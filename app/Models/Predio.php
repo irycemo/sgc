@@ -30,7 +30,7 @@ class Predio extends Model
     }
 
     public function referencias_construccion(){
-        return $this->hasOne(Referencia::class);
+        return $this->hasMany(Referencia::class);
     }
 
     public function colindancias(){

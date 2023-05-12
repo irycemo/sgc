@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('persona_id')->constrained();
             $table->string('tipo');
             $table->unsignedDecimal('porcentaje', 15,2);
-            $table->foreignId('creado_por')->nullable()->constrained()->references('id')->on('users');
-            $table->foreignId('actualizado_por')->nullable()->constrained()->references('id')->on('users');
+            $table->foreignId('creado_por')->nullable()->references('id')->on('users');
+            $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
         });
     }

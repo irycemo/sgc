@@ -40,6 +40,28 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'Auditoria', 'area' => 'Auditoria'])->syncRoles([$role1]);
         Permission::create(['name' => 'Logs', 'area' => 'Logs'])->syncRoles([$role1]);
 
+        Permission::create(['name' => 'Lista de servicios', 'area' => 'Servicios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Crear servicio', 'area' => 'Servicios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Editar servicio', 'area' => 'Servicios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Borrar servicio', 'area' => 'Servicios'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'Lista de subconceptos', 'area' => 'Subconceptos'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Crear subconcepto', 'area' => 'Subconceptos'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Editar subconcepto', 'area' => 'Subconceptos'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Borrar subconcepto', 'area' => 'Subconceptos'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'Lista de categorías', 'area' => 'Categorías de servicios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Crear categoría', 'area' => 'Categorías de servicios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Editar categoría', 'area' => 'Categorías de servicios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Borrar categoría', 'area' => 'Categorías de servicios'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'Lista de umas', 'area' => 'Umas'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Crear uma', 'area' => 'Umas'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Editar uma', 'area' => 'Umas'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Borrar uma', 'area' => 'Umas'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'Ventanilla', 'area' => 'Trámites y servicios'])->syncRoles([$role1]);
+
     }
 
 }

@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('predio_id')->constrained();
             $table->string('viento');
-            $table->unsignedDecimal('longitud', 15, 2);
+            $table->unsignedDecimal('longitud', 15, 8);
             $table->text('descripcion');
-            $table->foreignId('creado_por')->nullable()->constrained()->references('id')->on('users');
-            $table->foreignId('actualizado_por')->nullable()->constrained()->references('id')->on('users');
+            $table->foreignId('creado_por')->nullable()->references('id')->on('users');
+            $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
         });
     }

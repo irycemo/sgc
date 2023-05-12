@@ -13,7 +13,12 @@ class Constantes{
         'Entrega',
         'Entrada',
         'Umas',
-        'Auditoría'
+        'Auditoría',
+        'Categorías de servicios',
+        'Servicios',
+        'Umas',
+        'Subconceptos',
+        'Trámites y servicios'
     ];
 
     const AREAS_ADSCRIPCION = [

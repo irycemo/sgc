@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('movimiento_id')->constrained();
             $table->date('fecha');
             $table->text('descripcion');
-            $table->foreignId('creado_por')->nullable()->constrained()->references('id')->on('users');
-            $table->foreignId('actualizado_por')->nullable()->constrained()->references('id')->on('users');
+            $table->foreignId('creado_por')->nullable()->references('id')->on('users');
+            $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
         });
     }

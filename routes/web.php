@@ -1,13 +1,18 @@
 <?php
 
-
+use App\Http\Controllers\Admin\TramiteController;
+use App\Http\Livewire\Admin\Umas;
 use App\Http\Livewire\Admin\Roles;
 use App\Http\Livewire\Admin\Permisos;
 use App\Http\Livewire\Admin\Usuarios;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\Auditoria;
+use App\Http\Livewire\Admin\Servicios;
 use App\Http\Controllers\ManualController;
 use App\Http\Controllers\SetPasswordController;
+use App\Http\Livewire\Admin\CategoriasServicios;
+use App\Http\Livewire\Ventanilla;
+use App\Http\Services\LineasDeCaptura\LineaCaptura;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +48,15 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('usuarios', Usuarios::class)->middleware('permission:Lista de usuarios')->name('usuarios');
 
     Route::get('auditoria', Auditoria::class)->middleware('permission:Auditoria')->name('auditoria');
+
+    Route::get('servicios', Servicios::class)->middleware('permission:Lista de servicios')->name('servicios');
+
+    Route::get('categorias_servicios', CategoriasServicios::class)->middleware('permission:Lista de categorías')->name('categorias_servicios');
+
+    Route::get('umas', Umas::class)->middleware('permission:Lista de umas')->name('umas');
+
+    Route::get('ventanilla', Ventanilla::class)->middleware('permission:Ventanilla')->name('ventanilla');
+    Route::get('tramites/{tramite}', [TramiteController::class, 'orden'])->name('tramites.orden');
 
 });
 

@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "barryvdh/laravel-dompdf": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.0",
         "laravel/jetstream": "^3.0",
@@ -13,7 +14,9 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^2.11",
         "opcodesio/log-viewer": "^2.3",
+        "orangehill/iseed": "^3.0",
         "owen-it/laravel-auditing": "^13.4",
+        "picqer/php-barcode-generator": "^2.2",
         "spatie/laravel-permission": "^5.9"
     },
     "require-dev": {

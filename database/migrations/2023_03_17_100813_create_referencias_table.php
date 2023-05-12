@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('categoria_construccion');
             $table->string('calidad_construccion');
             $table->unsignedInteger('numero_niveles_construccion');
-            $table->unsignedDecimal('superficie_construccion');
-            $table->foreignId('creado_por')->nullable()->constrained()->references('id')->on('users');
-            $table->foreignId('actualizado_por')->nullable()->constrained()->references('id')->on('users');
+            $table->unsignedDecimal('superficie_construccion', 15,2);
+            $table->foreignId('creado_por')->nullable()->references('id')->on('users');
+            $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -23,8 +23,8 @@ return new class extends Migration
             $table->unsignedInteger('indice_construccion');
             $table->unsignedDecimal('superficie_proporcional_terreno', 18,2);
             $table->unsignedDecimal('superficie_proporcional_construuccion', 18,2);
-            $table->foreignId('creado_por')->nullable()->constrained()->references('id')->on('users');
-            $table->foreignId('actualizado_por')->nullable()->constrained()->references('id')->on('users');
+            $table->foreignId('creado_por')->nullable()->references('id')->on('users');
+            $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
         });
     }

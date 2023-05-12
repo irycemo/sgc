@@ -16,6 +16,8 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Enrique',
+            'ap_paterno' => 'Robledo',
+            'ap_materno' => 'Camacho',
             'oficina' => 'Catastro',
             'status' => 'activo',
             'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
