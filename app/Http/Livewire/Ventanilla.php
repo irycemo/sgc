@@ -497,6 +497,9 @@ class Ventanilla extends Component
 
     public function crear(){
 
+        if(!empty($this->predios) && count($this->predios) != $this->modelo_editar->cantidad)
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', 'La cantidad y el número de predios debe ser la misma']);
+
         $context = new TramiteContext($this->categoria['nombre'], $this->modelo_editar);
 
         $this->validate(array_merge($this->rules(), $context->validaciones()));
