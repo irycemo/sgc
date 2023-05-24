@@ -32,12 +32,22 @@ class Ventanilla extends Component
     public $servicio;
     public $predios = [];
     public $predio;
-    public $localidad = 39;
-    public $oficina = 33;
+    public $localidad = 35;
+    public $oficina = 85;
     public $tipo = 2;
-    public $registro = 65;
+    public $registro = 56;
     public $importe_base;
     public $editar = false;
+    public $angulo;
+
+    public Tramite $modelo_editar;
+
+    public $certificados_historia = [
+        'Certificado de historia catastral hasta 5 movimientos',
+        'Certificado de historia catastral de 6 a 10 movimientos',
+        'Certificado de historia catastral de 11 a 15 movimientos',
+        'Certificado de historia catastral de mas de 15 movimientos'
+    ];
 
     public $flags = [
         'flag_tipo_de_tramite' => false,
@@ -48,9 +58,8 @@ class Ventanilla extends Component
         'predios' => false,
         'observaciones' => false,
         'adiciona' => false,
+        'angulo' => false
     ];
-
-    public Tramite $modelo_editar;
 
     protected function rules(){
 
@@ -59,7 +68,6 @@ class Ventanilla extends Component
             'modelo_editar.servicio_id' => 'required',
             'modelo_editar.solicitante' => 'required',
             'modelo_editar.monto' => 'required',
-            'modelo_editar.parcial_usados' => 'nullable',
             'modelo_editar.tipo_servicio' => 'required',
             'modelo_editar.cantidad' => 'required|numeric|min:1',
             'modelo_editar.adiciona' => 'required_if:adicionaTramite,true',
@@ -73,7 +81,8 @@ class Ventanilla extends Component
         'modelo_editar.tipo_servicio' => 'tipo de servicio',
         'modelo_editar.adiciona' => 'trámite',
         'tipo' => 'tipo de predio',
-        'registro' => 'número de registro'
+        'registro' => 'número de registro',
+        'tramiteAdicionaSelected' => 'trámite adiciona'
     ];
 
     public function crearModeloVacio(){
@@ -90,24 +99,63 @@ class Ventanilla extends Component
 
             $this->reset(['tramiteAdicionaSelected', 'tramiteAdiciona']);
 
+            $this->modelo_editar->adiciona = null;
+
             $this->updatedTramiteAdiciona();
 
         }else{
 
             $this->dispatchBrowserEvent('select2');
 
+            if(in_array($this->servicio['nombre'], $this->certificados_historia)){
+
+                $this->tramitesAdiciones = Tramite::with('predios.propietarios.persona')
+                                                    ->whereHas('servicio', function ($q) {
+                                                        $q->where('nombre', 'Certificado de historia catastral');
+                                                    })
+                                                    ->whereHas('predios', function ($q) {
+                                                        $q->where('oficina', auth()->user()->oficina);
+                                                    })
+                                                    ->where('estado', 'pagado')
+                                                    ->where('parcial_usados', 0)
+                                                    ->get();
+
+            }else{
+
+                $this->tramitesAdiciones = Tramite::with('predios.propietarios.persona')
+                                                    ->whereHas('servicio', function ($q) {
+                                                        $q->where('nombre', $this->servicio['nombre']);
+                                                    })
+                                                    ->where('estado', 'pagado')
+                                                    ->where('parcial_usados', 0)
+                                                    ->get();
+
+            }
         }
 
         $this->updatedModeloEditarTipoTramite();
+
     }
 
     public function updatedTramiteAdiciona(){
 
         $this->tramiteAdicionaSelected = json_decode($this->tramiteAdiciona, true);
 
-        if($this->tramiteAdicionaSelected)
+        if($this->tramiteAdicionaSelected){
+
             $this->modelo_editar->adiciona = $this->tramiteAdicionaSelected['id'];
 
+            $this->modelo_editar->solicitante = $this->tramiteAdicionaSelected['solicitante'];
+
+            foreach($this->tramiteAdicionaSelected['predios'] as $predio){
+
+                array_push($this->predios, $predio);
+
+            }
+
+        }
+
+        $this->updatedModeloEditarCantidad();
 
     }
 
@@ -123,7 +171,7 @@ class Ventanilla extends Component
 
         $this->categoria = json_decode($this->categoria_select, true);
 
-        $this->servicios = Servicio::where('categoria_servicio_id', $this->categoria['id'])->get();
+        $this->servicios = Servicio::where('categoria_servicio_id', $this->categoria['id'])->where('estado', 'activo')->get();
 
         $this->resetearTodo($borrado = true);
 
@@ -139,7 +187,7 @@ class Ventanilla extends Component
 
         }
 
-        $this->resetearTodo();
+        $this->resetearTodo($borrado = true);
 
         $this->servicio = json_decode($this->servicio_select, true);
 
@@ -159,6 +207,16 @@ class Ventanilla extends Component
 
 
         if($this->modelo_editar->tipo_tramite == 'exento'){
+
+            if(!auth()->user()->can('Trámite excento')){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No tiene permiso para elaborar trámites exentos."]);
+
+                $this->modelo_editar->tipo_tramite = 'normal';
+
+                return;
+
+            }
 
             $this->modelo_editar->monto = 0;
 
@@ -184,6 +242,30 @@ class Ventanilla extends Component
 
             $this->modelo_editar->monto = $this->servicio[$this->modelo_editar->tipo_servicio] * $this->modelo_editar->cantidad;
 
+        }elseif($this->modelo_editar->tipo_tramite == 'parcial'){
+
+            if(!$this->tramiteAdicionaSelected){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Para el parcial es necesario seleccione el tramite al que adiciona."]);
+
+                $this->modelo_editar->tipo_tramite = 'normal';
+
+                $this->updatedModeloEditarTipoTramite();
+
+            }
+
+        }elseif($this->modelo_editar->tipo_tramite == 'porcentaje'){
+
+            if($this->servicio['porcentaje'] == 0){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El servicio no aplica para porcentaje."]);
+
+                $this->modelo_editar->tipo_tramite = 'normal';
+
+                $this->updatedModeloEditarTipoTramite();
+
+            }
+
         }
 
     }
@@ -194,6 +276,31 @@ class Ventanilla extends Component
 
         $this->updatedModeloEditarTipoTramite();
 
+        if($this->modelo_editar->tipo_servicio == 'urgente'){
+
+            if($this->modelo_editar->monto == 0){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No hay servicio urgente para el servicio seleccionado."]);
+
+                $this->modelo_editar->tipo_servicio = 'ordinario';
+
+                $this->updatedModeloEditarTipoTramite();
+            }
+
+        }
+        elseif($this->modelo_editar->tipo_servicio == 'extra_urgente'){
+
+            if($this->modelo_editar->monto == 0){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No hay servicio extra urgente para el servicio seleccionado."]);
+
+                $this->modelo_editar->tipo_servicio = 'ordinario';
+
+                $this->updatedModeloEditarTipoTramite();
+            }
+
+        }
+
     }
 
     public function updatedModeloEditarCantidad(){
@@ -202,8 +309,51 @@ class Ventanilla extends Component
             $this->modelo_editar->cantidad = 1;
         }
 
-        $this->modelo_editar->monto = $this->servicio[$this->modelo_editar->tipo_servicio] * $this->modelo_editar->cantidad;
+        if($this->servicio['id'] == 37){
 
+            $aux = $this->modelo_editar->cantidad - 1;
+
+            if($this->modelo_editar->adiciona){
+
+                $this->modelo_editar->monto = $this->modelo_editar->servicio->ordinario * $this->modelo_editar->cantidad * 0.1;
+
+                return;
+
+            }elseif($this->modelo_editar->cantidad > 1){
+
+                $this->modelo_editar->monto = $this->modelo_editar->servicio->ordinario * $aux * 0.1 + $this->modelo_editar->servicio->ordinario;
+
+            }
+
+        }else{
+
+            $this->modelo_editar->monto = $this->servicio[$this->modelo_editar->tipo_servicio] * $this->modelo_editar->cantidad;
+
+        }
+
+    }
+
+    public function updatedImporteBase(){
+
+        if($this->importe_base == '')
+            return;
+
+        if($this->servicio['id'] == 108){
+
+            $this->modelo_editar->monto = (float)$this->servicio['porcentaje'] / 100 * $this->importe_base ;
+
+        }
+
+    }
+
+    public function updatedAngulo(){
+
+        if($this->angulo == 'min')
+            $this->modelo_editar->monto = $this->servicio['ordinario'] * 1.2;
+        elseif($this->angulo == 'max')
+            $this->modelo_editar->monto = $this->servicio['ordinario'] * 1.5;
+        else
+            $this->modelo_editar->monto = $this->servicio['ordinario'];
     }
 
     public function buscarPredio(){
@@ -266,7 +416,10 @@ class Ventanilla extends Component
 
         $this->categoria = null;
 
-        $this->tramite = Tramite::with('predios.propietarios.persona', 'servicio')->where('folio', $this->tramite_folio)->first();
+        $this->tramite = Tramite::with('predios.propietarios.persona', 'servicio')
+                                    ->where('folio', $this->tramite_folio)
+                                    ->whereIn('estado', ['pagado', 'nuevo'])
+                                    ->first();
 
         if(!$this->tramite)
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No se encontro el trámite."]);
@@ -295,6 +448,11 @@ class Ventanilla extends Component
         $context = new TramiteContext($this->modelo_editar->servicio->categoria->nombre, $this->modelo_editar);
 
         $this->flags = $context->cambiarFlags();
+
+        $this->flags['flag_tipo_de_tramite'] = false;
+        $this->flags['flag_tipo_de_servicio'] = false;
+        $this->flags['cantidad'] = false;
+        $this->flags['adiciona'] = false;
 
         foreach($this->modelo_editar->predios as $predio){
 
@@ -331,8 +489,8 @@ class Ventanilla extends Component
             });
 
         } catch (\Throwable $th) {
-            Log::error("Error al actualizar trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+            Log::error("Error al actualizar trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', $th->getMessage()]);
         }
 
     }
@@ -351,8 +509,8 @@ class Ventanilla extends Component
 
                 $this->resetearTodo($borrado = true);
 
-                $this->categoria = null;
                 $this->categoria_select = null;
+                $this->servicio_select = null;
 
                 $this->dispatchBrowserEvent('imprimir_recibo', ['tramite' => $tramite->id]);
 
@@ -361,8 +519,8 @@ class Ventanilla extends Component
             });
 
         } catch (\Throwable $th) {
-            Log::error("Error al crear trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+            Log::error("Error al crear trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', $th->getMessage()]);
         }
 
 
@@ -378,11 +536,9 @@ class Ventanilla extends Component
 
         $this->modelo_editar = $this->crearModeloVacio();
 
-        array_push($this->fields, 'adicionaTramite', 'tramite', 'predios', 'predio', 'localidad', 'oficina', 'tipo', 'registro', 'flags', 'editar', 'tramiteAdicionaSelected', 'tramiteAdiciona');
+        array_push($this->fields, 'adicionaTramite', 'tramite', 'predios', 'predio', 'localidad', 'oficina', 'tipo', 'registro', 'flags', 'editar', 'tramiteAdicionaSelected', 'tramiteAdiciona', 'importe_base', 'angulo');
 
         $this->categorias = CategoriaServicio::orderBy('nombre')->get();
-
-        $this->tramitesAdiciones = Tramite::all();
 
     }
 

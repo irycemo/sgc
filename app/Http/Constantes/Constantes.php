@@ -18,7 +18,8 @@ class Constantes{
         'Servicios',
         'Umas',
         'Subconceptos',
-        'Trámites y servicios'
+        'Trámites y servicios',
+        'Trámites'
     ];
 
     const AREAS_ADSCRIPCION = [
@@ -63,22 +64,6 @@ class Constantes{
         'Regional 5',
         'Regional 6',
         'Regional 7'
-    ];
-
-    const SOLICITANTES = [
-        'Oficialia de partes',
-        'SAT',
-        /* 'Juzgado', */
-        'Ventanilla',
-        'Pensiones'
-    ];
-
-    const SECCIONES = [
-        'Propiedad',
-        'Gravamen',
-        'Sentencias',
-        'Varios',
-        'Cancelaciones	'
     ];
 
 }

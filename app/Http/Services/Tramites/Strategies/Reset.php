@@ -8,14 +8,10 @@ use App\Http\Services\Tramites\TramitesStrategyInterface;
 
 class Reset implements TramitesStrategyInterface{
 
-    public $tramite;
+    public function __construct(public Tramite $tramite){}
 
-    public function __construct(Tramite $tramite)
+    public function cambiarFlags():array
     {
-        $this->tramite = $tramite;
-    }
-
-    public function cambiarFlags(){
 
         return [
             'flag_tipo_de_tramite' => false,
@@ -26,11 +22,13 @@ class Reset implements TramitesStrategyInterface{
             'predios' => false,
             'observaciones' => false,
             'adiciona' => false,
+            'angulo' => false
         ];
 
     }
 
-    public function crearTramite($predios){
+    public function crearTramite($predios):Tramite
+    {
 
         throw new TramiteNoRegistradoException('El trámite no esta registrado en TramitesContexto. ' . 'Servicio id: ' . $this->tramite->id_servicio);
 
@@ -38,7 +36,8 @@ class Reset implements TramitesStrategyInterface{
 
     }
 
-    public function actualizarTramite($predios){
+    public function actualizarTramite($predios):Tramite
+    {
 
         throw new TramiteNoRegistradoException('El trámite no esta registrado en TramitesContexto. ' . 'Servicio id: ' . $this->tramite->id_servicio);
 
@@ -46,7 +45,8 @@ class Reset implements TramitesStrategyInterface{
 
     }
 
-    public function validaciones(){
+    public function validaciones():array
+    {
 
         return [
 

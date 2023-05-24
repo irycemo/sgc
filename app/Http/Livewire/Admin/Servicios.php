@@ -30,13 +30,14 @@ class Servicios extends Component
             'modelo_editar.ordinario' => 'required|numeric|nullable',
             'modelo_editar.urgente' => 'numeric|nullable|min:0',
             'modelo_editar.extra_urgente' => 'numeric|nullable|min:0',
-            'modelo_editar.operacion_parcial' => 'required|numeric',
-            'modelo_editar.categoria_servicio_id' => 'required'
+            'modelo_editar.categoria_servicio_id' => 'required',
+            'modelo_editar.porcentaje' => 'numeric|nullable|min:0',
+            'modelo_editar.clave_ingreso' => 'required|string',
          ];
     }
 
     protected $validationAttributes  = [
-        'modelo_editar.operacion_parcial' => 'operación parcial',
+        'modelo_editar.clave_ingreso' => 'clave de ingreso',
     ];
 
     public function crearModeloVacio(){
@@ -49,6 +50,11 @@ class Servicios extends Component
     }
 
     public function updatedModeloEditarUmas(){
+
+        $this->checarTipo();
+    }
+
+    public function updatedModeloEditarTipo(){
 
         $this->checarTipo();
     }
@@ -78,15 +84,33 @@ class Servicios extends Component
 
             $this->modelo_editar->extra_urgente = ceil($this->modelo_editar->ordinario * 3);
 
-        }else{
+            $this->modelo_editar->fija = null;
+
+            $this->modelo_editar->porcentaje = null;
+
+        }elseif($this->modelo_editar->tipo == 'fija'){
 
             $this->modelo_editar->umas = null;
+
+            $this->modelo_editar->porcentaje = null;
 
             $this->modelo_editar->ordinario = ceil($this->modelo_editar->ordinario);
 
             $this->modelo_editar->urgente = ceil($this->modelo_editar->ordinario * 2);
 
             $this->modelo_editar->extra_urgente = ceil($this->modelo_editar->ordinario * 3);
+
+        }else{
+
+            $this->modelo_editar->umas = null;
+
+            $this->modelo_editar->fija = null;
+
+            $this->modelo_editar->ordinario = 0;
+
+            $this->modelo_editar->urgente = 0;
+
+            $this->modelo_editar->extra_urgente = 0;
 
         }
 
@@ -107,7 +131,7 @@ class Servicios extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al crear servicio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
+            Log::error("Error al crear servicio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
         }
@@ -129,7 +153,7 @@ class Servicios extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al actualizar servicio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
+            Log::error("Error al actualizar servicio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 
@@ -151,7 +175,7 @@ class Servicios extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al borrar servicio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
+            Log::error("Error al borrar servicio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 
@@ -176,7 +200,7 @@ class Servicios extends Component
                                 ->orWhere('umas', 'LIKE', '%' . $this->search . '%')
                                 ->orWhere('estado', 'LIKE', '%' . $this->search . '%')
                                 ->orWhere('ordinario', 'LIKE', '%' . $this->search . '%')
-                                ->orWhere('operacion_parcial', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('clave_ingreso', 'LIKE', '%' . $this->search . '%')
                                 ->orWhere('urgente', 'LIKE', '%' . $this->search . '%')
                                 ->orWhere('extra_urgente', 'LIKE', '%' . $this->search . '%')
                                 ->orWhere(function($q){

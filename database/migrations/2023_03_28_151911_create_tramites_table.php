@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('tramites', function (Blueprint $table) {
             $table->id();
             $table->string('estado');
-            $table->string("tipo_tramite"); //Normal, complemento, excento, porcentaje, parcial
+            $table->string("tipo_tramite");
             $table->unsignedInteger('folio')->unique();
             $table->foreignId('servicio_id')->constrained();
             $table->string('solicitante');
             $table->unsignedDecimal("monto", 18, 2);
-            $table->date("fecha_entrega");
+            $table->date("fecha_entrega")->nullable();
             $table->date("fecha_pago")->nullable();
+            $table->date("fecha_vencimiento")->nullable();
             $table->string("folio_pago")->nullable();
             $table->boolean('parcial_usados')->nullable()->default(0);
             $table->string("tipo_servicio");

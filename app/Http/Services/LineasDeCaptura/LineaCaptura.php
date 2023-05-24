@@ -2,6 +2,8 @@
 
 namespace App\Http\Services\LineasDeCaptura;
 
+use App\Exceptions\ErrorAlGenerarLineaDeCaptura;
+use App\Exceptions\ErrorAlValidarLineaDeCaptura;
 use App\Models\Servicio;
 
 class LineaCaptura
@@ -79,6 +81,9 @@ class LineaCaptura
 
         $error = curl_errno($ch);
 
+        if($error)
+            throw new ErrorAlGenerarLineaDeCaptura("Error al generar línea de captura");
+
         $xml = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $response);
         $xml = simplexml_load_string($xml);
         $json = json_encode($xml);
@@ -128,6 +133,9 @@ class LineaCaptura
         curl_close($ch);
 
         $error = curl_errno($ch);
+
+        if($error)
+            throw new ErrorAlValidarLineaDeCaptura("Error al validar línea de captura");
 
         $xml = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $response);
         $xml = simplexml_load_string($xml);

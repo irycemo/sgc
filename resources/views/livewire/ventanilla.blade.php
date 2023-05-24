@@ -90,55 +90,59 @@
 
             </div>
 
-            @if ($flags['adiciona'])
+            <div>
 
-                <div class="flex space-x-3 bg-white p-4 rounded-lg mb-3 shadow-md">
+                @if ($flags['adiciona'])
 
-                    <div class="flex space-x-4 items-center">
+                    <div class="flex space-x-3 bg-white p-4 rounded-lg mb-3 shadow-md">
 
-                        <Label>¿Adiciona a otro trámite?</Label>
+                        <div class="flex space-x-4 items-center">
 
-                        <x-checkbox wire:model="adicionaTramite"></x-checkbox>
+                            <Label>¿Adiciona a otro trámite?</Label>
 
-                    </div>
-
-                    @if($adicionaTramite)
-
-                        <div class="flex-auto mr-1 ">
-
-                            <div class="flex space-x-4 items-center">
-
-                                <Label>Seleccione el trámite</Label>
-
-                            </div>
-
-                            <div class="" wire:ignore>
-
-                                <select class="select2 bg-white rounded text-sm w-full  z-50" wire:model="tramiteAdiciona">
-
-                                    @foreach ($tramitesAdiciones as $item)
-
-                                        <option value="{{ $item }}">{{ $item->folio }}</option>
-
-                                    @endforeach
-
-                                </select>
-
-                            </div>
-
-                            <div>
-
-                                @error('tramiteAdiciona') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                            </div>
+                            <x-checkbox wire:model="adicionaTramite"></x-checkbox>
 
                         </div>
 
-                    @endif
+                        @if($adicionaTramite)
 
-                </div>
+                            <div class="flex-auto mr-1 ">
 
-            @endif
+                                <div class="flex space-x-4 items-center">
+
+                                    <Label>Seleccione el trámite</Label>
+
+                                </div>
+
+                                <div class="" wire:ignore>
+
+                                    <select class="select2 bg-white rounded text-sm w-full  z-50" wire:model="tramiteAdiciona">
+
+                                        @foreach ($tramitesAdiciones as $item)
+
+                                            <option value="{{ $item }}">{{ $item->folio }}</option>
+
+                                        @endforeach
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                        @endif
+
+                        <div class="">
+
+                            @error('tramiteAdicionaSelected') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                @endif
+
+            </div>
 
             <div class="flex-row lg:flex lg:space-x-3">
 
@@ -260,6 +264,37 @@
 
                 @endif
 
+                @if ($flags['angulo'])
+
+                    <div class="flex-auto bg-white p-4 rounded-lg mb-3 shadow-md">
+
+                        <div class="mb-2">
+
+                            <Label class="text-lg tracking-widest rounded-xl border-gray-500">Pendiente</Label>
+
+                        </div>
+
+                        <div>
+
+                            <select class="bg-white rounded text-sm w-full" wire:model.lazy="angulo">
+
+                                <option value="" selected>Selecciona una opción</option>
+                                <option value="min">16° a 45°</option>
+                                <option value="max">Mayor a 45°</option>
+                            </select>
+
+                        </div>
+
+                        <div>
+
+                            @error('angulo') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                @endif
+
             </div>
 
             @if ($flags['solicitante'])
@@ -323,7 +358,7 @@
 
                                 <div>
 
-                                    <input placeholder="Oficina rentistica" type="number" class="bg-white rounded text-sm w-full" wire:model.defer="oficina">
+                                    <input placeholder="Oficina rentistica" type="number" class="bg-white rounded text-sm w-full" wire:model.defer="oficina" @if(auth()->user()->oficina != 101) readonly @endif>
 
                                     <div>
 
@@ -480,7 +515,7 @@
 
                         <div>
 
-                            <textarea rows="5" wire:model.lazy="modelo_editar.observaciones" class="bg-white rounded text-sm w-full"></textarea>
+                            <textarea rows="5" wire:model.lazy="modelo_editar.observaciones" class="bg-white rounded text-sm w-full" placeholder="Se lo mas especifico posible acerca de porque se genera el trámite."></textarea>
 
                         </div>
 
@@ -681,7 +716,7 @@
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                            <p><strong>Fecha de entrega:</strong> {{ $tramite->fecha_entrega->format('d-m-Y') }}</p>
+                            <p><strong>Fecha de entrega:</strong> {{ $tramite->fecha_entrega?->format('d-m-Y') }}</p>
 
                         </div>
 
@@ -802,17 +837,17 @@
                                 Editar
                             </button>
 
-                        @endif
+                            <button
+                                wire:click="reimprimir"
+                                wire:loading.attr="disabled"
+                                wire:target="reimprimir"
+                                type="button"
+                                class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-none ">
+                                <img wire:loading wire:target="reimprimir" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                                Reimprimir
+                            </button>
 
-                        <button
-                            wire:click="reimprimir"
-                            wire:loading.attr="disabled"
-                            wire:target="reimprimir"
-                            type="button"
-                            class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-none ">
-                            <img wire:loading wire:target="reimprimir" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-                            Reimprimir
-                        </button>
+                        @endif
 
                     </div>
 

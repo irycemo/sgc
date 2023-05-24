@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('categoria_servicios', function (Blueprint $table) {
             $table->id();
             $table->string("nombre");
-            $table->string('operacion_principal');
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

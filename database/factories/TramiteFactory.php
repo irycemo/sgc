@@ -21,7 +21,7 @@ class TramiteFactory extends Factory
         $servicio = Servicio::inRandomOrder()->first();
 
         return [
-            'estado' => $this->faker->randomElement(['activo', 'inactivo']),
+            'estado' => $this->faker->randomElement(['nuevo', 'pagado', 'activo', 'concluido']),
             'tipo_tramite' => $this->faker->randomElement(['normal', 'complemento', 'exento', 'porcentaje', 'parcial']),
             'tipo_servicio' => $this->faker->randomElement(['ordinario', 'urgente', 'extra urgente']),
             'cantidad' => $this->faker->numberBetween(1,10),

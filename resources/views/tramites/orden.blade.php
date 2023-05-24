@@ -139,7 +139,7 @@
                     <p>Solicitante: {{ $tramite->solicitante }}</p>
                     <p>Servicio: {{ $tramite->servicio->nombre }}
                         @if($tramite->adiciona)
-                            / {{ $tramite->adicionaA->servicio->nombre }}
+                            / {{ $tramite->adicionaA->servicio->nombre }} ({{ $tramite->adicionaA->folio }})
                         @endif
                     </p>
                     <p>Tipo de servicio: {{ $tramite->tipo_servicio }}</p>
@@ -148,11 +148,11 @@
                     </p>
                     <p>Observaciones:
 
-                        {{ $tramite->observaciones }}
+                        {{ $tramite->observaciones ?  $tramite->observaciones . '; ' : ''}}
 
                         @if($tramite->predios->count())
 
-                            <span>; Cuentas prediales: </span>
+                            <span>Cuentas prediales: </span>
 
                             @foreach ($tramite->predios as $item)
 
@@ -169,8 +169,7 @@
                     <div class="text-center" >
 
                         <p>La vigencia para el pago de este trámite es:</p>
-                        <p>{{ now() }}.</p>
-                        {{-- <p>{{ $tramite->limite_de_pago->format('d-m-Y') }}.</p> --}}
+                        <p>{{ $tramite->fecha_vencimiento?->format('d-m-Y') }}.</p>
 
                         <p >Linea de captura:</p>
                         <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($tramite->linea_de_captura, $generatorPNG::TYPE_CODE_128)) }}">

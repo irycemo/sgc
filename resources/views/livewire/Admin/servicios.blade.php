@@ -166,11 +166,11 @@
 
                         </th>
 
-                        {{-- <th wire:click="order('operacion_principal')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        <th wire:click="order('porcentaje')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
 
-                            Opreación Principal
+                            Porcentaje
 
-                            @if($sort == 'operacion_principal')
+                            @if($sort == 'porcentaje')
 
                                 @if($direction == 'asc')
 
@@ -194,13 +194,13 @@
 
                             @endif
 
-                        </th> --}}
+                        </th>
 
-                        <th wire:click="order('operacion_parcial')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        <th wire:click="order('clave_ingreso')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
 
-                            Opreación Parcial
+                            Clave de ingreso
 
-                            @if($sort == 'operacion_parcial')
+                            @if($sort == 'clave_ingreso')
 
                                 @if($direction == 'asc')
 
@@ -458,19 +458,19 @@
 
                             </td>
 
-                            {{-- <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
+                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
 
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Operación Principal</span>
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Porcentaje</span>
 
-                                {{ $servicio->operacion_principal }}
+                                {{ $servicio->porcentaje != 0 ? $servicio->porcentaje . '%' : 'N/A' }}
 
-                            </td> --}}
+                            </td>
 
                             <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
 
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Operación Parcial</span>
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Clave de ingreso</span>
 
-                                {{ $servicio->operacion_parcial }}
+                                {{ $servicio->clave_ingreso ?? 'N/A' }}
 
                             </td>
 
@@ -670,43 +670,22 @@
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    {{-- <div class="flex-auto ">
-
-                        <div>
-
-                            <Label>Operación principal</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.operacion_principal">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.operacion_principal') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div> --}}
-
                     <div class="flex-auto ">
 
                         <div>
 
-                            <Label>Operación parcial</Label>
+                            <Label>Clave de ingreso</Label>
                         </div>
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.operacion_parcial">
+                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.clave_ingreso">
 
                         </div>
 
                         <div>
 
-                            @error('modelo_editar.operacion_parcial') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                            @error('modelo_editar.clave_ingreso') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                         </div>
 
@@ -792,6 +771,7 @@
                                 <option value="" selected>Seleccione una opción</option>
                                 <option value="fija" selected>Fija</option>
                                 <option value="uma" selected>UMA</option>
+                                <option value="porcentaje" selected>Porcentaje</option>
 
                             </select>
 
@@ -824,6 +804,32 @@
                             <div>
 
                                 @error('modelo_editar.umas') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                    @endif
+
+                    @if($this->modelo_editar->tipo == 'porcentaje')
+
+                        <div class="flex-auto">
+
+                            <div>
+
+                                <Label>Porcentaje</Label>
+
+                            </div>
+
+                            <div>
+
+                                <input type="number" class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.porcentaje">
+
+                            </div>
+
+                            <div>
+
+                                @error('modelo_editar.porcentaje') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                             </div>
 

@@ -71,7 +71,7 @@ class Roles extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al crear rol por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
+            Log::error("Error al crear rol por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 
@@ -100,7 +100,7 @@ class Roles extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al actualzar rol por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
+            Log::error("Error al actualzar rol por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 
@@ -122,7 +122,7 @@ class Roles extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al borrar rol por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
+            Log::error("Error al borrar rol por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 

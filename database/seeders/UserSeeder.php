@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'Enrique',
             'ap_paterno' => 'Robledo',
             'ap_materno' => 'Camacho',
-            'oficina' => 'Catastro',
+            'oficina' => '101',
             'status' => 'activo',
             'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
             'email' => 'correo@correo.com',

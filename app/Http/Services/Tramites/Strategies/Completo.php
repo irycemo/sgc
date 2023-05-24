@@ -8,14 +8,7 @@ use App\Http\Services\LineasDeCaptura\LineaCaptura;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Services\Tramites\TramitesStrategyInterface;
 
-class Certificados implements TramitesStrategyInterface{
-
-    public $certificados_historia = [
-        'Certificado de historia catastral hasta 5 movimientos',
-        'Certificado de historia catastral de 6 a 10 movimientos',
-        'Certificado de historia catastral de 11 a 15 movimientos',
-        'Certificado de historia catastral de mas de 15 movimientos'
-    ];
+class Completo implements TramitesStrategyInterface{
 
     public function __construct(public Tramite $tramite){}
 
@@ -34,48 +27,15 @@ class Certificados implements TramitesStrategyInterface{
             'angulo' => false
         ];
 
-        if($this->tramite->servicio->nombre == 'Certificado negativo catastral'){
-
-            $flags['predios'] = false;
-
-            return $flags;
-
-        }elseif($this->tramite->servicio->nombre == 'Certificado de historia catastral'){
-
-            $flags['adiciona'] = false;
-
-            return $flags;
-
-        }
-
         return $flags;
     }
 
     public function validaciones():array
     {
+        return [
 
-        if($this->tramite->servicio->nombre == 'Certificado negativo catastral'){
-
-            return [
-
-                'predios' => 'nullable',
-
-            ];
-
-        }elseif($this->tramite->servicio->nombre == 'Certificado de historia catastral hasta 5 movimientos'){
-
-            return [
-
-                'predios' => 'nullable',
-                'tramiteAdicionaSelected' => 'required'
-            ];
-
-        }else
-
-            return [
-
-                'predios' => 'required',
-
+                'modelo_editar.solicitante' => 'required',
+                'predios' => 'required'
             ];
 
     }
@@ -85,6 +45,8 @@ class Certificados implements TramitesStrategyInterface{
 
         $sap = (new LineaCaptura())->generarLineaDeCaptura($this->tramite);
 
+        $this->complemento();
+
         $this->tramite->estado = 'nuevo';
         $this->tramite->folio = $this->calcularFolio();
         $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
@@ -92,22 +54,8 @@ class Certificados implements TramitesStrategyInterface{
         $this->tramite->linea_de_captura = $sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['LINEA_CAPTURA'];
         $this->tramite->fecha_vencimiento = $this->convertirFechaVencimieto($sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['FECHA_VENCIMIENTO']);
         $this->tramite->creado_por = auth()->user()->id;
-
-        $this->parcialesUsados();
-
-        $this->complemento();
-
         $this->tramite->save();
 
-        if(count($predios) > 0){
-
-            foreach($predios as $predio){
-
-                $this->tramite->predios()->attach($predio['id']);
-
-            }
-
-        }
 
         return $this->tramite;
 
@@ -143,32 +91,20 @@ class Certificados implements TramitesStrategyInterface{
 
     }
 
-    public function calcularFechaEntrega():?string
+    public function calcularFechaEntrega():string
     {
 
-        if($this->tramite->servicio->nombre == 'Certificado de historia catastral'){
+        if($this->tramite->tipo_servicio == 'ordinario'){
 
-            return now()->addDays(10)->toDateString();
+            return now()->addDays(4)->toDateString();
 
-        }elseif($this->tramite->servicio->nombre == 'Certificado de historia catastral'){
+        }elseif($this->tramite->tipo_servicio == 'urgente'){
 
-            return null;
+            return now()->addDays(1)->toDateString();
 
         }else{
 
-            if($this->tramite->tipo_servicio == 'ordinario'){
-
-                return now()->addDays(4)->toDateString();
-
-            }elseif($this->tramite->tipo_servicio == 'urgente'){
-
-                return now()->addDays(1)->toDateString();
-
-            }else{
-
-                return now()->toDateString();
-
-            }
+            return now()->toDateString();
 
         }
 
@@ -178,22 +114,6 @@ class Certificados implements TramitesStrategyInterface{
     {
 
         return Tramite::max('folio') + 1;
-
-    }
-
-    public function parcialesUsados():void
-    {
-
-        if(in_array($this->tramite->servicio->nombre, $this->certificados_historia)){
-
-            $tramite = Tramite::find($this->tramite->adiciona);
-
-            if(!$tramite)
-                throw new ModelNotFoundException("No se encontro el trámite origen para su actualización.");
-
-            $tramite->update(['parcial_usados' => 1]);
-
-        }
 
     }
 

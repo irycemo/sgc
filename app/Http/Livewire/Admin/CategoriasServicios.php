@@ -18,13 +18,8 @@ class CategoriasServicios extends Component
     protected function rules(){
         return [
             'modelo_editar.nombre' => 'required',
-            'modelo_editar.operacion_principal' => 'required',
          ];
     }
-
-    protected $validationAttributes  = [
-        'modelo_editar.operacion_principal' => 'operación principal',
-    ];
 
     public function crearModeloVacio(){
         return CategoriaServicio::make();
@@ -56,7 +51,7 @@ class CategoriasServicios extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al crear categoría por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
+            Log::error("Error al crear categoría por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 
@@ -77,7 +72,7 @@ class CategoriasServicios extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al actualizar categoría por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
+            Log::error("Error al actualizar categoría por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 
@@ -99,7 +94,7 @@ class CategoriasServicios extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al borrar categoría por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
+            Log::error("Error al borrar categoría por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 
