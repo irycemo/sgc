@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Tramite;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SapActualizarPagoRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class SapControllerApi extends Controller
 {
@@ -14,17 +16,34 @@ class SapControllerApi extends Controller
 
         try {
 
-            $tramite = Tramite::where('folio', $request->folio)->first();
+            DB::transaction(function () use($request){
 
-            $tramite->update([
-                'estado' => 'pagado',
-                'fecha_pago' => now()->toDateString(),
-                'folio_pago' => $request->folio_pago
-            ]);
+                $tramite = Tramite::where('folio', $request->folio)->first();
 
-            return response()->json([
-                'result' => 'success',
-            ], 200);
+                $tramite->update([
+                    'estado' => 'pagado',
+                    'fecha_pago' => now()->toDateString(),
+                    'folio_pago' => $request->folio_pago
+                ]);
+
+                if($tramite->tipo_tramite == 'complemento'){
+
+                    $tramiteAdiciona = Tramite::find($tramite->adiciona);
+
+                    if(!$tramiteAdiciona)
+                        throw new ModelNotFoundException("No se encontro el trámite al que adiciona.");
+
+                    $tramiteAdiciona->update([
+                        'tipo_servicio' => $tramite->tipo_servicio
+                    ]);
+
+                }
+
+                return response()->json([
+                    'result' => 'success',
+                ], 200);
+
+            });
 
         } catch (\Throwable $th) {
 

@@ -46,8 +46,6 @@ class CopiasDocumentos implements TramitesStrategyInterface{
 
         $sap = (new LineaCaptura())->generarLineaDeCaptura($this->tramite);
 
-        $this->complemento();
-
         if($this->tramite->adiciona){
 
             $this->tramite->estado = 'nuevo';
@@ -136,24 +134,6 @@ class CopiasDocumentos implements TramitesStrategyInterface{
     {
 
         return Tramite::max('folio') + 1;
-
-    }
-
-    public function complemento():void
-    {
-
-        if($this->tramite->tipo_tramite == 'complemento'){
-
-            $tramiteAdiciona = Tramite::find($this->tramite->adiciona);
-
-            if(!$tramiteAdiciona)
-                throw new ModelNotFoundException("No se encontro el trámite al que adiciona.");
-
-            $tramiteAdiciona->update([
-                'tipo_servicio' => $this->tramite->tipo_servicio
-            ]);
-
-        }
 
     }
 

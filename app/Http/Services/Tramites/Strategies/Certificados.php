@@ -95,8 +95,6 @@ class Certificados implements TramitesStrategyInterface{
 
         $this->parcialesUsados();
 
-        $this->complemento();
-
         $this->tramite->save();
 
         if(count($predios) > 0){
@@ -192,24 +190,6 @@ class Certificados implements TramitesStrategyInterface{
                 throw new ModelNotFoundException("No se encontro el trámite origen para su actualización.");
 
             $tramite->update(['parcial_usados' => 1]);
-
-        }
-
-    }
-
-    public function complemento():void
-    {
-
-        if($this->tramite->tipo_tramite == 'complemento'){
-
-            $tramiteAdiciona = Tramite::find($this->tramite->adiciona);
-
-            if(!$tramiteAdiciona)
-                throw new ModelNotFoundException("No se encontro el trámite al que adiciona.");
-
-            $tramiteAdiciona->update([
-                'tipo_servicio' => $this->tramite->tipo_servicio
-            ]);
 
         }
 

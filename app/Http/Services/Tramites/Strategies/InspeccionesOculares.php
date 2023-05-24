@@ -50,8 +50,6 @@ class InspeccionesOculares implements TramitesStrategyInterface{
 
         $this->calcularMonto();
 
-        $this->complemento();
-
         $this->tramite->estado = 'nuevo';
         $this->tramite->folio = $this->calcularFolio();
         $this->tramite->fecha_entrega = null;
@@ -128,24 +126,6 @@ class InspeccionesOculares implements TramitesStrategyInterface{
         if($this->tramite->cantidad > 1){
 
             $this->tramite->monto = $this->tramite->servicio->ordinario * $aux * 0.1 + $this->tramite->servicio->ordinario;
-
-        }
-
-    }
-
-    public function complemento():void
-    {
-
-        if($this->tramite->tipo_tramite == 'complemento'){
-
-            $tramiteAdiciona = Tramite::find($this->tramite->adiciona);
-
-            if(!$tramiteAdiciona)
-                throw new ModelNotFoundException("No se encontro el trámite al que adiciona.");
-
-            $tramiteAdiciona->update([
-                'tipo_servicio' => $this->tramite->tipo_servicio
-            ]);
 
         }
 

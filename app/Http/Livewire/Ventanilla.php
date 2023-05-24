@@ -540,6 +540,8 @@ class Ventanilla extends Component
 
         $this->categorias = CategoriaServicio::orderBy('nombre')->get();
 
+        $this->oficina = auth()->user()->oficina;
+
     }
 
     public function render()
