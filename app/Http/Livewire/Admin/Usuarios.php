@@ -178,6 +178,6 @@ class Usuarios extends Component
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 
-        return view('livewire.admin.usuarios', compact('usuarios'))->extends('layouts.admin');
+        return view('livewire.Admin.usuarios', compact('usuarios'))->extends('layouts.admin');
     }
 }

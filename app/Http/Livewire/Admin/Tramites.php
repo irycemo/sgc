@@ -180,6 +180,6 @@ class Tramites extends Component
                             ->paginate($this->pagination);
 
 
-        return view('livewire.admin.tramites', compact('tramites'))->extends('layouts.admin');
+        return view('livewire.Admin.tramites', compact('tramites'))->extends('layouts.admin');
     }
 }

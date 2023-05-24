@@ -115,6 +115,6 @@ class Umas extends Component
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 
-        return view('livewire.admin.umas', compact('umas'))->extends('layouts.admin');
+        return view('livewire.Admin.umas', compact('umas'))->extends('layouts.admin');
     }
 }

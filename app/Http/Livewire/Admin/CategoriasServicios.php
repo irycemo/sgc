@@ -110,7 +110,7 @@ class CategoriasServicios extends Component
                                             ->orderBy($this->sort, $this->direction)
                                             ->paginate($this->pagination);
 
-        return view('livewire.admin.categorias-servicios', compact('categorias'))->extends('layouts.admin');
+        return view('livewire.Admin.categorias-servicios', compact('categorias'))->extends('layouts.admin');
     }
 
 }

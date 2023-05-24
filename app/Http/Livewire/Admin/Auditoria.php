@@ -62,7 +62,7 @@ class Auditoria extends Component
                             ->paginate($this->pagination);
 
 
-        return view('livewire.admin.auditoria', compact('audits'))->extends('layouts.admin');
+        return view('livewire.Admin.auditoria', compact('audits'))->extends('layouts.admin');
     }
 
 }

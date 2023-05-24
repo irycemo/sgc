@@ -212,6 +212,6 @@ class Servicios extends Component
                                 ->paginate($this->pagination);
 
 
-        return view('livewire.admin.servicios', compact('servicios'))->extends('layouts.admin');
+        return view('livewire.Admin.servicios', compact('servicios'))->extends('layouts.admin');
     }
 }
