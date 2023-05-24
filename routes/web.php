@@ -3,6 +3,7 @@
 use App\Http\Livewire\Admin\Umas;
 use App\Http\Livewire\Ventanilla;
 use App\Http\Livewire\Admin\Roles;
+use App\Http\Livewire\Admin\Predios;
 use App\Http\Livewire\Admin\Permisos;
 use App\Http\Livewire\Admin\Tramites;
 use App\Http\Livewire\Admin\Usuarios;
@@ -57,6 +58,8 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('umas', Umas::class)->middleware('permission:Lista de umas')->name('umas');
 
     Route::get('tramties', Tramites::class)->middleware('permission:Lista de trámites')->name('tramites');
+
+    Route::get('predios', Predios::class)->middleware('permission:Lista de predios')->name('predios');
 
     Route::get('ventanilla', Ventanilla::class)->middleware('permission:Ventanilla')->name('ventanilla');
     Route::get('tramites/{tramite}', [TramiteController::class, 'orden'])->name('tramites.orden');

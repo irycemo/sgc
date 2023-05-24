@@ -19,7 +19,8 @@ class Constantes{
         'Umas',
         'Subconceptos',
         'Trámites y servicios',
-        'Trámites'
+        'Trámites',
+        'Predios'
     ];
 
     const AREAS_ADSCRIPCION = [

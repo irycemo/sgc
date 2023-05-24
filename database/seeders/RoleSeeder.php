@@ -64,6 +64,9 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'Editar trámite', 'area' => 'Trámites'])->syncRoles([$role1]);
         Permission::create(['name' => 'Borrar trámite', 'area' => 'Trámites'])->syncRoles([$role1]);
 
+        Permission::create(['name' => 'Lista de predios', 'area' => 'Predios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Ver predio', 'area' => 'Predios'])->syncRoles([$role1]);
+
         Permission::create(['name' => 'Ventanilla', 'area' => 'Trámites y servicios'])->syncRoles([$role1]);
         Permission::create(['name' => 'Trámite excento', 'area' => 'Trámites y servicios'])->syncRoles([$role1]);
 

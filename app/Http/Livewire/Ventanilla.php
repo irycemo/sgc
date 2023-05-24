@@ -32,10 +32,10 @@ class Ventanilla extends Component
     public $servicio;
     public $predios = [];
     public $predio;
-    public $localidad = 35;
-    public $oficina = 85;
-    public $tipo = 2;
-    public $registro = 56;
+    public $localidad;
+    public $oficina;
+    public $tipo;
+    public $registro;
     public $importe_base;
     public $editar = false;
     public $angulo;
