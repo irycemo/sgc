@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('referencias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('predio_id')->constrained();
-            $table->string('tipo_construccion');
-            $table->string('uso_construccion');
-            $table->string('categoria_construccion');
-            $table->string('calidad_construccion');
-            $table->unsignedInteger('numero_niveles_construccion');
-            $table->unsignedDecimal('superficie_construccion', 15,2);
+            $table->unsignedInteger('referenciaable_id');
+            $table->string('referenciaable_type');
+            $table->string('referencia');
+            $table->string('tipo');
+            $table->string('uso');
+            $table->string('estado');
+            $table->string('calidad');
+            $table->unsignedInteger('niveles');
+            $table->unsignedDecimal('superficie', 15,2);
+            $table->unsignedDecimal('valor_unitario', 15,2);
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

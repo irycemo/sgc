@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\UmaSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\PredioSeeder;
@@ -31,5 +32,9 @@ class DatabaseSeeder extends Seeder
         $this->call(TramiteSeeder::class);
         $this->call(PersonaSeeder::class);
         $this->call(PredioSeeder::class);
+        $this->call(UmaSeeder::class);
+        $this->call(ValoresUnitariosConstruccionsTableSeeder::class);
+        $this->call(ValoresUnitariosRusticosTableSeeder::class);
+        $this->call(OficinasTableSeeder::class);
     }
 }

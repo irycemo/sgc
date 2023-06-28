@@ -13,5 +13,8 @@ class Condominio extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    public function condominioable(){
+        return $this->morphTo();
+    }
 
 }

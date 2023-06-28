@@ -224,7 +224,7 @@
 
                         <div>
 
-                            <input type="number" min="1" class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.cantidad">
+                            <input type="number" min="1" class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.cantidad" @if($flags['predios']) readonly @endif>
 
                         </div>
 
@@ -610,7 +610,7 @@
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                            <p><strong>Monto:</strong> ${{ number_format($modelo_editar->monto, 2) }}</p>
+                            <p><strong>Monto:</strong>${{ number_format($modelo_editar->monto, 2) }}</p>
 
                         </div>
 

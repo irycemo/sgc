@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('condominios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('predio_id')->constrained();
+            $table->unsignedInteger('condominioable_id');
+            $table->string('condominioable_type');
             $table->string('nombre_conjundo');
             $table->string('edificio');
             $table->string('numero_departamento');

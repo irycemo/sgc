@@ -201,6 +201,12 @@ class Ventanilla extends Component
 
         $this->updatedModeloEditarTipoServicio();
 
+        if($this->categoria['id'] == 6 || $this->categoria['id'] == 17){
+            $this->servicio[$this->modelo_editar->tipo_servicio] = $this->modelo_editar->monto / 2;
+
+            $this->modelo_editar->monto = $this->servicio[$this->modelo_editar->tipo_servicio];
+        }
+
     }
 
     public function updatedModeloEditarTipoTramite(){
@@ -265,6 +271,8 @@ class Ventanilla extends Component
                 $this->updatedModeloEditarTipoTramite();
 
             }
+
+            $this->updatedImporteBase();
 
         }
 
@@ -344,16 +352,25 @@ class Ventanilla extends Component
 
         }
 
+        if($this->servicio['id'] == 292){
+
+            $this->modelo_editar->monto = (float)$this->servicio['porcentaje'] / 100 * $this->importe_base ;
+
+        }
+
     }
 
     public function updatedAngulo(){
 
+        if($this->modelo_editar->adiciona == null)
+            $this->modelo_editar->monto = $this->servicio['ordinario'] / 2;
+
         if($this->angulo == 'min')
-            $this->modelo_editar->monto = $this->servicio['ordinario'] * 1.2;
+            $this->modelo_editar->monto = $this->modelo_editar->monto * 1.2;
         elseif($this->angulo == 'max')
-            $this->modelo_editar->monto = $this->servicio['ordinario'] * 1.5;
+            $this->modelo_editar->monto = $this->modelo_editar->monto * 1.5;
         else
-            $this->modelo_editar->monto = $this->servicio['ordinario'];
+            $this->modelo_editar->monto = $this->modelo_editar->monto;
     }
 
     public function buscarPredio(){
@@ -381,6 +398,14 @@ class Ventanilla extends Component
 
     public function agregarPredio(){
 
+        if(($this->servicio['id'] == 7 || in_array($this->servicio['nombre'], $this->certificados_historia)) && count($this->predios) == 1){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Solo es posible agregar 1 predioa historias catastrales."]);
+
+            return;
+
+        }
+
         $colection = collect($this->predios);
 
         if($colection->contains('id', $this->predio->id))
@@ -389,6 +414,8 @@ class Ventanilla extends Component
             array_push($this->predios, $this->predio->toArray());
 
         $this->predio = null;
+
+        $this->modelo_editar->cantidad = count($this->predios);
 
     }
 
@@ -407,6 +434,8 @@ class Ventanilla extends Component
         }
 
         unset($this->predios[$a]);
+
+        $this->modelo_editar->cantidad = count($this->predios);
 
     }
 
@@ -539,7 +568,7 @@ class Ventanilla extends Component
 
         $this->modelo_editar = $this->crearModeloVacio();
 
-        array_push($this->fields, 'adicionaTramite', 'tramite', 'predios', 'predio', 'localidad', 'oficina', 'tipo', 'registro', 'flags', 'editar', 'tramiteAdicionaSelected', 'tramiteAdiciona', 'importe_base', 'angulo');
+        array_push($this->fields, 'adicionaTramite', 'tramite', 'predios', 'predio', 'localidad', 'tipo', 'registro', 'flags', 'editar', 'tramiteAdicionaSelected', 'tramiteAdiciona', 'importe_base', 'angulo');
 
         $this->categorias = CategoriaServicio::orderBy('nombre')->get();
 

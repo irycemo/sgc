@@ -10,4 +10,6 @@ class Role extends SpatieRole
 {
     use HasFactory;
     use ModelosTrait;
+
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 }

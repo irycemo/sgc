@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Http\Constantes\Constantes;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,7 +19,7 @@ class PersonaFactory extends Factory
     public function definition(): array
     {
         return [
-            'tipo' => $this->faker->randomElement(['fisico', 'moral']),
+            'tipo' => $this->faker->randomElement(['FISICA','MORAL']),
             'nombre' => $this->faker->name(),
             'ap_paterno' => $this->faker->word(),
             'ap_materno' => $this->faker->word(),

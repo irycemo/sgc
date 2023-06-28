@@ -4,7 +4,6 @@ namespace App\Http\Services\Tramites\Strategies;
 
 use App\Models\Tramite;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 use App\Http\Services\LineasDeCaptura\LineaCaptura;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Services\Tramites\TramitesStrategyInterface;
@@ -73,12 +72,13 @@ class Certificados implements TramitesStrategyInterface{
 
             ];
 
-        }elseif($this->tramite->servicio->nombre == 'Certificado de historia catastral hasta 5 movimientos'){
+        }elseif(in_array($this->tramite->servicio->nombre, $this->certificados_historia)){
 
             return [
 
                 'predios' => 'nullable',
-                'tramiteAdicionaSelected' => 'required'
+                'tramiteAdicionaSelected' => 'required',
+                'modelo_editar.adiciona' => 'required'
             ];
 
         }else

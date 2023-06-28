@@ -116,7 +116,7 @@
 
                         <th wire:click="order('oficina')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
 
-                            Ubicación
+                            Oficina
 
                             @if($sort == 'oficina')
 
@@ -515,6 +515,52 @@
 
                         <div>
 
+                            <Label>Apellido paterno</Label>
+                        </div>
+
+                        <div>
+
+                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.ap_paterno">
+
+                        </div>
+
+                        <div>
+
+                            @error('modelo_editar.ap_paterno') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex-auto ">
+
+                        <div>
+
+                            <Label>Apellido materno</Label>
+                        </div>
+
+                        <div>
+
+                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.ap_materno">
+
+                        </div>
+
+                        <div>
+
+                            @error('modelo_editar.ap_materno') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
+
+                    <div class="flex-auto ">
+
+                        <div>
+
                             <Label>Email</Label>
 
                         </div>
@@ -532,10 +578,6 @@
                         </div>
 
                     </div>
-
-                </div>
-
-                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
                     <div class="flex-auto mr-1 ">
 
@@ -602,25 +644,16 @@
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <div class="flex-auto mb-5">
+                    <div class="flex-auto ">
 
                         <div>
 
-                            <Label>Localidad</Label>
+                            <Label>Oficina</Label>
                         </div>
 
                         <div>
 
-                            <select class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.oficina">
-                                <option selected value="">Selecciona una opción</option>
-
-                                @foreach ($ubicaciones as $ubicacion)
-
-                                    <option value="{{ $ubicacion }}">{{ $ubicacion }}</option>
-
-                                @endforeach
-
-                            </select>
+                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.oficina">
 
                         </div>
 

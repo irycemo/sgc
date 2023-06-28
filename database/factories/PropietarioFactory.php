@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Http\Constantes\Constantes;
 use App\Models\Persona;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,7 +23,7 @@ class PropietarioFactory extends Factory
 
         return [
             'persona_id' => $this->faker->randomElement($personas),
-            'tipo' => $this->faker->randomElement(['nudo', 'usufructo']),
+            'tipo' => $this->faker->randomElement(Constantes::TIPO_PROPIETARIO),
             'porcentaje' => 50
         ];
     }

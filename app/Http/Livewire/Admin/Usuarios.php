@@ -17,7 +17,6 @@ class Usuarios extends Component
     use ComponentesTrait;
 
     public $roles;
-    public $ubicaciones;
     public $areas_adscripcion;
 
     public User $modelo_editar;
@@ -26,6 +25,8 @@ class Usuarios extends Component
     protected function rules(){
         return [
             'modelo_editar.name' => 'required',
+            'modelo_editar.ap_paterno' => 'required',
+            'modelo_editar.ap_materno' => 'required',
             'modelo_editar.email' => 'required|email:rfc,dns|unique:users,email,' . $this->modelo_editar->id,
             'modelo_editar.status' => 'required|in:activo,inactivo',
             'role' => 'required',
@@ -53,7 +54,6 @@ class Usuarios extends Component
             $this->modelo_editar = $modelo;
 
         $this->role = $modelo['roles'][0]['id'];
-
     }
 
     public function crear(){
@@ -76,6 +76,7 @@ class Usuarios extends Component
 
                 $this->modelo_editar->password = 'sistema';
                 $this->modelo_editar->creado_por = auth()->user()->id;
+                $this->modelo_editar->clave = User::max('clave') + 1;
                 $this->modelo_editar->save();
 
                 $this->modelo_editar->roles()->attach($this->role);
@@ -151,10 +152,6 @@ class Usuarios extends Component
         array_push($this->fields, 'role');
 
         $this->roles = Role::where('id', '!=', 1)->select('id', 'name')->orderBy('name')->get();
-
-        $this->ubicaciones = Constantes::UBICACIONES;
-
-        sort($this->ubicaciones);
 
         $this->areas_adscripcion = Constantes::AREAS_ADSCRIPCION;
 

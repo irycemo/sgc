@@ -35,7 +35,11 @@
 
                 @endif
 
-                <p class="uppercase text-md text-rojo mb-4 tracking-wider">Valuación</p>
+                @can('Área de valuación')
+
+                    @include('layouts.sidebar-valuacion')
+
+                @endcan
 
 
                 <p class="uppercase text-md text-rojo mb-4 tracking-wider">Cartografía</p>

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Http\Constantes\Constantes;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,13 +22,26 @@ class PredioFactory extends Factory
             'region_catastral' => $this->faker->numberBetween(1,100),
             'municipio' => $this->faker->numberBetween(1,100),
             'zona_catastral' => $this->faker->numberBetween(1,100),
-            'tipo_vialidad' => $this->faker->sentence(),
+            'tipo_vialidad' => $this->faker->randomElement(Constantes::TIPO_VIALIDADES),
+            'tipo_asentamiento' => $this->faker->randomElement(Constantes::TIPO_ASENTAMIENTO),
             'nombre_vialidad' => $this->faker->sentence(),
+            'nombre_edificio' => $this->faker->sentence(),
+            'nombre_predio' => $this->faker->sentence(),
+            'clave_edificio' => $this->faker->sentence(),
+            'departamento_edificio' => $this->faker->sentence(),
+            'nombre_asentamiento' => $this->faker->sentence(),
             'numero_exterior' => $this->faker->numberBetween(1,100),
+            'numero_exterior_2' => $this->faker->numberBetween(1,100),
+            'numero_adicional' => $this->faker->numberBetween(1,100),
+            'numero_adicional_2' => $this->faker->numberBetween(1,100),
+            'numero_interior' => $this->faker->numberBetween(1,100),
+            'lote_fraccionador' => $this->faker->numberBetween(1,100),
+            'manzana_fraccionador' => $this->faker->numberBetween(1,100),
+            'etapa_fraccionador' => $this->faker->numberBetween(1,100),
+            'codigo_postal' => $this->faker->numberBetween(1,100),
             'localidad' => $this->faker->numberBetween(1,100),
             'sector' => $this->faker->numberBetween(1,100),
             'manzana' => $this->faker->numberBetween(1,100),
-            'predio' => $this->faker->numberBetween(1,100),
             'edificio' => $this->faker->numberBetween(1,100),
             'departamento' => $this->faker->numberBetween(1,100),
             'oficina' => $this->faker->numberBetween(1,100),

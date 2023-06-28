@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Http\Constantes\Constantes;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -25,9 +26,16 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
+            'clave' => $this->faker->unique()->randomNumber(),
+            'valuador' => $this->faker->randomElement([0, 1]),
             'name' => $this->faker->name(),
+            'ap_paterno' => $this->faker->word(),
+            'ap_materno' => $this->faker->word(),
+            'oficina' => $this->faker->unique()->randomNumber(),
+            'area' => $this->faker->randomElement(Constantes::AREAS_ADSCRIPCION),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'status' => 'activo',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,

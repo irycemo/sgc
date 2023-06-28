@@ -2,38 +2,51 @@
 
 namespace App\Models;
 
+use App\Models\Terreno;
 use App\Models\Condominio;
 use App\Models\Referencia;
 use App\Models\Colindancia;
 use App\Models\Propietario;
 use App\Http\Traits\ModelosTrait;
+use App\Models\Condominioconstruccion;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Predio extends Model
+class Predio extends Model implements Auditable
 {
     use HasFactory;
     use ModelosTrait;
+    use \OwenIt\Auditing\Auditable;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function propietarios(){
-        return $this->hasMany(Propietario::class);
+        return $this->morphMany(Propietario::class, 'propietarioable');
     }
 
     public function condominio(){
-        return $this->hasOne(Condominio::class);
+        return $this->morphMany(Condominio::class, 'condominioable');
+    }
+
+    public function condominioConstrucciones(){
+        return $this->morphMany(Condominioconstruccion::class, 'condominioconstruccionable');
+    }
+
+    public function terrenos(){
+        return $this->morphMany(Terreno::class, 'terrenoable');
+    }
+
+    public function construcciones(){
+        return $this->morphMany(Referencia::class, 'referenciaable');
+    }
+
+    public function colindancias(){
+        return $this->morphMany(Colindancia::class, 'colindanciaable');
     }
 
     public function movimientos(){
         return $this->belongsToMany(Movimineto::class)->withPivot('fecha', 'descripcion')->withTimestamps();
     }
 
-    public function referencias_construccion(){
-        return $this->hasMany(Referencia::class);
-    }
-
-    public function colindancias(){
-        return $this->hasMany(Colindancia::class);
-    }
 }

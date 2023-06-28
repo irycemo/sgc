@@ -13,5 +13,8 @@ class Colindancia extends Model
 
     protected $fillable = ['predio_id', 'viento', 'longitud', 'descripcion', 'creado_por', 'actualizado_por'];
 
+    public function colindanciaable(){
+        return $this->morphTo();
+    }
 
 }

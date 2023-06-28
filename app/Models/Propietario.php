@@ -15,12 +15,12 @@ class Propietario extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    public function propietarioable(){
+        return $this->morphTo();
+    }
 
     public function persona(){
         return $this->belongsTo(Persona::class);
     }
 
-    public function predios(){
-        return $this->belongsToMany(Predio::class);
-    }
 }

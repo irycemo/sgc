@@ -5,7 +5,6 @@ namespace App\Http\Services\Tramites\Strategies;
 use App\Models\Tramite;
 use Illuminate\Support\Str;
 use App\Http\Services\LineasDeCaptura\LineaCaptura;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Services\Tramites\TramitesStrategyInterface;
 
 class PrediosIgnorados implements TramitesStrategyInterface{
@@ -67,7 +66,7 @@ class PrediosIgnorados implements TramitesStrategyInterface{
         $this->observaciones();
 
         $this->tramite->estado = 'nuevo';
-        $this->tramite->folio = $this->calcularFolio();
+        $this->tramite->folio = Tramite::max('folio') + 1;
         $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
         $this->tramite->orden_de_pago = $sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['NRO_ORD_PAGO'];
         $this->tramite->linea_de_captura = $sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['LINEA_CAPTURA'];
@@ -126,13 +125,6 @@ class PrediosIgnorados implements TramitesStrategyInterface{
             return now()->toDateString();
 
         }
-
-    }
-
-    public function calcularFolio():int
-    {
-
-        return Tramite::max('folio') + 1;
 
     }
 

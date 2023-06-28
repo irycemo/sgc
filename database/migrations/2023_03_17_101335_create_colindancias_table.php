@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('colindancias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('predio_id')->constrained();
+            $table->unsignedInteger('colindanciaable_id');
+            $table->string('colindanciaable_type');
             $table->string('viento');
             $table->unsignedDecimal('longitud', 15, 8);
             $table->text('descripcion');

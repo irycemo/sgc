@@ -5,7 +5,6 @@ namespace App\Http\Services\Tramites\Strategies;
 use App\Models\Tramite;
 use Illuminate\Support\Str;
 use App\Http\Services\LineasDeCaptura\LineaCaptura;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Services\Tramites\TramitesStrategyInterface;
 
 class LevantamientosTopograficos implements TramitesStrategyInterface{
@@ -46,7 +45,8 @@ class LevantamientosTopograficos implements TramitesStrategyInterface{
         $sap = (new LineaCaptura())->generarLineaDeCaptura($this->tramite);
 
         $this->tramite->estado = 'nuevo';
-        $this->tramite->folio = $this->calcularFolio();
+        $this->tramite->monto = $this->calcularMonto();
+        $this->tramite->folio = Tramite::max('folio') + 1;
         $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
         $this->tramite->orden_de_pago = $sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['NRO_ORD_PAGO'];
         $this->tramite->linea_de_captura = $sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['LINEA_CAPTURA'];
@@ -108,10 +108,15 @@ class LevantamientosTopograficos implements TramitesStrategyInterface{
 
     }
 
-    public function calcularFolio():int
-    {
+    public function calcularMonto(){
 
-        return Tramite::max('folio') + 1;
+        if(!$this->tramite->adiciona){
+
+            return $this->tramite->monto / 2;
+
+        }
+
+        return $this->tramite->monto;
 
     }
 

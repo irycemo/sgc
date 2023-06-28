@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('propietarios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('predio_id')->constrained();
+            $table->unsignedInteger('propietarioable_id');
+            $table->string('propietarioable_type');
             $table->foreignId('persona_id')->constrained();
             $table->string('tipo');
             $table->unsignedDecimal('porcentaje', 15,2);
