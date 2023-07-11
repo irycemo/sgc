@@ -24,7 +24,8 @@ class InspeccionesOculares implements TramitesStrategyInterface{
             'predios' => false,
             'observaciones' => true,
             'adiciona' => true,
-            'angulo' => false
+            'angulo' => false,
+            'avaluo_para' => true
         ];
 
         return $flags;
@@ -36,6 +37,7 @@ class InspeccionesOculares implements TramitesStrategyInterface{
         return [
 
             'modelo_editar.solicitante' => 'required',
+            'modelo_editar.avaluo_para' => 'required',
 
         ];
 

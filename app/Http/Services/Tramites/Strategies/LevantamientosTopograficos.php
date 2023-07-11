@@ -23,7 +23,8 @@ class LevantamientosTopograficos implements TramitesStrategyInterface{
             'predios' => true,
             'observaciones' => true,
             'adiciona' => true,
-            'angulo' => true
+            'angulo' => true,
+            'avaluo_para' => false
         ];
 
         return $flags;

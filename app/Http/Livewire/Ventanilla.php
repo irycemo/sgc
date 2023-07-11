@@ -58,7 +58,8 @@ class Ventanilla extends Component
         'predios' => false,
         'observaciones' => false,
         'adiciona' => false,
-        'angulo' => false
+        'angulo' => false,
+        'avaluo_para' => false
     ];
 
     protected function rules(){
@@ -68,6 +69,7 @@ class Ventanilla extends Component
             'modelo_editar.servicio_id' => 'required',
             'modelo_editar.solicitante' => 'required',
             'modelo_editar.monto' => 'required',
+            'modelo_editar.avaluo_para' => 'nullable',
             'modelo_editar.tipo_servicio' => 'required',
             'modelo_editar.cantidad' => 'required|numeric|min:1',
             'modelo_editar.adiciona' => 'required_if:adicionaTramite,true',

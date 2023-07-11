@@ -25,7 +25,8 @@ class CopiasDocumentos implements TramitesStrategyInterface{
             'predios' => true,
             'observaciones' => true,
             'adiciona' => true,
-            'angulo' => false
+            'angulo' => false,
+            'avaluo_para' => false
         ];
 
         return $flags;

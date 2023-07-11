@@ -36,7 +36,7 @@
 
                 <div class="text-center">
 
-                    <input type="number" class="bg-white rounded text-xs w-40 @error('tramiteImpresion') border-1 border-red-500 @enderror" wire:model.defer="tramiteImpresion">
+                    <input type="number" class="bg-white rounded text-xs w-40 @error('tramiteAvaluo') border-1 border-red-500 @enderror" wire:model.defer="tramiteAvaluo">
 
                 </div>
 
@@ -145,7 +145,7 @@
 
                     <div class="text-center">
 
-                        <input type="number" class="bg-white rounded text-xs w-full @error('notificador') border-1 border-red-500 @enderror" wire:model.defer="notificador">
+                        <input type="text" class="bg-white rounded text-xs w-full @error('notificador') border-1 border-red-500 @enderror" wire:model.defer="notificador">
 
                     </div>
 
@@ -181,7 +181,7 @@
 
         @else
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-end mx-auto mb-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end mx-auto mb-4">
 
                 <div class="flex-auto">
 
@@ -193,39 +193,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="autoridad_municipal" readonly>
-
-                    </div>
-
-                </div>
-
-                <div class="flex-auto">
-
-                    <div class="text-center">
-
-                        <Label class="text-base tracking-widest rounded-xl border-gray-500">Jefe de departamento</Label>
-
-                    </div>
-
-                    <div class="text-center">
-
-                        <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="jefe_departamento_municipal" readonly>
-
-                    </div>
-
-                </div>
-
-                <div class="flex-auto">
-
-                    <div class="text-center">
-
-                        <Label class="text-base tracking-widest rounded-xl border-gray-500">Notificador</Label>
-
-                    </div>
-
-                    <div class="text-center">
-
-                        <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="notificador_municipal" readonly>
+                        <input type="text" class="bg-white rounded text-xs w-full lg:w-1/2" wire:model.defer="autoridad_municipal" readonly>
 
                     </div>
 
@@ -241,7 +209,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="valuador_municipal" readonly>
+                        <input type="text" class="bg-white rounded text-xs w-full lg:w-1/2" wire:model.defer="valuador_municipal" readonly>
 
                     </div>
 

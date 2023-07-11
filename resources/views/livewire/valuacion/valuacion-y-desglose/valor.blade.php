@@ -140,7 +140,7 @@
 
     <div class="space-y-2 mb-5 bg-white rounded-lg p-2">
 
-        <h4 class="text-lg mb-5 tex-center">Terrenos</h4>
+        <h4 class="text-lg mb-5 text-center">Terrenos</h4>
 
         <div class="mb-5  divide-y">
 
@@ -345,7 +345,7 @@
 
             @foreach ($construcciones as $index => $construccion)
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-3 items-start mb-2 bg-gray-50 p-4 rounded-lg items-end">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-3 mb-2 bg-gray-50 p-4 rounded-lg items-end">
 
                     <div class="flex-auto lg:col-span-2">
 

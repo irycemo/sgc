@@ -23,7 +23,8 @@ class PrediosIgnorados implements TramitesStrategyInterface{
             'predios' => false,
             'observaciones' => true,
             'adiciona' => false,
-            'angulo' => false
+            'angulo' => false,
+            'avaluo_para' => false
         ];
 
         if($this->tramite->servicio->nombre == "Solicitud de Predio Ignorado"){

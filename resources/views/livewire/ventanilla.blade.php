@@ -327,6 +327,46 @@
 
             @endif
 
+            @if ($flags['solicitante'])
+
+                <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md">
+
+                    <div class="flex-auto ">
+
+                        <div class="mb-2">
+
+                            <Label class="text-lg tracking-widest rounded-xl border-gray-500">Avaluo para</Label>
+
+                        </div>
+
+                        <div>
+
+                            <select class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.avaluo_para">
+
+                                <option value="" selected>Seleccione una opción</option>
+                                <option value="46">Variación Catastral</option>
+                                <option value="43">Avaluos de desglose de fraccionamientos, condominios, conjuntos habitacionales y subdivisiones</option>
+                                <option value="44">Avaluos de desglose de cualquier otro tipo de inmueble</option>
+                                <option value="">Avaluos de actualización</option>
+                                <option value="">Avaluos de fusión</option>
+                                <option value="">Avaluos de cambio de régimen</option>
+
+                            </select>
+
+                        </div>
+
+                        <div>
+
+                            @error('modelo_editar.avaluo_para') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            @endif
+
             @if ($flags['predios'])
 
                 <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md">

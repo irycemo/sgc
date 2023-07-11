@@ -22,7 +22,8 @@ class Reset implements TramitesStrategyInterface{
             'predios' => false,
             'observaciones' => false,
             'adiciona' => false,
-            'angulo' => false
+            'angulo' => false,
+            'avaluo_para' => false
         ];
 
     }

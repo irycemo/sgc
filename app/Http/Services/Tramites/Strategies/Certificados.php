@@ -31,7 +31,8 @@ class Certificados implements TramitesStrategyInterface{
             'predios' => true,
             'observaciones' => true,
             'adiciona' => true,
-            'angulo' => false
+            'angulo' => false,
+            'avaluo_para' => false
         ];
 
         if($this->tramite->servicio->nombre == 'Certificado negativo catastral'){

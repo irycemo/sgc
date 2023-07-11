@@ -24,7 +24,8 @@ class Simple implements TramitesStrategyInterface{
             'predios' => false,
             'observaciones' => true,
             'adiciona' => true,
-            'angulo' => false
+            'angulo' => false,
+            'avaluo_para' => false
         ];
 
         return $flags;
