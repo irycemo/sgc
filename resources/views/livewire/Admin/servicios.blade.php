@@ -700,7 +700,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.clave_ingreso">
+                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.clave_ingreso">
 
                         </div>
 
@@ -721,7 +721,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.operacion_principal">
+                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.operacion_principal">
 
                         </div>
 
@@ -742,7 +742,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.operacion_parcial">
+                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.operacion_parcial">
 
                         </div>
 
