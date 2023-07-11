@@ -674,6 +674,27 @@
 
                         <div>
 
+                            <Label>Material</Label>
+                        </div>
+
+                        <div>
+
+                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.material">
+
+                        </div>
+
+                        <div>
+
+                            @error('modelo_editar.material') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex-auto ">
+
+                        <div>
+
                             <Label>Clave de ingreso</Label>
                         </div>
 
@@ -690,6 +711,52 @@
                         </div>
 
                     </div>
+
+                    <div class="flex-auto ">
+
+                        <div>
+
+                            <Label>Operación princial</Label>
+                        </div>
+
+                        <div>
+
+                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.operacion_principal">
+
+                        </div>
+
+                        <div>
+
+                            @error('modelo_editar.operacion_principal') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex-auto ">
+
+                        <div>
+
+                            <Label>Operación parcial</Label>
+                        </div>
+
+                        <div>
+
+                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.operacion_parcial">
+
+                        </div>
+
+                        <div>
+
+                            @error('modelo_editar.operacion_parcial') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
                     <div class="flex-auto ">
 
@@ -718,10 +785,6 @@
                         </div>
 
                     </div>
-
-                </div>
-
-                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
                     <div class="flex-auto mr-1 ">
 

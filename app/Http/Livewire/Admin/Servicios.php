@@ -33,11 +33,16 @@ class Servicios extends Component
             'modelo_editar.categoria_servicio_id' => 'required',
             'modelo_editar.porcentaje' => 'numeric|nullable|min:0',
             'modelo_editar.clave_ingreso' => 'required|string',
+            'modelo_editar.material' => 'required|string',
+            'modelo_editar.operacion_principal' => 'required|string',
+            'modelo_editar.operacion_parcial' => 'required|string',
          ];
     }
 
     protected $validationAttributes  = [
         'modelo_editar.clave_ingreso' => 'clave de ingreso',
+        'modelo_editar.operacion_principal' => 'operacion principal',
+        'modelo_editar.operacion_parcial' => 'operacion parcial',
     ];
 
     public function crearModeloVacio(){
