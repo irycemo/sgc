@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Http\Constantes\Constantes;
+use App\Models\Oficina;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -31,7 +32,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'ap_paterno' => $this->faker->word(),
             'ap_materno' => $this->faker->word(),
-            'oficina' => $this->faker->unique()->randomNumber(),
+            'oficina' => Oficina::select('oficina')->inRandomOrder()->first()->oficina,
             'area' => $this->faker->randomElement(Constantes::AREAS_ADSCRIPCION),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),

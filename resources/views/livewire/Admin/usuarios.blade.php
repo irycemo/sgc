@@ -444,7 +444,7 @@
 
                     <tr>
 
-                        <td colspan="8" class="py-2 px-5">
+                        <td colspan="9" class="py-2 px-5">
                             {{ $usuarios->links()}}
                         </td>
 
@@ -690,6 +690,27 @@
                         <div>
 
                             @error('modelo_editar.area') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex-auto mb-5">
+
+                        <div>
+
+                            <Label>Valuador</Label>
+                        </div>
+
+                        <div class="">
+
+                            <input type="checkbox" class="bg-white rounded text-xs " wire:model.defer="modelo_editar.valuador">
+
+                        </div>
+
+                        <div>
+
+                            @error('modelo_editar.valuador') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                         </div>
 

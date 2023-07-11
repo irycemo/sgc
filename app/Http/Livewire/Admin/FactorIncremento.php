@@ -114,6 +114,6 @@ class FactorIncremento extends Component
         $factores = ModelsFactorIncremento::orderBy($this->sort, $this->direction)
                                             ->paginate($this->pagination);
 
-        return view('livewire.admin.factor-incremento', compact('factores'))->extends('layouts.admin');
+        return view('livewire.Admin.factor-incremento', compact('factores'))->extends('layouts.admin');
     }
 }

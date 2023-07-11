@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Constantes\Constantes;
@@ -25,6 +26,7 @@ class Usuarios extends Component
     protected function rules(){
         return [
             'modelo_editar.name' => 'required',
+            'modelo_editar.valuador' => Rule::requiredIf($this->role === "3"),
             'modelo_editar.ap_paterno' => 'required',
             'modelo_editar.ap_materno' => 'required',
             'modelo_editar.email' => 'required|email:rfc,dns|unique:users,email,' . $this->modelo_editar->id,

@@ -24,6 +24,6 @@ class ValoresunitariosConstruccion extends Component
         $valores = ModelsValoresUnitariosConstruccion::orderBy($this->sort, $this->direction)
                                                         ->paginate($this->pagination);
 
-        return view('livewire.admin.valores-unitarios-construccion',compact('valores'))->extends('layouts.admin');
+        return view('livewire.Admin.valores-unitarios-construccion',compact('valores'))->extends('layouts.admin');
     }
 }

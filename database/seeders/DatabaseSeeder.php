@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(RoleSeeder::class);
+        $this->call(OficinasTableSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CategoriaServiciosTableSeeder::class);
         $this->call(ServiciosTableSeeder::class);
@@ -35,6 +36,5 @@ class DatabaseSeeder extends Seeder
         $this->call(UmaSeeder::class);
         $this->call(ValoresUnitariosConstruccionsTableSeeder::class);
         $this->call(ValoresUnitariosRusticosTableSeeder::class);
-        $this->call(OficinasTableSeeder::class);
     }
 }

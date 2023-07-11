@@ -25,7 +25,7 @@ class ValoresUnitariosRusticos extends Component
         $valores = ModelsValoresUnitariosRusticos::orderBy($this->sort, $this->direction)
                                                         ->paginate($this->pagination);
 
-        return view('livewire.admin.valores-unitarios-rusticos',compact('valores'))->extends('layouts.admin');
+        return view('livewire.Admin.valores-unitarios-rusticos',compact('valores'))->extends('layouts.admin');
 
     }
 }

@@ -28,8 +28,6 @@ class Oficinas extends Component
             'modelo_editar.titular' => 'required',
             'modelo_editar.email' => 'required|email',
             'modelo_editar.telefonos' => 'required',
-            'modelo_editar.notificador' => 'required',
-            'modelo_editar.jefe_departamento' => 'required',
             'modelo_editar.autoridad_municipal' => 'required',
             'modelo_editar.valuador_municipal' => 'required',
             'modelo_editar.cabecera' => 'nullable',
@@ -37,7 +35,6 @@ class Oficinas extends Component
     }
 
     protected $validationAttributes  = [
-        'modelo_editar.jefe_departamento' => 'jefe de departamento',
         'modelo_editar.autoridad_municipal' => 'autoridad municipal',
         'modelo_editar.valuador_municipal' => 'valuador municipal'
     ];
@@ -151,13 +148,11 @@ class Oficinas extends Component
                                 ->orWhere('titular', 'LIKE', '%'. $this->search . '%')
                                 ->orWhere('email', 'LIKE', '%'. $this->search . '%')
                                 ->orWhere('telefonos', 'LIKE', '%'. $this->search . '%')
-                                ->orWhere('notificador', 'LIKE', '%'. $this->search . '%')
-                                ->orWhere('jefe_departamento', 'LIKE', '%'. $this->search . '%')
                                 ->orWhere('autoridad_municipal', 'LIKE', '%'. $this->search . '%')
                                 ->orWhere('valuador_municipal', 'LIKE', '%'. $this->search . '%')
                                 ->orderBy($this->sort, $this->direction)
                                 ->paginate($this->pagination);
 
-        return view('livewire.admin.oficinas', compact('oficinas'))->extends('layouts.admin');
+        return view('livewire.Admin.oficinas', compact('oficinas'))->extends('layouts.admin');
     }
 }

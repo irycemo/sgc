@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Oficina;
 use App\Http\Constantes\Constantes;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -39,12 +40,12 @@ class PredioFactory extends Factory
             'manzana_fraccionador' => $this->faker->numberBetween(1,100),
             'etapa_fraccionador' => $this->faker->numberBetween(1,100),
             'codigo_postal' => $this->faker->numberBetween(1,100),
-            'localidad' => $this->faker->numberBetween(1,100),
+            'localidad' => $this->faker->numberBetween(1,10),
             'sector' => $this->faker->numberBetween(1,100),
             'manzana' => $this->faker->numberBetween(1,100),
             'edificio' => $this->faker->numberBetween(1,100),
             'departamento' => $this->faker->numberBetween(1,100),
-            'oficina' => $this->faker->numberBetween(1,100),
+            'oficina' => Oficina::select('oficina')->inRandomOrder()->first()->oficina,
             'tipo_predio' => $this->faker->numberBetween(1,2),
             'numero_registro' => $this->faker->numberBetween(1,100),
             'superficie_terreno' => $this->faker->numberBetween(1,100),
