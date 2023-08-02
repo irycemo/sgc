@@ -794,99 +794,6 @@
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-3">
 
-                    <div class="flex-auto mr-1 ">
-
-                        <div>
-
-                            <Label>Valuador municipal</Label>
-
-                        </div>
-
-                        <div>
-
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.valuador_municipal">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.valuador_municipal') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto">
-
-                        <div>
-
-                            <Label>Notificador</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.notificador">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.notificador') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-3">
-
-                    <div class="flex-auto ">
-
-                        <div>
-
-                            <Label>Jefe de departamento</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.jefe_departamento">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.jefe_departamento') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto ">
-
-                        <div>
-
-                            <Label>Autoridad catastral</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.autoridad_municipal">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.autoridad_municipal') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-3">
-
                     <div class="flex-auto ">
 
                         <div>
@@ -925,6 +832,54 @@
                         <div>
 
                             @error('modelo_editar.email') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-3">
+
+                    <div class="flex-auto mr-1 ">
+
+                        <div>
+
+                            <Label>Valuador municipal</Label>
+
+                        </div>
+
+                        <div>
+
+                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.valuador_municipal">
+
+                        </div>
+
+                        <div>
+
+                            @error('modelo_editar.valuador_municipal') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex-auto ">
+
+                        <div>
+
+                            <Label>Autoridad municipal</Label>
+                        </div>
+
+                        <div>
+
+                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.autoridad_municipal">
+
+                        </div>
+
+                        <div>
+
+                            @error('modelo_editar.autoridad_municipal') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                         </div>
 

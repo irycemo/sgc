@@ -194,6 +194,17 @@ class Valor extends Component
             ];
         }
 
+        foreach ($this->predio->condominioConstrucciones as $construccion) {
+
+            $this->construccionesCondominio[] = [
+                'id' => $construccion->id,
+                'area_comun_construccion' => $construccion->area_comun_construccion,
+                'indiviso_construccion' => $construccion->indiviso_construccion,
+                'valor_clasificacion_construccion' => $construccion->valor_clasificacion_construccion,
+                'valor_construcción_comun' => $construccion->valor_construcción_comun,
+            ];
+        }
+
         $this->avaluo = $this->predio->avaluo;
 
         $this->porcentajeDemerito = null;

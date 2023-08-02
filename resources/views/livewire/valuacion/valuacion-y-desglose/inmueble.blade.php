@@ -294,7 +294,7 @@
 
         <h4 class="text-lg mb-5 text-center">Ubicación del predio</h4>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 items-end">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 items-start">
 
             <div class="flex-auto">
 
@@ -404,28 +404,6 @@
 
                 <div>
 
-                    <label class="text-sm" >Número interior</label>
-
-                </div>
-
-                <div>
-
-                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_interior">
-
-                </div>
-
-                <div>
-
-                    @error('predio.numero_interior') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                </div>
-
-            </div>
-
-            <div class="flex-auto ">
-
-                <div>
-
                     <label class="text-sm" >Número exterior</label>
 
                 </div>
@@ -461,6 +439,28 @@
                 <div>
 
                     @error('predio.numero_exterior_2') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                </div>
+
+            </div>
+
+            <div class="flex-auto ">
+
+                <div>
+
+                    <label class="text-sm" >Número interior</label>
+
+                </div>
+
+                <div>
+
+                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_interior">
+
+                </div>
+
+                <div>
+
+                    @error('predio.numero_interior') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -708,9 +708,9 @@
 
                     <div class="space-y-1">
 
-                        <input placeholder="X" type="text" class="bg-white rounded text-xs w-40" wire:model.lazy="predio.xutm">
+                        <input placeholder="X" type="text" class="bg-white rounded text-xs w-40 @error('predio.xutm') border-red-500 @enderror" wire:model.lazy="predio.xutm">
 
-                        <input placeholder="Y" type="text" class="bg-white rounded text-xs w-40" wire:model.lazy="predio.yutm">
+                        <input placeholder="Y" type="text" class="bg-white rounded text-xs w-40 @error('predio.yutm') border-red-500 @enderror" wire:model.lazy="predio.yutm">
 
                         <select class="bg-white rounded text-xs" wire:model.lazy="predio.zutm">
 
@@ -740,9 +740,9 @@
 
                     <div class="space-y-1">
 
-                        <input placeholder="Lat" type="number" class="bg-white rounded text-xs w-40" wire:model.lazy="predio.lat">
+                        <input placeholder="Lat" type="number" class="bg-white rounded text-xs w-40 @error('predio.lat') border-red-500 @enderror" wire:model.lazy="predio.lat">
 
-                        <input placeholder="Lon" type="number" class="bg-white rounded text-xs w-40" wire:model.lazy="predio.lon">
+                        <input placeholder="Lon" type="number" class="bg-white rounded text-xs w-40 @error('predio.lon') border-red-500 @enderror" wire:model.lazy="predio.lon">
 
                     </div>
 
@@ -758,7 +758,9 @@
 
         @if(count($errors) > 0)
 
-            <span class="bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-red-700 flex items-center justify-center focus:outline-none ">Campos incorrectos</span>
+            <span class="bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-red-700 flex items-center justify-center focus:outline-none ">
+                Campos incorrectos
+            </span>
 
         @endif
 

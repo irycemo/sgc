@@ -327,7 +327,7 @@
 
             @endif
 
-            @if ($flags['solicitante'])
+            @if ($flags['avaluo_para'])
 
                 <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md">
 

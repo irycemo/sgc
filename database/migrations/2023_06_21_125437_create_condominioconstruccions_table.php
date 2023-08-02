@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedDecimal('area_comun_construccion', 10, 2)->nullable();
             $table->unsignedDecimal('indiviso_construccion', 10, 2)->nullable();
             $table->unsignedDecimal('valor_clasificacion_construccion', 10, 2)->nullable();
-            $table->unsignedDecimal('valor_construcción_comun', 10, 2)->nullable();
+            $table->unsignedDecimal('valor_construccion_comun', 10, 2)->nullable();
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

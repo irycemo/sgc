@@ -40,39 +40,45 @@ class Caracteristicas extends Component
 
     protected function rules(){
         return [
-            'avaluo.clasificacion_zona' => 'nullable',
-            'avaluo.construccion_dominante' => 'nullable',
+            'avaluo.clasificacion_zona' => 'required',
+            'avaluo.construccion_dominante' => 'required',
             'avaluo.agua' => 'nullable',
             'avaluo.drenaje' => 'nullable',
             'avaluo.pavimento' => 'nullable',
             'avaluo.energia_electrica' => 'nullable',
             'avaluo.alumbrado_publico' => 'nullable',
             'avaluo.banqueta' => 'nullable',
-            'avaluo.cimentacion' => 'nullable',
-            'avaluo.estructura' => 'nullable',
-            'avaluo.muros' => 'nullable',
-            'avaluo.entrepiso' => 'nullable',
-            'avaluo.techo' => 'nullable',
-            'avaluo.plafones' => 'nullable',
-            'avaluo.vidrieria' => 'nullable',
-            'avaluo.lambrines' => 'nullable',
-            'avaluo.pisos' => 'nullable',
-            'avaluo.herreria' => 'nullable',
-            'avaluo.pintura' => 'nullable',
-            'avaluo.carpinteria' => 'nullable',
-            'avaluo.recubrimiento_especial' => 'nullable',
-            'avaluo.aplanados' => 'nullable',
-            'avaluo.hidraulica' => 'nullable',
-            'avaluo.sanitaria' => 'nullable',
-            'avaluo.electrica' => 'nullable',
-            'avaluo.gas' => 'nullable',
-            'avaluo.especiales' => 'nullable',
+            'avaluo.cimentacion' => 'required',
+            'avaluo.estructura' => 'required',
+            'avaluo.muros' => 'required',
+            'avaluo.entrepiso' => 'required',
+            'avaluo.techo' => 'required',
+            'avaluo.plafones' => 'required',
+            'avaluo.vidrieria' => 'required',
+            'avaluo.lambrines' => 'required',
+            'avaluo.pisos' => 'required',
+            'avaluo.herreria' => 'required',
+            'avaluo.pintura' => 'required',
+            'avaluo.carpinteria' => 'required',
+            'avaluo.recubrimiento_especial' => 'required',
+            'avaluo.aplanados' => 'required',
+            'avaluo.hidraulica' => 'required',
+            'avaluo.sanitaria' => 'required',
+            'avaluo.electrica' => 'required',
+            'avaluo.gas' => 'required',
+            'avaluo.especiales' => 'required',
             'predio' => 'required'
          ];
     }
 
     protected $messages = [
-        'predio.required' => '. Primero debe cargar el avaluo'
+        'predio.required' => '. Primero debe cargar el avaluo',
+
+    ];
+
+    protected $validationAttributes  = [
+        'avaluo.clasificacion_zona' => 'clasificación de la zona',
+        'avaluo.construccion_dominante' => 'tipo de construcción dominante'
     ];
 
     public function cargarPredio($id){

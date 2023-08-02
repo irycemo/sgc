@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\File;
 use App\Http\Traits\ModelosTrait;
+use App\Http\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Avaluo extends Model implements Auditable
 {
+    use Uuid;
     use HasFactory;
     use ModelosTrait;
     use \OwenIt\Auditing\Auditable;
@@ -48,6 +50,16 @@ class Avaluo extends Model implements Auditable
 
     }
 
+    public function fachada_pdf(){
+
+        $fachada = $this->imagenes()->where('descripcion', 'fachada')->first();
+
+        return $fachada
+            ? 'avaluos/' . $fachada->url
+            : 'storage/img/escudo_guinda.png';
+
+    }
+
     public function foto2(){
 
         $foto2 = $this->imagenes()->where('descripcion', 'foto2')->first();
@@ -56,6 +68,16 @@ class Avaluo extends Model implements Auditable
             ? Storage::disk('avaluos')->url($foto2->url)
             : Storage::disk('public')->url('img/logo.png');
         ;
+
+    }
+
+    public function foto2_pdf(){
+
+        $foto2 = $this->imagenes()->where('descripcion', 'foto2')->first();
+
+        return $foto2
+            ? 'avaluos/' . $foto2->url
+            : 'storage/img/escudo_guinda.png';
 
     }
 
@@ -70,6 +92,16 @@ class Avaluo extends Model implements Auditable
 
     }
 
+    public function foto3_pdf(){
+
+        $foto3 = $this->imagenes()->where('descripcion', 'foto3')->first();
+
+        return $foto3
+            ? 'avaluos/' . $foto3->url
+            : 'storage/img/escudo_guinda.png';
+
+    }
+
     public function foto4(){
 
         $foto4 = $this->imagenes()->where('descripcion', 'foto4')->first();
@@ -78,6 +110,16 @@ class Avaluo extends Model implements Auditable
             ? Storage::disk('avaluos')->url($foto4->url)
             : Storage::disk('public')->url('img/logo.png');
         ;
+
+    }
+
+    public function foto4_pdf(){
+
+        $foto4 = $this->imagenes()->where('descripcion', 'foto4')->first();
+
+        return $foto4
+            ? 'avaluos/' . $foto4->url
+            : 'storage/img/escudo_guinda.png';
 
     }
 
@@ -92,6 +134,16 @@ class Avaluo extends Model implements Auditable
 
     }
 
+    public function macrolocalizacion_pdf(){
+
+        $macrolocalizacion = $this->imagenes()->where('descripcion', 'macrolocalizacion')->first();
+
+        return $macrolocalizacion
+            ? 'avaluos/' . $macrolocalizacion->url
+            : 'storage/img/escudo_guinda.png';
+
+    }
+
     public function microlocalizacion(){
 
         $microlocalizacion = $this->imagenes()->where('descripcion', 'microlocalizacion')->first();
@@ -103,6 +155,16 @@ class Avaluo extends Model implements Auditable
 
     }
 
+    public function microlocalizacion_pdf(){
+
+        $microlocalizacion = $this->imagenes()->where('descripcion', 'microlocalizacion')->first();
+
+        return $microlocalizacion
+            ? 'avaluos/' . $microlocalizacion->url
+            : 'storage/img/escudo_guinda.png';
+
+    }
+
     public function poligonoImagen(){
 
         $poligonoImagen = $this->imagenes()->where('descripcion', 'poligonoImagen')->first();
@@ -111,6 +173,16 @@ class Avaluo extends Model implements Auditable
             ? Storage::disk('avaluos')->url($poligonoImagen->url)
             : Storage::disk('public')->url('img/logo.png');
         ;
+
+    }
+
+    public function poligonoImagen_pdf(){
+
+        $poligonoImagen = $this->imagenes()->where('descripcion', 'poligonoImagen')->first();
+
+        return $poligonoImagen
+            ? 'avaluos/' . $poligonoImagen->url
+            : 'storage/img/escudo_guinda.png';
 
     }
 

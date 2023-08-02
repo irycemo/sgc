@@ -38,7 +38,6 @@ class Inmueble extends Component
         return [
             'predio.copia' => 'nullable',
             'predio.sociedad' => 'nullable',
-            'predio.estado' => 'required',
             'predio.numero_registro' => 'required',
             'predio.region_catastral' => 'required',
             'predio.municipio' => 'required',
@@ -50,11 +49,12 @@ class Inmueble extends Component
             'predio.departamento' => 'required',
             'predio.tipo_predio' => 'required',
             'predio.oficina' => 'required',
-            'predio.tipo_asentamiento' => 'nullable',
-            'predio.nombre_asentamiento' => 'nullable',
-            'predio.tipo_vialidad' => 'nullable',
-            'predio.nombre_vialidad' => 'nullable',
-            'predio.numero_exterior' => 'nullable',
+            'predio.estado' => 'required',
+            'predio.tipo_asentamiento' => 'required',
+            'predio.nombre_asentamiento' => 'required',
+            'predio.tipo_vialidad' => 'required',
+            'predio.nombre_vialidad' => 'required',
+            'predio.numero_exterior' => 'required',
             'predio.numero_exterior_2' => 'nullable',
             'predio.numero_interior' => 'nullable',
             'predio.numero_adicional_2' => 'nullable',
@@ -70,8 +70,8 @@ class Inmueble extends Component
             'predio.xutm' => 'nullable|string',
             'predio.yutm' => 'nullable|string',
             'predio.zutm' => 'nullable',
-            'predio.lat' => 'nullable',
-            'predio.lon' => 'nullable',
+            'predio.lat' => 'required',
+            'predio.lon' => 'required',
             'ap_paterno' => 'required',
             'ap_materno' => 'required',
             'nombre' => 'required',
@@ -89,7 +89,11 @@ class Inmueble extends Component
     ];
 
     public function crearModeloVacio(){
-        return PredioAvaluo::make();
+        return PredioAvaluo::make([
+            'sociedad' => false,
+            'estado' => 16,
+            'copia' => false
+        ]);
     }
 
     public function updatedPredioXutm(){

@@ -6,21 +6,27 @@ use App\Models\User;
 use App\Models\Oficina;
 use App\Models\Tramite;
 use Livewire\Component;
+use Illuminate\Http\File;
 use App\Models\PredioAvaluo;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Valuacion\AvaluosController;
+use Exception;
+use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 
 class Impresion extends Component
 {
 
-    public $tramiteInspeccion;
-    public $tramiteAvaluo;
+    public $tramiteInspeccion = 994437376;
+    public $tramiteAvaluo = 994437375;
     public $formato = 0;
     public $autoridad_municipal;
-    public $localidad;
+    public $localidad = 4;
     public $oficina;
-    public $tipo;
-    public $registro_inicio;
-    public $registro_final;
+    public $tipo = 2;
+    public $registro_inicio = 11;
+    public $registro_final = 11;
     public $director;
     public $jefe_departamento;
     public $notificador;
@@ -39,7 +45,7 @@ class Impresion extends Component
     protected function rules(){
         return [
             'tramiteInspeccion' => 'required',
-            'tramiteImpresion' => 'required',
+            'tramiteAvaluo' => 'required',
             'localidad' => 'required',
             'oficina' => 'required',
             'tipo' => 'required',
@@ -67,6 +73,9 @@ class Impresion extends Component
 
         if(!$this->formato)
             $this->oficina = 101;
+        else{
+            $this->oficina = auth()->user()->oficina;
+        }
 
     }
 
@@ -79,8 +88,6 @@ class Impresion extends Component
         if(!$oficina){
 
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Oficina incorrecta."]);
-
-            $this->oficina = null;
 
             return;
 
@@ -97,7 +104,10 @@ class Impresion extends Component
 
         $this->validate();
 
-        $this->cantidad = $this->registro_final - $this->registro_inicio;
+        $this->cantidad = $this->registro_final - $this->registro_inicio + 1;
+
+        if($this->registro_final == $this->registro_inicio)
+            $this->cantidad = 1;
 
         if($this->cantidad < 0){
 
@@ -107,21 +117,33 @@ class Impresion extends Component
 
         }
 
-        $tramiteInspeccion  = Tramite::where('folio', $this->tramiteInspeccion)
-                                        ->where('estado', 'pagado')
-                                        ->first();
+        $tramiteInspeccion  = Tramite::where('folio', $this->tramiteInspeccion)->first();
 
-        if(( $this->cantidad + $tramiteInspeccion->usados) > $tramiteInspeccion->cantidad){
+        if($tramiteInspeccion->estado != 'pagado'){
 
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cantidad de inspecciones que avala el trámite ya se usó."]);
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de inspección no esta pagado o ha sido concluido."]);
 
             return;
 
         }
 
-        $tramiteAvaluo = Tramite::where('folio', $this->tramiteAvaluo)
-                                    ->where('estado', 'pagado')
-                                    ->first();
+        if(( $this->cantidad + $tramiteInspeccion->usados) > $tramiteInspeccion->cantidad){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cantidad de inspecciones que avala el trámite ya se usó o es insuficiente."]);
+
+            return;
+
+        }
+
+        $tramiteAvaluo = Tramite::where('folio', $this->tramiteAvaluo)->first();
+
+        if($tramiteInspeccion->estado != 'pagado'){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no esta pagado o ha sido concluido."]);
+
+            return;
+
+        }
 
         if(( $this->cantidad + $tramiteAvaluo->usados) > $tramiteAvaluo->cantidad){
 
@@ -154,7 +176,26 @@ class Impresion extends Component
 
         }
 
-        DB::transaction(function () use($tramiteInspeccion, $tramiteAvaluo){
+        $path = null;
+
+        $predios = PredioAvaluo::with('avaluo', 'propietarios.persona', 'colindancias', 'terrenos', 'condominio', 'condominioConstrucciones', 'construcciones')->where('localidad', $this->localidad)
+                                        ->where('oficina', $this->oficina)
+                                        ->where('tipo_predio', $this->tipo)
+                                        ->whereBetween('numero_registro', [$this->registro_inicio, $this->registro_final])
+                                        ->get();
+
+        if($predios->count() == 0){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No se encontraron avaluos para el rango de cuentas prediales."]);
+
+            return;
+
+        }
+
+        if($this->revisarAvaluosCompletos($predios))
+            return;
+
+        DB::transaction(function () use($tramiteInspeccion, $tramiteAvaluo, &$path, $predios){
 
             $tramiteInspeccion->update([
                             'usados' => $this->cantidad + $tramiteInspeccion->usados,
@@ -169,15 +210,27 @@ class Impresion extends Component
                                     ]);
             }
 
-            $predios = PredioAvaluo::with('avaluo')->where('localidad', $this->localidad)
-                                        ->where('oficina', $this->oficina)
-                                        ->where('tipo', $this->tipo)
-                                        ->whereBetween('numero_registro', [$this->registro_inicio, $this->registro_final])
-                                        ->get();
+            $path = (new AvaluosController())->imprime(
+                                                        $predios,
+                                                        $tramiteInspeccion,
+                                                        $tramiteAvaluo,
+                                                        $this->ciudad,
+                                                        $this->hora,
+                                                        $this->dia,
+                                                        $this->mes,
+                                                        $this->año,
+                                                        $this->nombre,
+                                                        $this->calidad,
+                                                        $this->director,
+                                                        $this->jefe_departamento,
+                                                        $this->valuador,
+                                                        $this->valuador_municipal,
+                                                        $this->autoridad_municipal,
+                                                    );
 
             foreach($predios as $predio){
 
-                $predio->update(['estado' => 'impreso']);
+                $predio->update(['status' => 'impreso']);
 
                 $predio->avaluo->update(['tramite_id' => $tramiteInspeccion->id]);
 
@@ -189,15 +242,65 @@ class Impresion extends Component
             if($tramiteAvaluo->cantidad == $tramiteAvaluo->usados)
                 $tramiteAvaluo->update(['estado' => 'concluido']);
 
-            $this->crearPdfs($predios);
-
         });
+
+        return response()->download(storage_path($path));
 
     }
 
-    public function crearPdfs($predios){
+    public function revisarAvaluosCompletos($predios){
 
-        
+        foreach($predios as $predio){
+
+            if(!$predio->colindancias->count()){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene colindancias."]);
+
+                return true;
+
+            }
+
+            if(!$predio->avaluo->clasificacion_zona){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene caracteristicas."]);
+
+                return true;
+
+            }
+
+            if(!$predio->uso_1){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene uso de predio."]);
+
+                return true;
+
+            }
+
+            if(!$predio->terrenos->count()){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene terrenos."]);
+
+                return true;
+
+            }
+
+            if(!$predio->construcciones->count()){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene construcciones."]);
+
+                return true;
+
+            }
+
+            if($predio->edificio != 0 && !$predio->condominioConstrucciones->count()){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo" . $predio->avaluo->folio . " no tiene construcciones."]);
+
+                return true;
+
+            }
+
+        }
 
     }
 
@@ -205,7 +308,11 @@ class Impresion extends Component
 
         $this->oficina = auth()->user()->oficina;
 
-        if($this->oficina != 101) $this->formato = 1;
+        if($this->oficina != 101){
+
+            $this->formato = 1;
+
+        }
 
         $this->director = User::where('status', 'activo')
                                     ->whereHas('roles', function($q){

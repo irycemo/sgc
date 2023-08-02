@@ -38,6 +38,12 @@
 
                 </div>
 
+                <div>
+
+                    @error('avaluo.clasificacion_zona') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                </div>
+
             </div>
 
             <div class="flex-auto">
@@ -61,6 +67,12 @@
                         @endforeach
 
                     </select>
+
+                </div>
+
+                <div>
+
+                    @error('avaluo.construccion_dominante') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -226,7 +238,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.cimentacion">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.cimentacion') border-red-500 @enderror" wire:model.defer="avaluo.cimentacion">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -237,12 +249,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.cimentacion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -258,7 +264,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.estructura">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.estructura') border-red-500 @enderror" wire:model.defer="avaluo.estructura">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -269,12 +275,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.estructura') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -290,7 +290,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.muros">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.muros') border-red-500 @enderror" wire:model.defer="avaluo.muros">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -304,12 +304,6 @@
 
                 </div>
 
-                <div>
-
-                    @error('avaluo.muros') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                </div>
-
             </div>
 
             <div class="flex-auto ">
@@ -322,7 +316,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.entrepiso">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.entrepiso') border-red-500 @enderror" wire:model.defer="avaluo.entrepiso">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -333,44 +327,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.entrepiso') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                </div>
-
-            </div>
-
-            <div class="flex-auto ">
-
-                <div>
-
-                    <label class="text-sm" >Entrepisos</label>
-
-                </div>
-
-                <div>
-
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.entrepiso">
-
-                        <option value="" selected>Seleccione una opción</option>
-
-                        @foreach ($entrepisos as $item)
-
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
-
-                        @endforeach
-
-                    </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.entrepiso') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -386,7 +342,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.techo">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.techo') border-red-500 @enderror" wire:model.defer="avaluo.techo">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -397,12 +353,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.techo') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -428,7 +378,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.plafones">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.plafones') border-red-500 @enderror" wire:model.defer="avaluo.plafones">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -439,12 +389,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.plafones') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -460,7 +404,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.vidrieria">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.vidrieria') border-red-500 @enderror" wire:model.defer="avaluo.vidrieria">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -471,12 +415,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.vidrieria') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -492,7 +430,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.lambrines">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.lambrines') border-red-500 @enderror" wire:model.defer="avaluo.lambrines">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -503,12 +441,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.lambrines') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -524,7 +456,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.pisos">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.pisos') border-red-500 @enderror" wire:model.defer="avaluo.pisos">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -535,12 +467,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.pisos') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -556,7 +482,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.herreria">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.herreria') border-red-500 @enderror" wire:model.defer="avaluo.herreria">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -567,12 +493,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.herreria') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -588,7 +508,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.pintura">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.pintura') border-red-500 @enderror" wire:model.defer="avaluo.pintura">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -599,12 +519,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.pintura') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -620,7 +534,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.carpinteria">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.carpinteria') border-red-500 @enderror" wire:model.defer="avaluo.carpinteria">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -631,12 +545,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.carpinteria') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -652,7 +560,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.aplanados">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.aplanados') border-red-500 @enderror" wire:model.defer="avaluo.aplanados">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -663,12 +571,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.aplanados') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -684,7 +586,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.recubrimiento_especial">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.recubrimiento_especial') border-red-500 @enderror" wire:model.defer="avaluo.recubrimiento_especial">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -695,12 +597,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.recubrimiento_especial') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -726,7 +622,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.hidraulica">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.hidraulica') border-red-500 @enderror" wire:model.defer="avaluo.hidraulica">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -737,12 +633,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.hidraulica') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -758,7 +648,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.sanitaria">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.sanitaria') border-red-500 @enderror" wire:model.defer="avaluo.sanitaria">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -769,12 +659,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.sanitaria') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -790,7 +674,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.electrica">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.electrica') border-red-500 @enderror" wire:model.defer="avaluo.electrica">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -801,12 +685,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.electrica') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -822,7 +700,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.gas">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.gas') border-red-500 @enderror" wire:model.defer="avaluo.gas">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -833,12 +711,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.gas') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
@@ -854,7 +726,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.especiales">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.especiales') border-red-500 @enderror" wire:model.defer="avaluo.especiales">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -865,12 +737,6 @@
                         @endforeach
 
                     </select>
-
-                </div>
-
-                <div>
-
-                    @error('avaluo.especiales') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                 </div>
 
