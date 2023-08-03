@@ -28,8 +28,8 @@ class Oficinas extends Component
             'modelo_editar.titular' => 'required',
             'modelo_editar.email' => 'required|email',
             'modelo_editar.telefonos' => 'required',
-            'modelo_editar.autoridad_municipal' => 'required',
-            'modelo_editar.valuador_municipal' => 'required',
+            'modelo_editar.autoridad_municipal' => 'nullable',
+            'modelo_editar.valuador_municipal' => 'nullable',
             'modelo_editar.cabecera' => 'nullable',
          ];
     }

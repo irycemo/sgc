@@ -32,10 +32,10 @@ class Servicios extends Component
             'modelo_editar.extra_urgente' => 'numeric|nullable|min:0',
             'modelo_editar.categoria_servicio_id' => 'required',
             'modelo_editar.porcentaje' => 'numeric|nullable|min:0',
-            'modelo_editar.clave_ingreso' => 'required|string',
-            'modelo_editar.material' => 'required|string',
-            'modelo_editar.operacion_principal' => 'required|string',
-            'modelo_editar.operacion_parcial' => 'required|string',
+            'modelo_editar.clave_ingreso' => 'nullable|string',
+            'modelo_editar.material' => 'nullable|string',
+            'modelo_editar.operacion_principal' => 'nullable|string',
+            'modelo_editar.operacion_parcial' => 'nullable|string',
          ];
     }
 
