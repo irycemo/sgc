@@ -446,21 +446,6 @@ class Inmueble extends Component
             return true;
         }
 
-        $cuentaAsignada = AsignarCuenta::where('localidad', $this->predio->localidad)
-                                            ->where('oficina', $this->predio->oficina)
-                                            ->where('tipo_predio', $this->predio->tipo_predio)
-                                            ->where('numero_registro', $this->predio->numero_registro)
-                                            ->where('valuador', auth()->user()->id)
-                                            ->first();
-
-        if(!$cuentaAsignada){
-
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No tienes la cuenta asignada."]);
-
-            return true;;
-
-        }
-
     }
 
     public function crear(){
@@ -469,6 +454,25 @@ class Inmueble extends Component
 
         if($this->validarDisponibilidad())
             return;
+
+        if(!$this->flag){
+
+            $cuentaAsignada = AsignarCuenta::where('localidad', $this->predio->localidad)
+                                            ->where('oficina', $this->predio->oficina)
+                                            ->where('tipo_predio', $this->predio->tipo_predio)
+                                            ->where('numero_registro', $this->predio->numero_registro)
+                                            ->where('valuador', auth()->user()->id)
+                                            ->first();
+
+            if(!$cuentaAsignada){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No tienes la cuenta asignada."]);
+
+                return true;
+
+            }
+
+        }
 
         try {
 

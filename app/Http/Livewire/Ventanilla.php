@@ -491,7 +491,6 @@ class Ventanilla extends Component
 
         }
 
-
         $this->editar = true;
 
     }

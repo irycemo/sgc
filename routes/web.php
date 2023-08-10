@@ -22,6 +22,7 @@ use App\Http\Livewire\Admin\ValoresunitariosConstruccion;
 use App\Http\Livewire\Admin\ValoresUnitariosRusticos;
 use App\Http\Livewire\Valuacion\AsignacionCuentaPredial;
 use App\Http\Livewire\Valuacion\Impresion;
+use App\Http\Livewire\Ventanilla\Ventanilla as VentanillaVentanilla;
 use App\Models\Avaluo;
 
 /*
@@ -89,6 +90,8 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     /* Ventanilla */
     Route::get('ventanilla', Ventanilla::class)->middleware('permission:Ventanilla')->name('ventanilla');
     Route::get('tramites/{tramite}', [TramiteController::class, 'orden'])->name('tramites.orden');
+
+    Route::get('ventanilla2', VentanillaVentanilla::class)->middleware('permission:Ventanilla')->name('ventanilla2');
 
 });
 

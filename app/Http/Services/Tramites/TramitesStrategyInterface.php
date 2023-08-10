@@ -2,8 +2,6 @@
 
 namespace App\Http\Services\Tramites;
 
-use App\Models\Tramite;
-
 interface TramitesStrategyInterface
 {
 

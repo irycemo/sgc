@@ -168,11 +168,33 @@ class Certificados implements TramitesStrategyInterface{
 
             if($this->tramite->tipo_servicio == 'ordinario'){
 
-                return now()->addDays(4)->toDateString();
+                $actual = now();
+
+                for ($i=0; $i < 5; $i++) {
+
+                    $actual->addDays(1);
+
+                    while($actual->isWeekend()){
+
+                        $actual->addDay();
+
+                    }
+
+                }
+
+                return $actual->toDateString();
 
             }elseif($this->tramite->tipo_servicio == 'urgente'){
 
-                return now()->addDays(1)->toDateString();
+                $actual = now()->addDays(1);
+
+                while($actual->isWeekend()){
+
+                    $actual->addDay();
+
+                }
+
+                return $actual->toDateString();
 
             }else{
 
