@@ -14,12 +14,12 @@ class OficinasTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('oficinas')->delete();
-        
+
         \DB::table('oficinas')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 1,
                 'municipio' => 1,
@@ -40,7 +40,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 2,
                 'municipio' => 2,
@@ -61,7 +61,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 3,
                 'municipio' => 3,
@@ -82,7 +82,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            3 => 
+            3 =>
             array (
                 'id' => 4,
                 'municipio' => 4,
@@ -103,7 +103,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            4 => 
+            4 =>
             array (
                 'id' => 5,
                 'municipio' => 5,
@@ -124,7 +124,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            5 => 
+            5 =>
             array (
                 'id' => 6,
                 'municipio' => 6,
@@ -145,7 +145,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            6 => 
+            6 =>
             array (
                 'id' => 7,
                 'municipio' => 7,
@@ -166,7 +166,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            7 => 
+            7 =>
             array (
                 'id' => 8,
                 'municipio' => 8,
@@ -187,7 +187,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            8 => 
+            8 =>
             array (
                 'id' => 9,
                 'municipio' => 9,
@@ -208,7 +208,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            9 => 
+            9 =>
             array (
                 'id' => 10,
                 'municipio' => 10,
@@ -229,7 +229,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            10 => 
+            10 =>
             array (
                 'id' => 11,
                 'municipio' => 11,
@@ -250,7 +250,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            11 => 
+            11 =>
             array (
                 'id' => 12,
                 'municipio' => 12,
@@ -271,7 +271,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            12 => 
+            12 =>
             array (
                 'id' => 13,
                 'municipio' => 13,
@@ -292,7 +292,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            13 => 
+            13 =>
             array (
                 'id' => 14,
                 'municipio' => 14,
@@ -313,7 +313,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            14 => 
+            14 =>
             array (
                 'id' => 15,
                 'municipio' => 15,
@@ -334,7 +334,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            15 => 
+            15 =>
             array (
                 'id' => 16,
                 'municipio' => 16,
@@ -355,7 +355,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            16 => 
+            16 =>
             array (
                 'id' => 17,
                 'municipio' => 17,
@@ -376,7 +376,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            17 => 
+            17 =>
             array (
                 'id' => 18,
                 'municipio' => 18,
@@ -397,7 +397,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            18 => 
+            18 =>
             array (
                 'id' => 19,
                 'municipio' => 19,
@@ -418,7 +418,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            19 => 
+            19 =>
             array (
                 'id' => 20,
                 'municipio' => 20,
@@ -439,7 +439,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            20 => 
+            20 =>
             array (
                 'id' => 21,
                 'municipio' => 21,
@@ -460,7 +460,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            21 => 
+            21 =>
             array (
                 'id' => 22,
                 'municipio' => 22,
@@ -481,7 +481,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            22 => 
+            22 =>
             array (
                 'id' => 23,
                 'municipio' => 23,
@@ -499,11 +499,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-11 12:44:56',
             ),
-            23 => 
+            23 =>
             array (
                 'id' => 24,
                 'municipio' => 24,
@@ -524,7 +524,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            24 => 
+            24 =>
             array (
                 'id' => 25,
                 'municipio' => 25,
@@ -545,7 +545,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            25 => 
+            25 =>
             array (
                 'id' => 26,
                 'municipio' => 26,
@@ -566,7 +566,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            26 => 
+            26 =>
             array (
                 'id' => 27,
                 'municipio' => 27,
@@ -574,7 +574,7 @@ class OficinasTableSeeder extends Seeder
                 'localidad' => 1,
                 'nombre' => 'CHUCANDIRO',
                 'ubicacion' => 'BENITO JUÁREZ 150 COL. CENTRO C.P 58860
-AL ORIENTE RAMÓN Y ALCARAZ, 
+AL ORIENTE RAMÓN Y ALCARAZ,
 AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALGO
 ',
                 'titular' => 'C. MAYRA LOPEZ JIMENEZ',
@@ -586,11 +586,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-08 12:53:26',
             ),
-            27 => 
+            27 =>
             array (
                 'id' => 28,
                 'municipio' => 28,
@@ -611,7 +611,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            28 => 
+            28 =>
             array (
                 'id' => 29,
                 'municipio' => 29,
@@ -632,7 +632,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            29 => 
+            29 =>
             array (
                 'id' => 30,
                 'municipio' => 30,
@@ -653,7 +653,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            30 => 
+            30 =>
             array (
                 'id' => 31,
                 'municipio' => 31,
@@ -674,7 +674,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            31 => 
+            31 =>
             array (
                 'id' => 32,
                 'municipio' => 32,
@@ -695,7 +695,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            32 => 
+            32 =>
             array (
                 'id' => 33,
                 'municipio' => 33,
@@ -716,7 +716,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            33 => 
+            33 =>
             array (
                 'id' => 34,
                 'municipio' => 34,
@@ -737,7 +737,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            34 => 
+            34 =>
             array (
                 'id' => 35,
                 'municipio' => 35,
@@ -758,7 +758,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            35 => 
+            35 =>
             array (
                 'id' => 36,
                 'municipio' => 36,
@@ -779,7 +779,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            36 => 
+            36 =>
             array (
                 'id' => 37,
                 'municipio' => 37,
@@ -800,7 +800,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            37 => 
+            37 =>
             array (
                 'id' => 38,
                 'municipio' => 38,
@@ -821,7 +821,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            38 => 
+            38 =>
             array (
                 'id' => 39,
                 'municipio' => 39,
@@ -842,7 +842,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            39 => 
+            39 =>
             array (
                 'id' => 40,
                 'municipio' => 40,
@@ -860,11 +860,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => '',
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-11 12:38:45',
             ),
-            40 => 
+            40 =>
             array (
                 'id' => 41,
                 'municipio' => 41,
@@ -885,7 +885,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            41 => 
+            41 =>
             array (
                 'id' => 42,
                 'municipio' => 42,
@@ -906,7 +906,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            42 => 
+            42 =>
             array (
                 'id' => 43,
                 'municipio' => 43,
@@ -927,7 +927,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            43 => 
+            43 =>
             array (
                 'id' => 44,
                 'municipio' => 44,
@@ -948,7 +948,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            44 => 
+            44 =>
             array (
                 'id' => 45,
                 'municipio' => 45,
@@ -969,7 +969,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            45 => 
+            45 =>
             array (
                 'id' => 46,
                 'municipio' => 46,
@@ -990,7 +990,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            46 => 
+            46 =>
             array (
                 'id' => 47,
                 'municipio' => 47,
@@ -1008,11 +1008,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-08 14:56:35',
             ),
-            47 => 
+            47 =>
             array (
                 'id' => 48,
                 'municipio' => 48,
@@ -1033,7 +1033,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            48 => 
+            48 =>
             array (
                 'id' => 49,
                 'municipio' => 49,
@@ -1054,7 +1054,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            49 => 
+            49 =>
             array (
                 'id' => 50,
                 'municipio' => 50,
@@ -1075,7 +1075,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            50 => 
+            50 =>
             array (
                 'id' => 51,
                 'municipio' => 51,
@@ -1096,7 +1096,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            51 => 
+            51 =>
             array (
                 'id' => 52,
                 'municipio' => 52,
@@ -1114,11 +1114,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-14 14:39:10',
             ),
-            52 => 
+            52 =>
             array (
                 'id' => 53,
                 'municipio' => 53,
@@ -1139,7 +1139,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            53 => 
+            53 =>
             array (
                 'id' => 54,
                 'municipio' => 54,
@@ -1160,7 +1160,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            54 => 
+            54 =>
             array (
                 'id' => 55,
                 'municipio' => 55,
@@ -1181,7 +1181,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            55 => 
+            55 =>
             array (
                 'id' => 56,
                 'municipio' => 56,
@@ -1202,7 +1202,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            56 => 
+            56 =>
             array (
                 'id' => 57,
                 'municipio' => 57,
@@ -1223,7 +1223,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            57 => 
+            57 =>
             array (
                 'id' => 58,
                 'municipio' => 58,
@@ -1244,7 +1244,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            58 => 
+            58 =>
             array (
                 'id' => 59,
                 'municipio' => 59,
@@ -1265,7 +1265,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            59 => 
+            59 =>
             array (
                 'id' => 60,
                 'municipio' => 60,
@@ -1286,7 +1286,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            60 => 
+            60 =>
             array (
                 'id' => 61,
                 'municipio' => 61,
@@ -1307,7 +1307,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            61 => 
+            61 =>
             array (
                 'id' => 62,
                 'municipio' => 62,
@@ -1328,7 +1328,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            62 => 
+            62 =>
             array (
                 'id' => 63,
                 'municipio' => 63,
@@ -1349,7 +1349,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            63 => 
+            63 =>
             array (
                 'id' => 64,
                 'municipio' => 64,
@@ -1370,7 +1370,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            64 => 
+            64 =>
             array (
                 'id' => 65,
                 'municipio' => 65,
@@ -1391,7 +1391,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            65 => 
+            65 =>
             array (
                 'id' => 66,
                 'municipio' => 66,
@@ -1412,7 +1412,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            66 => 
+            66 =>
             array (
                 'id' => 67,
                 'municipio' => 67,
@@ -1433,7 +1433,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            67 => 
+            67 =>
             array (
                 'id' => 68,
                 'municipio' => 68,
@@ -1454,7 +1454,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            68 => 
+            68 =>
             array (
                 'id' => 69,
                 'municipio' => 69,
@@ -1475,7 +1475,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            69 => 
+            69 =>
             array (
                 'id' => 70,
                 'municipio' => 70,
@@ -1496,7 +1496,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            70 => 
+            70 =>
             array (
                 'id' => 71,
                 'municipio' => 71,
@@ -1517,7 +1517,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            71 => 
+            71 =>
             array (
                 'id' => 72,
                 'municipio' => 72,
@@ -1538,7 +1538,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            72 => 
+            72 =>
             array (
                 'id' => 73,
                 'municipio' => 73,
@@ -1559,7 +1559,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            73 => 
+            73 =>
             array (
                 'id' => 74,
                 'municipio' => 74,
@@ -1580,7 +1580,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            74 => 
+            74 =>
             array (
                 'id' => 75,
                 'municipio' => 75,
@@ -1601,7 +1601,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            75 => 
+            75 =>
             array (
                 'id' => 76,
                 'municipio' => 76,
@@ -1622,7 +1622,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            76 => 
+            76 =>
             array (
                 'id' => 77,
                 'municipio' => 77,
@@ -1643,7 +1643,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            77 => 
+            77 =>
             array (
                 'id' => 78,
                 'municipio' => 78,
@@ -1664,7 +1664,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            78 => 
+            78 =>
             array (
                 'id' => 79,
                 'municipio' => 79,
@@ -1685,7 +1685,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            79 => 
+            79 =>
             array (
                 'id' => 80,
                 'municipio' => 80,
@@ -1706,7 +1706,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            80 => 
+            80 =>
             array (
                 'id' => 81,
                 'municipio' => 81,
@@ -1727,7 +1727,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            81 => 
+            81 =>
             array (
                 'id' => 82,
                 'municipio' => 82,
@@ -1748,7 +1748,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            82 => 
+            82 =>
             array (
                 'id' => 83,
                 'municipio' => 83,
@@ -1769,7 +1769,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            83 => 
+            83 =>
             array (
                 'id' => 84,
                 'municipio' => 84,
@@ -1790,7 +1790,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            84 => 
+            84 =>
             array (
                 'id' => 85,
                 'municipio' => 85,
@@ -1811,7 +1811,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            85 => 
+            85 =>
             array (
                 'id' => 86,
                 'municipio' => 86,
@@ -1832,7 +1832,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            86 => 
+            86 =>
             array (
                 'id' => 87,
                 'municipio' => 87,
@@ -1853,7 +1853,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            87 => 
+            87 =>
             array (
                 'id' => 88,
                 'municipio' => 88,
@@ -1874,7 +1874,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            88 => 
+            88 =>
             array (
                 'id' => 89,
                 'municipio' => 89,
@@ -1895,7 +1895,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            89 => 
+            89 =>
             array (
                 'id' => 90,
                 'municipio' => 90,
@@ -1916,7 +1916,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            90 => 
+            90 =>
             array (
                 'id' => 91,
                 'municipio' => 91,
@@ -1937,7 +1937,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            91 => 
+            91 =>
             array (
                 'id' => 92,
                 'municipio' => 92,
@@ -1958,7 +1958,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            92 => 
+            92 =>
             array (
                 'id' => 93,
                 'municipio' => 93,
@@ -1979,7 +1979,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            93 => 
+            93 =>
             array (
                 'id' => 94,
                 'municipio' => 94,
@@ -2000,7 +2000,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            94 => 
+            94 =>
             array (
                 'id' => 95,
                 'municipio' => 95,
@@ -2021,7 +2021,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            95 => 
+            95 =>
             array (
                 'id' => 96,
                 'municipio' => 96,
@@ -2042,7 +2042,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            96 => 
+            96 =>
             array (
                 'id' => 97,
                 'municipio' => 97,
@@ -2063,7 +2063,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            97 => 
+            97 =>
             array (
                 'id' => 98,
                 'municipio' => 98,
@@ -2084,7 +2084,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            98 => 
+            98 =>
             array (
                 'id' => 99,
                 'municipio' => 99,
@@ -2105,7 +2105,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            99 => 
+            99 =>
             array (
                 'id' => 100,
                 'municipio' => 100,
@@ -2126,7 +2126,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            100 => 
+            100 =>
             array (
                 'id' => 101,
                 'municipio' => 101,
@@ -2147,7 +2147,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            101 => 
+            101 =>
             array (
                 'id' => 102,
                 'municipio' => 102,
@@ -2168,7 +2168,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            102 => 
+            102 =>
             array (
                 'id' => 103,
                 'municipio' => 103,
@@ -2189,7 +2189,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            103 => 
+            103 =>
             array (
                 'id' => 104,
                 'municipio' => 104,
@@ -2210,7 +2210,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            104 => 
+            104 =>
             array (
                 'id' => 105,
                 'municipio' => 105,
@@ -2231,7 +2231,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            105 => 
+            105 =>
             array (
                 'id' => 106,
                 'municipio' => 106,
@@ -2252,7 +2252,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            106 => 
+            106 =>
             array (
                 'id' => 107,
                 'municipio' => 107,
@@ -2273,7 +2273,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            107 => 
+            107 =>
             array (
                 'id' => 108,
                 'municipio' => 108,
@@ -2294,7 +2294,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            108 => 
+            108 =>
             array (
                 'id' => 109,
                 'municipio' => 109,
@@ -2315,7 +2315,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            109 => 
+            109 =>
             array (
                 'id' => 110,
                 'municipio' => 110,
@@ -2336,7 +2336,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            110 => 
+            110 =>
             array (
                 'id' => 111,
                 'municipio' => 111,
@@ -2357,7 +2357,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            111 => 
+            111 =>
             array (
                 'id' => 112,
                 'municipio' => 112,
@@ -2378,7 +2378,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            112 => 
+            112 =>
             array (
                 'id' => 113,
                 'municipio' => 113,
@@ -2399,7 +2399,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            113 => 
+            113 =>
             array (
                 'id' => 114,
                 'municipio' => 114,
@@ -2420,7 +2420,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            114 => 
+            114 =>
             array (
                 'id' => 115,
                 'municipio' => 115,
@@ -2441,7 +2441,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            115 => 
+            115 =>
             array (
                 'id' => 116,
                 'municipio' => 116,
@@ -2462,7 +2462,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            116 => 
+            116 =>
             array (
                 'id' => 117,
                 'municipio' => 117,
@@ -2479,11 +2479,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => 'LIC. EN NUTRICION KAREN VENECIA ALCANTAR HERNANDEZ ',
                 'cabecera' => 34,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-09 14:15:39',
             ),
-            117 => 
+            117 =>
             array (
                 'id' => 118,
                 'municipio' => 118,
@@ -2501,11 +2501,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => 'LIC. EN NUTRICION KAREN VENECIA ALCANTAR HERNANDEZ',
                 'cabecera' => 34,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-09 14:12:30',
             ),
-            118 => 
+            118 =>
             array (
                 'id' => 119,
                 'municipio' => 119,
@@ -2523,11 +2523,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => 'LIC. EN NUTRICION KAREN VENECIA ALCANTAR HERNANDEZ',
                 'cabecera' => 34,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-09 14:10:55',
             ),
-            119 => 
+            119 =>
             array (
                 'id' => 120,
                 'municipio' => 120,
@@ -2545,11 +2545,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => 'LIC. EN NUTRICION KAREN VENECIA ALCANTAR HERNANDEZ',
                 'cabecera' => 34,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-09 14:07:12',
             ),
-            120 => 
+            120 =>
             array (
                 'id' => 121,
                 'municipio' => 121,
@@ -2570,7 +2570,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            121 => 
+            121 =>
             array (
                 'id' => 122,
                 'municipio' => 122,
@@ -2591,7 +2591,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            122 => 
+            122 =>
             array (
                 'id' => 123,
                 'municipio' => 52,
@@ -2608,11 +2608,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 52,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-14 14:38:38',
             ),
-            123 => 
+            123 =>
             array (
                 'id' => 124,
                 'municipio' => 52,
@@ -2630,11 +2630,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 52,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-14 14:38:15',
             ),
-            124 => 
+            124 =>
             array (
                 'id' => 125,
                 'municipio' => 125,
@@ -2655,7 +2655,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            125 => 
+            125 =>
             array (
                 'id' => 126,
                 'municipio' => 126,
@@ -2676,7 +2676,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            126 => 
+            126 =>
             array (
                 'id' => 127,
                 'municipio' => 127,
@@ -2697,7 +2697,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            127 => 
+            127 =>
             array (
                 'id' => 128,
                 'municipio' => 128,
@@ -2718,7 +2718,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            128 => 
+            128 =>
             array (
                 'id' => 129,
                 'municipio' => 129,
@@ -2739,7 +2739,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            129 => 
+            129 =>
             array (
                 'id' => 130,
                 'municipio' => 130,
@@ -2760,14 +2760,14 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            130 => 
+            130 =>
             array (
                 'id' => 131,
                 'municipio' => 66,
                 'oficina' => 1001,
                 'localidad' => 2,
                 'nombre' => 'CUANAJO',
-                'ubicacion' => 'AV. ÁLVARO OBREGÓN 25 COL. CENTRO C.P 61600 ENTRE  SILVIANO CARRILLO 
+                'ubicacion' => 'AV. ÁLVARO OBREGÓN 25 COL. CENTRO C.P 61600 ENTRE  SILVIANO CARRILLO
 ',
                 'titular' => 'MARIA ESTER MOLINERO MAGAÑA',
                 'email' => 'rentaspatzcuaro3076@gmail.com',
@@ -2778,11 +2778,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 66,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-14 14:37:10',
             ),
-            131 => 
+            131 =>
             array (
                 'id' => 132,
                 'municipio' => 66,
@@ -2799,11 +2799,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 66,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-14 14:37:04',
             ),
-            132 => 
+            132 =>
             array (
                 'id' => 133,
                 'municipio' => 67,
@@ -2821,11 +2821,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 67,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-11 13:13:49',
             ),
-            133 => 
+            133 =>
             array (
                 'id' => 134,
                 'municipio' => 67,
@@ -2843,11 +2843,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 67,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-11 13:12:17',
             ),
-            134 => 
+            134 =>
             array (
                 'id' => 135,
                 'municipio' => 68,
@@ -2865,11 +2865,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 68,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-11 12:47:41',
             ),
-            135 => 
+            135 =>
             array (
                 'id' => 136,
                 'municipio' => 71,
@@ -2886,11 +2886,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 71,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 14:25:24',
             ),
-            136 => 
+            136 =>
             array (
                 'id' => 137,
                 'municipio' => 71,
@@ -2907,11 +2907,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 71,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 14:24:26',
             ),
-            137 => 
+            137 =>
             array (
                 'id' => 138,
                 'municipio' => 71,
@@ -2929,11 +2929,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 71,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 14:23:08',
             ),
-            138 => 
+            138 =>
             array (
                 'id' => 139,
                 'municipio' => 71,
@@ -2951,11 +2951,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 71,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 14:21:49',
             ),
-            139 => 
+            139 =>
             array (
                 'id' => 140,
                 'municipio' => 75,
@@ -2973,11 +2973,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 75,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 14:15:40',
             ),
-            140 => 
+            140 =>
             array (
                 'id' => 141,
                 'municipio' => 75,
@@ -2995,11 +2995,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 75,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 14:14:14',
             ),
-            141 => 
+            141 =>
             array (
                 'id' => 142,
                 'municipio' => 142,
@@ -3020,7 +3020,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            142 => 
+            142 =>
             array (
                 'id' => 143,
                 'municipio' => 143,
@@ -3041,7 +3041,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            143 => 
+            143 =>
             array (
                 'id' => 144,
                 'municipio' => 144,
@@ -3062,7 +3062,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            144 => 
+            144 =>
             array (
                 'id' => 145,
                 'municipio' => 83,
@@ -3079,11 +3079,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 83,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 12:10:15',
             ),
-            145 => 
+            145 =>
             array (
                 'id' => 146,
                 'municipio' => 83,
@@ -3101,11 +3101,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 83,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 12:08:09',
             ),
-            146 => 
+            146 =>
             array (
                 'id' => 147,
                 'municipio' => 84,
@@ -3123,11 +3123,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 84,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 12:03:12',
             ),
-            147 => 
+            147 =>
             array (
                 'id' => 148,
                 'municipio' => 85,
@@ -3145,11 +3145,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 85,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 11:57:21',
             ),
-            148 => 
+            148 =>
             array (
                 'id' => 149,
                 'municipio' => 88,
@@ -3167,11 +3167,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 88,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 11:55:10',
             ),
-            149 => 
+            149 =>
             array (
                 'id' => 150,
                 'municipio' => 90,
@@ -3189,11 +3189,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 90,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 11:51:58',
             ),
-            150 => 
+            150 =>
             array (
                 'id' => 151,
                 'municipio' => 91,
@@ -3211,11 +3211,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => 'LIC. CLAUDIO CESAR JULIAN TORREZ',
                 'cabecera' => 91,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 11:49:06',
             ),
-            151 => 
+            151 =>
             array (
                 'id' => 152,
                 'municipio' => 91,
@@ -3233,11 +3233,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => 'LIC. CLAUDIO CESAR JULIAN TORREZ',
                 'cabecera' => 91,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 11:48:06',
             ),
-            152 => 
+            152 =>
             array (
                 'id' => 153,
                 'municipio' => 97,
@@ -3255,11 +3255,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 97,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 11:46:46',
             ),
-            153 => 
+            153 =>
             array (
                 'id' => 154,
                 'municipio' => 103,
@@ -3277,11 +3277,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 103,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 11:45:07',
             ),
-            154 => 
+            154 =>
             array (
                 'id' => 155,
                 'municipio' => 104,
@@ -3299,11 +3299,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 104,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-04 14:37:20',
             ),
-            155 => 
+            155 =>
             array (
                 'id' => 156,
                 'municipio' => 107,
@@ -3321,11 +3321,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 107,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-04 14:34:57',
             ),
-            156 => 
+            156 =>
             array (
                 'id' => 157,
                 'municipio' => 108,
@@ -3343,11 +3343,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 108,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-04 14:30:22',
             ),
-            157 => 
+            157 =>
             array (
                 'id' => 158,
                 'municipio' => 108,
@@ -3365,11 +3365,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 108,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-04 14:28:43',
             ),
-            158 => 
+            158 =>
             array (
                 'id' => 159,
                 'municipio' => 108,
@@ -3387,11 +3387,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 108,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-04 14:26:08',
             ),
-            159 => 
+            159 =>
             array (
                 'id' => 160,
                 'municipio' => 108,
@@ -3409,11 +3409,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 108,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-04 12:15:33',
             ),
-            160 => 
+            160 =>
             array (
                 'id' => 161,
                 'municipio' => 110,
@@ -3431,11 +3431,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 110,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-04 12:05:04',
             ),
-            161 => 
+            161 =>
             array (
                 'id' => 162,
                 'municipio' => 110,
@@ -3453,11 +3453,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 110,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-03 15:00:25',
             ),
-            162 => 
+            162 =>
             array (
                 'id' => 163,
                 'municipio' => 163,
@@ -3478,7 +3478,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            163 => 
+            163 =>
             array (
                 'id' => 164,
                 'municipio' => 112,
@@ -3496,12 +3496,12 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 112,
                 'creado_por' => NULL,
-                'actualizado_por' => 1,
+                'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-03 14:39:17',
             ),
         ));
-        
-        
+
+
     }
 }
