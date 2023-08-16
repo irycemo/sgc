@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->foreignId('predio_id')->references('id')->on('predio_avaluos');
-            $table->unsignedBigInteger('folio')->unique();
+            $table->unsignedInteger('folio')->unique();
             $table->string('estado');
             $table->string('clasificacion_zona')->nullable();
             $table->string('construccion_dominante')->nullable();
@@ -46,16 +46,16 @@ return new class extends Migration
             $table->string('especiales')->nullable();
             $table->unsignedDecimal('area_comun_terreno', 10, 2)->nullable();
             $table->unsignedDecimal('area_comun_construccion', 10, 2)->nullable();
-            $table->unsignedDecimal('indiviso_terreno', 10, 2)->nullable();
             $table->unsignedDecimal('valor_terreno_comun', 10, 2)->nullable();
-            $table->unsignedDecimal('valor_unitario', 10, 2)->nullable();
-            $table->unsignedDecimal('valor_construcción_comun', 10, 2)->nullable();
+            $table->unsignedDecimal('valor_construccion_comun', 10, 2)->nullable();
             $table->boolean('como_urbano')->default(0);
             $table->text('observaciones')->nullable();
+            $table->foreignId('tramite_id')->nullable();
             $table->foreignId('asignado_a')->nullable()->references('id')->on('users');
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
-            $table->foreignId('tramite_id')->nullable();
+            $table->foreignId('notificado_por')->nullable()->references('id')->on('users');
+            $table->date('notificado_en')->nullable();
             $table->timestamps();
         });
     }

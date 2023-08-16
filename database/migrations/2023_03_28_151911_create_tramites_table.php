@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('estado');
             $table->string("tipo_tramite");
-            $table->unsignedBigInteger('folio')->unique();
+            $table->unsignedInteger('folio')->unique();
             $table->foreignId('servicio_id')->constrained();
             $table->string('solicitante');
             $table->unsignedDecimal("monto", 18, 2);

@@ -6,27 +6,22 @@ use App\Models\User;
 use App\Models\Oficina;
 use App\Models\Tramite;
 use Livewire\Component;
-use Illuminate\Http\File;
 use App\Models\PredioAvaluo;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Valuacion\AvaluosController;
-use Exception;
-use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 
 class Impresion extends Component
 {
 
-    public $tramiteInspeccion = 994437376;
-    public $tramiteAvaluo = 994437375;
-    public $formato = 0;
+    public $tramiteInspeccion;
+    public $tramiteAvaluo;
+    public $formato;
     public $autoridad_municipal;
-    public $localidad = 4;
+    public $localidad;
     public $oficina;
-    public $tipo = 2;
-    public $registro_inicio = 11;
-    public $registro_final = 11;
+    public $tipo;
+    public $registro_inicio;
+    public $registro_final;
     public $director;
     public $jefe_departamento;
     public $notificador;
@@ -153,9 +148,9 @@ class Impresion extends Component
 
         }
 
-        if($tramiteInspeccion->avaluo_para == 46){
+        if($tramiteInspeccion->avaluo_para == 46 || $tramiteInspeccion->avaluo_para == 45){
 
-            if($tramiteAvaluo->servicio_id != 46){
+            if($tramiteAvaluo->servicio_id != 46 && $tramiteAvaluo->servicio_id != 45){
 
                 $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a una variación."]);
 
@@ -178,7 +173,8 @@ class Impresion extends Component
 
         $path = null;
 
-        $predios = PredioAvaluo::with('avaluo', 'propietarios.persona', 'colindancias', 'terrenos', 'condominio', 'condominioConstrucciones', 'construcciones')->where('localidad', $this->localidad)
+        $predios = PredioAvaluo::with('avaluo', 'propietarios.persona', 'colindancias', 'terrenos', 'condominioTerrenos', 'condominioConstrucciones', 'construcciones')
+                                        ->where('localidad', $this->localidad)
                                         ->where('oficina', $this->oficina)
                                         ->where('tipo_predio', $this->tipo)
                                         ->whereBetween('numero_registro', [$this->registro_inicio, $this->registro_final])
@@ -295,6 +291,14 @@ class Impresion extends Component
             if($predio->edificio != 0 && !$predio->condominioConstrucciones->count()){
 
                 $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo" . $predio->avaluo->folio . " no tiene construcciones."]);
+
+                return true;
+
+            }
+
+            if($predio->valor_catastral == null){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo" . $predio->avaluo->folio . " no tiene valor catastral."]);
 
                 return true;
 

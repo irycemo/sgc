@@ -14,16 +14,16 @@ use App\Http\Controllers\ManualController;
 use App\Http\Controllers\SetPasswordController;
 use App\Http\Livewire\Admin\CategoriasServicios;
 use App\Http\Controllers\Admin\TramiteController;
-use App\Http\Controllers\Valuacion\AvaluosController;
 use App\Http\Controllers\Valuacion\ValuacionYDesgloseController;
 use App\Http\Livewire\Admin\FactorIncremento;
 use App\Http\Livewire\Admin\Oficinas;
 use App\Http\Livewire\Admin\ValoresunitariosConstruccion;
 use App\Http\Livewire\Admin\ValoresUnitariosRusticos;
 use App\Http\Livewire\Valuacion\AsignacionCuentaPredial;
+use App\Http\Livewire\Valuacion\FichaTecnica;
 use App\Http\Livewire\Valuacion\Impresion;
+use App\Http\Livewire\Valuacion\Notificacion;
 use App\Http\Livewire\Ventanilla\Ventanilla as VentanillaVentanilla;
-use App\Models\Avaluo;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,7 +85,10 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('asignacion_cuenta', AsignacionCuentaPredial::class)->middleware('permission:Asignacion de cuenta')->name('asignacion_cuenta');
 
     Route::get('impresion_avaluos', Impresion::class)->middleware('permission:Impresión de avaluos')->name('impresion_avaluos');
-    Route::get('test/{id}', [AvaluosController::class, 'test']);
+
+    Route::get('notificacion_avaluos', Notificacion::class)->middleware('permission:Notificación de avaluos')->name('notificacion_avaluos');
+
+    Route::get('ficha_tecnica', FichaTecnica::class)->middleware('permission:Ficha técnica')->name('ficha_tecnica');
 
     /* Ventanilla */
     Route::get('ventanilla', Ventanilla::class)->middleware('permission:Ventanilla')->name('ventanilla');

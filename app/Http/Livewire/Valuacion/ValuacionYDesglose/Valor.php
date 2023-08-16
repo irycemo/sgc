@@ -5,12 +5,14 @@ namespace App\Http\Livewire\Valuacion\ValuacionYDesglose;
 use App\Models\Avaluo;
 use App\Models\Terreno;
 use Livewire\Component;
-use App\Models\Referencia;
 use App\Models\PredioAvaluo;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
-use App\Models\Condominioconstruccion;
 use Illuminate\Support\Facades\Log;
+use App\Models\Condominioconstruccion;
+use App\Models\Condominioterreno;
+use App\Models\Construccion;
 use App\Models\ValoresUnitariosRusticos;
 use Luecano\NumeroALetras\NumeroALetras;
 use App\Models\ValoresUnitariosConstruccion;
@@ -23,6 +25,7 @@ class Valor extends Component
     public $terrenos = [];
     public $construcciones = [];
     public $construccionesCondominio = [];
+    public $terrenosCondominio = [];
     public $valores_rusticos;
     public $valores_construccion;
     public $porcentajeDemerito;
@@ -43,11 +46,9 @@ class Valor extends Component
             'predio.ubicacion_en_manzana' => 'required',
             'predio.valor_catastral' => 'nullable',
             'predio' => 'required',
-            'avaluo.area_comun_terreno' => 'required',
-            'avaluo.indiviso_terreno' => 'required',
-            'avaluo.valor_unitario' => 'required',
-            'avaluo.valor_terreno_comun' => 'required',
-            'avaluo.valor_construcción_comun' => 'required',
+            'avaluo.area_comun_terreno' => 'nullable',
+            'avaluo.valor_terreno_comun' => 'nullable',
+            'avaluo.valor_construccion_comun' => 'nullable',
          ];
     }
 
@@ -66,6 +67,9 @@ class Valor extends Component
         'predio.ubicacion_en_manzana' => 'ubicación en manzana',
         'construccionesCondominio.*.area_comun_construccion' => 'área común de construcción',
         'construccionesCondominio.*.indiviso_construccion' => 'indiviso de construcción',
+        'terrenosCondominio.*.area_terreno_comun' => 'área de terreno común',
+        'terrenosCondominio.*.indiviso_terreno' => 'indiviso de terreno',
+        'terrenosCondominio.*.valor_unitario' => 'valor unitario',
         'construccionesCondominio.*.valor_clasificacion_construccion' => 'valor de clasificación',
     ];
 
@@ -125,6 +129,23 @@ class Valor extends Component
 
     }
 
+    public function updatedTerrenosCondominio($value, $index){
+
+        $i = explode('.', $index);
+
+        if(isset($this->terrenosCondominio[$i[0]]['area_terreno_comun']) &&
+            isset($this->terrenosCondominio[$i[0]]['indiviso_terreno']) &&
+            isset($this->terrenosCondominio[$i[0]]['valor_unitario']))
+        {
+
+            $this->terrenosCondominio[$i[0]]['valor_terreno_comun'] = (float)$this->terrenosCondominio[$i[0]]['area_terreno_comun'] *
+                                                                                    (float)$this->terrenosCondominio[$i[0]]['indiviso_terreno'] *
+                                                                                    (float)$this->terrenosCondominio[$i[0]]['valor_unitario'] ;
+
+        }
+
+    }
+
     public function updatedConstruccionesCondominio($value, $index){
 
         $i = explode('.', $index);
@@ -134,7 +155,7 @@ class Valor extends Component
             isset($this->construccionesCondominio[$i[0]]['valor_clasificacion_construccion']))
         {
 
-            $this->construccionesCondominio[$i[0]]['valor_construcción_comun'] = (float)$this->construccionesCondominio[$i[0]]['area_comun_construccion'] *
+            $this->construccionesCondominio[$i[0]]['valor_construccion_comun'] = (float)$this->construccionesCondominio[$i[0]]['area_comun_construccion'] *
                                                                                     (float)$this->construccionesCondominio[$i[0]]['indiviso_construccion'] *
                                                                                     (float)$this->construccionesCondominio[$i[0]]['valor_clasificacion_construccion'] ;
 
@@ -148,7 +169,7 @@ class Valor extends Component
             $this->avaluo->valor_terreno_comun = $this->avaluo->area_comun_terreno * $this->avaluo->indiviso_terreno * $this->avaluo->valor_unitario;
 
         if($this->avaluo->area_comun_construccion && $this->avaluo->indiviso_construccion && $this->avaluo->valor_clasificacion_construccion)
-            $this->avaluo->valor_construcción_comun = $this->avaluo->area_comun_construccion * $this->avaluo->indiviso_construccion * $this->avaluo->valor_clasificacion_construccion;
+            $this->avaluo->valor_construccion_comun = $this->avaluo->area_comun_construccion * $this->avaluo->indiviso_construccion * $this->avaluo->valor_clasificacion_construccion;
 
     }
 
@@ -164,7 +185,7 @@ class Valor extends Component
 
         $this->reset(['terrenos', 'construcciones']);
 
-        $this->predio = PredioAvaluo::with('construcciones', 'terrenos', 'avaluo')->find($id);
+        $this->predio = PredioAvaluo::with('avaluo')->find($id);
 
         foreach ($this->predio->terrenos as $terreno) {
 
@@ -194,6 +215,17 @@ class Valor extends Component
             ];
         }
 
+        foreach ($this->predio->condominioTerrenos as $terreno) {
+
+            $this->terrenosCondominio[] = [
+                'id' => $terreno->id,
+                'area_terreno_comun' => $terreno->area_terreno_comun,
+                'indiviso_terreno' => $terreno->indiviso_terreno,
+                'valor_unitario' => $terreno->valor_unitario,
+                'valor_terreno_comun' => $terreno->valor_terreno_comun,
+            ];
+        }
+
         foreach ($this->predio->condominioConstrucciones as $construccion) {
 
             $this->construccionesCondominio[] = [
@@ -201,7 +233,7 @@ class Valor extends Component
                 'area_comun_construccion' => $construccion->area_comun_construccion,
                 'indiviso_construccion' => $construccion->indiviso_construccion,
                 'valor_clasificacion_construccion' => $construccion->valor_clasificacion_construccion,
-                'valor_construcción_comun' => $construccion->valor_construcción_comun,
+                'valor_construccion_comun' => $construccion->valor_construccion_comun,
             ];
         }
 
@@ -242,9 +274,15 @@ class Valor extends Component
 
     }
 
+    public function agregarTerrenoConstruccion(){
+
+        $this->terrenosCondominio[] = ['codigo' => null, 'niveles' => null, 'superficie' => null, 'id' => null, 'valor_unitario' => null, 'valores' => null, 'uso' => null, 'tipo' => null, 'categoria' => null, 'calidad' => null];
+
+    }
+
     public function agregarCondominioConstruccion(){
 
-        $this->construccionesCondominio[] = ['area_comun_construccion' => null, 'indiviso_construccion' => null, 'valor_clasificacion_construccion' => null, 'id' => null, 'valor_construcción_comun' => null,];
+        $this->construccionesCondominio[] = ['area_comun_construccion' => null, 'indiviso_construccion' => null, 'valor_clasificacion_construccion' => null, 'id' => null, 'valor_construccion_comun' => null,];
 
     }
 
@@ -285,6 +323,26 @@ class Valor extends Component
         unset($this->terrenos[$index]);
 
         $this->terrenos = array_values($this->terrenos);
+
+    }
+
+    public function borrarCondominioTerreno($index){
+
+        $this->validate(['predio' => 'required']);
+
+        try {
+
+            if($this->terrenosCondominio[$index]['id'] != null)
+                $this->predio->condominioTerrenos()->where('id', $this->terrenosCondominio[$index]['id'])->delete();
+
+        } catch (\Throwable $th) {
+            Log::error("Error al borrar terreno de condominio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Hubo un error."]);
+        }
+
+        unset($this->terrenosCondominio[$index]);
+
+        $this->terrenosCondominio = array_values($this->terrenosCondominio);
 
     }
 
@@ -348,7 +406,7 @@ class Valor extends Component
 
                     }else{
 
-                        Referencia::find($construccion['id'])->update([
+                        Construccion::find($construccion['id'])->update([
                             'referencia' => $construccion['referencia'],
                             'valor_unitario' => $construccion['valor_unitario'],
                             'niveles' => $construccion['niveles'],
@@ -448,14 +506,75 @@ class Valor extends Component
 
     }
 
+    public function guardarTerrenosCondominio(){
+
+        $this->validate([
+            'predio' => 'required',
+            'terrenosCondominio.*.area_terreno_comun' => 'required',
+            'terrenosCondominio.*.indiviso_terreno' => 'required',
+            'terrenosCondominio.*.valor_unitario' => 'required',
+        ]);
+
+        try {
+
+            DB::transaction(function () {
+
+                $sum = 0;
+
+                $sum2 = 0;
+
+                foreach ($this->terrenosCondominio as $key => $terreno) {
+
+                    if($terreno['id'] == null){
+
+                        $aux = $this->predio->condominioTerrenos()->create([
+                            'area_terreno_comun' => $terreno['area_terreno_comun'],
+                            'indiviso_terreno' => $terreno['indiviso_terreno'],
+                            'valor_unitario' => $terreno['valor_unitario'],
+                            'valor_terreno_comun' => $terreno['valor_terreno_comun'],
+                        ]);
+
+                        $this->terrenosCondominio[$key]['id'] = $aux->id;
+
+                    }else{
+
+                        Condominioterreno::find($terreno['id'])->update([
+                            'area_terreno_comun' => $terreno['area_terreno_comun'],
+                            'indiviso_terreno' => $terreno['indiviso_terreno'],
+                            'valor_unitario' => $terreno['valor_unitario'],
+                            'valor_terreno_comun' => $terreno['valor_terreno_comun'],
+                        ]);
+
+                    }
+
+                    $sum = $sum + (float)$terreno['valor_terreno_comun'];
+
+                    $sum2 = $sum2 + (float)$terreno['area_terreno_comun'];
+
+                }
+
+                $this->avaluo->area_comun_terreno = $sum2;
+                $this->avaluo->valor_terreno_comun = $sum;
+
+                $this->avaluo->save();
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La información de terrenos de condominio se guardó con éxito"]);
+
+            });
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al actualizar el valor de terreno condominio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
     public function guardarCondominio(){
 
         $this->validate([
             'predio' => 'required',
-            'avaluo.area_comun_terreno' => 'required',
-            'avaluo.indiviso_terreno' => 'required',
-            'avaluo.valor_unitario' => 'required',
-            'avaluo.valor_terreno_comun' => 'required',
             'construccionesCondominio.*.area_comun_construccion' => 'required',
             'construccionesCondominio.*.indiviso_construccion' => 'required',
             'construccionesCondominio.*.valor_clasificacion_construccion' => 'required',
@@ -477,7 +596,7 @@ class Valor extends Component
                             'area_comun_construccion' => $construccion['area_comun_construccion'],
                             'indiviso_construccion' => $construccion['indiviso_construccion'],
                             'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
-                            'valor_construcción_comun' => $construccion['valor_construcción_comun'],
+                            'valor_construccion_comun' => $construccion['valor_construccion_comun'],
                         ]);
 
                         $this->construccionesCondominio[$key]['id'] = $aux->id;
@@ -488,12 +607,12 @@ class Valor extends Component
                             'area_comun_construccion' => $construccion['area_comun_construccion'],
                             'indiviso_construccion' => $construccion['indiviso_construccion'],
                             'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
-                            'valor_construcción_comun' => $construccion['valor_construcción_comun'],
+                            'valor_construccion_comun' => $construccion['valor_construccion_comun'],
                         ]);
 
                     }
 
-                    $sum = $sum + (float)$construccion['valor_construcción_comun'];
+                    $sum = $sum + (float)$construccion['valor_construccion_comun'];
 
                     $sum2 = $sum2 + (float)$construccion['area_comun_construccion'];
 
@@ -504,7 +623,7 @@ class Valor extends Component
                 ]);
 
                 $this->avaluo->area_comun_construccion = $sum2;
-                $this->avaluo->valor_construcción_comun = $sum;
+                $this->avaluo->valor_construccion_comun = $sum;
 
                 $this->avaluo->save();
 
@@ -523,11 +642,27 @@ class Valor extends Component
 
     public function guardar(){
 
-        $this->validate();
+        $this->validate([
+            'predio.uso_1' => 'required',
+            'predio.uso_2' => 'nullable',
+            'predio.uso_3' => 'nullable',
+            'predio.superficie_terreno' => 'nullable',
+            'predio.superficie_construccion' => 'nullable',
+            'predio.ubicacion_en_manzana' => 'required',
+            'predio.valor_catastral' => 'nullable',
+            'predio' => 'required',
+        ]);
+
+        $this->validate([
+            'avaluo.area_comun_terreno' => Rule::requiredIf($this->predio->edificio === 1),
+            'avaluo.area_comun_construccion' => Rule::requiredIf($this->predio->edificio === 1),
+            'avaluo.valor_terreno_comun' => Rule::requiredIf($this->predio->edificio === 1),
+            'avaluo.valor_construccion_comun' => Rule::requiredIf($this->predio->edificio === 1),
+        ]);
 
         try {
 
-            $this->predio->valor_catastral = $this->predio->valor_total_terreno + $this->avaluo->valor_terreno_comun + $this->predio->valor_construccion;
+            $this->predio->valor_catastral = $this->predio->valor_total_terreno + $this->avaluo->valor_terreno_comun + $this->avaluo->valor_construccion_comun;
             $this->predio->save();
 
             $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La información se guardó con éxito"]);
@@ -555,8 +690,12 @@ class Valor extends Component
             ['codigo' => null, 'niveles' => null, 'superficie' => null, 'id' => null, 'valor_unitario' => null, 'valores' => null, 'uso' => null, 'tipo' => null, 'categoria' => null, 'calidad' => null]
         ];
 
+        $this->terrenosCondominio = [
+            ['area_terreno_comun' => null, 'indiviso_terreno' => null, 'valor_unitario' => null, 'id' => null, 'valor_terreno_comun' => null,]
+        ];
+
         $this->construccionesCondominio = [
-            ['area_comun_construccion' => null, 'indiviso_construccion' => null, 'valor_clasificacion_construccion' => null, 'id' => null, 'valor_construcción_comun' => null,]
+            ['area_comun_construccion' => null, 'indiviso_construccion' => null, 'valor_clasificacion_construccion' => null, 'id' => null, 'valor_construccion_comun' => null,]
         ];
 
         $this->valores_rusticos = ValoresUnitariosRusticos::all();

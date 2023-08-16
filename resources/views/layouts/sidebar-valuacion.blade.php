@@ -62,7 +62,7 @@
 
                 @can('Ficha técnica')
 
-                    <a href="{{ route('permisos') }}" class="ml-8 w-full hover:text-red-600 capitalize font-medium transition ease-in-out duration-500 flex hover hover:bg-gray-100 p-2 px-4 rounded-xl">
+                    <a href="{{ route('ficha_tecnica') }}" class="ml-8 w-full hover:text-red-600 capitalize font-medium transition ease-in-out duration-500 flex hover hover:bg-gray-100 p-2 px-4 rounded-xl">
 
                         Ficha técnica
 
@@ -82,7 +82,7 @@
 
                 @can('Notificación')
 
-                    <a href="{{ route('permisos') }}" class="ml-8 w-full hover:text-red-600 capitalize font-medium transition ease-in-out duration-500 flex hover hover:bg-gray-100 p-2 px-4 rounded-xl">
+                    <a href="{{ route('notificacion_avaluos') }}" class="ml-8 w-full hover:text-red-600 capitalize font-medium transition ease-in-out duration-500 flex hover hover:bg-gray-100 p-2 px-4 rounded-xl">
 
                         Notificación
 

@@ -22,8 +22,8 @@ class PredioAvaluo extends Model implements Auditable
         return $this->morphMany(Propietario::class, 'propietarioable');
     }
 
-    public function condominio(){
-        return $this->morphMany(Condominio::class, 'condominioable');
+    public function condominioTerrenos(){
+        return $this->morphMany(CondominioTerreno::class, 'condominioterrenoable');
     }
 
     public function condominioConstrucciones(){
@@ -35,7 +35,7 @@ class PredioAvaluo extends Model implements Auditable
     }
 
     public function construcciones(){
-        return $this->morphMany(Referencia::class, 'referenciaable');
+        return $this->morphMany(Construccion::class, 'construccionable');
     }
 
     public function colindancias(){

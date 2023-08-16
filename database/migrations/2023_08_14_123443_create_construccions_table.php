@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('referencias', function (Blueprint $table) {
+        Schema::create('construccions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('referenciaable_id');
-            $table->string('referenciaable_type');
+            $table->unsignedInteger('construccionable_id');
+            $table->string('construccionable_type');
             $table->string('referencia');
             $table->string('tipo');
             $table->string('uso');
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('referencias');
+        Schema::dropIfExists('construccions');
     }
 };

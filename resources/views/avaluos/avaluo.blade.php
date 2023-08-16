@@ -623,20 +623,24 @@
 
                             <tbody>
 
-                                <tr>
-                                    <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
-                                        <p>{{ $predio->avaluo->area_comun_terreno }}</p>
-                                    </td>
-                                    <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
-                                        <p>{{ $predio->avaluo->indiviso_terreno }}</p>
-                                    </td>
-                                    <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
-                                        <p>{{ $predio->avaluo->valor_unitario }}</p>
-                                    </td>
-                                    <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
-                                        <p>{{ $predio->avaluo->valor_terreno_comun }}</p>
-                                    </td>
-                                </tr>
+                                @foreach ($predio->condominioTerrenos as $constr)
+
+                                    <tr>
+                                        <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
+                                            <p>{{ $constr->area_terreno_comun }}</p>
+                                        </td>
+                                        <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
+                                            <p>{{ $constr->indiviso_terreno }}</p>
+                                        </td>
+                                        <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
+                                            <p>{{ $constr->valor_unitario }}</p>
+                                        </td>
+                                        <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
+                                            <p>{{ $constr->valor_terreno_comun }}</p>
+                                        </td>
+                                    </tr>
+
+                                @endforeach
 
                             </tbody>
 
@@ -678,7 +682,7 @@
                                                 <p>{{ $constr->valor_clasificacion_construccion }}</p>
                                             </td>
                                             <td style="padding-right: 40px; font-size:10px; border: 1px solid black;">
-                                                <p>{{ $constr->valor_construcción_comun }}</p>
+                                                <p>{{ $constr->valor_construccion_comun }}</p>
                                             </td>
                                         </tr>
 
@@ -725,10 +729,10 @@
                                             <p>{{ $predio->superficie_terreno }}</p>
                                         </td>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">
-                                            <p>{{ $predio->avaluo->area_comun_terreno * $predio->avaluo->indiviso_terreno }}</p>
+                                            <p>{{ $predio->avaluo->area_comun_terreno }}</p>
                                         </td>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">
-                                            <p>{{ $predio->avaluo->area_comun_terreno * $predio->avaluo->indiviso_terreno  + $predio->superficie_terreno}}</p>
+                                            <p>{{ $predio->avaluo->area_comun_terreno  + $predio->superficie_terreno}}</p>
                                         </td>
                                     </tr>
 
@@ -766,11 +770,11 @@
                                         </tr>
                                         <tr>
                                             <td style="padding-right: 40px; font-size:10px">Privatio + Proporcional</td>
-                                            <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format($predio->valor_construccion + $predio->avaluo->valor_construcción_comun, 2) }}</td>
+                                            <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format($predio->valor_construccion + $predio->avaluo->valor_construccion_comun, 2) }}</td>
                                         </tr>
                                         <tr>
                                             <td style="padding-right: 40px; font-size:10px">Total</td>
-                                            <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format($predio->valor_total_terreno + $predio->avaluo->valor_terreno_comun + $predio->valor_construccion + $predio->avaluo->valor_construcción_comun, 2) }}</td>
+                                            <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format($predio->valor_total_terreno + $predio->avaluo->valor_terreno_comun + $predio->valor_construccion + $predio->avaluo->valor_construccion_comun, 2) }}</td>
                                         </tr>
 
                                     </tbody>

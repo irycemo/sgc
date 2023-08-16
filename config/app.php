@@ -198,7 +198,8 @@ return [
         App\Providers\JetstreamServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         OwenIt\Auditing\AuditingServiceProvider::class,
-        Webklex\PDFMerger\Providers\PDFMergerServiceProvider::class
+        Webklex\PDFMerger\Providers\PDFMergerServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -215,7 +216,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'PDFMerger' => Webklex\PDFMerger\Facades\PDFMergerFacade::class
+        'PDFMerger' => Webklex\PDFMerger\Facades\PDFMergerFacade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];

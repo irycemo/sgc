@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use App\Models\Terreno;
-use App\Models\Condominio;
-use App\Models\Referencia;
 use App\Models\Colindancia;
 use App\Models\Propietario;
+use App\Models\Construccion;
 use App\Http\Traits\ModelosTrait;
+use App\Models\CondominioTerreno;
 use App\Models\Condominioconstruccion;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -25,8 +25,8 @@ class Predio extends Model implements Auditable
         return $this->morphMany(Propietario::class, 'propietarioable');
     }
 
-    public function condominio(){
-        return $this->morphMany(Condominio::class, 'condominioable');
+    public function condominioTerrenos(){
+        return $this->morphMany(CondominioTerreno::class, 'condominioterrenoable');
     }
 
     public function condominioConstrucciones(){
@@ -38,7 +38,7 @@ class Predio extends Model implements Auditable
     }
 
     public function construcciones(){
-        return $this->morphMany(Referencia::class, 'referenciaable');
+        return $this->morphMany(Construccion::class, 'construccionable');
     }
 
     public function colindancias(){

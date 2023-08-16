@@ -50,7 +50,7 @@ return new class extends Migration
             $table->unsignedDecimal('superficie_terreno', 18,2);
             $table->unsignedDecimal('superficie_construccion', 18,2);
             $table->unsignedDecimal('superficie_judicial', 18,2)->nullable();
-            $table->unsignedDecimal('superficie_notarial', 18,2);
+            $table->unsignedDecimal('superficie_notarial', 18,2)->nullable();
             $table->unsignedDecimal('valor_catastral', 18,2);
             $table->unsignedDecimal('valor_total_terreno', 18,2);
             $table->unsignedDecimal('valor_construccion', 18,2);
@@ -63,6 +63,7 @@ return new class extends Migration
             $table->decimal('lon', 11, 8)->nullable();
             $table->decimal('lat', 11, 8)->nullable();
             $table->date('fecha_efectos')->nullable();
+            $table->date('fecha_notificacion')->nullable();
             $table->text('observaciones')->nullable();
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

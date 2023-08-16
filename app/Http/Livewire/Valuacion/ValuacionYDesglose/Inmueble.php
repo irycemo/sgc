@@ -97,12 +97,10 @@ class Inmueble extends Component
     }
 
     public function updatedPredioXutm(){
-
         $this->convertirCoordenadas();
     }
 
     public function updatedPredioYutm(){
-
         $this->convertirCoordenadas();
     }
 
@@ -134,7 +132,7 @@ class Inmueble extends Component
                 'predio.departamento' => 'nullable',
             ]);
 
-            $this->predio = PredioAvaluo::with('propietarios', 'construcciones', 'condominio', 'colindancias', 'avaluo')
+            $this->predio = PredioAvaluo::with('propietarios', 'avaluo')
                                         ->where('estado', 16)
                                         ->where('numero_registro', $this->predio->numero_registro)
                                         ->where('region_catastral', $this->predio->region_catastral)
@@ -146,6 +144,16 @@ class Inmueble extends Component
                                         ->where('edificio', $this->predio->edificio)
                                         ->where('departamento', $this->predio->departamento)
                                         ->firstOrFail();
+
+            if($this->predio->avaluo->creado_por != auth()->user()->id){
+
+                $this->predio = PredioAvaluo::make();
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo está asinagnado a otro valuador."]);
+
+                return;
+
+            }
 
             $this->ap_paterno = $this->predio->propietarios()->first()->persona->ap_paterno;
             $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
@@ -185,12 +193,22 @@ class Inmueble extends Component
                 'predio.oficina' => 'required',
             ]);
 
-            $this->predio = PredioAvaluo::with('propietarios', 'construcciones', 'condominio', 'colindancias','avaluo')
+            $this->predio = PredioAvaluo::with('propietarios', 'avaluo')
                                     ->where('numero_registro', $this->predio->numero_registro)
                                     ->where('tipo_predio', $this->predio->tipo_predio)
                                     ->where('localidad', $this->predio->localidad)
                                     ->where('oficina', $this->predio->oficina)
                                     ->firstOrFail();
+
+            if($this->predio->avaluo->creado_por != auth()->user()->id){
+
+                $this->predio = PredioAvaluo::make();
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo está asinagnado a otro valuador."]);
+
+                return;
+
+            }
 
             $this->ap_paterno = $this->predio->propietarios()->first()->persona->ap_paterno;
             $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;

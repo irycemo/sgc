@@ -345,7 +345,7 @@
 
             @foreach ($construcciones as $index => $construccion)
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-3 mb-2 bg-gray-50 p-4 rounded-lg items-end">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-3 mb-2 bg-gray-50 p-4 rounded-lg items-start">
 
                     <div class="flex-auto lg:col-span-2">
 
@@ -594,99 +594,158 @@
 
         <div class="space-y-2 mb-5 bg-white rounded-lg p-2">
 
-            <h4 class="text-lg mb-5 text-center">Codominios</h4>
+            <h4 class="text-lg mb-5 text-center">Terrenos de área común</h4>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 items-end mx-auto">
+            <div class="mb-5  divide-y">
 
-                <div class="flex-auto ">
+                @foreach ($terrenosCondominio as $index => $item)
 
-                    <div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3 items-start mb-2 bg-gray-50 p-4 rounded-lg">
 
-                        <label class="text-sm" >Área común de terreno</label>
+                        <div class="flex-auto lg:col-span-1">
+
+                            <div>
+
+                                <label class="text-sm" >Área común de terreno</label>
+
+                            </div>
+
+                            <div>
+
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosCondominio.{{ $index }}.area_terreno_comun">
+
+                            </div>
+
+                            <div>
+
+                                @error('terrenosCondominio.' .  $index . '.area_terreno_comun') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                        <div class="flex-auto lg:col-span-1">
+
+                            <div>
+
+                                <label class="text-sm" >Indiviso de terreno</label>
+
+                            </div>
+
+                            <div>
+
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosCondominio.{{ $index }}.indiviso_terreno">
+
+                            </div>
+
+                            <div>
+
+                                @error('terrenosCondominio.' . $index . '.indiviso_terreno') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                        <div class="flex-auto lg:col-span-1">
+
+                            <div>
+
+                                <label class="text-sm" >Valor unitario</label>
+
+                            </div>
+
+                            <div>
+
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosCondominio.{{ $index }}.valor_unitario">
+
+                            </div>
+
+                            <div>
+
+                                @error('terrenosCondominio.' . $index . '.valor_unitario') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                        <div class="flex-auto lg:col-span-1">
+
+                            <div>
+
+                                <label class="text-sm" >Valor de terreno común</label>
+
+                            </div>
+
+                            <div>
+
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosCondominio.{{ $index }}.valor_terreno_comun" readonly>
+
+                            </div>
+
+                            <div>
+
+                                @error('terrenosCondominio.' . $index . '.valor_terreno_comun') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                        <div class="flex-auto lg:col-span-1 my-auto">
+
+                            <button
+                                wire:click="borrarCondominioTerreno({{ $index }})"
+                                wire:loading.attr="disabled"
+                                wire:target="borrarCondominioTerreno({{ $index }})"
+                                class="  bg-red-400 hover:shadow-lg text-white text-xs md:text-sm  px-3 py-1 w-full lg:w-auto lg:ml-auto rounded-full  hover:bg-red-700 flex justify-center items-center focus:outline-none "
+                            >
+
+                                <img wire:loading wire:target="borrarCondominioTerreno({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                                Borrar
+
+                            </button>
+
+                        </div>
 
                     </div>
 
-                    <div>
+                @endforeach
 
-                        <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="avaluo.area_comun_terreno">
+                <button
+                    wire:click="agregarTerrenoConstruccion"
+                    wire:loading.attr="disabled"
+                    wire:target="agregarTerrenoConstruccion"
+                    class=" bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 mr-auto rounded-full  hover:bg-blue-700 flex items-center justify-center focus:outline-none "
+                >
 
-                    </div>
+                    <img wire:loading wire:target="agregarTerrenoConstruccion" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                    <div>
+                    Agregar nuevo
 
-                        @error('avaluo.area_comun_terreno') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                    </div>
-
-                </div>
-
-                <div class="flex-auto ">
-
-                    <div>
-
-                        <label class="text-sm" >Indiviso de terreno</label>
-
-                    </div>
-
-                    <div>
-
-                        <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="avaluo.indiviso_terreno">
-
-                    </div>
-
-                    <div>
-
-                        @error('avaluo.indiviso_terreno') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                    </div>
-
-                </div>
-
-                <div class="flex-auto ">
-
-                    <div>
-
-                        <label class="text-sm" >Valor unitario</label>
-
-                    </div>
-
-                    <div>
-
-                        <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="avaluo.valor_unitario">
-
-                    </div>
-
-                    <div>
-
-                        @error('avaluo.valor_unitario') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                    </div>
-
-                </div>
-
-                <div class="flex-auto ">
-
-                    <div>
-
-                        <label class="text-sm" >Valor de terreno común</label>
-
-                    </div>
-
-                    <div>
-
-                        <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.valor_terreno_comun" readonly>
-
-                    </div>
-
-                    <div>
-
-                        @error('avaluo.valor_terreno_comun') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                    </div>
-
-                </div>
+                </button>
 
             </div>
+
+            <div class="flex justify-end">
+
+                <button
+                    wire:click="guardarTerrenosCondominio"
+                    wire:loading.attr="disabled"
+                    wire:target="guardarTerrenosCondominio"
+                    class=" bg-green-400 mt-5 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
+                >
+
+                    <img wire:loading wire:target="guardarTerrenosCondominio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Guardar condominio
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="space-y-2 mb-5 bg-white rounded-lg p-2">
 
             <h4 class="text-lg mb-5 text-center">Construcciones de área común</h4>
 
@@ -782,13 +841,13 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesCondominio.{{ $index }}.valor_construcción_comun" readonly>
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesCondominio.{{ $index }}.valor_construccion_comun" readonly>
 
                             </div>
 
                             <div>
 
-                                @error('construccionesCondominio.' . $index . '.valor_construcción_comun') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                                @error('construccionesCondominio.' . $index . '.valor_construccion_comun') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                             </div>
 
@@ -879,8 +938,8 @@
                             <tr>
                                 <td>Superficie de terreno</td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" wire:model="predio.superficie_terreno"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $avaluo->area_comun_terreno * $avaluo->indiviso_terreno }}"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $avaluo->area_comun_terreno * $avaluo->indiviso_terreno  + $predio->superficie_terreno }}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $avaluo->area_comun_terreno}}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $avaluo->area_comun_terreno}}"></td>
                             </tr>
 
                             <tr>
@@ -910,11 +969,11 @@
                             </tr>
                             <tr>
                                 <td class="text-sm">Privatio + Proporcional</td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_construccion + $avaluo->valor_construcción_comun, 2) }}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_construccion + $avaluo->valor_construccion_comun, 2) }}"></td>
                             </tr>
                             <tr>
                                 <td class="text-sm">Total</td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_terreno + $avaluo->valor_terreno_comun + $predio->valor_construccion + $avaluo->valor_construcción_comun, 2) }}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_terreno + $avaluo->valor_terreno_comun + $predio->valor_construccion + $avaluo->valor_construccion_comun, 2) }}"></td>
                             </tr>
 
                         </tbody>
