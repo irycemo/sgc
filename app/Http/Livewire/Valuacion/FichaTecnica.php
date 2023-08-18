@@ -2,25 +2,48 @@
 
 namespace App\Http\Livewire\Valuacion;
 
-use App\Imports\AvaluoImport;
 use Livewire\Component;
+use App\Imports\AvaluoImport;
 use Livewire\WithFileUploads;
+use App\Http\Constantes\Constantes;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\ValoresUnitariosRusticos;
+use App\Models\ValoresUnitariosConstruccion;
+use App\Exceptions\ErrorAlValidarLineaDeCaptura;
+use App\Exceptions\ErrorAlProcesarTerrenosException;
+use App\Exceptions\ErrorAlProcesarCoordenadasException;
+use App\Exceptions\ErrorAlProcesarColindanciasException;
+use App\Exceptions\ErrorAlProcesarConstruccionesException;
 
 class FichaTecnica extends Component
 {
 
     use WithFileUploads;
 
-    public $file;
+    public $documento;
+    public $data;
+    public $vientos;
+    public $valoresConstruccion;
+    public $valoresRusticos;
 
     public function procesar(){
+
+        $this->validate([
+            'documento' => 'required'
+        ]);
 
         $import = new AvaluoImport;
 
         try {
-            Excel::import($import, $this->file);
+
+            Excel::import($import, $this->documento);
+
+            $this->data = $import->data;
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['success', "Los avaluos se generaron con éxito"]);
+
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+
             $failures = $e->failures();
 
             foreach ($failures as $failure) {
@@ -32,9 +55,50 @@ class FichaTecnica extends Component
                 $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Error en la fila: " . $failure->row() . ", campo: " . $failure->attribute()]);
 
                 break;
-            }
-       }
 
+            }
+
+       }catch (ErrorAlValidarLineaDeCaptura $e) {
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', $e->getMessage()]);
+
+       }catch (ErrorAlProcesarCoordenadasException $e) {
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', $e->getMessage()]);
+
+        }catch (ErrorAlProcesarColindanciasException $e) {
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', $e->getMessage()]);
+
+        }catch (ErrorAlProcesarTerrenosException $e) {
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', $e->getMessage()]);
+
+        }catch (ErrorAlProcesarConstruccionesException $e) {
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', $e->getMessage()]);
+
+        }
+
+        $this->dispatchBrowserEvent('removeFiles');
+
+        $this->reset('documento');
+
+    }
+
+    public function descargarFicha(){
+
+        return response()->download(storage_path('app/public/ficha_tecnica.xlsx'));
+
+    }
+
+    public function mount(){
+
+        $this->vientos = Constantes::VIENTOS;
+
+        $this->valoresConstruccion = ValoresUnitariosConstruccion::all();
+
+        $this->valoresRusticos = ValoresUnitariosRusticos::all();
 
     }
 

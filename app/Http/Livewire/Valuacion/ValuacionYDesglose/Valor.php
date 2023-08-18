@@ -662,7 +662,7 @@ class Valor extends Component
 
         try {
 
-            $this->predio->valor_catastral = $this->predio->valor_total_terreno + $this->avaluo->valor_terreno_comun + $this->avaluo->valor_construccion_comun;
+            $this->predio->valor_catastral = $this->predio->valor_total_terreno + $this->predio->valor_construccion + $this->avaluo->valor_terreno_comun + $this->avaluo->valor_construccion_comun;
             $this->predio->save();
 
             $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La información se guardó con éxito"]);

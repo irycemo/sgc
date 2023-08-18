@@ -218,7 +218,7 @@ class Constantes{
         'MULTIPANEL',
         'MADERA Y ADOBE',
         'PIEDRA O ADOBE',
-        ' TABIQUE Y/O TABICON',
+        'TABIQUE Y/O TABICON',
         'TABIQUE Y CONCRETO',
         'COCRETO ARMADO',
     ];
@@ -226,10 +226,10 @@ class Constantes{
     const ENTREPISOS = [
         'NO APLICA',
         'BOVEDA  CATALANA',
-        'MADERA   ',
+        'MADERA',
         'LOSA RETICULAR',
         'LOSA DE CONCRETO  REFORZADO',
-        ' ESTRUCTURA METALICA O MIXTA',
+        'ESTRUCTURA METALICA O MIXTA',
         'ARMADURAS DE MONTEN O ANGULOS SENCILLOS',
         'ARMADURAS METALICAS DE PERALTE REGULAR',
         'ARMADURAS  METALICAS DE GRAN PERALTE',
@@ -238,15 +238,6 @@ class Constantes{
 
     CONST TECHOS = [
         'NO APLICA',
-        'BOVEDA  CATALANA',
-        'MADERA   ',
-        'LOSA RETICULAR',
-        'LOSA DE CONCRETO  REFORZADO',
-        ' ESTRUCTURA METALICA O MIXTA',
-        'ARMADURAS DE MONTEN O ANGULOS SENCILLOS',
-        'ARMADURAS METALICAS DE PERALTE REGULAR',
-        'ARMADURAS  METALICAS DE GRAN PERALTE',
-        'TRIDILOSA',
         'TEJA',
         'LAMINA DE CARTON',
         'LAMINA ACRILICA',
@@ -335,7 +326,7 @@ class Constantes{
     const HIDRAULICA = [
         'NO APLICA',
         'GALVANIZADA',
-        'GALVANIZADA, COBRE  ',
+        'GALVANIZADA, COBRE',
         'COBRE Y/O PVC',
     ];
 

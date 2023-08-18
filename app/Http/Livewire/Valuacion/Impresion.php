@@ -288,9 +288,9 @@ class Impresion extends Component
 
             }
 
-            if($predio->edificio != 0 && !$predio->condominioConstrucciones->count()){
+            if($predio->edificio != 0 && !$predio->condominioTerrenos->count()){
 
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo" . $predio->avaluo->folio . " no tiene construcciones."]);
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . " no tiene terrenos de área común."]);
 
                 return true;
 
@@ -298,7 +298,7 @@ class Impresion extends Component
 
             if($predio->valor_catastral == null){
 
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo" . $predio->avaluo->folio . " no tiene valor catastral."]);
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . " no tiene valor catastral."]);
 
                 return true;
 

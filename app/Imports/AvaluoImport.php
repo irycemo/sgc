@@ -4,26 +4,40 @@ namespace App\Imports;
 
 use App\Models\Avaluo;
 use App\Models\Predio;
+use App\Models\Persona;
 use App\Models\PredioAvaluo;
 use App\Models\AsignarCuenta;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
+use App\Models\ValoresUnitariosRusticos;
+use App\Models\ValoresUnitariosConstruccion;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use App\Http\Services\Coordenadas\Coordenadas;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use App\Exceptions\ErrorAlValidarLineaDeCaptura;
-use Maatwebsite\Excel\Concerns\RemembersRowNumber;
+use App\Exceptions\ErrorAlProcesarTerrenosException;
 use App\Exceptions\ErrorAlProcesarCoordenadasException;
 use App\Exceptions\ErrorAlProcesarColindanciasException;
-use Illuminate\Support\Facades\Validator;
+use App\Exceptions\ErrorAlProcesarConstruccionesException;
 
 class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
 {
 
-    use RemembersRowNumber;
+    public $valoresConstruccion;
+    public $valoresRusticos;
+    public $avaluos = [];
+
+    public function __construct()
+    {
+
+        $this->valoresConstruccion = ValoresUnitariosConstruccion::all();
+
+        $this->valoresRusticos = ValoresUnitariosRusticos::all();
+
+    }
 
     public $data;
 
@@ -32,15 +46,43 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
 
         DB::transaction(function () use($rows){
 
-            foreach ($rows as $row)
+
+            foreach ($rows as $key => $row)
             {
 
-                $this->validarDisponibilidad($row);
+                $key = $key + 3;
 
-                $coordenadas = $this->procesarCoordenadas($row['latitud'], $row['longitud']);
+                /* Validaciones */
+                $this->validarDisponibilidad($row, $key);
 
-                $colindancias = $this->procesarColindacias($row['colindancias']);
+                $coordenadas = $this->procesarCoordenadas($row['latitud'], $row['longitud'], $key);
 
+                $colindancias = $this->procesarColindacias($row['colindancias'], $key);
+
+                $terrenos = $this->procesarTerrenos($row['terrenos'], $row['tipo'], $key);
+
+                $construcciones = $this->procesarConstrucciones($row['construcciones'], $key);
+
+                $terrenosComun = $this->procesarTerrenosComun($row['terrenos_comun'], $key);
+
+                $construccionesComun = $this->procesarConstruccionesComun($row['construcciones_comun'], $key);
+
+
+                if($row['tipo'] == 1){
+
+                    $valorCatastral = $terrenos->sum('valor_terreno') + $construcciones->sum(function (array $construccion) { return (float)$construccion['valor_unitario'] * (float)$construccion['superficie']; });
+
+                }elseif($row['tipo'] == 2){
+
+                    $valorCatastral = $terrenos->sum('valor_terreno')
+                                        + $construcciones->sum(function (array $construccion) { return (float)$construccion['valor_unitario'] * (float)$construccion['superficie']; })
+                                        + $terrenosComun->sum('valor_terreno_comun')
+                                        + $construccionesComun->sum('valor_construccion_comun');
+
+
+                }
+
+                /* Crear predio */
                 $predio = PredioAvaluo::create([
                     'status' => 'activo',
                     'sociedad' => $row['sociedad'] == 'SI' ? 1 : 0,
@@ -83,8 +125,84 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
                     'lon'=> $row['latitud'],
                     'lat'=> $row['longitud'],
                     'observaciones' => $row['observaciones'],
+                    'superficie_terreno' => $terrenos->sum('superficie'),
+                    'valor_total_terreno' => $terrenos->sum('valor_terreno'),
+                    'superficie_construccion' => $construcciones->sum('superficie'),
+                    'valor_construccion' => $construcciones->sum(function (array $construccion) { return (float)$construccion['valor_unitario'] * (float)$construccion['superficie']; }),
+                    'valor_catastral' => $valorCatastral,
                     'actualizado_por' => auth()->user()->id
                 ]);
+
+                /* Asociar relaciones */
+                $persona = Persona::firstOrCreate(
+                    [
+                        'ap_paterno' => $row['ap_paterno'],
+                        'ap_materno' => $row['ap_materno'],
+                        'nombre' => $row['nombre'],
+                        'tipo' => $row['tipo_persona'],
+                    ],
+                    [
+                        'ap_paterno' => $row['ap_paterno'],
+                        'ap_materno' => $row['ap_materno'],
+                        'nombre' => $row['nombre'],
+                        'tipo' => $row['tipo_persona'],
+                    ]
+                );
+
+                $predio->propietarios()->create([
+                    'persona_id' => $persona->id,
+                    'tipo' => $row['tipo_propietario'],
+                    'porcentaje' => $row['porcentaje'],
+                ]);
+
+                foreach ($terrenos as $terreno) {
+
+                    $predio->terrenos()->create([
+                        'superficie' => $terreno['superficie'],
+                        'valor_unitario' => $terreno['valor_unitario'],
+                        'demerito' => $terreno['demerito'],
+                        'valor_demeritado' => $terreno['valor_demeritado'],
+                        'valor_terreno' => $terreno['valor_terreno'],
+                    ]);
+
+                }
+
+                foreach ($construcciones as $construccion) {
+
+                    $predio->construcciones()->create([
+                        'referencia' => $construccion['referencia'],
+                        'valor_unitario' => $construccion['valor_unitario'],
+                        'niveles' => $construccion['niveles'],
+                        'superficie' => $construccion['superficie'],
+                        'uso' => $construccion['uso'],
+                        'tipo' => $construccion['tipo'],
+                        'calidad' => $construccion['calidad'],
+                        'estado' => $construccion['estado'],
+                    ]);
+
+                }
+
+                foreach ($terrenosComun as $terreno) {
+
+                    $predio->condominioTerrenos()->create([
+                        'area_terreno_comun' => $terreno['area_terreno_comun'],
+                        'indiviso_terreno' => $terreno['indiviso_terreno'],
+                        'valor_unitario' => $terreno['valor_unitario'],
+                        'valor_terreno_comun' => $terreno['valor_terreno_comun'],
+                    ]);
+
+                }
+
+                foreach ($construccionesComun as $construccion) {
+
+                    $predio->condominioConstrucciones()->create([
+                        'area_comun_construccion' => $construccion['area_comun_construccion'],
+                        'indiviso_construccion' => $construccion['indiviso_construccion'],
+                        'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
+                        'valor_construccion_comun' => $construccion['valor_construccion_comun'],
+                    ]);
+
+                }
 
                 foreach($colindancias as $coindancia){
 
@@ -96,11 +214,49 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
 
                 }
 
-                $this->data = Avaluo::create([
-                    'name' => $row[0],
+                /* Crear avaluo */
+                $avaluo = Avaluo::create([
+                    'predio_id' => $predio->id,
+                    'folio' => Avaluo::max('folio') + 1,
+                    'estado' => 'nuevo',
+                    'clasificacion_zona' => $row['clasificacion_zona'],
+                    'construccion_dominante' => $row['tipo_construccion_dominante'],
+                    'agua' => $row['agua_potable'] == 'SI' ? 1 : 0,
+                    'drenaje' => $row['drenaje']  == 'SI' ? 1 : 0,
+                    'pavimento' => $row['pavimento']  == 'SI' ? 1 : 0,
+                    'energia_electrica' => $row['energia_electrica']  == 'SI' ? 1 : 0,
+                    'alumbrado_publico' => $row['alumbrado_publico']  == 'SI' ? 1 : 0,
+                    'banqueta' => $row['banqueta']  == 'SI' ? 1 : 0,
+                    'cimentacion' => $row['cimentacion'],
+                    'estructura' => $row['estructura'],
+                    'muros' => $row['muros'],
+                    'entrepiso' => $row['entrepisos'],
+                    'techo' => $row['techo'],
+                    'plafones' => $row['plafones'],
+                    'vidrieria' => $row['vidrieria'],
+                    'lambrines' => $row['lambrines'],
+                    'pisos' => $row['pisos'],
+                    'herreria' => $row['herreria'],
+                    'pintura' => $row['pintura'],
+                    'carpinteria' => $row['carpinteria'],
+                    'recubrimiento_especial' => $row['recubrimiento_especial'],
+                    'aplanados' => $row['aplanados'],
+                    'hidraulica' => $row['hidraulica'],
+                    'sanitaria' => $row['sanitaria'],
+                    'electrica' => $row['electrica'],
+                    'gas' => $row['gas'],
+                    'especiales' => $row['especiales'],
+                    'area_comun_terreno' => $terrenosComun->sum('area_terreno_comun'),
+                    'valor_terreno_comun' => $terrenosComun->sum('valor_terreno_comun'),
+                    'area_comun_construccion' => $construccionesComun->sum('area_comun_construccion'),
+                    'valor_construccion_comun' => $construccionesComun->sum('valor_construccion_comun'),
                 ]);
 
+                $this->avaluos[] = $avaluo->load('predio.propietarios.persona');
+
             }
+
+            $this->data = $this->avaluos;
 
         });
 
@@ -138,7 +294,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
             'colindancias' => 'required',
             'clasificacion_zona' => ['required', Rule::in(Constantes::CLASIFICACION_ZONA)],
             'tipo_construccion_dominante' => ['required', Rule::in(Constantes::CONSTRUCCION_DOMINANTE)],
-            'agua potable' => ['required', Rule::in(['SI', 'NO'])],
+            'agua_potable' => ['required', Rule::in(['SI', 'NO'])],
             'drenaje' => ['required', Rule::in(['SI', 'NO'])],
             'pavimento' => ['required', Rule::in(['SI', 'NO'])],
             'energia_electrica' => ['required', Rule::in(['SI', 'NO'])],
@@ -168,13 +324,13 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
             'terrenos_comun' => 'required',
             'construcciones_comun' => 'required',
             'uso_1' =>  ['required', Rule::in(Constantes::USO_PREDIO)],
-            'uso_2' =>  ['required', Rule::in(Constantes::USO_PREDIO)],
-            'uso_3' =>  ['required', Rule::in(Constantes::USO_PREDIO)],
-            'ubicación manzana' => ['required', Rule::in(Constantes::UBICACION_PREDIO)],
+            'uso_2' =>  ['nullable', Rule::in(Constantes::USO_PREDIO)],
+            'uso_3' =>  ['nullable', Rule::in(Constantes::USO_PREDIO)],
+            'ubicacion_manzana' => ['required', Rule::in(Constantes::UBICACION_PREDIO)],
         ];
     }
 
-    public function validarDisponibilidad($row){
+    public function validarDisponibilidad($row, $key){
 
         $predioCompleto = Predio::where('estado', $row['estado'])
                                     ->where('region_catastral', $row['region'])
@@ -199,7 +355,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
                                         ->first();
 
             if($cuentaPredial)
-                throw new ErrorAlValidarLineaDeCaptura("La cuenta predial ya existe en el padrón con otra clave catastral, verifique en la linea " . $this->getRowNumber());
+                throw new ErrorAlValidarLineaDeCaptura("La cuenta predial ya existe en el padrón con otra clave catastral, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
             $claveCatastral = Predio::where('estado', $row['estado'])
                                         ->where('region_catastral', $row['region'])
@@ -213,10 +369,10 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
                                         ->first();
 
             if($claveCatastral)
-                throw new ErrorAlValidarLineaDeCaptura("La clave catastral ya existe en el padrón con otra cuenta predial, verifique en la linea " . $this->getRowNumber());
+                throw new ErrorAlValidarLineaDeCaptura("La clave catastral ya existe en el padrón con otra cuenta predial, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
         }else
-            throw new ErrorAlValidarLineaDeCaptura("El predio ya existe, verifique en la linea " . $this->getRowNumber());
+            throw new ErrorAlValidarLineaDeCaptura("El predio ya existe, verifique en la linea " . $key);
 
         $predioCompletoAvaluo = PredioAvaluo::where('estado', $row['estado'])
                                                 ->where('region_catastral', $row['region'])
@@ -241,7 +397,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
                                                 ->first();
 
             if($cuentaPredialAvaluo)
-                throw new ErrorAlValidarLineaDeCaptura("La cuenta predial ya existe en avaluos con otra clave catastral, verifique en la linea " . $this->getRowNumber());
+                throw new ErrorAlValidarLineaDeCaptura("La cuenta predial ya existe en avaluos con otra clave catastral, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
             $claveCatastralAvaluo = PredioAvaluo::where('estado', $row['estado'])
                                                     ->where('region_catastral', $row['region'])
@@ -255,10 +411,10 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
                                                     ->first();
 
             if($claveCatastralAvaluo)
-                throw new ErrorAlValidarLineaDeCaptura("La clave catastral ya existe en avaluos con otra cuenta predial, verifique en la linea " . $this->getRowNumber());
+                throw new ErrorAlValidarLineaDeCaptura("La clave catastral ya existe en avaluos con otra cuenta predial, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
         }else
-            throw new ErrorAlValidarLineaDeCaptura("El predio ya existe en avaluos, verifique en la linea " . $this->getRowNumber());
+            throw new ErrorAlValidarLineaDeCaptura("El predio ya existe en avaluos, verifique la cuenta: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
         $cuentaAsignada = AsignarCuenta::where('localidad', $row['localidad'])
                                         ->where('oficina', $row['oficina'])
@@ -268,25 +424,25 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
                                         ->first();
 
         if(!$cuentaAsignada)
-            throw new ErrorAlValidarLineaDeCaptura("No tienes la cuenta asignada en la linea " . $this->getRowNumber());
+            throw new ErrorAlValidarLineaDeCaptura("No tienes asignada la cuenta: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
     }
 
-    public function procesarCoordenadas($lat, $lon):array
+    public function procesarCoordenadas($lat, $lon, $linea):array
     {
 
         $ll = (new Coordenadas())->ll2utm($lat, $lon);
 
             if(!$ll['success']){
 
-                throw new ErrorAlProcesarCoordenadasException($ll['msg'] . " en la linea " . $this->getRowNumber());
+                throw new ErrorAlProcesarCoordenadasException($ll['msg'] . " en la linea " . $linea);
 
 
             }else{
 
                 if((float)$ll['attr']['zone'] < 13 || (float)$ll['attr']['zone'] > 14){
 
-                    throw new ErrorAlProcesarCoordenadasException("Las coordenadas no corresponden a una zona válida en la linea " . $this->getRowNumber());
+                    throw new ErrorAlProcesarCoordenadasException("Las coordenadas no corresponden a una zona válida en la linea " . $linea);
 
                     $lat = null;
                     $lon = null;
@@ -303,25 +459,28 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
 
     }
 
-    public function procesarColindacias($colindancias):array
+    public function procesarColindacias($colindancias, $linea):array
     {
 
-        $array = str_split($colindancias, '|');
+        $array = explode('|', $colindancias);
 
         $colindanciasArreglo = [];
 
         foreach($array as $colindancia){
 
-            $campos = str_split($colindancia, ':');
+            $campos = explode(':', $colindancia);
 
             if(!in_array($campos[0], Constantes::VIENTOS))
-                throw new ErrorAlProcesarColindanciasException("Error en el campo viento de las colindancias en la linea " . $this->getRowNumber());
+                throw new ErrorAlProcesarColindanciasException("Error en el campo viento de las colindancias en la linea " . $linea);
 
             if(!isset($campos[1]) || !isset($campos[2]))
-                throw new ErrorAlProcesarColindanciasException("Error en los campos de las colindancias en la linea " . $this->getRowNumber());
+                throw new ErrorAlProcesarColindanciasException("Error en los campos de las colindancias en la linea " . $linea);
 
             if(isset($campos[3]))
-                throw new ErrorAlProcesarColindanciasException("Error en los campos de las colindancias en la linea " . $this->getRowNumber());
+                throw new ErrorAlProcesarColindanciasException("Error en los campos de las colindancias en la lineass " . $linea);
+
+            if($campos[1] == '' || $campos[2] == '')
+                throw new ErrorAlProcesarColindanciasException("Error en los campos de las colindancias en la lineass " . $linea);
 
             $colindanciasArreglo [] = [
                 'viento' => $campos[0],
@@ -330,8 +489,198 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
             ];
 
         }
-
         return $colindanciasArreglo;
+
+    }
+
+    public function procesarTerrenos($terrenos, $tipo, $linea):collection
+    {
+
+        $array = explode('|', $terrenos);
+
+        $terrenosArreglo = [];
+
+        foreach($array as $terreno){
+
+            $campos = explode(':', $terreno);
+
+            if(!isset($campos[0]) || !isset($campos[1]) || !isset($campos[2]))
+                throw new ErrorAlProcesarTerrenosException("Faltan campos en los terrenos en la linea " . $linea);
+
+            if($campos[0] == '' || $campos[1] == '' || $campos[2] == '')
+                throw new ErrorAlProcesarTerrenosException("Los campos no pueden estar vacios en los terrenos en la linea " . $linea);
+
+            if(isset($campos[4]))
+                throw new ErrorAlProcesarTerrenosException("Hay campos de mas en los terrenos en la linea " . $linea);
+
+            if($tipo == 1){
+
+                $valorUnitario = (float)$campos[1];
+
+                $valorDemeritado = $valorUnitario - $valorUnitario * (float)$campos[2] / 100;
+
+                $valorTerreno = (float)$campos[0] * $valorDemeritado;
+
+                if(!is_float($valorTerreno))
+                    throw new ErrorAlProcesarTerrenosException("Error en los campos de los terrenos en la linea " . $linea);
+
+            }elseif($tipo == 2){
+
+                if(!$this->valoresRusticos->where('concepto', $campos[1])->first())
+                    throw new ErrorAlProcesarTerrenosException("Error en valor unitario de los terrenos en la linea " . $linea);
+
+                $valorUnitario = $this->valoresRusticos->where('concepto', $campos[1])->first()->valor;
+
+                $valorDemeritado = $valorUnitario - $valorUnitario * $campos[2] / 100;
+
+                $valorTerreno = (float)$campos[0] * $valorDemeritado / 10000;
+
+                if(!is_float($valorTerreno))
+                    throw new ErrorAlProcesarTerrenosException("Error en los campos de los terrenos en la linea " . $linea);
+            }
+
+            $terrenosArreglo [] = [
+                'superficie' => $campos[0],
+                'valor_unitario' => $valorUnitario,
+                'demerito' => $campos[2],
+                'valor_demeritado' => $valorDemeritado,
+                'valor_terreno' => $valorTerreno
+            ];
+
+        }
+
+        $collection = collect($terrenosArreglo);
+
+        return $collection;
+
+    }
+
+    public function procesarConstrucciones($construcciones, $linea):collection
+    {
+        $array = explode('|', $construcciones);
+
+        $construccionesArreglo = [];
+
+        foreach($array as $construccion){
+
+            $campos = explode(':', $construccion);
+
+            if(!isset($campos[0]) || !isset($campos[1]) || !isset($campos[2]) || !isset($campos[3]) || !isset($campos[4]) || !isset($campos[5]) || !isset($campos[6]))
+                throw new ErrorAlProcesarConstruccionesException("Error en los campos de las construcciones en la linea " . $linea);
+
+            if($campos[0] == '' || $campos[1] == '' || $campos[2] == '' || $campos[3] == '' || $campos[4] == '' || $campos[5] == '' || $campos[6] == '')
+                throw new ErrorAlProcesarConstruccionesException("Error en los campos de las construcciones en la linea " . $linea);
+
+            if(isset($campos[7]))
+                throw new ErrorAlProcesarConstruccionesException("Error en los campos de las construcciones en la lineas " . $linea);
+
+            if(!$this->valoresConstruccion->where('tipo', $campos[1])->where('uso', $campos[2])->where('calidad', $campos[3])->where('estado', $campos[4])->first())
+                throw new ErrorAlProcesarConstruccionesException("Error en valor unitario de las construcciones en la linea " . $linea);
+
+            $valorUnitario = $this->valoresConstruccion->where('tipo', $campos[1])->where('uso', $campos[2])->where('calidad', $campos[3])->where('estado', $campos[4])->first()->valor;
+
+            $construccionesArreglo [] = [
+                'referencia' => $campos[0],
+                'tipo' => $campos[1],
+                'uso' => $campos[2],
+                'calidad' => $campos[3],
+                'estado' => $campos[4],
+                'niveles' => $campos[5],
+                'superficie' => $campos[6],
+                'valor_unitario' => $valorUnitario,
+            ];
+
+        }
+
+        $collection = collect($construccionesArreglo);
+
+        return $collection;
+
+    }
+
+    public function procesarTerrenosComun($terrenos, $linea):collection
+    {
+        $array = explode('|', $terrenos);
+
+        $terrenosArreglo = [];
+
+        foreach($array as $terreno){
+
+            $campos = explode(':', $terreno);
+
+            if(!isset($campos[0]) || !isset($campos[1]) || !isset($campos[2]))
+                throw new ErrorAlProcesarConstruccionesException("Hacen falta campos terrenos en común en la linea " . $linea);
+
+            if($campos[0] == '' || $campos[1] == '' || $campos[2] == '')
+                throw new ErrorAlProcesarConstruccionesException("No puede haber campos vacios en terrenos en común en la linea " . $linea);
+
+            if(isset($campos[3]))
+                throw new ErrorAlProcesarConstruccionesException("Hay campos de mas en terrenos en común en la linea " . $linea);
+
+            if((float)$campos[1] > 100)
+                throw new ErrorAlProcesarConstruccionesException("Indiviso de terreno no puede ser mayor a 100 en terrenos en común en la linea " . $linea);
+
+            $valorTerreno = (float)$campos[0] * (float)$campos[1] * (float)$campos[2];
+
+            if(!is_float($valorTerreno))
+                    throw new ErrorAlProcesarTerrenosException("Error en los campos de los terrenos en común en la linea " . $linea);
+
+            $terrenosArreglo [] = [
+                'area_terreno_comun' => $campos[0],
+                'indiviso_terreno' => $campos[1],
+                'valor_unitario' => $campos[2],
+                'valor_terreno_comun' => $valorTerreno
+            ];
+
+        }
+
+        $collection = collect($terrenosArreglo);
+
+        return $collection;
+
+    }
+
+    public function procesarConstruccionesComun($construcciones, $linea):collection
+    {
+        $array = explode('|', $construcciones);
+
+        $construccionesArreglo = [];
+
+        foreach($array as $construccion){
+
+            $campos = explode(':', $construccion);
+
+            if(!isset($campos[0]) || !isset($campos[1]) || !isset($campos[2]) || !isset($campos[3]) || !isset($campos[4]) || !isset($campos[5]))
+                throw new ErrorAlProcesarConstruccionesException("Error en los campos de las construcciones común en la linea " . $linea);
+
+            if($campos[0] == '' || $campos[1] == '' || $campos[2] == '' || $campos[3] == '' || $campos[4] == '' || $campos[5] == '')
+                throw new ErrorAlProcesarConstruccionesException("Error en los campos de las construcciones común en la linea " . $linea);
+
+            if(isset($campos[7]))
+                throw new ErrorAlProcesarConstruccionesException("Error en los campos de las construcciones común en la lineas " . $linea);
+
+            if(!$this->valoresConstruccion->where('tipo', $campos[2])->where('uso', $campos[3])->where('calidad', $campos[4])->where('estado', $campos[5])->first())
+                throw new ErrorAlProcesarConstruccionesException("Error en valor unitario de las construcciones común en la linea " . $linea);
+
+            $valorUnitario = $this->valoresConstruccion->where('tipo', $campos[2])->where('uso', $campos[3])->where('calidad', $campos[4])->where('estado', $campos[5])->first()->valor;
+
+            $valorConstruccion = (float)$campos[0] * (float)$campos[1] * $valorUnitario;
+
+            if(!is_float($valorConstruccion))
+                throw new ErrorAlProcesarTerrenosException("Error en valor unitario de las construcciones común en la linea " . $linea);
+
+            $construccionesArreglo [] = [
+                'area_comun_construccion' => $campos[0],
+                'indiviso_construccion' => $campos[1],
+                'valor_clasificacion_construccion' => $valorUnitario,
+                'valor_construccion_comun' => $valorConstruccion,
+            ];
+
+        }
+
+        $collection = collect($construccionesArreglo);
+
+        return $collection;
 
     }
 
