@@ -26,6 +26,12 @@ class FichaTecnica extends Component
     public $valoresConstruccion;
     public $valoresRusticos;
 
+    public function updatingDocumeto(){
+
+        $this->reset('data');
+
+    }
+
     public function procesar(){
 
         $this->validate([
@@ -52,7 +58,7 @@ class FichaTecnica extends Component
                 $failure->errors(); // Actual error messages from Laravel validator
                 $failure->values(); // The values of the row that has failed.
 
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Error en la fila: " . $failure->row() . ", campo: " . $failure->attribute()]);
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Error en la fila: " . $failure->row() . ", campo: " . $failure->attribute() ." ".$failure->errors()[0] ]);
 
                 break;
 

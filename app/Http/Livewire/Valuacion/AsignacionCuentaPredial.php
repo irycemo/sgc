@@ -129,7 +129,7 @@ class AsignacionCuentaPredial extends Component
 
         }
 
-        $this->reset(['localidad', 'oficina', 'tipo', 'observaciones', 'cantidad', 'valuador', 'origen', 'cuentasAsignadas']);
+        $this->reset(['localidad', 'oficina', 'tipo', 'observaciones', 'cantidad', 'valuador', 'origen']);
 
     }
 

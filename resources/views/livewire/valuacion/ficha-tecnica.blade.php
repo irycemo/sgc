@@ -120,7 +120,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Clave catastral</span>
 
-                                {{ $avaluo->predio->estado }}-{{ $avaluo->predio->region_catastral }}-{{ $avaluo->predio->municipio }}-{{ $avaluo->predio->zona_catastral }}-{{ $avaluo->predio->localidad }}-{{ $avaluo->predio->sector }}-{{ $avaluo->predio->manzana }}-{{ $avaluo->predio->edificio }}-{{ $avaluo->predio->departamento }}
+                                {{ $avaluo->predio->estado }}-{{ $avaluo->predio->region_catastral }}-{{ $avaluo->predio->municipio }}-{{ $avaluo->predio->zona_catastral }}-{{ $avaluo->predio->localidad }}-{{ $avaluo->predio->sector }}-{{ $avaluo->predio->manzana }}-{{ $avaluo->predio->numero_registro }}-{{ $avaluo->predio->edificio }}-{{ $avaluo->predio->departamento }}
 
                             </td>
 

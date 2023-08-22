@@ -22,8 +22,9 @@ use App\Exceptions\ErrorAlProcesarTerrenosException;
 use App\Exceptions\ErrorAlProcesarCoordenadasException;
 use App\Exceptions\ErrorAlProcesarColindanciasException;
 use App\Exceptions\ErrorAlProcesarConstruccionesException;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
+class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, WithMultipleSheets
 {
 
     public $valoresConstruccion;
@@ -250,6 +251,8 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
                     'valor_terreno_comun' => $terrenosComun->sum('valor_terreno_comun'),
                     'area_comun_construccion' => $construccionesComun->sum('area_comun_construccion'),
                     'valor_construccion_comun' => $construccionesComun->sum('valor_construccion_comun'),
+                    'asignado_a' => auth()->user()->id,
+                    'creado_por' => auth()->user()->id,
                 ]);
 
                 $this->avaluos[] = $avaluo->load('predio.propietarios.persona');
@@ -687,6 +690,13 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation
     public function headingRow(): int
     {
         return 2;
+    }
+
+    public function sheets(): array
+    {
+        return [
+            0 => $this,
+        ];
     }
 
 }

@@ -762,6 +762,8 @@
 
                                 <table >
 
+                                    <thead><tr><th></th></tr></thead>
+
                                     <tbody>
 
                                         <tr>
@@ -785,6 +787,8 @@
                             </td>
                         </tr>
                     </table>
+
+                    <p><strong>Valor catastral del predio : ${{ number_format($predio->valor_catastral, 2) }}</strong></p>
 
                 </div>
 

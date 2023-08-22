@@ -300,7 +300,7 @@ class Constantes{
 
     const CARPINTERIA = [
         'NO APLICA',
-        'MADERA ECONOMICA ',
+        'MADERA ECONOMICA',
         'MADERA DE MEDIANA CALIDAD',
         'MADERAS FINAS',
     ];
