@@ -29,7 +29,7 @@ class PrediosPadron extends Component
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 
-        return view('livewire.Admin.Predios.predios-padron', compact('predios'))->extends('layouts.admin');
+        return view('livewire.admin.predios.predios-padron', compact('predios'))->extends('layouts.admin');
 
     }
 }
