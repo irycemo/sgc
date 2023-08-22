@@ -6,6 +6,7 @@ namespace App\Http\Livewire\Valuacion;
 use App\Models\Avaluo;
 use App\Models\Predio;
 use App\Models\Persona;
+use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\Propietario;
 use App\Models\PredioAvaluo;
@@ -41,6 +42,7 @@ class AvaluoPredioIgnorado extends Component
     public $oficina;
     public $tipo;
     public $numero_registro;
+    public $tramite;
 
     public $predio_padron;
     public $flag = false;
@@ -441,6 +443,13 @@ class AvaluoPredioIgnorado extends Component
             return;
         }
 
+        if($this->predio->avaluo->estado == "concluido"){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avalúo esta concluido no se puede editar"]);
+
+            return;
+        }
+
         if($this->validarDisponibilidad())
             return;
 
@@ -501,6 +510,13 @@ class AvaluoPredioIgnorado extends Component
     public function actualizar(){
 
         $this->validate();
+
+        if($this->predio->avaluo->estado == "concluido"){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avalúo esta concluido no se puede editar"]);
+
+            return;
+        }
 
         try {
 
@@ -625,7 +641,18 @@ class AvaluoPredioIgnorado extends Component
             'oficina' => 'required',
             'tipo' => 'required',
             'numero_registro' => 'required',
+            'tramite' => 'required'
         ]);
+
+        $tramite = Tramite::where('estado', 'pagado')->where('servicio_id', 292)->first();
+
+        if(!$tramite){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Trámite no valido."]);
+
+            return;
+
+        }
 
         $this->predio->localidad = $this->localidad;
         $this->predio->oficina = $this->oficina;
@@ -637,11 +664,15 @@ class AvaluoPredioIgnorado extends Component
 
         $this->predio->save();
 
-        $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La cunta predial se asigno correctamente, puede consultar el avalúo en la sección Valuación y Desglose."]);
+         $this->predio->avaluo->update(['estado' => 'conluido']);
+
+        $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La cuenta predial se asignó correctamente, puede consultar y/o notificar el avalúo en la sección Valuación y Desglose."]);
 
         $this->modal2 = false;
 
         $this->predio = PredioAvaluo::make();
+
+        $tramite->update(['estado', 'concluido']);
 
     }
 

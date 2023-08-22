@@ -113,7 +113,7 @@
 
                     <img wire:loading wire:target="$set('modal2', true)" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                    Consultar por propietario
+                    Asignar cuenta predial
 
                 </button>
 
@@ -995,6 +995,28 @@
             <div class="relative p-1">
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5 items-end">
+
+                    <div class="flex-auto ">
+
+                        <div>
+
+                            <Label>Trámite de inscripción</Label>
+
+                        </div>
+
+                        <div>
+
+                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="tramite">
+
+                        </div>
+
+                        <div>
+
+                            @error('tramite') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
 
                     <div class="flex-auto ">
 
