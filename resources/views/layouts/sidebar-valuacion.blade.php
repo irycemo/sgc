@@ -94,7 +94,7 @@
 
         @endcan
 
-        @can('Topografía')
+        {{-- @can('Topografía')
 
             <a href="{{ route('usuarios') }}" class="w-full hover:text-red-600 capitalize font-medium text-sm transition ease-in-out duration-500 flex hover  hover:bg-gray-100 p-2 px-4 rounded-xl">
 
@@ -102,11 +102,11 @@
 
             </a>
 
-        @endcan
+        @endcan --}}
 
-        @can('Avaluos de predios ignorados')
+        @can('Avaluos de predio ignorado')
 
-            <a href="{{ route('predios') }}" class="capitalize hover:text-red-600  font-medium text-sm transition ease-in-out duration-500 flex hover  hover:bg-gray-100 p-2 px-4 rounded-xl">
+            <a href="{{ route('avaluo_predio_ignorado') }}" class="capitalize hover:text-red-600  font-medium text-sm transition ease-in-out duration-500 flex hover  hover:bg-gray-100 p-2 px-4 rounded-xl">
 
                 Avaluos de predios ignorados
 

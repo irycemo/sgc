@@ -1,21 +1,22 @@
 <?php
 
-namespace App\Http\Livewire\Valuacion\ValuacionYDesglose;
+namespace App\Http\Livewire\Valuacion;
 
+
+use App\Models\Avaluo;
 use App\Models\Predio;
 use App\Models\Persona;
 use Livewire\Component;
+use App\Models\Propietario;
 use App\Models\PredioAvaluo;
 use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
 use App\Http\Services\Coordenadas\Coordenadas;
-use App\Models\AsignarCuenta;
-use App\Models\Avaluo;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class Inmueble extends Component
+class AvaluoPredioIgnorado extends Component
 {
 
     public $tipoPropietarios;
@@ -28,6 +29,19 @@ class Inmueble extends Component
     public $tipo_propietario;
     public $porcentaje;
 
+    public $modal = false;
+    public $modal2 = false;
+
+    public $predios_propietario;
+    public $propietario_ap_paterno;
+    public $propietario_ap_materno;
+    public $propietario_nombre;
+
+    public $localidad;
+    public $oficina;
+    public $tipo;
+    public $numero_registro;
+
     public $predio_padron;
     public $flag = false;
     public $editar = false;
@@ -38,11 +52,11 @@ class Inmueble extends Component
         return [
             'predio.copia' => 'nullable',
             'predio.sociedad' => 'nullable',
-            'predio.numero_registro' => 'required',
+            'predio.numero_registro' => 'required|numeric',
             'predio.region_catastral' => 'required',
             'predio.municipio' => 'required',
             'predio.zona_catastral' => 'required',
-            'predio.localidad' => 'required',
+            'predio.localidad' => 'nullable',
             'predio.sector' => 'required',
             'predio.manzana' => 'required',
             'predio.edificio' => 'required',
@@ -86,13 +100,18 @@ class Inmueble extends Component
         'ap_materno' => 'apellido materno',
         'tipo_persona' => 'tipo de persona',
         'tipo_propietario' => 'tipo de propietario',
+        'propietario_nombre' => 'nombre',
+        'propietario_ap_paterno' => 'apellido paterno',
+        'propietario_ap_materno' => 'apellido materno',
     ];
 
     public function crearModeloVacio(){
         return PredioAvaluo::make([
             'sociedad' => false,
             'estado' => 16,
-            'copia' => false
+            'copia' => false,
+            'numero_registro' => 0,
+            'localidad' => 0
         ]);
     }
 
@@ -145,7 +164,7 @@ class Inmueble extends Component
                                         ->where('departamento', $this->predio->departamento)
                                         ->firstOrFail();
 
-            if($this->predio->avaluo->asignado_a != auth()->user()->id){
+            if($this->predio->avaluo->creado_por != auth()->user()->id){
 
                 $this->predio = PredioAvaluo::make();
 
@@ -174,120 +193,6 @@ class Inmueble extends Component
         }
         catch(ValidationException $e){
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La clave catastral esta incompleta."]);
-        }
-        catch (\Throwable $th) {
-            Log::error("Error al buscar predio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Hubo un error."]);
-        }
-
-    }
-
-    public function buscarCuentaPredial(){
-
-        try {
-
-            $this->validate([
-                'predio.numero_registro' => 'required',
-                'predio.tipo_predio' => 'required',
-                'predio.localidad' => 'required',
-                'predio.oficina' => 'required',
-            ]);
-
-            $this->predio = PredioAvaluo::with('propietarios', 'avaluo')
-                                    ->where('numero_registro', $this->predio->numero_registro)
-                                    ->where('tipo_predio', $this->predio->tipo_predio)
-                                    ->where('localidad', $this->predio->localidad)
-                                    ->where('oficina', $this->predio->oficina)
-                                    ->firstOrFail();
-
-            if($this->predio->avaluo->asignado_a != auth()->user()->id){
-
-                $this->predio = PredioAvaluo::make();
-
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo está asinagnado a otro valuador."]);
-
-                return;
-
-            }
-
-            $this->ap_paterno = $this->predio->propietarios()->first()->persona->ap_paterno;
-            $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
-            $this->nombre = $this->predio->propietarios()->first()->persona->nombre;
-            $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
-            $this->tipo_propietario = $this->predio->propietarios()->first()->tipo;
-            $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
-
-            $this->editar = true;
-
-            if($this->predio->copia)
-                $this->flag = true;
-
-            $this->emit('cargarPredio', $this->predio->id);
-
-        }
-        catch(ModelNotFoundException $e){
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No existen avaluos relacionados a el predio."]);
-        }
-        catch(ValidationException $e){
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cuenta predial esta incompleta."]);
-        }
-        catch (\Throwable $th) {
-            Log::error("Error al buscar predio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Hubo un error."]);
-        }
-
-    }
-
-    public function datosPadron(){
-
-        try {
-
-            $this->validate([
-                'predio.numero_registro' => 'required',
-                'predio.tipo_predio' => 'required',
-                'predio.localidad' => 'required',
-                'predio.oficina' => 'required',
-            ]);
-
-            $this->predio_padron = Predio::with('propietarios', 'construcciones', 'condominio', 'colindancias')
-                                    ->where('numero_registro', $this->predio->numero_registro)
-                                    ->where('tipo_predio', $this->predio->tipo_predio)
-                                    ->where('localidad', $this->predio->localidad)
-                                    ->where('oficina', $this->predio->oficina)
-                                    ->firstOrFail();
-
-
-            foreach($this->predio_padron->getAttributes() as $attribute => $value){
-
-                $this->predio[$attribute] = $value;
-
-            }
-
-            $this->predio->id = null;
-            $this->predio->actualizado_por = null;
-            $this->predio->created_at = now();
-            $this->predio->updated_at = now();
-
-            $this->ap_paterno = $this->predio_padron->propietarios()->first()->persona->ap_paterno;
-            $this->ap_materno = $this->predio_padron->propietarios()->first()->persona->ap_materno;
-            $this->nombre = $this->predio_padron->propietarios()->first()->persona->nombre;
-            $this->tipo_persona = $this->predio_padron->propietarios()->first()->persona->tipo;
-            $this->tipo_propietario = $this->predio_padron->propietarios()->first()->tipo;
-            $this->porcentaje = $this->predio_padron->propietarios()->first()->porcentaje;
-
-            if($this->predio_padron->propietarios()->count() > 1)
-                $this->predio->sociedad = true;
-
-            $this->predio->copia = true;
-
-            $this->flag = true;
-
-        }
-        catch(ValidationException $e){
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cuenta predial esta incompleta."]);
-        }
-        catch(ModelNotFoundException $e){
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No existen avaluos relacionados a el predio."]);
         }
         catch (\Throwable $th) {
             Log::error("Error al buscar predio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
@@ -351,6 +256,65 @@ class Inmueble extends Component
     }
 
     public function validarDisponibilidad(){
+
+        $predioCompletoAvaluo = PredioAvaluo::where('estado', $this->predio->estado)
+                                                ->where('region_catastral', $this->predio->region_catastral)
+                                                ->where('municipio', $this->predio->municipio)
+                                                ->where('zona_catastral', $this->predio->zona_catastral)
+                                                ->where('localidad', $this->predio->localidad)
+                                                ->where('sector', $this->predio->sector)
+                                                ->where('manzana', $this->predio->manzana)
+                                                ->where('edificio', $this->predio->edificio)
+                                                ->where('departamento', $this->predio->departamento)
+                                                ->where('oficina', $this->predio->oficina)
+                                                ->where('tipo_predio', $this->predio->tipo_predio)
+                                                ->where('numero_registro', $this->predio->numero_registro)
+                                                ->first();
+
+        if(!$predioCompletoAvaluo){
+
+            $cuentaPredialAvaluo = PredioAvaluo::where('localidad', $this->predio->localidad)
+                                                ->where('oficina', $this->predio->oficina)
+                                                ->where('tipo_predio', $this->predio->tipo_predio)
+                                                ->where('numero_registro', $this->predio->numero_registro)
+                                                ->first();
+
+            if($cuentaPredialAvaluo){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cuenta predial ya existe en avaluos con otra clave catastral, verifique."]);
+
+                return true;
+            }
+
+            $claveCatastralAvaluo = PredioAvaluo::where('estado', $this->predio->estado)
+                                                    ->where('region_catastral', $this->predio->region_catastral)
+                                                    ->where('municipio', $this->predio->municipio)
+                                                    ->where('zona_catastral', $this->predio->zona_catastral)
+                                                    ->where('localidad', $this->predio->localidad)
+                                                    ->where('sector', $this->predio->sector)
+                                                    ->where('manzana', $this->predio->manzana)
+                                                    ->where('edificio', $this->predio->edificio)
+                                                    ->where('departamento', $this->predio->departamento)
+                                                    ->first();
+
+            if($claveCatastralAvaluo){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La clave catastral ya existe en avaluos con otra cuenta predial, verifique."]);
+
+                return true;
+
+            }
+
+        }else{
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El predio ya existe en avaluos, verifique."]);
+
+            return true;
+        }
+
+    }
+
+    public function validarDisponibilidad2(){
 
         $predioCompleto = Predio::where('estado', $this->predio->estado)
                                     ->where('region_catastral', $this->predio->region_catastral)
@@ -470,27 +434,15 @@ class Inmueble extends Component
 
         $this->validate();
 
+        if($this->predio->localidad != 0 || $this->predio->numero_registro != 0){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La localidad y número de registro deben ser 0"]);
+
+            return;
+        }
+
         if($this->validarDisponibilidad())
             return;
-
-        if(!$this->flag){
-
-            $cuentaAsignada = AsignarCuenta::where('localidad', $this->predio->localidad)
-                                            ->where('oficina', $this->predio->oficina)
-                                            ->where('tipo_predio', $this->predio->tipo_predio)
-                                            ->where('numero_registro', $this->predio->numero_registro)
-                                            ->where('valuador', auth()->user()->id)
-                                            ->first();
-
-            if(!$cuentaAsignada){
-
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No tienes la cuenta asignada."]);
-
-                return true;
-
-            }
-
-        }
 
         try {
 
@@ -596,6 +548,103 @@ class Inmueble extends Component
 
     }
 
+    public function busacarPropietario(){
+
+        $this->validate([
+            'propietario_ap_paterno' => 'required',
+            'propietario_ap_materno' => 'required',
+            'propietario_nombre' => 'required',
+        ]);
+
+        $this->predios_propietario =  Propietario::with('persona', 'propietarioable.avaluo')
+                                    ->whereHas('persona', function($q){
+                                        $q->where('ap_paterno', $this->propietario_ap_paterno)
+                                            ->where('ap_materno', $this->propietario_ap_materno)
+                                            ->where('nombre', $this->propietario_nombre);
+                                    })
+                                    ->whereHas('propietarioable', function($q){
+                                        $q->where('localidad', 0)
+                                            ->where('numero_registro', 0);
+                                    })
+                                    ->get();
+
+    }
+
+    public function cargarPredioAvaluo($id){
+
+        try {
+
+            $this->predio = PredioAvaluo::with('propietarios', 'avaluo')
+                                        ->find($id);
+
+            if($this->predio->avaluo->asignado_a != auth()->user()->id){
+
+                $this->predio = PredioAvaluo::make();
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo está asinagnado a otro valuador."]);
+
+                return;
+
+            }
+
+            $this->ap_paterno = $this->predio->propietarios()->first()->persona->ap_paterno;
+            $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
+            $this->nombre = $this->predio->propietarios()->first()->persona->nombre;
+            $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
+            $this->tipo_propietario = $this->predio->propietarios()->first()->tipo;
+            $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
+
+            $this->editar = true;
+
+            if($this->predio->copia)
+                $this->flag = true;
+
+            $this->emit('cargarPredio', $this->predio->id);
+
+        }catch(ModelNotFoundException $e){
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No existen avaluos relacionados a el predio."]);
+        }
+        catch(ValidationException $e){
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La clave catastral esta incompleta."]);
+        }
+        catch (\Throwable $th) {
+            Log::error("Error al buscar predio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Hubo un error."]);
+        }
+
+        $this->modal = false;
+
+        $this->reset('propietario_ap_paterno', 'propietario_ap_materno', 'propietario_nombre', 'predios_propietario');
+
+    }
+
+    public function asignarCuenta(){
+
+        $this->validate([
+            'localidad' => 'required',
+            'oficina' => 'required',
+            'tipo' => 'required',
+            'numero_registro' => 'required',
+        ]);
+
+        $this->predio->localidad = $this->localidad;
+        $this->predio->oficina = $this->oficina;
+        $this->predio->tipo_predio = $this->tipo;
+        $this->predio->numero_registro = $this->numero_registro;
+
+        if($this->validarDisponibilidad2())
+            return;
+
+        $this->predio->save();
+
+        $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La cunta predial se asigno correctamente, puede consultar el avalúo en la sección Valuación y Desglose."]);
+
+        $this->modal2 = false;
+
+        $this->predio = PredioAvaluo::make();
+
+    }
+
     public function mount(){
 
         $this->tipoPropietarios = Constantes::TIPO_PROPIETARIO;
@@ -612,7 +661,6 @@ class Inmueble extends Component
 
     public function render()
     {
-        return view('livewire.valuacion.valuacion-y-desglose.inmueble');
+        return view('livewire.valuacion.avaluo-predio-ignorado')->extends('layouts.admin');
     }
-
 }

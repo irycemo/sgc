@@ -14,12 +14,12 @@ class OficinasTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('oficinas')->delete();
-
+        
         \DB::table('oficinas')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'municipio' => 1,
@@ -40,7 +40,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 2,
                 'municipio' => 2,
@@ -61,7 +61,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 3,
                 'municipio' => 3,
@@ -82,7 +82,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            3 =>
+            3 => 
             array (
                 'id' => 4,
                 'municipio' => 4,
@@ -103,7 +103,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            4 =>
+            4 => 
             array (
                 'id' => 5,
                 'municipio' => 5,
@@ -124,7 +124,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            5 =>
+            5 => 
             array (
                 'id' => 6,
                 'municipio' => 6,
@@ -145,7 +145,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            6 =>
+            6 => 
             array (
                 'id' => 7,
                 'municipio' => 7,
@@ -166,7 +166,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            7 =>
+            7 => 
             array (
                 'id' => 8,
                 'municipio' => 8,
@@ -187,7 +187,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            8 =>
+            8 => 
             array (
                 'id' => 9,
                 'municipio' => 9,
@@ -208,7 +208,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            9 =>
+            9 => 
             array (
                 'id' => 10,
                 'municipio' => 10,
@@ -229,7 +229,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            10 =>
+            10 => 
             array (
                 'id' => 11,
                 'municipio' => 11,
@@ -250,7 +250,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            11 =>
+            11 => 
             array (
                 'id' => 12,
                 'municipio' => 12,
@@ -271,7 +271,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            12 =>
+            12 => 
             array (
                 'id' => 13,
                 'municipio' => 13,
@@ -292,7 +292,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            13 =>
+            13 => 
             array (
                 'id' => 14,
                 'municipio' => 14,
@@ -313,7 +313,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            14 =>
+            14 => 
             array (
                 'id' => 15,
                 'municipio' => 15,
@@ -334,7 +334,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            15 =>
+            15 => 
             array (
                 'id' => 16,
                 'municipio' => 16,
@@ -355,7 +355,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            16 =>
+            16 => 
             array (
                 'id' => 17,
                 'municipio' => 17,
@@ -376,7 +376,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            17 =>
+            17 => 
             array (
                 'id' => 18,
                 'municipio' => 18,
@@ -397,7 +397,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            18 =>
+            18 => 
             array (
                 'id' => 19,
                 'municipio' => 19,
@@ -418,7 +418,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            19 =>
+            19 => 
             array (
                 'id' => 20,
                 'municipio' => 20,
@@ -439,7 +439,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            20 =>
+            20 => 
             array (
                 'id' => 21,
                 'municipio' => 21,
@@ -460,7 +460,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            21 =>
+            21 => 
             array (
                 'id' => 22,
                 'municipio' => 22,
@@ -481,7 +481,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            22 =>
+            22 => 
             array (
                 'id' => 23,
                 'municipio' => 23,
@@ -503,7 +503,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-11 12:44:56',
             ),
-            23 =>
+            23 => 
             array (
                 'id' => 24,
                 'municipio' => 24,
@@ -524,7 +524,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            24 =>
+            24 => 
             array (
                 'id' => 25,
                 'municipio' => 25,
@@ -545,7 +545,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            25 =>
+            25 => 
             array (
                 'id' => 26,
                 'municipio' => 26,
@@ -566,7 +566,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            26 =>
+            26 => 
             array (
                 'id' => 27,
                 'municipio' => 27,
@@ -590,7 +590,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-08 12:53:26',
             ),
-            27 =>
+            27 => 
             array (
                 'id' => 28,
                 'municipio' => 28,
@@ -611,7 +611,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            28 =>
+            28 => 
             array (
                 'id' => 29,
                 'municipio' => 29,
@@ -632,7 +632,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            29 =>
+            29 => 
             array (
                 'id' => 30,
                 'municipio' => 30,
@@ -653,7 +653,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            30 =>
+            30 => 
             array (
                 'id' => 31,
                 'municipio' => 31,
@@ -674,7 +674,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            31 =>
+            31 => 
             array (
                 'id' => 32,
                 'municipio' => 32,
@@ -695,7 +695,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            32 =>
+            32 => 
             array (
                 'id' => 33,
                 'municipio' => 33,
@@ -716,7 +716,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            33 =>
+            33 => 
             array (
                 'id' => 34,
                 'municipio' => 34,
@@ -737,7 +737,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            34 =>
+            34 => 
             array (
                 'id' => 35,
                 'municipio' => 35,
@@ -758,7 +758,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            35 =>
+            35 => 
             array (
                 'id' => 36,
                 'municipio' => 36,
@@ -779,7 +779,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            36 =>
+            36 => 
             array (
                 'id' => 37,
                 'municipio' => 37,
@@ -800,7 +800,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            37 =>
+            37 => 
             array (
                 'id' => 38,
                 'municipio' => 38,
@@ -821,7 +821,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            38 =>
+            38 => 
             array (
                 'id' => 39,
                 'municipio' => 39,
@@ -842,7 +842,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            39 =>
+            39 => 
             array (
                 'id' => 40,
                 'municipio' => 40,
@@ -864,7 +864,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-11 12:38:45',
             ),
-            40 =>
+            40 => 
             array (
                 'id' => 41,
                 'municipio' => 41,
@@ -885,7 +885,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            41 =>
+            41 => 
             array (
                 'id' => 42,
                 'municipio' => 42,
@@ -906,49 +906,51 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            42 =>
+            42 => 
             array (
                 'id' => 43,
                 'municipio' => 43,
                 'oficina' => 1705,
                 'localidad' => 1,
                 'nombre' => 'JACONA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'MORELOS 2 INT B, COL. CENTRO, 59800 ENTRE AMADO NERVO, ZARAGOZA Y CONSTITUCIÓN.
+',
+                'titular' => 'LIC. JORGE CERVANTES LOPES',
+                'email' => 'Jorge.cer@hotmail.com',
+                'telefonos' => '3511258582',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 12:33:17',
             ),
-            43 =>
+            43 => 
             array (
                 'id' => 44,
                 'municipio' => 44,
                 'oficina' => 1105,
                 'localidad' => 1,
                 'nombre' => 'JIMENEZ',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => '1 DE MAYO 3 COL. CENTRO C.P 58780 ENTRE CALLE IGNACIO ALLENDE Y MIGUEL HIDALGO.
+',
+                'titular' => 'L.I.A OSCAR JARAMILLO AMBRIZ',
+                'email' => 'ambriz_42@hotmail.com',
+                'telefonos' => '4434710430',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 12:28:23',
             ),
-            44 =>
+            44 => 
             array (
                 'id' => 45,
                 'municipio' => 45,
@@ -969,28 +971,29 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            45 =>
+            45 => 
             array (
                 'id' => 46,
                 'municipio' => 46,
                 'oficina' => 503,
                 'localidad' => 1,
                 'nombre' => 'JUAREZ',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PLAZA CENTRAL S/N COL. CENTRO C.P 61570 ENTRE CALLE AV REVOLUCIÓN Y NICOLÁS  ROMERO.
+',
+                'titular' => 'LIC. IDALIA BENITEZ ESTEBIS',
+                'email' => 'doll_sol89@hotmail.com',
+                'telefonos' => '7861367518',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 12:23:27',
             ),
-            46 =>
+            46 => 
             array (
                 'id' => 47,
                 'municipio' => 47,
@@ -1012,7 +1015,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-08 14:56:35',
             ),
-            47 =>
+            47 => 
             array (
                 'id' => 48,
                 'municipio' => 48,
@@ -1033,49 +1036,51 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            48 =>
+            48 => 
             array (
                 'id' => 49,
                 'municipio' => 49,
                 'oficina' => 108,
                 'localidad' => 1,
                 'nombre' => 'MADERO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL HIDALGO 35-A COL. CENTRO C.P 58480 ENTRE AV. MORELOS Y CALLE VENUSTIANO CARRANZA JUNTO AL PALACIO MUNICIPAL.
+',
+                'titular' => 'LIC. IVAN JOAQUIN AYALA MENDOZA',
+                'email' => 'receptormadero@gmail.com',
+                'telefonos' => '4591073326',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 12:19:12',
             ),
-            49 =>
+            49 => 
             array (
                 'id' => 50,
                 'municipio' => 50,
                 'oficina' => 401,
                 'localidad' => 1,
                 'nombre' => 'MARAVATIO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'ÁLVARO OBREGÓN 198 COL. CENTRO C.P 61250 ENTRE ABASOLO, GALEANA Y GUERRERO.
+',
+                'titular' => 'LIC. LEONEL REYES MIRANDA',
+                'email' => 'licreyesmirandaleonel@gmail.com',
+                'telefonos' => '4436824742',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 12:17:44',
             ),
-            50 =>
+            50 => 
             array (
                 'id' => 51,
                 'municipio' => 51,
@@ -1096,7 +1101,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            51 =>
+            51 => 
             array (
                 'id' => 52,
                 'municipio' => 52,
@@ -1118,154 +1123,158 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-14 14:39:10',
             ),
-            52 =>
+            52 => 
             array (
                 'id' => 53,
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 1,
                 'nombre' => 'MORELIA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS # 1016, COLONIA VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
+                'titular' => 'DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL ',
+                'email' => 'catastro@michoacan.gob.mx',
+                'telefonos' => '443 3121929 ',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
-                'autoridad_municipal' => NULL,
-                'valuador_municipal' => NULL,
+                'autoridad_municipal' => 'ING. ALFONSO JESUS MARTINEZ ALCAZAR',
+                'valuador_municipal' => 'ARQ. RAFAEL CELAYA AVILA ',
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:25:50',
             ),
-            53 =>
+            53 => 
             array (
                 'id' => 54,
                 'municipio' => 54,
                 'oficina' => 1904,
                 'localidad' => 1,
                 'nombre' => 'MORELOS',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL MORELOS 1 COL. CENTRO C.P 58802 ENTRE CALLE ITURBIDE, AL ORIENTE MARIANO JIMÉNEZ AL PONIENTE CALLE SIN NOMBRE Y PLAZA PRINCIPAL.
+',
+                'titular' => 'T.A. FABIOLA RANGEL CHÁVEZ',
+                'email' => 'farachaoct@outlook.es',
+                'telefonos' => '4431810889',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 12:16:05',
             ),
-            54 =>
+            54 => 
             array (
                 'id' => 55,
                 'municipio' => 55,
                 'oficina' => 1404,
                 'localidad' => 1,
                 'nombre' => 'MUGICA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PALACIO MUNICIPAL, PLAN DE IGUALA S/N , LIBERTAD, C.P. 61760.',
+                'titular' => 'LIC. MARA ARELI MARTINEZ MADRIGAL',
+                'email' => 'rentasmugica19@hotmail.com',
+                'telefonos' => '4251055146',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 12:08:15',
             ),
-            55 =>
+            55 => 
             array (
                 'id' => 56,
                 'municipio' => 56,
                 'oficina' => 1206,
                 'localidad' => 1,
                 'nombre' => 'NAHUATZEN',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'FRANCISCO I. MADERO 180 COL. CENTRO, PALACIO MUNICIPAL C.P 60280.',
+                'titular' => 'LIC. ALBERTO MANRIQUEZ PALEO',
+                'email' => 'ar2262911@gmail.com',
+                'telefonos' => '452 2173226',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 12:07:03',
             ),
-            56 =>
+            56 => 
             array (
                 'id' => 57,
                 'municipio' => 57,
                 'oficina' => 603,
                 'localidad' => 1,
                 'nombre' => 'NOCUPETARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. MORELOS SUR 100 COL. CENTRO C.P 61900 ENTRE JUÁREZ ORIENTE Y SANTOS DEGOLLADO.
+',
+                'titular' => 'LIC. FRANCISCO LÓPEZ GALVÁN',
+                'email' => 'rentasnocupetaro@gmail.com',
+                'telefonos' => '4434928278',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 12:05:22',
             ),
-            57 =>
+            57 => 
             array (
                 'id' => 58,
                 'municipio' => 58,
                 'oficina' => 1205,
                 'localidad' => 1,
                 'nombre' => 'NUEVO PARANGARICUTIRO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => '16 DE SEPTIEMBRE S/N COL. CENTRO, C.P 60490 ENTRE CALLES INSURGENTES, FRAY JUAN DE MIGUEL.
+',
+                'titular' => 'C. CARMEN GUADALUPE ECHEVARRIA HERRERA',
+                'email' => 'lupita.cdeh@gmail.com',
+                'telefonos' => '4521250203',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 12:03:42',
             ),
-            58 =>
+            58 => 
             array (
                 'id' => 59,
                 'municipio' => 59,
                 'oficina' => 804,
                 'localidad' => 1,
                 'nombre' => 'NUEVO URECHO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'INDEPENDENCIA S/N COL. CENTRO C.P 61750 DENTRO DE LAS OFICINAS DEL H. AYUNTAMIENTO.
+',
+                'titular' => 'LIC. LUIS ALBERTO MEDINA VERDUZCO',
+                'email' => 'lamv.r@hotmail.com',
+                'telefonos' => '4432007573',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 12:02:26',
             ),
-            59 =>
+            59 => 
             array (
                 'id' => 60,
                 'municipio' => 60,
@@ -1286,175 +1295,183 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            60 =>
+            60 => 
             array (
                 'id' => 61,
                 'municipio' => 61,
                 'oficina' => 505,
                 'localidad' => 1,
                 'nombre' => 'OCAMPO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'VENUSTIANO CARRANZA S/N COL. CENTRO C.P 61450 ESQUINA CON CALLE ZARAGOZA.
+',
+                'titular' => 'C. RODOLFO ARGUETA MIRANDA',
+                'email' => 'rentasocampo55@gmail.com',
+                'telefonos' => '7153084610',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 12:00:23',
             ),
-            61 =>
+            61 => 
             array (
                 'id' => 62,
                 'municipio' => 62,
                 'oficina' => 2103,
                 'localidad' => 1,
                 'nombre' => 'PAJACUARAN',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'ALDAMA 1 PALACIO MUNICIPAL COL. CENTRO. C.P 59180 ENTRE MORELOS Y JOSE MORA DEL RIO.
+',
+                'titular' => 'C. CLAUDIO ANDRES RINCON DEL PRADO',
+                'email' => 'crincondelprado@hotmail.com',
+                'telefonos' => '3531130010',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:58:11',
             ),
-            62 =>
+            62 => 
             array (
                 'id' => 63,
                 'municipio' => 63,
                 'oficina' => 1104,
                 'localidad' => 1,
                 'nombre' => 'PANINDICUARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL HIDALGO 1 INTERIOR 13 COL. CENTRO C.P 58570. ENTRE CALLES MIGUEL HIDALGO Y A, OBREGÓN.
+',
+                'titular' => 'LIC. HUGO PRIMITIVO REYES HERNANDEZ',
+                'email' => 'reyes_construcciones@outlook.com',
+                'telefonos' => '4434113673',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:56:50',
             ),
-            63 =>
+            63 => 
             array (
                 'id' => 64,
                 'municipio' => 64,
                 'oficina' => 1405,
                 'localidad' => 1,
                 'nombre' => 'PARACUARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL OCAMPO 34 COL. CENTRO, C.P. 60760. CALLES QUE LO RODEAN, AV LÁZARO CÁRDENAS Y CALLE CORREGIDORA.
+',
+                'titular' => 'L.C. CLAUDIA ISABEL FRANCO CARDENAS',
+                'email' => 'claudiafranc@gmail.com',
+                'telefonos' => '4251350150',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:55:09',
             ),
-            64 =>
+            64 => 
             array (
                 'id' => 65,
                 'municipio' => 65,
                 'oficina' => 1207,
                 'localidad' => 1,
                 'nombre' => 'PARACHO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'EMILIO CARRANZA 58 COL. CENTRO C.P 60250 ENTRE DOCTOR VERDUZCO , E HIDALGO.
+',
+                'titular' => 'LIC. ANGELICA NAYELI MONTECILLO GARCIA',
+                'email' => 'rentasparacho_1207@hotmail.com',
+                'telefonos' => '4521880379',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:52:23',
             ),
-            65 =>
+            65 => 
             array (
                 'id' => 66,
                 'municipio' => 66,
                 'oficina' => 1001,
                 'localidad' => 1,
                 'nombre' => 'PATZCUARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. ÁLVARO OBREGÓN 25 COL. CENTRO C.P 61600 ENTRE  SILVIANO CARRILLO CÁRDENAS
+',
+                'titular' => 'C. MARIA ESTER MOLINERO MAGAÑA',
+                'email' => 'rentaspatzcuaro3076@gmail.com',
+                'telefonos' => '4341007715',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:43:45',
             ),
-            66 =>
+            66 => 
             array (
                 'id' => 67,
                 'municipio' => 67,
                 'oficina' => 1804,
                 'localidad' => 1,
                 'nombre' => 'PENJAMILLO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'ALLENDE 500 COL. CENTRO C.P 59470 ENTRE CALLE MADERO Y JARDÍN DE PRESIDENCIA.
+',
+                'titular' => 'C. YAZMIN ARCELIA LEON ALVARADO',
+                'email' => 'yazleon33@gmail.com',
+                'telefonos' => '4271237176',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:42:03',
             ),
-            67 =>
+            67 => 
             array (
                 'id' => 68,
                 'municipio' => 68,
                 'oficina' => 1303,
                 'localidad' => 1,
                 'nombre' => 'PERIBAN',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'FRANCISCO VILLA #40, COL. GIRASOLES, C.P. 60440 ENTRE FRANCISCO VILLA ESQUINA CON CALLE MORELOS.
+',
+                'titular' => 'DR. ADRIANA ESQUIVEL SERAFIN',
+                'email' => 'h419adriana@hotmail.com',
+                'telefonos' => '3541250219',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:40:18',
             ),
-            68 =>
+            68 => 
             array (
                 'id' => 69,
                 'municipio' => 69,
@@ -1475,196 +1492,205 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            69 =>
+            69 => 
             array (
                 'id' => 70,
                 'municipio' => 70,
                 'oficina' => 1706,
                 'localidad' => 1,
                 'nombre' => 'PUREPERO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'HIDALGO 28 COL. CENTRO C.P 58760 ENTRE CALLE 5 DE MAYO Y OBREGÓN.
+',
+                'titular' => 'LIC. JOSE ROBERTO MURILLO PEREZ',
+                'email' => 'lic.betomurillo@gmail.com',
+                'telefonos' => '4431090313',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:37:04',
             ),
-            70 =>
+            70 => 
             array (
                 'id' => 71,
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 1,
                 'nombre' => 'PURUANDIRO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL HIDALGO #60 COL. CENTRO C.P 58500 ENTRE CALLE ZENDEJAS Y MORELOS.
+',
+                'titular' => 'LIC. KENIA PANTOJA MEZA',
+                'email' => 'kennya9@hotmail.com',
+                'telefonos' => '4381123911',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:35:25',
             ),
-            71 =>
+            71 => 
             array (
                 'id' => 72,
                 'municipio' => 72,
                 'oficina' => 204,
                 'localidad' => 1,
                 'nombre' => 'QUERENDARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL HIDALGO 1 CENTRO C.P 58980 AL NORTE MORELOS ORIENTE, AL ORIENTE NICOLAS BRAVO Y AL SUR CALLE GUERRERO.
+',
+                'titular' => 'LIC. ROMAN VERA ZAMUDIO',
+                'email' => 'licromanvz1003@hotmail.com',
+                'telefonos' => '4434026303',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:33:57',
             ),
-            72 =>
+            72 => 
             array (
                 'id' => 73,
                 'municipio' => 73,
                 'oficina' => 1005,
                 'localidad' => 1,
                 'nombre' => 'QUIROGA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'SANTOS DE GOLLADO S/N COL CENTRO C.P 58420 ENTRE CALLE MARIANO JIMÉNEZ Y AV FRANCISCO I. MADERO.
+',
+                'titular' => 'MTRA. ANA LAURA PEÑA ALVAREZ',
+                'email' => 'ana_pa_992@hotmail.com',
+                'telefonos' => '4433897986',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:32:35',
             ),
-            73 =>
+            73 => 
             array (
                 'id' => 74,
                 'municipio' => 74,
                 'oficina' => 2102,
                 'localidad' => 1,
                 'nombre' => 'COJUMATLAN DE REGULES',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'CUAUHTÉMOC 18 CENTRO C.P 59141 DENTRO DE PALACIO MUNICIPAL 2° PISO, ENTRE MIGUEL HIDALGO Y DOLORES ACUÑA.
+',
+                'titular' => 'LIC. JULIO CESAR TRUJILLO RODRIGUEZ',
+                'email' => 'licjctr@gmail.com',
+                'telefonos' => '3531022254',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:28:57',
             ),
-            74 =>
+            74 => 
             array (
                 'id' => 75,
                 'municipio' => 75,
                 'oficina' => 1301,
                 'localidad' => 1,
                 'nombre' => 'LOS REYES',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'FRANCISCO I. MADERO S/N COL. CENTRO C.P 60300 ESQUINA TORRES QUINTERO
+',
+                'titular' => 'BIOL. MIGUEL SEGUNDO GARIBAY',
+                'email' => 'segundo.garibay04@gmail.com',
+                'telefonos' => '3541183548',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:26:59',
             ),
-            75 =>
+            75 => 
             array (
                 'id' => 76,
                 'municipio' => 76,
                 'oficina' => 2101,
                 'localidad' => 1,
                 'nombre' => 'SAHUAYO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+            'ubicacion' => 'GUERRERO #290 COL. CENTRO C.P 59000 ENTRE BOULEVARD LÁZARO CÁRDENAS Y CALLE CONSTITUCIÓN (enfrente de la preparatoria hermanos López Rayón )
+',
+                'titular' => 'C. MARIANO SÁNCHEZ SÁNCHEZ',
+                'email' => 'marianoss1953@hotmail.com',
+                'telefonos' => '353 1081538',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:22:11',
             ),
-            76 =>
+            76 => 
             array (
                 'id' => 77,
                 'municipio' => 77,
                 'oficina' => 604,
                 'localidad' => 1,
                 'nombre' => 'SAN LUCAS',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. SERVANDO CHAVEZ OTE. #1 COL. CENTRO C.P 61980 FRENTE AL JARDÍN PRINCIPAL, AL EXTERIOR DE PRESIDENCIA MUNICIPAL 
+',
+                'titular' => 'LIC. JOSE FREDI COSTILLA CHAVEZ',
+                'email' => 'fredi.dhav61@gmail.com',
+                'telefonos' => '4351153748',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:20:52',
             ),
-            77 =>
+            77 => 
             array (
                 'id' => 78,
                 'municipio' => 78,
                 'oficina' => 109,
                 'localidad' => 1,
                 'nombre' => 'SANTA ANA MAYA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'FRANCISCO I. MADERO 1 COL. CENTRO C.P 58900 UBICADO EN LA PLAZA PRINCIPAL.
+',
+                'titular' => 'LIC. FRANCISCO JAVIER MENDOZA ORTIZ',
+                'email' => 'vetesantana@hotmail.com',
+                'telefonos' => '4431734736',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-22 11:06:29',
             ),
-            78 =>
+            78 => 
             array (
                 'id' => 79,
                 'municipio' => 79,
@@ -1685,49 +1711,50 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            79 =>
+            79 => 
             array (
                 'id' => 80,
                 'municipio' => 80,
                 'oficina' => 405,
                 'localidad' => 1,
                 'nombre' => 'SENGUIO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'GUERRERO 3 CENTRO C.P. 61290 ENTRE CALLE JUÁREZ E INDEPENDENCIA.
+',
+                'titular' => 'C. IRMA GARCIA TORRES',
+                'email' => 'irmagarcia01@hotmail.com',
+                'telefonos' => '7862084027',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:55:28',
             ),
-            80 =>
+            80 => 
             array (
                 'id' => 81,
                 'municipio' => 81,
                 'oficina' => 506,
                 'localidad' => 1,
                 'nombre' => 'SUSUPUATO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'VICENTE GUERRO 6 INT.  PRESIDENCIA MUNICIPAL PLANTA BAJA.',
+                'titular' => 'C. JAVIER MILLAN VELAZQUEZ',
+                'email' => 'javiermillanvelazquez@hotmail.com',
+                'telefonos' => '786127 0226',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:54:19',
             ),
-            81 =>
+            81 => 
             array (
                 'id' => 82,
                 'municipio' => 82,
@@ -1748,7 +1775,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            82 =>
+            82 => 
             array (
                 'id' => 83,
                 'municipio' => 83,
@@ -1769,112 +1796,117 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            83 =>
+            83 => 
             array (
                 'id' => 84,
                 'municipio' => 84,
                 'oficina' => 1707,
                 'localidad' => 1,
                 'nombre' => 'SANTIAGO TANGAMANDAPIO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'JAVIER MINA 4 EL PROGRESO C.P 59920 ENTRE CALLE GUERRERO Y JAVIER MINA.
+',
+                'titular' => 'C. ROSA ISELA ARROYO LARA',
+                'email' => 'iselaarroyo777@gmail.com',
+                'telefonos' => '3511834198',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:49:50',
             ),
-            84 =>
+            84 => 
             array (
                 'id' => 85,
                 'municipio' => 85,
                 'oficina' => 1708,
                 'localidad' => 1,
                 'nombre' => 'TANGANCICUARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'ROMÁN SILVA ÁLVAREZ 10 COL. CENTRO C.P 59750 ENTRE DOCTOR MIGUEL SILVA, REFORMA Y CONSTITUCIÓN.
+',
+                'titular' => 'C. JOSE LUIS ALVAREZ MENDEZ',
+                'email' => 'rentastangancicuaro@outlook.com',
+                'telefonos' => '3511115020',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:48:18',
             ),
-            85 =>
+            85 => 
             array (
                 'id' => 86,
                 'municipio' => 86,
                 'oficina' => 2001,
                 'localidad' => 1,
                 'nombre' => 'TANHUATO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'CARRETERA TANHUATO EL CALVARIO YURÉCUARO 12 C.P 59230 
+',
+                'titular' => 'LIC. ALFONSO RICO CURIEL',
+                'email' => 'directorrico@hotmail.com',
+                'telefonos' => '4432273401',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:46:17',
             ),
-            86 =>
+            86 => 
             array (
                 'id' => 87,
                 'municipio' => 87,
                 'oficina' => 1209,
                 'localidad' => 1,
                 'nombre' => 'TARETAN',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'DOCTOR RAFAEL ALVARADO 323 COL CENTRO C.P 61710 ENTRE CALLE BENITO JUÁREZ Y LUCAS ORTIZ
+',
+                'titular' => 'L.I. LUIS IGNACIO HERNANDEZ TORRES',
+                'email' => 'liht81@gmail.com',
+                'telefonos' => '4521176606',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:44:05',
             ),
-            87 =>
+            87 => 
             array (
                 'id' => 88,
                 'municipio' => 88,
                 'oficina' => 110,
                 'localidad' => 1,
                 'nombre' => 'TARIMBARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => '16 DE SEPTIEMBRE 10 CENTRO C.P 5880 ENTRE CALLES LÁZARO CÁRDENAS, JOSÉ MARÍA MORELOS Y PAVÓN E IGNACIO ZARAGOZA.
+',
+                'titular' => 'C. RODOLFO FERNANDO YAÑEZ SANTOYO',
+                'email' => 'conlagente10@gmail.com',
+                'telefonos' => '3431212051',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:42:27',
             ),
-            88 =>
+            88 => 
             array (
                 'id' => 89,
                 'municipio' => 89,
@@ -1895,70 +1927,73 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            89 =>
+            89 => 
             array (
                 'id' => 90,
                 'municipio' => 90,
                 'oficina' => 1210,
                 'localidad' => 1,
                 'nombre' => 'TINGAMBATO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL HIDALGO S/N CENTRO C.P 60290 ENTRE ABASOLO E HIDALGO DENTRO DE LA PRESIDENCIA.
+',
+                'titular' => 'LIC. DIEGO SAUCEDO OROZCO',
+                'email' => 'orozcodiego140@gmail.com',
+                'telefonos' => '4341369654',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:40:35',
             ),
-            90 =>
+            90 => 
             array (
                 'id' => 91,
                 'municipio' => 91,
                 'oficina' => 1304,
                 'localidad' => 1,
                 'nombre' => 'TINGUINDIN',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL HIDALGO  4, CENTRO, C.P. 58980 ENTRE LAS CALLES EMILIANO ZAPATA Y JAVIER MINA DENTRO DE LA PRESIDENCIA MUNICIPAL.
+',
+                'titular' => 'L.A.E. LIZETH FABIAN MONTUFAR',
+                'email' => 'lizfmon@hotmail.com',
+                'telefonos' => '3541250451',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:24:08',
             ),
-            91 =>
+            91 => 
             array (
                 'id' => 92,
                 'municipio' => 92,
                 'oficina' => 605,
                 'localidad' => 1,
                 'nombre' => 'TIQUICHEO DE N R',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'CALLE OTHÓN VILLELA #15 COL. CENTRO C.P 61370 ENTRE CALLE GUERRERO Y GALEANA
+',
+                'titular' => 'C. SANTIAGO GAONA SANCHEZ',
+                'email' => 'santiago102269@gmail.com',
+                'telefonos' => '4591129248',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:20:55',
             ),
-            92 =>
+            92 => 
             array (
                 'id' => 93,
                 'municipio' => 93,
@@ -1979,49 +2014,51 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            93 =>
+            93 => 
             array (
                 'id' => 94,
                 'municipio' => 94,
                 'oficina' => 1805,
                 'localidad' => 1,
                 'nombre' => 'TLAZAZALCA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PALACIO MUNICIPAL S/N C.P 58740 EN CALLE JOSE MA. MORELOS ENTRE CALLES AQUILES SERDAN Y MIGUEL HIDALGO.
+',
+                'titular' => 'LIC. JUAN GABRIEL MENDEZ AGUILAR',
+                'email' => 'rentastlazazalca2022@outlook.com',
+                'telefonos' => '4361082621',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:18:01',
             ),
-            94 =>
+            94 => 
             array (
                 'id' => 95,
                 'municipio' => 95,
                 'oficina' => 1305,
                 'localidad' => 1,
                 'nombre' => 'TOCUMBO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL LÁZARO CÁRDENAS 16, CENTRO, C.P. 59962 ENTRE JAVIER MINA Y BOULEVARD LÁZARO CÁRDENAS.
+',
+                'titular' => 'C. ALBERTO VILLANUEVA MAGAÑA',
+                'email' => 'alber.l.lreyes@gmail.com',
+                'telefonos' => '4431176595',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:15:09',
             ),
-            95 =>
+            95 => 
             array (
                 'id' => 96,
                 'municipio' => 96,
@@ -2042,364 +2079,380 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            96 =>
+            96 => 
             array (
                 'id' => 97,
                 'municipio' => 97,
                 'oficina' => 702,
                 'localidad' => 1,
                 'nombre' => 'TURICATO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'ÁLVARO OBREGÓN S/N COL. CENTRO C.P. 61680 ESQUINA CON CALLE VASCO DE QUIROGA. AL SUR: CALLE TANGANXOAN.
+',
+                'titular' => 'C. HERMINIA ANGEL MANRIQUEZ',
+                'email' => 'angelmanrriquezpinal@gmail.com',
+                'telefonos' => '4591067761',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:13:01',
             ),
-            97 =>
+            97 => 
             array (
                 'id' => 98,
                 'municipio' => 98,
                 'oficina' => 507,
                 'localidad' => 1,
                 'nombre' => 'TUXPAN',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. MORELOS NORTE S/N COL CENTRO C.P. 61420 ENTRE LA CALLE FRANCISCO J. MÚGICA Y LA COLONIA RIO GRANDE
+',
+                'titular' => 'C. ELSA ANGELICA RODRIGUEZ PEREGRINO',
+                'email' => 'elsafeass@hotmail.com',
+                'telefonos' => '7861006065',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:10:34',
             ),
-            98 =>
+            98 => 
             array (
                 'id' => 99,
                 'municipio' => 99,
                 'oficina' => 508,
                 'localidad' => 1,
                 'nombre' => 'TUZANTLA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. SIXTO VERDUZCO NORTE 6 CENTRO C.P. 61540 ENTRE LA CALLE LÁZARO CÁRDENAS, RENTERIA LUVIANO Y GERTRUDIS SÁNCHEZ.
+',
+                'titular' => 'LIC. CESAR AUGUSTO BEIZA MARTINEZ',
+                'email' => 'beizamtz@hotmail.com',
+                'telefonos' => '7862083146',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:08:28',
             ),
-            99 =>
+            99 => 
             array (
                 'id' => 100,
                 'municipio' => 100,
                 'oficina' => 1007,
                 'localidad' => 1,
                 'nombre' => 'TZINTZUNTZAN',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. LAS YACATAS #25 COL CENTRO C.P 58440 ENTRE AV. LÁZARO CÁRDENAS Y 24 DE DICIEMBRE
+',
+                'titular' => 'LIC. OSCAR JESÚS RENDÓN RODRÍGUEZ',
+                'email' => 'rero900515@gmail.com',
+                'telefonos' => '4432613462',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:05:10',
             ),
-            100 =>
+            100 => 
             array (
                 'id' => 101,
                 'municipio' => 101,
                 'oficina' => 111,
                 'localidad' => 1,
                 'nombre' => 'TZITZIO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'KM 16 + 500 METROS,  CARRETERA TEMAZCAL-HUETAMO TZITZIO, MICH.',
+                'titular' => 'C. ISRAEL GUTIERREZ ORTIZ',
+                'email' => 'Isramtv08@gmail.com',
+                'telefonos' => '4434699363',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 14:00:20',
             ),
-            101 =>
+            101 => 
             array (
                 'id' => 102,
                 'municipio' => 102,
                 'oficina' => 1201,
                 'localidad' => 1,
                 'nombre' => 'URUAPAN',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+            'ubicacion' => 'AV. PARICUTIN S/N COL. SAN RAFAEL C.P. 60137 (ES UNA PRIVADA)
+',
+                'titular' => 'CP. LUZ MARIA REYES SANCHEZ ',
+                'email' => 'lumaresa@hotmail.com',
+                'telefonos' => '4525299451',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-21 13:58:33',
             ),
-            102 =>
+            102 => 
             array (
                 'id' => 103,
                 'municipio' => 103,
                 'oficina' => 2104,
                 'localidad' => 1,
                 'nombre' => 'VENUSTIANO CARRANZA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'MELCHOR OCAMPO 38 D COL. CENTRO C.P. 59160. ENTRE CALLE JUÁREZ E IGNACIO ALLENDE
+
+',
+                'titular' => 'LIC. SILVIA ALEJANDRE MARAVILLA',
+                'email' => 'alexa.lus@hotmail.com',
+                'telefonos' => '3535720010',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 12:48:26',
             ),
-            103 =>
+            103 => 
             array (
                 'id' => 104,
                 'municipio' => 104,
                 'oficina' => 1604,
                 'localidad' => 1,
                 'nombre' => 'VILLAMAR',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'FELICITAS DEL RIO SIN NUMERO CENTRO C.P  59550 ENTRE CALLE SAN FRANCISCO Y COMONFORT
+',
+                'titular' => 'C. IMELDA MENDOZA FIGUEROA',
+                'email' => 'Imelda039676@hotmail.com',
+                'telefonos' => '3531008400',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 12:34:56',
             ),
-            104 =>
+            104 => 
             array (
                 'id' => 105,
                 'municipio' => 105,
                 'oficina' => 2003,
                 'localidad' => 1,
                 'nombre' => 'VISTA HERMOSA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'CAPITÁN AZUETA #12 PLANTA ALTA COL. CENTRO C.P. 59200 ENTRE FRANCISCO VILLA Y ALEJANDRO QUEZADA.
+',
+                'titular' => 'C.P. ROBERTO MARICHE DUEÑAS',
+                'email' => 'robertomariche@hotmail.com',
+                'telefonos' => '4434718101',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 14:07:54',
             ),
-            105 =>
+            105 => 
             array (
                 'id' => 106,
                 'municipio' => 106,
                 'oficina' => 2004,
                 'localidad' => 1,
                 'nombre' => 'YURECUARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL HIDALGO S/N, CENTRO, C.P.59250 ENTRE CALLE HIDALGO Y GUERRERO.
+',
+                'titular' => 'MTRO. VICTOR VILLANUEVA HERNANDEZ',
+                'email' => 'victorvillanueva06@hotmail.com',
+                'telefonos' => '3521135210',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 14:05:36',
             ),
-            106 =>
+            106 => 
             array (
                 'id' => 107,
                 'municipio' => 107,
                 'oficina' => 1101,
                 'localidad' => 1,
                 'nombre' => 'ZACAPU',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. MORELOS # 61 COL. CENTRO C.P 58600 ENTRE ZARAGOZA Y CALLE JUÁREZ.
+',
+                'titular' => 'C. JUAN MANUEL LEMUS MAGAÑA ',
+                'email' => 'manilemus@gmail.com',
+                'telefonos' => '4361055510',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 14:02:11',
             ),
-            107 =>
+            107 => 
             array (
                 'id' => 108,
                 'municipio' => 108,
                 'oficina' => 1701,
                 'localidad' => 1,
                 'nombre' => 'ZAMORA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+            'ubicacion' => 'GUERRERO #82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS).
+',
+                'titular' => 'C. MARIA TERESA OREGEL AYALA',
+                'email' => 'rentas_zamora1701@hotmail.com',
+                'telefonos' => '3511200460',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 14:00:23',
             ),
-            108 =>
+            108 => 
             array (
                 'id' => 109,
                 'municipio' => 109,
                 'oficina' => 1806,
                 'localidad' => 1,
                 'nombre' => 'ZINAPARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV COLON 2 CENTRO C.P 5946 ENTRE AV FRANCISCO I MADERO Y PLAZUELA INDEPENDENCIA.
+',
+                'titular' => 'LIC. SERGIO ALBERTO GUIDO RAMIREZ',
+                'email' => 'guidoalberto13@gmail.com',
+                'telefonos' => '4434038528',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:58:41',
             ),
-            109 =>
+            109 => 
             array (
                 'id' => 110,
                 'municipio' => 110,
                 'oficina' => 201,
                 'localidad' => 1,
                 'nombre' => 'ZINAPECUARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'JUÁREZ #14 COL. CENTRO C.P 58930 MELCHOR OCAMPO AL NORTE Y AL SUR CON RAFAEL CARRILLO.
+',
+                'titular' => 'C. JULIO CESAR GARCIA SANCHEZ',
+                'email' => 'juliocgarcia.sanchez83@gmail.com',
+                'telefonos' => '4432177190',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:57:03',
             ),
-            110 =>
+            110 => 
             array (
                 'id' => 111,
                 'municipio' => 111,
                 'oficina' => 1211,
                 'localidad' => 1,
                 'nombre' => 'ZIRACUARETIRO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PASAJE PORTAL MATAMOROS S/N CENTRO C.P 61700 ENTRE ABASOLO Y MORELOS.
+',
+                'titular' => 'T.C. MIGUEL DURAN CHAVEZ',
+                'email' => 'migueldc430@gmail.com',
+                'telefonos' => '4522108920',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:52:14',
             ),
-            111 =>
+            111 => 
             array (
                 'id' => 112,
                 'municipio' => 112,
                 'oficina' => 501,
                 'localidad' => 1,
                 'nombre' => 'ZITACUARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'BENEDICTO LOPEZ SUR #7 COL. CENTRO C.P 61500 ENTRE  IGNACIO LÓPEZ RAYÓN Y MIGUEL HIDALGO.
+',
+                'titular' => 'LIC. OMAR CONTRERAS RAMIREZ',
+                'email' => 'rentas_zitacuaro@hotmail.com',
+                'telefonos' => '7151182176',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:49:11',
             ),
-            112 =>
+            112 => 
             array (
                 'id' => 113,
                 'municipio' => 113,
                 'oficina' => 1903,
                 'localidad' => 1,
                 'nombre' => 'JOSE SIXTO VERDUZCO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PALACIO MUNICIPAL S/N CENTRO C.P 58540',
+                'titular' => 'MIGUEL ANGEL AYALA ROBLEDO',
+                'email' => 'miguelangelayalarobledo@gmail.com',
+                'telefonos' => '4433688150',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:42:58',
             ),
-            113 =>
+            113 => 
             array (
                 'id' => 114,
                 'municipio' => 114,
@@ -2420,49 +2473,51 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            114 =>
+            114 => 
             array (
                 'id' => 115,
-                'municipio' => 115,
+                'municipio' => 9,
                 'oficina' => 801,
                 'localidad' => 2,
                 'nombre' => 'URAPA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. MORELOS #244 COL. CENTRO C.P 61830 ENTRE CALLES FRANCISCO JAVIER MINA Y GENERAL IGNACIO ZARAGOZA
+',
+                'titular' => 'C. ARMANDO BECERRA AGUILAR',
+                'email' => 'armandobecerra@live.com.mx',
+                'telefonos' => '4251169976',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => 9,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:28:16',
             ),
-            115 =>
+            115 => 
             array (
                 'id' => 116,
-                'municipio' => 116,
+                'municipio' => 12,
                 'oficina' => 1403,
                 'localidad' => 2,
                 'nombre' => 'FELIPE CARRILLO PUERTO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+            'ubicacion' => 'ÁLVARO OBREGÓN S/N CENTRO C.P 60500 ENTRE CALLE NARCISO MENDOZA Y LÁZARO CÁRDENAS (DENTRO DE LA PRESIDENCIA).
+',
+                'titular' => 'LIC. GUSTAVO ANGEL RODRIGUEZ GUZMAN',
+                'email' => 'movsoc855@gmail.com',
+                'telefonos' => '4531586433',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => 12,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-16 13:38:40',
             ),
-            116 =>
+            116 => 
             array (
                 'id' => 117,
                 'municipio' => 117,
@@ -2483,7 +2538,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-09 14:15:39',
             ),
-            117 =>
+            117 => 
             array (
                 'id' => 118,
                 'municipio' => 118,
@@ -2505,7 +2560,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-09 14:12:30',
             ),
-            118 =>
+            118 => 
             array (
                 'id' => 119,
                 'municipio' => 119,
@@ -2527,7 +2582,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-09 14:10:55',
             ),
-            119 =>
+            119 => 
             array (
                 'id' => 120,
                 'municipio' => 120,
@@ -2549,49 +2604,51 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-09 14:07:12',
             ),
-            120 =>
+            120 => 
             array (
                 'id' => 121,
-                'municipio' => 121,
+                'municipio' => 35,
                 'oficina' => 803,
                 'localidad' => 2,
                 'nombre' => 'ZICUIRAN',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL ALLENDE S/N COL. CENTRO C.P 61853 DENTRO DE LA PRESIDENCIA MUNICIPAL ENTRE CALLE REVOLUCIÓN, ALLENDE, AL NORTE CON ZARAGOZA Y AL SUR CALLE JUÁREZ.
+',
+                'titular' => 'LIC. LUIS ANGEL PADILLA SOTO',
+                'email' => 'jaydenpr2014@gmail.com',
+                'telefonos' => '425 1111914',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => 35,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:35:30',
             ),
-            121 =>
+            121 => 
             array (
                 'id' => 122,
-                'municipio' => 122,
+                'municipio' => 49,
                 'oficina' => 108,
                 'localidad' => 2,
                 'nombre' => 'D CURUCUPASEO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL HIDALGO #35-A COL. CENTRO C.P 58480 ENTRE AV. MORELOS Y CALLE VENUSTIANO CARRANZA JUNTO AL PALACIO MUNICIPAL.
+',
+                'titular' => 'LIC. IVAN JOAQUIN AYALA MENDOZA',
+                'email' => 'receptormadero@gmail.com',
+                'telefonos' => '4591073326',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => 49,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:31:48',
             ),
-            122 =>
+            122 => 
             array (
                 'id' => 123,
                 'municipio' => 52,
@@ -2612,7 +2669,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-14 14:38:38',
             ),
-            123 =>
+            123 => 
             array (
                 'id' => 124,
                 'municipio' => 52,
@@ -2634,133 +2691,134 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-14 14:38:15',
             ),
-            124 =>
+            124 => 
             array (
                 'id' => 125,
-                'municipio' => 125,
+                'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 2,
                 'nombre' => 'SANTIAGO UNDAMEO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS # 1016, COLONIA VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA',
+                'titular' => 'DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRA',
+                'email' => 'catastro@michoacan.gob.mx',
+                'telefonos' => '443 3121929 ',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
-                'autoridad_municipal' => NULL,
-                'valuador_municipal' => NULL,
+                'autoridad_municipal' => 'ING. ALFONSO JESUS MARTINEZ ALCAZAR',
+                'valuador_municipal' => 'ARQ. RAFAEL CELAYA AVILA ',
                 'cabecera' => 53,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:17:12',
             ),
-            125 =>
+            125 => 
             array (
                 'id' => 126,
-                'municipio' => 126,
+                'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 3,
                 'nombre' => 'CHIQUIMITIO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS # 1016, COLONIA VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA',
+                'titular' => 'DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRA',
+                'email' => 'catastro@michoacan.gob.mx',
+                'telefonos' => '443 3121929 ',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
-                'autoridad_municipal' => NULL,
-                'valuador_municipal' => NULL,
+                'autoridad_municipal' => 'ING. ALFONSO JESUS MARTINEZ ALCAZAR ',
+                'valuador_municipal' => 'ARQ. RAFAEL CELAYA AVILA ',
                 'cabecera' => 53,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:15:40',
             ),
-            126 =>
+            126 => 
             array (
                 'id' => 127,
-                'municipio' => 127,
+                'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 4,
                 'nombre' => 'TIRIPETIO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS # 1016, COLONIA VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
+                'titular' => 'DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL ',
+                'email' => 'catastro@michoacan.gob.mx',
+                'telefonos' => '443 3121929 ',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
-                'autoridad_municipal' => NULL,
-                'valuador_municipal' => NULL,
+                'autoridad_municipal' => 'ING. ALFONSO JESUS MARTINEZ ALCAZAR',
+                'valuador_municipal' => 'ARQ. RAFAEL CELAYA AVILA',
                 'cabecera' => 53,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:07:23',
             ),
-            127 =>
+            127 => 
             array (
                 'id' => 128,
-                'municipio' => 128,
+                'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 5,
                 'nombre' => 'CAPULA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS # 1016, COLONIA VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
+                'titular' => ' 	DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL ',
+                'email' => 'catastro@michoacan.gob.mx',
+                'telefonos' => '443 3121929 ',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
-                'autoridad_municipal' => NULL,
-                'valuador_municipal' => NULL,
+                'autoridad_municipal' => 'ING. ALFONSO JESUS MARTINEZ ALCAZAR ',
+                'valuador_municipal' => 'ARQ. RAFAEL CELAYA AVILA ',
                 'cabecera' => 53,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:06:16',
             ),
-            128 =>
+            128 => 
             array (
                 'id' => 129,
-                'municipio' => 129,
+                'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 6,
                 'nombre' => 'TEREMENDO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS # 1016, COLONIA VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
+                'titular' => 'DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL 	',
+                'email' => 'catastro@michoacan.gob.mx',
+                'telefonos' => '443 3121929 ',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
-                'autoridad_municipal' => NULL,
-                'valuador_municipal' => NULL,
+                'autoridad_municipal' => 'ING. ALFONSO JESUS MARTINEZ ALCAZAR ',
+                'valuador_municipal' => 'ARQ. RAFAEL CELAYA AVILA ',
                 'cabecera' => 53,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:04:53',
             ),
-            129 =>
+            129 => 
             array (
                 'id' => 130,
-                'municipio' => 130,
+                'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 7,
                 'nombre' => 'TENENCIA MORELIA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS # 1016, COLONIA VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA.
+',
+                'titular' => 'DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL',
+                'email' => 'catastro@michoacan.gob.mx',
+                'telefonos' => '443 3121929',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
-                'autoridad_municipal' => NULL,
-                'valuador_municipal' => NULL,
+                'autoridad_municipal' => 'ING. ALFONSO JESUS MARTINEZ ALCAZAR',
+                'valuador_municipal' => 'ARQ. RAFAEL CELAYA AVILA',
                 'cabecera' => 53,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-17 13:03:19',
             ),
-            130 =>
+            130 => 
             array (
                 'id' => 131,
                 'municipio' => 66,
@@ -2782,7 +2840,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-14 14:37:10',
             ),
-            131 =>
+            131 => 
             array (
                 'id' => 132,
                 'municipio' => 66,
@@ -2803,7 +2861,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-14 14:37:04',
             ),
-            132 =>
+            132 => 
             array (
                 'id' => 133,
                 'municipio' => 67,
@@ -2825,7 +2883,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-11 13:13:49',
             ),
-            133 =>
+            133 => 
             array (
                 'id' => 134,
                 'municipio' => 67,
@@ -2847,7 +2905,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-11 13:12:17',
             ),
-            134 =>
+            134 => 
             array (
                 'id' => 135,
                 'municipio' => 68,
@@ -2869,7 +2927,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-11 12:47:41',
             ),
-            135 =>
+            135 => 
             array (
                 'id' => 136,
                 'municipio' => 71,
@@ -2890,7 +2948,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 14:25:24',
             ),
-            136 =>
+            136 => 
             array (
                 'id' => 137,
                 'municipio' => 71,
@@ -2911,7 +2969,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 14:24:26',
             ),
-            137 =>
+            137 => 
             array (
                 'id' => 138,
                 'municipio' => 71,
@@ -2933,7 +2991,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 14:23:08',
             ),
-            138 =>
+            138 => 
             array (
                 'id' => 139,
                 'municipio' => 71,
@@ -2955,7 +3013,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 14:21:49',
             ),
-            139 =>
+            139 => 
             array (
                 'id' => 140,
                 'municipio' => 75,
@@ -2977,7 +3035,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 14:15:40',
             ),
-            140 =>
+            140 => 
             array (
                 'id' => 141,
                 'municipio' => 75,
@@ -2999,7 +3057,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 14:14:14',
             ),
-            141 =>
+            141 => 
             array (
                 'id' => 142,
                 'municipio' => 142,
@@ -3020,7 +3078,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            142 =>
+            142 => 
             array (
                 'id' => 143,
                 'municipio' => 143,
@@ -3041,7 +3099,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            143 =>
+            143 => 
             array (
                 'id' => 144,
                 'municipio' => 144,
@@ -3062,7 +3120,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            144 =>
+            144 => 
             array (
                 'id' => 145,
                 'municipio' => 83,
@@ -3083,7 +3141,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 12:10:15',
             ),
-            145 =>
+            145 => 
             array (
                 'id' => 146,
                 'municipio' => 83,
@@ -3105,7 +3163,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 12:08:09',
             ),
-            146 =>
+            146 => 
             array (
                 'id' => 147,
                 'municipio' => 84,
@@ -3127,7 +3185,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 12:03:12',
             ),
-            147 =>
+            147 => 
             array (
                 'id' => 148,
                 'municipio' => 85,
@@ -3149,7 +3207,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 11:57:21',
             ),
-            148 =>
+            148 => 
             array (
                 'id' => 149,
                 'municipio' => 88,
@@ -3171,7 +3229,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 11:55:10',
             ),
-            149 =>
+            149 => 
             array (
                 'id' => 150,
                 'municipio' => 90,
@@ -3193,7 +3251,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 11:51:58',
             ),
-            150 =>
+            150 => 
             array (
                 'id' => 151,
                 'municipio' => 91,
@@ -3215,7 +3273,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 11:49:06',
             ),
-            151 =>
+            151 => 
             array (
                 'id' => 152,
                 'municipio' => 91,
@@ -3237,7 +3295,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 11:48:06',
             ),
-            152 =>
+            152 => 
             array (
                 'id' => 153,
                 'municipio' => 97,
@@ -3259,14 +3317,15 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-10 11:46:46',
             ),
-            153 =>
+            153 => 
             array (
                 'id' => 154,
                 'municipio' => 103,
                 'oficina' => 2104,
                 'localidad' => 2,
                 'nombre' => 'LA PALMA',
-                'ubicacion' => 'MELCHOR OCAMPO 38 D COL. CENTRO C.P. 59160. ENTRE CALLE JUÁREZ Y PLAZA.
+                'ubicacion' => 'MELCHOR OCAMPO 38 D COL. CENTRO C.P. 59160. ENTRE CALLE JUAREZ E IGNACIO ALLENDE
+
 ',
                 'titular' => 'LIC. SILVIA ALEJANDRE MARAVILLA',
                 'email' => 'alexa.lus@hotmail.com',
@@ -3277,11 +3336,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'valuador_municipal' => NULL,
                 'cabecera' => 103,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-10 11:45:07',
+                'updated_at' => '2023-08-17 12:49:48',
             ),
-            154 =>
+            154 => 
             array (
                 'id' => 155,
                 'municipio' => 104,
@@ -3303,7 +3362,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-04 14:37:20',
             ),
-            155 =>
+            155 => 
             array (
                 'id' => 156,
                 'municipio' => 107,
@@ -3325,7 +3384,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-04 14:34:57',
             ),
-            156 =>
+            156 => 
             array (
                 'id' => 157,
                 'municipio' => 108,
@@ -3347,7 +3406,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-04 14:30:22',
             ),
-            157 =>
+            157 => 
             array (
                 'id' => 158,
                 'municipio' => 108,
@@ -3369,7 +3428,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-04 14:28:43',
             ),
-            158 =>
+            158 => 
             array (
                 'id' => 159,
                 'municipio' => 108,
@@ -3391,7 +3450,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-04 14:26:08',
             ),
-            159 =>
+            159 => 
             array (
                 'id' => 160,
                 'municipio' => 108,
@@ -3413,7 +3472,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-04 12:15:33',
             ),
-            160 =>
+            160 => 
             array (
                 'id' => 161,
                 'municipio' => 110,
@@ -3435,7 +3494,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-04 12:05:04',
             ),
-            161 =>
+            161 => 
             array (
                 'id' => 162,
                 'municipio' => 110,
@@ -3457,7 +3516,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-03 15:00:25',
             ),
-            162 =>
+            162 => 
             array (
                 'id' => 163,
                 'municipio' => 163,
@@ -3478,7 +3537,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            163 =>
+            163 => 
             array (
                 'id' => 164,
                 'municipio' => 112,
@@ -3501,7 +3560,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'updated_at' => '2023-08-03 14:39:17',
             ),
         ));
-
-
+        
+        
     }
 }

@@ -29,7 +29,7 @@ class Usuarios extends Component
             'modelo_editar.valuador' => Rule::requiredIf($this->role === "3"),
             'modelo_editar.ap_paterno' => 'required',
             'modelo_editar.ap_materno' => 'required',
-            'modelo_editar.email' => 'required|email:rfc,dns|unique:users,email,' . $this->modelo_editar->id,
+            'modelo_editar.email' => 'required|email|unique:users,email,' . $this->modelo_editar->id,
             'modelo_editar.status' => 'required|in:activo,inactivo',
             'role' => 'required',
             'modelo_editar.oficina' => 'required',

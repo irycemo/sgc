@@ -1,4 +1,4 @@
-<div x-data="{openRoles:true, openDistritos:true, openValores:true}" class="mb-5">
+<div x-data="{openRoles:true, openDistritos:true, openValores:true, openPredios:true}" class="mb-5">
 
     <p class="uppercase text-base text-rojo tracking-wider mb-2">Administración</p>
 
@@ -127,7 +127,7 @@
 
         <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
-            <a href="{{ route('predios') }}" class=" capitalize font-medium text-sm  flex hover w-full  p-2 px-4 ">
+            <a href="{{ route('predios') }}" class="capitalize font-medium text-sm transition ease-in-out hover:text-red-600 duration-500 flex hover  hover:bg-gray-100 p-2 px-4 rounded-xl">
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-4 ">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
@@ -136,6 +136,27 @@
                 Predios
 
             </a>
+            <svg @click="openPredios = false" x-show="openPredios" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-gray-300 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+
+            <svg @click="openPredios = true" x-show="!openPredios" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2 text-gray-300 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+            </svg>
+
+        </div>
+
+        <div
+            x-transition:enter="transition duration-2000 transform ease-out"
+            x-transition:leave="transition duration-200 transform ease-in"
+            x-transition:leave-end="opacity-0 scale-90"
+            x-transition:enter-start="scale-75"
+            class="flex flex-col items-center mb-3 w-full rounded-xl text-sm text-left"
+            x-show="!openPredios">
+
+            <a href="{{ route('predios_avaluos') }}" class="capitalize font-medium text-sm  flex hover w-full  hover:bg-gray-100 p-2 px-4 ml-5 rounded-xl hover:text-red-600">Avaluos</a>
+
+            <a href="{{ route('predios_asignado') }}" class="capitalize font-medium text-sm  flex hover w-full  hover:bg-gray-100 p-2 px-4 ml-5 rounded-xl hover:text-red-600">Asignado</a>
 
         </div>
 

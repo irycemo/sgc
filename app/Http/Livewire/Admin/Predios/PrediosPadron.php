@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Admin;
+namespace App\Http\Livewire\Admin\Predios;
 
 use App\Models\Predio;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Http\Traits\ComponentesTrait;
 
-class Predios extends Component
+class PrediosPadron extends Component
 {
 
     use WithPagination;
@@ -29,7 +29,7 @@ class Predios extends Component
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 
-        return view('livewire.Admin.predios', compact('predios'))->extends('layouts.admin');
+        return view('livewire.Admin.Predios.predios-padron', compact('predios'))->extends('layouts.admin');
 
     }
 }

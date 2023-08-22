@@ -66,6 +66,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'Borrar trámite', 'area' => 'Trámites'])->syncRoles([$role1]);
 
         Permission::create(['name' => 'Lista de predios', 'area' => 'Predios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Lista de predios avaluos', 'area' => 'Predios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Lista de predios asignados', 'area' => 'Predios'])->syncRoles([$role1]);
         Permission::create(['name' => 'Ver predio', 'area' => 'Predios'])->syncRoles([$role1]);
 
         Permission::create(['name' => 'Lista de oficinas', 'area' => 'Oficinas'])->syncRoles([$role1]);
@@ -95,6 +97,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'Asignacion de cuenta', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
         Permission::create(['name' => 'Impresión de avaluos', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
         Permission::create(['name' => 'Notificación de avaluos', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
+        Permission::create(['name' => 'Avaluos de predio ignorado', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
 
     }
 

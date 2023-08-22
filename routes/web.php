@@ -1,9 +1,7 @@
 <?php
 
 use App\Http\Livewire\Admin\Umas;
-use App\Http\Livewire\Ventanilla;
 use App\Http\Livewire\Admin\Roles;
-use App\Http\Livewire\Admin\Predios;
 use App\Http\Livewire\Admin\Permisos;
 use App\Http\Livewire\Admin\Tramites;
 use App\Http\Livewire\Admin\Usuarios;
@@ -14,9 +12,13 @@ use App\Http\Controllers\ManualController;
 use App\Http\Controllers\SetPasswordController;
 use App\Http\Livewire\Admin\CategoriasServicios;
 use App\Http\Controllers\Admin\TramiteController;
+use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
 use App\Http\Controllers\Valuacion\ValuacionYDesgloseController;
 use App\Http\Livewire\Admin\FactorIncremento;
 use App\Http\Livewire\Admin\Oficinas;
+use App\Http\Livewire\Admin\Predios\PrediosAsignados;
+use App\Http\Livewire\Admin\Predios\PrediosAvaluos;
+use App\Http\Livewire\Admin\Predios\PrediosPadron;
 use App\Http\Livewire\Admin\ValoresunitariosConstruccion;
 use App\Http\Livewire\Admin\ValoresUnitariosRusticos;
 use App\Http\Livewire\Valuacion\AsignacionCuentaPredial;
@@ -69,7 +71,11 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
     Route::get('tramties', Tramites::class)->middleware('permission:Lista de trámites')->name('tramites');
 
-    Route::get('predios', Predios::class)->middleware('permission:Lista de predios')->name('predios');
+    Route::get('predios', PrediosPadron::class)->middleware('permission:Lista de predios')->name('predios');
+
+    Route::get('predios_avaluos', PrediosAvaluos::class)->middleware('permission:Lista de predios avaluos')->name('predios_avaluos');
+
+    Route::get('predios_asignado', PrediosAsignados::class)->middleware('permission:Lista de predios asignados')->name('predios_asignado');
 
     Route::get('oficinas', Oficinas::class)->middleware('permission:Lista de oficinas')->name('oficinas');
 
@@ -90,11 +96,13 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
     Route::get('ficha_tecnica', FichaTecnica::class)->middleware('permission:Ficha técnica')->name('ficha_tecnica');
 
+    Route::get('avaluo_predio_ignorado', AvaluoPredioIgnoradoController::class)->middleware('permission:Avaluos de predio ignorado')->name('avaluo_predio_ignorado');
+
     /* Ventanilla */
-    Route::get('ventanilla', Ventanilla::class)->middleware('permission:Ventanilla')->name('ventanilla');
+    /* Route::get('ventanilla', Ventanilla::class)->middleware('permission:Ventanilla')->name('ventanilla'); */
     Route::get('tramites/{tramite}', [TramiteController::class, 'orden'])->name('tramites.orden');
 
-    Route::get('ventanilla2', VentanillaVentanilla::class)->middleware('permission:Ventanilla')->name('ventanilla2');
+    Route::get('ventanilla', VentanillaVentanilla::class)->middleware('permission:Ventanilla')->name('ventanilla');
 
 });
 
