@@ -29,6 +29,6 @@ class PrediosAsignados extends Component
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 
-        return view('livewire.admin.predios.predios-asignados', compact('predios'))->extends('layouts.admin');
+        return view('livewire.Admin.predios.predios-asignados', compact('predios'))->extends('layouts.admin');
     }
 }

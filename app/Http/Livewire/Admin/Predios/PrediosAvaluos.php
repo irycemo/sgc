@@ -29,7 +29,7 @@ class PrediosAvaluos extends Component
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 
-        return view('livewire.admin.predios.predios-avaluos', compact('predios'))->extends('layouts.admin');
+        return view('livewire.Admin.predios.predios-avaluos', compact('predios'))->extends('layouts.admin');
 
     }
 }
