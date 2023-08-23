@@ -308,7 +308,7 @@
                     <select class="bg-white rounded text-xs w-full" wire:model.defer="predio.tipo_asentamiento">
                         <option value="" selected>Seleccione una opción</option>
 
-                        @foreach ($tipoVialidades as $item)
+                        @foreach ($tipoAsentamientos as $item)
 
                             <option value="{{ $item }}" selected>{{ $item }}</option>
 
