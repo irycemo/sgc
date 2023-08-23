@@ -46,7 +46,7 @@ class Predio extends Model implements Auditable
     }
 
     public function movimientos(){
-        return $this->belongsToMany(Movimineto::class)->withPivot('fecha', 'descripcion')->withTimestamps();
+        return $this->belongsToMany(Movimineto::class)->withPivot('descripcion')->withTimestamps();
     }
 
 }

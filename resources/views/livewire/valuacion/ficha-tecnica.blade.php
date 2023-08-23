@@ -8,7 +8,7 @@
 
     <div class="space-y-2 mb-5 bg-white rounded-lg p-2">
 
-        <div class="lg:w-1/4 mx-auto items-center text-center">
+        <div class="md:w-1/2 lg:w-1/4 mx-auto items-center text-center">
 
             <div class="mb-5">
 
@@ -160,7 +160,7 @@
 
                 <p class="">Valores permitidos para VIENTO:</p>
 
-                <ul class="ml-10 grid grid-cols-6">
+                <ul class="ml-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
 
                     @foreach ($vientos as $viento)
 
@@ -188,7 +188,7 @@
 
                 <p class="">Si el predio es urbano ingresa el valor numérico del valor unitario, si es un predio rustico debe usar uno de los siguientes valores:</p>
 
-                <ul class="ml-10 grid grid-cols-6">
+                <ul class="ml-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
 
                     @foreach ($valoresRusticos as $valor)
 
@@ -220,7 +220,7 @@
 
                 <p class="">Valores permitidos para la clasificación de construcción <strong>(TIPO:USO:CALIDAD:ESTADO)</strong>:</p>
 
-                <ul class="ml-10 grid grid-cols-6">
+                <ul class="ml-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
 
                     @foreach ($valoresConstruccion as $valor)
 
@@ -264,7 +264,7 @@
 
                 <p class="">Valores permitidos para la clasificación de construcción <strong>(TIPO:USO:CALIDAD:ESTADO)</strong>:</p>
 
-                <ul class="ml-10 grid grid-cols-6">
+                <ul class="ml-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
 
                     @foreach ($valoresConstruccion as $valor)
 

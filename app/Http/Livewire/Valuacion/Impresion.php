@@ -169,6 +169,16 @@ class Impresion extends Component
 
             }
 
+        }elseif($tramiteInspeccion->avaluo_para == 47){
+
+            if($tramiteAvaluo->servicio_id != 47){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un avlúo predio ignorado."]);
+
+                return;
+
+            }
+
         }
 
         $path = null;
