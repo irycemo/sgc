@@ -492,13 +492,6 @@ class Inmueble extends Component
 
         }
 
-        if($this->predio->avaluo->estado == "concluido"){
-
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avalúo esta concluido no se puede editar"]);
-
-            return;
-        }
-
         try {
 
             DB::transaction(function () {
