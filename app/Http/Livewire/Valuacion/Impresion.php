@@ -222,6 +222,7 @@ class Impresion extends Component
                                                         $this->valuador,
                                                         $this->valuador_municipal,
                                                         $this->autoridad_municipal,
+                                                        $this->formato
                                                     );
 
             foreach($predios as $predio){

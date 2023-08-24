@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Valuacion;
 
 use App\Models\User;
 use App\Models\Predio;
+use App\Models\Oficina;
 use Livewire\Component;
 use App\Models\AsignarCuenta;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +34,7 @@ class AsignacionCuentaPredial extends Component
             'valuador' => 'required',
             'localidad' => 'required',
             'oficina' => 'required',
-            'tipo' => 'required',
+            'tipo' => 'required|numeric|min:1|max:2',
             'titulo' => 'nullable',
             'cantidad' => 'required',
             'origen' => 'nullable',

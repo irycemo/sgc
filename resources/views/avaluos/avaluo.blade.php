@@ -141,11 +141,8 @@
 
             <p class="titulo">AVALÚO Y NOTIFICACIÓN DE VALOR CATASTRAL</p>
 
-            <p class="fundamento">EL VALOR CATASTRAL DETERMINADO Y QUE EN EL ACTO SE NOTIFICA, SE ENCUENTRA FUNDADO EN LOS ARTICULOS 1, 2, 3, 6,7, 10, 11, 12, 13, 17,
-                18, 19, 20, 21, 22, 23, 24, 25, 28, 39, DE LA LEY DE CATASTRO DEL ESTADO DE MICHOACÁN DE OCAMPO; 2°, 3°, 4°, 7° SEGUNDO PÁRRAFO , 8°, 12, 13, 18
-                Y 36 DEL REGLAMENTO DE LA LEY DE CATASTRO DEL ESTADO DE MICHOACÁN DE OCAMPO; ASÍ COMO EN LOS ARTÍCULOS 111, 112, 113, 114, DEL
-                CÓDIGO FISCAL MUNICIPAL DEL ESTADO DE MICHOACÁN DE OCAMPO; Y PARA LOS EFECTOS JURÍDICOS DEL PAGO DEL IMPUESTO PREDIAL,
-                EN EL NUMERAL 20 DE LA LEY DE HACIENDA MUNICIPAL DEL ESTADO DE MICHOACÁN DE OCAMPO
+            <p class="fundamento">
+                CON FUNDAMENTO  EN LOS ARTÍCULOS 1,2,3,6,7,8,66,68,69,71,72,73,74,75,76,90,92 y 93 DE  LA  LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO, 8,73,74,75,80,81,82 Y 83 DEL REGLAMENTO DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO DEL ESTADO DE MICHOACÁN.
             </p>
 
         </div>
@@ -162,7 +159,7 @@
 
                         <tr>
                             <td style="padding-right: 40px;">
-                                <p><strong>Folio del avaluo:</strong> {{ $predio->avaluo->folio }}</p>
+                                <p><strong>Folio del avalúo:</strong> {{ $predio->avaluo->folio }}</p>
                             </td>
                             <td style="padding-right: 40px;">
                                 <p><strong>Cuenta predial:</strong> {{ $predio->localidad }}-{{ $predio->oficina }}-{{ $predio->tipo_predio }}-{{ $predio->numero_registro }}</p>
@@ -217,7 +214,7 @@
                 @if($predio->xutm || $predio->lat)
 
                     <p style=" margin-top: 8px;">
-                        <strong>Coordenadas geografícas: </strong>
+                        <strong>Coordenadas geográficas: </strong>
                     </p>
 
                     @if($predio->xutm)
@@ -282,7 +279,7 @@
 
             @endif
 
-            <p class="separador">Caracteristicas</p>
+            <p class="separador">Características</p>
 
             <div class="informacion">
 
@@ -298,7 +295,7 @@
                             <th style="padding: 0 5px 0 5px;">Agua</th>
                             <th style="padding: 0 5px 0 5px;">Drenaje</th>
                             <th style="padding: 0 5px 0 5px;">Pavimento</th>
-                            <th style="padding: 0 5px 0 5px;">Energia eléctrica</th>
+                            <th style="padding: 0 5px 0 5px;">Energía eléctrica</th>
                             <th style="padding: 0 5px 0 5px;">Alambrado púlico</th>
                             <th style="padding: 0 5px 0 5px;">Banqueta</th>
                         </tr>
@@ -562,7 +559,7 @@
 
                                 <tr>
                                     <th style="padding: 0 5px 0 5px;">Referencia</th>
-                                    <th style="padding: 0 5px 0 5px;">Clasificación de construccion</th>
+                                    <th style="padding: 0 5px 0 5px;">Clasificación de construcción</th>
                                     <th style="padding: 0 5px 0 5px;">Valor unitario</th>
                                     <th style="padding: 0 5px 0 5px;">Niveles</th>
                                     <th style="padding: 0 5px 0 5px;">Superficie</th>
@@ -767,11 +764,11 @@
                                     <tbody>
 
                                         <tr>
-                                            <td style="padding-right: 40px; font-size:10px">Privatio + Proporcional</td>
+                                            <td style="padding-right: 40px; font-size:10px">Privativo + Proporcional</td>
                                             <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format($predio->valor_total_terreno + $predio->avaluo->valor_terreno_comun, 2) }}</td>
                                         </tr>
                                         <tr>
-                                            <td style="padding-right: 40px; font-size:10px">Privatio + Proporcional</td>
+                                            <td style="padding-right: 40px; font-size:10px">Privativo + Proporcional</td>
                                             <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format($predio->valor_construccion + $predio->avaluo->valor_construccion_comun, 2) }}</td>
                                         </tr>
                                         <tr>
@@ -804,7 +801,7 @@
 
             @endif
 
-            <p class="separador">Imagenes</p>
+            <p class="separador">Imágenes</p>
 
             <div class="informacion">
 
@@ -880,7 +877,7 @@
                                 <td style="font-size:12px;">
                                     <div>
 
-                                        <p style="margin-bottom: 10px;">Representación del poligono</p>
+                                        <p style="margin-bottom: 10px;">Representación del polígono</p>
 
                                         <img class="imagenes" src="{{ public_path($predio->avaluo->poligonoImagen_pdf()) }}" alt="Fachada">
 
@@ -897,7 +894,7 @@
 
             <div class="informacion">
 
-                @if($predio->oficina == 101)
+                @if($formato)
 
                     <table style="margin-top: 60px">
 
@@ -962,7 +959,7 @@
 
                 @endif
 
-                <p class="fundamento">NOTIFIQUESE CONFORME AL ARTICULO 134 DE LA LEY DE LA FUNCION REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPÓ
+                <p class="fundamento">NOTIFIQUESE CONFORME AL ARTICULO 134 DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPÓ
                     EL PRESENTE ACTO ES RECURRIBLE, DENTRO DE LOS 10 DÍAS HÁBILES SIGUIENTES A SU NOTIFICACIÓN ANTE LA AUTORIDAD QUE LO EMITE
                     O BIEN ANTE EL TRIBUNAL DE JUSTICIA ADMINISTRATIVA DEL ESTADO DE MICHOACÁN, DE CONFORMIDAD CON EL ARTÍCULO 128 DEL CÓDIGO
                     DE JUSTICIA ADMINISTRATIVA DEL ESTADO DE MICHOACÁN DE OCAMPO
@@ -972,7 +969,7 @@
                      del mes @if($mes) {{ $mes }} @else _______ @endif del año @if($año) {{  $año }} @else _______ @endif
                 </p>
                 <p>Nombre completo: @if($nombre) {{ $nombre }} @else __________________________________________________________________________________ @endif</p>
-                <p>Recibi en calidad de:  @if($calidad) {{ $calidad }} @else ___________________________________ @endif Notificador:  ___________________________________</p>
+                <p>Recibí en calidad de:  @if($calidad) {{ $calidad }} @else ___________________________________ @endif Notificador:  ___________________________________</p>
                 <p>Firma: ________________________________________________ Firma: ______________________________________</p>
 
 
