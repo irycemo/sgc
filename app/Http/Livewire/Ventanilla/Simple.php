@@ -241,7 +241,7 @@ class Simple extends Component
 
             DB::transaction(function () {
 
-                $tramite = (new TramiteService($this->modelo_editar))->crearTramite($this->predios);
+                $tramite = (new TramiteService($this->modelo_editar))->crearTramite();
 
                 $this->resetearTodo();
 
@@ -268,7 +268,7 @@ class Simple extends Component
 
             DB::transaction(function () {
 
-                $tramite = (new TramiteService($this->modelo_editar))->actualizarTramite($this->predios);
+                $tramite = (new TramiteService($this->modelo_editar))->actualizarTramite();
 
                 $this->resetearTodo();
 
