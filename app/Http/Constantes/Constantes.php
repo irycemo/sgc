@@ -52,7 +52,8 @@ class Constantes{
         'USUFRUCTUARIO',
         'JUBILADO O PENSIONADO',
         'FIDUCIARIO',
-        'FIDECOMITENTE'
+        'FIDECOMITENTE',
+        'PROPIETARIO'
     ];
 
     const TIPO_VIALIDADES = [

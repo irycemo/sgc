@@ -39,7 +39,7 @@ class TramiteService{
 
     }
 
-    public function actualizarTramite($predios):Tramite
+    public function actualizarTramite($predios = null):Tramite
     {
 
         $this->tramite->actualizado_por = auth()->user()->id;
