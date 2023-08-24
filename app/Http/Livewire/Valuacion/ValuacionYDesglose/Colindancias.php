@@ -41,6 +41,8 @@ class Colindancias extends Component
 
         $this->predio = PredioAvaluo::with('colindancias', 'avaluo')->find($id);
 
+        $this->medidas[] = ['viento' => null, 'longitud' => null, 'descripcion' => null, 'id' => null];
+
         foreach ($this->predio->colindancias as $colindancia) {
 
             $this->medidas[] = [

@@ -443,13 +443,6 @@ class AvaluoPredioIgnorado extends Component
             return;
         }
 
-        if($this->predio->avaluo->estado == "concluido"){
-
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avalúo esta concluido no se puede editar"]);
-
-            return;
-        }
-
         if($this->validarDisponibilidad())
             return;
 
