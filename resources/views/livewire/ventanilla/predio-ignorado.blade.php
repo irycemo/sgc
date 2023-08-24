@@ -38,7 +38,7 @@
 
                 @endif
 
-                @if ($servicio['clave_ingreso'] == '321321')
+                @if ($servicio['id'] == 292)
 
                     <div class="flex-auto bg-white p-4 rounded-lg mb-3 shadow-md">
 

@@ -20,6 +20,8 @@ class PredioIgnorado extends Component
     public $tramiteAdicionadoSeleccionado;
     public $tramiteAdicionado;
 
+    public $importe_base;
+
     public $editar = false;
 
     public Tramite $modelo_editar;
@@ -45,7 +47,6 @@ class PredioIgnorado extends Component
             'modelo_editar.servicio_id' => 'required',
             'modelo_editar.solicitante' => 'required',
             'modelo_editar.monto' => 'required',
-            'importe_base' => 'nullable',
             'modelo_editar.tipo_servicio' => 'required',
             'modelo_editar.cantidad' => 'required|numeric',
             'modelo_editar.adiciona' => 'required_if:adicionaTramite,true',
@@ -169,6 +170,8 @@ class PredioIgnorado extends Component
 
         $this->modelo_editar->servicio_id = $this->servicio['id'];
 
+        $this->updatedModeloEditarTipoTramite();
+
     }
 
     public function resetearTodo(){
@@ -188,11 +191,14 @@ class PredioIgnorado extends Component
 
         $this->validate();
 
+        if ($this->servicio['id'] == 292)
+            $this->validate(['importe_base' => 'required']);
+
         try {
 
             DB::transaction(function () {
 
-                $tramite = (new TramiteService($this->modelo_editar))->crearTramite($this->predios);
+                $tramite = (new TramiteService($this->modelo_editar))->crearTramite();
 
                 $this->resetearTodo();
 
