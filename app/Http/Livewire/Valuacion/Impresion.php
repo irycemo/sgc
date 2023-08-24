@@ -151,7 +151,7 @@ class Impresion extends Component
 
         }elseif($tramiteInspeccion->avaluo_para == 43 || $tramiteInspeccion->avaluo_para == 44){
 
-            if($tramiteAvaluo->servicio_id != 43 || $tramiteAvaluo->servicio_id != 44){
+            if($tramiteAvaluo->servicio_id != 43 && $tramiteAvaluo->servicio_id != 44){
 
                 $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un desglose."]);
 
