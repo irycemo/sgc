@@ -164,7 +164,11 @@ class AsignacionCuentaPredial extends Component
 
     public function mount(){
 
-        $this->valuadores = User::where('status', 'activo')->where('valuador', 1)->orderBy('ap_paterno')->get();
+        $this->valuadores = User::where('status', 'activo')
+                                    ->where('oficina', auth()->user()->oficina)
+                                    ->where('valuador', 1)
+                                    ->orderBy('ap_paterno')
+                                    ->get();
 
         $this->oficina = auth()->user()->oficina;
 
