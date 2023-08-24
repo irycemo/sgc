@@ -113,7 +113,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="director" readonly>
+                        <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="director" >
 
                     </div>
 
@@ -129,7 +129,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="jefe_departamento" readonly>
+                        <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="jefe_departamento" >
 
                     </div>
 
@@ -167,7 +167,7 @@
 
                             @foreach ($valuadores as $valuador)
 
-                                <option value="{{ $valuador->name }} {{ $valuador->ap_paterno }} {{ $valuador->ap_materno }}">{{ $valuador->name }} {{ $valuador->ap_paterno }} {{ $valuador->ap_materno }}</option>
+                                <option @if(auth()->user()->id == $valuador->id) selected @endif value="{{ $valuador->name }} {{ $valuador->ap_paterno }} {{ $valuador->ap_materno }}">{{ $valuador->name }} {{ $valuador->ap_paterno }} {{ $valuador->ap_materno }}</option>
 
                             @endforeach
 

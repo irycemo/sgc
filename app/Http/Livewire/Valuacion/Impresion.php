@@ -326,9 +326,7 @@ class Impresion extends Component
 
             $this->formato = 1;
 
-        }
-
-        $this->director = User::where('status', 'activo')
+            $this->director = User::where('status', 'activo')
                                     ->whereHas('roles', function($q){
                                         $q->where('name', 'Director');
                                     })
@@ -346,6 +344,7 @@ class Impresion extends Component
         $this->jefe_departamento = $this->jefe_departamento->name . ' ' . $this->jefe_departamento->ap_paterno . ' ' . $this->jefe_departamento->ap_materno;
 
         $this->notificador = "Temo";
+        }
 
         $this->valuadores = User::where('status', 'activo')
                                     ->where('valuador', 1)
