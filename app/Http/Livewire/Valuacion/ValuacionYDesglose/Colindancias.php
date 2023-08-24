@@ -19,6 +19,7 @@ class Colindancias extends Component
 
     protected function rules(){
         return [
+            'medidas.*' => 'required',
             'medidas.*.viento' => 'required|string',
             'medidas.*.longitud' => 'required|numeric|min:1',
             'medidas.*.descripcion' => 'required|string',

@@ -370,6 +370,7 @@ class Valor extends Component
 
         $this->validate([
             'predio' => 'required',
+            'construcciones.*'  => 'required',
             'construcciones.*.referencia' => 'required',
             'construcciones.*.valor_unitario' => 'required',
             'construcciones.*.niveles' => 'required',
@@ -445,6 +446,7 @@ class Valor extends Component
 
         $this->validate([
             'predio' => 'required',
+            'terrenos.*' => 'required',
             'terrenos.*.superficie' => 'required',
             'terrenos.*.valor_unitario' => 'required',
             'terrenos.*.demerito' => 'nullable|numeric|min:0',
@@ -510,6 +512,7 @@ class Valor extends Component
 
         $this->validate([
             'predio' => 'required',
+            'terrenosCondominio.*' => 'required',
             'terrenosCondominio.*.area_terreno_comun' => 'required',
             'terrenosCondominio.*.indiviso_terreno' => 'required',
             'terrenosCondominio.*.valor_unitario' => 'required',
@@ -575,6 +578,7 @@ class Valor extends Component
 
         $this->validate([
             'predio' => 'required',
+            'construccionesCondominio.*' => 'required',
             'construccionesCondominio.*.area_comun_construccion' => 'required',
             'construccionesCondominio.*.indiviso_construccion' => 'required',
             'construccionesCondominio.*.valor_clasificacion_construccion' => 'required',
