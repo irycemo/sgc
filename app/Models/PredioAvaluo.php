@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Avaluo;
 use App\Models\Terreno;
+use App\Models\Colindancia;
+use App\Models\Propietario;
+use App\Models\Construccion;
 use App\Http\Traits\ModelosTrait;
+use App\Models\Condominioterreno;
 use App\Models\Condominioconstruccion;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -23,7 +28,7 @@ class PredioAvaluo extends Model implements Auditable
     }
 
     public function condominioTerrenos(){
-        return $this->morphMany(CondominioTerreno::class, 'condominioterrenoable');
+        return $this->morphMany(Condominioterreno::class, 'condominioterrenoable');
     }
 
     public function condominioConstrucciones(){

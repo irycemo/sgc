@@ -26,8 +26,6 @@
 
                     <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.clasificacion_zona">
 
-                        <option value="" selected>Seleccione una opción</option>
-
                         @foreach ($zonas as $item)
 
                             <option value="{{ $item }}" selected>{{ $item }}</option>
@@ -57,8 +55,6 @@
                 <div class="">
 
                     <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.construccion_dominante">
-
-                        <option value="" selected>Seleccione una opción</option>
 
                         @foreach ($construcciones as $item)
 
@@ -99,7 +95,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.agua">
+                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.agua" @if($predio && $predio->tipo_predio == 1) checked @endif>
 
                     </div>
 
@@ -120,7 +116,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.drenaje">
+                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.drenaje" @if($predio && $predio->tipo_predio == 1) checked @endif>
 
                     </div>
 
@@ -141,7 +137,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.pavimento">
+                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.pavimento" @if($predio && $predio->tipo_predio == 1) checked @endif>
 
                     </div>
 
@@ -162,7 +158,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.energia_electrica">
+                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.energia_electrica" @if($predio && $predio->tipo_predio == 1) checked @endif>
 
                     </div>
 
@@ -183,7 +179,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.alumbrado_publico">
+                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.alumbrado_publico" @if($predio && $predio->tipo_predio == 1) checked @endif>
 
                     </div>
 
@@ -204,7 +200,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.banqueta">
+                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.banqueta" @if($predio && $predio->tipo_predio == 1) checked @endif>
 
                     </div>
 
@@ -240,8 +236,6 @@
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.cimentacion') border-red-500 @enderror" wire:model.defer="avaluo.cimentacion">
 
-                        <option value="" selected>Seleccione una opción</option>
-
                         @foreach ($cimentaciones as $item)
 
                             <option value="{{ $item }}" selected>{{ $item }}</option>
@@ -265,8 +259,6 @@
                 <div>
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.estructura') border-red-500 @enderror" wire:model.defer="avaluo.estructura">
-
-                        <option value="" selected>Seleccione una opción</option>
 
                         @foreach ($estructuras as $item)
 
@@ -292,8 +284,6 @@
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.muros') border-red-500 @enderror" wire:model.defer="avaluo.muros">
 
-                        <option value="" selected>Seleccione una opción</option>
-
                         @foreach ($muros as $item)
 
                             <option value="{{ $item }}" selected>{{ $item }}</option>
@@ -318,8 +308,6 @@
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.entrepiso') border-red-500 @enderror" wire:model.defer="avaluo.entrepiso">
 
-                        <option value="" selected>Seleccione una opción</option>
-
                         @foreach ($entrepisos as $item)
 
                             <option value="{{ $item }}" selected>{{ $item }}</option>
@@ -343,8 +331,6 @@
                 <div>
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.techo') border-red-500 @enderror" wire:model.defer="avaluo.techo">
-
-                        <option value="" selected>Seleccione una opción</option>
 
                         @foreach ($techos as $item)
 
@@ -380,8 +366,6 @@
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.plafones') border-red-500 @enderror" wire:model.defer="avaluo.plafones">
 
-                        <option value="" selected>Seleccione una opción</option>
-
                         @foreach ($plafones as $item)
 
                             <option value="{{ $item }}" selected>{{ $item }}</option>
@@ -405,8 +389,6 @@
                 <div>
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.vidrieria') border-red-500 @enderror" wire:model.defer="avaluo.vidrieria">
-
-                        <option value="" selected>Seleccione una opción</option>
 
                         @foreach ($vidrieria as $item)
 
@@ -432,8 +414,6 @@
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.lambrines') border-red-500 @enderror" wire:model.defer="avaluo.lambrines">
 
-                        <option value="" selected>Seleccione una opción</option>
-
                         @foreach ($lambrines as $item)
 
                             <option value="{{ $item }}" selected>{{ $item }}</option>
@@ -457,8 +437,6 @@
                 <div>
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.pisos') border-red-500 @enderror" wire:model.defer="avaluo.pisos">
-
-                        <option value="" selected>Seleccione una opción</option>
 
                         @foreach ($pisos as $item)
 
@@ -484,8 +462,6 @@
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.herreria') border-red-500 @enderror" wire:model.defer="avaluo.herreria">
 
-                        <option value="" selected>Seleccione una opción</option>
-
                         @foreach ($herreria as $item)
 
                             <option value="{{ $item }}" selected>{{ $item }}</option>
@@ -509,8 +485,6 @@
                 <div>
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.pintura') border-red-500 @enderror" wire:model.defer="avaluo.pintura">
-
-                        <option value="" selected>Seleccione una opción</option>
 
                         @foreach ($pintura as $item)
 
@@ -536,8 +510,6 @@
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.carpinteria') border-red-500 @enderror" wire:model.defer="avaluo.carpinteria">
 
-                        <option value="" selected>Seleccione una opción</option>
-
                         @foreach ($carpinteria as $item)
 
                             <option value="{{ $item }}" selected>{{ $item }}</option>
@@ -562,8 +534,6 @@
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.aplanados') border-red-500 @enderror" wire:model.defer="avaluo.aplanados">
 
-                        <option value="" selected>Seleccione una opción</option>
-
                         @foreach ($aplanados as $item)
 
                             <option value="{{ $item }}" selected>{{ $item }}</option>
@@ -587,8 +557,6 @@
                 <div>
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.recubrimiento_especial') border-red-500 @enderror" wire:model.defer="avaluo.recubrimiento_especial">
-
-                        <option value="" selected>Seleccione una opción</option>
 
                         @foreach ($rec_especial as $item)
 
@@ -624,8 +592,6 @@
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.hidraulica') border-red-500 @enderror" wire:model.defer="avaluo.hidraulica">
 
-                        <option value="" selected>Seleccione una opción</option>
-
                         @foreach ($hidraulica as $item)
 
                             <option value="{{ $item }}" selected>{{ $item }}</option>
@@ -649,8 +615,6 @@
                 <div>
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.sanitaria') border-red-500 @enderror" wire:model.defer="avaluo.sanitaria">
-
-                        <option value="" selected>Seleccione una opción</option>
 
                         @foreach ($sanitaria as $item)
 
@@ -676,8 +640,6 @@
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.electrica') border-red-500 @enderror" wire:model.defer="avaluo.electrica">
 
-                        <option value="" selected>Seleccione una opción</option>
-
                         @foreach ($electrica as $item)
 
                             <option value="{{ $item }}" selected>{{ $item }}</option>
@@ -702,8 +664,6 @@
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.gas') border-red-500 @enderror" wire:model.defer="avaluo.gas">
 
-                        <option value="" selected>Seleccione una opción</option>
-
                         @foreach ($gas as $item)
 
                             <option value="{{ $item }}" selected>{{ $item }}</option>
@@ -727,8 +687,6 @@
                 <div>
 
                     <select class="bg-white rounded text-xs w-full @error('avaluo.especiales') border-red-500 @enderror" wire:model.defer="avaluo.especiales">
-
-                        <option value="" selected>Seleccione una opción</option>
 
                         @foreach ($especiales as $item)
 

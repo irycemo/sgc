@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Models\Terreno;
+use App\Models\Movimiento;
 use App\Models\Colindancia;
 use App\Models\Propietario;
 use App\Models\Construccion;
 use App\Http\Traits\ModelosTrait;
-use App\Models\CondominioTerreno;
+use App\Models\Condominioterreno;
 use App\Models\Condominioconstruccion;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -26,7 +27,7 @@ class Predio extends Model implements Auditable
     }
 
     public function condominioTerrenos(){
-        return $this->morphMany(CondominioTerreno::class, 'condominioterrenoable');
+        return $this->morphMany(Condominioterreno::class, 'condominioterrenoable');
     }
 
     public function condominioConstrucciones(){
@@ -46,7 +47,7 @@ class Predio extends Model implements Auditable
     }
 
     public function movimientos(){
-        return $this->belongsToMany(Movimineto::class)->withPivot('descripcion')->withTimestamps();
+        return $this->belongsToMany(Movimiento::class)->withPivot('descripcion')->withTimestamps();
     }
 
 }
