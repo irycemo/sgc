@@ -64,16 +64,6 @@ class Impresion extends Component
 
     }
 
-    public function updatedFormato(){
-
-        if(!$this->formato)
-            $this->oficina = 101;
-        else{
-            $this->oficina = auth()->user()->oficina;
-        }
-
-    }
-
     public function updatedOficina(){
 
         $this->validate(['localidad' => 'required','oficina' => 'required']);
@@ -322,9 +312,9 @@ class Impresion extends Component
 
         $this->oficina = auth()->user()->oficina;
 
-        if($this->oficina != 101){
+        $this->formato = 0;
 
-            $this->formato = 1;
+        if($this->oficina != 101){
 
             $this->director = User::where('status', 'activo')
                                     ->whereHas('roles', function($q){
