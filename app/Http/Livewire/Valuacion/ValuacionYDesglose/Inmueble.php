@@ -249,7 +249,7 @@ class Inmueble extends Component
                 'predio.oficina' => 'required',
             ]);
 
-            $this->predio_padron = Predio::with('propietarios', 'construcciones', 'condominio', 'colindancias')
+            $this->predio_padron = Predio::with('propietarios', 'avaluo')
                                     ->where('numero_registro', $this->predio->numero_registro)
                                     ->where('tipo_predio', $this->predio->tipo_predio)
                                     ->where('localidad', $this->predio->localidad)
