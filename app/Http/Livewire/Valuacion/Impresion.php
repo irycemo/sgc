@@ -86,6 +86,29 @@ class Impresion extends Component
 
         $this->valuador_municipal = $oficina->valuador_municipal;
 
+        if($this->oficina == 101){
+
+            $this->director = User::where('status', 'activo')
+                                    ->whereHas('roles', function($q){
+                                        $q->where('name', 'Director');
+                                    })
+                                    ->first();
+
+            $this->director = $this->director->name . ' ' . $this->director->ap_paterno . ' ' . $this->director->ap_materno;
+
+            $this->jefe_departamento = User::where('status', 'activo')
+                                                ->whereHas('roles', function($q){
+                                                    $q->where('name', 'Jefe de departamento');
+                                                })
+                                                ->where('area', 'Departamento de Valuación')
+                                                ->first();
+
+            $this->jefe_departamento = $this->jefe_departamento->name . ' ' . $this->jefe_departamento->ap_paterno . ' ' . $this->jefe_departamento->ap_materno;
+
+            $this->notificador = "Temo";
+
+        }
+
 
     }
 
@@ -322,7 +345,7 @@ class Impresion extends Component
 
         $this->formato = 0;
 
-        if($this->oficina != 101){
+        if($this->oficina == 101){
 
             $this->director = User::where('status', 'activo')
                                     ->whereHas('roles', function($q){
