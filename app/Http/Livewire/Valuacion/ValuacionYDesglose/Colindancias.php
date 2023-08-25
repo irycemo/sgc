@@ -3,9 +3,10 @@
 namespace App\Http\Livewire\Valuacion\ValuacionYDesglose;
 
 use Livewire\Component;
-use App\Models\PredioAvaluo;
-use App\Http\Constantes\Constantes;
 use App\Models\Colindancia;
+use App\Models\PredioAvaluo;
+use Illuminate\Support\Facades\DB;
+use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
 
 class Colindancias extends Component
@@ -40,8 +41,6 @@ class Colindancias extends Component
     public function cargarPredio($id){
 
         $this->predio = PredioAvaluo::with('colindancias', 'avaluo')->find($id);
-
-        $this->medidas[] = ['viento' => null, 'longitud' => null, 'descripcion' => null, 'id' => null];
 
         foreach ($this->predio->colindancias as $colindancia) {
 
@@ -87,29 +86,35 @@ class Colindancias extends Component
 
         try {
 
-            foreach ($this->medidas as $medida) {
+            DB::transaction(function () {
 
-                if($medida['id'] == null){
+                foreach ($this->medidas as $key =>$medida) {
 
-                    $this->predio->colindancias()->create([
-                        'viento' => $medida['viento'],
-                        'longitud' => $medida['longitud'],
-                        'descripcion' => $medida['descripcion'],
-                    ]);
+                    if($medida['id'] == null){
 
-                }else{
+                        $aux = $this->predio->colindancias()->create([
+                            'viento' => $medida['viento'],
+                            'longitud' => $medida['longitud'],
+                            'descripcion' => $medida['descripcion'],
+                        ]);
 
-                    Colindancia::find($medida['id'])->update([
-                        'viento' => $medida['viento'],
-                        'longitud' => $medida['longitud'],
-                        'descripcion' => $medida['descripcion'],
-                    ]);
+                        $this->medidas[$key]['id'] = $aux->id;
+
+                    }else{
+
+                        Colindancia::find($medida['id'])->update([
+                            'viento' => $medida['viento'],
+                            'longitud' => $medida['longitud'],
+                            'descripcion' => $medida['descripcion'],
+                        ]);
+
+                    }
 
                 }
 
-            }
+                $this->dispatchBrowserEvent('mostrarMensaje', ['success', "Las colindacias se guardaron con éxito"]);
 
-            $this->dispatchBrowserEvent('mostrarMensaje', ['success', "Las colindacias se guardaron con éxito"]);
+            });
 
         } catch (\Throwable $th) {
             Log::error("Error al crear medidas por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
