@@ -785,7 +785,7 @@
                         </tr>
                     </table>
 
-                    <p><strong>Valor catastral del predio : ${{ number_format($predio->valor_catastral, 2) }}</strong></p>
+                    <p style="font-size: 14; text-align: center"><strong>Valor catastral del predio : ${{ number_format($predio->valor_catastral, 2) }}</strong></p>
 
                 </div>
 
@@ -793,11 +793,15 @@
 
             @if($predio->avaluo->observaciones)
 
+            <div class="caracteristicas-tabla">
+
                 <p class="separador">Observaciones</p>
 
                 <div class="informacion">
                     @if($predio->avaluo->observaciones)<p style="text-align: justify">{{ $predio->avaluo->observaciones }}</p>@endif
                 </div>
+
+            </div>
 
             @endif
 
