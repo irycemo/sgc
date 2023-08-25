@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Valuacion;
 
 use App\Models\User;
 use App\Models\Predio;
-use App\Models\Oficina;
 use Livewire\Component;
 use App\Models\AsignarCuenta;
 use Illuminate\Support\Facades\DB;

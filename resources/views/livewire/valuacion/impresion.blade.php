@@ -89,7 +89,7 @@
 
             <input placeholder="Registro inicial" type="number" class="bg-white rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model.defer="registro_inicio">
             <p class="text-sm mb-0">a</p>
-            <input placeholder="Registro final" type="number" class="bg-white rounded text-xs" wire:model.defer="registro_final">
+            <input placeholder="Registro final" type="number" class="bg-white rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model.defer="registro_final">
 
         </div>
 
@@ -113,7 +113,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="director" >
+                        <input type="text" class="bg-white rounded text-xs w-full @error('director') border-1 border-red-500 @enderror" wire:model.defer="director" >
 
                     </div>
 
@@ -129,7 +129,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="jefe_departamento" >
+                        <input type="text" class="bg-white rounded text-xs w-full @error('jefe_departamento') border-1 border-red-500 @enderror" wire:model.defer="jefe_departamento" >
 
                     </div>
 
@@ -167,7 +167,7 @@
 
                             @foreach ($valuadores as $valuador)
 
-                                <option @if(auth()->user()->id == $valuador->id) selected @endif value="{{ $valuador->name }} {{ $valuador->ap_paterno }} {{ $valuador->ap_materno }}">{{ $valuador->name }} {{ $valuador->ap_paterno }} {{ $valuador->ap_materno }}</option>
+                                <option value="{{ $valuador->name }} {{ $valuador->ap_paterno }} {{ $valuador->ap_materno }}">{{ $valuador->name }} {{ $valuador->ap_paterno }} {{ $valuador->ap_materno }}</option>
 
                             @endforeach
 
@@ -193,7 +193,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full lg:w-1/2" wire:model.defer="autoridad_municipal" readonly>
+                        <input type="text" class="bg-white rounded text-xs w-full lg:w-1/2 @error('autoridad_municipal') border-1 border-red-500 @enderror" wire:model.defer="autoridad_municipal">
 
                     </div>
 
@@ -209,7 +209,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full lg:w-1/2" wire:model.defer="valuador_municipal" readonly>
+                        <input type="text" class="bg-white rounded text-xs w-full lg:w-1/2 @error('valuador_municipal') border-1 border-red-500 @enderror" wire:model.defer="valuador_municipal">
 
                     </div>
 
@@ -292,7 +292,7 @@
         @if(count($errors) > 0)
 
             <span class="bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-red-700 flex items-center justify-center focus:outline-none ">
-                Campos incorrectos {{ $errors }}
+                Campos incorrectos
                 @error('predio') <span class="error text-sm text-white">{{ $message }}</span> @enderror
             </span>
 

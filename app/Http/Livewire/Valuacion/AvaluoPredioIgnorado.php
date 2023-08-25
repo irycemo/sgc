@@ -98,6 +98,8 @@ class AvaluoPredioIgnorado extends Component
     }
 
     protected $validationAttributes  = [
+        'tramite' => 'trámite',
+        'numero_registro' => 'número de registro',
         'ap_paterno' => 'apellido paterno',
         'ap_materno' => 'apellido materno',
         'tipo_persona' => 'tipo de persona',

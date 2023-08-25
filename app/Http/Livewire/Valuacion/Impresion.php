@@ -39,6 +39,10 @@ class Impresion extends Component
 
     protected function rules(){
         return [
+            'director' => 'required',
+            'valuador_municipal' => 'required',
+            'jefe_departamento' => 'required',
+            'autoridad_municipal' => 'required',
             'tramiteInspeccion' => 'required',
             'tramiteAvaluo' => 'required',
             'localidad' => 'required',
@@ -323,18 +327,19 @@ class Impresion extends Component
                                     })
                                     ->first();
 
-        $this->director = $this->director->name . ' ' . $this->director->ap_paterno . ' ' . $this->director->ap_materno;
+            $this->director = $this->director->name . ' ' . $this->director->ap_paterno . ' ' . $this->director->ap_materno;
 
-        $this->jefe_departamento = User::where('status', 'activo')
-                                            ->whereHas('roles', function($q){
-                                                $q->where('name', 'Jefe de departamento');
-                                            })
-                                            ->where('area', 'Departamento de Valuación')
-                                            ->first();
+            $this->jefe_departamento = User::where('status', 'activo')
+                                                ->whereHas('roles', function($q){
+                                                    $q->where('name', 'Jefe de departamento');
+                                                })
+                                                ->where('area', 'Departamento de Valuación')
+                                                ->first();
 
-        $this->jefe_departamento = $this->jefe_departamento->name . ' ' . $this->jefe_departamento->ap_paterno . ' ' . $this->jefe_departamento->ap_materno;
+            $this->jefe_departamento = $this->jefe_departamento->name . ' ' . $this->jefe_departamento->ap_paterno . ' ' . $this->jefe_departamento->ap_materno;
 
-        $this->notificador = "Temo";
+            $this->notificador = "Temo";
+
         }
 
         $this->valuadores = User::where('status', 'activo')

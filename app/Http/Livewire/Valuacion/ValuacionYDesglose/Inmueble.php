@@ -403,13 +403,7 @@ class Inmueble extends Component
 
         }else{
 
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El predio ya existe, verifique."]);
-
-            return true;
-
-        }
-
-        $predioCompletoAvaluo = PredioAvaluo::where('estado', $this->predio->estado)
+            $predioCompletoAvaluo = PredioAvaluo::where('estado', $this->predio->estado)
                                                 ->where('region_catastral', $this->predio->region_catastral)
                                                 ->where('municipio', $this->predio->municipio)
                                                 ->where('zona_catastral', $this->predio->zona_catastral)
@@ -423,45 +417,48 @@ class Inmueble extends Component
                                                 ->where('numero_registro', $this->predio->numero_registro)
                                                 ->first();
 
-        if(!$predioCompletoAvaluo){
+            if(!$predioCompletoAvaluo){
 
-            $cuentaPredialAvaluo = PredioAvaluo::where('localidad', $this->predio->localidad)
-                                                ->where('oficina', $this->predio->oficina)
-                                                ->where('tipo_predio', $this->predio->tipo_predio)
-                                                ->where('numero_registro', $this->predio->numero_registro)
-                                                ->first();
-
-            if($cuentaPredialAvaluo){
-
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cuenta predial ya existe en avaluos con otra clave catastral, verifique."]);
-
-                return true;
-            }
-
-            $claveCatastralAvaluo = PredioAvaluo::where('estado', $this->predio->estado)
-                                                    ->where('region_catastral', $this->predio->region_catastral)
-                                                    ->where('municipio', $this->predio->municipio)
-                                                    ->where('zona_catastral', $this->predio->zona_catastral)
-                                                    ->where('localidad', $this->predio->localidad)
-                                                    ->where('sector', $this->predio->sector)
-                                                    ->where('manzana', $this->predio->manzana)
-                                                    ->where('edificio', $this->predio->edificio)
-                                                    ->where('departamento', $this->predio->departamento)
+                $cuentaPredialAvaluo = PredioAvaluo::where('localidad', $this->predio->localidad)
+                                                    ->where('oficina', $this->predio->oficina)
+                                                    ->where('tipo_predio', $this->predio->tipo_predio)
+                                                    ->where('numero_registro', $this->predio->numero_registro)
                                                     ->first();
 
-            if($claveCatastralAvaluo){
+                if($cuentaPredialAvaluo){
 
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La clave catastral ya existe en avaluos con otra cuenta predial, verifique."]);
+                    $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cuenta predial ya existe en avaluos con otra clave catastral, verifique."]);
+
+                    return true;
+                }
+
+                $claveCatastralAvaluo = PredioAvaluo::where('estado', $this->predio->estado)
+                                                        ->where('region_catastral', $this->predio->region_catastral)
+                                                        ->where('municipio', $this->predio->municipio)
+                                                        ->where('zona_catastral', $this->predio->zona_catastral)
+                                                        ->where('localidad', $this->predio->localidad)
+                                                        ->where('sector', $this->predio->sector)
+                                                        ->where('manzana', $this->predio->manzana)
+                                                        ->where('edificio', $this->predio->edificio)
+                                                        ->where('departamento', $this->predio->departamento)
+                                                        ->first();
+
+                if($claveCatastralAvaluo){
+
+                    $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La clave catastral ya existe en avaluos con otra cuenta predial, verifique."]);
+
+                    return true;
+
+                }
+
+            }else{
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El predio ya existe en avaluos, verifique."]);
 
                 return true;
 
             }
 
-        }else{
-
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El predio ya existe en avaluos, verifique."]);
-
-            return true;
         }
 
     }

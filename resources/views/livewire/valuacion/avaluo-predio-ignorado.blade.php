@@ -810,9 +810,9 @@
 
             <div class="relative p-1">
 
-                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5 items-end">
+                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <div class="flex-auto ">
+                    <div class="flex-auto items-start">
 
                         <div>
 
@@ -834,7 +834,7 @@
 
                     </div>
 
-                    <div class="flex-auto ">
+                    <div class="flex-auto items-start">
 
                         <div>
 
@@ -856,7 +856,7 @@
 
                     </div>
 
-                    <div class="flex-auto ">
+                    <div class="flex-auto items-start">
 
                         <div>
 
@@ -878,13 +878,13 @@
 
                     </div>
 
-                    <div class="flex-auto ">
+                    <div class="">
 
                         <button
                             wire:click="busacarPropietario"
                             wire:loading.attr="disabled"
                             wire:target="busacarPropietario"
-                            class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
+                            class=" bg-green-400 hover:shadow-lg text-white mt-3 my-auto w-full text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
                         >
 
                             <img wire:loading wire:target="busacarPropietario" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
@@ -994,7 +994,7 @@
 
             <div class="relative p-1">
 
-                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5 items-end">
+                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5 items-start">
 
                     <div class="flex-auto ">
 
@@ -1006,7 +1006,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="tramite">
+                            <input type="number" class="bg-white rounded text-sm" wire:model.defer="tramite">
 
                         </div>
 
@@ -1017,6 +1017,10 @@
                         </div>
 
                     </div>
+
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5 items-start">
 
                     <div class="flex-auto ">
 
