@@ -343,6 +343,7 @@ class Notificacion extends Component
     {
 
         $avaluos = Avaluo::with('predio.propietarios.persona')
+                                    ->where('estado', 'impreso')
                                     ->whereBetween('folio', [$this->inicio, $this->final])
                                     ->whereNull('notificado_en')
                                     ->paginate($this->pagination);

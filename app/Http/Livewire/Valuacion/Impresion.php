@@ -233,7 +233,10 @@ class Impresion extends Component
 
                 $predio->update(['status' => 'impreso']);
 
-                $predio->avaluo->update(['tramite_id' => $tramiteInspeccion->id]);
+                $predio->avaluo->update([
+                            'tramite_id' => $tramiteInspeccion->id,
+                            'estado' => 'impreso'
+                        ]);
 
             }
 

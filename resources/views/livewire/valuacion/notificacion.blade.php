@@ -178,7 +178,7 @@
 
                 <div>
 
-                    <input type="datetime-local" class="bg-white rounded text-sm w-full" wire:model.defer="fecha_notificacion">
+                    <input type="date" class="bg-white rounded text-sm w-full" wire:model="fecha_notificacion">
 
                 </div>
 
