@@ -37,7 +37,7 @@ class Notificacion extends Component
     public function notificar(){
 
         $this->validate(
-            ['fecha_notificacion' => 'required']
+            ['fecha_notificacion' => 'required|before:tomorrow']
         );
 
         $predio = Predio::where('estado', $this->avaluo->predio->estado)
