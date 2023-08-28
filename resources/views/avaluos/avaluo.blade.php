@@ -898,7 +898,7 @@
 
             <div class="informacion">
 
-                @if($formato)
+                @if(!$formato)
 
                     <table style="margin-top: 60px">
 

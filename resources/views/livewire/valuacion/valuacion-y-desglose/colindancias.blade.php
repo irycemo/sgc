@@ -145,18 +145,22 @@
 
         @endif
 
-        <button
-            wire:click="guardar"
-            wire:loading.attr="disabled"
-            wire:target="guardar"
-            class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-        >
+        @if($predio)
 
-            <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+            <button
+                wire:click="guardar"
+                wire:loading.attr="disabled"
+                wire:target="guardar"
+                class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
+            >
 
-            Guardar
+                <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-        </button>
+                Guardar
+
+            </button>
+
+        @endif
 
     </div>
 

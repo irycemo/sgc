@@ -211,6 +211,8 @@ class InspeccionOcular extends Component
 
         $this->modelo_editar->servicio_id = $this->servicio['id'];
 
+        $this->updatedModeloEditarTipoTramite();
+
     }
 
     public function resetearTodo(){

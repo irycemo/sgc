@@ -155,6 +155,7 @@ class Constantes{
     ];
 
     const CLASIFICACION_ZONA = [
+        'NO APLICA',
         'HAB. DEN. SUBURBANA MENOR 50 HAB POR HA',
         'HAB. DEN. BAJA 51 - 150 HAB POR HA',
         'HAB. DEN. MEDIA 151 - 300 HAB POR HA',
@@ -183,6 +184,7 @@ class Constantes{
     ];
 
     const CONSTRUCCION_DOMINANTE = [
+        'NO APLICA',
         'UN NIVEL (ECONOMICA)',
         'UN NIVEL (IND. LIGERA)',
         'UN NIVEL  (IND. MEDIA)',

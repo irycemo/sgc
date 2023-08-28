@@ -318,6 +318,8 @@ class Copias extends Component
 
         $this->oficina = auth()->user()->oficina;
 
+        $this->updatedModeloEditarTipoTramite();
+
     }
 
     public function resetearTodo(){

@@ -305,7 +305,7 @@
 
         </div>
 
-        <button
+        {{-- <button
             wire:click="agregarTerreno"
             wire:loading.attr="disabled"
             wire:target="agregarTerreno"
@@ -316,7 +316,7 @@
 
             Agregar nuevo
 
-        </button>
+        </button> --}}
 
         <div class="flex justify-end">
 
@@ -329,7 +329,7 @@
 
                 <img wire:loading wire:target="guardarTerrenos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                Guardar terrenos
+                Guardar terreno
 
             </button>
 
@@ -347,7 +347,7 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-3 mb-2 bg-gray-50 p-4 rounded-lg items-start">
 
-                    <div class="flex-auto lg:col-span-2">
+                    <div class="flex-auto lg:col-span-1">
 
                         <div>
 
@@ -369,7 +369,7 @@
 
                     </div>
 
-                    <div class="flex-auto lg:col-span-2">
+                    <div class="flex-auto lg:col-span-3">
 
                         <div>
 
@@ -999,18 +999,22 @@
 
         @endif
 
-        <button
-            wire:click="guardar"
-            wire:loading.attr="disabled"
-            wire:target="guardar"
-            class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-        >
+        @if($predio)
 
-            <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+            <button
+                wire:click="guardar"
+                wire:loading.attr="disabled"
+                wire:target="guardar"
+                class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
+            >
 
-            Guardar
+                <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-        </button>
+                Guardar
+
+            </button>
+
+        @endif
 
     </div>
 

@@ -40,6 +40,7 @@ class Caracteristicas extends Component
 
     protected function rules(){
         return [
+            'avaluo' => 'required',
             'avaluo.clasificacion_zona' => 'required',
             'avaluo.construccion_dominante' => 'required',
             'avaluo.agua' => 'nullable',
