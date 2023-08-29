@@ -58,7 +58,8 @@ class Oficinas extends Component
         if($this->modelo_editar->isNot($modelo))
             $this->modelo_editar = $modelo;
 
-        $this->sectores = json_decode($this->modelo_editar->sectores, true);
+        if($this->modelo_editar->sectores)
+            $this->sectores = json_decode($this->modelo_editar->sectores, true);
 
     }
 
