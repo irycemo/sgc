@@ -61,6 +61,7 @@ class AvaluoPredioIgnorado extends Component
             'predio.localidad' => 'nullable',
             'predio.sector' => 'required',
             'predio.manzana' => 'required',
+            'predio.predio' => 'required',
             'predio.edificio' => 'required',
             'predio.departamento' => 'required',
             'predio.tipo_predio' => 'required',
@@ -151,6 +152,7 @@ class AvaluoPredioIgnorado extends Component
                 'predio.localidad' => 'required',
                 'predio.sector' => 'required',
                 'predio.manzana' => 'required',
+                'predio.predio' => 'required',
                 'predio.edificio' => 'nullable',
                 'predio.departamento' => 'nullable',
             ]);
@@ -164,6 +166,7 @@ class AvaluoPredioIgnorado extends Component
                                         ->where('localidad', $this->predio->localidad)
                                         ->where('sector', $this->predio->sector)
                                         ->where('manzana', $this->predio->manzana)
+                                        ->where('predio', $this->predio->manzana)
                                         ->where('edificio', $this->predio->edificio)
                                         ->where('departamento', $this->predio->departamento)
                                         ->firstOrFail();
@@ -268,6 +271,7 @@ class AvaluoPredioIgnorado extends Component
                                                 ->where('localidad', $this->predio->localidad)
                                                 ->where('sector', $this->predio->sector)
                                                 ->where('manzana', $this->predio->manzana)
+                                                ->where('predio', $this->predio->manzana)
                                                 ->where('edificio', $this->predio->edificio)
                                                 ->where('departamento', $this->predio->departamento)
                                                 ->where('oficina', $this->predio->oficina)
@@ -297,6 +301,7 @@ class AvaluoPredioIgnorado extends Component
                                                     ->where('localidad', $this->predio->localidad)
                                                     ->where('sector', $this->predio->sector)
                                                     ->where('manzana', $this->predio->manzana)
+                                                    ->where('predio', $this->predio->manzana)
                                                     ->where('edificio', $this->predio->edificio)
                                                     ->where('departamento', $this->predio->departamento)
                                                     ->first();
@@ -327,6 +332,7 @@ class AvaluoPredioIgnorado extends Component
                                     ->where('localidad', $this->predio->localidad)
                                     ->where('sector', $this->predio->sector)
                                     ->where('manzana', $this->predio->manzana)
+                                    ->where('predio', $this->predio->predio)
                                     ->where('edificio', $this->predio->edificio)
                                     ->where('departamento', $this->predio->departamento)
                                     ->where('oficina', $this->predio->oficina)
@@ -357,6 +363,7 @@ class AvaluoPredioIgnorado extends Component
                                         ->where('localidad', $this->predio->localidad)
                                         ->where('sector', $this->predio->sector)
                                         ->where('manzana', $this->predio->manzana)
+                                        ->where('predio', $this->predio->predio)
                                         ->where('edificio', $this->predio->edificio)
                                         ->where('departamento', $this->predio->departamento)
                                         ->first();

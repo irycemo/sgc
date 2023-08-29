@@ -259,7 +259,231 @@
 
     </div>
 
-    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Propietarios</h4>
+    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terreno</h4>
+
+    @forelse ($predio->construcciones as $construccion)
+
+        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Superficie</strong>
+
+                    <p>{{ $predio->terrenos->first()?->superficie }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Valor unitario</strong>
+
+                    <p>{{ $predio->terrenos->first()?->valor_unitario }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Demerito</strong>
+
+                    <p>{{ $predio->terrenos->first()?->demerito }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Valor demeritado</strong>
+
+                    <p>{{ $predio->terrenos->first()?->valor_demeritado }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Valor del terreno</strong>
+
+                    <p>{{ $predio->terrenos->first()?->valor_demeritado }}</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    @empty
+
+        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
+
+            No hay resultados.
+
+        </div>
+
+    @endforelse
+
+    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Construcciones ({{ $predio->construcciones->count() }})</h4>
+
+    @forelse ($predio->construcciones as $construccion)
+
+        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Referencia</strong>
+
+                    <p>{{ $construccion->referencia }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Clasificación de construccion</strong>
+
+                    <p>{{ $construccion->tipo }}-{{ $construccion->uso }}-{{ $construccion->calidad }}--{{ $construccion->estado }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Niveles</strong>
+
+                    <p>{{ $construccion->niveles }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Superficie</strong>
+
+                    <p>{{ $construccion->superficie }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Valor unitario</strong>
+
+                    <p>{{ $construccion->valor_unitario }}</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    @empty
+
+        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
+
+            No hay resultados.
+
+        </div>
+
+    @endforelse
+
+    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terrenos de área común ({{ $predio->condominioTerrenos->count() }})</h4>
+
+    @forelse ($predio->condominioTerrenos as $terreno)
+
+        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Área común de terreno</strong>
+
+                    <p>{{ $terreno->area_terreno_comun }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Indiviso de terreno</strong>
+
+                    <p>{{ $terreno->tipo }}-{{ $terreno->uso }}-{{ $terreno->calidad }}--{{ $terreno->estado }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Valor unitario</strong>
+
+                    <p>{{ $terreno->valor_unitario }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Valor de terreno común</strong>
+
+                    <p>{{ $terreno->valor_terreno_comun }}</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    @empty
+
+        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
+
+            No hay resultados.
+
+        </div>
+
+    @endforelse
+
+    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terrenos de área común ({{ $predio->condominioConstrucciones->count() }})</h4>
+
+    @forelse ($predio->condominioConstrucciones as $construccion)
+
+        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Área común de construcción</strong>
+
+                    <p>{{ $construccion->area_comun_construccion }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Clasificación de construccion</strong>
+
+                    <p>{{ $construccion->tipo }}-{{ $construccion->uso }}-{{ $construccion->calidad }}--{{ $construccion->estado }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Valor de construcción común</strong>
+
+                    <p>{{ $construccion->valor_construccion_comun }}</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    @empty
+
+        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
+
+            No hay resultados.
+
+        </div>
+
+    @endforelse
+
+    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Propietarios ({{ $predio->propietarios->count() }})</h4>
 
     @forelse ($predio->propietarios as $propietario)
 
@@ -347,17 +571,21 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 py-1 px-2 col-span-2">
 
                     <strong>Dirección</strong>
 
-                    <p>Calle: {{ $propietario->persona->calle }}</p>
-                    <p>Número exterior: {{ $propietario->persona->numero_exterior }}</p>
-                    <p>Número interior: {{ $propietario->persona->numero_interior }}</p>
-                    <p>Colonia: {{ $propietario->persona->colonia }}</p>
-                    <p>Código postal: {{ $propietario->persona->cp }}</p>
-                    <p>Entidad: {{ $propietario->persona->entidad }}</p>
-                    <p>Municipio: {{ $propietario->persona->municipio }}</p>
+                    <div class="flex flex-wrap space-x-2">
+
+                        <p>Calle: {{ $propietario->persona->calle }}.</p>
+                        <p>Número exterior: {{ $propietario->persona->numero_exterior }}.</p>
+                        <p>Número interior: {{ $propietario->persona->numero_interior }}.</p>
+                        <p>Colonia: {{ $propietario->persona->colonia }}.</p>
+                        <p>Código postal: {{ $propietario->persona->cp }}.</p>
+                        <p>Entidad: {{ $propietario->persona->entidad }}.</p>
+                        <p>Municipio: {{ $propietario->persona->municipio }}.</p>
+
+                    </div>
 
                 </div>
 
@@ -367,7 +595,7 @@
 
     @empty
 
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
 
             No hay resultados.
 

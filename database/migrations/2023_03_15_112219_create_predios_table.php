@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedInteger('localidad');
             $table->unsignedInteger('sector');
             $table->unsignedInteger('manzana');
+            $table->unsignedInteger('predio');
             $table->unsignedInteger('edificio');
             $table->unsignedInteger('departamento');
             $table->unsignedInteger('oficina');

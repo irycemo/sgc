@@ -135,9 +135,9 @@
             <tr>
 
                 <th>
-                    <p>Folio: {{ $tramite->folio }}</p>
+                    <p>Trámite: {{ $tramite->folio }}</p>
                     <p>Solicitante: {{ $tramite->solicitante }}</p>
-                    <p>Servicio: {{ $tramite->servicio->nombre }}
+                    <p>Servicio: {{ $tramite->servicio->categoria->nombre }} {{ $tramite->servicio->nombre }}
                         @if($tramite->adiciona)
                             / {{ $tramite->adicionaA->servicio->nombre }} ({{ $tramite->adicionaA->folio }})
                         @endif

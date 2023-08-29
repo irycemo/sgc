@@ -45,6 +45,7 @@ class Inmueble extends Component
             'predio.localidad' => 'required',
             'predio.sector' => 'required',
             'predio.manzana' => 'required',
+            'predio.predio' => 'required',
             'predio.edificio' => 'required',
             'predio.departamento' => 'required',
             'predio.tipo_predio' => 'required',
@@ -128,6 +129,7 @@ class Inmueble extends Component
                 'predio.localidad' => 'required',
                 'predio.sector' => 'required',
                 'predio.manzana' => 'required',
+                'predio.predio' => 'required',
                 'predio.edificio' => 'nullable',
                 'predio.departamento' => 'nullable',
             ]);
@@ -141,6 +143,7 @@ class Inmueble extends Component
                                         ->where('localidad', $this->predio->localidad)
                                         ->where('sector', $this->predio->sector)
                                         ->where('manzana', $this->predio->manzana)
+                                        ->where('predio', $this->predio->predio)
                                         ->where('edificio', $this->predio->edificio)
                                         ->where('departamento', $this->predio->departamento)
                                         ->firstOrFail();
@@ -359,6 +362,7 @@ class Inmueble extends Component
                                     ->where('localidad', $this->predio->localidad)
                                     ->where('sector', $this->predio->sector)
                                     ->where('manzana', $this->predio->manzana)
+                                    ->where('predio', $this->predio->predio)
                                     ->where('edificio', $this->predio->edificio)
                                     ->where('departamento', $this->predio->departamento)
                                     ->where('oficina', $this->predio->oficina)
@@ -389,6 +393,7 @@ class Inmueble extends Component
                                         ->where('localidad', $this->predio->localidad)
                                         ->where('sector', $this->predio->sector)
                                         ->where('manzana', $this->predio->manzana)
+                                        ->where('predio', $this->predio->predio)
                                         ->where('edificio', $this->predio->edificio)
                                         ->where('departamento', $this->predio->departamento)
                                         ->first();
@@ -410,6 +415,7 @@ class Inmueble extends Component
                                                 ->where('localidad', $this->predio->localidad)
                                                 ->where('sector', $this->predio->sector)
                                                 ->where('manzana', $this->predio->manzana)
+                                                ->where('predio', $this->predio->predio)
                                                 ->where('edificio', $this->predio->edificio)
                                                 ->where('departamento', $this->predio->departamento)
                                                 ->where('oficina', $this->predio->oficina)
@@ -439,6 +445,7 @@ class Inmueble extends Component
                                                         ->where('localidad', $this->predio->localidad)
                                                         ->where('sector', $this->predio->sector)
                                                         ->where('manzana', $this->predio->manzana)
+                                                        ->where('predio', $this->predio->predio)
                                                         ->where('edificio', $this->predio->edificio)
                                                         ->where('departamento', $this->predio->departamento)
                                                         ->first();

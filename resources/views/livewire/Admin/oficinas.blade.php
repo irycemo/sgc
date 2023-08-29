@@ -914,6 +914,75 @@
 
                 </div>
 
+                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-3">
+
+                    <div class="flex-auto ">
+
+                        <div>
+
+                            <Label>Sector inicial</Label>
+                        </div>
+
+                        <div>
+
+                            <input type="number" min="1" max="102" class="bg-white rounded text-sm w-full" wire:model.defer="sectorInicial">
+
+                        </div>
+
+                        <div>
+
+                            @error('sectorInicial') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex-auto ">
+
+                        <div>
+
+                            <Label>Sector final</Label>
+                        </div>
+
+                        <div>
+
+                            <input type="number" min="1" max="102" class="bg-white rounded text-sm w-full" wire:model.defer="sectorFinal">
+
+                        </div>
+
+                        <div>
+
+                            @error('sectorFinal') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                @if($sectores)
+
+                    <div>
+
+                        <p>Sectores:</p>
+                        <p>
+                            @foreach ($sectores as $sector)
+
+                                {{ $sector }},
+
+                            @endforeach
+                        </p>
+
+                    </div>
+
+                @endif
+
+                <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" wire:loading.delay.longer>
+
+                    <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
+
+                </div>
+
             </div>
 
         </x-slot>

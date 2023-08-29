@@ -165,7 +165,7 @@
                                 <p><strong>Cuenta predial:</strong> {{ $predio->localidad }}-{{ $predio->oficina }}-{{ $predio->tipo_predio }}-{{ $predio->numero_registro }}</p>
                             </td>
                             <td>
-                                <p><strong>Clave catastral:</strong> {{ $predio->estado }}-{{ $predio->region_catastral }}-{{ $predio->municipio }}-{{ $predio->zona_catastral }}-{{ $predio->localidad }}-{{ $predio->sector }}-{{ $predio->manzana }}-{{ $predio->numero_registro }}-{{ $predio->edificio ?? 0 }}-{{ $predio->departamento ?? 0 }}</p>
+                                <p><strong>Clave catastral:</strong> {{ $predio->estado }}-{{ $predio->region_catastral }}-{{ $predio->municipio }}-{{ $predio->zona_catastral }}-{{ $predio->localidad }}-{{ $predio->sector }}-{{ $predio->manzana }}-{{ $predio->predio }}-{{ $predio->edificio ?? 0 }}-{{ $predio->departamento ?? 0 }}</p>
                             </td>
                         </tr>
 

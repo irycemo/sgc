@@ -16,7 +16,7 @@ class PredioSeeder extends Seeder
      */
     public function run(): void
     {
-        Predio::factory(100)->has(Propietario::factory(2))->create()->each(function(Predio $predio){
+        Predio::factory(100)->create()->each(function(Predio $predio){
 
             AsignarCuenta::create([
                 'localidad' => $predio->localidad,
@@ -26,6 +26,11 @@ class PredioSeeder extends Seeder
                 'estatus' => 1,
                 'observaciones' => 'Origen desde seeder',
                 'valuador' => User::where('valuador', 1)->inRandomOrder()->first()->id
+            ]);
+
+            Propietario::factory(2)->create([
+                'propietarioable_id' => $predio->id,
+                'propietarioable_type' => 'App\Models\Predio'
             ]);
 
         });

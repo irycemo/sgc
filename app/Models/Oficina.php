@@ -11,9 +11,14 @@ class Oficina extends Model
     use HasFactory;
     use ModelosTrait;
 
+    protected $casts = [
+        'sectores' => 'array'
+    ];
+
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function cabeceraMunicipal(){
         return $this->belongsTo(Oficina::class, 'cabecera');
     }
+
 }

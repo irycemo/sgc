@@ -94,6 +94,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                     'localidad' => $row['localidad'],
                     'sector' => $row['sector'],
                     'manzana' => $row['manzana'],
+                    'predio' => $row['predio'],
                     'edificio' => $row['edificio'],
                     'departamento' => $row['departamento'],
                     'oficina' => $row['oficina'],
@@ -268,16 +269,17 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
     public function rules(): array
     {
         return [
-            'localidad' => 'required',
+            'localidad' => 'required|same:zona',
             'oficina' => 'required',
             'tipo' => 'required',
             'registro' => 'required',
             'estado' => 'required',
             'region' => 'required',
             'municipio' => 'required',
-            'zona' => 'required',
+            'zona' => 'required|same:localidad',
             'sector' => 'required',
             'manzana' => 'required',
+            'predio' => 'required',
             'edificio' => 'required',
             'departamento' => 'required',
             'ap_paterno' => 'required',
@@ -342,6 +344,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                     ->where('localidad', $row['localidad'])
                                     ->where('sector', $row['sector'])
                                     ->where('manzana', $row['manzana'])
+                                    ->where('predio', $row['predio'])
                                     ->where('edificio', $row['edificio'])
                                     ->where('departamento', $row['departamento'])
                                     ->where('oficina', $row['oficina'])
@@ -367,6 +370,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                         ->where('localidad', $row['localidad'])
                                         ->where('sector', $row['sector'])
                                         ->where('manzana', $row['manzana'])
+                                        ->where('predio', $row['predio'])
                                         ->where('edificio', $row['edificio'])
                                         ->where('departamento', $row['departamento'])
                                         ->first();
@@ -374,35 +378,11 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             if($claveCatastral)
                 throw new ErrorAlValidarLineaDeCaptura("La clave catastral ya existe en el padrón con otra cuenta predial, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
-        }else
-            throw new ErrorAlValidarLineaDeCaptura("El predio ya existe, verifique en la linea " . $key);
+        }else{
 
-        $predioCompletoAvaluo = PredioAvaluo::where('estado', $row['estado'])
-                                                ->where('region_catastral', $row['region'])
-                                                ->where('municipio', $row['municipio'])
-                                                ->where('zona_catastral', $row['zona'])
-                                                ->where('localidad', $row['localidad'])
-                                                ->where('sector', $row['sector'])
-                                                ->where('manzana', $row['manzana'])
-                                                ->where('edificio', $row['edificio'])
-                                                ->where('departamento', $row['departamento'])
-                                                ->where('oficina', $row['oficina'])
-                                                ->where('tipo_predio', $row['tipo'])
-                                                ->where('numero_registro', $row['registro'])
-                                                ->first();
+            /* throw new ErrorAlValidarLineaDeCaptura("El predio ya existe, verifique en la linea " . $key); */
 
-        if(!$predioCompletoAvaluo){
-
-            $cuentaPredialAvaluo = PredioAvaluo::where('localidad', $row['localidad'])
-                                                ->where('oficina', $row['oficina'])
-                                                ->where('tipo_predio', $row['tipo'])
-                                                ->where('numero_registro', $row['registro'])
-                                                ->first();
-
-            if($cuentaPredialAvaluo)
-                throw new ErrorAlValidarLineaDeCaptura("La cuenta predial ya existe en avaluos con otra clave catastral, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
-
-            $claveCatastralAvaluo = PredioAvaluo::where('estado', $row['estado'])
+            $predioCompletoAvaluo = PredioAvaluo::where('estado', $row['estado'])
                                                     ->where('region_catastral', $row['region'])
                                                     ->where('municipio', $row['municipio'])
                                                     ->where('zona_catastral', $row['zona'])
@@ -411,13 +391,40 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                                     ->where('manzana', $row['manzana'])
                                                     ->where('edificio', $row['edificio'])
                                                     ->where('departamento', $row['departamento'])
+                                                    ->where('oficina', $row['oficina'])
+                                                    ->where('tipo_predio', $row['tipo'])
+                                                    ->where('numero_registro', $row['registro'])
                                                     ->first();
 
-            if($claveCatastralAvaluo)
-                throw new ErrorAlValidarLineaDeCaptura("La clave catastral ya existe en avaluos con otra cuenta predial, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+            if(!$predioCompletoAvaluo){
 
-        }else
-            throw new ErrorAlValidarLineaDeCaptura("El predio ya existe en avaluos, verifique la cuenta: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+                $cuentaPredialAvaluo = PredioAvaluo::where('localidad', $row['localidad'])
+                                                    ->where('oficina', $row['oficina'])
+                                                    ->where('tipo_predio', $row['tipo'])
+                                                    ->where('numero_registro', $row['registro'])
+                                                    ->first();
+
+                if($cuentaPredialAvaluo)
+                    throw new ErrorAlValidarLineaDeCaptura("La cuenta predial ya existe en avaluos con otra clave catastral, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+
+                $claveCatastralAvaluo = PredioAvaluo::where('estado', $row['estado'])
+                                                        ->where('region_catastral', $row['region'])
+                                                        ->where('municipio', $row['municipio'])
+                                                        ->where('zona_catastral', $row['zona'])
+                                                        ->where('localidad', $row['localidad'])
+                                                        ->where('sector', $row['sector'])
+                                                        ->where('manzana', $row['manzana'])
+                                                        ->where('edificio', $row['edificio'])
+                                                        ->where('departamento', $row['departamento'])
+                                                        ->first();
+
+                if($claveCatastralAvaluo)
+                    throw new ErrorAlValidarLineaDeCaptura("La clave catastral ya existe en avaluos con otra cuenta predial, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+
+            }else
+                throw new ErrorAlValidarLineaDeCaptura("El predio ya existe en avaluos, verifique la cuenta: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+
+        }
 
         $cuentaAsignada = AsignarCuenta::where('localidad', $row['localidad'])
                                         ->where('oficina', $row['oficina'])

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('municipio');
             $table->unsignedBigInteger('oficina');
             $table->unsignedBigInteger('localidad');
+            $table->json('sectores')->nullable();
             $table->string('nombre');
             $table->text('ubicacion')->nullable();
             $table->string('titular')->nullable();

@@ -26,10 +26,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 102,
                 'localidad' => 1,
                 'nombre' => 'ACUITZIO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'CALLE SIN NOMBRE S/N COL. CENTRO C.P 58460. PALACIO MUNICIPAL SEGUNDA PLANTA.
+',
+                'titular' => 'C. LIZBETH RAYO DUARTE',
+                'email' => 'lizbethrayod@gmail.com',
+                'telefonos' => '4432234917',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -38,7 +39,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-28 14:51:47',
             ),
             1 =>
             array (
@@ -47,10 +48,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1402,
                 'localidad' => 1,
                 'nombre' => 'AGUILILLA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL HIDALGO 22 COL. CENTRO, C.P. 60570. ENTRE CALLE MIGUEL MALDONADO Y PORTAL MORELOS.
+',
+                'titular' => 'C. PATRICIA CUEVAS MENDOZA',
+                'email' => 'rentasaguililla@gmail.com',
+                'telefonos' => '4531120800',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -59,7 +61,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-28 14:50:29',
             ),
             2 =>
             array (
@@ -89,10 +91,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1902,
                 'localidad' => 1,
                 'nombre' => 'ANGAMACUTIRO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'GALEANA 12 CENTRO C.P 58550 ENTRE ABASOLO, PROLONGACIÓN ALDAMA, CARRANZA Y MORELOS.
+',
+                'titular' => 'C. DANIEL RODRIGUEZ MORADO',
+                'email' => 'danielrom2116@gmail.com',
+                'telefonos' => '4432640218',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -101,7 +104,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-28 14:48:45',
             ),
             4 =>
             array (
@@ -110,10 +113,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 502,
                 'localidad' => 1,
                 'nombre' => 'ANGANGUEO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'NACIONAL 1 COL. CENTRO C.P 61410 ENTRE CALLE MORELOS Y BENITO JUÁREZ.
+',
+                'titular' => 'LIC.CATALINA KOREY QUINTERO RODRIGUEZ ',
+                'email' => 'yiyith1996@gmail.com',
+                'telefonos' => '7151972601',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -122,7 +126,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-28 14:47:16',
             ),
             5 =>
             array (
@@ -152,10 +156,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 402,
                 'localidad' => 1,
                 'nombre' => 'APORO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+            'ubicacion' => 'NICOLAS BRAVO 1 COL. CENTRO C.P 61400 CONTRA ESQUINA DE NICOLÁS BRAVO Y PORFIRIO DÍAZ  (DENTRO DE LAS OFICINAS DEL DIF).
+',
+                'titular' => 'C.P. EVELIN RUFINA SANCHEZ CRUZ',
+                'email' => 'cruevelin41@gmail.com',
+                'telefonos' => '7225845966',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -164,7 +169,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-28 14:45:18',
             ),
             7 =>
             array (
@@ -194,10 +199,10 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 801,
                 'localidad' => 1,
                 'nombre' => 'ARIO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. MORELOS 244 COL. CENTRO C.P 61830 ENTRE CALLES FRANCISCO JAVIER MINA Y GENERAL IGNACIO ZARAGOZA.',
+                'titular' => 'C. ARMANDO BECERRA AGUILAR',
+                'email' => 'armandobecerra@live.com.mx',
+                'telefonos' => '4251169976',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -206,7 +211,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-28 14:42:39',
             ),
             9 =>
             array (
@@ -215,10 +220,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 901,
                 'localidad' => 1,
                 'nombre' => 'ARTEAGA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'MIGUEL HIDALGO 87 COL. CENTRO C.P 60950 ENTRE IGNACIO ALLENDE Y ALDAMA.
+',
+                'titular' => 'C. VICTORINO JACOBO LOMBERA',
+                'email' => 'jacobovictorino507@gmail.com',
+                'telefonos' => '4361112702',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -227,7 +233,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-28 14:40:17',
             ),
             10 =>
             array (
@@ -236,10 +242,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 2002,
                 'localidad' => 1,
                 'nombre' => 'BRISEÑAS',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'JOSEFA O. DE DOMÍNGUEZ 2 COL. CENTRO C.P 59122 DENTRO DE LA PRESIDENCIA MUNICIPAL.
+',
+                'titular' => 'LIC. MA GUADALUPE OCEGUEDA ZAVALA',
+                'email' => 'receptoriabriseñas22@gmail.com',
+                'telefonos' => '3931003530',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -248,7 +255,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-28 14:36:04',
             ),
             11 =>
             array (
@@ -257,10 +264,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1403,
                 'localidad' => 1,
                 'nombre' => 'BUENAVISTA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+            'ubicacion' => 'ÁLVARO OBREGÓN S/N COL. CENTRO C.P 60500 ENTRE CALLE NARCISO MENDOZA Y LÁZARO CÁRDENAS (DENTRO DE LA PRESIDENCIA).
+',
+                'titular' => 'LIC. GUSTAVO ANGEL RODRIGUEZ GUZMAN',
+                'email' => 'buenavista.1403@hotmail.com',
+                'telefonos' => '4531586433',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -269,7 +277,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-28 14:08:23',
             ),
             12 =>
             array (
@@ -278,10 +286,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 602,
                 'localidad' => 1,
                 'nombre' => 'CARACUARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'FRANCISCO I. MADERO 2 COL. CENTRO C.P 61920 ENTRE CALLE 18 DE MARZO Y BENITO JUÁREZ.
+',
+                'titular' => 'LIC. LEOVIGILDO TENTORY GRACÍA',
+                'email' => 'leovy-tentory@hotmail.com',
+                'telefonos' => '4431744522',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -290,7 +299,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-28 14:00:41',
             ),
             13 =>
             array (
@@ -341,10 +350,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1102,
                 'localidad' => 1,
                 'nombre' => 'COENEO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. MORELOS NTE. 158 COL. CENTRO C.P 58400. ENTRE CALLE MORELOS Y ZARAGOZA.
+',
+                'titular' => 'C. ANEER EMILAN GARCIA ESPINOS',
+                'email' => 'aneer.garcia@gmail.com',
+                'telefonos' => '4361372249',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -353,7 +363,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-25 12:53:49',
             ),
             16 =>
             array (
@@ -362,10 +372,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 403,
                 'localidad' => 1,
                 'nombre' => 'CONTEPEC',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'MORELOS 1 COL. CENTRO C.P. 61020 INTERIOR DEL PALACIO MUNICIPAL ENTRE CALLE CORREGIDORA Y ALDAMA.
+',
+                'titular' => 'LIC. MARTIN ROJAS MARTINEZ',
+                'email' => 'martinrojasma@gmail.com',
+                'telefonos' => '4431459361',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -374,7 +385,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-25 12:52:38',
             ),
             17 =>
             array (
@@ -383,10 +394,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 103,
                 'localidad' => 1,
                 'nombre' => 'COPANDARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'CALLE HIDALGO 60, COL. CENTRO C.P 58870. ENTRE IGNACIO LOPEZ RAYÓN Y 16 DE SEPTIEMBRE.
+',
+                'titular' => 'ARQ. JOSE EFREN CHAVEZ HERNANDEZ',
+                'email' => 'jefren.ch.h@gmail.com',
+                'telefonos' => '4431736240',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -395,7 +407,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-25 12:49:44',
             ),
             18 =>
             array (
@@ -404,10 +416,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1302,
                 'localidad' => 1,
                 'nombre' => 'COTIJA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PINO SUÁREZ 100 COL CENTRO, C.P 59940. DENTRO DEL PALACIO MUNICIPAL.
+',
+                'titular' => 'LIC. CECILIA GARCIA VALENCIA',
+                'email' => 'ceciliagarciavalencia33@gmail.com',
+                'telefonos' => '3541074630',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -416,7 +429,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-25 12:46:46',
             ),
             19 =>
             array (
@@ -425,10 +438,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 104,
                 'localidad' => 1,
                 'nombre' => 'CUITZEO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. MORELOS SUR. 18 INTERIOR C COL. CENTRO C.P 58840. AUN COSTADO DE LA PRESIDENCIA MUNICIPAL.
+',
+                'titular' => 'C. MARCELA FERNANDEZ PINTOR',
+                'email' => 'mfer8316@gmail.com',
+                'telefonos' => '4432133168',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -437,7 +451,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-25 12:44:44',
             ),
             20 =>
             array (
@@ -446,10 +460,12 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1202,
                 'localidad' => 1,
                 'nombre' => 'CHARAPAN',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. NACIONAL S/N COL. CENTRO C.P 60240. ENTRE CALLE LÁZARO CÁRDENAS, EMILIANO ZAPATA.
+
+',
+                'titular' => 'C. JAZMIN ALEJANDRA ACHA PALOMARES',
+                'email' => 'Acha_palomares@hotmail.com',
+                'telefonos' => '443 4032566',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -458,7 +474,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-25 12:42:20',
             ),
             21 =>
             array (
@@ -467,10 +483,11 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 105,
                 'localidad' => 1,
                 'nombre' => 'CHARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'HIDALGO 185 COL. CENTRO C.P 61300 ENTRE AV. MORELOS Y 20 DE OCTUBRE.
+',
+                'titular' => 'C. BERTHA FLORES MOLINERO',
+                'email' => 'florembertitha24@gmail.com',
+                'telefonos' => '4435394906',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -479,7 +496,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-25 12:35:04',
             ),
             22 =>
             array (
@@ -531,10 +548,10 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1702,
                 'localidad' => 1,
                 'nombre' => 'CHILCHOTA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PALACIO MUNICIPAL COL. CENTRO C.P 59780.',
+                'titular' => 'C. ABEL NARCIZO RAMOS',
+                'email' => 'abelnarcizo91@gmail.com',
+                'telefonos' => '4431031029',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -543,7 +560,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-24 14:57:13',
             ),
             25 =>
             array (
@@ -573,9 +590,8 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 106,
                 'localidad' => 1,
                 'nombre' => 'CHUCANDIRO',
-                'ubicacion' => 'BENITO JUÁREZ 150 COL. CENTRO C.P 58860
-AL ORIENTE RAMÓN Y ALCARAZ,
-AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALGO
+                'ubicacion' => 'BENITO JUÁREZ 150 COL. CENTRO C.P 58860. AL ORIENTE RAMÓN Y ALCARAZ,
+AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALGO.
 ',
                 'titular' => 'C. MAYRA LOPEZ JIMENEZ',
                 'email' => 'mairaagosto284@gmail.com',
@@ -588,7 +604,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-08 12:53:26',
+                'updated_at' => '2023-08-24 14:53:47',
             ),
             27 =>
             array (
@@ -597,10 +613,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 1802,
                 'localidad' => 1,
                 'nombre' => 'CHURINTZIO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'HIDALGO 40 COL. CENTRO C.P 59440. ENTRE CALLE 5 DE FEBRERO Y CALLE INDEPENDENCIA.
+',
+                'titular' => 'L.T.S ADRIANA ELIZABETH SORIA PULIDO ',
+                'email' => 'ady_zeth30@hotmail.com',
+                'telefonos' => '3511832413',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -609,7 +626,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-24 14:52:28',
             ),
             28 =>
             array (
@@ -618,10 +635,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 802,
                 'localidad' => 1,
                 'nombre' => 'CHURUMUCO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. VERACRUZ S/N COL. CENTRO C.P 61680 ENTRE RIO BALSAS, AV. HÉROES DE LA REVOLUCIÓN Y AV. MORELOS.
+',
+                'titular' => 'MA. GUADALUPE MEDINA NUÑES',
+                'email' => 'magumenu2010@hotmail.com',
+                'telefonos' => '4438443604',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -630,7 +648,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-24 14:51:01',
             ),
             29 =>
             array (
@@ -639,10 +657,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 1703,
                 'localidad' => 1,
                 'nombre' => 'ECUANDUREO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'ALLENDE 23 INT D, COL. CENTRO, C.P 59790. ENTRE CALLE ALLENDE, FRANCISCO I. MADERO Y ALDAMA
+',
+                'titular' => 'LIC. MOISES GIL RAMÍREZ',
+                'email' => 'moisesgilramirez@hotmail.com',
+                'telefonos' => '5526694796',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -651,7 +670,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-24 14:48:14',
             ),
             30 =>
             array (
@@ -681,10 +700,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 1002,
                 'localidad' => 1,
                 'nombre' => 'ERONGARICUARO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. MARÍA LUISA MARTÍNEZ S/N BARRIO SAN MIGUEL C.P 61630. ENTRE ALFONSO URRUETA Y ROMERO.
+',
+                'titular' => 'LIC. JAZMIN CORTES SEPTIMO',
+                'email' => 'jazz_pink11@hotmail.com',
+                'telefonos' => '4341168298',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -693,7 +713,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-24 14:33:15',
             ),
             32 =>
             array (
@@ -702,10 +722,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 1204,
                 'localidad' => 1,
                 'nombre' => 'GABRIEL ZAMORA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'FRANCISCO JOSE MÚGICA S/N CENTRO C.P  61730. ENTRE CALLE NIÑOS HÉROES Y AV. REVOLUCIÓN.
+',
+                'titular' => 'LIC. VILMA YESENIA MALDONADO CORREA',
+                'email' => 'vilma_malco@hotmail.com',
+                'telefonos' => '4431812783',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -714,7 +735,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-24 11:12:04',
             ),
             33 =>
             array (
@@ -723,19 +744,20 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 301,
                 'localidad' => 1,
                 'nombre' => 'HIDALGO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P 61100. ENTRE CARRANZA E  INDEPENDENCIA.
+',
+                'titular' => 'TC. MONICA BLANCO NATARES',
+                'email' => 'mblanconateras@hotmail.com',
+                'telefonos' => '7861136868',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
-                'autoridad_municipal' => NULL,
-                'valuador_municipal' => NULL,
+                'autoridad_municipal' => 'LIC. JOSE LUIS TELLEZ MARIN ',
+                'valuador_municipal' => 'LIC. EN NUTRICION KAREN VENECIA ALCANTAR HERNANDEZ ',
                 'cabecera' => NULL,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-24 11:18:30',
             ),
             34 =>
             array (
@@ -744,10 +766,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 803,
                 'localidad' => 1,
                 'nombre' => 'LA HUACANA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL ALLENDE S/N COL. CENTRO C.P 61853 DENTRO DE LA PRESIDENCIA MUNICIPAL.  ENTRE CALLE REVOLUCIÓN, ALLENDE, AL NORTE CON ZARAGOZA Y AL SUR CALLE JUÁREZ.
+',
+                'titular' => 'LIC. LUIS ANGEL PADILLA SOTO',
+                'email' => 'jaydenpr2014@gmail.com',
+                'telefonos' => '425 1111914',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -756,7 +779,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-24 11:07:06',
             ),
             35 =>
             array (
@@ -765,10 +788,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 107,
                 'localidad' => 1,
                 'nombre' => 'HUANDACAREO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'CALZADA LÁZARO CÁRDENAS 8 COL. CENTRO C.P 58820 ENTRE CALLE 16 DE SEPTIEMBRE Y GALVEZ BETANCOURT.
+',
+                'titular' => 'LIC. ESMERALDA CISNEROS ORTIZ',
+                'email' => 'esme14cisneros@gmail.com',
+                'telefonos' => '4451014151',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -777,7 +801,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-24 10:35:38',
             ),
             36 =>
             array (
@@ -786,10 +810,10 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 1103,
                 'localidad' => 1,
                 'nombre' => 'HUANIQUEO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PLAZA PRINCIPAL S/N COL. CENTRO C.P 58360, A UN COSTADO DEL H. AYUNTAMIENTO.  ',
+                'titular' => 'LIC. ELICEO REYES CORTES',
+                'email' => 'elrojo562@hotmail.com',
+                'telefonos' => '4361174925',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -798,7 +822,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-23 11:08:20',
             ),
             37 =>
             array (
@@ -807,10 +831,12 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 601,
                 'localidad' => 1,
                 'nombre' => 'HUETAMO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'JAZMINES 32 COL. LA NOPALERA CUITZEO, MUNICIPIO DE HUETAMO
+AUN COSTADO DE LA UNIDAD DEPORTIVA.
+',
+                'titular' => 'C.P. JORGE ALCARAZ MALDONADO',
+                'email' => 'cp.alcaraz@hotmail.com',
+                'telefonos' => '4351001542',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -819,7 +845,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-23 11:04:33',
             ),
             38 =>
             array (
@@ -828,10 +854,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 1003,
                 'localidad' => 1,
                 'nombre' => 'HUIRAMBA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PORTAL HIDALGO S/N COL. CENTRO C.P 61640 ENTRE DAMASO CÁRDENAS AUN COSTADO DE LA IGLESIA DE HUIRAMBA.
+',
+                'titular' => 'CP.  VIRGINIA MOLINA REYES',
+                'email' => '4341049842v@gmail.com',
+                'telefonos' => '4341049842',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -840,7 +867,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-23 10:58:55',
             ),
             39 =>
             array (
@@ -871,10 +898,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 302,
                 'localidad' => 1,
                 'nombre' => 'IRIMBO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'AV. MORELOS 32 COL. CENTRO C.P 61280 UBICADOS AL INTERIOR DE LA PRESIDENCIA MUNICIPAL.
+',
+                'titular' => 'C. ERWING SOTO MEDINA',
+                'email' => 'erwing.sotom@hotmail.com',
+                'telefonos' => '7861136117',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -883,7 +911,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-23 10:55:09',
             ),
             41 =>
             array (
@@ -892,10 +920,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 1704,
                 'localidad' => 1,
                 'nombre' => 'IXTLAN',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'JUÁREZ NTE.13 CENTRO C.P 59280 ENTRE CALLE ALLENDE Y RUBIO.
+',
+                'titular' => 'LIC. CARLOS AARON CASTELLANOS ROMERO',
+                'email' => 'cacr94@hotmail.com',
+                'telefonos' => '3531724188',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -904,7 +933,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-23 10:52:21',
             ),
             42 =>
             array (
@@ -1718,11 +1747,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 405,
                 'localidad' => 1,
                 'nombre' => 'SENGUIO',
-                'ubicacion' => 'GUERRERO 3 CENTRO C.P. 61290 ENTRE CALLE JUÁREZ E INDEPENDENCIA.
+                'ubicacion' => 'GUERRERO 3 COL. CENTRO C.P. 61290 ENTRE CALLE JUÁREZ E INDEPENDENCIA.
 ',
-                'titular' => 'C. IRMA GARCIA TORRES',
-                'email' => 'irmagarcia01@hotmail.com',
-                'telefonos' => '7862084027',
+                'titular' => 'LIC. JOSE CORDOVA RESENDIS',
+                'email' => 'joseresendis008@gmail.com',
+                'telefonos' => '7861410895',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -1731,7 +1760,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-21 14:55:28',
+                'updated_at' => '2023-08-28 13:24:28',
             ),
             80 =>
             array (
@@ -2152,7 +2181,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 1007,
                 'localidad' => 1,
                 'nombre' => 'TZINTZUNTZAN',
-                'ubicacion' => 'AV. LAS YACATAS #25 COL CENTRO C.P 58440 ENTRE AV. LÁZARO CÁRDENAS Y 24 DE DICIEMBRE
+                'ubicacion' => 'AV. LAS YACATAS 25 COL. CENTRO C.P 58440 ENTRE AV. LÁZARO CÁRDENAS Y 24 DE DICIEMBRE.
 ',
                 'titular' => 'LIC. OSCAR JESÚS RENDÓN RODRÍGUEZ',
                 'email' => 'rero900515@gmail.com',
@@ -2165,7 +2194,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-21 14:05:10',
+                'updated_at' => '2023-08-29 09:59:03',
             ),
             100 =>
             array (
@@ -2394,7 +2423,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 1211,
                 'localidad' => 1,
                 'nombre' => 'ZIRACUARETIRO',
-                'ubicacion' => 'PASAJE PORTAL MATAMOROS S/N CENTRO C.P 61700 ENTRE ABASOLO Y MORELOS.
+                'ubicacion' => 'PASAJE PORTAL MATAMOROS S/N COL. CENTRO C.P 61700 ENTRE ABASOLO Y MORELOS.
 ',
                 'titular' => 'T.C. MIGUEL DURAN CHAVEZ',
                 'email' => 'migueldc430@gmail.com',
@@ -2407,7 +2436,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-17 13:52:14',
+                'updated_at' => '2023-08-28 14:56:07',
             ),
             111 =>
             array (
@@ -2520,11 +2549,11 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
             116 =>
             array (
                 'id' => 117,
-                'municipio' => 117,
+                'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 2,
                 'nombre' => 'ANTONIO VILLALONGIN',
-                'ubicacion' => 'IGNACIO RAYÓN #10 COL. CENTRO C.P 61100 ENTRE CARRANZA E INDEPENDENCIA. ',
+                'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P 61100 ENTRE CARRANZA E INDEPENDENCIA. ',
                 'titular' => 'TC. MONICA BLANCO NATARES',
                 'email' => 'mblanconateras@hotmail.com',
                 'telefonos' => '7861136868',
@@ -2536,16 +2565,16 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-09 14:15:39',
+                'updated_at' => '2023-08-24 11:13:14',
             ),
             117 =>
             array (
                 'id' => 118,
-                'municipio' => 118,
+                'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 3,
                 'nombre' => 'EL CARACOL',
-                'ubicacion' => 'IGNACIO RAYÓN #10 COL. CENTRO C.P 61100 ENTRE CARRANZA E  INDEPENDENCIA.
+                'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P 61100 ENTRE CARRANZA E  INDEPENDENCIA.
 ',
                 'titular' => 'TC. MONICA BLANCO NATARES',
                 'email' => 'mblanconateras@hotmail.com',
@@ -2558,16 +2587,16 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-09 14:12:30',
+                'updated_at' => '2023-08-24 11:13:42',
             ),
             118 =>
             array (
                 'id' => 119,
-                'municipio' => 119,
+                'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 4,
                 'nombre' => 'AGOSTITLAN',
-                'ubicacion' => 'IGNACIO RAYÓN #10 COL. CENTRO C.P 61100 ENTRE CARRANZA E  INDEPENDENCIA.
+                'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P 61100 ENTRE CARRANZA E  INDEPENDENCIA.
 ',
                 'titular' => 'TC. MONICA BLANCO NATARES',
                 'email' => 'mblanconateras@hotmail.com',
@@ -2580,16 +2609,16 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-09 14:10:55',
+                'updated_at' => '2023-08-24 11:16:34',
             ),
             119 =>
             array (
                 'id' => 120,
-                'municipio' => 120,
+                'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 5,
                 'nombre' => 'TENENCIA  CIUDAD HIDALGO',
-                'ubicacion' => 'IGNACIO RAYÓN #10 COL. CENTRO C.P. 61100 ENTRE CARRANZA E  INDEPENDENCIA.
+                'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P. 61100 ENTRE CARRANZA E  INDEPENDENCIA.
 ',
                 'titular' => 'TC. MONICA BLANCO NATARES',
                 'email' => 'mblanconateras@hotmail.com',
@@ -2602,7 +2631,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-09 14:07:12',
+                'updated_at' => '2023-08-24 11:16:08',
             ),
             120 =>
             array (
@@ -3501,7 +3530,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 201,
                 'localidad' => 3,
                 'nombre' => 'V DE JUAREZ',
-                'ubicacion' => 'JUÁREZ #14 COL. CENTRO C.P 58930 MELCHOR OCAMPO AL NORTE Y AL SUR CON RAFAEL CARRILLO.
+                'ubicacion' => 'JUÁREZ 14 COL. CENTRO C.P 58930 MELCHOR OCAMPO AL NORTE Y AL SUR CON RAFAEL CARRILLO.
 ',
                 'titular' => 'C. JULIO CESAR GARCIA SANCHEZ',
                 'email' => 'Juliocgarcia.sanchez83@gmail.com',
@@ -3514,19 +3543,20 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-03 15:00:25',
+                'updated_at' => '2023-08-28 14:53:15',
             ),
             162 =>
             array (
                 'id' => 163,
-                'municipio' => 163,
+                'municipio' => 111,
                 'oficina' => 1211,
                 'localidad' => 2,
                 'nombre' => 'SAN A ZURUMUCAPIO',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'PASAJE PORTAL MATAMOROS S/N COL. CENTRO C.P 61700 ENTRE ABASOLO Y MORELOS.
+',
+                'titular' => 'T.C. MIGUEL DURAN CHAVEZ',
+                'email' => 'migueldc430@gmail.com',
+                'telefonos' => '4522108920',
                 'notificador' => NULL,
                 'jefe_departamento' => NULL,
                 'autoridad_municipal' => NULL,
@@ -3535,7 +3565,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2023-08-28 14:54:42',
             ),
             163 =>
             array (
@@ -3544,7 +3574,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'oficina' => 501,
                 'localidad' => 2,
                 'nombre' => 'CRESCENCIO MORALES',
-                'ubicacion' => 'BENEDICTO LOPEZ SUR #7 COL. CENTRO CP 61500 ENTRE  IGNACIO LÓPEZ RAYÓN Y MIGUEL HIDALGO.
+                'ubicacion' => 'BENEDICTO LOPEZ SUR 7 COL. CENTRO C.P 61500 ENTRE  IGNACIO LÓPEZ RAYÓN Y MIGUEL HIDALGO.
 ',
                 'titular' => 'LIC. OMAR CONTRERAS RAMIREZ',
                 'email' => 'rentas_zitacuaro@hotmail.com',
@@ -3557,7 +3587,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-03 14:39:17',
+                'updated_at' => '2023-08-28 14:52:28',
             ),
         ));
 

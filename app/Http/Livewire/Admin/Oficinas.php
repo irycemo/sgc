@@ -17,6 +17,9 @@ class Oficinas extends Component
 
     public Oficina $modelo_editar;
     public $cabeceras;
+    public $sectorInicial;
+    public $sectorFinal;
+    public $sectores = [];
 
     protected function rules(){
         return [
@@ -31,6 +34,9 @@ class Oficinas extends Component
             'modelo_editar.autoridad_municipal' => 'nullable',
             'modelo_editar.valuador_municipal' => 'nullable',
             'modelo_editar.cabecera' => 'nullable',
+            'modelo_editar.sectores' => 'nullable',
+            'sectorInicial' => 'nullable|numeric|min:1|max:102|lt:sectorFinal',
+            'sectorFinal' => 'nullable|numeric|min:1|max:102|gt:sectorInicial'
          ];
     }
 
@@ -52,6 +58,8 @@ class Oficinas extends Component
         if($this->modelo_editar->isNot($modelo))
             $this->modelo_editar = $modelo;
 
+        $this->sectores = json_decode($this->modelo_editar->sectores, true);
+
     }
 
     public function crear(){
@@ -60,8 +68,15 @@ class Oficinas extends Component
 
         try {
 
-            DB::transaction(function () {
+            DB::transaction(function (){
 
+                $array = [];
+
+                for ($i=$this->sectorInicial; $i <= $this->sectorFinal ; $i++) {
+                    array_push($array, (int)$i);
+                }
+
+                $this->modelo_editar->sectores = json_encode($array);
                 $this->modelo_editar->creado_por = auth()->user()->id;
                 $this->modelo_editar->save();
 
@@ -89,6 +104,18 @@ class Oficinas extends Component
 
             DB::transaction(function () {
 
+                for ($i=$this->sectorInicial; $i <= $this->sectorFinal ; $i++) {
+
+                    if($this->sectores && in_array($i, $this->sectores))
+                        continue;
+
+                    array_push($this->sectores, (int)$i);
+
+                }
+
+                sort($this->sectores);
+
+                $this->modelo_editar->sectores = json_encode($this->sectores);
                 $this->modelo_editar->actualizado_por = auth()->user()->id;
                 $this->modelo_editar->save();
 
@@ -133,6 +160,8 @@ class Oficinas extends Component
         $this->cabeceras = Oficina::whereNull('cabecera')->orderBy('nombre')->get();
 
         $this->modelo_editar = $this->crearModeloVacio();
+
+        array_push($this->fields, 'sectorInicial', 'sectorFinal', 'sectores');
 
     }
 
