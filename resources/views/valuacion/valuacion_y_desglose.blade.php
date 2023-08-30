@@ -4,7 +4,7 @@
 
     <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Valuación y Desglose</h1>
 
-    <div class="tab-wrapper" x-data="{ activeTab:  0 }">
+    <div class="tab-wrapper max-h-full" x-data="{ activeTab:  0 }">
 
         <div class="flex py-4 space-x-4 items-center border-b-2 border-gray-500 mb-6 flex-wrap">
 

@@ -56,7 +56,7 @@ class PredioFactory extends Factory
             'superficie_notarial' => $this->faker->numberBetween(1,100),
             'valor_catastral' => $this->faker->numberBetween(1,100),
             'valor_total_terreno' => $this->faker->numberBetween(1,100),
-            'valor_construccion' => $this->faker->numberBetween(1,100),
+            'valor_total_construccion' => $this->faker->numberBetween(1,100),
             'titulo_propiedad' => $this->faker->numberBetween(1,100),
             'superficie_notarial' => $this->faker->numberBetween(1,100),
             'superficie_notarial' => $this->faker->numberBetween(1,100),

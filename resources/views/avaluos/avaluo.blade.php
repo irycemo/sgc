@@ -726,10 +726,10 @@
                                             <p>{{ $predio->superficie_terreno }}</p>
                                         </td>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">
-                                            <p>{{ $predio->avaluo->area_comun_terreno }}</p>
+                                            <p>{{ $predio->area_comun_terreno }}</p>
                                         </td>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">
-                                            <p>{{ $predio->avaluo->area_comun_terreno  + $predio->superficie_terreno}}</p>
+                                            <p>{{ $predio->area_comun_terreno + $predio->superficie_terreno}}</p>
                                         </td>
                                     </tr>
 
@@ -741,10 +741,10 @@
                                             <p>{{ $predio->superficie_construccion }}</p>
                                         </td>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">
-                                            <p>{{ $predio->avaluo->area_comun_construccion }}</p>
+                                            <p>{{ $predio->area_comun_construccion }}</p>
                                         </td>
                                         <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">
-                                            <p>{{ $predio->avaluo->area_comun_construccion  + $predio->superficie_construccion }}</p>
+                                            <p>{{ $predio->area_comun_construccion + $predio->superficie_construccion }}</p>
                                         </td>
                                     </tr>
 
@@ -765,16 +765,37 @@
 
                                         <tr>
                                             <td style="padding-right: 40px; font-size:10px">Privativo + Proporcional</td>
-                                            <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format($predio->valor_total_terreno + $predio->avaluo->valor_terreno_comun, 2) }}</td>
+                                            <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format($predio->valor_total_terreno + $predio->valor_terreno_comun, 2) }}</td>
                                         </tr>
                                         <tr>
                                             <td style="padding-right: 40px; font-size:10px">Privativo + Proporcional</td>
-                                            <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format($predio->valor_construccion + $predio->avaluo->valor_construccion_comun, 2) }}</td>
+                                            <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format($predio->valor_total_construccion + $predio->valor_construccion_comun, 2) }}</td>
                                         </tr>
-                                        <tr>
-                                            <td style="padding-right: 40px; font-size:10px">Total</td>
-                                            <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format($predio->valor_total_terreno + $predio->avaluo->valor_terreno_comun + $predio->valor_construccion + $predio->avaluo->valor_construccion_comun, 2) }}</td>
-                                        </tr>
+                                        @if($predio->ubicacion_en_manzana == 'ESQUINA')
+
+                                            <tr>
+                                                <td style="padding-right: 40px; font-size:10px">Sub Total</td>
+                                                <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun, 2) }}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="padding-right: 40px; font-size:10px">Ubicación en esquina</td>
+                                                <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format(($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun) * 0.15, 2) }}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="padding-right: 40px; font-size:10px">Total</td>
+                                                <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format(($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun) + ($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun) * 0.15, 2) }}</td>
+                                            </tr>
+
+                                        @else
+
+                                            <tr>
+                                                <td style="padding-right: 40px; font-size:10px">Total</td>
+                                                <td style="padding-right: 40px; font-size:10px; border: 1px solid black; text-align: right;">${{ number_format($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun, 2) }}</td>
+                                            </tr>
+
+                                        @endif
 
                                     </tbody>
 

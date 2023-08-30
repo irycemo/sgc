@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('avaluos', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
-            $table->foreignId('predio_id')->references('id')->on('predio_avaluos');
+            $table->foreignId('predio_id')->nullable()->references('id')->on('predio_avaluos');
             $table->unsignedInteger('folio')->unique();
             $table->string('estado');
             $table->string('clasificacion_zona')->nullable();
@@ -44,10 +44,6 @@ return new class extends Migration
             $table->string('electrica')->nullable();
             $table->string('gas')->nullable();
             $table->string('especiales')->nullable();
-            $table->unsignedDecimal('area_comun_terreno', 10, 2)->nullable();
-            $table->unsignedDecimal('area_comun_construccion', 10, 2)->nullable();
-            $table->unsignedDecimal('valor_terreno_comun', 10, 2)->nullable();
-            $table->unsignedDecimal('valor_construccion_comun', 10, 2)->nullable();
             $table->boolean('como_urbano')->default(0);
             $table->text('observaciones')->nullable();
             $table->foreignId('tramite_id')->nullable();

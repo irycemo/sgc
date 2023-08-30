@@ -88,6 +88,26 @@ class Caracteristicas extends Component
 
         $this->avaluo = $this->predio->avaluo;
 
+        $this->avaluo->cimentacion = 'NO APLICA';
+        $this->avaluo->estructura = 'NO APLICA';
+        $this->avaluo->muros = 'NO APLICA';
+        $this->avaluo->entrepiso = 'NO APLICA';
+        $this->avaluo->techo = 'NO APLICA';
+        $this->avaluo->plafones = 'NO APLICA';
+        $this->avaluo->vidrieria = 'NO APLICA';
+        $this->avaluo->lambrines = 'NO APLICA';
+        $this->avaluo->pisos = 'NO APLICA';
+        $this->avaluo->herreria = 'NO APLICA';
+        $this->avaluo->pintura = 'NO APLICA';
+        $this->avaluo->carpinteria = 'NO APLICA';
+        $this->avaluo->recubrimiento_especial = 'NO APLICA';
+        $this->avaluo->aplanados = 'NO APLICA';
+        $this->avaluo->hidraulica = 'NO APLICA';
+        $this->avaluo->sanitaria = 'NO APLICA';
+        $this->avaluo->electrica = 'NO APLICA';
+        $this->avaluo->gas = 'NO APLICA';
+        $this->avaluo->especiales = 'NO APLICA';
+
     }
 
     public function guardar(){

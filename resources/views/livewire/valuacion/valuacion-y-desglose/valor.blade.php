@@ -14,7 +14,7 @@
 
         <div class="space-y-2 mb-5 bg-white rounded-lg p-2">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-start  mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 items-start  mx-auto">
 
                 <div class="flex-auto">
 
@@ -110,7 +110,7 @@
 
                     <div class="">
 
-                        <select class="bg-white rounded text-xs w-full" wire:model.defer="predio.ubicacion_en_manzana">
+                        <select class="bg-white rounded text-xs w-full" wire:model="predio.ubicacion_en_manzana">
 
                             <option value="" selected>Seleccione una opción</option>
 
@@ -305,7 +305,7 @@
 
         </div>
 
-        {{-- <button
+        <button
             wire:click="agregarTerreno"
             wire:loading.attr="disabled"
             wire:target="agregarTerreno"
@@ -316,7 +316,7 @@
 
             Agregar nuevo
 
-        </button> --}}
+        </button>
 
         <div class="flex justify-end">
 
@@ -634,7 +634,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosCondominio.{{ $index }}.indiviso_terreno">
+                                <input type="number" max="100" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosCondominio.{{ $index }}.indiviso_terreno">
 
                             </div>
 
@@ -787,7 +787,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesCondominio.{{ $index }}.indiviso_construccion">
+                                <input type="number" max="100" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesCondominio.{{ $index }}.indiviso_construccion">
 
                             </div>
 
@@ -914,7 +914,7 @@
 
         <div class="bg-white rounded-lg p-3 flex justify-end">
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 items-end  mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 items-start  mx-auto">
 
                 <div>
 
@@ -938,15 +938,15 @@
                             <tr>
                                 <td>Superficie de terreno</td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" wire:model="predio.superficie_terreno"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $avaluo->area_comun_terreno}}"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $avaluo->area_comun_terreno}}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_terreno}}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_terreno}}"></td>
                             </tr>
 
                             <tr>
                                 <td>Superficie de construcción</td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" wire:model="predio.superficie_construccion"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $avaluo->area_comun_construccion }}"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $avaluo->area_comun_construccion  + $predio->superficie_construccion }}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_construccion }}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_construccion  + $predio->superficie_construccion }}"></td>
                             </tr>
 
                         </tbody>
@@ -965,16 +965,37 @@
 
                             <tr>
                                 <td class="text-sm">Privatio + Proporcional</td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_terreno + $avaluo->valor_terreno_comun, 2) }}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_terreno + $predio->valor_terreno_comun, 2) }}"></td>
                             </tr>
                             <tr>
                                 <td class="text-sm">Privatio + Proporcional</td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_construccion + $avaluo->valor_construccion_comun, 2) }}"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_construccion + $predio->valor_construccion_comun, 2) }}"></td>
                             </tr>
-                            <tr>
-                                <td class="text-sm">Total</td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_terreno + $avaluo->valor_terreno_comun + $predio->valor_construccion + $avaluo->valor_construccion_comun, 2) }}"></td>
-                            </tr>
+                            @if($this->predio->ubicacion_en_manzana == 'ESQUINA')
+
+                                <tr>
+                                    <td class="text-sm">Sub Total</td>
+                                    <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun, 2) }}"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-sm">Ubicación en esquina</td>
+                                    <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format(($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun) * 0.15, 2) }}"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-sm">Total</td>
+                                    <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format(($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun) + ($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun) * 0.15, 2) }}"></td>
+                                </tr>
+
+                            @else
+
+                                <tr>
+                                    <td class="text-sm">Total</td>
+                                    <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_terreno + $predio->valor_terreno_comun + $predio->valor_total_construccion + $predio->valor_construccion_comun, 2) }}"></td>
+                                </tr>
+
+                            @endif
 
                         </tbody>
 

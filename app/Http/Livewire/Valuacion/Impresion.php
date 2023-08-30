@@ -114,8 +114,6 @@ class Impresion extends Component
 
     public function imprimir(){
 
-        $this->validate();
-
         $this->cantidad = $this->registro_final - $this->registro_inicio + 1;
 
         if($this->registro_final == $this->registro_inicio)
@@ -129,72 +127,101 @@ class Impresion extends Component
 
         }
 
-        $tramiteInspeccion  = Tramite::where('folio', $this->tramiteInspeccion)->first();
+        if(!$this->formato){
 
-        if($tramiteInspeccion->estado != 'pagado'){
+            $this->validate([
+                'director' => 'required',
+                'jefe_departamento' => 'required',
+                'tramiteInspeccion' => 'required',
+                'tramiteAvaluo' => 'required',
+                'localidad' => 'required',
+                'oficina' => 'required',
+                'tipo' => 'required',
+                'registro_inicio' => 'required',
+                'registro_final' => 'required',
+                'valuador' => 'required_if:formato,0',
+                'notificador' => 'required_if:formato,0',
+                'ciudad' => 'nullable',
+                'hora' => 'nullable',
+                'dia' => 'nullable',
+                'año' => 'nullable',
+                'mes' => 'nullable',
+                'nombre' => 'nullable',
+                'calidad' => 'nullable',
+            ]);
 
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de inspección no esta pagado o ha sido concluido."]);
+            $tramiteInspeccion  = Tramite::where('folio', $this->tramiteInspeccion)->first();
 
-            return;
+            if($tramiteInspeccion->estado != 'pagado'){
 
-        }
-
-        if(( $this->cantidad + $tramiteInspeccion->usados) > $tramiteInspeccion->cantidad){
-
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cantidad de inspecciones que avala el trámite ya se usó o es insuficiente."]);
-
-            return;
-
-        }
-
-        $tramiteAvaluo = Tramite::where('folio', $this->tramiteAvaluo)->first();
-
-        if($tramiteInspeccion->estado != 'pagado'){
-
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no esta pagado o ha sido concluido."]);
-
-            return;
-
-        }
-
-        if(( $this->cantidad + $tramiteAvaluo->usados) > $tramiteAvaluo->cantidad){
-
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cantidad de avaluos que avala el trámite ya se usó."]);
-
-            return;
-
-        }
-
-        if($tramiteInspeccion->avaluo_para == 46 || $tramiteInspeccion->avaluo_para == 45){
-
-            if($tramiteAvaluo->servicio_id != 46 && $tramiteAvaluo->servicio_id != 45){
-
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a una variación."]);
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de inspección no esta pagado o ha sido concluido."]);
 
                 return;
 
             }
 
+            if(( $this->cantidad + $tramiteInspeccion->usados) > $tramiteInspeccion->cantidad){
 
-        }elseif($tramiteInspeccion->avaluo_para == 43 || $tramiteInspeccion->avaluo_para == 44){
-
-            if($tramiteAvaluo->servicio_id != 43 && $tramiteAvaluo->servicio_id != 44){
-
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un desglose."]);
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cantidad de inspecciones que avala el trámite ya se usó o es insuficiente."]);
 
                 return;
 
             }
 
-        }elseif($tramiteInspeccion->avaluo_para == 47){
+            $tramiteAvaluo = Tramite::where('folio', $this->tramiteAvaluo)->first();
 
-            if($tramiteAvaluo->servicio_id != 47){
+            if($tramiteInspeccion->estado != 'pagado'){
 
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un avlúo predio ignorado."]);
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no esta pagado o ha sido concluido."]);
 
                 return;
 
             }
+
+            if(( $this->cantidad + $tramiteAvaluo->usados) > $tramiteAvaluo->cantidad){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cantidad de avaluos que avala el trámite ya se usó."]);
+
+                return;
+
+            }
+
+            if($tramiteInspeccion->avaluo_para == 46 || $tramiteInspeccion->avaluo_para == 45){
+
+                if($tramiteAvaluo->servicio_id != 46 && $tramiteAvaluo->servicio_id != 45){
+
+                    $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a una variación."]);
+
+                    return;
+
+                }
+
+
+            }elseif($tramiteInspeccion->avaluo_para == 43 || $tramiteInspeccion->avaluo_para == 44){
+
+                if($tramiteAvaluo->servicio_id != 43 && $tramiteAvaluo->servicio_id != 44){
+
+                    $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un desglose."]);
+
+                    return;
+
+                }
+
+            }elseif($tramiteInspeccion->avaluo_para == 47){
+
+                if($tramiteAvaluo->servicio_id != 47){
+
+                    $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un avlúo predio ignorado."]);
+
+                    return;
+
+                }
+
+            }
+
+        }else{
+
+
 
         }
 
@@ -260,6 +287,8 @@ class Impresion extends Component
                             'tramite_id' => $tramiteInspeccion->id,
                             'estado' => 'impreso'
                         ]);
+
+                $predio->avaluo->audits()->latest()->first()->update(['tags' => 'Imprimio avalúo']);
 
             }
 
@@ -345,28 +374,24 @@ class Impresion extends Component
 
         $this->formato = 0;
 
-        if($this->oficina == 101){
+        $this->director = User::where('status', 'activo')
+                                ->whereHas('roles', function($q){
+                                    $q->where('name', 'Director');
+                                })
+                                ->first();
 
-            $this->director = User::where('status', 'activo')
-                                    ->whereHas('roles', function($q){
-                                        $q->where('name', 'Director');
-                                    })
-                                    ->first();
+        $this->director = $this->director->name . ' ' . $this->director->ap_paterno . ' ' . $this->director->ap_materno;
 
-            $this->director = $this->director->name . ' ' . $this->director->ap_paterno . ' ' . $this->director->ap_materno;
+        $this->jefe_departamento = User::where('status', 'activo')
+                                            ->whereHas('roles', function($q){
+                                                $q->where('name', 'Jefe de departamento');
+                                            })
+                                            ->where('area', 'Departamento de Valuación')
+                                            ->first();
 
-            $this->jefe_departamento = User::where('status', 'activo')
-                                                ->whereHas('roles', function($q){
-                                                    $q->where('name', 'Jefe de departamento');
-                                                })
-                                                ->where('area', 'Departamento de Valuación')
-                                                ->first();
+        $this->jefe_departamento = $this->jefe_departamento->name . ' ' . $this->jefe_departamento->ap_paterno . ' ' . $this->jefe_departamento->ap_materno;
 
-            $this->jefe_departamento = $this->jefe_departamento->name . ' ' . $this->jefe_departamento->ap_paterno . ' ' . $this->jefe_departamento->ap_materno;
-
-            $this->notificador = "Temo";
-
-        }
+        $this->notificador = "Temo";
 
         $this->valuadores = User::where('status', 'activo')
                                     ->where('valuador', 1)

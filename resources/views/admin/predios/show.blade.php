@@ -28,14 +28,6 @@
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                <strong>Valor catastral</strong>
-
-                <p>${{ number_format($predio->valor_catastral, 2) }}</p>
-
-            </div>
-
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
-
                 <strong>Título de propiedad</strong>
 
                 <p>{{ $predio->titulo_propiedad }}</p>
@@ -82,6 +74,78 @@
 
             </div>
 
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Superficie de terreno</strong>
+
+                <p>{{ number_format($predio->superficie_terreno, 2) }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Valor de terreno</strong>
+
+                <p>{{ number_format($predio->valor_total_terreno, 2) }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Superficie de construcción</strong>
+
+                <p>{{ number_format($predio->superficie_construccion, 2) }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Valor de terreno</strong>
+
+                <p>{{ number_format($predio->valor_total_construccion, 2) }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Área común de terreno</strong>
+
+                <p>{{ number_format($predio->area_comun_terreno, 2) }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Valor de terreno común</strong>
+
+                <p>{{ number_format($predio->valor_terreno_comun, 2) }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Área común de construcción</strong>
+
+                <p>{{ number_format($predio->area_comun_construccion, 2) }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Valor de construcción común</strong>
+
+                <p>{{ number_format($predio->valor_construccion_comun, 2) }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Valor catastral</strong>
+
+                <p>${{ number_format($predio->valor_catastral, 2) }}</p>
+
+            </div>
+
         </div>
 
     </div>
@@ -96,7 +160,7 @@
 
                 <strong>Tipo de asentamiento</strong>
 
-                <p>{{ $predio->observaciones }}</p>
+                <p>{{ $predio->tipo_asentamiento }}</p>
 
             </div>
 
@@ -261,7 +325,7 @@
 
     <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terreno</h4>
 
-    @forelse ($predio->construcciones as $construccion)
+    @forelse ($predio->terrenos as $terreno)
 
         <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
@@ -271,7 +335,7 @@
 
                     <strong>Superficie</strong>
 
-                    <p>{{ $predio->terrenos->first()?->superficie }}</p>
+                    <p>{{ $terreno->superficie }}</p>
 
                 </div>
 
@@ -279,7 +343,7 @@
 
                     <strong>Valor unitario</strong>
 
-                    <p>{{ $predio->terrenos->first()?->valor_unitario }}</p>
+                    <p>{{ $terreno->valor_unitario }}</p>
 
                 </div>
 
@@ -287,7 +351,7 @@
 
                     <strong>Demerito</strong>
 
-                    <p>{{ $predio->terrenos->first()?->demerito }}</p>
+                    <p>{{ $terreno->demerito }}</p>
 
                 </div>
 
@@ -295,7 +359,7 @@
 
                     <strong>Valor demeritado</strong>
 
-                    <p>{{ $predio->terrenos->first()?->valor_demeritado }}</p>
+                    <p>{{ $terreno->valor_demeritado }}</p>
 
                 </div>
 
@@ -303,7 +367,7 @@
 
                     <strong>Valor del terreno</strong>
 
-                    <p>{{ $predio->terrenos->first()?->valor_demeritado }}</p>
+                    <p>${{ number_format($terreno->valor_terreno, 2) }}</p>
 
                 </div>
 
@@ -341,7 +405,7 @@
 
                     <strong>Clasificación de construccion</strong>
 
-                    <p>{{ $construccion->tipo }}-{{ $construccion->uso }}-{{ $construccion->calidad }}--{{ $construccion->estado }}</p>
+                    <p>{{ $construccion->tipo }}-{{ $construccion->uso }}-{{ $construccion->calidad }}-{{ $construccion->estado }}</p>
 
                 </div>
 
@@ -403,7 +467,7 @@
 
                     <strong>Indiviso de terreno</strong>
 
-                    <p>{{ $terreno->tipo }}-{{ $terreno->uso }}-{{ $terreno->calidad }}--{{ $terreno->estado }}</p>
+                    <p>{{ $terreno->indiviso_terreno }}</p>
 
                 </div>
 
@@ -419,7 +483,7 @@
 
                     <strong>Valor de terreno común</strong>
 
-                    <p>{{ $terreno->valor_terreno_comun }}</p>
+                    <p>${{ number_format($terreno->valor_terreno_comun, 2) }}</p>
 
                 </div>
 
@@ -437,7 +501,7 @@
 
     @endforelse
 
-    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terrenos de área común ({{ $predio->condominioConstrucciones->count() }})</h4>
+    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Construcciones de área común ({{ $predio->condominioConstrucciones->count() }})</h4>
 
     @forelse ($predio->condominioConstrucciones as $construccion)
 
@@ -457,7 +521,7 @@
 
                     <strong>Clasificación de construccion</strong>
 
-                    <p>{{ $construccion->tipo }}-{{ $construccion->uso }}-{{ $construccion->calidad }}--{{ $construccion->estado }}</p>
+                    <p>{{ $construccion->valor_clasificacion_construccion }}</p>
 
                 </div>
 
@@ -465,7 +529,7 @@
 
                     <strong>Valor de construcción común</strong>
 
-                    <p>{{ $construccion->valor_construccion_comun }}</p>
+                    <p>${{ number_format($construccion->valor_construccion_comun, 2) }}</p>
 
                 </div>
 
@@ -586,6 +650,52 @@
                         <p>Municipio: {{ $propietario->persona->municipio }}.</p>
 
                     </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    @empty
+
+        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
+
+            No hay resultados.
+
+        </div>
+
+    @endforelse
+
+    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Movimientos ({{ $predio->audits->count() }})</h4>
+
+    @forelse ($predio->audits as $audit)
+
+        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-2">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Usuario</strong>
+
+                    <p>{{ $audit->user->name }} {{ $audit->user->ap_paterno }} {{ $audit->user->ap_materno }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Movimiento</strong>
+
+                    <p>{{ $audit->event }}. {{ $audit->tags }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Fecha</strong>
+
+                    <p>{{ $audit->created_at->format('d-m-Y') }}</p>
 
                 </div>
 

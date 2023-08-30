@@ -3,16 +3,17 @@
 namespace App\Http\Livewire\Valuacion\ValuacionYDesglose;
 
 use App\Models\Avaluo;
+use App\Models\Predio;
 use App\Models\Terreno;
 use Livewire\Component;
+use App\Models\Construccion;
 use App\Models\PredioAvaluo;
 use Illuminate\Validation\Rule;
+use App\Models\Condominioterreno;
 use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
 use App\Models\Condominioconstruccion;
-use App\Models\Condominioterreno;
-use App\Models\Construccion;
 use App\Models\ValoresUnitariosRusticos;
 use Luecano\NumeroALetras\NumeroALetras;
 use App\Models\ValoresUnitariosConstruccion;
@@ -46,9 +47,9 @@ class Valor extends Component
             'predio.ubicacion_en_manzana' => 'required',
             'predio.valor_catastral' => 'nullable',
             'predio' => 'required',
-            'avaluo.area_comun_terreno' => 'nullable',
-            'avaluo.valor_terreno_comun' => 'nullable',
-            'avaluo.valor_construccion_comun' => 'nullable',
+            'predio.area_comun_terreno' => 'nullable',
+            'predio.valor_terreno_comun' => 'nullable',
+            'predio.valor_construccion_comun' => 'nullable',
          ];
     }
 
@@ -63,7 +64,7 @@ class Valor extends Component
         'construcciones.*.valor_unitario' => 'valor unitario',
         'construcciones.*.niveles' => 'niveles',
         'construcciones.*.superficie' => 'superficie',
-        'predio.uso_1' => 'uso de predio 1',
+        'predio.uso_1' => 'uso de predio',
         'predio.ubicacion_en_manzana' => 'ubicación en manzana',
         'construccionesCondominio.*.area_comun_construccion' => 'área común de construcción',
         'construccionesCondominio.*.indiviso_construccion' => 'indiviso de construcción',
@@ -163,16 +164,6 @@ class Valor extends Component
 
     }
 
-    public function updatedAvaluo(){
-
-        if($this->avaluo->area_comun_terreno  && $this->avaluo->indiviso_terreno  && $this->avaluo->valor_unitario )
-            $this->avaluo->valor_terreno_comun = $this->avaluo->area_comun_terreno * $this->avaluo->indiviso_terreno * $this->avaluo->valor_unitario;
-
-        if($this->avaluo->area_comun_construccion && $this->avaluo->indiviso_construccion && $this->avaluo->valor_clasificacion_construccion)
-            $this->avaluo->valor_construccion_comun = $this->avaluo->area_comun_construccion * $this->avaluo->indiviso_construccion * $this->avaluo->valor_clasificacion_construccion;
-
-    }
-
     public function updatedPredioValorCatastral(){
 
         $formatter = new NumeroALetras();
@@ -182,8 +173,6 @@ class Valor extends Component
     }
 
     public function cargarPredio($id){
-
-        $this->reset(['terrenos', 'construcciones']);
 
         $this->predio = PredioAvaluo::with('avaluo')->find($id);
 
@@ -428,7 +417,7 @@ class Valor extends Component
 
                 $this->predio->update([
                     'superficie_construccion' => $sum2,
-                    'valor_construccion' => $sum,
+                    'valor_total_construccion' => $sum,
                 ]);
 
                 $this->dispatchBrowserEvent('mostrarMensaje', ['success', "Las construcciones se guardaron con éxito"]);
@@ -514,9 +503,12 @@ class Valor extends Component
             'predio' => 'required',
             'terrenosCondominio.*' => 'required',
             'terrenosCondominio.*.area_terreno_comun' => 'required',
-            'terrenosCondominio.*.indiviso_terreno' => 'required',
+            'terrenosCondominio.*.indiviso_terreno' => 'required|max:100',
             'terrenosCondominio.*.valor_unitario' => 'required',
         ]);
+
+        if($this->revisarPorcentaje())
+            return;
 
         try {
 
@@ -556,10 +548,10 @@ class Valor extends Component
 
                 }
 
-                $this->avaluo->area_comun_terreno = $sum2;
-                $this->avaluo->valor_terreno_comun = $sum;
+                $this->predio->area_comun_terreno = $sum2;
+                $this->predio->valor_terreno_comun = $sum;
 
-                $this->avaluo->save();
+                $this->predio->save();
 
                 $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La información de terrenos de condominio se guardó con éxito"]);
 
@@ -580,9 +572,12 @@ class Valor extends Component
             'predio' => 'required',
             'construccionesCondominio.*' => 'required',
             'construccionesCondominio.*.area_comun_construccion' => 'required',
-            'construccionesCondominio.*.indiviso_construccion' => 'required',
+            'construccionesCondominio.*.indiviso_construccion' => 'required|max:100',
             'construccionesCondominio.*.valor_clasificacion_construccion' => 'required',
         ]);
+
+        if($this->revisarPorcentaje())
+            return;
 
         try {
 
@@ -622,14 +617,10 @@ class Valor extends Component
 
                 }
 
-                $this->predio->update([
-                    'valor_construccion' => $sum,
-                ]);
+                $this->predio->area_comun_construccion = $sum2;
+                $this->predio->valor_construccion_comun = $sum;
 
-                $this->avaluo->area_comun_construccion = $sum2;
-                $this->avaluo->valor_construccion_comun = $sum;
-
-                $this->avaluo->save();
+                $this->predio->save();
 
                 $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La información de condominio se guardó con éxito"]);
 
@@ -658,15 +649,25 @@ class Valor extends Component
         ]);
 
         $this->validate([
-            'avaluo.area_comun_terreno' => Rule::requiredIf($this->predio->edificio === 1),
-            'avaluo.area_comun_construccion' => Rule::requiredIf($this->predio->edificio === 1),
-            'avaluo.valor_terreno_comun' => Rule::requiredIf($this->predio->edificio === 1),
-            'avaluo.valor_construccion_comun' => Rule::requiredIf($this->predio->edificio === 1),
+            'predio.area_comun_terreno' => Rule::requiredIf($this->predio->edificio === 1),
+            'predio.area_comun_construccion' => Rule::requiredIf($this->predio->edificio === 1),
+            'predio.valor_terreno_comun' => Rule::requiredIf($this->predio->edificio === 1),
+            'predio.valor_construccion_comun' => Rule::requiredIf($this->predio->edificio === 1),
         ]);
 
         try {
 
-            $this->predio->valor_catastral = $this->predio->valor_total_terreno + $this->predio->valor_construccion + $this->avaluo->valor_terreno_comun + $this->avaluo->valor_construccion_comun;
+            $this->predio->valor_catastral = $this->predio->valor_total_terreno +
+                                                $this->predio->valor_total_construccion +
+                                                $this->predio->valor_terreno_comun +
+                                                $this->predio->valor_construccion_comun;
+
+            if($this->predio->ubicacion_en_manzana == 'ESQUINA'){
+
+                $this->predio->valor_catastral *= (1 + 15 / 100);
+
+            }
+
             $this->predio->save();
 
             $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La información se guardó con éxito"]);
@@ -677,6 +678,73 @@ class Valor extends Component
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Hubo un error."]);
 
         }
+
+    }
+
+    public function revisarPorcentaje(){
+
+        $sumaTerrenos = 0;
+        $sumaConstrucciones = 0;
+
+        $predios = Predio::with('condominioTerrenos', 'condominioConstrucciones')
+                            ->where('estado', $this->predio->estado)
+                            ->where('region_catastral', $this->predio->region_catastral)
+                            ->where('municipio', $this->predio->municipio)
+                            ->where('zona_catastral', $this->predio->zona_catastral)
+                            ->where('localidad', $this->predio->localidad)
+                            ->where('sector', $this->predio->sector)
+                            ->where('manzana', $this->predio->manzana)
+                            ->where('predio', $this->predio->predio)
+                            ->where('oficina', $this->predio->oficina)
+                            ->where('tipo_predio', $this->predio->tipo_predio)
+                            ->where('numero_registro', $this->predio->numero_registro)
+                            ->get();
+
+        foreach ($predios as $predio) {
+
+            foreach ($predio->condominioTerrenos as $terreno) {
+
+                $sumaTerrenos += $terreno->indiviso_terreno;
+
+            }
+
+            foreach ($predio->condominioConstrucciones as $construccion) {
+
+                $sumaConstrucciones += $construccion->indiviso_construccion;
+
+            }
+
+        }
+
+        foreach ($this->terrenosCondominio as $terreno){
+
+            $sumaTerrenos += (float)$terreno['indiviso_terreno'];
+
+        }
+
+        foreach ($this->construccionesCondominio as $construccion) {
+
+            $sumaConstrucciones += (float)$construccion['indiviso_construccion'];
+
+        }
+
+        if($sumaTerrenos > 100){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La suma de los indivisos de terreno de área común es mayor al 100%."]);
+
+            return true;
+
+        }
+
+        if($sumaConstrucciones > 100){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La suma de los indivisos de construcciones de área común es mayor al 100%."]);
+
+            return true;
+
+        }
+
+        return false;
 
     }
 

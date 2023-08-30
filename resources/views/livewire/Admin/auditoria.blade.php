@@ -279,6 +279,8 @@
                                 @elseif($audit->event  == 'sync')
                                     Actualización
                                 @endif
+                                <br>
+                                {{ $audit->tags }}
 
                             </td>
 

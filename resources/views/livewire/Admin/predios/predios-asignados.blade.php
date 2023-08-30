@@ -227,6 +227,8 @@
 
                         </th>
 
+                        <th>Acciones</th>
+
                     </tr>
 
                 </thead>
@@ -307,6 +309,35 @@
 
                             </td>
 
+                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b lg:table-cell relative lg:static">
+
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
+
+                                <div class="flex md:flex-col justify-center lg:justify-start md:space-y-1">
+
+                                    @can('Reasignar valuador')
+
+                                        <button
+                                            wire:click="abrirModalReasignar({{$predio->id}})"
+                                            wire:loading.attr="disabled"
+                                            wire:target="abrirModalReasignar({{$predio->id}})"
+                                            class="md:w-full bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full mr-2 hover:bg-blue-700 flex justify-center focus:outline-none"
+                                        >
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                            </svg>
+
+                                            Reasignar
+
+                                        </button>
+
+                                    @endcan
+
+                                </div>
+
+                            </td>
+
                         </tr>
 
                     @endforeach
@@ -344,5 +375,90 @@
         </div>
 
     @endif
+
+    <x-dialog-modal wire:model="modal" maxWidth="sm">
+
+        <x-slot name="title">
+
+            Reasignar valuador
+
+        </x-slot>
+
+        <x-slot name="content">
+
+            <div class="relative p-1">
+
+                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
+
+                    <div class="flex-auto ">
+
+                        <div>
+
+                            <Label>Valuadores</Label>
+                        </div>
+
+                        <div>
+
+                            <select class="bg-white rounded text-sm w-full" wire:model.defer="valuador">
+
+                                <option value="" selected>Seleccione una opción</option>
+
+                                @foreach ($valuadores as $valuador)
+
+                                    <option value="{{ $valuador->id }}">{{ $valuador->ap_paterno }} {{ $valuador->ap_materno }} {{ $valuador->name }}</option>
+
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+                        <div>
+
+                            @error('valuador') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" wire:loading.delay.longer>
+
+                    <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
+
+                </div>
+
+            </div>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="float-righ">
+
+                <button
+                    wire:click="reasignar"
+                    wire:loading.attr="disabled"
+                    wire:target="reasignar"
+                    class="bg-blue-400 text-white hover:shadow-lg font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+
+                    <img wire:loading wire:target="reasignar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Resaiganr
+                </button>
+
+                <button
+                    wire:click="$set('modal', false)"
+                    wire:loading.attr="disabled"
+                    wire:target="$set('modal', false)"
+                    type="button"
+                    class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-red-700 flaot-left focus:outline-none">
+                    Cerrar
+                </button>
+
+        </x-slot>
+
+    </x-dialog-modal>
 
 </div>

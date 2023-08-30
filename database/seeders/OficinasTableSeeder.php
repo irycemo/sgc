@@ -25,6 +25,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 1,
                 'oficina' => 102,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8]"',
                 'nombre' => 'ACUITZIO',
                 'ubicacion' => 'CALLE SIN NOMBRE S/N COL. CENTRO C.P 58460. PALACIO MUNICIPAL SEGUNDA PLANTA.
 ',
@@ -39,7 +40,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-28 14:51:47',
+                'updated_at' => '2023-08-29 13:51:51',
             ),
             1 =>
             array (
@@ -47,8 +48,9 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 2,
                 'oficina' => 1402,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'AGUILILLA',
-                'ubicacion' => 'PORTAL HIDALGO 22 COL. CENTRO, C.P. 60570. ENTRE CALLE MIGUEL MALDONADO Y PORTAL MORELOS.
+                'ubicacion' => 'PORTAL HIDALGO 22 COL. CENTRO, C.P 60570. ENTRE CALLE MIGUEL MALDONADO Y PORTAL MORELOS.
 ',
                 'titular' => 'C. PATRICIA CUEVAS MENDOZA',
                 'email' => 'rentasaguililla@gmail.com',
@@ -61,7 +63,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-28 14:50:29',
+                'updated_at' => '2023-08-29 14:22:47',
             ),
             2 =>
             array (
@@ -69,6 +71,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 3,
                 'oficina' => 202,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'ALVARO OBREGON',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -90,6 +93,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 4,
                 'oficina' => 1902,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'ANGAMACUTIRO',
                 'ubicacion' => 'GALEANA 12 CENTRO C.P 58550 ENTRE ABASOLO, PROLONGACIÓN ALDAMA, CARRANZA Y MORELOS.
 ',
@@ -104,7 +108,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-28 14:48:45',
+                'updated_at' => '2023-08-29 14:35:25',
             ),
             4 =>
             array (
@@ -112,6 +116,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 5,
                 'oficina' => 502,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10]"',
                 'nombre' => 'ANGANGUEO',
                 'ubicacion' => 'NACIONAL 1 COL. CENTRO C.P 61410 ENTRE CALLE MORELOS Y BENITO JUÁREZ.
 ',
@@ -126,7 +131,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-28 14:47:16',
+                'updated_at' => '2023-08-29 14:37:46',
             ),
             5 =>
             array (
@@ -134,6 +139,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 6,
                 'oficina' => 1401,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'APATZINGAN',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -155,6 +161,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 7,
                 'oficina' => 402,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5]"',
                 'nombre' => 'APORO',
             'ubicacion' => 'NICOLAS BRAVO 1 COL. CENTRO C.P 61400 CONTRA ESQUINA DE NICOLÁS BRAVO Y PORFIRIO DÍAZ  (DENTRO DE LAS OFICINAS DEL DIF).
 ',
@@ -169,7 +176,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-28 14:45:18',
+                'updated_at' => '2023-08-29 14:38:59',
             ),
             7 =>
             array (
@@ -177,6 +184,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 8,
                 'oficina' => 2202,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'AQUILA',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -198,6 +206,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 9,
                 'oficina' => 801,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]"',
                 'nombre' => 'ARIO',
                 'ubicacion' => 'AV. MORELOS 244 COL. CENTRO C.P 61830 ENTRE CALLES FRANCISCO JAVIER MINA Y GENERAL IGNACIO ZARAGOZA.',
                 'titular' => 'C. ARMANDO BECERRA AGUILAR',
@@ -211,7 +220,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-28 14:42:39',
+                'updated_at' => '2023-08-29 14:40:25',
             ),
             9 =>
             array (
@@ -219,6 +228,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 10,
                 'oficina' => 901,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'ARTEAGA',
                 'ubicacion' => 'MIGUEL HIDALGO 87 COL. CENTRO C.P 60950 ENTRE IGNACIO ALLENDE Y ALDAMA.
 ',
@@ -233,7 +243,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-28 14:40:17',
+                'updated_at' => '2023-08-29 14:41:57',
             ),
             10 =>
             array (
@@ -241,6 +251,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 11,
                 'oficina' => 2002,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'BRISEÑAS',
                 'ubicacion' => 'JOSEFA O. DE DOMÍNGUEZ 2 COL. CENTRO C.P 59122 DENTRO DE LA PRESIDENCIA MUNICIPAL.
 ',
@@ -255,7 +266,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-28 14:36:04',
+                'updated_at' => '2023-08-29 14:42:31',
             ),
             11 =>
             array (
@@ -263,6 +274,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 12,
                 'oficina' => 1403,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]"',
                 'nombre' => 'BUENAVISTA',
             'ubicacion' => 'ÁLVARO OBREGÓN S/N COL. CENTRO C.P 60500 ENTRE CALLE NARCISO MENDOZA Y LÁZARO CÁRDENAS (DENTRO DE LA PRESIDENCIA).
 ',
@@ -277,7 +289,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-28 14:08:23',
+                'updated_at' => '2023-08-29 14:45:01',
             ),
             12 =>
             array (
@@ -285,6 +297,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 13,
                 'oficina' => 602,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'CARACUARO',
                 'ubicacion' => 'FRANCISCO I. MADERO 2 COL. CENTRO C.P 61920 ENTRE CALLE 18 DE MARZO Y BENITO JUÁREZ.
 ',
@@ -299,7 +312,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-28 14:00:41',
+                'updated_at' => '2023-08-29 14:46:00',
             ),
             13 =>
             array (
@@ -307,6 +320,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 14,
                 'oficina' => 2201,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'COAHUAYANA',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -328,6 +342,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 15,
                 'oficina' => 1501,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'COALCOMAN',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -349,6 +364,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 16,
                 'oficina' => 1102,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]"',
                 'nombre' => 'COENEO',
                 'ubicacion' => 'AV. MORELOS NTE. 158 COL. CENTRO C.P 58400. ENTRE CALLE MORELOS Y ZARAGOZA.
 ',
@@ -363,7 +379,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-25 12:53:49',
+                'updated_at' => '2023-08-29 14:46:42',
             ),
             16 =>
             array (
@@ -371,6 +387,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 17,
                 'oficina' => 403,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'CONTEPEC',
                 'ubicacion' => 'MORELOS 1 COL. CENTRO C.P. 61020 INTERIOR DEL PALACIO MUNICIPAL ENTRE CALLE CORREGIDORA Y ALDAMA.
 ',
@@ -385,7 +402,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-25 12:52:38',
+                'updated_at' => '2023-08-29 14:47:06',
             ),
             17 =>
             array (
@@ -393,6 +410,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 18,
                 'oficina' => 103,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]"',
                 'nombre' => 'COPANDARO',
                 'ubicacion' => 'CALLE HIDALGO 60, COL. CENTRO C.P 58870. ENTRE IGNACIO LOPEZ RAYÓN Y 16 DE SEPTIEMBRE.
 ',
@@ -407,7 +425,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-25 12:49:44',
+                'updated_at' => '2023-08-29 14:47:24',
             ),
             18 =>
             array (
@@ -415,8 +433,9 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 19,
                 'oficina' => 1302,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]"',
                 'nombre' => 'COTIJA',
-                'ubicacion' => 'PINO SUÁREZ 100 COL CENTRO, C.P 59940. DENTRO DEL PALACIO MUNICIPAL.
+                'ubicacion' => 'PINO SUÁREZ 100 COL. CENTRO, C.P 59940. DENTRO DEL PALACIO MUNICIPAL.
 ',
                 'titular' => 'LIC. CECILIA GARCIA VALENCIA',
                 'email' => 'ceciliagarciavalencia33@gmail.com',
@@ -429,7 +448,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-25 12:46:46',
+                'updated_at' => '2023-08-29 14:47:56',
             ),
             19 =>
             array (
@@ -437,6 +456,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 20,
                 'oficina' => 104,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]"',
                 'nombre' => 'CUITZEO',
                 'ubicacion' => 'AV. MORELOS SUR. 18 INTERIOR C COL. CENTRO C.P 58840. AUN COSTADO DE LA PRESIDENCIA MUNICIPAL.
 ',
@@ -451,7 +471,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-25 12:44:44',
+                'updated_at' => '2023-08-29 14:48:26',
             ),
             20 =>
             array (
@@ -459,6 +479,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 21,
                 'oficina' => 1202,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'CHARAPAN',
                 'ubicacion' => 'AV. NACIONAL S/N COL. CENTRO C.P 60240. ENTRE CALLE LÁZARO CÁRDENAS, EMILIANO ZAPATA.
 
@@ -474,7 +495,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-25 12:42:20',
+                'updated_at' => '2023-08-29 14:48:57',
             ),
             21 =>
             array (
@@ -482,6 +503,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 22,
                 'oficina' => 105,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40]"',
                 'nombre' => 'CHARO',
                 'ubicacion' => 'HIDALGO 185 COL. CENTRO C.P 61300 ENTRE AV. MORELOS Y 20 DE OCTUBRE.
 ',
@@ -496,7 +518,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-25 12:35:04',
+                'updated_at' => '2023-08-29 14:49:16',
             ),
             22 =>
             array (
@@ -504,6 +526,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 23,
                 'oficina' => 1602,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'CHAVINDA',
                 'ubicacion' => 'GÓMEZ FARÍAS NUMERO  9, CENTRO, C.P. 59580 ENTRE CALLE GALEANA Y PLAZA PRINCIPAL.
 ',
@@ -518,7 +541,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-11 12:44:56',
+                'updated_at' => '2023-08-30 09:01:51',
             ),
             23 =>
             array (
@@ -526,6 +549,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 24,
                 'oficina' => 1203,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'CHERAN',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -547,6 +571,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 25,
                 'oficina' => 1702,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]"',
                 'nombre' => 'CHILCHOTA',
                 'ubicacion' => 'PALACIO MUNICIPAL COL. CENTRO C.P 59780.',
                 'titular' => 'C. ABEL NARCIZO RAMOS',
@@ -560,7 +585,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-24 14:57:13',
+                'updated_at' => '2023-08-30 09:02:46',
             ),
             25 =>
             array (
@@ -568,6 +593,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 26,
                 'oficina' => 1502,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'CHINICUILA',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -589,6 +615,7 @@ class OficinasTableSeeder extends Seeder
                 'municipio' => 27,
                 'oficina' => 106,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'CHUCANDIRO',
                 'ubicacion' => 'BENITO JUÁREZ 150 COL. CENTRO C.P 58860. AL ORIENTE RAMÓN Y ALCARAZ,
 AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALGO.
@@ -604,7 +631,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-24 14:53:47',
+                'updated_at' => '2023-08-30 09:03:21',
             ),
             27 =>
             array (
@@ -612,6 +639,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'municipio' => 28,
                 'oficina' => 1802,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"',
                 'nombre' => 'CHURINTZIO',
                 'ubicacion' => 'HIDALGO 40 COL. CENTRO C.P 59440. ENTRE CALLE 5 DE FEBRERO Y CALLE INDEPENDENCIA.
 ',
@@ -626,7 +654,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-24 14:52:28',
+                'updated_at' => '2023-08-30 09:03:54',
             ),
             28 =>
             array (
@@ -634,6 +662,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'municipio' => 29,
                 'oficina' => 802,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14]"',
                 'nombre' => 'CHURUMUCO',
                 'ubicacion' => 'AV. VERACRUZ S/N COL. CENTRO C.P 61680 ENTRE RIO BALSAS, AV. HÉROES DE LA REVOLUCIÓN Y AV. MORELOS.
 ',
@@ -648,7 +677,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-24 14:51:01',
+                'updated_at' => '2023-08-30 09:04:55',
             ),
             29 =>
             array (
@@ -656,6 +685,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'municipio' => 30,
                 'oficina' => 1703,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'ECUANDUREO',
                 'ubicacion' => 'ALLENDE 23 INT D, COL. CENTRO, C.P 59790. ENTRE CALLE ALLENDE, FRANCISCO I. MADERO Y ALDAMA
 ',
@@ -670,7 +700,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-24 14:48:14',
+                'updated_at' => '2023-08-30 09:05:26',
             ),
             30 =>
             array (
@@ -678,6 +708,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'municipio' => 31,
                 'oficina' => 404,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'EPITACIO HUERTA',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -699,6 +730,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'municipio' => 32,
                 'oficina' => 1002,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"',
                 'nombre' => 'ERONGARICUARO',
                 'ubicacion' => 'AV. MARÍA LUISA MARTÍNEZ S/N BARRIO SAN MIGUEL C.P 61630. ENTRE ALFONSO URRUETA Y ROMERO.
 ',
@@ -713,7 +745,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-24 14:33:15',
+                'updated_at' => '2023-08-30 09:08:38',
             ),
             32 =>
             array (
@@ -721,6 +753,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'municipio' => 33,
                 'oficina' => 1204,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]"',
                 'nombre' => 'GABRIEL ZAMORA',
                 'ubicacion' => 'FRANCISCO JOSE MÚGICA S/N CENTRO C.P  61730. ENTRE CALLE NIÑOS HÉROES Y AV. REVOLUCIÓN.
 ',
@@ -735,7 +768,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-24 11:12:04',
+                'updated_at' => '2023-08-30 09:09:16',
             ),
             33 =>
             array (
@@ -743,6 +776,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]"',
                 'nombre' => 'HIDALGO',
                 'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P 61100. ENTRE CARRANZA E  INDEPENDENCIA.
 ',
@@ -757,7 +791,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-24 11:18:30',
+                'updated_at' => '2023-08-30 09:10:01',
             ),
             34 =>
             array (
@@ -765,6 +799,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'municipio' => 35,
                 'oficina' => 803,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"',
                 'nombre' => 'LA HUACANA',
                 'ubicacion' => 'PORTAL ALLENDE S/N COL. CENTRO C.P 61853 DENTRO DE LA PRESIDENCIA MUNICIPAL.  ENTRE CALLE REVOLUCIÓN, ALLENDE, AL NORTE CON ZARAGOZA Y AL SUR CALLE JUÁREZ.
 ',
@@ -779,7 +814,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-24 11:07:06',
+                'updated_at' => '2023-08-30 09:12:20',
             ),
             35 =>
             array (
@@ -787,6 +822,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'municipio' => 36,
                 'oficina' => 107,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'HUANDACAREO',
                 'ubicacion' => 'CALZADA LÁZARO CÁRDENAS 8 COL. CENTRO C.P 58820 ENTRE CALLE 16 DE SEPTIEMBRE Y GALVEZ BETANCOURT.
 ',
@@ -801,7 +837,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-24 10:35:38',
+                'updated_at' => '2023-08-30 09:13:30',
             ),
             36 =>
             array (
@@ -809,6 +845,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'municipio' => 37,
                 'oficina' => 1103,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'HUANIQUEO',
                 'ubicacion' => 'PLAZA PRINCIPAL S/N COL. CENTRO C.P 58360, A UN COSTADO DEL H. AYUNTAMIENTO.  ',
                 'titular' => 'LIC. ELICEO REYES CORTES',
@@ -822,7 +859,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-23 11:08:20',
+                'updated_at' => '2023-08-30 09:14:00',
             ),
             37 =>
             array (
@@ -830,6 +867,7 @@ AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALG
                 'municipio' => 38,
                 'oficina' => 601,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]"',
                 'nombre' => 'HUETAMO',
                 'ubicacion' => 'JAZMINES 32 COL. LA NOPALERA CUITZEO, MUNICIPIO DE HUETAMO
 AUN COSTADO DE LA UNIDAD DEPORTIVA.
@@ -845,7 +883,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-23 11:04:33',
+                'updated_at' => '2023-08-30 09:14:40',
             ),
             38 =>
             array (
@@ -853,6 +891,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 39,
                 'oficina' => 1003,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]"',
                 'nombre' => 'HUIRAMBA',
                 'ubicacion' => 'PORTAL HIDALGO S/N COL. CENTRO C.P 61640 ENTRE DAMASO CÁRDENAS AUN COSTADO DE LA IGLESIA DE HUIRAMBA.
 ',
@@ -867,7 +906,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-23 10:58:55',
+                'updated_at' => '2023-08-30 09:15:48',
             ),
             39 =>
             array (
@@ -875,6 +914,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 40,
                 'oficina' => 203,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'INDAPARAPEO',
                 'ubicacion' => 'MORELOS 76 CENTRO C.P. 58970 ENTRE LA CALLE PRIMERA DE ZARAGOZA, TERCERA DE BRAVO Y LA CARRETERA AV. ADOLFO LÓPEZ.
 ',
@@ -889,7 +929,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-11 12:38:45',
+                'updated_at' => '2023-08-30 09:42:13',
             ),
             40 =>
             array (
@@ -897,6 +937,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 41,
                 'oficina' => 302,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10]"',
                 'nombre' => 'IRIMBO',
                 'ubicacion' => 'AV. MORELOS 32 COL. CENTRO C.P 61280 UBICADOS AL INTERIOR DE LA PRESIDENCIA MUNICIPAL.
 ',
@@ -911,7 +952,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-23 10:55:09',
+                'updated_at' => '2023-08-30 09:42:34',
             ),
             41 =>
             array (
@@ -919,6 +960,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 42,
                 'oficina' => 1704,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]"',
                 'nombre' => 'IXTLAN',
                 'ubicacion' => 'JUÁREZ NTE.13 CENTRO C.P 59280 ENTRE CALLE ALLENDE Y RUBIO.
 ',
@@ -933,7 +975,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-23 10:52:21',
+                'updated_at' => '2023-08-30 09:43:00',
             ),
             42 =>
             array (
@@ -941,6 +983,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 43,
                 'oficina' => 1705,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]"',
                 'nombre' => 'JACONA',
                 'ubicacion' => 'MORELOS 2 INT B, COL. CENTRO, 59800 ENTRE AMADO NERVO, ZARAGOZA Y CONSTITUCIÓN.
 ',
@@ -955,7 +998,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-22 12:33:17',
+                'updated_at' => '2023-08-30 09:43:25',
             ),
             43 =>
             array (
@@ -963,6 +1006,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 44,
                 'oficina' => 1105,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]"',
                 'nombre' => 'JIMENEZ',
                 'ubicacion' => '1 DE MAYO 3 COL. CENTRO C.P 58780 ENTRE CALLE IGNACIO ALLENDE Y MIGUEL HIDALGO.
 ',
@@ -977,7 +1021,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-22 12:28:23',
+                'updated_at' => '2023-08-30 09:48:01',
             ),
             44 =>
             array (
@@ -985,6 +1029,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 45,
                 'oficina' => 1601,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'JIQUILPAN',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -1006,6 +1051,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 46,
                 'oficina' => 503,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'JUAREZ',
                 'ubicacion' => 'PLAZA CENTRAL S/N COL. CENTRO C.P 61570 ENTRE CALLE AV REVOLUCIÓN Y NICOLÁS  ROMERO.
 ',
@@ -1020,7 +1066,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-22 12:23:27',
+                'updated_at' => '2023-08-30 09:48:49',
             ),
             46 =>
             array (
@@ -1028,6 +1074,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 47,
                 'oficina' => 504,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]"',
                 'nombre' => 'JUNGAPEO',
                 'ubicacion' => 'FRANCISCO I. MADERO 47 CENTRO C.P. 61470  ENTRE CALLE REFORMA Y 20 DE NOVIEMBRE
 ',
@@ -1042,7 +1089,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-08 14:56:35',
+                'updated_at' => '2023-08-30 09:50:27',
             ),
             47 =>
             array (
@@ -1050,6 +1097,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 48,
                 'oficina' => 1004,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'LAGUNILLAS',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -1071,6 +1119,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 49,
                 'oficina' => 108,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'MADERO',
                 'ubicacion' => 'PORTAL HIDALGO 35-A COL. CENTRO C.P 58480 ENTRE AV. MORELOS Y CALLE VENUSTIANO CARRANZA JUNTO AL PALACIO MUNICIPAL.
 ',
@@ -1093,6 +1142,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 50,
                 'oficina' => 401,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'MARAVATIO',
                 'ubicacion' => 'ÁLVARO OBREGÓN 198 COL. CENTRO C.P 61250 ENTRE ABASOLO, GALEANA Y GUERRERO.
 ',
@@ -1115,6 +1165,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 51,
                 'oficina' => 1603,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'MARCOS CASTELLANOS',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -1136,6 +1187,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 52,
                 'oficina' => 2301,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'LAZARO CARDENAS',
                 'ubicacion' => 'AV. ZARAGOZA #128 COL CENTRO C.P 60950 ENTRE CALLES JUAN ÁLVAREZ Y AV. REFORMA.
 ',
@@ -1158,6 +1210,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98]"',
                 'nombre' => 'MORELIA',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS # 1016, COLONIA VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
                 'titular' => 'DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL ',
@@ -1171,7 +1224,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-17 13:25:50',
+                'updated_at' => '2023-08-29 13:58:16',
             ),
             53 =>
             array (
@@ -1179,6 +1232,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 54,
                 'oficina' => 1904,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'MORELOS',
                 'ubicacion' => 'PORTAL MORELOS 1 COL. CENTRO C.P 58802 ENTRE CALLE ITURBIDE, AL ORIENTE MARIANO JIMÉNEZ AL PONIENTE CALLE SIN NOMBRE Y PLAZA PRINCIPAL.
 ',
@@ -1201,6 +1255,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 55,
                 'oficina' => 1404,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'MUGICA',
                 'ubicacion' => 'PALACIO MUNICIPAL, PLAN DE IGUALA S/N , LIBERTAD, C.P. 61760.',
                 'titular' => 'LIC. MARA ARELI MARTINEZ MADRIGAL',
@@ -1222,6 +1277,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 56,
                 'oficina' => 1206,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'NAHUATZEN',
                 'ubicacion' => 'FRANCISCO I. MADERO 180 COL. CENTRO, PALACIO MUNICIPAL C.P 60280.',
                 'titular' => 'LIC. ALBERTO MANRIQUEZ PALEO',
@@ -1243,6 +1299,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 57,
                 'oficina' => 603,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'NOCUPETARO',
                 'ubicacion' => 'AV. MORELOS SUR 100 COL. CENTRO C.P 61900 ENTRE JUÁREZ ORIENTE Y SANTOS DEGOLLADO.
 ',
@@ -1265,6 +1322,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 58,
                 'oficina' => 1205,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'NUEVO PARANGARICUTIRO',
                 'ubicacion' => '16 DE SEPTIEMBRE S/N COL. CENTRO, C.P 60490 ENTRE CALLES INSURGENTES, FRAY JUAN DE MIGUEL.
 ',
@@ -1287,6 +1345,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 59,
                 'oficina' => 804,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'NUEVO URECHO',
                 'ubicacion' => 'INDEPENDENCIA S/N COL. CENTRO C.P 61750 DENTRO DE LAS OFICINAS DEL H. AYUNTAMIENTO.
 ',
@@ -1309,6 +1368,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 60,
                 'oficina' => 1803,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'NUMARAN',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -1330,6 +1390,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 61,
                 'oficina' => 505,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'OCAMPO',
                 'ubicacion' => 'VENUSTIANO CARRANZA S/N COL. CENTRO C.P 61450 ESQUINA CON CALLE ZARAGOZA.
 ',
@@ -1352,6 +1413,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 62,
                 'oficina' => 2103,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'PAJACUARAN',
                 'ubicacion' => 'ALDAMA 1 PALACIO MUNICIPAL COL. CENTRO. C.P 59180 ENTRE MORELOS Y JOSE MORA DEL RIO.
 ',
@@ -1374,6 +1436,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 63,
                 'oficina' => 1104,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'PANINDICUARO',
                 'ubicacion' => 'PORTAL HIDALGO 1 INTERIOR 13 COL. CENTRO C.P 58570. ENTRE CALLES MIGUEL HIDALGO Y A, OBREGÓN.
 ',
@@ -1396,6 +1459,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 64,
                 'oficina' => 1405,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'PARACUARO',
                 'ubicacion' => 'PORTAL OCAMPO 34 COL. CENTRO, C.P. 60760. CALLES QUE LO RODEAN, AV LÁZARO CÁRDENAS Y CALLE CORREGIDORA.
 ',
@@ -1418,6 +1482,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 65,
                 'oficina' => 1207,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'PARACHO',
                 'ubicacion' => 'EMILIO CARRANZA 58 COL. CENTRO C.P 60250 ENTRE DOCTOR VERDUZCO , E HIDALGO.
 ',
@@ -1440,6 +1505,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 66,
                 'oficina' => 1001,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'PATZCUARO',
                 'ubicacion' => 'AV. ÁLVARO OBREGÓN 25 COL. CENTRO C.P 61600 ENTRE  SILVIANO CARRILLO CÁRDENAS
 ',
@@ -1462,6 +1528,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 67,
                 'oficina' => 1804,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'PENJAMILLO',
                 'ubicacion' => 'ALLENDE 500 COL. CENTRO C.P 59470 ENTRE CALLE MADERO Y JARDÍN DE PRESIDENCIA.
 ',
@@ -1484,6 +1551,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 68,
                 'oficina' => 1303,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'PERIBAN',
                 'ubicacion' => 'FRANCISCO VILLA #40, COL. GIRASOLES, C.P. 60440 ENTRE FRANCISCO VILLA ESQUINA CON CALLE MORELOS.
 ',
@@ -1506,6 +1574,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 69,
                 'oficina' => 1801,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'LA PIEDAD',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -1527,6 +1596,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 70,
                 'oficina' => 1706,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'PUREPERO',
                 'ubicacion' => 'HIDALGO 28 COL. CENTRO C.P 58760 ENTRE CALLE 5 DE MAYO Y OBREGÓN.
 ',
@@ -1549,6 +1619,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'PURUANDIRO',
                 'ubicacion' => 'PORTAL HIDALGO #60 COL. CENTRO C.P 58500 ENTRE CALLE ZENDEJAS Y MORELOS.
 ',
@@ -1571,6 +1642,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 72,
                 'oficina' => 204,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'QUERENDARO',
                 'ubicacion' => 'PORTAL HIDALGO 1 CENTRO C.P 58980 AL NORTE MORELOS ORIENTE, AL ORIENTE NICOLAS BRAVO Y AL SUR CALLE GUERRERO.
 ',
@@ -1593,6 +1665,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 73,
                 'oficina' => 1005,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'QUIROGA',
                 'ubicacion' => 'SANTOS DE GOLLADO S/N COL CENTRO C.P 58420 ENTRE CALLE MARIANO JIMÉNEZ Y AV FRANCISCO I. MADERO.
 ',
@@ -1615,6 +1688,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 74,
                 'oficina' => 2102,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'COJUMATLAN DE REGULES',
                 'ubicacion' => 'CUAUHTÉMOC 18 CENTRO C.P 59141 DENTRO DE PALACIO MUNICIPAL 2° PISO, ENTRE MIGUEL HIDALGO Y DOLORES ACUÑA.
 ',
@@ -1637,6 +1711,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 75,
                 'oficina' => 1301,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'LOS REYES',
                 'ubicacion' => 'FRANCISCO I. MADERO S/N COL. CENTRO C.P 60300 ESQUINA TORRES QUINTERO
 ',
@@ -1659,6 +1734,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 76,
                 'oficina' => 2101,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'SAHUAYO',
             'ubicacion' => 'GUERRERO #290 COL. CENTRO C.P 59000 ENTRE BOULEVARD LÁZARO CÁRDENAS Y CALLE CONSTITUCIÓN (enfrente de la preparatoria hermanos López Rayón )
 ',
@@ -1681,6 +1757,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 77,
                 'oficina' => 604,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'SAN LUCAS',
                 'ubicacion' => 'AV. SERVANDO CHAVEZ OTE. #1 COL. CENTRO C.P 61980 FRENTE AL JARDÍN PRINCIPAL, AL EXTERIOR DE PRESIDENCIA MUNICIPAL
 ',
@@ -1703,6 +1780,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 78,
                 'oficina' => 109,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'SANTA ANA MAYA',
                 'ubicacion' => 'FRANCISCO I. MADERO 1 COL. CENTRO C.P 58900 UBICADO EN LA PLAZA PRINCIPAL.
 ',
@@ -1725,6 +1803,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 79,
                 'oficina' => 1006,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'SALVADOR ESCALANTE',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -1746,6 +1825,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 80,
                 'oficina' => 405,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'SENGUIO',
                 'ubicacion' => 'GUERRERO 3 COL. CENTRO C.P. 61290 ENTRE CALLE JUÁREZ E INDEPENDENCIA.
 ',
@@ -1768,6 +1848,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 81,
                 'oficina' => 506,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'SUSUPUATO',
                 'ubicacion' => 'VICENTE GUERRO 6 INT.  PRESIDENCIA MUNICIPAL PLANTA BAJA.',
                 'titular' => 'C. JAVIER MILLAN VELAZQUEZ',
@@ -1789,6 +1870,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 82,
                 'oficina' => 701,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TACAMBARO',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -1810,6 +1892,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 83,
                 'oficina' => 1208,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TANCITARO',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -1831,6 +1914,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 84,
                 'oficina' => 1707,
                 'localidad' => 1,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9]"',
                 'nombre' => 'SANTIAGO TANGAMANDAPIO',
                 'ubicacion' => 'JAVIER MINA 4 EL PROGRESO C.P 59920 ENTRE CALLE GUERRERO Y JAVIER MINA.
 ',
@@ -1845,7 +1929,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-21 14:49:50',
+                'updated_at' => '2023-08-29 14:36:27',
             ),
             84 =>
             array (
@@ -1853,6 +1937,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 85,
                 'oficina' => 1708,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TANGANCICUARO',
                 'ubicacion' => 'ROMÁN SILVA ÁLVAREZ 10 COL. CENTRO C.P 59750 ENTRE DOCTOR MIGUEL SILVA, REFORMA Y CONSTITUCIÓN.
 ',
@@ -1875,6 +1960,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 86,
                 'oficina' => 2001,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TANHUATO',
                 'ubicacion' => 'CARRETERA TANHUATO EL CALVARIO YURÉCUARO 12 C.P 59230
 ',
@@ -1897,6 +1983,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 87,
                 'oficina' => 1209,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TARETAN',
                 'ubicacion' => 'DOCTOR RAFAEL ALVARADO 323 COL CENTRO C.P 61710 ENTRE CALLE BENITO JUÁREZ Y LUCAS ORTIZ
 ',
@@ -1919,6 +2006,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 88,
                 'oficina' => 110,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TARIMBARO',
                 'ubicacion' => '16 DE SEPTIEMBRE 10 CENTRO C.P 5880 ENTRE CALLES LÁZARO CÁRDENAS, JOSÉ MARÍA MORELOS Y PAVÓN E IGNACIO ZARAGOZA.
 ',
@@ -1941,6 +2029,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 89,
                 'oficina' => 1406,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TEPALCATEPEC',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -1962,6 +2051,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 90,
                 'oficina' => 1210,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TINGAMBATO',
                 'ubicacion' => 'PORTAL HIDALGO S/N CENTRO C.P 60290 ENTRE ABASOLO E HIDALGO DENTRO DE LA PRESIDENCIA.
 ',
@@ -1984,6 +2074,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 91,
                 'oficina' => 1304,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TINGUINDIN',
                 'ubicacion' => 'PORTAL HIDALGO  4, CENTRO, C.P. 58980 ENTRE LAS CALLES EMILIANO ZAPATA Y JAVIER MINA DENTRO DE LA PRESIDENCIA MUNICIPAL.
 ',
@@ -2006,6 +2097,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 92,
                 'oficina' => 605,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TIQUICHEO DE N R',
                 'ubicacion' => 'CALLE OTHÓN VILLELA #15 COL. CENTRO C.P 61370 ENTRE CALLE GUERRERO Y GALEANA
 ',
@@ -2028,6 +2120,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 93,
                 'oficina' => 406,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TLALPUJAHUA',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -2049,6 +2142,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 94,
                 'oficina' => 1805,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TLAZAZALCA',
                 'ubicacion' => 'PALACIO MUNICIPAL S/N C.P 58740 EN CALLE JOSE MA. MORELOS ENTRE CALLES AQUILES SERDAN Y MIGUEL HIDALGO.
 ',
@@ -2071,6 +2165,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 95,
                 'oficina' => 1305,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TOCUMBO',
                 'ubicacion' => 'PORTAL LÁZARO CÁRDENAS 16, CENTRO, C.P. 59962 ENTRE JAVIER MINA Y BOULEVARD LÁZARO CÁRDENAS.
 ',
@@ -2093,6 +2188,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 96,
                 'oficina' => 902,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TUMBISCATIO',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -2114,6 +2210,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 97,
                 'oficina' => 702,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TURICATO',
                 'ubicacion' => 'ÁLVARO OBREGÓN S/N COL. CENTRO C.P. 61680 ESQUINA CON CALLE VASCO DE QUIROGA. AL SUR: CALLE TANGANXOAN.
 ',
@@ -2136,6 +2233,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 98,
                 'oficina' => 507,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TUXPAN',
                 'ubicacion' => 'AV. MORELOS NORTE S/N COL CENTRO C.P. 61420 ENTRE LA CALLE FRANCISCO J. MÚGICA Y LA COLONIA RIO GRANDE
 ',
@@ -2158,6 +2256,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 99,
                 'oficina' => 508,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TUZANTLA',
                 'ubicacion' => 'AV. SIXTO VERDUZCO NORTE 6 CENTRO C.P. 61540 ENTRE LA CALLE LÁZARO CÁRDENAS, RENTERIA LUVIANO Y GERTRUDIS SÁNCHEZ.
 ',
@@ -2180,6 +2279,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 100,
                 'oficina' => 1007,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TZINTZUNTZAN',
                 'ubicacion' => 'AV. LAS YACATAS 25 COL. CENTRO C.P 58440 ENTRE AV. LÁZARO CÁRDENAS Y 24 DE DICIEMBRE.
 ',
@@ -2202,6 +2302,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 101,
                 'oficina' => 111,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'TZITZIO',
                 'ubicacion' => 'KM 16 + 500 METROS,  CARRETERA TEMAZCAL-HUETAMO TZITZIO, MICH.',
                 'titular' => 'C. ISRAEL GUTIERREZ ORTIZ',
@@ -2223,6 +2324,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 102,
                 'oficina' => 1201,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'URUAPAN',
             'ubicacion' => 'AV. PARICUTIN S/N COL. SAN RAFAEL C.P. 60137 (ES UNA PRIVADA)
 ',
@@ -2245,6 +2347,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 103,
                 'oficina' => 2104,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'VENUSTIANO CARRANZA',
                 'ubicacion' => 'MELCHOR OCAMPO 38 D COL. CENTRO C.P. 59160. ENTRE CALLE JUÁREZ E IGNACIO ALLENDE
 
@@ -2268,6 +2371,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 104,
                 'oficina' => 1604,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'VILLAMAR',
                 'ubicacion' => 'FELICITAS DEL RIO SIN NUMERO CENTRO C.P  59550 ENTRE CALLE SAN FRANCISCO Y COMONFORT
 ',
@@ -2290,6 +2394,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 105,
                 'oficina' => 2003,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'VISTA HERMOSA',
                 'ubicacion' => 'CAPITÁN AZUETA #12 PLANTA ALTA COL. CENTRO C.P. 59200 ENTRE FRANCISCO VILLA Y ALEJANDRO QUEZADA.
 ',
@@ -2312,6 +2417,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 106,
                 'oficina' => 2004,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'YURECUARO',
                 'ubicacion' => 'PORTAL HIDALGO S/N, CENTRO, C.P.59250 ENTRE CALLE HIDALGO Y GUERRERO.
 ',
@@ -2334,6 +2440,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 107,
                 'oficina' => 1101,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'ZACAPU',
                 'ubicacion' => 'AV. MORELOS # 61 COL. CENTRO C.P 58600 ENTRE ZARAGOZA Y CALLE JUÁREZ.
 ',
@@ -2356,6 +2463,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 108,
                 'oficina' => 1701,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'ZAMORA',
             'ubicacion' => 'GUERRERO #82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS).
 ',
@@ -2378,6 +2486,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 109,
                 'oficina' => 1806,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'ZINAPARO',
                 'ubicacion' => 'AV COLON 2 CENTRO C.P 5946 ENTRE AV FRANCISCO I MADERO Y PLAZUELA INDEPENDENCIA.
 ',
@@ -2400,6 +2509,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 110,
                 'oficina' => 201,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'ZINAPECUARO',
                 'ubicacion' => 'JUÁREZ #14 COL. CENTRO C.P 58930 MELCHOR OCAMPO AL NORTE Y AL SUR CON RAFAEL CARRILLO.
 ',
@@ -2422,6 +2532,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 111,
                 'oficina' => 1211,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'ZIRACUARETIRO',
                 'ubicacion' => 'PASAJE PORTAL MATAMOROS S/N COL. CENTRO C.P 61700 ENTRE ABASOLO Y MORELOS.
 ',
@@ -2444,6 +2555,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 112,
                 'oficina' => 501,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'ZITACUARO',
                 'ubicacion' => 'BENEDICTO LOPEZ SUR #7 COL. CENTRO C.P 61500 ENTRE  IGNACIO LÓPEZ RAYÓN Y MIGUEL HIDALGO.
 ',
@@ -2466,6 +2578,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 113,
                 'oficina' => 1903,
                 'localidad' => 1,
+                'sectores' => NULL,
                 'nombre' => 'JOSE SIXTO VERDUZCO',
                 'ubicacion' => 'PALACIO MUNICIPAL S/N CENTRO C.P 58540',
                 'titular' => 'MIGUEL ANGEL AYALA ROBLEDO',
@@ -2487,6 +2600,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 114,
                 'oficina' => 2202,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'LA PLACITA',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -2508,8 +2622,9 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 9,
                 'oficina' => 801,
                 'localidad' => 2,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'URAPA',
-                'ubicacion' => 'AV. MORELOS #244 COL. CENTRO C.P 61830 ENTRE CALLES FRANCISCO JAVIER MINA Y GENERAL IGNACIO ZARAGOZA
+                'ubicacion' => 'AV. MORELOS 244 COL. CENTRO C.P 61830 ENTRE CALLES FRANCISCO JAVIER MINA Y GENERAL IGNACIO ZARAGOZA.
 ',
                 'titular' => 'C. ARMANDO BECERRA AGUILAR',
                 'email' => 'armandobecerra@live.com.mx',
@@ -2522,7 +2637,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-17 13:28:16',
+                'updated_at' => '2023-08-29 14:41:24',
             ),
             115 =>
             array (
@@ -2530,6 +2645,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 12,
                 'oficina' => 1403,
                 'localidad' => 2,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10]"',
                 'nombre' => 'FELIPE CARRILLO PUERTO',
             'ubicacion' => 'ÁLVARO OBREGÓN S/N CENTRO C.P 60500 ENTRE CALLE NARCISO MENDOZA Y LÁZARO CÁRDENAS (DENTRO DE LA PRESIDENCIA).
 ',
@@ -2544,7 +2660,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-16 13:38:40',
+                'updated_at' => '2023-08-29 14:45:33',
             ),
             116 =>
             array (
@@ -2552,6 +2668,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 2,
+                'sectores' => '"[1,2]"',
                 'nombre' => 'ANTONIO VILLALONGIN',
                 'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P 61100 ENTRE CARRANZA E INDEPENDENCIA. ',
                 'titular' => 'TC. MONICA BLANCO NATARES',
@@ -2565,7 +2682,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-24 11:13:14',
+                'updated_at' => '2023-08-30 09:10:43',
             ),
             117 =>
             array (
@@ -2573,6 +2690,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 3,
+                'sectores' => '"[1,2]"',
                 'nombre' => 'EL CARACOL',
                 'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P 61100 ENTRE CARRANZA E  INDEPENDENCIA.
 ',
@@ -2587,7 +2705,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-24 11:13:42',
+                'updated_at' => '2023-08-30 09:11:21',
             ),
             118 =>
             array (
@@ -2595,6 +2713,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 4,
+                'sectores' => '"[1,2]"',
                 'nombre' => 'AGOSTITLAN',
                 'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P 61100 ENTRE CARRANZA E  INDEPENDENCIA.
 ',
@@ -2609,7 +2728,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-24 11:16:34',
+                'updated_at' => '2023-08-30 09:11:36',
             ),
             119 =>
             array (
@@ -2617,6 +2736,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 5,
+                'sectores' => '"[1,2,3,4]"',
                 'nombre' => 'TENENCIA  CIUDAD HIDALGO',
                 'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P. 61100 ENTRE CARRANZA E  INDEPENDENCIA.
 ',
@@ -2631,7 +2751,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-24 11:16:08',
+                'updated_at' => '2023-08-30 09:11:49',
             ),
             120 =>
             array (
@@ -2639,6 +2759,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 35,
                 'oficina' => 803,
                 'localidad' => 2,
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]"',
                 'nombre' => 'ZICUIRAN',
                 'ubicacion' => 'PORTAL ALLENDE S/N COL. CENTRO C.P 61853 DENTRO DE LA PRESIDENCIA MUNICIPAL ENTRE CALLE REVOLUCIÓN, ALLENDE, AL NORTE CON ZARAGOZA Y AL SUR CALLE JUÁREZ.
 ',
@@ -2653,7 +2774,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-17 13:35:30',
+                'updated_at' => '2023-08-30 09:12:51',
             ),
             121 =>
             array (
@@ -2661,6 +2782,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 49,
                 'oficina' => 108,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'D CURUCUPASEO',
                 'ubicacion' => 'PORTAL HIDALGO #35-A COL. CENTRO C.P 58480 ENTRE AV. MORELOS Y CALLE VENUSTIANO CARRANZA JUNTO AL PALACIO MUNICIPAL.
 ',
@@ -2683,6 +2805,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 52,
                 'oficina' => 2301,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'LA MIRA',
                 'ubicacion' => 'AV. ZARAGOZA #128 COL CENTRO C.P 60950 ENTRE CALLES JUAN ÁLVAREZ Y AV. REFORMA. ',
                 'titular' => 'LIC. ARACELI GARCIA PICASO ',
@@ -2704,6 +2827,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 52,
                 'oficina' => 2301,
                 'localidad' => 3,
+                'sectores' => NULL,
                 'nombre' => 'GUACAMAYAS',
                 'ubicacion' => 'AV. ZARAGOZA #128 COL CENTRO C.P 60950 ENTRE CALLES JUAN ÁLVAREZ Y AV. REFORMA.
 ',
@@ -2726,6 +2850,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'SANTIAGO UNDAMEO',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS # 1016, COLONIA VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA',
                 'titular' => 'DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRA',
@@ -2747,6 +2872,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 3,
+                'sectores' => NULL,
                 'nombre' => 'CHIQUIMITIO',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS # 1016, COLONIA VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA',
                 'titular' => 'DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRA',
@@ -2768,6 +2894,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 4,
+                'sectores' => NULL,
                 'nombre' => 'TIRIPETIO',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS # 1016, COLONIA VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
                 'titular' => 'DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL ',
@@ -2789,6 +2916,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 5,
+                'sectores' => NULL,
                 'nombre' => 'CAPULA',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS # 1016, COLONIA VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
                 'titular' => ' 	DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL ',
@@ -2810,6 +2938,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 6,
+                'sectores' => NULL,
                 'nombre' => 'TEREMENDO',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS # 1016, COLONIA VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
                 'titular' => 'DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL 	',
@@ -2831,6 +2960,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 7,
+                'sectores' => NULL,
                 'nombre' => 'TENENCIA MORELIA',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS # 1016, COLONIA VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA.
 ',
@@ -2853,6 +2983,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 66,
                 'oficina' => 1001,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'CUANAJO',
                 'ubicacion' => 'AV. ÁLVARO OBREGÓN 25 COL. CENTRO C.P 61600 ENTRE  SILVIANO CARRILLO
 ',
@@ -2875,6 +3006,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 66,
                 'oficina' => 1001,
                 'localidad' => 3,
+                'sectores' => NULL,
                 'nombre' => 'SAN JUAN TUMBIO',
                 'ubicacion' => 'AV. ALVARO OBREGÓN 25 COL. CENTRO C.P 61600 ENTRE  SILVIANO CARRILLO. ',
                 'titular' => 'MARIA ESTER MOLINERO MAGAÑA',
@@ -2896,6 +3028,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 67,
                 'oficina' => 1804,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'SANTA FE DEL RIO',
                 'ubicacion' => 'ALLENDE 500 CENTRO C.P. 59470 ENTRE CALLE MADERO Y JARDÍN DE PRESIDENCIA.
 ',
@@ -2918,6 +3051,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 67,
                 'oficina' => 1804,
                 'localidad' => 3,
+                'sectores' => NULL,
                 'nombre' => 'ZIQUITARO',
                 'ubicacion' => 'ALLENDE 500 CENTRO C.P. 59470 ENTRE CALLE MADERO Y JARDÍN DE PRESIDENCIA
 ',
@@ -2940,6 +3074,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 68,
                 'oficina' => 1303,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'SAN FRANCISCO PERIBAN',
                 'ubicacion' => 'FRANCISCO VILLA #40, GIRASOLES, C.P. 60440 FRANCISCO VILLA ESQUINA CON CALLE MORELOS
 ',
@@ -2962,6 +3097,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'JANAMUATO',
                 'ubicacion' => 'PORTAL HIDALGO #60 COL. CENTRO C.P 58500 ENTRE CALLE ZENDEJAS Y MORELOS ',
                 'titular' => 'LIC. KENIA PANTOJA MEZA ',
@@ -2983,6 +3119,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 3,
+                'sectores' => NULL,
                 'nombre' => 'GALEANA',
                 'ubicacion' => ' PORTAL HIDALGO #60 COL. CENTRO C.P 58500 ENTRE CALLE ZENDEJAS Y MORELOS ',
                 'titular' => ' 	LIC. KENIA PANTOJA MEZA ',
@@ -3004,6 +3141,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 4,
+                'sectores' => NULL,
                 'nombre' => 'TENENCIA DE PURUANDIRO',
                 'ubicacion' => 'PORTAL HIDALGO #60 COL. CENTRO C.P 58500 ENTRE CALLE ZENDEJAS Y MORELOS
 ',
@@ -3026,6 +3164,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 5,
+                'sectores' => NULL,
                 'nombre' => 'LA QUEMADA',
                 'ubicacion' => 'PORTAL HIDALGO #60 COL. CENTRO C.P 58500 ENTRE CALLE ZENDEJAS Y MORELOS
 ',
@@ -3048,6 +3187,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 75,
                 'oficina' => 1301,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'PAMATACUARO',
                 'ubicacion' => 'FRANCISCO I. MADERO S/N COL. CENTRO C.P 60300 ESQUINA TORRES QUINTERO
 ',
@@ -3070,6 +3210,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 75,
                 'oficina' => 1301,
                 'localidad' => 3,
+                'sectores' => NULL,
                 'nombre' => 'TENENCIA LOS REYES',
                 'ubicacion' => 'FRANCISCO I. MADERO S/N COL. CENTRO C.P 60300 ESQUINA TORRES QUINTERO.
 ',
@@ -3092,6 +3233,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 142,
                 'oficina' => 1006,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'ZIRAHUEN',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -3113,6 +3255,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 143,
                 'oficina' => 1006,
                 'localidad' => 3,
+                'sectores' => NULL,
                 'nombre' => 'OPOPEO',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -3134,6 +3277,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 144,
                 'oficina' => 701,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'TECARIO',
                 'ubicacion' => NULL,
                 'titular' => NULL,
@@ -3155,6 +3299,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 83,
                 'oficina' => 1208,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'APO',
                 'ubicacion' => 'MIGUEL HIDALGO 1 CENTRO C.P 60460 ENTRE CALLE JUÁREZ, INDEPENDENCIA Y LÁZARO CÁRDENAS AUN COSTADO DEL H. AYUNTAMIENTO.',
                 'titular' => 'LIC ARISTEO JACOBO RAMIREZ ',
@@ -3176,6 +3321,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 83,
                 'oficina' => 1208,
                 'localidad' => 3,
+                'sectores' => NULL,
                 'nombre' => 'PAREO',
                 'ubicacion' => 'MIGUEL HIDALGO 1 CENTRO C.P 60460  ENTRE CALLE JUÁREZ, INDEPENDENCIA Y LÁZARO CÁRDENAS AUN COSTADO DEL H. AYUNTAMIENTO
 ',
@@ -3198,6 +3344,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 84,
                 'oficina' => 1707,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'TARECUATO',
                 'ubicacion' => 'JAVIER MINA 4 EL PROGRESO C.P 59920 ENTRE CALLE GUERRERO Y JAVIER MINA.
 ',
@@ -3220,6 +3367,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 85,
                 'oficina' => 1708,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'PATAMBAN',
                 'ubicacion' => 'ROMÁN SILVA ÁLVAREZ 10 COL. CENTRO C.P 59750 ENTRE DOCTOR MIGUEL SILVA, REFORMA Y CONSTITUCIÓN.
 ',
@@ -3242,6 +3390,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 88,
                 'oficina' => 110,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'TEJARO',
                 'ubicacion' => '16 DE SEPTIEMBRE #10 CENTRO C.P. 5880 ENTRE CALLES LÁZARO CÁRDENAS,JOSÉ MARÍA MORELOS Y PAVÓN E IGNACIO ZARAGOZA.
 ',
@@ -3264,6 +3413,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 90,
                 'oficina' => 1210,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'PICHATARO',
                 'ubicacion' => 'PORTAL HIDALGO S/N CENTRO C.P 60290 ENTRE ABASOLO E HIDALGO DENTRO DE LA PRESIDENCIA.
 ',
@@ -3286,6 +3436,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 91,
                 'oficina' => 1304,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'TACATZCUARO',
                 'ubicacion' => 'PORTAL HIDALGO  4, CENTRO, C.P. 58980 ENTRE LA CALLE EMILIANO ZAPATA Y JAVIER MINA, DENTRO DE LA PRESIDENCIA MUNICIPAL.
 ',
@@ -3308,6 +3459,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 91,
                 'oficina' => 1304,
                 'localidad' => 3,
+                'sectores' => NULL,
                 'nombre' => 'AQUILES SERDAN',
                 'ubicacion' => 'PORTAL HIDALGO  4, CENTRO, C.P. 58980 ENTRE LA CALLE EMILIANO ZAPATA Y JAVIER MINA, DENTRO DE LA PRESIDENCIA MUNICIPAL
 ',
@@ -3330,6 +3482,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 97,
                 'oficina' => 702,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'PURUARAN',
                 'ubicacion' => 'ÁLVARO OBREGÓN S/N COL. CENTRO C.P 61680 ESQUINA CON CALLE VASCO DE QUIROGA. AL SUR, CALLE TANGANXOAN.
 ',
@@ -3352,6 +3505,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 103,
                 'oficina' => 2104,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'LA PALMA',
                 'ubicacion' => 'MELCHOR OCAMPO 38 D COL. CENTRO C.P. 59160. ENTRE CALLE JUAREZ E IGNACIO ALLENDE
 
@@ -3375,6 +3529,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 104,
                 'oficina' => 1604,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'JARIPO',
                 'ubicacion' => 'FELICITAS DEL RIO SIN NUMERO CENTRO C.P  59550 ENTRE CALLE SAN FRANCISCO Y COMONFORT.
 ',
@@ -3397,6 +3552,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 107,
                 'oficina' => 1101,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'TENENCIA ZACAPU',
                 'ubicacion' => 'AV. MORELOS #61 COL. CENTRO C.P 58600 ENTRE ZARAGOZA Y CALLE JUÁREZ.
 ',
@@ -3419,6 +3575,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 108,
                 'oficina' => 1701,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'ARIO DE RAYON',
             'ubicacion' => 'GUERRERO #82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS).
 ',
@@ -3441,6 +3598,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 108,
                 'oficina' => 1701,
                 'localidad' => 3,
+                'sectores' => NULL,
                 'nombre' => 'ATACHEO',
             'ubicacion' => 'GUERRERO #82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS).
 ',
@@ -3463,6 +3621,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 108,
                 'oficina' => 1701,
                 'localidad' => 4,
+                'sectores' => NULL,
                 'nombre' => 'ATECUCARIO',
             'ubicacion' => 'GUERRERO #82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS)
 ',
@@ -3485,6 +3644,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 108,
                 'oficina' => 1701,
                 'localidad' => 5,
+                'sectores' => NULL,
                 'nombre' => 'LA SAUCEDAD',
             'ubicacion' => 'GUERRERO #82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EL EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS).
 ',
@@ -3507,6 +3667,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 110,
                 'oficina' => 201,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'UCAREO',
                 'ubicacion' => 'JUÁREZ #14 COL. CENTRO C.P 58930 MELCHOR OCAMPO AL NORTE Y AL SUR CON RAFAEL CARRILLO.
 ',
@@ -3529,6 +3690,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 110,
                 'oficina' => 201,
                 'localidad' => 3,
+                'sectores' => NULL,
                 'nombre' => 'V DE JUAREZ',
                 'ubicacion' => 'JUÁREZ 14 COL. CENTRO C.P 58930 MELCHOR OCAMPO AL NORTE Y AL SUR CON RAFAEL CARRILLO.
 ',
@@ -3551,6 +3713,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 111,
                 'oficina' => 1211,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'SAN A ZURUMUCAPIO',
                 'ubicacion' => 'PASAJE PORTAL MATAMOROS S/N COL. CENTRO C.P 61700 ENTRE ABASOLO Y MORELOS.
 ',
@@ -3573,6 +3736,7 @@ AUN COSTADO DE LA UNIDAD DEPORTIVA.
                 'municipio' => 112,
                 'oficina' => 501,
                 'localidad' => 2,
+                'sectores' => NULL,
                 'nombre' => 'CRESCENCIO MORALES',
                 'ubicacion' => 'BENEDICTO LOPEZ SUR 7 COL. CENTRO C.P 61500 ENTRE  IGNACIO LÓPEZ RAYÓN Y MIGUEL HIDALGO.
 ',

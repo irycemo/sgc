@@ -30,7 +30,7 @@
 
                         @foreach ($zonas as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -62,7 +62,7 @@
 
                         @foreach ($construcciones as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -242,7 +242,7 @@
 
                         @foreach ($cimentaciones as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -266,7 +266,7 @@
 
                         @foreach ($estructuras as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -290,7 +290,7 @@
 
                         @foreach ($muros as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -314,7 +314,7 @@
 
                         @foreach ($entrepisos as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -338,7 +338,7 @@
 
                         @foreach ($techos as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -372,7 +372,7 @@
 
                         @foreach ($plafones as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -396,7 +396,7 @@
 
                         @foreach ($vidrieria as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -420,7 +420,7 @@
 
                         @foreach ($lambrines as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -444,7 +444,7 @@
 
                         @foreach ($pisos as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -468,7 +468,7 @@
 
                         @foreach ($herreria as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -492,7 +492,7 @@
 
                         @foreach ($pintura as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -516,7 +516,7 @@
 
                         @foreach ($carpinteria as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -540,7 +540,7 @@
 
                         @foreach ($aplanados as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -564,7 +564,7 @@
 
                         @foreach ($rec_especial as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -598,7 +598,7 @@
 
                         @foreach ($hidraulica as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -622,7 +622,7 @@
 
                         @foreach ($sanitaria as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -646,7 +646,7 @@
 
                         @foreach ($electrica as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -670,7 +670,7 @@
 
                         @foreach ($gas as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 
@@ -694,7 +694,7 @@
 
                         @foreach ($especiales as $item)
 
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                            <option value="{{ $item }}">{{ $item }}</option>
 
                         @endforeach
 

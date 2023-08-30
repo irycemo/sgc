@@ -26,6 +26,10 @@ class PrediosPadron extends Component
     {
 
         $predios = Predio::with('actualizadoPor')
+                            ->where('localidad', 'LIKE', '%' . $this->search . '%')
+                            ->orWhere('oficina', 'LIKE', '%' . $this->search . '%')
+                            ->orWhere('tipo_predio', 'LIKE', '%' . $this->search . '%')
+                            ->orWhere('numero_registro', 'LIKE', '%' . $this->search . '%')
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 

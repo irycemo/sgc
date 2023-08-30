@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Terreno;
-use App\Models\Movimiento;
 use App\Models\Colindancia;
 use App\Models\Propietario;
 use App\Models\Construccion;
@@ -44,10 +43,6 @@ class Predio extends Model implements Auditable
 
     public function colindancias(){
         return $this->morphMany(Colindancia::class, 'colindanciaable');
-    }
-
-    public function movimientos(){
-        return $this->belongsToMany(Movimiento::class)->withPivot('descripcion')->withTimestamps();
     }
 
 }

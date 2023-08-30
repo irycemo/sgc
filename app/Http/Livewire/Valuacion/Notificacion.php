@@ -4,15 +4,17 @@ namespace App\Http\Livewire\Valuacion;
 
 use App\Models\Avaluo;
 use App\Models\Predio;
+use App\Models\Persona;
 use App\Models\Terreno;
 use Livewire\Component;
 use App\Models\Referencia;
 use App\Models\Colindancia;
+use App\Models\Propietario;
+use App\Models\Construccion;
+use App\Models\CondominioTerreno;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Condominioconstruccion;
-use App\Models\CondominioTerreno;
-use App\Models\Construccion;
 
 class Notificacion extends Component
 {
@@ -28,7 +30,7 @@ class Notificacion extends Component
 
         $this->avaluo = $avaluo;
 
-        $this->avaluo->load('predio.colindancias', 'predio.condominioTerrenos', 'predio.condominioConstrucciones', 'predio.terrenos', 'predio.construcciones');
+        $this->avaluo->load('predio.colindancias', 'predio.condominioTerrenos', 'predio.condominioConstrucciones', 'predio.terrenos', 'predio.construcciones', 'predio.propietarios.persona');
 
         $this->modal = true;
 
@@ -47,6 +49,7 @@ class Notificacion extends Component
                             ->where('localidad', $this->avaluo->predio->localidad)
                             ->where('sector', $this->avaluo->predio->sector)
                             ->where('manzana', $this->avaluo->predio->manzana)
+                            ->where('predio', $this->avaluo->predio->predio)
                             ->where('edificio', $this->avaluo->predio->edificio)
                             ->where('departamento', $this->avaluo->predio->departamento)
                             ->where('oficina', $this->avaluo->predio->oficina)
@@ -107,6 +110,7 @@ class Notificacion extends Component
                 'localidad' => $this->avaluo->predio->localidad,
                 'sector' => $this->avaluo->predio->sector,
                 'manzana' => $this->avaluo->predio->manzana,
+                'predio' => $this->avaluo->predio->predio,
                 'edificio' => $this->avaluo->predio->edificio,
                 'departamento' => $this->avaluo->predio->departamento,
                 'oficina' => $this->avaluo->predio->oficina,
@@ -137,9 +141,13 @@ class Notificacion extends Component
                 'superficie_construccion' => $this->avaluo->predio->superficie_construccion,
                 'superficie_judicial' => $this->avaluo->predio->superficie_judicial,
                 'superficie_notarial' => $this->avaluo->predio->superficie_notarial,
-                'valor_catastral' => $this->avaluo->predio->valor_catastral,
+                'area_comun_terreno' => $this->avaluo->predio->area_comun_terreno,
+                'area_comun_construccion' => $this->avaluo->predio->area_comun_construccion,
+                'valor_terreno_comun' => $this->avaluo->predio->valor_terreno_comun,
+                'valor_construccion_comun' => $this->avaluo->predio->valor_construccion_comun,
                 'valor_total_terreno' => $this->avaluo->predio->valor_total_terreno,
-                'valor_construccion' => $this->avaluo->predio->valor_construccion,
+                'valor_total_construccion' => $this->avaluo->predio->valor_total_construccion,
+                'valor_catastral' => $this->avaluo->predio->valor_catastral,
                 'titulo_propiedad' => $this->avaluo->predio->titulo_propiedad,
                 'curt' => $this->avaluo->predio->curt,
                 'folio_real' => $this->avaluo->predio->folio_real,
@@ -152,6 +160,8 @@ class Notificacion extends Component
                 'fecha_notificacion' => $this->fecha_notificacion,
                 'observaciones' => $this->avaluo->predio->observaciones,
             ]);
+
+            $predio->audits()->latest()->first()->update(['tags' => 'Se genera predio apartir de avalúo: ' . $this->avaluo->folio]);
 
             $this->procesarRelaciones($predio);
 
@@ -172,6 +182,7 @@ class Notificacion extends Component
                 'localidad' => $this->avaluo->predio->localidad,
                 'sector' => $this->avaluo->predio->sector,
                 'manzana' => $this->avaluo->predio->manzana,
+                'predio' => $this->avaluo->predio->predio,
                 'edificio' => $this->avaluo->predio->edificio,
                 'departamento' => $this->avaluo->predio->departamento,
                 'oficina' => $this->avaluo->predio->oficina,
@@ -202,9 +213,13 @@ class Notificacion extends Component
                 'superficie_construccion' => $this->avaluo->predio->superficie_construccion,
                 'superficie_judicial' => $this->avaluo->predio->superficie_judicial,
                 'superficie_notarial' => $this->avaluo->predio->superficie_notarial,
-                'valor_catastral' => $this->avaluo->predio->valor_catastral,
+                'area_comun_terreno' => $this->avaluo->predio->area_comun_terreno,
+                'area_comun_construccion' => $this->avaluo->predio->area_comun_construccion,
+                'valor_terreno_comun' => $this->avaluo->predio->valor_terreno_comun,
+                'valor_construccion_comun' => $this->avaluo->predio->valor_construccion_comun,
                 'valor_total_terreno' => $this->avaluo->predio->valor_total_terreno,
-                'valor_construccion' => $this->avaluo->predio->valor_construccion,
+                'valor_total_construccion' => $this->avaluo->predio->valor_total_construccion,
+                'valor_catastral' => $this->avaluo->predio->valor_catastral,
                 'titulo_propiedad' => $this->avaluo->predio->titulo_propiedad,
                 'curt' => $this->avaluo->predio->curt,
                 'folio_real' => $this->avaluo->predio->folio_real,
@@ -216,7 +231,10 @@ class Notificacion extends Component
                 'fecha_efectos' => $this->avaluo->predio->fecha_efectos,
                 'fecha_notificacion' => $this->fecha_notificacion,
                 'observaciones' => $this->avaluo->predio->observaciones,
+                'actualizado_por' => auth()->user()->id
             ]);
+
+            $predio->audits()->latest()->first()->update(['tags' => 'Actualización mediante avalúo: ' . $this->avaluo->folio]);
 
             $this->procesarRelaciones($predio);
 
@@ -227,6 +245,37 @@ class Notificacion extends Component
     public function procesarRelaciones($predio){
 
         DB::transaction(function () use($predio){
+
+            /* Propietarios */
+            foreach($predio->propietarios as $propietario){
+
+                Propietario::destroy($propietario->id);
+
+            }
+            foreach($this->avaluo->predio->propietarios as $propietario){
+
+                $persona = Persona::firstOrCreate(
+                    [
+                        'ap_paterno' => $propietario->persona->ap_paterno,
+                        'ap_materno' => $propietario->persona->ap_materno,
+                        'nombre' => $propietario->persona->nombre,
+                        'tipo' => $propietario->persona->tipo,
+                    ],
+                    [
+                        'ap_paterno' => $propietario->persona->ap_paterno,
+                        'ap_materno' => $propietario->persona->ap_materno,
+                        'nombre' => $propietario->persona->nombre,
+                        'tipo' => $propietario->persona->tipo,
+                    ]
+                );
+
+                $predio->propietarios()->create([
+                    'persona_id' => $persona->id,
+                    'tipo' => $propietario->tipo,
+                    'porcentaje' => $propietario->porcentaje,
+                ]);
+
+            }
 
             /* Colindancias */
             foreach($predio->colindancias as $colindancia){
@@ -328,14 +377,23 @@ class Notificacion extends Component
 
     public function actualizarAvaluo(){
 
-        $this->avaluo->update([
-            'actualizado_por' => auth()->user()->id,
-            'notificado_por' => auth()->user()->id,
-            'notificado_en' => $this->fecha_notificacion,
-            'estado' => 'notificado'
-        ]);
+        DB::transaction(function (){
 
-        $this->modal = false;
+            $this->avaluo->update([
+                'predio_id' => null,
+                'actualizado_por' => auth()->user()->id,
+                'notificado_por' => auth()->user()->id,
+                'notificado_en' => $this->fecha_notificacion,
+                'estado' => 'notificado'
+            ]);
+
+            $this->avaluo->predio->delete();
+
+            $this->avaluo->audits()->latest()->first()->update(['tags' => 'Notifico avalúo']);
+
+            $this->modal = false;
+
+        });
 
     }
 
@@ -346,6 +404,7 @@ class Notificacion extends Component
                                     ->where('estado', 'impreso')
                                     ->whereBetween('folio', [$this->inicio, $this->final])
                                     ->whereNull('notificado_en')
+                                    ->whereNull('notificado_por')
                                     ->paginate($this->pagination);
 
         return view('livewire.valuacion.notificacion', compact('avaluos'))->extends('layouts.admin');

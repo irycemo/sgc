@@ -246,9 +246,9 @@
 
                 <p class="">Los terrenos de área común deben tener la siguiente estrctura: <strong>ÁREA COMÚN DE TERRENO:INDIVISO DE TERRENO:VALOR UNITARIO</strong>. Cada elemento separado por el carácter '<strong>:</strong>'. Debe usar el carácter '<strong>|</strong>' para separar terrenos de área común.</p>
 
-                <p class="">Ejemplo para un terreno de área común: <strong>100:250:30</strong></p>
+                <p class="">Ejemplo para un terreno de área común: <strong>100:50:30</strong></p>
 
-                <p class="">Ejemplo para más de un terreno de área común: <strong>100:60:30|200:50:10|50:30:10</strong></p>
+                <p class="">Ejemplo para más de un terreno de área común: <strong>100:60:30|200:20:10|50:20:10</strong></p>
 
             </div>
 
