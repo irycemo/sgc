@@ -351,7 +351,7 @@
 
                     <strong>Viento</strong>
 
-                    <p>{{ $colindancia->superficie }}</p>
+                    <p>{{ $colindancia->viento }}</p>
 
                 </div>
 
@@ -757,7 +757,7 @@
 
                     <strong>Fecha</strong>
 
-                    <p>{{ $audit->created_at->format('d-m-Y') }}</p>
+                    <p>{{ $audit->created_at->format('d-m-Y H:i:s') }}</p>
 
                 </div>
 
