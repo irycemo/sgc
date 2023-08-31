@@ -290,7 +290,7 @@
 
                                     <div class="ml-4">
 
-                                        <div class="text-sm font-medium text-gray-900">{{ $user->name }} {{ $user->ap_paterno }}< {{ $user->ap_materno }}<</div>
+                                        <div class="text-sm font-medium text-gray-900">{{ $user->name }} {{ $user->ap_paterno }} {{ $user->ap_materno }}</div>
 
                                     </div>
 
