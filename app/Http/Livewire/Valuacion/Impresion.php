@@ -169,60 +169,60 @@ class Impresion extends Component
 
             }
 
-            $tramiteAvaluo = Tramite::where('folio', $this->tramiteAvaluo)->first();
+            if($tramiteInspeccion->avaluo_para){
 
-            if($tramiteInspeccion->estado != 'pagado'){
+                $tramiteAvaluo = Tramite::where('folio', $this->tramiteAvaluo)->first();
 
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no esta pagado o ha sido concluido."]);
+                if($tramiteInspeccion->estado != 'pagado'){
 
-                return;
-
-            }
-
-            if(( $this->cantidad + $tramiteAvaluo->usados) > $tramiteAvaluo->cantidad){
-
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cantidad de avaluos que avala el trámite ya se usó."]);
-
-                return;
-
-            }
-
-            if($tramiteInspeccion->avaluo_para == 46 || $tramiteInspeccion->avaluo_para == 45){
-
-                if($tramiteAvaluo->servicio_id != 46 && $tramiteAvaluo->servicio_id != 45){
-
-                    $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a una variación."]);
+                    $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no esta pagado o ha sido concluido."]);
 
                     return;
 
                 }
 
+                if(( $this->cantidad + $tramiteAvaluo->usados) > $tramiteAvaluo->cantidad){
 
-            }elseif($tramiteInspeccion->avaluo_para == 43 || $tramiteInspeccion->avaluo_para == 44){
-
-                if($tramiteAvaluo->servicio_id != 43 && $tramiteAvaluo->servicio_id != 44){
-
-                    $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un desglose."]);
+                    $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cantidad de avaluos que avala el trámite ya se usó."]);
 
                     return;
 
                 }
 
-            }elseif($tramiteInspeccion->avaluo_para == 47){
+                if($tramiteInspeccion->avaluo_para == 46 || $tramiteInspeccion->avaluo_para == 45){
 
-                if($tramiteAvaluo->servicio_id != 47){
+                    if($tramiteAvaluo->servicio_id != 46 && $tramiteAvaluo->servicio_id != 45){
 
-                    $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un avlúo predio ignorado."]);
+                        $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a una variación."]);
 
-                    return;
+                        return;
+
+                    }
+
+
+                }elseif($tramiteInspeccion->avaluo_para == 43 || $tramiteInspeccion->avaluo_para == 44){
+
+                    if($tramiteAvaluo->servicio_id != 43 && $tramiteAvaluo->servicio_id != 44){
+
+                        $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un desglose."]);
+
+                        return;
+
+                    }
+
+                }elseif($tramiteInspeccion->avaluo_para == 47){
+
+                    if($tramiteAvaluo->servicio_id != 47){
+
+                        $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un avlúo predio ignorado."]);
+
+                        return;
+
+                    }
 
                 }
 
             }
-
-        }else{
-
-
 
         }
 

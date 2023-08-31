@@ -62,7 +62,7 @@ class Usuarios extends Component
 
         $this->validate();
 
-        if(User::where('name', $this->modelo_editar->name)->first()){
+        if(User::where('name', $this->modelo_editar->name)->where('ap_paterno', $this->modelo_editar->ap_paterno)->where('ap_materno', $this->modelo_editar->ap_materno)->first()){
 
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El usuario " . $this->modelo_editar->name . " ya esta registrado."]);
 
