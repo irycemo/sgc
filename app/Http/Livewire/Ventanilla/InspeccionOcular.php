@@ -187,7 +187,13 @@ class InspeccionOcular extends Component
 
     }
 
-    /* public function updatedModeloEditar */
+    public function updatedModeloEditarAvaluoPara(){
+
+        if($this->modelo_editar->avaluo_para >= 100){
+            $this->modelo_editar->avaluo_para = null;
+        }
+
+    }
 
     public function resetearInformacion(){
 
