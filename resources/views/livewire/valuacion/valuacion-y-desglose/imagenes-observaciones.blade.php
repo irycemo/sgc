@@ -12,7 +12,7 @@
 
     <div class="rounded-lg mb-1">
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 items-start  mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1 items-start  mx-auto">
 
             <div class="bg-white rounded-lg p-1 px-4 flex flex-col text-center">
 
@@ -30,7 +30,7 @@
 
                     @else
 
-                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/logo.png') }}" alt="">
+                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/escudo_guinda.png') }}" alt="">
 
                     @endif
 
@@ -67,7 +67,7 @@
 
                     @else
 
-                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/logo.png') }}" alt="">
+                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/escudo_guinda.png') }}" alt="">
 
                     @endif
 
@@ -104,7 +104,7 @@
 
                     @else
 
-                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/logo.png') }}" alt="">
+                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/escudo_guinda.png') }}" alt="">
 
                     @endif
 
@@ -141,7 +141,7 @@
 
                     @else
 
-                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/logo.png') }}" alt="">
+                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/escudo_guinda.png') }}" alt="">
 
                     @endif
 
@@ -178,7 +178,7 @@
 
                     @else
 
-                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/logo.png') }}" alt="">
+                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/escudo_guinda.png') }}" alt="">
 
                     @endif
 
@@ -215,7 +215,7 @@
 
                     @else
 
-                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/logo.png') }}" alt="">
+                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/escudo_guinda.png') }}" alt="">
 
                     @endif
 
@@ -252,7 +252,7 @@
 
                     @else
 
-                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/logo.png') }}" alt="">
+                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/escudo_guinda.png') }}" alt="">
 
                     @endif
 
@@ -289,7 +289,7 @@
 
                     @else
 
-                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/logo.png') }}" alt="">
+                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/escudo_guinda.png') }}" alt="">
 
                     @endif
 
@@ -343,11 +343,11 @@
 
             </div>
 
-            <textarea class="bg-white rounded text-xs w-full" rows="4" wire:model.defer="predio.avaluo.observaciones"></textarea>
+            <textarea class="bg-white rounded text-xs w-full @error('predio.avaluo.observaciones') border-1 border-red-500 @enderror" rows="4" wire:model.defer="predio.avaluo.observaciones"></textarea>
 
             <div>
 
-                @error('observaciones') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                @error('predio.avaluo.observaciones') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
             </div>
 

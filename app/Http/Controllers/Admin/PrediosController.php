@@ -16,4 +16,5 @@ class PrediosController extends Controller
         return view('admin.predios.show', compact('predio'));
 
     }
+
 }

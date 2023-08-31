@@ -61,11 +61,15 @@ class Notificacion extends Component
 
             try {
 
-                $this->actualizaPredio($predio);
+                DB::transaction(function () use($predio){
 
-                $this->actualizarAvaluo();
+                    $this->actualizaPredio($predio);
 
-                $this->dispatchBrowserEvent('mostrarMensaje', ['success', "El predio se actualizó correctamente en el padrón catastral."]);
+                    $this->actualizarAvaluo();
+
+                    $this->dispatchBrowserEvent('mostrarMensaje', ['success', "El predio se actualizó correctamente en el padrón catastral."]);
+
+                });
 
             } catch (\Throwable $th) {
 
@@ -79,11 +83,15 @@ class Notificacion extends Component
 
             try {
 
-                $this->creaPredio();
+                DB::transaction(function () {
 
-                $this->actualizarAvaluo();
+                    $this->creaPredio();
 
-                $this->dispatchBrowserEvent('mostrarMensaje', ['success', "El predio se creó correctamente en el padrón catastral."]);
+                    $this->actualizarAvaluo();
+
+                    $this->dispatchBrowserEvent('mostrarMensaje', ['success', "El predio se creó correctamente en el padrón catastral."]);
+
+                });
 
             } catch (\Throwable $th) {
 
@@ -380,14 +388,13 @@ class Notificacion extends Component
         DB::transaction(function (){
 
             $this->avaluo->update([
-                'predio_id' => null,
                 'actualizado_por' => auth()->user()->id,
                 'notificado_por' => auth()->user()->id,
                 'notificado_en' => $this->fecha_notificacion,
                 'estado' => 'notificado'
             ]);
 
-            $this->avaluo->predio->delete();
+            $this->avaluo->predio->update(['status' => 'notificado']);
 
             $this->avaluo->audits()->latest()->first()->update(['tags' => 'Notifico avalúo']);
 

@@ -39,7 +39,6 @@ class ImagenesObservaciones extends Component
             'macrolocalizacion' => 'image|nullable',
             'poligonoDwg' => 'nullable|mimes:dwg',
             'poligonoImagen' => 'image|nullable',
-            'observaciones' => 'nullable',
             'predio' => 'required',
             'predio.avaluo.observaciones' => 'required'
          ];
@@ -47,6 +46,10 @@ class ImagenesObservaciones extends Component
 
     protected $messages = [
         'predio.required' => '. Primero debe cargar el avaluo'
+    ];
+
+    protected $validationAttributes  = [
+        'predio.avaluo.observaciones' => 'observaciones',
     ];
 
     protected $listeners = ['cargarPredio'];

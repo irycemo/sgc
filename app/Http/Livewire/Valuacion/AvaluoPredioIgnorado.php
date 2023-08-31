@@ -264,7 +264,8 @@ class AvaluoPredioIgnorado extends Component
 
     public function validarDisponibilidad(){
 
-        $predioCompletoAvaluo = PredioAvaluo::where('estado', $this->predio->estado)
+        $predioCompletoAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
+                                                ->where('estado', $this->predio->estado)
                                                 ->where('region_catastral', $this->predio->region_catastral)
                                                 ->where('municipio', $this->predio->municipio)
                                                 ->where('zona_catastral', $this->predio->zona_catastral)
@@ -281,7 +282,8 @@ class AvaluoPredioIgnorado extends Component
 
         if(!$predioCompletoAvaluo){
 
-            $cuentaPredialAvaluo = PredioAvaluo::where('localidad', $this->predio->localidad)
+            $cuentaPredialAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
+                                                ->where('localidad', $this->predio->localidad)
                                                 ->where('oficina', $this->predio->oficina)
                                                 ->where('tipo_predio', $this->predio->tipo_predio)
                                                 ->where('numero_registro', $this->predio->numero_registro)
@@ -294,7 +296,8 @@ class AvaluoPredioIgnorado extends Component
                 return true;
             }
 
-            $claveCatastralAvaluo = PredioAvaluo::where('estado', $this->predio->estado)
+            $claveCatastralAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
+                                                    ->where('estado', $this->predio->estado)
                                                     ->where('region_catastral', $this->predio->region_catastral)
                                                     ->where('municipio', $this->predio->municipio)
                                                     ->where('zona_catastral', $this->predio->zona_catastral)
@@ -441,6 +444,32 @@ class AvaluoPredioIgnorado extends Component
 
     }
 
+    public function validarSector(){
+
+        $oficina = Oficina::where('localidad', $this->predio->localidad)
+                            ->where('oficina', $this->predio->oficina)
+                            ->first();
+
+        if(!$oficina){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No se encontraron oficinas con los datos ingresados."]);
+
+            return true;
+
+        }
+
+        $sectores = json_decode($oficina->sectores, true);
+
+        if(!in_array($this->predio->sector, $sectores)){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El sector no corresponde a la zona."]);
+
+            return true;
+
+        }
+
+    }
+
     public function crear(){
 
         $this->validate();
@@ -452,7 +481,7 @@ class AvaluoPredioIgnorado extends Component
             return;
         }
 
-        if($this->validarDisponibilidad())
+        if($this->validarDisponibilidad() || $this->validarSector())
             return;
 
         try {

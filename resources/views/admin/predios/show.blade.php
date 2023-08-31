@@ -12,6 +12,22 @@
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
+                <strong>Cuenta predial</strong>
+
+                <p>{{ $predio->localidad }}-{{ $predio->oficina }}-{{ $predio->tipo_predio }}-{{ $predio->numero_registro }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Clave catastral</strong>
+
+                <p>{{ $predio->estado }}-{{ $predio->region_catastral }}-{{ $predio->municipio }}-{{ $predio->zona_catastral }}-{{ $predio->localidad }}-{{ $predio->sector }}-{{ $predio->manzana }}-{{ $predio->predio }}-{{ $predio->edificio }}-{{ $predio->departamento }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
                 <strong>Estado</strong>
 
                 <p>{{ $predio->status }}</p>
@@ -100,7 +116,7 @@
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                <strong>Valor de terreno</strong>
+                <strong>Valor de construcción</strong>
 
                 <p>{{ number_format($predio->valor_total_construccion, 2) }}</p>
 
@@ -323,7 +339,53 @@
 
     </div>
 
-    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terreno</h4>
+    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Colindancias ({{ $predio->colindancias->count() }})</h4>
+
+    @forelse ($predio->colindancias as $colindancia)
+
+        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Viento</strong>
+
+                    <p>{{ $colindancia->superficie }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Longitud</strong>
+
+                    <p>{{ $colindancia->longitud }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Descripción</strong>
+
+                    <p>{{ $colindancia->descripcion }}</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    @empty
+
+        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
+
+            No hay resultados.
+
+        </div>
+
+    @endforelse
+
+    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terrenos ({{ $predio->terrenos->count() }})</h4>
 
     @forelse ($predio->terrenos as $terreno)
 
