@@ -46,7 +46,7 @@ class InspeccionOcular extends Component
             'modelo_editar.servicio_id' => 'required',
             'modelo_editar.solicitante' => 'required',
             'modelo_editar.monto' => 'required',
-            'modelo_editar.avaluo_para' => 'required',
+            'modelo_editar.avaluo_para' => 'nullable',
             'modelo_editar.tipo_servicio' => 'required',
             'modelo_editar.cantidad' => 'required|numeric|min:1',
             'modelo_editar.adiciona' => 'required_if:adicionaTramite,true',
@@ -189,9 +189,8 @@ class InspeccionOcular extends Component
 
     public function updatedModeloEditarAvaluoPara(){
 
-        if($this->modelo_editar->avaluo_para >= 100){
+        if($this->modelo_editar->avaluo_para == '')
             $this->modelo_editar->avaluo_para = null;
-        }
 
     }
 
