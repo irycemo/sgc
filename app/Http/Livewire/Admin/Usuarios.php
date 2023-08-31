@@ -64,7 +64,7 @@ class Usuarios extends Component
 
         if(User::where('name', $this->modelo_editar->name)->where('ap_paterno', $this->modelo_editar->ap_paterno)->where('ap_materno', $this->modelo_editar->ap_materno)->first()){
 
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El usuario " . $this->modelo_editar->name . " ya esta registrado."]);
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El usuario " . $this->modelo_editar->name . " " . $this->modelo_editar->ap_paterno . " " . $this->modelo_editar->ap_materno . " ya esta registrado."]);
 
             $this->resetearTodo();
 
