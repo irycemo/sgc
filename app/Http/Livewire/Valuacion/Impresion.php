@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Valuacion;
 
 use App\Models\User;
 use App\Models\Oficina;
+use Illuminate\Validation\Rule;
 use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\PredioAvaluo;
@@ -133,7 +134,7 @@ class Impresion extends Component
                 'director' => 'required',
                 'jefe_departamento' => 'required',
                 'tramiteInspeccion' => 'required',
-                'tramiteAvaluo' => 'required',
+                'tramiteAvaluo' => Rule::requiredIf($this->tramiteInspeccion->avaluo_para != null),
                 'localidad' => 'required',
                 'oficina' => 'required',
                 'tipo' => 'required',

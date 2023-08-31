@@ -187,6 +187,8 @@ class InspeccionOcular extends Component
 
     }
 
+    /* public function updatedModeloEditar */
+
     public function resetearInformacion(){
 
         $this->modelo_editar->adiciona = $this->tramiteAdicionado['id'];
