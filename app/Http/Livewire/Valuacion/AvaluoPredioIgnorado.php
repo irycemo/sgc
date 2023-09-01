@@ -482,7 +482,7 @@ class AvaluoPredioIgnorado extends Component
             return;
         }
 
-        if($this->validarDisponibilidad() || $this->validarSector())
+        if($this->validarDisponibilidad())
             return;
 
         try {
