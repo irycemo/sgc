@@ -18,7 +18,7 @@ class PredioFactory extends Factory
      */
     public function definition(): array
     {
-        $oficina = Oficina::select(['oficina', 'localidad'])->inRandomOrder()->first();
+        $oficina = Oficina::select(['oficina', 'localidad', 'municipio'])->inRandomOrder()->first();
 
         return [
             'estado' => 16,
