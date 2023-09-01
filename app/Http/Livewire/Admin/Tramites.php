@@ -161,7 +161,7 @@ class Tramites extends Component
     public function render()
     {
 
-        $tramites = Tramite::with('creadoPor', 'actualizadoPor', 'servicio')
+        $tramites = Tramite::with('creadoPor', 'actualizadoPor', 'servicio.categoria', 'predios')
                             ->where('solicitante', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('folio', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('tipo_servicio', 'LIKE', '%' . $this->search . '%')

@@ -520,6 +520,8 @@ class AvaluoPredioIgnorado extends Component
                     'asignado_a' => auth()->user()->id,
                 ]);
 
+                $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo con folio: ' . $avaluo->folio]);
+
                 $this->dispatchBrowserEvent('mostrarMensaje', ['success', "El avaluo se creó con el folio " . $avaluo->folio . "."]);
 
                 $this->editar = true;

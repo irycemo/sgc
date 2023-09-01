@@ -295,6 +295,10 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                     'creado_por' => auth()->user()->id,
                 ]);
 
+                $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo con folio: ' . $avaluo->folio]);
+
+                $predio->audits()->latest()->first()->update(['tags' => 'Se genera predio apartir de avalúo: ' . $avaluo->folio]);
+
                 $this->avaluos[] = $avaluo->load('predio.propietarios.persona');
 
             }

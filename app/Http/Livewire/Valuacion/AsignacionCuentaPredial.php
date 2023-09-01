@@ -107,6 +107,8 @@ class AsignacionCuentaPredial extends Component
                             'predio_origen' => $this->origen ? $this->origen : null,
                         ]);
 
+                        $cuenta->audits()->latest()->first()->update(['tags' => 'Asigno cuenta']);
+
                         $this->cuentasAsignadas[] = $cuenta;
 
                     }

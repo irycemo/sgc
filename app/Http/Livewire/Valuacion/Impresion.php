@@ -341,7 +341,7 @@ class Impresion extends Component
 
             }
 
-            if($predio->edificio == 0 && !$predio->condominioTerrenos->count()){
+            if($predio->edificio != 0 && $predio->condominioTerrenos->count() == 0){
 
                 $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . " no tiene terrenos de área común."]);
 
