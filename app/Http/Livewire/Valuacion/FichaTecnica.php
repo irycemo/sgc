@@ -10,6 +10,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\ValoresUnitariosRusticos;
 use App\Models\ValoresUnitariosConstruccion;
 use App\Exceptions\ErrorAlValidarLineaDeCaptura;
+use App\Exceptions\ErrorALValidarSectorException;
 use App\Exceptions\ErrorAlProcesarTerrenosException;
 use App\Exceptions\ErrorAlProcesarCoordenadasException;
 use App\Exceptions\ErrorAlProcesarColindanciasException;
@@ -81,6 +82,10 @@ class FichaTecnica extends Component
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', $e->getMessage()]);
 
         }catch (ErrorAlProcesarConstruccionesException $e) {
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', $e->getMessage()]);
+
+        }catch (ErrorALValidarSectorException $e) {
 
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', $e->getMessage()]);
 

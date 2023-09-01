@@ -634,7 +634,7 @@
 
                             <div>
 
-                                <input type="number" max="100" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosCondominio.{{ $index }}.indiviso_terreno">
+                                <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosCondominio.{{ $index }}.indiviso_terreno">
 
                             </div>
 
@@ -787,7 +787,7 @@
 
                             <div>
 
-                                <input type="number" max="100" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesCondominio.{{ $index }}.indiviso_construccion">
+                                <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesCondominio.{{ $index }}.indiviso_construccion">
 
                             </div>
 
