@@ -68,12 +68,37 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                 $construcciones = $this->procesarConstrucciones($row['construcciones'], $key);
 
-                if(isset($row['terrenos_comun']))
+                if(isset($row['terrenos_comun'])){
+
                     $terrenosComun = $this->procesarTerrenosComun($row['terrenos_comun'], $key);
 
-                if(isset($row['construcciones_comun']))
+                    $sumValorTerenosComun = $terrenosComun->sum('valor_terreno_comun');
+
+                    $sumAreaTerrenosComun = $terrenosComun->sum('area_terreno_comun');
+
+                }else{
+
+                    $sumValorTerenosComun = 0;
+
+                    $sumAreaTerrenosComun = 0;
+
+                }
+
+                if(isset($row['construcciones_comun'])){
+
                     $construccionesComun = $this->procesarConstruccionesComun($row['construcciones_comun'], $key);
 
+                    $sumValorConstruccionesComun = $construccionesComun->sum('valor_construccion_comun');
+
+                    $sumAreaConstruccionComun = $construccionesComun->sum('area_comun_construccion');
+
+                }else{
+
+                    $sumValorConstruccionesComun = 0;
+
+                    $sumAreaConstruccionComun = 0;
+
+                }
 
                 if($row['tipo'] == 1){
 
@@ -83,8 +108,8 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                     $valorCatastral = $terrenos->sum('valor_terreno')
                                         + $construcciones->sum(function (array $construccion) { return (float)$construccion['valor_unitario'] * (float)$construccion['superficie']; })
-                                        + ($terrenosComun ? $terrenosComun->sum('valor_terreno_comun') : 0)
-                                        + ($construccionesComun ? $construccionesComun->sum('valor_construccion_comun') : 0);
+                                        + $sumValorTerenosComun
+                                        + $$sumValorConstruccionesComun;
 
 
                 }
@@ -136,10 +161,10 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                     'superficie_terreno' => $terrenos->sum('superficie'),
                     'valor_total_terreno' => $terrenos->sum('valor_terreno'),
                     'superficie_construccion' => $construcciones->sum('superficie'),
-                    'area_comun_terreno' => $terrenosComun->sum('area_terreno_comun'),
-                    'valor_terreno_comun' => $terrenosComun ? $terrenosComun->sum('valor_terreno_comun') : 0,
-                    'area_comun_construccion' => $construccionesComun->sum('area_comun_construccion'),
-                    'valor_construccion_comun' => $construccionesComun ? $construccionesComun->sum('valor_construccion_comun') : 0,
+                    'area_comun_terreno' => $sumAreaTerrenosComun,
+                    'valor_terreno_comun' => $sumValorTerenosComun,
+                    'area_comun_construccion' => $sumAreaConstruccionComun,
+                    'valor_construccion_comun' => $sumValorConstruccionesComun,
                     'valor_total_construccion' => $construcciones->sum(function (array $construccion) { return (float)$construccion['valor_unitario'] * (float)$construccion['superficie']; }),
                     'valor_catastral' => $valorCatastral,
                     'actualizado_por' => auth()->user()->id
