@@ -341,14 +341,6 @@ class Impresion extends Component
 
             }
 
-            if(!$predio->construcciones->count()){
-
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene construcciones."]);
-
-                return true;
-
-            }
-
             if($predio->edificio != 0 && !$predio->condominioTerrenos->count()){
 
                 $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . " no tiene terrenos de área común."]);
