@@ -353,6 +353,12 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
         $sectores = json_decode($oficina->sectores, true);
 
+        if(!$sectores){
+
+            throw new ErrorALValidarSectorException("La zona no tiene sectores, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+
+        }
+
         if(!in_array($row['sector'], $sectores)){
 
             throw new ErrorALValidarSectorException("El sector no corresponde a la zona, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
