@@ -219,25 +219,33 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                 }
 
-                foreach ($terrenosComun as $terreno) {
+                if(isset($row['terrenos_comun'])){
 
-                    $predio->condominioTerrenos()->create([
-                        'area_terreno_comun' => $terreno['area_terreno_comun'],
-                        'indiviso_terreno' => $terreno['indiviso_terreno'],
-                        'valor_unitario' => $terreno['valor_unitario'],
-                        'valor_terreno_comun' => $terreno['valor_terreno_comun'],
-                    ]);
+                    foreach ($terrenosComun as $terreno) {
+
+                        $predio->condominioTerrenos()->create([
+                            'area_terreno_comun' => $terreno['area_terreno_comun'],
+                            'indiviso_terreno' => $terreno['indiviso_terreno'],
+                            'valor_unitario' => $terreno['valor_unitario'],
+                            'valor_terreno_comun' => $terreno['valor_terreno_comun'],
+                        ]);
+
+                    }
 
                 }
 
-                foreach ($construccionesComun as $construccion) {
+                if(isset($row['construcciones_comun'])){
 
-                    $predio->condominioConstrucciones()->create([
-                        'area_comun_construccion' => $construccion['area_comun_construccion'],
-                        'indiviso_construccion' => $construccion['indiviso_construccion'],
-                        'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
-                        'valor_construccion_comun' => $construccion['valor_construccion_comun'],
-                    ]);
+                    foreach ($construccionesComun as $construccion) {
+
+                        $predio->condominioConstrucciones()->create([
+                            'area_comun_construccion' => $construccion['area_comun_construccion'],
+                            'indiviso_construccion' => $construccion['indiviso_construccion'],
+                            'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
+                            'valor_construccion_comun' => $construccion['valor_construccion_comun'],
+                        ]);
+
+                    }
 
                 }
 
