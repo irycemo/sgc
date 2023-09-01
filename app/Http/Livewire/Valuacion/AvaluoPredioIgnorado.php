@@ -57,7 +57,7 @@ class AvaluoPredioIgnorado extends Component
             'predio.numero_registro' => 'required|numeric',
             'predio.region_catastral' => 'required',
             'predio.municipio' => 'required',
-            'predio.zona_catastral' => 'required|same:predio.localidad',
+            'predio.zona_catastral' => 'required',
             'predio.localidad' => 'required',
             'predio.sector' => 'required',
             'predio.manzana' => 'required',
