@@ -40,7 +40,7 @@ class Colindancias extends Component
 
     public function cargarPredio($id){
 
-        $this->reset('colindancias');
+        $this->reset('medidas');
 
         $this->predio = PredioAvaluo::with('colindancias', 'avaluo')->find($id);
 
@@ -55,7 +55,7 @@ class Colindancias extends Component
 
         }
 
-        if(count($this->colindancias) == 0)
+        if(count($this->medidas) == 0)
             $this->agregarMedida();
 
     }
