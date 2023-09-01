@@ -23,8 +23,8 @@ class PredioFactory extends Factory
         return [
             'estado' => 16,
             'region_catastral' => $this->faker->numberBetween(1,100),
-            'municipio' => $this->faker->numberBetween(1,100),
-            'zona_catastral' => $this->faker->numberBetween(1,100),
+            'municipio' => $oficina->municipio,
+            'zona_catastral' => $oficina->localidad,
             'tipo_vialidad' => $this->faker->randomElement(Constantes::TIPO_VIALIDADES),
             'tipo_asentamiento' => $this->faker->randomElement(Constantes::TIPO_ASENTAMIENTO),
             'nombre_vialidad' => $this->faker->sentence(),
