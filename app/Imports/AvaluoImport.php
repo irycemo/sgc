@@ -66,7 +66,21 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                 $terrenos = $this->procesarTerrenos($row['terrenos'], $row['tipo'], $key);
 
-                $construcciones = $this->procesarConstrucciones($row['construcciones'], $key);
+                if(isset($row['terrenos_comun'])){
+
+                    $construcciones = $this->procesarConstrucciones($row['construcciones'], $key);
+
+                    $sumValorConstrucciones = $construcciones->sum(function (array $construccion) { return (float)$construccion['valor_unitario'] * (float)$construccion['superficie']; });
+
+                    $sumSuperficieConstrucciones = $construcciones->sum('superficie');
+
+                }else{
+
+                    $sumValorConstrucciones = 0;
+
+                    $sumSuperficieConstrucciones = 0;
+
+                }
 
                 if(isset($row['terrenos_comun'])){
 
@@ -107,7 +121,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                 }elseif($row['tipo'] == 2){
 
                     $valorCatastral = $terrenos->sum('valor_terreno')
-                                        + $construcciones->sum(function (array $construccion) { return (float)$construccion['valor_unitario'] * (float)$construccion['superficie']; })
+                                        + $sumValorConstrucciones
                                         + $sumValorTerenosComun
                                         + $sumValorConstruccionesComun;
 
@@ -160,12 +174,12 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                     'observaciones' => $row['observaciones'],
                     'superficie_terreno' => $terrenos->sum('superficie'),
                     'valor_total_terreno' => $terrenos->sum('valor_terreno'),
-                    'superficie_construccion' => $construcciones->sum('superficie'),
+                    'superficie_construccion' => $sumSuperficieConstrucciones,
                     'area_comun_terreno' => $sumAreaTerrenosComun,
                     'valor_terreno_comun' => $sumValorTerenosComun,
                     'area_comun_construccion' => $sumAreaConstruccionComun,
                     'valor_construccion_comun' => $sumValorConstruccionesComun,
-                    'valor_total_construccion' => $construcciones->sum(function (array $construccion) { return (float)$construccion['valor_unitario'] * (float)$construccion['superficie']; }),
+                    'valor_total_construccion' => $sumValorConstrucciones,
                     'valor_catastral' => $valorCatastral,
                     'actualizado_por' => auth()->user()->id
                 ]);
