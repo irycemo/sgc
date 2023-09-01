@@ -273,7 +273,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
     public function rules(): array
     {
         return [
-            'localidad' => 'required|same:zona',
+            'localidad' => 'required',
             'oficina' => 'required',
             'tipo' => 'required',
             'registro' => 'required',
