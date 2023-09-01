@@ -291,7 +291,7 @@ class Inmueble extends Component
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cuenta predial esta incompleta."]);
         }
         catch(ModelNotFoundException $e){
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No existen avaluos relacionados a el predio."]);
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No existe información relacionada a el predio."]);
         }
         catch (\Throwable $th) {
             Log::error("Error al buscar predio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);

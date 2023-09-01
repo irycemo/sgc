@@ -182,6 +182,8 @@ class AsignacionCuentaPredial extends Component
 
         $this->oficina = auth()->user()->oficina;
 
+        $this->oficina_busqueda = $this->oficina;
+
     }
 
     public function render()
