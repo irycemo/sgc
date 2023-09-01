@@ -68,10 +68,10 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                 $construcciones = $this->procesarConstrucciones($row['construcciones'], $key);
 
-                if($row['terrenos_comun'])
+                if(isset($row['terrenos_comun']))
                     $terrenosComun = $this->procesarTerrenosComun($row['terrenos_comun'], $key);
 
-                if($row['construcciones_comun'])
+                if(isset($row['construcciones_comun']))
                     $construccionesComun = $this->procesarConstruccionesComun($row['construcciones_comun'], $key);
 
 
