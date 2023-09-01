@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Valuacion;
 
 use App\Models\Avaluo;
 use App\Models\Predio;
+use App\Models\Oficina;
 use App\Models\Persona;
 use App\Models\Tramite;
 use Livewire\Component;
