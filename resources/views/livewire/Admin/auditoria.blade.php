@@ -361,7 +361,7 @@
 
             </table>
 
-            <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-0 left-0" wire:loading wire:target="search">
+            <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-0 left-0" wire:loading.delay.longer>
 
                 <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
 

@@ -49,4 +49,8 @@ class Tramite extends Model implements Auditable
     public function servicio(){
         return $this->belongsTo(Servicio::class);
     }
+
+    protected $auditEvents = [
+        'updated',
+    ];
 }
