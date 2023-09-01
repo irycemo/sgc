@@ -382,7 +382,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             'gas' => ['required', Rule::in(Constantes::GAS)],
             'especiales' => ['required', Rule::in(Constantes::ESPECIALES)],
             'terrenos' => 'required',
-            'construcciones' => 'required',
+            'construcciones' => 'nullable',
             'terrenos_comun' => 'nullable',
             'construcciones_comun' => 'nullable',
             'uso_1' =>  ['required', Rule::in(Constantes::USO_PREDIO)],
