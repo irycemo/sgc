@@ -66,7 +66,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                 $terrenos = $this->procesarTerrenos($row['terrenos'], $row['tipo'], $key);
 
-                if(isset($row['terrenos_comun'])){
+                if(isset($row['construcciones'])){
 
                     $construcciones = $this->procesarConstrucciones($row['construcciones'], $key);
 
@@ -218,18 +218,22 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                 }
 
-                foreach ($construcciones as $construccion) {
+                if(isset($row['construcciones'])){
 
-                    $predio->construcciones()->create([
-                        'referencia' => $construccion['referencia'],
-                        'valor_unitario' => $construccion['valor_unitario'],
-                        'niveles' => $construccion['niveles'],
-                        'superficie' => $construccion['superficie'],
-                        'uso' => $construccion['uso'],
-                        'tipo' => $construccion['tipo'],
-                        'calidad' => $construccion['calidad'],
-                        'estado' => $construccion['estado'],
-                    ]);
+                    foreach ($construcciones as $construccion) {
+
+                        $predio->construcciones()->create([
+                            'referencia' => $construccion['referencia'],
+                            'valor_unitario' => $construccion['valor_unitario'],
+                            'niveles' => $construccion['niveles'],
+                            'superficie' => $construccion['superficie'],
+                            'uso' => $construccion['uso'],
+                            'tipo' => $construccion['tipo'],
+                            'calidad' => $construccion['calidad'],
+                            'estado' => $construccion['estado'],
+                        ]);
+
+                    }
 
                 }
 
