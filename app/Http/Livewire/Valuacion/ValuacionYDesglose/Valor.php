@@ -137,7 +137,8 @@ class Valor extends Component
 
         $i = explode('.', $index);
 
-        $this->terrenosCondominio[$i[0]]['indiviso_terreno'] = round($this->terrenosCondominio[$i[0]]['indiviso_terreno'], 4);
+        if(isset($this->terrenosCondominio[$i[0]]['indiviso_terreno']))
+            $this->terrenosCondominio[$i[0]]['indiviso_terreno'] = round($this->terrenosCondominio[$i[0]]['indiviso_terreno'], 4);
 
         if(isset($this->terrenosCondominio[$i[0]]['area_terreno_comun']) &&
             isset($this->terrenosCondominio[$i[0]]['indiviso_terreno']) &&
@@ -156,7 +157,8 @@ class Valor extends Component
 
         $i = explode('.', $index);
 
-        $this->construccionesCondominio[$i[0]]['indiviso_construccion'] = round($this->construccionesCondominio[$i[0]]['indiviso_construccion'], 4);
+        if(isset($this->construccionesCondominio[$i[0]]['indiviso_construccion']))
+            $this->construccionesCondominio[$i[0]]['indiviso_construccion'] = round($this->construccionesCondominio[$i[0]]['indiviso_construccion'], 4);
 
         if(isset($this->construccionesCondominio[$i[0]]['area_comun_construccion']) &&
             isset($this->construccionesCondominio[$i[0]]['indiviso_construccion']) &&

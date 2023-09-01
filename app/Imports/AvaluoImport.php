@@ -128,6 +128,12 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                 }
 
+                if($row['ubicacion_manzana'] == 'ESQUINA'){
+
+                    $valorCatastral *= (1 + 15 / 100);
+
+                }
+
                 /* Crear predio */
                 $predio = PredioAvaluo::create([
                     'status' => 'activo',

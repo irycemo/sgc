@@ -359,7 +359,7 @@
 
                     <strong>Longitud</strong>
 
-                    <p>{{ $colindancia->longitud }}</p>
+                    <p>{{ number_format($colindancia->longitud, 2) }}</p>
 
                 </div>
 
@@ -749,7 +749,7 @@
 
                     <strong>Movimiento</strong>
 
-                    <p>{{ $audit->event }}. {{ $audit->tags }}</p>
+                    <p> {{ Str::ucfirst($audit->event) }}. {{ $audit->tags }}</p>
 
                 </div>
 
