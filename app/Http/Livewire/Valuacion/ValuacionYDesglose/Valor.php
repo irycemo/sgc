@@ -104,6 +104,9 @@ class Valor extends Component
 
             $this->terrenos[$i[0]]['valor_terreno'] = (float)$this->terrenos[$i[0]]['superficie'] * (float)$this->terrenos[$i[0]]['valor_unitario'];
 
+            if($this->predio->tipo_predio == 2)
+                $this->terrenos[$i[0]]['valor_terreno'] = $this->terrenos[$i[0]]['valor_terreno'] / 10000;
+
         }
 
     }
@@ -173,6 +176,8 @@ class Valor extends Component
     }
 
     public function cargarPredio($id){
+
+        $this->reset(['terrenos', 'construcciones', 'terrenosCondominio', 'construccionesCondominio']);
 
         $this->predio = PredioAvaluo::with('avaluo')->find($id);
 
@@ -248,6 +253,18 @@ class Valor extends Component
             $terreno['demerito'] = $this->porcentajeDemerito;
 
         }
+
+        if(count($this->terrenos) == 0)
+            $this->agregarTerreno();
+
+        if(count($this->construcciones) == 0)
+            $this->agregarConstruccion();
+
+        if(count($this->terrenosCondominio) == 0)
+            $this->agregarTerrenoConstruccion();
+
+        if(count($this->construccionesCondominio) == 0)
+            $this->agregarCondominioConstruccion();
 
     }
 

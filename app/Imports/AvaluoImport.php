@@ -455,8 +455,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
         }
 
-        $cuentaAsignada = AsignarCuenta::where('status', '!=', 'notificado')
-                                        ->where('localidad', $row['localidad'])
+        $cuentaAsignada = AsignarCuenta::where('localidad', $row['localidad'])
                                         ->where('oficina', $row['oficina'])
                                         ->where('tipo_predio', $row['tipo'])
                                         ->where('numero_registro', $row['registro'])
