@@ -35,8 +35,8 @@ class Oficinas extends Component
             'modelo_editar.valuador_municipal' => 'nullable',
             'modelo_editar.cabecera' => 'nullable',
             'modelo_editar.sectores' => 'nullable',
-            'sectorInicial' => 'nullable|numeric|min:1|max:102|lt:sectorFinal',
-            'sectorFinal' => 'nullable|numeric|min:1|max:102|gt:sectorInicial'
+            'sectorInicial' => 'nullable|numeric|min:1|max:102|lte:sectorFinal',
+            'sectorFinal' => 'nullable|numeric|min:1|max:102|gte:sectorInicial'
          ];
     }
 

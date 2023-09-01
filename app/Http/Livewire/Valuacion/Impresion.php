@@ -134,7 +134,7 @@ class Impresion extends Component
                 'director' => 'required',
                 'jefe_departamento' => 'required',
                 'tramiteInspeccion' => 'required',
-                'tramiteAvaluo' => Rule::requiredIf($this->tramiteInspeccion->avaluo_para != null),
+                'tramiteAvaluo' => 'nullable',
                 'localidad' => 'required',
                 'oficina' => 'required',
                 'tipo' => 'required',
