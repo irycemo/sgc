@@ -109,7 +109,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                     $valorCatastral = $terrenos->sum('valor_terreno')
                                         + $construcciones->sum(function (array $construccion) { return (float)$construccion['valor_unitario'] * (float)$construccion['superficie']; })
                                         + $sumValorTerenosComun
-                                        + $$sumValorConstruccionesComun;
+                                        + $sumValorConstruccionesComun;
 
 
                 }
