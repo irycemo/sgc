@@ -187,13 +187,6 @@ class InspeccionOcular extends Component
 
     }
 
-    public function updatedModeloEditarAvaluoPara(){
-
-        if($this->modelo_editar->avaluo_para == 0)
-            $this->modelo_editar->avaluo_para = null;
-
-    }
-
     public function resetearInformacion(){
 
         $this->modelo_editar->adiciona = $this->tramiteAdicionado['id'];
@@ -238,6 +231,9 @@ class InspeccionOcular extends Component
     public function crear(){
 
         $this->validate();
+
+        if($this->modelo_editar->avaluo_para == 0)
+            $this->modelo_editar->avaluo_para = null;
 
         try {
 
