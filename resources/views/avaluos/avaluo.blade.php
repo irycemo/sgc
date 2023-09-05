@@ -142,7 +142,7 @@
             <p class="titulo">AVALÚO Y NOTIFICACIÓN DE VALOR CATASTRAL</p>
 
             <p class="fundamento">
-                CON FUNDAMENTO  EN LOS ARTÍCULOS 1,2,3,6,7,8,66,68,69,71,72,73,74,75,76,90,92 y 93 DE  LA  LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO, 8,73,74,75,80,81,82 Y 83 DEL REGLAMENTO DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO DEL ESTADO DE MICHOACÁN.
+                CON FUNDAMENTO  EN LOS ARTÍCULOS 1,2,3,6,7,8,66,68,69,71,72,73,74,75,76,90,92 y 93 DE  LA  LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO, 8,73,74,75,80,81,82 Y 83 DEL REGLAMENTO DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO.
             </p>
 
         </div>
@@ -186,11 +186,11 @@
                     @if($predio->nombre_asentamiento)<strong>Nombre del asentamiento:</strong> {{ $predio->nombre_asentamiento }},@endif
                     @if($predio->tipo_vialidad)<strong>Tipo de vialidad:</strong> {{ $predio->tipo_vialidad }},@endif
                     @if($predio->nombre_vialidad)<strong>Nombre de la vialidad:</strong> {{ $predio->nombre_vialidad }},@endif
-                    @if($predio->numero_interior)<strong>Numero interior:</strong> {{ $predio->numero_interior }},@endif
-                    @if($predio->numero_exterior)<strong>Numero exterior:</strong> {{ $predio->numero_exterior }},@endif
-                    @if($predio->numero_exterior_2)<strong>Numero exterior 2:</strong> {{ $predio->numero_exterior_2 }},@endif
-                    @if($predio->numero_adicional)<strong>Numero adicional:</strong> {{ $predio->numero_adicional }},@endif
-                    @if($predio->numero_adicional_2)<strong>Numero adicional 2:</strong> {{ $predio->numero_adicional_2 }},@endif
+                    @if($predio->numero_interior)<strong>Número interior:</strong> {{ $predio->numero_interior }},@endif
+                    @if($predio->numero_exterior)<strong>Número exterior:</strong> {{ $predio->numero_exterior }},@endif
+                    @if($predio->numero_exterior_2)<strong>Número exterior 2:</strong> {{ $predio->numero_exterior_2 }},@endif
+                    @if($predio->numero_adicional)<strong>Número adicional:</strong> {{ $predio->numero_adicional }},@endif
+                    @if($predio->numero_adicional_2)<strong>Número adicional 2:</strong> {{ $predio->numero_adicional_2 }},@endif
                     @if($predio->codigo_postal)<strong>Código postal:</strong> {{ $predio->codigo_postal }}@endif
                 </p>
 
@@ -220,14 +220,14 @@
                     @if($predio->xutm)
 
                             <strong>UTM: </strong>
-                            X: {{ $predio->xutm }},  Y: {{ $predio->yutm }},  Z: {{ $predio->zutm }}
+                            <strong>X:</strong> {{ $predio->xutm }}, <strong>Y:</strong> {{ $predio->yutm }},  <strong>Z:</strong> {{ $predio->zutm }}
 
                     @endif
 
                     @if($predio->xutm)
                         <p style="">
                             <strong>GEO: </strong>
-                            LAT: {{ $predio->lat }}, LON: {{ $predio->lon }}
+                            <strong>LAT:</strong> {{ $predio->lat }}, <strong>LON:</strong> {{ $predio->lon }}
                         </p>
                     @endif
 
@@ -296,7 +296,7 @@
                             <th style="padding: 0 5px 0 5px;">Drenaje</th>
                             <th style="padding: 0 5px 0 5px;">Pavimento</th>
                             <th style="padding: 0 5px 0 5px;">Energía eléctrica</th>
-                            <th style="padding: 0 5px 0 5px;">Alambrado púlico</th>
+                            <th style="padding: 0 5px 0 5px;">Alumbrado púlico</th>
                             <th style="padding: 0 5px 0 5px;">Banqueta</th>
                         </tr>
 
@@ -984,10 +984,10 @@
 
                 @endif
 
-                <p class="fundamento">NOTIFIQUESE CONFORME AL ARTICULO 134 DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPÓ
+                <p class="fundamento">NOTIFÍQUESE CONFORME AL ARTÍCULO 134 DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPÓ
                     EL PRESENTE ACTO ES RECURRIBLE, DENTRO DE LOS 10 DÍAS HÁBILES SIGUIENTES A SU NOTIFICACIÓN ANTE LA AUTORIDAD QUE LO EMITE
                     O BIEN ANTE EL TRIBUNAL DE JUSTICIA ADMINISTRATIVA DEL ESTADO DE MICHOACÁN, DE CONFORMIDAD CON EL ARTÍCULO 128 DEL CÓDIGO
-                    DE JUSTICIA ADMINISTRATIVA DEL ESTADO DE MICHOACÁN DE OCAMPO
+                    DE JUSTICIA ADMINISTRATIVA DEL ESTADO DE MICHOACÁN DE OCAMPO.
                 </p>
 
                 <p style="margin-top: 10px">En la ciudad de: @if($ciudad) {{ $ciudad }} @else ____________________________________________ @endif a las @if($hora) {{ $hora }} @else _______ @endif
@@ -1009,9 +1009,9 @@
                             </td>
                             <td style="font-size:12px; padding-right: 40px;">
 
-                                <p><strong>Trámite de inspección:</strong> {{ $tramiteInspeccion->folio }} <strong>Recibo:</strong> {{ $tramiteInspeccion->folio_pago }}</p>
+                                <p><strong>Trámite de inspección ocular:</strong> {{ $tramiteInspeccion->folio }} <strong>Recibo:</strong> {{ $tramiteInspeccion->folio_pago }}</p>
                                 <p><strong>Trámite de impresión:</strong> {{ $tramiteAvaluo->folio }} <strong>Recibo:</strong> {{ $tramiteAvaluo->folio_pago }}</p>
-                                <p><strong>Elaborado por:</strong> {{ auth()->user()->name }} {{ auth()->user()->ap_paterno }} {{ auth()->user()->ap_materno }}, <strong>Con fecha:</strong> {{ now()->format('d-m-Y H:i:s') }}</p>
+                                <p><strong>Elaborado por:</strong> {{ auth()->user()->name }} {{ auth()->user()->ap_paterno }} {{ auth()->user()->ap_materno }}, <strong>con fecha:</strong> {{ now()->format('d-m-Y H:i:s') }}</p>
 
                             </td>
                         </tr>
