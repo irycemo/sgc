@@ -254,7 +254,7 @@ class Impresion extends Component
 
             $tramiteInspeccion->update([
                             'usados' => $this->cantidad + $tramiteInspeccion->usados,
-                            'parcial_usado' => $tramiteAvaluo->id
+                            'parcial_usado' => $tramiteAvaluo == 0 ? null : $tramiteAvaluo->id
             ]);
 
             if($tramiteInspeccion->avaluo_para != null){
@@ -300,8 +300,9 @@ class Impresion extends Component
             if($tramiteInspeccion->cantidad == $tramiteInspeccion->usados)
                 $tramiteInspeccion->update(['estado' => 'concluido']);
 
-            if($tramiteAvaluo->cantidad == $tramiteAvaluo->usados)
-                $tramiteAvaluo->update(['estado' => 'concluido']);
+            if($tramiteInspeccion->avaluo_para != null)
+                if($tramiteAvaluo->cantidad == $tramiteAvaluo->usados)
+                    $tramiteAvaluo->update(['estado' => 'concluido']);
 
         });
 
