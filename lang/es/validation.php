@@ -148,4 +148,10 @@ return [
 
     'attributes' => [],
 
+    'values' => [
+        'fecha_notificacion' => [
+            'tomorrow' => 'mañana'
+        ]
+    ]
+
 ];
