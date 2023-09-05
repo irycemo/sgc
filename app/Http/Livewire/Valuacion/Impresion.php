@@ -222,6 +222,10 @@ class Impresion extends Component
 
                 }
 
+            }else{
+
+                $tramiteAvaluo = 0;
+
             }
 
         }

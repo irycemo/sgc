@@ -995,7 +995,7 @@
                 </p>
                 <p>Nombre completo: @if($nombre) {{ $nombre }} @else __________________________________________________________________________________ @endif</p>
                 <p>Recibí en calidad de:  @if($calidad) {{ $calidad }} @else ___________________________________ @endif Notificador:  ___________________________________</p>
-                <p>Firma: ________________________________________________ Firma: ______________________________________</p>
+                <p>Firma({{ $calidad }}): ___________________________________ Firma(notificador): _________________________</p>
 
 
 
@@ -1010,7 +1010,9 @@
                             <td style="font-size:12px; padding-right: 40px;">
 
                                 <p><strong>Trámite de inspección ocular:</strong> {{ $tramiteInspeccion->folio }} <strong>Recibo:</strong> {{ $tramiteInspeccion->folio_pago }}</p>
-                                <p><strong>Trámite de impresión:</strong> {{ $tramiteAvaluo->folio }} <strong>Recibo:</strong> {{ $tramiteAvaluo->folio_pago }}</p>
+                                @if ($tramiteAvaluo)
+                                    <p><strong>Trámite de impresión:</strong> {{ $tramiteAvaluo->folio }} <strong>Recibo:</strong> {{ $tramiteAvaluo->folio_pago }}</p>
+                                @endif
                                 <p><strong>Elaborado por:</strong> {{ auth()->user()->name }} {{ auth()->user()->ap_paterno }} {{ auth()->user()->ap_materno }}, <strong>con fecha:</strong> {{ now()->format('d-m-Y H:i:s') }}</p>
 
                             </td>
