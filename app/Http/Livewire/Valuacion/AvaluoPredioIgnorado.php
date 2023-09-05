@@ -475,9 +475,9 @@ class AvaluoPredioIgnorado extends Component
 
         $this->validate();
 
-        if($this->predio->localidad != 0 || $this->predio->numero_registro != 0){
+        if($this->predio->numero_registro != 0){
 
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La localidad y número de registro deben ser 0"]);
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El número de registro deben ser 0"]);
 
             return;
         }
