@@ -283,20 +283,6 @@ class AvaluoPredioIgnorado extends Component
 
         if(!$predioCompletoAvaluo){
 
-            $cuentaPredialAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
-                                                ->where('localidad', $this->predio->localidad)
-                                                ->where('oficina', $this->predio->oficina)
-                                                ->where('tipo_predio', $this->predio->tipo_predio)
-                                                ->where('numero_registro', $this->predio->numero_registro)
-                                                ->first();
-
-            if($cuentaPredialAvaluo){
-
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cuenta predial ya existe en avaluos con otra clave catastral, verifique."]);
-
-                return true;
-            }
-
             $claveCatastralAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
                                                     ->where('estado', $this->predio->estado)
                                                     ->where('region_catastral', $this->predio->region_catastral)
