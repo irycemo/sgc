@@ -170,7 +170,8 @@
                                 <option value="46">Variación Catastral</option>
                                 <option value="43">Avaluos de desglose de fraccionamientos, condominios, conjuntos habitacionales y subdivisiones</option>
                                 <option value="44">Avaluos de desglose de cualquier otro tipo de inmueble</option>
-                                <option value="">Avaluos de actualización, fusión, cambio de régimen</option>
+                                <option value="47">Avaluo para predio ignorado</option>
+                                <option value="0">Avaluos de actualización, fusión, cambio de régimen</option>
 
                             </select>
 

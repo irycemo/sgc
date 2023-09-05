@@ -157,7 +157,7 @@
 
                     <div>
 
-                        <Label class="text-sm">Energia eléctrica</Label>
+                        <Label class="text-sm">Energía eléctrica</Label>
                     </div>
 
                     <div>
@@ -199,7 +199,7 @@
 
                     <div>
 
-                        <Label class="text-sm">Banqeta</Label>
+                        <Label class="text-sm">Banqueta</Label>
                     </div>
 
                     <div>

@@ -189,7 +189,7 @@ class InspeccionOcular extends Component
 
     public function updatedModeloEditarAvaluoPara(){
 
-        if($this->modelo_editar->avaluo_para == '')
+        if($this->modelo_editar->avaluo_para == 0)
             $this->modelo_editar->avaluo_para = null;
 
     }
