@@ -167,7 +167,7 @@ class AvaluoPredioIgnorado extends Component
                                         ->where('localidad', $this->predio->localidad)
                                         ->where('sector', $this->predio->sector)
                                         ->where('manzana', $this->predio->manzana)
-                                        ->where('predio', $this->predio->manzana)
+                                        ->where('predio', $this->predio->predio)
                                         ->where('edificio', $this->predio->edificio)
                                         ->where('departamento', $this->predio->departamento)
                                         ->firstOrFail();
