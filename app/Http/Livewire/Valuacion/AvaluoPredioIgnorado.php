@@ -696,17 +696,21 @@ class AvaluoPredioIgnorado extends Component
         if($this->validarDisponibilidad2())
             return;
 
-        $this->predio->save();
+        DB::transaction(function () use ($tramite){
 
-         $this->predio->avaluo->update(['estado' => 'conluido']);
+            $this->predio->save();
 
-        $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La cuenta predial se asignó correctamente, puede consultar y/o notificar el avalúo en la sección Valuación y Desglose."]);
+            $this->predio->avaluo->update(['estado' => 'conluido']);
 
-        $this->modal2 = false;
+            $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La cuenta predial se asignó correctamente, puede consultar y/o notificar el avalúo en la sección Valuación y Desglose."]);
 
-        $this->predio = PredioAvaluo::make();
+            $this->modal2 = false;
 
-        $tramite->update(['estado', 'concluido']);
+            $this->predio = PredioAvaluo::make();
+
+            $tramite->update(['estado' => 'concluido']);
+
+        });
 
     }
 
