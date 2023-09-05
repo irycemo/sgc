@@ -62,7 +62,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="medidas.{{ $index }}.longitud">
+                            <input type="number" min="0" class="bg-white rounded text-xs w-full" wire:model.defer="medidas.{{ $index }}.longitud">
 
                         </div>
 

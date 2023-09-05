@@ -8,6 +8,7 @@ use App\Models\PredioAvaluo;
 use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
+use Closure;
 
 class Colindancias extends Component
 {
@@ -22,7 +23,11 @@ class Colindancias extends Component
         return [
             'medidas.*' => 'required',
             'medidas.*.viento' => 'required|string',
-            'medidas.*.longitud' => 'required|numeric|min:1',
+            'medidas.*.longitud' => [
+                                        'required',
+                                        'numeric',
+                                        'min:0',
+                                    ],
             'medidas.*.descripcion' => 'required|string',
             'predio' => 'required'
          ];
@@ -37,6 +42,22 @@ class Colindancias extends Component
     protected $messages = [
         'predio.required' => '. Primero debe cargar el avaluo'
     ];
+
+    public function updatedMedidas($value, $index){
+
+        $i = explode('.', $index);
+
+        if(isset($this->medidas[$i[0]]['viento']) && $this->medidas[$i[0]]['viento'] == 'ANEXO'){
+
+            $this->medidas[$i[0]]['longitud'] = 0;
+
+        }else{
+
+            $this->medidas[$i[0]]['longitud'] = 1;
+
+        }
+
+    }
 
     public function cargarPredio($id){
 
