@@ -137,6 +137,7 @@ class Inmueble extends Component
 
             $this->predio = PredioAvaluo::with('propietarios', 'avaluo')
                                         ->where('estado', 16)
+                                        ->where('estado', '!=', 'notificado')
                                         ->where('numero_registro', $this->predio->numero_registro)
                                         ->where('region_catastral', $this->predio->region_catastral)
                                         ->where('municipio', $this->predio->municipio)
@@ -198,6 +199,7 @@ class Inmueble extends Component
             ]);
 
             $this->predio = PredioAvaluo::with('propietarios', 'avaluo')
+                                    ->where('estado', '!=', 'notificado')
                                     ->where('numero_registro', $this->predio->numero_registro)
                                     ->where('tipo_predio', $this->predio->tipo_predio)
                                     ->where('localidad', $this->predio->localidad)
