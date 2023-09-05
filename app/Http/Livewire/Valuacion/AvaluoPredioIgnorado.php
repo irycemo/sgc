@@ -700,6 +700,20 @@ class AvaluoPredioIgnorado extends Component
 
     }
 
+    public function abrirModalAsignar(){
+
+        if(!$this->predio->avaluo){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Debe cargar primero el avalúo."]);
+
+            return;
+
+        }
+
+        $this->modal2 = true;
+
+    }
+
     public function mount(){
 
         $this->tipoPropietarios = Constantes::TIPO_PROPIETARIO;

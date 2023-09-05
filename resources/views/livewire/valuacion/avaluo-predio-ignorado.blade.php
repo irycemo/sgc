@@ -105,13 +105,13 @@
                 </button>
 
                 <button
-                    wire:click="$set('modal2', true)"
+                    wire:click="abrirModalAsignar"
                     wire:loading.attr="disabled"
-                    wire:target="$set('modal2', true)"
+                    wire:target="abrirModalAsignar"
                     type="button"
                     class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center">
 
-                    <img wire:loading wire:target="$set('modal2', true)" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    <img wire:loading wire:target="abrirModalAsignar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Asignar cuenta predial
 
