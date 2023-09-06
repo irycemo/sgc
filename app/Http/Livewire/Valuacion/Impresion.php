@@ -83,9 +83,9 @@ class Impresion extends Component
 
         if(!$oficina){
 
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Oficina incorrecta."]);
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La localidad no correspoonde a la oficina."]);
 
-            $this->reset(['oficina', 'localidad']);
+            $this->reset(['localidad']);
 
             return;
 
@@ -229,6 +229,30 @@ class Impresion extends Component
 
     }
 
+    public function updatedRegistroInicio(){
+
+        $this->resetClaveCatastral();
+
+    }
+
+    public function updatedRegionCatastral(){
+
+        $this->resetCuentaPredial();
+
+    }
+
+    public function resetCuentaPredial(){
+
+        $this->reset(['tipo', 'registro_inicio', 'registro_final']);
+
+    }
+
+    public function resetClaveCatastral(){
+
+        $this->reset(['region_catastral', 'municipio', 'zona_catastral', 'sector', 'manzana', 'predio', 'edificio', 'departamento']);
+
+    }
+
     public function imprimir(){
 
         $this->cantidad = $this->registro_final - $this->registro_inicio + 1;
@@ -247,13 +271,13 @@ class Impresion extends Component
         if($this->validaciones())
             return;
 
-        if($this->region_catastral || $this->municipio || $this->zona || $this->sector || $this->manzana || $this->predio || $this->edificio || $this->departamento){
+        if($this->region_catastral || $this->municipio || $this->zona_catastral || $this->sector || $this->manzana || $this->predio || $this->edificio || $this->departamento){
 
             $predios = PredioAvaluo::with('avaluo', 'propietarios.persona', 'colindancias', 'terrenos', 'condominioTerrenos', 'condominioConstrucciones', 'construcciones')
                                         ->where('localidad', $this->localidad)
                                         ->where('region_catastral', $this->region_catastral)
                                         ->where('municipio', $this->municipio)
-                                        ->where('zona', $this->zona)
+                                        ->where('zona_catastral', $this->zona_catastral)
                                         ->where('sector', $this->sector)
                                         ->where('manzana', $this->manzana)
                                         ->where('predio', $this->predio)
