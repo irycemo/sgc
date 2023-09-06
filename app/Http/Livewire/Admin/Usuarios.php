@@ -164,7 +164,8 @@ class Usuarios extends Component
     public function render()
     {
 
-        $usuarios = User::with('creadoPor', 'actualizadoPor')->where('name', 'LIKE', '%' . $this->search . '%')
+        $usuarios = User::with('creadoPor', 'actualizadoPor')
+                            ->where('name', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('email', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('oficina', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('area', 'LIKE', '%' . $this->search . '%')

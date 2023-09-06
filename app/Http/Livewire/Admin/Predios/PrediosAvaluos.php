@@ -25,7 +25,12 @@ class PrediosAvaluos extends Component
     public function render()
     {
 
-        $predios = PredioAvaluo::with('actualizadoPor', 'avaluo')
+        $predios = PredioAvaluo::with('actualizadoPor', 'avaluo.asignadoA')
+                            ->whereHas('avaluo.asignadoA', function($q){
+                                $q->where('name', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('ap_paterno', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('ap_materno', 'LIKE', '%' . $this->search . '%');
+                            })
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 
