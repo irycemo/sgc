@@ -51,10 +51,6 @@ class Colindancias extends Component
 
             $this->medidas[$i[0]]['longitud'] = 0;
 
-        }else{
-
-            $this->medidas[$i[0]]['longitud'] = 1;
-
         }
 
     }

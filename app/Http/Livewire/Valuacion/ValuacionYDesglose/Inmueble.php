@@ -281,8 +281,12 @@ class Inmueble extends Component
             $this->tipo_propietario = $this->predio_padron->propietarios()->first()->tipo;
             $this->porcentaje = $this->predio_padron->propietarios()->first()->porcentaje;
 
-            if($this->predio_padron->propietarios()->count() > 1)
+            if($this->predio_padron->propietarios()->count() > 1){
+
                 $this->predio->sociedad = true;
+
+            }
+
 
             $this->predio->copia = true;
 
