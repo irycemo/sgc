@@ -660,7 +660,7 @@ class AvaluoPredioIgnorado extends Component
 
             $this->predio->save();
 
-            $this->predio->avaluo->update(['estado' => 'conluido']);
+            $this->predio->avaluo->update(['estado' => 'concluido']);
 
             $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La cuenta predial se asignó correctamente, puede consultar y/o notificar el avalúo en la sección Valuación y Desglose."]);
 
