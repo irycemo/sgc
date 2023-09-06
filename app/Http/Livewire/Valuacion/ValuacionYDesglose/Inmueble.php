@@ -148,6 +148,9 @@ class Inmueble extends Component
                                         ->where('predio', $this->predio->predio)
                                         ->where('edificio', $this->predio->edificio)
                                         ->where('departamento', $this->predio->departamento)
+                                        ->whereHas('avaluo', function($q){
+                                            $q->where('estado', '!=', 'notificado');
+                                        })
                                         ->firstOrFail();
 
             if($this->predio->avaluo->asignado_a != auth()->user()->id){
@@ -204,6 +207,9 @@ class Inmueble extends Component
                                     ->where('tipo_predio', $this->predio->tipo_predio)
                                     ->where('localidad', $this->predio->localidad)
                                     ->where('oficina', $this->predio->oficina)
+                                    ->whereHas('avaluo', function($q){
+                                        $q->where('estado', '!=', 'notificado');
+                                    })
                                     ->firstOrFail();
 
             if($this->predio->avaluo->asignado_a != auth()->user()->id){

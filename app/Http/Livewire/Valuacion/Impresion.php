@@ -285,6 +285,9 @@ class Impresion extends Component
                                         ->where('predio', $this->predio)
                                         ->where('edificio', $this->edificio)
                                         ->where('departamento', $this->departamento)
+                                        ->whereHas('avaluo', function($q){
+                                            $q->where('estado', '!=', 'notificado');
+                                        })
                                         ->get();
 
             if($predios->count() == 0){

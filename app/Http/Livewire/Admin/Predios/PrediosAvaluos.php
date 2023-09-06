@@ -31,6 +31,7 @@ class PrediosAvaluos extends Component
                                 ->orWhere('ap_paterno', 'LIKE', '%' . $this->search . '%')
                                 ->orWhere('ap_materno', 'LIKE', '%' . $this->search . '%');
                             })
+                            ->orWhere('estado', 'LIKE', '%' . $this->search . '%')
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 
