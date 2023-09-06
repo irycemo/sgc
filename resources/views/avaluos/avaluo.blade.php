@@ -919,7 +919,7 @@
 
             <div class="informacion">
 
-                @if(!$formato)
+                @if($tramiteInspeccion != 'Convenio municipal')
 
                     <table style="margin-top: 60px">
 

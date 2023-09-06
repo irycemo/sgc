@@ -44,31 +44,6 @@ class Impresion extends Component
     public $calidad;
     public $cantidad;
 
-    protected function rules(){
-        return [
-            'director' => 'required',
-            'valuador_municipal' => 'required',
-            'jefe_departamento' => 'required',
-            'autoridad_municipal' => 'required',
-            'tramiteInspeccion' => 'required',
-            'tramiteAvaluo' => 'required',
-            'localidad' => 'required',
-            'oficina' => 'required',
-            'tipo' => 'required',
-            'registro_inicio' => 'required',
-            'registro_final' => 'required',
-            'valuador' => 'required_if:formato,0',
-            'notificador' => 'required_if:formato,0',
-            'ciudad' => 'nullable',
-            'hora' => 'nullable',
-            'dia' => 'nullable',
-            'año' => 'nullable',
-            'mes' => 'nullable',
-            'nombre' => 'nullable',
-            'calidad' => 'nullable',
-         ];
-    }
-
     public function updatedLocalidad(){
 
         $this->updatedOficina();
@@ -263,7 +238,7 @@ class Impresion extends Component
                 'zona_catastral' => 'required',
                 'sector' => 'required',
                 'valuador' => 'required',
-                'notificador' => 'required_if:formato,0',
+                'notificador' => 'required',
                 'manzana' => 'nullable',
                 'predio' => 'nullable',
                 'edificio' => 'nullable',
@@ -344,7 +319,6 @@ class Impresion extends Component
                                                         $this->valuador,
                                                         $this->valuador_municipal,
                                                         $this->autoridad_municipal,
-                                                        $this->formato
                                                     );
 
             foreach($predios as $predio){

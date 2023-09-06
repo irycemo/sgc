@@ -17,7 +17,7 @@ use Endroid\QrCode\Writer\PngWriter;
 
 class AvaluosController extends Controller
 {
-    public function imprime($collection, $tramiteInspeccion, $tramiteAvaluo, $ciudad = null, $hora = null, $dia = null, $mes = null, $año = null, $nombre = null, $calidad = null, $director, $jefeDepartamento, $valuador, $valuador_municipal, $autoridad_municipal, $formato)
+    public function imprime($collection, $tramiteInspeccion, $tramiteAvaluo, $ciudad = null, $hora = null, $dia = null, $mes = null, $año = null, $nombre = null, $calidad = null, $director, $jefeDepartamento, $valuador, $valuador_municipal, $autoridad_municipal)
     {
 
         $qr = $this->generadorQr();
@@ -30,7 +30,7 @@ class AvaluosController extends Controller
 
             foreach ($collection as $predio) {
 
-                $pdf = Pdf::loadView('avaluos.avaluo', compact('qr', 'predio', 'tramiteInspeccion', 'tramiteAvaluo', 'ciudad', 'hora', 'dia', 'mes', 'año', 'nombre', 'calidad', 'director', 'jefeDepartamento', 'valuador', 'valuador_municipal', 'autoridad_municipal', 'formato'));
+                $pdf = Pdf::loadView('avaluos.avaluo', compact('qr', 'predio', 'tramiteInspeccion', 'tramiteAvaluo', 'ciudad', 'hora', 'dia', 'mes', 'año', 'nombre', 'calidad', 'director', 'jefeDepartamento', 'valuador', 'valuador_municipal', 'autoridad_municipal'));
 
                 $pdf->render();
 
@@ -58,7 +58,7 @@ class AvaluosController extends Controller
 
             $predio = $collection->first();
 
-            $pdf = Pdf::loadView('avaluos.avaluo', compact('qr', 'predio', 'tramiteInspeccion', 'tramiteAvaluo', 'ciudad', 'hora', 'dia', 'mes', 'año', 'nombre', 'calidad', 'director', 'jefeDepartamento', 'valuador', 'valuador_municipal', 'autoridad_municipal', 'formato'));
+            $pdf = Pdf::loadView('avaluos.avaluo', compact('qr', 'predio', 'tramiteInspeccion', 'tramiteAvaluo', 'ciudad', 'hora', 'dia', 'mes', 'año', 'nombre', 'calidad', 'director', 'jefeDepartamento', 'valuador', 'valuador_municipal', 'autoridad_municipal'));
 
             $pdf->render();
 
