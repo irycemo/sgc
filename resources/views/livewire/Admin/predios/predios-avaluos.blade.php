@@ -303,11 +303,7 @@
 
                                     @can('Ver predio')
 
-                                        <button
-                                            wire:click="abrirModalEditar({{$predio->id}})"
-                                            wire:loading.attr="disabled"
-                                            disabled
-                                            wire:target="abiriModalEditar({{$predio->id}})"
+                                        <a href="{{ route('ver_predio_avaluo', $predio->id) }}"
                                             class="bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full mr-2 hover:bg-blue-700 flex focus:outline-none"
                                         >
 
@@ -319,7 +315,7 @@
 
                                             <p>Ver</p>
 
-                                        </button>
+                                        </a>
 
                                     @endcan
 

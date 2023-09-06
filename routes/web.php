@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AvaluosController;
 use App\Http\Controllers\Admin\PrediosController;
 use App\Http\Livewire\Admin\Umas;
 use App\Http\Livewire\Admin\Roles;
@@ -74,6 +75,8 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
     Route::get('predios', PrediosPadron::class)->middleware('permission:Lista de predios')->name('predios');
     Route::get('predios/{predio}', [PrediosController::class, 'show'])->middleware('permission:Ver predio')->name('ver_predio');
+
+    Route::get('avaluos/{predio}', [AvaluosController::class, 'show'])->middleware('permission:Ver predio avaluo')->name('ver_predio_avaluo');
 
     Route::get('predios_avaluos', PrediosAvaluos::class)->middleware('permission:Lista de predios avaluos')->name('predios_avaluos');
 

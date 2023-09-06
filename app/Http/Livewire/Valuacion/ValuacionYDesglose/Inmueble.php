@@ -40,17 +40,17 @@ class Inmueble extends Component
             'predio.copia' => 'nullable',
             'predio.sociedad' => 'nullable',
             'predio.numero_registro' => 'required|min:1',
-            'predio.region_catastral' => 'required',
-            'predio.municipio' => 'required',
-            'predio.localidad' => 'required',
-            'predio.sector' => 'required',
-            'predio.zona_catastral' => 'required|same:predio.localidad',
-            'predio.manzana' => 'required',
-            'predio.predio' => 'required',
-            'predio.edificio' => 'required',
-            'predio.departamento' => 'required',
+            'predio.region_catastral' => 'required|min:1',
+            'predio.municipio' => 'required|min:1',
+            'predio.localidad' => 'required|min:1',
+            'predio.sector' => 'required|min:1',
+            'predio.zona_catastral' => 'required|min:1,|same:predio.localidad',
+            'predio.manzana' => 'required|min:1',
+            'predio.predio' => 'required|min:1',
+            'predio.edificio' => 'required|min:1',
+            'predio.departamento' => 'required|min:1',
             'predio.tipo_predio' => 'required|min:1|max:2',
-            'predio.oficina' => 'required',
+            'predio.oficina' => 'required|min:1',
             'predio.estado' => 'required',
             'predio.tipo_asentamiento' => 'required',
             'predio.nombre_asentamiento' => 'required',
@@ -216,12 +216,16 @@ class Inmueble extends Component
 
             }
 
-            $this->ap_paterno = $this->predio->propietarios()->first()->persona->ap_paterno;
-            $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
-            $this->nombre = $this->predio->propietarios()->first()->persona->nombre;
-            $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
-            $this->tipo_propietario = $this->predio->propietarios()->first()->tipo;
-            $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
+            if($this->ap_paterno = $this->predio->propietarios()->first()){
+
+                $this->ap_paterno = $this->predio->propietarios()->first()->persona->ap_paterno;
+                $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
+                $this->nombre = $this->predio->propietarios()->first()->persona->nombre;
+                $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
+                $this->tipo_propietario = $this->predio->propietarios()->first()->tipo;
+                $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
+
+            }
 
             $this->editar = true;
 
