@@ -656,7 +656,7 @@ class AvaluoPredioIgnorado extends Component
     public function asignarCuenta(){
 
         $this->validate([
-            'localidad' => 'required|same:predio.zona',
+            'localidad' => 'required',
             'oficina' => 'required',
             'tipo' => 'required|min:1|max:2',
             'numero_registro' => 'required',
