@@ -134,6 +134,40 @@
 
         <div class="p-4 flex-auto bg-white rounded-lg mb-3 shadow-md space-y-3">
 
+            <div class="text-center">
+
+                <Label class="text-lg mb-5 text-center">Clave catastral </Label>
+
+            </div>
+
+            <div class="space-y-1 text-center">
+
+                <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-20" title="Estado" value="16" readonly>
+
+                <input placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('region_catastral') border-1 border-red-500 @enderror" wire:model.defer="region_catastral">
+
+                <input placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('municipio') border-1 border-red-500 @enderror" wire:model.defer="municipio">
+
+                <input placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model.defer="zona_catastral">
+
+                <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.lazy="localidad">
+
+                <input placeholder="Sector" type="number" class="bg-white rounded text-xs w-20 @error('sector') border-1 border-red-500 @enderror" wire:model.defer="sector">
+
+                <input placeholder="Manzana" type="number" class="bg-white rounded text-xs w-20 @error('manzana') border-1 border-red-500 @enderror" wire:model.defer="manzana">
+
+                <input placeholder="Predio" type="number" class="bg-white rounded text-xs w-20 @error('predio') border-1 border-red-500 @enderror" wire:model.lazy="predio.predio">
+
+                <input placeholder="Edificio" type="number" class="bg-white rounded text-xs w-20 @error('edificio') border-1 border-red-500 @enderror" wire:model.defer="edificio">
+
+                <input placeholder="Departamento" type="number" class="bg-white rounded text-xs w-20 @error('departamento') border-1 border-red-500 @enderror" wire:model.defer="departamento">
+
+            </div>
+
+        </div>
+
+        <div class="p-4 flex-auto bg-white rounded-lg mb-3 shadow-md space-y-3">
+
             <h4 class="text-lg mb-5 text-center">Firmas</h4>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 items-end mx-auto mb-4">

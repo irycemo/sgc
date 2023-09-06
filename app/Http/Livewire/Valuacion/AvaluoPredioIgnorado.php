@@ -594,9 +594,9 @@ class AvaluoPredioIgnorado extends Component
 
         $this->predios_propietario =  Propietario::with('persona', 'propietarioable.avaluo')
                                     ->whereHas('persona', function($q){
-                                        $q->where('ap_paterno', 'like' . '%' . $this->propietario_ap_paterno . '%')
-                                            ->where('ap_materno', 'like' . '%' . $this->propietario_ap_materno . '%')
-                                            ->where('nombre', 'like' . '%' . $this->propietario_nombre . '%');
+                                        $q->where('ap_paterno', 'like',  '%' . $this->propietario_ap_paterno . '%')
+                                            ->where('ap_materno', 'like',  '%' . $this->propietario_ap_materno . '%')
+                                            ->where('nombre', 'like',  '%' . $this->propietario_nombre . '%');
                                     })
                                     ->whereHas('propietarioable', function($q){
                                         $q->where('numero_registro', 0);

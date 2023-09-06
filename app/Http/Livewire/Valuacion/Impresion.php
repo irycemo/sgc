@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Valuacion;
 
 use App\Models\User;
 use App\Models\Oficina;
-use Illuminate\Validation\Rule;
 use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\PredioAvaluo;
@@ -22,6 +21,14 @@ class Impresion extends Component
     public $tipo;
     public $registro_inicio;
     public $registro_final;
+    public $region_catastral;
+    public $municipio;
+    public $sector;
+    public $zona_catastral;
+    public $manzana;
+    public $predio;
+    public $edificio;
+    public $departamento;
     public $director;
     public $jefe_departamento;
     public $notificador;
@@ -240,18 +247,44 @@ class Impresion extends Component
         if($this->validaciones())
             return;
 
-        $predios = PredioAvaluo::with('avaluo', 'propietarios.persona', 'colindancias', 'terrenos', 'condominioTerrenos', 'condominioConstrucciones', 'construcciones')
+        if($this->region_catastral || $this->municipio || $this->zona || $this->sector || $this->manzana || $this->predio || $this->edificio || $this->departamento){
+
+            $predios = PredioAvaluo::with('avaluo', 'propietarios.persona', 'colindancias', 'terrenos', 'condominioTerrenos', 'condominioConstrucciones', 'construcciones')
+                                        ->where('localidad', $this->localidad)
+                                        ->where('region_catastral', $this->region_catastral)
+                                        ->where('municipio', $this->municipio)
+                                        ->where('zona', $this->zona)
+                                        ->where('sector', $this->sector)
+                                        ->where('manzana', $this->manzana)
+                                        ->where('predio', $this->predio)
+                                        ->where('edificio', $this->edificio)
+                                        ->where('departamento', $this->departamento)
+                                        ->get();
+
+            if($predios->count() == 0){
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No se encontraron avaluos para la clave catastral."]);
+
+                return;
+
+            }
+
+        }else{
+
+            $predios = PredioAvaluo::with('avaluo', 'propietarios.persona', 'colindancias', 'terrenos', 'condominioTerrenos', 'condominioConstrucciones', 'construcciones')
                                         ->where('localidad', $this->localidad)
                                         ->where('oficina', $this->oficina)
                                         ->where('tipo_predio', $this->tipo)
                                         ->whereBetween('numero_registro', [$this->registro_inicio, $this->registro_final])
                                         ->get();
 
-        if($predios->count() == 0){
+            if($predios->count() == 0){
 
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No se encontraron avaluos para el rango de cuentas prediales."]);
+                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No se encontraron avaluos para el rango de cuentas prediales."]);
 
-            return;
+                return;
+
+            }
 
         }
 
