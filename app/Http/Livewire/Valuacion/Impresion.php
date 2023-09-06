@@ -9,6 +9,7 @@ use Livewire\Component;
 use App\Models\PredioAvaluo;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Valuacion\AvaluosController;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Impresion extends Component
 {
@@ -74,7 +75,7 @@ class Impresion extends Component
 
             $this->tramiteInspeccion  = Tramite::where('folio', $this->tramiteInspeccion)->first();
 
-            if($this->tramiteInspeccion->estado != 'pagado'){
+            if($this->tramiteInspeccion && $this->tramiteInspeccion->estado != 'pagado'){
 
                 $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de inspección no esta pagado o ha sido concluido."]);
 
@@ -94,7 +95,7 @@ class Impresion extends Component
 
                 $this->tramiteAvaluo = Tramite::where('folio', $this->tramiteAvaluo)->first();
 
-                if($this->tramiteInspeccion->estado != 'pagado'){
+                if($this->tramiteAvaluo && $this->tramiteInspeccion->estado != 'pagado'){
 
                     $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no esta pagado o ha sido concluido."]);
 
@@ -161,25 +162,29 @@ class Impresion extends Component
 
     public function actualizarTramites(){
 
-        $this->tramiteInspeccion->update([
-            'usados' => $this->cantidad + $this->tramiteInspeccion->usados,
-            'parcial_usado' => $this->tramiteAvaluo == 0 ? null : $this->tramiteAvaluo->id
-        ]);
+        if($this->tramiteInspeccion){
 
-        if($this->tramiteInspeccion->avaluo_para != null){
+            $this->tramiteInspeccion->update([
+                'usados' => $this->cantidad + $this->tramiteInspeccion->usados,
+                'parcial_usado' => $this->tramiteAvaluo == 0 ? null : $this->tramiteAvaluo->id
+            ]);
 
-            $this->tramiteAvaluo->update([
-                                'usados' => $this->cantidad + $this->tramiteAvaluo->usados,
-                                'parcial_usado' => $this->tramiteAvaluo->id
-                                ]);
+            if($this->tramiteInspeccion->avaluo_para != null){
+
+                $this->tramiteAvaluo->update([
+                                    'usados' => $this->cantidad + $this->tramiteAvaluo->usados,
+                                    'parcial_usado' => $this->tramiteAvaluo->id
+                                    ]);
+            }
+
+            if($this->tramiteInspeccion->cantidad == $this->tramiteInspeccion->usados)
+                $this->tramiteInspeccion->update(['estado' => 'concluido']);
+
+            if($this->tramiteInspeccion->avaluo_para != null)
+                if($this->tramiteAvaluo->cantidad == $this->tramiteAvaluo->usados)
+                    $this->tramiteAvaluo->update(['estado' => 'concluido']);
+
         }
-
-        if($this->tramiteInspeccion->cantidad == $this->tramiteInspeccion->usados)
-            $this->tramiteInspeccion->update(['estado' => 'concluido']);
-
-        if($this->tramiteInspeccion->avaluo_para != null)
-            if($this->tramiteAvaluo->cantidad == $this->tramiteAvaluo->usados)
-                $this->tramiteAvaluo->update(['estado' => 'concluido']);
 
     }
 
