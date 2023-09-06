@@ -38,7 +38,7 @@ class Avaluos extends Component
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 
-        return view('livewire.Admin.Avaluos.avaluos', compact('predios'))->extends('layouts.admin');
+        return view('livewire.Admin.avaluos.avaluos', compact('predios'))->extends('layouts.admin');
 
     }
 }
