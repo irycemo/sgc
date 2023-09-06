@@ -97,27 +97,6 @@ class Impresion extends Component
 
         if(!auth()->user()->hasRole('Convenio municipal')){
 
-            $this->validate([
-                'director' => 'required',
-                'jefe_departamento' => 'required',
-                'tramiteInspeccion' => 'required',
-                'tramiteAvaluo' => 'nullable',
-                'localidad' => 'required',
-                'oficina' => 'required',
-                'tipo' => 'required',
-                'registro_inicio' => 'required',
-                'registro_final' => 'required',
-                'valuador' => 'required_if:formato,0',
-                'notificador' => 'required_if:formato,0',
-                'ciudad' => 'nullable',
-                'hora' => 'nullable',
-                'dia' => 'nullable',
-                'año' => 'nullable',
-                'mes' => 'nullable',
-                'nombre' => 'nullable',
-                'calidad' => 'nullable',
-            ]);
-
             $this->tramiteInspeccion  = Tramite::where('folio', $this->tramiteInspeccion)->first();
 
             if($this->tramiteInspeccion->estado != 'pagado'){
@@ -273,6 +252,24 @@ class Impresion extends Component
 
         if($this->region_catastral || $this->municipio || $this->zona_catastral || $this->sector || $this->manzana || $this->predio || $this->edificio || $this->departamento){
 
+            $this->validate([
+                'director' => 'required',
+                'jefe_departamento' => 'required',
+                'tramiteInspeccion' => 'required',
+                'tramiteAvaluo' => 'nullable',
+                'localidad' => 'required',
+                'region_catastral' => 'required',
+                'municipio' => 'required',
+                'zona_catastral' => 'required',
+                'sector' => 'required',
+                'valuador' => 'required',
+                'notificador' => 'required_if:formato,0',
+                'manzana' => 'nullable',
+                'predio' => 'nullable',
+                'edificio' => 'nullable',
+                'departamento' => 'nullable',
+            ]);
+
             $predios = PredioAvaluo::with('avaluo', 'propietarios.persona', 'colindancias', 'terrenos', 'condominioTerrenos', 'condominioConstrucciones', 'construcciones')
                                         ->where('localidad', $this->localidad)
                                         ->where('region_catastral', $this->region_catastral)
@@ -294,6 +291,18 @@ class Impresion extends Component
             }
 
         }else{
+
+            $this->validate([
+                'director' => 'required',
+                'jefe_departamento' => 'required',
+                'tramiteInspeccion' => 'required',
+                'tramiteAvaluo' => 'nullable',
+                'localidad' => 'required',
+                'oficina' => 'required',
+                'tipo' => 'required',
+                'registro_inicio' => 'required',
+                'registro_final' => 'required',
+            ]);
 
             $predios = PredioAvaluo::with('avaluo', 'propietarios.persona', 'colindancias', 'terrenos', 'condominioTerrenos', 'condominioConstrucciones', 'construcciones')
                                         ->where('localidad', $this->localidad)

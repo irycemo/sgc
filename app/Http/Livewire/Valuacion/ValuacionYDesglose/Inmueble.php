@@ -255,7 +255,7 @@ class Inmueble extends Component
                 'predio.oficina' => 'required',
             ]);
 
-            $this->predio_padron = Predio::with('propietarios')
+            $this->predio_padron = Predio::with('propietarios.persona')
                                     ->where('numero_registro', $this->predio->numero_registro)
                                     ->where('tipo_predio', $this->predio->tipo_predio)
                                     ->where('localidad', $this->predio->localidad)
@@ -286,7 +286,6 @@ class Inmueble extends Component
                 $this->predio->sociedad = true;
 
             }
-
 
             $this->predio->copia = true;
 
@@ -548,7 +547,7 @@ class Inmueble extends Component
                 $this->predio->actualizado_por = auth()->user()->id;
                 $this->predio->save();
 
-                $persona = Persona::firstOrCreate(
+                /* $persona = Persona::firstOrCreate(
                     [
                         'ap_paterno' => $this->ap_paterno,
                         'ap_materno' => $this->ap_materno,
@@ -567,7 +566,17 @@ class Inmueble extends Component
                     'persona_id' => $persona->id,
                     'tipo' => $this->tipo_propietario,
                     'porcentaje' => $this->porcentaje,
-                ]);
+                ]); */
+
+                foreach($this->predio_padron->propietarios() as $propietario){
+
+                    $this->predio->propietarios()->create([
+                        'persona_id' => $propietario->persona->id,
+                        'tipo' => $propietario->tipo_propietario,
+                        'porcentaje' => $propietario->porcentaje,
+                    ]);
+
+                }
 
                 $avaluo = Avaluo::create([
                     'folio' => Avaluo::max('folio') + 1,
