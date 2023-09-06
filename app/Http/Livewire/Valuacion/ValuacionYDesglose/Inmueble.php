@@ -547,33 +547,39 @@ class Inmueble extends Component
                 $this->predio->actualizado_por = auth()->user()->id;
                 $this->predio->save();
 
-                /* $persona = Persona::firstOrCreate(
-                    [
-                        'ap_paterno' => $this->ap_paterno,
-                        'ap_materno' => $this->ap_materno,
-                        'nombre' => $this->nombre,
-                        'tipo' => $this->tipo_persona,
-                    ],
-                    [
-                        'ap_paterno' => $this->ap_paterno,
-                        'ap_materno' => $this->ap_materno,
-                        'nombre' => $this->nombre,
-                        'tipo' => $this->tipo_persona,
-                    ]
-                );
+                if($this->flag){
 
-                $this->predio->propietarios()->create([
-                    'persona_id' => $persona->id,
-                    'tipo' => $this->tipo_propietario,
-                    'porcentaje' => $this->porcentaje,
-                ]); */
+                    foreach($this->predio_padron->propietarios as $propietario){
 
-                foreach($this->predio_padron->propietarios() as $propietario){
+                        $this->predio->propietarios()->create([
+                            'persona_id' => $propietario->persona->id,
+                            'tipo' => $propietario->tipo_propietario,
+                            'porcentaje' => $propietario->porcentaje,
+                        ]);
+
+                    }
+
+                }else{
+
+                    $persona = Persona::firstOrCreate(
+                        [
+                            'ap_paterno' => $this->ap_paterno,
+                            'ap_materno' => $this->ap_materno,
+                            'nombre' => $this->nombre,
+                            'tipo' => $this->tipo_persona,
+                        ],
+                        [
+                            'ap_paterno' => $this->ap_paterno,
+                            'ap_materno' => $this->ap_materno,
+                            'nombre' => $this->nombre,
+                            'tipo' => $this->tipo_persona,
+                        ]
+                    );
 
                     $this->predio->propietarios()->create([
-                        'persona_id' => $propietario->persona->id,
-                        'tipo' => $propietario->tipo_propietario,
-                        'porcentaje' => $propietario->porcentaje,
+                        'persona_id' => $persona->id,
+                        'tipo' => $this->tipo_propietario,
+                        'porcentaje' => $this->porcentaje,
                     ]);
 
                 }

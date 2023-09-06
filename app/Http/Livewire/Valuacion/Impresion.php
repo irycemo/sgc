@@ -33,7 +33,6 @@ class Impresion extends Component
     public $director;
     public $jefe_departamento;
     public $notificador;
-    public $valuadores;
     public $valuador;
     public $valuador_municipal;
     public $ciudad;
@@ -44,6 +43,23 @@ class Impresion extends Component
     public $nombre;
     public $calidad;
     public $cantidad;
+
+    protected function rules(){
+        return [
+            'tramiteInspeccion' => 'required',
+            'tramiteAvaluo' => 'nullable',
+            'valuador_municipal' => 'required',
+            'notificador' => 'nullable',
+            'ciudad' => 'nullable',
+            'hora' => 'nullable',
+            'dia' => 'nullable',
+            'mes' => 'nullable',
+            'año' => 'nullable',
+            'nombre' => 'nullable',
+            'calidad' => 'nullable',
+            'cantidad' => 'nullable',
+         ];
+    }
 
     public function updatedLocalidad(){
 
@@ -162,20 +178,29 @@ class Impresion extends Component
 
     public function actualizarTramites(){
 
+        $this->tramiteInspeccion  = Tramite::where('folio', $this->tramiteInspeccion)->first();
+
         if($this->tramiteInspeccion){
 
-            $this->tramiteInspeccion->update([
-                'usados' => $this->cantidad + $this->tramiteInspeccion->usados,
-                'parcial_usado' => $this->tramiteAvaluo == 0 ? null : $this->tramiteAvaluo->id
-            ]);
-
             if($this->tramiteInspeccion->avaluo_para != null){
+
+                $this->tramiteAvaluo = Tramite::where('folio', $this->tramiteAvaluo)->first();
 
                 $this->tramiteAvaluo->update([
                                     'usados' => $this->cantidad + $this->tramiteAvaluo->usados,
                                     'parcial_usado' => $this->tramiteAvaluo->id
                                     ]);
+
+                $this->tramiteInspeccion->update([
+                    'usados' => $this->cantidad + $this->tramiteInspeccion->usados,
+                    'parcial_usado' => $this->tramiteAvaluo->id
+                ]);
+
             }
+
+            $this->tramiteInspeccion->update([
+                'usados' => $this->cantidad + $this->tramiteInspeccion->usados,
+            ]);
 
             if($this->tramiteInspeccion->cantidad == $this->tramiteInspeccion->usados)
                 $this->tramiteInspeccion->update(['estado' => 'concluido']);
