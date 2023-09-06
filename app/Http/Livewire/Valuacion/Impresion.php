@@ -16,7 +16,6 @@ class Impresion extends Component
 
     public $tramiteInspeccion;
     public $tramiteAvaluo;
-    public $formato;
     public $autoridad_municipal;
     public $localidad;
     public $oficina;
@@ -79,56 +78,17 @@ class Impresion extends Component
 
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Oficina incorrecta."]);
 
+            $this->reset(['oficina', 'localidad']);
+
             return;
 
         }
-
-        $this->autoridad_municipal = $oficina->autoridad_municipal;
-
-        $this->valuador_municipal = $oficina->valuador_municipal;
-
-        if($this->oficina == 101){
-
-            $this->director = User::where('status', 'activo')
-                                    ->whereHas('roles', function($q){
-                                        $q->where('name', 'Director');
-                                    })
-                                    ->first();
-
-            $this->director = $this->director->name . ' ' . $this->director->ap_paterno . ' ' . $this->director->ap_materno;
-
-            $this->jefe_departamento = User::where('status', 'activo')
-                                                ->whereHas('roles', function($q){
-                                                    $q->where('name', 'Jefe de departamento');
-                                                })
-                                                ->where('area', 'Departamento de Valuación')
-                                                ->first();
-
-            $this->jefe_departamento = $this->jefe_departamento->name . ' ' . $this->jefe_departamento->ap_paterno . ' ' . $this->jefe_departamento->ap_materno;
-
-            $this->notificador = "Temo";
-
-        }
-
 
     }
 
-    public function imprimir(){
+    public function validaciones(){
 
-        $this->cantidad = $this->registro_final - $this->registro_inicio + 1;
-
-        if($this->registro_final == $this->registro_inicio)
-            $this->cantidad = 1;
-
-        if($this->cantidad < 0){
-
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El registro inicial no puede ser mayor al registro final."]);
-
-            return;
-
-        }
-
-        if(!$this->formato){
+        if(!auth()->user()->hasRole('Convenio municipal')){
 
             $this->validate([
                 'director' => 'required',
@@ -151,72 +111,72 @@ class Impresion extends Component
                 'calidad' => 'nullable',
             ]);
 
-            $tramiteInspeccion  = Tramite::where('folio', $this->tramiteInspeccion)->first();
+            $this->tramiteInspeccion  = Tramite::where('folio', $this->tramiteInspeccion)->first();
 
-            if($tramiteInspeccion->estado != 'pagado'){
+            if($this->tramiteInspeccion->estado != 'pagado'){
 
                 $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de inspección no esta pagado o ha sido concluido."]);
 
-                return;
+                return true;
 
             }
 
-            if(( $this->cantidad + $tramiteInspeccion->usados) > $tramiteInspeccion->cantidad){
+            if(( $this->cantidad + $this->tramiteInspeccion->usados) > $this->tramiteInspeccion->cantidad){
 
                 $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cantidad de inspecciones que avala el trámite ya se usó o es insuficiente."]);
 
-                return;
+                return true;
 
             }
 
-            if($tramiteInspeccion->avaluo_para){
+            if($this->tramiteInspeccion->avaluo_para){
 
-                $tramiteAvaluo = Tramite::where('folio', $this->tramiteAvaluo)->first();
+                $this->tramiteAvaluo = Tramite::where('folio', $this->tramiteAvaluo)->first();
 
-                if($tramiteInspeccion->estado != 'pagado'){
+                if($this->tramiteInspeccion->estado != 'pagado'){
 
                     $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no esta pagado o ha sido concluido."]);
 
-                    return;
+                    return true;
 
                 }
 
-                if(( $this->cantidad + $tramiteAvaluo->usados) > $tramiteAvaluo->cantidad){
+                if(( $this->cantidad + $this->tramiteAvaluo->usados) > $this->tramiteAvaluo->cantidad){
 
                     $this->dispatchBrowserEvent('mostrarMensaje', ['error', "La cantidad de avaluos que avala el trámite ya se usó."]);
 
-                    return;
+                    return true;
 
                 }
 
-                if($tramiteInspeccion->avaluo_para == 46 || $tramiteInspeccion->avaluo_para == 45){
+                if($this->tramiteInspeccion->avaluo_para == 46 || $this->tramiteInspeccion->avaluo_para == 45){
 
-                    if($tramiteAvaluo->servicio_id != 46 && $tramiteAvaluo->servicio_id != 45){
+                    if($this->tramiteAvaluo->servicio_id != 46 && $this->tramiteAvaluo->servicio_id != 45){
 
                         $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a una variación."]);
 
-                        return;
+                        return true;
 
                     }
 
 
-                }elseif($tramiteInspeccion->avaluo_para == 43 || $tramiteInspeccion->avaluo_para == 44){
+                }elseif($this->tramiteInspeccion->avaluo_para == 43 || $this->tramiteInspeccion->avaluo_para == 44){
 
-                    if($tramiteAvaluo->servicio_id != 43 && $tramiteAvaluo->servicio_id != 44){
+                    if($this->tramiteAvaluo->servicio_id != 43 && $this->tramiteAvaluo->servicio_id != 44){
 
                         $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un desglose."]);
 
-                        return;
+                        return true;
 
                     }
 
-                }elseif($tramiteInspeccion->avaluo_para == 47){
+                }elseif($this->tramiteInspeccion->avaluo_para == 47){
 
-                    if($tramiteAvaluo->servicio_id != 47){
+                    if($this->tramiteAvaluo->servicio_id != 47){
 
                         $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un avlúo predio ignorado."]);
 
-                        return;
+                        return true;
 
                     }
 
@@ -224,13 +184,61 @@ class Impresion extends Component
 
             }else{
 
-                $tramiteAvaluo = 0;
+                $this->tramiteAvaluo = 0;
 
             }
 
+        }else{
+
+            $this->tramiteInspeccion = 'Convenio municipal';
+
+            $this->tramiteAvaluo = 'Convenio municipal';
+
         }
 
-        $path = null;
+    }
+
+    public function actualizarTramites(){
+
+        $this->tramiteInspeccion->update([
+            'usados' => $this->cantidad + $this->tramiteInspeccion->usados,
+            'parcial_usado' => $this->tramiteAvaluo == 0 ? null : $this->tramiteAvaluo->id
+        ]);
+
+        if($this->tramiteInspeccion->avaluo_para != null){
+
+            $this->tramiteAvaluo->update([
+                                'usados' => $this->cantidad + $this->tramiteAvaluo->usados,
+                                'parcial_usado' => $this->tramiteAvaluo->id
+                                ]);
+        }
+
+        if($this->tramiteInspeccion->cantidad == $this->tramiteInspeccion->usados)
+            $this->tramiteInspeccion->update(['estado' => 'concluido']);
+
+        if($this->tramiteInspeccion->avaluo_para != null)
+            if($this->tramiteAvaluo->cantidad == $this->tramiteAvaluo->usados)
+                $this->tramiteAvaluo->update(['estado' => 'concluido']);
+
+    }
+
+    public function imprimir(){
+
+        $this->cantidad = $this->registro_final - $this->registro_inicio + 1;
+
+        if($this->registro_final == $this->registro_inicio)
+            $this->cantidad = 1;
+
+        if($this->cantidad < 0){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El registro inicial no puede ser mayor al registro final."]);
+
+            return;
+
+        }
+
+        if($this->validaciones())
+            return;
 
         $predios = PredioAvaluo::with('avaluo', 'propietarios.persona', 'colindancias', 'terrenos', 'condominioTerrenos', 'condominioConstrucciones', 'construcciones')
                                         ->where('localidad', $this->localidad)
@@ -250,25 +258,14 @@ class Impresion extends Component
         if($this->revisarAvaluosCompletos($predios))
             return;
 
-        DB::transaction(function () use($tramiteInspeccion, $tramiteAvaluo, &$path, $predios){
+        $path = null;
 
-            $tramiteInspeccion->update([
-                            'usados' => $this->cantidad + $tramiteInspeccion->usados,
-                            'parcial_usado' => $tramiteAvaluo == 0 ? null : $tramiteAvaluo->id
-            ]);
-
-            if($tramiteInspeccion->avaluo_para != null){
-
-                $tramiteAvaluo->update([
-                                    'usados' => $this->cantidad + $tramiteAvaluo->usados,
-                                    'parcial_usado' => $tramiteAvaluo->id
-                                    ]);
-            }
+        DB::transaction(function () use(&$path, $predios){
 
             $path = (new AvaluosController())->imprime(
                                                         $predios,
-                                                        $tramiteInspeccion,
-                                                        $tramiteAvaluo,
+                                                        $this->tramiteInspeccion,
+                                                        $this->tramiteAvaluo,
                                                         $this->ciudad,
                                                         $this->hora,
                                                         $this->dia,
@@ -289,7 +286,7 @@ class Impresion extends Component
                 $predio->update(['status' => 'impreso']);
 
                 $predio->avaluo->update([
-                            'tramite_id' => $tramiteInspeccion->id,
+                            'tramite_id' => $this->tramiteInspeccion->id,
                             'estado' => 'impreso'
                         ]);
 
@@ -297,12 +294,11 @@ class Impresion extends Component
 
             }
 
-            if($tramiteInspeccion->cantidad == $tramiteInspeccion->usados)
-                $tramiteInspeccion->update(['estado' => 'concluido']);
+            if(!auth()->user()->hasRole('Convenio municipal')){
 
-            if($tramiteInspeccion->avaluo_para != null)
-                if($tramiteAvaluo->cantidad == $tramiteAvaluo->usados)
-                    $tramiteAvaluo->update(['estado' => 'concluido']);
+                $this->actualizarTramites();
+
+            }
 
         });
 
@@ -370,8 +366,6 @@ class Impresion extends Component
 
         $this->oficina = auth()->user()->oficina;
 
-        $this->formato = 0;
-
         $this->director = User::where('status', 'activo')
                                 ->whereHas('roles', function($q){
                                     $q->where('name', 'Director');
@@ -391,10 +385,7 @@ class Impresion extends Component
 
         $this->notificador = "Temo";
 
-        $this->valuadores = User::where('status', 'activo')
-                                    ->where('valuador', 1)
-                                    ->orderBy('name')
-                                    ->get();
+        $this->valuador = auth()->user()->name;
 
     }
 

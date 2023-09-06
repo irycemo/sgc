@@ -594,13 +594,12 @@ class AvaluoPredioIgnorado extends Component
 
         $this->predios_propietario =  Propietario::with('persona', 'propietarioable.avaluo')
                                     ->whereHas('persona', function($q){
-                                        $q->where('ap_paterno', $this->propietario_ap_paterno)
-                                            ->where('ap_materno', $this->propietario_ap_materno)
-                                            ->where('nombre', $this->propietario_nombre);
+                                        $q->where('ap_paterno', 'like' . '%' . $this->propietario_ap_paterno . '%')
+                                            ->where('ap_materno', 'like' . '%' . $this->propietario_ap_materno . '%')
+                                            ->where('nombre', 'like' . '%' . $this->propietario_nombre . '%');
                                     })
                                     ->whereHas('propietarioable', function($q){
-                                        $q->where('localidad', 0)
-                                            ->where('numero_registro', 0);
+                                        $q->where('numero_registro', 0);
                                     })
                                     ->get();
 
@@ -657,7 +656,7 @@ class AvaluoPredioIgnorado extends Component
     public function asignarCuenta(){
 
         $this->validate([
-            'localidad' => 'required',
+            'localidad' => 'required|same:predio.zona',
             'oficina' => 'required',
             'tipo' => 'required|min:1|max:2',
             'numero_registro' => 'required',

@@ -39,7 +39,7 @@ class Inmueble extends Component
         return [
             'predio.copia' => 'nullable',
             'predio.sociedad' => 'nullable',
-            'predio.numero_registro' => 'required',
+            'predio.numero_registro' => 'required|min:1',
             'predio.region_catastral' => 'required',
             'predio.municipio' => 'required',
             'predio.localidad' => 'required',
