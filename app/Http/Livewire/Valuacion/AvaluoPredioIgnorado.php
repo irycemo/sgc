@@ -65,7 +65,7 @@ class AvaluoPredioIgnorado extends Component
             'predio.predio' => 'required',
             'predio.edificio' => 'required',
             'predio.departamento' => 'required',
-            'predio.tipo_predio' => 'required',
+            'predio.tipo_predio' => 'required|min:1|max:2',
             'predio.oficina' => 'required',
             'predio.estado' => 'required',
             'predio.tipo_asentamiento' => 'required',
@@ -659,7 +659,7 @@ class AvaluoPredioIgnorado extends Component
         $this->validate([
             'localidad' => 'required',
             'oficina' => 'required',
-            'tipo' => 'required',
+            'tipo' => 'required|min:1|max:2',
             'numero_registro' => 'required',
             'tramite' => 'required'
         ]);
