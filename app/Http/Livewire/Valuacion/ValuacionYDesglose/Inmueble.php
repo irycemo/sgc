@@ -557,7 +557,7 @@ class Inmueble extends Component
 
                         $this->predio->propietarios()->create([
                             'persona_id' => $propietario->persona->id,
-                            'tipo' => $propietario->tipo_propietario,
+                            'tipo' => $propietario->tipo,
                             'porcentaje' => $propietario->porcentaje,
                         ]);
 
