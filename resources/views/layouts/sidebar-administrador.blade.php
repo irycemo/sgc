@@ -154,9 +154,25 @@
             class="flex flex-col items-center mb-3 w-full rounded-xl text-sm text-left"
             x-show="!openPredios">
 
-            <a href="{{ route('predios_avaluos') }}" class="capitalize font-medium text-sm  flex hover w-full  hover:bg-gray-100 p-2 px-4 ml-5 rounded-xl hover:text-red-600">Avaluos</a>
-
             <a href="{{ route('predios_asignado') }}" class="capitalize font-medium text-sm  flex hover w-full  hover:bg-gray-100 p-2 px-4 ml-5 rounded-xl hover:text-red-600">Asignado</a>
+
+        </div>
+
+    @endcan
+
+    @can('Lista de avaluos')
+
+        <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+
+            <a href="{{ route('avaluos_lista') }}" class=" capitalize font-medium text-sm  flex hover w-full  p-2 px-4 ">
+
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" />
+                </svg>
+
+                Avaluos
+
+            </a>
 
         </div>
 

@@ -16,10 +16,10 @@ use App\Http\Livewire\Admin\CategoriasServicios;
 use App\Http\Controllers\Admin\TramiteController;
 use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
 use App\Http\Controllers\Valuacion\ValuacionYDesgloseController;
+use App\Http\Livewire\Admin\Avaluos\Avaluos;
 use App\Http\Livewire\Admin\FactorIncremento;
 use App\Http\Livewire\Admin\Oficinas;
 use App\Http\Livewire\Admin\Predios\PrediosAsignados;
-use App\Http\Livewire\Admin\Predios\PrediosAvaluos;
 use App\Http\Livewire\Admin\Predios\PrediosPadron;
 use App\Http\Livewire\Admin\ValoresunitariosConstruccion;
 use App\Http\Livewire\Admin\ValoresUnitariosRusticos;
@@ -76,9 +76,9 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('predios', PrediosPadron::class)->middleware('permission:Lista de predios')->name('predios');
     Route::get('predios/{predio}', [PrediosController::class, 'show'])->middleware('permission:Ver predio')->name('ver_predio');
 
-    Route::get('avaluos/{predio}', [AvaluosController::class, 'show'])->middleware('permission:Ver predio avaluo')->name('ver_predio_avaluo');
+    Route::get('avaluos_lista', Avaluos::class)->middleware('permission:Lista de avaluos')->name('avaluos_lista');
 
-    Route::get('predios_avaluos', PrediosAvaluos::class)->middleware('permission:Lista de predios avaluos')->name('predios_avaluos');
+    Route::get('avaluos/{predio}', [AvaluosController::class, 'show'])->middleware('permission:Ver predio avaluo')->name('ver_predio_avaluo');
 
     Route::get('predios_asignado', PrediosAsignados::class)->middleware('permission:Lista de predios asignados')->name('predios_asignado');
 

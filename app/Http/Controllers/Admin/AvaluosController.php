@@ -13,7 +13,11 @@ class AvaluosController extends Controller
 
         $predio->load('propietarios.persona', 'condominioTerrenos', 'condominioConstrucciones', 'terrenos', 'construcciones', 'colindancias', 'audits.user');
 
-        return view('admin.avaluos.show', compact('predio'));
+        $avaluo = $predio->avaluo;
+
+        $avaluo->load('audits.user');
+
+        return view('admin.avaluos.show', compact('predio', 'avaluo'));
 
     }
 

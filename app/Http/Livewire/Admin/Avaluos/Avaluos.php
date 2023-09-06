@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Predios;
+namespace App\Http\Livewire\Admin\Avaluos;
 
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Http\Traits\ComponentesTrait;
 use App\Models\PredioAvaluo;
 
-class PrediosAvaluos extends Component
+class Avaluos extends Component
 {
 
     use WithPagination;
@@ -31,11 +31,14 @@ class PrediosAvaluos extends Component
                                 ->orWhere('ap_paterno', 'LIKE', '%' . $this->search . '%')
                                 ->orWhere('ap_materno', 'LIKE', '%' . $this->search . '%');
                             })
+                            ->orWhereHas('avaluo', function($q){
+                                $q->where('estado', 'LIKE', '%' . $this->search . '%');
+                            })
                             ->orWhere('estado', 'LIKE', '%' . $this->search . '%')
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 
-        return view('livewire.Admin.predios.predios-avaluos', compact('predios'))->extends('layouts.admin');
+        return view('livewire.Admin.Avaluos.avaluos', compact('predios'))->extends('layouts.admin');
 
     }
 }

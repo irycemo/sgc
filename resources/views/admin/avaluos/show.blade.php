@@ -775,4 +775,48 @@
 
     @endforelse
 
+    @forelse ($avaluo->audits as $audit)
+
+        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-2">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Usuario</strong>
+
+                    <p>{{ $audit->user->name }} {{ $audit->user->ap_paterno }} {{ $audit->user->ap_materno }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Movimiento</strong>
+
+                    <p> {{ Str::ucfirst($audit->event) }}. {{ $audit->tags }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Fecha</strong>
+
+                    <p>{{ $audit->created_at->format('d-m-Y H:i:s') }}</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    @empty
+
+        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
+
+            No hay resultados.
+
+        </div>
+
+    @endforelse
+
 @endsection
