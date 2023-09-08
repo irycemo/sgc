@@ -16,7 +16,7 @@
         </style>
     </head>
     <body class="antialiased">
-        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-blue-400 bg-green-400 bg-yellow-400 bg-gray-400 selection:text-white">
+        <div class="relative sm:flex bg-black sm:justify-center sm:items-center min-h-screen bg-blue-400 bg-green-400 bg-yellow-400 bg-gray-400 selection:text-white">
             @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                     @auth

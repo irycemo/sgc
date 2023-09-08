@@ -20,6 +20,16 @@ class Avaluo extends Model implements Auditable
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    public function getEstadoColorAttribute()
+    {
+        return [
+            'nuevo' => 'blue-400',
+            'impreso' => 'green-400',
+            'concluido' => 'gray-400',
+            'notficado' => 'black',
+        ][$this->estado] ?? 'gray-400';
+    }
+
     public function predio(){
         return $this->belongsTo(PredioAvaluo::class, 'predio_id');
     }

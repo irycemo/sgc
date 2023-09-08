@@ -54,9 +54,9 @@
 
                     <tr class="text-xs font-medium text-gray-500 uppercase text-left traling-wider">
 
-                        <th class="cursor-pointer p-3 w-8 hidden lg:table-cell" wire:model="paginaSeleccionada">
+                        <th class="cursor-pointer p-3 w-8 hidden lg:table-cell" >
 
-                            <input type="checkbox" class="bg-white rounded text-sm">
+                            <input type="checkbox" class="bg-white rounded text-sm" wire:model="paginaSeleccionada">
 
                         </th>
 
@@ -220,7 +220,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Estado</span>
 
-                                {{ $avaluo->estado }}
+                                <span class="bg-{{ $avaluo->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($avaluo->estado) }}</span>
 
                             </td>
 

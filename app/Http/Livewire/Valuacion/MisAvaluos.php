@@ -28,7 +28,7 @@ class MisAvaluos extends Component
 
         if($value){
 
-
+            $this->seleccionados = $this->avaluos->pluck('id')->map(fn ($id) => (string) $id);
 
         }else{
 
@@ -71,14 +71,16 @@ class MisAvaluos extends Component
 
     }
 
+    public function getAvaluosAttribute(){
+
+        return Avaluo::with('predio.propietarios.persona', 'creadoPor', 'actualizadoPor')
+                        ->where('asignado_a', auth()->user()->id)
+                        ->orderBy($this->sort, $this->direction)
+                        ->paginate($this->pagination);
+    }
+
     public function render()
     {
-
-        $avaluos = Avaluo::with('predio.propietarios.persona', 'creadoPor', 'actualizadoPor')
-                            ->where('asignado_a', auth()->user()->id)
-                            ->orderBy($this->sort, $this->direction)
-                            ->paginate($this->pagination);
-
-        return view('livewire.valuacion.mis-avaluos', compact('avaluos'))->extends('layouts.admin');
+        return view('livewire.valuacion.mis-avaluos', ['avaluos' => $this->avaluos])->extends('layouts.admin');
     }
 }
