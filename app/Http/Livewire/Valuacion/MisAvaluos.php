@@ -54,7 +54,7 @@ class MisAvaluos extends Component
 
             DB::transaction(function () {
 
-                $avaluos = Avaluo::whereKey($this->seleccionados);
+                $avaluos = Avaluo::with('predio')->whereKey($this->seleccionados)->get();
 
                 foreach ($avaluos as $avaluo) {
 
@@ -66,9 +66,11 @@ class MisAvaluos extends Component
 
                     }
 
-                    $avaluo->predio->delete();
+                    $predio = $avaluo->predio;
 
                     $avaluo->delete();
+
+                    $predio->delete();
 
                 }
 
