@@ -692,7 +692,7 @@
 
                     </div>
 
-                    @if($tramite->predios->count())
+                    @if($modelo_editar && $tramite->predios->count())
 
                         <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
