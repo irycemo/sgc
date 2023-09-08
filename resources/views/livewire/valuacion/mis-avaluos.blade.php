@@ -21,6 +21,25 @@
 
             </div>
 
+            @if (count($seleccionados) > 0)
+
+                <button wire:click="eliminar" class="bg-red-500 hover:shadow-lg hover:bg-red-700 float-right text-sm py-2 px-4 text-white rounded-full focus:outline-none hidden md:block">
+
+                    <img wire:loading wire:target="eliminar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    Eliminar
+
+                </button>
+
+                <button wire:click="eliminar" class="bg-red-500 hover:shadow-lg hover:bg-red-700 float-right text-sm py-2 px-4 text-white rounded-full focus:outline-none md:hidden">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+
+                </button>
+
+            @endif
+
         </div>
 
     </div>
@@ -34,6 +53,12 @@
                 <thead class="border-b border-gray-300 bg-gray-50">
 
                     <tr class="text-xs font-medium text-gray-500 uppercase text-left traling-wider">
+
+                        <th class="cursor-pointer p-3 w-8 hidden lg:table-cell" wire:model="paginaSeleccionada">
+
+                            <input type="checkbox" class="bg-white rounded text-sm">
+
+                        </th>
 
                         <th wire:click="order('estado')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
 
@@ -183,7 +208,13 @@
 
                     @foreach($avaluos as $avaluo)
 
-                        <tr class="text-sm font-medium text-gray-500 bg-white flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+                        <tr class="text-sm font-medium text-gray-500 bg-white flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0" wire:key="row-{{ $avaluo->id }}">
+
+                            <td class="w-8 lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
+
+                                <input type="checkbox" class="bg-white rounded text-sm" wire:model="seleccionados" value="{{ $avaluo->id }}">
+
+                            </td>
 
                             <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
 
@@ -346,6 +377,7 @@
         </div>
 
     @endif
+
     <x-confirmation-modal wire:model="modalBorrar">
 
         <x-slot name="title">

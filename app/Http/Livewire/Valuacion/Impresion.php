@@ -323,6 +323,9 @@ class Impresion extends Component
                                         ->where('oficina', $this->oficina)
                                         ->where('tipo_predio', $this->tipo)
                                         ->whereBetween('numero_registro', [$this->registro_inicio, $this->registro_final])
+                                        ->whereHas('avaluo', function($q){
+                                            $q->where('estado', '!=', 'notificado');
+                                        })
                                         ->get();
 
             if($predios->count() == 0){

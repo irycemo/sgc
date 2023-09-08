@@ -15,51 +15,50 @@ class MisAvaluos extends Component
     use WithPagination;
     use ComponentesTrait;
 
-    public $roles;
-    public $areas_adscripcion;
+    public $seleccionados = [];
+    public $paginaSeleccionada = false;
 
     public Avaluo $modelo_editar;
-    public $role;
-
-    protected function rules(){
-        return [
-         ];
-    }
-
-    protected $validationAttributes  = [
-
-    ];
 
     public function crearModeloVacio(){
         return Avaluo::make();
     }
 
-    public function abrirModalEditar(Avaluo $modelo){
+    public function updatedPaginaSeleccionada($value){
 
-        $this->resetearTodo();
-        $this->modal = true;
-        $this->editar = true;
+        if($value){
 
-        if($this->modelo_editar->isNot($modelo))
-            $this->modelo_editar = $modelo;
+
+
+        }else{
+
+            $this->seleccionados = [];
+
+        }
 
     }
 
-    public function borrar(){
+    public function eliminar(){
 
         try{
 
-            $usuario = Avaluo::find($this->selected_id);
+            $avaluos = Avaluo::whereKey($this->seleccionados);
 
-            $usuario->delete();
+            foreach ($avaluos as $avaluo) {
+
+                $avaluo->predio->delete();
+
+                $avaluo->delete();
+
+            }
 
             $this->resetearTodo($borrado = true);
 
-            $this->dispatchBrowserEvent('mostrarMensaje', ['success', "El usuario se eliminó con éxito."]);
+            $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La información seleccionada se eliminó con éxito."]);
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al borrar usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al avaluos usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
         }
@@ -69,8 +68,6 @@ class MisAvaluos extends Component
     public function mount(){
 
         $this->modelo_editar = $this->crearModeloVacio();
-
-        array_push($this->fields, 'role');
 
     }
 
