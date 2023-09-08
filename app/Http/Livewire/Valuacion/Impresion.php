@@ -61,6 +61,10 @@ class Impresion extends Component
          ];
     }
 
+    protected $validationAttributes  = [
+        'tramiteInspeccion' => 'trámte de inspección'
+    ];
+
     public function updatedLocalidad(){
 
         $this->updatedOficina();

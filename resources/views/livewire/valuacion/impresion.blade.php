@@ -76,17 +76,23 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-12 gap-2 items-end mx-auto mb-4">
 
-                <div class="flex-auto col-span-6">
+                <div class="flex-auto col-span-6 text-center">
 
-                    <div class="text-center">
+                    <div >
 
                         <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite de inspección ocular</Label>
 
                     </div>
 
-                    <div class="text-center">
+                    <div >
 
                         <input type="number" class="bg-white rounded text-xs w-40 @error('tramiteInspeccion') border-1 border-red-500 @enderror" wire:model.defer="tramiteInspeccion">
+
+                    </div>
+
+                    <div>
+
+                        @error('tramiteInspeccion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                     </div>
 
