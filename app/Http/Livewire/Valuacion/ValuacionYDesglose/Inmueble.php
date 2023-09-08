@@ -120,6 +120,10 @@ class Inmueble extends Component
 
     public function buscarClaveCatastral(){
 
+        $this->reset('editar');
+
+        $this->predio->avaluo = null;
+
         try {
 
             $this->validate([
@@ -192,6 +196,10 @@ class Inmueble extends Component
 
     public function buscarCuentaPredial(){
 
+        $this->reset('editar');
+
+        $this->predio->avaluo = null;
+
         try {
 
             $this->validate([
@@ -255,6 +263,10 @@ class Inmueble extends Component
     }
 
     public function datosPadron(){
+
+        $this->reset('editar');
+
+        $this->predio->avaluo = null;
 
         try {
 

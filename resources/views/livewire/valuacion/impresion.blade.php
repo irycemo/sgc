@@ -303,7 +303,7 @@
         @if(count($errors) > 0)
 
             <span class="bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-red-700 flex items-center justify-center focus:outline-none ">
-                Campos incorrectos
+                Campos incorrectos {{ $errors }}
                 @error('predio') <span class="error text-sm text-white">{{ $message }}</span> @enderror
             </span>
 

@@ -103,6 +103,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'Impresión de avaluos', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2, $role6]);
         Permission::create(['name' => 'Notificación de avaluos', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2, $role6]);
         Permission::create(['name' => 'Avaluos de predio ignorado', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
+        Permission::create(['name' => 'Ver mis avaluos', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
 
     }
 

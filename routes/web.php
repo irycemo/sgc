@@ -26,6 +26,7 @@ use App\Http\Livewire\Admin\ValoresUnitariosRusticos;
 use App\Http\Livewire\Valuacion\AsignacionCuentaPredial;
 use App\Http\Livewire\Valuacion\FichaTecnica;
 use App\Http\Livewire\Valuacion\Impresion;
+use App\Http\Livewire\Valuacion\MisAvaluos;
 use App\Http\Livewire\Valuacion\Notificacion;
 use App\Http\Livewire\Ventanilla\Ventanilla as VentanillaVentanilla;
 
@@ -102,6 +103,8 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('ficha_tecnica', FichaTecnica::class)->middleware('permission:Ficha técnica')->name('ficha_tecnica');
 
     Route::get('avaluo_predio_ignorado', AvaluoPredioIgnoradoController::class)->middleware('permission:Avaluos de predio ignorado')->name('avaluo_predio_ignorado');
+
+    Route::get('mis_avaluos', MisAvaluos::class)->middleware('permission:Ver mis avaluos')->name('mis_avaluos');
 
     /* Ventanilla */
     /* Route::get('ventanilla', Ventanilla::class)->middleware('permission:Ventanilla')->name('ventanilla'); */

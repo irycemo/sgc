@@ -51,4 +51,20 @@ class PredioAvaluo extends Model implements Auditable
         return $this->hasOne(Avaluo::class, 'predio_id');
     }
 
+    public function cuentaPredial(){
+
+        return $this->localidad . '-' . $this->oficina . '-' . $this->tipo_predio . '-' . $this->numero_registro;
+
+    }
+
+    public function claveCatastral(){
+
+        return $this->estado . '-' . $this->region_catastral . '-' . $this->municipio . '-' . $this->zona_catastral . '-' . $this->localidad . '-' . $this->sector . '-' . $this->manzana . '-' . $this->predio . '-' . $this->edificio . '-' . $this->departamento;
+
+    }
+
+    public function primerPropietario(){
+        return $this->propietarios()->first()->persona->nombre . ' ' . $this->propietarios()->first()->persona->ap_paterno . ' ' . $this->propietarios()->first()->persona->ap_materno;
+    }
+
 }
