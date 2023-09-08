@@ -48,7 +48,7 @@ class Impresion extends Component
         return [
             'tramiteInspeccion' => 'required',
             'tramiteAvaluo' => 'nullable',
-            'valuador_municipal' => 'required',
+            'valuador_municipal' => 'nullable',
             'notificador' => 'nullable',
             'ciudad' => 'nullable',
             'hora' => 'nullable',
