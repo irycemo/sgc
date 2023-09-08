@@ -92,7 +92,7 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('valores_unitarios_rusticos', ValoresUnitariosRusticos::class)->middleware('permission:Lista de valores unitarios')->name('unitarios_rusticos');
 
     /* Valuación */
-    Route::get('valuacion', ValuacionYDesgloseController::class)->middleware('permission:Valuación y desglose')->name('valuacion_y_desglose');
+    Route::get('valuacion/{id?}', ValuacionYDesgloseController::class)->middleware('permission:Valuación y desglose')->name('valuacion_y_desglose');
 
     Route::get('asignacion_cuenta', AsignacionCuentaPredial::class)->middleware('permission:Asignacion de cuenta')->name('asignacion_cuenta');
 

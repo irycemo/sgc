@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class Inmueble extends Component
 {
 
+    public $avaluo_id;
+
     public $tipoPropietarios;
     public $tipoVialidades;
     public $tipoAsentamientos;
@@ -702,6 +704,14 @@ class Inmueble extends Component
         $this->predio = $this->crearModeloVacio();
 
         $this->predio->oficina = auth()->user()->oficina;
+
+        if($this->avaluo_id){
+
+            $avaluo = Avaluo::with('predio')->where('predio_id', $this->avaluo_id)->first();
+
+            $this->predio = $avaluo->predio;
+
+        }
 
     }
 

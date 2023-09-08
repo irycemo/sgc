@@ -47,7 +47,7 @@
 
         <div class="tab-panel" :class="{ 'active': activeTab === 0 }" x-show.transition.in.opacity.duration.800="activeTab === 0">
 
-            @livewire('valuacion.avaluo-predio-ignorado')
+            @livewire('valuacion.avaluo-predio-ignorado', ['avaluo_id' => $id])
 
         </div>
 

@@ -17,11 +17,21 @@ class MisAvaluos extends Component
 
     public $seleccionados = [];
     public $paginaSeleccionada = false;
+    public $todosSelecionados = false;
+    public $modal = false;
 
     public Avaluo $modelo_editar;
 
     public function crearModeloVacio(){
         return Avaluo::make();
+    }
+
+    public function updatedSeleccionados(){
+
+        $this->todosSelecionados = false;
+
+        $this->paginaSeleccionada = false;
+
     }
 
     public function updatedPaginaSeleccionada($value){
@@ -42,19 +52,31 @@ class MisAvaluos extends Component
 
         try{
 
-            $avaluos = Avaluo::whereKey($this->seleccionados);
+            DB::transaction(function () {
 
-            foreach ($avaluos as $avaluo) {
+                $avaluos = Avaluo::whereKey($this->seleccionados);
 
-                $avaluo->predio->delete();
+                foreach ($avaluos as $avaluo) {
 
-                $avaluo->delete();
+                    if($avaluo->estado == 'notificado'){
 
-            }
+                        $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avalúo con folio " . $avaluo->folio . ' no se puede eliminar, esta notificado.']);
 
-            $this->resetearTodo($borrado = true);
+                        return;
 
-            $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La información seleccionada se eliminó con éxito."]);
+                    }
+
+                    $avaluo->predio->delete();
+
+                    $avaluo->delete();
+
+                }
+
+                $this->resetearTodo($borrado = true);
+
+                $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La información seleccionada se eliminó con éxito."]);
+
+            });
 
         } catch (\Throwable $th) {
 
@@ -71,16 +93,29 @@ class MisAvaluos extends Component
 
     }
 
-    public function getAvaluosAttribute(){
+    public function getAvaluosQueryProperty(){
 
         return Avaluo::with('predio.propietarios.persona', 'creadoPor', 'actualizadoPor')
                         ->where('asignado_a', auth()->user()->id)
-                        ->orderBy($this->sort, $this->direction)
-                        ->paginate($this->pagination);
+                        ->orderBy($this->sort, $this->direction);
+
+    }
+
+    public function getAvaluosProperty(){
+
+        return $this->avaluosQuery->paginate($this->pagination);
+
     }
 
     public function render()
     {
+
+        if($this->todosSelecionados){
+
+            $this->seleccionados = $this->avaluos->pluck('id')->map(fn ($id) => (string) $id);
+
+        }
+
         return view('livewire.valuacion.mis-avaluos', ['avaluos' => $this->avaluos])->extends('layouts.admin');
     }
 }

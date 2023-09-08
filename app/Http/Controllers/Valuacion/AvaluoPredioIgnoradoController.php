@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 
 class AvaluoPredioIgnoradoController extends Controller
 {
-    public function __invoke()
+    public function __invoke(Request $request)
     {
-        return view('valuacion.avaluo_predio_ignorado');
+
+        $id = $request->id;
+
+        return view('valuacion.avaluo_predio_ignorado', compact('id'));
     }
 }

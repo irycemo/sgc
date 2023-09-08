@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 
 class ValuacionYDesgloseController extends Controller
 {
-    public function __invoke()
+    public function __invoke(Request $request)
     {
-        return view('valuacion.valuacion_y_desglose');
+
+        $id = $request->id;
+
+        return view('valuacion.valuacion_y_desglose', compact('id'));
     }
 }

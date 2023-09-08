@@ -23,9 +23,9 @@
 
             @if (count($seleccionados) > 0)
 
-                <button wire:click="eliminar" class="bg-red-500 hover:shadow-lg hover:bg-red-700 float-right text-sm py-2 px-4 text-white rounded-full focus:outline-none hidden md:block">
+                <button wire:click="$toggle('modal')" class="bg-red-500 hover:shadow-lg hover:bg-red-700 float-right text-sm py-2 px-4 text-white rounded-full focus:outline-none hidden md:block">
 
-                    <img wire:loading wire:target="eliminar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    <img wire:loading wire:target="$toggle('modal')" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                     Eliminar
 
                 </button>
@@ -206,6 +206,34 @@
 
                 <tbody class="divide-y divide-gray-200 flex-1 sm:flex-none ">
 
+                    @if ($paginaSeleccionada)
+
+                        <tr class="text-sm font-medium text-gray-500 bg-white flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0" wire:key="row-message">
+
+                            <td colspan="9" class="bg-gray-100 px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
+
+                                @unless ($todosSelecionados)
+
+                                    <div>
+
+                                        <span>Seleccionaste <strong>{{ $avaluos->count() }}</strong> avalúos. ¿Quieres seleccionar los {{ $avaluos->total() }} avaluos?</span>
+
+                                        <button class="inline-block text-blue-600 ml-2" wire:click="$toggle('todosSelecionados')">Seleccionar todos</button>
+
+                                    </div>
+
+                                @else
+
+                                    <span>Actualmente estas seleccionando todos los <strong>{{ $avaluos->total() }}</strong> avalúos</span>
+
+                                @endunless
+
+                            </td>
+
+                        </tr>
+
+                    @endif
+
                     @foreach($avaluos as $avaluo)
 
                         <tr class="text-sm font-medium text-gray-500 bg-white flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0" wire:key="row-{{ $avaluo->id }}">
@@ -292,52 +320,17 @@
 
                             </td>
 
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b lg:table-cell relative lg:static">
+                            <td class="px-3 py-3 p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b lg:table-cell relative lg:static">
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
 
-                                <div class="flex md:flex-col justify-center lg:justify-start md:space-y-1">
-
-                                    @can('Editar usuario')
-
-                                        <button
-                                            wire:click="abrirModalEditar({{$avaluo->id}})"
-                                            wire:loading.attr="disabled"
-                                            wire:target="abiriModalEditar({{$avaluo->id}})"
-                                            class="md:w-full bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full mr-2 hover:bg-blue-700 flex justify-center focus:outline-none"
-                                        >
-
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                            </svg>
-
-                                            Editar
-
-                                        </button>
-
-                                    @endcan
-
-                                    @can('Borrar usuario')
-
-                                        <button
-                                            wire:click="abrirModalBorrar({{$avaluo->id}})"
-                                            wire:loading.attr="disabled"
-                                            wire:target="abrirModalBorrar({{$avaluo->id}})"
-                                            class="md:w-full bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full hover:bg-red-700 flex justify-center focus:outline-none"
-                                        >
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-
-                                            Eliminar
-
-                                        </button>
-
-                                    @endcan
-
-                                </div>
+                                <a href="{{ route('valuacion_y_desglose', $avaluo) }}" class="bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full mr-2 hover:bg-blue-700 flex focus:outline-none justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    Ver
+                                </a>
 
                             </td>
                         </tr>
@@ -378,14 +371,14 @@
 
     @endif
 
-    <x-confirmation-modal wire:model="modalBorrar">
+    <x-confirmation-modal wire:model="modal">
 
         <x-slot name="title">
-            Eliminar Usuario
+            Eliminar avalúos
         </x-slot>
 
         <x-slot name="content">
-            ¿Esta seguro que desea eliminar al usuario? No sera posible recuperar la información.
+            ¿Esta seguro que desea eliminar la información? No sera posible recuperarla.
         </x-slot>
 
         <x-slot name="footer">
@@ -399,9 +392,9 @@
 
             <x-danger-button
                 class="ml-2"
-                wire:click="borrar()"
+                wire:click="eliminar"
                 wire:loading.attr="disabled"
-                wire:target="borrar"
+                wire:target="eliminar"
             >
                 Borrar
             </x-danger-button>
