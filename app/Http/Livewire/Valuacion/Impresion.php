@@ -239,6 +239,8 @@ class Impresion extends Component
 
     public function imprimir(){
 
+        $this->validate();
+
         $this->cantidad = $this->registro_final - $this->registro_inicio + 1;
 
         if($this->registro_final == $this->registro_inicio)
