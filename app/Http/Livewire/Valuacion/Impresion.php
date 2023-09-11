@@ -48,8 +48,8 @@ class Impresion extends Component
 
     protected function rules(){
         return [
-            'tramiteInspeccion' => 'required',
-            'tramiteAvaluo' => 'nullable',
+            'folioInspeccion' => 'required',
+            'folioAvaluo' => 'nullable',
             'valuador_municipal' => 'nullable',
             'notificador' => 'nullable',
             'ciudad' => 'nullable',
