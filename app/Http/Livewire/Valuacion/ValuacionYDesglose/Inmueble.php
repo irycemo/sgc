@@ -711,6 +711,8 @@ class Inmueble extends Component
 
             $this->predio = $avaluo->predio;
 
+            $this->emit('cargarPredio', $this->predio->id);
+
         }
 
     }
