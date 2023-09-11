@@ -108,7 +108,7 @@
 
                     <div class="text-center">
 
-                        <input type="number" class="bg-white rounded text-xs w-40 @error('folioteAvaluo') border-1 border-red-500 @enderror" wire:model.defer="folioteAvaluo">
+                        <input type="number" class="bg-white rounded text-xs w-40 @error('folioAvaluo') border-1 border-red-500 @enderror" wire:model.defer="folioAvaluo">
 
                     </div>
 
