@@ -86,13 +86,13 @@
 
                     <div >
 
-                        <input type="number" class="bg-white rounded text-xs w-40 @error('tramiteInspeccion') border-1 border-red-500 @enderror" wire:model.defer="tramiteInspeccion">
+                        <input type="number" class="bg-white rounded text-xs w-40 @error('tramiteInspeccion') border-1 border-red-500 @enderror" wire:model.defer="folioInspeccion">
 
                     </div>
 
                     <div>
 
-                        @error('tramiteInspeccion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                        @error('folioInspeccion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                     </div>
 
@@ -108,7 +108,7 @@
 
                     <div class="text-center">
 
-                        <input type="number" class="bg-white rounded text-xs w-40 @error('tramiteAvaluo') border-1 border-red-500 @enderror" wire:model.defer="tramiteAvaluo">
+                        <input type="number" class="bg-white rounded text-xs w-40 @error('folioteAvaluo') border-1 border-red-500 @enderror" wire:model.defer="folioteAvaluo">
 
                     </div>
 

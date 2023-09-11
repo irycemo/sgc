@@ -15,7 +15,9 @@ class Impresion extends Component
 {
 
     public $tramiteInspeccion;
+    public $folionspeccion;
     public $tramiteAvaluo;
+    public $folioAvaluo;
     public $autoridad_municipal;
     public $localidad;
     public $oficina;
@@ -93,7 +95,7 @@ class Impresion extends Component
 
         if(!auth()->user()->hasRole('Convenio municipal')){
 
-            $this->tramiteInspeccion  = Tramite::where('folio', $this->tramiteInspeccion)->first();
+            $this->tramiteInspeccion  = Tramite::where('folio', $this->folioInspeccion)->first();
 
             if($this->tramiteInspeccion && $this->tramiteInspeccion->estado != 'pagado'){
 
@@ -113,7 +115,7 @@ class Impresion extends Component
 
             if($this->tramiteInspeccion->avaluo_para){
 
-                $this->tramiteAvaluo = Tramite::where('folio', $this->tramiteAvaluo)->first();
+                $this->tramiteAvaluo = Tramite::where('folio', $this->folioAvaluo)->first();
 
                 if($this->tramiteAvaluo && $this->tramiteInspeccion->estado != 'pagado'){
 
