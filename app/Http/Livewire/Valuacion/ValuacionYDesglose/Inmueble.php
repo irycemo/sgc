@@ -707,7 +707,7 @@ class Inmueble extends Component
 
         if($this->avaluo_id){
 
-            $avaluo = Avaluo::with('predio')->where('predio_id', $this->avaluo_id)->first();
+            $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
 
             $this->predio = $avaluo->predio;
 
