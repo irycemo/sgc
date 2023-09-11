@@ -13,6 +13,7 @@ class Caracteristicas extends Component
 
     public PredioAvaluo $predio;
     public Avaluo $avaluo;
+    public $avaluo_id;
 
     public $zonas;
     public $construcciones;
@@ -173,6 +174,14 @@ class Caracteristicas extends Component
         $this->gas = Constantes::GAS;
 
         $this->especiales = Constantes::ESPECIALES;
+
+        if($this->avaluo_id){
+
+            $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
+
+            $this->cargarPredio($avaluo->predio->id);
+
+        }
 
     }
 

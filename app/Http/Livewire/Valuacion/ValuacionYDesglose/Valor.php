@@ -21,6 +21,8 @@ use App\Models\ValoresUnitariosConstruccion;
 class Valor extends Component
 {
 
+    public $avaluo_id;
+
     public $usos;
     public $ubicaciones;
     public $terrenos = [];
@@ -798,6 +800,14 @@ class Valor extends Component
         $this->valores_construccion = ValoresUnitariosConstruccion::all();
 
         $this->avaluo = Avaluo::make();
+
+        if($this->avaluo_id){
+
+            $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
+
+            $this->cargarPredio($avaluo->predio->id);
+
+        }
 
     }
 

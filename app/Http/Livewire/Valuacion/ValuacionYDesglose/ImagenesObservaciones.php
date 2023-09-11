@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Valuacion\ValuacionYDesglose;
 
 use App\Models\File;
+use App\Models\Avaluo;
 use Livewire\Component;
 use App\Models\PredioAvaluo;
 use Livewire\WithFileUploads;
@@ -15,6 +16,7 @@ class ImagenesObservaciones extends Component
 
     use WithFileUploads;
 
+    public $avaluo_id;
     public PredioAvaluo $predio;
 
     public $encabezado;
@@ -303,6 +305,18 @@ class ImagenesObservaciones extends Component
 
             Log::error("Error al guardar imagenes de avaluo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Hubo un error."]);
+        }
+
+    }
+
+    public function mount(){
+
+        if($this->avaluo_id){
+
+            $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
+
+            $this->predio = PredioAvaluo::with('avaluo.imagenes')->find($avaluo->predio->id);
+
         }
 
     }

@@ -53,25 +53,25 @@
 
         <div class="tab-panel" :class="{ 'active': activeTab === 1 }" x-show.transition.in.opacity.duration.800="activeTab === 1">
 
-            @livewire('valuacion.valuacion-y-desglose.colindancias')
+            @livewire('valuacion.valuacion-y-desglose.colindancias', ['avaluo_id' => $id])
 
         </div>
 
         <div class="tab-panel" :class="{ 'active': activeTab === 2 }" x-show.transition.in.opacity.duration.800="activeTab === 2">
 
-            @livewire('valuacion.valuacion-y-desglose.caracteristicas')
+            @livewire('valuacion.valuacion-y-desglose.caracteristicas', ['avaluo_id' => $id])
 
         </div>
 
         <div class="tab-panel" :class="{ 'active': activeTab === 3 }" x-show.transition.in.opacity.duration.800="activeTab === 3">
 
-            @livewire('valuacion.valuacion-y-desglose.valor')
+            @livewire('valuacion.valuacion-y-desglose.valor', ['avaluo_id' => $id])
 
         </div>
 
         <div class="tab-panel" :class="{ 'active': activeTab === 4 }" x-show.transition.in.opacity.duration.800="activeTab === 4">
 
-            @livewire('valuacion.valuacion-y-desglose.imagenes-observaciones')
+            @livewire('valuacion.valuacion-y-desglose.imagenes-observaciones', ['avaluo_id' => $id])
 
         </div>
 

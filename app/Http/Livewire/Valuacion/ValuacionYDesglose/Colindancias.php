@@ -2,17 +2,19 @@
 
 namespace App\Http\Livewire\Valuacion\ValuacionYDesglose;
 
+use Closure;
+use App\Models\Avaluo;
 use Livewire\Component;
 use App\Models\Colindancia;
 use App\Models\PredioAvaluo;
 use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
-use Closure;
 
 class Colindancias extends Component
 {
     public PredioAvaluo $predio;
+    public $avaluo_id;
 
     public $medidas = [];
     public $vientos;
@@ -152,6 +154,14 @@ class Colindancias extends Component
         $this->medidas = [
             ['viento' => null, 'longitud' => null, 'descripcion' => null, 'id' => null]
         ];
+
+        if($this->avaluo_id){
+
+            $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
+
+            $this->cargarPredio($avaluo->predio->id);
+
+        }
 
     }
 
