@@ -102,7 +102,7 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
     Route::get('ficha_tecnica', FichaTecnica::class)->middleware('permission:Ficha técnica')->name('ficha_tecnica');
 
-    Route::get('avaluo_predio_ignorado', AvaluoPredioIgnoradoController::class)->middleware('permission:Avaluos de predio ignorado')->name('avaluo_predio_ignorado');
+    Route::get('avaluo_predio_ignorado/{id?}', AvaluoPredioIgnoradoController::class)->middleware('permission:Avaluos de predio ignorado')->name('avaluo_predio_ignorado');
 
     Route::get('mis_avaluos', MisAvaluos::class)->middleware('permission:Ver mis avaluos')->name('mis_avaluos');
 
