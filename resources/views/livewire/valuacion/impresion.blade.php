@@ -86,7 +86,7 @@
 
                     <div >
 
-                        <input type="number" class="bg-white rounded text-xs w-40 @error('tramiteInspeccion') border-1 border-red-500 @enderror" wire:model.defer="folioInspeccion">
+                        <input type="number" class="bg-white rounded text-xs w-40 @error('folioInspeccion') border-1 border-red-500 @enderror" wire:model.defer="folioInspeccion">
 
                     </div>
 

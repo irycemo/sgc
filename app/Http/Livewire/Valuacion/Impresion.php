@@ -15,7 +15,7 @@ class Impresion extends Component
 {
 
     public $tramiteInspeccion;
-    public $folionspeccion;
+    public $folioInspeccion;
     public $tramiteAvaluo;
     public $folioAvaluo;
     public $autoridad_municipal;
@@ -184,13 +184,13 @@ class Impresion extends Component
 
     public function actualizarTramites(){
 
-        $this->tramiteInspeccion  = Tramite::where('folio', $this->tramiteInspeccion)->first();
+        $this->tramiteInspeccion  = Tramite::where('folio', $this->folioInspeccion)->first();
 
         if($this->tramiteInspeccion){
 
             if($this->tramiteInspeccion->avaluo_para != null){
 
-                $this->tramiteAvaluo = Tramite::where('folio', $this->tramiteAvaluo)->first();
+                $this->tramiteAvaluo = Tramite::where('folio', $this->folioAvaluo)->first();
 
                 $this->tramiteAvaluo->update([
                                     'usados' => $this->cantidad + $this->tramiteAvaluo->usados,
