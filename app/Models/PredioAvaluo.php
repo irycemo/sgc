@@ -64,7 +64,11 @@ class PredioAvaluo extends Model implements Auditable
     }
 
     public function primerPropietario(){
-        return $this->propietarios()->first()->persona->nombre . ' ' . $this->propietarios()->first()->persona->ap_paterno . ' ' . $this->propietarios()->first()->persona->ap_materno;
+
+        if($this->propietarios()->first())
+            return $this->propietarios()->first()->persona->nombre . ' ' . $this->propietarios()->first()->persona->ap_paterno . ' ' . $this->propietarios()->first()->persona->ap_materno;
+        else
+            return null;
     }
 
 }
