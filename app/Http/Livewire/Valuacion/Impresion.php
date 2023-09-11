@@ -188,11 +188,6 @@ class Impresion extends Component
 
         if($this->tramiteInspeccion){
 
-            $this->tramiteInspeccion->update([
-                'usados' => $this->cantidad + $this->tramiteInspeccion->usados,
-                'parcial_usado' => $this->tramiteAvaluo->id
-            ]);
-
             if($this->tramiteInspeccion->avaluo_para != null){
 
                 $this->tramiteAvaluo = Tramite::where('folio', $this->folioAvaluo)->first();
@@ -202,6 +197,14 @@ class Impresion extends Component
                                     'parcial_usado' => $this->tramiteAvaluo->id
                                     ]);
 
+                $this->tramiteInspeccion->update([
+                    'usados' => $this->cantidad + $this->tramiteInspeccion->usados,
+                    'parcial_usado' => $this->tramiteAvaluo->id
+                ]);
+
+                if($this->tramiteAvaluo->cantidad == $this->tramiteAvaluo->usados)
+                    $this->tramiteAvaluo->update(['estado' => 'concluido']);
+
             }
 
             $this->tramiteInspeccion->update([
@@ -210,10 +213,6 @@ class Impresion extends Component
 
             if($this->tramiteInspeccion->cantidad == $this->tramiteInspeccion->usados)
                 $this->tramiteInspeccion->update(['estado' => 'concluido']);
-
-            if($this->tramiteInspeccion->avaluo_para != null)
-                if($this->tramiteAvaluo->cantidad == $this->tramiteAvaluo->usados)
-                    $this->tramiteAvaluo->update(['estado' => 'concluido']);
 
         }
 

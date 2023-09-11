@@ -315,7 +315,7 @@ class ImagenesObservaciones extends Component
 
             $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
 
-            $this->predio = PredioAvaluo::with('avaluo.imagenes')->find($avaluo->predio->id);
+            $this->cargarPredio($avaluo->predio->id);
 
         }
 
