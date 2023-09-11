@@ -15,6 +15,7 @@ use App\Exceptions\ErrorAlProcesarTerrenosException;
 use App\Exceptions\ErrorAlProcesarCoordenadasException;
 use App\Exceptions\ErrorAlProcesarColindanciasException;
 use App\Exceptions\ErrorAlProcesarConstruccionesException;
+use App\Exceptions\ErrorAlValidarDisponibilidadEnAvaluosException;
 
 class FichaTecnica extends Component
 {
@@ -86,6 +87,10 @@ class FichaTecnica extends Component
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', $e->getMessage()]);
 
         }catch (ErrorALValidarSectorException $e) {
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', $e->getMessage()]);
+
+        }catch (ErrorAlValidarDisponibilidadEnAvaluosException $e) {
 
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', $e->getMessage()]);
 
