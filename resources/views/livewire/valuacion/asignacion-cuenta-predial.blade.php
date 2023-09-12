@@ -13,11 +13,11 @@
 
                 <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.lazy="localidad">
 
-                <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.defer="oficina" @if(auth()->user()->oficina != 101 && !auth()->user()->hasRole('Administrador')) readonly @endif>
+                <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina != 101 && !auth()->user()->hasRole('Administrador')) readonly @endif>
 
                 <input placeholder="Tipo" type="number" max="2" min="1" class="bg-white rounded text-xs w-20 @error('tipo') border-1 border-red-500 @enderror" wire:model.defer="tipo">
 
-                <select class="bg-white rounded text-xs @error('valuador') border-1 border-red-500 @enderror" wire:model.defer="valuador">
+                <select class="bg-white rounded text-xs @error('valuador') border-1 border-red-500 @enderror" wire:model="valuador">
 
                     <option value="" selected>Seleccione un valuador</option>
 
