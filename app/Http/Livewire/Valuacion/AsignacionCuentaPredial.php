@@ -164,6 +164,15 @@ class AsignacionCuentaPredial extends Component
 
     }
 
+    public function updatedOficina(){
+
+        $this->valuadores = User::where('status', 'activo')
+                                        ->where('valuador', 1)
+                                        ->where('oficina', $this->oficina)
+                                        ->orderBy('ap_paterno')
+                                        ->get();
+    }
+
     public function mount(){
 
         if(auth()->user()->hasRole('Administrador')){

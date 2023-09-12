@@ -366,7 +366,7 @@
 
         @endif
 
-        @if($predio && $predio->avaluo->estado != 'notificado')
+        @if($predio && $predio->avaluo && $predio->avaluo->estado != 'notificado')
 
             <button
                 wire:click="actualizar"
