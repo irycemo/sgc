@@ -7,17 +7,21 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
 
-        <div class="p-4 flex-auto bg-white rounded-lg mb-3 shadow-md space-y-3">
+        <div class="p-4 bg-white rounded-lg mb-3 shadow-md space-y-3">
 
-            <div class="flex justify-center space-x-2 mb-6">
+            <div class="flex flex-row flex-wrap justify-center items-center space-y-2 mb-6">
 
-                <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.lazy="localidad">
+                <div class="mx-auto">
 
-                <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina != 101 && !auth()->user()->hasRole('Administrador')) readonly @endif>
+                    <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.defer="localidad">
 
-                <input placeholder="Tipo" type="number" max="2" min="1" class="bg-white rounded text-xs w-20 @error('tipo') border-1 border-red-500 @enderror" wire:model.defer="tipo">
+                    <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina != 101 && !auth()->user()->hasRole('Administrador')) readonly @endif>
 
-                <select class="bg-white rounded text-xs @error('valuador') border-1 border-red-500 @enderror" wire:model="valuador">
+                    <input placeholder="Tipo" type="number" max="2" min="1" class="bg-white rounded text-xs w-20 @error('tipo') border-1 border-red-500 @enderror" wire:model.defer="tipo">
+
+                </div>
+
+                <select class="bg-white rounded text-xs w-full @error('valuador') border-1 border-red-500 @enderror" wire:model.defer="valuador">
 
                     <option value="" selected>Seleccione un valuador</option>
 
@@ -31,9 +35,9 @@
 
             </div>
 
-            <div class="flex-row flex">
+            <div class="flex flex-row flex-wrap text-center">
 
-                <div class="flex-auto ">
+                <div class="flex-auto">
 
                     <div>
 
@@ -65,7 +69,7 @@
 
                     <div>
 
-                        <input type="text" class="bg-white rounded text-xs" wire:model.defer="cantidad">
+                        <input type="text" class="bg-white rounded text-xs  @error('cantidad') border-red-500 @enderror" wire:model.defer="cantidad">
 
                     </div>
 
@@ -110,7 +114,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full mb-1" wire:model="observaciones">
+                    <select class="bg-white rounded text-xs w-full mb-1 @error('observaciones') border-red-500 @enderror" wire:model="observaciones">
                         <option value="" selected> Seleccione una opción</option>
                         <option value="AVALUO PARA EFECTOS DE ACTULIZACION DE VALOR CATASTRAL POR SUBDIVICION AUTORIZADA POR LA SUOP OFICIO SUOP-DOU-RU-XXXXX  DE FECHA XX/XX/XXXX">
                             AVALUO PARA EFECTOS DE ACTULIZACION DE VALOR CATASTRAL POR SUBDIVICION AUTORIZADA POR LA SUOP OFICIO SUOP-DOU-RU-XXXXX  DE FECHA XX/XX/XXXX
@@ -129,7 +133,7 @@
                         </option>
                     </select>
 
-                    <textarea rows="5" wire:model.defer="observaciones" class="bg-white rounded text-xs w-full"></textarea>
+                    <textarea rows="5" wire:model.defer="observaciones" class="bg-white rounded text-xs w-full @error('observaciones') border-red-500 @enderror"></textarea>
 
                 </div>
 
@@ -152,7 +156,7 @@
 
             <h4 class="text-lg mb-5 text-center">Busqueda de cuentas prediales asignadas</h4>
 
-            <div class="flex flex-wrap space-x-1 justify-center items-center">
+            <div class="flex flex-wrap space-x-1 justify-center items-center gap-1">
 
                 <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad_busqueda') border-1 border-red-500 @enderror" wire:model.lazy="localidad_busqueda">
 
@@ -253,7 +257,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Localidad</span>
 
-                                {{ $cuenta->localidad }}
+                                {{ $cuenta['localidad'] }}
 
                             </td>
 
@@ -261,7 +265,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Oficina</span>
 
-                                {{ $cuenta->oficina }}
+                                {{ $cuenta['oficina'] }}
 
                             </td>
 
@@ -269,7 +273,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Tipo de predio</span>
 
-                                {{ $cuenta->tipo_predio }}
+                                {{ $cuenta['tipo_predio'] }}
 
                             </td>
 
@@ -277,7 +281,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Número de registro</span>
 
-                                {{ $cuenta->numero_registro }}
+                                {{ $cuenta['numero_registro'] }}
 
                             </td>
 
@@ -285,7 +289,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Observaciones</span>
 
-                                {{ $cuenta->observaciones }}
+                                {{ $cuenta['observaciones'] }}
 
                             </td>
 
@@ -293,7 +297,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Predio origen</span>
 
-                                {{ $cuenta->predio_origen  ?? 'N/A' }}
+                                {{ $cuenta['predio_origen']  ?? 'N/A' }}
 
                             </td>
 
@@ -301,7 +305,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Titulo de propiedad</span>
 
-                                {{ $cuenta->titulo_propiedad ?? 'N/A' }}
+                                {{ $cuenta['titulo_propiedad'] ?? 'N/A' }}
 
                             </td>
 
@@ -309,7 +313,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Valuador</span>
 
-                                {{ $cuenta->valuadorAsignado->name }} {{ $cuenta->valuadorAsignado->ap_paterno }} {{ $cuenta->valuadorAsignado->ap_materno }}
+                                {{ $cuenta['valuadorAsignado']['name'] }} {{ $cuenta['valuadorAsignado']['ap_paterno'] }} {{ $cuenta['valuadorAsignado']['ap_materno'] }}
 
                             </td>
 
@@ -317,13 +321,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
-                                @if($cuenta->creadoPor != null)
-
-                                    <span class="font-semibold">Registrado por: {{$cuenta->creadoPor->name}}</span> <br>
-
-                                @endif
-
-                                {{ $cuenta->created_at }}
+                                {{ $cuenta['created_at'] }}
 
                             </td>
 

@@ -26,7 +26,7 @@ class AsignacionCuentaPredial extends Component
     public $tipo_busqueda;
     public $registro_inicio;
     public $registro_final;
-    public $cuentasAsignadas;
+    public $cuentasAsignadas = [];
 
     protected function rules(){
         return [
@@ -42,6 +42,8 @@ class AsignacionCuentaPredial extends Component
     }
 
     public function crearCuentas(){
+
+        $this->reset(['cuentasAsignadas']);
 
         $this->validate();
 
@@ -87,8 +89,15 @@ class AsignacionCuentaPredial extends Component
                             'predio_origen' => $this->origen ? $this->origen : null,
                             'observaciones' => 'Cuenta preexistente',
                             'titulo_propiedad' => $this->cantidad == 1 ? $this->titulo : null,
-                            'valuador' => $this->valuador
+                            'valuador' => $this->valuador,
+                            'creado_por' => auth()->user()->id
                         ]);
+
+                        $cuenta->valuadorAsignado = [
+                            'name' => $cuenta->valuadorAsignado->name,
+                            'ap_paterno' => $cuenta->valuadorAsignado->ap_paterno,
+                            'ap_materno' => $cuenta->valuadorAsignado->ap_materno
+                        ];
 
                         $this->cuentasAsignadas[] = $cuenta;
 
@@ -105,9 +114,16 @@ class AsignacionCuentaPredial extends Component
                             'titulo_propiedad' => $this->cantidad == 1 ? $this->titulo : null,
                             'valuador' => $this->valuador,
                             'predio_origen' => $this->origen ? $this->origen : null,
+                            'creado_por' => auth()->user()->id
                         ]);
 
                         $cuenta->audits()->latest()->first()->update(['tags' => 'Asigno cuenta']);
+
+                        $cuenta->valuadorAsignado = [
+                            'name' => $cuenta->valuadorAsignado->name,
+                            'ap_paterno' => $cuenta->valuadorAsignado->ap_paterno,
+                            'ap_materno' => $cuenta->valuadorAsignado->ap_materno
+                        ];
 
                         $this->cuentasAsignadas[] = $cuenta;
 
@@ -145,22 +161,16 @@ class AsignacionCuentaPredial extends Component
             'registro_final' => 'required',
         ]);
 
-        $this->cuentasAsignadas = $this->getCuentasAsignadasProperty();
+        $this->cuentasAsignadas = AsignarCuenta::with('valuadorAsignado', 'creadoPor')
+                                                    ->where('localidad', $this->localidad_busqueda)
+                                                    ->where('oficina', $this->oficina_busqueda)
+                                                    ->where('tipo_predio', $this->tipo_busqueda)
+                                                    ->whereBetween('numero_registro', [$this->registro_inicio, $this->registro_final])
+                                                    ->latest()
+                                                    ->get();
 
         if(count($this->cuentasAsignadas) == 0)
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No hay resultados con los datos ingresado."]);
-
-    }
-
-    public function getCuentasAsignadasProperty(){
-
-        return AsignarCuenta::with('valuadorAsignado', 'creadoPor')
-                                ->where('localidad', $this->localidad_busqueda)
-                                ->where('oficina', $this->oficina_busqueda)
-                                ->where('tipo_predio', $this->tipo_busqueda)
-                                ->whereBetween('numero_registro', [$this->registro_inicio, $this->registro_final])
-                                ->latest()
-                                ->get();
 
     }
 

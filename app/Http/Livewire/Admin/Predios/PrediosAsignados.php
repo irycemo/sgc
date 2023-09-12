@@ -33,6 +33,11 @@ class PrediosAsignados extends Component
         if($this->modelo_editar->isNot($modelo))
             $this->modelo_editar = $modelo;
 
+        $this->valuadores = User::whereNotNull('valuador')
+                                    ->where('oficina', $this->modelo_editar->oficina)
+                                    ->orderBy('ap_paterno')
+                                    ->get();
+
         $this->modal = true;
     }
 
@@ -59,8 +64,6 @@ class PrediosAsignados extends Component
     public function mount(){
 
         $this->modelo_editar = $this->crearModeloVacio();
-
-        $this->valuadores = User::whereNotNull('valuador')->orderBy('ap_paterno')->get();
 
     }
 

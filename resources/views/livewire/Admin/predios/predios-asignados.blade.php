@@ -399,17 +399,21 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-sm w-full" wire:model.defer="valuador">
+                            @if($valuadores)
 
-                                <option value="" selected>Seleccione una opción</option>
+                                <select class="bg-white rounded text-sm w-full" wire:model.defer="valuador">
 
-                                @foreach ($valuadores as $valuador)
+                                    <option value="" selected>Seleccione una opción</option>
 
-                                    <option value="{{ $valuador->id }}">{{ $valuador->ap_paterno }} {{ $valuador->ap_materno }} {{ $valuador->name }}</option>
+                                    @foreach ($valuadores as $valuador)
 
-                                @endforeach
+                                        <option value="{{ $valuador->id }}">{{ $valuador->ap_paterno }} {{ $valuador->ap_materno }} {{ $valuador->name }}</option>
 
-                            </select>
+                                    @endforeach
+
+                                </select>
+
+                            @endif
 
                         </div>
 
