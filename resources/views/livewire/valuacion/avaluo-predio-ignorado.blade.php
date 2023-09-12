@@ -764,35 +764,39 @@
 
         @endif
 
-        @if(!$editar)
+        @if($predio && $predio->avaluo->estado != 'notificado')
 
-            <button
-                wire:click="crear"
-                wire:loading.attr="disabled"
-                wire:target="crear"
-                class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-            >
+            @if(!$editar)
 
-                <img wire:loading wire:target="crear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                <button
+                    wire:click="crear"
+                    wire:loading.attr="disabled"
+                    wire:target="crear"
+                    class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
+                >
 
-                Guardar
+                    <img wire:loading wire:target="crear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-            </button>
+                    Guardar
 
-        @else
+                </button>
 
-            <button
-                wire:click="actualizar"
-                wire:loading.attr="disabled"
-                wire:target="actualizar"
-                class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-            >
+            @else
 
-                <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                <button
+                    wire:click="actualizar"
+                    wire:loading.attr="disabled"
+                    wire:target="actualizar"
+                    class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
+                >
 
-                Actualizar
+                    <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-            </button>
+                    Actualizar
+
+                </button>
+
+            @endif
 
         @endif
 

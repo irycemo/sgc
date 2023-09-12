@@ -318,22 +318,26 @@
 
         </button>
 
-        <div class="flex justify-end">
+        @if($predio && $predio->avaluo->estado != 'notificado')
 
-            <button
-                wire:click="guardarTerrenos"
-                wire:loading.attr="disabled"
-                wire:target="guardarTerrenos"
-                class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-            >
+            <div class="flex justify-end">
 
-                <img wire:loading wire:target="guardarTerrenos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                <button
+                    wire:click="guardarTerrenos"
+                    wire:loading.attr="disabled"
+                    wire:target="guardarTerrenos"
+                    class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
+                >
 
-                Guardar terreno
+                    <img wire:loading wire:target="guardarTerrenos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-            </button>
+                    Guardar terreno
 
-        </div>
+                </button>
+
+            </div>
+
+        @endif
 
     </div>
 
@@ -573,18 +577,22 @@
 
         <div class="flex justify-end">
 
-            <button
-                wire:click="guardarConstrucciones"
-                wire:loading.attr="disabled"
-                wire:target="guardarConstrucciones"
-                class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-            >
+            @if($predio && $predio->avaluo->estado != 'notificado')
 
-                <img wire:loading wire:target="guardarConstrucciones" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                <button
+                    wire:click="guardarConstrucciones"
+                    wire:loading.attr="disabled"
+                    wire:target="guardarConstrucciones"
+                    class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
+                >
 
-                Guardar construcciones
+                    <img wire:loading wire:target="guardarConstrucciones" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-            </button>
+                    Guardar construcciones
+
+                </button>
+
+            @endif
 
         </div>
 
@@ -728,18 +736,22 @@
 
             <div class="flex justify-end">
 
-                <button
-                    wire:click="guardarTerrenosCondominio"
-                    wire:loading.attr="disabled"
-                    wire:target="guardarTerrenosCondominio"
-                    class=" bg-green-400 mt-5 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-                >
+                @if($predio && $predio->avaluo->estado != 'notificado')
 
-                    <img wire:loading wire:target="guardarTerrenosCondominio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    <button
+                        wire:click="guardarTerrenosCondominio"
+                        wire:loading.attr="disabled"
+                        wire:target="guardarTerrenosCondominio"
+                        class=" bg-green-400 mt-5 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
+                    >
 
-                    Guardar condominio
+                        <img wire:loading wire:target="guardarTerrenosCondominio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                </button>
+                        Guardar condominio
+
+                    </button>
+
+                @endif
 
             </div>
 
@@ -891,18 +903,22 @@
 
             <div class="flex justify-end">
 
-                <button
-                    wire:click="guardarCondominio"
-                    wire:loading.attr="disabled"
-                    wire:target="guardarCondominio"
-                    class=" bg-green-400 mt-5 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-                >
+                @if($predio && $predio->avaluo->estado != 'notificado')
 
-                    <img wire:loading wire:target="guardarCondominio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    <button
+                        wire:click="guardarCondominio"
+                        wire:loading.attr="disabled"
+                        wire:target="guardarCondominio"
+                        class=" bg-green-400 mt-5 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
+                    >
 
-                    Guardar condominio
+                        <img wire:loading wire:target="guardarCondominio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                </button>
+                        Guardar condominio
+
+                    </button>
+
+                @endif
 
             </div>
 
@@ -1020,7 +1036,7 @@
 
         @endif
 
-        @if($predio)
+        @if($predio && $predio->avaluo->estado != 'notificado')
 
             <button
                 wire:click="guardar"

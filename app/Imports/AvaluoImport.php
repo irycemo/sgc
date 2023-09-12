@@ -475,8 +475,6 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
         }else{
 
-            /* throw new ErrorAlValidarLineaDeCaptura("El predio ya existe, verifique en la linea " . $key); */
-
             $predioCompletoAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
                                                     ->where('estado', $row['estado'])
                                                     ->where('region_catastral', $row['region'])

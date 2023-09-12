@@ -719,7 +719,7 @@
 
         @endif
 
-        @if($predio)
+        @if($predio && $predio->avaluo->estado != 'notificado')
 
             <button
                 wire:click="guardar"
