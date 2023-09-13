@@ -291,6 +291,12 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
+                                @if($predio->creadoPor != null)
+
+                                    <span class="font-semibold">Actualizado por: {{$predio->creadoPor->name}}</span> <br>
+
+                                @endif
+
                                 {{ $predio->created_at }}
 
                             </td>

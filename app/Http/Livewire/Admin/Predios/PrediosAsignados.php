@@ -70,7 +70,7 @@ class PrediosAsignados extends Component
     public function render()
     {
 
-        $predios = AsignarCuenta::with('actualizadoPor', 'valuadorAsignado')
+        $predios = AsignarCuenta::with('actualizadoPor', 'valuadorAsignado', 'creadoPor')
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 
