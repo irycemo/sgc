@@ -166,6 +166,7 @@ class AsignacionCuentaPredial extends Component
                                                     ->where('oficina', $this->oficina_busqueda)
                                                     ->where('tipo_predio', $this->tipo_busqueda)
                                                     ->whereBetween('numero_registro', [$this->registro_inicio, $this->registro_final])
+                                                    /* ->orderBy('numero_registro') */
                                                     ->latest()
                                                     ->get();
 

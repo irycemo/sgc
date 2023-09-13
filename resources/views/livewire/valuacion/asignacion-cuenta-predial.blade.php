@@ -321,6 +321,16 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
+                                @if($cuenta['creadoPor'] != null)
+
+                                    <span class="font-semibold">Registrado por: {{$cuenta->creadoPor->name}}</span> <br>
+
+                                @else
+
+                                    <span class="font-semibold">Registrado:</span> <br>
+
+                                @endif
+
                                 {{ $cuenta['created_at'] }}
 
                             </td>
