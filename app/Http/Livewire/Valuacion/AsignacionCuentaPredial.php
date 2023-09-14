@@ -147,11 +147,11 @@ class AsignacionCuentaPredial extends Component
 
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
-            $this->reset(['localidad', 'oficina', 'tipo', 'observaciones', 'cantidad', 'valuador', 'origen', 'cuentasAsignadas']);
+            $this->reset(['localidad', 'tipo', 'observaciones', 'cantidad', 'valuador', 'origen', 'cuentasAsignadas']);
 
         }
 
-        $this->reset(['localidad', 'oficina', 'tipo', 'observaciones', 'cantidad', 'valuador', 'origen']);
+        $this->reset(['localidad', 'tipo', 'observaciones', 'cantidad', 'valuador', 'origen']);
 
     }
 
