@@ -176,7 +176,9 @@ class AvaluoPredioIgnorado extends Component
 
             if($this->predio->avaluo->creado_por != auth()->user()->id){
 
-                $this->predio = PredioAvaluo::make();
+                $this->predio = PredioAvaluo::make([
+                    'oficina' => auth()->user()->oficina
+                ]);
 
                 $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo está asinagnado a otro valuador."]);
 
@@ -332,7 +334,13 @@ class AvaluoPredioIgnorado extends Component
                                     ->where('numero_registro', $this->predio->numero_registro)
                                     ->first();
 
-        if(!$predioCompleto){
+        if($predioCompleto){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El predio ya existe en el padrón, verifique."]);
+
+            return true;
+
+        }else{
 
             $cuentaPredial = Predio::where('localidad', $this->predio->localidad)
                                         ->where('oficina', $this->predio->oficina)
@@ -368,12 +376,6 @@ class AvaluoPredioIgnorado extends Component
 
             }
 
-        }else{
-
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El predio ya existe, verifique."]);
-
-            return true;
-
         }
 
         $predioCompletoAvaluo = PredioAvaluo::where('estado', $this->predio->estado)
@@ -389,7 +391,13 @@ class AvaluoPredioIgnorado extends Component
                                                 ->where('tipo_predio', $this->predio->tipo_predio)
                                                 ->first();
 
-        if(!$predioCompletoAvaluo){
+        if($predioCompletoAvaluo){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El predio ya existe en avaluos, verifique."]);
+
+            return true;
+
+        }else{
 
             $cuentaPredialAvaluo = PredioAvaluo::where('localidad', $this->predio->localidad)
                                                 ->where('oficina', $this->predio->oficina)

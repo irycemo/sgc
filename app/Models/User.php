@@ -39,7 +39,8 @@ class User extends Authenticatable implements Auditable
         'status',
         'area',
         'creado_por',
-        'actualizado_por'
+        'actualizado_por',
+        'valuador'
     ];
 
     /**

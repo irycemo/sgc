@@ -28,12 +28,6 @@ class FichaTecnica extends Component
     public $valoresConstruccion;
     public $valoresRusticos;
 
-    public function updatingDocumeto(){
-
-        $this->reset('data');
-
-    }
-
     public function procesar(){
 
         $this->validate([

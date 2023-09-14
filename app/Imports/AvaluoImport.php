@@ -391,7 +391,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             'electrica' => ['required', Rule::in(Constantes::ELECTRICA)],
             'gas' => ['required', Rule::in(Constantes::GAS)],
             'especiales' => ['required', Rule::in(Constantes::ESPECIALES)],
-            'terrenos' => 'required',
+            'terrenos' => 'nullable',
             'construcciones' => 'nullable',
             'terrenos_comun' => 'nullable',
             'construcciones_comun' => 'nullable',
@@ -447,7 +447,11 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                     ->where('numero_registro', $row['registro'])
                                     ->first();
 
-        if(!$predioCompleto){
+        if($predioCompleto){
+
+            throw new ErrorAlValidarDisponibilidadEnAvaluosException("El predio ya existe en el padrón, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+
+        }else{
 
             $cuentaPredial = Predio::where('localidad', $row['localidad'])
                                         ->where('oficina', $row['oficina'])
@@ -473,9 +477,40 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             if($claveCatastral)
                 throw new ErrorAlValidarDisponibilidadEnAvaluosException("La clave catastral ya existe en el padrón con otra cuenta predial, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
+        }
+
+        $predioCompletoAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
+                                                ->where('estado', $row['estado'])
+                                                ->where('region_catastral', $row['region'])
+                                                ->where('municipio', $row['municipio'])
+                                                ->where('zona_catastral', $row['zona'])
+                                                ->where('localidad', $row['localidad'])
+                                                ->where('sector', $row['sector'])
+                                                ->where('manzana', $row['manzana'])
+                                                ->where('edificio', $row['edificio'])
+                                                ->where('departamento', $row['departamento'])
+                                                ->where('oficina', $row['oficina'])
+                                                ->where('tipo_predio', $row['tipo'])
+                                                ->where('numero_registro', $row['registro'])
+                                                ->first();
+
+        if($predioCompletoAvaluo){
+
+            throw new ErrorAlValidarDisponibilidadEnAvaluosException("El predio ya existe en avaluos, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+
         }else{
 
-            $predioCompletoAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
+            $cuentaPredialAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
+                                                ->where('localidad', $row['localidad'])
+                                                ->where('oficina', $row['oficina'])
+                                                ->where('tipo_predio', $row['tipo'])
+                                                ->where('numero_registro', $row['registro'])
+                                                ->first();
+
+            if($cuentaPredialAvaluo)
+                throw new ErrorAlValidarDisponibilidadEnAvaluosException("La cuenta predial ya existe en avaluos con otra clave catastral, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+
+            $claveCatastralAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
                                                     ->where('estado', $row['estado'])
                                                     ->where('region_catastral', $row['region'])
                                                     ->where('municipio', $row['municipio'])
@@ -485,40 +520,10 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                                     ->where('manzana', $row['manzana'])
                                                     ->where('edificio', $row['edificio'])
                                                     ->where('departamento', $row['departamento'])
-                                                    ->where('oficina', $row['oficina'])
-                                                    ->where('tipo_predio', $row['tipo'])
-                                                    ->where('numero_registro', $row['registro'])
                                                     ->first();
 
-            if(!$predioCompletoAvaluo){
-
-                $cuentaPredialAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
-                                                    ->where('localidad', $row['localidad'])
-                                                    ->where('oficina', $row['oficina'])
-                                                    ->where('tipo_predio', $row['tipo'])
-                                                    ->where('numero_registro', $row['registro'])
-                                                    ->first();
-
-                if($cuentaPredialAvaluo)
-                    throw new ErrorAlValidarDisponibilidadEnAvaluosException("La cuenta predial ya existe en avaluos con otra clave catastral, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
-
-                $claveCatastralAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
-                                                        ->where('estado', $row['estado'])
-                                                        ->where('region_catastral', $row['region'])
-                                                        ->where('municipio', $row['municipio'])
-                                                        ->where('zona_catastral', $row['zona'])
-                                                        ->where('localidad', $row['localidad'])
-                                                        ->where('sector', $row['sector'])
-                                                        ->where('manzana', $row['manzana'])
-                                                        ->where('edificio', $row['edificio'])
-                                                        ->where('departamento', $row['departamento'])
-                                                        ->first();
-
-                if($claveCatastralAvaluo)
-                    throw new ErrorAlValidarDisponibilidadEnAvaluosException("La clave catastral ya existe en avaluos con otra cuenta predial, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
-
-            }else
-                throw new ErrorAlValidarDisponibilidadEnAvaluosException("El predio ya existe en avaluos, verifique la cuenta: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+            if($claveCatastralAvaluo)
+                throw new ErrorAlValidarDisponibilidadEnAvaluosException("La clave catastral ya existe en avaluos con otra cuenta predial, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
         }
 
