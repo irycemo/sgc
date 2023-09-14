@@ -297,7 +297,7 @@ class ImagenesObservaciones extends Component
 
                 $this->predio->avaluo->save();
 
-                $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La información se guardaró con éxito."]);
+                $this->dispatchBrowserEvent('mostrarMensaje', ['success', "La información se guardó con éxito."]);
 
             });
 
