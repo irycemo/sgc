@@ -552,7 +552,8 @@ class AvaluoPredioIgnorado extends Component
                 $avaluo = Avaluo::where('predio_id', $this->predio->id)->first();
 
                 $avaluo->update([
-                    'actualizado_por' => auth()->user()->id
+                    'actualizado_por' => auth()->user()->id,
+                    'estado' => 'nuevo'
                 ]);
 
                 $this->dispatchBrowserEvent('mostrarMensaje', ['success', "El avaluo se actualizó con el folio " . $avaluo->folio . "."]);

@@ -410,7 +410,7 @@
 
                 <div>
 
-                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_exterior">
+                    <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_exterior">
 
                 </div>
 
@@ -432,7 +432,7 @@
 
                 <div>
 
-                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_exterior_2">
+                    <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_exterior_2">
 
                 </div>
 
@@ -454,7 +454,7 @@
 
                 <div>
 
-                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_interior">
+                    <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_interior">
 
                 </div>
 
@@ -476,7 +476,7 @@
 
                 <div>
 
-                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_adicional">
+                    <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_adicional">
 
                 </div>
 
@@ -498,7 +498,7 @@
 
                 <div>
 
-                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_adicional_2">
+                    <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_adicional_2">
 
                 </div>
 
