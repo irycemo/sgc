@@ -447,11 +447,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                     ->where('numero_registro', $row['registro'])
                                     ->first();
 
-        if($predioCompleto){
-
-            throw new ErrorAlValidarDisponibilidadEnAvaluosException("El predio ya existe en el padrón, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
-
-        }else{
+        if(!$predioCompleto){
 
             $cuentaPredial = Predio::where('localidad', $row['localidad'])
                                         ->where('oficina', $row['oficina'])
@@ -494,11 +490,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                                 ->where('numero_registro', $row['registro'])
                                                 ->first();
 
-        if($predioCompletoAvaluo){
-
-            throw new ErrorAlValidarDisponibilidadEnAvaluosException("El predio ya existe en avaluos, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
-
-        }else{
+        if(!$predioCompletoAvaluo){
 
             $cuentaPredialAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
                                                 ->where('localidad', $row['localidad'])

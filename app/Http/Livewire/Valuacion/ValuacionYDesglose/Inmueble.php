@@ -404,13 +404,7 @@ class Inmueble extends Component
                                     ->where('numero_registro', $this->predio->numero_registro)
                                     ->first();
 
-        if($predioCompleto){
-
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El predio ya existe en el padrón, verifique."]);
-
-            return true;
-
-        }else{
+        if(!$predioCompleto){
 
             $cuentaPredial = Predio::where('localidad', $this->predio->localidad)
                                         ->where('oficina', $this->predio->oficina)
@@ -465,13 +459,7 @@ class Inmueble extends Component
                                             ->where('numero_registro', $this->predio->numero_registro)
                                             ->first();
 
-        if($predioCompletoAvaluo){
-
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El predio ya existe en avaluos, verifique."]);
-
-            return true;
-
-        }else{
+        if(!$predioCompletoAvaluo){
 
             $cuentaPredialAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
                                                 ->where('localidad', $this->predio->localidad)
@@ -647,6 +635,9 @@ class Inmueble extends Component
     public function actualizar(){
 
         $this->validate();
+
+        if($this->validarDisponibilidad() || $this->validarSector())
+            return;
 
         if($this->predio->avaluo->estado == "concluido"){
 
