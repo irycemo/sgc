@@ -71,8 +71,17 @@ class PrediosAsignados extends Component
     {
 
         $predios = AsignarCuenta::with('actualizadoPor', 'valuadorAsignado', 'creadoPor')
-                            ->orderBy($this->sort, $this->direction)
-                            ->paginate($this->pagination);
+                                    ->where('localidad', 'LIKE', '%' . $this->search . '%')
+                                    ->orWhere('oficina', 'LIKE', '%' . $this->search . '%')
+                                    ->orWhere('tipo_predio', 'LIKE', '%' . $this->search . '%')
+                                    ->orWhere('numero_registro', 'LIKE', '%' . $this->search . '%')
+                                    ->orWhereHas('valuadorAsignado', function($q){
+                                        $q->where('name', 'LIKE', '%' . $this->search . '%')
+                                            ->orWhere('ap_paterno', 'LIKE', '%' . $this->search . '%')
+                                            ->orWhere('ap_materno', 'LIKE', '%' . $this->search . '%');
+                                    })
+                                    ->orderBy($this->sort, $this->direction)
+                                    ->paginate($this->pagination);
 
         return view('livewire.Admin.predios.predios-asignados', compact('predios'))->extends('layouts.admin');
     }

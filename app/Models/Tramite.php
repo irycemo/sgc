@@ -50,6 +50,10 @@ class Tramite extends Model implements Auditable
         return $this->belongsTo(Servicio::class);
     }
 
+    public function avaluoPara(){
+        return $this->belongsTo(Servicio::class, 'avaluo_para');
+    }
+
     protected $auditEvents = [
         'updated',
     ];

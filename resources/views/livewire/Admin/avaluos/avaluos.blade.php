@@ -2,7 +2,7 @@
 
     <div class="mb-6">
 
-        <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Predios de avaluos</h1>
+        <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Avaluos</h1>
 
         <div class="flex justify-between">
 
@@ -113,11 +113,11 @@
 
                         </th>
 
-                        <th wire:click="order('tipo')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        <th wire:click="order('tipo_predio')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
 
                             Tipo
 
-                            @if($sort == 'tipo')
+                            @if($sort == 'tipo_predio')
 
                                 @if($direction == 'asc')
 
@@ -143,11 +143,11 @@
 
                         </th>
 
-                        <th wire:click="order('registro')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        <th wire:click="order('numero_registro')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
 
                             Registro
 
-                            @if($sort == 'registro')
+                            @if($sort == 'numero_registro')
 
                                 @if($direction == 'asc')
 
@@ -253,11 +253,11 @@
 
                             </td>
 
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
+                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center  lg:border-0 border border-b block lg:table-cell relative lg:static">
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Estado</span>
 
-                                {{ $predio->avaluo->estado }}
+                                <span class="bg-{{ $predio->avaluo->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($predio->avaluo->estado) }}</span>
 
                             </td>
 

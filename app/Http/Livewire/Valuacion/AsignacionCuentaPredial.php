@@ -56,7 +56,7 @@ class AsignacionCuentaPredial extends Component
 
         if(!$ultimaCuentaAsignada){
 
-            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No hay cuentas asignadas a la oficina " . $this->oficina]);
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No hay cuentas asignadas a la oficina " . $this->oficina . " localidad: " . $this->localidad]);
 
             return;
 
@@ -99,6 +99,8 @@ class AsignacionCuentaPredial extends Component
                             'ap_materno' => $cuenta->valuadorAsignado->ap_materno
                         ];
 
+                        $cuenta->creadoPor = null;
+
                         $this->cuentasAsignadas[] = $cuenta;
 
                         $i--;
@@ -124,6 +126,8 @@ class AsignacionCuentaPredial extends Component
                             'ap_paterno' => $cuenta->valuadorAsignado->ap_paterno,
                             'ap_materno' => $cuenta->valuadorAsignado->ap_materno
                         ];
+
+                        $cuenta->creadoPor = null;
 
                         $this->cuentasAsignadas[] = $cuenta;
 

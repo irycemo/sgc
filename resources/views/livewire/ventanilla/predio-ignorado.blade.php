@@ -38,32 +38,6 @@
 
                 @endif
 
-                @if ($servicio['id'] == 292)
-
-                    <div class="flex-auto bg-white p-4 rounded-lg mb-3 shadow-md">
-
-                        <div class="mb-2">
-
-                            <Label class="text-lg tracking-widest rounded-xl border-gray-500">Importe Base</Label>
-
-                        </div>
-
-                        <div>
-
-                            <input type="number" min="1" class="bg-white rounded text-sm w-full" wire:model="importe_base">
-
-                        </div>
-
-                        <div>
-
-                            @error('importe_base') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                @endif
-
             </div>
 
             @if ($flags['solicitante'])
@@ -89,6 +63,54 @@
                             @error('modelo_editar.solicitante') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                         </div>
+
+                    </div>
+
+                </div>
+
+            @endif
+
+            @if ($servicio['id'] == 292)
+
+                <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md">
+
+                    <div class="mb-2">
+
+                        <Label class="text-lg tracking-widest rounded-xl border-gray-500">Clave catastral</Label>
+
+                    </div>
+
+                    <div class="space-y-1">
+
+                        <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-10" title="Estado" value="16" readonly>
+
+                        <input title="Región" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('region_catastral') border-1 border-red-500 @enderror" wire:model.defer="region_catastral">
+
+                        <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('municipio') border-1 border-red-500 @enderror" wire:model.defer="municipio">
+
+                        <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model.defer="zona_catastral">
+
+                        <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.defer="localidad">
+
+                        <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-20 @error('sector') border-1 border-red-500 @enderror" wire:model.defer="sector">
+
+                        <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-20 @error('manzana') border-1 border-red-500 @enderror" wire:model.defer="manzana">
+
+                        <input title="Predio" placeholder="Predio" type="number" class="bg-white rounded text-xs w-20 @error('predio') border-1 border-red-500 @enderror" wire:model.defer="predio">
+
+                        <input title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-20 @error('edificio') border-1 border-red-500 @enderror" wire:model.defer="edificio">
+
+                        <input title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-20 @error('departamento') border-1 border-red-500 @enderror" wire:model.defer="departamento">
+
+                        <button
+                            wire:click="buscarPredio"
+                            wire:loading.attr="disabled"
+                            wire:target="buscarPredio"
+                            type="button"
+                            class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-none flex items-center w-fit">
+                            <img wire:loading wire:target="buscarPredio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                            <p class="mr-1"> Buscar</p>
+                        </button>
 
                     </div>
 

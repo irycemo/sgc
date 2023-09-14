@@ -647,6 +647,13 @@ class Inmueble extends Component
             return;
         }
 
+        if($this->predio->avaluo->estado == "notificado"){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avalúo esta notificado no se puede editar"]);
+
+            return;
+        }
+
         try {
 
             DB::transaction(function () {
@@ -717,6 +724,8 @@ class Inmueble extends Component
             $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
             $this->tipo_propietario = $this->predio->propietarios()->first()->tipo;
             $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
+
+            $this->editar = true;
 
         }
 

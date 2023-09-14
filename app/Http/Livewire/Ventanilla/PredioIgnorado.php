@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\Ventanilla;
 
+use App\Models\Avaluo;
 use App\Models\Tramite;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Services\Tramites\TramiteService;
+use App\Models\PredioAvaluo;
 
 class PredioIgnorado extends Component
 {
@@ -20,7 +22,15 @@ class PredioIgnorado extends Component
     public $tramiteAdicionadoSeleccionado;
     public $tramiteAdicionado;
 
-    public $importe_base;
+    public $region_catastral;
+    public $municipio;
+    public $zona_catastral;
+    public $sector;
+    public $localidad;
+    public $predio;
+    public $manzana;
+    public $edificio;
+    public $departamento;
 
     public $editar = false;
 
@@ -32,7 +42,6 @@ class PredioIgnorado extends Component
         'cantidad' => true,
         'solicitante' => true,
         'observaciones' => true,
-        'importe_base' => true,
     ];
 
     protected $listeners = [
@@ -51,7 +60,7 @@ class PredioIgnorado extends Component
             'modelo_editar.cantidad' => 'required|numeric',
             'modelo_editar.adiciona' => 'required_if:adicionaTramite,true',
             'modelo_editar.observaciones' => Rule::requiredIf($this->modelo_editar->tipo_tramite === "exento"),
-            ];
+        ];
 
     }
 
@@ -72,7 +81,8 @@ class PredioIgnorado extends Component
 
         $this->tramite = $tramtie;
 
-        $this->tramite->load('predios.propietarios.persona', 'servicio');
+        $this->tramite->load('servicio');
+
     }
 
     public function updatedModeloEditarTipoTramite(){
@@ -118,45 +128,61 @@ class PredioIgnorado extends Component
 
     }
 
-    public function updatedModeloEditarTipoServicio(){
+    public function buscarPredio(){
 
-        $this->modelo_editar->monto = $this->servicio[$this->modelo_editar->tipo_servicio] * $this->modelo_editar->cantidad;
+        $this->validate([
+            'region_catastral' => 'required',
+            'municipio' => 'required',
+            'zona_catastral' => 'required',
+            'sector' => 'required',
+            'localidad' => 'required',
+            'predio' => 'required',
+            'manzana' => 'required',
+            'edificio' => 'required',
+            'departamento' => 'required',
+        ]);
 
-        $this->updatedModeloEditarTipoTramite();
+        $predio = PredioAvaluo::where('estado', 16)
+                                    ->where('region_catastral', $this->region_catastral)
+                                    ->where('municipio', $this->municipio)
+                                    ->where('zona_catastral', $this->zona_catastral)
+                                    ->where('sector', $this->sector)
+                                    ->where('localidad', $this->localidad)
+                                    ->where('predio', $this->predio)
+                                    ->where('manzana', $this->manzana)
+                                    ->where('edificio', $this->edificio)
+                                    ->where('departamento', $this->departamento)
+                                    ->first();
 
-        if($this->modelo_editar->tipo_servicio == 'urgente'){
+        if(!$predio){
 
-            if($this->servicio['urgente'] == 0){
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', 'No existe el predio con la clave catastral ingresada.']);
 
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No hay servicio urgente para el servicio seleccionado."]);
-
-                $this->modelo_editar->tipo_servicio = 'ordinario';
-
-                $this->updatedModeloEditarTipoTramite();
-            }
-
-        }
-        elseif($this->modelo_editar->tipo_servicio == 'extra_urgente'){
-
-            if($this->servicio['extra_urgente'] == 0){
-
-                $this->dispatchBrowserEvent('mostrarMensaje', ['error', "No hay servicio extra urgente para el servicio seleccionado."]);
-
-                $this->modelo_editar->tipo_servicio = 'ordinario';
-
-                $this->updatedModeloEditarTipoTramite();
-            }
-
-        }
-
-    }
-
-    public function updatedImporteBase(){
-
-        if($this->importe_base == '')
             return;
+        }
 
-        $this->modelo_editar->monto = (float)$this->servicio['porcentaje'] / 100 * $this->importe_base ;
+        if(!$predio->valor_catastral){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', 'El predio no tiene valor catastral.']);
+
+            return;
+        }
+
+        $this->modelo_editar->monto = (float)$this->servicio['porcentaje'] / 100 * $predio->valor_catastral;
+
+        $this->modelo_editar->observaciones =
+                'Clave catastral: 16-' .
+                $this->region_catastral . '-' .
+                $this->municipio . '-' .
+                $this->zona_catastral . '-' .
+                $this->sector . '-' .
+                $this->localidad . '-' .
+                $this->predio . '-' .
+                $this->manzana . '-' .
+                $this->edificio . '-' .
+                $this->departamento;
+
+        $this->dispatchBrowserEvent('mostrarMensaje', ['success', 'Se cargo correctamente el 2% del valor del predio.']);
 
     }
 
@@ -190,9 +216,6 @@ class PredioIgnorado extends Component
     public function crear(){
 
         $this->validate();
-
-        if ($this->servicio['id'] == 292)
-            $this->validate(['importe_base' => 'required']);
 
         try {
 
@@ -257,12 +280,6 @@ class PredioIgnorado extends Component
         $this->flags['tipo_de_servicio'] = false;
         $this->flags['cantidad'] = false;
         $this->flags['adiciona'] = false;
-
-        foreach($this->modelo_editar->predios as $predio){
-
-            array_push($this->predios, $predio);
-
-        }
 
         $this->editar = true;
 

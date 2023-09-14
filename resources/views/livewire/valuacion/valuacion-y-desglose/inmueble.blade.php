@@ -410,7 +410,7 @@
 
                 <div>
 
-                    <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_exterior">
+                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_exterior">
 
                 </div>
 
@@ -432,7 +432,7 @@
 
                 <div>
 
-                    <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_exterior_2">
+                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_exterior_2">
 
                 </div>
 
@@ -454,7 +454,7 @@
 
                 <div>
 
-                    <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_interior">
+                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_interior">
 
                 </div>
 
@@ -476,7 +476,7 @@
 
                 <div>
 
-                    <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_adicional">
+                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_adicional">
 
                 </div>
 
@@ -498,7 +498,7 @@
 
                 <div>
 
-                    <input type="text" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_adicional_2">
+                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="predio.numero_adicional_2">
 
                 </div>
 
@@ -764,39 +764,35 @@
 
         @endif
 
-        @if($predio && $predio->avaluo && $predio->avaluo->estado != 'notificado')
+        @if(!$editar)
 
-            @if(!$editar)
+            <button
+                wire:click="crear"
+                wire:loading.attr="disabled"
+                wire:target="crear"
+                class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
+            >
 
-                <button
-                    wire:click="crear"
-                    wire:loading.attr="disabled"
-                    wire:target="crear"
-                    class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-                >
+                <img wire:loading wire:target="crear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                    <img wire:loading wire:target="crear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                Guardar
 
-                    Guardar
+            </button>
 
-                </button>
+        @else
 
-            @else
+            <button
+                wire:click="actualizar"
+                wire:loading.attr="disabled"
+                wire:target="actualizar"
+                class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
+            >
 
-                <button
-                    wire:click="actualizar"
-                    wire:loading.attr="disabled"
-                    wire:target="actualizar"
-                    class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-                >
+                <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                    <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                Actualizar
 
-                    Actualizar
-
-                </button>
-
-            @endif
+            </button>
 
         @endif
 

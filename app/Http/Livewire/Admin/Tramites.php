@@ -21,6 +21,7 @@ class Tramites extends Component
     public $oficina;
     public $tipo;
     public $registro;
+    public $modalVer = false;
 
     public Tramite $modelo_editar;
 
@@ -60,6 +61,16 @@ class Tramites extends Component
             }
 
         }
+
+    }
+
+    public function abrirModalVer(Tramite $modelo){
+
+        $this->resetearTodo();
+        $this->modalVer = true;
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
 
     }
 
@@ -164,6 +175,7 @@ class Tramites extends Component
         $tramites = Tramite::with('creadoPor', 'actualizadoPor', 'servicio.categoria', 'predios')
                             ->where('solicitante', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('folio', 'LIKE', '%' . $this->search . '%')
+                            ->orWhere('estado', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('tipo_servicio', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('tipo_tramite', 'LIKE', '%' . $this->search . '%')
                             ->orWhere(function($q){

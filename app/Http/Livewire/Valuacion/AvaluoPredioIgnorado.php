@@ -61,7 +61,7 @@ class AvaluoPredioIgnorado extends Component
             'predio.region_catastral' => 'required|min:1',
             'predio.municipio' => 'required|min:1',
             'predio.zona_catastral' => 'required|min:1',
-            'predio.localidad' => 'required|min:1',
+            'predio.localidad' => 'required|min:1|same:predio.zona_catastral',
             'predio.sector' => 'required|min:1',
             'predio.manzana' => 'required|min:1',
             'predio.predio' => 'required|min:1',
@@ -515,6 +515,13 @@ class AvaluoPredioIgnorado extends Component
             return;
         }
 
+        if($this->predio->avaluo->estado == "notificado"){
+
+            $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avalúo esta notificado no se puede editar"]);
+
+            return;
+        }
+
         try {
 
             DB::transaction(function () {
@@ -686,6 +693,10 @@ class AvaluoPredioIgnorado extends Component
 
         }
 
+        $this->oficina = auth()->user()->oficina;
+
+        $this->localidad = $this->predio->localidad;
+
         $this->modal2 = true;
 
     }
@@ -714,6 +725,8 @@ class AvaluoPredioIgnorado extends Component
             $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
             $this->tipo_propietario = $this->predio->propietarios()->first()->tipo;
             $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
+
+            $this->editar = true;
 
         }
 
