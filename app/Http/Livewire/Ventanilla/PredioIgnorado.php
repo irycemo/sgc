@@ -32,6 +32,8 @@ class PredioIgnorado extends Component
     public $edificio;
     public $departamento;
 
+    public $predioAvaluo;
+
     public $editar = false;
 
     public Tramite $modelo_editar;
@@ -60,13 +62,15 @@ class PredioIgnorado extends Component
             'modelo_editar.cantidad' => 'required|numeric',
             'modelo_editar.adiciona' => 'required_if:adicionaTramite,true',
             'modelo_editar.observaciones' => Rule::requiredIf($this->modelo_editar->tipo_tramite === "exento"),
+            'predioAvaluo' => 'required',
         ];
 
     }
 
     protected $validationAttributes  = [
         'modelo_editar.adiciona' => 'trámite',
-        'tramiteAdicionadoSeleccionado' => 'trámite adiciona'
+        'tramiteAdicionadoSeleccionado' => 'trámite adiciona',
+        'predioAvaluo' => 'La clave catastral es obligatoria'
     ];
 
     public function crearModeloVacio(){
@@ -142,7 +146,7 @@ class PredioIgnorado extends Component
             'departamento' => 'required',
         ]);
 
-        $predio = PredioAvaluo::where('estado', 16)
+        $this->predioAvaluo = PredioAvaluo::where('estado', 16)
                                     ->where('region_catastral', $this->region_catastral)
                                     ->where('municipio', $this->municipio)
                                     ->where('zona_catastral', $this->zona_catastral)
@@ -154,21 +158,21 @@ class PredioIgnorado extends Component
                                     ->where('departamento', $this->departamento)
                                     ->first();
 
-        if(!$predio){
+        if(!$this->predioAvaluo){
 
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', 'No existe el predio con la clave catastral ingresada.']);
 
             return;
         }
 
-        if(!$predio->valor_catastral){
+        if(!$this->predioAvaluo->valor_catastral){
 
             $this->dispatchBrowserEvent('mostrarMensaje', ['error', 'El predio no tiene valor catastral.']);
 
             return;
         }
 
-        $this->modelo_editar->monto = (float)$this->servicio['porcentaje'] / 100 * $predio->valor_catastral;
+        $this->modelo_editar->monto = (float)$this->servicio['porcentaje'] / 100 * $this->predioAvaluo->valor_catastral;
 
         $this->modelo_editar->observaciones =
                 'Clave catastral: 16-' .
@@ -248,7 +252,7 @@ class PredioIgnorado extends Component
 
             DB::transaction(function () {
 
-                $tramite = (new TramiteService($this->modelo_editar))->actualizarTramite($this->predios);
+                $tramite = (new TramiteService($this->modelo_editar))->actualizarTramite($this->predioAvaluos);
 
                 $this->resetearTodo();
 

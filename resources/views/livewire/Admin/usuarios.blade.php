@@ -653,7 +653,16 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.oficina">
+                            <select class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.oficina">
+                                <option selected value="">Selecciona una opción</option>
+
+                                @foreach ($oficinas as $oficina)
+
+                                    <option value="{{ $oficina->oficina }}">{{ $oficina->oficina }}</option>
+
+                                @endforeach
+
+                            </select>
 
                         </div>
 

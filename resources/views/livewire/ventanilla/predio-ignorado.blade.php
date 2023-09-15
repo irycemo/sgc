@@ -80,34 +80,44 @@
 
                     </div>
 
-                    <div class="space-y-1">
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2">
 
-                        <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-10" title="Estado" value="16" readonly>
+                        <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-full" title="Estado" value="16" readonly>
 
-                        <input title="Región" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('region_catastral') border-1 border-red-500 @enderror" wire:model.defer="region_catastral">
+                        <input title="Región" placeholder="Región" type="number" class="bg-white rounded text-xs w-full  @error('region_catastral') border-1 border-red-500 @enderror" wire:model.defer="region_catastral">
 
-                        <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('municipio') border-1 border-red-500 @enderror" wire:model.defer="municipio">
+                        <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-full @error('municipio') border-1 border-red-500 @enderror" wire:model.defer="municipio">
 
-                        <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model.defer="zona_catastral">
+                        <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-full @error('zona_catastral') border-1 border-red-500 @enderror" wire:model.defer="zona_catastral">
 
-                        <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.defer="localidad">
+                        <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-full @error('localidad') border-1 border-red-500 @enderror" wire:model.defer="localidad">
 
-                        <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-20 @error('sector') border-1 border-red-500 @enderror" wire:model.defer="sector">
+                        <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-full @error('sector') border-1 border-red-500 @enderror" wire:model.defer="sector">
 
-                        <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-20 @error('manzana') border-1 border-red-500 @enderror" wire:model.defer="manzana">
+                        <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-full @error('manzana') border-1 border-red-500 @enderror" wire:model.defer="manzana">
 
-                        <input title="Predio" placeholder="Predio" type="number" class="bg-white rounded text-xs w-20 @error('predio') border-1 border-red-500 @enderror" wire:model.defer="predio">
+                        <input title="Predio" placeholder="Predio" type="number" class="bg-white rounded text-xs w-full @error('predio') border-1 border-red-500 @enderror" wire:model.defer="predio">
 
-                        <input title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-20 @error('edificio') border-1 border-red-500 @enderror" wire:model.defer="edificio">
+                        <input title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-full @error('edificio') border-1 border-red-500 @enderror" wire:model.defer="edificio">
 
-                        <input title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-20 @error('departamento') border-1 border-red-500 @enderror" wire:model.defer="departamento">
+                        <input title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-full @error('departamento') border-1 border-red-500 @enderror" wire:model.defer="departamento">
+
+                    </div>
+
+                    <div>
+
+                        @error('predioAvaluo') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                    </div>
+
+                    <div class="text-right">
 
                         <button
                             wire:click="buscarPredio"
                             wire:loading.attr="disabled"
                             wire:target="buscarPredio"
                             type="button"
-                            class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-none flex items-center w-fit">
+                            class="bg-blue-400  hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-none items-center w-fit">
                             <img wire:loading wire:target="buscarPredio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                             <p class="mr-1"> Buscar</p>
                         </button>

@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
 use App\Http\Traits\ComponentesTrait;
+use App\Models\Oficina;
 
 class Usuarios extends Component
 {
@@ -19,6 +20,7 @@ class Usuarios extends Component
 
     public $roles;
     public $areas_adscripcion;
+    public $oficinas;
 
     public User $modelo_editar;
     public $role;
@@ -160,6 +162,8 @@ class Usuarios extends Component
         $this->areas_adscripcion = Constantes::AREAS_ADSCRIPCION;
 
         sort($this->areas_adscripcion);
+
+        $this->oficinas = Oficina::select('oficina', 'id')->whereNUll('cabecera')->orderBy('oficina')->get();
 
     }
 
