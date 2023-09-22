@@ -114,11 +114,11 @@
 
                         </th>
 
-                        <th wire:click="order('oficina')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        <th wire:click="order('oficina_id')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
 
                             Oficina
 
-                            @if($sort == 'oficina')
+                            @if($sort == 'oficina_id')
 
                                 @if($direction == 'asc')
 
@@ -322,7 +322,7 @@
 
                                 <span class="lg:hidden  absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Localidad</span>
 
-                                {{ $user->oficina }}
+                                {{ $user->oficina->oficina }} - {{ $user->oficina->nombre }}
 
                             </td>
 
@@ -653,12 +653,12 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.oficina">
+                            <select class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.oficina_id">
                                 <option selected value="">Selecciona una opción</option>
 
                                 @foreach ($oficinas as $oficina)
 
-                                    <option value="{{ $oficina->oficina }}">{{ $oficina->oficina }}</option>
+                                    <option value="{{ $oficina->id }}">{{ $oficina->nombre }} - {{ $oficina->oficina }}</option>
 
                                 @endforeach
 
@@ -668,7 +668,7 @@
 
                         <div>
 
-                            @error('modelo_editar.oficina') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                            @error('modelo_editar.oficina_id') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                         </div>
 

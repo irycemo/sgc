@@ -34,13 +34,14 @@ class Usuarios extends Component
             'modelo_editar.email' => 'required|email|unique:users,email,' . $this->modelo_editar->id,
             'modelo_editar.status' => 'required|in:activo,inactivo',
             'role' => 'required',
-            'modelo_editar.oficina' => 'required',
+            'modelo_editar.oficina_id' => 'required',
             'modelo_editar.area' => 'required'
          ];
     }
 
     protected $validationAttributes  = [
         'role' => 'rol',
+        'oficina_id' => 'oficina',
         'modelo_editar.oficina' => 'ubicación'
     ];
 
@@ -163,23 +164,23 @@ class Usuarios extends Component
 
         sort($this->areas_adscripcion);
 
-        $this->oficinas = Oficina::select('oficina', 'id')->whereNUll('cabecera')->orderBy('oficina')->get();
+        $this->oficinas = Oficina::select('oficina', 'id', 'nombre')->whereNUll('cabecera')->orderBy('nombre')->get();
 
     }
 
     public function render()
     {
 
-        $usuarios = User::with('creadoPor', 'actualizadoPor')
+        $usuarios = User::with('creadoPor', 'actualizadoPor', 'oficina')
                             ->where('name', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('email', 'LIKE', '%' . $this->search . '%')
-                            ->orWhere('oficina', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('area', 'LIKE', '%' . $this->search . '%')
                             ->orWhere('status', 'LIKE', '%' . $this->search . '%')
-                            ->orWhere(function($q){
-                                return $q->whereHas('roles', function($q){
+                            ->orWhereHas('roles', function($q){
+                                return $q->where('name', 'LIKE', '%' . $this->search . '%');
+                            })
+                            ->orWhereHas('roles', function($q){
                                     return $q->where('name', 'LIKE', '%' . $this->search . '%');
-                                });
                             })
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);

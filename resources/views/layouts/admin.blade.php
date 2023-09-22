@@ -67,6 +67,12 @@
 
                 @endcan
 
+                @can('Área de consultas')
+
+                    @include('layouts.sidebar-consultas')
+
+                @endcan
+
             </nav>
 
         </div>

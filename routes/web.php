@@ -23,6 +23,7 @@ use App\Http\Livewire\Admin\Predios\PrediosAsignados;
 use App\Http\Livewire\Admin\Predios\PrediosPadron;
 use App\Http\Livewire\Admin\ValoresunitariosConstruccion;
 use App\Http\Livewire\Admin\ValoresUnitariosRusticos;
+use App\Http\Livewire\Consultas\Oficina;
 use App\Http\Livewire\Valuacion\AsignacionCuentaPredial;
 use App\Http\Livewire\Valuacion\FichaTecnica;
 use App\Http\Livewire\Valuacion\Impresion;
@@ -105,6 +106,9 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('avaluo_predio_ignorado/{id?}', AvaluoPredioIgnoradoController::class)->middleware('permission:Avaluos de predio ignorado')->name('avaluo_predio_ignorado');
 
     Route::get('mis_avaluos', MisAvaluos::class)->middleware('permission:Ver mis avaluos')->name('mis_avaluos');
+
+    /* Consultas */
+    Route::get('ver_oficina/{ofice_id?}', Oficina::class)->middleware('permission:Ver oficina')->name('ver_oficina');
 
     /* Ventanilla */
     /* Route::get('ventanilla', Ventanilla::class)->middleware('permission:Ventanilla')->name('ventanilla'); */

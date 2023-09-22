@@ -97,7 +97,7 @@ class AvaluoPredioIgnorado extends Component
             'nombre' => 'required',
             'tipo_persona' => 'required',
             'tipo_propietario' => 'required',
-            'porcentaje' => 'required|numeric',
+            'porcentaje' => 'required|numeric|max:100',
          ];
     }
 

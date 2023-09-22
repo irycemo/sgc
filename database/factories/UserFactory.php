@@ -32,7 +32,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'ap_paterno' => $this->faker->word(),
             'ap_materno' => $this->faker->word(),
-            'oficina' => Oficina::select('oficina')->inRandomOrder()->first()->oficina,
+            'oficina_id' => Oficina::inRandomOrder()->first()->id,
             'area' => $this->faker->randomElement(Constantes::AREAS_ADSCRIPCION),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),

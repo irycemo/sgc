@@ -8,7 +8,7 @@
 
     <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -170,7 +170,7 @@
 
     <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -345,7 +345,7 @@
 
         <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -391,7 +391,7 @@
 
         <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -453,7 +453,7 @@
 
         <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -515,7 +515,7 @@
 
         <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -569,7 +569,7 @@
 
         <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -615,7 +615,7 @@
 
         <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-2">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -735,7 +735,7 @@
 
         <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-2">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2">
 

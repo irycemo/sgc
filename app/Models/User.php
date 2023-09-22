@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Oficina;
 use App\Http\Traits\ModelosTrait;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
-use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Notifications\Notifiable;
+use OwenIt\Auditing\Contracts\Auditable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -35,7 +36,7 @@ class User extends Authenticatable implements Auditable
         'ap_materno',
         'email',
         'password',
-        'oficina',
+        'oficina_id',
         'status',
         'area',
         'creado_por',
@@ -72,4 +73,8 @@ class User extends Authenticatable implements Auditable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function oficina(){
+        return $this->belongsTo(Oficina::class);
+    }
 }

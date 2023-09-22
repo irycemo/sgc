@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'Enrique',
             'ap_paterno' => 'Robledo',
             'ap_materno' => 'Camacho',
-            'oficina' => '101',
+            'oficina_id' => '1',
             'status' => 'activo',
             'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
             'email' => 'correo@correo.com',
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
             'name' => 'Sergio Arturo',
             'ap_paterno' => 'Calvillo',
             'ap_materno' => 'Corral',
-            'oficina' => '101',
+            'oficina_id' => '1',
             'status' => 'activo',
             'area' => 'Dirección de Catastro',
             'email' => 'correo2@correo.com',
@@ -43,14 +43,14 @@ class UserSeeder extends Seeder
             'name' => 'Martin',
             'ap_paterno' => 'Calvillo',
             'ap_materno' => 'Corral',
-            'oficina' => '101',
+            'oficina_id' => '1',
             'status' => 'activo',
             'area' => 'Departamento de Valuación',
             'email' => 'correo3@correo.com',
             'password' => Hash::make('12345678'),
         ])->assignRole('Jefe de departamento');
 
-        User::factory(20)->create()->each(function($user){
+        User::factory(10)->create()->each(function($user){
             $user->assignRole('Valuador');
         });
     }

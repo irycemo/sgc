@@ -13,17 +13,18 @@ return new class extends Migration
     {
         Schema::create('certificacions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('predio_id');
-            $table->unsignedInteger('numero_certificado');
+            $table->string('certificacionable_id');
+            $table->string('certificacionable_type');
+            $table->unsignedInteger('folio');
             $table->text('cadena_originial');
             $table->text('cadena_encriptada');
             $table->string('documento');
             $table->string('estado');
             $table->unsignedInteger('oficina');
-            $table->foreignId('creado_por')->references('id')->on('users');
             $table->string('actualizado_por');
             $table->foreignId('tramite_id');
             $table->text('observaciones');
+            $table->foreignId('creado_por')->references('id')->on('users');
             $table->timestamps();
         });
     }

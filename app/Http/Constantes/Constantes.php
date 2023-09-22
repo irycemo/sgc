@@ -25,7 +25,8 @@ class Constantes{
         'Factor de incremento',
         'Valores unitarios',
         'Oficinas',
-        'Avaluos'
+        'Avaluos',
+        'Consulta'
     ];
 
     const AREAS_ADSCRIPCION = [

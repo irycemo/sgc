@@ -16,7 +16,7 @@ class PredioSeeder extends Seeder
      */
     public function run(): void
     {
-        Predio::factory(100)->create()->each(function(Predio $predio){
+        Predio::factory(1000)->create()->each(function(Predio $predio){
 
             AsignarCuenta::create([
                 'localidad' => $predio->localidad,

@@ -22,8 +22,6 @@ return new class extends Migration
             $table->string('titular')->nullable();
             $table->string('email')->nullable();
             $table->string('telefonos')->nullable();
-            $table->string('notificador')->nullable();
-            $table->string('jefe_departamento')->nullable();
             $table->string('autoridad_municipal')->nullable();
             $table->string('valuador_municipal')->nullable();
             $table->foreignId('cabecera')->nullable()->references('id')->on('oficinas');

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Oficina;
+use Illuminate\Support\Arr;
 use App\Http\Constantes\Constantes;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,7 +19,9 @@ class PredioFactory extends Factory
      */
     public function definition(): array
     {
-        $oficina = Oficina::select(['oficina', 'localidad', 'municipio'])->inRandomOrder()->first();
+        $oficina = Oficina::inRandomOrder()->first();
+
+        $sectores = json_decode($oficina->sectores, true);
 
         return [
             'estado' => 16,
@@ -43,7 +46,7 @@ class PredioFactory extends Factory
             'etapa_fraccionador' => $this->faker->numberBetween(1,100),
             'codigo_postal' => $this->faker->numberBetween(1,100),
             'localidad' => $oficina->localidad,
-            'sector' => $this->faker->numberBetween(1,100),
+            'sector' => Arr::random($sectores),
             'manzana' => $this->faker->numberBetween(1,100),
             'predio' => $this->faker->numberBetween(1,100),
             'edificio' => $this->faker->numberBetween(1,100),
