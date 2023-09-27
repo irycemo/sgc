@@ -148,7 +148,6 @@ class AvaluoPredioIgnorado extends Component
         try {
 
             $this->validate([
-                'predio.numero_registro' => 'required',
                 'predio.region_catastral' => 'required',
                 'predio.municipio' => 'required',
                 'predio.zona_catastral' => 'required',
@@ -162,7 +161,6 @@ class AvaluoPredioIgnorado extends Component
 
             $this->predio = PredioAvaluo::with('propietarios', 'avaluo')
                                         ->where('estado', 16)
-                                        ->where('numero_registro', $this->predio->numero_registro)
                                         ->where('region_catastral', $this->predio->region_catastral)
                                         ->where('municipio', $this->predio->municipio)
                                         ->where('zona_catastral', $this->predio->zona_catastral)
