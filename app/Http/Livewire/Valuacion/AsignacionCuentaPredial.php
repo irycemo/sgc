@@ -202,7 +202,7 @@ class AsignacionCuentaPredial extends Component
         }else{
 
             $this->valuadores = User::where('status', 'activo')
-                                    ->where('oficina', auth()->user()->oficina->id)
+                                    ->where('oficina', auth()->user()->oficina_id)
                                     ->where('valuador', 1)
                                     ->orderBy('ap_paterno')
                                     ->get();
