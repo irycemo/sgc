@@ -30,7 +30,7 @@
 
                         <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('predio.localidad') border-1 border-red-500 @enderror" wire:model.lazy="predio.localidad">
 
-                        <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('predio.oficina') border-1 border-red-500 @enderror" wire:model.defer="predio.oficina" @if(auth()->user()->oficina != 101) readonly @endif>
+                        <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('predio.oficina') border-1 border-red-500 @enderror" wire:model.defer="predio.oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
                         <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-20 @error('predio.tipo_predio') border-1 border-red-500 @enderror" wire:model.defer="predio.tipo_predio">
 

@@ -154,7 +154,7 @@ class Certificaciones extends Component
                                                     })
                                                     ->when(!auth()->user()->hasRole('Administrador'), function($q){
                                                         $q->whereHas('predios', function ($q) {
-                                                            $q->where('oficina', auth()->user()->oficina);
+                                                            $q->where('oficina', auth()->user()->oficina->oficina);
                                                         });
                                                     })
                                                     ->where('estado', 'pagado')
@@ -388,7 +388,7 @@ class Certificaciones extends Component
 
         $this->modelo_editar->servicio_id = $this->servicio['id'];
 
-        $this->oficina = auth()->user()->oficina;
+        $this->oficina = auth()->user()->oficina->oficina;
 
         $this->updatedModeloEditarTipoTramite();
 

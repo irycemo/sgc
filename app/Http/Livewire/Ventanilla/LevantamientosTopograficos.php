@@ -322,7 +322,7 @@ class LevantamientosTopograficos extends Component
 
         $this->modelo_editar->servicio_id = $this->servicio['id'];
 
-        $this->oficina = auth()->user()->oficina;
+        $this->oficina = auth()->user()->oficina->oficina;
 
         $this->updatedModeloEditarTipoTramite();
 

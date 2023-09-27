@@ -454,7 +454,7 @@ class Impresion extends Component
 
     public function mount(){
 
-        $this->oficina = auth()->user()->oficina;
+        $this->oficina = auth()->user()->oficina->oficina;
 
         $this->director = User::where('status', 'activo')
                                 ->whereHas('roles', function($q){

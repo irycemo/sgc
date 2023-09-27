@@ -215,7 +215,7 @@
 
                                     <div>
 
-                                        <input placeholder="Oficina rentistica" type="number" class="bg-white rounded text-sm w-full" wire:model.defer="oficina" @if(auth()->user()->oficina != 101) readonly @endif>
+                                        <input placeholder="Oficina rentistica" type="number" class="bg-white rounded text-sm w-full" wire:model.defer="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
                                         <div>
 

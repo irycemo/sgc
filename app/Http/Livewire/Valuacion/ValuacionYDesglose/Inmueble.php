@@ -708,7 +708,7 @@ class Inmueble extends Component
 
         $this->predio = $this->crearModeloVacio();
 
-        $this->predio->oficina = auth()->user()->oficina;
+        $this->predio->oficina = auth()->user()->oficina->oficina;
 
         if($this->avaluo_id){
 

@@ -175,7 +175,7 @@ class AvaluoPredioIgnorado extends Component
             if($this->predio->avaluo->creado_por != auth()->user()->id){
 
                 $this->predio = PredioAvaluo::make([
-                    'oficina' => auth()->user()->oficina
+                    'oficina' => auth()->user()->oficina->oficina
                 ]);
 
                 $this->dispatchBrowserEvent('mostrarMensaje', ['error', "El avaluo está asinagnado a otro valuador."]);
@@ -700,7 +700,7 @@ class AvaluoPredioIgnorado extends Component
 
         }
 
-        $this->oficina = auth()->user()->oficina;
+        $this->oficina = auth()->user()->oficina->oficina;
 
         $this->localidad = $this->predio->localidad;
 
@@ -718,7 +718,7 @@ class AvaluoPredioIgnorado extends Component
 
         $this->predio = $this->crearModeloVacio();
 
-        $this->predio->oficina = auth()->user()->oficina;
+        $this->predio->oficina = auth()->user()->oficina->oficina;
 
         if($this->avaluo_id){
 

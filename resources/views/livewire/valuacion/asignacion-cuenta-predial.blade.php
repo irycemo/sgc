@@ -15,7 +15,7 @@
 
                     <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.defer="localidad">
 
-                    <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina != 101 && !auth()->user()->hasRole('Administrador')) readonly @endif>
+                    <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101 && !auth()->user()->hasRole('Administrador')) readonly @endif>
 
                     <input placeholder="Tipo" type="number" max="2" min="1" class="bg-white rounded text-xs w-20 @error('tipo') border-1 border-red-500 @enderror" wire:model.defer="tipo">
 
@@ -160,7 +160,7 @@
 
                 <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad_busqueda') border-1 border-red-500 @enderror" wire:model.lazy="localidad_busqueda">
 
-                <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina_busqueda') border-1 border-red-500 @enderror" wire:model.defer="oficina_busqueda" @if(auth()->user()->oficina != 101) readonly @endif>
+                <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina_busqueda') border-1 border-red-500 @enderror" wire:model.defer="oficina_busqueda" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
                 <input placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo_busqueda') border-1 border-red-500 @enderror" wire:model.defer="tipo_busqueda">
 
