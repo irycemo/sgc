@@ -511,6 +511,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                                     ->where('sector', $row['sector'])
                                                     ->where('manzana', $row['manzana'])
                                                     ->where('edificio', $row['edificio'])
+                                                    ->where('predio', $row['predio'])
                                                     ->where('departamento', $row['departamento'])
                                                     ->first();
 
