@@ -19,11 +19,71 @@ class UserSeeder extends Seeder
             'name' => 'Enrique',
             'ap_paterno' => 'Robledo',
             'ap_materno' => 'Camacho',
-            'oficina_id' => '1',
+            'oficina_id' => '53',
             'status' => 'activo',
             'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
             'email' => 'correo@correo.com',
-            'password' => Hash::make('12345678'),
+            'password' => 'sistema',
+        ])->assignRole('Administrador');
+
+        User::create([
+            'clave' => 1,
+            'name' => 'Tomas',
+            'ap_paterno' => 'Hernandez',
+            'ap_materno' => 'Cuellar',
+            'oficina_id' => '53',
+            'status' => 'activo',
+            'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
+            'email' => 'tomas.hernandez@plancartemorelia.edu.mx',
+            'password' => 'sistema',
+        ])->assignRole('Administrador');
+
+        User::create([
+            'clave' => 1,
+            'name' => 'Martin',
+            'ap_paterno' => 'Cervantes',
+            'ap_materno' => 'Osorio',
+            'oficina_id' => '53',
+            'status' => 'activo',
+            'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
+            'email' => 'cervantes.martin@gmail.com',
+            'password' => 'sistema',
+        ])->assignRole('Administrador');
+
+        User::create([
+            'clave' => 1,
+            'name' => 'Mauricio',
+            'ap_paterno' => 'Landa',
+            'ap_materno' => 'Herrera',
+            'oficina_id' => '53',
+            'status' => 'activo',
+            'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
+            'email' => 'mlanda64@hotmail.com',
+            'password' => 'sistema',
+        ])->assignRole('Administrador');
+
+        User::create([
+            'clave' => 1,
+            'name' => 'Salvador',
+            'ap_paterno' => 'Sanchez',
+            'ap_materno' => 'Alvarez',
+            'oficina_id' => '53',
+            'status' => 'activo',
+            'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
+            'email' => 'ssacat@outlook.com',
+            'password' => 'sistema',
+        ])->assignRole('Administrador');
+
+        User::create([
+            'clave' => 1,
+            'name' => 'Saul',
+            'ap_paterno' => 'Hernandez',
+            'ap_materno' => 'Castro',
+            'oficina_id' => '53',
+            'status' => 'activo',
+            'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
+            'email' => 'scastro@michoacan.gob.mx',
+            'password' => 'sistema',
         ])->assignRole('Administrador');
 
         User::create([
@@ -31,7 +91,7 @@ class UserSeeder extends Seeder
             'name' => 'Sergio Arturo',
             'ap_paterno' => 'Calvillo',
             'ap_materno' => 'Corral',
-            'oficina_id' => '1',
+            'oficina_id' => '53',
             'status' => 'activo',
             'area' => 'Dirección de Catastro',
             'email' => 'correo2@correo.com',
@@ -43,7 +103,7 @@ class UserSeeder extends Seeder
             'name' => 'Martin',
             'ap_paterno' => 'Calvillo',
             'ap_materno' => 'Corral',
-            'oficina_id' => '1',
+            'oficina_id' => '53',
             'status' => 'activo',
             'area' => 'Departamento de Valuación',
             'email' => 'correo3@correo.com',
