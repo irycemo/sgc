@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
         ])->assignRole('Administrador');
 
         User::create([
-            'clave' => 1,
+            'clave' => 2,
             'name' => 'Tomas',
             'ap_paterno' => 'Hernandez',
             'ap_materno' => 'Cuellar',
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
         ])->assignRole('Administrador');
 
         User::create([
-            'clave' => 1,
+            'clave' => 3,
             'name' => 'Martin',
             'ap_paterno' => 'Cervantes',
             'ap_materno' => 'Osorio',
@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
         ])->assignRole('Administrador');
 
         User::create([
-            'clave' => 1,
+            'clave' => 4,
             'name' => 'Mauricio',
             'ap_paterno' => 'Landa',
             'ap_materno' => 'Herrera',
@@ -63,7 +63,7 @@ class UserSeeder extends Seeder
         ])->assignRole('Administrador');
 
         User::create([
-            'clave' => 1,
+            'clave' => 5,
             'name' => 'Salvador',
             'ap_paterno' => 'Sanchez',
             'ap_materno' => 'Alvarez',
@@ -75,7 +75,7 @@ class UserSeeder extends Seeder
         ])->assignRole('Administrador');
 
         User::create([
-            'clave' => 1,
+            'clave' => 6,
             'name' => 'Saul',
             'ap_paterno' => 'Hernandez',
             'ap_materno' => 'Castro',
@@ -87,7 +87,7 @@ class UserSeeder extends Seeder
         ])->assignRole('Administrador');
 
         User::create([
-            'clave' => 2,
+            'clave' => 7,
             'name' => 'Sergio Arturo',
             'ap_paterno' => 'Calvillo',
             'ap_materno' => 'Corral',
@@ -99,7 +99,7 @@ class UserSeeder extends Seeder
         ])->assignRole('Director');
 
         User::create([
-            'clave' => 3,
+            'clave' => 8,
             'name' => 'Martin',
             'ap_paterno' => 'Calvillo',
             'ap_materno' => 'Corral',
