@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedInteger('colindanciaable_id');
             $table->string('colindanciaable_type');
             $table->string('viento');
-            $table->unsignedDecimal('longitud', 15, 8);
+            $table->unsignedDecimal('longitud', 15, 2);
             $table->text('descripcion');
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');

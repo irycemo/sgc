@@ -9,7 +9,6 @@ use Livewire\Component;
 use App\Models\PredioAvaluo;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Valuacion\AvaluosController;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Impresion extends Component
 {

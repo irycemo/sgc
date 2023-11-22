@@ -22,8 +22,6 @@ class AvaluosController extends Controller
 
         $qr = $this->generadorQr();
 
-        set_time_limit(300);
-
         if($collection->count() > 1){
 
             $oMerger = PDFMerger::init();
