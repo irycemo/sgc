@@ -8,9 +8,9 @@
 
             <div>
 
-                <input type="text" wire:model.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
 
-                <select class="bg-white rounded-full text-sm" wire:model="pagination">
+                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -272,7 +272,7 @@
 
     @endif
 
-    <x-dialog-modal wire:model="modal" maxWidth="2xl">
+    <x-dialog-modal wire:model.live="modal" maxWidth="2xl">
 
         <x-slot name="title">
 
@@ -299,7 +299,7 @@
 
                         <div>
 
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.nombre">
+                            <input type="text" class="bg-white rounded text-sm w-full" wire:model="modelo_editar.nombre">
 
                         </div>
 
@@ -371,7 +371,7 @@
 
     </x-dialog-modal>
 
-    <x-confirmation-modal wire:model="modalBorrar">
+    <x-confirmation-modal wire:model.live="modalBorrar">
 
         <x-slot name="title">
             Eliminar Categoría

@@ -23,7 +23,7 @@
 
                     <div>
 
-                        <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="titular">
+                        <input type="text" class="bg-white rounded text-sm w-full" wire:model="titular">
 
                     </div>
 
@@ -44,7 +44,7 @@
 
                     <div>
 
-                        <input type="email" class="bg-white rounded text-sm w-full" wire:model.defer="email">
+                        <input type="email" class="bg-white rounded text-sm w-full" wire:model="email">
 
                     </div>
 
@@ -65,7 +65,7 @@
 
                     <div>
 
-                        <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="telefonos">
+                        <input type="text" class="bg-white rounded text-sm w-full" wire:model="telefonos">
 
                     </div>
 
@@ -86,7 +86,7 @@
 
                     <div>
 
-                        <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="autoridad_municipal">
+                        <input type="text" class="bg-white rounded text-sm w-full" wire:model="autoridad_municipal">
 
                     </div>
 
@@ -107,7 +107,7 @@
 
                     <div>
 
-                        <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="valuador_municipal">
+                        <input type="text" class="bg-white rounded text-sm w-full" wire:model="valuador_municipal">
 
                     </div>
 
@@ -130,7 +130,7 @@
 
                 <div>
 
-                    <textarea rows="3" class="bg-white rounded text-sm w-full" wire:model.defer="ubicacion"></textarea>
+                    <textarea rows="3" class="bg-white rounded text-sm w-full" wire:model="ubicacion"></textarea>
 
                 </div>
 
@@ -513,7 +513,7 @@
 
     </div>
 
-    <x-dialog-modal wire:model="modal">
+    <x-dialog-modal wire:model.live="modal">
 
         <x-slot name="title">
 

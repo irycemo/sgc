@@ -500,4 +500,16 @@ class Constantes{
         'INTERIOR',
     ];
 
+    const AÑOS = [
+        '2024' => '2024',
+        '2023' => '2023',
+    ];
+
+    const SOLICITANTES = [
+        'Escrituración social',
+        'Notaría',
+        'Oficialia de partes',
+        'Usuario'
+    ];
+
 }

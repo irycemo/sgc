@@ -15,7 +15,7 @@ trait ComponentesTrait{
     public $selected_id;
     public $fields = ['modalBorrar', 'modal', 'crear', 'editar'];
 
-    public function order($sort):void
+    public function sortBy($sort):void
     {
 
         if($this->sort == $sort){
@@ -48,7 +48,7 @@ trait ComponentesTrait{
         $this->resetValidation();
 
         if($borrado)
-            $this->modelo_editar = $this->crearModeloVacio();
+            $this->crearModeloVacio();
 
     }
 
@@ -69,14 +69,14 @@ trait ComponentesTrait{
         $this->crear =true;
 
         if($this->modelo_editar->getKey())
-            $this->modelo_editar = $this->crearModeloVacio();
+            $this->crearModeloVacio();
 
     }
 
     public function mount():void
     {
 
-        $this->modelo_editar = $this->crearModeloVacio();
+        $this->crearModeloVacio();
 
     }
 

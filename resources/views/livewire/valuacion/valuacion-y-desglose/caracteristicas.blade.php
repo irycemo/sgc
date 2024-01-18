@@ -24,7 +24,7 @@
 
                 <div class="">
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.clasificacion_zona">
+                    <select class="bg-white rounded text-xs w-full" wire:model="avaluo.clasificacion_zona">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -56,7 +56,7 @@
 
                 <div class="">
 
-                    <select class="bg-white rounded text-xs w-full" wire:model.defer="avaluo.construccion_dominante">
+                    <select class="bg-white rounded text-xs w-full" wire:model="avaluo.construccion_dominante">
 
                         <option value="" selected>Seleccione una opción</option>
 
@@ -99,7 +99,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.agua" @if($predio && $predio->tipo_predio == 1) checked @endif>
+                        <input type="checkbox" class="bg-white rounded text-xs" wire:model="avaluo.agua" @if($predio && $predio->avaluo->agua == 1) checked @endif>
 
                     </div>
 
@@ -120,7 +120,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.drenaje" @if($predio && $predio->tipo_predio == 1) checked @endif>
+                        <input type="checkbox" class="bg-white rounded text-xs" wire:model="avaluo.drenaje" @if($predio && $predio->avaluo->drenaje == 1) checked @endif>
 
                     </div>
 
@@ -141,7 +141,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.pavimento" @if($predio && $predio->tipo_predio == 1) checked @endif>
+                        <input type="checkbox" class="bg-white rounded text-xs" wire:model="avaluo.pavimento" @if($predio && $predio->avaluo->pavimento == 1) checked @endif>
 
                     </div>
 
@@ -162,7 +162,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.energia_electrica" @if($predio && $predio->tipo_predio == 1) checked @endif>
+                        <input type="checkbox" class="bg-white rounded text-xs" wire:model="avaluo.energia_electrica" @if($predio && $predio->avaluo->energia_electrica == 1) checked @endif>
 
                     </div>
 
@@ -183,7 +183,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.alumbrado_publico" @if($predio && $predio->tipo_predio == 1) checked @endif>
+                        <input type="checkbox" class="bg-white rounded text-xs" wire:model="avaluo.alumbrado_publico" @if($predio && $predio->avaluo->alumbrado_publico == 1) checked @endif>
 
                     </div>
 
@@ -204,7 +204,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model.defer="avaluo.banqueta" @if($predio && $predio->tipo_predio == 1) checked @endif>
+                        <input type="checkbox" class="bg-white rounded text-xs" wire:model="avaluo.banqueta" @if($predio && $predio->avaluo->banqueta == 1) checked @endif>
 
                     </div>
 
@@ -238,7 +238,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.cimentacion') border-red-500 @enderror" wire:model.defer="avaluo.cimentacion">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.cimentacion') border-red-500 @enderror" wire:model="avaluo.cimentacion">
 
                         @foreach ($cimentaciones as $item)
 
@@ -262,7 +262,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.estructura') border-red-500 @enderror" wire:model.defer="avaluo.estructura">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.estructura') border-red-500 @enderror" wire:model="avaluo.estructura">
 
                         @foreach ($estructuras as $item)
 
@@ -286,7 +286,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.muros') border-red-500 @enderror" wire:model.defer="avaluo.muros">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.muros') border-red-500 @enderror" wire:model="avaluo.muros">
 
                         @foreach ($muros as $item)
 
@@ -310,7 +310,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.entrepiso') border-red-500 @enderror" wire:model.defer="avaluo.entrepiso">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.entrepiso') border-red-500 @enderror" wire:model="avaluo.entrepiso">
 
                         @foreach ($entrepisos as $item)
 
@@ -334,7 +334,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.techo') border-red-500 @enderror" wire:model.defer="avaluo.techo">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.techo') border-red-500 @enderror" wire:model="avaluo.techo">
 
                         @foreach ($techos as $item)
 
@@ -368,7 +368,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.plafones') border-red-500 @enderror" wire:model.defer="avaluo.plafones">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.plafones') border-red-500 @enderror" wire:model="avaluo.plafones">
 
                         @foreach ($plafones as $item)
 
@@ -392,7 +392,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.vidrieria') border-red-500 @enderror" wire:model.defer="avaluo.vidrieria">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.vidrieria') border-red-500 @enderror" wire:model="avaluo.vidrieria">
 
                         @foreach ($vidrieria as $item)
 
@@ -416,7 +416,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.lambrines') border-red-500 @enderror" wire:model.defer="avaluo.lambrines">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.lambrines') border-red-500 @enderror" wire:model="avaluo.lambrines">
 
                         @foreach ($lambrines as $item)
 
@@ -440,7 +440,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.pisos') border-red-500 @enderror" wire:model.defer="avaluo.pisos">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.pisos') border-red-500 @enderror" wire:model="avaluo.pisos">
 
                         @foreach ($pisos as $item)
 
@@ -464,7 +464,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.herreria') border-red-500 @enderror" wire:model.defer="avaluo.herreria">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.herreria') border-red-500 @enderror" wire:model="avaluo.herreria">
 
                         @foreach ($herreria as $item)
 
@@ -488,7 +488,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.pintura') border-red-500 @enderror" wire:model.defer="avaluo.pintura">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.pintura') border-red-500 @enderror" wire:model="avaluo.pintura">
 
                         @foreach ($pintura as $item)
 
@@ -512,7 +512,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.carpinteria') border-red-500 @enderror" wire:model.defer="avaluo.carpinteria">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.carpinteria') border-red-500 @enderror" wire:model="avaluo.carpinteria">
 
                         @foreach ($carpinteria as $item)
 
@@ -536,7 +536,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.aplanados') border-red-500 @enderror" wire:model.defer="avaluo.aplanados">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.aplanados') border-red-500 @enderror" wire:model="avaluo.aplanados">
 
                         @foreach ($aplanados as $item)
 
@@ -560,7 +560,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.recubrimiento_especial') border-red-500 @enderror" wire:model.defer="avaluo.recubrimiento_especial">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.recubrimiento_especial') border-red-500 @enderror" wire:model="avaluo.recubrimiento_especial">
 
                         @foreach ($rec_especial as $item)
 
@@ -594,7 +594,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.hidraulica') border-red-500 @enderror" wire:model.defer="avaluo.hidraulica">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.hidraulica') border-red-500 @enderror" wire:model="avaluo.hidraulica">
 
                         @foreach ($hidraulica as $item)
 
@@ -618,7 +618,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.sanitaria') border-red-500 @enderror" wire:model.defer="avaluo.sanitaria">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.sanitaria') border-red-500 @enderror" wire:model="avaluo.sanitaria">
 
                         @foreach ($sanitaria as $item)
 
@@ -642,7 +642,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.electrica') border-red-500 @enderror" wire:model.defer="avaluo.electrica">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.electrica') border-red-500 @enderror" wire:model="avaluo.electrica">
 
                         @foreach ($electrica as $item)
 
@@ -666,7 +666,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.gas') border-red-500 @enderror" wire:model.defer="avaluo.gas">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.gas') border-red-500 @enderror" wire:model="avaluo.gas">
 
                         @foreach ($gas as $item)
 
@@ -690,7 +690,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full @error('avaluo.especiales') border-red-500 @enderror" wire:model.defer="avaluo.especiales">
+                    <select class="bg-white rounded text-xs w-full @error('avaluo.especiales') border-red-500 @enderror" wire:model="avaluo.especiales">
 
                         @foreach ($especiales as $item)
 
@@ -721,18 +721,16 @@
 
         @if($predio && $predio->avaluo && $predio->avaluo->estado != 'notificado')
 
-            <button
+            <x-button-green
                 wire:click="guardar"
                 wire:loading.attr="disabled"
-                wire:target="guardar"
-                class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-            >
+                wire:target="guardar">
 
                 <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                 Guardar
 
-            </button>
+            </x-button-green>
 
         @endif
 

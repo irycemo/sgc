@@ -31,6 +31,7 @@ class Tramite extends Model implements Auditable
             'activo' => 'yellow-400',
             'concluido' => 'gray-400',
             'expirado' => 'red-400',
+            'inactivo' => 'red-400',
         ][$this->estado] ?? 'gray-400';
     }
 

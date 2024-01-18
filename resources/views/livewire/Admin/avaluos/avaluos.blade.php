@@ -8,9 +8,45 @@
 
             <div>
 
-                <input type="text" wire:model.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+                <input type="text" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
 
-                <select class="bg-white rounded-full text-sm" wire:model="pagination">
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
+
+                    <option value="" selected>Estado</option>
+                    <option value="nuevo">Nuevo</option>
+                    <option value="impreso">Impreso</option>
+                    <option value="concluido">Concluido</option>
+                    <option value="notificado">Notificado</option>
+
+                </select>
+
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.valuador">
+
+                    <option value="" selected>Valuador</option>
+
+                    @foreach ($valuadores as $valuador)
+
+                        <option value="{{ $valuador->id }}">{{ $valuador->ap_paterno }} {{ $valuador->ap_materno }} {{ $valuador->name }}</option>
+
+                    @endforeach
+
+                </select>
+
+                <input type="text" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+
+                <input type="text" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.tipo">
+
+                    <option value="" selected>Tipo</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+
+                </select>
+
+                <input type="text" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+
+                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -25,367 +61,167 @@
 
     </div>
 
-    @if($predios->count())
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
 
-        <div class="relative overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+        <x-table>
 
-            <table class="rounded-lg w-full">
+            <x-slot name="head">
 
-                <thead class="border-b border-gray-300 bg-gray-50">
+                <x-table.heading >Folio</x-table.heading>
+                <x-table.heading >Estado</x-table.heading>
+                <x-table.heading >Valuador</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('localidad')" :direction="$sort === 'localidad' ? $direction : null">Localidad</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('oficina')" :direction="$sort === 'oficina' ? $direction : null">Oficina</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('tipo_predio')" :direction="$sort === 'tipo_predio' ? $direction : null">Tipo de predio</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('numero_registro')" :direction="$sort === 'numero_registro' ? $direction : null">Número de registro</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
+                <x-table.heading >Acciones</x-table.heading>
 
-                    <tr class="text-xs font-medium text-gray-500 uppercase text-left traling-wider">
+            </x-slot>
 
-                        <th class="px-3 py-3 hidden lg:table-cell">
+            <x-slot name="body">
 
-                            Folio avaluo
+                @forelse ($predios as $predio)
 
-                        </th>
+                    <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $predio->id }}">
 
-                        <th class="px-3 py-3 hidden lg:table-cell">
+                        <x-table.cell>
 
-                            Estado
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Folio</span>
 
-                        </th>
+                            {{ $predio->avaluo->folio }}
 
-                        <th class="px-3 py-3 hidden lg:table-cell">
+                        </x-table.cell>
 
-                            Valuador
+                        <x-table.cell>
 
-                        </th>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Estado</span>
 
-                        <th wire:click="order('localidad')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                            <span class="bg-{{ $predio->avaluo->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($predio->avaluo->estado) }}</span>
 
-                            Localidad
+                        </x-table.cell>
 
-                            @if($sort == 'localidad')
+                        <x-table.cell>
 
-                                @if($direction == 'asc')
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Valuador</span>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            {{ $predio->avaluo->asignadoA->name }} {{ $predio->avaluo->asignadoA->ap_paterno }} {{ $predio->avaluo->asignadoA->ap_materno }}
 
-                                @else
+                        </x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                        <x-table.cell>
 
-                                @endif
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Localidad</span>
 
-                            @else
+                            {{ $predio->localidad }}
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                        </x-table.cell>
 
-                            @endif
+                        <x-table.cell>
 
-                        </th>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Oficina</span>
 
-                        <th wire:click="order('oficina')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                            {{ $predio->oficina }}
 
-                            Oficina
+                        </x-table.cell>
 
-                            @if($sort == 'oficina')
+                        <x-table.cell>
 
-                                @if($direction == 'asc')
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Tipo de predio</span>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            {{ $predio->tipo_predio }}
 
-                                @else
+                        </x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                        <x-table.cell>
 
-                                @endif
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Número de registro</span>
 
-                            @else
+                            {{ $predio->numero_registro }}
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                        </x-table.cell>
 
-                            @endif
+                        <x-table.cell>
 
-                        </th>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
-                        <th wire:click="order('tipo_predio')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                            {{ $predio->created_at }}
 
-                            Tipo
+                        </x-table.cell>
 
-                            @if($sort == 'tipo_predio')
+                        <x-table.cell>
 
-                                @if($direction == 'asc')
+                            <span class="font-semibold">@if($predio->actualizadoPor != null)Actualizado por: {{$predio->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            {{ $predio->updated_at }}
 
-                                @else
+                        </x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                        <x-table.cell>
 
-                                @endif
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
 
-                            @else
+                            <div class="flex justify-center lg:justify-start gap-2">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                                @can('Ver predio')
 
-                            @endif
+                                    <x-link-blue href="{{ route('ver_predio_avaluo', $predio->id) }}">
 
-                        </th>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-3">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
 
-                        <th wire:click="order('numero_registro')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
 
-                            Registro
+                                        <p>Ver</p>
 
-                            @if($sort == 'numero_registro')
+                                    </x-link-blue>
 
-                                @if($direction == 'asc')
+                                @endcan
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            </div>
 
-                                @else
+                        </x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                    </x-table.row>
 
-                                @endif
+                @empty
 
-                            @else
+                    <x-table.row wire:key="row-empty">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                        <x-table.cell colspan="10">
 
-                            @endif
+                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
 
-                        </th>
+                                No hay resultados.
 
-                        <th wire:click="order('created_at')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                            </div>
 
-                            Registro
+                        </x-table.cell>
 
-                            @if($sort == 'created_at')
+                    </x-table.row>
 
-                                @if($direction == 'asc')
+                @endforelse
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+            </x-slot>
 
-                                @else
+            <x-slot name="tfoot">
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                <x-table.row>
 
-                                @endif
+                    <x-table.cell colspan="10" class="bg-gray-50">
 
-                            @else
+                        {{ $predios->links()}}
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                    </x-table.cell>
 
-                            @endif
+                </x-table.row>
 
-                        </th>
+            </x-slot>
 
-                        <th wire:click="order('updated_at')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+        </x-table>
 
-                            Actualizado
-
-                            @if($sort == 'updated_at')
-
-                                @if($direction == 'asc')
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
-
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
-
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th class="px-3 py-3 hidden lg:table-cell">Acciones</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody class="divide-y divide-gray-200 flex-1 sm:flex-none ">
-
-                    @foreach($predios as $predio)
-
-                        <tr class="text-sm font-medium text-gray-500 bg-white flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Folio avaluo</span>
-
-                                {{ $predio->avaluo->folio }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center  lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Estado</span>
-
-                                <span class="bg-{{ $predio->avaluo->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($predio->avaluo->estado) }}</span>
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Valuador</span>
-
-                                {{ $predio->avaluo->asignadoA->name }} {{ $predio->avaluo->asignadoA->ap_paterno }} {{ $predio->avaluo->asignadoA->ap_materno }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Localidad</span>
-
-                                {{ $predio->localidad }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Oficina</span>
-
-                                {{ $predio->oficina }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Tipo</span>
-
-                                {{ $predio->tipo_predio }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registro</span>
-
-                                {{ $predio->numero_registro }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
-
-                                {{ $predio->created_at }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Actualizado</span>
-
-                                @if($predio->actualizadoPor != null)
-
-                                    <span class="font-semibold">Actualizado por: {{$predio->actualizadoPor->name}}</span> <br>
-
-                                @endif
-
-                                {{ $predio->updated_at }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
-
-                                <div class="flex justify-center lg:justify-start">
-
-                                    @can('Ver predio')
-
-                                        <a href="{{ route('ver_predio_avaluo', $predio->id) }}"
-                                            class="bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full mr-2 hover:bg-blue-700 flex focus:outline-none"
-                                        >
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-3">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            </svg>
-
-
-                                            <p>Ver</p>
-
-                                        </a>
-
-                                    @endcan
-
-                                </div>
-
-                            </td>
-                        </tr>
-
-                    @endforeach
-
-                </tbody>
-
-                <tfoot class="border-gray-300 bg-gray-50">
-
-                    <tr>
-
-                        <td colspan="10" class="py-2 px-5">
-                            {{ $predios->links()}}
-                        </td>
-
-                    </tr>
-
-                </tfoot>
-
-            </table>
-
-            <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-0 left-0" wire:loading.delay.longer>
-
-                <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
-
-            </div>
-
-        </div>
-
-    @else
-
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-full text-lg">
-
-            No hay resultados.
-
-        </div>
-
-    @endif
+    </div>
 
 </div>

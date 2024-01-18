@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Collection;
+use Livewire\Livewire;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Opcodes\LogViewer\Facades\LogViewer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,29 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
         Model::shouldBeStrict();
+
+        LogViewer::auth(function ($request) {
+
+            if(Auth::user()->hasRole('Administrador'))
+                return true;
+            else
+                abort(401, 'Unauthorized');
+
+        });
+
+        if(!env('LOCAL')){
+
+            Livewire::setScriptRoute(function ($handle) {
+                return Route::get('/stramites/public/livewire/livewire.js', $handle);
+            });
+
+            Livewire::setUpdateRoute(function ($handle) {
+                return Route::post('/stramites/public/livewire/update', $handle);
+            });
+
+        }
+
     }
 }

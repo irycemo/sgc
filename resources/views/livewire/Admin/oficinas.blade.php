@@ -2,15 +2,15 @@
 
     <div class="mb-6">
 
-        <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Oficinas</h1>
+        <x-header>Oficinas</x-header>
 
         <div class="flex justify-between">
 
             <div>
 
-                <input type="text" wire:model.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
 
-                <select class="bg-white rounded-full text-sm" wire:model="pagination">
+                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -23,7 +23,7 @@
 
             @can('Crear oficina')
 
-                <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 float-right text-sm py-2 px-4 text-white rounded-full focus:outline-none hidden md:block">
+                <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 text-sm py-2 px-4 text-white rounded-full hidden md:block items-center justify-center focus:outline-gray-400 focus:outline-offset-2">
 
                     <img wire:loading wire:target="abrirModalCrear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                     Agregar nueva oficina
@@ -38,609 +38,191 @@
 
     </div>
 
-    @if($oficinas->count())
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
 
-        <div class="relative overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+        <x-table>
 
-            <table class="rounded-lg w-full">
+            <x-slot name="head">
 
-                <thead class="border-b border-gray-300 bg-gray-50">
+                <x-table.heading sortable wire:click="sortBy('municipio')" :direction="$sort === 'municipio' ? $direction : null" >Municipio</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('nombre')" :direction="$sort === 'nombre' ? $direction : null" >Nombre</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('oficina')" :direction="$sort === 'oficina' ? $direction : null" >Oficina</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('localidad')" :direction="$sort === 'localidad' ? $direction : null" >Localidad</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('titular')" :direction="$sort === 'titular' ? $direction : null" >Titular</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
+                <x-table.heading >Acciones</x-table.heading>
 
-                    <tr class="text-xs font-medium text-gray-500 uppercase text-left traling-wider">
+            </x-slot>
 
-                        <th wire:click="order('municipio')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+            <x-slot name="body">
 
-                            Municipio
+                @forelse ($oficinas as $oficina)
 
-                            @if($sort == 'municipio')
+                    <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $oficina->id }}">
 
-                                @if($direction == 'asc')
+                        <x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Municipio</span>
 
-                                @else
+                            {{ $oficina->municipio }}
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @endif
+                        <x-table.cell>
 
-                            @else
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Nombre</span>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                            {{ $oficina->nombre }}
 
-                            @endif
+                        </x-table.cell>
 
-                        </th>
+                        <x-table.cell>
 
-                        <th wire:click="order('nombre')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Oficina</span>
 
-                            Nombre
+                            {{ $oficina->oficina }}
 
-                            @if($sort == 'nombre')
+                        </x-table.cell>
 
-                                @if($direction == 'asc')
+                        <x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Localidad</span>
 
-                                @else
+                            {{ $oficina->localidad }}
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @endif
+                        <x-table.cell>
 
-                            @else
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">titular</span>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                            {{ $oficina->titular }}
 
-                            @endif
+                        </x-table.cell>
 
-                        </th>
+                        <x-table.cell>
 
-                        <th wire:click="order('oficina')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
-                            Oficina
 
-                            @if($sort == 'oficina')
+                            <span class="font-semibold">@if($oficina->creadoPor != null)Registrado por: {{$oficina->creadoPor->name}} @else Registro: @endif</span> <br>
 
-                                @if($direction == 'asc')
+                            {{ $oficina->created_at }}
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @else
+                        <x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                            <span class="font-semibold">@if($oficina->actualizadoPor != null)Actualizado por: {{$oficina->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
 
-                                @endif
+                            {{ $oficina->updated_at }}
 
-                            @else
+                        </x-table.cell>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                        <x-table.cell>
 
-                            @endif
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
 
-                        </th>
+                            <div class="flex justify-center lg:justify-start gap-2">
 
-                        <th wire:click="order('localidad')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                                @can('Ver oficina')
 
-                            Localidad
+                                    <x-link-green href="{{ route('ver_oficina', $oficina) }}">
 
-                            @if($sort == 'localidad')
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
 
-                                @if($direction == 'asc')
+                                        Ver
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                                    </x-link-green>
 
-                                @else
+                                @endcan
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                                @can('Editar oficina')
 
-                                @endif
+                                    <x-button-blue
+                                        wire:click="abrirModalEditar({{$oficina->id}})"
+                                        wire:loading.attr="disabled"
+                                        wire:target="abiriModalEditar({{$oficina->id}})"
+                                    >
 
-                            @else
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
 
-                            @endif
+                                        Editar
 
-                        </th>
+                                    </x-button-blue>
 
-                        <th wire:click="order('titular')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                                @endcan
 
-                            Titular
+                                @can('Borrar oficina')
 
-                            @if($sort == 'titular')
+                                    <x-button-red
+                                        wire:click="abrirModalBorrar({{$oficina->id}})"
+                                        wire:loading.attr="disabled"
+                                        wire:target="abrirModalBorrar({{$oficina->id}})"
+                                    >
 
-                                @if($direction == 'asc')
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                                        Eliminar
 
-                                @else
+                                    </x-button-red>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                                @endcan
 
-                                @endif
+                            </div>
 
-                            @else
+                        </x-table.cell>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                    </x-table.row>
 
-                            @endif
+                @empty
 
-                        </th>
+                    <x-table.row wire:key="row-empty">
 
-                        <th wire:click="order('email')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        <x-table.cell colspan="9">
 
-                            Correo
+                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
 
-                            @if($sort == 'email')
+                                No hay resultados.
 
-                                @if($direction == 'asc')
+                            </div>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @else
+                    </x-table.row>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                @endforelse
 
-                                @endif
+            </x-slot>
 
-                            @else
+            <x-slot name="tfoot">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                <x-table.row>
 
-                            @endif
+                    <x-table.cell colspan="9" class="bg-gray-50">
 
-                        </th>
+                        {{ $oficinas->links()}}
 
-                        <th wire:click="order('telefonos')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                    </x-table.cell>
 
-                            Telefonos
+                </x-table.row>
 
-                            @if($sort == 'telefonos')
+            </x-slot>
 
-                                @if($direction == 'asc')
+        </x-table>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+    </div>
 
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
-
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th wire:click="order('autoridad_municipal')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
-
-                            Autoridad Municipal
-
-                            @if($sort == 'autoridad_municipal')
-
-                                @if($direction == 'asc')
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
-
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
-
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th wire:click="order('valuador_municipal')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
-
-                            Valuador Municipal
-
-                            @if($sort == 'valuador_municipal')
-
-                                @if($direction == 'asc')
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
-
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
-
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th wire:click="order('cabecera')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
-
-                            Cabecera
-
-                            @if($sort == 'cabecera')
-
-                                @if($direction == 'asc')
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
-
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
-
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th wire:click="order('created_at')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
-
-                            Registro
-
-                            @if($sort == 'created_at')
-
-                                @if($direction == 'asc')
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
-
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
-
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th wire:click="order('updated_at')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
-
-                            Actualizado
-
-                            @if($sort == 'updated_at')
-
-                                @if($direction == 'asc')
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
-
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
-
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th class="px-3 py-3 hidden lg:table-cell">Acciones</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody class="divide-y divide-gray-200 flex-1 sm:flex-none ">
-
-                    @foreach($oficinas as $oficina)
-
-                        <tr class="text-sm font-medium text-gray-500 bg-white flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Municipio</span>
-
-                                {{ $oficina->municipio }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Nombre</span>
-
-                                {{ $oficina->nombre }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Oficina</span>
-
-                                {{ $oficina->oficina }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto capitalize p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden  absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Localidad</span>
-
-                                {{ $oficina->localidad }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto capitalize p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden  absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Titular</span>
-
-                                {{ $oficina->titular ?? 'N/A' }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Correo</span>
-
-                                {{ $oficina->email ?? 'N/A' }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Teléfonos</span>
-
-                                {{ $oficina->telefonos ?? 'N/A' }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Autoridad municipal</span>
-
-                                {{ $oficina->autoridad_municipal ?? 'N/A' }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Valuador municipal</span>
-
-                                {{ $oficina->valuador_municipal ?? 'N/A' }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Cabecera</span>
-
-                                {{ $oficina->cabecera ? $oficina->cabeceraMunicipal->nombre : 'N/A' }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
-
-                                @if($oficina->creadoPor != null)
-
-                                    <span class="font-semibold">Registrado por: {{$oficina->creadoPor->name}}</span> <br>
-
-                                @else
-
-                                    <span class="font-semibold">Registrado:</span> <br>
-
-                                @endif
-
-                                {{ $oficina->created_at }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Actualizado</span>
-
-                                @if($oficina->actualizadoPor != null)
-
-                                    <span class="font-semibold">Actualizado por: {{$oficina->actualizadoPor->name}}</span> <br>
-
-                                @else
-
-                                    <span class="font-semibold">Actualizado:</span> <br>
-
-                                @endif
-
-                                {{ $oficina->updated_at }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
-
-                                <div class="flex md:flex-col justify-center lg:justify-start md:space-y-1">
-
-                                    @can('Ver oficina')
-
-                                        <a
-                                            href="{{ route('ver_oficina', $oficina) }}"
-                                            class="w-1/3 lg:w-full bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full hover:bg-green-700 flex justify-center focus:outline-none"
-                                        >
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            </svg>
-
-                                            Ver
-
-                                        </a>
-
-                                    @endcan
-
-                                    @can('Editar oficina')
-
-                                        <button
-                                            wire:click="abrirModalEditar({{$oficina->id}})"
-                                            wire:loading.attr="disabled"
-                                            wire:target="abiriModalEditar({{$oficina->id}})"
-                                            class="md:w-full bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full mr-2 hover:bg-blue-700 flex justify-center focus:outline-none"
-                                        >
-
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                            </svg>
-
-                                            Editar
-
-                                        </button>
-
-                                    @endcan
-
-                                    @can('Borrar oficina')
-
-                                        <button
-                                            wire:click="abrirModalBorrar({{$oficina->id}})"
-                                            wire:loading.attr="disabled"
-                                            wire:target="abrirModalBorrar({{$oficina->id}})"
-                                            class="md:w-full bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full hover:bg-red-700 flex justify-center focus:outline-none"
-                                        >
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-
-                                            Eliminar
-
-                                        </button>
-
-                                    @endcan
-
-                                </div>
-
-                            </td>
-                        </tr>
-
-                    @endforeach
-
-                </tbody>
-
-                <tfoot class="border-gray-300 bg-gray-50">
-
-                    <tr>
-
-                        <td colspan="16" class="py-2 px-5">
-                            {{ $oficinas->links()}}
-                        </td>
-
-                    </tr>
-
-                </tfoot>
-
-            </table>
-
-            <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-0 left-0" wire:loading.delay.longer>
-
-                <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
-
-            </div>
-
-        </div>
-
-    @else
-
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-full text-lg">
-
-            No hay resultados.
-
-        </div>
-
-    @endif
-
-    <x-dialog-modal wire:model="modal">
+    <x-dialog-modal wire:model.live="modal">
 
         <x-slot name="title">
 
@@ -658,233 +240,82 @@
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-3">
 
-                    <div class="flex-auto ">
+                    <x-input-group for="modelo_editar.municipio" label="Municipio" :error="$errors->first('modelo_editar.municipio')" class="w-full">
 
-                        <div>
+                        <x-input-text type="number" id="modelo_editar.municipio" wire:model="modelo_editar.municipio" />
 
-                            <Label>Municipio</Label>
-                        </div>
+                    </x-input-group>
 
-                        <div>
+                    <x-input-group for="modelo_editar.oficina" label="Oficina" :error="$errors->first('modelo_editar.oficina')" class="w-full">
 
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.municipio">
+                        <x-input-text type="number" id="modelo_editar.oficina" wire:model="modelo_editar.oficina" />
 
-                        </div>
+                    </x-input-group>
 
-                        <div>
+                    <x-input-group for="modelo_editar.localidad" label="Localidad" :error="$errors->first('modelo_editar.localidad')" class="w-full">
 
-                            @error('modelo_editar.municipio') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                        <x-input-text type="number" id="modelo_editar.localidad" wire:model="modelo_editar.localidad" />
 
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto ">
-
-                        <div>
-
-                            <Label>Oficina</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.oficina">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.oficina') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto ">
-
-                        <div>
-
-                            <Label>Localidad</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.localidad">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.localidad') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
+                    </x-input-group>
 
                 </div>
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-3">
 
-                    <div class="flex-auto ">
+                    <x-input-group for="modelo_editar.nombre" label="Nombre" :error="$errors->first('modelo_editar.nombre')" class="w-full">
 
-                        <div>
+                        <x-input-text id="modelo_editar.nombre" wire:model="modelo_editar.nombre" />
 
-                            <Label>Nombre</Label>
+                    </x-input-group>
 
-                        </div>
+                    <x-input-group for="modelo_editar.titular" label="Titular" :error="$errors->first('modelo_editar.titular')" class="w-full">
 
-                        <div>
+                        <x-input-text id="modelo_editar.titular" wire:model="modelo_editar.titular" />
 
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.nombre">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.nombre') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto mr-1 ">
-
-                        <div>
-
-                            <Label>Titular</Label>
-
-                        </div>
-
-                        <div>
-
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.titular">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.titular') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
+                    </x-input-group>
 
                 </div>
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-3">
 
-                    <div class="flex-auto ">
+                    <x-input-group for="modelo_editar.telefonos" label="Teléfonos" :error="$errors->first('modelo_editar.telefonos')" class="w-full">
 
-                        <div>
+                        <x-input-text id="modelo_editar.telefonos" wire:model="modelo_editar.telefonos" />
 
-                            <Label>Teléfonos</Label>
-                        </div>
+                    </x-input-group>
 
-                        <div>
+                    <x-input-group for="modelo_editar.email" label="Teléfonos" :error="$errors->first('modelo_editar.email')" class="w-full">
 
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.telefonos">
+                        <x-input-text type="email" id="modelo_editar.email" wire:model="modelo_editar.email" />
 
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.telefonos') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto mr-1 ">
-
-                        <div>
-
-                            <Label>Correo</Label>
-
-                        </div>
-
-                        <div>
-
-                            <input type="email" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.email">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.email') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
+                    </x-input-group>
 
                 </div>
 
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-3">
 
-                    <div class="flex-auto mr-1 ">
+                    <x-input-group for="modelo_editar.valuador_municipal" label="Valuador municipal" :error="$errors->first('modelo_editar.valuador_municipal')" class="w-full">
 
-                        <div>
+                        <x-input-text id="modelo_editar.valuador_municipal" wire:model="modelo_editar.valuador_municipal" />
 
-                            <Label>Valuador municipal</Label>
+                    </x-input-group>
 
-                        </div>
+                    <x-input-group for="modelo_editar.autoridad_municipal" label="Autoridad municipal" :error="$errors->first('modelo_editar.autoridad_municipal')" class="w-full">
 
-                        <div>
+                        <x-input-text id="modelo_editar.autoridad_municipal" wire:model="modelo_editar.autoridad_municipal" />
 
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.valuador_municipal">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.valuador_municipal') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto ">
-
-                        <div>
-
-                            <Label>Autoridad municipal</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.autoridad_municipal">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.autoridad_municipal') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
+                    </x-input-group>
 
                 </div>
 
                 <div class="flex-auto ">
 
-                    <div>
+                    <x-input-group for="modelo_editar.ubicacion" label="Ubicación" :error="$errors->first('modelo_editar.ubicacion')" class="w-full">
 
-                        <Label>Ubicación</Label>
-                    </div>
+                        <x-input-text wire:model="modelo_editar.ubicacion"></x-input-text>
 
-                    <div>
-
-                        <textarea rows="3" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.ubicacion"></textarea>
-
-                    </div>
-
-                    <div>
-
-                        @error('modelo_editar.ubicacion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                    </div>
+                    </x-input-group>
 
                 </div>
 
@@ -896,47 +327,17 @@
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-3">
 
-                    <div class="flex-auto ">
+                    <x-input-group for="sectorInicial" label="Sector inicial" :error="$errors->first('sectorInicial')" class="w-full">
 
-                        <div>
+                        <x-input-text type="number" id="sectorInicial" wire:model="sectorInicial" />
 
-                            <Label>Sector inicial</Label>
-                        </div>
+                    </x-input-group>
 
-                        <div>
+                    <x-input-group for="sectorFinal" label="Sector final" :error="$errors->first('sectorFinal')" class="w-full">
 
-                            <input type="number" min="1" max="102" class="bg-white rounded text-sm w-full" wire:model.defer="sectorInicial">
+                        <x-input-text type="number" id="sectorFinal" wire:model="sectorFinal" />
 
-                        </div>
-
-                        <div>
-
-                            @error('sectorInicial') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto ">
-
-                        <div>
-
-                            <Label>Sector final</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="number" min="1" max="102" class="bg-white rounded text-sm w-full" wire:model.defer="sectorFinal">
-
-                        </div>
-
-                        <div>
-
-                            @error('sectorFinal') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
+                    </x-input-group>
 
                 </div>
 
@@ -969,44 +370,41 @@
 
         <x-slot name="footer">
 
-            <div class="float-righ">
+            <div class="flex items-center gap-3">
 
                 @if($crear)
 
-                    <button
-                        wire:click="crear"
+                    <x-button-blue
+                        wire:click="guardar"
                         wire:loading.attr="disabled"
-                        wire:target="crear"
-                        class="bg-blue-400 text-white hover:shadow-lg font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                        wire:target="guardar">
 
-                        <img wire:loading wire:target="crear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                        <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                         Guardar
-                    </button>
+                    </x-button-blue>
 
                 @elseif($editar)
 
-                    <button
+                    <x-button-blue
                         wire:click="actualizar"
                         wire:loading.attr="disabled"
-                        wire:target="actualizar"
-                        class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                        wire:target="actualizar">
 
                         <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                         Actualizar
-                    </button>
+                    </x-button-blue>
 
                 @endif
 
-                <button
+                <x-button-red
                     wire:click="resetearTodo"
                     wire:loading.attr="disabled"
                     wire:target="resetearTodo"
-                    type="button"
-                    class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-red-700 flaot-left focus:outline-none">
+                    type="button">
                     Cerrar
-                </button>
+                </x-button-red>
 
             </div>
 
@@ -1014,7 +412,7 @@
 
     </x-dialog-modal>
 
-    <x-confirmation-modal wire:model="modalBorrar">
+    <x-confirmation-modal wire:model.live="modalBorrar" maxWidth="sm">
 
         <x-slot name="title">
             Eliminar Oficina

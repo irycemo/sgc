@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->foreignId('predio_id')->nullable()->references('id')->on('predio_avaluos');
-            $table->unsignedInteger('folio')->unique();
+            $table->unsignedInteger('año');
+            $table->unsignedInteger('folio');
             $table->string('estado');
             $table->string('clasificacion_zona')->nullable();
             $table->string('construccion_dominante')->nullable();
@@ -53,6 +54,9 @@ return new class extends Migration
             $table->foreignId('notificado_por')->nullable()->references('id')->on('users');
             $table->date('notificado_en')->nullable();
             $table->timestamps();
+
+            $table->unique(['año', 'folio']);
+
         });
     }
 

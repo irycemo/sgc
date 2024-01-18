@@ -7,7 +7,9 @@ use Database\Seeders\UmaSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\PredioSeeder;
+use Database\Seeders\NotariaSeeder;
 use Database\Seeders\TramiteSeeder;
+use Database\Seeders\DependenciaSeeder;
 use Database\Seeders\ServiciosTableSeeder;
 use Database\Seeders\CategoriaServiciosTableSeeder;
 
@@ -36,5 +38,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UmaSeeder::class);
         $this->call(ValoresUnitariosConstruccionsTableSeeder::class);
         $this->call(ValoresUnitariosRusticosTableSeeder::class);
+        $this->call(DependenciaSeeder::class);
+        $this->call(NotariaSeeder::class);
     }
 }

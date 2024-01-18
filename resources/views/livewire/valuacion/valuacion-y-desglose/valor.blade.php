@@ -26,7 +26,7 @@
 
                     <div class="">
 
-                        <select class="bg-white rounded text-xs w-full" wire:model.defer="predio.uso_1">
+                        <select class="bg-white rounded text-xs w-full" wire:model="predio.uso_1">
 
                             <option value="" selected>Seleccione una opción</option>
 
@@ -58,7 +58,7 @@
 
                     <div class="">
 
-                        <select class="bg-white rounded text-xs w-full" wire:model.defer="predio.uso_2">
+                        <select class="bg-white rounded text-xs w-full" wire:model="predio.uso_2">
 
                             <option value="" selected>Seleccione una opción</option>
 
@@ -84,7 +84,7 @@
 
                     <div class="">
 
-                        <select class="bg-white rounded text-xs w-full" wire:model.defer="predio.uso_3">
+                        <select class="bg-white rounded text-xs w-full" wire:model="predio.uso_3">
 
                             <option value="" selected>Seleccione una opción</option>
 
@@ -110,7 +110,7 @@
 
                     <div class="">
 
-                        <select class="bg-white rounded text-xs w-full" wire:model="predio.ubicacion_en_manzana">
+                        <select class="bg-white rounded text-xs w-full" wire:model.live="predio.ubicacion_en_manzana">
 
                             <option value="" selected>Seleccione una opción</option>
 
@@ -158,7 +158,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.superficie">
+                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.superficie">
 
                         </div>
 
@@ -182,7 +182,7 @@
 
                             <div>
 
-                                <select class="bg-white rounded text-xs w-full" wire:model="terrenos.{{ $index }}.valor_unitario">
+                                <select class="bg-white rounded text-xs w-full" wire:model.live="terrenos.{{ $index }}.valor_unitario">
 
                                     <option value="" selected>Seleccione una opción</option>
 
@@ -216,7 +216,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.valor_unitario" @if($predio && $predio->tipo_predio == 2) readonly @endif>
+                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.valor_unitario" @if($predio && $predio->tipo_predio == 2) readonly @endif>
 
                         </div>
 
@@ -238,7 +238,7 @@
 
                         <div>
 
-                            <input type="number" min="0" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.demerito">
+                            <input type="number" min="0" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.demerito">
 
                         </div>
 
@@ -260,7 +260,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="terrenos.{{ $index }}.valor_demeritado" readonly>
+                            <input type="number" class="bg-white rounded text-xs w-full" wire:model="terrenos.{{ $index }}.valor_demeritado" readonly>
 
                         </div>
 
@@ -276,7 +276,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.defer="terrenos.{{ $index }}.valor_terreno" readonly>
+                            <input type="number" class="bg-white rounded text-xs w-full" wire:model="terrenos.{{ $index }}.valor_terreno" readonly>
 
                         </div>
 
@@ -284,18 +284,16 @@
 
                     <div class="flex-auto lg:col-span-1 my-auto">
 
-                        <button
+                        <x-button-red
                             wire:click="borrarTerreno({{ $index }})"
                             wire:loading.attr="disabled"
-                            wire:target="borrarTerreno({{ $index }})"
-                            class="  bg-red-400 hover:shadow-lg text-white text-xs md:text-sm  px-3 py-1 w-full lg:w-auto lg:ml-auto rounded-full  hover:bg-red-700 flex justify-center items-center focus:outline-none "
-                        >
+                            wire:target="borrarTerreno({{ $index }})">
 
                             <img wire:loading wire:target="borrarTerreno({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                             Borrar
 
-                        </button>
+                        </x-button-red>
 
                     </div>
 
@@ -305,35 +303,31 @@
 
         </div>
 
-        <button
+        <x-button-blue
             wire:click="agregarTerreno"
             wire:loading.attr="disabled"
-            wire:target="agregarTerreno"
-            class=" bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 mr-auto rounded-full  hover:bg-blue-700 flex items-center justify-center focus:outline-none "
-        >
+            wire:target="agregarTerreno">
 
             <img wire:loading wire:target="agregarTerreno" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
             Agregar nuevo
 
-        </button>
+        </x-button-blue>
 
         @if($predio && $predio->avaluo->estado != 'notificado')
 
             <div class="flex justify-end">
 
-                <button
+                <x-button-green
                     wire:click="guardarTerrenos"
                     wire:loading.attr="disabled"
-                    wire:target="guardarTerrenos"
-                    class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-                >
+                    wire:target="guardarTerrenos">
 
                     <img wire:loading wire:target="guardarTerrenos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Guardar terreno
 
-                </button>
+                </x-button-green>
 
             </div>
 
@@ -361,7 +355,7 @@
 
                         <div>
 
-                            <input type="text" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.referencia">
+                            <input type="text" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.referencia">
 
                         </div>
 
@@ -383,7 +377,7 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-xs w-full" wire:model="construcciones.{{ $index }}.valores">
+                            <select class="bg-white rounded text-xs w-full" wire:model.live="construcciones.{{ $index }}.valores">
 
                                 <option value="" selected>Seleccione una opción</option>
 
@@ -417,7 +411,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" readonly wire:model.lazy="construcciones.{{ $index }}.tipo">
+                                <input type="number" class="bg-white rounded text-xs w-full" readonly wire:model.blur="construcciones.{{ $index }}.tipo">
 
                             </div>
 
@@ -433,7 +427,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" readonly wire:model.lazy="construcciones.{{ $index }}.uso">
+                                <input type="number" class="bg-white rounded text-xs w-full" readonly wire:model.blur="construcciones.{{ $index }}.uso">
 
                             </div>
 
@@ -449,7 +443,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" readonly wire:model.lazy="construcciones.{{ $index }}.calidad">
+                                <input type="number" class="bg-white rounded text-xs w-full" readonly wire:model.blur="construcciones.{{ $index }}.calidad">
 
                             </div>
 
@@ -465,7 +459,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" readonly wire:model.lazy="construcciones.{{ $index }}.estado">
+                                <input type="number" class="bg-white rounded text-xs w-full" readonly wire:model.blur="construcciones.{{ $index }}.estado">
 
                             </div>
 
@@ -483,7 +477,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.valor_unitario" readonly>
+                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.valor_unitario" readonly>
 
                         </div>
 
@@ -505,7 +499,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.niveles">
+                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.niveles">
 
                         </div>
 
@@ -527,7 +521,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.superficie">
+                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.superficie">
 
                         </div>
 
@@ -541,18 +535,16 @@
 
                     <div class="flex-auto lg:col-span-1 my-auto">
 
-                        <button
+                        <x-button-red
                             wire:click="borrarConstruccion({{ $index }})"
                             wire:loading.attr="disabled"
-                            wire:target="borrarConstruccion({{ $index }})"
-                            class="  bg-red-400 hover:shadow-lg text-white text-xs md:text-sm  px-3 py-1 w-full lg:w-auto lg:ml-auto rounded-full  hover:bg-red-700 flex justify-center items-center focus:outline-none "
-                        >
+                            wire:target="borrarConstruccion({{ $index }})">
 
                             <img wire:loading wire:target="borrarConstruccion({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                             Borrar
 
-                        </button>
+                        </x-button-red>
 
                     </div>
 
@@ -562,35 +554,31 @@
 
         </div>
 
-        <button
+        <x-button-blue
             wire:click="agregarConstruccion"
             wire:loading.attr="disabled"
-            wire:target="agregarConstruccion"
-            class=" bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 mr-auto rounded-full  hover:bg-blue-700 flex items-center justify-center focus:outline-none "
-        >
+            wire:target="agregarConstruccion">
 
             <img wire:loading wire:target="agregarConstruccion" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
             Agregar nuevo
 
-        </button>
+        </x-button-blue>
 
         <div class="flex justify-end">
 
             @if($predio && $predio->avaluo->estado != 'notificado')
 
-                <button
+                <x-button-green
                     wire:click="guardarConstrucciones"
                     wire:loading.attr="disabled"
-                    wire:target="guardarConstrucciones"
-                    class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-                >
+                    wire:target="guardarConstrucciones">
 
                     <img wire:loading wire:target="guardarConstrucciones" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Guardar construcciones
 
-                </button>
+                </x-button-green>
 
             @endif
 
@@ -620,7 +608,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosCondominio.{{ $index }}.area_terreno_comun">
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenosCondominio.{{ $index }}.area_terreno_comun">
 
                             </div>
 
@@ -642,7 +630,7 @@
 
                             <div>
 
-                                <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosCondominio.{{ $index }}.indiviso_terreno">
+                                <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.blur="terrenosCondominio.{{ $index }}.indiviso_terreno">
 
                             </div>
 
@@ -664,7 +652,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosCondominio.{{ $index }}.valor_unitario">
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenosCondominio.{{ $index }}.valor_unitario">
 
                             </div>
 
@@ -686,7 +674,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosCondominio.{{ $index }}.valor_terreno_comun" readonly>
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenosCondominio.{{ $index }}.valor_terreno_comun" readonly>
 
                             </div>
 
@@ -700,18 +688,16 @@
 
                         <div class="flex-auto lg:col-span-1 my-auto">
 
-                            <button
+                            <x-button-red
                                 wire:click="borrarCondominioTerreno({{ $index }})"
                                 wire:loading.attr="disabled"
-                                wire:target="borrarCondominioTerreno({{ $index }})"
-                                class="  bg-red-400 hover:shadow-lg text-white text-xs md:text-sm  px-3 py-1 w-full lg:w-auto lg:ml-auto rounded-full  hover:bg-red-700 flex justify-center items-center focus:outline-none "
-                            >
+                                wire:target="borrarCondominioTerreno({{ $index }})">
 
                                 <img wire:loading wire:target="borrarCondominioTerreno({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                                 Borrar
 
-                            </button>
+                            </x-button-red>
 
                         </div>
 
@@ -719,18 +705,16 @@
 
                 @endforeach
 
-                <button
+                <x-button-blue
                     wire:click="agregarTerrenoConstruccion"
                     wire:loading.attr="disabled"
-                    wire:target="agregarTerrenoConstruccion"
-                    class=" bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 mr-auto rounded-full  hover:bg-blue-700 flex items-center justify-center focus:outline-none "
-                >
+                    wire:target="agregarTerrenoConstruccion">
 
                     <img wire:loading wire:target="agregarTerrenoConstruccion" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Agregar nuevo
 
-                </button>
+                </x-button-blue>
 
             </div>
 
@@ -738,18 +722,16 @@
 
                 @if($predio && $predio->avaluo->estado != 'notificado')
 
-                    <button
+                    <x-button-green
                         wire:click="guardarTerrenosCondominio"
                         wire:loading.attr="disabled"
-                        wire:target="guardarTerrenosCondominio"
-                        class=" bg-green-400 mt-5 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-                    >
+                        wire:target="guardarTerrenosCondominio">
 
                         <img wire:loading wire:target="guardarTerrenosCondominio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                         Guardar condominio
 
-                    </button>
+                    </x-button-green>
 
                 @endif
 
@@ -777,7 +759,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesCondominio.{{ $index }}.area_comun_construccion">
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construccionesCondominio.{{ $index }}.area_comun_construccion">
 
                             </div>
 
@@ -799,7 +781,7 @@
 
                             <div>
 
-                                <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesCondominio.{{ $index }}.indiviso_construccion">
+                                <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.blur="construccionesCondominio.{{ $index }}.indiviso_construccion">
 
                             </div>
 
@@ -821,7 +803,7 @@
 
                             <div>
 
-                                <select class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesCondominio.{{ $index }}.valor_clasificacion_construccion">
+                                <select class="bg-white rounded text-xs w-full" wire:model.blur="construccionesCondominio.{{ $index }}.valor_clasificacion_construccion">
 
                                     <option value="" selected>Seleccione una opción</option>
 
@@ -853,7 +835,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesCondominio.{{ $index }}.valor_construccion_comun" readonly>
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construccionesCondominio.{{ $index }}.valor_construccion_comun" readonly>
 
                             </div>
 
@@ -867,18 +849,16 @@
 
                         <div class="flex-auto lg:col-span-1 my-auto">
 
-                            <button
+                            <x-button-red
                                 wire:click="borrarCondominioConstruccion({{ $index }})"
                                 wire:loading.attr="disabled"
-                                wire:target="borrarCondominioConstruccion({{ $index }})"
-                                class="  bg-red-400 hover:shadow-lg text-white text-xs md:text-sm  px-3 py-1 w-full lg:w-auto lg:ml-auto rounded-full  hover:bg-red-700 flex justify-center items-center focus:outline-none "
-                            >
+                                wire:target="borrarCondominioConstruccion({{ $index }})">
 
                                 <img wire:loading wire:target="borrarCondominioConstruccion({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                                 Borrar
 
-                            </button>
+                            </x-button-red>
 
                         </div>
 
@@ -886,18 +866,16 @@
 
                 @endforeach
 
-                <button
+                <x-button-blue
                     wire:click="agregarCondominioConstruccion"
                     wire:loading.attr="disabled"
-                    wire:target="agregarCondominioConstruccion"
-                    class=" bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 mr-auto rounded-full  hover:bg-blue-700 flex items-center justify-center focus:outline-none "
-                >
+                    wire:target="agregarCondominioConstruccion">
 
                     <img wire:loading wire:target="agregarCondominioConstruccion" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Agregar nuevo
 
-                </button>
+                </x-button-blue>
 
             </div>
 
@@ -905,18 +883,16 @@
 
                 @if($predio && $predio->avaluo->estado != 'notificado')
 
-                    <button
+                    <x-button-green
                         wire:click="guardarCondominio"
                         wire:loading.attr="disabled"
-                        wire:target="guardarCondominio"
-                        class=" bg-green-400 mt-5 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-                    >
+                        wire:target="guardarCondominio">
 
                         <img wire:loading wire:target="guardarCondominio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                         Guardar condominio
 
-                    </button>
+                    </x-button-green>
 
                 @endif
 
@@ -953,14 +929,14 @@
 
                             <tr>
                                 <td>Superficie de terreno</td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" wire:model="predio.superficie_terreno"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" wire:model.live="predio.superficie_terreno"></td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_terreno}}"></td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_terreno}}"></td>
                             </tr>
 
                             <tr>
                                 <td>Superficie de construcción</td>
-                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" wire:model="predio.superficie_construccion"></td>
+                                <td><input readonly class="bg-white rounded text-xs w-full" type="text" wire:model.live="predio.superficie_construccion"></td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_construccion }}"></td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="{{ $predio->area_comun_construccion  + $predio->superficie_construccion }}"></td>
                             </tr>
@@ -1038,18 +1014,16 @@
 
         @if($predio && $predio->avaluo && $predio->avaluo->estado != 'notificado')
 
-            <button
+            <x-button-green
                 wire:click="guardar"
                 wire:loading.attr="disabled"
-                wire:target="guardar"
-                class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-            >
+                wire:target="guardar">
 
                 <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                 Guardar
 
-            </button>
+            </x-button-green>
 
         @endif
 

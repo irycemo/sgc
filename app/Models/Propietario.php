@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Predio;
 use App\Models\Persona;
-use App\Models\PredioAvaluo;
 use App\Http\Traits\ModelosTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

@@ -2,15 +2,15 @@
 
     <div class="mb-6">
 
-        <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Factor de incremento</h1>
+        <x-header>Factor de incremento</x-header>
 
         <div class="flex justify-between">
 
             <div>
 
-                <input type="text" wire:model.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
 
-                <select class="bg-white rounded-full text-sm" wire:model="pagination">
+                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -21,9 +21,9 @@
 
             </div>
 
+            @can('Crear factor incremento')
 
-
-                <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 float-right text-sm py-2 px-4 text-white rounded-full focus:outline-none hidden md:block">
+                <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 text-sm py-2 px-4 text-white rounded-full hidden md:block items-center justify-center focus:outline-gray-400 focus:outline-offset-2">
 
                     <img wire:loading wire:target="abrirModalCrear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                     Agregar nuevo factor de incremento
@@ -32,286 +32,152 @@
 
                 <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 float-right text-sm py-2 px-4 text-white rounded-full focus:outline-none md:hidden">+</button>
 
-
+            @endcan
 
         </div>
 
     </div>
 
-    @if($factores->count())
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
 
-        <div class="relative overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+        <x-table>
 
-            <table class="rounded-lg w-full">
+            <x-slot name="head">
 
-                <thead class="border-b border-gray-300 bg-gray-50">
+                <x-table.heading sortable wire:click="sortBy('factor')" :direction="$sort === 'factor' ? $direction : null" >Factor</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('ano')" :direction="$sort === 'ano' ? $direction : null" >Año</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
+                <x-table.heading >Acciones</x-table.heading>
 
-                    <tr class="text-xs font-medium text-gray-500 uppercase text-left traling-wider">
+            </x-slot>
 
-                        <th wire:click="order('factor')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+            <x-slot name="body">
 
-                            Factor
+                @forelse ($factores as $factor)
 
-                            @if($sort == 'factor')
+                    <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $factor->id }}">
 
-                                @if($direction == 'asc')
+                        <x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Factor</span>
 
-                                @else
+                            {{ $factor->factor }}
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @endif
+                        <x-table.cell>
 
-                            @else
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Año</span>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                            {{ $factor->ano }}
 
-                            @endif
+                        </x-table.cell>
 
-                        </th>
+                        <x-table.cell>
 
-                        <th wire:click="order('ano')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
-                            Año
 
-                            @if($sort == 'ano')
+                            <span class="font-semibold">@if($factor->creadoPor != null)Registrado por: {{$factor->creadoPor->name}} @else Registro: @endif</span> <br>
 
-                                @if($direction == 'asc')
+                            {{ $factor->created_at }}
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @else
+                        <x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                            <span class="font-semibold">@if($factor->actualizadoPor != null)Actualizado por: {{$factor->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
 
-                                @endif
+                            {{ $factor->updated_at }}
 
-                            @else
+                        </x-table.cell>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                        <x-table.cell>
 
-                            @endif
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
 
-                        </th>
+                            <div class="flex justify-center lg:justify-start gap-2">
 
-                        <th wire:click="order('created_at')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                                @can('Editar factor incremento')
 
-                            Registro
+                                    <x-button-blue
+                                        wire:click="abrirModalEditar({{ $factor->id }})"
+                                        wire:target="abrirModalEditar({{ $factor->id }})"
+                                        wire:loading.attr="disabled"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
 
-                            @if($sort == 'created_at')
+                                        <span>Editar</span>
 
-                                @if($direction == 'asc')
+                                    </x-button-blue>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                                @endcan
 
-                                @else
+                                @can('Borrar factor incremento')
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                                    <x-button-red
+                                        wire:click="abrirModalBorrar({{ $factor->id }})"
+                                        wire:target="abrirModalBorrar({{ $factor->id }})"
+                                        wire:loading.attr="disabled"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
 
-                                @endif
+                                        <span>Eliminar</span>
 
-                            @else
+                                    </x-button-red>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                                @endcan
 
-                            @endif
+                            </div>
 
-                        </th>
+                        </x-table.cell>
 
-                        <th wire:click="order('updated_at')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                    </x-table.row>
 
-                            Actualizado
+                @empty
 
-                            @if($sort == 'updated_at')
+                    <x-table.row wire:key="row-empty">
 
-                                @if($direction == 'asc')
+                        <x-table.cell colspan="9">
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
 
-                                @else
+                                No hay resultados.
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                            </div>
 
-                                @endif
+                        </x-table.cell>
 
-                            @else
+                    </x-table.row>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                @endforelse
 
-                            @endif
+            </x-slot>
 
-                        </th>
+            <x-slot name="tfoot">
 
-                        <th class="px-3 py-3 hidden lg:table-cell">Acciones</th>
+                <x-table.row>
 
-                    </tr>
+                    <x-table.cell colspan="9" class="bg-gray-50">
 
-                </thead>
+                        {{ $factores->links()}}
 
-                <tbody class="divide-y divide-gray-200 flex-1 sm:flex-none ">
+                    </x-table.cell>
 
-                    @foreach($factores as $factor)
+                </x-table.row>
 
-                        <tr class="text-sm font-medium text-gray-500 bg-white flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+            </x-slot>
 
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
+        </x-table>
 
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Nombre</span>
+    </div>
 
-                                {{ $factor->factor }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Año</span>
-
-                                {{ $factor->ano }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
-
-                                @if($factor->creadoPor != null)
-
-                                    <span class="font-semibold">Registrado por: {{$factor->creadoPor->name}}</span> <br>
-
-                                @endif
-
-                                {{ $factor->created_at }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Actualizado</span>
-
-                                @if($factor->actualizadoPor != null)
-
-                                    <span class="font-semibold">Actualizado por: {{$factor->actualizadoPor->name}}</span> <br>
-
-                                @endif
-
-                                {{ $factor->updated_at }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
-
-                                <div class="flex justify-center lg:justify-start">
-
-                                    @can('Editar permiso')
-
-                                        <button
-                                            wire:click="abrirModalEditar({{$factor->id}})"
-                                            wire:loading.attr="disabled"
-                                            wire:target="abiriModalEditar({{$factor->id}})"
-                                            class="bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full mr-2 hover:bg-blue-700 flex focus:outline-none"
-                                        >
-
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-3">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                            </svg>
-
-                                            <p>Editar</p>
-
-                                        </button>
-
-                                    @endcan
-
-
-                                    @can('Borrar permiso')
-
-                                        <button
-                                            wire:click="abrirModalBorrar({{$factor->id}})"
-                                            wire:loading.attr="disabled"
-                                            wire:target="abrirModalBorrar({{$factor->id}})"
-                                            class="bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full hover:bg-red-700 flex focus:outline-none"
-                                        >
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-3">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-
-                                            <p>Eliminar</p>
-
-                                        </button>
-
-                                    @endcan
-
-                                </div>
-
-                            </td>
-                        </tr>
-
-                    @endforeach
-
-                </tbody>
-
-                <tfoot class="border-gray-300 bg-gray-50">
-
-                    <tr>
-
-                        <td colspan="8" class="py-2 px-5">
-                            {{ $factores->links()}}
-                        </td>
-
-                    </tr>
-
-                </tfoot>
-
-            </table>
-
-            <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-0 left-0" wire:loading.delay.longer>
-
-                <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
-
-            </div>
-
-        </div>
-
-    @else
-
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-full text-lg">
-
-            No hay resultados.
-
-        </div>
-
-    @endif
-
-    <x-dialog-modal wire:model="modal">
+    <x-dialog-modal wire:model.live="modal" maxWidth="sm">
 
         <x-slot name="title">
 
@@ -329,48 +195,17 @@
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <div class="flex-auto ">
+                    <x-input-group for="modelo_editar.factor" label="Factor" :error="$errors->first('modelo_editar.factor')" class="w-full">
 
-                        <div>
+                        <x-input-text type="number" id="modelo_editar.factor" wire:model="modelo_editar.factor" />
 
-                            <Label>Factor</Label>
-                        </div>
+                    </x-input-group>
 
-                        <div>
+                    <x-input-group for="modelo_editar.ano" label="Año" :error="$errors->first('modelo_editar.ano')" class="w-full">
 
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.factor">
+                        <x-input-text type="number" id="modelo_editar.ano" wire:model="modelo_editar.ano" />
 
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.factor') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto ">
-
-                        <div>
-
-                            <Label>Año</Label>
-
-                        </div>
-
-                        <div>
-
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.ano">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.ano') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
+                    </x-input-group>
 
                 </div>
 
@@ -386,44 +221,40 @@
 
         <x-slot name="footer">
 
-            <div class="float-righ">
+            <div class="flex items-center gap-3">
 
                 @if($crear)
 
-                    <button
-                        wire:click="crear"
+                    <x-button-blue
+                        wire:click="guardar"
                         wire:loading.attr="disabled"
-                        wire:target="crear"
-                        class="bg-blue-400 text-white hover:shadow-lg font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                        wire:target="guardar">
 
-                        <img wire:loading wire:target="crear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                        <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                         Guardar
-                    </button>
+                    </x-button-blue>
 
                 @elseif($editar)
 
-                    <button
+                    <x-button-blue
                         wire:click="actualizar"
                         wire:loading.attr="disabled"
-                        wire:target="actualizar"
-                        class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                        wire:target="actualizar">
 
                         <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                         Actualizar
-                    </button>
+                    </x-button-blue>
 
                 @endif
 
-                <button
+                <x-button-red
                     wire:click="resetearTodo"
                     wire:loading.attr="disabled"
-                    wire:target="resetearTodo"
-                    type="button"
-                    class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-red-700 flaot-left focus:outline-none">
+                    wire:target="resetearTodo">
                     Cerrar
-                </button>
+                </x-button-red>
 
             </div>
 
@@ -431,7 +262,7 @@
 
     </x-dialog-modal>
 
-    <x-confirmation-modal wire:model="modalBorrar">
+    <x-confirmation-modal wire:model.live="modalBorrar" maxWidth="sm">
 
         <x-slot name="title">
             Eliminar factor de incremento

@@ -1,4 +1,4 @@
-<div class="p-4 max-h-full overflow-y-auto">
+<div class="p-4 mb-1">
 
     @if(isset($predio->avaluo->folio))
 
@@ -13,43 +13,6 @@
     <div class="rounded-lg mb-1">
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1 items-start  mx-auto">
-
-            <div class="bg-white rounded-lg p-1 px-4 flex flex-col text-center">
-
-                <p>Encabezado</p>
-
-                @if($encabezado)
-
-                    <img class="h-20 w-20 mx-auto my-3" src="{{ $encabezado->temporaryUrl() }}" alt="">
-
-                @else
-
-                    @if($predio)
-
-                        <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->encabezado() }}" alt="">
-
-                    @else
-
-                        <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/escudo_guinda.png') }}" alt="">
-
-                    @endif
-
-                @endif
-
-                <label for="encabezado" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer focus:outline-none">
-                    <img wire:loading wire:target="encabezado" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-                    Subir archivo
-                </label>
-
-                <input type="file" class="sr-only" id="encabezado" wire:model="encabezado">
-
-                <div>
-
-                    @error('encabezado') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                </div>
-
-            </div>
 
             <div class="bg-white rounded-lg p-1 px-4 flex flex-col text-center">
 
@@ -73,12 +36,12 @@
 
                 @endif
 
-                <label for="fachada" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer focus:outline-none">
+                <label for="fachada" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-1 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer">
                     <img wire:loading wire:target="fachada" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="fachada" wire:model="fachada">
+                <input type="file" class="sr-only" id="fachada" wire:model.live="fachada">
 
                 <div>
 
@@ -110,12 +73,12 @@
 
                 @endif
 
-                <label for="foto2" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer focus:outline-none">
+                <label for="foto2" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-1 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer">
                     <img wire:loading wire:target="foto2" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="foto2" wire:model="foto2">
+                <input type="file" class="sr-only" id="foto2" wire:model.live="foto2">
 
                 <div>
 
@@ -133,9 +96,9 @@
 
                     <img class="h-20 w-20 mx-auto my-3" src="{{ $foto3->temporaryUrl() }}" alt="">
 
-                    @else
+                @else
 
-                @if($predio)
+                    @if($predio)
 
                         <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->foto3() }}" alt="">
 
@@ -147,12 +110,12 @@
 
                 @endif
 
-                <label for="foto3" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer focus:outline-none">
+                <label for="foto3" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-1 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer">
                     <img wire:loading wire:target="foto3" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="foto3" wire:model="foto3">
+                <input type="file" class="sr-only" id="foto3" wire:model.live="foto3">
 
                 <div>
 
@@ -184,12 +147,12 @@
 
                 @endif
 
-                <label for="foto4" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer focus:outline-none">
+                <label for="foto4" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-1 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer">
                     <img wire:loading wire:target="foto4" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="foto4" wire:model="foto4">
+                <input type="file" class="sr-only" id="foto4" wire:model.live="foto4">
 
                 <div>
 
@@ -221,12 +184,12 @@
 
                 @endif
 
-                <label for="macrolocalizacion" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer focus:outline-none">
+                <label for="macrolocalizacion" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-1 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer">
                     <img wire:loading wire:target="macrolocalizacion" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="macrolocalizacion" wire:model="macrolocalizacion">
+                <input type="file" class="sr-only" id="macrolocalizacion" wire:model.live="macrolocalizacion">
 
                 <div>
 
@@ -258,12 +221,12 @@
 
                 @endif
 
-                <label for="microlocalizacion" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer focus:outline-none">
+                <label for="microlocalizacion" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-1 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer">
                     <img wire:loading wire:target="microlocalizacion" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="microlocalizacion" wire:model="microlocalizacion">
+                <input type="file" class="sr-only" id="microlocalizacion" wire:model.live="microlocalizacion">
 
                 <div>
 
@@ -295,12 +258,12 @@
 
                 @endif
 
-                <label for="poligonoImagen" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer focus:outline-none">
+                <label for="poligonoImagen" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-1 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer">
                     <img wire:loading wire:target="poligonoImagen" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="poligonoImagen" wire:model="poligonoImagen">
+                <input type="file" class="sr-only" id="poligonoImagen" wire:model.live="poligonoImagen">
 
                 <div>
 
@@ -314,12 +277,12 @@
 
                 <p>Representación del poligono (DWG)</p>
 
-                <label for="poligonoDwg" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer focus:outline-none">
+                <label for="poligonoDwg" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-1 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer">
                     <img wire:loading wire:target="poligonoDwg" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="poligonoDwg" wire:model="poligonoDwg">
+                <input type="file" class="sr-only" id="poligonoDwg" wire:model.live="poligonoDwg">
 
                 <div>
 
@@ -333,29 +296,37 @@
 
     </div>
 
-    <div class="bg-white rounded-lg p-1 flex justify-end mb-2">
+    @if($predio)
 
-        <div class="  mx-auto lg:w-1/2">
+        <div class="bg-white rounded-lg p-1 flex justify-end mb-2">
 
-            <div>
+            <div class=" mx-auto lg:w-1/2">
 
-                <h4 class="text-lg mb-1 text-center">Observaciones</h4>
+                <div>
 
-            </div>
+                    <h4 class="text-lg mb-1 text-center">Observaciones</h4>
 
-            <textarea class="bg-white rounded text-xs w-full @error('predio.avaluo.observaciones') border-1 border-red-500 @enderror" rows="4" wire:model.defer="predio.avaluo.observaciones"></textarea>
+                </div>
 
-            <div>
+                <div>
 
-                @error('predio.avaluo.observaciones') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                    <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="predio.avaluo.observaciones"></textarea>
+
+                </div>
+
+                <div>
+
+                    @error('predio.avaluo.observaciones') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
+    @endif
 
-    <div class="bg-white rounded-lg p-1 flex justify-end">
+    <div class="bg-white rounded-lg p-3 flex justify-end">
 
         @if(count($errors) > 0)
 
@@ -368,18 +339,16 @@
 
         @if($predio && $predio->avaluo && $predio->avaluo->estado != 'notificado')
 
-            <button
+            <x-button-green
                 wire:click="actualizar"
                 wire:loading.attr="disabled"
-                wire:target="actualizar"
-                class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-            >
+                wire:target="actualizar">
 
                 <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                 Guardar
 
-            </button>
+            </x-button-green>
 
         @endif
 

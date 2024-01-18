@@ -8,9 +8,9 @@
 
             <div>
 
-                <input type="text" wire:model.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
 
-                <select class="bg-white rounded-full text-sm" wire:model="pagination">
+                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -56,7 +56,7 @@
 
                         <th class="cursor-pointer p-3 w-8 hidden lg:table-cell" >
 
-                            <input type="checkbox" class="bg-white rounded text-sm" wire:model="paginaSeleccionada">
+                            <input type="checkbox" class="bg-white rounded text-sm" wire:model.live="paginaSeleccionada">
 
                         </th>
 
@@ -240,7 +240,7 @@
 
                             <td class="w-8 lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
 
-                                <input type="checkbox" class="bg-white rounded text-sm" wire:model="seleccionados" value="{{ $avaluo->id }}">
+                                <input type="checkbox" class="bg-white rounded text-sm" wire:model.live="seleccionados" value="{{ $avaluo->id }}">
 
                             </td>
 
@@ -385,7 +385,7 @@
 
     @endif
 
-    <x-confirmation-modal wire:model="modal">
+    <x-confirmation-modal wire:model.live="modal">
 
         <x-slot name="title">
             Eliminar avalúos

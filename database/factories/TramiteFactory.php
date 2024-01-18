@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Http\Constantes\Constantes;
+use App\Models\User;
 use App\Models\Servicio;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,11 +27,14 @@ class TramiteFactory extends Factory
             'tipo_tramite' => $this->faker->randomElement(['normal', 'complemento', 'exento', 'porcentaje', 'parcial']),
             'tipo_servicio' => $this->faker->randomElement(['ordinario', 'urgente', 'extra urgente']),
             'cantidad' => $this->faker->numberBetween(1,10),
-            'solicitante' => $this->faker->name(),
+            'solicitante' => $this->faker->randomElement(Constantes::SOLICITANTES),
+            'nombre_solicitante' => $this->faker->name(),
             'observaciones' => $this->faker->text(),
             'servicio_id' => $servicio->id,
             'monto' => $servicio->ordinario,
+            'año' => '2024',
             'folio' => $this->faker->unique()->randomNumber,
+            'usuario' => $this->faker->numberBetween(1, User::count()),
             'fecha_entrega' => $this->faker->dateTimeBetween(now()->subMonths($this->faker->numberBetween(1,10)), now()->addMonths($this->faker->numberBetween(1,5))),
             'fecha_pago' => now()->subMonths($this->faker->numberBetween(1,10)),
             'folio_pago' => 8694618464,

@@ -18,7 +18,7 @@ class SapControllerApi extends Controller
 
             DB::transaction(function () use($request){
 
-                $tramite = Tramite::where('folio', $request->folio)->first();
+                $tramite = Tramite::where('linea_de_captura', $request->linea_de_captura)->first();
 
                 $tramite->update([
                     'estado' => 'pagado',

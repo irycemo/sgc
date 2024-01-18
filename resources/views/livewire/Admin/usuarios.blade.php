@@ -4,13 +4,49 @@
 
         <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Usuarios</h1>
 
-        <div class="flex justify-between">
+        <div class="flex justify-between items-center ">
 
-            <div>
+            <div class="space-y-2">
 
-                <input type="text" wire:model.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm ">
 
-                <select class="bg-white rounded-full text-sm" wire:model="pagination">
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.rol">
+
+                    <option value="">Seleccione un rol</option>
+
+                    @foreach ($roles as $rol)
+
+                        <option value="{{ $rol->name }}">{{ $rol->name }}</option>
+
+                    @endforeach
+
+                </select>
+
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.oficina">
+
+                    <option value="">Seleccione una oficina</option>
+
+                    @foreach ($oficinas as $of)
+
+                        <option value="{{ $of->nombre }}">{{ $of->nombre }}</option>
+
+                    @endforeach
+
+                </select>
+
+                <select class="bg-white rounded-full text-sm w-48" wire:model.live="filters.area">
+
+                    <option value="">Seleccione una área</option>
+
+                    @foreach ($areas_adscripcion as $area)
+
+                        <option value="{{ $area }}">{{ $area }}</option>
+
+                    @endforeach
+
+                </select>
+
+                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -23,14 +59,18 @@
 
             @can('Crear usuario')
 
-                <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 float-right text-sm py-2 px-4 text-white rounded-full focus:outline-none hidden md:block">
+                <div class="">
 
-                    <img wire:loading wire:target="abrirModalCrear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-                    Agregar nuevo usuario
+                    <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 text-sm py-2 px-4 text-white rounded-full hidden md:block items-center justify-center focus:outline-gray-400 focus:outline-offset-2">
 
-                </button>
+                        <img wire:loading wire:target="abrirModalCrear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                        Agregar nuevo usuario
 
-                <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 float-right text-sm py-2 px-4 text-white rounded-full focus:outline-none md:hidden">+</button>
+                    </button>
+
+                    <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 float-right text-sm py-2 px-4 text-white rounded-full md:hidden focus:outline-gray-400 focus:outline-offset-2">+</button>
+
+                </div>
 
             @endcan
 
@@ -38,439 +78,221 @@
 
     </div>
 
-    @if($usuarios->count())
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
 
-        <div class="relative overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+        <x-table>
 
-            <table class="rounded-lg w-full">
+            <x-slot name="head">
 
-                <thead class="border-b border-gray-300 bg-gray-50">
+                <x-table.heading sortable wire:click="sortBy('clave')" :direction="$sort === 'clave' ? $direction : null" >Clave</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('name')" :direction="$sort === 'name' ? $direction : null" >Nombre</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('email')" :direction="$sort === 'email' ? $direction : null" >Correo</x-table.heading>
+                <x-table.heading >Rol</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('oficina_id')" :direction="$sort === 'oficina_id' ? $direction : null" >Oficina</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('area')" :direction="$sort === 'area' ? $direction : null" >Área</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('status')" :direction="$sort === 'status' ? $direction : null" >Estado</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
+                <x-table.heading >Acciones</x-table.heading>
 
-                    <tr class="text-xs font-medium text-gray-500 uppercase text-left traling-wider">
+            </x-slot>
 
-                        <th wire:click="order('name')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+            <x-slot name="body">
 
-                            Nombre
+                @forelse ($usuarios as $usuario)
 
-                            @if($sort == 'name')
+                    <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $usuario->id }}">
 
-                                @if($direction == 'asc')
+                        <x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Clave</span>
 
-                                @else
+                            {{ $usuario->clave }}
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @endif
+                        <x-table.cell>
 
-                            @else
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Nombre</span>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                            <div class="flex items-center justify-center lg:justify-start">
 
-                            @endif
+                                <img class="h-10 w-10 rounded-full" src="{{ $usuario->profile_photo_url }}" alt="{{ $usuario->name }}">
 
-                        </th>
+                                <span class="text-sm text-gray-900 ml-4">{{ $usuario->name }}</span>
 
-                        <th wire:click="order('email')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                            </div>
 
-                            Correo
+                        </x-table.cell>
 
-                            @if($sort == 'email')
+                        <x-table.cell>
 
-                                @if($direction == 'asc')
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Email</span>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            {{ $usuario->email }}
 
-                                @else
+                        </x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                        <x-table.cell>
 
-                                @endif
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Role</span>
 
-                            @else
+                            @if ($usuario->roles()->count())
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                                {{ $usuario->getRoleNames()->first() }}
 
                             @endif
 
-                        </th>
+                        </x-table.cell>
 
-                        <th class="px-3 py-3 hidden lg:table-cell">
+                        <x-table.cell>
 
-                            Rol
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Oficina</span>
 
-                        </th>
+                            {{ $usuario->oficina->nombre }}
 
-                        <th wire:click="order('oficina_id')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        </x-table.cell>
 
-                            Oficina
+                        <x-table.cell>
 
-                            @if($sort == 'oficina_id')
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Área</span>
 
-                                @if($direction == 'asc')
+                            {{ $usuario->area }}
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @else
+                        <x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Status</span>
 
-                                @endif
+                            @if($usuario->status == 'activo')
+
+                                <span class="bg-green-400 py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($usuario->status) }}</span>
 
                             @else
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                                <span class="bg-red-400 py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($usuario->status) }}</span>
 
                             @endif
 
-                        </th>
+                        </x-table.cell>
 
-                        <th wire:click="order('area')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        <x-table.cell>
 
-                            Área
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
-                            @if($sort == 'area')
 
-                                @if($direction == 'asc')
+                            <span class="font-semibold">@if($usuario->creadoPor != null)Registrado por: {{$usuario->creadoPor->name}} @else Registro: @endif</span> <br>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            {{ $usuario->created_at }}
 
-                                @else
+                        </x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                        <x-table.cell>
 
-                                @endif
+                            <span class="font-semibold">@if($usuario->actualizadoPor != null)Actualizado por: {{$usuario->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
 
-                            @else
+                            {{ $usuario->updated_at }}
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                        </x-table.cell>
 
-                            @endif
+                        <x-table.cell>
 
-                        </th>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
 
-                        <th wire:click="order('status')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                            <div class="flex flex-col justify-center lg:justify-start gap-2">
 
-                            Estado
+                                @can('Editar permisos')
 
-                            @if($sort == 'status')
+                                    <x-button-green
+                                        wire:click="abrirModalPermisos({{ $usuario->id }})"
+                                        wire:loading.attr="disabled"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                                        </svg>
 
-                                @if($direction == 'asc')
+                                        <span>Permisos</span>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                                    </x-button-green>
 
-                                @else
+                                @endcan
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                                @can('Editar usuario')
 
-                                @endif
+                                    <x-button-blue
+                                        wire:click="abrirModalEditar({{ $usuario->id }})"
+                                        wire:loading.attr="disabled"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
 
-                            @else
+                                        <span>Editar</span>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                                    </x-button-blue>
 
-                            @endif
+                                @endcan
 
-                        </th>
+                                @can('Borrar usuario')
 
-                        <th wire:click="order('created_at')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                                    <x-button-red
+                                        wire:click="abrirModalBorrar({{ $usuario->id }})"
+                                        wire:loading.attr="disabled"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
 
-                            Registro
+                                        <span>Eliminar</span>
 
-                            @if($sort == 'created_at')
+                                    </x-button-red>
 
-                                @if($direction == 'asc')
+                                @endcan
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            </div>
 
-                                @else
+                        </x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                    </x-table.row>
 
-                                @endif
+                @empty
 
-                            @else
+                    <x-table.row>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                        <x-table.cell colspan="10">
 
-                            @endif
+                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
 
-                        </th>
+                                No hay resultados.
 
-                        <th wire:click="order('updated_at')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                            </div>
 
-                            Actualizado
+                        </x-table.cell>
 
-                            @if($sort == 'updated_at')
+                    </x-table.row>
 
-                                @if($direction == 'asc')
+                @endforelse
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+            </x-slot>
 
-                                @else
+            <x-slot name="tfoot">
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                <x-table.row>
 
-                                @endif
+                    <x-table.cell colspan="10" class="bg-gray-50">
 
-                            @else
+                        {{ $usuarios->links()}}
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                    </x-table.cell>
 
-                            @endif
+                </x-table.row>
 
-                        </th>
+            </x-slot>
 
-                        <th class="px-3 py-3 hidden lg:table-cell">Acciones</th>
+        </x-table>
 
-                    </tr>
-
-                </thead>
-
-                <tbody class="divide-y divide-gray-200 flex-1 sm:flex-none ">
-
-                    @foreach($usuarios as $user)
-
-                        <tr class="text-sm font-medium text-gray-500 bg-white flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Nombre</span>
-
-                                <div class="flex items-center justify-center lg:justify-start">
-
-                                    <div class="flex-shrink-0 h-10 w-10">
-
-                                        <img class="h-10 w-10 rounded-full" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
-
-                                    </div>
-
-                                    <div class="ml-4">
-
-                                        <div class="text-sm font-medium text-gray-900">{{ $user->name }} {{ $user->ap_paterno }} {{ $user->ap_materno }}</div>
-
-                                    </div>
-
-                                </div>
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Email</span>
-
-                                {{ $user->email }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Role</span>
-
-                                @if ($user->getRoleNames()->count())
-
-                                    {{ $user->getRoleNames()[0] }}
-
-                                @endif
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto capitalize p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden  absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Localidad</span>
-
-                                {{ $user->oficina->oficina }} - {{ $user->oficina->nombre }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto capitalize p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden  absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Área</span>
-
-                                {{ $user->area }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Status</span>
-
-                                @if($user->status == 'activo')
-
-                                    <span class="bg-green-400 py-1 px-2 rounded-full text-white">{{ ucfirst($user->status) }}</span>
-
-                                @else
-
-                                    <span class="bg-red-400 py-1 px-2 rounded-full text-white">{{ ucfirst($user->status) }}</span>
-
-                                @endif
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
-
-                                @if($user->creadoPor != null)
-
-                                    <span class="font-semibold">Registrado por: {{$user->creadoPor->name}}</span> <br>
-
-                                @else
-
-                                    <span class="font-semibold">Registrado:</span> <br>
-
-                                @endif
-
-                                {{ $user->created_at }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Actualizado</span>
-
-                                @if($user->actualizadoPor != null)
-
-                                    <span class="font-semibold">Actualizado por: {{$user->actualizadoPor->name}}</span> <br>
-
-                                @else
-
-                                    <span class="font-semibold">Actualizado:</span> <br>
-
-                                @endif
-
-                                {{ $user->updated_at }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
-
-                                <div class="flex md:flex-col justify-center lg:justify-start md:space-y-1">
-
-                                    @can('Editar usuario')
-
-                                        <button
-                                            wire:click="abrirModalEditar({{$user->id}})"
-                                            wire:loading.attr="disabled"
-                                            wire:target="abiriModalEditar({{$user->id}})"
-                                            class="md:w-full bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full mr-2 hover:bg-blue-700 flex justify-center focus:outline-none"
-                                        >
-
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                            </svg>
-
-                                            Editar
-
-                                        </button>
-
-                                    @endcan
-
-                                    @can('Borrar usuario')
-
-                                        <button
-                                            wire:click="abrirModalBorrar({{$user->id}})"
-                                            wire:loading.attr="disabled"
-                                            wire:target="abrirModalBorrar({{$user->id}})"
-                                            class="md:w-full bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full hover:bg-red-700 flex justify-center focus:outline-none"
-                                        >
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-
-                                            Eliminar
-
-                                        </button>
-
-                                    @endcan
-
-                                </div>
-
-                            </td>
-                        </tr>
-
-                    @endforeach
-
-                </tbody>
-
-                <tfoot class="border-gray-300 bg-gray-50">
-
-                    <tr>
-
-                        <td colspan="9" class="py-2 px-5">
-                            {{ $usuarios->links()}}
-                        </td>
-
-                    </tr>
-
-                </tfoot>
-
-            </table>
-
-            <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-0 left-0" wire:loading.delay.longer>
-
-                <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
-
-            </div>
-
-        </div>
-
-    @else
-
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-full text-lg">
-
-            No hay resultados.
-
-        </div>
-
-    @endif
+    </div>
 
     <x-dialog-modal wire:model="modal">
 
@@ -490,240 +312,103 @@
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <div class="flex-auto ">
+                    <x-input-group for="modelo_editar.name" label="Nombre" :error="$errors->first('modelo_editar.name')" class="w-full">
 
-                        <div>
+                        <x-input-text id="modelo_editar.name" wire:model="modelo_editar.name" />
 
-                            <Label>Nombre</Label>
-                        </div>
+                    </x-input-group>
 
-                        <div>
+                    <x-input-group for="modelo_editar.ap_paterno" label="Apellido paterno" :error="$errors->first('modelo_editar.ap_paterno')" class="w-full">
 
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.name">
+                        <x-input-text id="modelo_editar.ap_paterno" wire:model="modelo_editar.ap_paterno" />
 
-                        </div>
+                    </x-input-group>
 
-                        <div>
+                    <x-input-group for="modelo_editar.ap_materno" label="Apellido materno" :error="$errors->first('modelo_editar.ap_materno')" class="w-full">
 
-                            @error('modelo_editar.name') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                        <x-input-text id="modelo_editar.ap_materno" wire:model="modelo_editar.ap_materno" />
 
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto ">
-
-                        <div>
-
-                            <Label>Apellido paterno</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.ap_paterno">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.ap_paterno') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto ">
-
-                        <div>
-
-                            <Label>Apellido materno</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.ap_materno">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.ap_materno') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
+                    </x-input-group>
 
                 </div>
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <div class="flex-auto ">
+                    <x-input-group for="modelo_editar.email" label="Correo" :error="$errors->first('modelo_editar.email')" class="w-full">
 
-                        <div>
+                        <x-input-text id="modelo_editar.email" wire:model="modelo_editar.email" />
 
-                            <Label>Email</Label>
+                    </x-input-group>
 
-                        </div>
+                    <x-input-group for="modelo_editar.status" label="Estado" :error="$errors->first('modelo_editar.status')" class="w-full">
 
-                        <div>
+                        <x-input-select id="modelo_editar.status" wire:model="modelo_editar.status" class="w-full">
 
-                            <input type="email" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.email">
+                            <option value="">Seleccione una opción</option>
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
 
-                        </div>
+                        </x-input-select>
 
-                        <div>
+                    </x-input-group>
 
-                            @error('modelo_editar.email') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                    <x-input-group for="role" label="Rol" :error="$errors->first('role')" class="w-full">
 
-                        </div>
+                        <x-input-select id="role" wire:model="role" class="w-full">
 
-                    </div>
+                            <option value="">Seleccione una opción</option>
 
-                    <div class="flex-auto mr-1 ">
+                            @foreach ($roles as $role)
 
-                        <div>
+                                <option value="{{ $role->id }}">{{ $role->name }}</option>
 
-                            <Label>Status</Label>
+                            @endforeach
 
-                        </div>
+                        </x-input-select>
 
-                        <div>
-
-                            <select class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.status">
-
-                                <option value="">Seleccione una opción</option>
-                                <option value="activo">Activo</option>
-                                <option value="inactivo">Inactivo</option>
-
-                            </select>
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.status') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto mr-1 ">
-
-                        <div>
-
-                            <Label>Rol</Label>
-
-                        </div>
-
-                        <div>
-
-                            <select class="bg-white rounded text-sm w-full" wire:model.defer="role">
-
-                                <option value="">Seleccione una opción</option>
-
-                                @foreach ($roles as $role)
-
-
-                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
-
-                                @endforeach
-
-                            </select>
-
-                        </div>
-
-                        <div>
-
-                            @error('role') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
+                    </x-input-group>
 
                 </div>
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <div class="flex-auto ">
+                    <x-input-group for="modelo_editar.oficina_id" label="Oficina" :error="$errors->first('modelo_editar.oficina_id')" class="w-full">
 
-                        <div>
+                        <x-input-select id="modelo_editar.oficina_id" wire:model="modelo_editar.oficina_id" class="w-full">
 
-                            <Label>Oficina</Label>
-                        </div>
+                            <option value="">Seleccione una opción</option>
 
-                        <div>
+                            @foreach ($oficinas as $oficina)
 
-                            <select class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.oficina_id">
-                                <option selected value="">Selecciona una opción</option>
+                                <option value="{{ $oficina->id }}">{{ $oficina->nombre }} - {{ $oficina->oficina }}</option>
 
-                                @foreach ($oficinas as $oficina)
+                            @endforeach
 
-                                    <option value="{{ $oficina->id }}">{{ $oficina->nombre }} - {{ $oficina->oficina }}</option>
+                        </x-input-select>
 
-                                @endforeach
+                    </x-input-group>
 
-                            </select>
+                    <x-input-group for="modelo_editar.area" label="Área" :error="$errors->first('modelo_editar.area')" class="w-full">
 
-                        </div>
+                        <x-input-select id="modelo_editar.area" wire:model="modelo_editar.area" class="w-full">
 
-                        <div>
+                            <option value="">Seleccione una opción</option>
 
-                            @error('modelo_editar.oficina_id') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto mb-5">
-
-                        <div>
-
-                            <Label>Área</Label>
-                        </div>
-
-                        <div>
-
-                            <select class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.area">
-                                <option selected value="">Selecciona una opción</option>
-
-                                @foreach ($areas_adscripcion as $area)
+                            @foreach ($areas_adscripcion as $area)
 
                                     <option value="{{ $area }}">{{ $area }}</option>
 
                                 @endforeach
 
-                            </select>
+                        </x-input-select>
 
-                        </div>
+                    </x-input-group>
 
-                        <div>
+                    <x-input-group for="modelo_editar.valuador" label="Valuador" :error="$errors->first('modelo_editar.valuador')" class="w-full">
 
-                            @error('modelo_editar.area') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                        <input type="checkbox" class="bg-white rounded text-xs " wire:model="modelo_editar.valuador">
 
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto mb-5">
-
-                        <div>
-
-                            <Label>Valuador</Label>
-                        </div>
-
-                        <div class="">
-
-                            <input type="checkbox" class="bg-white rounded text-xs " wire:model.defer="modelo_editar.valuador">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.valuador') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
+                    </x-input-group>
 
                 </div>
 
@@ -739,44 +424,41 @@
 
         <x-slot name="footer">
 
-            <div class="float-righ">
+            <div class="flex gap-3">
 
                 @if($crear)
 
-                    <button
-                        wire:click="crear"
+                    <x-button-blue
+                        wire:click="guardar"
                         wire:loading.attr="disabled"
-                        wire:target="crear"
-                        class="bg-blue-400 text-white hover:shadow-lg font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                        wire:target="guardar">
 
-                        <img wire:loading wire:target="crear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                        <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                         Guardar
-                    </button>
+                    </x-button-blue>
 
                 @elseif($editar)
 
-                    <button
+                    <x-button-blue
                         wire:click="actualizar"
                         wire:loading.attr="disabled"
-                        wire:target="actualizar"
-                        class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                        wire:target="actualizar">
 
                         <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                         Actualizar
-                    </button>
+                    </x-button-blue>
 
                 @endif
 
-                <button
+                <x-button-red
                     wire:click="resetearTodo"
                     wire:loading.attr="disabled"
                     wire:target="resetearTodo"
-                    type="button"
-                    class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-red-700 flaot-left focus:outline-none">
+                    type="button">
                     Cerrar
-                </button>
+                </x-button-red>
 
             </div>
 
@@ -815,5 +497,87 @@
         </x-slot>
 
     </x-confirmation-modal>
+
+    <x-dialog-modal wire:model="modalPermisos">
+
+        <x-slot name="title">
+
+            Asignar permisos
+
+        </x-slot>
+
+        <x-slot name="content">
+
+            <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
+
+                <div class="flex-auto ">
+
+                    <div>
+
+                        <Label class="block text-sm font-medium leading-6 text-gray-900">Seleccione los permisos</Label>
+
+                    </div>
+
+                    <div class="overflow-y-auto ">
+
+                        @foreach($permisos as $nombre => $area)
+
+                            <p class="my-2">Área de {{ $nombre }}:</p>
+
+                            <div class="mb-2 flex flex-wrap gap-2">
+
+                                @foreach ($area as $permission)
+
+                                    <label class="border border-gray-400 text-gray-500 px-2 rounded-full py-1 text-xs flex items-center">
+
+                                        <input class="bg-white rounded" type="checkbox" wire:model.defer="listaDePermisos" value="{{ $permission['id'] }}">
+
+                                        <p class="ml-2">{{ $permission['name'] }}</p>
+
+                                    </label>
+
+                                @endforeach
+
+                            </div>
+
+                            <hr>
+
+                        @endforeach
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex gap-3">
+
+                <x-button-blue
+                    wire:click="asignar"
+                    wire:loading.attr="disabled"
+                    wire:target="asignar">
+
+                    <img wire:loading wire:target="asignar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Asiganr
+                </x-button-blue>
+
+                <x-button-red
+                    wire:click="resetearTodo"
+                    wire:loading.attr="disabled"
+                    wire:target="resetearTodo"
+                    type="button">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
 
 </div>

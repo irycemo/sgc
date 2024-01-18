@@ -12,7 +12,7 @@
 
             <div class="mb-5">
 
-                <x-filepond wire:model="documento"  accept="['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', '.xlsx']"/>
+                <x-filepond wire:model.live="documento"  accept="['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', '.xlsx']"/>
 
             </div>
 

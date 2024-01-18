@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('concepto');
             $table->unsignedDecimal('valor', 10, 2);
+            $table->unsignedDecimal('valor_aterior', 10, 2)->nullable();
             $table->timestamps();
         });
     }

@@ -13,15 +13,15 @@
 
                 <div class="mx-auto">
 
-                    <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.defer="localidad">
+                    <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model="localidad">
 
-                    <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101 && !auth()->user()->hasRole('Administrador')) readonly @endif>
+                    <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.live="oficina" @if(auth()->user()->oficina->oficina != 101 && !auth()->user()->hasRole('Administrador')) readonly @endif>
 
-                    <input placeholder="Tipo" type="number" max="2" min="1" class="bg-white rounded text-xs w-20 @error('tipo') border-1 border-red-500 @enderror" wire:model.defer="tipo">
+                    <input placeholder="Tipo" type="number" max="2" min="1" class="bg-white rounded text-xs w-20 @error('tipo') border-1 border-red-500 @enderror" wire:model="tipo">
 
                 </div>
 
-                <select class="bg-white rounded text-xs w-full @error('valuador') border-1 border-red-500 @enderror" wire:model.defer="valuador">
+                <select class="bg-white rounded text-xs w-full @error('valuador') border-1 border-red-500 @enderror" wire:model="valuador">
 
                     <option value="" selected>Seleccione un valuador</option>
 
@@ -47,7 +47,7 @@
 
                     <div>
 
-                        <input type="text" class="bg-white rounded text-xs" wire:model.defer="titulo">
+                        <input type="text" class="bg-white rounded text-xs" wire:model="titulo">
 
                     </div>
 
@@ -69,7 +69,7 @@
 
                     <div>
 
-                        <input type="text" class="bg-white rounded text-xs  @error('cantidad') border-red-500 @enderror" wire:model.defer="cantidad">
+                        <input type="text" class="bg-white rounded text-xs  @error('cantidad') border-red-500 @enderror" wire:model="cantidad">
 
                     </div>
 
@@ -91,7 +91,7 @@
 
                     <div>
 
-                        <input type="text" class="bg-white rounded text-xs" wire:model.defer="origen">
+                        <input type="text" class="bg-white rounded text-xs" wire:model="origen">
 
                     </div>
 
@@ -114,7 +114,7 @@
 
                 <div>
 
-                    <select class="bg-white rounded text-xs w-full mb-1 @error('observaciones') border-red-500 @enderror" wire:model="observaciones">
+                    <select class="bg-white rounded text-xs w-full mb-1 @error('observaciones') border-red-500 @enderror" wire:model.live="observaciones">
                         <option value="" selected> Seleccione una opción</option>
                         <option value="AVALUO PARA EFECTOS DE ACTULIZACION DE VALOR CATASTRAL POR SUBDIVICION AUTORIZADA POR LA SUOP OFICIO SUOP-DOU-RU-XXXXX  DE FECHA XX/XX/XXXX">
                             AVALUO PARA EFECTOS DE ACTULIZACION DE VALOR CATASTRAL POR SUBDIVICION AUTORIZADA POR LA SUOP OFICIO SUOP-DOU-RU-XXXXX  DE FECHA XX/XX/XXXX
@@ -133,7 +133,7 @@
                         </option>
                     </select>
 
-                    <textarea rows="5" wire:model.defer="observaciones" class="bg-white rounded text-xs w-full @error('observaciones') border-red-500 @enderror"></textarea>
+                    <textarea rows="5" wire:model="observaciones" class="bg-white rounded text-xs w-full @error('observaciones') border-red-500 @enderror" placeholder="Se lo mas especifico posible acerca del motivo por el que se generan las nuevas cuentas prediales"></textarea>
 
                 </div>
 
@@ -145,10 +145,14 @@
 
             </div>
 
-            <button wire:click="crearCuentas" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 float-right text-sm py-2 px-4 text-white rounded-full focus:outline-none hidden md:block">
-                <img wire:loading wire:target="crearCuentas" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-                Crear cuentas
-            </button>
+            <div class="flex justify-end">
+
+                <x-button-gray wire:click="crearCuentas">
+                    <img wire:loading wire:target="crearCuentas" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    Crear cuentas
+                </x-button-gray>
+
+            </div>
 
         </div>
 
@@ -158,22 +162,26 @@
 
             <div class="flex flex-wrap space-x-1 justify-center items-center gap-1">
 
-                <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad_busqueda') border-1 border-red-500 @enderror" wire:model.lazy="localidad_busqueda">
+                <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad_busqueda') border-1 border-red-500 @enderror" wire:model.blur="localidad_busqueda">
 
-                <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina_busqueda') border-1 border-red-500 @enderror" wire:model.defer="oficina_busqueda" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina_busqueda') border-1 border-red-500 @enderror" wire:model="oficina_busqueda" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                <input placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo_busqueda') border-1 border-red-500 @enderror" wire:model.defer="tipo_busqueda">
+                <input placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo_busqueda') border-1 border-red-500 @enderror" wire:model="tipo_busqueda">
 
-                <input placeholder="Registro inicial" type="number" class="bg-white rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model.defer="registro_inicio">
+                <input placeholder="Registro inicial" type="number" class="bg-white rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model="registro_inicio">
                 <p class="text-sm mb-0">a</p>
-                <input placeholder="Registro final" type="number" class="bg-white rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model.defer="registro_final">
+                <input placeholder="Registro final" type="number" class="bg-white rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model="registro_final">
 
             </div>
 
-            <button wire:click="buscarCuentas" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 mx-auto text-sm py-2 px-4 text-white rounded-full focus:outline-none hidden md:block">
-                <img wire:loading wire:target="buscarCuentas" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-                Buscar
-            </button>
+            <div class="flex justify-center">
+
+                <x-button-gray wire:click="buscarCuentas">
+                    <img wire:loading wire:target="buscarCuentas" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    Buscar
+                </x-button-gray>
+
+            </div>
 
         </div>
 

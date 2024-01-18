@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Models\File;
-use App\Http\Traits\ModelosTrait;
+use App\Models\Tramite;
 use App\Http\Traits\Uuid;
+use App\Http\Traits\ModelosTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -17,8 +18,11 @@ class Avaluo extends Model implements Auditable
     use ModelosTrait;
     use \OwenIt\Auditing\Auditable;
 
-
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    protected $casts = [
+        'notificado_en' => 'date'
+    ];
 
     public function getEstadoColorAttribute()
     {
@@ -30,12 +34,20 @@ class Avaluo extends Model implements Auditable
         ][$this->estado] ?? 'gray-400';
     }
 
+    public function tramite(){
+        return $this->belongsTo(Tramite::class);
+    }
+
     public function predio(){
         return $this->belongsTo(PredioAvaluo::class, 'predio_id');
     }
 
     public function asignadoA(){
         return $this->belongsTo(User::class, 'asignado_a');
+    }
+
+    public function notificador(){
+        return $this->belongsTo(User::class, 'notificado_por');
     }
 
     public function imagenes(){

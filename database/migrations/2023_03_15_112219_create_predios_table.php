@@ -72,6 +72,11 @@ return new class extends Migration
             $table->text('observaciones')->nullable();
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
+
+            $table->unique(['localidad', 'oficina', 'tipo_predio', 'numero_registro'], 'cuenta_predial');
+
+            $table->unique(['estado', 'region_catastral', 'municipio', 'zona_catastral', 'localidad', 'sector', 'manzana', 'predio', 'edificio', 'departamento'], 'clave_catastral');
+
         });
     }
 

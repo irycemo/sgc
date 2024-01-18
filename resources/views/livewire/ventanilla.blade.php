@@ -26,7 +26,7 @@
 
                     <div>
 
-                        <select class="bg-white rounded text-sm w-full" wire:model="categoria_select">
+                        <select class="bg-white rounded text-sm w-full" wire:model.live="categoria_select">
 
                             <option selected value="">Selecciona una opción</option>
 
@@ -62,7 +62,7 @@
 
                             <div>
 
-                                <select class="bg-white rounded text-sm w-full" wire:model="servicio_select">
+                                <select class="bg-white rounded text-sm w-full" wire:model.live="servicio_select">
 
                                     <option selected value="">Selecciona una opción</option>
 
@@ -100,7 +100,7 @@
 
                             <Label>¿Adiciona a otro trámite?</Label>
 
-                            <x-checkbox wire:model="adicionaTramite"></x-checkbox>
+                            <x-checkbox wire:model.live="adicionaTramite"></x-checkbox>
 
                         </div>
 
@@ -116,7 +116,7 @@
 
                                 <div class="" wire:ignore>
 
-                                    <select class="select2 bg-white rounded text-sm w-full  z-50" wire:model="tramiteAdiciona">
+                                    <select class="select2 bg-white rounded text-sm w-full  z-50" wire:model.live="tramiteAdiciona">
 
                                         @foreach ($tramitesAdiciones as $item)
 
@@ -158,7 +158,7 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-sm w-full" wire:model="modelo_editar.tipo_tramite">
+                            <select class="bg-white rounded text-sm w-full" wire:model.live="modelo_editar.tipo_tramite">
 
                                 <option value="normal">Normal</option>
                                 <option value="complemento">Complemento</option>
@@ -192,7 +192,7 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-sm w-full" wire:model="modelo_editar.tipo_servicio">
+                            <select class="bg-white rounded text-sm w-full" wire:model.live="modelo_editar.tipo_servicio">
 
                                 <option value="ordinario">Ordinario</option>
                                 <option value="urgente">Urgente</option>
@@ -224,7 +224,7 @@
 
                         <div>
 
-                            <input type="number" min="1" class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.cantidad" @if($flags['predios']) readonly @endif>
+                            <input type="number" min="1" class="bg-white rounded text-sm w-full" wire:model.blur="modelo_editar.cantidad" @if($flags['predios']) readonly @endif>
 
                         </div>
 
@@ -250,7 +250,7 @@
 
                         <div>
 
-                            <input type="number" min="1" class="bg-white rounded text-sm w-full" wire:model.lazy="importe_base">
+                            <input type="number" min="1" class="bg-white rounded text-sm w-full" wire:model.blur="importe_base">
 
                         </div>
 
@@ -276,7 +276,7 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-sm w-full" wire:model.lazy="angulo">
+                            <select class="bg-white rounded text-sm w-full" wire:model.blur="angulo">
 
                                 <option value="" selected>Selecciona una opción</option>
                                 <option value="min">16° a 45°</option>
@@ -311,7 +311,7 @@
 
                         <div>
 
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.solicitante">
+                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.blur="modelo_editar.solicitante">
 
                         </div>
 
@@ -341,7 +341,7 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.avaluo_para">
+                            <select class="bg-white rounded text-sm w-full" wire:model.blur="modelo_editar.avaluo_para">
 
                                 <option value="" selected>Seleccione una opción</option>
                                 <option value="46">Variación Catastral</option>
@@ -385,7 +385,7 @@
 
                                 <div>
 
-                                    <input placeholder="Localidad" type="number" class="bg-white rounded text-sm w-full" wire:model.defer="localidad">
+                                    <input placeholder="Localidad" type="number" class="bg-white rounded text-sm w-full" wire:model="localidad">
 
                                     <div>
 
@@ -398,7 +398,7 @@
 
                                 <div>
 
-                                    <input placeholder="Oficina rentistica" type="number" class="bg-white rounded text-sm w-full" wire:model.defer="oficina" @if(auth()->user()->oficina != 101) readonly @endif>
+                                    <input placeholder="Oficina rentistica" type="number" class="bg-white rounded text-sm w-full" wire:model="oficina" @if(auth()->user()->oficina != 101) readonly @endif>
 
                                     <div>
 
@@ -410,7 +410,7 @@
 
                                 <div>
 
-                                    <input placeholder="Tipo de predio" type="number" class="bg-white rounded text-sm w-full" wire:model.defer="tipo">
+                                    <input placeholder="Tipo de predio" type="number" class="bg-white rounded text-sm w-full" wire:model="tipo">
 
                                     <div>
 
@@ -423,7 +423,7 @@
 
                                 <div>
 
-                                    <input placeholder="Número de registro" type="number" class="bg-white rounded text-sm w-full" wire:model.defer="registro">
+                                    <input placeholder="Número de registro" type="number" class="bg-white rounded text-sm w-full" wire:model="registro">
 
                                     <div>
 
@@ -555,7 +555,7 @@
 
                         <div>
 
-                            <textarea rows="5" wire:model.lazy="modelo_editar.observaciones" class="bg-white rounded text-sm w-full" placeholder="Se lo mas especifico posible acerca de porque se genera el trámite."></textarea>
+                            <textarea rows="5" wire:model.blur="modelo_editar.observaciones" class="bg-white rounded text-sm w-full" placeholder="Se lo mas especifico posible acerca de porque se genera el trámite."></textarea>
 
                         </div>
 
@@ -585,7 +585,7 @@
 
                 <div class="flex lg:w-1/2 mx-auto">
 
-                    <input type="number" placeholder="Número de trámite" min="1" class="bg-white rounded-l text-sm w-full focus:ring-0" wire:model.defer="tramite_folio">
+                    <input type="number" placeholder="Número de trámite" min="1" class="bg-white rounded-l text-sm w-full focus:ring-0" wire:model="tramite_folio">
 
                     <button
                         wire:click="buscarTramite"

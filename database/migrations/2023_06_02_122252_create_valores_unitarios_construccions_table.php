@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('calidad');
             $table->unsignedTinyInteger('estado');
             $table->unsignedDecimal('valor', 10, 2);
+            $table->unsignedDecimal('valor_aterior', 10, 2)->nullable();
             $table->timestamps();
         });
     }

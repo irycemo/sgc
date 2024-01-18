@@ -2,15 +2,15 @@
 
     <div class="mb-6">
 
-        <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Umas</h1>
+        <x-header>Umas</x-header>
 
         <div class="flex justify-between">
 
             <div>
 
-                <input type="text" wire:model.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
 
-                <select class="bg-white rounded-full text-sm" wire:model="pagination">
+                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -21,7 +21,7 @@
 
             </div>
 
-                <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 float-right text-sm py-2 px-4 text-white rounded-full focus:outline-none hidden md:block">
+                <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 text-sm py-2 px-4 text-white rounded-full hidden md:block items-center justify-center focus:outline-gray-400 focus:outline-offset-2">
 
                     <img wire:loading wire:target="abrirModalCrear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                     Agregar nueva UMA
@@ -34,356 +34,168 @@
 
     </div>
 
-    @if($umas->count())
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
 
-        <div class="relative overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+        <x-table>
 
-            <table class="rounded-lg w-full">
+            <x-slot name="head">
 
-                <thead class="border-b border-gray-300 bg-gray-50">
+                <x-table.heading sortable wire:click="sortBy('año')" :direction="$sort === 'año' ? $direction : null" >Año</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('diario')" :direction="$sort === 'diario' ? $direction : null" >Diario</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('mensual')" :direction="$sort === 'mensual' ? $direction : null" >Mensual</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('anual')" :direction="$sort === 'anual' ? $direction : null" >Anual</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
+                <x-table.heading >Acciones</x-table.heading>
 
-                    <tr class="text-xs font-medium text-gray-500 uppercase text-left traling-wider">
+            </x-slot>
 
-                        <th wire:click="order('año')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+            <x-slot name="body">
 
-                            Año
+                @forelse ($umas as $uma)
 
-                            @if($sort == 'año')
+                    <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $uma->id }}">
 
-                                @if($direction == 'asc')
+                        <x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Año</span>
 
-                                @else
+                            {{ $uma->año }}
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @endif
+                        <x-table.cell>
 
-                            @else
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Diario</span>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                            ${{ number_format($uma->diario, 2) }}
 
-                            @endif
+                        </x-table.cell>
 
-                        </th>
+                        <x-table.cell>
 
-                        <th wire:click="order('diario')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Mensual</span>
 
-                            Diario
+                            ${{ number_format($uma->mensual, 2) }}
 
-                            @if($sort == 'diario')
+                        </x-table.cell>
 
-                                @if($direction == 'asc')
+                        <x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Anual</span>
 
-                                @else
+                            ${{ number_format($uma->anual, 2) }}
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @endif
+                        <x-table.cell>
 
-                            @else
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
 
-                            @endif
+                            <span class="font-semibold">@if($uma->creadoPor != null)Registrado por: {{$uma->creadoPor->name}} @else Registro: @endif</span> <br>
 
-                        </th>
+                            {{ $uma->created_at }}
 
-                        <th wire:click="order('mensual')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        </x-table.cell>
 
-                            Mensual
+                        <x-table.cell>
 
-                            @if($sort == 'mensual')
+                            <span class="font-semibold">@if($uma->actualizadoPor != null)Actualizado por: {{$uma->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
 
-                                @if($direction == 'asc')
+                            {{ $uma->updated_at }}
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @else
+                        <x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
 
-                                @endif
+                            <div class="flex justify-center lg:justify-start gap-2">
 
-                            @else
+                                @can('Editar uma')
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                                    <x-button-blue
+                                        wire:click="abrirModalEditar({{$uma->id}})"
+                                        wire:loading.attr="disabled"
+                                        wire:target="abiriModalEditar({{$uma->id}})"
+                                    >
 
-                            @endif
 
-                        </th>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-3">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
 
-                        <th wire:click="order('anual')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                                        <p>Editar</p>
 
-                            Anual
+                                    </x-button-blue>
 
-                            @if($sort == 'anual')
+                                @endcan
 
-                                @if($direction == 'asc')
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                                @can('Borrar uma')
 
-                                @else
+                                    <x-button-red
+                                        wire:click="abrirModalBorrar({{$uma->id}})"
+                                        wire:loading.attr="disabled"
+                                        wire:target="abrirModalBorrar({{$uma->id}})"
+                                    >
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-3">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
 
-                                @endif
+                                        <p>Eliminar</p>
 
-                            @else
+                                    </x-button-red>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                                @endcan
 
-                            @endif
+                            </div>
 
-                        </th>
+                        </x-table.cell>
 
-                        <th wire:click="order('created_at')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                    </x-table.row>
 
-                            Registro
+                @empty
 
-                            @if($sort == 'created_at')
+                    <x-table.row wire:key="row-empty">
 
-                                @if($direction == 'asc')
+                        <x-table.cell colspan="9">
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
 
-                                @else
+                                No hay resultados.
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                            </div>
 
-                                @endif
+                        </x-table.cell>
 
-                            @else
+                    </x-table.row>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                @endforelse
 
-                            @endif
+            </x-slot>
 
-                        </th>
+            <x-slot name="tfoot">
 
-                        <th wire:click="order('updated_at')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                <x-table.row>
 
-                            Actualizado
+                    <x-table.cell colspan="9" class="bg-gray-50">
 
-                            @if($sort == 'updated_at')
+                        {{ $umas->links()}}
 
-                                @if($direction == 'asc')
+                    </x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                </x-table.row>
 
-                                @else
+            </x-slot>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+        </x-table>
 
-                                @endif
+    </div>
 
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th class="px-3 py-3 hidden lg:table-cell">Acciones</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody class="divide-y divide-gray-200 flex-1 sm:flex-none ">
-
-                    @foreach($umas as $uma)
-
-                        <tr class="text-sm font-medium text-gray-500 bg-white flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Año</span>
-
-                                {{ $uma->año }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Diario</span>
-
-                                ${{ number_format($uma->diario, 2) }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Mensual</span>
-
-                                ${{ number_format($uma->mensual, 2) }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Anual</span>
-
-                                ${{ number_format($uma->anual, 2) }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
-
-                                @if($uma->creadoPor != null)
-
-                                    <span class="font-semibold">Registrado por: {{$uma->creadoPor->name}}</span> <br>
-
-                                @endif
-
-                                {{ $uma->created_at }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Actualizado</span>
-
-                                @if($uma->actualizadoPor != null)
-
-                                    <span class="font-semibold">Actualizado por: {{$uma->actualizadoPor->name}}</span> <br>
-
-                                @endif
-
-                                {{ $uma->updated_at }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
-
-                                <div class="flex justify-center lg:justify-start">
-
-                                    @can('Editar uma')
-
-                                        <button
-                                            wire:click="abrirModalEditar({{$uma->id}})"
-                                            wire:loading.attr="disabled"
-                                            wire:target="abiriModalEditar({{$uma->id}})"
-                                            class="bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full mr-2 hover:bg-blue-700 flex focus:outline-none"
-                                        >
-
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-3">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                            </svg>
-
-                                            <p>Editar</p>
-
-                                        </button>
-
-                                    @endcan
-
-
-                                    @can('Borrar uma')
-
-                                        <button
-                                            wire:click="abrirModalBorrar({{$uma->id}})"
-                                            wire:loading.attr="disabled"
-                                            wire:target="abrirModalBorrar({{$uma->id}})"
-                                            class="bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full hover:bg-red-700 flex focus:outline-none"
-                                        >
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-3">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-
-                                            <p>Eliminar</p>
-
-                                        </button>
-
-                                    @endcan
-
-                                </div>
-
-                            </td>
-                        </tr>
-
-                    @endforeach
-
-                </tbody>
-
-                <tfoot class="border-gray-300 bg-gray-50">
-
-                    <tr>
-
-                        <td colspan="8" class="py-2 px-5">
-                            {{ $umas->links()}}
-                        </td>
-
-                    </tr>
-
-                </tfoot>
-
-            </table>
-
-            <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-0 left-0" wire:loading.delay.longer>
-
-                <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
-
-            </div>
-
-        </div>
-
-    @else
-
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-full text-lg">
-
-            No hay resultados.
-
-        </div>
-
-    @endif
-
-    <x-dialog-modal wire:model="modal">
+    <x-dialog-modal wire:model.live="modal" maxWidth="sm">
 
         <x-slot name="title">
 
@@ -401,48 +213,17 @@
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <div class="flex-auto ">
+                    <x-input-group for="modelo_editar.año" label="Año" :error="$errors->first('modelo_editar.año')" class="w-full">
 
-                        <div>
+                        <x-input-text id="modelo_editar.año" wire:model="modelo_editar.año" />
 
-                            <Label>Año</Label>
-                        </div>
+                    </x-input-group>
 
-                        <div>
+                    <x-input-group for="modelo_editar.diario" label="Diario" :error="$errors->first('modelo_editar.diario')" class="w-full">
 
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.año">
+                        <x-input-text id="modelo_editar.diario" wire:model="modelo_editar.diario" />
 
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.año') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto ">
-
-                        <div>
-
-                            <Label>Diario</Label>
-
-                        </div>
-
-                        <div>
-
-                            <input type="number" min="0" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.diario">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.diario') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
+                    </x-input-group>
 
                 </div>
 
@@ -458,44 +239,40 @@
 
         <x-slot name="footer">
 
-            <div class="float-righ">
+            <div class="flex items-center gap-3">
 
                 @if($crear)
 
-                    <button
-                        wire:click="crear"
+                    <x-button-blue
+                        wire:click="guardar"
                         wire:loading.attr="disabled"
-                        wire:target="crear"
-                        class="bg-blue-400 text-white hover:shadow-lg font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                        wire:target="guardar">
 
-                        <img wire:loading wire:target="crear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                        <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                         Guardar
-                    </button>
+                    </x-button-blue>
 
                 @elseif($editar)
 
-                    <button
+                    <x-button-blue
                         wire:click="actualizar"
                         wire:loading.attr="disabled"
-                        wire:target="actualizar"
-                        class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                        wire:target="actualizar">
 
                         <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                         Actualizar
-                    </button>
+                    </x-button-blue>
 
                 @endif
 
-                <button
+                <x-button-red
                     wire:click="resetearTodo"
                     wire:loading.attr="disabled"
-                    wire:target="resetearTodo"
-                    type="button"
-                    class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-red-700 flaot-left focus:outline-none">
+                    wire:target="resetearTodo">
                     Cerrar
-                </button>
+                </x-button-red>
 
             </div>
 
@@ -503,7 +280,7 @@
 
     </x-dialog-modal>
 
-    <x-confirmation-modal wire:model="modalBorrar">
+    <x-confirmation-modal wire:model.live="modalBorrar" maxWidth="sm">
 
         <x-slot name="title">
             Eliminar UMA

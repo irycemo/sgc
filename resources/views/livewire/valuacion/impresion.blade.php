@@ -14,15 +14,15 @@
 
             <div class="flex flex-wrap space-x-1 justify-center items-center">
 
-                <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.lazy="localidad">
+                <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-                <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.lazy="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.blur="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                <input placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo') border-1 border-red-500 @enderror" wire:model.defer="tipo">
+                <input placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo') border-1 border-red-500 @enderror" wire:model="tipo">
 
-                <input placeholder="Registro inicial" type="number" class="bg-white rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model.defer="registro_inicio">
+                <input placeholder="Registro inicial" type="number" class="bg-white rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model="registro_inicio">
                 <p class="text-sm mb-0">a</p>
-                <input placeholder="Registro final" type="number" class="bg-white rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model.defer="registro_final">
+                <input placeholder="Registro final" type="number" class="bg-white rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model="registro_final">
 
             </div>
 
@@ -44,7 +44,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full lg:w-1/2 @error('autoridad_municipal') border-1 border-red-500 @enderror" wire:model.defer="autoridad_municipal">
+                        <input type="text" class="bg-white rounded text-xs w-full lg:w-1/2 @error('autoridad_municipal') border-1 border-red-500 @enderror" wire:model="autoridad_municipal">
 
                     </div>
 
@@ -60,7 +60,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full lg:w-1/2 @error('valuador_municipal') border-1 border-red-500 @enderror" wire:model.defer="valuador_municipal">
+                        <input type="text" class="bg-white rounded text-xs w-full lg:w-1/2 @error('valuador_municipal') border-1 border-red-500 @enderror" wire:model="valuador_municipal">
 
                     </div>
 
@@ -86,7 +86,7 @@
 
                     <div >
 
-                        <input type="number" class="bg-white rounded text-xs w-40 @error('folioInspeccion') border-1 border-red-500 @enderror" wire:model.defer="folioInspeccion">
+                        <input type="number" class="bg-white rounded text-xs w-40 @error('folioInspeccion') border-1 border-red-500 @enderror" wire:model="folioInspeccion">
 
                     </div>
 
@@ -108,7 +108,7 @@
 
                     <div class="text-center">
 
-                        <input type="number" class="bg-white rounded text-xs w-40 @error('folioAvaluo') border-1 border-red-500 @enderror" wire:model.defer="folioAvaluo">
+                        <input type="number" class="bg-white rounded text-xs w-40 @error('folioAvaluo') border-1 border-red-500 @enderror" wire:model="folioAvaluo">
 
                     </div>
 
@@ -124,15 +124,15 @@
 
             <div class="flex flex-wrap space-x-1 justify-center items-center">
 
-                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.lazy="localidad">
+                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-                <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.lazy="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.blur="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo') border-1 border-red-500 @enderror" wire:model.defer="tipo">
+                <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo') border-1 border-red-500 @enderror" wire:model="tipo">
 
-                <input title="Registro inicial" placeholder="Registro inicial" type="number" class="bg-white rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model="registro_inicio">
+                <input title="Registro inicial" placeholder="Registro inicial" type="number" class="bg-white rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model.live="registro_inicio">
                 <p class="text-sm mb-0">a</p>
-                <input title="Registro final" placeholder="Registro final" type="number" class="bg-white rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model.defer="registro_final">
+                <input title="Registro final" placeholder="Registro final" type="number" class="bg-white rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model="registro_final">
 
             </div>
 
@@ -150,23 +150,23 @@
 
                 <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-20" title="Estado" value="16" readonly>
 
-                <input title="Región catastral" data-tooltip-target="tooltip-default" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral">
+                <input title="Región catastral" data-tooltip-target="tooltip-default" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('region_catastral') border-1 border-red-500 @enderror" wire:model.live="region_catastral">
 
-                <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('municipio') border-1 border-red-500 @enderror" wire:model.defer="municipio">
+                <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio">
 
-                <input title="Zona catastral" placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model.defer="zona_catastral">
+                <input title="Zona catastral" placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model="zona_catastral">
 
-                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.lazy="localidad">
+                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-                <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-20 @error('sector') border-1 border-red-500 @enderror" wire:model.defer="sector">
+                <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-20 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
 
-                <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-20 @error('manzana') border-1 border-red-500 @enderror" wire:model.defer="manzana">
+                <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-20 @error('manzana') border-1 border-red-500 @enderror" wire:model="manzana">
 
-                <input title="Predio" placeholder="Predio" type="number" class="bg-white rounded text-xs w-20 @error('predio') border-1 border-red-500 @enderror" wire:model.lazy="predio.predio">
+                <input title="Predio" placeholder="Predio" type="number" class="bg-white rounded text-xs w-20 @error('predio') border-1 border-red-500 @enderror" wire:model.blur="predio.predio">
 
-                <input title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-20 @error('edificio') border-1 border-red-500 @enderror" wire:model.defer="edificio">
+                <input title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-20 @error('edificio') border-1 border-red-500 @enderror" wire:model="edificio">
 
-                <input title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-20 @error('departamento') border-1 border-red-500 @enderror" wire:model.defer="departamento">
+                <input title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-20 @error('departamento') border-1 border-red-500 @enderror" wire:model="departamento">
 
             </div>
 
@@ -188,7 +188,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full @error('director') border-1 border-red-500 @enderror" wire:model.defer="director" >
+                        <input type="text" class="bg-white rounded text-xs w-full @error('director') border-1 border-red-500 @enderror" wire:model="director" >
 
                     </div>
 
@@ -204,7 +204,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full @error('jefe_departamento') border-1 border-red-500 @enderror" wire:model.defer="jefe_departamento" >
+                        <input type="text" class="bg-white rounded text-xs w-full @error('jefe_departamento') border-1 border-red-500 @enderror" wire:model="jefe_departamento" >
 
                     </div>
 
@@ -220,7 +220,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full @error('notificador') border-1 border-red-500 @enderror" wire:model.defer="notificador">
+                        <input type="text" class="bg-white rounded text-xs w-full @error('notificador') border-1 border-red-500 @enderror" wire:model="notificador">
 
                     </div>
 
@@ -238,23 +238,23 @@
 
                 <p>En la ciudad de </p>
 
-                <input type="text" class="bg-white rounded text-xs @error('ciudad') border-1 border-red-500 @enderror" wire:model.defer="ciudad">
+                <input type="text" class="bg-white rounded text-xs @error('ciudad') border-1 border-red-500 @enderror" wire:model="ciudad">
 
                 <p>a las</p>
 
-                <input type="text" class="bg-white rounded text-xs @error('hora') border-1 border-red-500 @enderror" wire:model.defer="hora">
+                <input type="text" class="bg-white rounded text-xs @error('hora') border-1 border-red-500 @enderror" wire:model="hora">
 
                 <p>del día</p>
 
-                <input type="text" class="bg-white rounded text-xs @error('dia') border-1 border-red-500 @enderror" wire:model.defer="dia">
+                <input type="text" class="bg-white rounded text-xs @error('dia') border-1 border-red-500 @enderror" wire:model="dia">
 
                 <p>del mes</p>
 
-                <input type="text" class="bg-white rounded text-xs @error('mes') border-1 border-red-500 @enderror" wire:model.defer="mes">
+                <input type="text" class="bg-white rounded text-xs @error('mes') border-1 border-red-500 @enderror" wire:model="mes">
 
                 <p>del año</p>
 
-                <input type="text" class="bg-white rounded text-xs @error('año') border-1 border-red-500 @enderror" wire:model.defer="año">
+                <input type="text" class="bg-white rounded text-xs @error('año') border-1 border-red-500 @enderror" wire:model="año">
 
             </div>
 
@@ -270,7 +270,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full @error('nombre') border-1 border-red-500 @enderror" wire:model.defer="nombre">
+                        <input type="text" class="bg-white rounded text-xs w-full @error('nombre') border-1 border-red-500 @enderror" wire:model="nombre">
 
                     </div>
 
@@ -286,7 +286,7 @@
 
                     <div class="text-center">
 
-                        <input type="text" class="bg-white rounded text-xs w-full @error('calidad') border-1 border-red-500 @enderror" wire:model.defer="calidad">
+                        <input type="text" class="bg-white rounded text-xs w-full @error('calidad') border-1 border-red-500 @enderror" wire:model="calidad">
 
                     </div>
 

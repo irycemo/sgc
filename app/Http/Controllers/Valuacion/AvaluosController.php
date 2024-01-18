@@ -17,6 +17,7 @@ use Endroid\QrCode\Writer\PngWriter;
 
 class AvaluosController extends Controller
 {
+
     public function imprime($collection, $tramiteInspeccion, $tramiteAvaluo, $ciudad = null, $hora = null, $dia = null, $mes = null, $año = null, $nombre = null, $calidad = null, $director, $jefeDepartamento, $valuador, $valuador_municipal, $autoridad_municipal)
     {
 
@@ -76,7 +77,8 @@ class AvaluosController extends Controller
 
     }
 
-    public function generadorQr(){
+    public function generadorQr()
+    {
 
         $result = Builder::create()
                             ->writer(new PngWriter())
@@ -96,7 +98,8 @@ class AvaluosController extends Controller
         return $result->getDataUri();
     }
 
-    public function test($id){
+    public function test($id)
+    {
 
         $predio = PredioAvaluo::find($id);
 

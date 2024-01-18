@@ -4,6 +4,9 @@ namespace App\Http\Services\Tramites;
 
 use App\Models\Tramite;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+use App\Exceptions\TramiteServiceException;
+use App\Exceptions\ErrorAlGenerarLineaDeCaptura;
 use App\Http\Services\LineasDeCaptura\LineaCaptura;
 
 class TramiteService{
@@ -13,56 +16,83 @@ class TramiteService{
     public function crearTramite($predios = null):Tramite
     {
 
-        $sap = (new LineaCaptura())->generarLineaDeCaptura($this->tramite);
+        try {
 
-        $this->tramite->estado = 'nuevo';
-        $this->tramite->folio = Tramite::max('folio') + 1;
-        $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
-        $this->tramite->orden_de_pago = $sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['NRO_ORD_PAGO'];
-        $this->tramite->linea_de_captura = $sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['LINEA_CAPTURA'];
-        $this->tramite->fecha_vencimiento = $this->convertirFechaVencimieto($sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['FECHA_VENCIMIENTO']);
-        $this->tramite->creado_por = auth()->user()->id;
+            $this->tramite->estado = 'nuevo';
+            $this->tramite->año = now()->format('Y');
+            $this->tramite->usuario = auth()->user()->clave;
+            $this->tramite->folio = (Tramite::where('año', $this->tramite->año)->where('usuario', $this->tramite->usuario)->max('folio') ?? 0) + 1;
 
-        $this->tramite->save();
+            $sap = (new LineaCaptura($this->tramite))->generarLineaDeCaptura();
 
-        if($predios && count($predios) > 0){
+            $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
+            $this->tramite->orden_de_pago = $sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['NRO_ORD_PAGO'];
+            $this->tramite->linea_de_captura = $sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['LINEA_CAPTURA'];
+            $this->tramite->fecha_vencimiento = $this->convertirFechaVencimieto($sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['FECHA_VENCIMIENTO']);
+            $this->tramite->creado_por = auth()->user()->id;
 
-            foreach($predios as $predio){
+            $this->tramite->save();
 
-                $this->tramite->predios()->attach($predio['id']);
+            if($predios && count($predios) > 0){
+
+                foreach($predios as $predio){
+
+                    $this->tramite->predios()->attach($predio['id']);
+
+                }
 
             }
 
-        }
+            return $this->tramite;
 
-        return $this->tramite;
+        } catch (ErrorAlGenerarLineaDeCaptura $th) {
+
+            throw new TramiteServiceException($th->getMessage());
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al crear trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". Trámite: " . $this->tramite->año . '-' . $this->tramite->numero_control . '-' . $this->tramite->usuario . '. ' . $th);
+
+            throw new TramiteServiceException("Error al crear trámite");
+        }
 
     }
 
-    public function actualizarTramite($predios = null):Tramite
+    public function actualizarTramite($predios = null):void
     {
 
-        $this->tramite->actualizado_por = auth()->user()->id;
-        $this->tramite->save();
+        try {
 
-        $this->tramite->predios()->detach();
+            $this->tramite->actualizado_por = auth()->user()->id;
+            $this->tramite->save();
 
-        if(count($predios) > 0){
+            if(count($predios) > 0){
 
-            foreach($predios as $predio){
+                $this->tramite->predios()->detach();
 
-                $this->tramite->predios()->attach($predio['id']);
+                foreach($predios as $predio){
+
+                    $this->tramite->predios()->attach($predio['id']);
+
+                }
 
             }
 
-        }
+        }  catch (\Throwable $th) {
 
-        return $this->tramite;
+            Log::error("Error al actualizar trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". Trámite: " . $this->tramite->año . '-' . $this->tramite->numero_control . '-' . $this->tramite->usuario . '. ' . $th);
+
+            throw new TramiteServiceException("Error al actualizar trámite");
+
+        }
 
     }
 
     public function convertirFechaVencimieto($fecha):string
     {
+
+        if(Str::length($fecha) == 10)
+            return $fecha;
 
         return Str::substr($fecha, 0, 4) . '-' . Str::substr($fecha, 4, 2) . '-' . Str::substr($fecha, 6, 2);
 

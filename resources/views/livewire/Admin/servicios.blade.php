@@ -8,9 +8,9 @@
 
             <div>
 
-                <input type="text" wire:model.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
 
-                <select class="bg-white rounded-full text-sm" wire:model="pagination">
+                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -23,7 +23,7 @@
 
             @can('Crear servicio')
 
-                <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 float-right text-sm py-2 px-4 text-white rounded-full focus:outline-none hidden md:block">
+                <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 text-sm py-2 px-4 text-white rounded-full hidden md:block items-center justify-center focus:outline-gray-400 focus:outline-offset-2">
                     <img wire:loading wire:target="abrirModalCrear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                     Agregar nuevo servicio
                 </button>
@@ -36,598 +36,224 @@
 
     </div>
 
-    @if($servicios->count())
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
 
-        <div class="relative overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+        <x-table>
 
-            <table class="rounded-lg w-full">
+            <x-slot name="head">
 
-                <thead class="border-b border-gray-300 bg-gray-50">
+                <x-table.heading sortable wire:click="sortBy('nombre')" :direction="$sort === 'nombre' ? $direction : null" >Nombre</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('estado')" :direction="$sort === 'estado' ? $direction : null" >Estado</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('tipo')" :direction="$sort === 'tipo' ? $direction : null" >Tipo</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('umas')" :direction="$sort === 'umas' ? $direction : null" >UMAS</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('porcentaje')" :direction="$sort === 'porcentaje' ? $direction : null" >Porcentaje</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('clave_ingreso')" :direction="$sort === 'clave_ingreso' ? $direction : null" >Clave de ingreso</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('ordinario')" :direction="$sort === 'ordinario' ? $direction : null" >Ordinario</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('urgente')" :direction="$sort === 'urgente' ? $direction : null" >Urgente</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('extra_urgente')" :direction="$sort === 'extra_urgente' ? $direction : null" >Extra urgente</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('categoria_servicio_id')" :direction="$sort === 'categoria_servicio_id' ? $direction : null" >Categoría</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
+                <x-table.heading >Acciones</x-table.heading>
 
-                    <tr class="text-xs font-medium text-gray-500 uppercase text-left traling-wider">
+            </x-slot>
 
-                        <th wire:click="order('nombre')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+            <x-slot name="body">
 
-                            Nombre
+                @forelse ($servicios as $servicio)
 
-                            @if($sort == 'nombre')
+                    <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $servicio->id }}">
 
-                                @if($direction == 'asc')
+                        <x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Nombre</span>
 
-                                @else
+                            {{ $servicio->nombre }}
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @endif
+                        <x-table.cell>
 
-                            @else
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Estado</span>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                            @if($servicio->estado == 'activo')
 
-                            @endif
-
-                        </th>
-
-                        <th wire:click="order('estado')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
-
-                            Estado
-
-                            @if($sort == 'estado')
-
-                                @if($direction == 'asc')
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
-
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
+                                <span class="bg-green-400 py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($servicio->estado) }}</span>
 
                             @else
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                                <span class="bg-red-400 py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($servicio->estado) }}</span>
 
                             @endif
 
-                        </th>
+                        </x-table.cell>
 
-                        <th wire:click="order('tipo')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        <x-table.cell>
 
-                            Tipo
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Tipo</span>
 
-                            @if($sort == 'tipo')
+                            {{ $servicio->tipo }}
 
-                                @if($direction == 'asc')
+                        </x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                        <x-table.cell>
 
-                                @else
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">UMAS</span>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                            {{ $servicio->umas }}
 
-                                @endif
+                        </x-table.cell>
 
-                            @else
+                        <x-table.cell>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Porcentaje</span>
 
-                            @endif
+                            {{ $servicio->porcentaje ?? 'N/A' }}
 
-                        </th>
+                        </x-table.cell>
 
-                        <th wire:click="order('umas')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        <x-table.cell>
 
-                            UMAS
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Clave de ingreso</span>
 
-                            @if($sort == 'umas')
+                            {{ $servicio->clave_ingreso }}
 
-                                @if($direction == 'asc')
+                        </x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                        <x-table.cell>
 
-                                @else
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Ordinario</span>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                            ${{ number_format($servicio->ordinario, 2) }}
 
-                                @endif
+                        </x-table.cell>
 
-                            @else
+                        <x-table.cell>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Urgente</span>
 
-                            @endif
+                            ${{ number_format($servicio->urgente, 2) }}
 
-                        </th>
+                        </x-table.cell>
 
-                        <th wire:click="order('porcentaje')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        <x-table.cell>
 
-                            Porcentaje
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Extra urgente</span>
 
-                            @if($sort == 'porcentaje')
+                            ${{ number_format($servicio->extra_urgente, 2) }}
 
-                                @if($direction == 'asc')
+                        </x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                        <x-table.cell>
 
-                                @else
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Categoría</span>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                            {{ $servicio->categoria->nombre }}
 
-                                @endif
+                        </x-table.cell>
 
-                            @else
+                        <x-table.cell>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
-                            @endif
 
-                        </th>
+                            <span class="font-semibold">@if($servicio->creadoPor != null)Registrado por: {{$servicio->creadoPor->name}} @else Registro: @endif</span> <br>
 
-                        <th wire:click="order('clave_ingreso')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                            {{ $servicio->created_at }}
 
-                            Clave de ingreso
+                        </x-table.cell>
 
-                            @if($sort == 'clave_ingreso')
+                        <x-table.cell>
 
-                                @if($direction == 'asc')
+                            <span class="font-semibold">@if($servicio->actualizadoPor != null)Actualizado por: {{$servicio->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            {{ $servicio->updated_at }}
 
-                                @else
+                        </x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                        <x-table.cell>
 
-                                @endif
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
 
-                            @else
+                            <div class="flex md:flex-col justify-center lg:justify-start gap-2">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                                @can('Editar servicio')
 
-                            @endif
+                                    <x-button-blue
+                                        wire:click="abrirModalEditar({{ $servicio->id }})"
+                                        wire:loading.attr="disabled"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
 
-                        </th>
+                                        <span>Editar</span>
 
-                        <th wire:click="order('ordinario')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                                    </x-button-blue>
 
-                            Ordinario
+                                @endcan
 
-                            @if($sort == 'ordinario')
+                                @can('Borrar servicio')
 
-                                @if($direction == 'asc')
+                                    <x-button-red
+                                        wire:click="abrirModalBorrar({{ $servicio->id }})"
+                                        wire:loading.attr="disabled"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                                        <span>Eliminar</span>
 
-                                @else
+                                    </x-button-red>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                                @endcan
 
-                                @endif
+                            </div>
 
-                            @else
+                        </x-table.cell>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                    </x-table.row>
 
-                            @endif
+                @empty
 
-                        </th>
+                    <x-table.row>
 
-                        <th wire:click="order('urgente')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        <x-table.cell colspan="13">
 
-                            Urgente
+                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
 
-                            @if($sort == 'urgente')
+                                No hay resultados.
 
-                                @if($direction == 'asc')
+                            </div>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @else
+                    </x-table.row>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                @endforelse
 
-                                @endif
+            </x-slot>
 
-                            @else
+            <x-slot name="tfoot">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                <x-table.row>
 
-                            @endif
+                    <x-table.cell colspan="13" class="bg-gray-50">
 
-                        </th>
+                        {{ $servicios->links()}}
 
-                        <th wire:click="order('extra_urgente')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                    </x-table.cell>
 
-                            Extra Urgente
+                </x-table.row>
 
-                            @if($sort == 'extra_urgente')
+            </x-slot>
 
-                                @if($direction == 'asc')
+        </x-table>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+    </div>
 
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
-
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th wire:click="order('categoria_servicio_id')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
-
-                            Categoría
-
-                            @if($sort == 'categoria_servicio_id')
-
-                                @if($direction == 'asc')
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
-
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
-
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th wire:click="order('created_at')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
-
-                            Registro
-
-                            @if($sort == 'created_at')
-
-                                @if($direction == 'asc')
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
-
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
-
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th wire:click="order('updated_at')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
-
-                            Actualizado
-
-                            @if($sort == 'updated_at')
-
-                                @if($direction == 'asc')
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
-
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
-
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th class="px-3 py-3 hidden lg:table-cell">Acciones</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody class="divide-y divide-gray-200 flex-1 sm:flex-none ">
-
-                    @foreach($servicios as $servicio)
-
-                        <tr class="text-sm font-medium text-gray-500 bg-white flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Nombre</span>
-
-                                {{ $servicio->nombre }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Estado</span>
-
-                                @if($servicio->estado == 'activo')
-
-                                    <span class="bg-green-400 py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($servicio->estado) }}</span>
-
-                                @else
-
-                                    <span class="bg-red-400 py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($servicio->estado) }}</span>
-
-                                @endif
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full capitalize lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Tipo</span>
-
-                                {{ $servicio->tipo }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Umas</span>
-
-                                {{ $servicio->umas > 0 ?  $servicio->umas : 'N/A'}}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Porcentaje</span>
-
-                                {{ $servicio->porcentaje != 0 ? $servicio->porcentaje . '%' : 'N/A' }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Clave de ingreso</span>
-
-                                {{ $servicio->clave_ingreso ?? 'N/A' }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto capitalize p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden  absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Ordinario</span>
-
-                                ${{ $servicio->ordinario }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto capitalize p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden  absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Urgente</span>
-
-                                {{ $servicio->urgente > 0 ? '$' . $servicio->urgente : 'N/A'}}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Extra Urgente</span>
-
-                                {{ $servicio->extra_urgente > 0 ? '$' . $servicio->extra_urgente : 'N/A'}}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Categoría</span>
-
-                                {{ $servicio->categoria->nombre  }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
-
-                                @if($servicio->creadoPor != null)
-
-                                    <span class="font-semibold">Registrado por: {{$servicio->creadoPor->name}}</span> <br>
-
-                                @else
-
-                                    <span class="font-semibold">Registrado:</span> <br>
-
-                                @endif
-
-                                {{ $servicio->created_at }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Actualizado</span>
-
-                                @if($servicio->actualizadoPor != null)
-
-                                    <span class="font-semibold">Actualizado por: {{$servicio->actualizadoPor->name}}</span> <br>
-
-                                @else
-
-                                    <span class="font-semibold">Actualizado:</span> <br>
-
-                                @endif
-
-                                {{ $servicio->updated_at }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
-
-                                <div class="flex md:flex-col justify-center lg:justify-start md:space-y-1">
-
-                                    @can('Editar servicio')
-
-                                        <button
-                                            wire:click="abrirModalEditar({{$servicio->id}})"
-                                            wire:loading.attr="disabled"
-                                            wire:target="abiriModalEditar({{$servicio->id}})"
-                                            class="md:w-full bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 rounded-full mr-2 hover:bg-blue-700 flex items-center justify-center focus:outline-none"
-                                        >
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                            </svg>
-
-                                            Editar
-
-                                        </button>
-
-                                    @endcan
-
-                                    @can('Borrar servicio')
-
-                                        <button
-                                            wire:click="abrirModalBorrar({{$servicio->id}})"
-                                            wire:loading.attr="disabled"
-                                            wire:target="abrirModalBorrar({{$servicio->id}})"
-                                            class="md:w-full bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full hover:bg-red-700 flex justify-center focus:outline-none"
-                                        >
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-
-                                            Eliminar
-
-                                        </button>
-
-                                    @endcan
-
-                                </div>
-
-                            </td>
-                        </tr>
-
-                    @endforeach
-
-                </tbody>
-
-                <tfoot class="border-gray-300 bg-gray-50">
-
-                    <tr>
-
-                        <td colspan="15" class="py-2 px-5">
-                            {{ $servicios->links()}}
-                        </td>
-
-                    </tr>
-
-                </tfoot>
-
-            </table>
-
-            <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-0 left-0" wire:loading.delay.longer>
-
-                <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
-
-            </div>
-
-        </div>
-
-    @else
-
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-full text-lg">
-
-            No hay resultados.
-
-        </div>
-
-    @endif
-
-    <x-dialog-modal wire:model="modal">
+    <x-dialog-modal wire:model.live="modal">
 
         <x-slot name="title">
 
@@ -645,258 +271,102 @@
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <div class="flex-auto ">
+                    <x-input-group for="modelo_editar.nombre" label="Nombre" :error="$errors->first('modelo_editar.nombre')" class="w-full">
 
-                        <div>
+                        <x-input-text id="modelo_editar.nombre" wire:model="modelo_editar.nombre" />
 
-                            <Label>Nombre</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.nombre">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.nombre') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
+                    </x-input-group>
 
                 </div>
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <div class="flex-auto ">
+                    <x-input-group for="modelo_editar.material" label="Material" :error="$errors->first('modelo_editar.material')" class="w-full">
 
-                        <div>
+                        <x-input-text type="number" id="modelo_editar.material" wire:model="modelo_editar.material" />
 
-                            <Label>Material</Label>
-                        </div>
+                    </x-input-group>
 
-                        <div>
+                    <x-input-group for="modelo_editar.clave_ingreso" label="Clave de ingreso" :error="$errors->first('modelo_editar.clave_ingreso')" class="w-full">
 
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.material">
+                        <x-input-text id="modelo_editar.clave_ingreso" wire:model="modelo_editar.clave_ingreso" />
 
-                        </div>
+                    </x-input-group>
 
-                        <div>
+                    <x-input-group for="modelo_editar.operacion_principal" label="Operación princial" :error="$errors->first('modelo_editar.operacion_principal')" class="w-full">
 
-                            @error('modelo_editar.material') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                        <x-input-text id="modelo_editar.operacion_principal" wire:model="modelo_editar.operacion_principal" />
 
-                        </div>
+                    </x-input-group>
 
-                    </div>
+                    <x-input-group for="modelo_editar.operacion_parcial" label="Operación parcial" :error="$errors->first('modelo_editar.operacion_parcial')" class="w-full">
 
-                    <div class="flex-auto ">
+                        <x-input-text id="modelo_editar.operacion_parcial" wire:model="modelo_editar.operacion_parcial" />
 
-                        <div>
-
-                            <Label>Clave de ingreso</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.clave_ingreso">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.clave_ingreso') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto ">
-
-                        <div>
-
-                            <Label>Operación princial</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.operacion_principal">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.operacion_principal') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto ">
-
-                        <div>
-
-                            <Label>Operación parcial</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.operacion_parcial">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.operacion_parcial') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
+                    </x-input-group>
 
                 </div>
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <div class="flex-auto ">
+                    <x-input-group for="modelo_editar.estado" label="Estado" :error="$errors->first('modelo_editar.estado')" class="w-full">
 
-                        <div>
+                        <x-input-select id="modelo_editar.estado" wire:model="modelo_editar.estado" class="w-full">
 
-                            <Label>Estado</Label>
+                            <option value="">Seleccione una opción</option>
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
 
-                        </div>
+                        </x-input-select>
 
-                        <div>
+                    </x-input-group>
 
-                            <select class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.estado">
+                    <x-input-group for="modelo_editar.categoria_servicio_id" label="Categoría" :error="$errors->first('modelo_editar.categoria_servicio_id')" class="w-full">
 
-                                <option value="" selected>Seleccione una opción</option>
-                                <option value="activo" selected>Activo</option>
-                                <option value="inactivo" selected>Inactivo</option>
+                        <x-input-select id="modelo_editar.categoria_servicio_id" wire:model="modelo_editar.categoria_servicio_id" class="w-full">
 
-                            </select>
+                            <option value="">Seleccione una opción</option>
 
-                        </div>
+                            @foreach ($categorias as $categoria)
 
-                        <div>
+                                <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
 
-                            @error('modelo_editar.estado') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                            @endforeach
 
-                        </div>
+                        </x-input-select>
 
-                    </div>
+                    </x-input-group>
 
-                    <div class="flex-auto mr-1 ">
+                    <x-input-group for="modelo_editar.tipo" label="Tipo" :error="$errors->first('modelo_editar.tipo')" class="w-full">
 
-                        <div>
+                        <x-input-select id="modelo_editar.tipo" wire:model.live="modelo_editar.tipo" class="w-full">
 
-                            <Label>Categoría</Label>
+                            <option value="">Seleccione una opción</option>
+                            <option value="fija" selected>Fija</option>
+                            <option value="uma" selected>UMA</option>
+                            <option value="porcentaje" selected>Porcentaje</option>
 
-                        </div>
+                        </x-input-select>
 
-                        <div>
-
-                            <select class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.categoria_servicio_id">
-
-                                <option value="">Seleccione una opción</option>
-
-                                @foreach ($categorias as $categoria)
-
-
-                                    <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
-
-                                @endforeach
-
-                            </select>
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.categoria_servicio_id') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto ">
-
-                        <div>
-
-                            <Label>Tipo</Label>
-
-                        </div>
-
-                        <div>
-
-                            <select class="bg-white rounded text-sm w-full" wire:model="modelo_editar.tipo">
-
-                                <option value="" selected>Seleccione una opción</option>
-                                <option value="fija" selected>Fija</option>
-                                <option value="uma" selected>UMA</option>
-                                <option value="porcentaje" selected>Porcentaje</option>
-
-                            </select>
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.tipo') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
+                    </x-input-group>
 
                     @if($this->modelo_editar->tipo == 'uma')
 
-                        <div class="flex-auto">
+                        <x-input-group for="modelo_editar.umas" label="UMAS" :error="$errors->first('modelo_editar.umas')" class="w-full">
 
-                            <div>
+                            <x-input-text type="number" id="modelo_editar.umas" wire:model.live="modelo_editar.umas" />
 
-                                <Label>UMAS</Label>
-
-                            </div>
-
-                            <div>
-
-                                <input type="number" class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.umas">
-
-                            </div>
-
-                            <div>
-
-                                @error('modelo_editar.umas') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                            </div>
-
-                        </div>
+                        </x-input-group>
 
                     @endif
 
                     @if($this->modelo_editar->tipo == 'porcentaje')
 
-                        <div class="flex-auto">
+                        <x-input-group for="modelo_editar.porcentaje" label="Porcentaje" :error="$errors->first('modelo_editar.porcentaje')" class="w-full">
 
-                            <div>
+                            <x-input-text type="number" id="modelo_editar.porcentaje" wire:model.live="modelo_editar.porcentaje" />
 
-                                <Label>Porcentaje</Label>
-
-                            </div>
-
-                            <div>
-
-                                <input type="number" class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.porcentaje">
-
-                            </div>
-
-                            <div>
-
-                                @error('modelo_editar.porcentaje') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                            </div>
-
-                        </div>
+                        </x-input-group>
 
                     @endif
 
@@ -904,68 +374,23 @@
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <div class="flex-auto mb-5">
+                    <x-input-group for="modelo_editar.ordinario" label="Ordinario" :error="$errors->first('modelo_editar.ordinario')" class="w-full">
 
-                        <div>
+                        <x-input-text type="number" id="modelo_editar.ordinario" wire:model.live="modelo_editar.ordinario" />
 
-                            <Label>Ordinario</Label>
-                        </div>
+                    </x-input-group>
 
-                        <div>
+                    <x-input-group for="modelo_editar.urgente" label="Urgente" :error="$errors->first('modelo_editar.urgente')" class="w-full">
 
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.ordinario">
+                        <x-input-text type="number" id="modelo_editar.urgente" wire:model="modelo_editar.urgente" />
 
-                        </div>
+                    </x-input-group>
 
-                        <div>
+                    <x-input-group for="modelo_editar.extra_urgente" label="Extra urgente" :error="$errors->first('modelo_editar.extra_urgente')" class="w-full">
 
-                            @error('modelo_editar.ordinario') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                        <x-input-text type="number" id="modelo_editar.extra_urgente" wire:model="modelo_editar.extra_urgente" />
 
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto mb-5">
-
-                        <div>
-
-                            <Label>Urgente</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.urgente">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.urgente') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto mb-5">
-
-                        <div>
-
-                            <Label>Extra Ordinario</Label>
-                        </div>
-
-                        <div>
-
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model.defer="modelo_editar.extra_urgente">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.extra_urgente') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
+                    </x-input-group>
 
                 </div>
 
@@ -981,44 +406,40 @@
 
         <x-slot name="footer">
 
-            <div class="float-righ">
+            <div class="flex gap-3">
 
                 @if($crear)
 
-                    <button
-                        wire:click="crear"
+                    <x-button-blue
+                        wire:click="guardar"
                         wire:loading.attr="disabled"
-                        wire:target="crear"
-                        class="bg-blue-400 text-white hover:shadow-lg font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                        wire:target="guardar">
 
-                        <img wire:loading wire:target="crear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                        <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                         Guardar
-                    </button>
+                    </x-button-blue>
 
                 @elseif($editar)
 
-                    <button
+                    <x-button-blue
                         wire:click="actualizar"
                         wire:loading.attr="disabled"
-                        wire:target="actualizar"
-                        class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                        wire:target="actualizar">
 
                         <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                         Actualizar
-                    </button>
+                    </x-button-blue>
 
                 @endif
 
-                <button
+                <x-button-red
                     wire:click="resetearTodo"
                     wire:loading.attr="disabled"
-                    wire:target="resetearTodo"
-                    type="button"
-                    class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-red-700 flaot-left focus:outline-none">
+                    wire:target="resetearTodo">
                     Cerrar
-                </button>
+                </x-button-red>
 
             </div>
 
@@ -1026,7 +447,7 @@
 
     </x-dialog-modal>
 
-    <x-confirmation-modal wire:model="modalBorrar">
+    <x-confirmation-modal wire:model.live="modalBorrar" maxWidth="sm">
 
         <x-slot name="title">
             Eliminar Servicio

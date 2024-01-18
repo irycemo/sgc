@@ -56,8 +56,8 @@
                 })
 
                 Toast.fire({
-                    icon: event.detail[0],
-                    title: event.detail[1]
+                    icon: event.detail[0][0],
+                    title: event.detail[0][1]
                 })
             })
 

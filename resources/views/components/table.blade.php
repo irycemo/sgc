@@ -1,17 +1,23 @@
-<div class="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg">
+<table class="min-w-full">
 
-    <table class="min-w-full divide-y divide-cool-gray-200">
+    <thead class="border-b border-gray-300 bg-gray-50">
 
-        <thead>
-            <tr>
-                {{ $head }}
-            </tr>
-        </thead>
+        <tr class="text-gray-500 uppercase text-left">
+            {{ $head }}
+        </tr>
 
-        <tbody class="bg-white divide-y divide-cool-gray-200">
-            {{ $body }}
-        </tbody>
+    </thead>
 
-    </table>
+    <tbody class="bg-gray-100 divide-y">
 
-</div>
+        {{ $body }}
+
+    </tbody>
+
+    <tfoot >
+
+        {{ $tfoot }}
+
+    </tfoot>
+
+</table>

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('factor_incrementos', function (Blueprint $table) {
             $table->id();
-            $table->decimal('factor', 15,5);
-            $table->unsignedInteger('ano');
+            $table->decimal('factor', 15,2);
+            $table->unsignedInteger('año');
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

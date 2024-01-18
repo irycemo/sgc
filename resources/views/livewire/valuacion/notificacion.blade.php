@@ -10,11 +10,11 @@
 
         <p class="text-lg tracking-widest">Avaluos</p>
 
-        <input type="number" class="bg-white rounded text-xs w-40 @error('inicio') border-1 border-red-500 @enderror" placeholder="Inicio" wire:model="inicio">
+        <input type="number" class="bg-white rounded text-xs w-40 @error('inicio') border-1 border-red-500 @enderror" placeholder="Inicio" wire:model.live="inicio">
 
         <p class="text-lg tracking-widest">a</p>
 
-        <input type="number" class="bg-white rounded text-xs w-40 @error('final') border-1 border-red-500 @enderror" placeholder="Final" wire:model="final">
+        <input type="number" class="bg-white rounded text-xs w-40 @error('final') border-1 border-red-500 @enderror" placeholder="Final" wire:model.live="final">
 
     </div>
 
@@ -158,7 +158,7 @@
 
     @endif
 
-    <x-dialog-modal wire:model="modal" maxWidth="sm">
+    <x-dialog-modal wire:model.live="modal" maxWidth="sm">
 
         <x-slot name="title">
 
@@ -178,7 +178,7 @@
 
                 <div>
 
-                    <input type="date" class="bg-white rounded text-sm w-full" wire:model="fecha_notificacion">
+                    <input type="date" class="bg-white rounded text-sm w-full" wire:model.live="fecha_notificacion">
 
                 </div>
 

@@ -1,35 +1,36 @@
 <?php
 
+use App\Livewire\Admin\Umas;
+use App\Livewire\Admin\Roles;
+use App\Livewire\Admin\Oficinas;
+use App\Livewire\Admin\Permisos;
+use App\Livewire\Admin\Tramites;
+use App\Livewire\Admin\Usuarios;
+use App\Livewire\Admin\Auditoria;
+use App\Livewire\Admin\Servicios;
+use App\Livewire\Consultas\Oficina;
+use Illuminate\Support\Facades\Route;
+use App\Livewire\Valuacion\MisAvaluos;
+use App\Livewire\Admin\Avaluos\Avaluos;
+use App\Livewire\Admin\FactorIncremento;
+use App\Livewire\Valuacion\FichaTecnica;
+use App\Livewire\Valuacion\Notificacion;
+use App\Http\Controllers\ManualController;
+use App\Livewire\Admin\CategoriasServicios;
+use App\Livewire\Valuacion\ImpresionAvaluo;
+use App\Http\Controllers\DashboardController;
+use App\Livewire\Admin\Predios\PrediosPadron;
+use App\Http\Controllers\SetPasswordController;
+use App\Livewire\Admin\Predios\PrediosAsignados;
+use App\Livewire\Admin\ValoresUnitariosRusticos;
 use App\Http\Controllers\Admin\AvaluosController;
 use App\Http\Controllers\Admin\PrediosController;
-use App\Http\Livewire\Admin\Umas;
-use App\Http\Livewire\Admin\Roles;
-use App\Http\Livewire\Admin\Permisos;
-use App\Http\Livewire\Admin\Tramites;
-use App\Http\Livewire\Admin\Usuarios;
-use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Admin\Auditoria;
-use App\Http\Livewire\Admin\Servicios;
-use App\Http\Controllers\ManualController;
-use App\Http\Controllers\SetPasswordController;
-use App\Http\Livewire\Admin\CategoriasServicios;
 use App\Http\Controllers\Admin\TramiteController;
-use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
+use App\Livewire\Valuacion\AsignacionCuentaPredial;
+use App\Livewire\Admin\ValoresunitariosConstruccion;
+use App\Livewire\Ventanilla\Ventanilla as VentanillaVentanilla;
 use App\Http\Controllers\Valuacion\ValuacionYDesgloseController;
-use App\Http\Livewire\Admin\Avaluos\Avaluos;
-use App\Http\Livewire\Admin\FactorIncremento;
-use App\Http\Livewire\Admin\Oficinas;
-use App\Http\Livewire\Admin\Predios\PrediosAsignados;
-use App\Http\Livewire\Admin\Predios\PrediosPadron;
-use App\Http\Livewire\Admin\ValoresunitariosConstruccion;
-use App\Http\Livewire\Admin\ValoresUnitariosRusticos;
-use App\Http\Livewire\Consultas\Oficina;
-use App\Http\Livewire\Valuacion\AsignacionCuentaPredial;
-use App\Http\Livewire\Valuacion\FichaTecnica;
-use App\Http\Livewire\Valuacion\Impresion;
-use App\Http\Livewire\Valuacion\MisAvaluos;
-use App\Http\Livewire\Valuacion\Notificacion;
-use App\Http\Livewire\Ventanilla\Ventanilla as VentanillaVentanilla;
+use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,19 +47,11 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
-
 Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
     /* Administración */
+    Route::get('dashboard', DashboardController::class)->name('dashboard');
+
     Route::get('roles', Roles::class)->middleware('permission:Lista de roles')->name('roles');
 
     Route::get('permisos', Permisos::class)->middleware('permission:Lista de permisos')->name('permisos');
@@ -97,13 +90,13 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
     Route::get('asignacion_cuenta', AsignacionCuentaPredial::class)->middleware('permission:Asignacion de cuenta')->name('asignacion_cuenta');
 
-    Route::get('impresion_avaluos', Impresion::class)->middleware('permission:Impresión de avaluos')->name('impresion_avaluos');
+    Route::get('impresion_avaluos', ImpresionAvaluo::class)->middleware('permission:Impresión de avaluos')->name('impresion_avaluos');
 
     Route::get('notificacion_avaluos', Notificacion::class)->middleware('permission:Notificación de avaluos')->name('notificacion_avaluos');
 
     Route::get('ficha_tecnica', FichaTecnica::class)->middleware('permission:Ficha técnica')->name('ficha_tecnica');
 
-    Route::get('avaluo_predio_ignorado/{id?}', AvaluoPredioIgnoradoController::class)->middleware('permission:Avaluos de predio ignorado')->name('avaluo_predio_ignorado');
+    Route::get('avaluo_predio_ignorado/{avaluo?}', AvaluoPredioIgnoradoController::class)->middleware('permission:Avaluos de predio ignorado')->name('avaluo_predio_ignorado');
 
     Route::get('mis_avaluos', MisAvaluos::class)->middleware('permission:Ver mis avaluos')->name('mis_avaluos');
 
@@ -111,7 +104,6 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('ver_oficina/{ofice_id?}', Oficina::class)->middleware('permission:Ver oficina')->name('ver_oficina');
 
     /* Ventanilla */
-    /* Route::get('ventanilla', Ventanilla::class)->middleware('permission:Ventanilla')->name('ventanilla'); */
     Route::get('tramites/{tramite}', [TramiteController::class, 'orden'])->name('tramites.orden');
 
     Route::get('ventanilla', VentanillaVentanilla::class)->middleware('permission:Ventanilla')->name('ventanilla');

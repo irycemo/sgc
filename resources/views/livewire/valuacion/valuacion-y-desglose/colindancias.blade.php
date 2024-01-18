@@ -30,7 +30,7 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-xs w-full" wire:model.defer="medidas.{{ $index }}.viento">
+                            <select class="bg-white rounded text-xs w-full" wire:model="medidas.{{ $index }}.viento">
 
                                 <option value="" selected>Seleccione una opción</option>
 
@@ -62,7 +62,7 @@
 
                         <div>
 
-                            <input type="number" min="0" class="bg-white rounded text-xs w-full" wire:model.defer="medidas.{{ $index }}.longitud">
+                            <input type="number" min="0" class="bg-white rounded text-xs w-full" wire:model="medidas.{{ $index }}.longitud">
 
                         </div>
 
@@ -84,7 +84,7 @@
 
                         <div>
 
-                            <textarea rows="1" class="bg-white rounded text-xs w-full" wire:model.defer="medidas.{{ $index }}.descripcion"></textarea>
+                            <textarea rows="1" class="bg-white rounded text-xs w-full" wire:model="medidas.{{ $index }}.descripcion"></textarea>
 
                         </div>
 
@@ -98,18 +98,16 @@
 
                     <div class="flex-auto lg:col-span-1 my-auto">
 
-                        <button
+                        <x-button-red
                             wire:click="borrarMedida({{ $index }})"
                             wire:loading.attr="disabled"
-                            wire:target="borrarMedida({{ $index }})"
-                            class="  bg-red-400 hover:shadow-lg text-white text-xs md:text-sm  px-3 py-1 w-full lg:w-auto lg:ml-auto rounded-full  hover:bg-red-700 flex justify-center items-center focus:outline-none "
-                        >
+                            wire:target="borrarMedida({{ $index }})">
 
                             <img wire:loading wire:target="borrarMedida({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                             Borrar
 
-                        </button>
+                        </x-button-red>
 
                     </div>
 
@@ -119,18 +117,16 @@
 
         </div>
 
-        <button
+        <x-button-blue
             wire:click="agregarMedida"
             wire:loading.attr="disabled"
-            wire:target="agregarMedida"
-            class=" bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 mr-auto rounded-full  hover:bg-blue-700 flex items-center justify-center focus:outline-none "
-        >
+            wire:target="agregarMedida">
 
             <img wire:loading wire:target="agregarMedida" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
             Agregar nuevo
 
-        </button>
+        </x-button-blue>
 
     </div>
 
@@ -147,18 +143,16 @@
 
         @if($predio && $predio->avaluo && $predio->avaluo->estado != 'notificado')
 
-            <button
+            <x-button-green
                 wire:click="guardar"
                 wire:loading.attr="disabled"
-                wire:target="guardar"
-                class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-            >
+                wire:target="guardar">
 
                 <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                 Guardar
 
-            </button>
+            </x-button-green>
 
         @endif
 

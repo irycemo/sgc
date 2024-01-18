@@ -2,13 +2,13 @@
 
     <div class="mb-5">
 
-        <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Auditoría</h1>
+        <x-header>Auditoría</x-header>
 
         <div class="flex justify-between">
 
             <div>
 
-                <select class="bg-white rounded-full text-sm" wire:model="usuario">
+                <select class="bg-white rounded-full text-sm" wire:model.live="usuario">
 
                     <option value="" selected>Seleccione un usuario</option>
 
@@ -20,7 +20,7 @@
 
                 </select>
 
-                <select class="bg-white rounded-full text-sm" wire:model="modelo">
+                <select class="bg-white rounded-full text-sm" wire:model.live="modelo">
 
                     <option value="" selected>Seleccione un área</option>
 
@@ -32,7 +32,7 @@
 
                 </select>
 
-                <select class="bg-white rounded-full text-sm" wire:model="evento">
+                <select class="bg-white rounded-full text-sm" wire:model.live="evento">
 
                     <option value="" selected>Seleccione una acción</option>
                     <option value="created" selected>Creación</option>
@@ -41,7 +41,9 @@
 
                 </select>
 
-                <select class="bg-white rounded-full text-sm" wire:model="pagination">
+                <input type="number" class="bg-white rounded-full text-sm p-2 border border-gray-500" wire:model.live="modelo_id" placeholder="Modelo ID">
+
+                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -56,328 +58,155 @@
 
     </div>
 
-    @if($audits->count())
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
 
-        <div class="relative overflow-x-auto rounded-lg shadow-xl">
+        <x-table>
 
-            <table class="rounded-lg w-full">
+            <x-slot name="head">
 
-                <thead class="border-b border-gray-300 bg-gray-50">
+                <x-table.heading sortable wire:click="sortBy('user_id')" :direction="$sort === 'user_id' ? $direction : null" >Usuario</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('event')" :direction="$sort === 'event' ? $direction : null" >Evento</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('auditable_type')" :direction="$sort === 'auditable_type' ? $direction : null" >Modelo</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('auditable_id')" :direction="$sort === 'auditable_id' ? $direction : null" >ID</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('ip_address')" :direction="$sort === 'ip_address' ? $direction : null" >IP</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
+                <x-table.heading >Acciones</x-table.heading>
 
-                    <tr class="text-xs font-medium text-gray-500 uppercase text-left traling-wider">
+            </x-slot>
 
-                        <th wire:click="order('user_id')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+            <x-slot name="body">
 
-                            Usuario
+                @forelse ($audits as $audit)
 
-                            @if($sort == 'user_id')
+                    <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $audit->id }}">
 
-                                @if($direction == 'asc')
+                        <x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Usuario</span>
 
-                                @else
+                            {{ $audit->user->name ?? 'N/A' }}
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @endif
+                        <x-table.cell>
 
-                            @else
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Evento</span>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
+                            @if( $audit->event  == 'updated')
+                                Actualización
+                            @elseif($audit->event  == 'created' )
+                                Creado
+                            @elseif($audit->event  == 'deleted')
+                                Borrado
+                            @elseif($audit->event  == 'sync')
+                                Actualización
                             @endif
 
-                        </th>
+                        </x-table.cell>
 
-                        <th wire:click="order('event')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        <x-table.cell>
 
-                            Evento
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Modelo</span>
 
-                            @if($sort == 'event')
+                            {{ Str::substr($audit->auditable_type, 11) }}
 
-                                @if($direction == 'asc')
+                        </x-table.cell>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">ID</span>
+
+                            {{ $audit->auditable_id }}
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">IP</span>
+
+                            {{ $audit->ip_address }}
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
+
+                            {{ $audit->created_at }}
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Actualizado</span>
+
+                            {{ $audit->updated_at }}
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
+
+                            <div class="flex justify-center lg:justify-start gap-2">
+
+                                <x-button-green
+                                    wire:click="ver({{$audit}})"
+                                    wire:loading.attr="disabled"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                     </svg>
 
-                                @else
+                                    <span>Ver</span>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                                </x-button-green>
 
-                                @endif
+                            </div>
 
-                            @else
+                        </x-table.cell>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                    </x-table.row>
 
-                            @endif
+                @empty
 
-                        </th>
+                    <x-table.row>
 
-                        <th wire:click="order('auditable_type')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                        <x-table.cell colspan="9">
 
-                            Modelo
+                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
 
-                            @if($sort == 'auditable_type')
+                                No hay resultados.
 
-                                @if($direction == 'asc')
+                            </div>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
+                        </x-table.cell>
 
-                                @else
+                    </x-table.row>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
+                @endforelse
 
-                                @endif
+            </x-slot>
 
-                            @else
+            <x-slot name="tfoot">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
+                <x-table.row>
 
-                            @endif
+                    <x-table.cell colspan="9" class="bg-gray-50">
 
-                        </th>
+                        {{ $audits->links()}}
 
-                        <th wire:click="order('auditable_id')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
+                    </x-table.cell>
 
-                            Modelo Id
+                </x-table.row>
 
-                            @if($sort == 'auditable_id')
+            </x-slot>
 
-                                @if($direction == 'asc')
+        </x-table>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
-
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
-
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th wire:click="order('ip_address')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
-
-                            IP
-
-                            @if($sort == 'ip_address')
-
-                                @if($direction == 'asc')
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
-
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
-
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th wire:click="order('created_at')" class="cursor-pointer px-3 py-3 hidden lg:table-cell">
-
-                            Registro
-
-                            @if($sort == 'created_at')
-
-                                @if($direction == 'asc')
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4" />
-                                    </svg>
-
-                                @else
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
-                                    </svg>
-
-                                @endif
-
-                            @else
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 float-right" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                                </svg>
-
-                            @endif
-
-                        </th>
-
-                        <th class="px-3 py-3 hidden lg:table-cell">Acciones</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody class="divide-y divide-gray-200 flex-1 sm:flex-none ">
-
-                    @foreach($audits as $audit)
-
-                        <tr class="text-sm font-medium text-gray-500 bg-white flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Usuario</span>
-
-                                {{ $audit->user->name ?? 'N/A' }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Evento</span>
-
-                                @if( $audit->event  == 'updated')
-                                    Actualización
-                                @elseif($audit->event  == 'created' )
-                                    Creado
-                                @elseif($audit->event  == 'deleted')
-                                    Borrado
-                                @elseif($audit->event  == 'sync')
-                                    Actualización
-                                @endif
-                                <br>
-                                {{ $audit->tags }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Modelo</span>
-
-                                {{ Str::substr($audit->auditable_type, 11) }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Modelo ID</span>
-
-                                {{ $audit->auditable_id }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">IP</span>
-
-                                {{ $audit->ip_address }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registro</span>
-
-                                {{ $audit->created_at }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
-
-                                <div class="flex justify-center lg:justify-start">
-
-                                    <button
-                                        wire:click="ver({{$audit}})"
-                                        wire:loading.attr="disabled"
-                                        class="bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-2 items-center rounded-full mr-2 hover:bg-green-700 flex focus:outline-none"
-                                    >
-
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                        </svg>
-
-                                        <p>Ver</p>
-
-                                    </button>
-
-                                </div>
-
-                            </td>
-                        </tr>
-
-                    @endforeach
-
-                </tbody>
-
-                <tfoot class="border-gray-300 bg-gray-50">
-
-                    <tr>
-
-                        <td colspan="8" class="py-2 px-5">
-                            {{ $audits->links()}}
-                        </td>
-
-                    </tr>
-
-                </tfoot>
-
-            </table>
-
-            <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-0 left-0" wire:loading.delay.longer>
-
-                <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
-
-            </div>
-
-        </div>
-
-    @else
-
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-full text-lg">
-
-            No hay resultados.
-
-        </div>
-
-    @endif
+    </div>
 
     @if($selecetedAudit)
 
@@ -482,13 +311,11 @@
 
                 <div class="float-righ">
 
-                    <button
+                    <x-button-red
                         wire:click="$set('modal', false)"
-                        wire:loading.attr="disabled"
-                        type="button"
-                        class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-red-700 flaot-left focus:outline-none">
+                        wire:loading.attr="disabled">
                         Cerrar
-                    </button>
+                    </x-button-red>
 
                 </div>
 

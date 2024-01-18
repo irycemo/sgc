@@ -135,8 +135,8 @@
             <tr>
 
                 <th>
-                    <p>Trámite: {{ $tramite->folio }}</p>
-                    <p>Solicitante: {{ $tramite->solicitante }}</p>
+                    <p>Trámite: {{ $tramite->año }}-{{ $tramite->folio }}-{{ $tramite->usuario }}</p>
+                    <p>Solicitante: {{ $tramite->nombre_solicitante }}</p>
                     <p>Servicio: {{ $tramite->servicio->categoria->nombre }} {{ $tramite->servicio->nombre }}
                         @if($tramite->adiciona)
                             / {{ $tramite->adicionaA->servicio->nombre }} ({{ $tramite->adicionaA->folio }})
@@ -145,22 +145,6 @@
                     <p>Tipo de servicio: {{ $tramite->tipo_servicio }}</p>
                     <p>Orden de pago: {{ $tramite->orden_de_pago }}</p>
                     <p>Total a pagar: ${{ number_format($tramite->monto, 2) }}
-                    </p>
-                    <p>Observaciones:
-
-                        {{ $tramite->observaciones ?  $tramite->observaciones . '; ' : ''}}
-
-                        @if($tramite->predios->count())
-
-                            <span>Cuentas prediales: </span>
-
-                            @foreach ($tramite->predios as $item)
-
-                                 {{ $item['localidad'] }}-{{ $item['oficina'] }}-{{ $item['tipo_predio'] }}-{{ $item['numero_registro'] }} @if(!$loop->last), @endif
-
-                            @endforeach
-
-                        @endif
                     </p>
                 </th>
 
@@ -180,6 +164,33 @@
                 </th>
 
             </tr>
+
+            @if($tramite->observaciones || $tramite->predios->count())
+
+                <tr>
+                    <th colspan="2">
+
+                        <p>
+                            Observaciones: {{ $tramite->observaciones ?  $tramite->observaciones . '; ' : ''}}
+
+                            @if($tramite->predios->count())
+
+                                <span>Cuentas prediales: </span>
+
+                                @foreach ($tramite->predios as $item)
+
+                                    {{ $item['localidad'] }}-{{ $item['oficina'] }}-{{ $item['tipo_predio'] }}-{{ $item['numero_registro'] }} @if(!$loop->last), @endif
+
+                                @endforeach
+
+                            @endif
+
+                        </p>
+
+                    </th>
+                </tr>
+
+            @endif
 
         </thead>
 

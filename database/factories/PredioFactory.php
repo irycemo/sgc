@@ -53,7 +53,7 @@ class PredioFactory extends Factory
             'departamento' => $this->faker->numberBetween(1,100),
             'oficina' => $oficina->oficina,
             'tipo_predio' => $this->faker->numberBetween(1,2),
-            'numero_registro' => $this->faker->numberBetween(1,100),
+            'numero_registro' => $this->faker->numberBetween(1,100000),
             'superficie_terreno' => $this->faker->numberBetween(1,100),
             'superficie_construccion' => $this->faker->numberBetween(1,100),
             'superficie_notarial' => $this->faker->numberBetween(1,100),

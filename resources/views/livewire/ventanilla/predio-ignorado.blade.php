@@ -1,14 +1,156 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
 
-    <div>
+    <div class="relative">
         {{ $errors }}
         @if(!$tramite)
+
+            @if ($flags['solicitante'])
+
+                <div class="flex-row lg:flex lg:space-x-3 relative" wire:loading.class.delay.longest="opacity-50">
+
+                    <div class="flex-auto bg-white p-3 rounded-lg mb-3 shadow-md">
+
+                        <div class="flex-auto ">
+
+                            <div class="mb-2">
+
+                                <Label class="text-lg tracking-widest rounded-xl border-gray-500">Solicitante</Label>
+
+                            </div>
+
+                            <div>
+
+                                <select class="bg-white rounded text-sm w-full" wire:model.live="modelo_editar.solicitante">
+
+                                    <option value="" selected>Seleccione una opción</option>
+
+                                    @foreach ($solicitantes as $solicitante)
+
+                                        <option value="{{ $solicitante }}">{{ $solicitante }}</option>
+
+                                    @endforeach
+
+                                </select>
+
+                            </div>
+
+                            <div>
+
+                                @error('modelo_editar.solicitante') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    @if ($flags['nombre_solicitante'])
+
+                        <div class="flex-auto bg-white p-3 rounded-lg mb-3 shadow-md">
+
+                            <div class="mb-2">
+
+                                <Label class="text-lg tracking-widest rounded-xl border-gray-500">Nombre del solicitante</Label>
+
+                            </div>
+
+                            <div>
+
+                                <input type="text" class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.nombre_solicitante">
+
+                            </div>
+
+                            <div>
+
+                                @error('modelo_editar.nombre_solicitante') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                    @endif
+
+                    @if ($flags['dependencias'])
+
+                        <div class="flex-auto bg-white p-3 rounded-lg mb-3 shadow-md">
+
+                            <div class="mb-2">
+
+                                <Label class="text-lg tracking-widest rounded-xl border-gray-500">Dependencia</Label>
+
+                            </div>
+
+                            <div>
+
+                                <select class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.nombre_solicitante">
+
+                                    <option value="" selected>Seleccione una opción</option>
+
+                                    @foreach ($dependencias as $item)
+
+                                        <option value="{{ $item->nombre }}">{{ $item->nombre }}</option>
+
+                                    @endforeach
+
+                                </select>
+
+                            </div>
+
+                            <div>
+
+                                @error('modelo_editar.nombre_solicitante') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                    @endif
+
+                    @if ($flags['notarias'])
+
+                        <div class="flex-auto bg-white p-3 rounded-lg mb-3 shadow-md">
+
+                            <div class="mb-2">
+
+                                <Label class="text-lg tracking-widest rounded-xl border-gray-500">Notaria</Label>
+
+                            </div>
+
+                            <div>
+
+                                <select class="bg-white rounded text-sm w-full" wire:model.lazy="notaria">
+
+                                    <option value="" selected>Seleccione una opción</option>
+
+                                    @foreach ($notarias as $item)
+
+                                        <option value="{{ $item }}">{{ $item->numero }} - {{ $item->notario }}</option>
+
+                                    @endforeach
+
+                                </select>
+
+                            </div>
+
+                            <div>
+
+                                @error('modelo_editar.nombre_solicitante') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                    @endif
+
+                </div>
+
+            @endif
 
             <div class="flex-row lg:flex lg:space-x-3 ">
 
                 @if ($flags['tipo_de_tramite'])
 
-                    <div class="flex-auto bg-white p-4 rounded-lg mb-3 shadow-md">
+                    <div class="flex-auto bg-white p-4 rounded-lg mb-3 shadow-md" wire:loading.class.delay.longest="opacity-50">
 
                         <div class="mb-2">
 
@@ -18,7 +160,7 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-sm w-full" wire:model="modelo_editar.tipo_tramite">
+                            <select class="bg-white rounded text-sm w-full" wire:model.live="modelo_editar.tipo_tramite">
 
                                 <option value="normal">Normal</option>
                                 <option value="complemento">Complemento</option>
@@ -40,39 +182,9 @@
 
             </div>
 
-            @if ($flags['solicitante'])
-
-                <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md">
-
-                    <div class="flex-auto ">
-
-                        <div class="mb-2">
-
-                            <Label class="text-lg tracking-widest rounded-xl border-gray-500">Solicitante</Label>
-
-                        </div>
-
-                        <div>
-
-                            <input type="text" class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.solicitante">
-
-                        </div>
-
-                        <div>
-
-                            @error('modelo_editar.solicitante') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            @endif
-
             @if ($servicio['id'] == 292)
 
-                <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md">
+                <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md" wire:loading.class.delay.longest="opacity-50">
 
                     <div class="mb-2">
 
@@ -84,23 +196,23 @@
 
                         <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-full" title="Estado" value="16" readonly>
 
-                        <input title="Región" placeholder="Región" type="number" class="bg-white rounded text-xs w-full  @error('region_catastral') border-1 border-red-500 @enderror" wire:model.defer="region_catastral">
+                        <input title="Región" placeholder="Región" type="number" class="bg-white rounded text-xs w-full  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral">
 
-                        <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-full @error('municipio') border-1 border-red-500 @enderror" wire:model.defer="municipio">
+                        <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-full @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio">
 
-                        <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-full @error('zona_catastral') border-1 border-red-500 @enderror" wire:model.defer="zona_catastral">
+                        <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-full @error('zona_catastral') border-1 border-red-500 @enderror" wire:model="zona_catastral">
 
-                        <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-full @error('localidad') border-1 border-red-500 @enderror" wire:model.defer="localidad">
+                        <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-full @error('localidad') border-1 border-red-500 @enderror" wire:model="localidad">
 
-                        <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-full @error('sector') border-1 border-red-500 @enderror" wire:model.defer="sector">
+                        <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-full @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
 
-                        <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-full @error('manzana') border-1 border-red-500 @enderror" wire:model.defer="manzana">
+                        <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-full @error('manzana') border-1 border-red-500 @enderror" wire:model="manzana">
 
-                        <input title="Predio" placeholder="Predio" type="number" class="bg-white rounded text-xs w-full @error('predio') border-1 border-red-500 @enderror" wire:model.defer="predio">
+                        <input title="Predio" placeholder="Predio" type="number" class="bg-white rounded text-xs w-full @error('predio') border-1 border-red-500 @enderror" wire:model="predio">
 
-                        <input title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-full @error('edificio') border-1 border-red-500 @enderror" wire:model.defer="edificio">
+                        <input title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-full @error('edificio') border-1 border-red-500 @enderror" wire:model="edificio">
 
-                        <input title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-full @error('departamento') border-1 border-red-500 @enderror" wire:model.defer="departamento">
+                        <input title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-full @error('departamento') border-1 border-red-500 @enderror" wire:model="departamento">
 
                     </div>
 
@@ -130,7 +242,7 @@
 
             @if ($flags['observaciones'])
 
-                <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md">
+                <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md" wire:loading.class.delay.longest="opacity-50">
 
                     <div class="flex-auto ">
 
@@ -142,7 +254,7 @@
 
                         <div>
 
-                            <textarea rows="5" wire:model.lazy="modelo_editar.observaciones" class="bg-white rounded text-sm w-full" placeholder="Se lo mas especifico posible acerca de porque se genera el trámite."></textarea>
+                            <textarea rows="5" wire:model.blur="modelo_editar.observaciones" class="bg-white rounded text-sm w-full" placeholder="Se lo mas especifico posible acerca de porque se genera el trámite."></textarea>
 
                         </div>
 
@@ -159,6 +271,13 @@
             @endif
 
         @endif
+
+        <div wire:loading.flex class="flex absolute top-1 right-1 items-center">
+            <svg class="animate-spin h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+        </div>
 
     </div>
 
@@ -216,7 +335,7 @@
 
                     <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                        <p><strong>Solicitante:</strong> {{ $tramite->solicitante }}</p>
+                        <p><strong>Solicitante:</strong>{{ $tramite->solicitante }} / {{ $tramite->nombre_solicitante }}</p>
 
                     </div>
 
@@ -356,7 +475,7 @@
 
                     <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                        <p><strong>Solicitante:</strong> {{ $modelo_editar->solicitante }}</p>
+                        <p><strong>Solicitante:</strong>{{ $modelo_editar->solicitante }} / {{ $modelo_editar->nombre_solicitante }}</p>
 
                     </div>
 

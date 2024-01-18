@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'status' => 'activo',
             'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
             'email' => 'correo@correo.com',
-            'password' => 'sistema',
+            'password' => bcrypt('sistema'),
         ])->assignRole('Administrador');
 
         User::create([
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
             'status' => 'activo',
             'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
             'email' => 'tomas.hernandez@plancartemorelia.edu.mx',
-            'password' => 'sistema',
+            'password' => bcrypt('sistema'),
         ])->assignRole('Administrador');
 
         User::create([
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
             'status' => 'activo',
             'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
             'email' => 'cervantes.martin@gmail.com',
-            'password' => 'sistema',
+            'password' => bcrypt('sistema'),
         ])->assignRole('Administrador');
 
         User::create([
@@ -59,7 +59,7 @@ class UserSeeder extends Seeder
             'status' => 'activo',
             'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
             'email' => 'mlanda64@hotmail.com',
-            'password' => 'sistema',
+            'password' => bcrypt('sistema'),
         ])->assignRole('Administrador');
 
         User::create([
@@ -71,7 +71,7 @@ class UserSeeder extends Seeder
             'status' => 'activo',
             'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
             'email' => 'ssacat@outlook.com',
-            'password' => 'sistema',
+            'password' => bcrypt('sistema'),
         ])->assignRole('Administrador');
 
         User::create([
@@ -83,7 +83,7 @@ class UserSeeder extends Seeder
             'status' => 'activo',
             'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
             'email' => 'scastro@michoacan.gob.mx',
-            'password' => 'sistema',
+            'password' => bcrypt('sistema'),
         ])->assignRole('Administrador');
 
         User::create([

@@ -4,6 +4,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SapControllerApi;
+use App\Http\Controllers\Api\V1\ConsultaPredioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('acredita_pago', SapControllerApi::class);
+
+Route::post('consulta_predio', ConsultaPredioController::class);
