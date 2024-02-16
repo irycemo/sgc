@@ -7,6 +7,7 @@ use App\Models\Oficina;
 use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\PredioAvaluo;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Valuacion\AvaluosController;
 
@@ -52,7 +53,7 @@ class Impresion extends Component
 
     protected function rules(){
         return [
-            'folioInspeccion' => 'required',
+            'folioInspeccion' => Rule::requiredIf(!$this->actualizacion),
             'folioAvaluo' => 'nullable',
             'valuador_municipal' => 'nullable',
             'notificador' => 'nullable',

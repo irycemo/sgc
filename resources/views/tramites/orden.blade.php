@@ -142,7 +142,7 @@
                             / {{ $tramite->adicionaA->servicio->nombre }} ({{ $tramite->adicionaA->folio }})
                         @endif
                     </p>
-                    <p>Tipo de servicio: {{ $tramite->tipo_servicio }}</p>
+                    <p>Tipo de servicio: {{ $tramite->tipo_servicio }}, Cantidad: {{ $tramite->cantidad }}</p>
                     <p>Orden de pago: {{ $tramite->orden_de_pago }}</p>
                     <p>Total a pagar: ${{ number_format($tramite->monto, 2) }}
                     </p>
@@ -170,7 +170,7 @@
                 <tr>
                     <th colspan="2">
 
-                        <p>
+                        <p style="font-size: 12px">
                             Observaciones: {{ $tramite->observaciones ?  $tramite->observaciones . '; ' : ''}}
 
                             @if($tramite->predios->count())
@@ -179,7 +179,7 @@
 
                                 @foreach ($tramite->predios as $item)
 
-                                    {{ $item['localidad'] }}-{{ $item['oficina'] }}-{{ $item['tipo_predio'] }}-{{ $item['numero_registro'] }} @if(!$loop->last), @endif
+                                    {{ $item->cuentaPredial() }} @if(!$loop->last), @endif
 
                                 @endforeach
 

@@ -142,27 +142,24 @@
 
             </div>
 
-            <div class="flex items-center justify-end">
+            <div class="flex items-center gap-3 justify-end">
 
-                <button
+                <x-button-blue
                     wire:click="actualizar"
                     wire:loading.attr="disabled"
-                    wire:target="actualizar"
-                    class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                    wire:target="actualizar">
 
                     <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Actualizar
-                </button>
+                </x-button-blue>
 
-                <button
+                <x-button-red
                     wire:click="$toggle('editar')"
                     wire:loading.attr="disabled"
-                    wire:target="$toggle('editar')"
-                    type="button"
-                    class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-red-700 flaot-left focus:outline-none">
+                    wire:target="$toggle('editar')">
                     Cerrar
-                </button>
+                </x-button-red>
 
             </div>
 
@@ -170,7 +167,7 @@
 
             <div class=" flex justify-end mb-3">
 
-                <button wire:click="$toggle('editar')" class=" bg-blue-400 text-white p-2 rounded-full inline hover:bg-blue-700">
+                <button wire:click="$toggle('editar')" class=" bg-blue-400 hover:shadow-lg text-white font-bold p-2 rounded-full text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />

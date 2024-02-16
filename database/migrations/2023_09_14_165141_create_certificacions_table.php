@@ -13,19 +13,22 @@ return new class extends Migration
     {
         Schema::create('certificacions', function (Blueprint $table) {
             $table->id();
-            $table->string('certificacionable_id');
-            $table->string('certificacionable_type');
+            $table->uuid('uuid');
+            $table->unsignedInteger('año');
             $table->unsignedInteger('folio');
-            $table->text('cadena_originial');
-            $table->text('cadena_encriptada');
             $table->string('documento');
+            $table->text('cadena_originial');
+            $table->text('cadena_encriptada')->nullable();
             $table->string('estado');
-            $table->unsignedInteger('oficina');
-            $table->string('actualizado_por');
-            $table->foreignId('tramite_id');
-            $table->text('observaciones');
+            $table->foreignId('oficina_id');
+            $table->foreignId('tramite_id')->nullable();
+            $table->text('observaciones')->nullable();
             $table->foreignId('creado_por')->references('id')->on('users');
+            $table->foreignId('actualizado_por')->references('id')->on('users');
             $table->timestamps();
+
+            $table->unique(['año', 'folio', 'documento']);
+
         });
     }
 

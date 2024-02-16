@@ -38,7 +38,15 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'Crear usuario', 'area' => 'Usuarios'])->syncRoles([$role1]);
         Permission::create(['name' => 'Editar usuario', 'area' => 'Usuarios'])->syncRoles([$role1]);
         Permission::create(['name' => 'Borrar usuario', 'area' => 'Usuarios'])->syncRoles([$role1]);
-        Permission::create(['name' => 'Editar permisos', 'area' => 'Usuarios'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'Lista de certificaciones', 'area' => 'Certificaciones'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Editar certificación', 'area' => 'Certificaciones'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Borrar certificación', 'area' => 'Certificaciones'])->syncRoles([$role1]);
+
+        Permission::create(['name' => 'Lista de efirmas', 'area' => 'Efirmas'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Crear efirma', 'area' => 'Efirmas'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Editar efirma', 'area' => 'Efirmas'])->syncRoles([$role1]);
+        Permission::create(['name' => 'Borrar efirma', 'area' => 'Efirmas'])->syncRoles([$role1]);
 
         Permission::create(['name' => 'Auditoria', 'area' => 'Auditoria'])->syncRoles([$role1]);
         Permission::create(['name' => 'Logs', 'area' => 'Logs'])->syncRoles([$role1]);
@@ -98,15 +106,23 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'Notificación', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2, $role6]);
         Permission::create(['name' => 'Topografía', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
         Permission::create(['name' => 'Asignación de manzanas', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
-        Permission::create(['name' => 'Asignación de cuentas', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
         Permission::create(['name' => 'Avaluos de predios ignorados', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
-        Permission::create(['name' => 'Asignacion de cuenta', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
+        Permission::create(['name' => 'Asignación de cuentas', 'area' => 'Valuación'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'Impresión de avaluos', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2, $role6]);
         Permission::create(['name' => 'Notificación de avaluos', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2, $role6]);
         Permission::create(['name' => 'Avaluos de predio ignorado', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
         Permission::create(['name' => 'Ver mis avaluos', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
 
+        Permission::create(['name' => 'Área de gestión catastral', 'area' => 'Gestión catasral'])->syncRoles([$role1, $role2, $role4]);
+        Permission::create(['name' => 'Captura al padron', 'area' => 'Gestión catasral'])->syncRoles([$role1, $role2, $role4]);
+        Permission::create(['name' => 'Certificado de historia', 'area' => 'Gestión catasral'])->syncRoles([$role1, $role2, $role4]);
+
+        Permission::create(['name' => 'Área de anotaciones y t. a.', 'area' => 'Anotaciones y T. A.'])->syncRoles([$role1, $role2, $role4]);
+
+        Permission::create(['name' => 'Área de cartografía', 'area' => 'Cartografía'])->syncRoles([$role1, $role2, $role4]);
+
         Permission::create(['name' => 'Área de consultas', 'area' => 'Consulta'])->syncRoles([$role1, $role2, $role4]);
+
         Permission::create(['name' => 'Ver oficina', 'area' => 'Consulta'])->syncRoles([$role1, $role2, $role4]);
 
     }

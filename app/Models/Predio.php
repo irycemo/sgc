@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Terreno;
+use App\Models\Movimiento;
 use App\Models\Colindancia;
 use App\Models\Propietario;
 use App\Models\Construccion;
@@ -21,8 +22,31 @@ class Predio extends Model implements Auditable
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+   /*  protected $casts = [
+        'fecha_efectos' => 'date',
+        'fecha_otorgamiento' => 'date'
+    ]; */
+
+    public function getEstadoColorAttribute()
+    {
+        return [
+            'nuevo' => 'blue-400',
+            'activo' => 'green-400',
+            'baja' => 'gray-400',
+            'bloqueado' => 'black',
+        ][$this->status] ?? 'gray-400';
+    }
+
     public function propietarios(){
         return $this->morphMany(Propietario::class, 'propietarioable');
+    }
+
+    public function avaluos(){
+        return $this->hasMany(Avaluo::class, 'predio');
+    }
+
+    public function ultimoAvaluo(){
+        return $this->hasOne(Avaluo::class, 'predio')->where('estado', 'notificado')->latest();
     }
 
     public function condominioTerrenos(){
@@ -43,6 +67,30 @@ class Predio extends Model implements Auditable
 
     public function colindancias(){
         return $this->morphMany(Colindancia::class, 'colindanciaable');
+    }
+
+    public function movimientos(){
+        return $this->hasMany(Movimiento::class);
+    }
+
+    public function cuentaPredial(){
+
+        return $this->localidad . '-' . $this->oficina . '-' . $this->tipo_predio . '-' . $this->numero_registro;
+
+    }
+
+    public function claveCatastral(){
+
+        return $this->estado . '-' . $this->region_catastral . '-' . $this->municipio . '-' . $this->zona_catastral . '-' . $this->localidad . '-' . $this->sector . '-' . $this->manzana . '-' . $this->predio . '-' . $this->edificio . '-' . $this->departamento;
+
+    }
+
+    public function primerPropietario(){
+
+        if($this->propietarios()->first())
+            return $this->propietarios()->first()->persona->nombre . ' ' . $this->propietarios()->first()->persona->ap_paterno . ' ' . $this->propietarios()->first()->persona->ap_materno;
+        else
+            return null;
     }
 
 }

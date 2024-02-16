@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('efirmas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->datetime('vigencia');
             $table->string('estado');
-            $table->string('pem_privada');
-            $table->string('pem_publica');
+            $table->string('cer');
+            $table->string('key');
+            $table->string('contraseña');
+            $table->string('imagen')->nullable();
+            $table->foreignId('creado_por')->nullable()->references('id')->on('users');
+            $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
         });
     }

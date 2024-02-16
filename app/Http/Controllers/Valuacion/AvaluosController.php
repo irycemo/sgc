@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers\Valuacion;
 
-use Barryvdh\DomPDF\Facade\Pdf;
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Oficina;
+use App\Models\Tramite;
 use App\Models\PredioAvaluo;
-use Illuminate\Support\Facades\Storage;
-use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
+use App\Models\Certificacion;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Endroid\QrCode\Builder\Builder;
-use Endroid\QrCode\Encoding\Encoding;
-use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
-use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
-use Endroid\QrCode\Label\Font\NotoSans;
-use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use PhpCfdi\Credentials\Credential;
+use App\Http\Controllers\Controller;
 use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\Label\Font\NotoSans;
+use Illuminate\Support\Facades\Storage;
+use Luecano\NumeroALetras\NumeroALetras;
+use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
+use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
 
 class AvaluosController extends Controller
 {
@@ -98,14 +104,89 @@ class AvaluosController extends Controller
         return $result->getDataUri();
     }
 
-    public function test($id)
+    public function teste($id)
     {
 
-        $predio = PredioAvaluo::find($id);
+        $cadena = null;
+
+        $predios = PredioAvaluo::with('avaluo.asignadoA')->whereIn('id', [2])->get();
+
+        foreach($predios as $predio){
+
+            $cadena = 'Folio avalúo:' . ':' . $predio->avaluo->año . '-' . $predio->avaluo->folio . '|' . 'Cuenta predial: ' . $predio->cuentaPredial() . '|' . 'Clave catastral: ' . $predio->claveCatastral() . '|' . 'Propietario: ' . $predio->primerPropietario();
+
+        }
 
         $qr = $this->generadorQr();
 
-        $pdf = Pdf::loadView('avaluos.avaluo', compact('qr', 'predio'));
+        $formatter = new NumeroALetras();
+
+        $numero_avaluos_letra = $formatter->toWords($predios->count());
+
+        $tramiteInspeccion = Tramite::where('año', '2024')->where('folio', 31332140)->where('usuario', 1)->first();
+
+        $tramiteAvaluo = Tramite::where('año', '2024')->where('folio', 31332141)->where('usuario', 1)->first();
+
+        $cadena = $cadena . '|' . 'Trámite de inspección: ' . $tramiteInspeccion->año . '-' . $tramiteInspeccion->folio . '-'. $tramiteInspeccion->usuario . '|' . 'Recibo: ' . $tramiteInspeccion->folio_pago;
+
+        if($tramiteAvaluo){
+
+            $cadena = $cadena . '|' . 'Trámite de avalúo: ' . $tramiteAvaluo->año . '-' . $tramiteAvaluo->folio . '-'. $tramiteAvaluo->usuario  . '|' . 'Recibo: ' . $tramiteAvaluo->folio_pago;
+
+        }
+
+        $cadena = $cadena . '|' . 'Valuador: ' . $predio->avaluo->asignadoA->nombreCompleto();
+
+        $director = User::with('efirma')->where('status', 'activo')
+                                ->whereHas('roles', function($q){
+                                    $q->where('name', 'Director');
+                                })
+                                ->first();
+
+        $jefe_departamento = User::with('efirma')->where('status', 'activo')
+                                            ->whereHas('roles', function($q){
+                                                $q->where('name', 'Jefe de departamento');
+                                            })
+                                            ->where('area', 'Departamento de Valuación')
+                                            ->first();
+
+        $fielDirector = Credential::openFiles(Storage::disk('efirma')->path($director->efirma->cer), Storage::disk('efirma')->path($director->efirma->key), $director->efirma->contraseña);
+
+        $fielJefe = Credential::openFiles(Storage::disk('efirma')->path($jefe_departamento->efirma->cer), Storage::disk('efirma')->path($jefe_departamento->efirma->key), $jefe_departamento->efirma->contraseña);
+
+        $firmaDirector = $fielDirector->sign($cadena);
+
+        $firmaJefe = $fielJefe->sign($cadena);
+
+        $fechaImpresion = now()->format('d-m-Y H:i:s');
+
+        $certificacion = Certificacion::create([
+            'año' => now()->format('Y'),
+            'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', 'NOTIFICACIÓN DE VALOR CATASTRAL')->max('folio') ?? 0) + 1,
+            'documento' => 'NOTIFICACIÓN DE VALOR CATASTRAL',
+            'cadena_originial' => $cadena,
+            'cadena_encriptada' => base64_encode($firmaDirector),
+            'estado' => 'activo',
+            'oficina_id' => Oficina::where('oficina', $predio->oficina)->first()->id,
+            'tramite_id' => $tramiteInspeccion->id,
+            'creado_por' => auth()->id(),
+            'actualizado_por' => auth()->id()
+        ]);
+
+        $pdf = Pdf::loadView('avaluos.notificacion', [
+            'predios' => $predios,
+            'numero_avaluos_letra' => $numero_avaluos_letra,
+            'tramiteInspeccion' => $tramiteInspeccion,
+            'tramiteAvaluo' => $tramiteAvaluo,
+            'director' => $director->nombreCompleto(),
+            'jefe_departamento' => $jefe_departamento->nombreCompleto(),
+            'firmaDirector' => base64_encode($firmaDirector),
+            'firmaJefe' => base64_encode($firmaJefe),
+            'qr' => $qr,
+            'certificacion' => $certificacion,
+            'fecha_impresion' => $fechaImpresion,
+            'impreso_por' => auth()->user()->nombreCompleto()
+        ]);
 
         $pdf->render();
 
@@ -113,7 +194,9 @@ class AvaluosController extends Controller
 
         $canvas = $dom_pdf->get_canvas();
 
-        $canvas->page_text(280, 810, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
+        $canvas->page_text(480, 794, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+
+        /* $pdf = $dom_pdf->output(); */
 
         return $pdf->stream('documento.pdf');
     }

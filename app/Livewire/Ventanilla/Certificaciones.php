@@ -411,6 +411,8 @@ class Certificaciones extends Component
 
         $this->modelo_editar->solicitante = $this->tramiteAdicionado['solicitante'];
 
+        $this->modelo_editar->nombre_solicitante = $this->tramiteAdicionado['nombre_solicitante'];
+
         $this->modelo_editar->cantidad = $this->tramiteAdicionado['cantidad'];
 
         $this->modelo_editar->observaciones = $this->tramiteAdicionado['observaciones'];
@@ -434,6 +436,8 @@ class Certificaciones extends Component
         if($servicio['nombre'] == 'Certificado negativo catastral' || in_array($servicio['nombre'], $this->certificados_historia)){
 
             $this->flags['predios'] = false;
+
+            $this->flags['solicitante'] = false;
 
         }elseif($servicio['nombre'] == 'Certificado de historia catastral'){
 

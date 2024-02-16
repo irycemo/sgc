@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedInteger('niveles');
             $table->unsignedDecimal('superficie', 15,2);
             $table->unsignedDecimal('valor_unitario', 15,2);
+            $table->unsignedDecimal('valor_construccion', 15,2);
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

@@ -11,6 +11,7 @@ use Database\Seeders\NotariaSeeder;
 use Database\Seeders\TramiteSeeder;
 use Database\Seeders\DependenciaSeeder;
 use Database\Seeders\ServiciosTableSeeder;
+use Database\Seeders\CodigoPostalsTableSeeder;
 use Database\Seeders\CategoriaServiciosTableSeeder;
 
 class DatabaseSeeder extends Seeder
@@ -40,5 +41,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ValoresUnitariosRusticosTableSeeder::class);
         $this->call(DependenciaSeeder::class);
         $this->call(NotariaSeeder::class);
+        $this->call(FactorIncrementosTableSeeder::class);
+        $this->call(CodigoPostalsTableSeeder::class);
     }
 }

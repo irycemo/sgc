@@ -8,7 +8,7 @@
 
                 @if ($flags['adiciona'])
 
-                    <div class="flex space-x-3 bg-white p-4 rounded-lg mb-3 shadow-md relative" wire:loading.class.delaylongest="opacity-50">
+                    <div class="flex space-x-3 bg-white p-4 rounded-lg mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
 
                         <div class="flex space-x-4 items-center">
 
@@ -207,7 +207,7 @@
 
             @endif
 
-            <div class="flex-row lg:flex lg:space-x-3 relative" wire:loading.class.delaylongest="opacity-50">
+            <div class="flex-row lg:flex lg:space-x-3 relative" wire:loading.class.delay.longest="opacity-50">
 
                 @if ($flags['tipo_de_tramite'])
 
@@ -296,7 +296,7 @@
 
             @if ($flags['avaluo_para'])
 
-                <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md relative" wire:loading.class.delaylongest="opacity-50">
+                <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
 
                     <div class="flex-auto ">
 
@@ -335,7 +335,7 @@
 
             @if ($flags['observaciones'])
 
-                <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md relative" wire:loading.class.delaylongest="opacity-50">
+                <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
 
                     <div class="flex-auto ">
 
@@ -590,7 +590,7 @@
                                 wire:loading.attr="disabled"
                                 wire:target="actualizar"
                                 type="button"
-                                class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-none ">
+                                class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-blue-400 focus:outline-offset-2">
                                 <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                                 Actualizar trámite
                             </button>
@@ -602,7 +602,7 @@
                                 wire:loading.attr="disabled"
                                 wire:target="crear"
                                 type="button"
-                                class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-none ">
+                                class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-blue-400 focus:outline-offset-2">
                                 <img wire:loading wire:target="crear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                                 Crear nuevo trámite
                             </button>

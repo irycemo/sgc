@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Efirma;
 use App\Models\Oficina;
 use App\Http\Traits\ModelosTrait;
 use Laravel\Sanctum\HasApiTokens;
@@ -76,5 +77,15 @@ class User extends Authenticatable implements Auditable
 
     public function oficina(){
         return $this->belongsTo(Oficina::class);
+    }
+
+    public function nombreCompleto(){
+
+        return $this->name . ' '. $this->ap_paterno . ' '. $this->ap_materno;
+
+    }
+
+    public function efirma(){
+        return $this->hasOne(Efirma::class);
     }
 }

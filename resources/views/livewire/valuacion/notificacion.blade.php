@@ -72,7 +72,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Cuenta predial</span>
 
-                                {{ $avaluo->predio->localidad }}-{{ $avaluo->predio->oficina }}-{{ $avaluo->predio->tipo_predio }}-{{ $avaluo->predio->numero_registro }}
+                                {{ $avaluo->predioAvaluo->cuentaPredial() }}
 
                             </td>
 
@@ -80,7 +80,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Clave catastral</span>
 
-                                {{ $avaluo->predio->estado }}-{{ $avaluo->predio->region_catastral }}-{{ $avaluo->predio->municipio }}-{{ $avaluo->predio->zona_catastral }}-{{ $avaluo->predio->localidad }}-{{ $avaluo->predio->sector }}-{{ $avaluo->predio->manzana }}-{{ $avaluo->predio->predio }}-{{ $avaluo->predio->edificio ?? '0' }}-{{ $avaluo->predio->departamento ?? '0' }}
+                                {{ $avaluo->predioAvaluo->claveCatastral() }}
 
                             </td>
 
@@ -88,7 +88,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Propietario</span>
 
-                                {{ $avaluo->predio->propietarios->first()->persona->nombre }} {{ $avaluo->predio->propietarios->first()->persona->ap_paterno }} {{ $avaluo->predio->propietarios->first()->persona->ap_materno }}
+                                {{ $avaluo->predioAvaluo->primerPropietario() }}
 
                             </td>
 
@@ -96,7 +96,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Valor catastral</span>
 
-                                ${{ number_format($avaluo->predio->valor_catastral, 2) }}
+                                ${{ number_format($avaluo->predioAvaluo->valor_catastral, 2) }}
 
                             </td>
 

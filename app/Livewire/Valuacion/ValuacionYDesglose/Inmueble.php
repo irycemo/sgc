@@ -44,9 +44,9 @@ class Inmueble extends Component
             'predio.numero_registro' => 'required|min:1',
             'predio.region_catastral' => 'required|min:1',
             'predio.municipio' => 'required|min:1',
-            'predio.localidad' => 'required|min:1',
+            'predio.localidad' => 'required|min:1|same:predio.zona_catastral',
             'predio.sector' => 'required|min:1',
-            'predio.zona_catastral' => 'required|min:1,|same:predio.localidad',
+            'predio.zona_catastral' => 'required|min:1',
             'predio.manzana' => 'required|min:1',
             'predio.predio' => 'required|min:1',
             'predio.edificio' => 'required|min:1',
@@ -142,7 +142,7 @@ class Inmueble extends Component
 
             $this->predio = PredioAvaluo::with('propietarios', 'avaluo')
                                         ->where('estado', 16)
-                                        ->where('estado', '!=', 'notificado')
+                                        ->where('status', '!=', 'notificado')
                                         ->where('region_catastral', $this->predio->region_catastral)
                                         ->where('municipio', $this->predio->municipio)
                                         ->where('zona_catastral', $this->predio->zona_catastral)
@@ -603,14 +603,15 @@ class Inmueble extends Component
                 }
 
                 $avaluo = Avaluo::create([
-                    'folio' => Avaluo::max('folio') + 1,
+                    'año' => now()->format('Y'),
+                    'folio' => (Avaluo::where('año', now()->format('Y'))->max('folio') ?? 0) + 1,
                     'predio_id' => $this->predio->id,
                     'estado' => 'nuevo',
                     'creado_por' => auth()->user()->id,
                     'asignado_a' => auth()->user()->id,
                 ]);
 
-                $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo con folio: ' . $avaluo->folio]);
+                $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo con folio: ' . $avaluo->año . '-' . $avaluo->folio]);
 
                 $this->dispatch('mostrarMensaje', ['success', "El avaluo se creó con el folio " . $avaluo->folio . "."]);
 
@@ -714,9 +715,9 @@ class Inmueble extends Component
 
         if($this->avaluo_id){
 
-            $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
+            $avaluo = Avaluo::with('predioAvaluo')->find($this->avaluo_id);
 
-            $this->predio = $avaluo->predio;
+            $this->predio = $avaluo->predioAvaluo;
 
             $this->ap_paterno = $this->predio->propietarios()->first()->persona->ap_paterno;
             $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;

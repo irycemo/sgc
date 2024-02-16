@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('personas', function (Blueprint $table) {
             $table->id();
             $table->string('tipo');
-            $table->string('nombre');
+            $table->string('nombre')->nullable();
             $table->string('ap_paterno')->nullable();
             $table->string('ap_materno')->nullable();
             $table->string('curp')->nullable();
@@ -30,6 +30,7 @@ return new class extends Migration
             $table->unsignedInteger('cp')->nullable();
             $table->string('entidad')->nullable();
             $table->string('municipio')->nullable();
+            $table->string('ciudad')->nullable();
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

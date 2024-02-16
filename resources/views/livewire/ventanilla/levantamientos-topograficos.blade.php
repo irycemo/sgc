@@ -398,7 +398,7 @@
                                         wire:loading.attr="disabled"
                                         wire:target="buscarPredio"
                                         type="button"
-                                        class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-none flex items-center w-fit">
+                                        class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-blue-400 focus:outline-offset-2 flex items-center w-fit">
                                         <img wire:loading wire:target="buscarPredio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                                         <p class="mr-1"> Buscar</p>
                                     </button>
@@ -426,7 +426,7 @@
                                     wire:loading.attr="disabled"
                                     wire:target="agregarPredio"
                                     type="button"
-                                    class="bg-green-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-green-700 focus:outline-none flex items-center w-fit">
+                                    class="bg-green-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-green-700 focus:outline-green-400 focus:outline-offset-2 flex items-center w-fit">
                                     <img wire:loading wire:target="agregarPredio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
                                     <p class="mr-1">Agregar</p>
                                 </button>
@@ -467,18 +467,16 @@
                                                 <td class="px-2">
                                                     @if($this->modelo_editar->tipo_tramite != 'complemento')
 
-                                                        <button
+                                                        <x-button-red
                                                             wire:click="quitarPredio({{ $item['id'] }})"
                                                             wire:loading.attr="disabled"
-                                                            wire:target="quitarPredio({{ $item['id'] }})"
-                                                            class="md:w-full bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-1 py-1 items-center rounded-full hover:bg-red-700 flex justify-center focus:outline-none"
-                                                        >
+                                                            wire:target="quitarPredio({{ $item['id'] }})">
 
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                             </svg>
 
-                                                        </button>
+                                                        </x-button-red>
                                                     @endif
                                                 </td>
 

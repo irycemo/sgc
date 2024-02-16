@@ -117,9 +117,9 @@
 
                             <div class="flex items-center justify-center lg:justify-start">
 
-                                <img class="h-10 w-10 rounded-full" src="{{ $usuario->profile_photo_url }}" alt="{{ $usuario->name }}">
+                                <img class="h-10 w-10 rounded-full" src="{{ $usuario->profile_photo_url }}" alt="{{ $usuario->nombreCompleto() }}">
 
-                                <span class="text-sm text-gray-900 ml-4">{{ $usuario->name }}</span>
+                                <span class="text-sm text-gray-900 ml-4">{{ $usuario->nombreCompleto() }}</span>
 
                             </div>
 
@@ -466,7 +466,7 @@
 
     </x-dialog-modal>
 
-    <x-confirmation-modal wire:model="modalBorrar">
+    <x-confirmation-modal wire:model="modalBorrar" maxWidth="sm">
 
         <x-slot name="title">
             Eliminar Usuario

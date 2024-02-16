@@ -130,31 +130,37 @@
 
     </div>
 
+    @if(count($errors) > 0)
+
+        <div class="mb-5 bg-white rounded-lg p-2 shadow-lg flex gap-2 flex-wrap ">
+
+            <ul class="flex gap-2 felx flex-wrap list-disc ml-5">
+            @foreach ($errors->all() as $error)
+
+                <li class="text-red-500 text-xs md:text-sm ml-5">
+                    {{ $error }}
+                </li>
+
+            @endforeach
+
+        </ul>
+
+        </div>
+
+    @endif
+
     <div class="bg-white rounded-lg p-3 flex justify-end">
 
-        @if(count($errors) > 0)
+        <x-button-green
+            wire:click="guardar"
+            wire:loading.attr="disabled"
+            wire:target="guardar">
 
-            <span class="bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-red-700 flex items-center justify-center focus:outline-none ">
-                Campos incorrectos
-                @error('predio') <span class="error text-sm text-white">{{ $message }}</span> @enderror
-            </span>
+            <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-        @endif
+            Guardar
 
-        @if($predio && $predio->avaluo && $predio->avaluo->estado != 'notificado')
-
-            <x-button-green
-                wire:click="guardar"
-                wire:loading.attr="disabled"
-                wire:target="guardar">
-
-                <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-
-                Guardar
-
-            </x-button-green>
-
-        @endif
+        </x-button-green>
 
     </div>
 

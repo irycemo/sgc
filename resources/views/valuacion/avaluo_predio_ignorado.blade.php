@@ -45,33 +45,33 @@
 
         </div>
 
+        <div class="tab-panel" :class="{ 'active': activeTab === 3 }" x-show.transition.in.opacity.duration.800="activeTab === 3" x-cloak>
+
+            @livewire('valuacion.valuacion-y-desglose.valor', ['avaluo_id' => $id])
+
+        </div>
+
+        <div class="tab-panel" :class="{ 'active': activeTab === 4 }" x-show.transition.in.opacity.duration.800="activeTab === 4" x-cloak>
+
+            @livewire('valuacion.valuacion-y-desglose.imagenes-observaciones', ['avaluo_id' => $id])
+
+        </div>
+
         <div class="tab-panel" :class="{ 'active': activeTab === 0 }" x-show.transition.in.opacity.duration.800="activeTab === 0">
 
             @livewire('valuacion.avaluo-predio-ignorado', ['avaluo_id' => $id])
 
         </div>
 
-        <div class="tab-panel" :class="{ 'active': activeTab === 1 }" x-show.transition.in.opacity.duration.800="activeTab === 1">
+        <div class="tab-panel" :class="{ 'active': activeTab === 1 }" x-show.transition.in.opacity.duration.800="activeTab === 1" x-cloak>
 
             @livewire('valuacion.valuacion-y-desglose.colindancias', ['avaluo_id' => $id])
 
         </div>
 
-        <div class="tab-panel" :class="{ 'active': activeTab === 2 }" x-show.transition.in.opacity.duration.800="activeTab === 2">
+        <div class="tab-panel" :class="{ 'active': activeTab === 2 }" x-show.transition.in.opacity.duration.800="activeTab === 2" x-cloak>
 
             @livewire('valuacion.valuacion-y-desglose.caracteristicas', ['avaluo_id' => $id])
-
-        </div>
-
-        <div class="tab-panel" :class="{ 'active': activeTab === 3 }" x-show.transition.in.opacity.duration.800="activeTab === 3">
-
-            @livewire('valuacion.valuacion-y-desglose.valor', ['avaluo_id' => $id])
-
-        </div>
-
-        <div class="tab-panel" :class="{ 'active': activeTab === 4 }" x-show.transition.in.opacity.duration.800="activeTab === 4">
-
-            @livewire('valuacion.valuacion-y-desglose.imagenes-observaciones', ['avaluo_id' => $id])
 
         </div>
 

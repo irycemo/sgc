@@ -314,24 +314,20 @@
 
         </x-button-blue>
 
-        @if($predio && $predio->avaluo->estado != 'notificado')
+        <div class="flex justify-end">
 
-            <div class="flex justify-end">
+            <x-button-green
+                wire:click="guardarTerrenos"
+                wire:loading.attr="disabled"
+                wire:target="guardarTerrenos">
 
-                <x-button-green
-                    wire:click="guardarTerrenos"
-                    wire:loading.attr="disabled"
-                    wire:target="guardarTerrenos">
+                <img wire:loading wire:target="guardarTerrenos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                    <img wire:loading wire:target="guardarTerrenos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                Guardar terreno
 
-                    Guardar terreno
+            </x-button-green>
 
-                </x-button-green>
-
-            </div>
-
-        @endif
+        </div>
 
     </div>
 
@@ -511,7 +507,7 @@
 
                     </div>
 
-                    <div class="flex-auto lg:col-span-2">
+                    <div class="flex-auto lg:col-span-1">
 
                         <div>
 
@@ -528,6 +524,28 @@
                         <div>
 
                             @error('construcciones.' . $index . '.superficie') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex-auto lg:col-span-1">
+
+                        <div>
+
+                            <label class="text-sm" >Valor</label>
+
+                        </div>
+
+                        <div>
+
+                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.valor_construccion" readonly>
+
+                        </div>
+
+                        <div>
+
+                            @error('construcciones.' . $index . '.valor_construccion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                         </div>
 
@@ -567,20 +585,16 @@
 
         <div class="flex justify-end">
 
-            @if($predio && $predio->avaluo->estado != 'notificado')
+            <x-button-green
+                wire:click="guardarConstrucciones"
+                wire:loading.attr="disabled"
+                wire:target="guardarConstrucciones">
 
-                <x-button-green
-                    wire:click="guardarConstrucciones"
-                    wire:loading.attr="disabled"
-                    wire:target="guardarConstrucciones">
+                <img wire:loading wire:target="guardarConstrucciones" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                    <img wire:loading wire:target="guardarConstrucciones" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                Guardar construcciones
 
-                    Guardar construcciones
-
-                </x-button-green>
-
-            @endif
+            </x-button-green>
 
         </div>
 
@@ -720,20 +734,16 @@
 
             <div class="flex justify-end">
 
-                @if($predio && $predio->avaluo->estado != 'notificado')
+                <x-button-green
+                    wire:click="guardarTerrenosCondominio"
+                    wire:loading.attr="disabled"
+                    wire:target="guardarTerrenosCondominio">
 
-                    <x-button-green
-                        wire:click="guardarTerrenosCondominio"
-                        wire:loading.attr="disabled"
-                        wire:target="guardarTerrenosCondominio">
+                    <img wire:loading wire:target="guardarTerrenosCondominio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                        <img wire:loading wire:target="guardarTerrenosCondominio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    Guardar condominio
 
-                        Guardar condominio
-
-                    </x-button-green>
-
-                @endif
+                </x-button-green>
 
             </div>
 
@@ -881,20 +891,16 @@
 
             <div class="flex justify-end">
 
-                @if($predio && $predio->avaluo->estado != 'notificado')
+                <x-button-green
+                    wire:click="guardarCondominio"
+                    wire:loading.attr="disabled"
+                    wire:target="guardarCondominio">
 
-                    <x-button-green
-                        wire:click="guardarCondominio"
-                        wire:loading.attr="disabled"
-                        wire:target="guardarCondominio">
+                    <img wire:loading wire:target="guardarCondominio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                        <img wire:loading wire:target="guardarCondominio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    Guardar condominio
 
-                        Guardar condominio
-
-                    </x-button-green>
-
-                @endif
+                </x-button-green>
 
             </div>
 
@@ -1001,31 +1007,37 @@
 
     @endif
 
-    <div class="bg-white rounded-lg p-3 flex justify-end">
+    @if(count($errors) > 0)
 
-        @if(count($errors) > 0)
+        <div class="mb-5 bg-white rounded-lg p-2 shadow-lg flex gap-2 flex-wrap ">
 
-            <span class="bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-red-700 flex items-center justify-center focus:outline-none ">
-                Campos incorrectos
-                @error('predio') <span class="error text-sm text-white">{{ $message }}</span> @enderror
-            </span>
+            <ul class="flex gap-2 felx flex-wrap list-disc ml-5">
+            @foreach ($errors->all() as $error)
 
-        @endif
+                <li class="text-red-500 text-xs md:text-sm ml-5">
+                    {{ $error }}
+                </li>
 
-        @if($predio && $predio->avaluo && $predio->avaluo->estado != 'notificado')
+            @endforeach
 
-            <x-button-green
-                wire:click="guardar"
-                wire:loading.attr="disabled"
-                wire:target="guardar">
+        </ul>
 
-                <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+        </div>
 
-                Guardar
+    @endif
 
-            </x-button-green>
+    <div class="bg-white rounded-lg p-3 flex justify-end mt-5">
 
-        @endif
+        <x-button-green
+            wire:click="guardar"
+            wire:loading.attr="disabled"
+            wire:target="guardar">
+
+            <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+            Guardar
+
+        </x-button-green>
 
     </div>
 

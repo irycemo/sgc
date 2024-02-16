@@ -35,6 +35,7 @@ class Oficinas extends Component
             'modelo_editar.valuador_municipal' => 'nullable',
             'modelo_editar.cabecera' => 'nullable',
             'modelo_editar.sectores' => 'nullable',
+            'modelo_editar.tipo' => 'required',
             'sectorInicial' => 'nullable|numeric|min:1|max:102|lte:sectorFinal',
             'sectorFinal' => 'nullable|numeric|min:1|max:102|gte:sectorInicial'
          ];
@@ -46,7 +47,7 @@ class Oficinas extends Component
     ];
 
     public function crearModeloVacio(){
-        return Oficina::make();
+        $this->modelo_editar =  Oficina::make();
     }
 
     public function abrirModalEditar(Oficina $modelo){
@@ -81,7 +82,7 @@ class Oficinas extends Component
                 $this->modelo_editar->creado_por = auth()->user()->id;
                 $this->modelo_editar->save();
 
-                $this->resetearTodo();
+                $this->resetearTodo($borrado = true);
 
                 $this->dispatch('mostrarMensaje', ['success', "La oficina se creó con éxito."]);
 
@@ -120,7 +121,7 @@ class Oficinas extends Component
                 $this->modelo_editar->actualizado_por = auth()->user()->id;
                 $this->modelo_editar->save();
 
-                $this->resetearTodo();
+                $this->resetearTodo($borrado = true);
 
                 $this->dispatch('mostrarMensaje', ['success', "La oficina se actualizó con éxito."]);
 
@@ -160,7 +161,7 @@ class Oficinas extends Component
 
         $this->cabeceras = Oficina::whereNull('cabecera')->orderBy('nombre')->get();
 
-        $this->modelo_editar = $this->crearModeloVacio();
+        $this->crearModeloVacio();
 
         array_push($this->fields, 'sectorInicial', 'sectorFinal', 'sectores');
 

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Avaluos;
 
+use App\Http\Constantes\Constantes;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\PredioAvaluo;
@@ -21,7 +22,10 @@ class Avaluos extends Component
 
     public $valuadores;
 
+    public $años;
+
     public $filters = [
+        'año' => '',
         'folio' => '',
         'valuador' => '',
         'localidad' => '',
@@ -38,6 +42,8 @@ class Avaluos extends Component
 
         $this->valuadores = User::whereNotNull('valuador')->orderBy('ap_paterno')->get();
 
+        $this->años = Constantes::AÑOS;
+
         $this->crearModeloVacio();
 
     }
@@ -46,6 +52,11 @@ class Avaluos extends Component
     {
 
         $predios = PredioAvaluo::with('actualizadoPor', 'avaluo.asignadoA')
+                            ->when($this->filters['año'], function($q, $año) {
+                                $q->whereHas('avaluo', function($q) use($año){
+                                        $q->where('año', $this->filters['año']);
+                                });
+                            })
                             ->when($this->filters['folio'], function($q, $folio) {
                                 $q->whereHas('avaluo', function($q) use($folio){
                                         $q->where('folio', $this->filters['folio']);

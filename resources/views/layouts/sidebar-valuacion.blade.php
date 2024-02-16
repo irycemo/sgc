@@ -32,71 +32,99 @@
 
         @can('Asignación de cuentas')
 
-            <a href="{{ route('asignacion_cuenta') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
+            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
-                Asignación de cuenta predial
+                <a href="{{ route('asignacion_cuenta') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
-            </a>
+                    Asignación de cuenta predial
+
+                </a>
+
+            </div>
 
         @endcan
 
         @can('Valuación y desglose')
 
-            <a href="{{ route('valuacion_y_desglose') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
+            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
-                Valuación y desglose
+                <a href="{{ route('valuacion_y_desglose') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
-            </a>
+                    Valuación y desglose
+
+                </a>
+
+            </div>
 
         @endcan
 
         @can('Ficha técnica')
 
-            <a href="{{ route('ficha_tecnica') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
+            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
-                Ficha técnica
+                <a href="{{ route('ficha_tecnica') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
-            </a>
+                    Ficha técnica
+
+                </a>
+
+            </div>
 
         @endcan
 
         @can('Impresión de avaluos')
 
-            <a href="{{ route('impresion_avaluos') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
+            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
-                Impresión
+                <a href="{{ route('impresion_avaluos') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
-            </a>
+                    Impresión
+
+                </a>
+
+            </div>
 
         @endcan
 
         @can('Notificación')
 
-            <a href="{{ route('notificacion_avaluos') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
+            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
-                Notificación
+                <a href="{{ route('notificacion_avaluos') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
-            </a>
+                    Notificación
+
+                </a>
+
+            </div>
 
         @endcan
 
         @can('Avaluos de predio ignorado')
 
-            <a href="{{ route('avaluo_predio_ignorado') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
+            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
-                Avaluos de predios ignorados
+                <a href="{{ route('avaluo_predio_ignorado') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
-            </a>
+                    Avaluos de predios ignorados
+
+                </a>
+
+            </div>
 
         @endcan
 
         @can('Ver mis avaluos')
 
-            <a href="{{ route('mis_avaluos') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
+            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
-                Mis avaluos
+                <a href="{{ route('mis_avaluos') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
-            </a>
+                    Mis avaluos
+
+                </a>
+
+            </div>
 
         @endcan
 

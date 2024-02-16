@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'oficina_id' => '53',
             'status' => 'activo',
             'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
-            'email' => 'correo@correo.com',
+            'email' => 'enrique_j_@hotmail.com',
             'password' => bcrypt('sistema'),
         ])->assignRole('Administrador');
 
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
             'clave' => 3,
             'name' => 'Martin',
             'ap_paterno' => 'Cervantes',
-            'ap_materno' => 'Osorio',
+            'ap_materno' => 'Contreras',
             'oficina_id' => '53',
             'status' => 'activo',
             'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
@@ -101,8 +101,8 @@ class UserSeeder extends Seeder
         User::create([
             'clave' => 8,
             'name' => 'Martin',
-            'ap_paterno' => 'Calvillo',
-            'ap_materno' => 'Corral',
+            'ap_paterno' => 'Vargas',
+            'ap_materno' => 'Contreras',
             'oficina_id' => '53',
             'status' => 'activo',
             'area' => 'Departamento de Valuación',

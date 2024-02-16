@@ -64,6 +64,14 @@ return [
             'throw' => false,
         ],
 
+        'efirma' => [
+            'driver' => 'local',
+            'root' => storage_path('app/efirma'),
+            'url' => env('APP_URL').'/efirma',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
     ],
 
     /*
@@ -80,6 +88,7 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
         public_path('avaluos') => storage_path('app/avaluos'),
+        public_path('efirma') => storage_path('app/efirma'),
     ],
 
 ];

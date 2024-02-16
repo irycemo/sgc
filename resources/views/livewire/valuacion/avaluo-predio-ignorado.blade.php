@@ -83,7 +83,7 @@
                     wire:loading.attr="disabled"
                     wire:target="buscarClaveCatastral"
                     type="button"
-                    class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center">
+                    class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-blue-400 focus:outline-offset-2 flex items-center justify-center">
 
                     <img wire:loading wire:target="buscarClaveCatastral" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
@@ -96,7 +96,7 @@
                     wire:loading.attr="disabled"
                     wire:target="$set('modal', true)"
                     type="button"
-                    class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center">
+                    class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-blue-400 focus:outline-offset-2 flex items-center justify-center">
 
                     <img wire:loading wire:target="$set('modal', true)" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
@@ -109,7 +109,7 @@
                     wire:loading.attr="disabled"
                     wire:target="abrirModalAsignar"
                     type="button"
-                    class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center">
+                    class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-blue-400 focus:outline-offset-2 flex items-center justify-center">
 
                     <img wire:loading wire:target="abrirModalAsignar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
@@ -766,33 +766,29 @@
 
         @if(!$editar)
 
-            <button
+            <x-button-green
                 wire:click="crear"
                 wire:loading.attr="disabled"
-                wire:target="crear"
-                class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-            >
+                wire:target="crear">
 
                 <img wire:loading wire:target="crear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                 Guardar
 
-            </button>
+            </x-button-green>
 
         @else
 
-            <button
+            <x-button-green
                 wire:click="actualizar"
                 wire:loading.attr="disabled"
-                wire:target="actualizar"
-                class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-            >
+                wire:target="actualizar">
 
                 <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                 Actualizar
 
-            </button>
+            </x-button-green>
 
         @endif
 
@@ -880,18 +876,16 @@
 
                     <div class="">
 
-                        <button
+                        <x-button-green
                             wire:click="busacarPropietario"
                             wire:loading.attr="disabled"
-                            wire:target="busacarPropietario"
-                            class=" bg-green-400 hover:shadow-lg text-white mt-3 my-auto w-full text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-                        >
+                            wire:target="busacarPropietario">
 
                             <img wire:loading wire:target="busacarPropietario" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                             Buscar
 
-                        </button>
+                        </x-button-green>
 
                     </div>
 
@@ -923,18 +917,16 @@
                                         <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">{{ $item->persona->ap_paterno }} {{ $item->persona->ap_materno }} {{ $item->persona->nombre }}</td>
                                         <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">{{ $item->propietarioable?->nombre_asentamiento }} {{ $item->propietarioable?->nombre_vialidad }} {{ $item->propietarioable?->numero_exterior }}</td>
                                         <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-                                            <button
+                                            <x-button-blue
                                                 wire:click="cargarPredioAvaluo({{ $item->propietarioable->id }})"
                                                 wire:loading.attr="disabled"
-                                                wire:target="cargarPredioAvaluo({{ $item->propietarioable->id }})"
-                                                class=" bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 ml-auto rounded-full  hover:bg-blue-700 flex items-center justify-center focus:outline-none "
-                                            >
+                                                wire:target="cargarPredioAvaluo({{ $item->propietarioable->id }})">
 
                                                 <img wire:loading wire:target="cargarPredioAvaluo({{ $item->propietarioable->id }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                                                 Cargar
 
-                                            </button>
+                                            </x-button-blue>
                                         </td>
 
                                     </tr>
@@ -969,20 +961,18 @@
 
         <x-slot name="footer">
 
-            <button
+            <x-button-red
                 wire:click="$set('modal', false)"
                 wire:loading.attr="disabled"
-                wire:target="$set('modal', false)"
-                type="button"
-                class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-red-700 flaot-left focus:outline-none">
+                wire:target="$set('modal', false)">
                 Cerrar
-            </button>
+            </x-button-red>
 
         </x-slot>
 
     </x-dialog-modal>
 
-    <x-dialog-modal wire:model.live="modal2">
+    <x-dialog-modal wire:model.live="modal2" >
 
         <x-slot name="title">
 
@@ -996,23 +986,27 @@
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5 items-start">
 
-                    <div class="flex-auto ">
+                    <div class="flex-auto text-center mb-3">
 
-                        <div>
+                        <div >
 
-                            <Label>Trámite de inscripción</Label>
-
-                        </div>
-
-                        <div>
-
-                            <input type="number" class="bg-white rounded text-sm" wire:model="tramite">
+                            <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite</Label>
 
                         </div>
 
-                        <div>
+                        <div class="inline-flex">
 
-                            @error('tramite') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                            <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
+                                @foreach ($años as $año)
+
+                                    <option value="{{ $año }}">{{ $año }}</option>
+
+                                @endforeach
+                            </select>
+
+                            <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
+
+                            <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
 
                         </div>
 
@@ -1020,9 +1014,9 @@
 
                 </div>
 
-                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5 items-start">
+                <div class="flex flex-col md:flex-row justify-between gap-2 mb-5 items-start">
 
-                    <div class="flex-auto ">
+                    <div class="flex-auto">
 
                         <div>
 
@@ -1044,7 +1038,7 @@
 
                     </div>
 
-                    <div class="flex-auto ">
+                    <div class="flex-auto">
 
                         <div>
 
@@ -1066,7 +1060,7 @@
 
                     </div>
 
-                    <div class="flex-auto ">
+                    <div class="flex-auto">
 
                         <div>
 
@@ -1088,7 +1082,7 @@
 
                     </div>
 
-                    <div class="flex-auto ">
+                    <div class="flex-auto">
 
                         <div>
 
@@ -1118,27 +1112,24 @@
 
         <x-slot name="footer">
 
-            <div class="float-righ">
+            <div class="flex gap-3">
 
-                <button
+                <x-button-blue
                     wire:click="asignarCuenta"
                     wire:loading.attr="disabled"
-                    wire:target="asignarCuenta"
-                    class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                    wire:target="asignarCuenta">
 
                     <img wire:loading wire:target="asignarCuenta" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Actualizar
-                </button>
+                </x-button-blue>
 
-                <button
+                <x-button-red
                     wire:click="$set('modal2', false)"
                     wire:loading.attr="disabled"
-                    wire:target="$set('modal2', false)"
-                    type="button"
-                    class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-red-700 flaot-left focus:outline-none">
+                    wire:target="$set('modal2', false)">
                     Cerrar
-                </button>
+                </x-button-red>
 
             </div>
 

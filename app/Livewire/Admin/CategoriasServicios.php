@@ -22,7 +22,7 @@ class CategoriasServicios extends Component
     }
 
     public function crearModeloVacio(){
-        return CategoriaServicio::make();
+        $this->modelo_editar =  CategoriaServicio::make();
     }
 
     public function abrirModalEditar(CategoriaServicio $modelo){
@@ -45,7 +45,7 @@ class CategoriasServicios extends Component
             $this->modelo_editar->creado_por = auth()->user()->id;
             $this->modelo_editar->save();
 
-            $this->resetearTodo();
+            $this->resetearTodo($borrado = true);
 
             $this->dispatch('mostrarMensaje', ['success', "La categoría se creó con éxito."]);
 
@@ -66,7 +66,7 @@ class CategoriasServicios extends Component
             $this->modelo_editar->actualizado_por = auth()->user()->id;
             $this->modelo_editar->save();
 
-            $this->resetearTodo();
+            $this->resetearTodo($borrado = true);
 
             $this->dispatch('mostrarMensaje', ['success', "La categoría se actualizó con éxito."]);
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Servicio;
 use App\Models\Seguimiento;
+use App\Models\PredioAvaluo;
 use App\Http\Traits\ModelosTrait;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -41,6 +42,10 @@ class Tramite extends Model implements Auditable
 
     public function predios(){
         return $this->belongstoMany(Predio::class)->withPivot('estado')->withTimestamps();
+    }
+
+    public function predioAvaluo(){
+        $this->belongsTo(PredioAvaluo::class, 'predio_avaluo');
     }
 
     public function adicionaA(){

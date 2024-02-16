@@ -20,6 +20,8 @@ class Auditoria extends Component
     public $evento;
     public $modelo;
     public $selecetedAudit;
+    public $oldValues;
+    public $newValues;
     public $modelos = [
         'App\Models\User',
         'App\Models\Tramite',
@@ -45,15 +47,22 @@ class Auditoria extends Component
         'App\Models\Tramite',
         'App\Models\Uma',
         'App\Models\User',
+        'App\Models\Movimiento',
     ];
 
-    public function ver($audit){
-
-        $old =json_decode($audit['old_values']);
-
-        /* dd($old->roles[0]->id); */
+    public function ver(Audit $audit){
 
         $this->selecetedAudit = $audit;
+
+        if($this->selecetedAudit->event === 'attach' || $this->selecetedAudit->event === 'sync'){
+
+            $this->oldValues = json_decode($this->selecetedAudit->old_values, true);
+
+            $this->newValues = json_decode($this->selecetedAudit->new_values, true);
+
+            /* dd($this->oldValues['roles'][0]); */
+
+        }
 
         $this->modal = true;
 

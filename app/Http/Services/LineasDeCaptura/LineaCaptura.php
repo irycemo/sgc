@@ -37,27 +37,18 @@ class LineaCaptura
                 <ser:MT_ServGralLC_PI_Sender>
                     <!--Optional:-->
                     <ES_GEN_DATA>
-                        <!--Optional:-->
-                        <TP_PROCESAMIENTO>2</TP_PROCESAMIENTO>
-                        <!--Optional:-->
-                        <TP_DATOMAESTRO>E</TP_DATOMAESTRO>
-                        <!--Optional:-->
-                        <TP_DIVERSO>DIRNOTAR</TP_DIVERSO>
-                        <!--Optional:-->
-                        <RFC>XXXX0001XXX</RFC>
-                        <!--Optional:-->
-                        <NOMBRE_RAZON>". $this->tramite->nombre_solicitante ."</NOMBRE_RAZON>
-                        <!--Optional:-->
-                        <DOMICILIO>Conocido</DOMICILIO>
-                        <OBSERVACIONES>Trámite: " . $this->tramite->año . '-' . $this->tramite->folio . "-" . $this->tramite->usuario . " Tipo de servicio: " . $this->tramite->tipo_servicio . "</OBSERVACIONES>
+                    <TP_PROCESAMIENTO>2</TP_PROCESAMIENTO>
+                    <TP_DATOMAESTRO>E</TP_DATOMAESTRO>
+                    <TP_DIVERSO>RPP</TP_DIVERSO>
+                    <RFC>XXXX0001XXX</RFC>
+                    <NOMBRE_RAZON>". $this->tramite->nombre_solicitante ."</NOMBRE_RAZON>
+                    <DOMICILIO>Conocido</DOMICILIO>
+                    <OBSERVACIONES>Número de control: " . $this->tramite->año . '-' . $this->tramite->numero_control . '-' . $this->tramite->usuario . "</OBSERVACIONES>
                     </ES_GEN_DATA>
                     <!--Zero or more repetitions:-->
                     <TB_CONCEPTOS>
-                        <!--Optional:-->
-                        <TP_INGRESO>D957</TP_INGRESO>
-                        <!--Optional:-->
-                        <CANTIDAD>" . $this->tramite->cantidad . "</CANTIDAD>
-                        <!--Optional:-->
+                        <TP_INGRESO>". $this->tramite->servicio->clave_ingreso ."</TP_INGRESO>
+                        <CANTIDAD>1</CANTIDAD>
                         <IMPORTE>" . $this->tramite->monto . "</IMPORTE>
                     </TB_CONCEPTOS>
                 </ser:MT_ServGralLC_PI_Sender>
@@ -71,30 +62,44 @@ class LineaCaptura
                 'User-Agent: PHP-SOAP-CURL',
                 'Content-Type: text/xml; charset=utf-8',
                 'SOAPAction: "http://sap.com/xi/WebService/soap1.1"',
-                'Host: gemnwpiq.michoacan.gob.mx:51000',
+                'Host: gemnwpip.michoacan.gob.mx:52001',
             ];
 
-            $ch = curl_init('http://gemnwpiq.michoacan.gob.mx:51000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BS_WEB_PIQ&receiverParty=&receiverService=&interface=SI_ServGralLC_PI_Sender&interfaceNamespace=http://www.michoacan.gob.mx/ServGralLC');
+            $ch = curl_init('https://gemnwpip.michoacan.gob.mx:52001/XISOAPAdapter/MessageServlet?senderParty=&senderService=BS_WEB_PIP&receiverParty=&receiverService=&interface=SI_ServGralLC_PI_Sender&interfaceNamespace=http://www.michoacan.gob.mx/ServGralLC');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_USERPWD, $this->soapUser.":".$this->soapPassword);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
             curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
             $response = curl_exec($ch);
 
             curl_close($ch);
 
             $error = curl_errno($ch);
 
-            if($error)
-                throw new ErrorAlGenerarLineaDeCaptura("Error al generar línea de captura");
+            if($error){
+
+                Log::error($error);
+
+                throw new ErrorAlGenerarLineaDeCaptura('Error de conexión a SAP.');
+
+            }
 
             $xml = preg_replace("/(<\/?)(\w+):([^>]*>)/", "$1$2$3", $response);
             $xml = simplexml_load_string($xml);
             $json = json_encode($xml);
             $responseArray = json_decode($json,true);
+
+            if(isset($responseArray['SOAPBody']['SOAPFault']['detail']['sSystemError']['text'])){
+
+                Log::error($responseArray);
+
+                throw new ErrorAlGenerarLineaDeCaptura("Error al generar linea de captura.");
+
+            }
 
             return $responseArray;
 

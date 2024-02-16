@@ -24,7 +24,8 @@ class PropietarioFactory extends Factory
         return [
             'persona_id' => $this->faker->randomElement($personas),
             'tipo' => $this->faker->randomElement(Constantes::TIPO_PROPIETARIO),
-            'porcentaje' => 50
+            'porcentaje_nuda' => 50,
+            'porcentaje_usufructo' => 50
         ];
     }
 }

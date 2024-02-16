@@ -14,6 +14,7 @@ use App\Http\Traits\ComponentesTrait;
 
 class Permisos extends Component
 {
+
     use WithPagination;
     use ComponentesTrait;
 
@@ -34,7 +35,7 @@ class Permisos extends Component
     ];
 
     public function crearModeloVacio(){
-        return Permission::make();
+        $this->modelo_editar = Permission::make();
     }
 
     public function abrirModalEditar(Permission $modelo){
@@ -57,7 +58,7 @@ class Permisos extends Component
             $this->modelo_editar->creado_por = auth()->user()->id;
             $this->modelo_editar->save();
 
-            $this->resetearTodo();
+            $this->resetearTodo($borrado = true);
 
             $this->dispatch('mostrarMensaje', ['success', "El permiso se creó con éxito."]);
 
@@ -80,7 +81,7 @@ class Permisos extends Component
             $this->modelo_editar->actualizado_por = auth()->user()->id;
             $this->modelo_editar->save();
 
-            $this->resetearTodo();
+            $this->resetearTodo($borrado = true);
 
             $this->dispatch('mostrarMensaje', ['success', "El permiso se actualizó con éxito."]);
 
@@ -118,7 +119,7 @@ class Permisos extends Component
 
     public function mount(){
 
-        $this->modelo_editar = $this->crearModeloVacio();
+        $this->crearModeloVacio();
 
         $this->areas = Constantes::AREAS;
 

@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\Uma;
 use Livewire\Component;
+use App\Models\Servicio;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Log;
 use App\Http\Traits\ComponentesTrait;
@@ -48,7 +49,19 @@ class Umas extends Component
             $this->modelo_editar->creado_por = auth()->user()->id;
             $this->modelo_editar->save();
 
-            $this->resetearTodo();
+            $servicios = Servicio::where('umas', '>', 0)->get();
+
+            foreach ($servicios as $servicio) {
+
+                $servicio->update([
+                    'ordinario' => round($servicio->umas * $this->modelo_editar->diario),
+                    'urgente' => round($servicio->umas * $this->modelo_editar->diario * 2),
+                    'extra_urgente' => round($servicio->umas * $this->modelo_editar->diario * 3),
+                ]);
+
+            }
+
+            $this->resetearTodo($borrado = true);
 
             $this->dispatch('mostrarMensaje', ['success', "La UMA se creó con éxito."]);
 
@@ -71,7 +84,7 @@ class Umas extends Component
             $this->modelo_editar->actualizado_por = auth()->user()->id;
             $this->modelo_editar->save();
 
-            $this->resetearTodo();
+            $this->resetearTodo($borrado = true);
 
             $this->dispatch('mostrarMensaje', ['success', "La UMA se actualizó con éxito."]);
 

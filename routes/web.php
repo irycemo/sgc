@@ -2,6 +2,7 @@
 
 use App\Livewire\Admin\Umas;
 use App\Livewire\Admin\Roles;
+use App\Livewire\Admin\Efirmas;
 use App\Livewire\Admin\Oficinas;
 use App\Livewire\Admin\Permisos;
 use App\Livewire\Admin\Tramites;
@@ -12,15 +13,18 @@ use App\Livewire\Consultas\Oficina;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Valuacion\MisAvaluos;
 use App\Livewire\Admin\Avaluos\Avaluos;
+use App\Livewire\Admin\Certificaciones;
 use App\Livewire\Admin\FactorIncremento;
 use App\Livewire\Valuacion\FichaTecnica;
 use App\Livewire\Valuacion\Notificacion;
 use App\Http\Controllers\ManualController;
+use App\Livewire\GestionCatastral\Captura;
 use App\Livewire\Admin\CategoriasServicios;
 use App\Livewire\Valuacion\ImpresionAvaluo;
 use App\Http\Controllers\DashboardController;
 use App\Livewire\Admin\Predios\PrediosPadron;
 use App\Http\Controllers\SetPasswordController;
+use App\Http\Controllers\VerificacionController;
 use App\Livewire\Admin\Predios\PrediosAsignados;
 use App\Livewire\Admin\ValoresUnitariosRusticos;
 use App\Http\Controllers\Admin\AvaluosController;
@@ -28,6 +32,8 @@ use App\Http\Controllers\Admin\PrediosController;
 use App\Http\Controllers\Admin\TramiteController;
 use App\Livewire\Valuacion\AsignacionCuentaPredial;
 use App\Livewire\Admin\ValoresunitariosConstruccion;
+use App\Livewire\GestionCatastral\CertificadoHistoria;
+use App\Http\Controllers\Valuacion\AvaluosController as Val;
 use App\Livewire\Ventanilla\Ventanilla as VentanillaVentanilla;
 use App\Http\Controllers\Valuacion\ValuacionYDesgloseController;
 use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
@@ -58,6 +64,8 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
     Route::get('usuarios', Usuarios::class)->middleware('permission:Lista de usuarios')->name('usuarios');
 
+    Route::get('efirmas', Efirmas::class)->middleware('permission:Lista de efirmas')->name('efirmas');
+
     Route::get('auditoria', Auditoria::class)->middleware('permission:Auditoria')->name('auditoria');
 
     Route::get('servicios', Servicios::class)->middleware('permission:Lista de servicios')->name('servicios');
@@ -70,6 +78,8 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
     Route::get('predios', PrediosPadron::class)->middleware('permission:Lista de predios')->name('predios');
     Route::get('predios/{predio}', [PrediosController::class, 'show'])->middleware('permission:Ver predio')->name('ver_predio');
+
+    Route::get('certificaciones', Certificaciones::class)->middleware('permission:Lista de certificaciones')->name('certificaciones');
 
     Route::get('avaluos_lista', Avaluos::class)->middleware('permission:Lista de avaluos')->name('avaluos_lista');
 
@@ -86,9 +96,9 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('valores_unitarios_rusticos', ValoresUnitariosRusticos::class)->middleware('permission:Lista de valores unitarios')->name('unitarios_rusticos');
 
     /* Valuación */
-    Route::get('valuacion/{id?}', ValuacionYDesgloseController::class)->middleware('permission:Valuación y desglose')->name('valuacion_y_desglose');
+    Route::get('valuacion/{avaluo?}', ValuacionYDesgloseController::class)->middleware('permission:Valuación y desglose')->name('valuacion_y_desglose');
 
-    Route::get('asignacion_cuenta', AsignacionCuentaPredial::class)->middleware('permission:Asignacion de cuenta')->name('asignacion_cuenta');
+    Route::get('asignacion_cuenta', AsignacionCuentaPredial::class)->middleware('permission:Asignación de cuentas')->name('asignacion_cuenta');
 
     Route::get('impresion_avaluos', ImpresionAvaluo::class)->middleware('permission:Impresión de avaluos')->name('impresion_avaluos');
 
@@ -100,6 +110,11 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
     Route::get('mis_avaluos', MisAvaluos::class)->middleware('permission:Ver mis avaluos')->name('mis_avaluos');
 
+    /* Gestión catastral */
+    Route::get('captura_padron', Captura::class)->middleware('permission:Captura al padron')->name('captura_padron');
+
+    Route::get('certificado_historia', CertificadoHistoria::class)->middleware('permission:Certificado de historia')->name('certificado_historia');
+
     /* Consultas */
     Route::get('ver_oficina/{ofice_id?}', Oficina::class)->middleware('permission:Ver oficina')->name('ver_oficina');
 
@@ -110,7 +125,12 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
 });
 
+Route::get('verificacion/{certificacion}', VerificacionController::class)->name('verificacion');
+
 Route::get('setpassword/{email}', [SetPasswordController::class, 'create'])->name('setpassword');
 Route::post('setpassword', [SetPasswordController::class, 'store'])->name('setpassword.store');
 
 Route::get('manual', ManualController::class)->name('manual');
+
+
+Route::get('teste/{id}', [Val::class, 'teste'])->name('teste');

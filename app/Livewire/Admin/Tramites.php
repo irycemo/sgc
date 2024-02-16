@@ -61,6 +61,16 @@ class Tramites extends Component
         $this->modelo_editar = Tramite::make();
     }
 
+    public function updatedModal(){
+
+        if(!$this->modal){
+
+            $this->resetearTodo();
+
+        }
+
+    }
+
     public function abrirModalEditar(Tramite $modelo){
 
         $this->useCachedRows();

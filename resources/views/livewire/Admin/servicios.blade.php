@@ -42,16 +42,14 @@
 
             <x-slot name="head">
 
+                <x-table.heading sortable wire:click="sortBy('categoria_servicio_id')" :direction="$sort === 'categoria_servicio_id' ? $direction : null" >Categoría</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('nombre')" :direction="$sort === 'nombre' ? $direction : null" >Nombre</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('estado')" :direction="$sort === 'estado' ? $direction : null" >Estado</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('tipo')" :direction="$sort === 'tipo' ? $direction : null" >Tipo</x-table.heading>
-                <x-table.heading sortable wire:click="sortBy('umas')" :direction="$sort === 'umas' ? $direction : null" >UMAS</x-table.heading>
-                <x-table.heading sortable wire:click="sortBy('porcentaje')" :direction="$sort === 'porcentaje' ? $direction : null" >Porcentaje</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('clave_ingreso')" :direction="$sort === 'clave_ingreso' ? $direction : null" >Clave de ingreso</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('ordinario')" :direction="$sort === 'ordinario' ? $direction : null" >Ordinario</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('urgente')" :direction="$sort === 'urgente' ? $direction : null" >Urgente</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('extra_urgente')" :direction="$sort === 'extra_urgente' ? $direction : null" >Extra urgente</x-table.heading>
-                <x-table.heading sortable wire:click="sortBy('categoria_servicio_id')" :direction="$sort === 'categoria_servicio_id' ? $direction : null" >Categoría</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
                 <x-table.heading >Acciones</x-table.heading>
@@ -63,6 +61,14 @@
                 @forelse ($servicios as $servicio)
 
                     <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $servicio->id }}">
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Categoría</span>
+
+                            {{ $servicio->categoria->nombre }}
+
+                        </x-table.cell>
 
                         <x-table.cell>
 
@@ -98,22 +104,6 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">UMAS</span>
-
-                            {{ $servicio->umas }}
-
-                        </x-table.cell>
-
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Porcentaje</span>
-
-                            {{ $servicio->porcentaje ?? 'N/A' }}
-
-                        </x-table.cell>
-
-                        <x-table.cell>
-
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Clave de ingreso</span>
 
                             {{ $servicio->clave_ingreso }}
@@ -141,14 +131,6 @@
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Extra urgente</span>
 
                             ${{ number_format($servicio->extra_urgente, 2) }}
-
-                        </x-table.cell>
-
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Categoría</span>
-
-                            {{ $servicio->categoria->nombre }}
 
                         </x-table.cell>
 

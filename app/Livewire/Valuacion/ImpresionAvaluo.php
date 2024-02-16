@@ -2,22 +2,39 @@
 
 namespace App\Livewire\Valuacion;
 
+use App\Models\User;
 use App\Models\Oficina;
 use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\PredioAvaluo;
+use App\Models\Certificacion;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
+use Endroid\QrCode\Builder\Builder;
+use PhpCfdi\Credentials\Credential;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\Label\Font\NotoSans;
+use Illuminate\Support\Facades\Storage;
 use Luecano\NumeroALetras\NumeroALetras;
+use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
 
 class ImpresionAvaluo extends Component
 {
 
     public $tramiteInspeccion;
+    public $usuarioInspeccion;
     public $folioInspeccion;
     public $tramiteAvaluo;
     public $folioAvaluo;
+    public $usuarioAvaluo;
+
+    public $director;
+    public $jefe_departamento;
 
     public $localidad;
     public $oficina;
@@ -33,19 +50,26 @@ class ImpresionAvaluo extends Component
     public $edificio;
     public $departamento;
 
+    public $predios;
+
+    public $pdf;
+
     public $cantidad;
     public $años;
     public $año;
 
+    public $cadena;
+
     protected function rules(){
         return [
-            'folioInspeccion' => 'required',
+            'folioInspeccion' => Rule::requiredIf(!auth()->user()->hasRole('Convenio municipal')),
             'folioAvaluo' => 'nullable',
          ];
     }
 
     protected $validationAttributes  = [
-        'tramiteInspeccion' => 'trámte de inspección'
+        'tramiteInspeccion' => 'trámte de inspección',
+        'usuarioInspeccion' => 'trámte de inspección'
     ];
 
     public function updatedLocalidad(){
@@ -259,13 +283,13 @@ class ImpresionAvaluo extends Component
 
     }
 
-    public function revisarAvaluosCompletos($predios){
+    public function revisarAvaluosCompletos(){
 
-        foreach($predios as $predio){
+        foreach($this->predios as $predio){
 
             if(!$predio->colindancias->count()){
 
-                $this->dispatch('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene colindancias."]);
+                $this->dispatch('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->año . '-' . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene colindancias."]);
 
                 return true;
 
@@ -273,7 +297,7 @@ class ImpresionAvaluo extends Component
 
             if(!$predio->avaluo->clasificacion_zona){
 
-                $this->dispatch('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene caracteristicas."]);
+                $this->dispatch('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->año . '-' . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene caracteristicas."]);
 
                 return true;
 
@@ -281,7 +305,7 @@ class ImpresionAvaluo extends Component
 
             if(!$predio->uso_1){
 
-                $this->dispatch('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene uso de predio."]);
+                $this->dispatch('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->año . '-' . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene uso de predio."]);
 
                 return true;
 
@@ -289,7 +313,7 @@ class ImpresionAvaluo extends Component
 
             if(!$predio->terrenos->count()){
 
-                $this->dispatch('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene terrenos."]);
+                $this->dispatch('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->año . '-' . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene terrenos."]);
 
                 return true;
 
@@ -297,7 +321,7 @@ class ImpresionAvaluo extends Component
 
             if($predio->edificio != 0 && $predio->condominioTerrenos->count() == 0){
 
-                $this->dispatch('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . " no tiene terrenos de área común."]);
+                $this->dispatch('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->año . '-' . $predio->avaluo->folio . " no tiene terrenos de área común."]);
 
                 return true;
 
@@ -305,7 +329,7 @@ class ImpresionAvaluo extends Component
 
             if($predio->valor_catastral == null){
 
-                $this->dispatch('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->folio . " no tiene valor catastral."]);
+                $this->dispatch('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->año . '-' . $predio->avaluo->folio . " no tiene valor catastral."]);
 
                 return true;
 
@@ -315,11 +339,7 @@ class ImpresionAvaluo extends Component
 
     }
 
-    public function imprimir(){
-
-        $this->validate();
-
-        if($this->validaciones()) return;
+    public function buscarPredios(){
 
         if($this->region_catastral || $this->municipio || $this->zona_catastral || $this->sector || $this->manzana || $this->predio || $this->edificio || $this->departamento){
 
@@ -331,15 +351,13 @@ class ImpresionAvaluo extends Component
                 'municipio' => 'required',
                 'zona_catastral' => 'required',
                 'sector' => 'required',
-                'valuador' => 'required',
-                'notificador' => 'required',
                 'manzana' => 'nullable',
                 'predio' => 'nullable',
                 'edificio' => 'nullable',
                 'departamento' => 'nullable',
             ]);
 
-            $predios = PredioAvaluo::with('avaluo', 'propietarios.persona')
+            $this->predios = PredioAvaluo::with('avaluo', 'propietarios.persona')
                                         ->where('localidad', $this->localidad)
                                         ->where('region_catastral', $this->region_catastral)
                                         ->where('municipio', $this->municipio)
@@ -354,11 +372,11 @@ class ImpresionAvaluo extends Component
                                         })
                                         ->get();
 
-            if($predios->count() == 0){
+            if($this->predios->count() == 0){
 
                 $this->dispatch('mostrarMensaje', ['error', "No se encontraron avaluos para la clave catastral."]);
 
-                return;
+                return true;
 
             }
 
@@ -374,7 +392,7 @@ class ImpresionAvaluo extends Component
                 'registro_final' => 'required',
             ]);
 
-            $predios = PredioAvaluo::with('avaluo', 'propietarios.persona')
+            $this->predios = PredioAvaluo::with('avaluo.asignadoA', 'propietarios.persona', 'colindancias', 'condominioTerrenos', 'condominioConstrucciones', 'terrenos', 'construcciones')
                                         ->where('localidad', $this->localidad)
                                         ->where('oficina', $this->oficina)
                                         ->where('tipo_predio', $this->tipo)
@@ -384,39 +402,60 @@ class ImpresionAvaluo extends Component
                                         })
                                         ->get();
 
-            if($predios->count() == 0){
+            $this->cantidad = $this->predios->count();
+
+            if($this->predios->count() == 0){
 
                 $this->dispatch('mostrarMensaje', ['error', "No se encontraron avaluos para el rango de cuentas prediales."]);
 
-                return;
+                return true;
+
+            }
+
+            $valuador = $this->predios->first()->avaluo->asignadoA->id;
+
+            foreach ($this->predios as $predio) {
+
+                if($valuador != $predio->avaluo->asignadoA->id){
+
+                    $this->dispatch('mostrarMensaje', ['error', "El avalúo del predio " . $predio->cuentaPredial() . ' esta asigando a un valuador distinto.']);
+
+                    return true;
+
+                }
 
             }
 
         }
 
-        if($this->revisarAvaluosCompletos($predios)) return;
+    }
+
+    public function imprimir(){
+
+        $this->validate();
+
+        if($this->validaciones()) return;
+
+        if($this->buscarPredios()) return;
+
+        if($this->revisarAvaluosCompletos()) return;
 
         $pdf = null;
 
-        DB::transaction(function () use(&$pdf, $predios){
+        DB::transaction(function () use (&$pdf){
 
-            $formatter = new NumeroALetras();
+            $this->cadena = 'Impreso por: ' . auth()->user()->nombreCompleto();
 
-            $numero_avaluos_letra = $formatter->toWords($predios->count());
+            foreach($this->predios as $predio){
 
-            $pdf = Pdf::loadview('avaluos.notificacion', [
-                                'predios' => $predios,
-                                'numero_avaluos_letra' => $numero_avaluos_letra,
-                                'tramiteInspeccion' => $this->tramiteInspeccion,
-                                'tramiteAvaluo' => $this->tramiteAvaluo,
-                            ]);
+                $sociedad = $predio->sociedad ? ' y soc.' : '';
 
-            foreach($predios as $predio){
+                $this->cadena = $this->cadena . '|' . 'Folio avalúo=' . $predio->avaluo->año . '-' . $predio->avaluo->folio . '%Cuenta predial=' . $predio->cuentaPredial() . '%Clave catastral=' . $predio->claveCatastral() . '%Propietario=' . $predio->primerPropietario() . $sociedad . '%Valor catastral=' . $predio->valor_catastral;
 
                 $predio->update(['status' => 'impreso']);
 
                 $predio->avaluo->update([
-                            'tramite_id' => $this->tramiteInspeccion->id,
+                            'tramite_id' => $this->tramiteInspeccion->id ?? null,
                             'estado' => 'impreso'
                         ]);
 
@@ -424,7 +463,27 @@ class ImpresionAvaluo extends Component
 
             }
 
-            if(!auth()->user()->hasRole('Convenio municipal')) $this->actualizarTramites();
+            if($this->tramiteInspeccion != 'Convenio municipal'){
+
+                $this->cadena = $this->cadena . '|' . 'Trámite de inspección: ' . $this->tramiteInspeccion->año . '-' . $this->tramiteInspeccion->folio . '-'. $this->tramiteInspeccion->usuario . '|' . 'Recibo Inspección: ' . $this->tramiteInspeccion->folio_pago;
+
+            }else{
+
+                $this->cadena = $this->cadena . '|' . 'Convenio municipal: Convenio municipal';
+
+            }
+
+            if($this->tramiteAvaluo != 'Convenio municipal'){
+
+                $this->cadena = $this->cadena . '|' . 'Trámite de avalúo: ' . $this->tramiteAvaluo->año . '-' . $this->tramiteAvaluo->folio . '-'. $this->tramiteAvaluo->usuario  . '|' . 'Recibo Avalúo: ' . $this->tramiteAvaluo->folio_pago;
+
+            }
+
+            $this->cadena = $this->cadena . '|' . 'Valuador: ' . $predio->avaluo->asignadoA->nombreCompleto();
+
+            $pdf = $this->revisarOficina($pdf);
+
+            /* if(!auth()->user()->hasRole('Convenio municipal')) $this->actualizarTramites(); */
 
         });
 
@@ -435,11 +494,183 @@ class ImpresionAvaluo extends Component
 
     }
 
+    public function revisarOficina($pdf){
+
+        $formatter = new NumeroALetras();
+
+        $numero_avaluos_letra = $formatter->toWords($this->predios->count());
+
+        $this->cadena = $this->cadena . '|' . 'Número: ' . $this->predios->count() . ' ' . $numero_avaluos_letra;
+
+        $fechaImpresion = now()->format('d-m-Y H:i:s');
+
+        $this->cadena = $this->cadena . '|' . 'Impreso en: ' . $fechaImpresion;
+
+        if(auth()->user()->hasRole('Convenio municipal')){
+
+            $oficina = Oficina::where('oficina', $this->oficina)->first();
+
+            $this->cadena = $this->cadena . '|' . 'Autoridad municipal: ' . $oficina->autoridad_municipal;
+
+            $certificacion = Certificacion::create([
+                'año' => now()->format('Y'),
+                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', 'NOTIFICACIÓN DE VALOR CATASTRAL')->max('folio') ?? 0) + 1,
+                'documento' => 'NOTIFICACIÓN DE VALOR CATASTRAL',
+                'cadena_originial' => $this->cadena,
+                'estado' => 'activo',
+                'oficina_id' => $oficina->id,
+                'creado_por' => auth()->id(),
+                'actualizado_por' => auth()->id(),
+            ]);
+
+            $pdf = Pdf::loadview('avaluos.notificacion', [
+                'predios' => $this->predios,
+                'numero_avaluos_letra' => $numero_avaluos_letra,
+                'autoridad_municipal' => $oficina->autoridad_municipal,
+                'qr' => $this->generadorQr($certificacion),
+                'certificacion' => $certificacion,
+                'fecha_impresion' => $fechaImpresion,
+                'convenio' => 'Convenio municipal',
+                'impreso_por' => auth()->user()->nombreCompleto()
+            ]);
+
+
+        }elseif($this->oficina == 101){
+
+            $this->cadena = $this->cadena . '|' . 'Titular: ' . $this->director->nombreCompleto() . '|' . 'Cargo: Director de catastro';
+
+            $this->cadena = $this->cadena . '|' . 'Jefe de departamento: ' . $this->jefe_departamento->nombreCompleto();
+
+            $fielDirector = Credential::openFiles(Storage::disk('efirma')->path($this->director->efirma->cer), Storage::disk('efirma')->path($this->director->efirma->key), $this->director->efirma->contraseña);
+
+            $fielJefe = Credential::openFiles(Storage::disk('efirma')->path($this->jefe_departamento->efirma->cer), Storage::disk('efirma')->path($this->jefe_departamento->efirma->key), $this->jefe_departamento->efirma->contraseña);
+
+            $firmaDirector = $fielDirector->sign($this->cadena);
+
+            $firmaJefe = $fielJefe->sign($this->cadena);
+
+            $this->cadena = $this->cadena . '|' . 'Firma Jefe de departamento: ' . base64_encode($firmaJefe);
+
+            $certificacion = Certificacion::create([
+                'año' => now()->format('Y'),
+                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', 'NOTIFICACIÓN DE VALOR CATASTRAL')->max('folio') ?? 0) + 1,
+                'documento' => 'NOTIFICACIÓN DE VALOR CATASTRAL',
+                'cadena_originial' => $this->cadena,
+                'cadena_encriptada' => base64_encode($firmaDirector),
+                'estado' => 'activo',
+                'oficina_id' => Oficina::where('oficina', 101)->first()->id,
+                'tramite_id' => $this->tramiteInspeccion->id,
+                'creado_por' => auth()->id(),
+                'actualizado_por' => auth()->id(),
+            ]);
+
+            $pdf = Pdf::loadview('avaluos.notificacion', [
+                                'predios' => $this->predios,
+                                'numero_avaluos_letra' => $numero_avaluos_letra,
+                                'tramiteInspeccion' => $this->tramiteInspeccion,
+                                'tramiteAvaluo' => $this->tramiteAvaluo,
+                                'director' => $this->director->nombreCompleto(),
+                                'jefe_departamento' => $this->jefe_departamento->nombreCompleto(),
+                                'firmaDirector' => base64_encode($firmaDirector),
+                                'firmaJefe' => base64_encode($firmaJefe),
+                                'qr' => $this->generadorQr($certificacion),
+                                'certificacion' => $certificacion,
+                                'fecha_impresion' => $fechaImpresion,
+                                'impreso_por' => auth()->user()->nombreCompleto()
+                            ]);
+
+        }else{
+
+            $oficina = Oficina::where('oficina', $this->oficina)->first();
+
+            $this->cadena = $this->cadena . '|' . 'Titular: ' . $oficina->titular;
+
+            $cargo = $oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR DE RENTAS';
+
+            $this->cadena = $this->cadena . '|' . 'Cargo: ' . $cargo;
+
+            $certificacion = Certificacion::create([
+                'año' => now()->format('Y'),
+                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', 'NOTIFICACIÓN DE VALOR CATASTRAL')->max('folio') ?? 0) + 1,
+                'documento' => 'NOTIFICACIÓN DE VALOR CATASTRAL',
+                'cadena_originial' => $this->cadena,
+                'estado' => 'activo',
+                'oficina_id' => $oficina->id,
+                'tramite_id' => $this->tramiteInspeccion->id,
+                'creado_por' => auth()->id(),
+                'actualizado_por' => auth()->id(),
+            ]);
+
+            $pdf = Pdf::loadview('avaluos.notificacion', [
+                                'predios' => $this->predios,
+                                'numero_avaluos_letra' => $numero_avaluos_letra,
+                                'tramiteInspeccion' => $this->tramiteInspeccion,
+                                'tramiteAvaluo' => $this->tramiteAvaluo,
+                                'cargo' => $oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR DE RENTAS',
+                                'titular' => $oficina->titular,
+                                'qr' => $this->generadorQr($certificacion),
+                                'fecha_impresion' => $fechaImpresion,
+                                'certificacion' => $certificacion,
+                                'impreso_por' => auth()->user()->nombreCompleto()
+                            ]);
+
+        }
+
+        $pdf->render();
+
+        $dom_pdf = $pdf->getDomPDF();
+
+        $canvas = $dom_pdf->get_canvas();
+
+        $canvas->page_text(480, 794, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+
+        return $dom_pdf->output();
+
+    }
+
+    public function generadorQr($certificacion)
+    {
+
+        $rute = route('verificacion', $certificacion);
+
+        $result = Builder::create()
+                            ->writer(new PngWriter())
+                            ->writerOptions([])
+                            ->data($rute)
+                            ->encoding(new Encoding('UTF-8'))
+                            ->errorCorrectionLevel(new ErrorCorrectionLevelHigh())
+                            ->size(100)
+                            ->margin(0)
+                            ->roundBlockSizeMode(new RoundBlockSizeModeMargin())
+                            ->labelText('Escanea para verificar')
+                            ->labelFont(new NotoSans(7))
+                            ->labelAlignment(new LabelAlignmentCenter())
+                            ->validateResult(false)
+                            ->build();
+
+        return $result->getDataUri();
+    }
+
     public function mount(){
 
         $this->años = Constantes::AÑOS;
 
         $this->año = now()->format('Y');
+
+        $this->director = User::with('efirma')->where('status', 'activo')
+                ->whereHas('roles', function($q){
+                    $q->where('name', 'Director');
+                })
+                ->first();
+
+        $this->jefe_departamento = User::with('efirma')->where('status', 'activo')
+                            ->whereHas('roles', function($q){
+                                $q->where('name', 'Jefe de departamento');
+                            })
+                            ->where('area', 'Departamento de Valuación')
+                            ->first();
+
+        $this->oficina = auth()->user()->oficina->oficina;
 
     }
 

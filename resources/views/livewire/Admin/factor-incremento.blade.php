@@ -45,7 +45,7 @@
             <x-slot name="head">
 
                 <x-table.heading sortable wire:click="sortBy('factor')" :direction="$sort === 'factor' ? $direction : null" >Factor</x-table.heading>
-                <x-table.heading sortable wire:click="sortBy('ano')" :direction="$sort === 'ano' ? $direction : null" >Año</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('año')" :direction="$sort === 'año' ? $direction : null" >Año</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
                 <x-table.heading >Acciones</x-table.heading>
@@ -70,7 +70,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Año</span>
 
-                            {{ $factor->ano }}
+                            {{ $factor->año }}
 
                         </x-table.cell>
 

@@ -92,22 +92,6 @@
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                <strong>Título de propiedad</strong>
-
-                <p>{{ $predio->titulo_propiedad }}</p>
-
-            </div>
-
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                <strong>CURT</strong>
-
-                <p>{{ $predio->curt }}</p>
-
-            </div>
-
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
-
                 <strong>Fecha de notificación</strong>
 
                 <p>{{ $predio->fecha_notificacion ?? 'N/A' }}</p>

@@ -56,7 +56,7 @@ class Usuarios extends Component
     ];
 
     public function crearModeloVacio(){
-        return User::make([
+        $this->modelo_editar =  User::make([
             'valuador' => false
         ]);
     }
@@ -138,9 +138,9 @@ class Usuarios extends Component
                 $this->modelo_editar->clave = User::max('clave') + 1;
                 $this->modelo_editar->save();
 
-                $this->modelo_editar->roles()->attach($this->role);
+                $this->modelo_editar->auditAttach('roles', $this->role);
 
-                $this->resetearTodo();
+                $this->resetearTodo($borrado = true);
 
                 $this->dispatch('mostrarMensaje', ['success', "El usuario se creó con éxito."]);
 
@@ -166,9 +166,9 @@ class Usuarios extends Component
                 $this->modelo_editar->actualizado_por = auth()->user()->id;
                 $this->modelo_editar->save();
 
-                $this->modelo_editar->roles()->sync($this->role);
+                $this->modelo_editar->auditSync('roles', $this->role);
 
-                $this->resetearTodo();
+                $this->resetearTodo($borrado = true);
 
                 $this->dispatch('mostrarMensaje', ['success', "El usuario se actualizó con éxito."]);
 
@@ -206,7 +206,7 @@ class Usuarios extends Component
 
     public function mount(){
 
-        $this->modelo_editar = $this->crearModeloVacio();
+        $this->crearModeloVacio();
 
         array_push($this->fields, 'role', 'listaDePermisos', 'modalPermisos');
 

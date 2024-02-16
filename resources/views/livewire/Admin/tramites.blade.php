@@ -63,6 +63,7 @@
 
                 <x-table.heading sortable wire:click="sortBy('año')" :direction="$sort === 'año' ? $direction : null" >Año</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('folio')" :direction="$sort === 'folio' ? $direction : null" >Folio</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('usuario')" :direction="$sort === 'usuario' ? $direction : null" >Usuario</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('estado')" :direction="$sort === 'estado' ? $direction : null" >Estado</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('tipo_tramite')" :direction="$sort === 'tipo_tramite' ? $direction : null" >Tipo de trámite</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('servicio_id')" :direction="$sort === 'servicio_id' ? $direction : null" >Servicio</x-table.heading>
@@ -102,6 +103,14 @@
 
                         <x-table.cell>
 
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Usuario</span>
+
+                            {{ $tramite->usuario }}
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Estado</span>
 
                             <span class="bg-{{ $tramite->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($tramite->estado) }}</span>
@@ -126,9 +135,9 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Solicitante</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Nombre del solicitante</span>
 
-                            {{ $tramite->solicitante }}
+                            {{ $tramite->nombre_solicitante }}
 
                         </x-table.cell>
 
@@ -160,7 +169,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Fecha de pago</span>
 
-                            {{ $tramite->fecha_pago?->format('d-m-Y') }}
+                            {{ $tramite->fecha_pago ? $tramite->fecha_pago->format('d-m-Y') : 'N/A'}}
 
                         </x-table.cell>
 
@@ -237,7 +246,7 @@
 
                     <x-table.row>
 
-                        <x-table.cell colspan="14">
+                        <x-table.cell colspan="15">
 
                             <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
 
@@ -257,7 +266,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="14" class="bg-gray-50">
+                    <x-table.cell colspan="15" class="bg-gray-50">
 
                         {{ $tramites->links()}}
 
@@ -382,7 +391,7 @@
 
                                         <div>
 
-                                            <p><strong>Propietario:</strong> {{ $predio->propietarios->first()->persona->nombre }} {{ $predio->propietarios->first()->persona->ap_paterno }} {{ $predio->propietarios->first()->persona->ap_materno }}</p>
+                                            <p><strong>Propietario:</strong> {{ $predio->primerPropietario }}</p>
 
                                             <p><strong>Ubicacion:</strong> {{ $predio->nombre_vialidad }} #{{ $predio->numero_exterior }}</p>
 
@@ -426,10 +435,13 @@
 
                                                     <tr class="border-b py-1">
 
-                                                        <td class="px-2">{{ $item['localidad'] }}-{{ $item['oficina'] }}-{{ $item['tipo_predio'] }}-{{ $item['numero_registro'] }}</td>
+                                                        <td class="px-2 w-1/4">
+                                                            <span class="rounded-full px-1 text-white @if($item->pivot->estado === 'A') bg-green-500 @else bg-gray-500 @endif">{{ $item->pivot->estado }}</span>
+                                                            {{ $item->cuentaPredial() }}
+                                                        </td>
                                                         <td class="px-2">
-                                                            <p>{{ $item['propietarios'][0]['persona']['nombre'] }} {{ $item['propietarios'][0]['persona']['ap_paterno'] }} {{ $item['propietarios'][0]['persona']['ap_materno'] }}</p>
-                                                            <p>{{ $item['nombre_vialidad'] }} #{{ $item['numero_exterior'] }}</p>
+                                                            <p>{{ $item->primerPropietario() }}</p>
+                                                            <p>{{ $item['nombre_vialidad'] }}, #{{ $item['numero_exterior'] }}</p>
                                                         </td>
                                                         <td class="px-2">
                                                             <button
@@ -500,27 +512,24 @@
 
         <x-slot name="footer">
 
-            <div class="float-righ">
+            <div class="flex gap-3">
 
-                <button
+                <x-button-blue
                     wire:click="actualizar"
                     wire:loading.attr="disabled"
-                    wire:target="actualizar"
-                    class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                    wire:target="actualizar">
 
                     <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Actualizar
-                </button>
+                </x-button-blue>
 
-                <button
+                <x-button-red
                     wire:click="resetearTodo"
                     wire:loading.attr="disabled"
-                    wire:target="resetearTodo"
-                    type="button"
-                    class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-red-700 flaot-left focus:outline-none">
+                    wire:target="resetearTodo">
                     Cerrar
-                </button>
+                </x-button-red>
 
             </div>
 
@@ -669,6 +678,24 @@
                         </div>
 
                     </div>
+
+                    @if($modelo_editar->predios()->count() > 0)
+
+                        <div class="flex justify-center mt-3">
+                            <span class="col-span-1 lg:col-span-2">Cuentas prediales</span>
+                        </div>
+
+                        <ul class="rounded-lg bg-gray-100 my-3 list-disc flex gap-2">
+
+                            @foreach ($modelo_editar->predios as $predio)
+
+                                    <li class="ml-5">{{ $predio->cuentaPredial() }} </li>
+
+                            @endforeach
+
+                        </ul>
+
+                    @endif
 
                     @if ($modelo_editar->observaciones)
 

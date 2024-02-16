@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Avaluo</title>
+    <title>Notificación de valor catastral</title>
 </head>
 <style>
 
@@ -37,6 +35,9 @@
         height: 100%;
         background-image: url("storage/img/escudo_fondo.png");
         background-size: cover;
+        font-family: sans-serif;
+        font-weight: normal;
+        line-height: 1.5;
     }
 
     .titulo{
@@ -47,7 +48,7 @@
 
     .fundamento{
         text-align: justify;
-        font-size: 10px;
+        font-size: 9px;
     }
 
     .separador{
@@ -62,7 +63,7 @@
 
     .informacion{
         padding: 0 20px 0 20px;
-        font-size: 12px;
+        font-size: 10px;
         margin-bottom: 10px;
     }
 
@@ -141,121 +142,233 @@
 
             <p class="titulo">NOTIFICACIÓN DE VALOR CATASTRAL</p>
 
+            <div class="informacion" >
+
+                <p class="fundamento">
+                    CON FUNDAMENTO LEGAL EN EL ARTÍCULO 134 DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO Y CON LA FINALIDAD DE DAR CUMPLIMIENTO A LAS OBLIGACIONES PROPIAS DE LA DIRECCIÓN
+                    DE CATASTRO DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO, CON EL CARÁCTER SEÑALADO ME PERMITO NOTIFICARLE <strong> {{ $predios->count() }}</strong> <strong>{{ $numero_avaluos_letra }}</strong>
+                    AVALÚO(S) DE VALOR CATASTRAL, QUE PARA MAYOR REFERENCIA SE DETALLA EN EL CUADRO ANEXO, ELLO CON EL PROPÓSITO DE QUE SURTA LOS EFECTOS LEGALES PROCEDENTES A QUE HAYA LUGAR;
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="informacion" >
+
+            <table style="font-size: 11px;">
+
+                <thead>
+
+                    <tr>
+                        <th style="padding: 0 5px 0 5px; text-align: center">FOLIO DEL AVALÚO</th>
+                        <th style="padding: 0 5px 0 5px; text-align: center">CUENTA PREDIAL</th>
+                        <th style="padding: 0 5px 0 5px; text-align: center">CLAVE CATASTRAL</th>
+                        <th style="padding: 0 5px 0 5px; text-align: center">PROPIETARIO</th>
+                        <th style="padding: 0 5px 0 5px; text-align: center">VALOR CATASTRAL</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach ($predios as $predio)
+
+                        <tr>
+                            <td style="border: 1px solid gray; padding: 0 5px 0 5px;  white-space: nowrap;">
+                                <p>{{ $predio->avaluo->año }}-{{ $predio->avaluo->folio }}</p>
+                            </td>
+                            <td style="border: 1px solid gray; padding: 0 5px 0 5px;  white-space: nowrap;">
+                                <p>{{ $predio->cuentaPredial() }}</p>
+                            </td>
+                            <td style="border: 1px solid gray; padding: 0 5px 0 5px; white-space: nowrap;">
+                                <p>{{ $predio->claveCatastral() }}</p>
+                            </td>
+                            <td style="border: 1px solid gray; padding: 0 5px 0 5px;">
+                                <p>{{ $predio->primerPropietario() }} @if($predio->sociedad) y soc. @endif</p>
+                            </td>
+                            <td style="border: 1px solid gray; padding: 0 5px 0 5px;  white-space: nowrap; text-align: right;">
+                                <p>${{ number_format($predio->valor_catastral, 2) }}</p>
+                            </td>
+                        </tr>
+
+                    @endforeach
+
+                </tbody>
+
+            </table>
+
             <p class="fundamento">
-                CON FUNDAMENTO LEGAL EN EL ARTÍCULO 134 DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO Y CON LA FINALIDAD DE DAR CUMPLIMIENTO A LAS OBLIGACIONES PROPIAS DE LA DIRECCIÓN
-                DE CATASTRO DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO, CON EL CARÁCTER SEÑALADO ME PERMITO NOTIFICARLE <strong>{{ $predios->count() }}</strong> <strong>{{ $numero_avaluos_letra }}</strong>
-                AVALÚO(S) DE VALOR CATASTRAL, QUE PARA MAYOR REFERENCIA SE DETALLA EN EL CUADRO ANEXO, ELLO CON EL PROPÓSITO DE QUE SURTA LOS EFECTOS LEGALES PROCEDENTES A QUE HAYA LUGAR;
+                EL PRESENTE ACTO ES RECURRIBLE, POR LO CUAL DEBERÁ SER INPUGNADO DENTRO DEL TÉRMINO DE 10 DÍAS HÁBILES SIGUIENTES A SU NOTIFICACIÓN ANTE ESTA DIRECCIÓN DE CATASTRO DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO
+                DE MICHOACÁN DE OCAMPO O BIEN ANTE EL TRIBUNAL DE JUSTICIA ADMINISTRATIVA DEL ESTADO DE MICHOACÁN, DE CONFORMIDAD CON EL ARTÍCULO 128 Y 129 DEL CÓDIGO DE JUSTICIA ADMINISTRATIVA DEL ESTADO DE MICHOACÁN DE OCAMPO.
+            </p>
+
+            <p class="fundamento">
+                DE CONFORMIDAD CON LO DISPUESTO EN LAFRACCIÓN I, XII DEL ARTÍCULO 18, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 90, 92 Y 93 DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO FRACCIÓN VII
+                DEL ARTÍCULO 1°, FRACCIÓN XX DE ARTÍCULO 2°, FRACCIÓN II DEL ARTÍCULO 90 DEL CÓDIGO DE DESARROLLO URBANO DEL ESTADO DE MICHOACÁN DE OCAMPO, ASÍ COMO LAS FRACCIONES II, VII Y XVI DEL ARTÍCULO 13 DEL REGLAMENTO INTERIOR
+                DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO.
             </p>
 
         </div>
 
-        <div class="content">
+        <p class="separador">Datos de control</p>
 
-            <div class="informacion" >
+        <div class="informacion">
 
-                <table>
+            <p style="margin-top: 10px">EN LA CIUDAD DE _____________________________________ A LAS _______DEL MES _______ DEL AÑO _______.</p>
 
-                    <thead>
+            <div>
 
-                        <tr>
-                            <th>FOLIO DEL AVALÚO</th>
-                            <th>CUENTA PREDIAL</th>
-                            <th>PROPIETARIO</th>
-                            <th>vALOR CATASTRAL</th>
-                        </tr>
-
-                    </thead>
+                <table style="margin-top: 40px">
 
                     <tbody>
+                        <tr>
 
-                        @foreach ($predios as $predio)
+                            <td style="padding-right: 20px; text-align:center; vertical-align: bottom; ">
 
+                                <p></p>
+                                <p style="border-top: gray solid 1px; overflow: hidden;">FIRMA Y NOMBRE DEL PROPIETAIO (REPRESENTANTE O APODERADO LEGAL)</p>
+
+                            </td>
+
+                            <td style="padding-right: 20px; text-align:center; vertical-align: bottom;">
+
+                                <p style="border-top: gray solid 1px; text-align: center">FIRMA Y NOMBRE DEL NOTIFICADOR</p>
+
+                            </td>
+
+                            @if(!isset($autoridad_municipal))
+
+                                <td style="padding-right: 20px; text-align:center; vertical-align: bottom;">
+
+                                    <p style="text-transform: uppercase;">{{ $predio->avaluo->asignadoA->nombreCompleto() }}</p>
+                                    <p style="border-top: gray solid 1px; text-align: center">FIRMA Y NOMBRE DEL VALUADOR</p>
+
+                                </td>
+
+                            @endif
+
+                        </tr>
+                    </tbody>
+
+                </table>
+
+                @if(isset($autoridad_municipal))
+
+                    <table style="margin-top: 40px">
+
+                        <tbody>
                             <tr>
-                                <td style="padding-right: 40px;">
-                                    <p>{{ $predio->avaluo->año }}-{{ $predio->avaluo->folio }}</p>
+
+                                <td style="padding-right: 20px; text-align:center; vertical-align: bottom;">
+
+                                    <p style="text-transform: uppercase;">{{ $autoridad_municipal }}</p>
+                                    <p style="border-top: gray solid 1px; text-align: center">FIRMA Y NOMBRE DE LA AUTORIDAD MUNICIPAL</p>
+
                                 </td>
-                                <td style="padding-right: 40px;">
-                                    <p>{{ $predio->avaluo->cuentaPredial() }}</p>
+
+                                <td style="padding-right: 20px; text-align:center; vertical-align: bottom;">
+
+                                    <p style="text-transform: uppercase;">{{ $predio->avaluo->asignadoA->nombreCompleto() }}</p>
+                                    <p style="border-top: gray solid 1px; text-align: center">FIRMA Y NOMBRE DEL VALUADOR</p>
+
                                 </td>
-                                <td>
-                                    <p>${{ number_format($predio->avaluo->valor_catastral, 2) }}</p>
-                                </td>
+
                             </tr>
+                        </tbody>
 
-                        @endforeach
+                    </table>
 
-                    </tbody>
+                @elseif(isset($director))
 
-                </table>
+                    <div style="margin-top: 30px; page-break-inside: avoid;">
 
-                <p class="fundamento">
-                    EL PRESENTE ACTO ES RECURRIBLE, POR LO CUAL DEBERÁ SER INPUGNADO DENTRO DEL TÉRMINO DE 10 DÍAS HÁBILES SIGUIENTES A SU NOTIFICACIÓN ANTE ESTA DIRECCIÓN DE CATASTRO DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO
-                    DE MICHOACÁN DE OCAMPO O BIEN ANTE EL TRIBUNAL DE JUSTICIA ADMINISTRATIVA DEL ESTADO DE MICHOACÁN, DE CONFORMIDAD CON EL ARTÍCULO 128 Y 129 DEL CÓDIGO DE JUSTICIA ADMINISTRATIVA DEL ESTADO DE MICHOACÁN DE OCAMPO.
-                </p>
+                        <div style="text-align: center">
 
-                <p class="fundamento">
-                    DE CONFORMIDAD CON LO DISPUESTO EN LAFRACCIÓN I, XII DEL ARTÍCULO 18, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 90, 92 Y 93 DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO FRACCIÓN VII
-                    DEL ARTÍCULO 1°, FRACCIÓN XX DE ARTÍCULO 2°, FRACCIÓN II DEL ARTÍCULO 90 DEL CÓDIGO DE DESARROLLO URBANO DEL ESTADO DE MICHOACÁN DE OCAMPO, ASÍ COMO LAS FRACCIONES II, VII Y XVI DEL ARTÍCULO 13 DEL REGLAMENTO INTERIOR
-                    DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO.
-                </p>
+                            <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $director }}</p>
+                            <p >DIRECTOR DE CATASTRO</p>
+                            <p>Firma Electrónica:</p>
+
+                        </div>
+
+                        <p style="overflow-wrap: break-word;">{{ $firmaDirector }}</p>
+
+                    </div>
+
+                    <div style="page-break-inside: avoid;">
+
+                        <div style="text-align: center;">
+
+                            <p style="text-transform: uppercase;">{{ $jefe_departamento }}</p>
+                            <p class="borde" style="width: ">JEFE DE DEPARTAMENTO DE VALUACIÓN</p>
+                            <p>Firma Electrónica:</p>
+
+                        </div>
+
+                        <p style="overflow-wrap: break-word;">{{ $firmaJefe }}</p>
+
+                    </div>
+
+                @else
+
+                    <div style="text-align: center; margin-top: 30px">
+
+                        <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $titular }}</p>
+                        <p style="text-transform: uppercase;">{{ $cargo }}</p>
+
+                    </div>
+
+                @endif
 
             </div>
 
-            <p class="separador">Datos de control</p>
+            <table style="margin-top: 10px">
 
-            <div class="informacion">
+                <tbody>
+                    <tr>
+                        <td style="padding-right: 40px;">
 
-                <p style="margin-top: 10px">En la ciudad de: ____________________________________________ a las _______
-                     del mes _______ del año _______
-                </p>
-                <p>PROPIETAIO (REPRESENTANTE O APODERADO LEGAL): __________________________________________________________________________________</p>
-                <p>FIRMA DEL PROPIETAIO (REPRESENTANTE O APODERADO LEGAL): ___________________________________</p>
-                <p>NOTIFICADOR:  ___________________________________</p>
-                <p>FIRMA DEL NOTIFICADOR: _________________________</p>
+                            <img class="qr" src="{{ $qr }}" alt="QR">
+                        </td>
+                        <td style="padding-right: 40px;">
 
 
+                            @if (isset($tramiteInspeccion))
 
-                <table style="margin-top: 10px">
+                                <p><strong>Trámite de inspección ocular:</strong> {{ $tramiteInspeccion->año }}-{{ $tramiteInspeccion->folio }}-{{ $tramiteInspeccion->usuario }} <strong>Recibo:</strong> {{ $tramiteInspeccion->folio_pago }}</p>
 
-                    <tbody>
-                        <tr>
-                            <td style="font-size:12px; padding-right: 40px;">
+                            @endif
 
-                                <img class="qr" src="{{ $qr }}" alt="QR">
-                            </td>
-                            <td style="font-size:12px; padding-right: 40px;">
+                            @if (isset($tramiteAvaluo))
 
-                                <p><strong>Trámite de inspección ocular:</strong> {{ $tramiteInspeccion->folio }} <strong>Recibo:</strong> {{ $tramiteInspeccion->folio_pago }}</p>
-                                @if ($tramiteAvaluo)
-                                    <p><strong>Trámite de impresión:</strong> {{ $tramiteAvaluo->folio }} <strong>Recibo:</strong> {{ $tramiteAvaluo->folio_pago }}</p>
-                                @endif
-                                <p><strong>Elaborado por:</strong> {{ auth()->user()->name }} {{ auth()->user()->ap_paterno }} {{ auth()->user()->ap_materno }}, <strong>con fecha:</strong> {{ now()->format('d-m-Y H:i:s') }}</p>
+                                <p><strong>Trámite de impresión:</strong> {{ $tramiteAvaluo->año }}-{{ $tramiteAvaluo->folio }}-{{ $tramiteAvaluo->usuario }} <strong>Recibo:</strong> {{ $tramiteAvaluo->folio_pago }}</p>
 
-                            </td>
-                        </tr>
-                    </tbody>
+                            @endif
 
-                </table>
-            </div>
+                            <p><strong>Impreso el:</strong> {{ $fecha_impresion }}</p>
 
+                            <p><strong>Impreso por:</strong> {{ $impreso_por }}</p>
+
+                            @if(isset($certificacion))
+
+                                <p><strong>Certificación:</strong>{{ $certificacion->documento }} {{ $certificacion->año }}-{{ $certificacion->folio }}</p>
+
+                            @endif
+
+                            @if(isset($convenio))
+
+                                <p><strong>Convenio:</strong>{{ $convenio }}</p>
+
+                            @endif
+
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
         </div>
 
     </main>
-
-    <script type="text/php">
-        if (isset($predio)) {
-            $x = 480;
-            $y = 794;
-            $text = "Página: {PAGE_NUM} de {PAGE_COUNT}";
-            $font = null;
-            $size = 9;
-            $color = array(1,1,1);
-            $word_space = 0.0;  //  default
-            $char_space = 0.0;  //  default
-            $angle = 0.0;   //  default
-            $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
-        }
-    </script>
 
 </body>
 </html>

@@ -44,6 +44,7 @@ class InspeccionOcular extends Component
         'numero_oficio' => false,
         'dependencias' => false,
         'notarias' => false,
+        'avaluo_para' => true
     ];
 
     protected $listeners = [
@@ -170,6 +171,39 @@ class InspeccionOcular extends Component
         }elseif($this->modelo_editar->tipo_tramite == 'normal'){
 
             $this->modelo_editar->monto = $this->servicio[$this->modelo_editar->tipo_servicio] * $this->modelo_editar->cantidad;
+
+        }
+
+    }
+
+    public function updatedModeloEditarTipoServicio(){
+
+        $this->modelo_editar->monto = $this->servicio[$this->modelo_editar->tipo_servicio] * $this->modelo_editar->cantidad;
+
+        $this->updatedModeloEditarTipoTramite();
+
+        if($this->modelo_editar->tipo_servicio == 'urgente'){
+
+            if($this->servicio['urgente'] == 0){
+
+                $this->dispatch('mostrarMensaje', ['error', "No hay servicio urgente para el servicio seleccionado."]);
+
+                $this->modelo_editar->tipo_servicio = 'ordinario';
+
+                $this->updatedModeloEditarTipoTramite();
+            }
+
+        }
+        elseif($this->modelo_editar->tipo_servicio == 'extra_urgente'){
+
+            if($this->servicio['extra_urgente'] == 0){
+
+                $this->dispatch('mostrarMensaje', ['error', "No hay servicio extra urgente para el servicio seleccionado."]);
+
+                $this->modelo_editar->tipo_servicio = 'ordinario';
+
+                $this->updatedModeloEditarTipoTramite();
+            }
 
         }
 

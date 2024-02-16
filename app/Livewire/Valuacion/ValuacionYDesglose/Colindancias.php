@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Valuacion\ValuacionYDesglose;
 
-use Closure;
 use App\Models\Avaluo;
+use App\Models\Predio;
 use Livewire\Component;
 use App\Models\Colindancia;
 use App\Models\PredioAvaluo;
@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Log;
 
 class Colindancias extends Component
 {
-    public PredioAvaluo $predio;
+
+    public $flag = false;
+
+    public $predio;
     public $avaluo_id;
+    public $predio_id;
 
     public $medidas = [];
     public $vientos;
@@ -42,7 +46,7 @@ class Colindancias extends Component
     ];
 
     protected $messages = [
-        'predio.required' => '. Primero debe cargar el avaluo'
+        'predio.required' => '. Primero debe cargar el predio'
     ];
 
     public function updatedMedidas($value, $index){
@@ -57,11 +61,21 @@ class Colindancias extends Component
 
     }
 
-    public function cargarPredio($id){
+    public function cargarPredio($id, $flag = null){
 
         $this->reset('medidas');
 
-        $this->predio = PredioAvaluo::with('colindancias', 'avaluo')->find($id);
+        if($flag){
+
+            $this->flag = true;
+
+            $this->predio = Predio::with('colindancias')->find($id);
+
+        }else{
+
+            $this->predio = PredioAvaluo::with('colindancias', 'avaluo')->find($id);
+
+        }
 
         foreach ($this->predio->colindancias as $colindancia) {
 
@@ -87,7 +101,8 @@ class Colindancias extends Component
 
     public function borrarMedida($index){
 
-        $this->authorize('update',$this->predio->avaluo);
+        if(!$this->flag)
+            $this->authorize('update',$this->predio->avaluo);
 
         $this->validate(['predio' => 'required']);
 
@@ -108,7 +123,15 @@ class Colindancias extends Component
 
     public function guardar(){
 
-        $this->authorize('update',$this->predio->avaluo);
+        if(!$this->flag && ($this->predio && $this->predio->avaluo && $this->predio->avaluo->estado == 'notificado')){
+
+            $this->authorize('update',$this->predio->avaluo);
+
+            $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
+
+            return;
+
+        }
 
         $this->validate();
 
@@ -161,9 +184,9 @@ class Colindancias extends Component
 
         if($this->avaluo_id){
 
-            $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
+            $avaluo = Avaluo::with('predioAvaluo')->find($this->avaluo_id);
 
-            $this->cargarPredio($avaluo->predio->id);
+            $this->cargarPredio($avaluo->predioAvaluo->id);
 
         }
 

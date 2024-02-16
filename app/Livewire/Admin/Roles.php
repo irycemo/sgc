@@ -63,7 +63,7 @@ class Roles extends Component
 
                 $this->modelo_editar->permissions()->sync($this->listaDePermisos);
 
-                $this->resetearTodo();
+                $this->resetearTodo($borrado = true);
 
                 $this->dispatch('mostrarMensaje', ['success', "El role se creó con éxito."]);
 
@@ -92,7 +92,7 @@ class Roles extends Component
 
                 $this->modelo_editar->permissions()->sync($this->listaDePermisos);
 
-                $this->resetearTodo();
+                $this->resetearTodo($borrado = true);
 
                 $this->dispatch('mostrarMensaje', ['success', "El rol se actualizó con éxito."]);
 

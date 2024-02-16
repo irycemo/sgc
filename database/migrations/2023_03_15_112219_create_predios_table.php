@@ -59,7 +59,6 @@ return new class extends Migration
             $table->unsignedDecimal('valor_total_terreno', 18,2)->nullable();
             $table->unsignedDecimal('valor_total_construccion', 18,2)->nullable();
             $table->unsignedDecimal('valor_catastral', 18,2)->nullable();
-            $table->string('titulo_propiedad')->nullable();
             $table->string('curt')->nullable();
             $table->string('folio_real')->nullable();
             $table->string('xutm')->nullable();
@@ -68,8 +67,13 @@ return new class extends Migration
             $table->decimal('lon', 11, 8)->nullable();
             $table->decimal('lat', 11, 8)->nullable();
             $table->date('fecha_efectos')->nullable();
-            $table->date('fecha_notificacion')->nullable();
+            $table->string('documento_entrada')->nullable();
+            $table->string('documento_numero')->nullable();
+            $table->string('declarante')->nullable();
             $table->text('observaciones')->nullable();
+            $table->string('origen')->nullable();
+            $table->dateTime('indexado_en')->nullable();
+            $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
 

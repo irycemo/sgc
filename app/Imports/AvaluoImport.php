@@ -70,7 +70,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                     $construcciones = $this->procesarConstrucciones($row['construcciones'], $key);
 
-                    $sumValorConstrucciones = $construcciones->sum(function (array $construccion) { return (float)$construccion['valor_unitario'] * (float)$construccion['superficie']; });
+                    $sumValorConstrucciones = $construcciones->sum('valor_construccion');
 
                     $sumSuperficieConstrucciones = $construcciones->sum('superficie');
 
@@ -237,6 +237,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                             'tipo' => $construccion['tipo'],
                             'calidad' => $construccion['calidad'],
                             'estado' => $construccion['estado'],
+                            'valor_construccion' => $construccion['valor_construccion'],
                         ]);
 
                     }
@@ -286,7 +287,8 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                 /* Crear avaluo */
                 $avaluo = Avaluo::create([
                     'predio_id' => $predio->id,
-                    'folio' => Avaluo::max('folio') + 1,
+                    'año' => now()->format('Y'),
+                    'folio' => (Avaluo::where('año', now()->format('Y'))->max('folio') ?? 0) + 1,
                     'estado' => 'nuevo',
                     'clasificacion_zona' => $row['clasificacion_zona'],
                     'construccion_dominante' => $row['tipo_construccion_dominante'],
@@ -323,7 +325,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                 $predio->audits()->latest()->first()->update(['tags' => 'Se genera predio apartir de avalúo: ' . $avaluo->folio]);
 
-                $this->avaluos[] = $avaluo->load('predio.propietarios.persona');
+                $this->avaluos[] = $avaluo->load('predioAvaluo.propietarios.persona');
 
             }
 
@@ -619,6 +621,9 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
             if($tipo == 1){
 
+                if(!is_numeric($campos[1]))
+                    throw new ErrorAlProcesarTerrenosException("Error en los campos de los terrenos en la linea " . $linea);
+
                 $valorUnitario = (float)$campos[1];
 
                 $valorDemeritado = $valorUnitario - $valorUnitario * (float)$campos[2] / 100;
@@ -629,6 +634,9 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                     throw new ErrorAlProcesarTerrenosException("Error en los campos de los terrenos en la linea " . $linea);
 
             }elseif($tipo == 2){
+
+                if(is_numeric($campos[1]))
+                    throw new ErrorAlProcesarTerrenosException("Error en valor unitario de los terrenos en la linea " . $linea);
 
                 if(!$this->valoresRusticos->where('concepto', $campos[1])->first())
                     throw new ErrorAlProcesarTerrenosException("Error en valor unitario de los terrenos en la linea " . $linea);
@@ -692,6 +700,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                 'niveles' => $campos[5],
                 'superficie' => $campos[6],
                 'valor_unitario' => $valorUnitario,
+                'valor_construccion' => (float)$valorUnitario * (float)$campos[6],
             ];
 
         }

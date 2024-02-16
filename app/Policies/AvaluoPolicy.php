@@ -15,7 +15,7 @@ class AvaluoPolicy
         if($user->hasRole('Administrador'))
             return true;
 
-        return $user->id === $avaluo->creado_por;
+        return $user->id === $avaluo->asignado_a;
 
     }
 
@@ -25,7 +25,7 @@ class AvaluoPolicy
     public function update(User $user, Avaluo $avaluo): Response
     {
 
-        return $user->id === $avaluo->creado_por
+        return $user->id === $avaluo->asignado_a
                 ? Response::allow()
                 : Response::deny('El avalúo pertenece a otro valuador no tienes permisos para editarlo.');
 
@@ -34,7 +34,7 @@ class AvaluoPolicy
     public function delete(User $user, Avaluo $avaluo): Response
     {
 
-        return $user->id === $avaluo->creado_por
+        return $user->id === $avaluo->asignado_a
                 ? Response::allow()
                 : Response::deny('El avalúo pertenece a otro valuador no tienes permisos para borrarlo.');
 

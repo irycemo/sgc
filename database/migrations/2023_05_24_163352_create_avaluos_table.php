@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('avaluos', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
             $table->foreignId('predio_id')->nullable()->references('id')->on('predio_avaluos');
+            $table->foreignId('predio')->nullable()->references('id')->on('predios');
             $table->unsignedInteger('año');
             $table->unsignedInteger('folio');
             $table->string('estado');

@@ -7,7 +7,6 @@ use App\Models\Predio;
 use App\Models\Persona;
 use App\Models\Terreno;
 use Livewire\Component;
-use App\Models\Referencia;
 use App\Models\Colindancia;
 use App\Models\Propietario;
 use App\Models\Construccion;
@@ -30,7 +29,7 @@ class Notificacion extends Component
 
         $this->avaluo = $avaluo;
 
-        $this->avaluo->load('predio.colindancias', 'predio.condominioTerrenos', 'predio.condominioConstrucciones', 'predio.terrenos', 'predio.construcciones', 'predio.propietarios.persona');
+        $this->avaluo->load('predioAvaluo.colindancias', 'predioAvaluo.condominioTerrenos', 'predioAvaluo.condominioConstrucciones', 'predioAvaluo.terrenos', 'predioAvaluo.construcciones', 'predioAvaluo.propietarios.persona');
 
         $this->modal = true;
 
@@ -42,19 +41,19 @@ class Notificacion extends Component
             ['fecha_notificacion' => 'required|before:tomorrow']
         );
 
-        $predio = Predio::where('estado', $this->avaluo->predio->estado)
-                            ->where('region_catastral', $this->avaluo->predio->region_catastral)
-                            ->where('municipio', $this->avaluo->predio->municipio)
-                            ->where('zona_catastral', $this->avaluo->predio->zona_catastral)
-                            ->where('localidad', $this->avaluo->predio->localidad)
-                            ->where('sector', $this->avaluo->predio->sector)
-                            ->where('manzana', $this->avaluo->predio->manzana)
-                            ->where('predio', $this->avaluo->predio->predio)
-                            ->where('edificio', $this->avaluo->predio->edificio)
-                            ->where('departamento', $this->avaluo->predio->departamento)
-                            ->where('oficina', $this->avaluo->predio->oficina)
-                            ->where('tipo_predio', $this->avaluo->predio->tipo_predio)
-                            ->where('numero_registro', $this->avaluo->predio->numero_registro)
+        $predio = Predio::where('estado', $this->avaluo->predioAvaluo->estado)
+                            ->where('region_catastral', $this->avaluo->predioAvaluo->region_catastral)
+                            ->where('municipio', $this->avaluo->predioAvaluo->municipio)
+                            ->where('zona_catastral', $this->avaluo->predioAvaluo->zona_catastral)
+                            ->where('localidad', $this->avaluo->predioAvaluo->localidad)
+                            ->where('sector', $this->avaluo->predioAvaluo->sector)
+                            ->where('manzana', $this->avaluo->predioAvaluo->manzana)
+                            ->where('predio', $this->avaluo->predioAvaluo->predio)
+                            ->where('edificio', $this->avaluo->predioAvaluo->edificio)
+                            ->where('departamento', $this->avaluo->predioAvaluo->departamento)
+                            ->where('oficina', $this->avaluo->predioAvaluo->oficina)
+                            ->where('tipo_predio', $this->avaluo->predioAvaluo->tipo_predio)
+                            ->where('numero_registro', $this->avaluo->predioAvaluo->numero_registro)
                             ->first();
 
         if($predio){
@@ -111,65 +110,68 @@ class Notificacion extends Component
 
             $predio = Predio::create([
                 'status' => 'activo',
-                'estado' => $this->avaluo->predio->estado,
-                'region_catastral' => $this->avaluo->predio->region_catastral,
-                'municipio' => $this->avaluo->predio->municipio,
-                'zona_catastral' => $this->avaluo->predio->zona_catastral,
-                'localidad' => $this->avaluo->predio->localidad,
-                'sector' => $this->avaluo->predio->sector,
-                'manzana' => $this->avaluo->predio->manzana,
-                'predio' => $this->avaluo->predio->predio,
-                'edificio' => $this->avaluo->predio->edificio,
-                'departamento' => $this->avaluo->predio->departamento,
-                'oficina' => $this->avaluo->predio->oficina,
-                'tipo_predio' => $this->avaluo->predio->tipo_predio,
-                'numero_registro' => $this->avaluo->predio->numero_registro,
-                'tipo_vialidad' => $this->avaluo->predio->tipo_vialidad,
-                'tipo_asentamiento' => $this->avaluo->predio->tipo_asentamiento,
-                'nombre_vialidad' => $this->avaluo->predio->nombre_vialidad,
-                'numero_exterior' => $this->avaluo->predio->numero_exterior,
-                'numero_exterior_2' => $this->avaluo->predio->numero_exterior_2,
-                'numero_adicional' => $this->avaluo->predio->numero_adicional,
-                'numero_adicional_2' => $this->avaluo->predio->numero_adicional_2,
-                'numero_interior' => $this->avaluo->predio->numero_interior,
-                'nombre_asentamiento' => $this->avaluo->predio->nombre_asentamiento,
-                'codigo_postal' => $this->avaluo->predio->codigo_postal,
-                'lote_fraccionador' => $this->avaluo->predio->lote_fraccionador,
-                'manzana_fraccionador' => $this->avaluo->predio->manzana_fraccionador,
-                'etapa_fraccionador' => $this->avaluo->predio->etapa_fraccionador,
-                'nombre_predio' => $this->avaluo->predio->nombre_predio,
-                'nombre_edificio' => $this->avaluo->predio->nombre_edificio,
-                'clave_edificio' => $this->avaluo->predio->clave_edificio,
-                'departamento_edificio' => $this->avaluo->predio->departamento_edificio,
-                'uso_1' => $this->avaluo->predio->uso_1,
-                'uso_2' => $this->avaluo->predio->uso_2,
-                'uso_3' => $this->avaluo->predio->uso_3,
-                'ubicacion_en_manzana' => $this->avaluo->predio->ubicacion_en_manzana,
-                'superficie_terreno' => $this->avaluo->predio->superficie_terreno,
-                'superficie_construccion' => $this->avaluo->predio->superficie_construccion,
-                'superficie_judicial' => $this->avaluo->predio->superficie_judicial,
-                'superficie_notarial' => $this->avaluo->predio->superficie_notarial,
-                'area_comun_terreno' => $this->avaluo->predio->area_comun_terreno,
-                'area_comun_construccion' => $this->avaluo->predio->area_comun_construccion,
-                'valor_terreno_comun' => $this->avaluo->predio->valor_terreno_comun,
-                'valor_construccion_comun' => $this->avaluo->predio->valor_construccion_comun,
-                'valor_total_terreno' => $this->avaluo->predio->valor_total_terreno,
-                'valor_total_construccion' => $this->avaluo->predio->valor_total_construccion,
-                'valor_catastral' => $this->avaluo->predio->valor_catastral,
-                'titulo_propiedad' => $this->avaluo->predio->titulo_propiedad,
-                'curt' => $this->avaluo->predio->curt,
-                'folio_real' => $this->avaluo->predio->folio_real,
-                'xutm' => $this->avaluo->predio->xutm,
-                'yutm' => $this->avaluo->predio->yutm,
-                'zutm' => $this->avaluo->predio->zutm,
-                'lon' => $this->avaluo->predio->lon,
-                'lat' => $this->avaluo->predio->lat,
-                'fecha_efectos' => $this->avaluo->predio->fecha_efectos,
-                'fecha_notificacion' => $this->fecha_notificacion,
-                'observaciones' => $this->avaluo->predio->observaciones,
+                'estado' => $this->avaluo->predioAvaluo->estado,
+                'region_catastral' => $this->avaluo->predioAvaluo->region_catastral,
+                'municipio' => $this->avaluo->predioAvaluo->municipio,
+                'zona_catastral' => $this->avaluo->predioAvaluo->zona_catastral,
+                'localidad' => $this->avaluo->predioAvaluo->localidad,
+                'sector' => $this->avaluo->predioAvaluo->sector,
+                'manzana' => $this->avaluo->predioAvaluo->manzana,
+                'predio' => $this->avaluo->predioAvaluo->predio,
+                'edificio' => $this->avaluo->predioAvaluo->edificio,
+                'departamento' => $this->avaluo->predioAvaluo->departamento,
+                'oficina' => $this->avaluo->predioAvaluo->oficina,
+                'tipo_predio' => $this->avaluo->predioAvaluo->tipo_predio,
+                'numero_registro' => $this->avaluo->predioAvaluo->numero_registro,
+                'tipo_vialidad' => $this->avaluo->predioAvaluo->tipo_vialidad,
+                'tipo_asentamiento' => $this->avaluo->predioAvaluo->tipo_asentamiento,
+                'nombre_vialidad' => $this->avaluo->predioAvaluo->nombre_vialidad,
+                'numero_exterior' => $this->avaluo->predioAvaluo->numero_exterior,
+                'numero_exterior_2' => $this->avaluo->predioAvaluo->numero_exterior_2,
+                'numero_adicional' => $this->avaluo->predioAvaluo->numero_adicional,
+                'numero_adicional_2' => $this->avaluo->predioAvaluo->numero_adicional_2,
+                'numero_interior' => $this->avaluo->predioAvaluo->numero_interior,
+                'nombre_asentamiento' => $this->avaluo->predioAvaluo->nombre_asentamiento,
+                'codigo_postal' => $this->avaluo->predioAvaluo->codigo_postal,
+                'lote_fraccionador' => $this->avaluo->predioAvaluo->lote_fraccionador,
+                'manzana_fraccionador' => $this->avaluo->predioAvaluo->manzana_fraccionador,
+                'etapa_fraccionador' => $this->avaluo->predioAvaluo->etapa_fraccionador,
+                'nombre_predio' => $this->avaluo->predioAvaluo->nombre_predio,
+                'nombre_edificio' => $this->avaluo->predioAvaluo->nombre_edificio,
+                'clave_edificio' => $this->avaluo->predioAvaluo->clave_edificio,
+                'departamento_edificio' => $this->avaluo->predioAvaluo->departamento_edificio,
+                'uso_1' => $this->avaluo->predioAvaluo->uso_1,
+                'uso_2' => $this->avaluo->predioAvaluo->uso_2,
+                'uso_3' => $this->avaluo->predioAvaluo->uso_3,
+                'ubicacion_en_manzana' => $this->avaluo->predioAvaluo->ubicacion_en_manzana,
+                'superficie_terreno' => $this->avaluo->predioAvaluo->superficie_terreno,
+                'superficie_construccion' => $this->avaluo->predioAvaluo->superficie_construccion,
+                'superficie_judicial' => $this->avaluo->predioAvaluo->superficie_judicial,
+                'superficie_notarial' => $this->avaluo->predioAvaluo->superficie_notarial,
+                'area_comun_terreno' => $this->avaluo->predioAvaluo->area_comun_terreno,
+                'area_comun_construccion' => $this->avaluo->predioAvaluo->area_comun_construccion,
+                'valor_terreno_comun' => $this->avaluo->predioAvaluo->valor_terreno_comun,
+                'valor_construccion_comun' => $this->avaluo->predioAvaluo->valor_construccion_comun,
+                'valor_total_terreno' => $this->avaluo->predioAvaluo->valor_total_terreno,
+                'valor_total_construccion' => $this->avaluo->predioAvaluo->valor_total_construccion,
+                'valor_catastral' => $this->avaluo->predioAvaluo->valor_catastral,
+                'xutm' => $this->avaluo->predioAvaluo->xutm,
+                'yutm' => $this->avaluo->predioAvaluo->yutm,
+                'zutm' => $this->avaluo->predioAvaluo->zutm,
+                'lon' => $this->avaluo->predioAvaluo->lon,
+                'lat' => $this->avaluo->predioAvaluo->lat,
+                'fecha_efectos' => $this->fecha_notificacion,
+                'observaciones' => $this->avaluo->predioAvaluo->observaciones,
+                'origen' => 'Alta mediante avaluo'
             ]);
 
-            $predio->audits()->latest()->first()->update(['tags' => 'Se genera predio apartir de avalúo: ' . $this->avaluo->folio]);
+            $predio->movimientos()->create([
+                'nombre' => 'Alta mediante avaluo',
+                'fecha' => $this->fecha_notificacion,
+                'descripcion' => 'Se da de alta predio en el padrón catastral mediante el avalúo con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '.'
+            ]);
+
+            $predio->audits()->latest()->first()->update(['tags' => 'Se genera predio apartir de avalúo: ' . $this->avaluo->año . '-' . $this->avaluo->folio]);
 
             $this->procesarRelaciones($predio);
 
@@ -183,62 +185,58 @@ class Notificacion extends Component
 
             $predio->update([
                 'status' => 'activo',
-                'estado' => $this->avaluo->predio->estado,
-                'region_catastral' => $this->avaluo->predio->region_catastral,
-                'municipio' => $this->avaluo->predio->municipio,
-                'zona_catastral' => $this->avaluo->predio->zona_catastral,
-                'localidad' => $this->avaluo->predio->localidad,
-                'sector' => $this->avaluo->predio->sector,
-                'manzana' => $this->avaluo->predio->manzana,
-                'predio' => $this->avaluo->predio->predio,
-                'edificio' => $this->avaluo->predio->edificio,
-                'departamento' => $this->avaluo->predio->departamento,
-                'oficina' => $this->avaluo->predio->oficina,
-                'tipo_predio' => $this->avaluo->predio->tipo_predio,
-                'numero_registro' => $this->avaluo->predio->numero_registro,
-                'tipo_vialidad' => $this->avaluo->predio->tipo_vialidad,
-                'tipo_asentamiento' => $this->avaluo->predio->tipo_asentamiento,
-                'nombre_vialidad' => $this->avaluo->predio->nombre_vialidad,
-                'numero_exterior' => $this->avaluo->predio->numero_exterior,
-                'numero_exterior_2' => $this->avaluo->predio->numero_exterior_2,
-                'numero_adicional' => $this->avaluo->predio->numero_adicional,
-                'numero_adicional_2' => $this->avaluo->predio->numero_adicional_2,
-                'numero_interior' => $this->avaluo->predio->numero_interior,
-                'nombre_asentamiento' => $this->avaluo->predio->nombre_asentamiento,
-                'codigo_postal' => $this->avaluo->predio->codigo_postal,
-                'lote_fraccionador' => $this->avaluo->predio->lote_fraccionador,
-                'manzana_fraccionador' => $this->avaluo->predio->manzana_fraccionador,
-                'etapa_fraccionador' => $this->avaluo->predio->etapa_fraccionador,
-                'nombre_predio' => $this->avaluo->predio->nombre_predio,
-                'nombre_edificio' => $this->avaluo->predio->nombre_edificio,
-                'clave_edificio' => $this->avaluo->predio->clave_edificio,
-                'departamento_edificio' => $this->avaluo->predio->departamento_edificio,
-                'uso_1' => $this->avaluo->predio->uso_1,
-                'uso_2' => $this->avaluo->predio->uso_2,
-                'uso_3' => $this->avaluo->predio->uso_3,
-                'ubicacion_en_manzana' => $this->avaluo->predio->ubicacion_en_manzana,
-                'superficie_terreno' => $this->avaluo->predio->superficie_terreno,
-                'superficie_construccion' => $this->avaluo->predio->superficie_construccion,
-                'superficie_judicial' => $this->avaluo->predio->superficie_judicial,
-                'superficie_notarial' => $this->avaluo->predio->superficie_notarial,
-                'area_comun_terreno' => $this->avaluo->predio->area_comun_terreno,
-                'area_comun_construccion' => $this->avaluo->predio->area_comun_construccion,
-                'valor_terreno_comun' => $this->avaluo->predio->valor_terreno_comun,
-                'valor_construccion_comun' => $this->avaluo->predio->valor_construccion_comun,
-                'valor_total_terreno' => $this->avaluo->predio->valor_total_terreno,
-                'valor_total_construccion' => $this->avaluo->predio->valor_total_construccion,
-                'valor_catastral' => $this->avaluo->predio->valor_catastral,
-                'titulo_propiedad' => $this->avaluo->predio->titulo_propiedad,
-                'curt' => $this->avaluo->predio->curt,
-                'folio_real' => $this->avaluo->predio->folio_real,
-                'xutm' => $this->avaluo->predio->xutm,
-                'yutm' => $this->avaluo->predio->yutm,
-                'zutm' => $this->avaluo->predio->zutm,
-                'lon' => $this->avaluo->predio->lon,
-                'lat' => $this->avaluo->predio->lat,
-                'fecha_efectos' => $this->avaluo->predio->fecha_efectos,
-                'fecha_notificacion' => $this->fecha_notificacion,
-                'observaciones' => $this->avaluo->predio->observaciones,
+                'estado' => $this->avaluo->predioAvaluo->estado,
+                'region_catastral' => $this->avaluo->predioAvaluo->region_catastral,
+                'municipio' => $this->avaluo->predioAvaluo->municipio,
+                'zona_catastral' => $this->avaluo->predioAvaluo->zona_catastral,
+                'localidad' => $this->avaluo->predioAvaluo->localidad,
+                'sector' => $this->avaluo->predioAvaluo->sector,
+                'manzana' => $this->avaluo->predioAvaluo->manzana,
+                'predio' => $this->avaluo->predioAvaluo->predio,
+                'edificio' => $this->avaluo->predioAvaluo->edificio,
+                'departamento' => $this->avaluo->predioAvaluo->departamento,
+                'oficina' => $this->avaluo->predioAvaluo->oficina,
+                'tipo_predio' => $this->avaluo->predioAvaluo->tipo_predio,
+                'numero_registro' => $this->avaluo->predioAvaluo->numero_registro,
+                'tipo_vialidad' => $this->avaluo->predioAvaluo->tipo_vialidad,
+                'tipo_asentamiento' => $this->avaluo->predioAvaluo->tipo_asentamiento,
+                'nombre_vialidad' => $this->avaluo->predioAvaluo->nombre_vialidad,
+                'numero_exterior' => $this->avaluo->predioAvaluo->numero_exterior,
+                'numero_exterior_2' => $this->avaluo->predioAvaluo->numero_exterior_2,
+                'numero_adicional' => $this->avaluo->predioAvaluo->numero_adicional,
+                'numero_adicional_2' => $this->avaluo->predioAvaluo->numero_adicional_2,
+                'numero_interior' => $this->avaluo->predioAvaluo->numero_interior,
+                'nombre_asentamiento' => $this->avaluo->predioAvaluo->nombre_asentamiento,
+                'codigo_postal' => $this->avaluo->predioAvaluo->codigo_postal,
+                'lote_fraccionador' => $this->avaluo->predioAvaluo->lote_fraccionador,
+                'manzana_fraccionador' => $this->avaluo->predioAvaluo->manzana_fraccionador,
+                'etapa_fraccionador' => $this->avaluo->predioAvaluo->etapa_fraccionador,
+                'nombre_predio' => $this->avaluo->predioAvaluo->nombre_predio,
+                'nombre_edificio' => $this->avaluo->predioAvaluo->nombre_edificio,
+                'clave_edificio' => $this->avaluo->predioAvaluo->clave_edificio,
+                'departamento_edificio' => $this->avaluo->predioAvaluo->departamento_edificio,
+                'uso_1' => $this->avaluo->predioAvaluo->uso_1,
+                'uso_2' => $this->avaluo->predioAvaluo->uso_2,
+                'uso_3' => $this->avaluo->predioAvaluo->uso_3,
+                'ubicacion_en_manzana' => $this->avaluo->predioAvaluo->ubicacion_en_manzana,
+                'superficie_terreno' => $this->avaluo->predioAvaluo->superficie_terreno,
+                'superficie_construccion' => $this->avaluo->predioAvaluo->superficie_construccion,
+                'superficie_judicial' => $this->avaluo->predioAvaluo->superficie_judicial,
+                'superficie_notarial' => $this->avaluo->predioAvaluo->superficie_notarial,
+                'area_comun_terreno' => $this->avaluo->predioAvaluo->area_comun_terreno,
+                'area_comun_construccion' => $this->avaluo->predioAvaluo->area_comun_construccion,
+                'valor_terreno_comun' => $this->avaluo->predioAvaluo->valor_terreno_comun,
+                'valor_construccion_comun' => $this->avaluo->predioAvaluo->valor_construccion_comun,
+                'valor_total_terreno' => $this->avaluo->predioAvaluo->valor_total_terreno,
+                'valor_total_construccion' => $this->avaluo->predioAvaluo->valor_total_construccion,
+                'valor_catastral' => $this->avaluo->predioAvaluo->valor_catastral,
+                'xutm' => $this->avaluo->predioAvaluo->xutm,
+                'yutm' => $this->avaluo->predioAvaluo->yutm,
+                'zutm' => $this->avaluo->predioAvaluo->zutm,
+                'lon' => $this->avaluo->predioAvaluo->lon,
+                'lat' => $this->avaluo->predioAvaluo->lat,
+                'fecha_efectos' => $this->fecha_notificacion,
+                'observaciones' => $this->avaluo->predioAvaluo->observaciones,
                 'actualizado_por' => auth()->user()->id
             ]);
 
@@ -260,7 +258,7 @@ class Notificacion extends Component
                 Propietario::destroy($propietario->id);
 
             }
-            foreach($this->avaluo->predio->propietarios as $propietario){
+            foreach($this->avaluo->predioAvaluo->propietarios as $propietario){
 
                 $persona = Persona::firstOrCreate(
                     [
@@ -292,7 +290,7 @@ class Notificacion extends Component
 
             }
 
-            foreach($this->avaluo->predio->colindancias as $colindancia){
+            foreach($this->avaluo->predioAvaluo->colindancias as $colindancia){
 
                 $predio->colindancias()->create([
                     'viento' => $colindancia['viento'],
@@ -309,7 +307,7 @@ class Notificacion extends Component
 
             }
 
-            foreach($this->avaluo->predio->construcciones as $construccion){
+            foreach($this->avaluo->predioAvaluo->construcciones as $construccion){
 
                 $predio->construcciones()->create([
                     'referencia' => $construccion['referencia'],
@@ -331,7 +329,7 @@ class Notificacion extends Component
 
             }
 
-            foreach($this->avaluo->predio->terrenos as $terreno){
+            foreach($this->avaluo->predioAvaluo->terrenos as $terreno){
 
                 $predio->terrenos()->create([
                     'superficie' => $terreno['superficie'],
@@ -350,7 +348,7 @@ class Notificacion extends Component
 
             }
 
-            foreach($this->avaluo->predio->condominioTerrenos as $construccion){
+            foreach($this->avaluo->predioAvaluo->condominioTerrenos as $construccion){
 
                 $predio->condominioTerrenos()->create([
                     'area_terreno_comun' => $construccion['area_terreno_comun'],
@@ -368,7 +366,7 @@ class Notificacion extends Component
 
             }
 
-            foreach($this->avaluo->predio->condominioConstrucciones as $construccion){
+            foreach($this->avaluo->predioAvaluo->condominioConstrucciones as $construccion){
 
                 $predio->condominioConstrucciones()->create([
                     'area_comun_construccion' => $construccion['area_comun_construccion'],
@@ -394,7 +392,7 @@ class Notificacion extends Component
                 'estado' => 'notificado'
             ]);
 
-            $this->avaluo->predio->update(['status' => 'notificado']);
+            $this->avaluo->predioAvaluo->update(['status' => 'notificado']);
 
             $this->avaluo->audits()->latest()->first()->update(['tags' => 'Notifico avalúo']);
 
@@ -407,7 +405,7 @@ class Notificacion extends Component
     public function render()
     {
 
-        $avaluos = Avaluo::with('predio.propietarios.persona')
+        $avaluos = Avaluo::with('predioAvaluo.propietarios.persona')
                                     ->whereIn('estado', ['impreso', 'concluido'])
                                     ->whereBetween('folio', [$this->inicio, $this->final])
                                     ->whereNull('notificado_en')

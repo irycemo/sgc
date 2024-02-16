@@ -35,7 +35,9 @@ class Valor extends Component
 
     public Avaluo $avaluo;
 
-    public PredioAvaluo $predio;
+    public $predio;
+
+    public $flag = false;
 
     protected $listeners = ['cargarPredio'];
 
@@ -56,7 +58,7 @@ class Valor extends Component
     }
 
     protected $messages = [
-        'predio.required' => '. Primero debe cargar el avaluo'
+        'predio.required' => '. Primero debe cargar el predio'
     ];
 
     protected $validationAttributes  = [
@@ -117,7 +119,23 @@ class Valor extends Component
 
         $i = explode('.', $index);
 
-        if($i[1] == 'valores'){
+        if($i[1] === 'valores'){
+
+            if($this->construcciones[$i[0]]['valores'] === "" ){
+
+                $this->construcciones[$i[0]]['uso'] = null;
+
+                $this->construcciones[$i[0]]['tipo'] = null;
+
+                $this->construcciones[$i[0]]['estado'] = null;
+
+                $this->construcciones[$i[0]]['calidad'] = null;
+
+                $this->construcciones[$i[0]]['valor_unitario'] = null;
+
+                return;
+
+            }
 
             $aux = json_decode($this->construcciones[$i[0]]['valores'], true);
 
@@ -130,6 +148,12 @@ class Valor extends Component
             $this->construcciones[$i[0]]['calidad'] = $aux['calidad'];
 
             $this->construcciones[$i[0]]['valor_unitario'] = $aux['valor'];
+
+        }
+
+        if(isset($this->construcciones[$i[0]]['valor_unitario']) && isset($this->construcciones[$i[0]]['superficie'])){
+
+            $this->construcciones[$i[0]]['valor_construccion'] = (float)$this->construcciones[$i[0]]['valor_unitario'] * (float)$this->construcciones[$i[0]]['superficie'];
 
         }
 
@@ -205,11 +229,21 @@ class Valor extends Component
 
     }
 
-    public function cargarPredio($id){
+    public function cargarPredio($id, $flag = null){
 
         $this->reset(['terrenos', 'construcciones', 'terrenosCondominio', 'construccionesCondominio']);
 
-        $this->predio = PredioAvaluo::with('avaluo')->find($id);
+        if($flag){
+
+            $this->flag = true;
+
+            $this->predio = Predio::with('colindancias')->find($id);
+
+        }else{
+
+            $this->predio = PredioAvaluo::with('avaluo')->find($id);
+
+        }
 
         foreach ($this->predio->terrenos as $terreno) {
 
@@ -236,6 +270,7 @@ class Valor extends Component
                 'uso' => $construccion->uso,
                 'calidad' => $construccion->calidad,
                 'estado' => $construccion->estado,
+                'valor_construccion' => $construccion->valor_construccion
             ];
         }
 
@@ -261,26 +296,30 @@ class Valor extends Component
             ];
         }
 
-        $this->avaluo = $this->predio->avaluo;
+        if(!$this->flag){
 
-        $this->porcentajeDemerito = null;
+            $this->avaluo = $this->predio->avaluo;
 
-        if(!$this->avaluo->agua)
-            $this->porcentajeDemerito = 5;
-        if(!$this->avaluo->drenaje)
-            $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
-        if(!$this->avaluo->pavimento)
-            $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
-        if(!$this->avaluo->energia_electrica)
-            $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
-        if(!$this->avaluo->alumbrado_publico)
-            $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
-        if(!$this->avaluo->banqueta)
-            $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
+            $this->porcentajeDemerito = null;
 
-        foreach ($this->terrenos as $terreno) {
+            if(!$this->avaluo->agua)
+                $this->porcentajeDemerito = 5;
+            if(!$this->avaluo->drenaje)
+                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
+            if(!$this->avaluo->pavimento)
+                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
+            if(!$this->avaluo->energia_electrica)
+                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
+            if(!$this->avaluo->alumbrado_publico)
+                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
+            if(!$this->avaluo->banqueta)
+                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
 
-            $terreno['demerito'] = $this->porcentajeDemerito;
+            foreach ($this->terrenos as $terreno) {
+
+                $terreno['demerito'] = $this->porcentajeDemerito;
+
+            }
 
         }
 
@@ -300,7 +339,7 @@ class Valor extends Component
 
     public function agregarConstruccion(){
 
-        $this->construcciones[] = ['superficie' => null, 'niveles' => null, 'referencia' => null, 'id' => null, 'valor_unitario' => null, 'valores' => null, 'uso' => null, 'tipo' => null, 'categoria' => null, 'calidad' => null];
+        $this->construcciones[] = ['superficie' => null, 'niveles' => null, 'referencia' => null, 'id' => null, 'valor_unitario' => null, 'valores' => null, 'uso' => null, 'tipo' => null, 'categoria' => null, 'calidad' => null, 'valor_construccion' => null];
 
     }
 
@@ -324,7 +363,8 @@ class Valor extends Component
 
     public function borrarConstruccion($index){
 
-        $this->authorize('update',$this->predio->avaluo);
+        if(!$this->flag)
+            $this->authorize('update',$this->predio->avaluo);
 
         $this->validate(['predio' => 'required']);
 
@@ -346,7 +386,8 @@ class Valor extends Component
 
     public function borrarTerreno($index){
 
-        $this->authorize('update',$this->predio->avaluo);
+        if(!$this->flag)
+            $this->authorize('update',$this->predio->avaluo);
 
         $this->validate(['predio' => 'required']);
 
@@ -368,7 +409,8 @@ class Valor extends Component
 
     public function borrarCondominioTerreno($index){
 
-        $this->authorize('update',$this->predio->avaluo);
+        if(!$this->flag)
+            $this->authorize('update',$this->predio->avaluo);
 
         $this->validate(['predio' => 'required']);
 
@@ -390,7 +432,8 @@ class Valor extends Component
 
     public function borrarCondominioConstruccion($index){
 
-        $this->authorize('update',$this->predio->avaluo);
+        if(!$this->flag)
+            $this->authorize('update',$this->predio->avaluo);
 
         $this->validate(['predio' => 'required']);
 
@@ -412,7 +455,15 @@ class Valor extends Component
 
     public function guardarConstrucciones(){
 
-        $this->authorize('update',$this->predio->avaluo);
+        if(!$this->flag && ($this->predio && $this->predio->avaluo && $this->predio->avaluo->estado == 'notificado')){
+
+            $this->authorize('update',$this->predio->avaluo);
+
+            $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
+
+            return;
+
+        }
 
         $this->validate([
             'predio' => 'required',
@@ -447,6 +498,7 @@ class Valor extends Component
                             'tipo' => $construccion['tipo'],
                             'calidad' => $construccion['calidad'],
                             'estado' => $construccion['estado'],
+                            'valor_construccion' => (float)$construccion['valor_unitario'] * (float)$construccion['superficie']
                         ]);
 
                         $this->construcciones[$key]['id'] = $aux->id;
@@ -462,6 +514,7 @@ class Valor extends Component
                             'tipo' => $construccion['tipo'],
                             'calidad' => $construccion['calidad'],
                             'estado' => $construccion['estado'],
+                            'valor_construccion' => (float)$construccion['valor_unitario'] * (float)$construccion['superficie']
                         ]);
 
                     }
@@ -490,7 +543,15 @@ class Valor extends Component
 
     public function guardarTerrenos(){
 
-        $this->authorize('update',$this->predio->avaluo);
+        if(!$this->flag && ($this->predio && $this->predio->avaluo && $this->predio->avaluo->estado == 'notificado')){
+
+            $this->authorize('update',$this->predio->avaluo);
+
+            $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
+
+            return;
+
+        }
 
         $this->validate([
             'predio' => 'required',
@@ -558,7 +619,15 @@ class Valor extends Component
 
     public function guardarTerrenosCondominio(){
 
-        $this->authorize('update',$this->predio->avaluo);
+        if(!$this->flag && ($this->predio && $this->predio->avaluo && $this->predio->avaluo->estado == 'notificado')){
+
+            $this->authorize('update',$this->predio->avaluo);
+
+            $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
+
+            return;
+
+        }
 
         $this->validate([
             'predio' => 'required',
@@ -568,8 +637,7 @@ class Valor extends Component
             'terrenosCondominio.*.valor_unitario' => 'required',
         ]);
 
-        if($this->revisarPorcentaje())
-            return;
+        /* if($this->revisarPorcentaje()) return; */
 
         try {
 
@@ -629,7 +697,15 @@ class Valor extends Component
 
     public function guardarCondominio(){
 
-        $this->authorize('update',$this->predio->avaluo);
+        if(!$this->flag && ($this->predio && $this->predio->avaluo && $this->predio->avaluo->estado == 'notificado')){
+
+            $this->authorize('update',$this->predio->avaluo);
+
+            $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
+
+            return;
+
+        }
 
         $this->validate([
             'predio' => 'required',
@@ -700,7 +776,15 @@ class Valor extends Component
 
     public function guardar(){
 
-        $this->authorize('update',$this->predio->avaluo);
+        if(!$this->flag && ($this->predio && $this->predio->avaluo && $this->predio->avaluo->estado == 'notificado')){
+
+            $this->authorize('update',$this->predio->avaluo);
+
+            $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
+
+            return;
+
+        }
 
         $this->validate([
             'predio.uso_1' => 'required',
@@ -824,7 +908,7 @@ class Valor extends Component
         ];
 
         $this->construcciones = [
-            ['codigo' => null, 'niveles' => null, 'superficie' => null, 'id' => null, 'valor_unitario' => null, 'valores' => null, 'uso' => null, 'tipo' => null, 'categoria' => null, 'calidad' => null]
+            ['codigo' => null, 'niveles' => null, 'superficie' => null, 'id' => null, 'valor_unitario' => null, 'valores' => null, 'uso' => null, 'tipo' => null, 'categoria' => null, 'calidad' => null, 'valor_construccion' => null]
         ];
 
         $this->terrenosCondominio = [
@@ -843,9 +927,9 @@ class Valor extends Component
 
         if($this->avaluo_id){
 
-            $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
+            $avaluo = Avaluo::with('predioAvaluo')->find($this->avaluo_id);
 
-            $this->cargarPredio($avaluo->predio->id);
+            $this->cargarPredio($avaluo->predioAvaluo->id);
 
         }
 

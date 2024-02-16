@@ -54,7 +54,7 @@ class MisAvaluos extends Component
 
             DB::transaction(function () {
 
-                $avaluos = Avaluo::with('predio')->whereKey($this->seleccionados)->get();
+                $avaluos = Avaluo::with('predioAvaluo')->whereKey($this->seleccionados)->get();
 
                 foreach ($avaluos as $avaluo) {
 
@@ -97,7 +97,7 @@ class MisAvaluos extends Component
 
     public function getAvaluosQueryProperty(){
 
-        return Avaluo::with('predio.propietarios.persona', 'creadoPor', 'actualizadoPor')
+        return Avaluo::with('predioAvaluo.propietarios.persona', 'creadoPor', 'actualizadoPor')
                         ->where('asignado_a', auth()->user()->id)
                         ->orderBy($this->sort, $this->direction);
 

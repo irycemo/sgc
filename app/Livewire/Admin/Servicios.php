@@ -46,7 +46,7 @@ class Servicios extends Component
     ];
 
     public function crearModeloVacio(){
-        return Servicio::make();
+        $this->modelo_editar =  Servicio::make();
     }
 
     public function updatedModeloEditarOrdinario(){
@@ -130,7 +130,7 @@ class Servicios extends Component
             $this->modelo_editar->creado_por = auth()->user()->id;
             $this->modelo_editar->save();
 
-            $this->resetearTodo();
+            $this->resetearTodo($borrado = true);
 
             $this->dispatch('mostrarMensaje', ['success', "El servicio se creó con éxito."]);
 
@@ -152,7 +152,7 @@ class Servicios extends Component
             $this->modelo_editar->actualizado_por = auth()->user()->id;
             $this->modelo_editar->save();
 
-            $this->resetearTodo();
+            $this->resetearTodo($borrado = true);
 
             $this->dispatch('mostrarMensaje', ['success', "El servicio se actualizó con éxito."]);
 
@@ -190,7 +190,7 @@ class Servicios extends Component
 
     public function mount(){
 
-        $this->modelo_editar = $this->crearModeloVacio();
+        $this->crearModeloVacio();
 
         $this->categorias = CategoriaServicio::orderBy('nombre')->get();
 

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\File;
 use App\Models\Tramite;
-use App\Http\Traits\Uuid;
+use App\Models\PredioAvaluo;
 use App\Http\Traits\ModelosTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Avaluo extends Model implements Auditable
 {
-    use Uuid;
+
     use HasFactory;
     use ModelosTrait;
     use \OwenIt\Auditing\Auditable;
@@ -38,7 +38,7 @@ class Avaluo extends Model implements Auditable
         return $this->belongsTo(Tramite::class);
     }
 
-    public function predio(){
+    public function predioAvaluo(){
         return $this->belongsTo(PredioAvaluo::class, 'predio_id');
     }
 

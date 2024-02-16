@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('propietarioable_type');
             $table->foreignId('persona_id')->constrained();
             $table->string('tipo');
-            $table->unsignedDecimal('porcentaje', 15,2);
+            $table->unsignedDecimal('porcentaje', 15,2)->nullable();
+            $table->unsignedDecimal('porcentaje_nuda', 15,2)->nullable();
+            $table->unsignedDecimal('porcentaje_usufructo', 15,2)->nullable();
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

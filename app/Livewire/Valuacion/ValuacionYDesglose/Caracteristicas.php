@@ -179,10 +179,13 @@ class Caracteristicas extends Component
 
         if($this->avaluo_id){
 
-            $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
+            $this->avaluo = Avaluo::with('predioAvaluo')->find($this->avaluo_id);
 
-            $this->cargarPredio($avaluo->predio->id);
+            $this->cargarPredio($this->avaluo->predioAvaluo->id);
 
+        }else{
+
+            $this->avaluo = Avaluo::make();
         }
 
     }

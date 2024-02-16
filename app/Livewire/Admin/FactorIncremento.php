@@ -21,7 +21,7 @@ class FactorIncremento extends Component
     protected function rules(){
         return [
             'modelo_editar.factor' => 'required|numeric',
-            'modelo_editar.ano' => 'required|numeric',
+            'modelo_editar.año' => 'required|numeric',
          ];
     }
 
@@ -49,7 +49,7 @@ class FactorIncremento extends Component
             $this->modelo_editar->creado_por = auth()->user()->id;
             $this->modelo_editar->save();
 
-            $this->resetearTodo();
+            $this->resetearTodo($borrado = true);
 
             $this->dispatch('mostrarMensaje', ['success', "El factor de incremento se creó con éxito."]);
 
@@ -72,7 +72,7 @@ class FactorIncremento extends Component
             $this->modelo_editar->actualizado_por = auth()->user()->id;
             $this->modelo_editar->save();
 
-            $this->resetearTodo();
+            $this->resetearTodo($borrado = true);
 
             $this->dispatch('mostrarMensaje', ['success', "El factor de incremento se actualizó con éxito."]);
 
@@ -111,7 +111,8 @@ class FactorIncremento extends Component
     public function render()
     {
 
-        $factores = ModelsFactorIncremento::orderBy($this->sort, $this->direction)
+        $factores = ModelsFactorIncremento::with('creadoPor', 'actualizadoPor')
+                                            ->orderBy($this->sort, $this->direction)
                                             ->paginate($this->pagination);
 
         return view('livewire.Admin.factor-incremento', compact('factores'))->extends('layouts.admin');

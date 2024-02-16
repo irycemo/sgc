@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('movimientos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('predio_id')->constrained();
             $table->string('nombre');
+            $table->date('fecha');
             $table->text('descripcion');
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');

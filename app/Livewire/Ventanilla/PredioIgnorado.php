@@ -77,7 +77,7 @@ class PredioIgnorado extends Component
             'modelo_editar.cantidad' => 'required|numeric',
             'modelo_editar.adiciona' => 'required_if:adicionaTramite,true',
             'modelo_editar.observaciones' => Rule::requiredIf($this->modelo_editar->tipo_tramite === "exento"),
-            'predioAvaluo' => 'required',
+            'predioAvaluo' => Rule::requiredIf($this->modelo_editar->servicio_id != 47),
             'modelo_editar.numero_oficio' => Rule::requiredIf($this->modelo_editar->solicitante == 'Oficialia de partes' ||
                                                                 $this->modelo_editar->solicitante == 'Escrituración social'),
         ];
@@ -186,8 +186,6 @@ class PredioIgnorado extends Component
 
         }
 
-        $this->updatedModeloEditarTipoServicio();
-
     }
 
     public function buscarPredio(){
@@ -232,17 +230,7 @@ class PredioIgnorado extends Component
 
         $this->modelo_editar->monto = (float)$this->servicio['porcentaje'] / 100 * $this->predioAvaluo->valor_catastral;
 
-        $this->modelo_editar->observaciones =
-                'Clave catastral: 16-' .
-                $this->region_catastral . '-' .
-                $this->municipio . '-' .
-                $this->zona_catastral . '-' .
-                $this->sector . '-' .
-                $this->localidad . '-' .
-                $this->predio . '-' .
-                $this->manzana . '-' .
-                $this->edificio . '-' .
-                $this->departamento;
+        $this->modelo_editar->predio_avaluo = $this->predioAvaluo->id;
 
         $this->dispatch('mostrarMensaje', ['success', 'Se cargo correctamente el 2% del valor del predio.']);
 

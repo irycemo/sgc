@@ -8,13 +8,11 @@ use App\Models\Servicio;
 use App\Models\CategoriaServicio;
 use App\Http\Constantes\Constantes;
 use App\Http\Traits\ComponentesTrait;
-use App\Http\Traits\BatchTramiteTrait;
 
 class Ventanilla extends Component
 {
 
     use ComponentesTrait;
-    use BatchTramiteTrait;
 
     public $año;
     public $años;

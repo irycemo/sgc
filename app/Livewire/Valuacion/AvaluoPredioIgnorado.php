@@ -51,6 +51,11 @@ class AvaluoPredioIgnorado extends Component
     public $flag = false;
     public $editar = false;
 
+    public $años;
+    public $año;
+    public $folio;
+    public $usuario;
+
     public PredioAvaluo $predio;
 
     protected function rules(){
@@ -387,6 +392,9 @@ class AvaluoPredioIgnorado extends Component
                                                 ->where('departamento', $this->predio->departamento)
                                                 ->where('oficina', $this->predio->oficina)
                                                 ->where('tipo_predio', $this->predio->tipo_predio)
+                                                ->where('oficina', $this->predio->oficina)
+                                                ->where('tipo_predio', $this->predio->tipo_predio)
+                                                ->where('numero_registro', $this->predio->numero_registro)
                                                 ->first();
 
         if($predioCompletoAvaluo){
@@ -451,8 +459,7 @@ class AvaluoPredioIgnorado extends Component
             return;
         }
 
-        if($this->validarDisponibilidad())
-            return;
+        if($this->validarDisponibilidad() || $this->validarSector()) return;
 
         try {
 
@@ -483,6 +490,7 @@ class AvaluoPredioIgnorado extends Component
                 ]);
 
                 $avaluo = Avaluo::create([
+                    'año' => now()->format('Y'),
                     'folio' => Avaluo::max('folio') + 1,
                     'predio_id' => $this->predio->id,
                     'estado' => 'nuevo',
@@ -490,7 +498,7 @@ class AvaluoPredioIgnorado extends Component
                     'asignado_a' => auth()->user()->id,
                 ]);
 
-                $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo con folio: ' . $avaluo->folio]);
+                $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo de predio ignaorado con folio: ' . $avaluo->año . '-' . $avaluo->folio]);
 
                 $this->dispatch('mostrarMensaje', ['success', "El avaluo se creó con el folio " . $avaluo->folio . "."]);
 
@@ -511,6 +519,8 @@ class AvaluoPredioIgnorado extends Component
     }
 
     public function actualizar(){
+
+        $this->authorize('update',$this->predio->avaluo);
 
         $this->validate();
 
@@ -561,6 +571,8 @@ class AvaluoPredioIgnorado extends Component
                     'actualizado_por' => auth()->user()->id,
                     'estado' => 'nuevo'
                 ]);
+
+                $avaluo->audits()->latest()->first()->update(['tags' => 'Actualizó información del predio del avalúo']);
 
                 $this->dispatch('mostrarMensaje', ['success', "El avaluo se actualizó con el folio " . $avaluo->folio . "."]);
 
@@ -646,19 +658,35 @@ class AvaluoPredioIgnorado extends Component
 
     public function asignarCuenta(){
 
+        $this->authorize('update',$this->predio->avaluo);
+
         $this->validate([
             'localidad' => 'required',
             'oficina' => 'required',
             'tipo' => 'required|min:1|max:2',
             'numero_registro' => 'required',
-            'tramite' => 'required'
+            'año' => 'required',
+            'folio' => 'required',
+            'usuario' => 'required',
         ]);
 
-        $tramite = Tramite::where('estado', 'pagado')->where('servicio_id', 292)->first();
+        $tramite = Tramite::where('servicio_id', 292)->where('año', $this->año)->where('folio', $this->folio)->where('usuario', $this->usuario)->first();
 
-        if(!$tramite){
+        if($tramite->estado != 'pagado'){
 
-            $this->dispatch('mostrarMensaje', ['error', "Trámite no valido."]);
+            $this->dispatch('mostrarMensaje', ['error', "El trámite no esta pagado."]);
+
+            return;
+
+        }elseif(!$tramite->estado){
+
+            $this->dispatch('mostrarMensaje', ['error', "El trámite no existe."]);
+
+            return;
+
+        }elseif($tramite->predio_avaluo != $this->predio->id){
+
+            $this->dispatch('mostrarMensaje', ['error', "El trámite no esta asociado a la clave catastral del avalúo."]);
 
             return;
 
@@ -669,8 +697,7 @@ class AvaluoPredioIgnorado extends Component
         $this->predio->tipo_predio = $this->tipo;
         $this->predio->numero_registro = $this->numero_registro;
 
-        if($this->validarDisponibilidad2())
-            return;
+        if($this->validarDisponibilidad2()) return;
 
         DB::transaction(function () use ($tramite){
 
@@ -678,7 +705,9 @@ class AvaluoPredioIgnorado extends Component
 
             $this->predio->avaluo->update(['estado' => 'concluido']);
 
-            $this->dispatch('mostrarMensaje', ['success', "La cuenta predial se asignó correctamente, puede consultar y/o notificar el avalúo en la sección Valuación y Desglose."]);
+            $this->predio->avaluo->audits()->latest()->first()->update(['tags' => 'Asigno cuenta predial a avalúo de predio ignorado']);
+
+            $this->dispatch('mostrarMensaje', ['success', "La cuenta predial se asignó correctamente."]);
 
             $this->modal2 = false;
 
@@ -694,7 +723,7 @@ class AvaluoPredioIgnorado extends Component
 
         if(!$this->predio->avaluo){
 
-            $this->dispatch('mostrarMensaje', ['error', "Debe cargar primero el avalúo."]);
+            $this->dispatch('mostrarMensaje', ['error', "Primero debe cargar el avalúo."]);
 
             return;
 
@@ -722,9 +751,9 @@ class AvaluoPredioIgnorado extends Component
 
         if($this->avaluo_id){
 
-            $avaluo = Avaluo::with('predio')->find($this->avaluo_id);
+            $avaluo = Avaluo::with('predioAvaluo')->find($this->avaluo_id);
 
-            $this->predio = $avaluo->predio;
+            $this->predio = $avaluo->predioAvaluo;
 
             $this->ap_paterno = $this->predio->propietarios()->first()->persona->ap_paterno;
             $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
@@ -736,6 +765,10 @@ class AvaluoPredioIgnorado extends Component
             $this->editar = true;
 
         }
+
+        $this->años = Constantes::AÑOS;
+
+        $this->año = now()->format('Y');
 
     }
 

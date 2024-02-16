@@ -12,7 +12,7 @@
 
     <div class="space-y-2 mb-5 bg-white rounded-lg p-2">
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end md:w-2/3 mx-auto mb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-start md:w-2/3 mx-auto mb-4">
 
             <div class="flex-auto">
 

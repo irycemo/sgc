@@ -8,7 +8,19 @@
 
             <div>
 
-                <input type="text" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
+
+                    <option value="" selected>Estado</option>
+
+                    @foreach ($años as $año)
+
+                        <option value="{{ $año }}">{{ $año }}</option>
+
+                    @endforeach
+
+                </select>
+
+                <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
 
                 <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
 
@@ -32,9 +44,9 @@
 
                 </select>
 
-                <input type="text" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
 
-                <input type="text" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
 
                 <select class="bg-white rounded-full text-sm" wire:model.live="filters.tipo">
 
@@ -44,7 +56,7 @@
 
                 </select>
 
-                <input type="text" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
 
                 <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
@@ -67,6 +79,7 @@
 
             <x-slot name="head">
 
+                <x-table.heading >Año</x-table.heading>
                 <x-table.heading >Folio</x-table.heading>
                 <x-table.heading >Estado</x-table.heading>
                 <x-table.heading >Valuador</x-table.heading>
@@ -85,6 +98,14 @@
                 @forelse ($predios as $predio)
 
                     <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $predio->id }}">
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Año</span>
+
+                            {{ $predio->avaluo->año }}
+
+                        </x-table.cell>
 
                         <x-table.cell>
 

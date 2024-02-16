@@ -56,7 +56,9 @@
                             @endforeach
                         </select>
 
-                        <input type="number" class="bg-white text-sm w-full rounded-r focus:ring-0 @error('folioInspeccion') border-red-500 @enderror" wire:model="folioInspeccion">
+                        <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folioInspeccion') border-red-500 @enderror" wire:model="folioInspeccion">
+
+                        <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuarioInspeccion') border-red-500 @enderror" wire:model="usuarioInspeccion">
 
                     </div>
 
@@ -86,7 +88,9 @@
                             @endforeach
                         </select>
 
-                        <input type="number" class="bg-white text-sm w-full rounded-r focus:ring-0 @error('folioAvaluo') border-red-500 @enderror" wire:model="folioAvaluo">
+                        <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folioAvaluo') border-red-500 @enderror" wire:model="folioAvaluo">
+
+                        <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuarioAvaluo') border-red-500 @enderror" wire:model="usuarioAvaluo">
 
                     </div>
 
@@ -163,18 +167,16 @@
 
         @endif
 
-        <button
+        <x-button-green
             wire:click="imprimir"
             wire:loading.attr="disabled"
-            wire:target="imprimir"
-            class=" bg-green-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-green-700 flex items-center justify-center focus:outline-none "
-        >
+            wire:target="imprimir">
 
             <img wire:loading wire:target="imprimir" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
             Imprimir
 
-        </button>
+        </x-button-green>
 
     </div>
 
