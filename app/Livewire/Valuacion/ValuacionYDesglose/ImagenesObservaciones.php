@@ -74,7 +74,10 @@ class ImagenesObservaciones extends Component
 
                 if($this->encabezado){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)->where('descripcion' , 'encabezado')->first();
+                    $file = File::where('fileable_id', $this->predio->avaluo->id)
+                                    ->where('fileable_type', 'App\Models\Avaluo')
+                                    ->where('descripcion' , 'encabezado')
+                                    ->first();
 
                     $encabezado = $this->encabezado->store('/', 'avaluos');
 
@@ -99,7 +102,10 @@ class ImagenesObservaciones extends Component
 
                 if($this->fachada){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)->where('descripcion' , 'fachada')->first();
+                    $file = File::where('fileable_id', $this->predio->avaluo->id)
+                                    ->where('fileable_type', 'App\Models\Avaluo')
+                                    ->where('descripcion' , 'fachada')
+                                    ->first();
 
                     $fachada = $this->fachada->store('/', 'avaluos');
 
@@ -124,7 +130,10 @@ class ImagenesObservaciones extends Component
 
                 if($this->foto2){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)->where('descripcion' , 'foto2')->first();
+                    $file = File::where('fileable_id', $this->predio->avaluo->id)
+                                    ->where('fileable_type', 'App\Models\Avaluo')
+                                    ->where('descripcion' , 'foto2')
+                                    ->first();
 
                     $foto2 = $this->foto2->store('/', 'avaluos');
 
@@ -150,7 +159,10 @@ class ImagenesObservaciones extends Component
 
                 if($this->foto3){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)->where('descripcion' , 'foto3')->first();
+                    $file = File::where('fileable_id', $this->predio->avaluo->id)
+                                    ->where('fileable_type', 'App\Models\Avaluo')
+                                    ->where('descripcion' , 'foto3')
+                                    ->first();
 
                     $foto3 = $this->foto3->store('/', 'avaluos');
 
@@ -175,7 +187,10 @@ class ImagenesObservaciones extends Component
 
                 if($this->foto4){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)->where('descripcion' , 'foto4')->first();
+                    $file = File::where('fileable_id', $this->predio->avaluo->id)
+                                    ->where('fileable_type', 'App\Models\Avaluo')
+                                    ->where('descripcion' , 'foto4')
+                                    ->first();
 
                     $foto4 = $this->foto4->store('/', 'avaluos');
 
@@ -199,7 +214,10 @@ class ImagenesObservaciones extends Component
 
                 if($this->macrolocalizacion){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)->where('descripcion' , 'macrolocalizacion')->first();
+                    $file = File::where('fileable_id', $this->predio->avaluo->id)
+                                    ->where('fileable_type', 'App\Models\Avaluo')
+                                    ->where('descripcion' , 'macrolocalizacion')
+                                    ->first();
 
                     $macrolocalizacion = $this->macrolocalizacion->store('/', 'avaluos');
 
@@ -224,7 +242,10 @@ class ImagenesObservaciones extends Component
 
                 if($this->microlocalizacion){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)->where('descripcion' , 'microlocalizacion')->first();
+                    $file = File::where('fileable_id', $this->predio->avaluo->id)
+                                    ->where('fileable_type', 'App\Models\Avaluo')
+                                    ->where('descripcion' , 'microlocalizacion')
+                                    ->first();
 
                     $microlocalizacion = $this->microlocalizacion->store('/', 'avaluos');
 
@@ -249,7 +270,10 @@ class ImagenesObservaciones extends Component
 
                 if($this->poligonoImagen){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)->where('descripcion' , 'poligonoImagen')->first();
+                    $file = File::where('fileable_id', $this->predio->avaluo->id)
+                                    ->where('fileable_type', 'App\Models\Avaluo')
+                                    ->where('descripcion' , 'poligonoImagen')
+                                    ->first();
 
                     $poligonoImagen = $this->poligonoImagen->store('/', 'avaluos');
 
@@ -274,7 +298,10 @@ class ImagenesObservaciones extends Component
 
                 if($this->poligonoDwg){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)->where('descripcion' , 'poligonoDwg')->first();
+                    $file = File::where('fileable_id', $this->predio->avaluo->id)
+                                    ->where('fileable_type', 'App\Models\Avaluo')
+                                    ->where('descripcion' , 'poligonoDwg')
+                                    ->first();
 
                     $poligonoDwg = $this->poligonoDwg->store('/', 'avaluos');
 

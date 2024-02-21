@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Valuacion;
 
+use App\Models\File;
 use App\Models\Avaluo;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Traits\ComponentesTrait;
+use Illuminate\Support\Facades\Storage;
 
 class MisAvaluos extends Component
 {
@@ -16,6 +18,7 @@ class MisAvaluos extends Component
     use ComponentesTrait;
 
     public $seleccionados = [];
+    public $idsEnPagina = [];
     public $paginaSeleccionada = false;
     public $todosSelecionados = false;
     public $modal = false;
@@ -26,35 +29,13 @@ class MisAvaluos extends Component
         return Avaluo::make();
     }
 
-    public function updatedSeleccionados(){
-
-        $this->todosSelecionados = false;
-
-        $this->paginaSeleccionada = false;
-
-    }
-
-    public function updatedPaginaSeleccionada($value){
-
-        if($value){
-
-            $this->seleccionados = $this->avaluos->pluck('id')->map(fn ($id) => (string) $id);
-
-        }else{
-
-            $this->seleccionados = [];
-
-        }
-
-    }
-
     public function eliminar(){
 
         try{
 
             DB::transaction(function () {
 
-                $avaluos = Avaluo::with('predioAvaluo')->whereKey($this->seleccionados)->get();
+                $avaluos = Avaluo::with('predioAvaluo.propietarios', 'predioAvaluo.colindancias', 'predioAvaluo.condominioTerrenos', 'predioAvaluo.condominioConstrucciones', 'predioAvaluo.terrenos', 'predioAvaluo.construcciones')->whereKey($this->seleccionados)->get();
 
                 foreach ($avaluos as $avaluo) {
 
@@ -66,11 +47,29 @@ class MisAvaluos extends Component
 
                     }
 
-                    $predio = $avaluo->predio;
+                    $predio = $avaluo->predioAvaluo;
+
+                    $predio->propietarios()->delete();
+
+                    $predio->colindancias()->delete();
+
+                    $predio->condominioTerrenos()->delete();
+
+                    $predio->condominioConstrucciones()->delete();
+
+                    $predio->construcciones()->delete();
+
+                    $predio->terrenos()->delete();
 
                     $avaluo->delete();
 
                     $predio->delete();
+
+                    $files = File::where('fileable_id', $avaluo->id)->where('fileable_type', 'App\Models\Avaluo')->get();
+
+                    foreach ($files as $file) {
+                        Storage::disk('avaluos')->delete($file->url);
+                    }
 
                 }
 
@@ -95,29 +94,16 @@ class MisAvaluos extends Component
 
     }
 
-    public function getAvaluosQueryProperty(){
-
-        return Avaluo::with('predioAvaluo.propietarios.persona', 'creadoPor', 'actualizadoPor')
-                        ->where('asignado_a', auth()->user()->id)
-                        ->orderBy($this->sort, $this->direction);
-
-    }
-
-    public function getAvaluosProperty(){
-
-        return $this->avaluosQuery->paginate($this->pagination);
-
-    }
-
     public function render()
     {
 
-        if($this->todosSelecionados){
+        $avaluos = Avaluo::with('predioAvaluo.propietarios.persona', 'creadoPor', 'actualizadoPor')
+                            ->where('asignado_a', auth()->user()->id)
+                            ->orderBy($this->sort, $this->direction)
+                            ->paginate($this->pagination);
 
-            $this->seleccionados = $this->avaluos->pluck('id')->map(fn ($id) => (string) $id);
+        $this->idsEnPagina = $avaluos->map(fn ($avaluo) => (string)$avaluo->id)->toArray();
 
-        }
-
-        return view('livewire.valuacion.mis-avaluos', ['avaluos' => $this->avaluos])->extends('layouts.admin');
+        return view('livewire.valuacion.mis-avaluos', compact('avaluos'))->extends('layouts.admin');
     }
 }

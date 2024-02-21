@@ -2,12 +2,17 @@
 
 namespace App\Livewire\Admin\Avaluos;
 
-use App\Http\Constantes\Constantes;
+use App\Models\File;
 use App\Models\User;
+use App\Models\Avaluo;
 use Livewire\Component;
 use App\Models\PredioAvaluo;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
+use App\Http\Constantes\Constantes;
+use Illuminate\Support\Facades\Log;
 use App\Http\Traits\ComponentesTrait;
+use Illuminate\Support\Facades\Storage;
 
 class Avaluos extends Component
 {
@@ -19,6 +24,9 @@ class Avaluos extends Component
     use ComponentesTrait;
 
     public PredioAvaluo $modelo_editar;
+
+    public $seleccionados = [];
+    public $idsEnPagina = [];
 
     public $valuadores;
 
@@ -36,6 +44,65 @@ class Avaluos extends Component
 
     public function crearModeloVacio(){
         $this->modelo_editar = PredioAvaluo::make();
+    }
+
+    public function eliminar(){
+
+        try{
+
+            DB::transaction(function () {
+
+                $avaluos = Avaluo::with('predioAvaluo.propietarios', 'predioAvaluo.colindancias', 'predioAvaluo.condominioTerrenos', 'predioAvaluo.condominioConstrucciones', 'predioAvaluo.terrenos', 'predioAvaluo.construcciones')->whereKey($this->seleccionados)->get();
+
+                foreach ($avaluos as $avaluo) {
+
+                    if($avaluo->estado == 'notificado'){
+
+                        $this->dispatch('mostrarMensaje', ['error', "El avalúo con folio " . $avaluo->folio . ' no se puede eliminar, esta notificado.']);
+
+                        return;
+
+                    }
+
+                    $predio = $avaluo->predioAvaluo;
+
+                    $predio->propietarios()->delete();
+
+                    $predio->colindancias()->delete();
+
+                    $predio->condominioTerrenos()->delete();
+
+                    $predio->condominioConstrucciones()->delete();
+
+                    $predio->construcciones()->delete();
+
+                    $predio->terrenos()->delete();
+
+                    $avaluo->delete();
+
+                    $predio->delete();
+
+                    $files = File::where('fileable_id', $avaluo->id)->where('fileable_type', 'App\Models\Avaluo')->get();
+
+                    foreach ($files as $file) {
+                        Storage::disk('avaluos')->delete($file->url);
+                    }
+
+                }
+
+                $this->dispatch('mostrarMensaje', ['success', "La información seleccionada se eliminó con éxito."]);
+
+                $this->resetearTodo($borrado = true);
+
+            });
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al avaluos usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+
+        }
+
     }
 
     public function mount(){
@@ -73,6 +140,8 @@ class Avaluos extends Component
                             ->when($this->filters['registro'], fn($q, $registro) => $q->where('numero_registro', $this->filters['registro']))
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
+
+        $this->idsEnPagina = $predios->map(fn ($predio) => (string)$predio->avaluo->id)->toArray();
 
         return view('livewire.Admin.avaluos.avaluos', compact('predios'))->extends('layouts.admin');
 
