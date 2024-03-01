@@ -104,20 +104,18 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
 
-                                <button
+                                <x-button-blue
                                     wire:click="abrirModal({{$avaluo->id}})"
                                     wire:loading.attr="disabled"
-                                    wire:target="abrirModal({{$avaluo->id}})"
-                                    class="md:w-full bg-blue-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 items-center rounded-full mr-2 hover:bg-blue-700 flex justify-center focus:outline-none"
-                                >
+                                    wire:target="abrirModal({{$avaluo->id}})">
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-3">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                                     </svg>
 
                                     Notificar
 
-                                </button>
+                                </x-button-blue>
 
                             </td>
                         </tr>
@@ -194,27 +192,24 @@
 
         <x-slot name="footer">
 
-            <div class="float-righ">
+            <div class="flex gap-3 items-center">
 
-                <button
+                <x-button-blue
                     wire:click="notificar"
                     wire:loading.attr="disabled"
-                    wire:target="notificar"
-                    class="bg-blue-400 text-white hover:shadow-lg font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                    wire:target="notificar">
 
                     <img wire:loading wire:target="notificar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Notificar
-                </button>
+                </x-button-blue>
 
-                <button
+                <x-button-red
                     wire:click="$set('modal', false)"
                     wire:loading.attr="disabled"
-                    wire:target="$set('modal', false)"
-                    type="button"
-                    class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-red-700 flaot-left focus:outline-none">
+                    wire:target="$set('modal', false)">
                     Cerrar
-                </button>
+                </x-button-red>
 
             </div>
 

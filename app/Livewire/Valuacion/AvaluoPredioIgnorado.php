@@ -658,9 +658,7 @@ class AvaluoPredioIgnorado extends Component
 
     public function asignarCuenta(){
 
-        $this->authorize('update',$this->predio->avaluo);
-
-        $this->validate([
+        /* $this->validate([
             'localidad' => 'required',
             'oficina' => 'required',
             'tipo' => 'required|min:1|max:2',
@@ -668,19 +666,27 @@ class AvaluoPredioIgnorado extends Component
             'año' => 'required',
             'folio' => 'required',
             'usuario' => 'required',
-        ]);
+        ]); */
 
-        $tramite = Tramite::where('servicio_id', 292)->where('año', $this->año)->where('folio', $this->folio)->where('usuario', $this->usuario)->first();
+        $this->authorize('update', $this->predio->avaluo);
 
-        if($tramite->estado != 'pagado'){
+        $tramite = Tramite::where('año', $this->año)->where('folio', $this->folio)->where('usuario', $this->usuario)->first();
 
-            $this->dispatch('mostrarMensaje', ['error', "El trámite no esta pagado."]);
+        if(!$tramite){
+
+            $this->dispatch('mostrarMensaje', ['error', "El trámite no existe."]);
 
             return;
 
-        }elseif(!$tramite->estado){
+        }elseif($tramite->id != 292){
 
-            $this->dispatch('mostrarMensaje', ['error', "El trámite no existe."]);
+            $this->dispatch('mostrarMensaje', ['error', "El trámite no es una inscripción o registro de predios ignorado."]);
+
+            return;
+
+        }elseif($tramite->estado != 'pagado'){
+
+            $this->dispatch('mostrarMensaje', ['error', "El trámite no esta pagado."]);
 
             return;
 

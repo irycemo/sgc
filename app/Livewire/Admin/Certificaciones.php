@@ -4,19 +4,20 @@ namespace App\Livewire\Admin;
 
 use App\Models\Oficina;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use App\Models\Certificacion;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Constantes\Constantes;
+use Endroid\QrCode\Builder\Builder;
 use Illuminate\Support\Facades\Log;
+use Endroid\QrCode\Writer\PngWriter;
 use App\Http\Traits\ComponentesTrait;
-use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
-use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
-use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
 use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\Label\Font\NotoSans;
-use Endroid\QrCode\Writer\PngWriter;
-use Endroid\QrCode\Builder\Builder;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
 
 class Certificaciones extends Component
 {
@@ -83,8 +84,6 @@ class Certificaciones extends Component
 
         $this->modelo_editar = $certificacion;
 
-        $partes = null;
-
         if($this->modelo_editar->documento == 'CERTIFICADO DE HISTORIA CATASTRAL'){
 
             $pdf = $this->certificadoHistoria($this->certificadoHistoriaPartes($this->modelo_editar->cadena_originial));
@@ -92,6 +91,10 @@ class Certificaciones extends Component
         }elseif($this->modelo_editar->documento == 'NOTIFICACIÓN DE VALOR CATASTRAL'){
 
             $pdf = $this->notificacionValorCatastral($this->notificacionValorCatastralPartes($this->modelo_editar->cadena_originial));
+
+        }elseif(in_array($this->modelo_editar->documento, ['CERTIFICADO DE REGISTRO ELECTRÓNICO', 'CERTIFICADO DE REGISTRO CON COLINDANCIAS', 'CERTIFICADO DE REGISTRO'])){
+
+            $pdf = $this->certificadoRegistro($this->certificadoRegistroPartes($this->modelo_editar->cadena_originial));
 
         }
 
@@ -109,12 +112,13 @@ class Certificaciones extends Component
             fn () => print($pdf),
             'certificacion.pdf'
         );
+
     }
 
     public function certificadoHistoria($partes){
 
         return Pdf::loadview('certificados.historia-reimpresion', [
-            'array' => $partes,
+            'objeto' => $partes,
             'qr' => $this->generadorQr($this->modelo_editar),
             'certificacion' => $this->modelo_editar,
         ]);
@@ -124,7 +128,17 @@ class Certificaciones extends Component
     public function notificacionValorCatastral($partes){
 
         return Pdf::loadview('avaluos.notificacion-reimpresion', [
-            'array' => $partes,
+            'objeto' => $partes,
+            'qr' => $this->generadorQr($this->modelo_editar),
+            'certificacion' => $this->modelo_editar,
+        ]);
+
+    }
+
+    public function certificadoRegistro($partes){
+
+        return Pdf::loadview('certificados.registro-reimpresion', [
+            'objeto' => $partes,
             'qr' => $this->generadorQr($this->modelo_editar),
             'certificacion' => $this->modelo_editar,
         ]);
@@ -154,55 +168,140 @@ class Certificaciones extends Component
         return $result->getDataUri();
     }
 
-    private function certificadoHistoriaPartes($cadena){
+    public function certificadoHistoriaPartes($cadena){
+
+        $object = (object)[];
 
         $array = explode('|', $cadena);
 
-        return array_map(function($array){
+        foreach ($array as $item) {
 
-            $aux =  explode(': ', $array);
+            $aux =  explode(': ', $item);
 
             $historia = null;
 
-            if($aux[0] === 'Historia'){
+            if($aux[0] === 'historia'){
 
                 foreach($aux as $item){
 
-                    if($item === 'Historia') continue;
+                    if($item === 'historia') continue;
 
                     $historia = $historia . ' ' . $item;
 
                 }
 
-                return[$aux[0] => $historia];
+                $object->{$aux[0]} = $historia;
+
+                continue;
 
             }
 
-            return[$aux[0] => $aux[1]];
+            $object->{$aux[0]} = $aux[1];
 
-        }, $array);
+        }
+
+        return $object;
 
     }
 
     public function notificacionValorCatastralPartes($cadena){
 
+        $object = (object)[
+            'avaluos' => collect(),
+        ];
+
         $array = explode('|', $cadena);
 
-        return array_map(function($array){
+        foreach ($array as $item) {
 
-            $aux =  explode(': ', $array);
+            $aux =  explode(': ', $item);
 
-            $aux2 = explode('%', $array);
+            $aux2 = explode('%', $item);
 
             if(count($aux2) === 5){
 
-                return $aux2;
+                $avaluo = (object)[];
+
+                $avaluo->folio = str_replace('folio_avaluo=' , '', $aux2[0]);
+
+                $avaluo->cuenta_predial = str_replace('Cuenta predial=' , '', $aux2[1]);
+
+                $avaluo->clave_catastral = str_replace('Clave catastral=' , '', $aux2[2]);
+
+                $avaluo->propietario = str_replace('Propietario=' , '', $aux2[3]);
+
+                $avaluo->valor_catastral = str_replace('Valor catastral=' , '', $aux2[4]);
+
+                $object->avaluos->push($avaluo);
+
+                continue;
 
             }
 
-            return[$aux[0] => $aux[1]];
+            $object->{$aux[0]} = $aux[1];
 
-        }, $array);
+        }
+
+        return $object;
+
+    }
+
+    public function certificadoRegistroPartes($cadena){
+
+        $object = (object)[
+            'propietarios' => collect(),
+            'colindancias' => collect(),
+        ];
+
+        $array = explode('|', $cadena);
+
+        foreach ($array as $item) {
+
+            $aux =  explode(': ', $item);
+
+            $aux2 = explode('%', $item);
+
+            if(count($aux2) === 5){
+
+                $propietario = (object)[];
+
+                $propietario->nombre = str_replace('Nombre=' , '', $aux2[0]);
+
+                $propietario->tipo = str_replace('Tipo=' , '', $aux2[1]);
+
+                $propietario->porcentaje = str_replace('Porcentaje propiedad=' , '', $aux2[2]);
+
+                $propietario->porcentaje_nuda = str_replace('Porcentaje nuda=' , '', $aux2[3]);
+
+                $propietario->porcentaje_usufructo = str_replace('Porcentaje usufructo=' , '', $aux2[4]);
+
+                $object->propietarios->push($propietario);
+
+                continue;
+
+            }
+
+            if(count($aux2) === 3){
+
+                $colindancia = (object)[];
+
+                $colindancia->viento = str_replace('Viento=' , '', $aux2[0]);
+
+                $colindancia->longitud = str_replace('Longitud=' , '', $aux2[1]);
+
+                $colindancia->descripcion = str_replace('Descripcion=' , '', $aux2[2]);
+
+                $object->colindancias->push($colindancia);
+
+                continue;
+
+            }
+
+            $object->{$aux[0]} = $aux[1];
+
+        }
+
+        return $object;
 
     }
 

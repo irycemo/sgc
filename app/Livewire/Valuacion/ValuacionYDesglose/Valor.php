@@ -363,10 +363,10 @@ class Valor extends Component
 
     public function borrarConstruccion($index){
 
+        $this->validate(['predio' => 'required']);
+
         if(!$this->flag)
             $this->authorize('update',$this->predio->avaluo);
-
-        $this->validate(['predio' => 'required']);
 
         try {
 
@@ -386,10 +386,10 @@ class Valor extends Component
 
     public function borrarTerreno($index){
 
+        $this->validate(['predio' => 'required']);
+
         if(!$this->flag)
             $this->authorize('update',$this->predio->avaluo);
-
-        $this->validate(['predio' => 'required']);
 
         try {
 
@@ -409,10 +409,10 @@ class Valor extends Component
 
     public function borrarCondominioTerreno($index){
 
+        $this->validate(['predio' => 'required']);
+
         if(!$this->flag)
             $this->authorize('update',$this->predio->avaluo);
-
-        $this->validate(['predio' => 'required']);
 
         try {
 

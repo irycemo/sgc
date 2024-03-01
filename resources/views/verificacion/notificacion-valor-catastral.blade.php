@@ -12,15 +12,7 @@
 
         <p class="font-semibold text-gray-900">Cantidad de avalúos</p>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Número')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->numero }}</p>
 
     </div>
 
@@ -28,15 +20,7 @@
 
         <p class="font-semibold text-gray-900">Valuador</p>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Valuador')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->valuador }}</p>
 
     </div>
 
@@ -44,15 +28,7 @@
 
         <strong>Titular</strong>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Titular')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{!! $item[key($item)] !!}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->titular }}</p>
 
     </div>
 
@@ -60,39 +36,23 @@
 
         <strong>Cargo</strong>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Cargo')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{!! $item[key($item)] !!}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->cargo }}</p>
 
     </div>
 
-    @foreach ($array as $item)
+    <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-        @if(key($item) === 'Jefe de departamento')
+        <p class="font-semibold text-gray-900">Jefe de departamento</p>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->jefe_de_departamento }}</p>
 
-                <p class="font-semibold text-gray-900">Jefe de departamento</p>
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            </div>
-
-        @endif
-
-    @endforeach
+    </div>
 
 </div>
 
 <div class="rounded-lg bg-gray-100 py-1 px-2 mb-3 overflow-x-auto">
 
-    <strong>Avaluos</strong>
+    <p class="text-center"><strong>Avaluos</strong></p>
 
     <table class="w-full overflow-x-auto table">
 
@@ -112,19 +72,15 @@
 
         <tbody class="divide-y divide-gray-200">
 
-            @foreach ($array as $item)
+            @foreach ($objeto->avaluos as $avaluo)
 
-                @if(count($item) === 5)
-
-                    <tr class="text-gray-500 text-sm leading-relaxed">
-                        <td class=" px-2 w-full whitespace-nowrap">{{ str_replace('Folio avalúo=' , '', $item[0]) }}</td>
-                        <td class=" px-2 w-full whitespace-nowrap">{{ str_replace('Cuenta predial=' , '', $item[1]) }}</td>
-                        <td class=" px-2 w-full whitespace-nowrap">{{ str_replace('Clave catastral=' , '', $item[2]) }}</td>
-                        <td class=" px-2 w-full whitespace-nowrap">{{ str_replace('Propietario=' , '', $item[3]) }}</td>
-                        <td class=" px-2 w-full whitespace-nowrap text-right">${{ number_format(str_replace('Valor catastral=' , '', $item[4]), 2) }}</td>
-                    </tr>
-
-                @endif
+                <tr class="text-gray-500 text-sm leading-relaxed">
+                    <td class=" px-2 w-full whitespace-nowrap">{{ $avaluo->folio }}</td>
+                    <td class=" px-2 w-full whitespace-nowrap">{{ $avaluo->cuenta_predial }}</td>
+                    <td class=" px-2 w-full whitespace-nowrap">{{ $avaluo->clave_catastral }}</td>
+                    <td class=" px-2 w-full whitespace-nowrap">{{ $avaluo->propietario }}</td>
+                    <td class=" px-2 w-full whitespace-nowrap text-right">${{ number_format($avaluo->valor_catastral, 2) }}</td>
+                </tr>
 
             @endforeach
 
@@ -136,71 +92,39 @@
 
 <div class="flex flex-col lg:flex-row gap-3 mb-3">
 
-    @foreach ($array as $item)
+    @if(isset($objeto->tramite_inspeccion))
 
-        @if(key($item) === 'Trámite de inspección')
+        <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <p class="font-semibold text-gray-900">Trámite de inspección</p>
 
-                <p class="font-semibold text-gray-900">Trámite de inspección</p>
+            <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->tramite_inspeccion }}</p>
 
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
+            <p class="text-gray-500 text-sm leading-relaxed">Recibo: {{ $objeto->recibo_inspeccion }}</p>
 
-                @foreach ($array as $item)
+        </div>
 
-                    @if(key($item) === 'Recibo Inspección')
+    @endif
 
-                        <p class="text-gray-500 text-sm leading-relaxed">Recibo: {{ $item[key($item)] }}</p>
+    @if(isset($objeto->tramite_avaluo))
 
-                    @endif
+        <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                @endforeach
+            <p class="font-semibold text-gray-900">Trámite de avalúo</p>
 
-            </div>
+            <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->tramite_avaluo }}</p>
 
-        @endif
+            <p class="text-gray-500 text-sm leading-relaxed">Recibo: {{ $objeto->recibo_avaluo }}</p>
 
-    @endforeach
+        </div>
 
-    @foreach ($array as $item)
-
-        @if(key($item) === 'Trámite de avalúo')
-
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                <p class="font-semibold text-gray-900">Trámite de avalúo</p>
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-                @foreach ($array as $item)
-
-                    @if(key($item) === 'Recibo Avalúo')
-
-                        <p class="text-gray-500 text-sm leading-relaxed">Recibo: {{ $item[key($item)] }}</p>
-
-                    @endif
-
-                @endforeach
-
-            </div>
-
-        @endif
-
-    @endforeach
+    @endif
 
     <div class="rounded-lg bg-gray-100 py-1 px-2">
 
         <p class="font-semibold text-gray-900">Impreso en</p>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Impreso en')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->impreso_en }}</p>
 
     </div>
 
@@ -208,57 +132,41 @@
 
         <p class="font-semibold text-gray-900">Impreso por</p>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Impreso por')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->impreso_por }}</p>
 
     </div>
 
 </div>
 
-@foreach ($array as $item)
+@if(isset($objeto->convenio_municipal))
 
-    @if(key($item) === 'Convenio municipal')
+    <div class="rounded-lg bg-gray-100 py-1 px-2 mb-3">
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2 mb-3">
+        <p class="font-semibold text-gray-900">Convenio municipal</p>
 
-            <p class="font-semibold text-gray-900">Convenio municipal</p>
+        <p class="text-gray-500 text-sm leading-relaxed break-words">Convenio municipal</p>
 
-            <p class="text-gray-500 text-sm leading-relaxed break-words">Convenio municipal</p>
+    </div>
 
-        </div>
+@endif
 
-    @endif
+@if(isset($objeto->firma_jefe_de_departamento))
 
-@endforeach
+    <div class="rounded-lg bg-gray-100 py-1 px-2 mb-3">
 
-@foreach ($array as $item)
+        <p class="font-semibold text-gray-900 text-center">Firma electrónica (Jefe de departamento)</p>
 
-    @if(key($item) === 'Firma Jefe de departamento')
+        <p class="text-gray-500 text-sm leading-relaxed break-words">{{ $objeto->firma_jefe_de_departamento }}</p>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2 mb-3">
+    </div>
 
-            <p class="font-semibold text-gray-900">Firma electrónica (Jefe de departamento)</p>
-
-            <p class="text-gray-500 text-sm leading-relaxed break-words">{{ $item[key($item)] }}</p>
-
-        </div>
-
-    @endif
-
-@endforeach
+@endif
 
 @if($certificacion->cadena_encriptada)
 
     <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-        <p class="font-semibold text-gray-900">Firma electrónica (Director)</p>
+        <p class="font-semibold text-gray-900 text-center">Firma electrónica (Director)</p>
 
         <p class="text-gray-500 text-sm leading-relaxed break-words">{{ $certificacion->cadena_encriptada }}</p>
 

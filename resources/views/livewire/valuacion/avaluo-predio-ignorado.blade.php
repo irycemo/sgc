@@ -754,16 +754,26 @@
 
     </div>
 
+    @if(count($errors) > 0)
+
+        <div class="mb-5 bg-white rounded-lg p-2 shadow-lg flex gap-2 flex-wrap ">
+
+            <ul class="flex gap-2 felx flex-wrap list-disc ml-5">
+            @foreach ($errors->all() as $error)
+
+                <li class="text-red-500 text-xs md:text-sm ml-5">
+                    {{ $error }}
+                </li>
+
+            @endforeach
+
+        </ul>
+
+        </div>
+
+    @endif
+
     <div class="bg-white rounded-lg p-3 flex justify-end">
-
-        @if(count($errors) > 0)
-
-            <span class="bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-3 py-1 ml-auto rounded-full  hover:bg-red-700 flex items-center justify-center focus:outline-none ">
-                Campos incorrectos {{ $errors }}
-            </span>
-
-        @endif
-
         @if(!$editar)
 
             <x-button-green
@@ -794,7 +804,7 @@
 
     </div>
 
-    <x-dialog-modal wire:model.live="modal">
+    <x-dialog-modal wire:model="modal">
 
         <x-slot name="title">
 
@@ -806,7 +816,7 @@
 
             <div class="relative p-1">
 
-                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
+                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5 items-center">
 
                     <div class="flex-auto items-start">
 
@@ -972,7 +982,7 @@
 
     </x-dialog-modal>
 
-    <x-dialog-modal wire:model.live="modal2" >
+    <x-dialog-modal wire:model="modal2" maxWidth="sm">
 
         <x-slot name="title">
 
@@ -1016,93 +1026,29 @@
 
                 <div class="flex flex-col md:flex-row justify-between gap-2 mb-5 items-start">
 
-                    <div class="flex-auto">
+                    <x-input-group for="localidad" label="Localidad" :error="$errors->first('localidad')">
 
-                        <div>
+                        <x-input-text type="number" id="localidad" wire:model="localidad" readonly/>
 
-                            <Label>Localidad</Label>
+                    </x-input-group>
 
-                        </div>
+                    <x-input-group for="oficina" label="Oficina" :error="$errors->first('oficina')">
 
-                        <div>
+                        <x-input-text type="number" id="oficina" wire:model="oficina" readonly/>
 
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model="localidad" readonly>
+                    </x-input-group>
 
-                        </div>
+                    <x-input-group for="tipo" label="Tipo" :error="$errors->first('tipo')">
 
-                        <div>
+                        <x-input-text type="number" id="tipo" wire:model="tipo" max="2" min="1"/>
 
-                            @error('localidad') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                    </x-input-group>
 
-                        </div>
+                    <x-input-group for="numero_registro" label="Número de Registro" :error="$errors->first('numero_registro')" class="w-full">
 
-                    </div>
+                        <x-input-text type="number" id="numero_registro" wire:model="numero_registro" max="2" min="1"/>
 
-                    <div class="flex-auto">
-
-                        <div>
-
-                            <Label>Oficina</Label>
-
-                        </div>
-
-                        <div>
-
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
-
-                        </div>
-
-                        <div>
-
-                            @error('oficina') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto">
-
-                        <div>
-
-                            <Label>Tipo</Label>
-
-                        </div>
-
-                        <div>
-
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model="tipo">
-
-                        </div>
-
-                        <div>
-
-                            @error('tipo') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex-auto">
-
-                        <div>
-
-                            <Label>Número de registro</Label>
-
-                        </div>
-
-                        <div>
-
-                            <input type="number" class="bg-white rounded text-sm w-full" wire:model="numero_registro">
-
-                        </div>
-
-                        <div>
-
-                            @error('numero_registro') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                        </div>
-
-                    </div>
+                    </x-input-group>
 
                 </div>
 

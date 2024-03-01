@@ -1009,11 +1009,21 @@
                             </td>
                             <td style="font-size:12px; padding-right: 40px;">
 
-                                <p><strong>Trámite de inspección ocular:</strong> {{ $tramiteInspeccion->folio }} <strong>Recibo:</strong> {{ $tramiteInspeccion->folio_pago }}</p>
+                                @if ($tramiteInspeccion)
+                                    <p><strong>Trámite de inspección ocular:</strong> {{ $tramiteInspeccion->folio }} <strong>Recibo:</strong> {{ $tramiteInspeccion->folio_pago }}</p>
+                                @endif
+
                                 @if ($tramiteAvaluo)
                                     <p><strong>Trámite de impresión:</strong> {{ $tramiteAvaluo->folio }} <strong>Recibo:</strong> {{ $tramiteAvaluo->folio_pago }}</p>
                                 @endif
+
                                 <p><strong>Elaborado por:</strong> {{ auth()->user()->name }} {{ auth()->user()->ap_paterno }} {{ auth()->user()->ap_materno }}, <strong>con fecha:</strong> {{ now()->format('d-m-Y H:i:s') }}</p>
+
+                                @if(isset($convenio))
+
+                                    <p><strong>Convenio:</strong>{{ $convenio }}</p>
+
+                                @endif
 
                             </td>
                         </tr>
@@ -1029,21 +1039,6 @@
         </div>
 
     </main>
-
-    <script type="text/php">
-        if (isset($predio)) {
-            $x = 280;
-            $y = 810;
-            $text = "Página: {PAGE_NUM} de {PAGE_COUNT}";
-            $font = null;
-            $size = 9;
-            $color = array(0,0,0);
-            $word_space = 0.0;  //  default
-            $char_space = 0.0;  //  default
-            $angle = 0.0;   //  default
-            $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
-        }
-    </script>
 
 </body>
 </html>

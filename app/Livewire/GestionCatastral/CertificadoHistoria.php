@@ -62,6 +62,8 @@ class CertificadoHistoria extends Component
     public $tramite;
     public $cadena;
 
+    public $impresionDirector = false;
+
     public Movimiento $modelo_editar;
 
     public function crearModeloVacio(){
@@ -340,37 +342,35 @@ class CertificadoHistoria extends Component
 
         $fechaImpresion = now()->format('d-m-Y H:i:s');
 
-        $this->cadena = 'Cuenta predial: ' . $this->predio->cuentaPredial();
+        $this->cadena = 'cuenta_predial: ' . $this->predio->cuentaPredial();
 
-        $this->cadena = $this->cadena . '|' . 'Clave catastral: ' . $this->predio->claveCatastral();
+        $this->cadena = $this->cadena . '|' . 'clave_catastral: ' . $this->predio->claveCatastral();
 
-        $this->cadena = $this->cadena . '|' . 'Propietario: ' . $this->predio->primerPropietario();
+        $this->cadena = $this->cadena . '|' . 'propietario: ' . $this->predio->primerPropietario();
 
-        $this->cadena = $this->cadena . '|' . 'Historia: ' . $this->certificado;
+        $this->cadena = $this->cadena . '|' . 'historia: ' . $this->certificado;
 
-        $this->cadena = $this->cadena . '|' . 'Impreso en: ' . $fechaImpresion;
+        $this->cadena = $this->cadena . '|' . 'impreso_en: ' . $fechaImpresion;
 
-        $this->cadena = $this->cadena . '|' . 'Impreso por: ' . auth()->user()->nombreCompleto();
+        $this->cadena = $this->cadena . '|' . 'impreso_por: ' . auth()->user()->nombreCompleto();
 
-        $this->cadena = $this->cadena . '|' . 'Trámite: ' . $this->tramite->año . '-' . $this->tramite->folio . '-'. $this->tramite->usuario . '|' . 'Recibo: ' . $this->tramite->folio_pago;
+        $this->cadena = $this->cadena . '|' . 'tramite: ' . $this->tramite->año . '-' . $this->tramite->folio . '-'. $this->tramite->usuario . '|' . 'recibo: ' . $this->tramite->folio_pago;
 
-        $this->cadena = $this->cadena . '|' . 'Solicitante: ' . $this->tramite->nombre_solicitante;
+        $this->cadena = $this->cadena . '|' . 'solicitante: ' . $this->tramite->nombre_solicitante;
 
-        $this->cadena = $this->cadena . '|' . 'Director: ' . $this->director->nombreCompleto();
-
-        if($this->predio->oficina == 101){
+        if($this->predio->oficina == 101 || $this->impresionDirector){
 
             $fielDirector = Credential::openFiles(Storage::disk('efirma')->path($this->director->efirma->cer), Storage::disk('efirma')->path($this->director->efirma->key), $this->director->efirma->contraseña);
 
-            $firmaDirector = $fielDirector->sign($this->cadena);
-
             $oficina = Oficina::where('oficina', 101)->first();
 
-            $this->cadena = $this->cadena . '|' . 'Oficina: ' . $oficina->nombre;
+            $this->cadena = $this->cadena . '|' . 'oficina: ' . $oficina->nombre;
 
-            $this->cadena = $this->cadena . '|' . 'Suscrito: ' . $this->director->nombreCompleto();
+            $this->cadena = $this->cadena . '|' . 'suscrito: ' . $this->director->nombreCompleto();
 
-            $this->cadena = $this->cadena . '|' . 'Cargo: Director de catastro';
+            $this->cadena = $this->cadena . '|' . 'cargo: Director de catastro';
+
+            $firmaDirector = $fielDirector->sign($this->cadena);
 
             $certificacion = Certificacion::create([
                 'año' => now()->format('Y'),
@@ -402,11 +402,13 @@ class CertificadoHistoria extends Component
 
             $oficina = Oficina::where('oficina', $this->predio->oficina)->first();
 
-            $this->cadena = $this->cadena . '|' . 'Oficina: ' . $oficina->nombre;
+            $this->cadena = $this->cadena . '|' . 'oficina: ' . $oficina->nombre;
 
-            $this->cadena = $this->cadena . '|' . 'Suscrito: ' . $oficina->titular;
+            $this->cadena = $this->cadena . '|' . 'suscrito: ' . $oficina->titular;
 
-            $this->cadena = $this->cadena . '|' . 'Cargo: ' . $oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR DE RENTAS';
+            $cargo = $oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR(A) DE RENTAS';
+
+            $this->cadena = $this->cadena . '|' . 'cargo: ' .  $cargo;
 
             $certificacion = Certificacion::create([
                 'año' => now()->format('Y'),
@@ -425,7 +427,7 @@ class CertificadoHistoria extends Component
                                 'certificado' => $this->certificado,
                                 'tramite' => $this->tramite,
                                 'oficina' => $oficina->nombre,
-                                'cargo' => $oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR DE RENTAS',
+                                'cargo' => $cargo,
                                 'titular' => $oficina->titular,
                                 'qr' => $this->generadorQr($certificacion->uuid),
                                 'fecha_impresion' => $fechaImpresion,

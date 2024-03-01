@@ -12,15 +12,7 @@
 
         <p class="font-semibold text-gray-900">Suscrito</p>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Suscrito')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->suscrito }}</p>
 
     </div>
 
@@ -28,15 +20,7 @@
 
         <p class="font-semibold text-gray-900">Cargo</p>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Cargo')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->cargo }}</p>
 
     </div>
 
@@ -44,15 +28,7 @@
 
         <strong>Cuenta predial</strong>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Cuenta predial')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->cuenta_predial }}</p>
 
     </div>
 
@@ -60,15 +36,7 @@
 
         <strong>Clave catastral</strong>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Clave catastral')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->clave_catastral }}</p>
 
     </div>
 
@@ -76,15 +44,7 @@
 
         <strong>Propietario</strong>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Propietario')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->propietario }}</p>
 
     </div>
 
@@ -94,15 +54,7 @@
 
     <strong>Historia</strong>
 
-    @foreach ($array as $item)
-
-        @if(key($item) === 'Historia')
-
-            <p class="text-gray-500 text-sm leading-relaxed">{!! $item[key($item)] !!}</p>
-
-        @endif
-
-    @endforeach
+    <p class="text-gray-500 text-sm leading-relaxed">{!! $objeto->historia !!}</p>
 
 </div>
 
@@ -112,15 +64,7 @@
 
         <p class="font-semibold text-gray-900">Solicitante</p>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Solicitante')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->solicitante }}</p>
 
     </div>
 
@@ -128,15 +72,7 @@
 
         <p class="font-semibold text-gray-900">Expedido en</p>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Oficina')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->oficina }}</p>
 
     </div>
 
@@ -144,25 +80,9 @@
 
         <p class="font-semibold text-gray-900">Trámite</p>
 
-        @foreach ($array as $item)
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->tramite }}</p>
 
-            @if(key($item) === 'Trámite')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
-
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Recibo')
-
-                <p class="text-gray-500 text-sm leading-relaxed">Recibo: {{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">Recibo: {{ $objeto->recibo }}</p>
 
     </div>
 
@@ -170,15 +90,7 @@
 
         <p class="font-semibold text-gray-900">Impreso en</p>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Impreso en')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->impreso_en }}</p>
 
     </div>
 
@@ -186,31 +98,7 @@
 
         <p class="font-semibold text-gray-900">Impreso por</p>
 
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Impreso por')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{{ $item[key($item)] }}</p>
-
-            @endif
-
-        @endforeach
-
-    </div>
-
-    <div class="rounded-lg bg-gray-100 py-1 px-2 mb-3">
-
-        <strong>Titular</strong>
-
-        @foreach ($array as $item)
-
-            @if(key($item) === 'Titular')
-
-                <p class="text-gray-500 text-sm leading-relaxed">{!! $item[key($item)] !!}</p>
-
-            @endif
-
-        @endforeach
+        <p class="text-gray-500 text-sm leading-relaxed">{{ $objeto->impreso_por }}</p>
 
     </div>
 

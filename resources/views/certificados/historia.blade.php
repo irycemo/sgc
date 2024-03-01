@@ -39,6 +39,8 @@
         font-family: sans-serif;
         font-weight: normal;
         line-height: 1.5;
+        text-transform: uppercase;
+        font-size: 9px;
     }
 
     .titulo{
@@ -64,7 +66,6 @@
 
     .informacion{
         padding: 0 20px 0 20px;
-        font-size: 10px;
         margin-bottom: 10px;
     }
 
@@ -86,7 +87,7 @@
         background: #5E1D45;
         color: white;
         font-size: 12px;
-
+        text-transform: lowercase;
     }
 
     .fot{
@@ -143,18 +144,16 @@
 
             <p class="titulo">CERTIFICADO DE HISTORIA CATASTRAL</p>
 
-            <div class="informacion" >
-
-                <p class="fundamento">
-                    CON FUNDAMENTO EN LOS ARTICULOS 18° FRACCIÓN VI DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL
-                    DEL ESTADO DE MICHOACÁN DE OCAMPO,8 FRACCIONES XI Y XVIII,DEL REGLAMENTO DE LA LEY DE LA
-                    FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO,Y 11 FRACCIONES I,II,VI,XXVII
-                    Y XXXIV DEL REGLAMENTO INTERIOR DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN
-                    DE OCAMPO EL SUSCRITO  @if(isset($director)) <strong style="text-transform: uppercase;">{{ $director }} DIRECTOR DE CATASTRO.</strong> @elseif(isset($titular)) <strong style="text-transform: uppercase;">{{ $titular }}, {{ $cargo }}.</strong> @endif CERTIFICA QUE EN LOS ARCHIVOS CATASTRALES EXISTENTES EN ESTA OFICINA A MI CARGO, SE ENCONTRARON
-                    REGISTROS HISTORICOS DE LA SIGUIENTE PROPIEDAD:
-                </p>
-
-            </div>
+            <p class="fundamento">
+                CON FUNDAMENTO EN LOS ARTICULOS 18° FRACCIÓN VI DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL
+                DEL ESTADO DE MICHOACÁN DE OCAMPO,8 FRACCIONES XI Y XVIII,DEL REGLAMENTO DE LA LEY DE LA
+                FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO,Y II FRACCIONES I,II,VI,XXVII
+                Y XXXIV DEL REGLAMENTO INTERIOR DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN
+                DE OCAMPO EL SUSCRITO
+                @if(isset($director)) <strong style="text-transform: uppercase;"> {{ $director }} DIRECTOR DE CATASTRO.</strong> @elseif(isset($titular)) <strong style="text-transform: uppercase;"> {{ $titular }}, {{ $cargo }}.</strong> @endif
+                CERTIFICA QUE EN LOS ARCHIVOS CATASTRALES EXISTENTES EN ESTA OFICINA A MI CARGO, SE ENCONTRARON
+                REGISTROS HISTORICOS DE LA SIGUIENTE PROPIEDAD:
+            </p>
 
         </div>
 
@@ -164,17 +163,21 @@
             <p><strong>Clave catastral</strong> {{ $predio->claveCatastral() }}</p>
             <p><strong>Propietario</strong> {{ $predio->primerPropietario() }}</p>
 
-            <p style="text-transform: uppercase; font-weight: bold; text-align: center; margin-top: 10px;">HISTORIA</p>
+        </div>
+
+        <p class="separador">HISTORIA</p>
+
+        <div class="informacion">
 
             {!! $certificado !!}
-
-            <p style="margin-top: 10px;">A SOLICITUD DE <strong style="text-transform: uppercase;">{{ $tramite->nombre_solicitante }}</strong> EXPIDO EL PRESENTE CERTIFICADO EN LA CIUDAD DE <strong style="text-transform: uppercase;">{{ $oficina }}</strong>, MICHOACÁN.</p>
 
         </div>
 
         <p class="separador">Datos de control</p>
 
         <div class="informacion">
+
+            <p style="margin-top: 10px;">A SOLICITUD DE <strong style="text-transform: uppercase;">{{ $tramite->nombre_solicitante }}</strong> EXPIDO EL PRESENTE CERTIFICADO EN LA CIUDAD DE <strong style="text-transform: uppercase;">{{ $oficina }}</strong>, MICHOACÁN.</p>
 
             <div>
 

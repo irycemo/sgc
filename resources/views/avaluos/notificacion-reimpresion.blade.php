@@ -146,7 +146,7 @@
 
                 <p class="fundamento">
                     CON FUNDAMENTO LEGAL EN EL ARTÍCULO 134 DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO Y CON LA FINALIDAD DE DAR CUMPLIMIENTO A LAS OBLIGACIONES PROPIAS DE LA DIRECCIÓN
-                    DE CATASTRO DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO, CON EL CARÁCTER SEÑALADO ME PERMITO NOTIFICARLE <strong>@foreach ($array as $item) @if(key($item) === 'Número') {{ $item[key($item)] }}@endif @endforeach</strong>
+                    DE CATASTRO DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO, CON EL CARÁCTER SEÑALADO ME PERMITO NOTIFICARLE <strong> {{ $objeto->numero }}</strong>
                     AVALÚO(S) DE VALOR CATASTRAL, QUE PARA MAYOR REFERENCIA SE DETALLA EN EL CUADRO ANEXO, ELLO CON EL PROPÓSITO DE QUE SURTA LOS EFECTOS LEGALES PROCEDENTES A QUE HAYA LUGAR;
                 </p>
 
@@ -172,29 +172,25 @@
 
                 <tbody>
 
-                    @foreach ($array as $item)
+                    @foreach ($objeto->avaluos as $avaluo)
 
-                        @if(count($item) === 5)
-
-                            <tr>
-                                <td style="border: 1px solid gray; padding: 0 5px 0 5px;  white-space: nowrap;">
-                                    <p>{{ str_replace('Folio avalúo=' , '', $item[0]) }}</p>
-                                </td>
-                                <td style="border: 1px solid gray; padding: 0 5px 0 5px;  white-space: nowrap;">
-                                    <p>{{ str_replace('Cuenta predial=' , '', $item[1]) }}</p>
-                                </td>
-                                <td style="border: 1px solid gray; padding: 0 5px 0 5px; white-space: nowrap;">
-                                    <p>{{ str_replace('Clave catastral=' , '', $item[2]) }}</p>
-                                </td>
-                                <td style="border: 1px solid gray; padding: 0 5px 0 5px;">
-                                    <p>{{ str_replace('Propietario=' , '', $item[3]) }}</p>
-                                </td>
-                                <td style="border: 1px solid gray; padding: 0 5px 0 5px;  white-space: nowrap; text-align: right;">
-                                    <p>${{ number_format(str_replace('Valor catastral=' , '', $item[4]), 2) }}</p>
-                                </td>
-                            </tr>
-
-                        @endif
+                        <tr>
+                            <td style="border: 1px solid gray; padding: 0 5px 0 5px;  white-space: nowrap;">
+                                <p>{{ $avaluo->folio }}</p>
+                            </td>
+                            <td style="border: 1px solid gray; padding: 0 5px 0 5px;  white-space: nowrap;">
+                                <p>{{ $avaluo->cuenta_predial }}</p>
+                            </td>
+                            <td style="border: 1px solid gray; padding: 0 5px 0 5px; white-space: nowrap;">
+                                <p>{{ $avaluo->clave_catastral }}</p>
+                            </td>
+                            <td style="border: 1px solid gray; padding: 0 5px 0 5px;">
+                                <p>{{ $avaluo->propietario }}</p>
+                            </td>
+                            <td style="border: 1px solid gray; padding: 0 5px 0 5px;  white-space: nowrap; text-align: right;">
+                                <p>${{ number_format($avaluo->valor_catastral,2) }}</p>
+                            </td>
+                        </tr>
 
                     @endforeach
 
@@ -239,125 +235,90 @@
 
                                 <p style="border-top: gray solid 1px; text-align: center">FIRMA Y NOMBRE DEL NOTIFICADOR</p>
 
-                            </td>s
+                            </td>
 
-                            @foreach ($array as $item)
+                            @if(!isset($objeto->autoridad_municipal))
 
-                                @if(key($item) === 'Titular')
+                                <td style="padding-right: 20px; text-align:center; vertical-align: bottom;">
 
-                                    @foreach ($array as $item)
+                                    <p style="text-transform: uppercase;">{{ $objeto->valuador }}</p>
+                                    <p style="border-top: gray solid 1px; text-align: center">FIRMA Y NOMBRE DEL VALUADOR</p>
 
-                                        @if(key($item) === 'Valuador')
+                                </td>
 
-                                            <td style="padding-right: 20px; text-align:center; vertical-align: bottom;">
-
-                                                <p style="text-transform: uppercase;">{{ $item[key($item)] }}</p>
-                                                <p style="border-top: gray solid 1px; text-align: center">FIRMA Y NOMBRE DEL VALUADOR</p>
-
-                                            </td>
-
-                                        @endif
-
-                                    @endforeach
-
-                                @endif
-
-                            @endforeach
+                            @endif
 
                         </tr>
-
                     </tbody>
 
                 </table>
 
-                @foreach ($array as $item)
+                @if(isset($objeto->autoridad_municipal))
 
-                    @if(key($item) === 'Autoridad municipal')
+                    <table style="margin-top: 40px">
 
-                        <table style="margin-top: 40px">
+                        <tbody>
+                            <tr>
 
-                            <tbody>
-                                <tr>
+                                <td style="padding-right: 20px; text-align:center; vertical-align: bottom;">
 
-                                    <td style="padding-right: 20px; text-align:center; vertical-align: bottom;">
+                                    <p style="text-transform: uppercase;">{{ $objeto->autoridad_municipal }}</p>
+                                    <p style="border-top: gray solid 1px; text-align: center">FIRMA Y NOMBRE DE LA AUTORIDAD MUNICIPAL</p>
 
-                                        <p style="text-transform: uppercase;">{{ $item[key($item)] }}</p>
-                                        <p style="border-top: gray solid 1px; text-align: center">FIRMA Y NOMBRE DE LA AUTORIDAD MUNICIPAL</p>
+                                </td>
 
-                                    </td>
+                                <td style="padding-right: 20px; text-align:center; vertical-align: bottom;">
 
-                                    @foreach ($array as $item)
+                                    <p style="text-transform: uppercase;">{{ $objeto->valuador }}</p>
+                                    <p style="border-top: gray solid 1px; text-align: center">FIRMA Y NOMBRE DEL VALUADOR</p>
 
-                                        @if(key($item) === 'Valuador')
+                                </td>
 
-                                            <td style="padding-right: 20px; text-align:center; vertical-align: bottom;">
+                            </tr>
+                        </tbody>
 
-                                                <p style="text-transform: uppercase;">{{ $item[key($item)] }}</p>
-                                                <p style="border-top: gray solid 1px; text-align: center">FIRMA Y NOMBRE DEL VALUADOR</p>
+                    </table>
 
-                                            </td>
+                @elseif($certificacion->cadena_encriptada)
 
-                                        @endif
+                    <div style="margin-top: 30px; page-break-inside: avoid;">
 
-                                    @endforeach
+                        <div style="text-align: center">
 
-                                </tr>
-                            </tbody>
+                            <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $objeto->titular }}</p>
+                            <p >DIRECTOR DE CATASTRO</p>
+                            <p>Firma Electrónica:</p>
 
-                        </table>
+                        </div>
 
-                    @endif
+                        <p style="overflow-wrap: break-word;">{{ $certificacion->cadena_encriptada }}</p>
 
-                @endforeach
+                    </div>
 
-                @foreach ($array as $item)
+                    <div style="page-break-inside: avoid;">
 
-                    @if(key($item) === 'Titular')
+                        <div style="text-align: center;">
 
-                        @if($certificacion->cadena_encriptada)
+                            <p style="text-transform: uppercase;">{{ $objeto->jefe_de_departamento }}</p>
+                            <p class="borde" style="width: ">JEFE DE DEPARTAMENTO DE VALUACIÓN</p>
+                            <p>Firma Electrónica:</p>
 
-                            <div style="margin-top: 30px; page-break-inside: avoid;">
+                        </div>
 
-                                <div style="text-align: center">
+                        <p style="overflow-wrap: break-word;">{{ $objeto->firma_jefe_de_departamento }}</p>
 
-                                    <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">@foreach ($array as $item) @if(key($item) === 'Titular') {{ $item[key($item)] }}@endif @endforeach</p>
-                                    <p >DIRECTOR DE CATASTRO</p>
-                                    <p>Firma Electrónica:</p>
+                    </div>
 
-                                </div>
+                @else
 
-                                <p style="overflow-wrap: break-word;">{{ $certificacion->cadena_encriptada }}</p>
+                    <div style="text-align: center; margin-top: 30px">
 
-                            </div>
+                        <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $objeto->titular }}</p>
+                        <p style="text-transform: uppercase;">{{ $objeto->cargo }}</p>
 
-                            <div style="page-break-inside: avoid;">
+                    </div>
 
-                                <div style="text-align: center;">
-
-                                    <p style="text-transform: uppercase;">@foreach ($array as $item) @if(key($item) === 'Jefe de departamento') {{ $item[key($item)] }}@endif @endforeach</p>
-                                    <p class="borde" style="width: ">JEFE DE DEPARTAMENTO DE VALUACIÓN</p>
-                                    <p>Firma Electrónica:</p>
-
-                                </div>
-
-                                <p style="overflow-wrap: break-word;">@foreach ($array as $item) @if(key($item) === 'Firma Jefe de departamento') {{ $item[key($item)] }}@endif @endforeach</p>
-
-                            </div>
-
-                        @else
-
-                            <div style="text-align: center; margin-top: 30px">
-
-                                <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">@foreach ($array as $item) @if(key($item) === 'Titular') {{ $item[key($item)] }}@endif @endforeach</p>
-                                <p style="text-transform: uppercase;">@foreach ($array as $item) @if(key($item) === 'Cargo') {{ $item[key($item)] }}@endif @endforeach</p>
-
-                            </div>
-
-                        @endif
-
-                    @endif
-
-                @endforeach
+                @endif
 
             </div>
 
@@ -371,55 +332,27 @@
                         </td>
                         <td style="padding-right: 40px;">
 
-                            @foreach ($array as $item)
+                            @if(isset($objeto->tramite_de_inspeccion))
 
-                                @if(key($item) === 'Trámite de inspección')
+                                <p>
+                                    <strong>Trámite de inspección ocular:</strong> {{ $objeto->tramite_de_inspeccion }}
+                                    <strong>Recibo:</strong> {{ $objeto->recibo_inspeccion }}
+                                </p>
 
-                                        <p>
-                                            <strong>Trámite de inspección ocular:</strong> {{ $item[key($item)] }}
+                            @endif
 
-                                            @foreach ($array as $item)
+                            @if(isset($objeto->tramite_de_avaluo))
 
-                                                @if(key($item) === 'Recibo Inspección')
+                                <p>
+                                    <strong>Trámite de impresión:</strong> {{ $objeto->tramite_de_avaluo }}
+                                    <strong>Recibo:</strong> {{ $objeto->recibo_avaluo }}
+                                </p>
 
-                                                    <strong>Recibo:</strong> {{ $item[key($item)] }}
+                            @endif
 
-                                                @endif
+                            <p><strong>Impreso el:</strong> {{ $objeto->impreso_en }}</p>
 
-                                            @endforeach
-
-                                        </p>
-
-                                @endif
-
-                            @endforeach
-
-                            @foreach ($array as $item)
-
-                                @if(key($item) === 'Trámite de avalúo')
-
-                                    <p>
-                                        <strong>Trámite de impresión:</strong> {{ $item[key($item)] }}
-
-                                        @foreach ($array as $item)
-
-                                            @if(key($item) === 'Recibo Avalúo')
-
-                                                <strong>Recibo:</strong> {{ $item[key($item)] }}
-
-                                            @endif
-
-                                        @endforeach
-
-                                    </p>
-
-                                @endif
-
-                            @endforeach
-
-                            <p><strong>Impreso el:</strong> @foreach ($array as $item) @if(key($item) === 'Impreso en') {{ $item[key($item)] }}@endif @endforeach</p>
-
-                            <p><strong>Impreso por:</strong> @foreach ($array as $item) @if(key($item) === 'Impreso por') {{ $item[key($item)] }}@endif @endforeach</p>
+                            <p><strong>Impreso por:</strong> {{ $objeto->impreso_por }}</p>
 
                             @if(isset($certificacion))
 
@@ -427,17 +360,11 @@
 
                             @endif
 
-                            @foreach ($array as $item)
+                            @if(isset($objeto->convenio_municipal))
 
-                                @if(key($item) === 'Convenio municipal')
+                                <p><strong>Convenio:</strong> {{ $objeto->convenio_municipal }}</p>
 
-                                    <p>
-                                        <strong>Convenio:</strong> {{ $item[key($item)] }}
-                                    </p>
-
-                                @endif
-
-                            @endforeach
+                            @endif
 
                         </td>
                     </tr>

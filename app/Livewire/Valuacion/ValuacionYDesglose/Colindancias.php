@@ -101,10 +101,10 @@ class Colindancias extends Component
 
     public function borrarMedida($index){
 
+        $this->validate(['predio' => 'required']);
+
         if(!$this->flag)
             $this->authorize('update',$this->predio->avaluo);
-
-        $this->validate(['predio' => 'required']);
 
         try {
 

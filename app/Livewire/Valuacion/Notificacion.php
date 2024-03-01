@@ -318,6 +318,7 @@ class Notificacion extends Component
                     'tipo' => $construccion['tipo'],
                     'calidad' => $construccion['calidad'],
                     'estado' => $construccion['estado'],
+                    'valor_construccion' => (float)$construccion['valor_unitario'] * (float)$construccion['superficie']
                 ]);
 
             }

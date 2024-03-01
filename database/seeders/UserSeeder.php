@@ -100,9 +100,9 @@ class UserSeeder extends Seeder
 
         User::create([
             'clave' => 8,
-            'name' => 'Martin',
-            'ap_paterno' => 'Vargas',
-            'ap_materno' => 'Contreras',
+            'name' => 'Jose',
+            'ap_paterno' => 'Lopez',
+            'ap_materno' => 'Ayala',
             'oficina_id' => '53',
             'status' => 'activo',
             'area' => 'Departamento de Valuación',

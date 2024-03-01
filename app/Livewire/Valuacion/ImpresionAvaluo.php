@@ -444,13 +444,13 @@ class ImpresionAvaluo extends Component
 
         DB::transaction(function () use (&$pdf){
 
-            $this->cadena = 'Impreso por: ' . auth()->user()->nombreCompleto();
+            $this->cadena = 'impreso_por: ' . auth()->user()->nombreCompleto();
 
             foreach($this->predios as $predio){
 
                 $sociedad = $predio->sociedad ? ' y soc.' : '';
 
-                $this->cadena = $this->cadena . '|' . 'Folio avalúo=' . $predio->avaluo->año . '-' . $predio->avaluo->folio . '%Cuenta predial=' . $predio->cuentaPredial() . '%Clave catastral=' . $predio->claveCatastral() . '%Propietario=' . $predio->primerPropietario() . $sociedad . '%Valor catastral=' . $predio->valor_catastral;
+                $this->cadena = $this->cadena . '|' . 'folio_avaluo=' . $predio->avaluo->año . '-' . $predio->avaluo->folio . '%Cuenta predial=' . $predio->cuentaPredial() . '%Clave catastral=' . $predio->claveCatastral() . '%Propietario=' . $predio->primerPropietario() . $sociedad . '%Valor catastral=' . $predio->valor_catastral;
 
                 $predio->update(['status' => 'impreso']);
 
@@ -465,21 +465,21 @@ class ImpresionAvaluo extends Component
 
             if($this->tramiteInspeccion != 'Convenio municipal'){
 
-                $this->cadena = $this->cadena . '|' . 'Trámite de inspección: ' . $this->tramiteInspeccion->año . '-' . $this->tramiteInspeccion->folio . '-'. $this->tramiteInspeccion->usuario . '|' . 'Recibo Inspección: ' . $this->tramiteInspeccion->folio_pago;
+                $this->cadena = $this->cadena . '|' . 'tramite_de_inspeccion: ' . $this->tramiteInspeccion->año . '-' . $this->tramiteInspeccion->folio . '-'. $this->tramiteInspeccion->usuario . '|' . 'recibo_inspeccion: ' . $this->tramiteInspeccion->folio_pago;
 
             }else{
 
-                $this->cadena = $this->cadena . '|' . 'Convenio municipal: Convenio municipal';
+                $this->cadena = $this->cadena . '|' . 'convenio_municipal: Convenio municipal';
 
             }
 
-            if($this->tramiteAvaluo != 'Convenio municipal'){
+            if($this->tramiteAvaluo != 'convenio_municipal'){
 
-                $this->cadena = $this->cadena . '|' . 'Trámite de avalúo: ' . $this->tramiteAvaluo->año . '-' . $this->tramiteAvaluo->folio . '-'. $this->tramiteAvaluo->usuario  . '|' . 'Recibo Avalúo: ' . $this->tramiteAvaluo->folio_pago;
+                $this->cadena = $this->cadena . '|' . 'tramite_de_avaluo: ' . $this->tramiteAvaluo->año . '-' . $this->tramiteAvaluo->folio . '-'. $this->tramiteAvaluo->usuario  . '|' . 'recibo_avaluo: ' . $this->tramiteAvaluo->folio_pago;
 
             }
 
-            $this->cadena = $this->cadena . '|' . 'Valuador: ' . $predio->avaluo->asignadoA->nombreCompleto();
+            $this->cadena = $this->cadena . '|' . 'valuador: ' . $predio->avaluo->asignadoA->nombreCompleto();
 
             $pdf = $this->revisarOficina($pdf);
 
@@ -500,17 +500,17 @@ class ImpresionAvaluo extends Component
 
         $numero_avaluos_letra = $formatter->toWords($this->predios->count());
 
-        $this->cadena = $this->cadena . '|' . 'Número: ' . $this->predios->count() . ' ' . $numero_avaluos_letra;
+        $this->cadena = $this->cadena . '|' . 'numero: ' . $this->predios->count() . ' ' . $numero_avaluos_letra;
 
         $fechaImpresion = now()->format('d-m-Y H:i:s');
 
-        $this->cadena = $this->cadena . '|' . 'Impreso en: ' . $fechaImpresion;
+        $this->cadena = $this->cadena . '|' . 'impreso_en: ' . $fechaImpresion;
 
         if(auth()->user()->hasRole('Convenio municipal')){
 
             $oficina = Oficina::where('oficina', $this->oficina)->first();
 
-            $this->cadena = $this->cadena . '|' . 'Autoridad municipal: ' . $oficina->autoridad_municipal;
+            $this->cadena = $this->cadena . '|' . 'autoridad_municipal: ' . $oficina->autoridad_municipal;
 
             $certificacion = Certificacion::create([
                 'año' => now()->format('Y'),
@@ -537,9 +537,9 @@ class ImpresionAvaluo extends Component
 
         }elseif($this->oficina == 101){
 
-            $this->cadena = $this->cadena . '|' . 'Titular: ' . $this->director->nombreCompleto() . '|' . 'Cargo: Director de catastro';
+            $this->cadena = $this->cadena . '|' . 'titular: ' . $this->director->nombreCompleto() . '|' . 'cargo: Director de catastro';
 
-            $this->cadena = $this->cadena . '|' . 'Jefe de departamento: ' . $this->jefe_departamento->nombreCompleto();
+            $this->cadena = $this->cadena . '|' . 'jefe_de_departamento: ' . $this->jefe_departamento->nombreCompleto();
 
             $fielDirector = Credential::openFiles(Storage::disk('efirma')->path($this->director->efirma->cer), Storage::disk('efirma')->path($this->director->efirma->key), $this->director->efirma->contraseña);
 
@@ -549,7 +549,7 @@ class ImpresionAvaluo extends Component
 
             $firmaJefe = $fielJefe->sign($this->cadena);
 
-            $this->cadena = $this->cadena . '|' . 'Firma Jefe de departamento: ' . base64_encode($firmaJefe);
+            $this->cadena = $this->cadena . '|' . 'firma_jefe_de_departamento: ' . base64_encode($firmaJefe);
 
             $certificacion = Certificacion::create([
                 'año' => now()->format('Y'),
@@ -583,11 +583,11 @@ class ImpresionAvaluo extends Component
 
             $oficina = Oficina::where('oficina', $this->oficina)->first();
 
-            $this->cadena = $this->cadena . '|' . 'Titular: ' . $oficina->titular;
+            $this->cadena = $this->cadena . '|' . 'titular: ' . $oficina->titular;
 
-            $cargo = $oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR DE RENTAS';
+            $cargo = $oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR(A) DE RENTAS';
 
-            $this->cadena = $this->cadena . '|' . 'Cargo: ' . $cargo;
+            $this->cadena = $this->cadena . '|' . 'cargo: ' . $cargo;
 
             $certificacion = Certificacion::create([
                 'año' => now()->format('Y'),
@@ -606,7 +606,7 @@ class ImpresionAvaluo extends Component
                                 'numero_avaluos_letra' => $numero_avaluos_letra,
                                 'tramiteInspeccion' => $this->tramiteInspeccion,
                                 'tramiteAvaluo' => $this->tramiteAvaluo,
-                                'cargo' => $oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR DE RENTAS',
+                                'cargo' => $cargo,
                                 'titular' => $oficina->titular,
                                 'qr' => $this->generadorQr($certificacion),
                                 'fecha_impresion' => $fechaImpresion,

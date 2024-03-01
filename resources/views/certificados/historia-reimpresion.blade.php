@@ -39,6 +39,8 @@
         font-family: sans-serif;
         font-weight: normal;
         line-height: 1.5;
+        font-size: 9px;
+        text-transform: uppercase;
     }
 
     .titulo{
@@ -64,7 +66,6 @@
 
     .informacion{
         padding: 0 20px 0 20px;
-        font-size: 10px;
         margin-bottom: 10px;
     }
 
@@ -86,7 +87,7 @@
         background: #5E1D45;
         color: white;
         font-size: 12px;
-
+        text-transform: lowercase;
     }
 
     .fot{
@@ -143,42 +144,44 @@
 
             <p class="titulo">CERTIFICADO DE HISTORIA CATASTRAL</p>
 
-            <div class="informacion" >
-
-                <p class="fundamento">
-                    CON FUNDAMENTO EN LOS ARTICULOS 18° FRACCIÓN VI DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL
-                    DEL ESTADO DE MICHOACÁN DE OCAMPO,8 FRACCIONES XI Y XVIII,DEL REGLAMENTO DE LA LEY DE LA
-                    FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO,Y 11 FRACCIONES I,II,VI,XXVII
-                    Y XXXIV DEL REGLAMENTO INTERIOR DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN
-                    DE OCAMPO EL SUSCRITO   @foreach ($array as $item) @if(key($item) === 'Suscrito') <strong style="text-transform: uppercase;">{{ $item[key($item)] }}</strong> @endif @endforeach @foreach ($array as $item) @if(key($item) === 'Cargo') <strong style="text-transform: uppercase;">{{ $item[key($item)] }}</strong> @endif @endforeach CERTIFICA QUE EN LOS ARCHIVOS CATASTRALES EXISTENTES EN ESTA OFICINA A MI CARGO, SE ENCONTRARON
-                    REGISTROS HISTORICOS DE LA SIGUIENTE PROPIEDAD:
-                </p>
-
-            </div>
+            <p class="fundamento">
+                CON FUNDAMENTO EN LOS ARTICULOS 18° FRACCIÓN VI DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL
+                DEL ESTADO DE MICHOACÁN DE OCAMPO,8 FRACCIONES XI Y XVIII,DEL REGLAMENTO DE LA LEY DE LA
+                FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO,Y II FRACCIONES I,II,VI,XXVII
+                Y XXXIV DEL REGLAMENTO INTERIOR DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN
+                DE OCAMPO EL SUSCRITO
+                <strong style="text-transform: uppercase;"> {{ $objeto->suscrito }},</strong> <strong style="text-transform: uppercase;">{{ $objeto->cargo }}</strong>
+                CERTIFICA QUE EN LOS ARCHIVOS CATASTRALES EXISTENTES EN ESTA OFICINA A MI CARGO, SE ENCONTRARON
+                REGISTROS HISTORICOS DE LA SIGUIENTE PROPIEDAD:
+            </p>
 
         </div>
 
         <div class="informacion" >
 
-            <p><strong>Cuenta predial</strong>@foreach ($array as $item) @if(key($item) === 'Cuenta predial') {{ $item[key($item)] }} @endif @endforeach</p>
-            <p><strong>Clave catastral</strong>@foreach ($array as $item) @if(key($item) === 'Clave catastral') {{ $item[key($item)] }} @endif @endforeach</p>
-            <p><strong>Propietario</strong>@foreach ($array as $item) @if(key($item) === 'Propietario') {{ $item[key($item)] }} @endif @endforeach</p>
+            <p><strong>Cuenta predial </strong>{{ $objeto->cuenta_predial }}</p>
+            <p><strong>Clave catastral </strong>{{ $objeto->clave_catastral }}</p>
+            <p><strong>Propietario </strong>{{ $objeto->propietario }}</p>
 
-            <p style="text-transform: uppercase; font-weight: bold; text-align: center; margin-top: 10px;">HISTORIA</p>
+        </div>
 
-            @foreach ($array as $item) @if(key($item) === 'Historia') {!! $item[key($item)] !!} @endif @endforeach
+        <p class="separador">HISTORIA</p>
 
-            <p style="margin-top: 10px;">
-                A SOLICITUD DE @foreach ($array as $item) @if(key($item) === 'Solicitante') <strong style="text-transform: uppercase;">{{ $item[key($item)] }}</strong> @endif @endforeach
-                EXPIDO EL PRESENTE CERTIFICADO EN LA CIUDAD DE
-                @foreach ($array as $item) @if(key($item) === 'Oficina') <strong style="text-transform: uppercase;">{{ $item[key($item)] }}</strong>, @endif @endforeach MICHOACÁN.
-            </p>
+        <div class="informacion">
+
+            {!! $objeto->historia !!}
 
         </div>
 
         <p class="separador">Datos de control</p>
 
         <div class="informacion">
+
+            <p style="margin-top: 10px;">
+                A SOLICITUD DE <strong style="text-transform: uppercase;">{{ $objeto->solicitante }}</strong>
+                EXPIDO EL PRESENTE CERTIFICADO EN LA CIUDAD DE
+                <strong style="text-transform: uppercase;">{{ $objeto->oficina }}</strong>, MICHOACÁN.
+            </p>
 
             <div>
 
@@ -188,8 +191,8 @@
                         <tr>
                             <td style="padding-right: 40px; text-align:center; ; vertical-align: bottom; white-space: nowrap;">
 
-                                <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">@foreach ($array as $item) @if(key($item) === 'Suscrito') {{ $item[key($item)] }}@endif @endforeach</p>
-                                <p style="text-transform: uppercase">@foreach ($array as $item) @if(key($item) === 'Cargo') {{ $item[key($item)] }} @endif @endforeach</p>
+                                <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $objeto->suscrito }}</p>
+                                <p style="text-transform: uppercase">{{ $objeto->cargo }}</p>
 
                             </td>
 
@@ -226,9 +229,9 @@
 
                             <p><strong>Trámite:</strong> {{ $certificacion->tramite->año }}-{{ $certificacion->tramite->folio }}-{{ $certificacion->tramite->usuario }} <strong>Recibo:</strong> {{ $certificacion->tramite->folio_pago }}</p>
 
-                            <p><strong>Impreso el:</strong> @foreach ($array as $item) @if(key($item) === 'Impreso en') {{ $item[key($item)] }} @endif @endforeach</p>
+                            <p><strong>Impreso el:</strong> {{ $objeto->impreso_en }}</p>
 
-                            <p><strong>Impreso por:</strong>  @foreach ($array as $item) @if(key($item) === 'Impreso por') {{ $item[key($item)] }} @endif @endforeach</p>
+                            <p><strong>Impreso por:</strong> {{ $objeto->impreso_por }}</p>
 
                             @if(isset($certificacion))
 

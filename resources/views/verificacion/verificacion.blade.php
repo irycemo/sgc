@@ -50,6 +50,10 @@
 
                         @include('verificacion.notificacion-valor-catastral')
 
+                    @elseif(in_array($certificacion->documento, ['CERTIFICADO DE REGISTRO CON COLINDANCIAS', 'CERTIFICADO DE REGISTRO ELECTRÓNICO', 'CERTIFICADO DE REGISTRO']))
+
+                        @include('verificacion.certificado-registro')
+
                     @endif
 
                 </div>
