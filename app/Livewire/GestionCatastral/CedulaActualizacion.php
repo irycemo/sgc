@@ -9,19 +9,20 @@ use Livewire\Component;
 use App\Models\Certificacion;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Constantes\Constantes;
+use Endroid\QrCode\Builder\Builder;
 use Illuminate\Support\Facades\Log;
 use PhpCfdi\Credentials\Credential;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\Label\Font\NotoSans;
 use Illuminate\Support\Facades\Storage;
 use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
-use Endroid\QrCode\Encoding\Encoding;
-use Endroid\QrCode\Label\Font\NotoSans;
-use Endroid\QrCode\Writer\PngWriter;
-use Endroid\QrCode\Builder\Builder;
+use Exception;
 
-class CertificadoRegistro extends Component
+class CedulaActualizacion extends Component
 {
 
     public $años;
@@ -39,8 +40,6 @@ class CertificadoRegistro extends Component
     public $cadena;
 
     public $impresionDirector = false;
-
-    public $tipo_certificado;
 
     public function buscarTramite(){
 
@@ -60,9 +59,9 @@ class CertificadoRegistro extends Component
                                         ->where('usuario', $this->usuario)
                                         ->firstOrFail();
 
-            if(!in_array($this->tramite->servicio->id, ['3', '4', '6'])){
+            if(!in_array($this->tramite->servicio->id, [64, 65])){
 
-                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a una historia catastral."]);
+                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a una cedula de actualización."]);
 
                 return;
 
@@ -84,13 +83,9 @@ class CertificadoRegistro extends Component
 
             }
 
-            $this->tipo_certificado = mb_strtoupper($this->tramite->servicio->nombre, 'utf-8');
-
             $this->predio = $this->tramite->predios()->first();
 
             $this->oficina = Oficina::where('oficina', $this->predio->oficina)->first()->oficina;
-
-            $this->predio->load('propietarios.persona', 'colindancias');
 
             $this->reset(['folio', 'usuario']);
 
@@ -100,7 +95,7 @@ class CertificadoRegistro extends Component
             $this->dispatch('mostrarMensaje', ['error', "El trámite no existe."]);
 
         } catch (\Throwable $th) {
-            Log::error("Error al buscar certificado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al buscar cedula por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 
         }
@@ -148,22 +143,11 @@ class CertificadoRegistro extends Component
         if($this->predio->area_comun_terreno > 0) $this->cadena = $this->cadena . '|' . 'area_comun_terreno: ' . $this->predio->area_comun_terreno;
         if($this->predio->area_comun_construccion > 0) $this->cadena = $this->cadena . '|' . 'area_comun_construccion: ' . $this->predio->area_comun_construccion;
         if($this->predio->valor_catastral) $this->cadena = $this->cadena . '|' . 'valor_catastral: ' . $this->predio->valor_catastral;
+        if($this->predio->observaciones) $this->cadena = $this->cadena . '|' . 'observaciones: ' . $this->predio->observaciones;
 
-        foreach ($this->predio->propietarios as $propietarios) {
+        $sociedad = $this->predio->propietarios()->count() > 1 ? ' y soc.' : '';
 
-            $this->cadena = $this->cadena . '|' . 'Nombre=' . $propietarios->persona->nombre . ' ' . $propietarios->persona->ap_paterno . ' ' . $propietarios->persona->ap_materno . ' ' . $propietarios->persona->razon_social . '%Tipo=' . $propietarios->persona->tipo . '%Porcentaje propiedad=' . $propietarios->porcentaje . '%Porcentaje nuda=' . $propietarios->porcentaje_nuda . '%Porcentaje usufructo=' . $propietarios->porcentaje_usufructo;
-
-        }
-
-        if($this->tramite->servicio_id == 6){
-
-            foreach ($this->predio->colindancias as $colindancia) {
-
-                $this->cadena = $this->cadena . '|' . 'Viento=' . $colindancia->viento . '%Longitud=' . $colindancia->longitud . '%Descripcion=' . $colindancia->descripcion;
-
-            }
-
-        }
+        $this->cadena = $this->cadena . '|' . 'propietario: ' . $this->predio->primerPropietario() . $sociedad;
 
     }
 
@@ -191,8 +175,8 @@ class CertificadoRegistro extends Component
 
             $certificacion = Certificacion::create([
                 'año' => now()->format('Y'),
-                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', $this->tipo_certificado)->max('folio') ?? 0) + 1,
-                'documento' => $this->tipo_certificado,
+                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', 'CEDULA DE ACTUALIZACIÓN CATASTRAL')->max('folio') ?? 0) + 1,
+                'documento' => 'CEDULA DE ACTUALIZACIÓN CATASTRAL',
                 'cadena_originial' => $this->cadena,
                 'cadena_encriptada' => base64_encode($firmaDirector),
                 'estado' => 'activo',
@@ -202,7 +186,7 @@ class CertificadoRegistro extends Component
                 'actualizado_por' => auth()->id(),
             ]);
 
-            $pdf = Pdf::loadview('certificados.registro', [
+            $pdf = Pdf::loadview('certificados.cedula', [
                 'predio' => $this->predio,
                 'tramite' => $this->tramite,
                 'director' => $this->director->nombreCompleto(),
@@ -212,7 +196,7 @@ class CertificadoRegistro extends Component
                 'certificacion' => $certificacion,
                 'fecha_impresion' => $fechaImpresion,
                 'impreso_por' => auth()->user()->nombreCompleto(),
-                'tipo_certificado' => $this->tipo_certificado,
+                'tipo_certificado' => 'CEDULA DE ACTUALIZACIÓN CATASTRAL',
                 'imagen' => $this->director->efirma->imagen
             ]);
 
@@ -230,8 +214,8 @@ class CertificadoRegistro extends Component
 
             $certificacion = Certificacion::create([
                 'año' => now()->format('Y'),
-                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', $this->tipo_certificado)->max('folio') ?? 0) + 1,
-                'documento' => $this->tipo_certificado,
+                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', 'CEDULA DE ACTUALIZACIÓN CATASTRAL')->max('folio') ?? 0) + 1,
+                'documento' => 'CEDULA DE ACTUALIZACIÓN CATASTRAL',
                 'cadena_originial' => $this->cadena,
                 'estado' => 'activo',
                 'oficina_id' => $oficina->id,
@@ -240,7 +224,7 @@ class CertificadoRegistro extends Component
                 'actualizado_por' => auth()->id(),
             ]);
 
-            $pdf = Pdf::loadview('certificados.registro', [
+            $pdf = Pdf::loadview('certificados.cedula', [
                 'predio' => $this->predio,
                 'tramite' => $this->tramite,
                 'oficina' => $oficina->nombre,
@@ -250,7 +234,7 @@ class CertificadoRegistro extends Component
                 'fecha_impresion' => $fechaImpresion,
                 'certificacion' => $certificacion,
                 'impreso_por' => auth()->user()->nombreCompleto(),
-                'tipo_certificado' => $this->tipo_certificado
+                'tipo_certificado' => 'CEDULA DE ACTUALIZACIÓN CATASTRAL'
             ]);
 
         }
@@ -290,7 +274,7 @@ class CertificadoRegistro extends Component
         return $result->getDataUri();
     }
 
-    public function generarCertificado(){
+    public function generarCedula(){
 
         $this->construirCadena();
 
@@ -300,7 +284,7 @@ class CertificadoRegistro extends Component
 
         return response()->streamDownload(
             fn () => print($pdf),
-            'certificado_de_historia.pdf'
+            'cedula_actualizacion.pdf'
         );
 
     }
@@ -323,6 +307,6 @@ class CertificadoRegistro extends Component
 
     public function render()
     {
-        return view('livewire.gestion-catastral.certificado-registro')->extends('layouts.admin');
+       return view('livewire.gestion-catastral.cedula-actualizacion')->extends('layouts.admin');
     }
 }

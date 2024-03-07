@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\User;
 use App\Models\Oficina;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -28,6 +29,8 @@ class Certificaciones extends Component
     public $años;
     public $documentos;
     public $oficinas;
+
+    public $imagen;
 
     public $filters = [
         'año' => '',
@@ -96,6 +99,10 @@ class Certificaciones extends Component
 
             $pdf = $this->certificadoRegistro($this->certificadoRegistroPartes($this->modelo_editar->cadena_originial));
 
+        }elseif($this->modelo_editar->documento == 'CEDULA DE ACTUALIZACIÓN CATASTRAL'){
+
+            $pdf = $this->cedulaActualizacion($this->cedulaActualizacionPartes($this->modelo_editar->cadena_originial));
+
         }
 
         $pdf->render();
@@ -121,6 +128,7 @@ class Certificaciones extends Component
             'objeto' => $partes,
             'qr' => $this->generadorQr($this->modelo_editar),
             'certificacion' => $this->modelo_editar,
+            'imagen' => $this->imagen
         ]);
 
     }
@@ -131,6 +139,7 @@ class Certificaciones extends Component
             'objeto' => $partes,
             'qr' => $this->generadorQr($this->modelo_editar),
             'certificacion' => $this->modelo_editar,
+            'imagen' => $this->imagen
         ]);
 
     }
@@ -141,6 +150,18 @@ class Certificaciones extends Component
             'objeto' => $partes,
             'qr' => $this->generadorQr($this->modelo_editar),
             'certificacion' => $this->modelo_editar,
+            'imagen' => $this->imagen
+        ]);
+
+    }
+
+    public function cedulaActualizacion($partes){
+
+        return Pdf::loadview('certificados.cedula-reimpresion', [
+            'objeto' => $partes,
+            'qr' => $this->generadorQr($this->modelo_editar),
+            'certificacion' => $this->modelo_editar,
+            'imagen' => $this->imagen
         ]);
 
     }
@@ -305,6 +326,24 @@ class Certificaciones extends Component
 
     }
 
+    public function cedulaActualizacionPartes($cadena){
+
+        $object = (object)[];
+
+        $array = explode('|', $cadena);
+
+        foreach ($array as $item) {
+
+            $aux =  explode(': ', $item);
+
+            $object->{$aux[0]} = $aux[1];
+
+        }
+
+        return $object;
+
+    }
+
     public function mount(): void
     {
 
@@ -315,6 +354,12 @@ class Certificaciones extends Component
         $this->documentos = Constantes::CERTIFICACIONES;
 
         $this->oficinas = Oficina::orderBy('nombre')->get();
+
+        $this->imagen = User::with('efirma')->where('status', 'activo')
+                ->whereHas('roles', function($q){
+                    $q->where('name', 'Director');
+                })
+                ->first()->efirma->imagen;
 
     }
 

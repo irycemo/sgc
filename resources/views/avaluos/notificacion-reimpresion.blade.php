@@ -285,6 +285,7 @@
 
                         <div style="text-align: center">
 
+                            <p><img style="height: 40px;" src="{{ public_path('efirma/' . $imagen) }}" alt=""></p>
                             <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $objeto->titular }}</p>
                             <p >DIRECTOR DE CATASTRO</p>
                             <p>Firma Electrónica:</p>

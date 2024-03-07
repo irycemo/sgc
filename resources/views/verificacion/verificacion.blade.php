@@ -54,6 +54,10 @@
 
                         @include('verificacion.certificado-registro')
 
+                    @elseif($certificacion->documento === 'CEDULA DE ACTUALIZACIÓN CATASTRAL')
+
+                        @include('verificacion.cedula-actualizacion')
+
                     @endif
 
                 </div>

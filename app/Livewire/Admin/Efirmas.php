@@ -23,6 +23,8 @@ class Efirmas extends Component
     public $usuarios;
 
     public $cer;
+    public $key;
+    public $imagen;
 
     public Efirma $modelo_editar;
 
@@ -64,11 +66,15 @@ class Efirmas extends Component
 
             DB::transaction(function () {
 
-                if($this->modelo_editar->imagen)
-                    $this->modelo_editar->imagen = $this->modelo_editar->imagen->store('/', 'efirma');
+                if($this->imagen)
+                    $this->modelo_editar->imagen = $this->imagen->store('/', 'efirma');
 
-                $this->modelo_editar->cer = $this->modelo_editar->cer->store('/', 'efirma');
-                $this->modelo_editar->key = $this->modelo_editar->key->store('/', 'efirma');
+                if($this->cer)
+                    $this->modelo_editar->cer = $this->cer->store('/', 'efirma');
+
+                if($this->key)
+                    $this->modelo_editar->key = $this->key->store('/', 'efirma');
+
                 $this->modelo_editar->creado_por = auth()->user()->id;
                 $this->modelo_editar->save();
 
@@ -96,6 +102,33 @@ class Efirmas extends Component
 
             DB::transaction(function () {
 
+                if($this->imagen){
+
+                    if($this->modelo_editar->imagen)
+                        Storage::disk('efirma')->delete($this->modelo_editar->imagen);
+
+                    $this->modelo_editar->imagen = $this->imagen->store('/', 'efirma');
+
+                }
+
+                if($this->cer){
+
+                    if($this->modelo_editar->cer)
+                        Storage::disk('efirma')->delete($this->modelo_editar->cer);
+
+                    $this->modelo_editar->cer = $this->cer->store('/', 'efirma');
+                }
+
+
+                if($this->key){
+
+                    if($this->modelo_editar->key)
+                        Storage::disk('efirma')->delete($this->modelo_editar->key);
+
+                    $this->modelo_editar->key = $this->key->store('/', 'efirma');
+
+                }
+
                 $this->modelo_editar->actualizado_por = auth()->user()->id;
                 $this->modelo_editar->save();
 
@@ -120,6 +153,15 @@ class Efirmas extends Component
         try{
 
             $efirma = Efirma::find($this->selected_id);
+
+            if($this->modelo_editar->imagen)
+                Storage::disk('efirma')->delete($this->modelo_editar->imagen);
+
+            if($this->modelo_editar->cer)
+                Storage::disk('efirma')->delete($this->modelo_editar->cer);
+
+            if($this->modelo_editar->key)
+                Storage::disk('efirma')->delete($this->modelo_editar->key);
 
             $efirma->delete();
 

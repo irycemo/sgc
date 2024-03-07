@@ -17,6 +17,7 @@ class VerificacionController extends Controller
             'CERTIFICADO DE REGISTRO CON COLINDANCIAS' => $this->certificadoRegistroPartes($certificacion->cadena_originial),
             'CERTIFICADO DE REGISTRO ELECTRÓNICO' => $this->certificadoRegistroPartes($certificacion->cadena_originial),
             'CERTIFICADO DE REGISTRO' => $this->certificadoRegistroPartes($certificacion->cadena_originial),
+            'CEDULA DE ACTUALIZACIÓN CATASTRAL' => $this->cedulaActualizacionPartes($certificacion->cadena_originial),
         };
 
         return view('verificacion.verificacion', compact('certificacion', 'objeto'));
@@ -151,6 +152,26 @@ class VerificacionController extends Controller
                 continue;
 
             }
+
+            $object->{$aux[0]} = $aux[1];
+
+        }
+
+        return $object;
+
+    }
+
+    private function cedulaActualizacionPartes($cadena){
+
+        $object = (object)[];
+
+        $array = explode('|', $cadena);
+
+        foreach ($array as $item) {
+
+            $aux =  explode(': ', $item);
+
+            $aux2 = explode('%', $item);
 
             $object->{$aux[0]} = $aux[1];
 

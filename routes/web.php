@@ -37,6 +37,7 @@ use App\Http\Controllers\Valuacion\AvaluosController as Val;
 use App\Livewire\Ventanilla\Ventanilla as VentanillaVentanilla;
 use App\Http\Controllers\Valuacion\ValuacionYDesgloseController;
 use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
+use App\Livewire\GestionCatastral\CedulaActualizacion;
 use App\Livewire\GestionCatastral\CertificadoRegistro;
 
 /*
@@ -117,6 +118,8 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('certificado_historia', CertificadoHistoria::class)->middleware('permission:Certificado de historia')->name('certificado_historia');
 
     Route::get('certificado_registro', CertificadoRegistro::class)->middleware('permission:Certificado de registro')->name('certificado_registro');
+
+    Route::get('cedula_actualizacion', CedulaActualizacion::class)->middleware('permission:Cedula de actualización')->name('cedula_actualizacion');
 
     /* Consultas */
     Route::get('ver_oficina/{ofice_id?}', Oficina::class)->middleware('permission:Ver oficina')->name('ver_oficina');

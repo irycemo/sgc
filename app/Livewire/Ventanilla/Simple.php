@@ -253,6 +253,28 @@ class Simple extends Component
 
     }
 
+    public function updatedNotaria(){
+
+        if($this->notaria == ""){
+
+            $this->reset(['notaria']);
+
+            $this->modelo_editar->numero_notaria = null;
+            $this->modelo_editar->nombre_notario = null;
+            $this->modelo_editar->nombre_solicitante = null;
+
+            return;
+
+        }
+
+        $notaria = json_decode($this->notaria);
+
+        $this->modelo_editar->numero_notaria = $notaria->numero;
+        $this->modelo_editar->nombre_notario = $notaria->notario;
+        $this->modelo_editar->nombre_solicitante = $notaria->numero . ' ' .$notaria->notario;
+
+    }
+
     public function resetearInformacion(){
 
         $this->modelo_editar->adiciona = $this->tramiteAdicionado['id'];

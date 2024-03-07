@@ -189,6 +189,7 @@
 
                                 @if(isset($director))
 
+                                    <p><img style="height: 40px;" src="{{ public_path('efirma/' . $imagen) }}" alt=""></p>
                                     <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $director }}</p>
                                     <p>DIRECTOR DE CATASTRO</p>
 
@@ -215,8 +216,12 @@
 
                 @if(isset($firmaDirector))
 
-                    <p style="text-align: center">Firma Electrónica:</p>
-                    <p style="overflow-wrap: break-word;">{{ $firmaDirector }}</p>
+                    <div style="page-break-inside: avoid;">
+
+                        <p style="text-align: center">Firma Electrónica:</p>
+                        <p style="overflow-wrap: break-word;">{{ $firmaDirector }}</p>
+
+                    </div>
 
                 @endif
 

@@ -191,6 +191,7 @@
                         <tr>
                             <td style="padding-right: 40px; text-align:center; ; vertical-align: bottom; white-space: nowrap;">
 
+                                @if($objeto->cargo === 'Director de catastro') <p><img style="height: 40px;" src="{{ public_path('efirma/' . $imagen) }}" alt=""></p> @endif
                                 <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $objeto->suscrito }}</p>
                                 <p style="text-transform: uppercase">{{ $objeto->cargo }}</p>
 
@@ -210,8 +211,12 @@
 
                 @if($certificacion->cadena_encriptada)
 
-                    <p style="text-align: center">Firma Electrónica:</p>
-                    <p style="overflow-wrap: break-word;">{{ $certificacion->cadena_encriptada }}</p>
+                    <div style="page-break-inside: avoid;">
+
+                        <p style="text-align: center">Firma Electrónica:</p>
+                        <p style="overflow-wrap: break-word;">{{ $certificacion->cadena_encriptada }}</p>
+
+                    </div>
 
                 @endif
 

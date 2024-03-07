@@ -253,25 +253,25 @@
 
             <div class="flex flex-col md:flex-row justify-between gap-3 mb-3">
 
-                <x-input-group for="modelo_editar.cer" label="Archio CER" :error="$errors->first('modelo_editar.cer')" class="w-full">
+                <x-input-group for="cer" label="Archio CER" :error="$errors->first('cer')" class="w-full">
 
                     <div x-data="{ focused: false }" class="w-full">
 
                         <span class="rounded-md shadow-sm w-full ">
 
-                            <input @focus="focused = true" @blur="focused = false" class="sr-only" type="file" wire:model.live="modelo_editar.cer" id="modelo_editar.cer">
+                            <input @focus="focused = true" @blur="focused = false" class="sr-only" type="file" wire:model.live="cer" id="cer">
 
-                            <label for="modelo_editar.cer" :class="{ 'outline-none border-blue-300 shadow-outline-blue': focused }" class="relative flex items-center justify-between w-full cursor-pointer py-2 px-3 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
+                            <label for="cer" :class="{ 'outline-none border-blue-300 shadow-outline-blue': focused }" class="relative flex items-center justify-between w-full cursor-pointer py-2 px-3 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
                                 Selecccione el archivo
 
-                                <div wire:loading.flex wire:target="modelo_editar.cer" class="flex absolute top-1 right-1 items-center">
+                                <div wire:loading.flex wire:target="cer" class="flex absolute top-1 right-1 items-center">
                                     <svg class="animate-spin h-4 w-4 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                     </svg>
                                 </div>
 
-                                @if($modelo_editar->cer)
+                                @if($cer)
 
                                     <span class=" text-blue-700">
 
@@ -295,25 +295,25 @@
 
             <div class="flex flex-col md:flex-row justify-between gap-3 mb-3">
 
-                <x-input-group for="modelo_editar.key" label="Archio KEY" :error="$errors->first('modelo_editar.key')" class="w-full">
+                <x-input-group for="key" label="Archio KEY" :error="$errors->first('key')" class="w-full">
 
                     <div x-data="{ focused: false }" class="w-full">
 
                         <span class="rounded-md shadow-sm w-full ">
 
-                            <input @focus="focused = true" @blur="focused = false" class="sr-only" type="file" wire:model.live="modelo_editar.key" id="modelo_editar.key">
+                            <input @focus="focused = true" @blur="focused = false" class="sr-only" type="file" wire:model.live="key" id="key">
 
-                            <label for="modelo_editar.key" :class="{ 'outline-none border-blue-300 shadow-outline-blue': focused }" class="flex items-center relative justify-between w-full cursor-pointer py-2 px-3 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
+                            <label for="key" :class="{ 'outline-none border-blue-300 shadow-outline-blue': focused }" class="flex items-center relative justify-between w-full cursor-pointer py-2 px-3 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
                                 Selecccione el archivo
 
-                                <div wire:loading.flex wire:target="modelo_editar.key" class="flex absolute top-1 right-1 items-center">
+                                <div wire:loading.flex wire:target="key" class="flex absolute top-1 right-1 items-center">
                                     <svg class="animate-spin h-4 w-4 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                     </svg>
                                 </div>
 
-                                @if($modelo_editar->key)
+                                @if($key)
 
                                     <span class=" text-blue-700">
 
@@ -337,27 +337,27 @@
 
             <div class="flex flex-col md:flex-row justify-between gap-3 mb-3">
 
-                <x-input-group for="modelo_editar.imagen" label="Firma (imagen)" :error="$errors->first('modelo_editar.imagen')" class="w-full">
+                <x-input-group for="imagen" label="Firma (imagen)" :error="$errors->first('imagen')" class="w-full">
 
                     <div x-data="{ focused: false }" class="w-full">
 
                         <span class="rounded-md shadow-sm w-full ">
 
-                            <input @focus="focused = true" @blur="focused = false" class="sr-only" type="file" wire:model.live="modelo_editar.imagen" id="modelo_editar.imagen">
+                            <input @focus="focused = true" @blur="focused = false" class="sr-only" type="file" wire:model.live="imagen" id="imagen">
 
-                            <label for="modelo_editar.imagen" :class="{ 'outline-none border-blue-300 shadow-outline-blue': focused }" class="flex items-center relative justify-between w-full cursor-pointer py-2 px-3 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
+                            <label for="imagen" :class="{ 'outline-none border-blue-300 shadow-outline-blue': focused }" class="flex items-center relative justify-between w-full cursor-pointer py-2 px-3 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:text-gray-500 active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out">
                                 Selecccione el archivo
 
-                                <div wire:loading.flex wire:target="modelo_editar.imagen" class="flex absolute top-1 right-1 items-center">
+                                <div wire:loading.flex wire:target="imagen" class="flex absolute top-1 right-1 items-center">
                                     <svg class="animate-spin h-4 w-4 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                     </svg>
                                 </div>
 
-                                @if($modelo_editar->imagen)
+                                @if($imagen)
 
-                                    <span class=" text-blue-700" wire:loading.remove wire:target="modelo_editar.imagen">
+                                    <span class=" text-blue-700" wire:loading.remove wire:target="imagen">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rounded-full border border-blue-700">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
@@ -397,16 +397,15 @@
 
                 @elseif($editar)
 
-                    <button
+                    <x-button-blue
                         wire:click="actualizar"
                         wire:loading.attr="disabled"
-                        wire:target="actualizar"
-                        class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-blue-700 flaot-left mr-1 focus:outline-none">
+                        wire:target="actualizar">
 
                         <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                         <span>Actualizar</span>
-                    </button>
+                    </x-button-blue>
 
                 @endif
 

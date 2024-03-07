@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('nombre_solicitante');
             $table->unsignedDecimal("monto", 18, 2);
             $table->date("fecha_entrega")->nullable();
-            $table->date("fecha_pago")->nullable();
+            $table->date("fecha_pago")->nullable()->index();
             $table->date("fecha_vencimiento")->nullable();
             $table->string("folio_pago")->nullable();
             $table->string("tipo_servicio");

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Certificado de registro</title>
+    <title>Cedula de actualización</title>
 </head>
 <style>
 
@@ -142,26 +142,15 @@
 
         <div>
 
-            <p class="titulo">{{ $tipo_certificado }}</p>
-
-            <div class="informacion" >
-
-                <p class="fundamento">
-                    CON FUNDAMENTO EN LOS ARTICULOS 18° FRACCIÓN VI DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL
-                    DEL ESTADO DE MICHOACÁN DE OCAMPO,8 FRACCIONES XI Y XVIII,DEL REGLAMENTO DE LA LEY DE LA
-                    FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO,Y II FRACCIONES I,II,VI,XXVII
-                    Y XXXIV DEL REGLAMENTO INTERIOR DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN
-                    DE OCAMPO EL SUSCRITO  @if(isset($director)) <strong style="text-transform: uppercase;">{{ $director }}, DIRECTOR DE CATASTRO.</strong> @elseif(isset($titular)) <strong style="text-transform: uppercase;">{{ $titular }}, {{ $cargo }}. </strong> @endif
-                    CERTIFICA QUE HABIENDO EFECTUADO UNA REVISIÓN DE LOS PADRONES CATASTRALES EXISTENTES EN ESTA OFICINA A MI CARGO, SE ENCONTRO REGISTRO DE LA SIGUIENTE PROPIEDAD.
-                </p>
-
-            </div>
+            <p class="titulo">CEDULA DE ACTUALIZACIÓN CATASTRAL</p>
 
         </div>
 
         <div class="informacion" >
 
             <p style="margin-bottom: 10px;"><strong>Cuenta predial</strong> {{ $predio->cuentaPredial() }} <strong style="margin-left: 40px;">Clave catastral</strong> {{ $predio->claveCatastral() }}</p>
+
+            <p style="margin-bottom: 10px;"><strong>PROPIETARIO</strong> {{ $predio->primerPropietario() }}  @if($predio->propietarios()->count() > 1) y soc. @endif</p>
 
             <p class="separador">Ubicación del predio</p>
 
@@ -219,97 +208,7 @@
 
                 @endif
 
-            </div>
-
-            @if($tramite->servicio_id == 6)
-
-                <p class="separador">Colindancias</p>
-
-                <div class="informacion" >
-
-                    <table>
-
-                        <thead>
-
-                            <tr>
-                                <th style="text-align: left;">Viento</th>
-                                <th style="text-align: left;">Longitud</th>
-                                <th style="text-align: left;">Descripción</th>
-                            </tr>
-
-                        </thead>
-
-                        <tbody>
-
-                            @foreach ($predio->colindancias as $colindancia)
-
-                                <tr>
-                                    <td style="padding-right: 40px;">
-                                        <p>{{ $colindancia->viento }}</p>
-                                    </td>
-                                    <td style="padding-right: 40px;">
-                                        <p>{{ number_format($colindancia->longitud, 2) }} mts.</p>
-                                    </td>
-                                    <td>
-                                        <p>{{ $colindancia->descripcion }}</p>
-                                    </td>
-                                </tr>
-
-                            @endforeach
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            @endif
-
-            <p class="separador">Propietarios</p>
-
-            <div class="informacion" >
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-                            <th style="text-align: left;">Tipo</th>
-                            <th style="text-align: left;">Nombre/Razón social</th>
-                            <th style="text-align: left;">Porcentaje de propiedad</th>
-                            <th style="text-align: left;">Porcentaje de nuda</th>
-                            <th style="text-align: left;">Porcentaje de usufructo</th>
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        @foreach ($predio->propietarios as $propietario)
-
-                            <tr>
-                                <td style="padding-right: 40px;">
-                                    <p>{{ $propietario->persona->tipo }}</p>
-                                </td>
-                                <td style="padding-right: 40px;">
-                                    <p>{{ $propietario->persona->nombre }} {{ $propietario->persona->ap_paterno }} {{ $propietario->persona->ap_materno }} {{ $propietario->persona->razon_social }}</p>
-                                </td>
-                                <td style="padding-right: 40px;">
-                                    <p>{{ number_format($propietario->porcentaje, 2) }}%</p>
-                                </td>
-                                <td style="padding-right: 40px;">
-                                    <p>{{ number_format($propietario->porcentaje_nuda, 2) }}%</p>
-                                </td>
-                                <td style="padding-right: 40px;">
-                                    <p>{{ number_format($propietario->porcentaje_usufructo, 2) }}%</p>
-                                </td>
-                            </tr>
-
-                        @endforeach
-
-                    </tbody>
-
-                </table>
+                @if($predio->observaciones)<strong>Observaciones:</strong> {{ $predio->observaciones }}@endif
 
             </div>
 
@@ -342,7 +241,6 @@
                     <table style="margin-top: 20px">
 
                         @if(isset($director))
-
                             <p><img style="height: 40px;" src="{{ public_path('efirma/' . $imagen) }}" alt=""></p>
                             <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $director }}</p>
                             <p style="text-align: center;">DIRECTOR DE CATASTRO</p>
@@ -396,13 +294,6 @@
                     </tbody>
 
                 </table>
-
-                <p style="font-size: 7px; text-align: justify">
-                    EL PRESENTE CERTIFICADO ES SOLO PARA FINES ADMINISTRATIVOS PARA CUALQUIER OTRO DEBE SER VALIDADO POR LA OFICINA CORRESPONDIENTE
-                    SE EXPIDE EL PRESENTE CONFORME A LOS DATOS CONTENIDOS EN EL SISTEMA DE GESTION CATASTRAL
-                    A PETICION DEL INTERESADO, SIN REPOSICIÓN POR FALTA DE ACTUALIZACIÓN
-                </p>
-
             </div>
 
         </div>

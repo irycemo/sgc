@@ -254,6 +254,28 @@ class Completo extends Component
 
     }
 
+    public function updatedNotaria(){
+
+        if($this->notaria == ""){
+
+            $this->reset(['notaria']);
+
+            $this->modelo_editar->numero_notaria = null;
+            $this->modelo_editar->nombre_notario = null;
+            $this->modelo_editar->nombre_solicitante = null;
+
+            return;
+
+        }
+
+        $notaria = json_decode($this->notaria);
+
+        $this->modelo_editar->numero_notaria = $notaria->numero;
+        $this->modelo_editar->nombre_notario = $notaria->notario;
+        $this->modelo_editar->nombre_solicitante = $notaria->numero . ' ' .$notaria->notario;
+
+    }
+
     public function buscarPredio(){
 
         $this->validate([
@@ -262,6 +284,20 @@ class Completo extends Component
             'tipo' => 'required',
             'registro' => 'required'
         ]);
+
+        if($this->modelo_editar->servicio_id == 64 && $this->tipo != 2){
+
+            $this->dispatch('mostrarMensaje', ['error', "El predio no es rustico."]);
+            return;
+
+        }
+
+        if($this->modelo_editar->servicio_id == 65 && $this->tipo != 1){
+
+            $this->dispatch('mostrarMensaje', ['error', "El predio no es urbano."]);
+            return;
+
+        }
 
         $this->predio = Predio::with('propietarios.persona')
                                 ->where('localidad', $this->localidad)

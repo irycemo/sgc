@@ -395,7 +395,8 @@ class CertificadoHistoria extends Component
                                 'oficina' => $oficina->nombre,
                                 'certificacion' => $certificacion,
                                 'fecha_impresion' => $fechaImpresion,
-                                'impreso_por' => auth()->user()->nombreCompleto()
+                                'impreso_por' => auth()->user()->nombreCompleto(),
+                                'imagen' => $this->director->efirma->imagen
             ]);
 
         }else{
@@ -493,6 +494,8 @@ class CertificadoHistoria extends Component
                 ->first();
 
         $this->oficina =  auth()->user()->oficina->oficina;
+
+        if(!$this->director->efirma->cer || !$this->director->efirma->key || !$this->director->efirma->imagen) abort(500, message:"Es necesario actualizar la firma electrónica del director");
 
     }
 
