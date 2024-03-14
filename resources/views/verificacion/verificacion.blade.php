@@ -58,6 +58,10 @@
 
                         @include('verificacion.cedula-actualizacion')
 
+                    @elseif($certificacion->documento === 'CERTIFICADO NEGATIVO DE REGISTRO')
+
+                        @include('verificacion.certificado-negativo')
+
                     @endif
 
                 </div>

@@ -673,7 +673,7 @@ class ImpresionAvaluo extends Component
 
         $this->oficina = auth()->user()->oficina->oficina;
 
-        if(!$this->director->efirma->cer || !$this->director->efirma->key || !$this->director->efirma->imagen) abort(500, message:"Es necesario actualizar la firma electrónica del director");
+        if(!$this->director->efirma || !$this->director->efirma->cer || !$this->director->efirma->key || !$this->director->efirma->imagen) abort(500, message:"Es necesario actualizar la firma electrónica del director");
 
     }
 

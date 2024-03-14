@@ -44,48 +44,6 @@
 
         @endcan
 
-        @can('Certificado de historia')
-
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
-
-                <a href="{{ route('certificado_historia') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
-
-                    Certificado de historia
-
-                </a>
-
-            </div>
-
-        @endcan
-
-        @can('Certificado de registro')
-
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
-
-                <a href="{{ route('certificado_registro') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
-
-                    Certificado de registro
-
-                </a>
-
-            </div>
-
-        @endcan
-
-        @can('Cedula de actualización')
-
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
-
-                <a href="{{ route('cedula_actualizacion') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
-
-                    Cedula de actualización
-
-                </a>
-
-            </div>
-
-        @endcan
-
     </div>
 
 </div>

@@ -34,7 +34,7 @@ class Colindancias extends Component
                                         'numeric',
                                         'min:0',
                                     ],
-            'medidas.*.descripcion' => 'required|string',
+            'medidas.*.descripcion' => 'required|string|regex:/^[a-zA-Z0-9\s]+$/',
             'predio' => 'required'
          ];
     }
@@ -108,7 +108,13 @@ class Colindancias extends Component
 
         try {
 
-            $this->predio->colindancias()->where('id', $this->medidas[$index]['id'])->delete();
+            DB::transaction(function () use($index){
+
+                $this->predio->colindancias()->where('id', $this->medidas[$index]['id'])->delete();
+
+                $this->audit();
+
+            });
 
         } catch (\Throwable $th) {
             Log::error("Error al borrar colindancia por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
@@ -163,6 +169,8 @@ class Colindancias extends Component
 
                 }
 
+                $this->audit();
+
                 $this->dispatch('mostrarMensaje', ['success', "Las colindacias se guardaron con éxito"]);
 
             });
@@ -171,6 +179,24 @@ class Colindancias extends Component
             Log::error("Error al crear medidas por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
         }
+
+    }
+
+    public function audit(){
+
+        if($this->avaluo_id){
+
+            $avaluo = Avaluo::find($this->avaluo_id);
+
+            $avaluo->update(['actualizado_por' => auth()->id()]);
+
+            $avaluo->audits()->latest()->first()->update(['tags' => 'Actualizó colindancias']);
+
+        }
+
+        $this->predio->update(['actualizado_por' => auth()->id()]);
+
+        $this->predio->audits()->latest()->first()->update(['tags' => 'Actualizó colindancias']);
 
     }
 

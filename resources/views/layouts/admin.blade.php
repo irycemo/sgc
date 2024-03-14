@@ -49,7 +49,13 @@
 
                 @can('Área de anotaciones y t. a.')
 
-                    @include('layouts.sidebar-cartografia')
+                    @include('layouts.sidebar-anotaciones')
+
+                @endcan
+
+                @can('Área de certificados')
+
+                    @include('layouts.sidebar-certificados')
 
                 @endcan
 

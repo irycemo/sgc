@@ -48,6 +48,7 @@ class Auditoria extends Component
         'App\Models\Uma',
         'App\Models\User',
         'App\Models\Movimiento',
+        'App\Models\VariacionCatastral',
     ];
 
     public function ver(Audit $audit){

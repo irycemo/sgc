@@ -72,6 +72,14 @@ return [
             'throw' => false,
         ],
 
+        'variacionescatastrales' => [
+            'driver' => 'local',
+            'root' => storage_path('app/variacionescatastrales'),
+            'url' => env('APP_URL').'/variacionescatastrales',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
     ],
 
     /*
@@ -89,6 +97,7 @@ return [
         public_path('storage') => storage_path('app/public'),
         public_path('avaluos') => storage_path('app/avaluos'),
         public_path('efirma') => storage_path('app/efirma'),
+        public_path('variacionescatastrales') => storage_path('app/variacionescatastrales'),
     ],
 
 ];

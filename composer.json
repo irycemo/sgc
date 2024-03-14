@@ -21,6 +21,8 @@
         "owen-it/laravel-auditing": "^13.4",
         "phpcfdi/credentials": "^1.2",
         "picqer/php-barcode-generator": "^2.2",
+        "setasign/fpdf": "^1.8",
+        "setasign/fpdi": "^2.6",
         "spatie/laravel-permission": "^5.9",
         "webklex/laravel-pdfmerger": "^1.3"
     },

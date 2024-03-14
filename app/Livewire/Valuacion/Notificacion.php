@@ -168,7 +168,8 @@ class Notificacion extends Component
             $predio->movimientos()->create([
                 'nombre' => 'Alta mediante avaluo',
                 'fecha' => $this->fecha_notificacion,
-                'descripcion' => 'Se da de alta predio en el padrón catastral mediante el avalúo con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '.'
+                'descripcion' => 'Se da de alta predio en el padrón catastral mediante el avalúo con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '.',
+                'creado_por' => auth()->id()
             ]);
 
             $predio->audits()->latest()->first()->update(['tags' => 'Se genera predio apartir de avalúo: ' . $this->avaluo->año . '-' . $this->avaluo->folio]);

@@ -18,6 +18,7 @@ class VerificacionController extends Controller
             'CERTIFICADO DE REGISTRO ELECTRÓNICO' => $this->certificadoRegistroPartes($certificacion->cadena_originial),
             'CERTIFICADO DE REGISTRO' => $this->certificadoRegistroPartes($certificacion->cadena_originial),
             'CEDULA DE ACTUALIZACIÓN CATASTRAL' => $this->cedulaActualizacionPartes($certificacion->cadena_originial),
+            'CERTIFICADO NEGATIVO DE REGISTRO' => $this->certificadoNegativoPartes($certificacion->cadena_originial),
         };
 
         return view('verificacion.verificacion', compact('certificacion', 'objeto'));
@@ -171,7 +172,23 @@ class VerificacionController extends Controller
 
             $aux =  explode(': ', $item);
 
-            $aux2 = explode('%', $item);
+            $object->{$aux[0]} = $aux[1];
+
+        }
+
+        return $object;
+
+    }
+
+    private function certificadoNegativoPartes($cadena){
+
+        $object = (object)[];
+
+        $array = explode('|', $cadena);
+
+        foreach ($array as $item) {
+
+            $aux =  explode(': ', $item);
 
             $object->{$aux[0]} = $aux[1];
 

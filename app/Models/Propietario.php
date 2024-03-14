@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Predio;
 use App\Models\Persona;
 use App\Http\Traits\ModelosTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,11 @@ class Propietario extends Model
 
     public function persona(){
         return $this->belongsTo(Persona::class);
+    }
+
+    public function predio()
+    {
+        return $this->belongsTo(Predio::class, 'propietarioable_id');
     }
 
 }

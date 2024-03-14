@@ -42,7 +42,7 @@ class ImagenesObservaciones extends Component
             'poligonoDwg' => 'nullable|mimes:dwg',
             'poligonoImagen' => 'image|nullable',
             'predio' => 'required',
-            'predio.avaluo.observaciones' => 'required'
+            'predio.avaluo.observaciones' => 'required|regex:/^[a-zA-Z0-9\s]+$/'
          ];
     }
 
@@ -326,6 +326,8 @@ class ImagenesObservaciones extends Component
 
                 $this->predio->avaluo->save();
 
+                $this->audit('Actualizó observaciones/imagenes');
+
                 $this->dispatch('mostrarMensaje', ['success', "La información se guardó con éxito."]);
 
             });
@@ -335,6 +337,24 @@ class ImagenesObservaciones extends Component
             Log::error("Error al guardar imagenes de avaluo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
         }
+
+    }
+
+    public function audit($string){
+
+        if($this->avaluo_id){
+
+            $avaluo = Avaluo::find($this->avaluo_id);
+
+            $avaluo->update(['actualizado_por' => auth()->id()]);
+
+            $avaluo->audits()->latest()->first()->update(['tags' => $string]);
+
+        }
+
+        $this->predio->update(['actualizado_por' => auth()->id()]);
+
+        $this->predio->audits()->latest()->first()->update(['tags' => $string]);
 
     }
 

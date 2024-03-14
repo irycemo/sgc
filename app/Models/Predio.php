@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Bloqueo;
 use App\Models\Terreno;
 use App\Models\Movimiento;
 use App\Models\Colindancia;
@@ -71,6 +72,17 @@ class Predio extends Model implements Auditable
 
     public function movimientos(){
         return $this->hasMany(Movimiento::class);
+    }
+
+    public function bloqueos(){
+        return $this->hasMany(Bloqueo::class);
+    }
+
+    public function bloqueadoActivo(){
+
+        return $this->bloqueos->where('estado', 'activo')->count() > 0 ? true : false;
+
+
     }
 
     public function cuentaPredial(){

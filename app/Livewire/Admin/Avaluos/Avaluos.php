@@ -30,7 +30,11 @@ class Avaluos extends Component
 
     public $valuadores;
 
+    public $valuador_id;
+
     public $años;
+
+    public $modalReasignar = false;
 
     public $filters = [
         'año' => '',
@@ -44,6 +48,41 @@ class Avaluos extends Component
 
     public function crearModeloVacio(){
         $this->modelo_editar = PredioAvaluo::make();
+    }
+
+    public function abrirModal(PredioAvaluo $predio){
+
+        $this->modelo_editar = $predio;
+
+        $this->modalReasignar = true;
+
+    }
+
+    public function reasignar(){
+
+        $this->validate(['valuador_id' => 'required'],['valuador_id' => 'El campo valuador es obligatorio']);
+
+        try{
+
+            DB::transaction(function () {
+
+                $this->modelo_editar->avaluo->update(['asignado_a' => $this->valuador_id]);
+
+                $this->modelo_editar->avaluo->audits()->latest()->first()->update(['tags' => 'Reasignó valuador']);
+
+                $this->dispatch('mostrarMensaje', ['success', "Se reasigno valuador con éxito."]);
+
+                $this->resetearTodo($borrado = true);
+
+            });
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al reasignar valuador por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+
+        }
+
     }
 
     public function eliminar(){
@@ -106,6 +145,8 @@ class Avaluos extends Component
     }
 
     public function mount(){
+
+        array_push($this->fields, 'modalReasignar', 'valuador_id');
 
         $this->valuadores = User::whereNotNull('valuador')->orderBy('ap_paterno')->get();
 

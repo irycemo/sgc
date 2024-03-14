@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Livewire\GestionCatastral;
+namespace App\Livewire\Certificaciones;
 
 use App\Models\User;
 use App\Models\Oficina;
+use App\Models\Persona;
 use App\Models\Tramite;
 use Livewire\Component;
+use App\Models\Propietario;
 use App\Models\Certificacion;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Validation\Rule;
 use App\Http\Constantes\Constantes;
 use Endroid\QrCode\Builder\Builder;
 use Illuminate\Support\Facades\Log;
@@ -20,9 +23,8 @@ use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
-use Exception;
 
-class CedulaActualizacion extends Component
+class CertificadoNegativo extends Component
 {
 
     public $años;
@@ -40,6 +42,14 @@ class CedulaActualizacion extends Component
     public $cadena;
 
     public $impresionDirector = false;
+
+    public $nombre;
+    public $ap_paterno;
+    public $ap_materno;
+    public $razon_social;
+
+    public $predioFlag = false;
+    public $tramiteFlag = false;
 
     public function buscarTramite(){
 
@@ -59,9 +69,9 @@ class CedulaActualizacion extends Component
                                         ->where('usuario', $this->usuario)
                                         ->firstOrFail();
 
-            if(!in_array($this->tramite->servicio->id, [64, 65])){
+            if($this->tramite->servicio->id !== 5){
 
-                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a una cedula de actualización."]);
+                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a un certificado negativo de registro."]);
 
                 return;
 
@@ -83,12 +93,6 @@ class CedulaActualizacion extends Component
 
             }
 
-            $this->predio = $this->tramite->predios()->first();
-
-            $this->oficina = Oficina::where('oficina', $this->predio->oficina)->first()->oficina;
-
-            $this->reset(['folio', 'usuario']);
-
 
         } catch (ModelNotFoundException $th) {
 
@@ -103,51 +107,58 @@ class CedulaActualizacion extends Component
 
     }
 
+    public function buscarPropietario(){
+
+        $this->validate([
+            'nombre' => Rule::requiredIf($this->razon_social === null || $this->razon_social === ''),
+            'ap_paterno' => Rule::requiredIf($this->razon_social === null || $this->razon_social === ''),
+            'ap_materno' => Rule::requiredIf($this->razon_social === null || $this->razon_social === ''),
+            'razon_social' => 'nullable'
+        ]);
+
+        $propietario = Persona::when($this->nombre, fn($q) => $q->where('nombre', $this->nombre))
+                                ->when($this->ap_paterno, fn($q) => $q->where('ap_paterno', $this->ap_paterno))
+                                ->when($this->ap_materno, fn($q) => $q->where('ap_materno', $this->ap_materno))
+                                ->when($this->razon_social, fn($q) => $q->where('razon_social', $this->razon_social))
+                                ->first();
+
+        if($propietario){
+
+            $propietario = Propietario::where('persona_id', $propietario->id)->first();
+
+            $this->predio = $propietario->predio;
+
+            $this->predioFlag = true;
+
+        }else{
+
+            $this->tramiteFlag = true;
+
+            $this->reset('predio');
+
+        }
+
+    }
+
     public function construirCadena(){
 
-        $this->cadena = 'cuenta_predial: ' . $this->predio->cuentaPredial();
+        if($this->nombre){
 
-        $this->cadena = $this->cadena . '|' . 'clave_catastral: ' . $this->predio->claveCatastral();
+            $this->cadena = 'nombre: ' . $this->nombre;
 
-        $this->cadena = $this->cadena . '|' . 'tramite: ' . $this->tramite->año . '-' . $this->tramite->folio . '-'. $this->tramite->usuario . '|' . 'recibo: ' . $this->tramite->folio_pago;
+            $this->cadena =  $this->cadena . '|' . 'ap_paterno: ' . $this->ap_paterno;
+
+            $this->cadena =  $this->cadena . '|' . 'ap_materno: ' . $this->ap_materno;
+
+        }elseif($this->razon_social){
+
+            $this->cadena =  $this->cadena . '|' . 'razon_social: ' . $this->razon_social;
+
+        }
 
         $this->cadena = $this->cadena . '|' . 'solicitante: ' . $this->tramite->nombre_solicitante;
 
-        if($this->predio->tipo_asentamiento) $this->cadena = $this->cadena . '|' . 'tipo_asentamiento: ' . $this->predio->tipo_asentamiento;
-        if($this->predio->nombre_asentamiento) $this->cadena = $this->cadena . '|' . 'nombre_asentamiento: ' . $this->predio->nombre_asentamiento;
-        if($this->predio->tipo_vialidad) $this->cadena = $this->cadena . '|' . 'tipo_vialidad: ' . $this->predio->tipo_vialidad;
-        if($this->predio->nombre_vialidad) $this->cadena = $this->cadena . '|' . 'nombre_vialidad: ' . $this->predio->nombre_vialidad;
-        if($this->predio->numero_interior) $this->cadena = $this->cadena . '|' . 'numero_interior: ' . $this->predio->numero_interior;
-        if($this->predio->numero_exterior) $this->cadena = $this->cadena . '|' . 'numero_exterior: ' . $this->predio->numero_exterior;
-        if($this->predio->numero_exterior_2) $this->cadena = $this->cadena . '|' . 'numero_exterior_2: ' . $this->predio->numero_exterior_2;
-        if($this->predio->numero_adicional) $this->cadena = $this->cadena . '|' . 'numero_adicional: ' . $this->predio->numero_adicional;
-        if($this->predio->numero_adicional_2) $this->cadena = $this->cadena . '|' . 'numero_adicional_2: ' . $this->predio->numero_adicional_2;
-        if($this->predio->codigo_postal) $this->cadena = $this->cadena . '|' . 'codigo_postal: ' . $this->predio->codigo_postal;
-        if($this->predio->nombre_edificio) $this->cadena = $this->cadena . '|' . 'nombre_edificio: ' . $this->predio->nombre_edificio;
-        if($this->predio->clave_edificio) $this->cadena = $this->cadena . '|' . 'clave_edificio: ' . $this->predio->clave_edificio;
-        if($this->predio->departamento_edificio) $this->cadena = $this->cadena . '|' . 'departamento_edificio: ' . $this->predio->departamento_edificio;
-        if($this->predio->lote_fraccionador) $this->cadena = $this->cadena . '|' . 'lote_fraccionador: ' . $this->predio->lote_fraccionador;
-        if($this->predio->manzana_fraccionador) $this->cadena = $this->cadena . '|' . 'manzana_fraccionador: ' . $this->predio->manzana_fraccionador;
-        if($this->predio->etapa_fraccionador) $this->cadena = $this->cadena . '|' . 'etapa_fraccionador: ' . $this->predio->etapa_fraccionador;
-        if($this->predio->ubicacion_en_manzana) $this->cadena = $this->cadena . '|' . 'ubicacion_en_manzana: ' . $this->predio->ubicacion_en_manzana;
-        if($this->predio->nombre_predio) $this->cadena = $this->cadena . '|' . 'nombre_predio: ' . $this->predio->nombre_predio;
-        if($this->predio->xutm) $this->cadena = $this->cadena . '|' . 'xutm: ' . $this->predio->xutm;
-        if($this->predio->yutm) $this->cadena = $this->cadena . '|' . 'yutm: ' . $this->predio->yutm;
-        if($this->predio->zutm) $this->cadena = $this->cadena . '|' . 'zutm: ' . $this->predio->zutm;
-        if($this->predio->lat) $this->cadena = $this->cadena . '|' . 'lat: ' . $this->predio->lat;
-        if($this->predio->lon) $this->cadena = $this->cadena . '|' . 'lon: ' . $this->predio->lon;
-        if($this->predio->superficie_terreno > 0) $this->cadena = $this->cadena . '|' . 'superficie_terreno: ' . $this->predio->superficie_terreno;
-        if($this->predio->superficie_notarial > 0) $this->cadena = $this->cadena . '|' . 'superficie_notarial: ' . $this->predio->superficie_notarial;
-        if($this->predio->superficie_judicial > 0) $this->cadena = $this->cadena . '|' . 'superficie_judicial: ' . $this->predio->superficie_judicial;
-        if($this->predio->superficie_construccion > 0) $this->cadena = $this->cadena . '|' . 'superficie_construccion: ' . $this->predio->superficie_construccion;
-        if($this->predio->area_comun_terreno > 0) $this->cadena = $this->cadena . '|' . 'area_comun_terreno: ' . $this->predio->area_comun_terreno;
-        if($this->predio->area_comun_construccion > 0) $this->cadena = $this->cadena . '|' . 'area_comun_construccion: ' . $this->predio->area_comun_construccion;
-        if($this->predio->valor_catastral) $this->cadena = $this->cadena . '|' . 'valor_catastral: ' . $this->predio->valor_catastral;
-        if($this->predio->observaciones) $this->cadena = $this->cadena . '|' . 'observaciones: ' . $this->predio->observaciones;
-
-        $sociedad = $this->predio->propietarios()->count() > 1 ? ' y soc.' : '';
-
-        $this->cadena = $this->cadena . '|' . 'propietario: ' . $this->predio->primerPropietario() . $sociedad;
+        $this->cadena = $this->cadena . '|' . 'tramite: ' . $this->tramite->año . '-' . $this->tramite->folio . '-'. $this->tramite->usuario . '|' . 'recibo: ' . $this->tramite->folio_pago;
 
     }
 
@@ -159,7 +170,7 @@ class CedulaActualizacion extends Component
 
         $this->cadena = $this->cadena . '|' . 'impreso_por: ' . auth()->user()->nombreCompleto();
 
-        if($this->oficina === 101 || $this->impresionDirector){
+        if(auth()->user()->oficina->oficina === 101 || $this->impresionDirector){
 
             $fielDirector = Credential::openFiles(Storage::disk('efirma')->path($this->director->efirma->cer), Storage::disk('efirma')->path($this->director->efirma->key), $this->director->efirma->contraseña);
 
@@ -175,8 +186,8 @@ class CedulaActualizacion extends Component
 
             $certificacion = Certificacion::create([
                 'año' => now()->format('Y'),
-                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', 'CEDULA DE ACTUALIZACIÓN CATASTRAL')->max('folio') ?? 0) + 1,
-                'documento' => 'CEDULA DE ACTUALIZACIÓN CATASTRAL',
+                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', 'CERTIFICADO NEGATIVO DE REGISTRO')->max('folio') ?? 0) + 1,
+                'documento' => 'CERTIFICADO NEGATIVO DE REGISTRO',
                 'cadena_originial' => $this->cadena,
                 'cadena_encriptada' => base64_encode($firmaDirector),
                 'estado' => 'activo',
@@ -186,8 +197,7 @@ class CedulaActualizacion extends Component
                 'actualizado_por' => auth()->id(),
             ]);
 
-            $pdf = Pdf::loadview('certificados.cedula', [
-                'predio' => $this->predio,
+            $pdf = Pdf::loadview('certificados.negativo', [
                 'tramite' => $this->tramite,
                 'director' => $this->director->nombreCompleto(),
                 'firmaDirector' => base64_encode($firmaDirector),
@@ -196,13 +206,17 @@ class CedulaActualizacion extends Component
                 'certificacion' => $certificacion,
                 'fecha_impresion' => $fechaImpresion,
                 'impreso_por' => auth()->user()->nombreCompleto(),
-                'tipo_certificado' => 'CEDULA DE ACTUALIZACIÓN CATASTRAL',
-                'imagen' => $this->director->efirma->imagen
+                'tipo_certificado' => 'CERTIFICADO NEGATIVO DE REGISTRO',
+                'imagen' => $this->director->efirma->imagen,
+                'nombre' => $this->nombre,
+                'ap_paterno' => $this->ap_paterno,
+                'ap_materno' => $this->ap_materno,
+                'razon_social' => $this->razon_social,
             ]);
 
         }else{
 
-            $oficina = Oficina::where('oficina', $this->predio->oficina)->first();
+            $oficina = Oficina::find(auth()->user()->oficina_id);
 
             $this->cadena = $this->cadena . '|' . 'oficina: ' . $oficina->nombre;
 
@@ -214,8 +228,8 @@ class CedulaActualizacion extends Component
 
             $certificacion = Certificacion::create([
                 'año' => now()->format('Y'),
-                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', 'CEDULA DE ACTUALIZACIÓN CATASTRAL')->max('folio') ?? 0) + 1,
-                'documento' => 'CEDULA DE ACTUALIZACIÓN CATASTRAL',
+                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', 'CERTIFICADO NEGATIVO DE REGISTRO')->max('folio') ?? 0) + 1,
+                'documento' => 'CERTIFICADO NEGATIVO DE REGISTRO',
                 'cadena_originial' => $this->cadena,
                 'estado' => 'activo',
                 'oficina_id' => $oficina->id,
@@ -224,8 +238,7 @@ class CedulaActualizacion extends Component
                 'actualizado_por' => auth()->id(),
             ]);
 
-            $pdf = Pdf::loadview('certificados.cedula', [
-                'predio' => $this->predio,
+            $pdf = Pdf::loadview('certificados.negativo', [
                 'tramite' => $this->tramite,
                 'oficina' => $oficina->nombre,
                 'cargo' => $cargo,
@@ -234,7 +247,11 @@ class CedulaActualizacion extends Component
                 'fecha_impresion' => $fechaImpresion,
                 'certificacion' => $certificacion,
                 'impreso_por' => auth()->user()->nombreCompleto(),
-                'tipo_certificado' => 'CEDULA DE ACTUALIZACIÓN CATASTRAL'
+                'tipo_certificado' => 'CERTIFICADO NEGATIVO DE REGISTRO',
+                'nombre' => $this->nombre,
+                'ap_paterno' => $this->ap_paterno,
+                'ap_materno' => $this->ap_materno,
+                'razon_social' => $this->razon_social,
             ]);
 
         }
@@ -274,7 +291,8 @@ class CedulaActualizacion extends Component
         return $result->getDataUri();
     }
 
-    public function generarCedula(){
+
+    public function generarCertificado(){
 
         $this->construirCadena();
 
@@ -284,7 +302,7 @@ class CedulaActualizacion extends Component
 
         return response()->streamDownload(
             fn () => print($pdf),
-            'cedula_actualizacion.pdf'
+            'certificado_negativo.pdf'
         );
 
     }
@@ -301,12 +319,12 @@ class CedulaActualizacion extends Component
                 })
                 ->first();
 
-        if(!$this->director->efirma->cer || !$this->director->efirma->key || !$this->director->efirma->imagen) abort(500, message:"Es necesario actualizar la firma electrónica del director");
+        if(!$this->director->efirma || !$this->director->efirma->cer || !$this->director->efirma->key || !$this->director->efirma->imagen) abort(500, message:"Es necesario actualizar la firma electrónica del director");
 
     }
 
     public function render()
     {
-       return view('livewire.gestion-catastral.cedula-actualizacion')->extends('layouts.admin');
+        return view('livewire.certificaciones.certificado-negativo')->extends('layouts.admin');
     }
 }

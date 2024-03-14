@@ -41,36 +41,36 @@ class Captura extends Component
 
     protected function rules(){
         return [
-            'predio.numero_registro' => 'required|min:1',
-            'predio.region_catastral' => 'required|min:1',
-            'predio.municipio' => 'required|min:1',
-            'predio.localidad' => 'required|min:1',
-            'predio.sector' => 'required|min:1',
-            'predio.zona_catastral' => 'required|min:1,|same:predio.localidad',
-            'predio.manzana' => 'required|min:1',
-            'predio.predio' => 'required|min:1',
-            'predio.edificio' => 'required|min:1',
-            'predio.departamento' => 'required|min:1',
-            'predio.tipo_predio' => 'required|min:1|max:2',
-            'predio.oficina' => 'required|min:1',
+            'predio.numero_registro' => 'required|numeric|min:1',
+            'predio.region_catastral' => 'required|numeric|min:1',
+            'predio.municipio' => 'required|numeric|min:1',
+            'predio.localidad' => 'required|numeric|min:1',
+            'predio.sector' => 'required|numeric|min:1',
+            'predio.zona_catastral' => 'required|numeric|min:1,|same:predio.localidad',
+            'predio.manzana' => 'required|numeric|min:1',
+            'predio.predio' => 'required|numeric|min:1',
+            'predio.edificio' => 'required|numeric|min:1',
+            'predio.departamento' => 'required|numeric|min:1',
+            'predio.tipo_predio' => 'required|numeric|min:1|max:2',
+            'predio.oficina' => 'required|numeric|min:1',
             'predio.estado' => 'required',
             'predio.tipo_asentamiento' => 'required',
             'predio.nombre_asentamiento' => 'required',
             'predio.tipo_vialidad' => 'required',
-            'predio.nombre_vialidad' => 'required',
-            'predio.numero_exterior' => 'required',
-            'predio.numero_exterior_2' => 'nullable',
-            'predio.numero_interior' => 'nullable',
-            'predio.numero_adicional_2' => 'nullable',
-            'predio.numero_adicional' => 'nullable',
-            'predio.codigo_postal' => 'required',
-            'predio.lote_fraccionador' => 'nullable',
-            'predio.manzana_fraccionador' => 'nullable',
-            'predio.etapa_fraccionador' => 'nullable',
-            'predio.nombre_predio'  => 'nullable',
-            'predio.nombre_edificio' => 'nullable',
-            'predio.clave_edificio' => 'nullable',
-            'predio.departamento_edificio' => 'nullable',
+            'predio.nombre_vialidad' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.numero_exterior' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.numero_exterior_2' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.numero_interior' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.numero_adicional_2' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.numero_adicional' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.codigo_postal' => 'required|numeric',
+            'predio.lote_fraccionador' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.manzana_fraccionador' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.etapa_fraccionador' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.nombre_predio'  => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.nombre_edificio' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.clave_edificio' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.departamento_edificio' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
             'predio.xutm' => 'nullable|string',
             'predio.yutm' => 'nullable|string',
             'predio.zutm' => 'nullable',
@@ -81,7 +81,7 @@ class Captura extends Component
             'predio.documento_numero' => Rule::requiredIf(!$this->actualizacion),
             'predio.fecha_efectos' => Rule::requiredIf(!$this->actualizacion),
             'predio.origen' => 'required',
-            'predio.observaciones' => 'required_if:modalBaja, true'
+            'predio.observaciones' => 'required_if:modalBaja, true|regex:/^[a-zA-Z0-9\s]+$/'
          ];
     }
 
@@ -215,6 +215,14 @@ class Captura extends Component
                                     ->where('oficina', $this->predio->oficina)
                                     ->firstOrFail();
 
+            if($this->predio->bloqueadoActivo()){
+
+                $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
+                $this->predio = $this->crearModeloVacio();
+                return;
+
+            }
+
             if($this->predioInactivo()) return;
 
             $this->dispatch('cargarPredio', id: $this->predio->id, flag: true);
@@ -243,6 +251,14 @@ class Captura extends Component
                                     ->where('edificio', $this->predio->edificio)
                                     ->where('departamento', $this->predio->departamento)
                                     ->firstOrFail();
+
+            if($this->predio->bloqueadoActivo()){
+
+                $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
+                $this->predio = $this->crearModeloVacio();
+                return;
+
+            }
 
             if($this->predioInactivo()) return;
 
@@ -483,7 +499,7 @@ class Captura extends Component
             $this->predio->actualizado_por = auth()->id();
             $this->predio->save();
 
-            $this->predio->audits()->latest()->first()->update(['tags' => 'Actualizo información del predio']);
+            $this->predio->audits()->latest()->first()->update(['tags' => 'Actualizo información de identificación']);
 
             $this->dispatch('mostrarMensaje', ['success', "El predio se actualizó correctamente."]);
 

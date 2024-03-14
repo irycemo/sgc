@@ -103,6 +103,10 @@ class Certificaciones extends Component
 
             $pdf = $this->cedulaActualizacion($this->cedulaActualizacionPartes($this->modelo_editar->cadena_originial));
 
+        }elseif($this->modelo_editar->documento == 'CERTIFICADO NEGATIVO DE REGISTRO'){
+
+            $pdf = $this->certificadoNegativo($this->certificadoNegativoPartes($this->modelo_editar->cadena_originial));
+
         }
 
         $pdf->render();
@@ -158,6 +162,17 @@ class Certificaciones extends Component
     public function cedulaActualizacion($partes){
 
         return Pdf::loadview('certificados.cedula-reimpresion', [
+            'objeto' => $partes,
+            'qr' => $this->generadorQr($this->modelo_editar),
+            'certificacion' => $this->modelo_editar,
+            'imagen' => $this->imagen
+        ]);
+
+    }
+
+    public function certificadoNegativo($partes){
+
+        return Pdf::loadview('certificados.negativo-reimpresion', [
             'objeto' => $partes,
             'qr' => $this->generadorQr($this->modelo_editar),
             'certificacion' => $this->modelo_editar,
@@ -327,6 +342,24 @@ class Certificaciones extends Component
     }
 
     public function cedulaActualizacionPartes($cadena){
+
+        $object = (object)[];
+
+        $array = explode('|', $cadena);
+
+        foreach ($array as $item) {
+
+            $aux =  explode(': ', $item);
+
+            $object->{$aux[0]} = $aux[1];
+
+        }
+
+        return $object;
+
+    }
+
+    public function certificadoNegativoPartes($cadena){
 
         $object = (object)[];
 

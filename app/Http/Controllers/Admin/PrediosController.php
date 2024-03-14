@@ -11,7 +11,17 @@ class PrediosController extends Controller
 
     public function show(Predio $predio){
 
-        $predio->load('propietarios.persona', 'condominioTerrenos', 'condominioConstrucciones', 'terrenos', 'construcciones', 'colindancias', 'audits.user');
+        $predio->load(
+            'propietarios.persona',
+            'condominioTerrenos',
+            'condominioConstrucciones',
+            'terrenos',
+            'construcciones',
+            'colindancias',
+            'audits.user',
+            'bloqueos.creadoPor',
+            'movimientos.creadoPor'
+        );
 
         return view('admin.predios.show', compact('predio'));
 

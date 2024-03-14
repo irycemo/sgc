@@ -312,6 +312,13 @@ class LevantamientosTopograficos extends Component
                                 ->where('numero_registro', $this->registro)
                                 ->first();
 
+        if($this->predio->bloqueadoActivo()){
+
+            $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
+            $this->predio = null;
+            return;
+        }
+
         if(!$this->predio){
             $this->dispatch('mostrarMensaje', ['error', "La cuenta predial no esta registrada."]);
             return;

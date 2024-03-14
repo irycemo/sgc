@@ -41,44 +41,44 @@ class Inmueble extends Component
         return [
             'predio.copia' => 'nullable',
             'predio.sociedad' => 'nullable',
-            'predio.numero_registro' => 'required|min:1',
-            'predio.region_catastral' => 'required|min:1',
-            'predio.municipio' => 'required|min:1',
-            'predio.localidad' => 'required|min:1|same:predio.zona_catastral',
-            'predio.sector' => 'required|min:1',
-            'predio.zona_catastral' => 'required|min:1',
-            'predio.manzana' => 'required|min:1',
-            'predio.predio' => 'required|min:1',
-            'predio.edificio' => 'required|min:1',
-            'predio.departamento' => 'required|min:1',
-            'predio.tipo_predio' => 'required|min:1|max:2',
-            'predio.oficina' => 'required|min:1',
+            'predio.numero_registro' => 'required|numeric|min:1',
+            'predio.region_catastral' => 'required|numeric|min:1',
+            'predio.municipio' => 'required|numeric|min:1',
+            'predio.localidad' => 'required|numeric|min:1|same:predio.zona_catastral',
+            'predio.sector' => 'required|numeric|min:1',
+            'predio.zona_catastral' => 'required|numeric|min:1',
+            'predio.manzana' => 'required|numeric|min:1',
+            'predio.predio' => 'required|numeric|min:1',
+            'predio.edificio' => 'required|numeric|min:1',
+            'predio.departamento' => 'required|numeric|min:1',
+            'predio.tipo_predio' => 'required|numeric|min:1|max:2',
+            'predio.oficina' => 'required|numeric|min:1',
             'predio.estado' => 'required',
             'predio.tipo_asentamiento' => 'required',
             'predio.nombre_asentamiento' => 'required',
             'predio.tipo_vialidad' => 'required',
             'predio.nombre_vialidad' => 'required',
-            'predio.numero_exterior' => 'required',
-            'predio.numero_exterior_2' => 'nullable',
-            'predio.numero_interior' => 'nullable',
-            'predio.numero_adicional_2' => 'nullable',
-            'predio.numero_adicional' => 'nullable',
-            'predio.codigo_postal' => 'nullable',
-            'predio.lote_fraccionador' => 'nullable',
-            'predio.manzana_fraccionador' => 'nullable',
-            'predio.etapa_fraccionador' => 'nullable',
-            'predio.nombre_predio'  => 'nullable',
-            'predio.nombre_edificio' => 'nullable',
-            'predio.clave_edificio' => 'nullable',
-            'predio.departamento_edificio' => 'nullable',
+            'predio.numero_exterior' => 'required|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.numero_exterior_2' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.numero_interior' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.numero_adicional_2' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.numero_adicional' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.codigo_postal' => 'nullable|numeric',
+            'predio.lote_fraccionador' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.manzana_fraccionador' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.etapa_fraccionador' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.nombre_predio'  => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.nombre_edificio' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.clave_edificio' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'predio.departamento_edificio' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
             'predio.xutm' => 'nullable|string',
             'predio.yutm' => 'nullable|string',
             'predio.zutm' => 'nullable',
             'predio.lat' => 'required',
             'predio.lon' => 'required',
-            'ap_paterno' => 'required',
-            'ap_materno' => 'required',
-            'nombre' => 'required',
+            'ap_paterno' => 'required|regex:/^[\pL\s]+$/u',
+            'ap_materno' => 'required|regex:/^[\pL\s]+$/u',
+            'nombre' => 'required|regex:/^[\pL\s]+$/u',
             'tipo_persona' => 'required',
             'tipo_propietario' => 'required',
             'porcentaje' => 'required|numeric|max:100',
@@ -613,7 +613,7 @@ class Inmueble extends Component
 
                 $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo con folio: ' . $avaluo->año . '-' . $avaluo->folio]);
 
-                $this->dispatch('mostrarMensaje', ['success', "El avaluo se creó con el folio " . $avaluo->folio . "."]);
+                $this->dispatch('mostrarMensaje', ['success', "El avaluo se creó con el folio " . $avaluo->año . '-' . $avaluo->folio . "."]);
 
                 $this->editar = true;
 
@@ -688,7 +688,9 @@ class Inmueble extends Component
                     'estado' => 'nuevo'
                 ]);
 
-                $this->dispatch('mostrarMensaje', ['success', "El avaluo se actualizó con el folio " . $avaluo->folio . "."]);
+                $avaluo->audits()->latest()->first()->update(['tags' => 'Actualizó datos de identificación del inmueble']);
+
+                $this->dispatch('mostrarMensaje', ['success', "El avaluo se actualizó con el folio " . $avaluo->año . '-' . $avaluo->folio . "."]);
 
             });
 

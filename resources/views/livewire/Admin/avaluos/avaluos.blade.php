@@ -246,6 +246,22 @@
 
                                 @endcan
 
+                                @can('Reasignar valuador')
+
+                                    <x-button-red
+                                        wire:click="abrirModal({{ $predio->id }})"
+                                        wire:loading.attr="disabled">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-3">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                        </svg>
+
+                                        <span>Reasignar</span>
+
+                                    </x-button-red>
+
+                                @endcan
+
                             </div>
 
                         </x-table.cell>
@@ -289,6 +305,54 @@
         </x-table>
 
     </div>
+
+    <x-dialog-modal wire:model="modalReasignar" maxWidth="sm">
+
+        <x-slot name="title">
+            Reasignar avaluo
+        </x-slot>
+
+        <x-slot name="content">
+
+            <x-input-group for="valuador_id" label="Valuador" :error="$errors->first('valuador_id')" class="w-full">
+
+                <x-input-select id="valuador_id" wire:model="valuador_id" class="w-full">
+
+                    <option value="">Seleccione una opción</option>
+
+                    @foreach ($valuadores as $valuador)
+
+                            <option value="{{ $valuador->id }}">{{ $valuador->nombreCompleto() }}</option>
+
+                    @endforeach
+
+                </x-input-select>
+
+            </x-input-group>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <x-secondary-button
+                wire:click="$toggle('modal')"
+                wire:loading.attr="disabled"
+            >
+                No
+            </x-secondary-button>
+
+            <x-danger-button
+                class="ml-2"
+                wire:click="reasignar"
+                wire:loading.attr="disabled"
+                wire:target="reasignar"
+            >
+                Reasignar
+            </x-danger-button>
+
+        </x-slot>
+
+    </x-dialog-modal>
 
     <x-confirmation-modal wire:model.live="modal" maxWidth="sm">
 

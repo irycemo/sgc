@@ -373,6 +373,8 @@ class Valor extends Component
             if($this->construcciones[$index]['id'] != null)
                 $this->predio->construcciones()->where('id', $this->construcciones[$index]['id'])->delete();
 
+            $this->audit('Actualizó construcciones');
+
         } catch (\Throwable $th) {
             Log::error("Error al borrar construccion por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
@@ -395,6 +397,8 @@ class Valor extends Component
 
             if($this->terrenos[$index]['id'] != null)
                 $this->predio->terrenos()->where('id', $this->terrenos[$index]['id'])->delete();
+
+            $this->audit('Actualizó terrenos');
 
         } catch (\Throwable $th) {
             Log::error("Error al borrar terreno por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
@@ -419,6 +423,8 @@ class Valor extends Component
             if($this->terrenosCondominio[$index]['id'] != null)
                 $this->predio->condominioTerrenos()->where('id', $this->terrenosCondominio[$index]['id'])->delete();
 
+            $this->audit('Actualizó terrenos en común');
+
         } catch (\Throwable $th) {
             Log::error("Error al borrar terreno de condominio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
@@ -441,6 +447,8 @@ class Valor extends Component
 
             if($this->construccionesCondominio[$index]['id'] != null)
                 $this->predio->condominioConstrucciones()->where('id', $this->construccionesCondominio[$index]['id'])->delete();
+
+            $this->audit('Actualizó construcciones en común');
 
         } catch (\Throwable $th) {
             Log::error("Error al borrar terreno por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
@@ -530,6 +538,8 @@ class Valor extends Component
                     'valor_total_construccion' => $sum,
                 ]);
 
+                $this->audit('Actualizó construcciones');
+
                 $this->dispatch('mostrarMensaje', ['success', "Las construcciones se guardaron con éxito"]);
 
             });
@@ -606,6 +616,8 @@ class Valor extends Component
                     'valor_total_terreno' => $sum
                 ]);
 
+                $this->audit('Actualizó terrenos');
+
                 $this->dispatch('mostrarMensaje', ['success', "Los terrenos se guardaron con éxito"]);
 
             });
@@ -681,6 +693,8 @@ class Valor extends Component
                 $this->predio->valor_terreno_comun = $sum;
 
                 $this->predio->save();
+
+                $this->audit('Actualizó terrenos en común');
 
                 $this->dispatch('mostrarMensaje', ['success', "La información de terrenos de condominio se guardó con éxito"]);
 
@@ -761,6 +775,8 @@ class Valor extends Component
 
                 $this->predio->save();
 
+                $this->audit('Actualizó construcciones común');
+
                 $this->dispatch('mostrarMensaje', ['success', "La información de condominio se guardó con éxito"]);
 
             });
@@ -819,6 +835,8 @@ class Valor extends Component
 
             $this->predio->save();
 
+            $this->audit('Actualizó valor catastral');
+
             $this->dispatch('mostrarMensaje', ['success', "La información se guardó con éxito"]);
 
         } catch (\Throwable $th) {
@@ -827,6 +845,24 @@ class Valor extends Component
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 
         }
+
+    }
+
+    public function audit($string){
+
+        if($this->avaluo_id){
+
+            $avaluo = Avaluo::find($this->avaluo_id);
+
+            $avaluo->update(['actualizado_por' => auth()->id()]);
+
+            $avaluo->audits()->latest()->first()->update(['tags' => $string]);
+
+        }
+
+        $this->predio->update(['actualizado_por' => auth()->id()]);
+
+        $this->predio->audits()->latest()->first()->update(['tags' => $string]);
 
     }
 

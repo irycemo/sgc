@@ -141,9 +141,9 @@
                 </x-button-blue>
 
                 <x-button-red
-                    wire:click="resetearTodo"
+                    wire:click="$toggle('modalBaja')"
                     wire:loading.attr="disabled"
-                    wire:target="resetearTodo"
+                    wire:target="$toggle('modalBaja')"
                     type="button">
                     Cerrar
                 </x-button-red>

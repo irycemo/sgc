@@ -32,13 +32,15 @@ use App\Http\Controllers\Admin\PrediosController;
 use App\Http\Controllers\Admin\TramiteController;
 use App\Livewire\Valuacion\AsignacionCuentaPredial;
 use App\Livewire\Admin\ValoresunitariosConstruccion;
-use App\Livewire\GestionCatastral\CertificadoHistoria;
+use App\Livewire\Certificaciones\CedulaActualizacion;
+use App\Livewire\Certificaciones\CertificadoHistoria;
+use App\Livewire\Certificaciones\CertificadoRegistro;
 use App\Http\Controllers\Valuacion\AvaluosController as Val;
 use App\Livewire\Ventanilla\Ventanilla as VentanillaVentanilla;
 use App\Http\Controllers\Valuacion\ValuacionYDesgloseController;
 use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
-use App\Livewire\GestionCatastral\CedulaActualizacion;
-use App\Livewire\GestionCatastral\CertificadoRegistro;
+use App\Livewire\Certificaciones\CertificadoNegativo;
+use App\Livewire\TramitesAdministrativos\VariacionesCatastrales;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,11 +117,17 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     /* Gestión catastral */
     Route::get('captura_padron', Captura::class)->middleware('permission:Captura al padron')->name('captura_padron');
 
+    /* Tramites Administrativos */
+    Route::get('variaciones_catastrales', VariacionesCatastrales::class)->middleware('permission:Variaciones catastrales')->name('variaciones_catastrales');
+
+    /* Certificaciones */
     Route::get('certificado_historia', CertificadoHistoria::class)->middleware('permission:Certificado de historia')->name('certificado_historia');
 
     Route::get('certificado_registro', CertificadoRegistro::class)->middleware('permission:Certificado de registro')->name('certificado_registro');
 
     Route::get('cedula_actualizacion', CedulaActualizacion::class)->middleware('permission:Cedula de actualización')->name('cedula_actualizacion');
+
+    Route::get('certificado_negativo', CertificadoNegativo::class)->middleware('permission:Certificado negativo')->name('certificado_negativo');
 
     /* Consultas */
     Route::get('ver_oficina/{ofice_id?}', Oficina::class)->middleware('permission:Ver oficina')->name('ver_oficina');

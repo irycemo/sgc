@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\GestionCatastral;
+namespace App\Livewire\Certificaciones;
 
 use App\Models\User;
 use App\Models\Predio;
@@ -89,6 +89,14 @@ class CertificadoHistoria extends Component
                                     ->where('oficina', $this->oficina)
                                     ->firstOrFail();
 
+            if($this->predio->bloqueadoActivo()){
+
+                $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
+                $this->predio = null;
+                return;
+
+            }
+
         } catch (\Throwable $th) {
 
             $this->dispatch('mostrarMensaje', ['error', "No se encontro predio con la cuenta predial ingresada."]);
@@ -126,6 +134,14 @@ class CertificadoHistoria extends Component
                                     ->where('edificio', $this->edificio)
                                     ->where('departamento', $this->departamento)
                                     ->firstOrFail();
+
+            if($this->predio->bloqueadoActivo()){
+
+                $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
+                $this->predio = null;
+                return;
+
+            }
 
         } catch (\Throwable $th) {
 
@@ -495,13 +511,13 @@ class CertificadoHistoria extends Component
 
         $this->oficina =  auth()->user()->oficina->oficina;
 
-        if(!$this->director->efirma->cer || !$this->director->efirma->key || !$this->director->efirma->imagen) abort(500, message:"Es necesario actualizar la firma electrónica del director");
+        if(!$this->director->efirma || !$this->director->efirma->cer || !$this->director->efirma->key || !$this->director->efirma->imagen) abort(500, message:"Es necesario actualizar la firma electrónica del director");
 
     }
 
     public function render()
     {
-        return view('livewire.gestion-catastral.certificado-historia')->extends('layouts.admin');
+        return view('livewire.certificaciones.certificado-historia')->extends('layouts.admin');
     }
 }
 

@@ -18,6 +18,10 @@ class PrediosPadron extends Component
 
     public Predio $modelo_editar;
 
+    public $modal = false;
+
+    public $observaciones;
+
     public $filters = [
         'localidad' => '',
         'oficina' => '',
@@ -27,8 +31,42 @@ class PrediosPadron extends Component
 
     public function updatedFilters() { $this->resetPage(); }
 
+    public function abrirModal(Predio $predio){
+
+        $this->modelo_editar = $predio;
+
+        $this->modal = true;
+
+    }
+
+    public function bloquear(){
+
+        $this->validate(['observaciones' => 'required']);
+
+        if($this->modelo_editar->bloqueadoActivo()){
+
+            $this->modelo_editar->bloqueos->where('estado', 'activo')->first()->update(['estado'=> 'inactivo', 'observaciones' => $this->observaciones, 'actualizado_por' => auth()->id()]);
+
+            $this->modelo_editar->update(['status' => 'activo']);
+
+        }else{
+
+            $this->modelo_editar->bloqueos()->create([
+                'estado'=> 'activo',
+                'observaciones' => $this->observaciones,
+                'creado_por' => auth()->id()
+            ]);
+
+            $this->modelo_editar->update(['status' => 'bloqueado']);
+
+        }
+
+        $this->reset('modal', 'observaciones');
+
+    }
+
     public function crearModeloVacio(){
-        return Predio::make();
+        $this->modelo_editar = Predio::make();
     }
 
     public function render()

@@ -32,7 +32,8 @@ class Constantes{
         'Cartografía',
         'Consulta',
         'Efirma',
-        'Certificaciones'
+        'Certificaciones',
+        'Certificados'
     ];
 
     const AREAS_ADSCRIPCION = [

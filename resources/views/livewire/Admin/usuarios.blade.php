@@ -398,7 +398,7 @@
 
                                     <option value="{{ $area }}">{{ $area }}</option>
 
-                                @endforeach
+                            @endforeach
 
                         </x-input-select>
 

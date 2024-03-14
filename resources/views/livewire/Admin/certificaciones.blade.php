@@ -10,7 +10,7 @@
 
                 <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
 
-                    <option value="" selected>Estado</option>
+                    <option value="" selected>Año</option>
 
                     @foreach ($años as $año)
 
@@ -25,8 +25,9 @@
                 <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
 
                     <option value="" selected>Estado</option>
-                    <option value="nuevo">Nuevo</option>
+                    <option value="activo">Activo</option>
                     <option value="cancelado">Cancelado</option>
+                    <option value="caducado">Caducado</option>
 
                 </select>
 

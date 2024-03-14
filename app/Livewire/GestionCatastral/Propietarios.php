@@ -56,31 +56,29 @@ class Propietarios extends Component
             'porcentaje_nuda' => ['numeric', 'min:1', 'nullable'],
             'porcentaje_usufructo' => ['numeric', 'min:1', 'nullable'],
             'tipo_persona' => 'required',
-            'nombre' => [
-                Rule::requiredIf($this->tipo_persona === 'FISICA')
-            ],
-            'ap_paterno' => Rule::requiredIf($this->tipo_persona === 'FISICA'),
-            'ap_materno' => Rule::requiredIf($this->tipo_persona === 'FISICA'),
+            'nombre' => [Rule::requiredIf($this->tipo_persona === 'FISICA'), 'regex:/^[\pL\s]+$/u'],
+            'ap_paterno' => [Rule::requiredIf($this->tipo_persona === 'FISICA'), 'regex:/^[\pL\s]+$/u'],
+            'ap_materno' => [Rule::requiredIf($this->tipo_persona === 'FISICA'), 'regex:/^[\pL\s]+$/u'],
             'curp' => [
                 'nullable',
-                /* 'regex:/^[A-Z]{1}[AEIOUX]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$/i' */
+                'regex:/^[A-Z]{1}[AEIOUX]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$/i'
             ],
             'rfc' => [
                 'nullable',
-                /* 'regex:/^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/' */
+                'regex:/^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/'
             ],
-            'razon_social' => Rule::requiredIf($this->tipo_persona === 'MORAL'),
+            'razon_social' => [Rule::requiredIf($this->tipo_persona === 'MORAL'), 'regex:/^[\pL\s]+$/u'],
             'fecha_nacimiento' => 'nullable',
-            'nacionalidad' => 'nullable',
+            'nacionalidad' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
             'estado_civil' => 'nullable',
-            'calle' => 'nullable',
-            'numero_exterior_propietario' => 'nullable',
-            'numero_interior_propietario' => 'nullable',
-            'colonia' => 'nullable',
-            'cp' => 'nullable',
-            'ciudad' => 'nullable',
-            'entidad' => 'nullable',
-            'municipio_propietario' => 'nullable',
+            'calle' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'numero_exterior_propietario' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'numero_interior_propietario' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'colonia' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'cp' => 'nullable|numeric',
+            'ciudad' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'entidad' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'municipio_propietario' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
         ];
     }
 

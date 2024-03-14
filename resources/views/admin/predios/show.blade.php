@@ -6,7 +6,7 @@
 
     <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Datos generales</h4>
 
-    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600">
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
@@ -160,7 +160,7 @@
 
     <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Ubicación del predio</h4>
 
-    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600">
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
@@ -333,438 +333,346 @@
 
     <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Colindancias ({{ $predio->colindancias->count() }})</h4>
 
-    @forelse ($predio->colindancias as $colindancia)
+    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+        <table class="w-full overflow-x-auto table-fixed">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
+            <thead class="border-b border-gray-300 ">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-                    <strong>Viento</strong>
+                    <th class="px-2">Viento</th>
+                    <th class="px-2">Longitud(mts.)</th>
+                    <th class="px-2">Descripción</th>
 
-                    <p>{{ $colindancia->viento }}</p>
+                </tr>
 
-                </div>
+            </thead>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <tbody class="divide-y divide-gray-200">
 
-                    <strong>Longitud</strong>
+                @foreach ($predio->colindancias as $colindancia)
 
-                    <p>{{ number_format($colindancia->longitud, 2) }}</p>
+                    <tr class="text-gray-500 text-sm leading-relaxed">
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $colindancia->viento }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $colindancia->longitud }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $colindancia->descripcion }}</td>
+                    </tr>
 
-                </div>
+                @endforeach
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+            </tbody>
 
-                    <strong>Descripción</strong>
+        </table>
 
-                    <p>{{ $colindancia->descripcion }}</p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    @empty
-
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
-
-            No hay resultados.
-
-        </div>
-
-    @endforelse
+    </div>
 
     <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terrenos ({{ $predio->terrenos->count() }})</h4>
 
-    @forelse ($predio->terrenos as $terreno)
+    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+        <table class="w-full overflow-x-auto table-fixed">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
+            <thead class="border-b border-gray-300 ">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-                    <strong>Superficie</strong>
+                    <th class="px-2">Superficie</th>
+                    <th class="px-2">Valor unitario</th>
+                    <th class="px-2">Demerito</th>
+                    <th class="px-2">Valor demeritado</th>
+                    <th class="px-2">Valor del terreno</th>
 
-                    <p>{{ $terreno->superficie }}</p>
+                </tr>
 
-                </div>
+            </thead>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <tbody class="divide-y divide-gray-200">
 
-                    <strong>Valor unitario</strong>
+                @foreach ($predio->terrenos as $terreno)
 
-                    <p>{{ $terreno->valor_unitario }}</p>
+                    <tr class="text-gray-500 text-sm leading-relaxed">
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->superficie }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->valor_unitario }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->demerito }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->demerito }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">${{ number_format($terreno->valor_terreno, 2) }}</td>
+                    </tr>
 
-                </div>
+                @endforeach
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+            </tbody>
 
-                    <strong>Demerito</strong>
+        </table>
 
-                    <p>{{ $terreno->demerito }}</p>
-
-                </div>
-
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                    <strong>Valor demeritado</strong>
-
-                    <p>{{ $terreno->valor_demeritado }}</p>
-
-                </div>
-
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                    <strong>Valor del terreno</strong>
-
-                    <p>${{ number_format($terreno->valor_terreno, 2) }}</p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    @empty
-
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
-
-            No hay resultados.
-
-        </div>
-
-    @endforelse
+    </div>
 
     <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Construcciones ({{ $predio->construcciones->count() }})</h4>
 
-    @forelse ($predio->construcciones as $construccion)
+    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+        <table class="w-full overflow-x-auto table-fixed">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
+            <thead class="border-b border-gray-300 ">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-                    <strong>Referencia</strong>
+                    <th class="px-2">Referencia</th>
+                    <th class="px-2">Clasificación de construcción</th>
+                    <th class="px-2">Niveles</th>
+                    <th class="px-2">Superficie</th>
+                    <th class="px-2">Valor unitario</th>
+                    <th class="px-2">Valor de construcción</th>
 
-                    <p>{{ $construccion->referencia }}</p>
+                </tr>
 
-                </div>
+            </thead>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <tbody class="divide-y divide-gray-200">
 
-                    <strong>Clasificación de construccion</strong>
+                @foreach ($predio->construcciones as $construccion)
 
-                    <p>{{ $construccion->tipo }}-{{ $construccion->uso }}-{{ $construccion->calidad }}-{{ $construccion->estado }}</p>
+                    <tr class="text-gray-500 text-sm leading-relaxed">
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->referencia }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->tipo }}-{{ $construccion->uso }}-{{ $construccion->calidad }}-{{ $construccion->estado }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->niveles }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->superficie }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->valor_unitario }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">${{ number_format($construccion->valor_construccion, 2) }}</td>
+                    </tr>
 
-                </div>
+                @endforeach
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+            </tbody>
 
-                    <strong>Niveles</strong>
+        </table>
 
-                    <p>{{ $construccion->niveles }}</p>
-
-                </div>
-
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                    <strong>Superficie</strong>
-
-                    <p>{{ $construccion->superficie }}</p>
-
-                </div>
-
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                    <strong>Valor unitario</strong>
-
-                    <p>{{ $construccion->valor_unitario }}</p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    @empty
-
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
-
-            No hay resultados.
-
-        </div>
-
-    @endforelse
+    </div>
 
     <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terrenos de área común ({{ $predio->condominioTerrenos->count() }})</h4>
 
-    @forelse ($predio->condominioTerrenos as $terreno)
+    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+        <table class="w-full overflow-x-auto table-fixed">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
+            <thead class="border-b border-gray-300 ">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-                    <strong>Área común de terreno</strong>
+                    <th class="px-2">Área común de terreno</th>
+                    <th class="px-2">Indiviso de terreno</th>
+                    <th class="px-2">Valor unitario</th>
+                    <th class="px-2">Valor de terreno común</th>
 
-                    <p>{{ $terreno->area_terreno_comun }}</p>
+                </tr>
 
-                </div>
+            </thead>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <tbody class="divide-y divide-gray-200">
 
-                    <strong>Indiviso de terreno</strong>
+                @foreach ($predio->condominioTerrenos as $terreno)
 
-                    <p>{{ $terreno->indiviso_terreno }}</p>
+                    <tr class="text-gray-500 text-sm leading-relaxed">
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->area_terreno_comun }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->indiviso_terreno }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->valor_unitario }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">${{ number_format($terreno->valor_terreno_comun, 2) }}</td>
+                    </tr>
 
-                </div>
+                @endforeach
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+            </tbody>
 
-                    <strong>Valor unitario</strong>
+        </table>
 
-                    <p>{{ $terreno->valor_unitario }}</p>
-
-                </div>
-
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                    <strong>Valor de terreno común</strong>
-
-                    <p>${{ number_format($terreno->valor_terreno_comun, 2) }}</p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    @empty
-
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
-
-            No hay resultados.
-
-        </div>
-
-    @endforelse
+    </div>
 
     <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Construcciones de área común ({{ $predio->condominioConstrucciones->count() }})</h4>
 
-    @forelse ($predio->condominioConstrucciones as $construccion)
+    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+        <table class="w-full overflow-x-auto table-fixed">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
+            <thead class="border-b border-gray-300 ">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-                    <strong>Área común de construcción</strong>
+                    <th class="px-2">Área común de construcción</th>
+                    <th class="px-2">Clasificación de construccion</th>
+                    <th class="px-2">Valor de construcción común</th>
 
-                    <p>{{ $construccion->area_comun_construccion }}</p>
+                </tr>
 
-                </div>
+            </thead>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <tbody class="divide-y divide-gray-200">
 
-                    <strong>Clasificación de construccion</strong>
+                @foreach ($predio->condominioConstrucciones as $construccion)
 
-                    <p>{{ $construccion->valor_clasificacion_construccion }}</p>
+                    <tr class="text-gray-500 text-sm leading-relaxed">
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->area_comun_construccion }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->valor_clasificacion_construccion }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">${{ number_format($construccion->valor_construccion_comun, 2) }}</td>
+                    </tr>
 
-                </div>
+                @endforeach
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+            </tbody>
 
-                    <strong>Valor de construcción común</strong>
+        </table>
 
-                    <p>${{ number_format($construccion->valor_construccion_comun, 2) }}</p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    @empty
-
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
-
-            No hay resultados.
-
-        </div>
-
-    @endforelse
+    </div>
 
     <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Propietarios ({{ $predio->propietarios->count() }})</h4>
 
-    @forelse ($predio->propietarios as $propietario)
+    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-2">
+        <table class="w-full overflow-x-auto table-fixed">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
+            <thead class="border-b border-gray-300 ">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-                    <strong>Tipo</strong>
+                    <th class="px-2">Tipo de propietario</th>
+                    <th class="px-2">Porcentaje de propiedad</th>
+                    <th class="px-2">Porcentaje de nuda</th>
+                    <th class="px-2">Porcentaje de usufructo</th>
+                    <th class="px-2">Tipo de persona</th>
+                    <th class="px-2">Nombre / Razón social</th>
 
-                    <p>{{ $propietario->tipo }}</p>
+                </tr>
 
-                </div>
+            </thead>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <tbody class="divide-y divide-gray-200">
 
-                    <strong>Porcentaje</strong>
+                @foreach ($predio->propietarios as $propietario)
 
-                    <p>{{ $propietario->porcentaje }}%</p>
+                    <tr class="text-gray-500 text-sm leading-relaxed">
+                        <td class=" px-2 w-full ">{{ $propietario->tipo }}</td>
+                        <td class=" px-2 w-full ">{{ $propietario->porcentaje }}%</td>
+                        <td class=" px-2 w-full ">{{ $propietario->porcentaje_nuda }}%</td>
+                        <td class=" px-2 w-full ">{{ $propietario->porcentaje_usufructo }}%</td>
+                        <td class=" px-2 w-full ">{{ $propietario->persona->tipo }}</td>
+                        <td class=" px-2 w-full ">{{ $propietario->persona->nombre }} {{ $propietario->persona->ap_paterno }} {{ $propietario->persona->ap_materno }} {{ $propietario->persona->razon_social }}</td>
+                    </tr>
 
-                </div>
+                @endforeach
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+            </tbody>
 
-                    <strong>Nombre</strong>
+        </table>
 
-                    <p>{{ $propietario->persona->nombre }}</p>
+    </div>
 
-                </div>
+    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Movimientos ({{ $predio->movimientos->count() }})</h4>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-                    <strong>Apellido paterno</strong>
+        <table class="w-full overflow-x-auto table-fixed">
 
-                    <p>{{ $propietario->persona->ap_paterno }}</p>
+            <thead class="border-b border-gray-300 ">
 
-                </div>
+                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    <th class="px-2">Movimiento</th>
+                    <th class="px-2">Fecha</th>
+                    <th class="px-2">Descripción</th>
+                    <th class="px-2">Registrado por</th>
 
-                    <strong>Apellido materno</strong>
+                </tr>
 
-                    <p>{{ $propietario->persona->ap_materno }}</p>
+            </thead>
 
-                </div>
+            <tbody class="divide-y divide-gray-200">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                @foreach ($predio->movimientos as $movimiento)
 
-                    <strong>Tipo de persona</strong>
+                    <tr class="text-gray-500 text-sm leading-relaxed">
+                        <td class=" px-2 w-full ">{{ $movimiento->nombre }}</td>
+                        <td class=" px-2 w-full ">{{ $movimiento->fecha }}</td>
+                        <td class=" px-2 w-full ">{{ $movimiento->descripcion }}</td>
+                        <td class=" px-2 w-full ">{{ $movimiento->creadoPor?->nombreCompleto() }}</td>
+                    </tr>
 
-                    <p>{{ $propietario->persona->tipo }}</p>
+                @endforeach
 
-                </div>
+            </tbody>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+        </table>
 
-                    <strong>CURP</strong>
+    </div>
 
-                    <p>{{ $propietario->persona->curp }}</p>
+    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Bloqueos ({{ $predio->bloqueos->count() }})</h4>
 
-                </div>
+    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <table class="w-full overflow-x-auto table-fixed">
 
-                    <strong>RFC</strong>
+            <thead class="border-b border-gray-300 ">
 
-                    <p>{{ $propietario->persona->rfc }}</p>
+                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-                </div>
+                    <th class="px-2">Estado</th>
+                    <th class="px-2">Observaciones</th>
+                    <th class="px-2">Registrado por</th>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                </tr>
 
-                    <strong>Razón social</strong>
+            </thead>
 
-                    <p>{{ $propietario->persona->razon_social }}</p>
+            <tbody class="divide-y divide-gray-200">
 
-                </div>
+                @foreach ($predio->bloqueos as $bloqueo)
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    <tr class="text-gray-500 text-sm leading-relaxed">
+                        <td class=" px-2 w-full ">{{ $bloqueo->estado }}</td>
+                        <td class=" px-2 w-full ">{{ $bloqueo->observaciones }}</td>
+                        <td class=" px-2 w-full ">{{ $movimiento->creadoPor?->nombreCompleto() }}</td>
+                    </tr>
 
-                    <strong>Estado civil</strong>
+                @endforeach
 
-                    <p>{{ $propietario->persona->estado_civil }}</p>
+            </tbody>
 
-                </div>
+        </table>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 col-span-2">
+    </div>
 
-                    <strong>Dirección</strong>
+    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Auditoria ({{ $predio->audits->count()}})</h4>
 
-                    <div class="flex flex-wrap space-x-2">
+    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-                        <p>Calle: {{ $propietario->persona->calle }}.</p>
-                        <p>Número exterior: {{ $propietario->persona->numero_exterior }}.</p>
-                        <p>Número interior: {{ $propietario->persona->numero_interior }}.</p>
-                        <p>Colonia: {{ $propietario->persona->colonia }}.</p>
-                        <p>Código postal: {{ $propietario->persona->cp }}.</p>
-                        <p>Entidad: {{ $propietario->persona->entidad }}.</p>
-                        <p>Municipio: {{ $propietario->persona->municipio }}.</p>
+        <table class="w-full overflow-x-auto table-fixed">
 
-                    </div>
+            <thead class="border-b border-gray-300 ">
 
-                </div>
+                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-            </div>
+                    <th class="px-2">Usuario</th>
+                    <th class="px-2">Movimiento</th>
+                    <th class="px-2">Fecha</th>
 
-        </div>
+                </tr>
 
-    @empty
+            </thead>
 
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
+            <tbody class="divide-y divide-gray-200">
 
-            No hay resultados.
+                @foreach ($predio->audits as $audit)
 
-        </div>
+                    <tr class="text-gray-500 text-sm leading-relaxed">
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $audit->user->nombreCompleto() }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ Str::ucfirst($audit->event) }}. {{ $audit->tags }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $audit->created_at->format('d-m-Y H:i:s') }}</td>
+                    </tr>
 
-    @endforelse
+                @endforeach
 
-    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Movimientos ({{ $predio->audits->count() }})</h4>
+            </tbody>
 
-    @forelse ($predio->audits as $audit)
+        </table>
 
-        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-2">
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
-
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                    <strong>Usuario</strong>
-
-                    <p>{{ $audit->user->name }} {{ $audit->user->ap_paterno }} {{ $audit->user->ap_materno }}</p>
-
-                </div>
-
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                    <strong>Movimiento</strong>
-
-                    <p> {{ Str::ucfirst($audit->event) }}. {{ $audit->tags }}</p>
-
-                </div>
-
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                    <strong>Fecha</strong>
-
-                    <p>{{ $audit->created_at->format('d-m-Y H:i:s') }}</p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    @empty
-
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-lg mb-5 text-lg">
-
-            No hay resultados.
-
-        </div>
-
-    @endforelse
+    </div>
 
 @endsection
