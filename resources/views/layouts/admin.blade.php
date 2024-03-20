@@ -53,6 +53,12 @@
 
                 @endcan
 
+                @can('Área de cartografía')
+
+                    @include('layouts.sidebar-cartografia')
+
+                @endcan
+
                 @can('Área de certificados')
 
                     @include('layouts.sidebar-certificados')

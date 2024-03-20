@@ -7,20 +7,17 @@ use App\Models\Oficina;
 use App\Models\Tramite;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
+use App\Models\PredioIgnorado;
 use Illuminate\Validation\Rule;
-use App\Models\VariacionCatastral;
 use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
 use App\Http\Traits\ComponentesTrait;
 use Illuminate\Support\Facades\Storage;
-use Livewire\WithFileUploads;
 use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
-use Mostafaznv\PdfOptimizer\Laravel\Facade\PdfOptimizer;
-use Mostafaznv\PdfOptimizer\Enums\ColorConversionStrategy;
-use Mostafaznv\PdfOptimizer\Enums\PdfSettings;
 
-class VariacionesCatastrales extends Component
+class PrediosIgnorados extends Component
 {
 
     use ComponentesTrait;
@@ -47,7 +44,7 @@ class VariacionesCatastrales extends Component
     public $modalSubirArchivo = false;
     public $modalCambiarEstado = false;
 
-    public VariacionCatastral $modelo_editar;
+    public PredioIgnorado $modelo_editar;
 
     public $filters = [
         'estado' => '',
@@ -65,7 +62,6 @@ class VariacionesCatastrales extends Component
             'tfolio' => 'required',
             'tusuario' => 'required',
             'modelo_editar.promovente' => 'required',
-            'modelo_editar.finado' => 'required',
             'modelo_editar.oficina_id' => Rule::requiredIf(!auth()->user()->hasRole('Oficina rentistica')),
             'modelo_editar.valuador' => 'nullable',
             'modelo_editar.estado' => 'nullable',
@@ -79,7 +75,7 @@ class VariacionesCatastrales extends Component
     ];
 
     public function crearModeloVacio(){
-        $this->modelo_editar = VariacionCatastral::make();
+        $this->modelo_editar = PredioIgnorado::make();
     }
 
     public function buscarTramite(){
@@ -98,19 +94,19 @@ class VariacionesCatastrales extends Component
 
         }
 
-        $variacion = VariacionCatastral::where('tramite_id', $this->tramite->id)->first();
+        $predioIgnorado = PredioIgnorado::where('tramite_id', $this->tramite->id)->first();
 
-        if($variacion){
+        if($predioIgnorado){
 
-            $this->dispatch('mostrarMensaje', ['error', "El trámite ya esta usado por una variación catastral."]);
+            $this->dispatch('mostrarMensaje', ['error', "El trámite ya esta usado por un predio ignorado."]);
 
             return true;
 
         }
 
-        if(!in_array($this->tramite->servicio->id, ['45', '46'])){
+        if($this->tramite->servicio->id !== 47){
 
-            $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a una variación catastral."]);
+            $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a un predio ignorado."]);
 
             return true;
 
@@ -154,7 +150,7 @@ class VariacionesCatastrales extends Component
                 }else{
 
                     $this->modelo_editar->estado = 'nuevo';
-                    $this->modelo_editar->folio = (VariacionCatastral::where('año', now()->format('Y'))->max('folio') ?? 0) + 1;
+                    $this->modelo_editar->folio = (PredioIgnorado::where('año', now()->format('Y'))->max('folio') ?? 0) + 1;
 
                 }
 
@@ -165,13 +161,13 @@ class VariacionesCatastrales extends Component
 
                 $this->resetearTodo($borrado = true);
 
-                $this->dispatch('mostrarMensaje', ['success', "La variación catastral se creó con éxito."]);
+                $this->dispatch('mostrarMensaje', ['success', "El predio ignorado se creó con éxito."]);
 
             });
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al crear variación catastral por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al crear predio ignorado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 
@@ -185,22 +181,22 @@ class VariacionesCatastrales extends Component
 
             DB::transaction(function () {
 
-                $variacion = VariacionCatastral::find($this->selected_id);
+                $predioIgnorado = PredioIgnorado::find($this->selected_id);
 
-                if($variacion->archivo !== null)
-                    Storage::disk('variacionescatastrales')->delete($variacion->archivo);
+                if($predioIgnorado->archivo !== null)
+                    Storage::disk('prediosignorados')->delete($predioIgnorado->archivo);
 
-                $variacion->delete();
+                $predioIgnorado->delete();
 
                 $this->resetearTodo($borrado = true);
 
-                $this->dispatch('mostrarMensaje', ['success', "La variación catastral se eliminó con exito."]);
+                $this->dispatch('mostrarMensaje', ['success', "El predio ignorado se eliminó con exito."]);
 
             });
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al borrar variación catastral por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al borrar predio ignorado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 
@@ -208,7 +204,7 @@ class VariacionesCatastrales extends Component
 
     }
 
-    public function abrirHacerRequerimiento(VariacionCatastral $modelo){
+    public function abrirHacerRequerimiento(PredioIgnorado $modelo){
 
         $this->reset('requerimiento');
 
@@ -242,7 +238,7 @@ class VariacionesCatastrales extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al crear requerimiento en variación catastral por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al crear requerimiento en predio ignorado catastral por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 
@@ -250,7 +246,7 @@ class VariacionesCatastrales extends Component
 
     }
 
-    public function abrirVerRequerimiento(VariacionCatastral $modelo){
+    public function abrirVerRequerimiento(PredioIgnorado $modelo){
 
         $this->modalVerRequerimiento = true;
 
@@ -261,7 +257,7 @@ class VariacionesCatastrales extends Component
 
     }
 
-    public function abrirAsignarValuador(VariacionCatastral $modelo){
+    public function abrirAsignarValuador(PredioIgnorado $modelo){
 
         $this->modalAsignarValuador = true;
 
@@ -289,7 +285,7 @@ class VariacionesCatastrales extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al asignar valuador en variación catastral por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al asignar valuador en predio ignorado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 
@@ -297,7 +293,7 @@ class VariacionesCatastrales extends Component
 
     }
 
-    public function abrirSubirArchivo(VariacionCatastral $modelo){
+    public function abrirSubirArchivo(PredioIgnorado $modelo){
 
         $this->dispatch('removeFiles');
 
@@ -315,11 +311,11 @@ class VariacionesCatastrales extends Component
 
             if(!$this->modelo_editar->archivo){
 
-                $this->modelo_editar->archivo  = $this->file->store('/', 'variacionescatastrales');
+                $this->modelo_editar->archivo  = $this->file->store('/', 'prediosignorados');
 
-                /* $result = PdfOptimizer::fromDisk('variacionescatastrales')
+                /* $result = PdfOptimizer::fromDisk('prediosignorados')
                             ->open($this->modelo_editar->archivo)
-                            ->toDisk('variacionescatastrales')
+                            ->toDisk('prediosignorados')
                             ->settings(PdfSettings::SCREEN)
                             ->colorConversionStrategy(ColorConversionStrategy::DEVICE_INDEPENDENT_COLOR)
                             ->colorImageResolution(50)
@@ -329,23 +325,23 @@ class VariacionesCatastrales extends Component
 
             }else{
 
-                $aux  = $this->file->store('/', 'variacionescatastrales');
+                $aux  = $this->file->store('/', 'prediosignorados');
 
                 $oMerger = PDFMerger::init();
 
-                $oMerger->addPDF(Storage::path('variacionescatastrales/'. $this->modelo_editar->archivo), 'all');
+                $oMerger->addPDF(Storage::path('prediosignorados/'. $this->modelo_editar->archivo), 'all');
 
-                $oMerger->addPDF(Storage::path('variacionescatastrales/'. $aux), 'all');
+                $oMerger->addPDF(Storage::path('prediosignorados/'. $aux), 'all');
 
                 $oMerger->merge();
 
                 $nombre = $this->modelo_editar->archivo;
 
-                Storage::disk('variacionescatastrales')->delete($this->modelo_editar->archivo);
+                Storage::disk('prediosignorados')->delete($this->modelo_editar->archivo);
 
-                Storage::disk('variacionescatastrales')->delete($aux);
+                Storage::disk('prediosignorados')->delete($aux);
 
-                Storage::put('variacionescatastrales/' . $nombre, $oMerger->output());
+                Storage::put('prediosignorados/' . $nombre, $oMerger->output());
 
             }
 
@@ -360,9 +356,9 @@ class VariacionesCatastrales extends Component
 
         } catch (\Throwable $th) {
 
-            Storage::disk('variacionescatastrales')->delete($aux);
+            Storage::disk('prediosignorados')->delete($aux);
 
-            Log::error("Error al subir archivo en variación catastral por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al subir archivo en predio ignorado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "El archivo no es compatible."]);
             $this->resetearTodo();
 
@@ -371,7 +367,7 @@ class VariacionesCatastrales extends Component
 
     }
 
-    public function abrirCambiarEstado(VariacionCatastral $modelo){
+    public function abrirCambiarEstado(PredioIgnorado $modelo){
 
         $this->modalCambiarEstado = true;
 
@@ -405,7 +401,7 @@ class VariacionesCatastrales extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al actualizar variación catastral por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al actualizar predio ignorado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "El archivo no es compatible."]);
             $this->resetearTodo();
 
@@ -413,21 +409,21 @@ class VariacionesCatastrales extends Component
 
     }
 
-    public function asignarFolio(VariacionCatastral $modelo){
+    public function asignarFolio(PredioIgnorado $modelo){
 
         try {
 
-            $modelo->folio = (VariacionCatastral::where('año', now()->format('Y'))->max('folio') ?? 0) + 1;
+            $modelo->folio = (PredioIgnorado::where('año', now()->format('Y'))->max('folio') ?? 0) + 1;
             $modelo->año = now()->format('Y');
             $modelo->estado = 'nuevo';
             $modelo->actualizado_por = auth()->id();
             $modelo->save();
 
-            $this->dispatch('mostrarMensaje', ['success', "La varicación catastral se actualizó con éxito."]);
+            $this->dispatch('mostrarMensaje', ['success', "El predio ignorado se actualizó con éxito."]);
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al asignar folio a varicación catastral por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al asignar folio a predio ignorado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 
@@ -455,6 +451,7 @@ class VariacionesCatastrales extends Component
             'valuación',
             'actualizado',
             'publicación',
+            'periódico oficial',
             'oposición',
             'concluido',
             'firma',
@@ -468,10 +465,9 @@ class VariacionesCatastrales extends Component
 
         if(auth()->user()->hasRole('Oficina rentistica')){
 
-            $variaciones = VariacionCatastral::with('creadoPor', 'actualizadoPor', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
+            $prediosIgnorados = PredioIgnorado::with('creadoPor', 'actualizadoPor', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
                                             ->where(function($q){
-                                                $q->where('promovente', 'LIKE', '%' . $this->search . '%')
-                                                    ->orWhere('finado', 'LIKE', '%' . $this->search . '%');
+                                                $q->where('promovente', 'LIKE', '%' . $this->search . '%');
                                             })
                                             ->when($this->filters['estado'], fn($q, $estado) => $q->where('estado', $estado))
                                             ->when($this->filters['año'], fn($q, $taño) => $q->where('año', $taño))
@@ -486,10 +482,9 @@ class VariacionesCatastrales extends Component
 
         }elseif(auth()->user()->hasRole('Valuador')){
 
-            $variaciones = VariacionCatastral::with('creadoPor', 'actualizadoPor', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
+            $prediosIgnorados = PredioIgnorado::with('creadoPor', 'actualizadoPor', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
                                             ->where(function($q){
-                                                $q->where('promovente', 'LIKE', '%' . $this->search . '%')
-                                                    ->orWhere('finado', 'LIKE', '%' . $this->search . '%');
+                                                $q->where('promovente', 'LIKE', '%' . $this->search . '%');
                                             })
                                             ->when($this->filters['estado'], fn($q, $estado) => $q->where('estado', $estado))
                                             ->when($this->filters['año'], fn($q, $taño) => $q->where('año', $taño))
@@ -503,10 +498,9 @@ class VariacionesCatastrales extends Component
 
         }elseif(auth()->user()->can('Variaciones catastrales')){
 
-            $variaciones = VariacionCatastral::with('creadoPor', 'actualizadoPor', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
+            $prediosIgnorados = PredioIgnorado::with('creadoPor', 'actualizadoPor', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
                                                 ->where(function($q){
-                                                    $q->where('promovente', 'LIKE', '%' . $this->search . '%')
-                                                        ->orWhere('finado', 'LIKE', '%' . $this->search . '%');
+                                                    $q->where('promovente', 'LIKE', '%' . $this->search . '%');
                                                 })
                                                 ->when($this->filters['estado'], fn($q, $estado) => $q->where('estado', $estado))
                                                 ->when($this->filters['año'], fn($q, $taño) => $q->where('año', $taño))
@@ -519,6 +513,6 @@ class VariacionesCatastrales extends Component
 
         }
 
-        return view('livewire.tramites-administrativos.variaciones-catastrales', compact('variaciones'))->extends('layouts.admin');
+        return view('livewire.tramites-administrativos.predios-ignorados', compact('prediosIgnorados'))->extends('layouts.admin');
     }
 }

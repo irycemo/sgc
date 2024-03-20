@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class VariacionCatastral extends Model implements Auditable
+class PredioIgnorado extends Model implements Auditable
 {
 
     use HasFactory;
@@ -32,6 +32,7 @@ class VariacionCatastral extends Model implements Auditable
             'concluido' => 'gray-400',
             'firma' => 'indigo-400',
             'revisión' => 'teal-400',
+            'periódico oficial' => 'teal-400',
         ][$this->estado] ?? 'gray-400';
     }
 

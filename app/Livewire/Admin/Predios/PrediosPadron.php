@@ -49,6 +49,8 @@ class PrediosPadron extends Component
 
             $this->modelo_editar->update(['status' => 'activo']);
 
+            $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Desbloqueo predio']);
+
         }else{
 
             $this->modelo_editar->bloqueos()->create([
@@ -59,7 +61,10 @@ class PrediosPadron extends Component
 
             $this->modelo_editar->update(['status' => 'bloqueado']);
 
+            $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Bloqueo predio']);
+
         }
+
 
         $this->reset('modal', 'observaciones');
 

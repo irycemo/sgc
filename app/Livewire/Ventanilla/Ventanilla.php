@@ -24,6 +24,7 @@ class Ventanilla extends Component
     public $servicio;
     public $tramite;
     public $tramite_folio;
+    public $tramite_usuario;
     public $flag = false;
     public $flags = [
         'Simple' => false,
@@ -152,6 +153,7 @@ class Ventanilla extends Component
         $this->tramite = Tramite::with('predios.propietarios.persona', 'servicio')
                                     ->where('año', $this->año)
                                     ->where('folio', $this->tramite_folio)
+                                    ->where('usuario', $this->tramite_usuario)
                                     ->whereIn('estado', ['pagado', 'nuevo'])
                                     ->first();
 
@@ -159,7 +161,7 @@ class Ventanilla extends Component
 
             $this->dispatch('mostrarMensaje', ['error', "No se encontro el trámite."]);
 
-            $this->reset(['categoria_seleccionada', 'servicio_seleccionado', 'servicios', 'categoria','tramite_folio', 'tramite', 'flag']);
+            $this->reset(['categoria_seleccionada', 'servicio_seleccionado', 'servicios', 'categoria','tramite_folio', 'tramite', 'flag', 'tramite_usuario']);
 
             return;
 
@@ -175,7 +177,7 @@ class Ventanilla extends Component
 
         $this->flag = true;
 
-        $this->reset(['categoria_seleccionada', 'servicio_seleccionado', 'servicios', 'categoria','tramite_folio']);
+        $this->reset(['categoria_seleccionada', 'servicio_seleccionado', 'servicios', 'categoria','tramite_folio', 'tramite_usuario']);
 
     }
 
@@ -194,3 +196,4 @@ class Ventanilla extends Component
         return view('livewire.ventanilla.ventanilla')->extends('layouts.admin');
     }
 }
+

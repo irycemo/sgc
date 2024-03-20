@@ -896,7 +896,7 @@
 
                     <tr class="text-gray-500 text-sm leading-relaxed">
                         <td class=" px-2 w-full whitespace-nowrap">{{ $audit->user->nombreCompleto() }}</td>
-                        <td class=" px-2 w-full whitespace-nowrap">{{ Str::ucfirst($audit->event) }}. {{ $audit->tags }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ Str::ucfirst($audit->event) }}: {{ $audit->tags }}</td>
                         <td class=" px-2 w-full whitespace-nowrap">{{ $audit->created_at->format('d-m-Y H:i:s') }}</td>
                     </tr>
 

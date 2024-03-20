@@ -551,7 +551,7 @@
 
                     <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                        <p><strong>Folio:</strong> {{ $tramite->folio }}</p>
+                        <p><strong>Folio:</strong>{{ $tramite->año }}-{{ $tramite->folio }}-{{ $tramite->usuario }}</p>
 
                     </div>
 
@@ -708,7 +708,17 @@
 
                 <div class="mt-4 text-right space-x-4">
 
-                    @if ($tramite->estado == 'nuevo')
+                    @if ($tramite->estado === 'nuevo')
+
+                        <button
+                            wire:click="validar"
+                            wire:loading.attr="disabled"
+                            wire:target="validar"
+                            type="button"
+                            class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-red-700 focus:outline-red-400 focus:outline-offset-2">
+                            <img wire:loading wire:target="validar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                            Validar pago
+                        </button>
 
                         <button
                             wire:click="editar"

@@ -626,9 +626,9 @@
                 @foreach ($predio->bloqueos as $bloqueo)
 
                     <tr class="text-gray-500 text-sm leading-relaxed">
-                        <td class=" px-2 w-full ">{{ $bloqueo->estado }}</td>
+                        <td class=" px-2 w-full capitalize">{{ $bloqueo->estado }}</td>
                         <td class=" px-2 w-full ">{{ $bloqueo->observaciones }}</td>
-                        <td class=" px-2 w-full ">{{ $movimiento->creadoPor?->nombreCompleto() }}</td>
+                        <td class=" px-2 w-full ">{{ $bloqueo->creadoPor?->nombreCompleto() }}</td>
                     </tr>
 
                 @endforeach
@@ -663,7 +663,7 @@
 
                     <tr class="text-gray-500 text-sm leading-relaxed">
                         <td class=" px-2 w-full whitespace-nowrap">{{ $audit->user->nombreCompleto() }}</td>
-                        <td class=" px-2 w-full whitespace-nowrap">{{ Str::ucfirst($audit->event) }}. {{ $audit->tags }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ Str::ucfirst($audit->event) }}: {{ $audit->tags }}</td>
                         <td class=" px-2 w-full whitespace-nowrap">{{ $audit->created_at->format('d-m-Y H:i:s') }}</td>
                     </tr>
 

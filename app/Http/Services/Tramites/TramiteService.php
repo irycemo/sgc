@@ -7,13 +7,14 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\TramiteServiceException;
 use App\Exceptions\ErrorAlGenerarLineaDeCaptura;
-use App\Http\Services\LineasDeCaptura\LineaCaptura;
+use App\Exceptions\ErrorAlValidarLineaDeCaptura;
+use App\Http\Services\LineasDeCaptura\LineaCapturaApi;
 
 class TramiteService{
 
     public function __construct(public Tramite $tramite){}
 
-    public function crearTramite($predios = null):Tramite
+    public function crearTramite(array $predios = null, int $predioAvaluo = null):Tramite
     {
 
         try {
@@ -23,13 +24,19 @@ class TramiteService{
             $this->tramite->usuario = auth()->user()->clave;
             $this->tramite->folio = (Tramite::where('año', $this->tramite->año)->where('usuario', $this->tramite->usuario)->max('folio') ?? 0) + 1;
 
-            $sap = (new LineaCaptura($this->tramite))->generarLineaDeCaptura();
+            $sap = (new LineaCapturaApi($this->tramite))->generarLineaDeCaptura();
 
             $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
-            $this->tramite->orden_de_pago = $sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['NRO_ORD_PAGO'];
-            $this->tramite->linea_de_captura = $sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['LINEA_CAPTURA'];
-            $this->tramite->fecha_vencimiento = $this->convertirFechaVencimieto($sap['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['ES_OPAG']['FECHA_VENCIMIENTO']);
+            $this->tramite->orden_de_pago = $sap['ES_OPAG']['NRO_ORD_PAGO'];
+            $this->tramite->linea_de_captura = $sap['ES_OPAG']['LINEA_CAPTURA'];
+            $this->tramite->fecha_vencimiento = $this->convertirFecha($sap['ES_OPAG']['FECHA_VENCIMIENTO']);
             $this->tramite->creado_por = auth()->user()->id;
+
+            if($predioAvaluo){
+
+                $this->tramite->predio_avaluo = $predioAvaluo;
+
+            }
 
             $this->tramite->save();
 
@@ -88,7 +95,7 @@ class TramiteService{
 
     }
 
-    public function convertirFechaVencimieto($fecha):string
+    public function convertirFecha($fecha):string
     {
 
         if(Str::length($fecha) == 10)
@@ -146,6 +153,32 @@ class TramiteService{
                 return now()->toDateString();
 
             }
+
+        }
+
+    }
+
+    public function procesarPago():void
+    {
+
+        try {
+
+            $array = (new LineaCapturaApi($this->tramite))->validarLineaDeCaptura();
+
+            $this->tramite->fecha_pago = $this->convertirFecha($array['FEC_PAGO']);
+            $this->tramite->folio_pago = $array['DOC_PAGO'];
+            $this->tramite->estado = "pagado";
+            $this->tramite->save();
+
+        }catch (ErrorAlValidarLineaDeCaptura $th) {
+
+            throw new TramiteServiceException($th->getMessage());
+
+        }  catch (\Throwable $th) {
+
+            Log::error("Error al procesar pago de trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". Trámite: " . $this->tramite->año . '-' . $this->tramite->numero_control . '-' . $this->tramite->usuario . '. ' . $th);
+
+            throw new TramiteServiceException("Error al procesar pago");
 
         }
 

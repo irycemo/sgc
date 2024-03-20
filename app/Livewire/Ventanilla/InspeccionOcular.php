@@ -417,6 +417,29 @@ class InspeccionOcular extends Component
 
     }
 
+    public function validar(){
+
+        try {
+
+            DB::transaction(function () {
+
+                (new TramiteService($this->tramite))->procesarPago();
+
+                $this->resetearTodo();
+
+                $this->dispatch('reset');
+
+                $this->dispatch('mostrarMensaje', ['success', "El trámite se valido con éxito."]);
+
+            });
+
+        } catch (\Throwable $th) {
+            Log::error("Error al validar trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', $th->getMessage()]);
+        }
+
+    }
+
     public function mount(){
 
         $this->solicitantes = Constantes::SOLICITANTES;

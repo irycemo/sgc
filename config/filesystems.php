@@ -80,6 +80,14 @@ return [
             'throw' => false,
         ],
 
+        'prediosignorados' => [
+            'driver' => 'local',
+            'root' => storage_path('app/prediosignorados'),
+            'url' => env('APP_URL').'/prediosignorados',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
     ],
 
     /*
@@ -98,6 +106,7 @@ return [
         public_path('avaluos') => storage_path('app/avaluos'),
         public_path('efirma') => storage_path('app/efirma'),
         public_path('variacionescatastrales') => storage_path('app/variacionescatastrales'),
+        public_path('prediosignorados') => storage_path('app/prediosignorados'),
     ],
 
 ];

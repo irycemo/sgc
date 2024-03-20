@@ -22,7 +22,7 @@
 
             <div class="inline-flex">
 
-                <select class="bg-white rounded-l text-sm border border-r-transparent focus:ring-0" wire:model="taño">
+                <select class="bg-white rounded-l text-sm border border-r-transparent focus:ring-0 @error('taño') border-red-500 @enderror" wire:model="taño">
 
                     @foreach ($años as $año)
 
@@ -54,21 +54,25 @@
 
             </x-input-group>
 
-            <x-input-group for="modelo_editar.oficina_id" label="Municipio" :error="$errors->first('modelo_editar.oficina_id')" class="w-full">
+            @if(!auth()->user()->hasRole('Oficina rentistica'))
 
-                <x-input-select id="modelo_editar.oficina_id" wire:model="modelo_editar.oficina_id" class="w-full">
+                <x-input-group for="modelo_editar.oficina_id" label="Municipio" :error="$errors->first('modelo_editar.oficina_id')" class="w-full">
 
-                    <option value="">Seleccione una opción</option>
+                    <x-input-select id="modelo_editar.oficina_id" wire:model="modelo_editar.oficina_id" class="w-full">
 
-                    @foreach ($oficinas as $oficina)
+                        <option value="">Seleccione una opción</option>
 
-                        <option value="{{ $oficina->id }}">{{ $oficina->nombre }}</option>
+                        @foreach ($oficinas as $oficina)
 
-                    @endforeach
+                            <option value="{{ $oficina->id }}">{{ $oficina->nombre }}</option>
 
-                </x-input-select>
+                        @endforeach
 
-            </x-input-group>
+                    </x-input-select>
+
+                </x-input-group>
+
+            @endif
 
         </div>
 

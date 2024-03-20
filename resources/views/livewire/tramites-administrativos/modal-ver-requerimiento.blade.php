@@ -10,7 +10,7 @@
 
         @if($modalVerRequerimiento)
 
-            @foreach ($modelo_editar->requerimientos as $requermiento)
+            @forelse ($modelo_editar->requerimientos as $requermiento)
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
 
@@ -24,7 +24,11 @@
 
                 </div>
 
-            @endforeach
+            @empty
+
+                <p class="text-lg text-center">No hay requerimientos</p>
+
+            @endforelse
 
         @endif
 

@@ -306,6 +306,11 @@ class Completo extends Component
                                 ->where('numero_registro', $this->registro)
                                 ->first();
 
+        if(!$this->predio){
+            $this->dispatch('mostrarMensaje', ['error', "La cuenta predial no esta registrada."]);
+            return;
+        }
+
         if($this->predio->bloqueadoActivo()){
 
             $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
@@ -313,14 +318,17 @@ class Completo extends Component
             return;
         }
 
-        if(!$this->predio){
-            $this->dispatch('mostrarMensaje', ['error', "La cuenta predial no esta registrada."]);
-            return;
-        }
-
     }
 
     public function agregarPredio(){
+
+        if(in_array($this->servicio['id'], [45, 46])  && count($this->predios) == 1){
+
+            $this->dispatch('mostrarMensaje', ['error', "Solo es posible agregar 1 predio a variaciones catastrales."]);
+
+            return;
+
+        }
 
         if($this->editar && count($this->predios) >= $this->modelo_editar->cantidad){
 
@@ -498,6 +506,29 @@ class Completo extends Component
         }
 
         $this->editar = true;
+
+    }
+
+    public function validar(){
+
+        try {
+
+            DB::transaction(function () {
+
+                (new TramiteService($this->tramite))->procesarPago();
+
+                $this->resetearTodo();
+
+                $this->dispatch('reset');
+
+                $this->dispatch('mostrarMensaje', ['success', "El trámite se valido con éxito."]);
+
+            });
+
+        } catch (\Throwable $th) {
+            Log::error("Error al validar trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', $th->getMessage()]);
+        }
 
     }
 

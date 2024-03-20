@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Ventanilla;
 
-use App\Models\Avaluo;
 use App\Models\Notaria;
 use App\Models\Tramite;
 use Livewire\Component;
@@ -275,7 +274,6 @@ class PredioIgnorado extends Component
     public function resetearTodo(){
 
         $this->reset([
-            'tramite',
             'adicionaTramite',
             'tramitesAdicionados',
             'tramiteAdicionadoSeleccionado',
@@ -293,7 +291,7 @@ class PredioIgnorado extends Component
 
             DB::transaction(function () {
 
-                $tramite = (new TramiteService($this->modelo_editar))->crearTramite();
+                $tramite = (new TramiteService($this->modelo_editar))->crearTramite(null, $this->predioAvaluo?->id);
 
                 $this->dispatch('imprimir_recibo', ['tramite' => $tramite->id]);
 
@@ -351,6 +349,28 @@ class PredioIgnorado extends Component
 
         $this->editar = true;
 
+    }
+
+    public function validar(){
+
+        try {
+
+            DB::transaction(function () {
+
+                (new TramiteService($this->tramite))->procesarPago();
+
+                $this->resetearTodo();
+
+                $this->dispatch('reset');
+
+                $this->dispatch('mostrarMensaje', ['success', "El trámite se valido con éxito."]);
+
+            });
+
+        } catch (\Throwable $th) {
+            Log::error("Error al validar trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', $th->getMessage()]);
+        }
     }
 
     public function mount(){

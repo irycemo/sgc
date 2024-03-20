@@ -311,15 +311,15 @@ class Copias extends Component
                                 ->where('numero_registro', $this->registro)
                                 ->first();
 
+        if(!$this->predio){
+            $this->dispatch('mostrarMensaje', ['error', "La cuenta predial no esta registrada."]);
+            return;
+        }
+
         if($this->predio->bloqueadoActivo()){
 
             $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
             $this->predio = null;
-            return;
-        }
-
-        if(!$this->predio){
-            $this->dispatch('mostrarMensaje', ['error', "La cuenta predial no esta registrada."]);
             return;
         }
 
@@ -538,6 +538,29 @@ class Copias extends Component
         $consulta->solicitante = $this->modelo_editar->solicitante;
 
         return (new TramiteService($consulta))->crearTramite();
+
+    }
+
+    public function validar(){
+
+        try {
+
+            DB::transaction(function () {
+
+                (new TramiteService($this->tramite))->procesarPago();
+
+                $this->resetearTodo();
+
+                $this->dispatch('reset');
+
+                $this->dispatch('mostrarMensaje', ['success', "El trámite se valido con éxito."]);
+
+            });
+
+        } catch (\Throwable $th) {
+            Log::error("Error al validar trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', $th->getMessage()]);
+        }
 
     }
 

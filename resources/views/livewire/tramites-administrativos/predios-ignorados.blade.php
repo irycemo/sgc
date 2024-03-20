@@ -1,6 +1,6 @@
 <div>
 
-    <x-header>Variaciones catastrales</x-header>
+    <x-header>Predios ignorados</x-header>
 
     <div class="mb-6">
 
@@ -26,11 +26,14 @@
 
                     <option value="" selected>Estado</option>
 
-                    @foreach ($estados as $estados)
-
-                        <option value="{{ $estados }}">{{ $estados }}</option>
-
-                    @endforeach
+                    <option value="nuevo">Nuevo</option>
+                    <option value="revisión">Revisión</option>
+                    <option value="requerimineto">Requerimineto</option>
+                    <option value="valuación">Valuación</option>
+                    <option value="publicación">Publicación</option>
+                    <option value="periódico oficial">Periódico oficial</option>
+                    <option value="firma">Firma</option>
+                    <option value="concluido">Concluido</option>
 
                 </select>
 
@@ -61,7 +64,7 @@
                     <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 text-sm py-2 px-4 text-white rounded-full hidden md:block items-center justify-center focus:outline-gray-400 focus:outline-offset-2">
 
                         <img wire:loading wire:target="abrirModalCrear" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-                        Agregar nueva variación
+                        Agregar nuevo predio ignorado
 
                     </button>
 
@@ -87,7 +90,6 @@
                 <x-table.heading sortable wire:click="sortBy('tramite_id')" :direction="$sort === 'tramite_id' ? $direction : null" >Trámite</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('oficina_id')" :direction="$sort === 'oficina_id' ? $direction : null" >Municipio</x-table.heading>
                 <x-table.heading >Promovente</x-table.heading>
-                <x-table.heading >Finado</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
                 <x-table.heading >Acciones</x-table.heading>
@@ -96,15 +98,15 @@
 
             <x-slot name="body">
 
-                @forelse ($variaciones as $variacion)
+                @forelse ($prediosIgnorados as $predio)
 
-                    <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $variacion->id }}">
+                    <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $predio->id }}">
 
                         <x-table.cell>
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Año</span>
 
-                            {{ $variacion->año }}
+                            {{ $predio->año }}
 
                         </x-table.cell>
 
@@ -112,7 +114,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Folio</span>
 
-                            {{ $variacion->folio }}
+                            {{ $predio->folio }}
 
                         </x-table.cell>
 
@@ -120,7 +122,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Estado</span>
 
-                            <span class="bg-{{ $variacion->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($variacion->estado) }}</span>
+                            <span class="bg-{{ $predio->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($predio->estado) }}</span>
 
                         </x-table.cell>
 
@@ -128,7 +130,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Trámite</span>
 
-                            {{ $variacion->tramite->año }}-{{ $variacion->tramite->folio }}-{{ $variacion->tramite->usuario }}
+                            {{ $predio->tramite->año }}-{{ $predio->tramite->folio }}-{{ $predio->tramite->usuario }}
 
                         </x-table.cell>
 
@@ -136,7 +138,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Municipio</span>
 
-                            {{ $variacion->oficina->nombre }}
+                            {{ $predio->oficina->nombre }}
 
                         </x-table.cell>
 
@@ -144,15 +146,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Promovente</span>
 
-                            {{ $variacion->promovente }}
-
-                        </x-table.cell>
-
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Finado</span>
-
-                            {{ $variacion->finado ?? 'N/A' }}
+                            {{ $predio->promovente }}
 
                         </x-table.cell>
 
@@ -161,17 +155,17 @@
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
 
-                            <span class="font-semibold">@if($variacion->creadoPor != null)Registrado por: {{$variacion->creadoPor->name}} @else Registro: @endif</span> <br>
+                            <span class="font-semibold">@if($predio->creadoPor != null)Registrado por: {{$predio->creadoPor->name}} @else Registro: @endif</span> <br>
 
-                            {{ $variacion->created_at }}
+                            {{ $predio->created_at }}
 
                         </x-table.cell>
 
                         <x-table.cell>
 
-                            <span class="font-semibold">@if($variacion->actualizadoPor != null)Actualizado por: {{$variacion->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
+                            <span class="font-semibold">@if($predio->actualizadoPor != null)Actualizado por: {{$predio->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
 
-                            {{ $variacion->updated_at }}
+                            {{ $predio->updated_at }}
 
                         </x-table.cell>
 
@@ -196,25 +190,25 @@
                                 <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     <button
-                                        wire:click="abrirVerRequerimiento({{ $variacion->id }})"
+                                        wire:click="abrirVerRequerimiento({{ $predio->id }})"
                                         wire:loading.attr="disabled"
                                         class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                         role="menuitem">
                                         Ver requerimientos
                                     </button>
 
-                                    @if($variacion->archivo)
+                                    @if($predio->archivo)
 
-                                        <a href="{{ Storage::disk('variacionescatastrales')->url($variacion->archivo) }}" target="_blank" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" role="menuitem">Descargar archivo</a>
+                                        <a href="{{ Storage::disk('prediosignorados')->url($predio->archivo) }}" target="_blank" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" role="menuitem">Descargar archivo</a>
 
                                     @endif
 
-                                    @if(!$variacion->folio)
+                                    @if(!$predio->folio)
 
                                         @can('Asignar Folio')
 
                                             <button
-                                                wire:click="asignarFolio({{ $variacion->id }})"
+                                                wire:click="asignarFolio({{ $predio->id }})"
                                                 wire:loading.attr="disabled"
                                                 class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                 role="menuitem">
@@ -225,12 +219,12 @@
 
                                     @endif
 
-                                    @if($variacion->estado !== 'concluido')
+                                    @if($predio->estado !== 'concluido')
 
                                         @can('Editar variación')
 
                                             <button
-                                                wire:click="abrirHacerRequerimiento({{ $variacion->id }})"
+                                                wire:click="abrirHacerRequerimiento({{ $predio->id }})"
                                                 wire:loading.attr="disabled"
                                                 class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                 role="menuitem">
@@ -238,7 +232,7 @@
                                             </button>
 
                                             <button
-                                                wire:click="abrirAsignarValuador({{ $variacion->id }})"
+                                                wire:click="abrirAsignarValuador({{ $predio->id }})"
                                                 wire:loading.attr="disabled"
                                                 class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                 role="menuitem">
@@ -248,7 +242,7 @@
                                         @endcan
 
                                         <button
-                                            wire:click="abrirSubirArchivo({{ $variacion->id }})"
+                                            wire:click="abrirSubirArchivo({{ $predio->id }})"
                                             wire:loading.attr="disabled"
                                             class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                             role="menuitem">
@@ -258,7 +252,7 @@
                                         @can('Editar variación')
 
                                             <button
-                                                wire:click="abrirCambiarEstado({{ $variacion->id }})"
+                                                wire:click="abrirCambiarEstado({{ $predio->id }})"
                                                 wire:loading.attr="disabled"
                                                 class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                 role="menuitem">
@@ -270,11 +264,11 @@
                                         @can('Borrar variación')
 
                                             <button
-                                                wire:click="abrirModalBorrar({{ $variacion->id }})"
+                                                wire:click="abrirModalBorrar({{ $predio->id }})"
                                                 wire:loading.attr="disabled"
                                                 class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                 role="menuitem">
-                                                Eliminar variación
+                                                Eliminar predio ignorado
                                             </button>
 
                                         @endcan
@@ -315,7 +309,7 @@
 
                     <x-table.cell colspan="10" class="bg-gray-50">
 
-                        {{ $variaciones->links()}}
+                        {{ $prediosIgnorados->links()}}
 
                     </x-table.cell>
 
@@ -327,7 +321,7 @@
 
     </div>
 
-    @include('livewire.tramites-administrativos.modal-crear-variacion')
+    @include('livewire.tramites-administrativos.modal-crear-predio')
 
     @include('livewire.tramites-administrativos.modal-eliminar')
 

@@ -98,7 +98,9 @@
                         @endforeach
                     </select>
 
-                    <input type="number" placeholder="Número de control" min="1" class="bg-white text-sm w-full focus:ring-0 @error('tramite_folio') border-red-500 @enderror" wire:model="tramite_folio">
+                    <input type="number" placeholder="Folio" min="1" class="bg-white text-sm w-20 focus:ring-0 @error('tramite_folio') border-red-500 @enderror" wire:model="tramite_folio">
+
+                    <input type="number" placeholder="Usuario" min="1" class="bg-white text-sm w-20 focus:ring-0 border-l-0 @error('tramite_folio') border-red-500 @enderror" wire:model="tramite_usuario">
 
                     <button
                         wire:click="buscarTramite"

@@ -48,7 +48,7 @@ class LineaCaptura
                     <!--Zero or more repetitions:-->
                     <TB_CONCEPTOS>
                         <TP_INGRESO>". $this->tramite->servicio->clave_ingreso ."</TP_INGRESO>
-                        <CANTIDAD>1</CANTIDAD>
+                        <CANTIDAD>" . $this->tramite->cantidad . "</CANTIDAD>
                         <IMPORTE>" . $this->tramite->monto . "</IMPORTE>
                     </TB_CONCEPTOS>
                 </ser:MT_ServGralLC_PI_Sender>
