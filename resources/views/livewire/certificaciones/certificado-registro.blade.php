@@ -77,6 +77,28 @@
 
             </div>
 
+            <div class="flex flex-wrap gap-3 justify-center text-sm mt-5">
+
+                <p class="text-center w-full">Predios</p>
+
+                @foreach ($tramite->predios as $item)
+
+                    @if($item->pivot->estado === "A")
+
+                        <div
+                            wire:click="seleccionarPredio({{ $item->id }})"
+                            class="rounded-lg bg-gray-100 py-1 px-2 hover:cursor-pointer hover:bg-gray-200">
+
+                            <p>{{ $item->cuentaPredial() }}</p>
+
+                        </div>
+
+                    @endif
+
+                @endforeach
+
+            </div>
+
         @endif
 
     </div>
@@ -91,7 +113,7 @@
 
                     <strong>Cuenta predial</strong>
 
-                    <p>{{ $tramite->predios()->first()->cuentaPredial() }}</p>
+                    <p>{{ $predio->cuentaPredial() }}</p>
 
                 </div>
 
@@ -99,7 +121,7 @@
 
                     <strong>Clave catastral</strong>
 
-                    <p>{{ $tramite->predios()->first()->claveCatastral() }}</p>
+                    <p>{{ $predio->claveCatastral() }}</p>
 
                 </div>
 

@@ -66,17 +66,17 @@ class CedulaActualizacion extends Component
 
             }
 
-            if($this->tramite->estado != 'pagado'){
+            if($this->tramite->estado === 'concluido'){
 
-                $this->dispatch('mostrarMensaje', ['error', "El trámite no esta pagado."]);
+                $this->dispatch('mostrarMensaje', ['error', "El trámite esta concluido."]);
 
                 return;
 
             }
 
-            if($this->tramite->estado === 'concluido'){
+            if($this->tramite->estado != 'pagado'){
 
-                $this->dispatch('mostrarMensaje', ['error', "El trámite esta concluido."]);
+                $this->dispatch('mostrarMensaje', ['error', "El trámite no esta pagado."]);
 
                 return;
 
@@ -189,6 +189,7 @@ class CedulaActualizacion extends Component
                 'estado' => 'activo',
                 'oficina_id' => $oficina->id,
                 'tramite_id' => $this->tramite->id,
+                'predio_id' => $this->predio->id,
                 'creado_por' => auth()->id(),
                 'actualizado_por' => auth()->id(),
             ]);
@@ -227,6 +228,7 @@ class CedulaActualizacion extends Component
                 'estado' => 'activo',
                 'oficina_id' => $oficina->id,
                 'tramite_id' => $this->tramite->id,
+                'predio_id' => $this->predio->id,
                 'creado_por' => auth()->id(),
                 'actualizado_por' => auth()->id(),
             ]);
@@ -287,7 +289,9 @@ class CedulaActualizacion extends Component
 
         $pdf = $this->revisarOficina();
 
-        /* $this->tramite->update(['estado' => 'concluido']); */
+        $this->tramite->update(['estado' => 'concluido']);
+
+        $this->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
 
         return response()->streamDownload(
             fn () => print($pdf),

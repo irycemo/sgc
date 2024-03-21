@@ -410,7 +410,6 @@ class Copias extends Component
     public function resetearTodo(){
 
         $this->reset([
-            'tramite',
             'adicionaTramite',
             'tramitesAdicionados',
             'tramiteAdicionadoSeleccionado',

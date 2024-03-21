@@ -21,7 +21,8 @@ return new class extends Migration
             $table->text('cadena_encriptada')->nullable();
             $table->string('estado');
             $table->foreignId('oficina_id');
-            $table->foreignId('tramite_id')->nullable();
+            $table->foreignId('tramite_id')->nullable()->constrainded();
+            $table->foreignId('predio_id')->nullable()->constrainded();
             $table->text('observaciones')->nullable();
             $table->foreignId('creado_por')->references('id')->on('users');
             $table->foreignId('actualizado_por')->references('id')->on('users');

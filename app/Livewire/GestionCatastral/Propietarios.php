@@ -52,9 +52,9 @@ class Propietarios extends Component
 
     protected function rules(){
         return [
-            'porcentaje' => ['numeric', 'min:1', 'nullable', Rule::requiredIf($this->porcentaje_nuda === null && $this->porcentaje_usufructo === null)],
-            'porcentaje_nuda' => ['numeric', 'min:1', 'nullable'],
-            'porcentaje_usufructo' => ['numeric', 'min:1', 'nullable'],
+            'porcentaje' => ['numeric', 'min:1', 'max:100', 'nullable', Rule::requiredIf($this->porcentaje_nuda === null && $this->porcentaje_usufructo === null)],
+            'porcentaje_nuda' => 'required|numeric|min:1|max:100',
+            'porcentaje_usufructo' => 'required|numeric|min:1|max:100',
             'tipo_persona' => 'required',
             'nombre' => [Rule::requiredIf($this->tipo_persona === 'FISICA'), 'regex:/^[\pL\s]+$/u'],
             'ap_paterno' => [Rule::requiredIf($this->tipo_persona === 'FISICA'), 'regex:/^[\pL\s]+$/u'],

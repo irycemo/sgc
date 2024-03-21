@@ -87,7 +87,7 @@ class TramiteService{
 
         }  catch (\Throwable $th) {
 
-            Log::error("Error al actualizar trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". Trámite: " . $this->tramite->año . '-' . $this->tramite->numero_control . '-' . $this->tramite->usuario . '. ' . $th);
+            Log::error("Error al actualizar trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". Trámite: " . $this->tramite->año . '-' . $this->tramite->folio . '-' . $this->tramite->usuario . '. ' . $th);
 
             throw new TramiteServiceException("Error al actualizar trámite");
 
@@ -176,7 +176,7 @@ class TramiteService{
 
         }  catch (\Throwable $th) {
 
-            Log::error("Error al procesar pago de trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". Trámite: " . $this->tramite->año . '-' . $this->tramite->numero_control . '-' . $this->tramite->usuario . '. ' . $th);
+            Log::error("Error al procesar pago de trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". Trámite: " . $this->tramite->año . '-' . $this->tramite->folio . '-' . $this->tramite->usuario . '. ' . $th);
 
             throw new TramiteServiceException("Error al procesar pago");
 

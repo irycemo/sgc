@@ -415,7 +415,6 @@ class LevantamientosTopograficos extends Component
     public function resetearTodo(){
 
         $this->reset([
-            'tramite',
             'adicionaTramite',
             'tramitesAdicionados',
             'tramiteAdicionadoSeleccionado',

@@ -304,7 +304,6 @@ class Simple extends Component
     public function resetearTodo(){
 
         $this->reset([
-            'tramite',
             'adicionaTramite',
             'tramitesAdicionados',
             'tramiteAdicionadoSeleccionado',

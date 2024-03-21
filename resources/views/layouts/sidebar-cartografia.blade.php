@@ -30,7 +30,33 @@
         class="flex flex-col w-full justify-between transition ease-in-out duration-500  rounded-xl text-sm"
         x-show="!openValuacion">
 
+        @can('Asignación de cuentas')
 
+            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+
+                <a href="{{ route('asignacion_cuenta') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
+
+                    Asignación de cuentas p.
+
+                </a>
+
+            </div>
+
+        @endcan
+
+        @can('Conciliar')
+
+            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+
+                <a href="{{ route('conciliar') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
+
+                    Conciliar
+
+                </a>
+
+            </div>
+
+        @endcan
 
     </div>
 

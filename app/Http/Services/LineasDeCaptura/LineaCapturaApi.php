@@ -40,7 +40,7 @@ class LineaCapturaApi
                         "TP_DIVERSO" => "CATASTRO",
                         "RFC" => "XXXX0001XXX",
                         "NOMBRE_RAZON" => $this->tramite->nombre_solicitante,
-                        "OBSERVACIONES" => $this->tramite->año . '-' . $this->tramite->numero_control . '-' . $this->tramite->usuario
+                        "OBSERVACIONES" => $this->tramite->año . '-' . $this->tramite->folio . '-' . $this->tramite->usuario
                     ],
                     "TB_CONCEPTOS" => [
                         "TP_INGRESO" => $this->tramite->servicio->clave_ingreso,
@@ -106,11 +106,11 @@ class LineaCapturaApi
 
         $data = json_decode($response, true);
 
-        if(isset($data['ES_MSJ']['TpMens'])){
+        if(isset($data['ES_MSJ'])){
 
-            Log::error($data['ES_MSJ']['V1Mens'] . ' EN SAP');
+            Log::error($data['ES_MSJ']['V1_MENS'] . ' EN SAP');
 
-            throw new ErrorAlValidarLineaDeCaptura("Error de comunicación con SAP.");
+            throw new ErrorAlValidarLineaDeCaptura($data['ES_MSJ']['V1_MENS'] ." en SAP.");
 
             return;
 

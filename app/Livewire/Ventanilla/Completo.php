@@ -322,9 +322,9 @@ class Completo extends Component
 
     public function agregarPredio(){
 
-        if(in_array($this->servicio['id'], [45, 46])  && count($this->predios) == 1){
+        if(in_array($this->servicio['id'], [45, 46, 64, 65])  && count($this->predios) == 1){
 
-            $this->dispatch('mostrarMensaje', ['error', "Solo es posible agregar 1 predio a variaciones catastrales."]);
+            $this->dispatch('mostrarMensaje', ['error', "Solo es posible agregar 1 predio al servicio."]);
 
             return;
 
@@ -417,7 +417,6 @@ class Completo extends Component
     public function resetearTodo(){
 
         $this->reset([
-            'tramite',
             'adicionaTramite',
             'tramitesAdicionados',
             'tramiteAdicionadoSeleccionado',

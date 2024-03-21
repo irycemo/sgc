@@ -32,10 +32,7 @@ class Efirmas extends Component
         return [
             'modelo_editar.user_id' => 'required',
             'modelo_editar.estado' => 'required',
-            'modelo_editar.cer' => 'required',
-            'modelo_editar.key' => 'required',
             'modelo_editar.contraseña' => 'required',
-            'modelo_editar.imagen' => 'nullable',
          ];
     }
 

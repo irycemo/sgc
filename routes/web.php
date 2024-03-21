@@ -39,6 +39,7 @@ use App\Http\Controllers\Valuacion\AvaluosController as Val;
 use App\Livewire\Ventanilla\Ventanilla as VentanillaVentanilla;
 use App\Http\Controllers\Valuacion\ValuacionYDesgloseController;
 use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
+use App\Livewire\Cartografia\Conciliar;
 use App\Livewire\Certificaciones\CertificadoNegativo;
 use App\Livewire\TramitesAdministrativos\PrediosIgnorados;
 use App\Livewire\TramitesAdministrativos\VariacionesCatastrales;
@@ -122,6 +123,9 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('variaciones_catastrales', VariacionesCatastrales::class)->middleware('permission:Variaciones catastrales')->name('variaciones_catastrales');
 
     Route::get('predios_ignorados', PrediosIgnorados::class)->middleware('permission:Predios ignorados')->name('predios_ignorados');
+
+    /* Cartografía */
+    Route::get('conciliar', Conciliar::class)->middleware('permission:Conciliar')->name('conciliar');
 
     /* Certificaciones */
     Route::get('certificado_historia', CertificadoHistoria::class)->middleware('permission:Certificado de historia')->name('certificado_historia');

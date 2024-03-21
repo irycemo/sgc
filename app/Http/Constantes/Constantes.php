@@ -53,7 +53,7 @@ class Constantes{
         'Departamento de Control Presupuestal y Recursos Financieros',
         'Departamento de Recursos Humanos, Materiales y Servicios Generales',
         'Departamento de Archivo Catastro',
-        'Receptoria de rentas'
+        'Oficina de rentas'
     ];
 
     const TIPO_PROPIETARIO = [

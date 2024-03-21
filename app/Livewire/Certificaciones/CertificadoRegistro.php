@@ -8,18 +8,19 @@ use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\Certificacion;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
+use Endroid\QrCode\Builder\Builder;
 use Illuminate\Support\Facades\Log;
 use PhpCfdi\Credentials\Credential;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\Label\Font\NotoSans;
 use Illuminate\Support\Facades\Storage;
 use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
 use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
-use Endroid\QrCode\Encoding\Encoding;
-use Endroid\QrCode\Label\Font\NotoSans;
-use Endroid\QrCode\Writer\PngWriter;
-use Endroid\QrCode\Builder\Builder;
 
 class CertificadoRegistro extends Component
 {
@@ -68,14 +69,6 @@ class CertificadoRegistro extends Component
 
             }
 
-            if($this->tramite->estado != 'pagado'){
-
-                $this->dispatch('mostrarMensaje', ['error', "El trámite no esta pagado."]);
-
-                return;
-
-            }
-
             if($this->tramite->estado === 'concluido'){
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite esta concluido."]);
@@ -84,21 +77,33 @@ class CertificadoRegistro extends Component
 
             }
 
-            $this->tipo_certificado = mb_strtoupper($this->tramite->servicio->nombre, 'utf-8');
+            if($this->tramite->estado != 'pagado'){
 
-            $this->predio = $this->tramite->predios()->first();
+                $this->dispatch('mostrarMensaje', ['error', "El trámite no esta pagado."]);
 
-            if($this->predio->bloqueadoActivo()){
-
-                $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
-                $this->predio = null;
                 return;
 
             }
 
-            $this->oficina = Oficina::where('oficina', $this->predio->oficina)->first()->oficina;
+            $this->tipo_certificado = mb_strtoupper($this->tramite->servicio->nombre, 'utf-8');
 
-            $this->predio->load('propietarios.persona', 'colindancias');
+            if($this->tramite->predios()->count() === 1){
+
+                $this->predio = $this->tramite->predios()->first();
+
+                if($this->predio->bloqueadoActivo()){
+
+                    $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
+                    $this->predio = null;
+                    return;
+
+                }
+
+                $this->oficina = $this->predio->oficina;
+
+                $this->predio->load('propietarios.persona', 'colindancias');
+
+            }
 
             $this->reset(['folio', 'usuario']);
 
@@ -113,6 +118,28 @@ class CertificadoRegistro extends Component
 
         }
 
+
+    }
+
+    public function seleccionarPredio($id){
+
+        $this->predio = $this->tramite->predios()->wherePivot('predio_id', $id)->wherePivot('estado', 'A')->first();
+
+        if($this->predio){
+
+            if($this->predio->bloqueadoActivo()){
+
+                $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
+                $this->predio = null;
+                return;
+
+            }
+
+            $this->oficina = $this->predio->oficina;
+
+            $this->predio->load('propietarios.persona', 'colindancias');
+
+        }
 
     }
 
@@ -206,6 +233,7 @@ class CertificadoRegistro extends Component
                 'estado' => 'activo',
                 'oficina_id' => $oficina->id,
                 'tramite_id' => $this->tramite->id,
+                'predio_id' => $this->predio->id,
                 'creado_por' => auth()->id(),
                 'actualizado_por' => auth()->id(),
             ]);
@@ -244,6 +272,7 @@ class CertificadoRegistro extends Component
                 'estado' => 'activo',
                 'oficina_id' => $oficina->id,
                 'tramite_id' => $this->tramite->id,
+                'predio_id' => $this->predio->id,
                 'creado_por' => auth()->id(),
                 'actualizado_por' => auth()->id(),
             ]);
@@ -300,16 +329,47 @@ class CertificadoRegistro extends Component
 
     public function generarCertificado(){
 
-        $this->construirCadena();
+        try {
 
-        $pdf = $this->revisarOficina();
+            $this->construirCadena();
 
-        /* $this->tramite->update(['estado' => 'concluido']); */
+            $pdf = $this->revisarOficina();
 
-        return response()->streamDownload(
-            fn () => print($pdf),
-            'certificado_de_historia.pdf'
-        );
+            DB::transaction(function () {
+
+                $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
+
+                $usados = $this->tramite->predios()->wherePivot('estado', 'I')->count();
+
+                $this->tramite->update(['usados' => $usados]);
+
+                $this->tramite->audits()->latest()->first()->update(['tags' => 'Generó certificado del predio ' . $this->predio->cuentaPredial()]);
+
+                if($this->tramite->cantidad === $usados){
+
+                    $this->tramite->update(['estado' => 'concluido']);
+
+                    $this->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
+
+                }
+
+            });
+
+            $this->reset('predio');
+
+            $this->tramite->load('predios');
+
+            return response()->streamDownload(
+                fn () => print($pdf),
+                'certificado_de_historia.pdf'
+            );
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al actualizar permisos usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+
+        }
 
     }
 
