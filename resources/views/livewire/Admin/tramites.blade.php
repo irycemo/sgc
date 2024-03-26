@@ -288,27 +288,25 @@
 
         <x-slot name="content">
 
-            <div class="relative p-1">
+            <div class="relative p-1" wire:loading.class.delaylongest="opacity-50">
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <x-input-group for="modelo_editar.solicitante" label="Solicitante" :error="$errors->first('modelo_editar.solicitante')" class="w-full">
+                    <x-input-group for="modelo_editar.nombre_solicitante" label="Nombre del solicitante" :error="$errors->first('modelo_editar.nombre_solicitante')" class="w-full">
 
-                        <x-input-text id="modelo_editar.solicitante" wire:model="modelo_editar.solicitante" />
-
-                    </x-input-group>
-
-                    <x-input-group for="modelo_editar.estado" label="Estado" :error="$errors->first('modelo_editar.estado')" class="w-full">
-
-                        <x-input-select id="modelo_editar.estado" wire:model="modelo_editar.estado" class="w-full">
-
-                            <option value="">Seleccione una opción</option>
-                            <option value="activo">Activo</option>
-                            <option value="inactivo">Inactivo</option>
-
-                        </x-input-select>
+                        <x-input-text id="modelo_editar.nombre_solicitante" wire:model="modelo_editar.nombre_solicitante" />
 
                     </x-input-group>
+
+                    @if($modelo_editar->numero_oficio)
+
+                        <x-input-group for="modelo_editar.numero_oficio" label="Número de oficio" :error="$errors->first('modelo_editar.numero_oficio')" class="w-full">
+
+                            <x-input-text id="modelo_editar.numero_oficio" wire:model="modelo_editar.numero_oficio" />
+
+                        </x-input-group>
+
+                    @endif
 
                 </div>
 
@@ -326,50 +324,25 @@
 
                                     <div>
 
-                                        <input placeholder="Localidad" type="number" class="bg-white rounded text-sm w-full" wire:model="localidad">
-
-                                        <div>
-
-                                            @error('localidad') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                                        </div>
-
+                                        <input placeholder="Localidad" type="number" class="bg-white rounded text-sm w-full @error('localidad') border-red-500 @enderror" wire:model="localidad">
 
                                     </div>
 
                                     <div>
 
-                                        <input placeholder="Oficina rentistica" type="number" class="bg-white rounded text-sm w-full" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
-
-                                        <div>
-
-                                            @error('oficina') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                                        </div>
+                                        <input placeholder="Oficina" type="number" class="bg-white rounded text-sm w-full @error('oficina') border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
                                     </div>
 
                                     <div>
 
-                                        <input placeholder="Tipo de predio" type="number" class="bg-white rounded text-sm w-full" wire:model="tipo">
-
-                                        <div>
-
-                                            @error('tipo') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                                        </div>
+                                        <input placeholder="Tipo de predio" type="number" class="bg-white rounded text-sm w-full @error('tipo') border-red-500 @enderror" wire:model="tipo">
 
                                     </div>
 
                                     <div>
 
-                                        <input placeholder="Número de registro" type="number" class="bg-white rounded text-sm w-full" wire:model="registro">
-
-                                        <div>
-
-                                            @error('registro') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                                        </div>
+                                        <input placeholder="Número de registro" type="number" class="bg-white rounded text-sm w-full @error('registro') border-red-500 @enderror" wire:model="registro">
 
                                     </div>
 
@@ -391,7 +364,7 @@
 
                                         <div>
 
-                                            <p><strong>Propietario:</strong> {{ $predio->primerPropietario }}</p>
+                                            <p><strong>Propietario:</strong> {{ $predio->primerPropietario() }}</p>
 
                                             <p><strong>Ubicacion:</strong> {{ $predio->nombre_vialidad }} #{{ $predio->numero_exterior }}</p>
 
@@ -411,7 +384,7 @@
 
                                 @endif
 
-                                @if($predios)
+                                @if($modelo_editar->predios()->count() > 0)
 
                                     <div class="text-sm my-3 rounded-lg">
 
@@ -421,8 +394,11 @@
 
                                                 <tr>
 
-                                                    <th class="px-2">Cuenta predial</th>
-                                                    <th class="px-2">Propietario / Ubicación</th>
+                                                    <th class="px-2">Estado</th>
+                                                    <th class="px-2">Localidad</th>
+                                                    <th class="px-2">Oficina</th>
+                                                    <th class="px-2">Tipo de predio</th>
+                                                    <th class="px-2">Número de registro</th>
                                                     <th class="px-2"></th>
 
                                                 </tr>
@@ -431,36 +407,68 @@
 
                                             <tbody>
 
-                                                @foreach ($predios as $item)
+                                                @foreach ($modelo_editar->predios as $item)
 
                                                     <tr class="border-b py-1">
 
-                                                        <td class="px-2 w-1/4">
+                                                        <td class="px-2">
                                                             <span class="rounded-full px-1 text-white @if($item->pivot->estado === 'A') bg-green-500 @else bg-gray-500 @endif">{{ $item->pivot->estado }}</span>
-                                                            {{ $item->cuentaPredial() }}
                                                         </td>
                                                         <td class="px-2">
-                                                            <p>{{ $item->primerPropietario() }}</p>
-                                                            <p>{{ $item['nombre_vialidad'] }}, #{{ $item['numero_exterior'] }}</p>
+                                                            {{ $item->localidad }}
                                                         </td>
                                                         <td class="px-2">
-                                                            <button
-                                                                wire:click="quitarPredio({{ $item['id'] }})"
-                                                                wire:loading.attr="disabled"
-                                                                wire:target="quitarPredio({{ $item['id'] }})"
-                                                                class="md:w-full bg-red-400 hover:shadow-lg text-white text-xs md:text-sm px-1 py-1 items-center rounded-full hover:bg-red-700 flex justify-center focus:outline-none"
-                                                            >
+                                                            <p>{{ $item->oficina }}</p>
+                                                        </td>
+                                                        <td class="px-2">
+                                                            <p>{{ $item->tipo_predio }}</p>
+                                                        </td>
+                                                        <td class="px-2">
+                                                            <p>{{ $item->numero_registro }}</p>
+                                                        </td>
+                                                        <td class="px-2 flex items-center space-x-2">
 
-                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                                </svg>
+                                                            @if($item->pivot->estado === 'I')
 
-                                                            </button>
+                                                                <button
+                                                                    wire:click="reactivarPredio({{ $item['id'] }})"
+                                                                    wire:loading.attr="disabled"
+                                                                    wire:target="reactivarPredio({{ $item['id'] }})"
+                                                                    class=" bg-blue-400 text-white text-xs p-1 items-center rounded-full hover:bg-blue-700 flex justify-center focus:outline-none"
+                                                                >
+
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                                                    </svg>
+
+                                                                </button>
+
+                                                            @elseif($item->pivot->estado === 'A')
+
+                                                                <button
+                                                                    wire:click="quitarPredio({{ $item['id'] }})"
+                                                                    wire:loading.attr="disabled"
+                                                                    wire:target="quitarPredio({{ $item['id'] }})"
+                                                                    class=" bg-red-400 text-white text-xs p-1 items-center rounded-full hover:bg-red-700 flex justify-center focus:outline-none"
+                                                                >
+
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                                    </svg>
+
+                                                                </button>
+
+                                                            @endif
+
                                                         </td>
 
                                                     </tr>
 
                                                 @endforeach
+
+                                                <tr>
+                                                    <td colspan="6">Total: {{ $modelo_editar->predios()->count() }}</td>
+                                                </tr>
 
                                             </tbody>
 
@@ -497,12 +505,6 @@
                         <textarea rows="5" wire:model.blur="modelo_editar.observaciones" class="bg-white rounded text-sm w-full" placeholder="Se lo mas especifico posible acerca de porque se genera el trámite."></textarea>
 
                     </x-input-group>
-
-                </div>
-
-                <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" wire:loading.delay.longer>
-
-                    <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
 
                 </div>
 
@@ -685,15 +687,15 @@
                             <span class="col-span-1 lg:col-span-2">Cuentas prediales</span>
                         </div>
 
-                        <ul class="rounded-lg bg-gray-100 my-3 list-disc flex gap-2">
+                        <div class="rounded-lg bg-gray-100 grid grid-cols-5 gap-2 list-disc p-2">
 
                             @foreach ($modelo_editar->predios as $predio)
 
-                                    <li class="ml-5">{{ $predio->cuentaPredial() }} </li>
+                                    <span class="">{{ $predio->cuentaPredial() }} </span>
 
                             @endforeach
 
-                        </ul>
+                        </div>
 
                     @endif
 

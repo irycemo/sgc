@@ -16,17 +16,13 @@ use App\Models\ValoresUnitariosRusticos;
 use App\Models\ValoresUnitariosConstruccion;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use App\Http\Services\Coordenadas\Coordenadas;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
+use App\Exceptions\FichaTecnicaImportException;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
-use App\Exceptions\ErrorAlProcesarTerrenosException;
-use App\Exceptions\ErrorAlProcesarCoordenadasException;
-use App\Exceptions\ErrorAlProcesarColindanciasException;
-use App\Exceptions\ErrorAlProcesarConstruccionesException;
-use App\Exceptions\ErrorAlValidarDisponibilidadEnAvaluosException;
-use App\Exceptions\ErrorALValidarSectorException;
 
-class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, WithMultipleSheets
+class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, WithMultipleSheets, SkipsEmptyRows
 {
 
     public $valoresConstruccion;
@@ -47,308 +43,314 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
     public function collection(Collection $rows)
     {
 
-        DB::transaction(function () use($rows){
+        try {
+
+            DB::transaction(function () use($rows){
 
 
-            foreach ($rows as $key => $row)
-            {
+                foreach ($rows as $key => $row)
+                {
 
-                $key = $key + 3;
+                    $key = $key + 3;
 
-                /* Validaciones */
-                $this->validarDisponibilidad($row, $key);
+                    /* Validaciones */
+                    $this->validarDisponibilidad($row, $key);
 
-                $this->validarSector($row, $key);
+                    $this->validarSector($row, $key);
 
-                $coordenadas = $this->procesarCoordenadas($row['latitud'], $row['longitud'], $key);
+                    $coordenadas = $this->procesarCoordenadas($row['latitud'], $row['longitud'], $key);
 
-                $colindancias = $this->procesarColindacias($row['colindancias'], $key);
+                    $colindancias = $this->procesarColindacias($row['colindancias'], $key);
 
-                $terrenos = $this->procesarTerrenos($row['terrenos'], $row['tipo'], $key);
+                    $terrenos = $this->procesarTerrenos($row['terrenos'], $row['tipo'], $key);
 
-                if(isset($row['construcciones'])){
+                    if(isset($row['construcciones'])){
 
-                    $construcciones = $this->procesarConstrucciones($row['construcciones'], $key);
+                        $construcciones = $this->procesarConstrucciones($row['construcciones'], $key);
 
-                    $sumValorConstrucciones = $construcciones->sum('valor_construccion');
+                        $sumValorConstrucciones = $construcciones->sum('valor_construccion');
 
-                    $sumSuperficieConstrucciones = $construcciones->sum('superficie');
+                        $sumSuperficieConstrucciones = $construcciones->sum('superficie');
 
-                }else{
+                    }else{
 
-                    $sumValorConstrucciones = 0;
+                        $sumValorConstrucciones = 0;
 
-                    $sumSuperficieConstrucciones = 0;
-
-                }
-
-                if(isset($row['terrenos_comun'])){
-
-                    $terrenosComun = $this->procesarTerrenosComun($row['terrenos_comun'], $key);
-
-                    $sumValorTerenosComun = $terrenosComun->sum('valor_terreno_comun');
-
-                    $sumAreaTerrenosComun = $terrenosComun->sum('area_terreno_comun');
-
-                }else{
-
-                    $sumValorTerenosComun = 0;
-
-                    $sumAreaTerrenosComun = 0;
-
-                }
-
-                if(isset($row['construcciones_comun'])){
-
-                    $construccionesComun = $this->procesarConstruccionesComun($row['construcciones_comun'], $key);
-
-                    $sumValorConstruccionesComun = $construccionesComun->sum('valor_construccion_comun');
-
-                    $sumAreaConstruccionComun = $construccionesComun->sum('area_comun_construccion');
-
-                }else{
-
-                    $sumValorConstruccionesComun = 0;
-
-                    $sumAreaConstruccionComun = 0;
-
-                }
-
-                if($row['tipo'] == 1){
-
-                    $valorCatastral = $terrenos->sum('valor_terreno') + $sumValorConstruccionesComun;
-
-                }elseif($row['tipo'] == 2){
-
-                    $valorCatastral = $terrenos->sum('valor_terreno')
-                                        + $sumValorConstrucciones
-                                        + $sumValorTerenosComun
-                                        + $sumValorConstruccionesComun;
-
-
-                }
-
-                if($row['ubicacion_manzana'] == 'ESQUINA'){
-
-                    $valorCatastral *= (1 + 15 / 100);
-
-                }
-
-                /* Crear predio */
-                $predio = PredioAvaluo::create([
-                    'status' => 'activo',
-                    'sociedad' => $row['sociedad'] == 'SI' ? 1 : 0,
-                    'estado' => $row['estado'],
-                    'region_catastral' => $row['region'],
-                    'municipio' => $row['municipio'],
-                    'zona_catastral' => $row['zona'],
-                    'localidad' => $row['localidad'],
-                    'sector' => $row['sector'],
-                    'manzana' => $row['manzana'],
-                    'predio' => $row['predio'],
-                    'edificio' => $row['edificio'],
-                    'departamento' => $row['departamento'],
-                    'oficina' => $row['oficina'],
-                    'tipo_predio' => $row['tipo'],
-                    'numero_registro' => $row['registro'],
-                    'tipo_vialidad' => $row['tipo_vialidad'],
-                    'tipo_asentamiento' => $row['tipo_asentamiento'],
-                    'nombre_vialidad' => $row['nombre_vialidad'],
-                    'numero_exterior' => $row['numero_exterior'],
-                    'numero_exterior_2' => $row['numero_exterior_2'],
-                    'numero_adicional' => $row['numero_adicional'],
-                    'numero_adicional_2' => $row['numero_adicional_2'],
-                    'numero_interior' => $row['numero_interior'],
-                    'nombre_asentamiento' => $row['nombre_asentamiento'],
-                    'codigo_postal' => $row['codigo_postal'],
-                    'lote_fraccionador' => $row['lote_fraccionador'],
-                    'manzana_fraccionador' => $row['manzana_fraccionador'],
-                    'etapa_fraccionador' => $row['etapa_fraccionador'],
-                    'nombre_predio' => $row['predio_rustico_antecedente'],
-                    'nombre_edificio' => $row['nombre_edificio'],
-                    'clave_edificio' => $row['clave_edificio'],
-                    'departamento_edificio' => $row['departamento_edificio'],
-                    'xutm' => $coordenadas['xutm'],
-                    'yutm' => $coordenadas['yutm'],
-                    'zutm' => $coordenadas['zutm'],
-                    'uso_1' => $row['uso_1'],
-                    'uso_2' => $row['uso_2'],
-                    'uso_3' => $row['uso_3'],
-                    'ubicacion_en_manzana' => $row['ubicacion_manzana'],
-                    'lon'=> $row['latitud'],
-                    'lat'=> $row['longitud'],
-                    'observaciones' => $row['observaciones'],
-                    'superficie_terreno' => $terrenos->sum('superficie'),
-                    'valor_total_terreno' => $terrenos->sum('valor_terreno'),
-                    'superficie_construccion' => $sumSuperficieConstrucciones,
-                    'area_comun_terreno' => $sumAreaTerrenosComun,
-                    'valor_terreno_comun' => $sumValorTerenosComun,
-                    'area_comun_construccion' => $sumAreaConstruccionComun,
-                    'valor_construccion_comun' => $sumValorConstruccionesComun,
-                    'valor_total_construccion' => $sumValorConstrucciones,
-                    'valor_catastral' => $valorCatastral,
-                    'actualizado_por' => auth()->user()->id
-                ]);
-
-                /* Asociar relaciones */
-                $persona = Persona::firstOrCreate(
-                    [
-                        'ap_paterno' => $row['ap_paterno'],
-                        'ap_materno' => $row['ap_materno'],
-                        'nombre' => $row['nombre'],
-                        'tipo' => $row['tipo_persona'],
-                    ],
-                    [
-                        'ap_paterno' => $row['ap_paterno'],
-                        'ap_materno' => $row['ap_materno'],
-                        'nombre' => $row['nombre'],
-                        'tipo' => $row['tipo_persona'],
-                    ]
-                );
-
-                $predio->propietarios()->create([
-                    'persona_id' => $persona->id,
-                    'tipo' => $row['tipo_propietario'],
-                    'porcentaje' => $row['porcentaje'],
-                ]);
-
-                foreach ($terrenos as $terreno) {
-
-                    $predio->terrenos()->create([
-                        'superficie' => $terreno['superficie'],
-                        'valor_unitario' => $terreno['valor_unitario'],
-                        'demerito' => $terreno['demerito'],
-                        'valor_demeritado' => $terreno['valor_demeritado'],
-                        'valor_terreno' => $terreno['valor_terreno'],
-                    ]);
-
-                }
-
-                if(isset($row['construcciones'])){
-
-                    foreach ($construcciones as $construccion) {
-
-                        $predio->construcciones()->create([
-                            'referencia' => $construccion['referencia'],
-                            'valor_unitario' => $construccion['valor_unitario'],
-                            'niveles' => $construccion['niveles'],
-                            'superficie' => $construccion['superficie'],
-                            'uso' => $construccion['uso'],
-                            'tipo' => $construccion['tipo'],
-                            'calidad' => $construccion['calidad'],
-                            'estado' => $construccion['estado'],
-                            'valor_construccion' => $construccion['valor_construccion'],
-                        ]);
+                        $sumSuperficieConstrucciones = 0;
 
                     }
 
-                }
+                    if(isset($row['terrenos_comun'])){
 
-                if(isset($row['terrenos_comun'])){
+                        $terrenosComun = $this->procesarTerrenosComun($row['terrenos_comun'], $key);
 
-                    foreach ($terrenosComun as $terreno) {
+                        $sumValorTerenosComun = $terrenosComun->sum('valor_terreno_comun');
 
-                        $predio->condominioTerrenos()->create([
-                            'area_terreno_comun' => $terreno['area_terreno_comun'],
-                            'indiviso_terreno' => $terreno['indiviso_terreno'],
+                        $sumAreaTerrenosComun = $terrenosComun->sum('area_terreno_comun');
+
+                    }else{
+
+                        $sumValorTerenosComun = 0;
+
+                        $sumAreaTerrenosComun = 0;
+
+                    }
+
+                    if(isset($row['construcciones_comun'])){
+
+                        $construccionesComun = $this->procesarConstruccionesComun($row['construcciones_comun'], $key);
+
+                        $sumValorConstruccionesComun = $construccionesComun->sum('valor_construccion_comun');
+
+                        $sumAreaConstruccionComun = $construccionesComun->sum('area_comun_construccion');
+
+                    }else{
+
+                        $sumValorConstruccionesComun = 0;
+
+                        $sumAreaConstruccionComun = 0;
+
+                    }
+
+                    if($row['tipo'] == 1){
+
+                        $valorCatastral = $terrenos->sum('valor_terreno') + $sumValorConstruccionesComun;
+
+                    }elseif($row['tipo'] == 2){
+
+                        $valorCatastral = $terrenos->sum('valor_terreno')
+                                            + $sumValorConstrucciones
+                                            + $sumValorTerenosComun
+                                            + $sumValorConstruccionesComun;
+
+
+                    }
+
+                    if($row['ubicacion_manzana'] == 'ESQUINA'){
+
+                        $valorCatastral *= (1 + 15 / 100);
+
+                    }
+
+                    /* Crear predio */
+                    $predio = PredioAvaluo::create([
+                        'status' => 'activo',
+                        'sociedad' => $row['sociedad'] == 'SI' ? 1 : 0,
+                        'estado' => $row['estado'],
+                        'region_catastral' => $row['region'],
+                        'municipio' => $row['municipio'],
+                        'zona_catastral' => $row['zona'],
+                        'localidad' => $row['localidad'],
+                        'sector' => $row['sector'],
+                        'manzana' => $row['manzana'],
+                        'predio' => $row['predio'],
+                        'edificio' => $row['edificio'],
+                        'departamento' => $row['departamento'],
+                        'oficina' => $row['oficina'],
+                        'tipo_predio' => $row['tipo'],
+                        'numero_registro' => $row['registro'],
+                        'tipo_vialidad' => $row['tipo_vialidad'],
+                        'tipo_asentamiento' => $row['tipo_asentamiento'],
+                        'nombre_vialidad' => $row['nombre_vialidad'],
+                        'numero_exterior' => $row['numero_exterior'],
+                        'numero_exterior_2' => $row['numero_exterior_2'],
+                        'numero_adicional' => $row['numero_adicional'],
+                        'numero_adicional_2' => $row['numero_adicional_2'],
+                        'numero_interior' => $row['numero_interior'],
+                        'nombre_asentamiento' => $row['nombre_asentamiento'],
+                        'codigo_postal' => $row['codigo_postal'],
+                        'lote_fraccionador' => $row['lote_fraccionador'],
+                        'manzana_fraccionador' => $row['manzana_fraccionador'],
+                        'etapa_fraccionador' => $row['etapa_fraccionador'],
+                        'nombre_predio' => $row['predio_rustico_antecedente'],
+                        'nombre_edificio' => $row['nombre_edificio'],
+                        'clave_edificio' => $row['clave_edificio'],
+                        'departamento_edificio' => $row['departamento_edificio'],
+                        'xutm' => $coordenadas['xutm'],
+                        'yutm' => $coordenadas['yutm'],
+                        'zutm' => $coordenadas['zutm'],
+                        'uso_1' => $row['uso_1'],
+                        'uso_2' => $row['uso_2'],
+                        'uso_3' => $row['uso_3'],
+                        'ubicacion_en_manzana' => $row['ubicacion_manzana'],
+                        'lon'=> $row['latitud'],
+                        'lat'=> $row['longitud'],
+                        'observaciones' => $row['observaciones'],
+                        'superficie_terreno' => $terrenos->sum('superficie'),
+                        'valor_total_terreno' => $terrenos->sum('valor_terreno'),
+                        'superficie_construccion' => $sumSuperficieConstrucciones,
+                        'area_comun_terreno' => $sumAreaTerrenosComun,
+                        'valor_terreno_comun' => $sumValorTerenosComun,
+                        'area_comun_construccion' => $sumAreaConstruccionComun,
+                        'valor_construccion_comun' => $sumValorConstruccionesComun,
+                        'valor_total_construccion' => $sumValorConstrucciones,
+                        'valor_catastral' => $valorCatastral,
+                        'actualizado_por' => auth()->user()->id
+                    ]);
+
+                    /* Asociar relaciones */
+                    $persona = Persona::firstOrCreate(
+                        [
+                            'ap_paterno' => $row['ap_paterno'],
+                            'ap_materno' => $row['ap_materno'],
+                            'nombre' => $row['nombre'],
+                            'tipo' => $row['tipo_persona'],
+                        ],
+                        [
+                            'ap_paterno' => $row['ap_paterno'],
+                            'ap_materno' => $row['ap_materno'],
+                            'nombre' => $row['nombre'],
+                            'tipo' => $row['tipo_persona'],
+                        ]
+                    );
+
+                    $predio->propietarios()->create([
+                        'persona_id' => $persona->id,
+                        'tipo' => $row['tipo_propietario'],
+                        'porcentaje' => $row['porcentaje'],
+                    ]);
+
+                    foreach ($terrenos as $terreno) {
+
+                        $predio->terrenos()->create([
+                            'superficie' => $terreno['superficie'],
                             'valor_unitario' => $terreno['valor_unitario'],
-                            'valor_terreno_comun' => $terreno['valor_terreno_comun'],
+                            'demerito' => $terreno['demerito'],
+                            'valor_demeritado' => $terreno['valor_demeritado'],
+                            'valor_terreno' => $terreno['valor_terreno'],
                         ]);
 
                     }
 
-                }
+                    if(isset($row['construcciones'])){
 
-                if(isset($row['construcciones_comun'])){
+                        foreach ($construcciones as $construccion) {
 
-                    foreach ($construccionesComun as $construccion) {
+                            $predio->construcciones()->create([
+                                'referencia' => $construccion['referencia'],
+                                'valor_unitario' => $construccion['valor_unitario'],
+                                'niveles' => $construccion['niveles'],
+                                'superficie' => $construccion['superficie'],
+                                'uso' => $construccion['uso'],
+                                'tipo' => $construccion['tipo'],
+                                'calidad' => $construccion['calidad'],
+                                'estado' => $construccion['estado'],
+                                'valor_construccion' => $construccion['valor_construccion'],
+                            ]);
 
-                        $predio->condominioConstrucciones()->create([
-                            'area_comun_construccion' => $construccion['area_comun_construccion'],
-                            'indiviso_construccion' => $construccion['indiviso_construccion'],
-                            'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
-                            'valor_construccion_comun' => $construccion['valor_construccion_comun'],
+                        }
+
+                    }
+
+                    if(isset($row['terrenos_comun'])){
+
+                        foreach ($terrenosComun as $terreno) {
+
+                            $predio->condominioTerrenos()->create([
+                                'area_terreno_comun' => $terreno['area_terreno_comun'],
+                                'indiviso_terreno' => $terreno['indiviso_terreno'],
+                                'valor_unitario' => $terreno['valor_unitario'],
+                                'valor_terreno_comun' => $terreno['valor_terreno_comun'],
+                            ]);
+
+                        }
+
+                    }
+
+                    if(isset($row['construcciones_comun'])){
+
+                        foreach ($construccionesComun as $construccion) {
+
+                            $predio->condominioConstrucciones()->create([
+                                'area_comun_construccion' => $construccion['area_comun_construccion'],
+                                'indiviso_construccion' => $construccion['indiviso_construccion'],
+                                'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
+                                'valor_construccion_comun' => $construccion['valor_construccion_comun'],
+                            ]);
+
+                        }
+
+                    }
+
+                    foreach($colindancias as $coindancia){
+
+                        $predio->colindancias()->create([
+                            'viento' => $coindancia['viento'],
+                            'longitud' => $coindancia['longitud'],
+                            'descripcion' => $coindancia['descripcion'],
                         ]);
 
                     }
 
-                }
-
-                foreach($colindancias as $coindancia){
-
-                    $predio->colindancias()->create([
-                        'viento' => $coindancia['viento'],
-                        'longitud' => $coindancia['longitud'],
-                        'descripcion' => $coindancia['descripcion'],
+                    /* Crear avaluo */
+                    $avaluo = Avaluo::create([
+                        'predio_id' => $predio->id,
+                        'año' => now()->format('Y'),
+                        'folio' => (Avaluo::where('año', now()->format('Y'))->max('folio') ?? 0) + 1,
+                        'estado' => 'nuevo',
+                        'clasificacion_zona' => $row['clasificacion_zona'],
+                        'construccion_dominante' => $row['tipo_construccion_dominante'],
+                        'agua' => $row['agua_potable'] == 'SI' ? 1 : 0,
+                        'drenaje' => $row['drenaje']  == 'SI' ? 1 : 0,
+                        'pavimento' => $row['pavimento']  == 'SI' ? 1 : 0,
+                        'energia_electrica' => $row['energia_electrica']  == 'SI' ? 1 : 0,
+                        'alumbrado_publico' => $row['alumbrado_publico']  == 'SI' ? 1 : 0,
+                        'banqueta' => $row['banqueta']  == 'SI' ? 1 : 0,
+                        'cimentacion' => $row['cimentacion'],
+                        'estructura' => $row['estructura'],
+                        'muros' => $row['muros'],
+                        'entrepiso' => $row['entrepisos'],
+                        'techo' => $row['techo'],
+                        'plafones' => $row['plafones'],
+                        'vidrieria' => $row['vidrieria'],
+                        'lambrines' => $row['lambrines'],
+                        'pisos' => $row['pisos'],
+                        'herreria' => $row['herreria'],
+                        'pintura' => $row['pintura'],
+                        'carpinteria' => $row['carpinteria'],
+                        'recubrimiento_especial' => $row['recubrimiento_especial'],
+                        'aplanados' => $row['aplanados'],
+                        'hidraulica' => $row['hidraulica'],
+                        'sanitaria' => $row['sanitaria'],
+                        'electrica' => $row['electrica'],
+                        'gas' => $row['gas'],
+                        'especiales' => $row['especiales'],
+                        'asignado_a' => auth()->user()->id,
+                        'creado_por' => auth()->user()->id,
                     ]);
 
+                    $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo con folio: ' . $avaluo->año . '-' . $avaluo->folio]);
+
+                    $predio->audits()->latest()->first()->update(['tags' => 'Se genera predio apartir de avalúo: ' . $avaluo->año . '-' . $avaluo->folio]);
+
+                    $this->avaluos[] = $avaluo->load('predioAvaluo.propietarios.persona');
+
                 }
 
-                /* Crear avaluo */
-                $avaluo = Avaluo::create([
-                    'predio_id' => $predio->id,
-                    'año' => now()->format('Y'),
-                    'folio' => (Avaluo::where('año', now()->format('Y'))->max('folio') ?? 0) + 1,
-                    'estado' => 'nuevo',
-                    'clasificacion_zona' => $row['clasificacion_zona'],
-                    'construccion_dominante' => $row['tipo_construccion_dominante'],
-                    'agua' => $row['agua_potable'] == 'SI' ? 1 : 0,
-                    'drenaje' => $row['drenaje']  == 'SI' ? 1 : 0,
-                    'pavimento' => $row['pavimento']  == 'SI' ? 1 : 0,
-                    'energia_electrica' => $row['energia_electrica']  == 'SI' ? 1 : 0,
-                    'alumbrado_publico' => $row['alumbrado_publico']  == 'SI' ? 1 : 0,
-                    'banqueta' => $row['banqueta']  == 'SI' ? 1 : 0,
-                    'cimentacion' => $row['cimentacion'],
-                    'estructura' => $row['estructura'],
-                    'muros' => $row['muros'],
-                    'entrepiso' => $row['entrepisos'],
-                    'techo' => $row['techo'],
-                    'plafones' => $row['plafones'],
-                    'vidrieria' => $row['vidrieria'],
-                    'lambrines' => $row['lambrines'],
-                    'pisos' => $row['pisos'],
-                    'herreria' => $row['herreria'],
-                    'pintura' => $row['pintura'],
-                    'carpinteria' => $row['carpinteria'],
-                    'recubrimiento_especial' => $row['recubrimiento_especial'],
-                    'aplanados' => $row['aplanados'],
-                    'hidraulica' => $row['hidraulica'],
-                    'sanitaria' => $row['sanitaria'],
-                    'electrica' => $row['electrica'],
-                    'gas' => $row['gas'],
-                    'especiales' => $row['especiales'],
-                    'asignado_a' => auth()->user()->id,
-                    'creado_por' => auth()->user()->id,
-                ]);
+                $this->data = $this->avaluos;
 
-                $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo con folio: ' . $avaluo->folio]);
+            });
 
-                $predio->audits()->latest()->first()->update(['tags' => 'Se genera predio apartir de avalúo: ' . $avaluo->folio]);
-
-                $this->avaluos[] = $avaluo->load('predioAvaluo.propietarios.persona');
-
-            }
-
-            $this->data = $this->avaluos;
-
-        });
+        } catch (\Throwable $th) {
+            throw $th;
+        }
 
     }
 
     public function rules(): array
     {
         return [
-            'numero_registro' => 'required|numeric|min:1',
-            'region_catastral' => 'required|numeric|min:1',
+            'registro' => 'required|numeric|min:1',
+            'region' => 'required|numeric|min:1',
             'municipio' => 'required|numeric|min:1',
             'localidad' => 'required|numeric|min:1',
             'sector' => 'required|numeric|min:1',
-            'zona_catastral' => 'required|numeric|min:1',
+            'zona' => 'required|numeric|min:1',
             'manzana' => 'required|numeric|min:1',
             'predio' => 'required|numeric|min:1',
             'edificio' => 'required|numeric|min:0',
             'departamento' => 'required|numeric|min:0',
-            'tipo_predio' => 'required|numeric|min:1|max:2',
+            'tipo' => 'required|numeric|min:1|max:2',
             'oficina' => 'required|numeric|min:1',
             'estado' => 'required',
             'ap_paterno' => ['required','regex:/^[\pL\s]+$/u'],
@@ -412,7 +414,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
         if(!$oficina){
 
-            throw new ErrorALValidarSectorException("No se encontraron oficinas con los datos ingresados, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+            throw new FichaTecnicaImportException("No se encontraron oficinas con los datos ingresados, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
         }
 
@@ -420,13 +422,13 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
         if(!$sectores){
 
-            throw new ErrorALValidarSectorException("La zona no tiene sectores, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+            throw new FichaTecnicaImportException("La zona no tiene sectores, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
         }
 
         if(!in_array($row['sector'], $sectores)){
 
-            throw new ErrorALValidarSectorException("El sector no corresponde a la zona, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+            throw new FichaTecnicaImportException("El sector no corresponde a la zona, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
         }
 
@@ -458,7 +460,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                         ->first();
 
             if($cuentaPredial)
-                throw new ErrorAlValidarDisponibilidadEnAvaluosException("La cuenta predial ya existe en el padrón con otra clave catastral, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+                throw new FichaTecnicaImportException("La cuenta predial ya existe en el padrón con otra clave catastral, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
             $claveCatastral = Predio::where('estado', $row['estado'])
                                         ->where('region_catastral', $row['region'])
@@ -473,7 +475,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                         ->first();
 
             if($claveCatastral)
-                throw new ErrorAlValidarDisponibilidadEnAvaluosException("La clave catastral ya existe en el padrón con otra cuenta predial, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+                throw new FichaTecnicaImportException("La clave catastral ya existe en el padrón con otra cuenta predial, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
         }
 
@@ -502,7 +504,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                                 ->first();
 
             if($cuentaPredialAvaluo)
-                throw new ErrorAlValidarDisponibilidadEnAvaluosException("La cuenta predial ya existe en avaluos con otra clave catastral, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+                throw new FichaTecnicaImportException("La cuenta predial ya existe en avaluos con otra clave catastral, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
             $claveCatastralAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
                                                     ->where('estado', $row['estado'])
@@ -518,7 +520,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                                     ->first();
 
             if($claveCatastralAvaluo)
-                throw new ErrorAlValidarDisponibilidadEnAvaluosException("La clave catastral ya existe en avaluos con otra cuenta predial, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+                throw new FichaTecnicaImportException("La clave catastral ya existe en avaluos con otra cuenta predial, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
         }
 
@@ -530,7 +532,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                         ->first();
 
         if(!$cuentaAsignada)
-            throw new ErrorAlValidarDisponibilidadEnAvaluosException("No tienes asignada la cuenta: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+            throw new FichaTecnicaImportException("No tienes asignada la cuenta: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
     }
 
@@ -541,14 +543,14 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
             if(!$ll['success']){
 
-                throw new ErrorAlProcesarCoordenadasException($ll['msg'] . " en la linea " . $linea);
+                throw new FichaTecnicaImportException($ll['msg'] . " en la linea " . $linea);
 
 
             }else{
 
                 if((float)$ll['attr']['zone'] < 13 || (float)$ll['attr']['zone'] > 14){
 
-                    throw new ErrorAlProcesarCoordenadasException("Las coordenadas no corresponden a una zona válida en la linea " . $linea);
+                    throw new FichaTecnicaImportException("Las coordenadas no corresponden a una zona válida en la linea " . $linea);
 
                     $lat = null;
                     $lon = null;
@@ -577,16 +579,16 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             $campos = explode(':', $colindancia);
 
             if(!in_array($campos[0], Constantes::VIENTOS))
-                throw new ErrorAlProcesarColindanciasException("Error en el campo viento de las colindancias en la linea " . $linea);
+                throw new FichaTecnicaImportException("Error en el campo viento de las colindancias en la linea " . $linea);
 
             if(!isset($campos[1]) || !isset($campos[2]))
-                throw new ErrorAlProcesarColindanciasException("Error en los campos de las colindancias en la linea " . $linea);
+                throw new FichaTecnicaImportException("Error en los campos de las colindancias en la linea " . $linea);
 
             if(isset($campos[3]))
-                throw new ErrorAlProcesarColindanciasException("Error en los campos de las colindancias en la lineass " . $linea);
+                throw new FichaTecnicaImportException("Error en los campos de las colindancias en la lineass " . $linea);
 
             if($campos[1] == '' || $campos[2] == '')
-                throw new ErrorAlProcesarColindanciasException("Error en los campos de las colindancias en la lineass " . $linea);
+                throw new FichaTecnicaImportException("Error en los campos de las colindancias en la lineass " . $linea);
 
             $colindanciasArreglo [] = [
                 'viento' => $campos[0],
@@ -611,18 +613,18 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             $campos = explode(':', $terreno);
 
             if(!isset($campos[0]) || !isset($campos[1]) || !isset($campos[2]))
-                throw new ErrorAlProcesarTerrenosException("Faltan campos en los terrenos en la linea " . $linea);
+                throw new FichaTecnicaImportException("Faltan campos en los terrenos en la linea " . $linea);
 
             if($campos[0] == '' || $campos[1] == '' || $campos[2] == '')
-                throw new ErrorAlProcesarTerrenosException("Los campos no pueden estar vacios en los terrenos en la linea " . $linea);
+                throw new FichaTecnicaImportException("Los campos no pueden estar vacios en los terrenos en la linea " . $linea);
 
             if(isset($campos[4]))
-                throw new ErrorAlProcesarTerrenosException("Hay campos de mas en los terrenos en la linea " . $linea);
+                throw new FichaTecnicaImportException("Hay campos de mas en los terrenos en la linea " . $linea);
 
             if($tipo == 1){
 
                 if(!is_numeric($campos[1]))
-                    throw new ErrorAlProcesarTerrenosException("Error en los campos de los terrenos en la linea " . $linea);
+                    throw new FichaTecnicaImportException("Error en los campos de los terrenos en la linea " . $linea);
 
                 $valorUnitario = (float)$campos[1];
 
@@ -631,15 +633,15 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                 $valorTerreno = (float)$campos[0] * $valorDemeritado;
 
                 if(!is_float($valorTerreno))
-                    throw new ErrorAlProcesarTerrenosException("Error en los campos de los terrenos en la linea " . $linea);
+                    throw new FichaTecnicaImportException("Error en los campos de los terrenos en la linea " . $linea);
 
             }elseif($tipo == 2){
 
                 if(is_numeric($campos[1]))
-                    throw new ErrorAlProcesarTerrenosException("Error en valor unitario de los terrenos en la linea " . $linea);
+                    throw new FichaTecnicaImportException("Error en valor unitario de los terrenos en la linea " . $linea);
 
                 if(!$this->valoresRusticos->where('concepto', $campos[1])->first())
-                    throw new ErrorAlProcesarTerrenosException("Error en valor unitario de los terrenos en la linea " . $linea);
+                    throw new FichaTecnicaImportException("Error en valor unitario de los terrenos en la linea " . $linea);
 
                 $valorUnitario = $this->valoresRusticos->where('concepto', $campos[1])->first()->valor;
 
@@ -648,7 +650,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                 $valorTerreno = (float)$campos[0] * $valorDemeritado / 10000;
 
                 if(!is_float($valorTerreno))
-                    throw new ErrorAlProcesarTerrenosException("Error en los campos de los terrenos en la linea " . $linea);
+                    throw new FichaTecnicaImportException("Error en los campos de los terrenos en la linea " . $linea);
             }
 
             $terrenosArreglo [] = [
@@ -678,16 +680,16 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             $campos = explode(':', $construccion);
 
             if(!isset($campos[0]) || !isset($campos[1]) || !isset($campos[2]) || !isset($campos[3]) || !isset($campos[4]) || !isset($campos[5]) || !isset($campos[6]))
-                throw new ErrorAlProcesarConstruccionesException("Error en los campos de las construcciones en la linea " . $linea);
+                throw new FichaTecnicaImportException("Error en los campos de las construcciones en la linea " . $linea);
 
             if($campos[0] == '' || $campos[1] == '' || $campos[2] == '' || $campos[3] == '' || $campos[4] == '' || $campos[5] == '' || $campos[6] == '')
-                throw new ErrorAlProcesarConstruccionesException("Error en los campos de las construcciones en la linea " . $linea);
+                throw new FichaTecnicaImportException("Error en los campos de las construcciones en la linea " . $linea);
 
             if(isset($campos[7]))
-                throw new ErrorAlProcesarConstruccionesException("Error en los campos de las construcciones en la lineas " . $linea);
+                throw new FichaTecnicaImportException("Error en los campos de las construcciones en la lineas " . $linea);
 
             if(!$this->valoresConstruccion->where('tipo', $campos[1])->where('uso', $campos[2])->where('calidad', $campos[3])->where('estado', $campos[4])->first())
-                throw new ErrorAlProcesarConstruccionesException("Error en valor unitario de las construcciones en la linea " . $linea);
+                throw new FichaTecnicaImportException("Error en valor unitario de las construcciones en la linea " . $linea);
 
             $valorUnitario = $this->valoresConstruccion->where('tipo', $campos[1])->where('uso', $campos[2])->where('calidad', $campos[3])->where('estado', $campos[4])->first()->valor;
 
@@ -722,21 +724,21 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             $campos = explode(':', $terreno);
 
             if(!isset($campos[0]) || !isset($campos[1]) || !isset($campos[2]))
-                throw new ErrorAlProcesarConstruccionesException("Hacen falta campos terrenos en común en la linea " . $linea);
+                throw new FichaTecnicaImportException("Hacen falta campos terrenos en común en la linea " . $linea);
 
             if($campos[0] == '' || $campos[1] == '' || $campos[2] == '')
-                throw new ErrorAlProcesarConstruccionesException("No puede haber campos vacios en terrenos en común en la linea " . $linea);
+                throw new FichaTecnicaImportException("No puede haber campos vacios en terrenos en común en la linea " . $linea);
 
             if(isset($campos[3]))
-                throw new ErrorAlProcesarConstruccionesException("Hay campos de mas en terrenos en común en la linea " . $linea);
+                throw new FichaTecnicaImportException("Hay campos de mas en terrenos en común en la linea " . $linea);
 
             if((float)$campos[1] > 100)
-                throw new ErrorAlProcesarConstruccionesException("Indiviso de terreno no puede ser mayor a 100 en terrenos en común en la linea " . $linea);
+                throw new FichaTecnicaImportException("Indiviso de terreno no puede ser mayor a 100 en terrenos en común en la linea " . $linea);
 
             $valorTerreno = (float)$campos[0] * (float)$campos[1] * (float)$campos[2];
 
             if(!is_float($valorTerreno))
-                    throw new ErrorAlProcesarTerrenosException("Error en los campos de los terrenos en común en la linea " . $linea);
+                    throw new FichaTecnicaImportException("Error en los campos de los terrenos en común en la linea " . $linea);
 
             $terrenosArreglo [] = [
                 'area_terreno_comun' => $campos[0],
@@ -764,23 +766,23 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             $campos = explode(':', $construccion);
 
             if(!isset($campos[0]) || !isset($campos[1]) || !isset($campos[2]) || !isset($campos[3]) || !isset($campos[4]) || !isset($campos[5]))
-                throw new ErrorAlProcesarConstruccionesException("Error en los campos de las construcciones común en la linea " . $linea);
+                throw new FichaTecnicaImportException("Error en los campos de las construcciones común en la linea " . $linea);
 
             if($campos[0] == '' || $campos[1] == '' || $campos[2] == '' || $campos[3] == '' || $campos[4] == '' || $campos[5] == '')
-                throw new ErrorAlProcesarConstruccionesException("Error en los campos de las construcciones común en la linea " . $linea);
+                throw new FichaTecnicaImportException("Error en los campos de las construcciones común en la linea " . $linea);
 
             if(isset($campos[7]))
-                throw new ErrorAlProcesarConstruccionesException("Error en los campos de las construcciones común en la lineas " . $linea);
+                throw new FichaTecnicaImportException("Error en los campos de las construcciones común en la lineas " . $linea);
 
             if(!$this->valoresConstruccion->where('tipo', $campos[2])->where('uso', $campos[3])->where('calidad', $campos[4])->where('estado', $campos[5])->first())
-                throw new ErrorAlProcesarConstruccionesException("Error en valor unitario de las construcciones común en la linea " . $linea);
+                throw new FichaTecnicaImportException("Error en valor unitario de las construcciones común en la linea " . $linea);
 
             $valorUnitario = $this->valoresConstruccion->where('tipo', $campos[2])->where('uso', $campos[3])->where('calidad', $campos[4])->where('estado', $campos[5])->first()->valor;
 
             $valorConstruccion = (float)$campos[0] * (float)$campos[1] * $valorUnitario;
 
             if(!is_float($valorConstruccion))
-                throw new ErrorAlProcesarTerrenosException("Error en valor unitario de las construcciones común en la linea " . $linea);
+                throw new FichaTecnicaImportException("Error en valor unitario de las construcciones común en la linea " . $linea);
 
             $construccionesArreglo [] = [
                 'area_comun_construccion' => $campos[0],

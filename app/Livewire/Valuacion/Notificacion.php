@@ -6,24 +6,32 @@ use App\Models\Avaluo;
 use App\Models\Predio;
 use App\Models\Persona;
 use App\Models\Terreno;
+use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\Colindancia;
 use App\Models\Propietario;
 use App\Models\Construccion;
 use App\Models\CondominioTerreno;
 use Illuminate\Support\Facades\DB;
+use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
 use App\Models\Condominioconstruccion;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Livewire\Attributes\Computed;
 
 class Notificacion extends Component
 {
 
-    public $inicio;
-    public $final;
+    public $años;
+    public $año;
+    public $folio;
+    public $usuario;
     public $pagination = 50;
     public $modal = false;
     public $avaluo;
     public $fecha_notificacion;
+
+    public $tramite;
 
     public function abrirModal(Avaluo $avaluo){
 
@@ -33,6 +41,49 @@ class Notificacion extends Component
 
         $this->modal = true;
 
+    }
+
+    public function buscarTramite(){
+
+        $this->validate([
+            'año' => 'required',
+            'folio' => 'required',
+            'usuario' => 'required',
+        ]);
+
+        try {
+
+            $this->tramite = Tramite::where('año', $this->año)
+                                        ->where('folio', $this->folio)
+                                        ->where('usuario', $this->usuario)
+                                        ->firstOrFail();
+
+            $this->reset(['folio', 'usuario']);
+
+
+        } catch (ModelNotFoundException $th) {
+
+            $this->dispatch('mostrarMensaje', ['error', "El trámite no existe."]);
+
+        } catch (\Throwable $th) {
+            Log::error("Error al buscar trámite en notificación por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+
+    }
+
+    #[Computed]
+    public function avaluos(){
+
+        if($this->tramite)
+            return Avaluo::with('predioAvaluo')
+                            ->whereIn('estado', ['impreso', 'concluido'])
+                            ->whereNull('notificado_en')
+                            ->whereNull('notificado_por')
+                            ->where('tramite_id', $this->tramite->id)
+                            ->paginate(10);
     }
 
     public function notificar(){
@@ -396,7 +447,7 @@ class Notificacion extends Component
 
             $this->avaluo->predioAvaluo->update(['status' => 'notificado']);
 
-            $this->avaluo->audits()->latest()->first()->update(['tags' => 'Notifico avalúo']);
+            $this->avaluo->audits()->latest()->first()->update(['tags' => 'Notificó avalúo']);
 
             $this->modal = false;
 
@@ -404,16 +455,17 @@ class Notificacion extends Component
 
     }
 
+    public function mount(){
+
+        $this->años = Constantes::AÑOS;
+
+        $this->año = now()->format('Y');
+
+    }
+
     public function render()
     {
 
-        $avaluos = Avaluo::with('predioAvaluo.propietarios.persona')
-                                    ->whereIn('estado', ['impreso', 'concluido'])
-                                    ->whereBetween('folio', [$this->inicio, $this->final])
-                                    ->whereNull('notificado_en')
-                                    ->whereNull('notificado_por')
-                                    ->paginate($this->pagination);
-
-        return view('livewire.valuacion.notificacion', compact('avaluos'))->extends('layouts.admin');
+        return view('livewire.valuacion.notificacion')->extends('layouts.admin');
     }
 }

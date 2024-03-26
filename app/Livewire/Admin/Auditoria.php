@@ -80,7 +80,8 @@ class Auditoria extends Component
     public function render()
     {
 
-        $audits = Audit::with('user')
+        $audits = Audit::select('id', 'user_id', 'event', 'auditable_type', 'auditable_id', 'ip_address', 'tags', 'created_at', 'updated_at')
+                            ->with('user')
                             ->when(isset($this->usuario) && $this->usuario != "", function($q){
                                 return $q->where('user_id', $this->usuario);
 

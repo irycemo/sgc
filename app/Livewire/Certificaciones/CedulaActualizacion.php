@@ -62,6 +62,8 @@ class CedulaActualizacion extends Component
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a una cedula de actualización."]);
 
+                $this->reset('tramite');
+
                 return;
 
             }
@@ -70,6 +72,8 @@ class CedulaActualizacion extends Component
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite esta concluido."]);
 
+                $this->reset('tramite');
+
                 return;
 
             }
@@ -77,6 +81,8 @@ class CedulaActualizacion extends Component
             if($this->tramite->estado != 'pagado'){
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite no esta pagado."]);
+
+                $this->reset('tramite');
 
                 return;
 

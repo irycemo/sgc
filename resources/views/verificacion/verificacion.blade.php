@@ -29,7 +29,7 @@
                             <h2 class="mt-6 text-xl font-semibold text-gray-900">Verificación de documento</h2>
 
                             <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-                                El Instituto Registral y Catastral verifica la siguiente información contenida el el documento: <strong>{{ $certificacion->documento }}, Folio: {{ $certificacion->año }}- {{ $certificacion->folio }}</strong>.
+                                El Instituto Registral y Catastral verifica la siguiente información contenida el el documento: <strong>{{ $certificacion->documento }}, FOLIO: {{ $certificacion->año }}-{{ $certificacion->folio }}</strong>.
                             </p>
 
                         </div>

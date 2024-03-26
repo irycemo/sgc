@@ -49,7 +49,7 @@
 
         @if($tramite)
 
-            <div class="flex gap-3 justify-center text-sm mb-3">
+            <div class="flex flex-col lg:flex-row gap-3 justify-center text-sm mb-3">
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -107,7 +107,7 @@
 
         <div class="bg-white p-4 rounded-lg mb-5 shadow-lg text-sm">
 
-            <div class="flex gap-3 justify-center w-full mx-auto lg:w-1/2">
+            <div class="flex flex-col lg:flex-row gap-3 justify-center w-full mx-auto lg:w-1/2">
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -187,7 +187,7 @@
 
             <p class="text-center my-4">Superficies y valor catastral</p>
 
-            <div class="flex gap-3 justify-center w-full mx-auto lg:w-1/2">
+            <div class="flex flex-col lg:flex-row gap-3 justify-center w-full mx-auto lg:w-1/2">
 
                 @if($predio->superficie_notarial)
 
@@ -269,7 +269,7 @@
 
             <p class="text-center my-4">Propietarios</p>
 
-            <div class="w-full mx-auto lg:w-1/2 space-y-2">
+            <div class="overflow-auto w-full mx-auto lg:w-1/2 space-y-2">
 
                 @foreach ($predio->propietarios as $propietario)
 
@@ -325,7 +325,7 @@
 
                 <p class="text-center my-4">Colindancias</p>
 
-                <div class="w-full mx-auto lg:w-1/2 space-y-2">
+                <div class="overflow-auto w-full mx-auto lg:w-1/2 space-y-2">
 
                     @foreach ($predio->colindancias as $colindancia)
 
@@ -365,7 +365,7 @@
 
         </div>
 
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg flex justify-between items-center">
+        <div class="flex flex-col lg:flex-row gap-3 mb-5 bg-white rounded-lg p-2 shadow-lg justify-center lg:justify-between items-center">
 
             <div>
 

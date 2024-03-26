@@ -6,23 +6,58 @@
 
     </div>
 
-    <div class="flex justify-center mx-auto  items-center space-x-4 space-y-2 mb-5 bg-white rounded-lg p-2 ">
+    <div class="bg-white p-4 rounded-lg mb-5 shadow-lg">
 
-        <p class="text-lg tracking-widest">Avaluos</p>
+        <div class="flex-auto text-center mb-3">
 
-        <input type="number" class="bg-white rounded text-xs w-40 @error('inicio') border-1 border-red-500 @enderror" placeholder="Inicio" wire:model.live="inicio">
+            <div >
 
-        <p class="text-lg tracking-widest">a</p>
+                <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite</Label>
 
-        <input type="number" class="bg-white rounded text-xs w-40 @error('final') border-1 border-red-500 @enderror" placeholder="Final" wire:model.live="final">
+            </div>
+
+            <div class="inline-flex">
+
+                <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
+                    @foreach ($años as $año)
+
+                        <option value="{{ $año }}">{{ $año }}</option>
+
+                    @endforeach
+                </select>
+
+                <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
+
+                <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
+
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+
+            <button
+                wire:click="buscarTramite"
+                wire:loading.attr="disabled"
+                wire:target="buscarTramite"
+                type="button"
+                class="bg-blue-400 mx-auto hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+
+                <img wire:loading wire:target="buscarTramite" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                Buscar trámtie
+
+            </button>
+
+        </div>
 
     </div>
 
-    @if($avaluos->count())
+    @if($this->avaluos)
 
         <div class="relative overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
 
-            <table class="rounded-lg w-full">
+            <table class="rounded-lg w-full" wire:loading.class.delaylongest="opacity-50">
 
                 <thead class="border-b border-gray-300 bg-gray-50">
 
@@ -56,7 +91,7 @@
 
                 <tbody class="divide-y divide-gray-200 flex-1 sm:flex-none ">
 
-                    @foreach($avaluos as $avaluo)
+                    @forelse($this->avaluos as $avaluo)
 
                         <tr class="text-sm font-medium text-gray-500 bg-white flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
 
@@ -64,7 +99,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Folio</span>
 
-                                {{ $avaluo->folio }}
+                                {{ $avaluo->año }}-{{ $avaluo->folio }}
 
                             </td>
 
@@ -80,7 +115,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Clave catastral</span>
 
-                                {{ $avaluo->predioAvaluo->claveCatastral() }}
+                                {{ $avaluo->predioAvaluo->claveCatastral()  }}
 
                             </td>
 
@@ -120,7 +155,15 @@
                             </td>
                         </tr>
 
-                    @endforeach
+                    @empty
+
+                    <tr>
+                        <td colspan="6">
+                            <p class="text-center text-xl tracking-widest text-gray-700 bg-white py-5"> No hay resultados.</p>
+                        </td>
+                    </tr>
+
+                    @endforelse
 
                 </tbody>
 
@@ -129,7 +172,7 @@
                     <tr>
 
                         <td colspan="16" class="py-2 px-5">
-                            {{ $avaluos->links()}}
+                            {{ $this->avaluos->links()}}
                         </td>
 
                     </tr>
@@ -137,20 +180,6 @@
                 </tfoot>
 
             </table>
-
-            <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-0 left-0" wire:loading.delay.longer>
-
-                <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
-
-            </div>
-
-        </div>
-
-    @else
-
-        <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-full text-lg">
-
-            No hay resultados.
 
         </div>
 
@@ -205,9 +234,9 @@
                 </x-button-blue>
 
                 <x-button-red
-                    wire:click="$set('modal', false)"
+                    wire:click="$toggle('modal')"
                     wire:loading.attr="disabled"
-                    wire:target="$set('modal', false)">
+                    wire:target="$toggle('modal')">
                     Cerrar
                 </x-button-red>
 

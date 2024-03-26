@@ -172,6 +172,8 @@ class CertificadoHistoria extends Component
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a una historia catastral."]);
 
+                $this->reset('tramite');
+
                 return;
 
             }
@@ -180,6 +182,8 @@ class CertificadoHistoria extends Component
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite esta concluido."]);
 
+                $this->reset('tramite');
+
                 return;
 
             }
@@ -187,6 +191,8 @@ class CertificadoHistoria extends Component
             if($this->tramite->estado != 'pagado'){
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite no esta pagado."]);
+
+                $this->reset('tramite');
 
                 return;
 
@@ -276,7 +282,7 @@ class CertificadoHistoria extends Component
 
             $this->reset('modal');
 
-            $this->dispatch('mostrarMensaje', ['success', "El movimiento se actualizó con éxito."]);
+            $this->dispatch('mostrarMensaje', ['success', "El movimiento se creó con éxito."]);
 
         } catch (\Throwable $th) {
 

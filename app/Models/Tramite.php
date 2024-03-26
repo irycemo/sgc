@@ -33,6 +33,7 @@ class Tramite extends Model implements Auditable
             'concluido' => 'gray-400',
             'expirado' => 'red-400',
             'inactivo' => 'red-400',
+            'autorizado' => 'indigo-400',
         ][$this->estado] ?? 'gray-400';
     }
 
@@ -58,6 +59,10 @@ class Tramite extends Model implements Auditable
 
     public function avaluoPara(){
         return $this->belongsTo(Servicio::class, 'avaluo_para');
+    }
+
+    public function avaluos(){
+        return $this->hasMany(Avaluo::class, 'tramite_id');
     }
 
     protected $auditEvents = [

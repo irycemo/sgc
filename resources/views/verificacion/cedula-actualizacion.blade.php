@@ -118,7 +118,7 @@
 
     <p class="text-center my-4"><strong>Superficies y valor catastral</strong></p>
 
-    <div class="flex gap-3 justify-center w-full mx-auto text-gray-500 text-sm leading-relaxed">
+    <div class="flex flex-col lg:flex-row gap-3 justify-center w-full mx-auto text-gray-500 text-sm leading-relaxed">
 
         @if(isset($objeto->superficie_notarial))
 

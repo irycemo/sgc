@@ -22,10 +22,10 @@ class OficinasTableSeeder extends Seeder
             0 =>
             array (
                 'id' => 1,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 1,
                 'oficina' => 102,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8]"',
                 'nombre' => 'ACUITZIO',
                 'ubicacion' => 'CALLE SIN NOMBRE S/N COL. CENTRO C.P 58460. PALACIO MUNICIPAL SEGUNDA PLANTA.',
@@ -43,10 +43,10 @@ class OficinasTableSeeder extends Seeder
             1 =>
             array (
                 'id' => 2,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 2,
                 'oficina' => 1402,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'AGUILILLA',
                 'ubicacion' => 'PORTAL HIDALGO 22 COL. CENTRO, C.P 60570. ENTRE CALLE MIGUEL MALDONADO Y PORTAL MORELOS.',
@@ -64,10 +64,10 @@ class OficinasTableSeeder extends Seeder
             2 =>
             array (
                 'id' => 3,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 3,
                 'oficina' => 202,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"',
                 'nombre' => 'ALVARO OBREGON',
                 'ubicacion' => 'PLAZA ZARAGOZA 1 COL. CENTRO C.P 58290 FRENTE A LA PRESIDENCIA MUNICIPAL.',
@@ -85,10 +85,10 @@ class OficinasTableSeeder extends Seeder
             3 =>
             array (
                 'id' => 4,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 4,
                 'oficina' => 1902,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'ANGAMACUTIRO',
                 'ubicacion' => 'GALEANA 12 CENTRO C.P 58550 ENTRE ABASOLO, PROLONGACIÓN ALDAMA, CARRANZA Y MORELOS.',
@@ -106,10 +106,10 @@ class OficinasTableSeeder extends Seeder
             4 =>
             array (
                 'id' => 5,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 5,
                 'oficina' => 502,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10]"',
                 'nombre' => 'ANGANGUEO',
                 'ubicacion' => 'NACIONAL 1 COL. CENTRO C.P 61410 ENTRE CALLE MORELOS Y BENITO JUÁREZ.',
@@ -127,13 +127,12 @@ class OficinasTableSeeder extends Seeder
             5 =>
             array (
                 'id' => 6,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 6,
                 'oficina' => 1401,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35]"',
                 'nombre' => 'APATZINGAN',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'AV. CONSTITUCIÓN DE 1814 1 COL. CENTRO C.P 60600 ENTRE CALLES AV JOSE MA MORELOS Y ESTEBAN VACA CALDERÓN.',
                 'titular' => 'C. MA. GUADALUPE HUERTA RICO',
                 'email' => 'rentas_apatzinganang@hotmail.com',
@@ -149,10 +148,10 @@ class OficinasTableSeeder extends Seeder
             6 =>
             array (
                 'id' => 7,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 7,
                 'oficina' => 402,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5]"',
                 'nombre' => 'APORO',
             'ubicacion' => 'NICOLAS BRAVO 1 COL. CENTRO C.P 61400 CONTRA ESQUINA DE NICOLÁS BRAVO Y PORFIRIO DÍAZ  (DENTRO DE LAS OFICINAS DEL DIF).',
@@ -170,10 +169,10 @@ class OficinasTableSeeder extends Seeder
             7 =>
             array (
                 'id' => 8,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 8,
                 'oficina' => 2202,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7]"',
                 'nombre' => 'AQUILA',
                 'ubicacion' => 'AV. INDEPENDENCIA S/N COL. CENTRO C.P 60870 DENTRO DEL PALACIO MUNICIPAL PLANTA BAJA.',
@@ -191,13 +190,12 @@ class OficinasTableSeeder extends Seeder
             8 =>
             array (
                 'id' => 9,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 9,
                 'oficina' => 801,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]"',
                 'nombre' => 'ARIO',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'AV. MORELOS 244 COL. CENTRO C.P 61830 ENTRE CALLES FRANCISCO JAVIER MINA Y GENERAL IGNACIO ZARAGOZA.',
                 'titular' => 'C. ARMANDO BECERRA AGUILAR',
                 'email' => 'armandobecerra@live.com.mx',
@@ -213,13 +211,12 @@ class OficinasTableSeeder extends Seeder
             9 =>
             array (
                 'id' => 10,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 10,
                 'oficina' => 901,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'ARTEAGA',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'MIGUEL HIDALGO 87 COL. CENTRO C.P 60950 ENTRE IGNACIO ALLENDE Y ALDAMA.',
                 'titular' => 'C. VICTORINO JACOBO LOMBERA',
                 'email' => 'jacobovictorino507@gmail.com',
@@ -235,10 +232,10 @@ class OficinasTableSeeder extends Seeder
             10 =>
             array (
                 'id' => 11,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 11,
                 'oficina' => 2002,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'BRISEÑAS',
                 'ubicacion' => 'JOSEFA O. DE DOMÍNGUEZ 2 COL. CENTRO C.P 59122 DENTRO DE LA PRESIDENCIA MUNICIPAL.',
@@ -256,10 +253,10 @@ class OficinasTableSeeder extends Seeder
             11 =>
             array (
                 'id' => 12,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 12,
                 'oficina' => 1403,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]"',
                 'nombre' => 'BUENAVISTA',
             'ubicacion' => 'ÁLVARO OBREGÓN S/N COL. CENTRO C.P 60500 ENTRE CALLE NARCISO MENDOZA Y LÁZARO CÁRDENAS (DENTRO DE LA PRESIDENCIA).',
@@ -277,10 +274,10 @@ class OficinasTableSeeder extends Seeder
             12 =>
             array (
                 'id' => 13,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 13,
                 'oficina' => 602,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'CARACUARO',
                 'ubicacion' => 'FRANCISCO I. MADERO 2 COL. CENTRO C.P 61920 ENTRE CALLE 18 DE MARZO Y BENITO JUÁREZ.',
@@ -298,13 +295,12 @@ class OficinasTableSeeder extends Seeder
             13 =>
             array (
                 'id' => 14,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 14,
                 'oficina' => 2201,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]"',
                 'nombre' => 'COAHUAYANA',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'AV. RAYÓN S/N COL. CENTRO C.P 60800 DENTRO DEL PALACIO MUNICIPAL.',
                 'titular' => 'LIC. CARLOS ABRAHAM GARCIA GARCIA',
                 'email' => 'rentas_coahuayana_sfa@michoacan.gob.mx',
@@ -320,13 +316,12 @@ class OficinasTableSeeder extends Seeder
             14 =>
             array (
                 'id' => 15,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 15,
                 'oficina' => 1501,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[0,1,2,3,4]"',
                 'nombre' => 'COALCOMAN',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'Salazar esquina con Melchor Ocampo',
                 'titular' => 'José Roberto reyes Álvarez',
                 'email' => 'jrobertogestionmun@hotmail.com',
@@ -342,10 +337,10 @@ class OficinasTableSeeder extends Seeder
             15 =>
             array (
                 'id' => 16,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 16,
                 'oficina' => 1102,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]"',
                 'nombre' => 'COENEO',
                 'ubicacion' => 'AV. MORELOS NTE. 158 COL. CENTRO C.P 58400. ENTRE CALLE MORELOS Y ZARAGOZA.',
@@ -363,13 +358,12 @@ class OficinasTableSeeder extends Seeder
             16 =>
             array (
                 'id' => 17,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 17,
                 'oficina' => 403,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'CONTEPEC',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'MORELOS 1 COL. CENTRO C.P. 61020 INTERIOR DEL PALACIO MUNICIPAL ENTRE CALLE CORREGIDORA Y ALDAMA.',
                 'titular' => 'LIC. MARTIN ROJAS MARTINEZ',
                 'email' => 'martinrojasma@gmail.com',
@@ -385,10 +379,10 @@ class OficinasTableSeeder extends Seeder
             17 =>
             array (
                 'id' => 18,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 18,
                 'oficina' => 103,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]"',
                 'nombre' => 'COPANDARO',
                 'ubicacion' => 'CALLE HIDALGO 60, COL. CENTRO C.P 58870. ENTRE IGNACIO LOPEZ RAYÓN Y 16 DE SEPTIEMBRE.',
@@ -406,10 +400,10 @@ class OficinasTableSeeder extends Seeder
             18 =>
             array (
                 'id' => 19,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 19,
                 'oficina' => 1302,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]"',
                 'nombre' => 'COTIJA',
                 'ubicacion' => 'PINO SUÁREZ 100 COL. CENTRO, C.P 59940. DENTRO DEL PALACIO MUNICIPAL.',
@@ -427,10 +421,10 @@ class OficinasTableSeeder extends Seeder
             19 =>
             array (
                 'id' => 20,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 20,
                 'oficina' => 104,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]"',
                 'nombre' => 'CUITZEO',
                 'ubicacion' => 'AV. MORELOS SUR. 18 INTERIOR C COL. CENTRO C.P 58840. AUN COSTADO DE LA PRESIDENCIA MUNICIPAL.',
@@ -448,10 +442,10 @@ class OficinasTableSeeder extends Seeder
             20 =>
             array (
                 'id' => 21,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 21,
                 'oficina' => 1202,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'CHARAPAN',
                 'ubicacion' => 'AV. NACIONAL S/N COL. CENTRO C.P 60240. ENTRE CALLE LÁZARO CÁRDENAS, EMILIANO ZAPATA.',
@@ -469,10 +463,10 @@ class OficinasTableSeeder extends Seeder
             21 =>
             array (
                 'id' => 22,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 22,
                 'oficina' => 105,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40]"',
                 'nombre' => 'CHARO',
                 'ubicacion' => 'HIDALGO 185 COL. CENTRO C.P 61300 ENTRE AV. MORELOS Y 20 DE OCTUBRE.',
@@ -490,10 +484,10 @@ class OficinasTableSeeder extends Seeder
             22 =>
             array (
                 'id' => 23,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 23,
                 'oficina' => 1602,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'CHAVINDA',
                 'ubicacion' => 'gomez ferias #5 altos  col centro Entre Izquierda: Nicolas bravo. derecha: galeana. atrás: Javier mina. ',
@@ -511,10 +505,10 @@ class OficinasTableSeeder extends Seeder
             23 =>
             array (
                 'id' => 24,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 24,
                 'oficina' => 1203,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12]"',
                 'nombre' => 'CHERAN',
                 'ubicacion' => 'AV INDEPENDENCIA 87 COL. CENTRO C.P 60270 ENTRE CALLE GUERRERO Y LÁZARO CÁRDENAS.',
@@ -532,10 +526,10 @@ class OficinasTableSeeder extends Seeder
             24 =>
             array (
                 'id' => 25,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 25,
                 'oficina' => 1702,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]"',
                 'nombre' => 'CHILCHOTA',
                 'ubicacion' => 'PALACIO MUNICIPAL COL. CENTRO C.P 59780.',
@@ -553,31 +547,31 @@ class OficinasTableSeeder extends Seeder
             25 =>
             array (
                 'id' => 26,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 26,
                 'oficina' => 1502,
                 'localidad' => 1,
-                'sectores' => '"[1,2,3,4]"',
+                'tipo' => 'RECEPTORIA',
+                'sectores' => '"[0,1,2,3,4]"',
                 'nombre' => 'CHINICUILA',
-                'ubicacion' => NULL,
-                'titular' => NULL,
-                'email' => NULL,
-                'telefonos' => NULL,
+                'ubicacion' => 'Villa Victoria, Chinicuila  Francisco I Madero #7 Centro',
+                'titular' => 'Leonel Huato Peñaloza',
+                'email' => 'leonelchinicuila22@gmail.com',
+                'telefonos' => '4434008059',
                 'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-06-27 15:48:20',
+                'updated_at' => '2024-03-19 11:40:39',
             ),
             26 =>
             array (
                 'id' => 27,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 27,
                 'oficina' => 106,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'CHUCANDIRO',
                 'ubicacion' => 'BENITO JUÁREZ 150 COL. CENTRO C.P 58860. AL ORIENTE RAMÓN Y ALCARAZ, AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALGO.',
@@ -595,10 +589,10 @@ class OficinasTableSeeder extends Seeder
             27 =>
             array (
                 'id' => 28,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 28,
                 'oficina' => 1802,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"',
                 'nombre' => 'CHURINTZIO',
                 'ubicacion' => 'HIDALGO 40 COL. CENTRO C.P 59440. ENTRE CALLE 5 DE FEBRERO Y CALLE INDEPENDENCIA.',
@@ -616,10 +610,10 @@ class OficinasTableSeeder extends Seeder
             28 =>
             array (
                 'id' => 29,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 29,
                 'oficina' => 802,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14]"',
                 'nombre' => 'CHURUMUCO',
                 'ubicacion' => 'AV. VERACRUZ S/N COL. CENTRO C.P 61680 ENTRE RIO BALSAS, AV. HÉROES DE LA REVOLUCIÓN Y AV. MORELOS.',
@@ -637,10 +631,10 @@ class OficinasTableSeeder extends Seeder
             29 =>
             array (
                 'id' => 30,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 30,
                 'oficina' => 1703,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'ECUANDUREO',
                 'ubicacion' => 'ALLENDE 23 INT D, COL. CENTRO, C.P 59790. ENTRE CALLE ALLENDE, FRANCISCO I. MADERO Y ALDAMA',
@@ -658,10 +652,10 @@ class OficinasTableSeeder extends Seeder
             30 =>
             array (
                 'id' => 31,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 31,
                 'oficina' => 404,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4]"',
                 'nombre' => 'EPITACIO HUERTA',
                 'ubicacion' => 'Melchor Ocampo número 1 entre calle  vasco de Quiroga e Hidalgo  ',
@@ -679,10 +673,10 @@ class OficinasTableSeeder extends Seeder
             31 =>
             array (
                 'id' => 32,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 32,
                 'oficina' => 1002,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"',
                 'nombre' => 'ERONGARICUARO',
                 'ubicacion' => 'AV. MARÍA LUISA MARTÍNEZ S/N BARRIO SAN MIGUEL C.P 61630. ENTRE ALFONSO URRUETA Y ROMERO.',
@@ -700,10 +694,10 @@ class OficinasTableSeeder extends Seeder
             32 =>
             array (
                 'id' => 33,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 33,
                 'oficina' => 1204,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]"',
                 'nombre' => 'GABRIEL ZAMORA',
                 'ubicacion' => 'FRANCISCO JOSE MÚGICA S/N CENTRO C.P  61730. ENTRE CALLE NIÑOS HÉROES Y AV. REVOLUCIÓN.',
@@ -721,13 +715,12 @@ class OficinasTableSeeder extends Seeder
             33 =>
             array (
                 'id' => 34,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]"',
                 'nombre' => 'HIDALGO',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P 61100. ENTRE CARRANZA E  INDEPENDENCIA.',
                 'titular' => 'TC. MONICA BLANCO NATARES',
                 'email' => 'mblanconateras@hotmail.com',
@@ -743,13 +736,12 @@ class OficinasTableSeeder extends Seeder
             34 =>
             array (
                 'id' => 35,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 35,
                 'oficina' => 803,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"',
                 'nombre' => 'LA HUACANA',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'PORTAL ALLENDE S/N COL. CENTRO C.P 61853 DENTRO DE LA PRESIDENCIA MUNICIPAL.  ENTRE CALLE REVOLUCIÓN, ALLENDE, AL NORTE CON ZARAGOZA Y AL SUR CALLE JUÁREZ.',
                 'titular' => 'LIC. LUIS ANGEL PADILLA SOTO',
                 'email' => 'jaydenpr2014@gmail.com',
@@ -765,10 +757,10 @@ class OficinasTableSeeder extends Seeder
             35 =>
             array (
                 'id' => 36,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 36,
                 'oficina' => 107,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'HUANDACAREO',
                 'ubicacion' => 'CALZADA LÁZARO CÁRDENAS 8 COL. CENTRO C.P 58820 ENTRE CALLE 16 DE SEPTIEMBRE Y GALVEZ BETANCOURT.',
@@ -786,10 +778,10 @@ class OficinasTableSeeder extends Seeder
             36 =>
             array (
                 'id' => 37,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 37,
                 'oficina' => 1103,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'HUANIQUEO',
                 'ubicacion' => 'PLAZA PRINCIPAL S/N COL. CENTRO C.P 58360, A UN COSTADO DEL H. AYUNTAMIENTO.  ',
@@ -807,13 +799,12 @@ class OficinasTableSeeder extends Seeder
             37 =>
             array (
                 'id' => 38,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 38,
                 'oficina' => 601,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]"',
                 'nombre' => 'HUETAMO',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'JAZMINES 32 COL. LA NOPALERA CUITZEO, MUNICIPIO DE HUETAMO AUN COSTADO DE LA UNIDAD DEPORTIVA.',
                 'titular' => 'C.P. JORGE ALCARAZ MALDONADO',
                 'email' => 'cp.alcaraz@hotmail.com',
@@ -829,10 +820,10 @@ class OficinasTableSeeder extends Seeder
             38 =>
             array (
                 'id' => 39,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 39,
                 'oficina' => 1003,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]"',
                 'nombre' => 'HUIRAMBA',
                 'ubicacion' => 'PORTAL HIDALGO S/N COL. CENTRO C.P 61640 ENTRE DAMASO CÁRDENAS AUN COSTADO DE LA IGLESIA DE HUIRAMBA.',
@@ -850,10 +841,10 @@ class OficinasTableSeeder extends Seeder
             39 =>
             array (
                 'id' => 40,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 40,
                 'oficina' => 203,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'INDAPARAPEO',
                 'ubicacion' => 'MORELOS 76 CENTRO C.P. 58970 ENTRE LA CALLE PRIMERA DE ZARAGOZA, TERCERA DE BRAVO Y LA CARRETERA AV. ADOLFO LÓPEZ.',
@@ -871,10 +862,10 @@ class OficinasTableSeeder extends Seeder
             40 =>
             array (
                 'id' => 41,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 41,
                 'oficina' => 302,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10]"',
                 'nombre' => 'IRIMBO',
                 'ubicacion' => 'AV. MORELOS 32 COL. CENTRO C.P 61280 UBICADOS AL INTERIOR DE LA PRESIDENCIA MUNICIPAL.',
@@ -892,10 +883,10 @@ class OficinasTableSeeder extends Seeder
             41 =>
             array (
                 'id' => 42,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 42,
                 'oficina' => 1704,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]"',
                 'nombre' => 'IXTLAN',
                 'ubicacion' => 'JUÁREZ NTE.13 CENTRO C.P 59280 ENTRE CALLE ALLENDE Y RUBIO.',
@@ -913,10 +904,10 @@ class OficinasTableSeeder extends Seeder
             42 =>
             array (
                 'id' => 43,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 43,
                 'oficina' => 1705,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]"',
                 'nombre' => 'JACONA',
                 'ubicacion' => 'MORELOS 2 INT B, COL. CENTRO, 59800 ENTRE AMADO NERVO, ZARAGOZA Y CONSTITUCIÓN.',
@@ -934,10 +925,10 @@ class OficinasTableSeeder extends Seeder
             43 =>
             array (
                 'id' => 44,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 44,
                 'oficina' => 1105,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]"',
                 'nombre' => 'JIMENEZ',
                 'ubicacion' => '1 DE MAYO 3 COL. CENTRO C.P 58780 ENTRE CALLE IGNACIO ALLENDE Y MIGUEL HIDALGO.',
@@ -955,14 +946,13 @@ class OficinasTableSeeder extends Seeder
             44 =>
             array (
                 'id' => 45,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 45,
                 'oficina' => 1601,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]"',
                 'nombre' => 'JIQUILPAN',
-                'tipo' => 'ADMINISTRACIÓN',
-                'ubicacion' => 'DIEGO JOSE ABAD 1 PLANTA ALTA COL. CENTRO C.P 59510 ENTRE PROFESOR FAJARDO Y DIEGO JOSE ABAD (UBICADOS EN LA ESQUINA).',
+            'ubicacion' => 'DIEGO JOSE ABAD 1 PLANTA ALTA COL. CENTRO C.P 59510 ENTRE PROFESOR FAJARDO Y DIEGO JOSE ABAD (UBICADOS EN LA ESQUINA).',
                 'titular' => 'C. CARLOS GERARDO GARIBAY ESPINOZA',
                 'email' => 'charlyjqn2@gmail.com',
                 'telefonos' => '3531261663',
@@ -977,10 +967,10 @@ class OficinasTableSeeder extends Seeder
             45 =>
             array (
                 'id' => 46,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 46,
                 'oficina' => 503,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'JUAREZ',
                 'ubicacion' => 'PLAZA CENTRAL S/N COL. CENTRO C.P 61570 ENTRE CALLE AV REVOLUCIÓN Y NICOLÁS  ROMERO.',
@@ -998,10 +988,10 @@ class OficinasTableSeeder extends Seeder
             46 =>
             array (
                 'id' => 47,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 47,
                 'oficina' => 504,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]"',
                 'nombre' => 'JUNGAPEO',
                 'ubicacion' => 'FRANCISCO I. MADERO 47 CENTRO C.P. 61470  ENTRE CALLE REFORMA Y 20 DE NOVIEMBRE',
@@ -1019,10 +1009,10 @@ class OficinasTableSeeder extends Seeder
             47 =>
             array (
                 'id' => 48,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 48,
                 'oficina' => 1004,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11]"',
                 'nombre' => 'LAGUNILLAS',
                 'ubicacion' => 'BOULEVARD MORELOS 98 INT. 7 COL. CENTRO C.P 58450 ENTRE  VICENTE GUERRERO AUN COSTADO DE LA PRESIDENCIA MUNICIPAL.',
@@ -1040,10 +1030,10 @@ class OficinasTableSeeder extends Seeder
             48 =>
             array (
                 'id' => 49,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 49,
                 'oficina' => 108,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]"',
                 'nombre' => 'MADERO',
                 'ubicacion' => 'PORTAL HIDALGO 35-A COL. CENTRO C.P 58480 ENTRE AV. MORELOS Y CALLE VENUSTIANO CARRANZA JUNTO AL PALACIO MUNICIPAL.',
@@ -1061,13 +1051,12 @@ class OficinasTableSeeder extends Seeder
             49 =>
             array (
                 'id' => 50,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 50,
                 'oficina' => 401,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37]"',
                 'nombre' => 'MARAVATIO',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'ÁLVARO OBREGÓN 198 COL. CENTRO C.P 61250 ENTRE ABASOLO, GALEANA Y GUERRERO.',
                 'titular' => 'LIC. LEONEL REYES MIRANDA',
                 'email' => 'licreyesmirandaleonel@gmail.com',
@@ -1083,10 +1072,10 @@ class OficinasTableSeeder extends Seeder
             50 =>
             array (
                 'id' => 51,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 51,
                 'oficina' => 1603,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]"',
                 'nombre' => 'MARCOS CASTELLANOS',
                 'ubicacion' => 'INDEPENDENCIA 101 COL. CENTRO, C.P 59500 ENTRE CALLE MORELOS Y GALEANA.',
@@ -1104,10 +1093,10 @@ class OficinasTableSeeder extends Seeder
             51 =>
             array (
                 'id' => 52,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 52,
                 'oficina' => 2301,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]"',
                 'nombre' => 'LAZARO CARDENAS',
                 'ubicacion' => 'AV. ZARAGOZA 128 COL CENTRO C.P 60950 ENTRE CALLES JUAN ÁLVAREZ Y AV. REFORMA.',
@@ -1125,13 +1114,12 @@ class OficinasTableSeeder extends Seeder
             52 =>
             array (
                 'id' => 53,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98]"',
                 'nombre' => 'MORELIA',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS  1016, COL. VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
                 'titular' => 'DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL ',
                 'email' => 'catastro@michoacan.gob.mx',
@@ -1147,10 +1135,10 @@ class OficinasTableSeeder extends Seeder
             53 =>
             array (
                 'id' => 54,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 54,
                 'oficina' => 1904,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'MORELOS',
                 'ubicacion' => 'PORTAL MORELOS 1 COL. CENTRO C.P 58802 ENTRE CALLE ITURBIDE, AL ORIENTE MARIANO JIMÉNEZ AL PONIENTE CALLE SIN NOMBRE Y PLAZA PRINCIPAL.',
@@ -1168,10 +1156,10 @@ class OficinasTableSeeder extends Seeder
             54 =>
             array (
                 'id' => 55,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 55,
                 'oficina' => 1404,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]"',
                 'nombre' => 'MUGICA',
                 'ubicacion' => 'PALACIO MUNICIPAL, PLAN DE IGUALA S/N , LIBERTAD, C.P. 61760.',
@@ -1189,10 +1177,10 @@ class OficinasTableSeeder extends Seeder
             55 =>
             array (
                 'id' => 56,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 56,
                 'oficina' => 1206,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]"',
                 'nombre' => 'NAHUATZEN',
                 'ubicacion' => 'FRANCISCO I. MADERO 180 COL. CENTRO, PALACIO MUNICIPAL C.P 60280.',
@@ -1210,10 +1198,10 @@ class OficinasTableSeeder extends Seeder
             56 =>
             array (
                 'id' => 57,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 57,
                 'oficina' => 603,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'NOCUPETARO',
                 'ubicacion' => 'AV. MORELOS SUR 100 COL. CENTRO C.P 61900 ENTRE JUÁREZ ORIENTE Y SANTOS DEGOLLADO.',
@@ -1231,10 +1219,10 @@ class OficinasTableSeeder extends Seeder
             57 =>
             array (
                 'id' => 58,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 58,
                 'oficina' => 1205,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14]"',
                 'nombre' => 'NUEVO PARANGARICUTIRO',
                 'ubicacion' => '16 DE SEPTIEMBRE S/N COL. CENTRO, C.P 60490 ENTRE CALLES INSURGENTES, FRAY JUAN DE MIGUEL.',
@@ -1252,10 +1240,10 @@ class OficinasTableSeeder extends Seeder
             58 =>
             array (
                 'id' => 59,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 59,
                 'oficina' => 804,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]"',
                 'nombre' => 'NUEVO URECHO',
                 'ubicacion' => 'INDEPENDENCIA S/N COL. CENTRO C.P 61750 DENTRO DE LAS OFICINAS DEL H. AYUNTAMIENTO.',
@@ -1273,10 +1261,10 @@ class OficinasTableSeeder extends Seeder
             59 =>
             array (
                 'id' => 60,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 60,
                 'oficina' => 1803,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11]"',
                 'nombre' => 'NUMARAN',
                 'ubicacion' => 'PLAZA CUAUHTÉMOC COL. CENTRO S/N C.P 59430 ENTRE CALLE GUERRERO E ISAAC CALDERÓN PARALELA ZARAGOZA Y JUÁREZ DENTRO DEL PALACIO MUNICIPAL.',
@@ -1294,10 +1282,10 @@ class OficinasTableSeeder extends Seeder
             60 =>
             array (
                 'id' => 61,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 61,
                 'oficina' => 505,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14]"',
                 'nombre' => 'OCAMPO',
                 'ubicacion' => 'VENUSTIANO CARRANZA S/N COL. CENTRO C.P 61450 ESQUINA CON CALLE ZARAGOZA.',
@@ -1315,10 +1303,10 @@ class OficinasTableSeeder extends Seeder
             61 =>
             array (
                 'id' => 62,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 62,
                 'oficina' => 2103,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12]"',
                 'nombre' => 'PAJACUARAN',
                 'ubicacion' => 'ALDAMA 1 PALACIO MUNICIPAL COL. CENTRO. C.P 59180 ENTRE MORELOS Y JOSE MORA DEL RIO.',
@@ -1336,10 +1324,10 @@ class OficinasTableSeeder extends Seeder
             62 =>
             array (
                 'id' => 63,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 63,
                 'oficina' => 1104,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]"',
                 'nombre' => 'PANINDICUARO',
                 'ubicacion' => 'PORTAL HIDALGO 1 INTERIOR 13 COL. CENTRO C.P 58570. ENTRE CALLES MIGUEL HIDALGO Y A, OBREGÓN.',
@@ -1357,10 +1345,10 @@ class OficinasTableSeeder extends Seeder
             63 =>
             array (
                 'id' => 64,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 64,
                 'oficina' => 1405,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]"',
                 'nombre' => 'PARACUARO',
                 'ubicacion' => 'PORTAL OCAMPO 34 COL. CENTRO, C.P. 60760. CALLES QUE LO RODEAN, AV LÁZARO CÁRDENAS Y CALLE CORREGIDORA.',
@@ -1378,10 +1366,10 @@ class OficinasTableSeeder extends Seeder
             64 =>
             array (
                 'id' => 65,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 65,
                 'oficina' => 1207,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27]"',
                 'nombre' => 'PARACHO',
                 'ubicacion' => 'EMILIO CARRANZA 58 COL. CENTRO C.P 60250 ENTRE DOCTOR VERDUZCO , E HIDALGO. Esquina con 20 noviembre',
@@ -1399,13 +1387,12 @@ class OficinasTableSeeder extends Seeder
             65 =>
             array (
                 'id' => 66,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 66,
                 'oficina' => 1001,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]"',
                 'nombre' => 'PATZCUARO',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'AV. ÁLVARO OBREGÓN 25 COL. CENTRO C.P 61600 ENTRE  SILVIANO CARRILLO CÁRDENAS',
                 'titular' => 'C. MARIA ESTER MOLINERO MAGAÑA',
                 'email' => 'rentaspatzcuaro3076@gmail.com',
@@ -1421,10 +1408,10 @@ class OficinasTableSeeder extends Seeder
             66 =>
             array (
                 'id' => 67,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 67,
                 'oficina' => 1804,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'PENJAMILLO',
                 'ubicacion' => 'ALLENDE 500 COL. CENTRO C.P 59470 ENTRE CALLE MADERO Y JARDÍN DE PRESIDENCIA.',
@@ -1442,10 +1429,10 @@ class OficinasTableSeeder extends Seeder
             67 =>
             array (
                 'id' => 68,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 68,
                 'oficina' => 1303,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12]"',
                 'nombre' => 'PERIBAN',
                 'ubicacion' => 'FRANCISCO VILLA 40, COL. GIRASOLES, C.P. 60440 ENTRE FRANCISCO VILLA ESQUINA CON CALLE MORELOS.',
@@ -1463,13 +1450,12 @@ class OficinasTableSeeder extends Seeder
             68 =>
             array (
                 'id' => 69,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 69,
                 'oficina' => 1801,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40]"',
                 'nombre' => 'LA PIEDAD',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'AV. TULIPANES 1000 COL. OBRERA C.P 59310, ENTRE CALLE GARDENIA Y SAN VICENTE.',
                 'titular' => 'L.A.E. MARTHA ALICIA ALATORRE MARQUEZ',
                 'email' => 'malatorre19@hotmail.com',
@@ -1485,10 +1471,10 @@ class OficinasTableSeeder extends Seeder
             69 =>
             array (
                 'id' => 70,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 70,
                 'oficina' => 1706,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7]"',
                 'nombre' => 'PUREPERO',
                 'ubicacion' => 'HIDALGO 28 COL. CENTRO C.P 58760 ENTRE CALLE 5 DE MAYO Y OBREGÓN.',
@@ -1506,13 +1492,12 @@ class OficinasTableSeeder extends Seeder
             70 =>
             array (
                 'id' => 71,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]"',
                 'nombre' => 'PURUANDIRO',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'PORTAL HIDALGO 60 COL. CENTRO C.P 58500 ENTRE CALLE ZENDEJAS Y MORELOS.',
                 'titular' => 'LIC. KENIA PANTOJA MEZA',
                 'email' => 'kennya9@hotmail.com',
@@ -1528,10 +1513,10 @@ class OficinasTableSeeder extends Seeder
             71 =>
             array (
                 'id' => 72,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 72,
                 'oficina' => 204,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7]"',
                 'nombre' => 'QUERENDARO',
                 'ubicacion' => 'PORTAL HIDALGO 1 CENTRO C.P 58980 AL NORTE MORELOS ORIENTE, AL ORIENTE NICOLAS BRAVO Y AL SUR CALLE GUERRERO.',
@@ -1549,10 +1534,10 @@ class OficinasTableSeeder extends Seeder
             72 =>
             array (
                 'id' => 73,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 73,
                 'oficina' => 1005,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]"',
                 'nombre' => 'QUIROGA',
                 'ubicacion' => 'SANTOS DE GOLLADO S/N COL CENTRO C.P 58420 ENTRE CALLE MARIANO JIMÉNEZ Y AV FRANCISCO I. MADERO.',
@@ -1570,10 +1555,10 @@ class OficinasTableSeeder extends Seeder
             73 =>
             array (
                 'id' => 74,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 74,
                 'oficina' => 2102,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"',
                 'nombre' => 'COJUMATLAN DE REGULES',
                 'ubicacion' => 'CUAUHTÉMOC 18 CENTRO C.P 59141 DENTRO DE PALACIO MUNICIPAL 2° PISO, ENTRE MIGUEL HIDALGO Y DOLORES ACUÑA.',
@@ -1591,13 +1576,12 @@ class OficinasTableSeeder extends Seeder
             74 =>
             array (
                 'id' => 75,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 75,
                 'oficina' => 1301,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14]"',
                 'nombre' => 'LOS REYES',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'FRANCISCO I. MADERO S/N COL. CENTRO C.P 60300 ESQUINA TORRES QUINTERO',
                 'titular' => 'BIOL. MIGUEL SEGUNDO GARIBAY',
                 'email' => 'segundo.garibay04@gmail.com',
@@ -1613,14 +1597,13 @@ class OficinasTableSeeder extends Seeder
             75 =>
             array (
                 'id' => 76,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 76,
                 'oficina' => 2101,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34]"',
                 'nombre' => 'SAHUAYO',
-                'tipo' => 'ADMINISTRACIÓN',
-                'ubicacion' => 'GUERRERO 290 COL. CENTRO C.P 59000 ENTRE BOULEVARD LÁZARO CÁRDENAS Y CALLE CONSTITUCIÓN (enfrente de la preparatoria hermanos López Rayón )',
+            'ubicacion' => 'GUERRERO 290 COL. CENTRO C.P 59000 ENTRE BOULEVARD LÁZARO CÁRDENAS Y CALLE CONSTITUCIÓN (enfrente de la preparatoria hermanos López Rayón )',
                 'titular' => 'C. MARIANO SÁNCHEZ SÁNCHEZ',
                 'email' => 'marianoss1953@hotmail.com',
                 'telefonos' => '353 1081538',
@@ -1635,10 +1618,10 @@ class OficinasTableSeeder extends Seeder
             76 =>
             array (
                 'id' => 77,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 77,
                 'oficina' => 604,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"',
                 'nombre' => 'SAN LUCAS',
                 'ubicacion' => 'AV. SERVANDO CHAVEZ HERNANDEZ N°1, COLONIA:CENTRO, EN SAN LUCAS, MICH. 61980. ENTRE CALLE: AUSENCIO CHÁVEZ Y CALLE IGNACIO ZARAGOZA',
@@ -1656,10 +1639,10 @@ class OficinasTableSeeder extends Seeder
             77 =>
             array (
                 'id' => 78,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 78,
                 'oficina' => 109,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"',
                 'nombre' => 'SANTA ANA MAYA',
                 'ubicacion' => 'FRANCISCO I. MADERO 1 COL. CENTRO C.P 58900 UBICADO EN LA PLAZA PRINCIPAL.',
@@ -1677,10 +1660,10 @@ class OficinasTableSeeder extends Seeder
             78 =>
             array (
                 'id' => 79,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 79,
                 'oficina' => 1006,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]"',
                 'nombre' => 'SALVADOR ESCALANTE',
                 'ubicacion' => 'PORTAL ALLENDE 56 COL CENTRO C.P 61800 ENTRE AV. MORELOS ORIENTE Y MIGUEL HIDALGO, DENTRO DE LA PRESIDENCIA MUNICIPAL.',
@@ -1698,10 +1681,10 @@ class OficinasTableSeeder extends Seeder
             79 =>
             array (
                 'id' => 80,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 80,
                 'oficina' => 405,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'SENGUIO',
                 'ubicacion' => 'GUERRERO 3 COL. CENTRO C.P. 61290 ENTRE CALLE JUÁREZ E INDEPENDENCIA.',
@@ -1719,10 +1702,10 @@ class OficinasTableSeeder extends Seeder
             80 =>
             array (
                 'id' => 81,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 81,
                 'oficina' => 506,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"',
                 'nombre' => 'SUSUPUATO',
                 'ubicacion' => 'VICENTE GUERRO 6 INT.  PRESIDENCIA MUNICIPAL PLANTA BAJA.',
@@ -1740,13 +1723,12 @@ class OficinasTableSeeder extends Seeder
             81 =>
             array (
                 'id' => 82,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 82,
                 'oficina' => 701,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]"',
                 'nombre' => 'TACAMBARO',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'HIDALGO NTE. 103 COL. CENTRO C.P 61650 ENTRE VICENTE GUERRERO Y MADERO',
                 'titular' => 'LIC. MOISES PEREZ BELTRAN',
                 'email' => 'moisesbeltran_@hotmail.com',
@@ -1762,10 +1744,10 @@ class OficinasTableSeeder extends Seeder
             82 =>
             array (
                 'id' => 83,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 83,
                 'oficina' => 1208,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]"',
                 'nombre' => 'TANCITARO',
                 'ubicacion' => 'MIGUEL HIDALGO 1 COL. CENTRO C.P 60460 ENTRE CALLE JUÁREZ, INDEPENDENCIA Y LÁZARO CÁRDENAS AUN COSTADO DEL H. AYUNTAMIENTO.',
@@ -1783,10 +1765,10 @@ class OficinasTableSeeder extends Seeder
             83 =>
             array (
                 'id' => 84,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 84,
                 'oficina' => 1707,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9]"',
                 'nombre' => 'SANTIAGO TANGAMANDAPIO',
                 'ubicacion' => 'Abasolo #7 por la calle de la iglesia a media cuadra, entre calles Madero y Juárez. Planta Alta',
@@ -1804,10 +1786,10 @@ class OficinasTableSeeder extends Seeder
             84 =>
             array (
                 'id' => 85,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 85,
                 'oficina' => 1708,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]"',
                 'nombre' => 'TANGANCICUARO',
                 'ubicacion' => 'MIGUEL  SILVA  # 170. ENTRE:   RAMON  SILVA Y  CUAHUTEMOC. ',
@@ -1825,13 +1807,12 @@ class OficinasTableSeeder extends Seeder
             85 =>
             array (
                 'id' => 86,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 86,
                 'oficina' => 2001,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"',
                 'nombre' => 'TANHUATO',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'CARRETERA TANHUATO EL CALVARIO YURÉCUARO 12 C.P 59230',
                 'titular' => 'LIC. ALFONSO RICO CURIEL',
                 'email' => 'directorrico@hotmail.com',
@@ -1847,10 +1828,10 @@ class OficinasTableSeeder extends Seeder
             86 =>
             array (
                 'id' => 87,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 87,
                 'oficina' => 1209,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"',
                 'nombre' => 'TARETAN',
                 'ubicacion' => 'DOCTOR RAFAEL ALVARADO 323 COL CENTRO C.P 61710 ENTRE CALLE BENITO JUÁREZ Y LUCAS ORTIZ.',
@@ -1868,10 +1849,10 @@ class OficinasTableSeeder extends Seeder
             87 =>
             array (
                 'id' => 88,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 88,
                 'oficina' => 110,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]"',
                 'nombre' => 'TARIMBARO',
                 'ubicacion' => '16 DE SEPTIEMBRE 10 CENTRO C.P 5880 ENTRE CALLES LÁZARO CÁRDENAS, JOSÉ MARÍA MORELOS Y PAVÓN E IGNACIO ZARAGOZA.',
@@ -1889,10 +1870,10 @@ class OficinasTableSeeder extends Seeder
             88 =>
             array (
                 'id' => 89,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 89,
                 'oficina' => 1406,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'TEPALCATEPEC',
                 'ubicacion' => 'MELCHOR OCAMPO 135 COL. CENTRO C.P 60540 ENTRE DOCTOR MIGUEL SILVA Y CARLOS SALAZAR.',
@@ -1910,10 +1891,10 @@ class OficinasTableSeeder extends Seeder
             89 =>
             array (
                 'id' => 90,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 90,
                 'oficina' => 1210,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8]"',
                 'nombre' => 'TINGAMBATO',
                 'ubicacion' => 'PORTAL HIDALGO S/N CENTRO C.P 60290 ENTRE ABASOLO E HIDALGO DENTRO DE LA PRESIDENCIA.',
@@ -1931,10 +1912,10 @@ class OficinasTableSeeder extends Seeder
             90 =>
             array (
                 'id' => 91,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 91,
                 'oficina' => 1304,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]"',
                 'nombre' => 'TINGUINDIN',
                 'ubicacion' => 'PORTAL HIDALGO  4, CENTRO, C.P. 58980 ENTRE LAS CALLES EMILIANO ZAPATA Y JAVIER MINA DENTRO DE LA PRESIDENCIA MUNICIPAL.',
@@ -1952,10 +1933,10 @@ class OficinasTableSeeder extends Seeder
             91 =>
             array (
                 'id' => 92,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 92,
                 'oficina' => 605,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]"',
                 'nombre' => 'TIQUICHEO DE N R',
                 'ubicacion' => 'CALLE OTHÓN VILLELA 15 COL. CENTRO C.P 61370 ENTRE CALLE GUERRERO Y GALEANA',
@@ -1973,10 +1954,10 @@ class OficinasTableSeeder extends Seeder
             92 =>
             array (
                 'id' => 93,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 93,
                 'oficina' => 406,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2]"',
                 'nombre' => 'TLALPUJAHUA',
                 'ubicacion' => NULL,
@@ -1994,10 +1975,10 @@ class OficinasTableSeeder extends Seeder
             93 =>
             array (
                 'id' => 94,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 94,
                 'oficina' => 1805,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'TLAZAZALCA',
                 'ubicacion' => 'PALACIO MUNICIPAL S/N C.P 58740 EN CALLE JOSE MA. MORELOS ENTRE CALLES AQUILES SERDAN Y MIGUEL HIDALGO.',
@@ -2015,10 +1996,10 @@ class OficinasTableSeeder extends Seeder
             94 =>
             array (
                 'id' => 95,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 95,
                 'oficina' => 1305,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"',
                 'nombre' => 'TOCUMBO',
                 'ubicacion' => 'PORTAL LÁZARO CÁRDENAS 16, CENTRO, C.P. 59962 ENTRE JAVIER MINA Y BOULEVARD LÁZARO CÁRDENAS.',
@@ -2036,10 +2017,10 @@ class OficinasTableSeeder extends Seeder
             95 =>
             array (
                 'id' => 96,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 96,
                 'oficina' => 902,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11]"',
                 'nombre' => 'TUMBISCATIO',
                 'ubicacion' => 'PORTAL EMILIANO ZAPATA 1-B COL. CENTRO C.P 60900',
@@ -2057,10 +2038,10 @@ class OficinasTableSeeder extends Seeder
             96 =>
             array (
                 'id' => 97,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 97,
                 'oficina' => 702,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'TURICATO',
                 'ubicacion' => 'ÁLVARO OBREGÓN S/N COL. CENTRO C.P. 61680 ESQUINA CON CALLE VASCO DE QUIROGA. AL SUR: CALLE TANGANXOAN.',
@@ -2078,10 +2059,10 @@ class OficinasTableSeeder extends Seeder
             97 =>
             array (
                 'id' => 98,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 98,
                 'oficina' => 507,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10]"',
                 'nombre' => 'TUXPAN',
                 'ubicacion' => 'AV. MORELOS NORTE S/N COL CENTRO C.P. 61420 ENTRE LA CALLE FRANCISCO J. MÚGICA Y LA COLONIA RIO GRANDE',
@@ -2099,10 +2080,10 @@ class OficinasTableSeeder extends Seeder
             98 =>
             array (
                 'id' => 99,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 99,
                 'oficina' => 508,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"',
                 'nombre' => 'TUZANTLA',
                 'ubicacion' => 'AV. SIXTO VERDUZCO NORTE 6 CENTRO C.P. 61540 ENTRE LA CALLE LÁZARO CÁRDENAS, RENTERIA LUVIANO Y GERTRUDIS SÁNCHEZ.',
@@ -2120,10 +2101,10 @@ class OficinasTableSeeder extends Seeder
             99 =>
             array (
                 'id' => 100,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 100,
                 'oficina' => 1007,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8]"',
                 'nombre' => 'TZINTZUNTZAN',
                 'ubicacion' => 'AV. LAS YACATAS 25 COL. CENTRO C.P 58440 ENTRE AV. LÁZARO CÁRDENAS Y 24 DE DICIEMBRE.',
@@ -2141,10 +2122,10 @@ class OficinasTableSeeder extends Seeder
             100 =>
             array (
                 'id' => 101,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 101,
                 'oficina' => 111,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]"',
                 'nombre' => 'TZITZIO',
                 'ubicacion' => 'KM 16 + 500 METROS,  CARRETERA TEMAZCAL-HUETAMO TZITZIO, MICH.',
@@ -2162,14 +2143,13 @@ class OficinasTableSeeder extends Seeder
             101 =>
             array (
                 'id' => 102,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 102,
                 'oficina' => 1201,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60]"',
                 'nombre' => 'URUAPAN',
-                'tipo' => 'ADMINISTRACIÓN',
-                'ubicacion' => 'AV. PARICUTIN S/N COL. SAN RAFAEL C.P. 60137 (ES UNA PRIVADA)',
+            'ubicacion' => 'AV. PARICUTIN S/N COL. SAN RAFAEL C.P. 60137 (ES UNA PRIVADA)',
                 'titular' => 'CP. LUZ MARIA REYES SANCHEZ ',
                 'email' => 'lumaresa@hotmail.com',
                 'telefonos' => '4525299451',
@@ -2184,10 +2164,10 @@ class OficinasTableSeeder extends Seeder
             102 =>
             array (
                 'id' => 103,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 103,
                 'oficina' => 2104,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8]"',
                 'nombre' => 'VENUSTIANO CARRANZA',
                 'ubicacion' => 'MELCHOR OCAMPO 38 D COL. CENTRO C.P. 59160. ENTRE CALLE JUÁREZ E IGNACIO ALLENDE',
@@ -2205,10 +2185,10 @@ class OficinasTableSeeder extends Seeder
             103 =>
             array (
                 'id' => 104,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 104,
                 'oficina' => 1604,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'VILLAMAR',
                 'ubicacion' => 'FELICITAS DEL RIO SIN NUMERO CENTRO C.P  59550 ENTRE CALLE SAN FRANCISCO Y COMONFORT',
@@ -2226,10 +2206,10 @@ class OficinasTableSeeder extends Seeder
             104 =>
             array (
                 'id' => 105,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 105,
                 'oficina' => 2003,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'VISTA HERMOSA',
                 'ubicacion' => 'CAPITÁN AZUETA 12 PLANTA ALTA COL. CENTRO C.P. 59200 ENTRE FRANCISCO VILLA Y ALEJANDRO QUEZADA.',
@@ -2247,10 +2227,10 @@ class OficinasTableSeeder extends Seeder
             105 =>
             array (
                 'id' => 106,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 106,
                 'oficina' => 2004,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14]"',
                 'nombre' => 'YURECUARO',
                 'ubicacion' => 'PORTAL HIDALGO S/N, CENTRO, C.P.59250 ENTRE CALLE HIDALGO Y GUERRERO.',
@@ -2268,13 +2248,12 @@ class OficinasTableSeeder extends Seeder
             106 =>
             array (
                 'id' => 107,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 107,
                 'oficina' => 1101,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]"',
                 'nombre' => 'ZACAPU',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'AV. MORELOS 61 COL. CENTRO C.P 58600 ENTRE ZARAGOZA Y CALLE JUÁREZ.',
                 'titular' => 'C. JUAN MANUEL LEMUS MAGAÑA ',
                 'email' => 'manilemus@gmail.com',
@@ -2290,14 +2269,13 @@ class OficinasTableSeeder extends Seeder
             107 =>
             array (
                 'id' => 108,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 108,
                 'oficina' => 1701,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100]"',
                 'nombre' => 'ZAMORA',
-                'tipo' => 'ADMINISTRACIÓN',
-                'ubicacion' => 'GUERRERO 82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS).',
+            'ubicacion' => 'GUERRERO 82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS).',
                 'titular' => 'C. MARIA TERESA OREGEL AYALA',
                 'email' => 'rentas_zamora1701@hotmail.com',
                 'telefonos' => '3511200460',
@@ -2312,10 +2290,10 @@ class OficinasTableSeeder extends Seeder
             108 =>
             array (
                 'id' => 109,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 109,
                 'oficina' => 1806,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11]"',
                 'nombre' => 'ZINAPARO',
                 'ubicacion' => 'AV COLON 2 CENTRO C.P 5946 ENTRE AV FRANCISCO I MADERO Y PLAZUELA INDEPENDENCIA.',
@@ -2333,13 +2311,12 @@ class OficinasTableSeeder extends Seeder
             109 =>
             array (
                 'id' => 110,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 110,
                 'oficina' => 201,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11]"',
                 'nombre' => 'ZINAPECUARO',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'JUÁREZ 14 COL. CENTRO C.P 58930 MELCHOR OCAMPO AL NORTE Y AL SUR CON RAFAEL CARRILLO.',
                 'titular' => 'C. JULIO CESAR GARCIA SANCHEZ',
                 'email' => 'juliocgarcia.sanchez83@gmail.com',
@@ -2355,10 +2332,10 @@ class OficinasTableSeeder extends Seeder
             110 =>
             array (
                 'id' => 111,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 111,
                 'oficina' => 1211,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'ZIRACUARETIRO',
                 'ubicacion' => 'PASAJE PORTAL MATAMOROS S/N COL. CENTRO C.P 61700 ENTRE ABASOLO Y MORELOS.',
@@ -2376,13 +2353,12 @@ class OficinasTableSeeder extends Seeder
             111 =>
             array (
                 'id' => 112,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 112,
                 'oficina' => 501,
                 'localidad' => 1,
+                'tipo' => 'ADMINISTRACIÓN',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50]"',
                 'nombre' => 'ZITACUARO',
-                'tipo' => 'ADMINISTRACIÓN',
                 'ubicacion' => 'BENEDICTO LOPEZ SUR 7 COL. CENTRO C.P 61500 ENTRE  IGNACIO LÓPEZ RAYÓN Y MIGUEL HIDALGO.',
                 'titular' => 'LIC. OMAR CONTRERAS RAMIREZ',
                 'email' => 'rentas_zitacuaro@hotmail.com',
@@ -2398,10 +2374,10 @@ class OficinasTableSeeder extends Seeder
             112 =>
             array (
                 'id' => 113,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 113,
                 'oficina' => 1903,
                 'localidad' => 1,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14]"',
                 'nombre' => 'JOSE SIXTO VERDUZCO',
                 'ubicacion' => 'PALACIO MUNICIPAL S/N CENTRO C.P 58540',
@@ -2419,10 +2395,10 @@ class OficinasTableSeeder extends Seeder
             113 =>
             array (
                 'id' => 114,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 8,
                 'oficina' => 2202,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"',
                 'nombre' => 'LA PLACITA',
                 'ubicacion' => 'AV. INDEPENDENCIA S/N COL. CENTRO C.P 60870 DENTRO DEL PALACIO MUNICIPAL PLANTA BAJA.',
@@ -2440,10 +2416,10 @@ class OficinasTableSeeder extends Seeder
             114 =>
             array (
                 'id' => 115,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 9,
                 'oficina' => 801,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'URAPA',
                 'ubicacion' => 'AV. MORELOS 244 COL. CENTRO C.P 61830 ENTRE CALLES FRANCISCO JAVIER MINA Y GENERAL IGNACIO ZARAGOZA.',
@@ -2461,10 +2437,10 @@ class OficinasTableSeeder extends Seeder
             115 =>
             array (
                 'id' => 116,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 12,
                 'oficina' => 1403,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10]"',
                 'nombre' => 'FELIPE CARRILLO PUERTO',
             'ubicacion' => 'ÁLVARO OBREGÓN S/N CENTRO C.P 60500 ENTRE CALLE NARCISO MENDOZA Y LÁZARO CÁRDENAS (DENTRO DE LA PRESIDENCIA).',
@@ -2482,10 +2458,10 @@ class OficinasTableSeeder extends Seeder
             116 =>
             array (
                 'id' => 117,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2]"',
                 'nombre' => 'ANTONIO VILLALONGIN',
                 'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P 61100 ENTRE CARRANZA E INDEPENDENCIA. ',
@@ -2503,10 +2479,10 @@ class OficinasTableSeeder extends Seeder
             117 =>
             array (
                 'id' => 118,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 3,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2]"',
                 'nombre' => 'EL CARACOL',
                 'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P 61100 ENTRE CARRANZA E  INDEPENDENCIA.',
@@ -2524,10 +2500,10 @@ class OficinasTableSeeder extends Seeder
             118 =>
             array (
                 'id' => 119,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 4,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2]"',
                 'nombre' => 'AGOSTITLAN',
                 'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P 61100 ENTRE CARRANZA E  INDEPENDENCIA.',
@@ -2545,10 +2521,10 @@ class OficinasTableSeeder extends Seeder
             119 =>
             array (
                 'id' => 120,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 5,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4]"',
                 'nombre' => 'TENENCIA  CIUDAD HIDALGO',
                 'ubicacion' => 'IGNACIO RAYÓN 10 COL. CENTRO C.P. 61100 ENTRE CARRANZA E  INDEPENDENCIA.',
@@ -2566,10 +2542,10 @@ class OficinasTableSeeder extends Seeder
             120 =>
             array (
                 'id' => 121,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 35,
                 'oficina' => 803,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]"',
                 'nombre' => 'ZICUIRAN',
                 'ubicacion' => 'PORTAL ALLENDE S/N COL. CENTRO C.P 61853 DENTRO DE LA PRESIDENCIA MUNICIPAL ENTRE CALLE REVOLUCIÓN, ALLENDE, AL NORTE CON ZARAGOZA Y AL SUR CALLE JUÁREZ.',
@@ -2587,10 +2563,10 @@ class OficinasTableSeeder extends Seeder
             121 =>
             array (
                 'id' => 122,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 49,
                 'oficina' => 108,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7]"',
                 'nombre' => 'D CURUCUPATZEO',
                 'ubicacion' => 'PORTAL HIDALGO 35-A COL. CENTRO C.P 58480 ENTRE AV. MORELOS Y CALLE VENUSTIANO CARRANZA JUNTO AL PALACIO MUNICIPAL.',
@@ -2608,10 +2584,10 @@ class OficinasTableSeeder extends Seeder
             122 =>
             array (
                 'id' => 123,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 52,
                 'oficina' => 2301,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'LA MIRA',
                 'ubicacion' => 'AV. ZARAGOZA 128 COL CENTRO C.P 60950 ENTRE CALLES JUAN ÁLVAREZ Y AV. REFORMA. ',
@@ -2629,10 +2605,10 @@ class OficinasTableSeeder extends Seeder
             123 =>
             array (
                 'id' => 124,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 52,
                 'oficina' => 2301,
                 'localidad' => 3,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]"',
                 'nombre' => 'GUACAMAYAS',
                 'ubicacion' => 'AV. ZARAGOZA 128 COL CENTRO C.P 60950 ENTRE CALLES JUAN ÁLVAREZ Y AV. REFORMA.',
@@ -2650,10 +2626,10 @@ class OficinasTableSeeder extends Seeder
             124 =>
             array (
                 'id' => 125,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,60,61,62,76,77,78,79,80,81,82,89,90,91,92,97,98,99,100]"',
                 'nombre' => 'SANTIAGO UNDAMEO',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS  1016, COL. VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA',
@@ -2671,10 +2647,10 @@ class OficinasTableSeeder extends Seeder
             125 =>
             array (
                 'id' => 126,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 3,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,70,71,72,93,94,95,96]"',
                 'nombre' => 'CHIQUIMITIO',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS  1016, COL. VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA',
@@ -2692,10 +2668,10 @@ class OficinasTableSeeder extends Seeder
             126 =>
             array (
                 'id' => 127,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 4,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,91,92,93,94]"',
                 'nombre' => 'TIRIPETIO',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS 1016, COL. VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
@@ -2713,10 +2689,10 @@ class OficinasTableSeeder extends Seeder
             127 =>
             array (
                 'id' => 128,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 5,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,72,73,74,96,97,98,99,100,101]"',
                 'nombre' => 'CAPULA',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS  1016, COL. VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
@@ -2734,10 +2710,10 @@ class OficinasTableSeeder extends Seeder
             128 =>
             array (
                 'id' => 129,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 6,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,44,94,95,96,97]"',
                 'nombre' => 'TEREMENDO',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS 1016, COL. VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
@@ -2755,10 +2731,10 @@ class OficinasTableSeeder extends Seeder
             129 =>
             array (
                 'id' => 130,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 7,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,55,86]"',
                 'nombre' => 'TENENCIA MORELIA',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS 1016, COL. VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA.',
@@ -2776,10 +2752,10 @@ class OficinasTableSeeder extends Seeder
             130 =>
             array (
                 'id' => 131,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 66,
                 'oficina' => 1001,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5]"',
                 'nombre' => 'CUANAJO',
                 'ubicacion' => 'AV. ÁLVARO OBREGÓN 25 COL. CENTRO C.P 61600 ENTRE  SILVIANO CARRILLO',
@@ -2797,10 +2773,10 @@ class OficinasTableSeeder extends Seeder
             131 =>
             array (
                 'id' => 132,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 66,
                 'oficina' => 1001,
                 'localidad' => 3,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3]"',
                 'nombre' => 'SAN JUAN TUMBIO',
                 'ubicacion' => 'AV. ALVARO OBREGÓN 25 COL. CENTRO C.P 61600 ENTRE  SILVIANO CARRILLO. ',
@@ -2818,10 +2794,10 @@ class OficinasTableSeeder extends Seeder
             132 =>
             array (
                 'id' => 133,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 67,
                 'oficina' => 1804,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9]"',
                 'nombre' => 'SANTA FE DEL RIO',
                 'ubicacion' => 'ALLENDE 500 CENTRO C.P. 59470 ENTRE CALLE MADERO Y JARDÍN DE PRESIDENCIA.',
@@ -2839,10 +2815,10 @@ class OficinasTableSeeder extends Seeder
             133 =>
             array (
                 'id' => 134,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 67,
                 'oficina' => 1804,
                 'localidad' => 3,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8]"',
                 'nombre' => 'ZIQUITARO',
                 'ubicacion' => 'ALLENDE 500 CENTRO C.P. 59470 ENTRE CALLE MADERO Y JARDÍN DE PRESIDENCIA',
@@ -2860,10 +2836,10 @@ class OficinasTableSeeder extends Seeder
             134 =>
             array (
                 'id' => 135,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 68,
                 'oficina' => 1303,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[6]"',
                 'nombre' => 'SAN FRANCISCO PERIBAN',
                 'ubicacion' => 'FRANCISCO VILLA #40, GIRASOLES, C.P. 60440 FRANCISCO VILLA ESQUINA CON CALLE MORELOS',
@@ -2881,10 +2857,10 @@ class OficinasTableSeeder extends Seeder
             135 =>
             array (
                 'id' => 136,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5]"',
                 'nombre' => 'JANAMUATO',
                 'ubicacion' => 'PORTAL HIDALGO 60 COL. CENTRO C.P 58500 ENTRE CALLE ZENDEJAS Y MORELOS ',
@@ -2902,10 +2878,10 @@ class OficinasTableSeeder extends Seeder
             136 =>
             array (
                 'id' => 137,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 3,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6]"',
                 'nombre' => 'GALEANA',
                 'ubicacion' => 'PORTAL HIDALGO 60 COL. CENTRO C.P 58500 ENTRE CALLE ZENDEJAS Y MORELOS ',
@@ -2923,10 +2899,10 @@ class OficinasTableSeeder extends Seeder
             137 =>
             array (
                 'id' => 138,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 4,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7]"',
                 'nombre' => 'TENENCIA DE PURUANDIRO',
                 'ubicacion' => 'PORTAL HIDALGO 60 COL. CENTRO C.P 58500 ENTRE CALLE ZENDEJAS Y MORELOS',
@@ -2944,10 +2920,10 @@ class OficinasTableSeeder extends Seeder
             138 =>
             array (
                 'id' => 139,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 5,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1]"',
                 'nombre' => 'LA QUEMADA',
                 'ubicacion' => 'PORTAL HIDALGO 60 COL. CENTRO C.P 58500 ENTRE CALLE ZENDEJAS Y MORELOS',
@@ -2965,10 +2941,10 @@ class OficinasTableSeeder extends Seeder
             139 =>
             array (
                 'id' => 140,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 75,
                 'oficina' => 1301,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7]"',
                 'nombre' => 'PAMATACUARO',
                 'ubicacion' => 'FRANCISCO I. MADERO S/N COL. CENTRO C.P 60300 ESQUINA TORRES QUINTERO',
@@ -2986,10 +2962,10 @@ class OficinasTableSeeder extends Seeder
             140 =>
             array (
                 'id' => 141,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 75,
                 'oficina' => 1301,
                 'localidad' => 3,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6]"',
                 'nombre' => 'TENENCIA LOS REYES',
                 'ubicacion' => 'FRANCISCO I. MADERO S/N COL. CENTRO C.P 60300 ESQUINA TORRES QUINTERO.',
@@ -3007,10 +2983,10 @@ class OficinasTableSeeder extends Seeder
             141 =>
             array (
                 'id' => 142,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 79,
                 'oficina' => 1006,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9]"',
                 'nombre' => 'ZIRAHUEN',
                 'ubicacion' => 'PORTAL ALLENDE 56 COL. CENTRO C.P 61800 ENTRE AV. MORELOS ORIENTE Y MIGUEL HIDALGO, DENTRO DE LA PRESIDENCIA MUNICIPAL.',
@@ -3028,10 +3004,10 @@ class OficinasTableSeeder extends Seeder
             142 =>
             array (
                 'id' => 143,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 79,
                 'oficina' => 1006,
                 'localidad' => 3,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9]"',
                 'nombre' => 'OPOPEO',
                 'ubicacion' => 'PORTAL ALLENDE 56 COL CENTRO C.P 61800 ENTRE AV. MORELOS ORIENTE Y MIGUEL HIDALGO, DENTRO DE LA PRESIDENCIA MUNICIPAL.',
@@ -3049,10 +3025,10 @@ class OficinasTableSeeder extends Seeder
             143 =>
             array (
                 'id' => 144,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 82,
                 'oficina' => 701,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9]"',
                 'nombre' => 'TECARIO',
                 'ubicacion' => 'HIDALGO NTE. 103 COL. CENTRO C.P 61650 ENTRE VICENTE GUERRERO Y MADERO.',
@@ -3070,10 +3046,10 @@ class OficinasTableSeeder extends Seeder
             144 =>
             array (
                 'id' => 145,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 83,
                 'oficina' => 1208,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10]"',
                 'nombre' => 'APO',
                 'ubicacion' => 'MIGUEL HIDALGO 1 COL. CENTRO C.P 60460 ENTRE CALLE JUÁREZ, INDEPENDENCIA Y LÁZARO CÁRDENAS AUN COSTADO DEL H. AYUNTAMIENTO.',
@@ -3091,10 +3067,10 @@ class OficinasTableSeeder extends Seeder
             145 =>
             array (
                 'id' => 146,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 83,
                 'oficina' => 1208,
                 'localidad' => 3,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10]"',
                 'nombre' => 'PAREO',
                 'ubicacion' => 'MIGUEL HIDALGO 1 COL. CENTRO C.P 60460  ENTRE CALLE JUÁREZ, INDEPENDENCIA Y LÁZARO CÁRDENAS AUN COSTADO DEL H. AYUNTAMIENTO',
@@ -3112,10 +3088,10 @@ class OficinasTableSeeder extends Seeder
             146 =>
             array (
                 'id' => 147,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 84,
                 'oficina' => 1707,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5]"',
                 'nombre' => 'TARECUATO',
                 'ubicacion' => 'JAVIER MINA 4 EL PROGRESO C.P 59920 ENTRE CALLE GUERRERO Y JAVIER MINA.',
@@ -3133,10 +3109,10 @@ class OficinasTableSeeder extends Seeder
             147 =>
             array (
                 'id' => 148,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 85,
                 'oficina' => 1708,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6]"',
                 'nombre' => 'PATAMBAN',
                 'ubicacion' => 'ROMÁN SILVA ÁLVAREZ 10 COL. CENTRO C.P 59750 ENTRE DOCTOR MIGUEL SILVA, REFORMA Y CONSTITUCIÓN.',
@@ -3154,10 +3130,10 @@ class OficinasTableSeeder extends Seeder
             148 =>
             array (
                 'id' => 149,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 88,
                 'oficina' => 110,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]"',
                 'nombre' => 'TEJARO',
                 'ubicacion' => '16 DE SEPTIEMBRE 10 CENTRO C.P. 5880 ENTRE CALLES LÁZARO CÁRDENAS,JOSÉ MARÍA MORELOS Y PAVÓN E IGNACIO ZARAGOZA.',
@@ -3175,10 +3151,10 @@ class OficinasTableSeeder extends Seeder
             149 =>
             array (
                 'id' => 150,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 90,
                 'oficina' => 1210,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4]"',
                 'nombre' => 'PICHATARO',
                 'ubicacion' => 'PORTAL HIDALGO S/N CENTRO C.P 60290 ENTRE ABASOLO E HIDALGO DENTRO DE LA PRESIDENCIA.',
@@ -3196,10 +3172,10 @@ class OficinasTableSeeder extends Seeder
             150 =>
             array (
                 'id' => 151,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 91,
                 'oficina' => 1304,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1]"',
                 'nombre' => 'TACATZCUARO',
                 'ubicacion' => 'PORTAL HIDALGO  4 COL. CENTRO, C.P. 58980 ENTRE LA CALLE EMILIANO ZAPATA Y JAVIER MINA, DENTRO DE LA PRESIDENCIA MUNICIPAL.',
@@ -3217,10 +3193,10 @@ class OficinasTableSeeder extends Seeder
             151 =>
             array (
                 'id' => 152,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 91,
                 'oficina' => 1304,
                 'localidad' => 3,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2]"',
                 'nombre' => 'AQUILES SERDAN',
                 'ubicacion' => 'PORTAL HIDALGO 4 COL. CENTRO, C.P. 58980 ENTRE LA CALLE EMILIANO ZAPATA Y JAVIER MINA, DENTRO DE LA PRESIDENCIA MUNICIPAL',
@@ -3238,10 +3214,10 @@ class OficinasTableSeeder extends Seeder
             152 =>
             array (
                 'id' => 153,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 97,
                 'oficina' => 702,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[12,13,18,19]"',
                 'nombre' => 'PURUARAN',
                 'ubicacion' => 'ÁLVARO OBREGÓN S/N COL. CENTRO C.P 61680 ESQUINA CON CALLE VASCO DE QUIROGA. AL SUR, CALLE TANGANXOAN.',
@@ -3259,10 +3235,10 @@ class OficinasTableSeeder extends Seeder
             153 =>
             array (
                 'id' => 154,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 103,
                 'oficina' => 2104,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7]"',
                 'nombre' => 'LA PALMA',
                 'ubicacion' => 'MELCHOR OCAMPO 38 D COL. CENTRO C.P. 59160. ENTRE CALLE JUAREZ E IGNACIO ALLENDE
@@ -3281,10 +3257,10 @@ class OficinasTableSeeder extends Seeder
             154 =>
             array (
                 'id' => 155,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 104,
                 'oficina' => 1604,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]"',
                 'nombre' => 'JARIPO',
                 'ubicacion' => 'FELICITAS DEL RIO S/N COL. CENTRO C.P  59550 ENTRE CALLE SAN FRANCISCO Y COMONFORT.',
@@ -3302,10 +3278,10 @@ class OficinasTableSeeder extends Seeder
             155 =>
             array (
                 'id' => 156,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 107,
                 'oficina' => 1101,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6]"',
                 'nombre' => 'TENENCIA ZACAPU',
                 'ubicacion' => 'AV. MORELOS 61 COL. CENTRO C.P 58600 ENTRE ZARAGOZA Y CALLE JUÁREZ.',
@@ -3323,10 +3299,10 @@ class OficinasTableSeeder extends Seeder
             156 =>
             array (
                 'id' => 157,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 108,
                 'oficina' => 1701,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5,6,7,8]"',
                 'nombre' => 'ARIO DE RAYON',
             'ubicacion' => 'GUERRERO 82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS).',
@@ -3344,10 +3320,10 @@ class OficinasTableSeeder extends Seeder
             157 =>
             array (
                 'id' => 158,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 108,
                 'oficina' => 1701,
                 'localidad' => 3,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0,1,2,3,4,5]"',
                 'nombre' => 'ATACHEO',
             'ubicacion' => 'GUERRERO 82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS).',
@@ -3365,10 +3341,10 @@ class OficinasTableSeeder extends Seeder
             158 =>
             array (
                 'id' => 159,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 108,
                 'oficina' => 1701,
                 'localidad' => 4,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0]"',
                 'nombre' => 'ATECUCARIO',
             'ubicacion' => 'GUERRERO 82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS)',
@@ -3386,10 +3362,10 @@ class OficinasTableSeeder extends Seeder
             159 =>
             array (
                 'id' => 160,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 108,
                 'oficina' => 1701,
                 'localidad' => 5,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[0]"',
                 'nombre' => 'LA SAUCEDAD',
             'ubicacion' => 'GUERRERO 82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EL EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS).',
@@ -3407,10 +3383,10 @@ class OficinasTableSeeder extends Seeder
             160 =>
             array (
                 'id' => 161,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 110,
                 'oficina' => 201,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[81,82]"',
                 'nombre' => 'UCAREO',
                 'ubicacion' => 'JUÁREZ 14 COL. CENTRO C.P 58930 MELCHOR OCAMPO AL NORTE Y AL SUR CON RAFAEL CARRILLO.',
@@ -3428,10 +3404,10 @@ class OficinasTableSeeder extends Seeder
             161 =>
             array (
                 'id' => 162,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 110,
                 'oficina' => 201,
                 'localidad' => 3,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2]"',
                 'nombre' => 'V DE JUAREZ',
                 'ubicacion' => 'JUÁREZ 14 COL. CENTRO C.P 58930 MELCHOR OCAMPO AL NORTE Y AL SUR CON RAFAEL CARRILLO.',
@@ -3449,10 +3425,10 @@ class OficinasTableSeeder extends Seeder
             162 =>
             array (
                 'id' => 163,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 111,
                 'oficina' => 1211,
                 'localidad' => 3,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[7,8,9,10]"',
                 'nombre' => 'SAN A ZURUMUCAPIO',
                 'ubicacion' => 'PASAJE PORTAL MATAMOROS S/N COL. CENTRO C.P 61700 ENTRE ABASOLO Y MORELOS.',
@@ -3470,10 +3446,10 @@ class OficinasTableSeeder extends Seeder
             163 =>
             array (
                 'id' => 164,
-                'tipo' => 'RECEPTORIA',
                 'municipio' => 112,
                 'oficina' => 501,
                 'localidad' => 2,
+                'tipo' => 'RECEPTORIA',
                 'sectores' => '"[1,2,3,4,5,6,7,8,9]"',
                 'nombre' => 'CRESCENCIO MORALES',
                 'ubicacion' => 'BENEDICTO LOPEZ SUR 7 COL. CENTRO C.P 61500 ENTRE  IGNACIO LÓPEZ RAYÓN Y MIGUEL HIDALGO.',
@@ -3486,7 +3462,7 @@ class OficinasTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-05 11:52:42',
+                'updated_at' => '2024-03-19 11:36:49',
             ),
         ));
 

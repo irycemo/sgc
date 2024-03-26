@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Admin;
 
-use App\Http\Constantes\Constantes;
 use App\Models\Predio;
 use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\Servicio;
 use Livewire\WithPagination;
-use App\Http\Traits\WithCache;
+use App\Models\Certificacion;
+use Illuminate\Support\Facades\DB;
+use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
 use App\Http\Traits\ComponentesTrait;
 
@@ -16,7 +17,6 @@ class Tramites extends Component
 {
 
     use WithPagination;
-    use WithCache;
     use ComponentesTrait;
 
     public $predios = [];
@@ -44,7 +44,8 @@ class Tramites extends Component
 
     protected function rules(){
         return [
-            'modelo_editar.solicitante' => 'required|string',
+            'modelo_editar.nombre_solicitante' => 'required|string',
+            'modelo_editar.numero_oficio' => 'required|string',
             'modelo_editar.observaciones' => 'nullable',
             'modelo_editar.estado' => 'required',
             'predios' => 'nullable'
@@ -52,7 +53,8 @@ class Tramites extends Component
     }
 
     protected $validationAttributes  = [
-
+        'modelo_editar.nombre_solicitante' => 'nombre del solicitante',
+        'modelo_editar.numero_oficio' => 'número de oficio',
     ];
 
     public function updatedFilters() { $this->resetPage(); }
@@ -73,42 +75,21 @@ class Tramites extends Component
 
     public function abrirModalEditar(Tramite $modelo){
 
-        $this->useCachedRows();
-
         $this->resetearTodo();
         $this->modal = true;
 
         if($this->modelo_editar->isNot($modelo))
             $this->modelo_editar = $modelo;
 
-        if($this->modelo_editar->predios->count()){
-
-            $this->modelo_editar->load('predios.propietarios.persona');
-
-            foreach($this->modelo_editar->predios as $predio){
-
-                array_push($this->predios, $predio);
-
-            }
-
-        }
-
-        $this->useCache = false;
-
     }
 
     public function abrirModalVer(Tramite $modelo){
-
-        $this->useCachedRows();
 
         $this->resetearTodo();
         $this->modalVer = true;
 
         if($this->modelo_editar->isNot($modelo))
             $this->modelo_editar = $modelo;
-
-
-        $this->useCache = false;
 
     }
 
@@ -121,15 +102,7 @@ class Tramites extends Component
             $this->modelo_editar->actualizado_por = auth()->user()->id;
             $this->modelo_editar->save();
 
-            if($this->predios){
-
-                foreach($this->predios as $predio){
-
-                    $this->modelo_editar->predios()->attach($predio['id']);
-
-                }
-
-            }
+            $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Actualizó información']);
 
             $this->resetearTodo();
 
@@ -146,8 +119,6 @@ class Tramites extends Component
     }
 
     public function buscarPredio(){
-
-        $this->useCachedRows();
 
         $this->validate([
             'localidad' => 'required',
@@ -168,46 +139,101 @@ class Tramites extends Component
             return;
         }
 
-        $this->useCache = false;
-
     }
 
     public function agregarPredio(){
 
-        $this->useCachedRows();
+        if($this->modelo_editar->cantidad === $this->modelo_editar->predios()->count()){
 
-        $colection = collect($this->predios);
+            $this->dispatch('mostrarMensaje', ['error', "El trámite ya tiene la cantidad de predios por la que se pagó."]);
 
-        if($colection->contains('id', $this->predio->id))
-            $this->dispatch('mostrarMensaje', ['error', "La cuenta predial ya esta agregada."]);
-        else
-            array_push($this->predios, $this->predio->toArray());
+            return;
 
-        $this->predio = null;
+        }
 
-        $this->useCache = false;
+        try {
+
+            $this->modelo_editar->predios()->attach($this->predio->id);
+
+            $this->modelo_editar->load('predios');
+
+            $this->reset(['predio', 'localidad', 'oficina', 'tipo', 'registro']);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al actualizar permisos usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+
+        }
+
+    }
+
+    public function reactivarPredio($id){
+
+        try {
+
+            DB::transaction(function () use ($id){
+
+                $certificacion = Certificacion::where('tramite_id', $this->modelo_editar->id)->where('predio_id', $id)->first();
+
+                if($certificacion){
+
+                    $certificacion->update(['estado' => 'cancelado']);
+
+                }
+
+                $this->modelo_editar->predios()->updateExistingPivot($id, ['estado' => 'A']);
+
+                if($this->modelo_editar->estado === 'concluido') $this->modelo_editar->update(['estado' => 'pagado']);
+
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Reactivó cuenta predial']);
+
+                $this->modelo_editar->load('predios');
+
+                $this->dispatch('mostrarMensaje', ['warning', "La cuenta predial se reactivó con éxito, si tenia un certificado este ha sido cancelado."]);
+
+            });
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al actualizar permisos usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+
+        }
 
     }
 
     public function quitarPredio($id){
 
-        $this->useCachedRows();
+        try {
 
-        $a = null;
+            DB::transaction(function () use ($id){
 
-        foreach ($this->predios as $k => $val) {
+                $certificacion = Certificacion::where('tramite_id', $this->modelo_editar->id)->where('predio_id', $id)->first();
 
-            if ($val['id'] == $id) {
+                if($certificacion){
 
-                $a = $k;
+                    $certificacion->update(['estado' => 'cancelado']);
 
-            }
+                }
+
+                $this->modelo_editar->predios()->detach($id);
+
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Eliminó cuenta predial']);
+
+                $this->modelo_editar->load('predios');
+
+                $this->dispatch('mostrarMensaje', ['warning', "La cuenta predial se eliminó con éxito, si tenia un certificado este ha sido cancelado."]);
+
+            });
+
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al actualizar permisos usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
         }
-
-        unset($this->predios[$a]);
-
-        $this->useCache = false;
 
     }
 
@@ -249,8 +275,21 @@ class Tramites extends Component
 
     public function render()
     {
-        return view('livewire.Admin.tramites', [
-            'tramites' => $this->rows
-        ])->extends('layouts.admin');
+
+        $tramites = Tramite::query()
+                            ->select('id', 'año', 'folio', 'usuario', 'estado', 'servicio_id', 'cantidad', 'monto', 'fecha_entrega', 'fecha_pago', 'tipo_tramite', 'tipo_servicio', 'nombre_solicitante', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                            ->with('servicio', 'creadoPor', 'actualizadoPor')
+                            ->when($this->filters['search'], fn($q, $search) => $q->where('solicitante', 'LIKE', '%' . $search . '%'))
+                            ->when($this->filters['año'], fn($q, $año) => $q->where('año', $año))
+                            ->when($this->filters['folio'], fn($q, $folio) => $q->where('folio', $folio))
+                            ->when($this->filters['estado'], fn($q, $estado) => $q->where('estado', $estado))
+                            ->when($this->filters['tipoTramite'], fn($q, $tipoTramite) => $q->where('tipo_tramite', $tipoTramite))
+                            ->when($this->filters['servicio'], fn($q, $servicio) => $q->where('servicio_id', $servicio))
+                            ->orderBy($this->sort, $this->direction)
+                            ->paginate($this->pagination);
+
+        return view('livewire.Admin.tramites', compact('tramites'))->extends('layouts.admin');
+
     }
+
 }

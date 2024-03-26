@@ -106,7 +106,7 @@
 
 @if($objeto->colindancias->count() > 0)
 
-    <div class="rounded-lg bg-gray-100 py-1 px-2 mb-3">
+    <div class="overflow-auto rounded-lg bg-gray-100 py-1 px-2 mb-3">
 
         <p class="text-center my-4"><strong>Colindancias</strong></p>
 
@@ -148,7 +148,7 @@
 
     <p class="text-center my-4"><strong>Superficies y valor catastral</strong></p>
 
-    <div class="flex gap-3 justify-center w-full mx-auto text-gray-500 text-sm leading-relaxed">
+    <div class="flex flex-col lg:flex-row gap-3 justify-center w-full mx-auto text-gray-500 text-sm leading-relaxed">
 
         @if(isset($objeto->superficie_notarial))
 
@@ -234,39 +234,43 @@
 
     <p class="text-center my-4"><strong>Propietarios</strong></p>
 
-    <table class="w-full overflow-x-auto table-auto">
+    <div class="overflow-auto">
 
-        <thead class="border-b border-gray-300 ">
+        <table class="w-full overflow-x-auto table-auto">
 
-            <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+            <thead class="border-b border-gray-300 ">
 
-                <th class="px-2">Tipo</th>
-                <th class="px-2">Nombre</th>
-                <th class="px-2">Porcentaje propiedad (%)</th>
-                <th class="px-2">Porcentaje nuda (%)</th>
-                <th class="px-2">Porcentaje usufructo (%)</th>
+                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-            </tr>
+                    <th class="px-2">Tipo</th>
+                    <th class="px-2">Nombre</th>
+                    <th class="px-2">Porcentaje propiedad (%)</th>
+                    <th class="px-2">Porcentaje nuda (%)</th>
+                    <th class="px-2">Porcentaje usufructo (%)</th>
 
-        </thead>
-
-        <tbody class="divide-y divide-gray-200">
-
-            @foreach ($objeto->propietarios as $propietario)
-
-                <tr class="text-gray-500 text-sm leading-relaxed">
-                    <td class=" px-2 w-full whitespace-nowrap">{{ $propietario->tipo }}</td>
-                    <td class=" px-2 w-full whitespace-nowrap">{{ $propietario->nombre }}</td>
-                    <td class=" px-2 w-full whitespace-nowrap">{{ $propietario->porcentaje }}</td>
-                    <td class=" px-2 w-full whitespace-nowrap">{{ $propietario->porcentaje_nuda }}</td>
-                    <td class=" px-2 w-full whitespace-nowrap">{{ $propietario->porcentaje_usufructo }}</td>
                 </tr>
 
-            @endforeach
+            </thead>
 
-        </tbody>
+            <tbody class="divide-y divide-gray-200">
 
-    </table>
+                @foreach ($objeto->propietarios as $propietario)
+
+                    <tr class="text-gray-500 text-sm leading-relaxed">
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $propietario->tipo }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $propietario->nombre }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $propietario->porcentaje }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $propietario->porcentaje_nuda }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $propietario->porcentaje_usufructo }}</td>
+                    </tr>
+
+                @endforeach
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
 

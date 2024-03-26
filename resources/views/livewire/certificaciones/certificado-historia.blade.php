@@ -158,7 +158,7 @@
 
                     <span class="text-lg text-gray-800">Movimimientos</span>
 
-                    <div class="flex gap-3 justify-center text-sm mt-5">
+                    <div class="flex flex-col lg:flex-row gap-3 justify-center text-sm mt-5">
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -207,9 +207,9 @@
 
                         <div class="flex flex-col md:flex-row items-center justify-between gap-2">
 
-                            <div class="flex items-center gap-3 order-2 md:order-1">
+                            <div class="flex flex-col md:flex-row items-center gap-3 order-2 md:order-1 w-full">
 
-                                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                                <div class="rounded-lg bg-gray-100 py-1 px-2 w-full">
 
                                     <strong>Movimiento</strong>
 
@@ -217,7 +217,7 @@
 
                                 </div>
 
-                                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                                <div class="rounded-lg bg-gray-100 py-1 px-2 w-full">
 
                                     <strong>Fecha</strong>
 
@@ -255,7 +255,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 py-1 px-2 w-full">
 
                             <strong>Descripción</strong>
 
@@ -320,7 +320,7 @@
 
             @if($tramite)
 
-                <div class="flex gap-3 justify-center text-sm mb-3">
+                <div class="flex flex-col lg:flex-row gap-3 justify-center text-sm mb-3">
 
                     <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -348,7 +348,7 @@
 
                 </div>
 
-                <div class="flex gap-3 justify-center text-sm">
+                <div class="flex flex-col lg:flex-row gap-3 justify-center text-sm">
 
                     <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -398,7 +398,7 @@
 
             </div>
 
-            <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg flex justify-between items-center">
+            <div class="flex flex-col lg:flex-row gap-3 mb-5 bg-white rounded-lg p-2 shadow-lg justify-center lg:justify-between items-center">
 
                 <div>
 

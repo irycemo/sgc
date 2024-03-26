@@ -98,14 +98,16 @@ class RoleSeeder extends Seeder
 
         Permission::create(['name' => 'Lista de valores unitarios', 'area' => 'Valores unitarios'])->syncRoles([$role1]);
 
-        Permission::create(['name' => 'Ventanilla', 'area' => 'Trámites y servicios'])->syncRoles([$role1, $role2]);
-        Permission::create(['name' => 'Trámite excento', 'area' => 'Trámites y servicios'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'Ventanilla', 'area' => 'Ventanilla'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'Trámite excento', 'area' => 'Ventanilla'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'Reactivar trámties', 'area' => 'Ventanilla'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'Autorizar tramite', 'area' => 'Ventanilla'])->syncRoles([$role1, $role2]);
 
         Permission::create(['name' => 'Área de valuación', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2, $role6]);
         Permission::create(['name' => 'Valuación y desglose', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2, $role6]);
         Permission::create(['name' => 'Ficha técnica', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
-        Permission::create(['name' => 'Impresión', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2, $role6]);
-        Permission::create(['name' => 'Notificación', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2, $role6]);
+        Permission::create(['name' => 'Impresión de avaluos', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2, $role6]);
+        Permission::create(['name' => 'Notificación de avaluos', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2, $role6]);
         Permission::create(['name' => 'Avaluos de predios ignorados', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
         Permission::create(['name' => 'Avaluos de predio ignorado', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);
         Permission::create(['name' => 'Ver mis avaluos', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2]);

@@ -459,7 +459,7 @@ class ImpresionAvaluo extends Component
                             'estado' => 'impreso'
                         ]);
 
-                $predio->avaluo->audits()->latest()->first()->update(['tags' => 'Imprimio avalúo']);
+                $predio->avaluo->audits()->latest()->first()->update(['tags' => 'Imprimió avalúo']);
 
             }
 
@@ -674,6 +674,8 @@ class ImpresionAvaluo extends Component
         $this->oficina = auth()->user()->oficina->oficina;
 
         if(!$this->director->efirma || !$this->director->efirma->cer || !$this->director->efirma->key || !$this->director->efirma->imagen) abort(500, message:"Es necesario actualizar la firma electrónica del director");
+
+        if(!$this->jefe_departamento->efirma || !$this->jefe_departamento->efirma->cer || !$this->jefe_departamento->efirma->key || !$this->jefe_departamento->efirma->imagen) abort(500, message:"Es necesario actualizar la firma electrónica del jefe de departamento de valuación");
 
     }
 

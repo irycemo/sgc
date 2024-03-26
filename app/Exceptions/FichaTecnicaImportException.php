@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 
-class ErrorAlProcesarCoordenadasException extends Exception
+class FichaTecnicaImportException extends Exception
 {
     //
 }

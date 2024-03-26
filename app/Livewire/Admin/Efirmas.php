@@ -199,6 +199,8 @@ class Efirmas extends Component
 
     public function mount(){
 
+        array_push($this->fields, 'cer', 'key', 'imagen');
+
         $this->crearModeloVacio();
 
         $this->usuarios = User::orderBy('name')->get();

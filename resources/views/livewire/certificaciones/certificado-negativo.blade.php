@@ -12,7 +12,7 @@
 
             </div>
 
-            <div class="inline-flex gap-2">
+            <div class="flex flex-col lg:flex-row lg:inline-flex gap-3 ">
 
                 <x-input-group for="nombre" label="Nombre" :error="$errors->first('nombre')" class="w-full">
 
@@ -65,7 +65,7 @@
 
                 <p class="p-2 border border-red-500 text-red-500 font-semibold rounded-xl text-center w-full mx-auto lg:w-1/2 mb-4">No se puede expedir un certificado negativo de registro se encontro la siguiente información:</p>
 
-                <div class="flex gap-3 justify-center w-full mx-auto lg:w-1/2">
+                <div class="flex flex-col lg:flex-row gap-3 justify-center w-full mx-auto lg:w-1/2">
 
                     <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -153,7 +153,7 @@
 
                 @if($tramite)
 
-                    <div class="flex gap-3 justify-center text-sm mb-3">
+                    <div class="flex flex-col lg:flex-row gap-3 justify-center text-sm mb-3">
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
@@ -187,7 +187,7 @@
 
             @if($tramite)
 
-                <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg flex justify-between items-center">
+                <div class="flex flex-col lg:flex-row gap-3 mb-5 bg-white rounded-lg p-2 shadow-lg justify-center lg:justify-between items-center">
 
                     <div>
 

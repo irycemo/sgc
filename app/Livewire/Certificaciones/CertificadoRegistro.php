@@ -65,6 +65,8 @@ class CertificadoRegistro extends Component
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a una historia catastral."]);
 
+                $this->reset('tramite');
+
                 return;
 
             }
@@ -73,13 +75,27 @@ class CertificadoRegistro extends Component
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite esta concluido."]);
 
+                $this->reset('tramite');
+
                 return;
 
             }
 
-            if($this->tramite->estado != 'pagado'){
+            if($this->tramite->estado != 'pagado' && $this->tramite->estado != 'autorizado'){
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite no esta pagado."]);
+
+                $this->reset('tramite');
+
+                return;
+
+            }
+
+            if($this->tramite->estado !== 'autorizado' && $this->tramite->fecha_entrega >= now()){
+
+                $this->dispatch('mostrarMensaje', ['error', "La fecha de entrega del trámite es: " . $this->tramite->fecha_entrega->format('d-m-Y')]);
+
+                $this->reset('tramite');
 
                 return;
 

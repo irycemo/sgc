@@ -43,6 +43,7 @@ use App\Livewire\Cartografia\Conciliar;
 use App\Livewire\Certificaciones\CertificadoNegativo;
 use App\Livewire\TramitesAdministrativos\PrediosIgnorados;
 use App\Livewire\TramitesAdministrativos\VariacionesCatastrales;
+use App\Livewire\Ventanilla\ReactivarTramites;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,6 +144,8 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('tramites/{tramite}', [TramiteController::class, 'orden'])->name('tramites.orden');
 
     Route::get('ventanilla', VentanillaVentanilla::class)->middleware('permission:Ventanilla')->name('ventanilla');
+
+    Route::get('reactivar_tramites', ReactivarTramites::class)->middleware('permission:Reactivar trámites')->name('reactivar_tramites');
 
 });
 
