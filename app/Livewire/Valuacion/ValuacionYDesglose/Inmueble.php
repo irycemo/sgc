@@ -100,6 +100,12 @@ class Inmueble extends Component
         ]);
     }
 
+    public function updatedPredioOficina(){
+
+        $this->predio->municipio = Oficina::where('oficina', $this->predio->oficina)->first()->municipio;
+
+    }
+
     public function updatedPredioXutm(){
         $this->convertirCoordenadas();
     }
@@ -530,6 +536,14 @@ class Inmueble extends Component
 
         }
 
+        if($oficina->municipio != $this->predio->municipio){
+
+            $this->dispatch('mostrarMensaje', ['error', "El municipio no corresponde a la oficina."]);
+
+            return true;
+
+        }
+
     }
 
     public function crear(){
@@ -714,6 +728,8 @@ class Inmueble extends Component
         $this->predio = $this->crearModeloVacio();
 
         $this->predio->oficina = auth()->user()->oficina->oficina;
+
+        $this->predio->municipio = auth()->user()->oficina->municipio;
 
         if($this->avaluo_id){
 

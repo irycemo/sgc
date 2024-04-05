@@ -20,6 +20,7 @@ class PrediosController extends Controller
             'colindancias',
             'audits.user',
             'bloqueos.creadoPor',
+            'bloqueos.actualizadoPor',
             'movimientos.creadoPor'
         );
 

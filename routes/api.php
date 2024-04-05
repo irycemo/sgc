@@ -17,10 +17,10 @@ use App\Http\Controllers\Api\V1\ConsultaPredioController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::post('consulta_predio', ConsultaPredioController::class);
+
 });
 
 Route::post('acredita_pago', SapControllerApi::class);
-
-Route::post('consulta_predio', ConsultaPredioController::class);

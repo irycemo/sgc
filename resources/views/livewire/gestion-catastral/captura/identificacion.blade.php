@@ -1,8 +1,8 @@
 <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg flex gap-3 justify-center">
 
-    <x-input-group for="predio.origen" label="Origen del movimiento" :error="$errors->first('predio.origen')" class="w-fit">
+    <x-input-group for="origen" label="Origen del movimiento" :error="$errors->first('origen')" class="w-fit">
 
-        <x-input-select id="predio.origen" wire:model="predio.origen" class="">
+        <x-input-select id="origen" wire:model="origen" class="">
 
             <option value="">Seleccione una opción</option>
 
@@ -42,9 +42,9 @@
 
                     <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('predio.localidad') border-1 border-red-500 @enderror" wire:model.blur="predio.localidad">
 
-                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('predio.oficina') border-1 border-red-500 @enderror" wire:model="predio.oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('predio.oficina') border-1 border-red-500 @enderror" wire:model.blur="predio.oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                    <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-20 @error('predio.tipo_predio') border-1 border-red-500 @enderror" wire:model="predio.tipo_predio">
+                    <input title="Tipo de predio" placeholder="Tipo" type="number" min="1" max="2" class="bg-white rounded text-xs w-20 @error('predio.tipo_predio') border-1 border-red-500 @enderror" wire:model="predio.tipo_predio">
 
                     <input title="Número de registro" placeholder="Registro" type="number" class="bg-white rounded text-xs w-20 @error('predio.numero_registro') border-1 border-red-500 @enderror" wire:model.blur="predio.numero_registro">
 
@@ -66,7 +66,7 @@
 
                     <input title="Región catastral" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('predio.region_catastral') border-1 border-red-500 @enderror" wire:model="predio.region_catastral">
 
-                    <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('predio.municipio') border-1 border-red-500 @enderror" wire:model="predio.municipio">
+                    <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('predio.municipio') border-1 border-red-500 @enderror" wire:model="predio.municipio" readonly>
 
                     <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('predio.zona_catastral') border-1 border-red-500 @enderror" wire:model="predio.zona_catastral">
 
@@ -688,7 +688,7 @@
 
 <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg">
 
-    <h4 class="text-lg mb-5 text-center">Coordenadas geografícas</h4>
+    <h4 class="text-lg mb-5 text-center">Coordenadas geográficas</h4>
 
     <div class="flex-auto ">
 
@@ -750,6 +750,40 @@
 
 </div>
 
+<div class="bg-white rounded-lg p-3 flex gap-3 mb-3 shadow-lg">
+
+    <x-input-group for="predio.superficie_terreno" label="Superficie de terreno" :error="$errors->first('predio.superficie_terreno')" class="w-full">
+
+        <x-input-text type="number" id="predio.superficie_terreno" wire:model="predio.superficie_terreno" />
+
+    </x-input-group>
+
+    <x-input-group for="predio.superficie_construccion" label="Superficie de construcción" :error="$errors->first('predio.superficie_construccion')" class="w-full">
+
+        <x-input-text type="number" id="predio.superficie_construccion" wire:model="predio.superficie_construccion" />
+
+    </x-input-group>
+
+    <x-input-group for="predio.superficie_notarial" label="Superficie notarial" :error="$errors->first('predio.superficie_notarial')" class="w-full">
+
+        <x-input-text type="number" id="predio.superficie_notarial" wire:model="predio.superficie_notarial" />
+
+    </x-input-group>
+
+    <x-input-group for="predio.superficie_judicial" label="Superficie judicial" :error="$errors->first('predio.superficie_judicial')" class="w-full">
+
+        <x-input-text type="number" id="predio.superficie_judicial" wire:model="predio.superficie_judicial" />
+
+    </x-input-group>
+
+    <x-input-group for="predio.valor_catastral" label="Valor catastral" :error="$errors->first('predio.valor_catastral')" class="w-full">
+
+        <x-input-text type="number" id="predio.valor_catastral" wire:model="predio.valor_catastral" />
+
+    </x-input-group>
+
+</div>
+
 <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg">
 
     <div class=" mx-auto lg:w-1/2">
@@ -762,13 +796,13 @@
 
         <div>
 
-            <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="predio.observaciones"></textarea>
+            <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico posible acerca del origen del movimiento"></textarea>
 
         </div>
 
         <div>
 
-            @error('predio.observaciones') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+            @error('observaciones') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
         </div>
 

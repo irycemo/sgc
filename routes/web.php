@@ -14,15 +14,17 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Valuacion\MisAvaluos;
 use App\Livewire\Admin\Avaluos\Avaluos;
 use App\Livewire\Admin\Certificaciones;
+use App\Livewire\Cartografia\Conciliar;
 use App\Livewire\Admin\FactorIncremento;
 use App\Livewire\Valuacion\FichaTecnica;
 use App\Livewire\Valuacion\Notificacion;
 use App\Http\Controllers\ManualController;
-use App\Livewire\GestionCatastral\Captura;
 use App\Livewire\Admin\CategoriasServicios;
 use App\Livewire\Valuacion\ImpresionAvaluo;
 use App\Http\Controllers\DashboardController;
 use App\Livewire\Admin\Predios\PrediosPadron;
+use App\Livewire\Consultas\Reportes\Reportes;
+use App\Livewire\Ventanilla\ReactivarTramites;
 use App\Http\Controllers\SetPasswordController;
 use App\Http\Controllers\VerificacionController;
 use App\Livewire\Admin\Predios\PrediosAsignados;
@@ -30,20 +32,20 @@ use App\Livewire\Admin\ValoresUnitariosRusticos;
 use App\Http\Controllers\Admin\AvaluosController;
 use App\Http\Controllers\Admin\PrediosController;
 use App\Http\Controllers\Admin\TramiteController;
+use App\Livewire\GestionCatastral\Captura\Captura;
 use App\Livewire\Valuacion\AsignacionCuentaPredial;
 use App\Livewire\Admin\ValoresunitariosConstruccion;
 use App\Livewire\Certificaciones\CedulaActualizacion;
 use App\Livewire\Certificaciones\CertificadoHistoria;
+use App\Livewire\Certificaciones\CertificadoNegativo;
 use App\Livewire\Certificaciones\CertificadoRegistro;
+use App\Livewire\TramitesAdministrativos\PrediosIgnorados;
 use App\Http\Controllers\Valuacion\AvaluosController as Val;
 use App\Livewire\Ventanilla\Ventanilla as VentanillaVentanilla;
 use App\Http\Controllers\Valuacion\ValuacionYDesgloseController;
-use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
-use App\Livewire\Cartografia\Conciliar;
-use App\Livewire\Certificaciones\CertificadoNegativo;
-use App\Livewire\TramitesAdministrativos\PrediosIgnorados;
 use App\Livewire\TramitesAdministrativos\VariacionesCatastrales;
-use App\Livewire\Ventanilla\ReactivarTramites;
+use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
+use App\Livewire\Consultas\ConsultaPadron;
 
 /*
 |--------------------------------------------------------------------------
@@ -139,6 +141,10 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
     /* Consultas */
     Route::get('ver_oficina/{ofice_id?}', Oficina::class)->middleware('permission:Ver oficina')->name('ver_oficina');
+
+    Route::get('reportes', Reportes::class)->middleware('permission:Ver reportes')->name('reportes');
+
+    Route::get('consulta_padron', ConsultaPadron::class)->middleware('permission:Consulta Padrón')->name('consulta_padron');
 
     /* Ventanilla */
     Route::get('tramites/{tramite}', [TramiteController::class, 'orden'])->name('tramites.orden');

@@ -188,15 +188,17 @@ class Colindancias extends Component
 
             $avaluo = Avaluo::find($this->avaluo_id);
 
-            $avaluo->update(['actualizado_por' => auth()->id()]);
+            $avaluo->touch();
 
             $avaluo->audits()->latest()->first()->update(['tags' => 'Actualizó colindancias']);
 
+        }else{
+
+            $this->predio->touch();
+
+            $this->predio->audits()->latest()->first()->update(['tags' => 'Actualizó colindancias']);
+
         }
-
-        $this->predio->update(['actualizado_por' => auth()->id()]);
-
-        $this->predio->audits()->latest()->first()->update(['tags' => 'Actualizó colindancias']);
 
     }
 

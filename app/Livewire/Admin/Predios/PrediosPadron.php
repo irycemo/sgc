@@ -45,7 +45,11 @@ class PrediosPadron extends Component
 
         if($this->modelo_editar->bloqueadoActivo()){
 
-            $this->modelo_editar->bloqueos->where('estado', 'activo')->first()->update(['estado'=> 'inactivo', 'observaciones' => $this->observaciones, 'actualizado_por' => auth()->id()]);
+            $this->modelo_editar->bloqueos()->where('estado', 'activo')->first()->update([
+                'estado'=> 'inactivo',
+                'observaciones' => $this->modelo_editar->bloqueos()->where('estado', 'activo')->first()->observaciones . '. Se desbloquea por motivo: ' . $this->observaciones,
+                'actualizado_por' => auth()->id()
+            ]);
 
             $this->modelo_editar->update(['status' => 'activo']);
 
@@ -55,7 +59,7 @@ class PrediosPadron extends Component
 
             $this->modelo_editar->bloqueos()->create([
                 'estado'=> 'activo',
-                'observaciones' => $this->observaciones,
+                'observaciones' => 'Se bloquea por motivo: ' . $this->observaciones,
                 'creado_por' => auth()->id()
             ]);
 

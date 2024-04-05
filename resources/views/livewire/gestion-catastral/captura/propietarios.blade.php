@@ -6,7 +6,16 @@
 
             <span class="flex items-center justify-center text-lg text-gray-700 mb-5">Propietarios</span>
 
-            <div class="flex justify-end mb-2">
+            <div class="flex justify-between mb-2">
+
+                <x-button-red
+                        wire:click="$toggle('modalBorrar')"
+                        wire:loading.attr="disabled"
+                        wire:target="$toggle('modalBorrar')">
+
+                        <img wire:loading wire:target="$toggle('modalBorrar')" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                        Borrar todos los propietarios
+                </x-button-red>
 
                 <x-button-gray
                         wire:click="agregarPropietario"
@@ -352,5 +361,37 @@
         </x-slot>
 
     </x-dialog-modal>
+
+    <x-confirmation-modal wire:model="modalBorrar" maxWidth="sm">
+
+        <x-slot name="title">
+            Eliminar propietarios
+        </x-slot>
+
+        <x-slot name="content">
+            ¿Esta seguro que desea eliminar los propietarios? No sera posible recuperar la información.
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <x-secondary-button
+                wire:click="$toggle('modalBorrar')"
+                wire:loading.attr="disabled"
+            >
+                No
+            </x-secondary-button>
+
+            <x-danger-button
+                class="ml-2"
+                wire:click="borrarPropietarios"
+                wire:loading.attr="disabled"
+                wire:target="borrarPropietarios"
+            >
+                Borrar
+            </x-danger-button>
+
+        </x-slot>
+
+    </x-confirmation-modal>
 
 </div>

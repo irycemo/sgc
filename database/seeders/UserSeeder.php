@@ -110,6 +110,36 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345678'),
         ])->assignRole('Jefe de departamento');
 
+        User::create([
+            'clave' => 9,
+            'name' => 'Sistema RPP',
+            'oficina_id' => '53',
+            'status' => 'activo',
+            'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
+            'email' => 'sistemarpp@gmail.com',
+            'password' => Hash::make('12345678'),
+        ])->assignRole('Sistemas');
+
+        User::create([
+            'clave' => 10,
+            'name' => 'Sistema pertios externos',
+            'oficina_id' => '53',
+            'status' => 'activo',
+            'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
+            'email' => 'sistemaperitosexternos@gmail.com',
+            'password' => Hash::make('12345678'),
+        ])->assignRole('Sistemas');
+
+        User::create([
+            'clave' => 10,
+            'name' => 'Sistema trámites en línea',
+            'oficina_id' => '53',
+            'status' => 'activo',
+            'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
+            'email' => 'sistematramiteslinea@gmail.com',
+            'password' => Hash::make('12345678'),
+        ])->assignRole('Sistemas');
+
         User::factory(10)->create()->each(function($user){
             $user->assignRole('Valuador');
         });

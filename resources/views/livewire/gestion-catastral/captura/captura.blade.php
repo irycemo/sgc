@@ -10,7 +10,7 @@
                 @click="activeTab = 0"
                 class="px-6 py-1 text-gray-600 rounded-xl border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white"
                 :class="{'active  bg-gray-200 rounded-full px-3 py-1 text-gray-500 no-underline': activeTab === 0 }"
-            >Datos de identificación del inmueble
+            >Información del inmueble
             </label>
 
             <label
@@ -31,20 +31,20 @@
                 @click="activeTab = 3"
                 class="px-6 py-1 text-gray-600 rounded-xl border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white"
                 :class="{'active  bg-gray-200 rounded-full px-3 py-1 text-gray-500 no-underline': activeTab === 3 }"
-            >Determinación de valor catastral
+            >Archivo
             </label>
 
         </div>
 
         <div x-cloak class="tab-panel" :class="{ 'active': activeTab === 3 }" x-show.transition.in.opacity.duration.800="activeTab === 3"  wire:key="tab-3">
 
-            @livewire('valuacion.valuacion-y-desglose.valor')
+            @livewire('gestion-catastral.captura.archivo')
 
         </div>
 
         <div class="tab-panel" :class="{ 'active': activeTab === 0 }" x-show.transition.in.opacity.duration.800="activeTab === 0"  wire:key="tab-0">
 
-            @include('livewire.gestion-catastral.identificacion')
+            @include('livewire.gestion-catastral.captura.identificacion')
 
         </div>
 
@@ -56,7 +56,7 @@
 
         <div x-cloak class="tab-panel" :class="{ 'active': activeTab === 2 }" x-show.transition.in.opacity.duration.800="activeTab === 2"  wire:key="tab-2">
 
-            @livewire('gestion-catastral.propietarios')
+            @livewire('gestion-catastral.captura.propietarios')
 
         </div>
 

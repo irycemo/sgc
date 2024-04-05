@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\GestionCatastral;
+namespace App\Livewire\GestionCatastral\Captura;
 
 
 use Carbon\Carbon;
@@ -11,6 +11,7 @@ use Livewire\Component;
 use App\Models\CodigoPostal;
 use Illuminate\Validation\Rule;
 use App\Models\FactorIncremento;
+use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
 use App\Http\Services\Coordenadas\Coordenadas;
@@ -31,6 +32,7 @@ class Captura extends Component
     public $label = 'Número de documento';
 
     public Predio $predio;
+    public $origen;
     public $observaciones;
 
     public $tipos_asentamientos;
@@ -76,12 +78,17 @@ class Captura extends Component
             'predio.zutm' => 'nullable',
             'predio.lat' => 'required',
             'predio.lon' => 'required',
+            'predio.superficie_terreno' => 'required|numeric',
+            'predio.superficie_construccion' => 'nullable|numeric',
+            'predio.superficie_judicial' => 'nullable|numeric',
+            'predio.superficie_notarial' => 'nullable|numeric',
+            'predio.valor_catastral' => 'required|numeric',
             'predio.documento_entrada' => Rule::requiredIf(!$this->actualizacion),
             'predio.declarante' => Rule::requiredIf(!$this->actualizacion),
             'predio.documento_numero' => Rule::requiredIf(!$this->actualizacion),
             'predio.fecha_efectos' => Rule::requiredIf(!$this->actualizacion),
-            'predio.origen' => 'required',
-            'predio.observaciones' => 'required_if:modalBaja, true|regex:/^[a-zA-Z0-9\s]+$/'
+            'origen' => 'required',
+            'observaciones' => 'required|regex:/^[a-zA-Z0-9\s]+$/'
          ];
     }
 
@@ -114,6 +121,12 @@ class Captura extends Component
         $this->predio = $this->crearModeloVacio();
 
         $this->predio->oficina = auth()->user()->oficina->oficina;
+
+    }
+
+    public function updatedPredioOficina(){
+
+        $this->predio->municipio = Oficina::where('oficina', $this->predio->oficina)->first()->municipio;
 
     }
 
@@ -317,17 +330,21 @@ class Captura extends Component
 
         try {
 
-            $this->predio->valor_catastral = $valor;
+            DB::transaction(function () use($valor){
 
-            $this->predio->indexado_en = now();
+                $this->predio->valor_catastral = $valor;
 
-            $this->predio->save();
+                $this->predio->indexado_en = now();
 
-            $this->predio->audits()->latest()->first()->update(['tags' => 'Indexó predio']);
+                $this->predio->save();
 
-            $this->dispatch('mostrarMensaje', ['success', "El valor del predio se indexó correctamente."]);
+                $this->predio->audits()->latest()->first()->update(['tags' => 'Indexó predio']);
 
-            $this->modalIndexar = false;
+                $this->dispatch('mostrarMensaje', ['success', "El valor del predio se indexó correctamente."]);
+
+                $this->modalIndexar = false;
+
+            });
 
         } catch (\Throwable $th) {
 
@@ -347,19 +364,23 @@ class Captura extends Component
 
         try {
 
-            $this->predio->update([
-                'status' => 'baja',
-                'actualizado_por' => auth()->id(),
-                'observaciones' => $this->predio->observaciones . '. ' . $this->observaciones
-            ]);
+            DB::transaction(function () {
 
-            $this->predio->audits()->latest()->first()->update(['tags' => 'Dio de baja predio']);
+                $this->predio->update([
+                    'status' => 'baja',
+                    'actualizado_por' => auth()->id(),
+                    'observaciones' => $this->predio->observaciones . '. ' . $this->observaciones
+                ]);
 
-            $this->dispatch('mostrarMensaje', ['success', "El predio se dió de baja correctamente."]);
+                $this->predio->audits()->latest()->first()->update(['tags' => 'Dio de baja predio']);
 
-            $this->modalBaja = false;
+                $this->dispatch('mostrarMensaje', ['success', "El predio se dió de baja correctamente."]);
 
-            $this->predio = $this->crearModeloVacio();
+                $this->modalBaja = false;
+
+                $this->predio = $this->crearModeloVacio();
+
+            });
 
         } catch (\Throwable $th) {
 
@@ -460,6 +481,14 @@ class Captura extends Component
 
         }
 
+        if($oficina->municipio != $this->predio->municipio){
+
+            $this->dispatch('mostrarMensaje', ['error', "El municipio no corresponde a la oficina."]);
+
+            return true;
+
+        }
+
     }
 
     public function crear(){
@@ -470,14 +499,29 @@ class Captura extends Component
 
         try {
 
-            $this->predio->creado_por = auth()->id();
-            $this->predio->save();
+            DB::transaction(function () {
 
-            $this->predio->audits()->latest()->first()->update(['tags' => 'Dió de alta predio']);
+                $this->predio->creado_por = auth()->id();
+                $this->predio->observaciones = $this->observaciones;
+                $this->predio->save();
 
-            $this->dispatch('cargarPredio', id:$this->predio->id, flag:true);
+                $this->predio->audits()->latest()->first()->update(['tags' => 'Dió de alta predio']);
 
-            $this->dispatch('mostrarMensaje', ['success', "El predio se dió de alta correctamente."]);
+                $this->predio->movimientos()->create([
+                    'nombre' => $this->origen,
+                    'fecha' => now()->toDateString(),
+                    'descripcion' => $this->observaciones
+                ]);
+
+                $this->dispatch('cargarPredio', id:$this->predio->id, flag:true);
+
+                $this->dispatch('mostrarMensaje', ['success', "El predio se dió de alta correctamente."]);
+
+                $this->reset(['origen', 'observaciones']);
+
+                $this->actualizacion = true;
+
+            });
 
         } catch (\Throwable $th) {
 
@@ -496,12 +540,25 @@ class Captura extends Component
 
         try {
 
-            $this->predio->actualizado_por = auth()->id();
-            $this->predio->save();
+            DB::transaction(function () {
 
-            $this->predio->audits()->latest()->first()->update(['tags' => 'Actualizo información de identificación']);
+                $this->predio->actualizado_por = auth()->id();
+                $this->predio->observaciones = $this->observaciones . '. ' . $this->observaciones;
+                $this->predio->save();
 
-            $this->dispatch('mostrarMensaje', ['success', "El predio se actualizó correctamente."]);
+                $this->predio->audits()->latest()->first()->update(['tags' => 'Actualizo información de identificación']);
+
+                $this->predio->movimientos()->create([
+                    'nombre' => $this->origen,
+                    'fecha' => now()->toDateString(),
+                    'descripcion' => $this->observaciones
+                ]);
+
+                $this->dispatch('mostrarMensaje', ['success', "El predio se actualizó correctamente."]);
+
+                $this->reset(['origen', 'observaciones']);
+
+            });
 
         } catch (\Throwable $th) {
 
@@ -528,10 +585,12 @@ class Captura extends Component
 
         $this->predio->oficina = auth()->user()->oficina->oficina;
 
+        $this->predio->municipio = auth()->user()->oficina->municipio;
+
     }
 
     public function render()
     {
-        return view('livewire.gestion-catastral.captura')->extends('layouts.admin');
+        return view('livewire.gestion-catastral.captura.captura')->extends('layouts.admin');
     }
 }

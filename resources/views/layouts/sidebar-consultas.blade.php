@@ -44,6 +44,34 @@
 
         @endcan
 
+        @can('Ver reportes')
+
+            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+
+                <a href="{{ route('reportes') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
+
+                    Reportes
+
+                </a>
+
+            </div>
+
+        @endcan
+
+        @can('Consulta Padrón')
+
+            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+
+                <a href="{{ route('consulta_padron') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
+
+                    Consultar padrón
+
+                </a>
+
+            </div>
+
+        @endcan
+
     </div>
 
 </div>

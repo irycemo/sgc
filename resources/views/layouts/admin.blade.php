@@ -67,7 +67,7 @@
 
                 @can('Ventanilla')
 
-                    @include('layouts.sidebar-ventanilla')
+                    @include('layouts.sidebar-tramites')
 
                 @endcan
 

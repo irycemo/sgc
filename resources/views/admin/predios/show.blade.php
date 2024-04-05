@@ -615,7 +615,8 @@
 
                     <th class="px-2">Estado</th>
                     <th class="px-2">Observaciones</th>
-                    <th class="px-2">Registrado por</th>
+                    <th class="px-2">Bloqueado por</th>
+                    <th class="px-2">Desbloqueado por</th>
 
                 </tr>
 
@@ -629,6 +630,7 @@
                         <td class=" px-2 w-full capitalize">{{ $bloqueo->estado }}</td>
                         <td class=" px-2 w-full ">{{ $bloqueo->observaciones }}</td>
                         <td class=" px-2 w-full ">{{ $bloqueo->creadoPor?->nombreCompleto() }}</td>
+                        <td class=" px-2 w-full ">{{ $bloqueo->actualizadoPor?->nombreCompleto() }}</td>
                     </tr>
 
                 @endforeach

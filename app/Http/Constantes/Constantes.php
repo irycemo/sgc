@@ -18,7 +18,7 @@ class Constantes{
         'Servicios',
         'Umas',
         'Subconceptos',
-        'Ventanilla',
+        'Trámites',
         'Trámites',
         'Predios',
         'Valuación',

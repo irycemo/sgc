@@ -2,7 +2,7 @@
 
     <div class="flex items-center  w-full justify-between mb-2">
 
-        <p class="uppercase text-base text-rojo tracking-wider">Ventanilla</p>
+        <p class="uppercase text-base text-rojo tracking-wider">Trámites</p>
 
         <button @click="openValuacion = false" x-show="openValuacion" class="rounded-full p-1 focus:outline-rojo">
 

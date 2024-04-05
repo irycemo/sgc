@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\GestionCatastral;
+namespace App\Livewire\GestionCatastral\Captura;
 
 use App\Models\Predio;
 use App\Models\Persona;
@@ -48,17 +48,18 @@ class Propietarios extends Component
     public $editar = false;
     public $crear = false;
     public $modal;
+    public $modalBorrar;
     public $partes_iguales;
 
     protected function rules(){
         return [
-            'porcentaje' => ['numeric', 'min:1', 'max:100', 'nullable', Rule::requiredIf($this->porcentaje_nuda === null && $this->porcentaje_usufructo === null)],
-            'porcentaje_nuda' => 'required|numeric|min:1|max:100',
-            'porcentaje_usufructo' => 'required|numeric|min:1|max:100',
+            'porcentaje' => ['numeric', 'max:100', 'nullable', Rule::requiredIf($this->porcentaje_nuda === null && $this->porcentaje_usufructo === null)],
+            'porcentaje_nuda' => 'nullable|numeric|max:100',
+            'porcentaje_usufructo' => 'nullable|numeric|max:100',
             'tipo_persona' => 'required',
-            'nombre' => [Rule::requiredIf($this->tipo_persona === 'FISICA'), 'regex:/^[\pL\s]+$/u'],
-            'ap_paterno' => [Rule::requiredIf($this->tipo_persona === 'FISICA'), 'regex:/^[\pL\s]+$/u'],
-            'ap_materno' => [Rule::requiredIf($this->tipo_persona === 'FISICA'), 'regex:/^[\pL\s]+$/u'],
+            'nombre' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
+            'ap_paterno' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
+            'ap_materno' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
             'curp' => [
                 'nullable',
                 'regex:/^[A-Z]{1}[AEIOUX]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$/i'
@@ -67,7 +68,7 @@ class Propietarios extends Component
                 'nullable',
                 'regex:/^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/'
             ],
-            'razon_social' => [Rule::requiredIf($this->tipo_persona === 'MORAL'), 'regex:/^[\pL\s]+$/u'],
+            'razon_social' => [Rule::requiredIf($this->tipo_persona === 'MORAL')],
             'fecha_nacimiento' => 'nullable',
             'nacionalidad' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
             'estado_civil' => 'nullable',
@@ -258,6 +259,10 @@ class Propietarios extends Component
                     'creado_por' => auth()->id()
                 ]);
 
+                $this->predio->audits()->latest()->first()->update(['tags' => 'Agregó propietario']);
+
+                $this->predio->touch();
+
                 $this->dispatch('mostrarMensaje', ['success', "El propietario se guardó con éxito."]);
 
                 $this->resetear();
@@ -324,6 +329,10 @@ class Propietarios extends Component
                 ]);
 
                 $this->dispatch('mostrarMensaje', ['success', "La información se actualizó con éxito."]);
+
+                $this->predio->touch();
+
+                $this->predio->audits()->latest()->first()->update(['tags' => 'Agregó propietario']);
 
                 $this->resetear();
 
@@ -392,6 +401,43 @@ class Propietarios extends Component
 
             $this->predio->load('propietarios.persona');
 
+            $this->predio->touch();
+
+            $this->predio->audits()->latest()->first()->update(['tags' => 'Borró propietario']);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al borrar propietario en pase a folio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+
+        }
+
+    }
+
+    public function borrarPropietarios(){
+
+        if(!$this->predio->getKey()){
+
+            $this->dispatch('mostrarMensaje', ['error', "Primero debe cargar el predio."]);
+
+            return;
+
+        }
+
+        try {
+
+            $this->predio->propietarios()->delete();
+
+            $this->dispatch('mostrarMensaje', ['success', "La información se eliminó con éxito."]);
+
+            $this->resetear();
+
+            $this->predio->load('propietarios.persona');
+
+            $this->predio->touch();
+
+            $this->predio->audits()->latest()->first()->update(['tags' => 'Borró todos los propietarios']);
+
         } catch (\Throwable $th) {
 
             Log::error("Error al borrar propietario en pase a folio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
@@ -455,6 +501,14 @@ class Propietarios extends Component
     }
 
     public function guardar(){
+
+        if(!$this->predio->getKey()){
+
+            $this->dispatch('mostrarMensaje', ['error', "Primero debe cargar el predio."]);
+
+            return;
+
+        }
 
         if($this->predio->propietarios->count() === 0){
 
@@ -537,6 +591,6 @@ class Propietarios extends Component
 
     public function render()
     {
-        return view('livewire.gestion-catastral.propietarios');
+        return view('livewire.gestion-catastral.captura.propietarios');
     }
 }

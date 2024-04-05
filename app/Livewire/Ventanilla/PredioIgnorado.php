@@ -381,6 +381,8 @@ class PredioIgnorado extends Component
 
         $this->notarias = Notaria::orderBy('numero')->get();
 
+        $this->municipio = auth()->user()->oficina->municipio;
+
         $this->cambiarFlags($this->servicio);
 
     }
