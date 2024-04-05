@@ -131,7 +131,7 @@ class UserSeeder extends Seeder
         ])->assignRole('Sistemas');
 
         User::create([
-            'clave' => 10,
+            'clave' => 11,
             'name' => 'Sistema trámites en línea',
             'oficina_id' => '53',
             'status' => 'activo',
