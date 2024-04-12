@@ -21,4 +21,8 @@ class Oficina extends Model
         return $this->belongsTo(Oficina::class, 'cabecera');
     }
 
+    public function localidades(){
+        return $this->hasMany(Oficina::class, 'cabecera');
+    }
+
 }

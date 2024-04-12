@@ -394,6 +394,8 @@ class Certificaciones extends Component
                 })
                 ->first()->efirma->imagen;
 
+        if(!$this->imagen) abort(500, message:"Es necesario actualizar la firma electrónica del director");
+
     }
 
     public function render()

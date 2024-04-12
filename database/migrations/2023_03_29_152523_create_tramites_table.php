@@ -37,12 +37,14 @@ return new class extends Migration
             $table->foreignId('adiciona')->nullable()->references('id')->on('tramites');
             $table->foreignId('predio_avaluo')->nullable()->references('id')->on('predio_avaluos');
             $table->text('observaciones')->nullable();
-            $table->unsignedInteger('notaria_id')->nullable();
+            $table->unsignedInteger('usuario_tramites_linea_id')->nullable();
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
 
             $table->unique(['año', 'folio', 'usuario']);
+
+            $table->index('usuario_tramites_linea_id');
 
         });
     }

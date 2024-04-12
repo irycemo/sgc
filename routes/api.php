@@ -4,7 +4,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SapControllerApi;
+use App\Http\Controllers\Api\V1\TramitesApiController;
 use App\Http\Controllers\Api\V1\ConsultaPredioController;
+use App\Http\Controllers\Api\V1\ConsultarCodigosPostales;
+use App\Http\Controllers\Api\V1\ConsultaOficinaController;
+use App\Http\Controllers\Api\V1\ConsultarServiciosController;
+use App\Http\Controllers\Api\V1\PropietariosApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +24,23 @@ use App\Http\Controllers\Api\V1\ConsultaPredioController;
 
 Route::middleware('auth:sanctum')->group(function () {
 
-    Route::post('consulta_predio', ConsultaPredioController::class);
+    Route::post('consulta_cuenta_predial', [ConsultaPredioController::class, 'consultarCuentaPredial']);
+
+    Route::post('consulta_predio', [ConsultaPredioController::class, 'consultarPredio']);
+
+    Route::get('oficinas', ConsultaOficinaController::class);
+
+    Route::get('codigos_postales', ConsultarCodigosPostales::class);
+
+    Route::get('consultar_tramite', [TramitesApiController::class, 'consultarTramite']);
+
+    Route::get('consultar_tramites', [TramitesApiController::class, 'consultarTramites']);
+
+    Route::post('craer_tramite', [TramitesApiController::class, 'crearTramtie']);
+
+    Route::get('consultar_servicios', [ConsultarServiciosController::class, 'consultarServicios']);
+
+    Route::get('consultar_propietarios', [PropietariosApiController::class, 'consultarPropietarios']);
 
 });
 

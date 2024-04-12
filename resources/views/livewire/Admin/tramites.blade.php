@@ -1,24 +1,28 @@
-<div>
+<div id="tramties">
 
     <div class="mb-6">
 
-        <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Trámites</h1>
+        <x-header>Trámites</x-header>
 
-        <div class="flex  w-full gap-2">
+        <div class="flex flex-col lg:flex-row w-full gap-2 overflow-auto">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
+            <div class="flex gap-2 flex-nowrap">
 
-                @foreach ($años as $año)
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
 
-                    <option value="{{ $año }}">{{ $año }}</option>
+                    @foreach ($años as $año)
 
-                @endforeach
+                        <option value="{{ $año }}">{{ $año }}</option>
 
-            </select>
+                    @endforeach
 
-            <input type="number" wire:model.live.debounce.500mse="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+                </select>
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="filters.tipoTramite">
+                <input type="number" wire:model.live.debounce.500mse="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+
+            </div>
+
+            <select class="bg-white rounded-full  text-sm" wire:model.live="filters.tipoTramite">
 
                 <option value="" selected>Tipo de trámtie</option>
                 <option value="parcial">Parcial</option>
@@ -42,7 +46,7 @@
 
             <input type="text" wire:model.live.debounce.500ms="filters.search" placeholder="Solicitante" class="bg-white rounded-full text-sm">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+            <select class="bg-white rounded-full text-sm w-fit" wire:model.live="pagination">
 
                 <option value="10">10</option>
                 <option value="25">25</option>
@@ -268,7 +272,7 @@
 
                     <x-table.cell colspan="15" class="bg-gray-50">
 
-                        {{ $tramites->links()}}
+                        {{ $tramites->links(data: ['scrollTo' => '#tramties'])}}
 
                     </x-table.cell>
 

@@ -148,20 +148,24 @@
                     </p>
                 </th>
 
-                <th style="vertical-align: middle">
+                @if($tramite->tipo_tramite !== 'exento')
 
-                    <div class="text-center" >
+                    <th style="vertical-align: middle">
 
-                        <p>La vigencia para el pago de este trámite es:</p>
-                        <p>{{ $tramite->fecha_vencimiento?->format('d-m-Y') }}.</p>
+                        <div class="text-center" >
 
-                        <p >Línea de captura:</p>
-                        <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($tramite->linea_de_captura, $generatorPNG::TYPE_CODE_128)) }}">
-                        <p>{{ $tramite->linea_de_captura }}</p>
+                            <p>La vigencia para el pago de este trámite es:</p>
+                            <p>{{ $tramite->fecha_vencimiento?->format('d-m-Y') }}.</p>
 
-                    </div>
+                            <p >Línea de captura:</p>
+                            <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($tramite->linea_de_captura, $generatorPNG::TYPE_CODE_128)) }}">
+                            <p>{{ $tramite->linea_de_captura }}</p>
 
-                </th>
+                        </div>
+
+                    </th>
+
+                @endif
 
             </tr>
 

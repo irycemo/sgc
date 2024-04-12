@@ -24,12 +24,22 @@ class TramiteService{
             $this->tramite->usuario = auth()->user()->clave;
             $this->tramite->folio = (Tramite::where('año', $this->tramite->año)->where('usuario', $this->tramite->usuario)->max('folio') ?? 0) + 1;
 
-            $sap = (new LineaCapturaApi($this->tramite))->generarLineaDeCaptura();
+            if($this->tramite->tipo_tramite == 'exento'){
 
-            $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
-            $this->tramite->orden_de_pago = $sap['ES_OPAG']['NRO_ORD_PAGO'];
-            $this->tramite->linea_de_captura = $sap['ES_OPAG']['LINEA_CAPTURA'];
-            $this->tramite->fecha_vencimiento = $this->convertirFecha($sap['ES_OPAG']['FECHA_VENCIMIENTO']);
+                $this->tramite->estado = 'pagado';
+                $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
+
+            }else{
+
+                $sap = (new LineaCapturaApi($this->tramite))->generarLineaDeCaptura();
+
+                $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
+                $this->tramite->orden_de_pago = $sap['ES_OPAG']['NRO_ORD_PAGO'];
+                $this->tramite->linea_de_captura = $sap['ES_OPAG']['LINEA_CAPTURA'];
+                $this->tramite->fecha_vencimiento = $this->convertirFecha($sap['ES_OPAG']['FECHA_VENCIMIENTO']);
+
+            }
+
             $this->tramite->creado_por = auth()->user()->id;
 
             if($predioAvaluo){
