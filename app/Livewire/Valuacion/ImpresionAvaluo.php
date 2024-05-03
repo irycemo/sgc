@@ -675,7 +675,7 @@ class ImpresionAvaluo extends Component
 
         if(!$this->director->efirma || !$this->director->efirma->cer || !$this->director->efirma->key || !$this->director->efirma->imagen) abort(500, message:"Es necesario actualizar la firma electrónica del director");
 
-        if(!$this->jefe_departamento->efirma || !$this->jefe_departamento->efirma->cer || !$this->jefe_departamento->efirma->key || !$this->jefe_departamento->efirma->imagen) abort(500, message:"Es necesario actualizar la firma electrónica del jefe de departamento de valuación");
+        if(!$this->jefe_departamento->efirma || !$this->jefe_departamento->efirma->cer || !$this->jefe_departamento->efirma->key) abort(500, message:"Es necesario actualizar la firma electrónica del jefe de departamento de valuación");
 
     }
 
