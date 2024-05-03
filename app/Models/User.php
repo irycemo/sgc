@@ -88,4 +88,9 @@ class User extends Authenticatable implements Auditable
     public function efirma(){
         return $this->hasOne(Efirma::class);
     }
+
+    public function trasladosAsignados(){
+        return $this->hasMany(Traslado::class, 'asignado_a');
+    }
+
 }

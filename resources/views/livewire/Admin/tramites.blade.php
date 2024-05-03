@@ -561,7 +561,7 @@
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                            <p><strong>Folio:</strong> {{ $modelo_editar->año }}-{{ $modelo_editar->folio }}</p>
+                            <p><strong>Folio:</strong> {{ $modelo_editar->año }}-{{ $modelo_editar->folio }}-{{ $modelo_editar->usuario }}</p>
 
                         </div>
 

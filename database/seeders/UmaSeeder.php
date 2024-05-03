@@ -18,57 +18,64 @@ class UmaSeeder extends Seeder
         Uma::create([
             'año' => 2016,
             'diario' => 73.04,
-            'mensual' => 73.04 * 30.4,
-            'anual' => 73.04 * 30.4 * 12
+            'mensual' => 2220.42,
+            'anual' => 26645.04
         ]);
 
         Uma::create([
             'año' => 2017,
             'diario' => 75.49,
-            'mensual' => 75.49 * 30.4,
-            'anual' => 75.49 * 30.4 * 12
+            'mensual' => 2294.90,
+            'anual' => 27538.80
         ]);
 
         Uma::create([
             'año' => 2018,
             'diario' => 80.60,
-            'mensual' => 80.60 * 30.4,
-            'anual' => 80.60 * 30.4 * 12
+            'mensual' => 2450.24,
+            'anual' => 29402.88
         ]);
 
         Uma::create([
             'año' => 2019,
             'diario' => 84.49,
-            'mensual' => 84.49 * 30.4,
-            'anual' => 84.49 * 30.4 * 12
+            'mensual' => 2568.50,
+            'anual' => 30822.00
         ]);
 
         Uma::create([
             'año' => 2020,
             'diario' => 86.88,
-            'mensual' => 86.88 * 30.4,
-            'anual' => 86.88 * 30.4 * 12
+            'mensual' => 2641.15,
+            'anual' => 31693.80
         ]);
 
         Uma::create([
             'año' => 2021,
             'diario' => 89.62,
-            'mensual' => 89.62 * 30.4,
-            'anual' => 89.62 * 30.4 * 12
+            'mensual' => 2724.45,
+            'anual' => 32693.40
         ]);
 
         Uma::create([
             'año' => 2022,
             'diario' => 96.22,
-            'mensual' => 96.22 * 30.4,
-            'anual' => 96.22 * 30.4 * 12
+            'mensual' => 2925.09,
+            'anual' => 35101.08
         ]);
 
         Uma::create([
             'año' => 2023,
             'diario' => 103.74,
-            'mensual' => 103.74 * 30.4,
-            'anual' => 103.74 * 30.4 * 12
+            'mensual' => 3153.70,
+            'anual' => 37844.40
+        ]);
+
+        Uma::create([
+            'año' => 2024,
+            'diario' => 108.57,
+            'mensual' => 3300.53,
+            'anual' => 39606.36
         ]);
     }
 }

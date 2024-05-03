@@ -14,9 +14,7 @@ class ConsultarServiciosController extends Controller
 
         $validated = $request->validate(['ids' => 'required|array']);
 
-        return ServicioResource::collection(
-            Servicio::find($validated['ids'])
-        );
+        return ServicioResource::collection(Servicio::find($validated['ids']))->response()->setStatusCode(200);
 
     }
 

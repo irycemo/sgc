@@ -26,9 +26,10 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+
         return [
-            'clave' => $this->faker->unique()->numberBetween(10, 100),
-            'valuador' => $this->faker->randomElement([0, 1]),
+            'clave' => User::max('clave') + 1,
+            'valuador' => 1,
             'name' => $this->faker->name(),
             'ap_paterno' => $this->faker->word(),
             'ap_materno' => $this->faker->word(),

@@ -30,10 +30,10 @@ class PropietariosApiController extends Controller
 
         }
 
-        if($tramite->estado !== 'pagado'){
+        if($tramite->estado === 'nuevo'){
 
             return response()->json([
-                'error' => "Trámite no valido.",
+                'error' => "El trámite no esta pagado.",
             ], 401);
 
         }

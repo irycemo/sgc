@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedDecimal("urgente", 18,2)->default(0)->nullable();
             $table->unsignedDecimal("extra_urgente", 18,2)->default(0)->nullable();
             $table->string('material')->nullable();
-            $table->string('clave_ingreso')->nullable();
+            $table->string('clave_ingreso')->nullable()->unique();
             $table->string('operacion_principal')->nullable();
             $table->string('operacion_parcial')->nullable();
             $table->foreignId('categoria_servicio_id')->constrained()->onDelete('cascade');

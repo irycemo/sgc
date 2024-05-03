@@ -70,16 +70,16 @@ class Propietarios extends Component
             ],
             'razon_social' => [Rule::requiredIf($this->tipo_persona === 'MORAL')],
             'fecha_nacimiento' => 'nullable',
-            'nacionalidad' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'nacionalidad' => 'nullable|' . utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
             'estado_civil' => 'nullable',
-            'calle' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
-            'numero_exterior_propietario' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
-            'numero_interior_propietario' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
-            'colonia' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'calle' => 'nullable|' . utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
+            'numero_exterior_propietario' => 'nullable|' . utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
+            'numero_interior_propietario' => 'nullable|' . utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
+            'colonia' => 'nullable|' . utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
             'cp' => 'nullable|numeric',
-            'ciudad' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
-            'entidad' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
-            'municipio_propietario' => 'nullable|regex:/^[a-zA-Z0-9\s]+$/',
+            'ciudad' => 'nullable|' . utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
+            'entidad' => 'nullable|' . utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
+            'municipio_propietario' => 'nullable|' . utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
         ];
     }
 
@@ -203,26 +203,19 @@ class Propietarios extends Component
             DB::transaction(function () {
 
                 $persona = Persona::query()
-                                    ->when($this->nombre, fn($q) => $q->where('nombre', $this->nombre))
-                                    ->when($this->ap_paterno, fn($q) => $q->where('ap_paterno', $this->ap_paterno))
-                                    ->when($this->ap_materno, fn($q) => $q->where('ap_materno', $this->ap_materno))
-                                    ->when($this->razon_social, fn($q) => $q->where('razon_social', $this->razon_social))
+                                    ->where(function($q){
+                                        $q->when($this->nombre, fn($q) => $q->where('nombre', $this->nombre))
+                                            ->when($this->ap_paterno, fn($q) => $q->where('ap_paterno', $this->ap_paterno))
+                                            ->when($this->ap_materno, fn($q) => $q->where('ap_materno', $this->ap_materno));
+                                    })
+                                    ->when($this->razon_social, fn($q) => $q->orWhere('razon_social', $this->razon_social))
+                                    ->when($this->rfc, fn($q) => $q->orWhere('rfc', $this->rfc))
+                                    ->when($this->curp, fn($q) => $q->orWhere('curp', $this->curp))
                                     ->first();
 
-                if($persona != null){
+                if($persona != null && $this->predio->propietarios()->where('persona_id', $persona->id)->first()){
 
-                    $persona->update([
-                        'estado_civil' => $this->estado_civil,
-                        'calle' => $this->calle,
-                        'numero_exterior' => $this->numero_exterior_propietario,
-                        'numero_interior' => $this->numero_interior_propietario,
-                        'colonia' => $this->colonia,
-                        'ciudad' => $this->ciudad,
-                        'cp' => $this->cp,
-                        'entidad' => $this->entidad,
-                        'municipio' => $this->municipio_propietario,
-                        'actualizado_por' => auth()->id()
-                    ]);
+                    $this->dispatch('mostrarMensaje', ['error', "La persona ya es un propietario."]);
 
                 }else{
 
@@ -299,13 +292,6 @@ class Propietarios extends Component
             DB::transaction(function () {
 
                 $this->propietario->persona->update([
-                    'tipo' => $this->tipo_persona,
-                    'nombre' => $this->nombre,
-                    'ap_paterno' => $this->ap_paterno,
-                    'ap_materno' => $this->ap_materno,
-                    'curp' => $this->curp,
-                    'rfc' => $this->rfc,
-                    'razon_social' => $this->razon_social,
                     'fecha_nacimiento' => $this->fecha_nacimiento,
                     'nacionalidad' => $this->nacionalidad,
                     'estado_civil' => $this->estado_civil,
@@ -317,7 +303,7 @@ class Propietarios extends Component
                     'cp' => $this->cp,
                     'entidad' => $this->entidad,
                     'municipio' => $this->municipio_propietario,
-                    'creado_por' => auth()->id()
+                    'actualizado_por' => auth()->id()
                 ]);
 
                 $this->propietario->update([

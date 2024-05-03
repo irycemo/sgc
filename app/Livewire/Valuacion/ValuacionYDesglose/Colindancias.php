@@ -34,7 +34,7 @@ class Colindancias extends Component
                                         'numeric',
                                         'min:0',
                                     ],
-            'medidas.*.descripcion' => 'required|string|regex:/^[a-zA-Z0-9\s]+$/',
+            'medidas.*.descripcion' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
             'predio' => 'required'
          ];
     }

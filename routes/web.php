@@ -19,6 +19,7 @@ use App\Livewire\Admin\FactorIncremento;
 use App\Livewire\Valuacion\FichaTecnica;
 use App\Livewire\Valuacion\Notificacion;
 use App\Http\Controllers\ManualController;
+use App\Livewire\Consultas\ConsultaPadron;
 use App\Livewire\Admin\CategoriasServicios;
 use App\Livewire\Valuacion\ImpresionAvaluo;
 use App\Http\Controllers\DashboardController;
@@ -45,7 +46,8 @@ use App\Livewire\Ventanilla\Ventanilla as VentanillaVentanilla;
 use App\Http\Controllers\Valuacion\ValuacionYDesgloseController;
 use App\Livewire\TramitesAdministrativos\VariacionesCatastrales;
 use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
-use App\Livewire\Consultas\ConsultaPadron;
+use App\Livewire\GestionCatastral\RevisionTraslados\RevisarTraslado;
+use App\Livewire\GestionCatastral\RevisionTraslados\RevisionTraslados;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +123,10 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
     /* Gestión catastral */
     Route::get('captura_padron', Captura::class)->middleware('permission:Captura al padron')->name('captura_padron');
+
+    Route::get('revision_traslados', RevisionTraslados::class)->middleware('permission:Revisar traslados')->name('revision_traslados');
+
+    Route::get('revisar_traslado/{traslado}', RevisarTraslado::class)->middleware('permission:Revisar traslados')->name('revisar_traslado');
 
     /* Tramites Administrativos */
     Route::get('variaciones_catastrales', VariacionesCatastrales::class)->middleware('permission:Variaciones catastrales')->name('variaciones_catastrales');

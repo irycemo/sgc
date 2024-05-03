@@ -140,7 +140,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345678'),
         ])->assignRole('Sistemas');
 
-        User::factory(10)->create()->each(function($user){
+        User::factory(1)->create()->each(function($user){
             $user->assignRole('Valuador');
         });
     }

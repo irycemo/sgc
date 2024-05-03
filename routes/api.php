@@ -4,12 +4,14 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\SapControllerApi;
+use App\Http\Controllers\Api\V1\CertificacionesApiControlller;
 use App\Http\Controllers\Api\V1\TramitesApiController;
 use App\Http\Controllers\Api\V1\ConsultaPredioController;
 use App\Http\Controllers\Api\V1\ConsultarCodigosPostales;
 use App\Http\Controllers\Api\V1\ConsultaOficinaController;
 use App\Http\Controllers\Api\V1\ConsultarServiciosController;
 use App\Http\Controllers\Api\V1\PropietariosApiController;
+use App\Http\Controllers\Api\V1\TrasladosApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,11 +38,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('consultar_tramites', [TramitesApiController::class, 'consultarTramites']);
 
+    Route::get('consultar_certificados', [TramitesApiController::class, 'consultarCertificados']);
+
     Route::post('craer_tramite', [TramitesApiController::class, 'crearTramtie']);
 
     Route::get('consultar_servicios', [ConsultarServiciosController::class, 'consultarServicios']);
 
     Route::get('consultar_propietarios', [PropietariosApiController::class, 'consultarPropietarios']);
+
+    Route::post('generar_certificado', [CertificacionesApiControlller::class, 'generarCertificado']);
+
+    Route::post('ingresar_traslado', [TrasladosApiController::class, 'ingresarTraslado']);
 
 });
 

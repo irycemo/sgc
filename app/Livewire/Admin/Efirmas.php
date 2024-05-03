@@ -217,6 +217,6 @@ class Efirmas extends Component
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 
-        return view('livewire.admin.efirmas', compact('efirmas'))->extends('layouts.admin');
+        return view('livewire.Admin.efirmas', compact('efirmas'))->extends('layouts.admin');
     }
 }

@@ -132,6 +132,10 @@
 
                                 <span class="bg-green-400 py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($certificacion->estado) }}</span>
 
+                            @elseif($certificacion->estado == 'caducado')
+
+                                <span class="bg-gray-400 py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($certificacion->estado) }}</span>
+
                             @else
 
                                 <span class="bg-red-400 py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($certificacion->estado) }}</span>

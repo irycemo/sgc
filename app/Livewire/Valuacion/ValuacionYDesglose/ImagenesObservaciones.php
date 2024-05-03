@@ -33,16 +33,16 @@ class ImagenesObservaciones extends Component
 
     protected function rules(){
         return [
-            'encabezado' => 'image|nullable',
-            'fachada' => 'image|nullable',
-            'foto2' => 'image|nullable',
-            'foto3' => 'image|nullable',
-            'foto4' => 'image|nullable',
-            'macrolocalizacion' => 'image|nullable',
+            'fachada' => 'image|max:5000',
+            'foto2' => 'image|max:5000',
+            'foto3' => 'image|max:5000',
+            'foto4' => 'image|max:5000',
+            'macrolocalizacion' => 'image|max:5000',
+            'microlocalizacion' => 'image|max:5000',
             'poligonoDwg' => 'nullable|mimes:dwg',
-            'poligonoImagen' => 'image|nullable',
+            'poligonoImagen' => 'image|max:5000',
             'predio' => 'required',
-            'predio.avaluo.observaciones' => 'required|regex:/^[a-zA-Z0-9\s]+$/'
+            'predio.avaluo.observaciones' => 'nullable|' . utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
          ];
     }
 

@@ -14,6 +14,16 @@ class CertificacionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+
+        return [
+            'uuid' => $this->uuid,
+            'año' => $this->año,
+            'folio' => $this->folio,
+            'documento' => $this->documento,
+            'cadena_original' => $this->cadena_originial,
+            'cadena_encriptada' => $this->cadena_encriptada,
+            'estado' => $this->estado
+        ];
+
     }
 }
