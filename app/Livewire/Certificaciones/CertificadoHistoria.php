@@ -349,11 +349,21 @@ class CertificadoHistoria extends Component
 
     public function generarCertificado(){
 
+        if($this->predio->sector === 88 || $this->predio->sector === 99){
+
+            $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra en sector 88 o 99 es necesario conciliarlo."]);
+
+            return;
+
+        }
+
         $pdf = $this->revisarOficina();
 
         $this->tramite->update(['estado' => 'concluido']);
 
         $this->tramite->adicionaA->update(['estado' => 'concluido']);
+
+        $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
 
         $this->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
 

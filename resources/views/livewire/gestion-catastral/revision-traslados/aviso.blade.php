@@ -171,7 +171,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2">
 
                     <strong>Coordenadas geográficas</strong>
 
@@ -188,7 +188,7 @@
             >Colindancias
             </label>
 
-            <div class="tab-panel w-full" :class="{ 'active': activeTab === 2 }" x-show.transition.in.opacity.duration.800="activeTab === 2"  wire:key="tab-2">
+            <div class="tab-panel w-full overflow-auto" :class="{ 'active': activeTab === 2 }" x-show.transition.in.opacity.duration.800="activeTab === 2"  wire:key="tab-2">
 
                 <table class="w-full">
 
@@ -229,7 +229,7 @@
             >Transmitentes
             </label>
 
-            <div class="tab-panel w-full" :class="{ 'active': activeTab === 1 }" x-show.transition.in.opacity.duration.800="activeTab === 1"  wire:key="tab-1">
+            <div class="tab-panel w-full  overflow-auto" :class="{ 'active': activeTab === 1 }" x-show.transition.in.opacity.duration.800="activeTab === 1"  wire:key="tab-1">
 
                 <table class="w-full">
 
@@ -255,6 +255,49 @@
                                 <td class=" px-2 w-min">{{ $transmitente['porcentaje'] ?? '0' }}</td>
                                 <td class=" px-2 w-min">{{ $transmitente['porcentaje_nuda'] ?? '0' }}</td>
                                 <td class=" px-2 w-min">{{ $transmitente['porcentaje_usufructo'] ?? '0' }}</td>
+                            </tr>
+
+                        @endforeach
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <label
+                @click="activeTab = 6"
+                class="px-6 py-1 text-gray-600 rounded-full border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white w-full"
+                :class="{'active  bg-gray-200 text-gray-500 no-underline': activeTab === 6 }"
+            >Adquirientes
+            </label>
+
+            <div class="tab-panel w-full  overflow-auto" :class="{ 'active': activeTab === 6 }" x-show.transition.in.opacity.duration.800="activeTab === 6"  wire:key="tab-6">
+
+                <table class="w-full">
+
+                    <thead class="border-b border-gray-300 ">
+
+                        <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+
+                            <th class="px-2">Nombre / Razón social</th>
+                            <th class="px-2">% Porpiedad</th>
+                            <th class="px-2">% Nuda</th>
+                            <th class="px-2">% Usufructo</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody class="divide-y divide-gray-200">
+
+                        @foreach ($aviso['adquirientes'] as $adquiriente)
+
+                            <tr class="text-gray-500 text-sm leading-relaxed">
+                                <td class=" px-2 w-full">{{ $adquiriente['nombre'] }} {{ $adquiriente['ap_paterno'] }} {{ $adquiriente['ap_materno'] }} {{ $adquiriente['razon_social'] }}</td>
+                                <td class=" px-2 w-min">{{ $adquiriente['porcentaje'] ?? '0' }}</td>
+                                <td class=" px-2 w-min">{{ $adquiriente['porcentaje_nuda'] ?? '0' }}</td>
+                                <td class=" px-2 w-min">{{ $adquiriente['porcentaje_usufructo'] ?? '0' }}</td>
                             </tr>
 
                         @endforeach

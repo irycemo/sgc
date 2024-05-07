@@ -491,18 +491,33 @@ class Captura extends Component
 
     }
 
+    public function validarTitulo(){
+
+        $predio = Predio::whereIn('documento_entrada', ['TÍTULO DE PROPIEDAD PARCELARIO', 'TÍTULO DE PROPIEDAD SOLAR URBANO'])
+                            ->where('documento_numero', $this->predio->documento_numero)
+                            ->first();
+
+        if($predio){
+
+            $this->dispatch('mostrarMensaje', ['error', "el título de propiedad ya esta registrado, verifique."]);
+
+            return true;
+
+        }
+
+    }
+
     public function crear(){
 
         $this->validate();
 
-        if($this->validarDisponibilidad() || $this->validarSector()) return;
+        if($this->validarDisponibilidad() || $this->validarSector() || $this->validarTitulo()) return;
 
         try {
 
             DB::transaction(function () {
 
                 $this->predio->creado_por = auth()->id();
-                $this->predio->observaciones = $this->observaciones;
                 $this->predio->save();
 
                 $this->predio->audits()->latest()->first()->update(['tags' => 'Dió de alta predio']);

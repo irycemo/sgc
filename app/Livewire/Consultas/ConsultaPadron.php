@@ -68,7 +68,7 @@ class ConsultaPadron extends Component
 
     public function updatedPredioOficina(){
 
-        $this->predio->municipio = Oficina::where('oficina', $this->predio->oficina)->first()->municipio;
+        $this->predio->municipio = Oficina::where('oficina', $this->predio->oficina)->first()?->municipio;
 
     }
 

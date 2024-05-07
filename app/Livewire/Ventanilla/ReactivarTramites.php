@@ -39,7 +39,7 @@ class ReactivarTramites extends Component
                                         ->where('usuario', $this->usuario)
                                         ->firstOrFail();
 
-            if($this->tramite->estado != 'pagado'){
+            if($this->tramite->estado === 'nuevo'){
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite no esta pagado."]);
 

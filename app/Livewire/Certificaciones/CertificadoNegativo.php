@@ -307,7 +307,6 @@ class CertificadoNegativo extends Component
         return $result->getDataUri();
     }
 
-
     public function generarCertificado(){
 
         $this->construirCadena();

@@ -171,7 +171,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2">
 
                     <strong>Coordenadas geográficas</strong>
 
@@ -229,7 +229,7 @@
             >Propietarios
             </label>
 
-            <div class="tab-panel w-full" :class="{ 'active': activeTab === 2 }" x-show.transition.in.opacity.duration.800="activeTab === 2"  wire:key="tab-2">
+            <div class="tab-panel w-full  overflow-auto" :class="{ 'active': activeTab === 2 }" x-show.transition.in.opacity.duration.800="activeTab === 2"  wire:key="tab-2">
 
                 <table class="w-full">
 

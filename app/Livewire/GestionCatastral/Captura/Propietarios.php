@@ -83,9 +83,11 @@ class Propietarios extends Component
         ];
     }
 
+
+
     public function updated($property, $value){
 
-        if(in_array($property, ['porcentaje_nuda', 'porcentaje_usufructo', 'porcentaje']) && $value == ''){
+        if($value == ''){
 
             $this->$property = null;
 
@@ -118,6 +120,7 @@ class Propietarios extends Component
                 'curp',
                 'fecha_nacimiento',
                 'estado_civil',
+                'rfc'
             ]);
 
         }

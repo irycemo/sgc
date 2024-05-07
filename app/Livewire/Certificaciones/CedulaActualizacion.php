@@ -291,11 +291,21 @@ class CedulaActualizacion extends Component
 
     public function generarCedula(){
 
+        if($this->predio->sector === 88 || $this->predio->sector === 99){
+
+            $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra en sector 88 o 99 es necesario conciliarlo."]);
+
+            return;
+
+        }
+
         $this->construirCadena();
 
         $pdf = $this->revisarOficina();
 
         $this->tramite->update(['estado' => 'concluido']);
+
+        $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
 
         $this->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
 

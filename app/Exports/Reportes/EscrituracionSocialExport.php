@@ -33,7 +33,7 @@ class EscrituracionSocialExport implements FromCollection,  WithProperties, With
     */
     public function collection()
     {
-        return Tramite::with('servicio')
+        return Tramite::with('servicio', 'creadoPor', 'actualizadoPor')
                             ->where('solicitante', 'Escrituración social')
                             ->when (isset($this->estado) && $this->estado != "", function($q){
                                 $q->where('estado', $this->estado);

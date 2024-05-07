@@ -38,7 +38,7 @@ class Usuarios extends Component
     protected function rules(){
         return [
             'modelo_editar.name' => 'required',
-            'modelo_editar.valuador' => Rule::requiredIf($this->role === "3"),
+            'modelo_editar.valuador' => 'accepted_if:role,3',
             'modelo_editar.ap_paterno' => 'required',
             'modelo_editar.ap_materno' => 'required',
             'modelo_editar.email' => 'required|email|unique:users,email,' . $this->modelo_editar->id,

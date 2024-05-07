@@ -314,181 +314,171 @@
 
                 </div>
 
-                @if($modelo_editar->predios->count())
+                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
+                    <div class="flex-auto ">
 
-                        <div class="flex-auto ">
+                        <div>
 
-                            <div>
+                            <Label class="text-base">Cuentas prediales involucradas</Label>
 
-                                <Label class="text-base">Cuentas prediales involucradas</Label>
+                            <div class="flex-row lg:flex lg:space-x-2 items-start justify-between ">
 
-                                <div class="flex-row lg:flex lg:space-x-2 items-start justify-between ">
+                                <div>
+
+                                    <input placeholder="Localidad" type="number" class="bg-white rounded text-sm w-full @error('localidad') border-red-500 @enderror" wire:model="localidad">
+
+                                </div>
+
+                                <div>
+
+                                    <input placeholder="Oficina" type="number" class="bg-white rounded text-sm w-full @error('oficina') border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+
+                                </div>
+
+                                <div>
+
+                                    <input placeholder="Tipo de predio" type="number" class="bg-white rounded text-sm w-full @error('tipo') border-red-500 @enderror" wire:model="tipo">
+
+                                </div>
+
+                                <div>
+
+                                    <input placeholder="Número de registro" type="number" class="bg-white rounded text-sm w-full @error('registro') border-red-500 @enderror" wire:model="registro">
+
+                                </div>
+
+                                <button
+                                    wire:click="buscarPredio"
+                                    wire:loading.attr="disabled"
+                                    wire:target="buscarPredio"
+                                    type="button"
+                                    class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-none flex items-center w-fit">
+                                    <img wire:loading wire:target="buscarPredio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                                    <p class="mr-1"> Buscar</p>
+                                </button>
+
+                            </div>
+
+                            @if($predio)
+
+                                <div class="text-sm my-3 flex items-center justify-between bg-gray-100 rounded-lg p-3">
 
                                     <div>
 
-                                        <input placeholder="Localidad" type="number" class="bg-white rounded text-sm w-full @error('localidad') border-red-500 @enderror" wire:model="localidad">
+                                        <p><strong>Propietario:</strong> {{ $predio->primerPropietario() }}</p>
 
-                                    </div>
-
-                                    <div>
-
-                                        <input placeholder="Oficina" type="number" class="bg-white rounded text-sm w-full @error('oficina') border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
-
-                                    </div>
-
-                                    <div>
-
-                                        <input placeholder="Tipo de predio" type="number" class="bg-white rounded text-sm w-full @error('tipo') border-red-500 @enderror" wire:model="tipo">
-
-                                    </div>
-
-                                    <div>
-
-                                        <input placeholder="Número de registro" type="number" class="bg-white rounded text-sm w-full @error('registro') border-red-500 @enderror" wire:model="registro">
+                                        <p><strong>Ubicacion:</strong> {{ $predio->nombre_vialidad }} #{{ $predio->numero_exterior }}</p>
 
                                     </div>
 
                                     <button
-                                        wire:click="buscarPredio"
+                                        wire:click="agregarPredio"
                                         wire:loading.attr="disabled"
-                                        wire:target="buscarPredio"
+                                        wire:target="agregarPredio"
                                         type="button"
-                                        class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-none flex items-center w-fit">
-                                        <img wire:loading wire:target="buscarPredio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-                                        <p class="mr-1"> Buscar</p>
+                                        class="bg-green-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-green-700 focus:outline-none flex items-center w-fit">
+                                        <img wire:loading wire:target="agregarPredio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                                        <p class="mr-1">Agregar</p>
                                     </button>
 
                                 </div>
 
-                                @if($predio)
+                            @endif
 
-                                    <div class="text-sm my-3 flex items-center justify-between bg-gray-100 rounded-lg p-3">
+                            @if($modelo_editar->predios()->count() > 0)
 
-                                        <div>
+                                <div class="text-sm my-3 rounded-lg">
 
-                                            <p><strong>Propietario:</strong> {{ $predio->primerPropietario() }}</p>
+                                    <table class="w-full rounded-lg">
 
-                                            <p><strong>Ubicacion:</strong> {{ $predio->nombre_vialidad }} #{{ $predio->numero_exterior }}</p>
+                                        <thead class="text-left bg-gray-100">
 
-                                        </div>
+                                            <tr>
 
-                                        <button
-                                            wire:click="agregarPredio"
-                                            wire:loading.attr="disabled"
-                                            wire:target="agregarPredio"
-                                            type="button"
-                                            class="bg-green-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-green-700 focus:outline-none flex items-center w-fit">
-                                            <img wire:loading wire:target="agregarPredio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-                                            <p class="mr-1">Agregar</p>
-                                        </button>
+                                                <th class="px-2">Estado</th>
+                                                <th class="px-2">Localidad</th>
+                                                <th class="px-2">Oficina</th>
+                                                <th class="px-2">Tipo de predio</th>
+                                                <th class="px-2">Número de registro</th>
+                                                <th class="px-2"></th>
 
-                                    </div>
+                                            </tr>
 
-                                @endif
+                                        </thead>
 
-                                @if($modelo_editar->predios()->count() > 0)
+                                        <tbody>
 
-                                    <div class="text-sm my-3 rounded-lg">
+                                            @foreach ($modelo_editar->predios as $item)
 
-                                        <table class="w-full rounded-lg">
+                                                <tr class="border-b py-1">
 
-                                            <thead class="text-left bg-gray-100">
+                                                    <td class="px-2">
+                                                        <span class="rounded-full px-1 text-white @if($item->pivot->estado === 'A') bg-green-500 @else bg-gray-500 @endif">{{ $item->pivot->estado }}</span>
+                                                    </td>
+                                                    <td class="px-2">
+                                                        {{ $item->localidad }}
+                                                    </td>
+                                                    <td class="px-2">
+                                                        <p>{{ $item->oficina }}</p>
+                                                    </td>
+                                                    <td class="px-2">
+                                                        <p>{{ $item->tipo_predio }}</p>
+                                                    </td>
+                                                    <td class="px-2">
+                                                        <p>{{ $item->numero_registro }}</p>
+                                                    </td>
+                                                    <td class="px-2 flex items-center space-x-2">
 
-                                                <tr>
+                                                        @if($item->pivot->estado === 'I')
 
-                                                    <th class="px-2">Estado</th>
-                                                    <th class="px-2">Localidad</th>
-                                                    <th class="px-2">Oficina</th>
-                                                    <th class="px-2">Tipo de predio</th>
-                                                    <th class="px-2">Número de registro</th>
-                                                    <th class="px-2"></th>
+                                                            <button
+                                                                wire:click="reactivarPredio({{ $item['id'] }})"
+                                                                wire:loading.attr="disabled"
+                                                                wire:target="reactivarPredio({{ $item['id'] }})"
+                                                                class=" bg-blue-400 text-white text-xs p-1 items-center rounded-full hover:bg-blue-700 flex justify-center focus:outline-none"
+                                                            >
+
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                                                </svg>
+
+                                                            </button>
+
+                                                        @elseif($item->pivot->estado === 'A')
+
+                                                            <button
+                                                                wire:click="quitarPredio({{ $item['id'] }})"
+                                                                wire:loading.attr="disabled"
+                                                                wire:target="quitarPredio({{ $item['id'] }})"
+                                                                class=" bg-red-400 text-white text-xs p-1 items-center rounded-full hover:bg-red-700 flex justify-center focus:outline-none"
+                                                            >
+
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                                </svg>
+
+                                                            </button>
+
+                                                        @endif
+
+                                                    </td>
 
                                                 </tr>
 
-                                            </thead>
+                                            @endforeach
 
-                                            <tbody>
+                                            <tr>
+                                                <td colspan="6">Total: {{ $modelo_editar->predios()->count() }}</td>
+                                            </tr>
 
-                                                @foreach ($modelo_editar->predios as $item)
+                                        </tbody>
 
-                                                    <tr class="border-b py-1">
-
-                                                        <td class="px-2">
-                                                            <span class="rounded-full px-1 text-white @if($item->pivot->estado === 'A') bg-green-500 @else bg-gray-500 @endif">{{ $item->pivot->estado }}</span>
-                                                        </td>
-                                                        <td class="px-2">
-                                                            {{ $item->localidad }}
-                                                        </td>
-                                                        <td class="px-2">
-                                                            <p>{{ $item->oficina }}</p>
-                                                        </td>
-                                                        <td class="px-2">
-                                                            <p>{{ $item->tipo_predio }}</p>
-                                                        </td>
-                                                        <td class="px-2">
-                                                            <p>{{ $item->numero_registro }}</p>
-                                                        </td>
-                                                        <td class="px-2 flex items-center space-x-2">
-
-                                                            @if($item->pivot->estado === 'I')
-
-                                                                <button
-                                                                    wire:click="reactivarPredio({{ $item['id'] }})"
-                                                                    wire:loading.attr="disabled"
-                                                                    wire:target="reactivarPredio({{ $item['id'] }})"
-                                                                    class=" bg-blue-400 text-white text-xs p-1 items-center rounded-full hover:bg-blue-700 flex justify-center focus:outline-none"
-                                                                >
-
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-                                                                    </svg>
-
-                                                                </button>
-
-                                                            @elseif($item->pivot->estado === 'A')
-
-                                                                <button
-                                                                    wire:click="quitarPredio({{ $item['id'] }})"
-                                                                    wire:loading.attr="disabled"
-                                                                    wire:target="quitarPredio({{ $item['id'] }})"
-                                                                    class=" bg-red-400 text-white text-xs p-1 items-center rounded-full hover:bg-red-700 flex justify-center focus:outline-none"
-                                                                >
-
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                                    </svg>
-
-                                                                </button>
-
-                                                            @endif
-
-                                                        </td>
-
-                                                    </tr>
-
-                                                @endforeach
-
-                                                <tr>
-                                                    <td colspan="6">Total: {{ $modelo_editar->predios()->count() }}</td>
-                                                </tr>
-
-                                            </tbody>
-
-                                        </table>
-
-                                    </div>
-
-                                @endif
-
-                                <div>
-
-                                    @error('predios') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                                    </table>
 
                                 </div>
 
-                            </div>
+                            @endif
 
                             <div>
 
@@ -498,9 +488,15 @@
 
                         </div>
 
+                        <div>
+
+                            @error('predios') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
                     </div>
 
-                @endif
+                </div>
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 

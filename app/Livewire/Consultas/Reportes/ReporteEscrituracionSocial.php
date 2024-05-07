@@ -64,7 +64,7 @@ class ReporteEscrituracionSocial extends Component
     public function render()
     {
 
-        $tramites = Tramite::with('servicio')
+        $tramites = Tramite::with('servicio', 'creadoPor', 'actualizadoPor')
                                 ->where('solicitante', 'Escrituración social')
                                 ->when (isset($this->estado) && $this->estado != "", function($q){
                                     $q->where('estado', $this->estado);
@@ -87,7 +87,7 @@ class ReporteEscrituracionSocial extends Component
                                 ->whereBetween('created_at', [$this->fecha1 . ' 00:00:00', $this->fecha2 . ' 23:59:59'])
                                 ->paginate($this->pagination);
 
-        return view('livewire.consultas.reporte-escrituracion-social', compact('tramites'));
+        return view('livewire.consultas.reportes.reporte-escrituracion-social', compact('tramites'));
 
     }
 
