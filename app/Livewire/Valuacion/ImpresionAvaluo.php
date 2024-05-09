@@ -489,9 +489,7 @@ class ImpresionAvaluo extends Component
 
             }
 
-            if($this->tramiteAvaluo != 'convenio_municipal'){
-
-                dd($this->tramiteAvaluo);
+            if($this->tramiteAvaluo != 'convenio_municipal' && $this->tramiteAvaluo != 0){
 
                 $this->cadena = $this->cadena . '|' . 'tramite_de_avaluo: ' . $this->tramiteAvaluo->año . '-' . $this->tramiteAvaluo->folio . '-'. $this->tramiteAvaluo->usuario  . '|' . 'recibo_avaluo: ' . $this->tramiteAvaluo->folio_pago;
 
