@@ -261,6 +261,12 @@ class Tramites extends Component
 
     }
 
+    public function reimprimir($id){
+
+        $this->dispatch('imprimir_recibo', ['tramite' => $id]);
+
+    }
+
     public function mount(){
 
         $this->crearModeloVacio();

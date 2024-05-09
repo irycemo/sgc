@@ -5,6 +5,7 @@ namespace App\Livewire\Ventanilla;
 use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\Servicio;
+use Livewire\Attributes\On;
 use App\Models\CategoriaServicio;
 use App\Http\Constantes\Constantes;
 use App\Http\Traits\ComponentesTrait;
@@ -40,7 +41,8 @@ class Ventanilla extends Component
 
     protected $listeners = [
         'reset' => 'resetAll',
-        'crearBatch' => 'crearBatch'
+        'crearBatch' => 'crearBatch',
+        'reimprimir' => 'reimprimir'
     ];
 
     public function resetAll(){
@@ -154,7 +156,6 @@ class Ventanilla extends Component
                                     ->where('año', $this->año)
                                     ->where('folio', $this->tramite_folio)
                                     ->where('usuario', $this->tramite_usuario)
-                                    ->whereIn('estado', ['pagado', 'nuevo'])
                                     ->first();
 
         if(!$this->tramite){
@@ -178,6 +179,12 @@ class Ventanilla extends Component
         $this->flag = true;
 
         $this->reset(['categoria_seleccionada', 'servicio_seleccionado', 'servicios', 'categoria','tramite_folio', 'tramite_usuario']);
+
+    }
+
+    public function reimprimir($id){
+
+        $this->dispatch('imprimir_recibo', ['tramite' => $id]);
 
     }
 

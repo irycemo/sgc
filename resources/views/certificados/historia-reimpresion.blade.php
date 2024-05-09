@@ -173,6 +173,81 @@
 
         </div>
 
+        <p class="separador">ACTUALMENTE</p>
+
+        <div class="informacion">
+
+            <p style="margin-bottom: 10px;"><strong>PROPIETARIO</strong> {{ $objeto->propietario }}</p>
+
+            <p style=" margin: 4px 0 4px 0;">
+                @if(isset($objeto->tipo_asentamiento))<strong>Tipo de asentamiento:</strong> {{ $objeto->tipo_asentamiento }},@endif
+                @if(isset($objeto->nombre_asentamiento))<strong>Nombre del asentamiento:</strong> {{ $objeto->nombre_asentamiento }},@endif
+                @if(isset($objeto->tipo_vialidad))<strong>Tipo de vialidad:</strong> {{ $objeto->tipo_vialidad }},@endif
+                @if(isset($objeto->nombre_vialidad))<strong>Nombre de la vialidad:</strong> {{ $objeto->nombre_vialidad }},@endif
+                @if(isset($objeto->numero_interior))<strong>Número interior:</strong> {{ $objeto->numero_interior }},@endif
+                @if(isset($objeto->numero_exterior))<strong>Número exterior:</strong> {{ $objeto->numero_exterior }},@endif
+                @if(isset($objeto->numero_exterior_2))<strong>Número exterior 2:</strong> {{ $objeto->numero_exterior_2 }},@endif
+                @if(isset($objeto->numero_adicional))<strong>Número adicional:</strong> {{ $objeto->numero_adicional }},@endif
+                @if(isset($objeto->numero_adicional_2))<strong>Número adicional 2:</strong> {{ $objeto->numero_adicional_2 }},@endif
+                @if(isset($objeto->codigo_postal))<strong>Código postal:</strong> {{ $objeto->codigo_postal }}@endif
+            </p>
+
+            <p style=" margin-bottom: 4px;">
+                @if(isset($objeto->nombre_edificio))<strong>Nombre del edificio:</strong> {{ $objeto->nombre_edificio }},@endif
+                    @if(isset($objeto->clave_edificio))<strong>Clave del edificio:</strong> {{ $objeto->clave_edificio }},@endif
+                    @if(isset($objeto->departamento_edificio))<strong>Departamento:</strong> {{ $objeto->departamento_edificio }}@endif
+            </p>
+
+            <p style=" margin-bottom: 4px;">
+            @if(isset($objeto->lote_fraccionador))<strong>Lote del fraccionador:</strong> {{ $objeto->lote_fraccionador }},@endif
+                @if(isset($objeto->manzana_fraccionador))<strong>Manzana del fraccionador:</strong> {{ $objeto->manzana_fraccionador }},@endif
+                @if(isset($objeto->etapa_fraccionador))<strong>Etapa del fraccionador:</strong> {{ $objeto->etapa_fraccionador }}@endif
+                @if(isset($objeto->ubicacion_en_manzana))<strong>Ubicación del predio en la manzana:</strong> {{ $objeto->ubicacion_en_manzana }}@endif
+            </p>
+
+            <p style="">
+                @if(isset($objeto->nombre_predio))<strong>Predio Rústico Denominado ó Antecedente:</strong> {{ $objeto->nombre_predio }}@endif
+            </p>
+
+            @if(isset($objeto->xutm) || isset($objeto->lat))
+
+                <p style=" margin-top: 4px;">
+                    <strong>Coordenadas geográficas: </strong>
+                </p>
+
+                @if(isset($objeto->xutm))
+
+                        <strong>UTM: </strong>
+                        <strong>X:</strong> {{ $objeto->xutm }}, <strong>Y:</strong> {{ $objeto->yutm }},  <strong>Z:</strong> {{ $objeto->zutm }}
+
+                @endif
+
+                @if(isset($objeto->xutm))
+                    <p style="">
+                        <strong>GEO: </strong>
+                        <strong>LAT:</strong> {{ $objeto->lat }}, <strong>LON:</strong> {{ $objeto->lon }}
+                    </p>
+                @endif
+
+            @endif
+
+        </div>
+
+        <div class="informacion">
+
+            <p style=" margin: 4px 0 4px 0;">
+                @if(isset($objeto->superficie_notarial))<strong>Superficie notarial:</strong> {{ number_format($objeto->superficie_notarial, 2) }},@endif
+                @if(isset($objeto->superficie_judicial))<strong>Superficie judicial:</strong> {{ number_format($objeto->superficie_judicial, 2) }},@endif
+                @if(isset($objeto->superficie_terreno))<strong>Superficie de terreno:</strong> {{ number_format($objeto->superficie_terreno, 2) }},@endif
+                @if(isset($objeto->superficie_construccion))<strong>Superficie de construcción:</strong> {{ number_format($objeto->superficie_construccion, 2) }},@endif
+                @if(isset($objeto->area_comun_terreno))<strong>Superficie de terreno común:</strong> {{ number_format($objeto->area_comun_terreno, 2) }},@endif
+                @if(isset($objeto->area_comun_construccion))<strong>Superficie de construcción común:</strong> {{ number_format($objeto->area_comun_construccion, 2) }},@endif
+            </p>
+
+            <p><strong>Valor catastral: </strong>${{ number_format($objeto->valor_catastral, 2) }}</p>
+
+        </div>
+
         <p class="separador">Datos de control</p>
 
         <div class="informacion">

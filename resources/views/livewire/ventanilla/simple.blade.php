@@ -483,17 +483,17 @@
                             Editar
                         </button>
 
-                        <button
-                            wire:click="reimprimir"
-                            wire:loading.attr="disabled"
-                            wire:target="reimprimir"
-                            type="button"
-                            class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-none ">
-                            <img wire:loading wire:target="reimprimir" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-                            Reimprimir
-                        </button>
-
                     @endif
+
+                    <button
+                        wire:click="$parent.reimprimir({{ $tramite->id }})"
+                        wire:loading.attr="disabled"
+                        wire:target="$parent.reimprimir({{ $tramite->id }})"
+                        type="button"
+                        class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-blue-700 focus:outline-none ">
+                        <img wire:loading wire:target="$parent.reimprimir({{ $tramite->id }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                        Reimprimir
+                    </button>
 
                 </div>
 

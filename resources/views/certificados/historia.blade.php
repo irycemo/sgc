@@ -161,7 +161,7 @@
 
             <p><strong>Cuenta predial</strong> {{ $predio->cuentaPredial() }}</p>
             <p><strong>Clave catastral</strong> {{ $predio->claveCatastral() }}</p>
-            <p><strong>Propietario</strong> {{ $predio->primerPropietario() }}</p>
+            <p><strong>Propietario</strong> {{ $predio->primerPropietario() }}  @if($predio->propietarios()->count() > 1) y soc. @endif</p>
 
         </div>
 
@@ -170,6 +170,82 @@
         <div class="informacion">
 
             {!! $certificado !!}
+
+        </div>
+
+        <p class="separador">ACTUALMENTE</p>
+
+        <div class="informacion">
+
+            <p style="margin-bottom: 10px;"><strong>PROPIETARIO</strong> {{ $predio->primerPropietario() }}  @if($predio->propietarios()->count() > 1) y soc. @endif</p>
+
+            <p style=" margin: 4px 0 4px 0;">
+                @if($predio->tipo_asentamiento)<strong>Tipo de asentamiento:</strong> {{ $predio->tipo_asentamiento }},@endif
+                @if($predio->nombre_asentamiento)<strong>Nombre del asentamiento:</strong> {{ $predio->nombre_asentamiento }},@endif
+                @if($predio->tipo_vialidad)<strong>Tipo de vialidad:</strong> {{ $predio->tipo_vialidad }},@endif
+                @if($predio->nombre_vialidad)<strong>Nombre de la vialidad:</strong> {{ $predio->nombre_vialidad }},@endif
+                @if($predio->numero_interior)<strong>Número interior:</strong> {{ $predio->numero_interior }},@endif
+                @if($predio->numero_exterior)<strong>Número exterior:</strong> {{ $predio->numero_exterior }},@endif
+                @if($predio->numero_exterior_2)<strong>Número exterior 2:</strong> {{ $predio->numero_exterior_2 }},@endif
+                @if($predio->numero_adicional)<strong>Número adicional:</strong> {{ $predio->numero_adicional }},@endif
+                @if($predio->numero_adicional_2)<strong>Número adicional 2:</strong> {{ $predio->numero_adicional_2 }},@endif
+                @if($predio->codigo_postal)<strong>Código postal:</strong> {{ $predio->codigo_postal }}@endif
+            </p>
+
+            <p style=" margin-bottom: 4px;">
+                @if($predio->nombre_edificio)<strong>Nombre del edificio:</strong> {{ $predio->nombre_edificio }},@endif
+                @if($predio->clave_edificio)<strong>Clave del edificio:</strong> {{ $predio->clave_edificio }},@endif
+                @if($predio->departamento_edificio)<strong>Departamento:</strong> {{ $predio->departamento_edificio }}@endif
+            </p>
+
+            <p style=" margin-bottom: 4px;">
+                @if($predio->lote_fraccionador)<strong>Lote del fraccionador:</strong> {{ $predio->lote_fraccionador }},@endif
+                @if($predio->manzana_fraccionador)<strong>Manzana del fraccionador:</strong> {{ $predio->manzana_fraccionador }},@endif
+                @if($predio->etapa_fraccionador)<strong>Etapa del fraccionador:</strong> {{ $predio->etapa_fraccionador }}@endif
+                @if($predio->ubicacion_en_manzana)<strong>Ubicación del predio en la manzana:</strong> {{ $predio->ubicacion_en_manzana }}@endif
+            </p>
+
+            <p style="">
+                @if($predio->nombre_predio)<strong>Predio Rústico Denominado ó Antecedente:</strong> {{ $predio->nombre_predio }}@endif
+            </p>
+
+            @if($predio->xutm || $predio->lat)
+
+                <p style=" margin-top: 4px;">
+                    <strong>Coordenadas geográficas: </strong>
+                </p>
+
+                @if($predio->xutm)
+
+                        <strong>UTM: </strong>
+                        <strong>X:</strong> {{ $predio->xutm }}, <strong>Y:</strong> {{ $predio->yutm }},  <strong>Z:</strong> {{ $predio->zutm }}
+
+                @endif
+
+                @if($predio->xutm)
+                    <p style="">
+                        <strong>GEO: </strong>
+                        <strong>LAT:</strong> {{ $predio->lat }}, <strong>LON:</strong> {{ $predio->lon }}
+                    </p>
+                @endif
+
+            @endif
+
+        </div>
+
+        <div class="informacion">
+
+            <p style=" margin: 4px 0 4px 0;">
+                @if($predio->superficie_notarial > 0)<strong>Superficie notarial:</strong> {{ number_format($predio->superficie_notarial, 2) }},@endif
+                @if($predio->superficie_judicial > 0)<strong>Superficie judicial:</strong> {{ number_format($predio->superficie_judicial, 2) }},@endif
+                @if($predio->superficie_terreno > 0)<strong>Superficie de terreno:</strong> {{ number_format($predio->superficie_terreno, 2) }},@endif
+                @if($predio->superficie_construccion > 0)<strong>Superficie de construcción:</strong> {{ number_format($predio->superficie_construccion, 2) }},@endif
+                @if($predio->area_comun_terreno > 0)<strong>Superficie de terreno común:</strong> {{ number_format($predio->area_comun_terreno, 2) }},@endif
+                @if($predio->area_comun_construccion > 0)<strong>Superficie de construcción común:</strong> {{ number_format($predio->area_comun_construccion, 2) }},@endif
+
+            </p>
+
+            <p><strong>Valor catastral: </strong>${{ number_format($predio->valor_catastral, 2) }}</p>
 
         </div>
 

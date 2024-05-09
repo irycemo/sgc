@@ -10,6 +10,7 @@ use Livewire\Component;
 use App\Models\Movimiento;
 use App\Models\Certificacion;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
 use Endroid\QrCode\Builder\Builder;
 use Illuminate\Support\Facades\Log;
@@ -188,7 +189,7 @@ class CertificadoHistoria extends Component
 
             }
 
-            if($this->tramite->estado != 'pagado'){
+            if($this->tramite->estado != 'pagado' && $this->tramite->estado != 'autorizado'){
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite no esta pagado."]);
 
@@ -207,17 +208,11 @@ class CertificadoHistoria extends Component
                 'D927' => 100
             };
 
-            $movimientos = $this->predio->movimientos->sortByDesc('fecha');
-
-            $count = 0;
+            $movimientos = $this->predio->movimientos->sortByDesc('fecha')->take($cantidad)->reverse();
 
             foreach ($movimientos as $movimiento) {
 
-                if($count == $cantidad) break;
-
                 $this->certificado = $this->certificado . '<br>' . 'Movmiento: ' . $movimiento->nombre . '<br>' . 'Fecha: ' . $movimiento->fecha->format('d-m-Y') . '<br>' . 'Descripción: ' . '<br>' . $movimiento->descripcion . '<br>';
-
-                $count ++;
             }
 
             $this->reset(['folio', 'usuario']);
@@ -357,15 +352,21 @@ class CertificadoHistoria extends Component
 
         }
 
-        $pdf = $this->revisarOficina();
+        $pdf = null;
 
-        $this->tramite->update(['estado' => 'concluido']);
+        DB::transaction(function () use(&$pdf){
 
-        $this->tramite->adicionaA->update(['estado' => 'concluido']);
+            $pdf = $this->revisarOficina();
 
-        $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
+            $this->tramite->update(['estado' => 'concluido']);
 
-        $this->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
+            $this->tramite->adicionaA->update(['estado' => 'concluido']);
+
+            $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
+
+            $this->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
+
+        });
 
         return response()->streamDownload(
             fn () => print($pdf),
@@ -382,7 +383,9 @@ class CertificadoHistoria extends Component
 
         $this->cadena = $this->cadena . '|' . 'clave_catastral: ' . $this->predio->claveCatastral();
 
-        $this->cadena = $this->cadena . '|' . 'propietario: ' . $this->predio->primerPropietario();
+        $sociedad = $this->predio->propietarios()->count() > 1 ? ' y soc.' : '';
+
+        $this->cadena = $this->cadena . '|' . 'propietario: ' . $this->predio->primerPropietario() . $sociedad;
 
         $this->cadena = $this->cadena . '|' . 'historia: ' . $this->certificado;
 
@@ -393,6 +396,37 @@ class CertificadoHistoria extends Component
         $this->cadena = $this->cadena . '|' . 'tramite: ' . $this->tramite->año . '-' . $this->tramite->folio . '-'. $this->tramite->usuario . '|' . 'recibo: ' . $this->tramite->folio_pago;
 
         $this->cadena = $this->cadena . '|' . 'solicitante: ' . $this->tramite->nombre_solicitante;
+
+        if($this->predio->tipo_asentamiento) $this->cadena = $this->cadena . '|' . 'tipo_asentamiento: ' . $this->predio->tipo_asentamiento;
+        if($this->predio->nombre_asentamiento) $this->cadena = $this->cadena . '|' . 'nombre_asentamiento: ' . $this->predio->nombre_asentamiento;
+        if($this->predio->tipo_vialidad) $this->cadena = $this->cadena . '|' . 'tipo_vialidad: ' . $this->predio->tipo_vialidad;
+        if($this->predio->nombre_vialidad) $this->cadena = $this->cadena . '|' . 'nombre_vialidad: ' . $this->predio->nombre_vialidad;
+        if($this->predio->numero_interior) $this->cadena = $this->cadena . '|' . 'numero_interior: ' . $this->predio->numero_interior;
+        if($this->predio->numero_exterior) $this->cadena = $this->cadena . '|' . 'numero_exterior: ' . $this->predio->numero_exterior;
+        if($this->predio->numero_exterior_2) $this->cadena = $this->cadena . '|' . 'numero_exterior_2: ' . $this->predio->numero_exterior_2;
+        if($this->predio->numero_adicional) $this->cadena = $this->cadena . '|' . 'numero_adicional: ' . $this->predio->numero_adicional;
+        if($this->predio->numero_adicional_2) $this->cadena = $this->cadena . '|' . 'numero_adicional_2: ' . $this->predio->numero_adicional_2;
+        if($this->predio->codigo_postal) $this->cadena = $this->cadena . '|' . 'codigo_postal: ' . $this->predio->codigo_postal;
+        if($this->predio->nombre_edificio) $this->cadena = $this->cadena . '|' . 'nombre_edificio: ' . $this->predio->nombre_edificio;
+        if($this->predio->clave_edificio) $this->cadena = $this->cadena . '|' . 'clave_edificio: ' . $this->predio->clave_edificio;
+        if($this->predio->departamento_edificio) $this->cadena = $this->cadena . '|' . 'departamento_edificio: ' . $this->predio->departamento_edificio;
+        if($this->predio->lote_fraccionador) $this->cadena = $this->cadena . '|' . 'lote_fraccionador: ' . $this->predio->lote_fraccionador;
+        if($this->predio->manzana_fraccionador) $this->cadena = $this->cadena . '|' . 'manzana_fraccionador: ' . $this->predio->manzana_fraccionador;
+        if($this->predio->etapa_fraccionador) $this->cadena = $this->cadena . '|' . 'etapa_fraccionador: ' . $this->predio->etapa_fraccionador;
+        if($this->predio->ubicacion_en_manzana) $this->cadena = $this->cadena . '|' . 'ubicacion_en_manzana: ' . $this->predio->ubicacion_en_manzana;
+        if($this->predio->nombre_predio) $this->cadena = $this->cadena . '|' . 'nombre_predio: ' . $this->predio->nombre_predio;
+        if($this->predio->xutm) $this->cadena = $this->cadena . '|' . 'xutm: ' . $this->predio->xutm;
+        if($this->predio->yutm) $this->cadena = $this->cadena . '|' . 'yutm: ' . $this->predio->yutm;
+        if($this->predio->zutm) $this->cadena = $this->cadena . '|' . 'zutm: ' . $this->predio->zutm;
+        if($this->predio->lat) $this->cadena = $this->cadena . '|' . 'lat: ' . $this->predio->lat;
+        if($this->predio->lon) $this->cadena = $this->cadena . '|' . 'lon: ' . $this->predio->lon;
+        if($this->predio->superficie_terreno > 0) $this->cadena = $this->cadena . '|' . 'superficie_terreno: ' . $this->predio->superficie_terreno;
+        if($this->predio->superficie_notarial > 0) $this->cadena = $this->cadena . '|' . 'superficie_notarial: ' . $this->predio->superficie_notarial;
+        if($this->predio->superficie_judicial > 0) $this->cadena = $this->cadena . '|' . 'superficie_judicial: ' . $this->predio->superficie_judicial;
+        if($this->predio->superficie_construccion > 0) $this->cadena = $this->cadena . '|' . 'superficie_construccion: ' . $this->predio->superficie_construccion;
+        if($this->predio->area_comun_terreno > 0) $this->cadena = $this->cadena . '|' . 'area_comun_terreno: ' . $this->predio->area_comun_terreno;
+        if($this->predio->area_comun_construccion > 0) $this->cadena = $this->cadena . '|' . 'area_comun_construccion: ' . $this->predio->area_comun_construccion;
+        if($this->predio->valor_catastral) $this->cadena = $this->cadena . '|' . 'valor_catastral: ' . $this->predio->valor_catastral;
 
         if($this->predio->oficina == 101 || $this->impresionDirector){
 
