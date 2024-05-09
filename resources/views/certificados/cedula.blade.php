@@ -142,7 +142,7 @@
 
         <div>
 
-            <p class="titulo">CEDULA DE ACTUALIZACIÓN CATASTRAL</p>
+            <p class="titulo">CÉDULA DE ACTUALIZACIÓN CATASTRAL</p>
 
         </div>
 

@@ -525,7 +525,8 @@ class Captura extends Component
                 $this->predio->movimientos()->create([
                     'nombre' => $this->origen,
                     'fecha' => now()->toDateString(),
-                    'descripcion' => $this->observaciones
+                    'descripcion' => $this->observaciones,
+                    'creado_por' => auth()->id()
                 ]);
 
                 $this->dispatch('cargarPredio', id:$this->predio->id, flag:true);
@@ -566,7 +567,8 @@ class Captura extends Component
                 $this->predio->movimientos()->create([
                     'nombre' => $this->origen,
                     'fecha' => now()->toDateString(),
-                    'descripcion' => $this->observaciones
+                    'descripcion' => $this->observaciones,
+                    'creado_por' => auth()->id()
                 ]);
 
                 $this->dispatch('mostrarMensaje', ['success', "El predio se actualizó correctamente."]);

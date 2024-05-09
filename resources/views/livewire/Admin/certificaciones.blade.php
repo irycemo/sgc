@@ -84,6 +84,7 @@
 
                 <x-table.heading sortable wire:click="sortBy('año')" :direction="$sort === 'año' ? $direction : null" >Año</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('folio')" :direction="$sort === 'folio' ? $direction : null" >Folio</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('predio_id')" :direction="$sort === 'predio_id' ? $direction : null" >Cuenta predial</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('documento')" :direction="$sort === 'documento' ? $direction : null" >Documento</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('estado')" :direction="$sort === 'estado' ? $direction : null" >Estado</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('oficina_id')" :direction="$sort === 'oficina_id' ? $direction : null" >Oficina</x-table.heading>
@@ -113,6 +114,14 @@
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Folio</span>
 
                             {{ $certificacion->folio }}
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Cuenta Predial</span>
+
+                            {{ $certificacion->predio ? $certificacion->predio->cuentaPredial() : 'N/A' }}
 
                         </x-table.cell>
 

@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TramiteRequest;
 use App\Http\Requests\CertificacionRequest;
+use App\Http\Requests\CrearCertificadoRequest;
 use App\Http\Resources\CertificacionResource;
 use App\Http\Services\Certificaciones\CertificacionesService;
 
 class CertificacionesApiControlller extends Controller
 {
 
-    public function generarCertificado(CertificacionRequest $request){
+    public function generarCertificado(CrearCertificadoRequest $request){
 
         $validated = $request->validated();
 
@@ -99,6 +100,52 @@ class CertificacionesApiControlller extends Controller
             return (new CertificacionResource($certificacion))->response()->setStatusCode(200);
 
         }
+
+    }
+
+    public function consultarCertificado(CertificacionRequest $request){
+
+        $validated = $request->validated();
+
+        $tramite = Tramite::where('año', $validated['año'])
+                            ->where('folio', $validated['folio'])
+                            ->where('usuario', 11)
+                            ->first();
+
+        if(!$tramite){
+
+            return response()->json([
+                'error' => "Trámite no existe.",
+            ], 404);
+
+        }
+
+        $certificacion = Certificacion::where('tramite_id', $tramite->id)
+                                        ->whereHas('predio', function($q) use ($validated){
+                                            $q->where('localidad', $validated['localidad'])
+                                                ->where('oficina', $validated['oficina'])
+                                                ->where('tipo_predio', $validated['tipo_predio'])
+                                                ->where('numero_registro', $validated['numero_registro']);
+                                        })
+                                        ->first();
+
+        if(!$certificacion){
+
+            return response()->json([
+                'error' => "No se encontró el certificado.",
+            ], 404);
+
+        }
+
+        if($certificacion->estado != 'activo'){
+
+            return response()->json([
+                'error' => "El trámite de certificado no esta activo.",
+            ], 401);
+
+        }
+
+        return (new CertificacionResource($certificacion))->response()->setStatusCode(200);
 
     }
 

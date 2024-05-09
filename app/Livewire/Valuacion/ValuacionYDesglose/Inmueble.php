@@ -81,7 +81,7 @@ class Inmueble extends Component
             'nombre' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
             'tipo_persona' => 'required',
             'tipo_propietario' => 'required',
-            'porcentaje' => 'required|numeric|max:100',
+            'porcentaje' => 'nullable|numeric|max:100',
          ];
     }
 

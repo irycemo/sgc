@@ -48,6 +48,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('generar_certificado', [CertificacionesApiControlller::class, 'generarCertificado']);
 
+    Route::get('consultar_certificado', [CertificacionesApiControlller::class, 'consultarCertificado']);
+
     Route::post('ingresar_traslado', [TrasladosApiController::class, 'ingresarTraslado']);
 
 });

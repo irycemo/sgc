@@ -58,6 +58,20 @@
 
         @endcan
 
+        @can('Conciliar manzanas')
+
+        <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+
+            <a href="{{ route('conciliar_manzanas') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
+
+                Conciliar manzanas
+
+            </a>
+
+        </div>
+
+    @endcan
+
     </div>
 
 </div>

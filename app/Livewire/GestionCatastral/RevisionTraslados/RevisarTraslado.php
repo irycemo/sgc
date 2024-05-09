@@ -326,6 +326,22 @@ class RevisarTraslado extends Component
                                                                                 })
                                                                                 ->delete();
 
+            }else{
+
+                 $aux = $this->traslado->predio->propietarios()->whereHas('persona', function($q) use($propietario){
+                                                                                    $q->where('nombre', $propietario['nombre'])
+                                                                                        ->where('ap_paterno', $propietario['ap_paterno'])
+                                                                                        ->where('ap_materno', $propietario['ap_materno'])
+                                                                                        ->where('razon_social', $propietario['razon_social']);
+                                                                                    })
+                                                                                    ->first();
+
+                $aux->update([
+                    'porcentaje' => $propietario['porcentaje'],
+                    'porcentaje_nuda' => $propietario['porcentaje_nuda'],
+                    'porcentaje_usufructo' => $propietario['porcentaje_usufructo'],
+                ]);
+
             }
 
         }
@@ -498,17 +514,9 @@ class RevisarTraslado extends Component
                     ];
                 }
 
-            }elseif($response->status() === 404){
-
-                $this->dispatch('mostrarMensaje', ['error', $data['error']]);
-
-                return true;
-
             }else{
 
-                $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
-
-                return true;
+                abort(500, message:"Error al consultar aviso");
 
             }
 
@@ -539,19 +547,9 @@ class RevisarTraslado extends Component
 
                 $this->rechazos = Constantes::RECHAZOS_AVISOS;
 
-            }elseif($response->status() === 404){
-
-                $this->dispatch('mostrarMensaje', ['error', $data['error']]);
-
-                return true;
-
             }else{
 
-                Log::error("Error al consultar avalúo de aviso en cierre por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $response);
-
-                $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
-
-                return true;
+                abort(500, message:"Error al consultar avalúo de aviso");
 
             }
 

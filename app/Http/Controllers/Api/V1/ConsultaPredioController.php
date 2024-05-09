@@ -21,19 +21,19 @@ class ConsultaPredioController extends Controller
                             ->where('numero_registro', $validated['numero_registro'])
                             ->first();
 
-        if($predio->status === 'bloqueado'){
-
-            return response()->json([
-                'error' => "El predio esta bloqueado.",
-            ], 401);
-
-        }
-
         if(!$predio){
 
             return response()->json([
                 'error' => "No se encontraron resultados.",
             ], 404);
+
+        }
+
+        if($predio->status === 'bloqueado'){
+
+            return response()->json([
+                'error' => "El predio esta bloqueado.",
+            ], 401);
 
         }
 

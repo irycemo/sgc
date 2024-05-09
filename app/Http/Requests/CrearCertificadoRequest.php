@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CertificacionRequest extends FormRequest
+class CrearCertificadoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,11 @@ class CertificacionRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'nombre_entidad' => 'required',
+            'entidad' => 'required',
             'año' => 'required',
             'folio' => 'required',
-            'localidad' => 'required',
-            'oficina' => 'required',
-            'tipo_predio' => 'required',
-            'numero_registro' => 'required'
+            'predio' => 'required'
         ];
     }
 }

@@ -27,6 +27,7 @@ use App\Livewire\Admin\Predios\PrediosPadron;
 use App\Livewire\Consultas\Reportes\Reportes;
 use App\Livewire\Ventanilla\ReactivarTramites;
 use App\Http\Controllers\SetPasswordController;
+use App\Livewire\Cartografia\ConciliarManzanas;
 use App\Http\Controllers\VerificacionController;
 use App\Livewire\Admin\Predios\PrediosAsignados;
 use App\Livewire\Admin\ValoresUnitariosRusticos;
@@ -135,6 +136,8 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
 
     /* Cartografía */
     Route::get('conciliar', Conciliar::class)->middleware('permission:Conciliar')->name('conciliar');
+
+    Route::get('conciliar_manzanas', ConciliarManzanas::class)->middleware('permission:Conciliar manzanas')->name('conciliar_manzanas');
 
     /* Certificaciones */
     Route::get('certificado_historia', CertificadoHistoria::class)->middleware('permission:Certificado de historia')->name('certificado_historia');

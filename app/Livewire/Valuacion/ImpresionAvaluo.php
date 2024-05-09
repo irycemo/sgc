@@ -177,6 +177,14 @@ class ImpresionAvaluo extends Component
 
             }
 
+            if(!in_array($this->tramiteInspeccion->servicio_id, [37, 38, 39, 40])){
+
+                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a una inspección."]);
+
+                return true;
+
+            }
+
             if($this->tramiteInspeccion && $this->tramiteInspeccion->estado != 'pagado'){
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite de inspección no esta pagado o ha sido concluido."]);
@@ -200,6 +208,14 @@ class ImpresionAvaluo extends Component
                 if(!$this->tramiteAvaluo){
 
                     $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no existe."]);
+
+                    return true;
+
+                }
+
+                if(!in_array($this->tramiteAvaluo->servicio_id, [43, 44, 45, 46, 47])){
+
+                    $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a un avalúo."]);
 
                     return true;
 
@@ -475,6 +491,8 @@ class ImpresionAvaluo extends Component
 
             if($this->tramiteAvaluo != 'convenio_municipal'){
 
+                dd($this->tramiteAvaluo);
+
                 $this->cadena = $this->cadena . '|' . 'tramite_de_avaluo: ' . $this->tramiteAvaluo->año . '-' . $this->tramiteAvaluo->folio . '-'. $this->tramiteAvaluo->usuario  . '|' . 'recibo_avaluo: ' . $this->tramiteAvaluo->folio_pago;
 
             }
@@ -483,7 +501,7 @@ class ImpresionAvaluo extends Component
 
             $pdf = $this->revisarOficina($pdf);
 
-            /* if(!auth()->user()->hasRole('Convenio municipal')) $this->actualizarTramites(); */
+            if(!auth()->user()->hasRole('Convenio municipal')) $this->actualizarTramites();
 
         });
 

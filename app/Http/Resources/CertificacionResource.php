@@ -22,7 +22,9 @@ class CertificacionResource extends JsonResource
             'documento' => $this->documento,
             'cadena_original' => $this->cadena_originial,
             'cadena_encriptada' => $this->cadena_encriptada,
-            'estado' => $this->estado
+            'estado' => $this->estado,
+            'tramite_id' => $this->tramite_id,
+            'created_at' => $this->created_at
         ];
 
     }

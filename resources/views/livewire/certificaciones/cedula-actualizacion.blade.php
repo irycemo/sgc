@@ -265,7 +265,7 @@
 
                     <x-checkbox wire:model="impresionDirector"></x-checkbox>
 
-                    <Label>Imprimir certificado con firma del director de catastro</Label>
+                    <Label>Imprimir cedula con firma del director de catastro</Label>
 
                 </div>
 
@@ -278,7 +278,7 @@
 
                 <img wire:loading wire:target="generarCedula" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                Generar certificado
+                Generar cedula
 
             </x-button-green>
 

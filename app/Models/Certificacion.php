@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Http\Traits\ModelosTrait;
-use App\Http\Traits\Uuid;
+use App\Models\Predio;
 use App\Models\Oficina;
 use App\Models\Tramite;
+use App\Http\Traits\Uuid;
+use App\Http\Traits\ModelosTrait;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,6 +31,10 @@ class Certificacion extends Model implements Auditable
 
     public function oficina(){
         return $this->belongsTo(Oficina::class);
+    }
+
+    public function predio(){
+        return $this->belongsTo(Predio::class);
     }
 
 }

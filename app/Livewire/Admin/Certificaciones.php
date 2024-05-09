@@ -402,6 +402,7 @@ class Certificaciones extends Component
     {
 
         $certificaciones = Certificacion::with('creadoPor', 'actualizadoPor', 'tramite', 'oficina')
+                                            ->with('predio:id,localidad,oficina,tipo_predio,numero_registro')
                                             ->when($this->filters['año'], fn($q, $año) => $q->where('año', $año))
                                             ->when($this->filters['folio'], fn($q, $folio) => $q->where('folio', $folio))
                                             ->when($this->filters['estado'], fn($q, $estado) => $q->where('estado', $estado))
@@ -425,6 +426,6 @@ class Certificaciones extends Component
                                             ->orderBy($this->sort, $this->direction)
                                             ->paginate($this->pagination);
 
-        return view('livewire.admin.certificaciones', compact('certificaciones'))->extends('layouts.admin');
+        return view('livewire.Admin.certificaciones', compact('certificaciones'))->extends('layouts.admin');
     }
 }
