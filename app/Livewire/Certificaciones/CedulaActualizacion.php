@@ -60,7 +60,7 @@ class CedulaActualizacion extends Component
 
             if(!in_array($this->tramite->servicio->id, [64, 65])){
 
-                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a una cedula de actualización."]);
+                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a una cédula de actualización."]);
 
                 $this->reset('tramite');
 

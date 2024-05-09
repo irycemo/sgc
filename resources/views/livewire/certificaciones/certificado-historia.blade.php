@@ -312,7 +312,7 @@
 
                     <img wire:loading wire:target="buscarTramite" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                    Buscar trámtie
+                    Buscar trámite
 
                 </button>
 

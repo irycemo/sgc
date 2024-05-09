@@ -36,7 +36,33 @@
 
         <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-md">
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 items-end mx-auto mb-4">
+            <div class="flex-col justify-center mx-auto mb-4">
+
+                <div class="flex-auto text-center mb-4">
+
+                    <div class="text-center">
+
+                        <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite que ampara la impresión de los avaluos</Label>
+
+                    </div>
+
+                    <div class="inline-flex justify-center">
+
+                        <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="añoAvaluo">
+                            @foreach ($años as $año)
+
+                                <option value="{{ $año }}">{{ $año }}</option>
+
+                            @endforeach
+                        </select>
+
+                        <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folioAvaluo') border-red-500 @enderror" wire:model="folioAvaluo">
+
+                        <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuarioAvaluo') border-red-500 @enderror" wire:model="usuarioAvaluo">
+
+                    </div>
+
+                </div>
 
                 <div class="flex-auto  text-center">
 
@@ -48,7 +74,7 @@
 
                     <div class="inline-flex">
 
-                        <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
+                        <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="añoInspeccion">
                             @foreach ($años as $año)
 
                                 <option value="{{ $año }}">{{ $año }}</option>
@@ -65,32 +91,6 @@
                     <div>
 
                         @error('folioInspeccion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                    </div>
-
-                </div>
-
-                <div class="flex-auto text-center">
-
-                    <div class="text-center">
-
-                        <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite que ampara la impresión de los avaluos</Label>
-
-                    </div>
-
-                    <div class="inline-flex justify-center">
-
-                        <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
-                            @foreach ($años as $año)
-
-                                <option value="{{ $año }}">{{ $año }}</option>
-
-                            @endforeach
-                        </select>
-
-                        <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folioAvaluo') border-red-500 @enderror" wire:model="folioAvaluo">
-
-                        <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuarioAvaluo') border-red-500 @enderror" wire:model="usuarioAvaluo">
 
                     </div>
 

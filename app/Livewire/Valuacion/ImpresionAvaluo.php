@@ -28,8 +28,10 @@ class ImpresionAvaluo extends Component
 
     public $tramiteInspeccion;
     public $usuarioInspeccion;
+    public $añoInspeccion;
     public $folioInspeccion;
     public $tramiteAvaluo;
+    public $añoAvaluo;
     public $folioAvaluo;
     public $usuarioAvaluo;
 
@@ -56,14 +58,15 @@ class ImpresionAvaluo extends Component
 
     public $cantidad;
     public $años;
-    public $año;
 
     public $cadena;
 
     protected function rules(){
         return [
-            'folioInspeccion' => Rule::requiredIf(!auth()->user()->hasRole('Convenio municipal')),
-            'folioAvaluo' => 'nullable',
+            'folioInspeccion' => 'nullable',
+            'usuarioInspeccion' => 'nullable',
+            'folioAvaluo' => Rule::requiredIf(!auth()->user()->hasRole('Convenio municipal')),
+            'usuarioAvaluo' => Rule::requiredIf(!auth()->user()->hasRole('Convenio municipal'))
          ];
     }
 
@@ -167,112 +170,101 @@ class ImpresionAvaluo extends Component
 
         if(!auth()->user()->hasRole('Convenio municipal')){
 
-            $this->tramiteInspeccion  = Tramite::where('folio', $this->folioInspeccion)->first();
+            $this->tramiteAvaluo = Tramite::where('año', $this->añoAvaluo)->where('folio', $this->folioAvaluo)->where('usuario', $this->usuarioAvaluo)->first();
 
-            if(!$this->tramiteInspeccion){
+            if(!$this->tramiteAvaluo){
 
-                $this->dispatch('mostrarMensaje', ['error', "El trámite de inspección existe."]);
-
-                return true;
-
-            }
-
-            if(!in_array($this->tramiteInspeccion->servicio_id, [37, 38, 39, 40])){
-
-                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a una inspección."]);
+                $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no existe."]);
 
                 return true;
 
             }
 
-            if($this->tramiteInspeccion && $this->tramiteInspeccion->estado != 'pagado'){
+            if($this->tramiteAvaluo->estado != 'pagado'){
 
-                $this->dispatch('mostrarMensaje', ['error', "El trámite de inspección no esta pagado o ha sido concluido."]);
-
-                return true;
-
-            }
-
-            if(($this->cantidad + $this->tramiteInspeccion->usados) > $this->tramiteInspeccion->cantidad){
-
-                $this->dispatch('mostrarMensaje', ['error', "La cantidad de inspecciones que avala el trámite ya se usó o es insuficiente."]);
+                $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no esta pagado o ha sido concluido."]);
 
                 return true;
 
             }
 
-            if($this->tramiteInspeccion->avaluo_para){
+            if(($this->cantidad + $this->tramiteAvaluo->usados) > $this->tramiteAvaluo->cantidad){
 
-                $this->tramiteAvaluo = Tramite::where('folio', $this->folioAvaluo)->first();
+                $this->dispatch('mostrarMensaje', ['error', "La cantidad de avaluos que avala el trámite ya se usó."]);
 
-                if(!$this->tramiteAvaluo){
+                return true;
 
-                    $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no existe."]);
+            }
 
-                    return true;
+            if(!in_array($this->tramiteAvaluo->servicio_id, [43, 44, 45, 46, 47])){
 
-                }
+                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a un avalúo."]);
 
-                if(!in_array($this->tramiteAvaluo->servicio_id, [43, 44, 45, 46, 47])){
+                return true;
 
-                    $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a un avalúo."]);
+            }
 
-                    return true;
+            if(in_array($this->tramiteAvaluo->servicio_id, [43, 44, 46, 47])){
 
-                }
+                $this->tramiteInspeccion = Tramite::where('año', $this->añoInspeccion)->where('folio', $this->folioInspeccion)->where('usuario', $this->usuarioInspeccion)->first();
 
-                if($this->tramiteAvaluo && $this->tramiteInspeccion->estado != 'pagado'){
+                if(!$this->tramiteInspeccion){
 
-                    $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no esta pagado o ha sido concluido."]);
-
-                    return true;
-
-                }
-
-                if(($this->cantidad + $this->tramiteAvaluo->usados) > $this->tramiteAvaluo->cantidad){
-
-                    $this->dispatch('mostrarMensaje', ['error', "La cantidad de avaluos que avala el trámite ya se usó."]);
+                    $this->dispatch('mostrarMensaje', ['error', "El trámite de inspección existe."]);
 
                     return true;
 
                 }
 
-                if($this->tramiteInspeccion->avaluo_para == 46 || $this->tramiteInspeccion->avaluo_para == 45){
+                if(!in_array($this->tramiteInspeccion->servicio_id, [37, 38, 39, 40])){
 
-                    if($this->tramiteAvaluo->servicio_id != 46 && $this->tramiteAvaluo->servicio_id != 45){
+                    $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a una inspección."]);
 
-                        $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no corresponde a una variación."]);
-
-                        return true;
-
-                    }
-
-
-                }elseif($this->tramiteInspeccion->avaluo_para == 43 || $this->tramiteInspeccion->avaluo_para == 44){
-
-                    if($this->tramiteAvaluo->servicio_id != 43 && $this->tramiteAvaluo->servicio_id != 44){
-
-                        $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un desglose."]);
-
-                        return true;
-
-                    }
-
-                }elseif($this->tramiteInspeccion->avaluo_para == 47){
-
-                    if($this->tramiteAvaluo->servicio_id != 47){
-
-                        $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un avlúo predio ignorado."]);
-
-                        return true;
-
-                    }
+                    return true;
 
                 }
 
-            }else{
+                if($this->tramiteInspeccion->estado != 'pagado'){
 
-                $this->tramiteAvaluo = 0;
+                    $this->dispatch('mostrarMensaje', ['error', "El trámite de inspección no esta pagado o ha sido concluido."]);
+
+                    return true;
+
+                }
+
+                if(($this->cantidad + $this->tramiteInspeccion->usados) > $this->tramiteInspeccion->cantidad){
+
+                    $this->dispatch('mostrarMensaje', ['error', "La cantidad de inspecciones que avala el trámite ya se usó o es insuficiente."]);
+
+                    return true;
+
+                }
+
+                if($this->tramiteInspeccion->avaluo_para == 46 && $this->tramiteAvaluo->servicio_id != 46){
+
+                    $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no corresponde a una variación catastral de otro tipo de inmueble."]);
+
+                    return true;
+
+                }elseif($this->tramiteInspeccion->avaluo_para == 43  && $this->tramiteAvaluo->servicio_id != 43){
+
+                    $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un desglose."]);
+
+                    return true;
+
+                }elseif($this->tramiteInspeccion->avaluo_para == 44  && $this->tramiteAvaluo->servicio_id != 44){
+
+                    $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un desglose."]);
+
+                    return true;
+
+                }elseif($this->tramiteInspeccion->avaluo_para == 47 && $this->tramiteAvaluo->servicio_id != 47){
+
+                    $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un avlúo predio ignorado."]);
+
+                    return true;
+
+                }
 
             }
 
@@ -489,7 +481,7 @@ class ImpresionAvaluo extends Component
 
             }
 
-            if($this->tramiteAvaluo != 'convenio_municipal' && $this->tramiteAvaluo != 0){
+            if($this->tramiteAvaluo != 'convenio_municipal'){
 
                 $this->cadena = $this->cadena . '|' . 'tramite_de_avaluo: ' . $this->tramiteAvaluo->año . '-' . $this->tramiteAvaluo->folio . '-'. $this->tramiteAvaluo->usuario  . '|' . 'recibo_avaluo: ' . $this->tramiteAvaluo->folio_pago;
 
@@ -672,7 +664,7 @@ class ImpresionAvaluo extends Component
 
         $this->años = Constantes::AÑOS;
 
-        $this->año = now()->format('Y');
+        $this->añoInspeccion = $this->añoAvaluo = now()->format('Y');
 
         $this->director = User::with('efirma')->where('status', 'activo')
                 ->whereHas('roles', function($q){

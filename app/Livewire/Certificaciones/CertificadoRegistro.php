@@ -63,7 +63,7 @@ class CertificadoRegistro extends Component
 
             if(!in_array($this->tramite->servicio->id, ['3', '4', '6'])){
 
-                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a una historia catastral."]);
+                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a un certificado de registro."]);
 
                 $this->reset('tramite');
 
