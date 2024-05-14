@@ -9,16 +9,19 @@ use App\Livewire\Admin\Tramites;
 use App\Livewire\Admin\Usuarios;
 use App\Livewire\Admin\Auditoria;
 use App\Livewire\Admin\Servicios;
+use Illuminate\Support\Facades\DB;
 use App\Livewire\Consultas\Oficina;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Valuacion\MisAvaluos;
 use App\Livewire\Admin\Avaluos\Avaluos;
 use App\Livewire\Admin\Certificaciones;
 use App\Livewire\Cartografia\Conciliar;
+use Illuminate\Support\Facades\Artisan;
 use App\Livewire\Admin\FactorIncremento;
 use App\Livewire\Valuacion\FichaTecnica;
 use App\Livewire\Valuacion\Notificacion;
 use App\Http\Controllers\ManualController;
+use App\Http\Services\Migracion\Migracion;
 use App\Livewire\Consultas\ConsultaPadron;
 use App\Livewire\Admin\CategoriasServicios;
 use App\Livewire\Valuacion\ImpresionAvaluo;
@@ -172,4 +175,22 @@ Route::post('setpassword', [SetPasswordController::class, 'store'])->name('setpa
 Route::get('manual', ManualController::class)->name('manual');
 
 
-Route::get('teste/{id}', [Val::class, 'teste'])->name('teste');
+Route::get('migracion', [Migracion::class , 'run']);
+
+Artisan::command('migrar', function(){
+
+    $prediosSSQL =  DB::connection('sqlsrv')->table('tcpro008')
+                                            ->join('ctpro003', function($q){
+                                                $q->on('tcpro008.mpio_008', 'ctpro003.mpio_003')
+                                                    ->on('tcpro008.zcat_008', 'ctpro003.zcat_003')
+                                                    ->on('tcpro008.locl_008', 'ctpro003.locl_003')
+                                                    ->on('tcpro008.sect_008', 'ctpro003.sect_003')
+                                                    ->on('tcpro008.mzna_008', 'ctpro003.mzna_003')
+                                                    ->on('tcpro008.pred_008', 'ctpro003.pred_003')
+                                                    ->on('tcpro008.edif_008', 'ctpro003.edif_003')
+                                                    ->on('tcpro008.dpto_008', 'ctpro003.dpto_003');
+                                            })->count();
+
+    info($prediosSSQL);
+
+});

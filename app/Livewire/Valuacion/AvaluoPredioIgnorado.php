@@ -62,7 +62,7 @@ class AvaluoPredioIgnorado extends Component
         return [
             'predio.copia' => 'nullable',
             'predio.sociedad' => 'nullable',
-            'predio.numero_registro' => 'required|numeric|min:1',
+            'predio.numero_registro' => 'required|numeric',
             'predio.region_catastral' => 'required|numeric|min:1',
             'predio.municipio' => 'required|numeric|min:1',
             'predio.localidad' => 'required|numeric|min:1|same:predio.zona_catastral',

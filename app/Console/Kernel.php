@@ -13,6 +13,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('tramites:vencidos')->dailyAt('00:01');
+
+        $schedule->command('migrar')->dailyAt('00:01');
     }
 
     /**
