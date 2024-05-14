@@ -692,7 +692,7 @@ class AvaluoPredioIgnorado extends Component
 
             return;
 
-        }elseif($tramite->id != 292){
+        }elseif($tramite->servicio_id != 292){
 
             $this->dispatch('mostrarMensaje', ['error', "El trámite no es una inscripción o registro de predios ignorado."]);
 
