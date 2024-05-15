@@ -100,7 +100,7 @@
 
                     <input type="number" placeholder="Folio" min="1" class="bg-white text-sm w-20 focus:ring-0 @error('tramite_folio') border-red-500 @enderror" wire:model="tramite_folio">
 
-                    <input type="number" placeholder="Usuario" min="1" class="bg-white text-sm w-20 focus:ring-0 border-l-0 @error('tramite_folio') border-red-500 @enderror" wire:model="tramite_usuario">
+                    <input type="number" placeholder="Usuario" min="1" class="bg-white text-sm w-20 focus:ring-0 border-l-0 @error('usuario') border-red-500 @enderror" wire:model="tramite_usuario">
 
                     <button
                         wire:click="buscarTramite"
