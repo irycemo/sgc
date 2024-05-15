@@ -142,8 +142,8 @@ class UserSeeder extends Seeder
 
         User::create([
             'clave' => 12,
+            'oficina_id' => '53',
             'name' => 'Jesus Manriquez Vargas',
-            'ubicacion' => 'Catastro',
             'status' => 'activo',
             'email' => 'subdirti.irycem@correo.michoacan.gob.mx',
             'password' => Hash::make('sistema'),
