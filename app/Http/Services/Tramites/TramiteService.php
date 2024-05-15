@@ -30,7 +30,7 @@ class TramiteService{
                 $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
 
             }else{
-
+                info($this->tramite);
                 $sap = (new LineaCapturaApi($this->tramite))->generarLineaDeCaptura();
 
                 $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
