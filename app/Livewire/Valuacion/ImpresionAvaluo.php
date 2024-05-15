@@ -125,42 +125,23 @@ class ImpresionAvaluo extends Component
 
     public function actualizarTramites(){
 
-        $this->tramiteInspeccion  = Tramite::where('folio', $this->folioInspeccion)->first();
+        $this->tramiteAvaluo->update([
+                            'usados' => $this->cantidad + $this->tramiteAvaluo->usados,
+                            'parcial_usado' => $this->tramiteInspeccion?->id
+                            ]);
+
+        if($this->tramiteAvaluo->cantidad == $this->tramiteAvaluo->usados)
+            $this->tramiteAvaluo->update(['estado' => 'concluido']);
 
         if($this->tramiteInspeccion){
 
-            if($this->tramiteInspeccion->avaluo_para != null){
+            $this->tramiteInspeccion->update([
+                'usados' => $this->cantidad + $this->tramiteInspeccion->usados,
+                'parcial_usado' => $this->tramiteAvaluo->id
+            ]);
 
-                $this->tramiteAvaluo = Tramite::where('folio', $this->folioAvaluo)->first();
-
-                $this->tramiteAvaluo->update([
-                                    'usados' => $this->cantidad + $this->tramiteAvaluo->usados,
-                                    'parcial_usado' => $this->tramiteInspeccion->id
-                                    ]);
-
-                $this->tramiteInspeccion->update([
-                    'usados' => $this->cantidad + $this->tramiteInspeccion->usados,
-                    'parcial_usado' => $this->tramiteAvaluo->id
-                ]);
-
-                if($this->tramiteAvaluo->cantidad == $this->tramiteAvaluo->usados)
-                    $this->tramiteAvaluo->update(['estado' => 'concluido']);
-
-                if($this->tramiteInspeccion->cantidad == $this->tramiteInspeccion->usados)
-                    $this->tramiteInspeccion->update(['estado' => 'concluido']);
-
-            }else{
-
-                $this->tramiteInspeccion->update([
-                    'usados' => $this->cantidad + $this->tramiteInspeccion->usados,
-                ]);
-
-                $this->tramiteInspeccion->refresh();
-
-                if($this->tramiteInspeccion->cantidad == $this->tramiteInspeccion->usados)
-                    $this->tramiteInspeccion->update(['estado' => 'concluido']);
-
-            }
+            if($this->tramiteInspeccion->cantidad == $this->tramiteInspeccion->usados)
+                $this->tramiteInspeccion->update(['estado' => 'concluido']);
 
         }
 
@@ -210,7 +191,7 @@ class ImpresionAvaluo extends Component
 
                 if(!$this->tramiteInspeccion){
 
-                    $this->dispatch('mostrarMensaje', ['error', "El trámite de inspección existe."]);
+                    $this->dispatch('mostrarMensaje', ['error', "El trámite de inspección no existe."]);
 
                     return true;
 
@@ -261,6 +242,26 @@ class ImpresionAvaluo extends Component
                 }elseif($this->tramiteInspeccion->avaluo_para == 47 && $this->tramiteAvaluo->servicio_id != 47){
 
                     $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no corresponde a un avlúo predio ignorado."]);
+
+                    return true;
+
+                }
+
+            }
+
+            if($this->tramiteAvaluo->parcial_usado){
+
+                if(!$this->tramiteInspeccion){
+
+                    $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión esta ligado a un trámite de inspección, es necesario ingresarlo."]);
+
+                    return true;
+
+                }
+
+                if($this->tramiteAvaluo->parcial_usado != $this->tramiteInspeccion->id){
+
+                    $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no esta ligado al trámite de inspección."]);
 
                     return true;
 
@@ -352,8 +353,8 @@ class ImpresionAvaluo extends Component
         if($this->region_catastral || $this->municipio || $this->zona_catastral || $this->sector || $this->manzana || $this->predio || $this->edificio || $this->departamento){
 
             $this->validate([
-                'tramiteInspeccion' => 'required',
-                'tramiteAvaluo' => 'nullable',
+                'tramiteInspeccion' => 'nullable',
+                'tramiteAvaluo' => 'required',
                 'localidad' => 'required',
                 'region_catastral' => 'required',
                 'municipio' => 'required',
@@ -391,8 +392,8 @@ class ImpresionAvaluo extends Component
         }else{
 
             $this->validate([
-                'tramiteInspeccion' => 'required',
-                'tramiteAvaluo' => 'nullable',
+                'tramiteInspeccion' => 'nullable',
+                'tramiteAvaluo' => 'required',
                 'localidad' => 'required',
                 'oficina' => 'required',
                 'tipo' => 'required',
@@ -471,7 +472,7 @@ class ImpresionAvaluo extends Component
 
             }
 
-            if($this->tramiteInspeccion != 'Convenio municipal'){
+            if($this->tramiteInspeccion && $this->tramiteInspeccion != 'Convenio municipal'){
 
                 $this->cadena = $this->cadena . '|' . 'tramite_de_inspeccion: ' . $this->tramiteInspeccion->año . '-' . $this->tramiteInspeccion->folio . '-'. $this->tramiteInspeccion->usuario . '|' . 'recibo_inspeccion: ' . $this->tramiteInspeccion->folio_pago;
 
@@ -605,7 +606,7 @@ class ImpresionAvaluo extends Component
                 'cadena_originial' => $this->cadena,
                 'estado' => 'activo',
                 'oficina_id' => $oficina->id,
-                'tramite_id' => $this->tramiteInspeccion->id,
+                'tramite_id' => $this->tramiteAvaluo->id,
                 'creado_por' => auth()->id(),
                 'actualizado_por' => auth()->id(),
             ]);

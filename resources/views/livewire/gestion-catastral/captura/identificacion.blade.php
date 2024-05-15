@@ -68,7 +68,7 @@
 
                     <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('predio.municipio') border-1 border-red-500 @enderror" wire:model="predio.municipio" readonly>
 
-                    <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('predio.zona_catastral') border-1 border-red-500 @enderror" wire:model="predio.zona_catastral">
+                    <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('predio.zona_catastral') border-1 border-red-500 @enderror" wire:model="predio.localidad">
 
                     <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('predio.localidad') border-1 border-red-500 @enderror" wire:model.blur="predio.localidad">
 
@@ -538,7 +538,7 @@
 
             <div>
 
-                <input type="number" class="bg-white rounded text-xs w-full" wire:model="predio.lote_fraccionador">
+                <input type="text" class="bg-white rounded text-xs w-full" wire:model="predio.lote_fraccionador">
 
             </div>
 
@@ -560,7 +560,7 @@
 
             <div>
 
-                <input type="number" class="bg-white rounded text-xs w-full" wire:model="predio.manzana_fraccionador">
+                <input type="text" class="bg-white rounded text-xs w-full" wire:model="predio.manzana_fraccionador">
 
             </div>
 
@@ -582,7 +582,7 @@
 
             <div>
 
-                <input type="number" class="bg-white rounded text-xs w-full" wire:model="predio.etapa_fraccionador">
+                <input type="text" class="bg-white rounded text-xs w-full" wire:model="predio.etapa_fraccionador">
 
             </div>
 

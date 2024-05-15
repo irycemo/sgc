@@ -564,7 +564,7 @@
 
                 <div>
 
-                    <input type="number" class="bg-white rounded text-xs w-full" wire:model="predio.manzana_fraccionador">
+                    <input type="text" class="bg-white rounded text-xs w-full" wire:model="predio.manzana_fraccionador">
 
                 </div>
 
@@ -586,7 +586,7 @@
 
                 <div>
 
-                    <input type="number" class="bg-white rounded text-xs w-full" wire:model="predio.etapa_fraccionador">
+                    <input type="text" class="bg-white rounded text-xs w-full" wire:model="predio.etapa_fraccionador">
 
                 </div>
 

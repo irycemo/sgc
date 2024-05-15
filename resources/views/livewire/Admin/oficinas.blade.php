@@ -44,6 +44,7 @@
 
             <x-slot name="head">
 
+                <x-table.heading sortable wire:click="sortBy('region')" :direction="$sort === 'region' ? $direction : null" >Región</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('municipio')" :direction="$sort === 'municipio' ? $direction : null" >Municipio</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('nombre')" :direction="$sort === 'nombre' ? $direction : null" >Nombre</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('oficina')" :direction="$sort === 'oficina' ? $direction : null" >Oficina</x-table.heading>
@@ -61,6 +62,14 @@
                 @forelse ($oficinas as $oficina)
 
                     <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $oficina->id }}">
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Región</span>
+
+                            {{ $oficina->region }}
+
+                        </x-table.cell>
 
                         <x-table.cell>
 
@@ -197,7 +206,7 @@
 
                     <x-table.row wire:key="row-empty">
 
-                        <x-table.cell colspan="9">
+                        <x-table.cell colspan="12">
 
                             <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
 
@@ -217,7 +226,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="9" class="bg-gray-50">
+                    <x-table.cell colspan="12" class="bg-gray-50">
 
                         {{ $oficinas->links()}}
 
@@ -248,6 +257,12 @@
             <div class="relative p-1">
 
                 <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-3">
+
+                    <x-input-group for="modelo_editar.region" label="Región" :error="$errors->first('modelo_editar.region')" class="w-full">
+
+                        <x-input-text type="number" id="modelo_editar.region" wire:model="modelo_editar.region" />
+
+                    </x-input-group>
 
                     <x-input-group for="modelo_editar.municipio" label="Municipio" :error="$errors->first('modelo_editar.municipio')" class="w-full">
 

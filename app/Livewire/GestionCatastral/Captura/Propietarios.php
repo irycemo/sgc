@@ -42,6 +42,7 @@ class Propietarios extends Component
     public $cp;
     public $entidad;
     public $municipio_propietario;
+    public $correo;
 
     public $estados;
     public $estados_civiles;
@@ -56,6 +57,7 @@ class Propietarios extends Component
             'porcentaje' => ['numeric', 'max:100', 'nullable', Rule::requiredIf($this->porcentaje_nuda === null && $this->porcentaje_usufructo === null)],
             'porcentaje_nuda' => 'nullable|numeric|max:100',
             'porcentaje_usufructo' => 'nullable|numeric|max:100',
+            'correo' => 'nullable|email',
             'tipo_persona' => 'required',
             'nombre' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
             'ap_paterno' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],

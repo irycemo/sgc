@@ -20,13 +20,13 @@
 
                 </x-input-group>
 
-                <x-input-group for="ap_paterno" label="Ap paterno" :error="$errors->first('ap_paterno')" class="w-full">
+                <x-input-group for="ap_paterno" label="Paterno" :error="$errors->first('ap_paterno')" class="w-full">
 
                     <x-input-text id="ap_paterno" wire:model="ap_paterno" />
 
                 </x-input-group>
 
-                <x-input-group for="ap_materno" label="Ap materno" :error="$errors->first('ap_materno')" class="w-full">
+                <x-input-group for="ap_materno" label="Materno" :error="$errors->first('ap_materno')" class="w-full">
 
                     <x-input-text id="ap_materno" wire:model="ap_materno" />
 

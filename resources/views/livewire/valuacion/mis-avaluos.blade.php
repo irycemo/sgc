@@ -190,6 +190,16 @@
 
                                 @endif
 
+                                @if($avaluo->estado == 'impreso')
+
+                                    <x-button-red
+                                        wire:click="imprimirAvaluo({{ $avaluo->id }})"
+                                        wire:loading.attr="disabled">
+                                        Imprimir
+                                    </x-button-red>
+
+                                @endif
+
                             </div>
 
                         </x-table.cell>

@@ -76,8 +76,8 @@ class Captura extends Component
             'predio.xutm' => 'nullable|string',
             'predio.yutm' => 'nullable|string',
             'predio.zutm' => 'nullable',
-            'predio.lat' => 'required',
-            'predio.lon' => 'required',
+            'predio.lat' => 'required|numeric',
+            'predio.lon' => 'required|numeric',
             'predio.superficie_terreno' => 'required|numeric',
             'predio.superficie_construccion' => 'nullable|numeric',
             'predio.superficie_judicial' => 'nullable|numeric',
@@ -88,13 +88,15 @@ class Captura extends Component
             'predio.documento_numero' => Rule::requiredIf(!$this->actualizacion),
             'predio.fecha_efectos' => Rule::requiredIf(!$this->actualizacion),
             'origen' => 'required',
-            'observaciones' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/')
+            'observaciones' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.()\/\-" ]*$/')
          ];
     }
 
     public function crearModeloVacio(){
         return Predio::make([
             'estado' => 16,
+            'edificio' => 0,
+            'departamento' => 0
         ]);
     }
 
@@ -126,7 +128,10 @@ class Captura extends Component
 
     public function updatedPredioOficina(){
 
-        $this->predio->municipio = Oficina::where('oficina', $this->predio->oficina)->first()->municipio;
+        $oficina = Oficina::where('oficina', $this->predio->oficina)->first();
+
+        $this->predio->municipio = $oficina?->municipio;
+        $this->predio->region_catastral = $oficina?->region;
 
     }
 

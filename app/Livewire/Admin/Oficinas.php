@@ -24,6 +24,7 @@ class Oficinas extends Component
     protected function rules(){
         return [
             'modelo_editar.oficina' => 'required|numeric',
+            'modelo_editar.region' => 'required|numeric',
             'modelo_editar.municipio' => 'required|numeric',
             'modelo_editar.localidad' => 'required|numeric',
             'modelo_editar.nombre' => 'required|string',

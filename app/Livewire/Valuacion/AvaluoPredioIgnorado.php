@@ -130,7 +130,10 @@ class AvaluoPredioIgnorado extends Component
 
     public function updatedPredioOficina(){
 
-        $this->predio->municipio = Oficina::where('oficina', $this->predio->oficina)->first()->municipio;
+        $oficina = Oficina::where('oficina', $this->predio->oficina)->first();
+
+        $this->predio->municipio = $oficina?->municipio;
+        $this->predio->region_catastral = $oficina?->region;
 
     }
 

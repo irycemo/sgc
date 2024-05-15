@@ -2,7 +2,7 @@
 
     <div class="mb-6">
 
-        <x-header>Impresión de avaluos</x-header>
+        <x-header>Impresión de avalúos</x-header>
 
     </div>
 
@@ -42,7 +42,7 @@
 
                     <div class="text-center">
 
-                        <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite que ampara la impresión de los avaluos</Label>
+                        <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite que ampara la impresión de los avalúos</Label>
 
                     </div>
 

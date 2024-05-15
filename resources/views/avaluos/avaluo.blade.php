@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Avaluo</title>
 </head>
 <style>
@@ -33,10 +31,16 @@
 
     body{
         margin-top: 120px;
+        margin-bottom: 20px;
         counter-reset: page;
         height: 100%;
         background-image: url("storage/img/escudo_fondo.png");
         background-size: cover;
+        font-family: sans-serif;
+        font-weight: normal;
+        line-height: 1.5;
+        text-transform: uppercase;
+        font-size: 9px;
     }
 
     .titulo{
@@ -47,7 +51,7 @@
 
     .fundamento{
         text-align: justify;
-        font-size: 10px;
+        font-size: 9px;
     }
 
     .separador{
@@ -62,7 +66,6 @@
 
     .informacion{
         padding: 0 20px 0 20px;
-        font-size: 12px;
         margin-bottom: 10px;
     }
 
@@ -84,7 +87,7 @@
         background: #5E1D45;
         color: white;
         font-size: 12px;
-
+        text-transform: lowercase;
     }
 
     .fot{
@@ -914,127 +917,6 @@
                 </table>
 
             </div>
-
-            <p class="separador">Datos de control</p>
-
-            <div class="informacion">
-
-                @if($tramiteInspeccion != 'Convenio municipal')
-
-                    <table style="margin-top: 60px">
-
-                        <tbody>
-                                <tr>
-                                    <td style="font-size:12px; padding-right: 5px; text-align:center; vertical-align: top; white-space: nowrap;">
-
-                                        <p>{{ $valuador }}</p>
-                                        <p class="borde">
-                                           Nombre y firma del valuador
-                                        </p>
-
-                                    </td>
-                                    <td style="font-size:12px; padding-right: 5px; text-align:center; vertical-align: top; white-space: nowrap;">
-
-                                        <p>{{ $jefeDepartamento }}</p>
-                                        <p class="borde">
-                                            Nombre y firma del jefe de departamento
-                                        </p>
-
-                                    </td>
-
-                                    <td style="font-size:12px; padding-right: 5px; text-align:center; vertical-align: top; white-space: nowrap;">
-
-                                        <p>{{ $director }}</p>
-                                        <p class="borde">
-                                            Nombre y firma de la autoridad catastral
-                                        </p>
-
-                                    </td>
-                                </tr>
-                        </tbody>
-
-                    </table>
-
-                @else
-
-                    <table style="margin-top: 60px">
-
-                        <tbody>
-                            <tr>
-                                <td style="font-size:12px; padding-right: 40px; text-align:center; ; vertical-align: top; white-space: nowrap;">
-
-                                    <p>{{ $autoridad_municipal }}</p>
-                                    <p class="borde">
-                                        POR EL H. AYUNTAMIENTO
-                                    </p>
-
-                                </td>
-                                <td style="font-size:12px; padding-right: 40px; text-align:center; ; vertical-align: top; white-space: nowrap;">
-
-                                    <p>{{ $valuador_municipal }}</p>
-                                    <p class="borde">
-                                        NOMBRE Y FIRMA DEL VALUADOR
-                                    </p>
-
-                                </td>
-                            </tr>
-                        </tbody>
-
-                    </table>
-
-                @endif
-
-                <p class="fundamento">NOTIFÍQUESE CONFORME AL ARTÍCULO 134 DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO
-                    EL PRESENTE ACTO ES RECURRIBLE, DENTRO DE LOS 10 DÍAS HÁBILES SIGUIENTES A SU NOTIFICACIÓN ANTE LA AUTORIDAD QUE LO EMITE
-                    O BIEN ANTE EL TRIBUNAL DE JUSTICIA ADMINISTRATIVA DEL ESTADO DE MICHOACÁN, DE CONFORMIDAD CON EL ARTÍCULO 128 DEL CÓDIGO
-                    DE JUSTICIA ADMINISTRATIVA DEL ESTADO DE MICHOACÁN DE OCAMPO.
-                </p>
-
-                <p style="margin-top: 10px">En la ciudad de: @if($ciudad) {{ $ciudad }} @else ____________________________________________ @endif a las @if($hora) {{ $hora }} @else _______ @endif
-                     del mes @if($mes) {{ $mes }} @else _______ @endif del año @if($año) {{  $año }} @else _______ @endif
-                </p>
-                <p>Nombre completo: @if($nombre) {{ $nombre }} @else __________________________________________________________________________________ @endif</p>
-                <p>Recibí en calidad de:  @if($calidad) {{ $calidad }} @else ___________________________________ @endif Notificador:  ___________________________________</p>
-                <p>Firma({{ $calidad }}): ___________________________________ Firma(notificador): _________________________</p>
-
-
-
-                <table style="margin-top: 10px">
-
-                    <tbody>
-                        <tr>
-                            <td style="font-size:12px; padding-right: 40px;">
-
-                                <img class="qr" src="{{ $qr }}" alt="QR">
-                            </td>
-                            <td style="font-size:12px; padding-right: 40px;">
-
-                                @if ($tramiteInspeccion)
-                                    <p><strong>Trámite de inspección ocular:</strong> {{ $tramiteInspeccion->folio }} <strong>Recibo:</strong> {{ $tramiteInspeccion->folio_pago }}</p>
-                                @endif
-
-                                @if ($tramiteAvaluo)
-                                    <p><strong>Trámite de impresión:</strong> {{ $tramiteAvaluo->folio }} <strong>Recibo:</strong> {{ $tramiteAvaluo->folio_pago }}</p>
-                                @endif
-
-                                <p><strong>Elaborado por:</strong> {{ auth()->user()->name }} {{ auth()->user()->ap_paterno }} {{ auth()->user()->ap_materno }}, <strong>con fecha:</strong> {{ now()->format('d-m-Y H:i:s') }}</p>
-
-                                @if(isset($convenio))
-
-                                    <p><strong>Convenio:</strong>{{ $convenio }}</p>
-
-                                @endif
-
-                            </td>
-                        </tr>
-                    </tbody>
-
-                </table>
-            </div>
-
-        </div>
-
-        <div style="text-align: center;">
 
         </div>
 

@@ -51,6 +51,18 @@ class CertificadoNegativo extends Component
     public $predioFlag = false;
     public $tramiteFlag = false;
 
+    public function updated($property, $value){
+
+        if($value == ''){
+
+            $this->$property = null;
+
+        }
+
+        $this->$property = trim($this->$property);
+
+    }
+
     public function buscarTramite(){
 
         $this->validate([
@@ -132,15 +144,15 @@ class CertificadoNegativo extends Component
             'razon_social' => 'nullable'
         ]);
 
-        $propietario = Persona::when($this->nombre, fn($q) => $q->where('nombre', $this->nombre))
-                                ->when($this->ap_paterno, fn($q) => $q->where('ap_paterno', $this->ap_paterno))
-                                ->when($this->ap_materno, fn($q) => $q->where('ap_materno', $this->ap_materno))
-                                ->when($this->razon_social, fn($q) => $q->where('razon_social', $this->razon_social))
+        $persona = Persona::when($this->nombre, fn($q) => $q->where('nombre', $this->nombre))
+                                ->when($this->ap_paterno && $this->ap_paterno != '', fn($q) => $q->where('ap_paterno', $this->ap_paterno))
+                                ->when($this->ap_materno && $this->ap_materno != '', fn($q) => $q->where('ap_materno', $this->ap_materno))
+                                ->when($this->razon_social && $this->razon_social != '', fn($q) => $q->where('razon_social', $this->razon_social))
                                 ->first();
 
-        if($propietario){
+        if($persona){
 
-            $propietario = Propietario::where('persona_id', $propietario->id)->first();
+            $propietario = Propietario::where('persona_id', $persona->id)->first();
 
             $this->predio = $propietario->predio;
 

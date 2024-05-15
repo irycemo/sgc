@@ -140,6 +140,16 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345678'),
         ])->assignRole('Sistemas');
 
+        User::create([
+            'clave' => 12,
+            'name' => 'Jesus Manriquez Vargas',
+            'ubicacion' => 'Catastro',
+            'status' => 'activo',
+            'email' => 'subdirti.irycem@correo.michoacan.gob.mx',
+            'password' => Hash::make('sistema'),
+            'area' => 'Subdirección de Tecnologías de la Información',
+        ])->assignRole('Administrador');
+
         User::factory(1)->create()->each(function($user){
             $user->assignRole('Valuador');
         });

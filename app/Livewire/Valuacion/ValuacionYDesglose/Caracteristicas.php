@@ -89,7 +89,7 @@ class Caracteristicas extends Component
 
         $this->avaluo = $this->predio->avaluo;
 
-        /* $this->avaluo->cimentacion = 'NO APLICA';
+        $this->avaluo->cimentacion = 'NO APLICA';
         $this->avaluo->estructura = 'NO APLICA';
         $this->avaluo->muros = 'NO APLICA';
         $this->avaluo->entrepiso = 'NO APLICA';
@@ -107,7 +107,7 @@ class Caracteristicas extends Component
         $this->avaluo->sanitaria = 'NO APLICA';
         $this->avaluo->electrica = 'NO APLICA';
         $this->avaluo->gas = 'NO APLICA';
-        $this->avaluo->especiales = 'NO APLICA'; */
+        $this->avaluo->especiales = 'NO APLICA';
 
     }
 

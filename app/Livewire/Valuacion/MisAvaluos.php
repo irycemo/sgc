@@ -6,6 +6,7 @@ use App\Models\File;
 use App\Models\Avaluo;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Traits\ComponentesTrait;
@@ -85,6 +86,33 @@ class MisAvaluos extends Component
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
         }
+
+    }
+
+    public function imprimirAvaluo(Avaluo $avaluo){
+
+        $predio = $avaluo->predioAvaluo;
+
+        $predio->load('propietarios.persona');
+
+        $pdf = Pdf::loadView('avaluos.avaluo', compact('predio'));
+
+        $pdf->render();
+
+        $dom_pdf = $pdf->getDomPDF();
+
+        $canvas = $dom_pdf->get_canvas();
+
+        $canvas->page_text(480, 794, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+
+        $canvas->page_text(35, 794, "Avalúo: " . $avaluo->año . "-" . $avaluo->folio , null, 10, array(1, 1, 1));
+
+        $pdf = $dom_pdf->output();
+
+        return response()->streamDownload(
+            fn () => print($pdf),
+            'avaluo.pdf'
+        );
 
     }
 

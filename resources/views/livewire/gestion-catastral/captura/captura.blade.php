@@ -36,6 +36,16 @@
 
         </div>
 
+        @if($predio->getKey())
+
+            <div class="space-y-2 mb-5 bg-white rounded-lg p-2 text-right">
+
+                <span class="bg-blue-400 text-white text-sm rounded-full px-2 py-1">Predio: {{ $predio->cuentaPredial() }}</span>
+
+            </div>
+
+        @endif
+
         <div x-cloak class="tab-panel" :class="{ 'active': activeTab === 3 }" x-show.transition.in.opacity.duration.800="activeTab === 3"  wire:key="tab-3">
 
             @livewire('gestion-catastral.captura.archivo')

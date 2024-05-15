@@ -295,8 +295,8 @@ class Impresion extends Component
             $this->validate([
                 'director' => 'required',
                 'jefe_departamento' => 'required',
-                'tramiteInspeccion' => 'required',
-                'tramiteAvaluo' => 'nullable',
+                'tramiteInspeccion' => 'nullable',
+                'tramiteAvaluo' => 'required',
                 'localidad' => 'required',
                 'region_catastral' => 'required',
                 'municipio' => 'required',
@@ -338,8 +338,8 @@ class Impresion extends Component
             $this->validate([
                 'director' => 'required',
                 'jefe_departamento' => 'required',
-                'tramiteInspeccion' => 'required',
-                'tramiteAvaluo' => 'nullable',
+                'tramiteInspeccion' => 'nullable',
+                'tramiteAvaluo' => 'required',
                 'localidad' => 'required',
                 'oficina' => 'required',
                 'tipo' => 'required',

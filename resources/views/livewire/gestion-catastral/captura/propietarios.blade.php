@@ -216,7 +216,7 @@
 
                 </x-input-group>
 
-                <span class="flex items-center justify-center text-lg text-gray-700 md:col-span-3 col-span-1 sm:col-span-2">Domicilio</span>
+                <span class="flex items-center justify-center text-lg text-gray-700 md:col-span-3 col-span-1 sm:col-span-2">Domicilio para notificaciones</span>
 
                 <x-input-group for="cp" label="Código postal" :error="$errors->first('cp')" class="w-full">
 
@@ -276,6 +276,12 @@
 
                 </x-input-group>
 
+                <x-input-group for="correo" label="Email" :error="$errors->first('correo')" class="w-full">
+
+                    <x-input-text type="email" id="correo" wire:model="correo" />
+
+                </x-input-group>
+
                 <span class="flex items-center justify-center text-lg text-gray-700 md:col-span-3 col-span-1 sm:col-span-2">Porcentajes</span>
 
                 {{-- <x-input-group for="tipo_propietario" label="Tipo de propietario" :error="$errors->first('tipo_propietario')" class="w-full">
@@ -296,13 +302,13 @@
 
                 </x-input-group>
 
-                <x-input-group for="porcentaje_nuda" label="Porcentaje nuda" :error="$errors->first('porcentaje_nuda')" class="w-full">
+                <x-input-group for="porcentaje_nuda" label="Porcentaje nuda propiedad" :error="$errors->first('porcentaje_nuda')" class="w-full">
 
                     <x-input-text min="1" type="number" id="porcentaje_nuda" wire:model.lazy="porcentaje_nuda" />
 
                 </x-input-group>
 
-                <x-input-group for="porcentaje_usufructo" label="Porcentaje usufructo" :error="$errors->first('porcentaje_usufructo')" class="w-full">
+                <x-input-group for="porcentaje_usufructo" label="Porcentaje usufructo " :error="$errors->first('porcentaje_usufructo')" class="w-full">
 
                     <x-input-text min="1" type="number" id="porcentaje_usufructo" wire:model.lazy="porcentaje_usufructo" />
 
