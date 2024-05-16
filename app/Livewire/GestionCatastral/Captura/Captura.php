@@ -88,7 +88,7 @@ class Captura extends Component
             'predio.documento_numero' => Rule::requiredIf(!$this->actualizacion),
             'predio.fecha_efectos' => Rule::requiredIf(!$this->actualizacion),
             'origen' => 'required',
-            'observaciones' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.()\/\-" ]*$/')
+            'observaciones' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.()\/\-," ]*$/'),
          ];
     }
 
