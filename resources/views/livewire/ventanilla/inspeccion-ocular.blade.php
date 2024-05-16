@@ -32,6 +32,8 @@
 
                                     <select class="select2 bg-white rounded text-sm w-full z-50" wire:model.live="tramiteAdicionadoSeleccionado">
 
+                                        <option value="" selected>Seleccione una opción</option>
+
                                         @foreach ($tramitesAdicionados as $item)
 
                                             <option value="{{ $item }}">{{ $item->folio }}</option>
