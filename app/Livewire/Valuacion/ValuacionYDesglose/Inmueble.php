@@ -427,8 +427,7 @@ class Inmueble extends Component
 
             }
 
-            $claveCatastral = Predio::where('status', '!=', 'notificado')
-                                        ->where('estado', $this->predio->estado)
+            $claveCatastral = Predio::where('estado', $this->predio->estado)
                                         ->where('region_catastral', $this->predio->region_catastral)
                                         ->where('municipio', $this->predio->municipio)
                                         ->where('zona_catastral', $this->predio->zona_catastral)
@@ -450,7 +449,7 @@ class Inmueble extends Component
 
         }
 
-        $predioCompletoAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
+        $predioCompletoAvaluo = PredioAvaluo::where('status', 'nuevo')
                                             ->where('estado', $this->predio->estado)
                                             ->where('region_catastral', $this->predio->region_catastral)
                                             ->where('municipio', $this->predio->municipio)
@@ -468,7 +467,7 @@ class Inmueble extends Component
 
         if(!$predioCompletoAvaluo){
 
-            $cuentaPredialAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
+            $cuentaPredialAvaluo = PredioAvaluo::where('status', 'nuevo')
                                                 ->where('localidad', $this->predio->localidad)
                                                 ->where('oficina', $this->predio->oficina)
                                                 ->where('tipo_predio', $this->predio->tipo_predio)
@@ -482,7 +481,7 @@ class Inmueble extends Component
                 return true;
             }
 
-            $claveCatastralAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
+            $claveCatastralAvaluo = PredioAvaluo::where('status', 'nuevo')
                                                     ->where('estado', $this->predio->estado)
                                                     ->where('region_catastral', $this->predio->region_catastral)
                                                     ->where('municipio', $this->predio->municipio)
