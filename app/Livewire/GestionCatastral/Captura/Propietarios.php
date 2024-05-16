@@ -302,6 +302,8 @@ class Propietarios extends Component
                     'nacionalidad' => $this->nacionalidad,
                     'estado_civil' => $this->estado_civil,
                     'calle' => $this->calle,
+                    'rfc' => $this->rfc,
+                    'curp' => $this->curp,
                     'numero_exterior' => $this->numero_exterior_propietario,
                     'numero_interior' => $this->numero_interior_propietario,
                     'colonia' => $this->colonia,
