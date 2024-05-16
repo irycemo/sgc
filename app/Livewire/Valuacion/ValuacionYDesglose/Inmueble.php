@@ -449,7 +449,7 @@ class Inmueble extends Component
 
         }
 
-        $predioCompletoAvaluo = PredioAvaluo::where('status', 'nuevo')
+        $predioCompletoAvaluo = PredioAvaluo::where('status', 'activo')
                                             ->where('estado', $this->predio->estado)
                                             ->where('region_catastral', $this->predio->region_catastral)
                                             ->where('municipio', $this->predio->municipio)
@@ -465,9 +465,17 @@ class Inmueble extends Component
                                             ->where('numero_registro', $this->predio->numero_registro)
                                             ->first();
 
+        if($predioCompletoAvaluo){
+
+            $this->dispatch('mostrarMensaje', ['error', "Ya existe un avalúo activo con el predio ingresado."]);
+
+            return true;
+
+        }
+
         if(!$predioCompletoAvaluo){
 
-            $cuentaPredialAvaluo = PredioAvaluo::where('status', 'nuevo')
+            $cuentaPredialAvaluo = PredioAvaluo::where('status', 'activo')
                                                 ->where('localidad', $this->predio->localidad)
                                                 ->where('oficina', $this->predio->oficina)
                                                 ->where('tipo_predio', $this->predio->tipo_predio)
@@ -481,7 +489,7 @@ class Inmueble extends Component
                 return true;
             }
 
-            $claveCatastralAvaluo = PredioAvaluo::where('status', 'nuevo')
+            $claveCatastralAvaluo = PredioAvaluo::where('status', 'activo')
                                                     ->where('estado', $this->predio->estado)
                                                     ->where('region_catastral', $this->predio->region_catastral)
                                                     ->where('municipio', $this->predio->municipio)

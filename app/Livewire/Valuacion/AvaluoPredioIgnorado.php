@@ -281,8 +281,7 @@ class AvaluoPredioIgnorado extends Component
 
     public function validarDisponibilidad(){
 
-        $predioCompletoAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
-                                                ->where('estado', $this->predio->estado)
+        $predioCompletoAvaluo = PredioAvaluo::where('estado', $this->predio->estado)
                                                 ->where('region_catastral', $this->predio->region_catastral)
                                                 ->where('municipio', $this->predio->municipio)
                                                 ->where('zona_catastral', $this->predio->zona_catastral)
@@ -297,10 +296,17 @@ class AvaluoPredioIgnorado extends Component
                                                 ->where('numero_registro', $this->predio->numero_registro)
                                                 ->first();
 
+        if($predioCompletoAvaluo){
+
+            $this->dispatch('mostrarMensaje', ['error', "Ya existe un avalúo activo con el predio ingresado."]);
+
+            return true;
+
+        }
+
         if(!$predioCompletoAvaluo){
 
-            $claveCatastralAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
-                                                    ->where('estado', $this->predio->estado)
+            $claveCatastralAvaluo = PredioAvaluo::where('estado', $this->predio->estado)
                                                     ->where('region_catastral', $this->predio->region_catastral)
                                                     ->where('municipio', $this->predio->municipio)
                                                     ->where('zona_catastral', $this->predio->zona_catastral)
