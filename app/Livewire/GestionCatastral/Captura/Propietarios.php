@@ -268,7 +268,7 @@ class Propietarios extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al guardar propietario en pase a folio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al guardar propietario en captura del padrón por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
         }
@@ -335,7 +335,7 @@ class Propietarios extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al actualizar actor en pase a folio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al actualizar actor en captura del padrón por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
         }
@@ -401,7 +401,7 @@ class Propietarios extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al borrar propietario en pase a folio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al borrar propietario en captura de l padrón por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
         }
@@ -434,7 +434,7 @@ class Propietarios extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al borrar propietario en pase a folio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al borrar propietario en captura de l padrón por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
         }

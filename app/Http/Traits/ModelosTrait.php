@@ -28,12 +28,14 @@ trait ModelosTrait{
 
         static::creating(function($model){
             foreach ($model->attributes as $key => $value) {
+                if($model->{$key} == 0) continue;
                 $model->{$key} = empty($value) ? null : $value;
             }
         });
 
         static::updating(function($model){
             foreach ($model->attributes as $key => $value) {
+                if($model->{$key} == 0) continue;
                 $model->{$key} = empty($value) ? null : $value;
             }
         });

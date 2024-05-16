@@ -40,7 +40,7 @@ class Inmueble extends Component
     protected function rules(){
         return [
             'predio.copia' => 'nullable',
-            'predio.sociedad' => 'nullable',
+            'predio.sociedad' => 'required',
             'predio.numero_registro' => 'required|numeric|min:1',
             'predio.region_catastral' => 'required|numeric|min:1',
             'predio.municipio' => 'required|numeric|min:1',
@@ -641,7 +641,7 @@ class Inmueble extends Component
         }
         catch (\Throwable $th) {
 
-            Log::error("Error al crear predio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al crear avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 
         }
