@@ -142,6 +142,7 @@
 
         <div>
 
+            <p class="titulo">DIRECCIÓN DE CATASTRO</p>
             <p class="titulo">CERTIFICADO DE HISTORIA CATASTRAL</p>
 
             <p class="fundamento">

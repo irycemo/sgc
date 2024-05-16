@@ -142,6 +142,7 @@
 
         <div>
 
+            <p class="titulo">DIRECCIÓN DE CATASTRO</p>
             <p class="titulo">CERTIFICADO NEGATIVO DE REGISTRO</p>
 
             <div class="informacion" >

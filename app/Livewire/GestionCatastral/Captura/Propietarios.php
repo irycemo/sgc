@@ -85,15 +85,7 @@ class Propietarios extends Component
         ];
     }
 
-
-
     public function updated($property, $value){
-
-        if($value == ''){
-
-            $this->$property = null;
-
-        }
 
         if(in_array($property, ['porcentaje_nuda', 'porcentaje_usufructo'])){
 
@@ -165,7 +157,9 @@ class Propietarios extends Component
             'entidad',
             'municipio_propietario',
             'modal',
-            'partes_iguales'
+            'partes_iguales',
+            'ciudad',
+            'correo'
         ]);
     }
 
@@ -240,6 +234,7 @@ class Propietarios extends Component
                         'numero_interior' => $this->numero_interior_propietario,
                         'colonia' => $this->colonia,
                         'ciudad' => $this->ciudad,
+                        'correo' => $this->correo,
                         'cp' => $this->cp,
                         'entidad' => $this->entidad,
                         'municipio' => $this->municipio_propietario,
@@ -297,6 +292,10 @@ class Propietarios extends Component
             DB::transaction(function () {
 
                 $this->propietario->persona->update([
+                    'nombre' => $this->nombre,
+                    'ap_paterno' => $this->ap_paterno,
+                    'ap_materno' => $this->ap_materno,
+                    'razon_social' => $this->razon_social,
                     'fecha_nacimiento' => $this->fecha_nacimiento,
                     'nacionalidad' => $this->nacionalidad,
                     'estado_civil' => $this->estado_civil,
@@ -305,6 +304,7 @@ class Propietarios extends Component
                     'numero_interior' => $this->numero_interior_propietario,
                     'colonia' => $this->colonia,
                     'ciudad' => $this->ciudad,
+                    'correo' => $this->correo,
                     'cp' => $this->cp,
                     'entidad' => $this->entidad,
                     'municipio' => $this->municipio_propietario,
@@ -366,7 +366,10 @@ class Propietarios extends Component
         $this->numero_exterior_propietario = $this->propietario->persona->numero_exterior;
         $this->numero_interior_propietario = $this->propietario->persona->numero_interior;
         $this->colonia = $this->propietario->persona->colonia;
+        $this->ciudad = $this->propietario->persona->ciudad;
+        $this->ciudad = $this->propietario->persona->ciudad;
         $this->cp = $this->propietario->persona->cp;
+        $this->correo = $this->propietario->persona->correo;
         $this->entidad = $this->propietario->persona->entidad;
         $this->municipio_propietario = $this->propietario->persona->municipio;
 

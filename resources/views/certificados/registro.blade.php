@@ -142,6 +142,7 @@
 
         <div>
 
+            <p class="titulo">DIRECCIÓN DE CATASTRO</p>
             <p class="titulo">{{ $tipo_certificado }}</p>
 
             <div class="informacion" >
