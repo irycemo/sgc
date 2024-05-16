@@ -194,12 +194,14 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                             'ap_paterno' => $row['ap_paterno'],
                             'ap_materno' => $row['ap_materno'],
                             'nombre' => $row['nombre'],
+                            'razon_social' => $row['razon_social'],
                             'tipo' => $row['tipo_persona'],
                         ],
                         [
                             'ap_paterno' => $row['ap_paterno'],
                             'ap_materno' => $row['ap_materno'],
                             'nombre' => $row['nombre'],
+                            'razon_social' => $row['razon_social'],
                             'tipo' => $row['tipo_persona'],
                         ]
                     );
@@ -480,7 +482,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
         }
 
-        $predioCompletoAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
+        $predioCompletoAvaluo = PredioAvaluo::where('status','activo')
                                                 ->where('estado', $row['estado'])
                                                 ->where('region_catastral', $row['region'])
                                                 ->where('municipio', $row['municipio'])
@@ -495,9 +497,12 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                                 ->where('numero_registro', $row['registro'])
                                                 ->first();
 
+        if($predioCompletoAvaluo)
+                throw new FichaTecnicaImportException("La cuenta predial ya existe en avaluos, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+
         if(!$predioCompletoAvaluo){
 
-            $cuentaPredialAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
+            $cuentaPredialAvaluo = PredioAvaluo::where('status','activo')
                                                 ->where('localidad', $row['localidad'])
                                                 ->where('oficina', $row['oficina'])
                                                 ->where('tipo_predio', $row['tipo'])
@@ -507,7 +512,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             if($cuentaPredialAvaluo)
                 throw new FichaTecnicaImportException("La cuenta predial ya existe en avaluos con otra clave catastral, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
 
-            $claveCatastralAvaluo = PredioAvaluo::where('status', '!=', 'notificado')
+            $claveCatastralAvaluo = PredioAvaluo::where('status','activo')
                                                     ->where('estado', $row['estado'])
                                                     ->where('region_catastral', $row['region'])
                                                     ->where('municipio', $row['municipio'])

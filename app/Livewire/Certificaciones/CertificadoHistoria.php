@@ -212,7 +212,7 @@ class CertificadoHistoria extends Component
 
             foreach ($movimientos as $movimiento) {
 
-                $this->certificado = $this->certificado . '<br>' . 'Movmiento: ' . $movimiento->nombre . '<br>' . 'Fecha: ' . $movimiento->fecha->format('d-m-Y') . '<br>' . 'Descripción: ' . '<br>' . $movimiento->descripcion . '<br>';
+                $this->certificado = $this->certificado . '<strong>Fecha:</strong> ' . $movimiento->fecha->format('d-m-Y') . ' ' . '<strong>Movmiento:</strong> ' . $movimiento->nombre . ' ' . '<br>' . $movimiento->descripcion . '<br>';
             }
 
             $this->reset(['folio', 'usuario']);
@@ -518,7 +518,9 @@ class CertificadoHistoria extends Component
 
         $canvas = $dom_pdf->get_canvas();
 
-        $canvas->page_text(480, 794, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+        $canvas->page_text(480, 796, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 7, array(1, 1, 1));
+
+        $canvas->page_text(35, 796, $certificacion->documento . "-" . $certificacion->año . '-' .$certificacion->folio , null, 7, array(1, 1, 1));
 
         return $dom_pdf->output();
 

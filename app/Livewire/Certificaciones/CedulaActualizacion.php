@@ -260,7 +260,9 @@ class CedulaActualizacion extends Component
 
         $canvas = $dom_pdf->get_canvas();
 
-        $canvas->page_text(480, 794, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+        $canvas->page_text(480, 796, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 7, array(1, 1, 1));
+
+        $canvas->page_text(35, 796, $certificacion->documento . "-" . $certificacion->año . '-' .$certificacion->folio , null, 7, array(1, 1, 1));
 
         return $dom_pdf->output();
 

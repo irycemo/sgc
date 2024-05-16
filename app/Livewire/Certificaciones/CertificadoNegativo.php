@@ -83,7 +83,7 @@ class CertificadoNegativo extends Component
 
             if($this->tramite->servicio->id !== 5){
 
-                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a un certificado negativo de registro."]);
+                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a un certificado negativo de registro CATASTRAL."]);
 
                 $this->reset('tramite');
 
@@ -214,8 +214,8 @@ class CertificadoNegativo extends Component
 
             $certificacion = Certificacion::create([
                 'año' => now()->format('Y'),
-                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', 'CERTIFICADO NEGATIVO DE REGISTRO')->max('folio') ?? 0) + 1,
-                'documento' => 'CERTIFICADO NEGATIVO DE REGISTRO',
+                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', 'CERTIFICADO NEGATIVO DE REGISTRO CATASTRAL')->max('folio') ?? 0) + 1,
+                'documento' => 'CERTIFICADO NEGATIVO DE REGISTRO CATASTRAL',
                 'cadena_originial' => $this->cadena,
                 'cadena_encriptada' => base64_encode($firmaDirector),
                 'estado' => 'activo',
@@ -234,7 +234,7 @@ class CertificadoNegativo extends Component
                 'certificacion' => $certificacion,
                 'fecha_impresion' => $fechaImpresion,
                 'impreso_por' => auth()->user()->nombreCompleto(),
-                'tipo_certificado' => 'CERTIFICADO NEGATIVO DE REGISTRO',
+                'tipo_certificado' => 'CERTIFICADO NEGATIVO DE REGISTRO CATASTRAL',
                 'imagen' => $this->director->efirma->imagen,
                 'nombre' => $this->nombre,
                 'ap_paterno' => $this->ap_paterno,
@@ -256,8 +256,8 @@ class CertificadoNegativo extends Component
 
             $certificacion = Certificacion::create([
                 'año' => now()->format('Y'),
-                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', 'CERTIFICADO NEGATIVO DE REGISTRO')->max('folio') ?? 0) + 1,
-                'documento' => 'CERTIFICADO NEGATIVO DE REGISTRO',
+                'folio' => (Certificacion::where('año', now()->format('Y'))->where('documento', 'CERTIFICADO NEGATIVO DE REGISTRO CATASTRAL')->max('folio') ?? 0) + 1,
+                'documento' => 'CERTIFICADO NEGATIVO DE REGISTRO CATASTRAL',
                 'cadena_originial' => $this->cadena,
                 'estado' => 'activo',
                 'oficina_id' => $oficina->id,
@@ -275,7 +275,7 @@ class CertificadoNegativo extends Component
                 'fecha_impresion' => $fechaImpresion,
                 'certificacion' => $certificacion,
                 'impreso_por' => auth()->user()->nombreCompleto(),
-                'tipo_certificado' => 'CERTIFICADO NEGATIVO DE REGISTRO',
+                'tipo_certificado' => 'CERTIFICADO NEGATIVO DE REGISTRO CATASTRAL',
                 'nombre' => $this->nombre,
                 'ap_paterno' => $this->ap_paterno,
                 'ap_materno' => $this->ap_materno,
@@ -290,7 +290,9 @@ class CertificadoNegativo extends Component
 
         $canvas = $dom_pdf->get_canvas();
 
-        $canvas->page_text(480, 794, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+        $canvas->page_text(480, 796, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 7, array(1, 1, 1));
+
+        $canvas->page_text(35, 796, $certificacion->documento . "-" . $certificacion->año . '-' .$certificacion->folio , null, 7, array(1, 1, 1));
 
         return $dom_pdf->output();
 

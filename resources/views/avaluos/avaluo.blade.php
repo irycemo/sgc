@@ -45,8 +45,9 @@
 
     .titulo{
         text-align: center;
-        font-size: 14px;
+        font-size: 11px;
         font-weight: bold;
+        margin: 0;
     }
 
     .fundamento{
@@ -142,7 +143,9 @@
 
         <div>
 
-            <p class="titulo">AVALÚO Y NOTIFICACIÓN DE VALOR CATASTRAL</p>
+            <p class="titulo">DIRECCIÓN DE CATASTRO</p>
+
+            <p class="titulo">AVALÚO CATASTRAL</p>
 
             <p class="fundamento">
                 CON FUNDAMENTO  EN LOS ARTÍCULOS 1,2,3,6,7,8,66,68,69,71,72,73,74,75,76,90,92 y 93 DE  LA  LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO, 8,73,74,75,80,81,82 Y 83 DEL REGLAMENTO DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO.
