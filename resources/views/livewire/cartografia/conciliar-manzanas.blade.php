@@ -54,11 +54,13 @@
 
             <div class="text-center">
 
-                <Label class="text-base tracking-widest rounded-xl border-gray-500">Nueva manzana</Label>
+                <Label class="text-base tracking-widest rounded-xl border-gray-500">Nuevos valores</Label>
 
             </div>
 
             <div class="text-center">
+
+                <input title="Nueva manzana" placeholder="Nuevo sector" type="number" class="bg-white rounded text-xs w-28 @error('nuevo_sector') border-1 border-red-500 @enderror" wire:model="nuevo_sector">
 
                 <input title="Nueva manzana" placeholder="Nueva manzana" type="number" class="bg-white rounded text-xs w-28 @error('nueva_manzana') border-1 border-red-500 @enderror" wire:model="nueva_manzana">
 
@@ -75,7 +77,7 @@
 
             <img wire:loading wire:target="cambiarManzana" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-            Cambiar manzana
+            Conciliar
 
         </button>
 

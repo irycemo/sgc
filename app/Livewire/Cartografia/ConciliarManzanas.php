@@ -16,6 +16,7 @@ class ConciliarManzanas extends Component
     public $localidad;
     public $sector;
     public $manzana;
+    public $nuevo_sector;
     public $nueva_manzana;
     public $predio_inicial;
     public $predio_final;
@@ -34,6 +35,7 @@ class ConciliarManzanas extends Component
             'zona_catastral' => 'required|numeric|min:1,|same:localidad',
             'manzana' => 'required|numeric|min:1',
             'nueva_manzana' => 'required|numeric|min:1',
+            'nuevo_sector' => 'required|numeric|min:1',
             'predio_inicial' => 'required|numeric|min:1',
             'predio_final' => 'required|numeric|min:1',
         ]);
@@ -66,8 +68,11 @@ class ConciliarManzanas extends Component
                                     ->where('zona_catastral', $this->zona_catastral)
                                     ->where('localidad', $this->localidad)
                                     ->where('sector', $this->sector)
+                                    ->where('sector', $this->nuevo_sector)
                                     ->where('manzana', $this->nueva_manzana)
                                     ->where('predio', $predio->predio)
+                                    ->where('edificio', $predio->edificio)
+                                    ->where('departamento', $predio->departamento)
                                     ->first();
 
                     if($aux){
@@ -80,22 +85,25 @@ class ConciliarManzanas extends Component
                                                 $aux->localidad . '-' .
                                                 $aux->sector . '-' .
                                                 $aux->manzana . '-' .
-                                                $aux->predio . " ya existe."
+                                                $aux->predio .
+                                                $aux->edificio .
+                                                $aux->departamento . " ya existe."
                                             );
                     }
 
                     $predio->update([
+                        'sector' => $this->nuevo_sector,
                         'manzana' => $this->nueva_manzana,
                         'actualizado_por' => auth()->id()
                     ]);
 
-                    $this->predio->audits()->latest()->first()->update(['tags' => 'Concilió numero de manzana']);
+                    $this->predio->audits()->latest()->first()->update(['tags' => 'Concilió sector / numero de manzana']);
 
                 }
 
             });
 
-            $this->dispatch('mostrarMensaje', ['success', "Se concilió la nueva manzana con éxito."]);
+            $this->dispatch('mostrarMensaje', ['success', "Se concilió con éxito."]);
 
         }catch (\Exception $th) {
 
