@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Predio;
 use Livewire\Component;
 use App\Models\AsignarCuenta;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -27,6 +28,12 @@ class AsignacionCuentaPredial extends Component
     public $registro_inicio;
     public $registro_final;
     public $cuentasAsignadas = [];
+    public $tipo_titulo;
+    public $oficio;
+    public $titulo_busqueda;
+    public $oficio_busqueda;
+    public $observaciones_busqueda;
+    public $valuador_busqueda;
 
     protected function rules(){
         return [
@@ -34,11 +41,23 @@ class AsignacionCuentaPredial extends Component
             'localidad' => 'required',
             'oficina' => 'required',
             'tipo' => 'required|numeric|min:1|max:2',
-            'titulo' => 'nullable',
+            'titulo' => Rule::requiredIf($this->tipo_titulo != null),
+            'tipo_titulo' => 'nullable',
+            'oficio' => 'nullable',
             'cantidad' => 'required',
             'origen' => 'nullable',
             'observaciones' => 'required',
          ];
+    }
+
+    public function updatedTipoTitulo(){
+
+        if($this->tipo_titulo != ''){
+
+            $this->cantidad = 1;
+
+        }
+
     }
 
     public function crearCuentas(){
@@ -46,6 +65,22 @@ class AsignacionCuentaPredial extends Component
         $this->reset(['cuentasAsignadas']);
 
         $this->validate();
+
+        if($this->tipo_titulo && $this->titulo){
+
+            $cuenta = AsignarCuenta::where('tipo_titulo', $this->tipo_titulo)
+                            ->where('titulo_propiedad', $this->titulo)
+                            ->first();
+
+            if($cuenta){
+
+                $this->dispatch('mostrarMensaje', ['error', "El título de propiedad ya esta registrado con el predio: " . $cuenta->localidad . '-'  . $cuenta->oficina . '-'  . $cuenta->tipo_predio . '-' . $cuenta->numero_registro]);
+
+                return;
+
+            }
+
+        }
 
         $ultimaCuentaAsignada = AsignarCuenta::where('localidad', $this->localidad)
                                             ->where('oficina', $this->oficina)
@@ -65,6 +100,12 @@ class AsignacionCuentaPredial extends Component
         $registroSolicitado = $ultimaCuentaAsignada->numero_registro + 1;
 
         $predio = null;
+
+        if($this->tipo_titulo != ''){
+
+            $this->cantidad = 1;
+
+        }
 
         try {
 
@@ -89,6 +130,8 @@ class AsignacionCuentaPredial extends Component
                             'predio_origen' => $this->origen ? $this->origen : null,
                             'observaciones' => 'Cuenta preexistente',
                             'titulo_propiedad' => $this->cantidad == 1 ? $this->titulo : null,
+                            'tipo_titulo' => $this->tipo_titulo,
+                            'oficio' => $this->oficio,
                             'valuador' => $this->valuador,
                             'creado_por' => auth()->user()->id
                         ]);
@@ -114,6 +157,8 @@ class AsignacionCuentaPredial extends Component
                             'numero_registro' => $registroSolicitado,
                             'observaciones' => $this->observaciones,
                             'titulo_propiedad' => $this->cantidad == 1 ? $this->titulo : null,
+                            'tipo_titulo' => $this->tipo_titulo,
+                            'oficio' => $this->oficio,
                             'valuador' => $this->valuador,
                             'predio_origen' => $this->origen ? $this->origen : null,
                             'creado_por' => auth()->user()->id
@@ -147,22 +192,22 @@ class AsignacionCuentaPredial extends Component
 
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
-            $this->reset(['localidad', 'tipo', 'observaciones', 'cantidad', 'valuador', 'origen', 'cuentasAsignadas']);
+            $this->reset(['localidad', 'tipo', 'observaciones', 'cantidad', 'valuador', 'origen', 'cuentasAsignadas', 'tipo_titulo', 'oficio']);
 
         }
 
-        $this->reset(['localidad', 'tipo', 'observaciones', 'cantidad', 'valuador', 'origen']);
+        $this->reset(['localidad', 'tipo', 'observaciones', 'cantidad', 'valuador', 'origen', 'tipo_titulo', 'oficio']);
 
     }
 
     public function buscarCuentas(){
 
         $this->validate([
-            'localidad_busqueda' => 'required',
-            'oficina_busqueda' => 'required',
-            'tipo_busqueda' => 'required',
-            'registro_inicio' => 'required',
-            'registro_final' => 'required',
+            'localidad_busqueda' => 'nullable',
+            'oficina_busqueda' => Rule::requiredIf($this->localidad_busqueda != null),
+            'tipo_busqueda' => Rule::requiredIf($this->localidad_busqueda != null),
+            'registro_inicio' => Rule::requiredIf($this->localidad_busqueda != null),
+            'registro_final' => Rule::requiredIf($this->localidad_busqueda != null),
         ]);
 
         $this->cuentasAsignadas = AsignarCuenta::with('valuadorAsignado', 'creadoPor')
@@ -170,6 +215,30 @@ class AsignacionCuentaPredial extends Component
                                                     ->where('oficina', $this->oficina_busqueda)
                                                     ->where('tipo_predio', $this->tipo_busqueda)
                                                     ->whereBetween('numero_registro', [$this->registro_inicio, $this->registro_final])
+                                                    ->orderBy('numero_registro', 'desc')
+                                                    ->latest()
+                                                    ->get();
+
+        if(count($this->cuentasAsignadas) == 0)
+            $this->dispatch('mostrarMensaje', ['error', "No hay resultados con los datos ingresado."]);
+
+    }
+
+    public function buscarCampos(){
+
+        $this->cuentasAsignadas = AsignarCuenta::with('valuadorAsignado', 'creadoPor')
+                                                    ->when($this->titulo_busqueda != '' || $this->titulo_busqueda != null, function($q){
+                                                        $q->where('titulo_propiedad', $this->titulo_busqueda);
+                                                    })
+                                                    ->when($this->oficio_busqueda != '' || $this->oficio_busqueda != null, function($q){
+                                                        $q->where('oficio', $this->oficio_busqueda);
+                                                    })
+                                                    ->when($this->observaciones_busqueda != '' || $this->observaciones_busqueda != null, function($q){
+                                                        $q->where('observaciones', 'LIKE' . '%' . $this->observaciones_busqueda . '%');
+                                                    })
+                                                    ->when($this->valuador_busqueda != '' || $this->valuador_busqueda != null, function($q){
+                                                        $q->where('valuador', $this->valuador_busqueda);
+                                                    })
                                                     ->orderBy('numero_registro', 'desc')
                                                     ->latest()
                                                     ->get();

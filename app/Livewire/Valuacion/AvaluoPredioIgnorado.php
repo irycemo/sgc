@@ -74,6 +74,7 @@ class AvaluoPredioIgnorado extends Component
             'predio.departamento' => 'required|numeric|min:0',
             'predio.tipo_predio' => 'required|numeric|min:1|max:2',
             'predio.oficina' => 'required|numeric|min:1',
+            'predio.tipo_predio' => 'required|numeric|min:1',
             'predio.estado' => 'required',
             'predio.tipo_asentamiento' => 'required',
             'predio.nombre_asentamiento' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
@@ -134,6 +135,7 @@ class AvaluoPredioIgnorado extends Component
 
         $this->predio->municipio = $oficina?->municipio;
         $this->predio->region_catastral = $oficina?->region;
+        $this->predio->zona_catastral = $this->predio->localidad;
 
     }
 
@@ -779,6 +781,8 @@ class AvaluoPredioIgnorado extends Component
         $this->predio->oficina = auth()->user()->oficina->oficina;
 
         $this->predio->municipio = auth()->user()->oficina->municipio;
+
+        $this->predio->region_catastral = auth()->user()->oficina->region;
 
         if($this->avaluo_id){
 

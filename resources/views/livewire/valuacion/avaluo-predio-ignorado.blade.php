@@ -1040,7 +1040,7 @@
 
                     <x-input-group for="tipo" label="Tipo" :error="$errors->first('tipo')">
 
-                        <x-input-text type="number" id="tipo" wire:model="tipo" max="2" min="1"/>
+                        <x-input-text type="number" id="tipo" wire:model="tipo" max="2" min="1" readonly/>
 
                     </x-input-group>
 

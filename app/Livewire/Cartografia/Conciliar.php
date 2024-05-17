@@ -46,7 +46,7 @@ class Conciliar extends Component
             'predio.localidad' => 'required|numeric|min:1',
             'predio.sector' => 'required|numeric|min:1',
             'predio.zona_catastral' => 'required|numeric|min:1,|same:predio.localidad',
-            'predio.manzana' => 'required|numeric|min:1',
+            'predio.manzana' => 'required|numeric|min:0',
             'predio.predio' => 'required|numeric|min:1',
             'predio.edificio' => 'required|numeric|min:0',
             'predio.departamento' => 'required|numeric|min:0',

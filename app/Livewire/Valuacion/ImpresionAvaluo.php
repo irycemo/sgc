@@ -161,6 +161,14 @@ class ImpresionAvaluo extends Component
 
             }
 
+            /* if($this->tramiteAvaluo->estado != 'pagado'){
+
+                $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no esta pagado o ha sido concluido."]);
+
+                return true;
+
+            } */
+
             if($this->tramiteAvaluo->estado != 'pagado'){
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no esta pagado o ha sido concluido."]);
@@ -464,7 +472,7 @@ class ImpresionAvaluo extends Component
                 $predio->update(['status' => 'impreso']);
 
                 $predio->avaluo->update([
-                            'tramite_id' => $this->tramiteInspeccion->id ?? null,
+                            'tramite_id' => $this->tramiteAvaluo->id,
                             'estado' => 'impreso'
                         ]);
 
@@ -568,7 +576,7 @@ class ImpresionAvaluo extends Component
                 'cadena_encriptada' => base64_encode($firmaDirector),
                 'estado' => 'activo',
                 'oficina_id' => Oficina::where('oficina', 101)->first()->id,
-                'tramite_id' => $this->tramiteInspeccion->id,
+                'tramite_id' => $this->tramiteAvaluo->id,
                 'creado_por' => auth()->id(),
                 'actualizado_por' => auth()->id(),
             ]);

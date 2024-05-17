@@ -109,6 +109,7 @@ class Migracion
                         'declarante' => 'Notaria ' . $predioss->cnot_003,
                         'observaciones' => $predioss->obse_008,
                         'origen' => 0,
+                        'actualizado_por' => $this->obtenerUsuario($predioss->cvee_008)
                     ]);
 
                     $this->colindacnias($p->id, $predioss->col1_003, $predioss->col2_003, $predioss->col3_003, $predioss->col4_003);

@@ -106,6 +106,7 @@ class Inmueble extends Component
 
         $this->predio->municipio = $oficina?->municipio;
         $this->predio->region_catastral = $oficina?->region;
+        $this->predio->zona_catastral = $this->predio->localidad;
 
     }
 
@@ -740,6 +741,8 @@ class Inmueble extends Component
         $this->predio->oficina = auth()->user()->oficina->oficina;
 
         $this->predio->municipio = auth()->user()->oficina->municipio;
+
+        $this->predio->region_catastral = auth()->user()->oficina->region;
 
         if($this->avaluo_id){
 
