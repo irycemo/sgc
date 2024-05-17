@@ -243,6 +243,8 @@ class Propietarios extends Component
 
                     $this->dispatch('mostrarMensaje', ['error', "La persona ya es un propietario."]);
 
+                    return;
+
                 }
 
                 $this->predio->propietarios()->create([
