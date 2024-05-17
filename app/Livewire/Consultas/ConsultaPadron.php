@@ -189,8 +189,6 @@ class ConsultaPadron extends Component
                                             ->where('propietarioable_type', 'App\Models\Predio')
                                             ->get();
 
-                                            dd($propietarios);
-
             if($propietarios->count()){
 
                 $this->predios = Predio::whereIn('id', $propietarios->pluck('propietarioable_id'))
