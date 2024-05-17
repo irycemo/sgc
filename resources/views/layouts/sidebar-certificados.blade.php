@@ -2,7 +2,7 @@
 
     <div class="flex items-center  w-full justify-between mb-2">
 
-        <p class="uppercase text-base text-rojo tracking-wider">Certificaciones</p>
+        <p class="uppercase text-base mb-2 border-b border-rojo rounded-lg px-1.5 w-full">Certificaciones</p>
 
         <button @click="openValuacion = false" x-show="openValuacion" class="rounded-full p-1 focus:outline-rojo">
 

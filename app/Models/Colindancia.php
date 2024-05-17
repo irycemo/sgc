@@ -11,7 +11,7 @@ class Colindancia extends Model
     use HasFactory;
     use ModelosTrait;
 
-    protected $fillable = ['predio_id', 'viento', 'longitud', 'descripcion', 'creado_por', 'actualizado_por'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function colindanciaable(){
         return $this->morphTo();

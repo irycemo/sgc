@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ServiciosTableSeeder::class);
         $this->call(TramiteSeeder::class);
         $this->call(PersonaSeeder::class);
-        $this->call(PredioSeeder::class);
+        /* $this->call(PredioSeeder::class); */
         $this->call(UmaSeeder::class);
         $this->call(ValoresUnitariosConstruccionsTableSeeder::class);
         $this->call(ValoresUnitariosRusticosTableSeeder::class);

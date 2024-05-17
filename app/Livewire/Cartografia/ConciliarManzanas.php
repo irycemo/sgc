@@ -91,6 +91,23 @@ class ConciliarManzanas extends Component
                                             );
                     }
 
+                    if($this->nueva_manzana == 0 && ($predio->predio != $predio->numero_registro)){
+
+                        throw new Exception("El predio y el número de registro noson iguales en el predio: " .
+                                                $aux->estado . '-' .
+                                                $aux->region_catastral . '-' .
+                                                $aux->municipio. '-' .
+                                                $aux->zona_catastral. '-'.
+                                                $aux->localidad . '-' .
+                                                $aux->sector . '-' .
+                                                $aux->manzana . '-' .
+                                                $aux->predio .
+                                                $aux->edificio .
+                                                $aux->departamento
+                                            );
+
+                    }
+
                     $predio->update([
                         'sector' => $this->nuevo_sector,
                         'manzana' => $this->nueva_manzana,

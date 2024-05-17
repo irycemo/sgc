@@ -1,6 +1,6 @@
 <div x-data="{openRoles:true, openDistritos:true, openValores:true, openPredios:true}" class="mb-5">
 
-    <p class="uppercase text-base text-rojo tracking-wider mb-2">Administración</p>
+    <p class="uppercase text-base mb-2 border-b border-rojo rounded-lg px-1.5 w-full">Administración</p>
 
     @can('Lista de roles')
 

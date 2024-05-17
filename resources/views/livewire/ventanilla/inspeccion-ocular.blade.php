@@ -313,12 +313,12 @@
                             <select class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.avaluo_para">
 
                                 <option value="" selected>Seleccione una opción</option>
-                                <option value="0">Variación Catastral vivienda</option>
+                                <option value="1">Variación Catastral vivienda</option>
                                 <option value="46">Variación Catastral otro tipo de inmueble</option>
                                 <option value="43">Avaluos de desglose de fraccionamientos, condominios, conjuntos habitacionales y subdivisiones</option>
                                 <option value="44">Avaluos de desglose de cualquier otro tipo de inmueble</option>
                                 <option value="47">Avaluo para predio ignorado</option>
-                                <option value="0">Avaluos de actualización, fusión, cambio de régimen</option>
+                                <option value="2">Avaluos de actualización, fusión, cambio de régimen</option>
 
                             </select>
 

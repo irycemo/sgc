@@ -4,6 +4,7 @@ namespace App\Http\Services\Migracion;
 use App\Models\Predio;
 use App\Models\Persona;
 use App\Models\Terreno;
+use App\Models\Movimiento;
 use App\Models\Colindancia;
 use App\Models\Propietario;
 use App\Models\Construccion;
@@ -12,6 +13,7 @@ use App\Models\Migracion\ctref007;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Condominioconstruccion;
+use Illuminate\Support\Facades\Schema;
 
 class Migracion
 {
@@ -20,12 +22,22 @@ class Migracion
 
     public function __construct()
     {
-        $this->referencias = ctref007::all();
+        $this->referencias = ctref007::whereIn('tipo_007', ["TV", "AH", "UP", "UB", "TE", "ED", "TP", "OM"])->get();
     }
 
 
     public function run()
     {
+
+        Schema::disableForeignKeyConstraints();
+        DB::table('colindancias')->truncate();
+        DB::table('terrenos')->truncate();
+        DB::table('construccions')->truncate();
+        DB::table('condominioterrenos')->truncate();
+        DB::table('condominioconstruccions')->truncate();
+        DB::table('movimientos')->truncate();
+        DB::table('predios')->truncate();
+        Schema::enableForeignKeyConstraints();
 
         $predios = DB::connection('sqlsrv')->table('tcpro008')
                                 ->join('ctpro003', function($q){
@@ -38,13 +50,11 @@ class Migracion
                                         ->on('tcpro008.edif_008', 'ctpro003.edif_003')
                                         ->on('tcpro008.dpto_008', 'ctpro003.dpto_003')
                                         ->where('tcpro008.mpio_008', 53)
-                                        ->where('tcpro008.locl_008', 5)
                                         ->where('tcpro008.nreg_008', '>', 0);
                                 })
                                 ->get();
 
         foreach($predios as $predioss){
-
 
             try {
 
@@ -81,10 +91,10 @@ class Migracion
                         'nombre_edificio' => $predioss->nedi_008,
                         'clave_edificio' => NULL,
                         'departamento_edificio' => $predioss->ndpt_008,
-                        'uso_1' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predioss->usop_003)->first()->desc_007,
-                        'uso_2' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predioss->uso2_003)->first()->desc_007,
-                        'uso_3' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predioss->uso3_003)->first()->desc_007,
-                        'ubicacion_en_manzana' => $this->referencias->where('tipo_007', "UB")->where('cven_007', $predioss->ubic_003)->first()->desc_007,
+                        'uso_1' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predioss->usop_003)->first()?->desc_007,
+                        'uso_2' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predioss->usp2_003)->first()?->desc_007,
+                        'uso_3' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predioss->usp3_003)->first()?->desc_007,
+                        'ubicacion_en_manzana' => $this->referencias->where('tipo_007', "UB")->where('cven_007', $predioss->ubic_003)->first()?->desc_007,
                         'superficie_terreno' => $predioss->stot_008,
                         'superficie_construccion' => $predioss->scon_008,
                         'superficie_judicial' => $predioss->sjur_008,
@@ -109,7 +119,7 @@ class Migracion
                         'declarante' => 'Notaria ' . $predioss->cnot_003,
                         'observaciones' => $predioss->obse_008,
                         'origen' => 0,
-                        'actualizado_por' => $this->obtenerUsuario($predioss->cvee_008)
+                        /* 'actualizado_nombre' => $this->obtenerUsuario($predioss->cvee_008) */
                     ]);
 
                     $this->colindacnias($p->id, $predioss->col1_003, $predioss->col2_003, $predioss->col3_003, $predioss->col4_003);
@@ -120,6 +130,8 @@ class Migracion
 
                     $this->personas($predioss, $p->id);
 
+                    $this->movimientos($predioss, $p->id);
+
                     if ($predioss->edif_008 > 0 && $predioss->dpto_008 > 0){
 
                         $this->condominio($predioss,$p->id);
@@ -127,8 +139,6 @@ class Migracion
                     }
 
                 });
-
-                break;
 
             } catch (\Throwable $th) {
 
@@ -249,7 +259,7 @@ class Migracion
                 'numero_interior' => $predioss->inte_008,
                 'colonia' => $predioss->noco_008,
                 'cp' => $predioss->copd_008,
-                'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $predioss->cest_008)->first()->desc_007,
+                'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $predioss->cest_008)->first()?->desc_007,
                 'municipio' => $predioss->nomu_008,
                 'ciudad' => $predioss->nopo_008,
             ]);
@@ -301,7 +311,7 @@ class Migracion
                     'numero_interior' => $propietario->nint_005,
                     'colonia' => $propietario->noco_005,
                     'cp' => $propietario->codp_005,
-                    'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $predioss->cest_005)->first()->desc_007,
+                    'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $propietario->cest_005)->first()?->desc_007,
                     'municipio' => $propietario->nomu_005,
                     'ciudad' => $propietario->nopo_005,
                 ]);
@@ -407,48 +417,76 @@ class Migracion
 
     public function colindacnias($idnvo, $col1, $col2, $col3, $col4)
     {
-        if (trim($col1->col1_003) != "")
+        if (trim($col1) != "")
         {
             Colindancia::create([
                 'colindanciaable_id' => $idnvo,
                 'colindanciaable_type' => 'App\Models\Predio',
                 'viento' => 0,
                 'longitud' => 0,
-                'descripcion' => $col1,
+                'descripcion' => trim($col1),
             ]);
         }
 
-        if (trim($col2->col2_003) != "")
+        if (trim($col2) != "")
         {
             Colindancia::create([
                 'colindanciaable_id' => $idnvo,
                 'colindanciaable_type' => 'App\Models\Predio',
                 'viento' => 0,
                 'longitud' => 0,
-                'descripcion' => $col2,
+                'descripcion' => trim($col2),
             ]);
         }
 
-        if (trim($col3->col3_003) != "")
+        if (trim($col3) != "")
         {
             Colindancia::create([
                 'colindanciaable_id' => $idnvo,
                 'colindanciaable_type' => 'App\Models\Predio',
                 'viento' => 0,
                 'longitud' => 0,
-                'descripcion' => $col3,
+                'descripcion' =>trim($col3),
             ]);
         }
 
-        if (trim($col4->col4_003) != "")
+        if (trim($col4) != "")
         {
             Colindancia::create([
                 'colindanciaable_id' => $idnvo,
                 'colindanciaable_type' => 'App\Models\Predio',
                 'viento' => 0,
                 'longitud' => 0,
-                'descripcion' => $col4,
+                'descripcion' => trim($col4),
             ]);
+        }
+    }
+
+    public function movimientos($predioss, $idnvo){
+
+        $movimientos = DB::connection('sqlsrv')->select("select * from cthis021
+                                                            where mpio_021 = ". $predioss->mpio_008 ."
+                                                            and zcat_021 = ". $predioss->zcat_008 ."
+                                                            and locl_021 = ". $predioss->locl_008 ."
+                                                            and sect_021 = ". $predioss->sect_008 ."
+                                                            and mzna_021 = ". $predioss->mzna_008 ."
+                                                            and pred_021 = ". $predioss->pred_008 ."
+                                                            and edif_021 = ". $predioss->edif_008 ."
+                                                            and dpto_021 = ". $predioss->dpto_008
+                                                        );
+
+        foreach ($movimientos as $movimiento) {
+
+            if(empty($movimiento['obse_021'])) continue;
+
+            Movimiento::create([
+                'predio_id' => $idnvo,
+                'nombre' => $this->referencias->where('cevn_007', $movimiento->cmto_021)->where('tipo_007', 'OM')->first()->desc_007,
+                'fecha' => $movimiento->femo_021,
+                'descripcion' => $movimiento->obse_021,
+                'actualizado_nombre' => $movimiento->nome_021,
+            ]);
+
         }
     }
 

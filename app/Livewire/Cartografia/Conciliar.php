@@ -204,6 +204,11 @@ class Conciliar extends Component
 
             }
 
+            $this->region_catastral = $this->predio->region_catastral;
+            $this->municipio = $this->predio->municipio;
+            $this->zona_catastral = $this->predio->zona_catastral;
+            $this->localidad = $this->predio->localidad;
+
             if($this->predioInactivo()) return;
 
         } catch (\Throwable $th) {

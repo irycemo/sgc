@@ -249,7 +249,8 @@ class ConsultaPadron extends Component
                                 'condominioConstrucciones',
                                 'terrenos',
                                 'construcciones',
-                                'colindancias'
+                                'colindancias',
+                                'movimientos'
                             );
 
     }

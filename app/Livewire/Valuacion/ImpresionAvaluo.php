@@ -161,17 +161,17 @@ class ImpresionAvaluo extends Component
 
             }
 
-            /* if($this->tramiteAvaluo->estado != 'pagado'){
+            if($this->tramiteAvaluo->estado != 'pagado'){
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no esta pagado o ha sido concluido."]);
 
                 return true;
 
-            } */
+            }
 
-            if($this->tramiteAvaluo->estado != 'pagado'){
+            if(in_array($this->tramiteAvaluo->servicio_id, [37, 38, 38, 40]) && $this->tramite->avaluo_para != 2){
 
-                $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no esta pagado o ha sido concluido."]);
+                $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no es para valúo de actualización, fusión ó cambio de régimen."]);
 
                 return true;
 
