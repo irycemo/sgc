@@ -662,9 +662,6 @@ class Inmueble extends Component
 
         $this->validate();
 
-        if($this->validarDisponibilidad() || $this->validarSector())
-            return;
-
         if($this->predio->avaluo->estado == "concluido"){
 
             $this->dispatch('mostrarMensaje', ['error', "El avalúo esta concluido no se puede editar"]);
@@ -715,7 +712,7 @@ class Inmueble extends Component
 
                 $avaluo->audits()->latest()->first()->update(['tags' => 'Actualizó datos de identificación del inmueble']);
 
-                $this->dispatch('mostrarMensaje', ['success', "El avaluo se actualizó con el folio " . $avaluo->año . '-' . $avaluo->folio . "."]);
+                $this->dispatch('mostrarMensaje', ['success', "El avaluo se actualizó con éxito."]);
 
             });
 

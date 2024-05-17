@@ -40,6 +40,16 @@ class ConsultaPadron extends Component
          ];
     }
 
+    public function updated($property, $value){
+
+        if($value == ''){
+
+            $this->$property = null;
+
+        }
+
+    }
+
     public function crearModeloVacio(){
         $this->predio = Predio::make();
     }
@@ -158,11 +168,11 @@ class ConsultaPadron extends Component
 
             $propietarios = Propietario::whereHas('persona', function($q){
                                                 $q->where('nombre', 'like', '%'. $this->nombre . '%')
-                                                    ->orWhere('ap_paterno', 'like', '%'. $this->ap_paterno . '%')
-                                                    ->orWhere('ap_materno', 'like', '%'. $this->ap_materno . '%')
-                                                    ->orWhere('razon_social', 'like', '%'. $this->razon_social . '%')
-                                                    ->orWhere('rfc', $this->rfc)
-                                                    ->orWhere('curp', $this->curp);
+                                                    ->where('ap_paterno', 'like', '%'. $this->ap_paterno . '%')
+                                                    ->where('ap_materno', 'like', '%'. $this->ap_materno . '%')
+                                                    ->where('razon_social', 'like', '%'. $this->razon_social . '%')
+                                                    ->where('rfc', $this->rfc)
+                                                    ->where('curp', $this->curp);
                                             })
                                             ->where('propietarioable_type', 'App\Models\Predio')
                                             ->get();

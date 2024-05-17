@@ -4,7 +4,7 @@
 
         <div class="space-y-2 mb-5 bg-white rounded-lg p-2 text-right">
 
-            <span class="bg-blue-400 text-white text-sm rounded-full px-2 py-1">Folio de avaluo: {{ $predio->avaluo->folio }}</span>
+            <span class="bg-blue-400 text-white text-sm rounded-full px-2 py-1">Avalúo: {{ $predio->avaluo->año }}-{{ $predio->avaluo->folio }} - Predio: {{ $predio->cuentaPredial() }}</span>
 
         </div>
 
