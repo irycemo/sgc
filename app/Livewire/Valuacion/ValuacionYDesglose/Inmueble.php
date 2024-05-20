@@ -315,6 +315,8 @@ class Inmueble extends Component
 
             }
 
+            $this->predio->zona_catastral = $this->predio->localidad;
+
             $this->predio->id = null;
             $this->predio->actualizado_por = null;
             $this->predio->created_at = now();
