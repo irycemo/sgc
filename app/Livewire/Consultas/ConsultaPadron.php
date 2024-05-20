@@ -33,8 +33,6 @@ class ConsultaPadron extends Component
             'predio.zona_catastral' => 'required|numeric|min:1,|same:predio.localidad',
             'predio.manzana' => 'required|numeric|min:1',
             'predio.predio' => 'required|numeric|min:1',
-            'predio.edificio' => 'required|numeric|min:0',
-            'predio.departamento' => 'required|numeric|min:0',
             'predio.tipo_predio' => 'required|numeric|min:1|max:2',
             'predio.oficina' => 'required|numeric|min:1',
          ];
@@ -137,8 +135,6 @@ class ConsultaPadron extends Component
                                     ->where('sector', $this->predio->sector)
                                     ->where('manzana', $this->predio->manzana)
                                     ->where('predio', $this->predio->predio)
-                                    ->where('edificio', $this->predio->edificio)
-                                    ->where('departamento', $this->predio->departamento)
                                     ->firstOrFail();
 
             if($this->predio->bloqueadoActivo()){
