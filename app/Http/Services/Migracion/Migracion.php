@@ -477,7 +477,7 @@ class Migracion
 
         foreach ($movimientos as $movimiento) {
 
-            if(empty($movimiento['obse_021'])) continue;
+            if(empty($movimiento->obse_021)) continue;
 
             Movimiento::create([
                 'predio_id' => $idnvo,

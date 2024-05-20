@@ -100,6 +100,12 @@ class Inmueble extends Component
         ]);
     }
 
+    public function updatedPredioLocalidad(){
+
+        $this->predio->zona_catastral = $this->predio->localidad;
+
+    }
+
     public function updatedPredioOficina(){
 
         $oficina = Oficina::where('oficina', $this->predio->oficina)->first();
@@ -740,6 +746,8 @@ class Inmueble extends Component
         $this->predio->municipio = auth()->user()->oficina->municipio;
 
         $this->predio->region_catastral = auth()->user()->oficina->region;
+
+        $this->predio->zona_catastral = $this->predio->localidad;
 
         if($this->avaluo_id){
 

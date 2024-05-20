@@ -100,6 +100,12 @@ class Captura extends Component
         ]);
     }
 
+    public function updatedPredioLocalidad(){
+
+        $this->predio->zona_catastral = $this->predio->localidad;
+
+    }
+
     public function updatedPredioDocumentoEntrada($value){
 
         if(in_array($value, ['TÍTULO DE PROPIEDAD PARCELARIO','TÍTULO DE PROPIEDAD SOLAR URBANO'])){

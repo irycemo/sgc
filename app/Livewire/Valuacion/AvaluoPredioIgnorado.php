@@ -159,6 +159,12 @@ class AvaluoPredioIgnorado extends Component
         $this->convertirCoordenadas();
     }
 
+    public function updatedPredioLocalidad(){
+
+        $this->predio->zona_catastral = $this->predio->localidad;
+
+    }
+
     public function buscarClaveCatastral(){
 
         try {
