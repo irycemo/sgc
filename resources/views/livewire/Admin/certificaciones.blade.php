@@ -4,9 +4,9 @@
 
         <x-header>Certificaciones</x-header>
 
-        <div class="flex justify-between">
+        <div class="">
 
-            <div class="flex gap-3">
+            <div class="flex gap-1 p-1 mb-1">
 
                 <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
 
@@ -20,7 +20,7 @@
 
                 </select>
 
-                <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-16">
 
                 <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
 
@@ -31,7 +31,7 @@
 
                 </select>
 
-                <select class="bg-white rounded-full text-sm w-60" wire:model.live="filters.documento">
+                <select class="bg-white rounded-full text-sm w-32" wire:model.live="filters.documento">
 
                     <option value="" selected>Documento</option>
 
@@ -43,7 +43,7 @@
 
                 </select>
 
-                <select class="bg-white rounded-full text-sm w-60" wire:model.live="filters.oficina">
+                <select class="bg-white rounded-full text-sm w-28" wire:model.live="filters.oficina">
 
                     <option value="" selected>Oficina</option>
 
@@ -55,11 +55,23 @@
 
                 </select>
 
+            </div>
+
+            <div class="flex gap-1 p-1">
+
                 <input type="number" wire:model.live.debounce.500ms="filters.tAño" placeholder="T. año" class="bg-white rounded-full text-sm w-24">
 
                 <input type="number" wire:model.live.debounce.500ms="filters.tFolio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
 
                 <input type="number" wire:model.live.debounce.500ms="filters.tUsuario" placeholder="T. Usuario" class="bg-white rounded-full text-sm w-24">
+
+                <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+
+                <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+
+                <input type="number" wire:model.live.debounce.500ms="filters.t_predio" placeholder="T. Predio" class="bg-white rounded-full text-sm w-24">
+
+                <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
 
                 <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 

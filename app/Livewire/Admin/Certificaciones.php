@@ -40,7 +40,11 @@ class Certificaciones extends Component
         'oficina' => '',
         'tAño' => '',
         'tFolio' => '',
-        'tUsuario' => ''
+        'tUsuario' => '',
+        'localidad' => '',
+        'oficina' => '',
+        't_predio' => '',
+        'registro' => '',
     ];
 
     public Certificacion $modelo_editar;
@@ -388,13 +392,13 @@ class Certificaciones extends Component
 
         $this->oficinas = Oficina::orderBy('nombre')->get();
 
-        $this->imagen = User::with('efirma')->where('status', 'activo')
+        $director = User::with('efirma')->where('status', 'activo')
                 ->whereHas('roles', function($q){
                     $q->where('name', 'Director');
                 })
-                ->first()->efirma->imagen;
+                ->first();
 
-        if(!$this->imagen) abort(500, message:"Es necesario actualizar la firma electrónica del director");
+        if(!$director->efirma?->imagen) abort(500, message:"Es necesario actualizar la imagen de la firma electrónica del director");
 
     }
 
@@ -421,6 +425,26 @@ class Certificaciones extends Component
                                             ->when($this->filters['tUsuario'], function($q, $tUsuario){
                                                 $q->WhereHas('tramite', function($q) use($tUsuario){
                                                     $q->where('usuario', $tUsuario);
+                                                });
+                                            })
+                                            ->when($this->filters['localidad'], function($q, $localidad){
+                                                $q->WhereHas('predio', function($q) use($localidad){
+                                                    $q->where('localidad', $localidad);
+                                                });
+                                            })
+                                            ->when($this->filters['oficina'], function($q, $oficina){
+                                                $q->WhereHas('predio', function($q) use($oficina){
+                                                    $q->where('oficina', $oficina);
+                                                });
+                                            })
+                                            ->when($this->filters['t_predio'], function($q, $t_predio){
+                                                $q->WhereHas('predio', function($q) use($t_predio){
+                                                    $q->where('tipo_predio', $t_predio);
+                                                });
+                                            })
+                                            ->when($this->filters['registro'], function($q, $registro){
+                                                $q->WhereHas('predio', function($q) use($registro){
+                                                    $q->where('numero_registro', $registro);
                                                 });
                                             })
                                             ->orderBy($this->sort, $this->direction)
