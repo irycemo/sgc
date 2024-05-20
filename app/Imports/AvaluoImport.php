@@ -421,6 +421,12 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
         }
 
+        if($oficina->region != $row['region']){
+
+            throw new FichaTecnicaImportException("La región no corresponde a la oficina ingresada, verifique la cuenta predial: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+
+        }
+
         $sectores = json_decode($oficina->sectores, true);
 
         if(!$sectores){
