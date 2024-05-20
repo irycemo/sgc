@@ -2,10 +2,11 @@
 
 namespace App\Livewire\Cartografia;
 
-use App\Models\Predio;
 use Exception;
+use App\Models\Predio;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ConciliarManzanas extends Component
 {
@@ -124,13 +125,15 @@ class ConciliarManzanas extends Component
 
         }catch (\Exception $th) {
 
+            Log::error("Error al conciliar manzana por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', $th->getMessage()]);
 
 
         }catch (\Throwable $th) {
 
-            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+            Log::error("Error al conciliar manzana por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
 
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 
         }
 
