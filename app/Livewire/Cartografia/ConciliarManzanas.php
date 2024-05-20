@@ -115,7 +115,7 @@ class ConciliarManzanas extends Component
                         'actualizado_por' => auth()->id()
                     ]);
 
-                    $this->predio->audits()->latest()->first()->update(['tags' => 'Concilió sector / numero de manzana']);
+                    $predio->audits()->latest()->first()->update(['tags' => 'Concilió sector / numero de manzana']);
 
                 }
 
