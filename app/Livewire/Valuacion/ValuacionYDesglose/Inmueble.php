@@ -173,6 +173,8 @@ class Inmueble extends Component
                                         })
                                         ->firstOrFail();
 
+            $this->predio->zona_catastral = $this->predio->localidad;
+
             if($this->predio->avaluo->asignado_a != auth()->user()->id){
 
                 $this->predio = PredioAvaluo::make([
@@ -237,6 +239,8 @@ class Inmueble extends Component
                                         $q->where('estado', '!=', 'notificado');
                                     })
                                     ->firstOrFail();
+
+            $this->predio->zona_catastral = $this->predio->localidad;
 
             if($this->predio->avaluo->asignado_a != auth()->user()->id){
 

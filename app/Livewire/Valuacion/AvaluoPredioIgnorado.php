@@ -194,6 +194,8 @@ class AvaluoPredioIgnorado extends Component
                                         ->where('departamento', $this->predio->departamento)
                                         ->firstOrFail();
 
+            $this->predio->zona_catastral = $this->predio->localidad;
+
             if($this->predio->avaluo->creado_por != auth()->user()->id){
 
                 $this->predio = PredioAvaluo::make([
