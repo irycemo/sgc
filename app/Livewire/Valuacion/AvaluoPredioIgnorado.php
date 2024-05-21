@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
 use App\Http\Services\Coordenadas\Coordenadas;
+use App\Models\AsignarCuenta;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -481,6 +482,26 @@ class AvaluoPredioIgnorado extends Component
 
     }
 
+    public function validarCuentaAsignada(){
+
+        $cuenta = AsignarCuenta::where('localidad', $this->localidad)
+                                ->where('oficina', $this->oficina)
+                                ->where('tipo', $this->tipo_predio)
+                                ->where('registro', $this->numero_registro)
+                                ->where('tipo', $this->tipo_predio)
+                                ->where('valuador', auth()->id())
+                                ->first();
+
+        if(!$cuenta){
+
+            $this->dispatch('mostrarMensaje', ['error', "No tienes asignada la cuenta ingresada."]);
+
+            return true;
+
+        }
+
+    }
+
     public function crear(){
 
         $this->validate();
@@ -737,6 +758,8 @@ class AvaluoPredioIgnorado extends Component
         $this->predio->numero_registro = $this->numero_registro;
 
         if($this->validarDisponibilidad2()) return;
+
+        if($this->validarCuentaAsignada()) return;
 
         DB::transaction(function () use ($tramite){
 

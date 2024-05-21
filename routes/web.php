@@ -52,6 +52,7 @@ use App\Livewire\TramitesAdministrativos\VariacionesCatastrales;
 use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
 use App\Livewire\GestionCatastral\RevisionTraslados\RevisarTraslado;
 use App\Livewire\GestionCatastral\RevisionTraslados\RevisionTraslados;
+use App\Livewire\Ventanilla\TramitesLinea;
 
 /*
 |--------------------------------------------------------------------------
@@ -164,6 +165,8 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('ventanilla', VentanillaVentanilla::class)->middleware('permission:Ventanilla')->name('ventanilla');
 
     Route::get('reactivar_tramites', ReactivarTramites::class)->middleware('permission:Reactivar trámites')->name('reactivar_tramites');
+
+    Route::get('tramites_linea', TramitesLinea::class)->middleware('permission:Trámites en línea')->name('tramites_linea');
 
 });
 

@@ -9,7 +9,10 @@ use App\Models\Colindancia;
 use App\Models\Propietario;
 use App\Models\Construccion;
 use App\Models\Condominioterreno;
+use App\Models\Migracion\ctcdm004;
+use App\Models\Migracion\ctpro003;
 use App\Models\Migracion\ctref007;
+use App\Models\Migracion\tcpro008;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Condominioconstruccion;
@@ -152,61 +155,57 @@ class Migracion
     public function condominio($predioss,$idnvo)
     {
 
-        $predio_padre = DB::connection('sqlsrv')->select("select * from tcpro008
-                                                            where mpio_008 = ". $predioss->mpio_008 ."
-                                                            and zcat_008 = ". $predioss->zcat_008 ."
-                                                            and locl_008 = ". $predioss->locl_008 ."
-                                                            and sect_008 = ". $predioss->sect_008 ."
-                                                            and mzna_008 = ". $predioss->mzna_008 ."
-                                                            and pred_008 =  ". $predioss->pred_008 ."
-                                                            and edif_008 = 0
-                                                            and dpto_008 = 0
-                                                            and nreg_008 = 0"
-                                                        );
+        $predio_padre = tcpro008::where('mpio_008', $predioss->mpio_008)
+                                ->where('zcat_008', $predioss->zcat_008)
+                                ->where('locl_008', $predioss->locl_008)
+                                ->where('sect_008', $predioss->sect_008)
+                                ->where('mzna_008', $predioss->mzna_008)
+                                ->where('pred_008', $predioss->pred_008)
+                                ->where('edif_008', 0)
+                                ->where('dpto_008', 0)
+                                ->where('nreg_008', 0)
+                                ->first();
 
         if(!$predio_padre){
 
-            $predio_padre = DB::connection('sqlsrv')->select("select * from ctpro003
-                                                                where mpio_003 = ". $predioss->mpio_008 ."
-                                                                and zcat_003 = ". $predioss->zcat_008 ."
-                                                                and locl_003 = ". $predioss->locl_008 ."
-                                                                and sect_003 = ". $predioss->sect_008 ."
-                                                                and mzna_003 = ". $predioss->mzna_008 ."
-                                                                and pred_003 =  ". $predioss->pred_008 ."
-                                                                and edif_003 = 0
-                                                                and dpto_003 = 0
-                                                                and nreg_003 = 0"
-
-                                                            );
+            $predio_padre = ctpro003::where('mpio_003', $predioss->mpio_008)
+                                        ->where('zcat_003', $predioss->zcat_008)
+                                        ->where('locl_003', $predioss->locl_008)
+                                        ->where('sect_003', $predioss->sect_008)
+                                        ->where('mzna_003', $predioss->mzna_008)
+                                        ->where('pred_003', $predioss->pred_008)
+                                        ->where('edif_003', 0)
+                                        ->where('dpto_003', 0)
+                                        ->where('nreg_003', 0)
+                                        ->first();
         }
 
-        $ctcdm004 = DB::connection('sqlsrv')->select("select * from ctcdm004
-                                                        where mpio_004 = ". $predioss->mpio_008 ."
-                                                        and zcat_004 = ". $predioss->zcat_008 ."
-                                                        and locl_004 = ". $predioss->locl_008 ."
-                                                        and sect_004 = ". $predioss->sect_008 ."
-                                                        and mzna_004 = ". $predioss->mzna_008 ."
-                                                        and pred_004 = ". $predioss->pred_008 ."
-                                                        and edif_004 = ". $predioss->edif_008 ."
-                                                        and dpto_004 = ". $predioss->dpto_008
-                                                    );
+        $ctcdm004 = ctcdm004::where('mpio_004', $predioss->mpio_008)
+                                ->where('zcat_004', $predioss->zcat_008)
+                                ->where('locl_004', $predioss->locl_008)
+                                ->where('sect_004', $predioss->sect_008)
+                                ->where('mzna_004', $predioss->mzna_008)
+                                ->where('pred_004', $predioss->pred_008)
+                                ->where('edif_004', $predioss->edif_008)
+                                ->where('dpto_004', $predioss->dpto_008)
+                                ->first();
 
-        if(!isset($predio_padre[0]['stot_008'])){
+        if(!isset($predio_padre->stot_008)){
 
-            $superficie_total = $predio_padre[0]['stot_003'];
+            $superficie_total = $predio_padre->stot_003;
 
         }else{
 
-            $superficie_total = $predio_padre[0]['stot_008'];
+            $superficie_total = $predio_padre->stot_008;
         }
 
-        if(!isset($predio_padre[0]['scon_008'])){
+        if(!isset($predio_padre->scon_008)){
 
-            $area_comun_construccion = $predio_padre[0]['scon_003'];
+            $area_comun_construccion = $predio_padre->scon_003;
 
         }else{
 
-            $area_comun_construccion = $predio_padre[0]['scon_008'];
+            $area_comun_construccion = $predio_padre->scon_008;
         }
 
        if ($ctcdm004) {
@@ -215,18 +214,18 @@ class Migracion
                 'condominioterrenoable_id' => $idnvo,
                 'condominioterrenoable_type' => 'App\Models\Predio',
                 'area_terreno_comun' => ($predio_padre) ? $superficie_total : 0,
-                'indiviso_terreno' => $ctcdm004[0]->ipre_004,
+                'indiviso_terreno' => $ctcdm004->ipre_004,
                 'valor_unitario' => 0,
-                'valor_terreno_comun' => ($ctcdm004[0]->vter_004 == NULL) ? 0 : $ctcdm004[0]->vter_004,
+                'valor_terreno_comun' => ($ctcdm004->vter_004 == NULL) ? 0 : $ctcdm004->vter_004,
             ]);
 
             Condominioconstruccion::create([
                 'condominioconstruccionable_id' => $idnvo,
                 'condominioconstruccionable_type' => 'App\Models\Predio',
                 'area_comun_construccion' => ($predio_padre) ? $area_comun_construccion : 0,
-                'indiviso_construccion' => $ctcdm004[0]->icon_004,
+                'indiviso_construccion' => $ctcdm004->icon_004,
                 'valor_clasificacion_construccion' => 0,
-                'valor_construccion_comun' => ($ctcdm004[0]->vcon_004 == NULL) ? 0 : $ctcdm004[0]->vcon_004,
+                'valor_construccion_comun' => ($ctcdm004->vcon_004 == NULL) ? 0 : $ctcdm004->vcon_004,
             ]);
 
        }
