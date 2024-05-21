@@ -7,11 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TramiteRequest;
 use App\Http\Resources\TramiteResource;
 use App\Http\Requests\TramiteListRequest;
 use App\Http\Requests\CrearTramiteRequest;
-use App\Http\Requests\TramiteRequest;
 use App\Http\Services\Tramites\TramiteService;
+use App\Exceptions\ErrorAlValidarLineaDeCaptura;
 
 class TramitesApiController extends Controller
 {
@@ -120,6 +121,48 @@ class TramitesApiController extends Controller
                                 ->paginate($validated['pagination'], ['*'], 'page', $validated['pagina']);
 
         return TramiteResource::collection($tramites)->response()->setStatusCode(200);
+
+    }
+
+    public function acreditarTramite(Request $request){
+
+        $validated = $request->validate(['linea_de_captura' => 'required']);
+
+        $tramite = Tramite::where('linea_de_captura', $validated['linea_de_captura'])->first();
+
+        if(!$tramite){
+
+            return response()->json([
+                'error' => "Trámite no encontrado.",
+            ], 404);
+
+        }
+
+        try {
+
+            (new TramiteService($tramite))->procesarPago();
+
+            return (new TramiteResource($tramite))->response()->setStatusCode(200);
+
+        } catch (ErrorAlValidarLineaDeCaptura $th) {
+
+            if(!$tramite){
+
+                return response()->json([
+                    'error' => $th->getMessage(),
+                ], 500);
+
+            }
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al acreditar pago api. " . $th);
+
+            return response()->json([
+                'error' => 'Error al acreditar pago.',
+            ], 500);
+
+        }
 
     }
 

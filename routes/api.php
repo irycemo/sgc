@@ -42,6 +42,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('craer_tramite', [TramitesApiController::class, 'crearTramtie']);
 
+    Route::post('acreditar_tramite', [TramitesApiController::class, 'acreditarTramite']);
+
     Route::get('consultar_servicios', [ConsultarServiciosController::class, 'consultarServicios']);
 
     Route::get('consultar_propietarios', [PropietariosApiController::class, 'consultarPropietarios']);
