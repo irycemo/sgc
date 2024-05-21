@@ -772,6 +772,8 @@ class AvaluoPredioIgnorado extends Component
 
         $this->localidad = $this->predio->localidad;
 
+        $this->tipo = $this->predio->tipo_predio;
+
         $this->modal2 = true;
 
     }
