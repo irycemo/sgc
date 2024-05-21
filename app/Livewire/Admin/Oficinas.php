@@ -61,8 +61,7 @@ class Oficinas extends Component
             $this->modelo_editar = $modelo;
 
         if($this->modelo_editar->sectores)
-            $this->sectores = json_decode($this->modelo_editar->sectores, true);
-
+            $this->sectores = json_decode($this->modelo_editar->sectores);
     }
 
     public function guardar(){
@@ -79,7 +78,7 @@ class Oficinas extends Component
                     array_push($array, (int)$i);
                 }
 
-                $this->modelo_editar->sectores = json_encode($array);
+                $this->modelo_editar->sectores = $array;
                 $this->modelo_editar->creado_por = auth()->user()->id;
                 $this->modelo_editar->save();
 
