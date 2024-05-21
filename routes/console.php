@@ -50,7 +50,7 @@ Artisan::command('migrar', function(){
                                     ->where('tcpro008.mpio_008', 53)
                                     ->where('tcpro008.nreg_008', '>', 0);
                             })
-                            ->take(5)->get();
+                            ->get();
 
 
     $progressbar = $this->output->createProgressBar(count($predios));
