@@ -146,13 +146,11 @@ class TramitesApiController extends Controller
 
         } catch (ErrorAlValidarLineaDeCaptura $th) {
 
-            if(!$tramite){
+            Log::error("Error al acreditar pago api. " . $th);
 
-                return response()->json([
-                    'error' => $th->getMessage(),
-                ], 500);
-
-            }
+            return response()->json([
+                'error' => $th->getMessage(),
+            ], 500);
 
         } catch (\Throwable $th) {
 
