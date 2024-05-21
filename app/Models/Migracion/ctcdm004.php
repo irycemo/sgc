@@ -11,5 +11,5 @@ class ctcdm004 extends Model
 
     protected $connection = 'sqlsrv';
 
-    protected $table = 'ctpro003';
+    protected $table = 'ctcdm004';
 }

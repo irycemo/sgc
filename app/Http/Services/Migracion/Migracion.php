@@ -11,143 +11,112 @@ use App\Models\Construccion;
 use App\Models\Condominioterreno;
 use App\Models\Migracion\ctcdm004;
 use App\Models\Migracion\ctpro003;
-use App\Models\Migracion\ctref007;
 use App\Models\Migracion\tcpro008;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Condominioconstruccion;
-use Illuminate\Support\Facades\Schema;
 
 class Migracion
 {
 
     public $referencias;
 
-    public function __construct()
+    public function __construct($referencias)
     {
-        $this->referencias = ctref007::whereIn('tipo_007', ["TV", "AH", "UP", "UB", "TE", "ED", "TP", "OM"])->get();
+        $this->referencias = $referencias;
     }
 
 
-    public function run()
+    public function run($predioss)
     {
 
-        Schema::disableForeignKeyConstraints();
-        DB::table('colindancias')->truncate();
-        DB::table('terrenos')->truncate();
-        DB::table('construccions')->truncate();
-        DB::table('condominioterrenos')->truncate();
-        DB::table('condominioconstruccions')->truncate();
-        DB::table('movimientos')->truncate();
-        DB::table('predios')->truncate();
-        Schema::enableForeignKeyConstraints();
+        try {
 
-        $predios = DB::connection('sqlsrv')->table('tcpro008')
-                                ->join('ctpro003', function($q){
-                                    $q->on('tcpro008.mpio_008', 'ctpro003.mpio_003')
-                                        ->on('tcpro008.zcat_008', 'ctpro003.zcat_003')
-                                        ->on('tcpro008.locl_008', 'ctpro003.locl_003')
-                                        ->on('tcpro008.sect_008', 'ctpro003.sect_003')
-                                        ->on('tcpro008.mzna_008', 'ctpro003.mzna_003')
-                                        ->on('tcpro008.pred_008', 'ctpro003.pred_003')
-                                        ->on('tcpro008.edif_008', 'ctpro003.edif_003')
-                                        ->on('tcpro008.dpto_008', 'ctpro003.dpto_003')
-                                        ->where('tcpro008.mpio_008', 53)
-                                        ->where('tcpro008.nreg_008', '>', 0);
-                                })
-                                ->get();
+            DB::transaction(function () use($predioss){
 
-        foreach($predios as $predioss){
+                $p = Predio::create([
+                    'estado' => $predioss->esta_008,
+                    'region_catastral' => $predioss->rcat_008,
+                    'municipio' => $predioss->mpio_008,
+                    'zona_catastral' => $predioss->zcat_008,
+                    'localidad' => $predioss->locl_008,
+                    'sector' => $predioss->sect_008,
+                    'manzana' => $predioss->mzna_008,
+                    'predio' => $predioss->pred_008,
+                    'edificio' => $predioss->edif_008,
+                    'departamento' => $predioss->dpto_008,
+                    'oficina' => $predioss->ofna_008,
+                    'tipo_predio' => $predioss->tpre_008,
+                    'numero_registro' => $predioss->nreg_008,
+                    'tipo_vialidad' => $this->referencias->where('tipo_007', "TV")->where('cven_007', $predioss->tvia_008)->first()->desc_007,
+                    'tipo_asentamiento' => $this->referencias->where('tipo_007', "AH")->where('cven_007', $predioss->tase_008)->first()->desc_007,
+                    'nombre_vialidad' => $predioss->call_008,
+                    'numero_exterior' => $predioss->next_008,
+                    'numero_exterior_2' => $predioss->nex2_008,
+                    'numero_adicional' => $predioss->nadi_008,
+                    'numero_adicional_2' => $predioss->nad2_008,
+                    'numero_interior' => $predioss->nint_008,
+                    'nombre_asentamiento' => $predioss->colo_008,
+                    'codigo_postal' => $predioss->codp_008,
+                    'lote_fraccionador' => $predioss->lote_008,
+                    'manzana_fraccionador' => $predioss->manz_008,
+                    'etapa_fraccionador' => $predioss->zona_008,
+                    'nombre_predio' => NULL,
+                    'nombre_edificio' => $predioss->nedi_008,
+                    'clave_edificio' => NULL,
+                    'departamento_edificio' => $predioss->ndpt_008,
+                    'uso_1' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predioss->usop_003)->first()?->desc_007,
+                    'uso_2' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predioss->usp2_003)->first()?->desc_007,
+                    'uso_3' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predioss->usp3_003)->first()?->desc_007,
+                    'ubicacion_en_manzana' => $this->referencias->where('tipo_007', "UB")->where('cven_007', $predioss->ubic_003)->first()?->desc_007,
+                    'superficie_terreno' => $predioss->stot_008,
+                    'superficie_construccion' => $predioss->scon_008,
+                    'superficie_judicial' => $predioss->sjur_008,
+                    'superficie_notarial' => $predioss->snot_008,
+                    'area_comun_terreno' => 0,
+                    'area_comun_construccion' => 0,
+                    'valor_terreno_comun' => 0,
+                    'valor_construccion_comun' => 0,
+                    'valor_total_terreno' => $predioss->vter_003,
+                    'valor_total_construccion' => $predioss->vcon_003,
+                    'valor_catastral' => $predioss->vcas_008,
+                    'curt' => NULL,
+                    'folio_real' => NULL,
+                    'xutm' => ($predioss->xutm_003 == NULL) ? 0 : $predioss->xutm_003,
+                    'yutm' => ($predioss->yutm_003 == NULL) ? 0 : $predioss->yutm_003,
+                    'zutm' => ($predioss->zutm_003 == NULL) ? 0 : $predioss->zutm_003,
+                    'lon' => ($predioss->long_003 == NULL) ? 0 : ($predioss->long_003 > -103.7 && $predioss->long_003 <= -100.06  ? $predioss->long_003 : 0),
+                    'lat' => ($predioss->lati_003 == NULL) ? 0 : ($predioss->lati_003 > 17.9 && $predioss->lati_003 <= 20.5  ? $predioss->lati_003 : 0),
+                    'fecha_efectos' => $predioss->fecn_008,
+                    'documento_entrada' => $this->referencias->where('tipo_007', "TE")->where('cven_007', $predioss->tesc_008)->first()->desc_007,
+                    'documento_numero' => $predioss->titp_008,
+                    'declarante' => 'Notaria ' . $predioss->cnot_003,
+                    'observaciones' => $predioss->obse_008,
+                    'origen' => 0,
+                    'actualizado_nombre' => $predioss->nome_008
+                ]);
 
-            try {
+                $this->colindacnias($p->id, $predioss->col1_003, $predioss->col2_003, $predioss->col3_003, $predioss->col4_003);
 
-                DB::transaction(function () use($predioss){
+                $this->terrenos($p->id, $predioss->stot_008, $predioss->valt_003, $predioss->vter_003);
 
-                    $p = Predio::create([
-                        'estado' => $predioss->esta_008,
-                        'region_catastral' => $predioss->rcat_008,
-                        'municipio' => $predioss->mpio_008,
-                        'zona_catastral' => $predioss->zcat_008,
-                        'localidad' => $predioss->locl_008,
-                        'sector' => $predioss->sect_008,
-                        'manzana' => $predioss->mzna_008,
-                        'predio' => $predioss->pred_008,
-                        'edificio' => $predioss->edif_008,
-                        'departamento' => $predioss->dpto_008,
-                        'oficina' => $predioss->ofna_008,
-                        'tipo_predio' => $predioss->tpre_008,
-                        'numero_registro' => $predioss->nreg_008,
-                        'tipo_vialidad' => $this->referencias->where('tipo_007', "TV")->where('cven_007', $predioss->tvia_008)->first()->desc_007,
-                        'tipo_asentamiento' => $this->referencias->where('tipo_007', "AH")->where('cven_007', $predioss->tase_008)->first()->desc_007,
-                        'nombre_vialidad' => $predioss->call_008,
-                        'numero_exterior' => $predioss->next_008,
-                        'numero_exterior_2' => $predioss->nex2_008,
-                        'numero_adicional' => $predioss->nadi_008,
-                        'numero_adicional_2' => $predioss->nad2_008,
-                        'numero_interior' => $predioss->nint_008,
-                        'nombre_asentamiento' => $predioss->colo_008,
-                        'codigo_postal' => $predioss->codp_008,
-                        'lote_fraccionador' => $predioss->lote_008,
-                        'manzana_fraccionador' => $predioss->manz_008,
-                        'etapa_fraccionador' => $predioss->zona_008,
-                        'nombre_predio' => NULL,
-                        'nombre_edificio' => $predioss->nedi_008,
-                        'clave_edificio' => NULL,
-                        'departamento_edificio' => $predioss->ndpt_008,
-                        'uso_1' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predioss->usop_003)->first()?->desc_007,
-                        'uso_2' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predioss->usp2_003)->first()?->desc_007,
-                        'uso_3' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predioss->usp3_003)->first()?->desc_007,
-                        'ubicacion_en_manzana' => $this->referencias->where('tipo_007', "UB")->where('cven_007', $predioss->ubic_003)->first()?->desc_007,
-                        'superficie_terreno' => $predioss->stot_008,
-                        'superficie_construccion' => $predioss->scon_008,
-                        'superficie_judicial' => $predioss->sjur_008,
-                        'superficie_notarial' => $predioss->snot_008,
-                        'area_comun_terreno' => 0,
-                        'area_comun_construccion' => 0,
-                        'valor_terreno_comun' => 0,
-                        'valor_construccion_comun' => 0,
-                        'valor_total_terreno' => $predioss->vter_003,
-                        'valor_total_construccion' => $predioss->vcon_003,
-                        'valor_catastral' => $predioss->vcas_008,
-                        'curt' => NULL,
-                        'folio_real' => NULL,
-                        'xutm' => ($predioss->xutm_003 == NULL) ? 0 : $predioss->xutm_003,
-                        'yutm' => ($predioss->yutm_003 == NULL) ? 0 : $predioss->yutm_003,
-                        'zutm' => ($predioss->zutm_003 == NULL) ? 0 : $predioss->zutm_003,
-                        'lon' => ($predioss->long_003 == NULL) ? 0 : ($predioss->long_003 > -103.7 && $predioss->long_003 <= -100.06  ? $predioss->long_003 : 0),
-                        'lat' => ($predioss->lati_003 == NULL) ? 0 : ($predioss->lati_003 > 17.9 && $predioss->lati_003 <= 20.5  ? $predioss->lati_003 : 0),
-                        'fecha_efectos' => $predioss->fecn_008,
-                        'documento_entrada' => $this->referencias->where('tipo_007', "TE")->where('cven_007', $predioss->tesc_008)->first()->desc_007,
-                        'documento_numero' => $predioss->titp_008,
-                        'declarante' => 'Notaria ' . $predioss->cnot_003,
-                        'observaciones' => $predioss->obse_008,
-                        'origen' => 0,
-                        /* 'actualizado_nombre' => $this->obtenerUsuario($predioss->cvee_008) */
-                    ]);
+                $this->construcciones($p->id, $predioss->mpio_008, $predioss->zcat_008, $predioss->locl_008, $predioss->sect_008, $predioss->mzna_008, $predioss->pred_008, $predioss->edif_008, $predioss->dpto_008);
 
-                    $this->colindacnias($p->id, $predioss->col1_003, $predioss->col2_003, $predioss->col3_003, $predioss->col4_003);
+                $this->personas($predioss, $p->id);
 
-                    $this->terrenos($p->id, $predioss->stot_008, $predioss->valt_003, $predioss->vter_003);
+                $this->movimientos($predioss, $p->id);
 
-                    $this->construcciones($p->id, $predioss->mpio_008, $predioss->zcat_008, $predioss->locl_008, $predioss->sect_008, $predioss->mzna_008, $predioss->pred_008, $predioss->edif_008, $predioss->dpto_008);
+                if ($predioss->edif_008 > 0 && $predioss->dpto_008 > 0){
 
-                    $this->personas($predioss, $p->id);
+                    $this->condominio($predioss,$p->id);
 
-                    $this->movimientos($predioss, $p->id);
+                }
 
-                    if ($predioss->edif_008 > 0 && $predioss->dpto_008 > 0){
+            });
 
-                        $this->condominio($predioss,$p->id);
+        } catch (\Throwable $th) {
 
-                    }
-
-                });
-
-            } catch (\Throwable $th) {
-
-                Log::error("El predio: " . $predioss->locl_008 . "-" . $predioss->ofna_008 . "-" . $predioss->tpre_008 . "-" . $predioss->nreg_008 . ". " . $th);
-            }
-
+            Log::error("El predio: " . $predioss->locl_008 . "-" . $predioss->ofna_008 . "-" . $predioss->tpre_008 . "-" . $predioss->nreg_008 . ". " . $th);
         }
 
     }
@@ -480,7 +449,7 @@ class Migracion
 
             Movimiento::create([
                 'predio_id' => $idnvo,
-                'nombre' => $this->referencias->where('cevn_007', $movimiento->cmto_021)->where('tipo_007', 'OM')->first()->desc_007,
+                'nombre' => $this->referencias->where('cven_007', $movimiento->cmto_021)->where('tipo_007', 'OM')->first()->desc_007,
                 'fecha' => $movimiento->femo_021,
                 'descripcion' => $movimiento->obse_021,
                 'actualizado_nombre' => $movimiento->nome_021,
