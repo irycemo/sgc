@@ -22,6 +22,7 @@ class ConsultaPadron extends Component
     public $rfc;
     public $curp;
     public $ubicacion;
+    public $diez = false;
 
     protected function rules(){
         return [
@@ -81,9 +82,45 @@ class ConsultaPadron extends Component
 
     public function buscarCuentaPredial(){
 
-        try {
+        $this->predio->id = null;
 
-            $this->predio = Predio::with(
+        if(!$this->diez){
+
+            try {
+
+                $this->predio = Predio::with(
+                                            'propietarios.persona',
+                                            'condominioTerrenos',
+                                            'condominioConstrucciones',
+                                            'terrenos',
+                                            'construcciones',
+                                            'colindancias',
+                                        )
+                                        ->where('numero_registro', $this->predio->numero_registro)
+                                        ->where('tipo_predio', $this->predio->tipo_predio)
+                                        ->where('localidad', $this->predio->localidad)
+                                        ->where('oficina', $this->predio->oficina)
+                                        ->firstOrFail();
+
+                if($this->predio->bloqueadoActivo()){
+
+                    $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
+                    $this->predio = $this->crearModeloVacio();
+                    return;
+
+                }
+
+                if($this->predioInactivo()) return;
+
+            } catch (\Throwable $th) {
+
+                $this->dispatch('mostrarMensaje', ['error', "No se encontro predio con la cuenta predial ingresada."]);
+
+            }
+
+        }else{
+
+            $this->predios = Predio::with(
                                         'propietarios.persona',
                                         'condominioTerrenos',
                                         'condominioConstrucciones',
@@ -91,25 +128,11 @@ class ConsultaPadron extends Component
                                         'construcciones',
                                         'colindancias',
                                     )
-                                    ->where('numero_registro', $this->predio->numero_registro)
                                     ->where('tipo_predio', $this->predio->tipo_predio)
                                     ->where('localidad', $this->predio->localidad)
                                     ->where('oficina', $this->predio->oficina)
-                                    ->firstOrFail();
-
-            if($this->predio->bloqueadoActivo()){
-
-                $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
-                $this->predio = $this->crearModeloVacio();
-                return;
-
-            }
-
-            if($this->predioInactivo()) return;
-
-        } catch (\Throwable $th) {
-
-            $this->dispatch('mostrarMensaje', ['error', "No se encontro predio con la cuenta predial ingresada."]);
+                                    ->whereBetween('numero_registro', [($this->predio->numero_registro - 10), ($this->predio->numero_registro + 10)])
+                                    ->get();
 
         }
 
@@ -117,35 +140,30 @@ class ConsultaPadron extends Component
 
     public function buscarClaveCatastral(){
 
+        $this->predio->id = null;
+
         try {
 
-            $this->predio = Predio::with(
+            $this->predios = Predio::with(
                                         'propietarios.persona',
                                         'condominioTerrenos',
                                         'condominioConstrucciones',
                                         'terrenos',
                                         'construcciones',
                                         'colindancias',
-                                    )->where('estado', 16)
+                                    )
+                                    ->where('status', 'activo')
+                                    ->where('estado', 16)
                                     ->where('region_catastral', $this->predio->region_catastral)
                                     ->where('municipio', $this->predio->municipio)
                                     ->where('zona_catastral', $this->predio->zona_catastral)
                                     ->where('localidad', $this->predio->localidad)
                                     ->where('sector', $this->predio->sector)
                                     ->where('manzana', $this->predio->manzana)
-                                    ->firstOrFail();
-
-            if($this->predio->bloqueadoActivo()){
-
-                $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
-                $this->predio = $this->crearModeloVacio();
-                return;
-
-            }
-
-            if($this->predioInactivo()) return;
-
-            $this->dispatch('cargarPredio', $this->predio->id);
+                                    ->when($this->predio->oficina != 101, function($q){
+                                        $q->where('oficina', $this->predio->oficina);
+                                    })
+                                    ->get();
 
         } catch (\Throwable $th) {
 
@@ -157,6 +175,7 @@ class ConsultaPadron extends Component
 
     public function buscarPorPropietario(){
 
+        $this->predio->id = null;
 
         try {
 
@@ -203,6 +222,8 @@ class ConsultaPadron extends Component
     }
 
     public function buscarPorUbicacion(){
+
+        $this->predio->id = null;
 
         try {
 

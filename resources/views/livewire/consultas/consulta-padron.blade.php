@@ -98,6 +98,10 @@
 
                                 <input title="Número de registro" placeholder="Registro" type="number" class="bg-white rounded text-xs w-20 @error('predio.numero_registro') border-1 border-red-500 @enderror" wire:model.blur="predio.numero_registro">
 
+                                <div class="inline-flex items-center">
+                                    <span class="text-xs mr-2">+/- 10</span><x-checkbox wire:model.live="diez"></x-checkbox>
+                                </div>
+
                             </div>
 
                         </div>
