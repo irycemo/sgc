@@ -164,7 +164,7 @@ class Migracion
 
             if(!isset($predio_padre->stot_008)){
 
-                $superficie_total = $predio_padre->stot_003;
+                $superficie_total = $predio_padre->ster_003;
 
             }else{
 
