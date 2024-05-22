@@ -164,20 +164,20 @@ class Migracion
 
             if(!isset($predio_padre->stot_008)){
 
-                $superficie_total = $predio_padre->ster_003;
+                $superficie_total = $predio_padre->ster_003 ?? 0;
 
             }else{
 
-                $superficie_total = $predio_padre->stot_008;
+                $superficie_total = $predio_padre->stot_008 ?? 0;
             }
 
             if(!isset($predio_padre->scon_008)){
 
-                $area_comun_construccion = $predio_padre->scon_003;
+                $area_comun_construccion = $predio_padre->scon_003 ?? 0;
 
             }else{
 
-                $area_comun_construccion = $predio_padre->scon_008;
+                $area_comun_construccion = $predio_padre->scon_008 ?? 0;
             }
 
         }

@@ -277,6 +277,8 @@ class Tramites extends Component
 
         $this->años = Constantes::AÑOS;
 
+        $this->oficina = auth()->user()->oficina->oficina;
+
     }
 
     public function render()
