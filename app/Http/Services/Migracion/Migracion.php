@@ -188,18 +188,18 @@ class Migracion
                 'condominioterrenoable_id' => $idnvo,
                 'condominioterrenoable_type' => 'App\Models\Predio',
                 'area_terreno_comun' => ($predio_padre) ? $superficie_total : 0,
-                'indiviso_terreno' => $ctcdm004->ipre_004,
+                'indiviso_terreno' => $ctcdm004->ipre_004 ?? 0,
                 'valor_unitario' => 0,
-                'valor_terreno_comun' => ($ctcdm004->vter_004 == NULL) ? 0 : $ctcdm004->vter_004,
+                'valor_terreno_comun' => $ctcdm004->vter_004 ?? 0,
             ]);
 
             Condominioconstruccion::create([
                 'condominioconstruccionable_id' => $idnvo,
                 'condominioconstruccionable_type' => 'App\Models\Predio',
                 'area_comun_construccion' => ($predio_padre) ? $area_comun_construccion : 0,
-                'indiviso_construccion' => $ctcdm004->icon_004,
+                'indiviso_construccion' => $ctcdm004->icon_004 ?? 0,
                 'valor_clasificacion_construccion' => 0,
-                'valor_construccion_comun' => ($ctcdm004->vcon_004 == NULL) ? 0 : $ctcdm004->vcon_004,
+                'valor_construccion_comun' => $ctcdm004->vcon_004 ?? 0
             ]);
 
         }
