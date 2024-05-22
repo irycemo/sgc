@@ -304,22 +304,28 @@ class Migracion
     {
 
         if ($tabla == 8){
+
+            $tipo = $this->referencias->where('tipo_007', "TP")->where('cven_007', $predioss->tper_008)->first();
+
             Propietario::create([
                 'propietarioable_id' => $idnvo,
                 'propietarioable_type' => 'App\Models\Predio',
                 'persona_id' => $idpersona,
-                'tipo' => $this->referencias->where('tipo_007', "TP")->where('cven_007', $predioss->tper_008)->first()?->desc_007,
+                'tipo' => $tipo ? $tipo->desc_007 : '0',
                 'porcentaje' => ($predioss->tper_008 == 1 || $predioss->tper_008 == 2 || $predioss->tper_008 >= 5) ? $predioss->ppro_008 : 0,
                 'porcentaje_nuda' => ($predioss->tper_008 == 3) ? $predioss->ppro_008 : 0,
                 'porcentaje_usufructo' => ($predioss->tper_008 == 4) ? $predioss->ppro_008 : 0,
             ]);
         }
         else{
+
+            $tipo = $this->referencias->where('tipo_007', "TP")->where('cven_007', $predioss->tper_005)->first();
+
             Propietario::create([
                 'propietarioable_id' => $idnvo,
                 'propietarioable_type' => 'App\Models\Predio',
                 'persona_id' => $idpersona,
-                'tipo' => $this->referencias->where('tipo_007', "TP")->where('cven_007', $predioss->tper_005)->first()->desc_007,
+                'tipo' => $tipo ? $tipo->desc_007 : '0',
                 'porcentaje' => ($predioss->tper_005 == 1 || $predioss->tper_005 == 2 || $predioss->tper_005 >= 5) ? $predioss->ppro_005 : 0,
                 'porcentaje_nuda' => ($predioss->tper_005 == 3) ? $predioss->ppro_005 : 0,
                 'porcentaje_usufructo' => ($predioss->tper_005 == 4) ? $predioss->ppro_005 : 0,
