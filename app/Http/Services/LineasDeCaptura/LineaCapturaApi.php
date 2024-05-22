@@ -82,6 +82,14 @@ class LineaCapturaApi
 
         }
 
+        if(!isset($data['ES_OPAG'])){
+
+            throw new ErrorAlGenerarLineaDeCaptura("Error de comunicación con SAP.");
+
+            return;
+
+        }
+
         return $data;
 
     }
