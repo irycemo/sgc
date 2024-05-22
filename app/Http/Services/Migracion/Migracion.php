@@ -159,25 +159,30 @@ class Migracion
                                 ->where('dpto_004', $predioss->dpto_008)
                                 ->first();
 
-        if(!isset($predio_padre->stot_008)){
+        if($predio_padre){
 
-            $superficie_total = $predio_padre->stot_003;
 
-        }else{
+            if(!isset($predio_padre->stot_008)){
 
-            $superficie_total = $predio_padre->stot_008;
+                $superficie_total = $predio_padre->stot_003;
+
+            }else{
+
+                $superficie_total = $predio_padre->stot_008;
+            }
+
+            if(!isset($predio_padre->scon_008)){
+
+                $area_comun_construccion = $predio_padre->scon_003;
+
+            }else{
+
+                $area_comun_construccion = $predio_padre->scon_008;
+            }
+
         }
 
-        if(!isset($predio_padre->scon_008)){
-
-            $area_comun_construccion = $predio_padre->scon_003;
-
-        }else{
-
-            $area_comun_construccion = $predio_padre->scon_008;
-        }
-
-       if ($ctcdm004) {
+        if ($ctcdm004) {
 
             Condominioterreno::create([
                 'condominioterrenoable_id' => $idnvo,
@@ -197,7 +202,7 @@ class Migracion
                 'valor_construccion_comun' => ($ctcdm004->vcon_004 == NULL) ? 0 : $ctcdm004->vcon_004,
             ]);
 
-       }
+        }
 
     }
 
@@ -297,12 +302,13 @@ class Migracion
 
     public function crear_propietario($predioss,$idnvo,$idpersona,$tabla)
     {
+
         if ($tabla == 8){
             Propietario::create([
                 'propietarioable_id' => $idnvo,
                 'propietarioable_type' => 'App\Models\Predio',
                 'persona_id' => $idpersona,
-                'tipo' => $this->referencias->where('tipo_007', "TP")->where('cven_007', $predioss->tper_008)->first()->desc_007,
+                'tipo' => $this->referencias->where('tipo_007', "TP")->where('cven_007', $predioss->tper_008)->first()?->desc_007,
                 'porcentaje' => ($predioss->tper_008 == 1 || $predioss->tper_008 == 2 || $predioss->tper_008 >= 5) ? $predioss->ppro_008 : 0,
                 'porcentaje_nuda' => ($predioss->tper_008 == 3) ? $predioss->ppro_008 : 0,
                 'porcentaje_usufructo' => ($predioss->tper_008 == 4) ? $predioss->ppro_008 : 0,
