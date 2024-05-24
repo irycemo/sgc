@@ -30,11 +30,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call(RoleSeeder::class);
         $this->call(OficinasTableSeeder::class);
-        $this->call(UserSeeder::class);
+        $this->call(UsersTableSeeder::class);
         $this->call(CategoriaServiciosTableSeeder::class);
         $this->call(ServiciosTableSeeder::class);
-        $this->call(TramiteSeeder::class);
-        $this->call(PersonaSeeder::class);
+        /* $this->call(TramiteSeeder::class);
+        $this->call(PersonaSeeder::class); */
         /* $this->call(PredioSeeder::class); */
         $this->call(UmaSeeder::class);
         $this->call(ValoresUnitariosConstruccionsTableSeeder::class);
@@ -43,5 +43,8 @@ class DatabaseSeeder extends Seeder
         $this->call(NotariaSeeder::class);
         $this->call(FactorIncrementosTableSeeder::class);
         $this->call(CodigoPostalsTableSeeder::class);
+        $this->call(ModelHasPermissionsTableSeeder::class);
+        $this->call(ModelHasRolesTableSeeder::class);
+        $this->call(RoleHasPermissionsTableSeeder::class);
     }
 }

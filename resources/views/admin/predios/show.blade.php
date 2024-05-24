@@ -592,7 +592,15 @@
                         <td class=" px-2 w-full ">{{ $movimiento->nombre }}</td>
                         <td class=" px-2 w-full ">{{ $movimiento->fecha }}</td>
                         <td class=" px-2 w-full ">{{ $movimiento->descripcion }}</td>
-                        <td class=" px-2 w-full ">{{ $movimiento->creadoPor?->nombreCompleto() }}</td>
+                        @if($movimiento->actualizado_nombre)
+
+                            <td class=" px-2 w-full ">{{ $movimiento->actualizado_nombre }}</td>
+
+                        @else
+
+                            <td class=" px-2 w-full ">{{ $movimiento->creadoPor?->nombreCompleto() }}</td>
+
+                        @endif
                     </tr>
 
                 @endforeach

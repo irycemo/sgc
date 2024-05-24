@@ -99,6 +99,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'Trámite excento', 'area' => 'Trámites'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'Reactivar trámites', 'area' => 'Trámites'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'Autorizar tramite', 'area' => 'Trámites'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'Trámites en línea', 'area' => 'Trámites'])->syncRoles([$role1, $role2]);
 
         Permission::create(['name' => 'Área de valuación', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2, $role6]);
         Permission::create(['name' => 'Valuación y desglose', 'area' => 'Valuación'])->syncRoles([$role1, $role3, $role2, $role6]);
@@ -135,6 +136,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'Asignación de cuentas', 'area' => 'Cartografía'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'Conciliar', 'area' => 'Cartografía'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'Conciliar manzanas', 'area' => 'Cartografía'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'Asignar coordenadas', 'area' => 'Cartografía'])->syncRoles([$role1, $role2]);
 
         Permission::create(['name' => 'Área de consultas', 'area' => 'Consulta'])->syncRoles([$role1, $role2, $role4]);
         Permission::create(['name' => 'Ver oficina', 'area' => 'Consulta'])->syncRoles([$role1, $role2, $role4]);

@@ -370,7 +370,7 @@ class Captura extends Component
     public function darDeBaja(){
 
         $this->validate([
-            'predio.origen' => 'required',
+            'origen' => 'required',
             'observaciones' => 'required'
         ]);
 

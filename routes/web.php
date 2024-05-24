@@ -50,6 +50,7 @@ use App\Livewire\Ventanilla\Ventanilla as VentanillaVentanilla;
 use App\Http\Controllers\Valuacion\ValuacionYDesgloseController;
 use App\Livewire\TramitesAdministrativos\VariacionesCatastrales;
 use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
+use App\Livewire\Cartografia\AsignarCoordenadas;
 use App\Livewire\GestionCatastral\RevisionTraslados\RevisarTraslado;
 use App\Livewire\GestionCatastral\RevisionTraslados\RevisionTraslados;
 use App\Livewire\Ventanilla\TramitesLinea;
@@ -142,6 +143,8 @@ Route::group(['middleware' => ['auth', 'esta.activo']], function(){
     Route::get('conciliar', Conciliar::class)->middleware('permission:Conciliar')->name('conciliar');
 
     Route::get('conciliar_manzanas', ConciliarManzanas::class)->middleware('permission:Conciliar manzanas')->name('conciliar_manzanas');
+
+    Route::get('asignar_coordenadas', AsignarCoordenadas::class)->middleware('permission:Asignar coordenadas')->name('asignar_coordenadas');
 
     /* Certificaciones */
     Route::get('certificado_historia', CertificadoHistoria::class)->middleware('permission:Certificado de historia')->name('certificado_historia');

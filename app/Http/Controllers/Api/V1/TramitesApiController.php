@@ -111,7 +111,6 @@ class TramitesApiController extends Controller
                                 ->whereIn('servicio_id', [4,3])
                                 ->where('usuario', 11)
                                 ->where('usuario_tramites_linea_id', $validated['entidad'])
-                                ->where('fecha_entrega', '<=', now()->toDateString())
                                 ->when(isset($validated['año']), fn($q) => $q->where('año', $validated['año']))
                                 ->when(isset($validated['folio']), fn($q) => $q->where('folio', $validated['folio']))
                                 ->when(isset($validated['estado']), fn($q) => $q->where('estado', $validated['estado']))
