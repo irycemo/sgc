@@ -267,13 +267,13 @@ class Migracion
 
         foreach($ctcop005 as $propietario){
 
-            $nombre = str_replace(['Y SOC', 'Y SOCIOS', 'Y SOC.'. 'Y SOCS.', 'Y SOCS', 'Y SOCIOS.'], '', $propietario->nomb_008);
+            $nombre = str_replace(['Y SOC', 'Y SOCIOS', 'Y SOC.'. 'Y SOCS.', 'Y SOCS', 'Y SOCIOS.'], '', $propietario->nomb_005);
 
             $persona = Persona::firstOrCreate(
                 [
-                    'nombre' => $propietario->nomb_008,
-                    'ap_paterno' => $propietario->apat_008,
-                    'ap_materno' => $propietario->amat_008
+                    'nombre' => $propietario->nomb_005,
+                    'ap_paterno' => $propietario->apat_005,
+                    'ap_materno' => $propietario->amat_005
                 ],
                 [
                     'tipo' => ($propietario->tper_005 == 1) ? 'FÍSICA' : ($propietario->tper_005 == 2 ? 'MORAL' : '0'),
