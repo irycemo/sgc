@@ -253,6 +253,8 @@ class Migracion
                                 ->where('dpto_005', $predioss->dpto_008)
                                 ->get();
 
+        info($ctcop005);
+
         foreach($ctcop005 as $propietario){
 
             $nombre = str_replace(['Y SOC', 'Y SOCIOS', 'Y SOC.'. 'Y SOCS.', 'Y SOCS', 'Y SOCIOS.'], '', $predioss->nomb_008);
