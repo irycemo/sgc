@@ -263,7 +263,7 @@ class Migracion
                                 ->where('dpto_005', $predioss->dpto_008)
                                 ->get();
 
-        info($ctcop005->count(), $ctcop005);
+        info($ctcop005->count());
 
         foreach($ctcop005 as $propietario){
 
