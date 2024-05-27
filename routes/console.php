@@ -27,6 +27,8 @@ Artisan::command('migrar', function(){
 
     Schema::disableForeignKeyConstraints();
     DB::table('colindancias')->truncate();
+    DB::table('propietarios')->truncate();
+    DB::table('personas')->truncate();
     DB::table('terrenos')->truncate();
     DB::table('construccions')->truncate();
     DB::table('condominioterrenos')->truncate();
