@@ -10,6 +10,7 @@ use App\Models\Propietario;
 use App\Models\Construccion;
 use App\Models\Condominioterreno;
 use App\Models\Migracion\ctcdm004;
+use App\Models\Migracion\ctcop005;
 use App\Models\Migracion\ctpro003;
 use App\Models\Migracion\tcpro008;
 use Illuminate\Support\Facades\DB;
@@ -209,14 +210,15 @@ class Migracion
     public function personas($predioss,$idnvo)
     {
 
-        $ep = $this->existe_persona($predioss->nomb_008,$predioss->apat_008,$predioss->amat_008);
+        $nombre = str_replace(['Y SOC', 'Y SOCIOS', 'Y SOC.'. 'Y SOCS.', 'Y SOCS', 'Y SOCIOS.'], '', $predioss->nomb_008);
 
-        if ($ep == 0)
-        {
-
-            $nombre = str_replace(['Y SOC', 'Y SOCIOS', 'Y SOC.'. 'Y SOCS.', 'Y SOCS', 'Y SOCIOS.'], '', $predioss->nomb_008);
-
-            $persona = Persona::create([
+        $persona = Persona::firstOrCreate(
+            [
+                'nombre' => $predioss->nomb_008,
+                'ap_paterno' => $predioss->apat_008,
+                'ap_materno' => $predioss->amat_008
+            ],
+            [
                 'tipo' => ($predioss->tper_008 == 1) ? 'FÍSICA' : ($predioss->tper_008 == 2 ? 'MORAL' : '0'),
                 'nombre' => $nombre,
                 'ap_paterno' => $predioss->apat_008,
@@ -234,41 +236,34 @@ class Migracion
                 'cp' => $predioss->copd_008,
                 'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $predioss->cest_008)->first()?->desc_007,
                 'municipio' => $predioss->nomu_008,
-                'ciudad' => $predioss->nopo_008,
-            ]);
+                'ciudad' => $predioss->nopo_008
+            ]
+        );
 
-            $this->crear_propietario($predioss,$idnvo,$persona->id,8);
-
-        }
-
-        else{
-
-            $this->crear_propietario($predioss,$idnvo,$ep,8);
-
-        }
-
+        $this->crear_propietario($predioss,$idnvo,$persona->id,8);
 
         //Verificar si en tccop005 hay más proppietatios
-        $ctcop005 = DB::connection('sqlsrv')->select("select * from ctcop005
-                                                            where mpio_005 = ". $predioss->mpio_008 ."
-                                                            and zcat_005 = ". $predioss->zcat_008 ."
-                                                            and locl_005 = ". $predioss->locl_008 ."
-                                                            and sect_005 = ". $predioss->sect_008 ."
-                                                            and mzna_005 = ". $predioss->mzna_008 ."
-                                                            and pred_005 = ". $predioss->pred_008 ."
-                                                            and edif_005 = ". $predioss->edif_008 ."
-                                                            and dpto_005 = ". $predioss->dpto_008);
+        $ctcop005 = ctcop005::where('mpio_005', $predioss->mpio_008)
+                                ->where('zcat_005', $predioss->zcat_008)
+                                ->where('locl_005', $predioss->locl_008)
+                                ->where('sect_005', $predioss->sect_008)
+                                ->where('mzna_005', $predioss->mzna_008)
+                                ->where('pred_005', $predioss->pred_008)
+                                ->where('edif_005', $predioss->edif_008)
+                                ->where('dpto_005', $predioss->dpto_008)
+                                ->get();
 
         foreach($ctcop005 as $propietario){
 
-            $ep = $this->existe_persona($propietario->nomb_005,$propietario->apat_005,$propietario->amat_005);
+            $nombre = str_replace(['Y SOC', 'Y SOCIOS', 'Y SOC.'. 'Y SOCS.', 'Y SOCS', 'Y SOCIOS.'], '', $predioss->nomb_008);
 
-            if ($ep == 0)
-            {
-
-                $nombre = str_replace(['Y SOC', 'Y SOCIOS', 'Y SOC.'. 'Y SOCS.', 'Y SOCS', 'Y SOCIOS.'], '', $propietario->nomb_005);
-
-                $persona005 = Persona::create([
+            $persona = Persona::firstOrCreate(
+                [
+                    'nombre' => $predioss->nomb_008,
+                    'ap_paterno' => $predioss->apat_008,
+                    'ap_materno' => $predioss->amat_008
+                ],
+                [
                     'tipo' => ($propietario->tper_005 == 1) ? 'FÍSICA' : ($propietario->tper_005 == 2 ? 'MORAL' : '0'),
                     'nombre' => $nombre,
                     'ap_paterno' => $propietario->apat_005,
@@ -287,17 +282,13 @@ class Migracion
                     'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $propietario->cest_005)->first()?->desc_007,
                     'municipio' => $propietario->nomu_005,
                     'ciudad' => $propietario->nopo_005,
-                ]);
+                ]
+            );
 
-                $this->crear_propietario($propietario,$idnvo,$persona005->id,5);
-
-            }else{
-
-                $this->crear_propietario($propietario,$idnvo,$ep,5);
-
-            }
+            $this->crear_propietario($propietario,$idnvo,$persona->id,5);
 
         }
+
     }
 
     public function crear_propietario($predioss,$idnvo,$idpersona,$tabla)
@@ -316,8 +307,8 @@ class Migracion
                 'porcentaje_nuda' => ($predioss->tper_008 == 3) ? $predioss->ppro_008 : 0,
                 'porcentaje_usufructo' => ($predioss->tper_008 == 4) ? $predioss->ppro_008 : 0,
             ]);
-        }
-        else{
+
+        }elseif($tabla == 5){
 
             $tipo = $this->referencias->where('tipo_007', "TP")->where('cven_007', $predioss->tper_005)->first();
 
@@ -330,22 +321,9 @@ class Migracion
                 'porcentaje_nuda' => ($predioss->tper_005 == 3) ? $predioss->ppro_005 : 0,
                 'porcentaje_usufructo' => ($predioss->tper_005 == 4) ? $predioss->ppro_005 : 0,
             ]);
+
         }
 
-    }
-
-    public function existe_persona($nomb,$apat,$amat)
-    {
-
-        $persona = Persona::where('nombre',$nomb)
-                            ->where('ap_paterno',$apat)
-                            ->where('ap_materno',$amat)
-                            ->first();
-
-        if ($persona)
-            return $persona->id;
-        else
-            return 0;
     }
 
     public function terrenos($idnvo, $superficie, $valor_unitario, $valor_terreno)
