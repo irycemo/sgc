@@ -297,7 +297,7 @@ class Migracion
                 ]
             );
 
-            $tipo = $this->referencias->where('tipo_007', "TP")->where('cven_007', $predioss->tper_005)->first();
+            $tipo = $this->referencias->where('tipo_007', "TP")->where('cven_007', $propietario->tper_005)->first();
 
             Propietario::create([
                 'propietarioable_id' => $idnvo,
