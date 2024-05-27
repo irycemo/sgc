@@ -240,7 +240,17 @@ class Migracion
             ]
         );
 
-        $this->crear_propietario($predioss,$idnvo,$persona->id,8);
+        $tipo = $this->referencias->where('tipo_007', "TP")->where('cven_007', $predioss->tper_008)->first();
+
+        Propietario::create([
+            'propietarioable_id' => $idnvo,
+            'propietarioable_type' => 'App\Models\Predio',
+            'persona_id' => $persona->id,
+            'tipo' => $tipo ? $tipo->desc_007 : '0',
+            'porcentaje' => ($predioss->tper_008 == 1 || $predioss->tper_008 == 2 || $predioss->tper_008 >= 5) ? $predioss->ppro_008 : 0,
+            'porcentaje_nuda' => ($predioss->tper_008 == 3) ? $predioss->ppro_008 : 0,
+            'porcentaje_usufructo' => ($predioss->tper_008 == 4) ? $predioss->ppro_008 : 0,
+        ]);
 
         //Verificar si en tccop005 hay más proppietatios
         $ctcop005 = ctcop005::where('mpio_005', $predioss->mpio_008)
@@ -253,7 +263,7 @@ class Migracion
                                 ->where('dpto_005', $predioss->dpto_008)
                                 ->get();
 
-        info($ctcop005);
+        info($ctcop005->count(), $ctcop005);
 
         foreach($ctcop005 as $propietario){
 
@@ -287,41 +297,16 @@ class Migracion
                 ]
             );
 
-            $this->crear_propietario($propietario,$idnvo,$persona->id,5);
-
-        }
-
-    }
-
-    public function crear_propietario($predioss,$idnvo,$idpersona,$tabla)
-    {
-
-        if ($tabla == 8){
-
-            $tipo = $this->referencias->where('tipo_007', "TP")->where('cven_007', $predioss->tper_008)->first();
-
-            Propietario::create([
-                'propietarioable_id' => $idnvo,
-                'propietarioable_type' => 'App\Models\Predio',
-                'persona_id' => $idpersona,
-                'tipo' => $tipo ? $tipo->desc_007 : '0',
-                'porcentaje' => ($predioss->tper_008 == 1 || $predioss->tper_008 == 2 || $predioss->tper_008 >= 5) ? $predioss->ppro_008 : 0,
-                'porcentaje_nuda' => ($predioss->tper_008 == 3) ? $predioss->ppro_008 : 0,
-                'porcentaje_usufructo' => ($predioss->tper_008 == 4) ? $predioss->ppro_008 : 0,
-            ]);
-
-        }elseif($tabla == 5){
-
             $tipo = $this->referencias->where('tipo_007', "TP")->where('cven_007', $predioss->tper_005)->first();
 
             Propietario::create([
                 'propietarioable_id' => $idnvo,
                 'propietarioable_type' => 'App\Models\Predio',
-                'persona_id' => $idpersona,
+                'persona_id' => $persona->id,
                 'tipo' => $tipo ? $tipo->desc_007 : '0',
-                'porcentaje' => ($predioss->tper_005 == 1 || $predioss->tper_005 == 2 || $predioss->tper_005 >= 5) ? $predioss->ppro_005 : 0,
-                'porcentaje_nuda' => ($predioss->tper_005 == 3) ? $predioss->ppro_005 : 0,
-                'porcentaje_usufructo' => ($predioss->tper_005 == 4) ? $predioss->ppro_005 : 0,
+                'porcentaje' => ($propietario->tper_005 == 1 || $propietario->tper_005 == 2 || $propietario->tper_005 >= 5) ? $propietario->ppro_005 : 0,
+                'porcentaje_nuda' => ($propietario->tper_005 == 3) ? $propietario->ppro_005 : 0,
+                'porcentaje_usufructo' => ($propietario->tper_005 == 4) ? $propietario->ppro_005 : 0,
             ]);
 
         }
