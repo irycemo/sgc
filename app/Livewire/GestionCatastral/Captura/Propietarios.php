@@ -331,6 +331,7 @@ class Propietarios extends Component
             DB::transaction(function () {
 
                 $this->propietario->persona->update([
+                    'tipo' => $this->tipo_persona,
                     'nombre' => $this->nombre,
                     'ap_paterno' => $this->ap_paterno,
                     'ap_materno' => $this->ap_materno,
