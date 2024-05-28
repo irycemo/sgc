@@ -295,6 +295,7 @@ class Certificaciones extends Component
         $this->flags['nombre_solicitante'] = false;
         $this->flags['dependencias'] = false;
         $this->flags['notarias'] = false;
+        $this->flags['numero_oficio'] = false;
 
         if($this->modelo_editar->solicitante == 'Usuario'){
 
