@@ -24,6 +24,7 @@ class CertificacionRequest extends FormRequest
         return [
             'año' => 'required',
             'folio' => 'required',
+            'usuario' => 'required',
             'localidad' => 'required',
             'oficina' => 'required',
             'tipo_predio' => 'required',

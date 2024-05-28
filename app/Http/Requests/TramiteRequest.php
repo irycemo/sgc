@@ -25,6 +25,7 @@ class TramiteRequest extends FormRequest
             'entidad' => 'required',
             'año' => 'nullable',
             'folio' => 'nullable',
+            'usuario' => 'nullable',
             'predio' => 'nullable'
         ];
     }

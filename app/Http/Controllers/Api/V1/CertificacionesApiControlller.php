@@ -109,7 +109,7 @@ class CertificacionesApiControlller extends Controller
 
         $tramite = Tramite::where('año', $validated['año'])
                             ->where('folio', $validated['folio'])
-                            ->where('usuario', 11)
+                            ->where('usuario', $validated['usuario'])
                             ->first();
 
         if(!$tramite){
