@@ -195,6 +195,14 @@ class Propietarios extends Component
 
         $this->validate();
 
+        if($this->porcentaje == 0 && $this->porcentaje_nuda == 0 && $this->porcentaje_usufructo == 0){
+
+            $this->dispatch('mostrarMensaje', ['error', "La suma de los porcentajes no puede ser 0."]);
+
+            return;
+
+        }
+
         if($this->revisarProcentajes()){
 
             $this->dispatch('mostrarMensaje', ['error', "La suma de los porcentajes no puede exceder el 100%."]);
@@ -317,6 +325,14 @@ class Propietarios extends Component
             'entidad' => 'nullable|' . utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
             'municipio_propietario' => 'nullable|' . utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
         ]);
+
+        if($this->porcentaje == 0 && $this->porcentaje_nuda == 0 && $this->porcentaje_usufructo == 0){
+
+            $this->dispatch('mostrarMensaje', ['error', "La suma de los porcentajes no puede ser 0."]);
+
+            return;
+
+        }
 
         if($this->revisarProcentajes($this->propietario->id)){
 
