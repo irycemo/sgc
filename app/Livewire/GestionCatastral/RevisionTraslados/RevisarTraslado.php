@@ -453,27 +453,27 @@ class RevisarTraslado extends Component
 
         if($pp_transmitentes == 0){
 
-            if(($pn_adquirientes + $pn) != $pp_transmitentes){
+            if(($pn_adquirientes + $pn) != $pn_transmitentes){
 
-                throw new Exception("La suma de los porcentajes de nuda debe ser " . $pp_transmitentes . '%.');
+                throw new Exception("La suma de los porcentajes de nuda debe ser " . $pn_transmitentes . '%.');
 
             }
 
-            if(($pu_adquirientes + $pu) != $pp_transmitentes){
+            if(($pu_adquirientes + $pu) != $pu_transmitentes){
 
-                throw new Exception("La suma de los porcentajes de usufructo debe ser " . $pp_transmitentes . '%.');
+                throw new Exception("La suma de los porcentajes de usufructo debe ser " . $pu_transmitentes . '%.');
 
             }
 
         }else{
 
-            if(($pn_adquirientes + $pn_transmitentes + $pp) != $pp_transmitentes){
+            if(($pn_adquirientes + $pn + $pp + $pp_transmitentes) != $pp_transmitentes){
 
                 throw new Exception("La suma de los porcentajes de nuda debe ser " . $pp_transmitentes . '%.');
 
             }
 
-            if(($pu_adquirientes + $pu_transmitentes + $pp) != $pp_transmitentes){
+            if(($pu_adquirientes + $pu + $pp + $pp_transmitentes) != $pp_transmitentes){
 
                 throw new Exception("La suma de los porcentajes de usufructo debe ser " . $pp_transmitentes . '%.');
 
