@@ -520,9 +520,9 @@ class RevisarTraslado extends Component
                         'ap_paterno' => $transmitente['ap_paterno'],
                         'ap_materno' => $transmitente['ap_materno'],
                         'razon_social' => $transmitente['razon_social'],
-                        'porcentaje' => (int)$transmitente['porcentaje'],
-                        'porcentaje_nuda' => (int)$transmitente['porcentaje_nuda'],
-                        'porcentaje_usufructo' => (int)$transmitente['porcentaje_usufructo'],
+                        'porcentaje' => $transmitente['porcentaje'],
+                        'porcentaje_nuda' => $transmitente['porcentaje_nuda'],
+                        'porcentaje_usufructo' => $transmitente['porcentaje_usufructo'],
                     ];
                 }
 
