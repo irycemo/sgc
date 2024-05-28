@@ -42,7 +42,7 @@ class RevisarTraslado extends Component
 
         if($this->transmitentes[$i[0]][$i[1]] == ''){
 
-            $this->transmitentes[$i[0]][$i[1]] = null;
+            $this->transmitentes[$i[0]][$i[1]] = 0;
 
         }
 
@@ -159,7 +159,7 @@ class RevisarTraslado extends Component
 
                         $this->traslado->update(['estado' => 'operado', 'actualizado_por' => auth()->id()]);
 
-                        $this->traslado->audits()->latest()->first()->update(['tags' => 'Autorizó traslado']);
+                        $this->traslado->audits()->latest()->first()->update(['tags' => 'Operó traslado']);
 
                         return redirect()->route('revision_traslados');
 
@@ -225,8 +225,8 @@ class RevisarTraslado extends Component
             'uso_1' => $this->avaluo['uso_1']  ?? null,
             'uso_2' => $this->avaluo['uso_2']  ?? null,
             'uso_3' => $this->avaluo['uso_3']  ?? null,
-            'superficie_terreno' => $this->aviso['superficie_terreno']  ?? null,
-            'superficie_construccion' => $this->aviso['superficie_construccion']  ?? null,
+            'superficie_terreno' => $this->avaluo['superficie_terreno']  ?? null,
+            'superficie_construccion' => $this->avaluo['superficie_construccion']  ?? null,
             'area_comun_terreno' => $this->avaluo['area_comun_terreno']  ?? null,
             'area_comun_construccion' => $this->avaluo['area_comun_construccion']  ?? null,
             'valor_total_terreno' => $this->avaluo['valor_total_terreno']  ?? null,
@@ -308,15 +308,15 @@ class RevisarTraslado extends Component
         }
 
         $this->traslado->predio->movimientos()->create([
-            'nombre' => 'AVISO ACLARATORIO',
+            'nombre' => $this->aviso['acto'],
             'fecha' => now()->toDateString(),
-            'descripcion' => 'Se actualiza predio mediante aviso aclaratorio',
+            'descripcion' => 'Se actualiza predio mediante aviso.',
             'creado_por' => auth()->id()
         ]);
 
         foreach($this->transmitentes as $propietario){
 
-            if(!isset($propietario['porcentaje']) && !isset($propietario['porcentaje_propiedad']) && !isset($propietario['porcentaje_usufructo'])){
+            if($propietario['porcentaje'] == 0 && $propietario['porcentaje_nuda'] == 0 && $propietario['porcentaje_usufructo'] == 0){
 
                 $this->traslado->predio->propietarios()->whereHas('persona', function($q) use($propietario){
                                                                                 $q->where('nombre', $propietario['nombre'])
@@ -445,7 +445,7 @@ class RevisarTraslado extends Component
 
         }
 
-        if($pp_adquirientes > $pp){
+        if($pp_adquirientes != $pp_transmitentes){
 
             throw new Exception("La suma de los porcentajes de propiedad debe ser " . $pp_transmitentes . '%.');
 
@@ -453,7 +453,7 @@ class RevisarTraslado extends Component
 
         if($pp_transmitentes == 0){
 
-            if(($pn_adquirientes + $pn) != $pn_transmitentes){
+            if(($pn_adquirientes + $pn) != $pp_transmitentes){
 
                 throw new Exception("La suma de los porcentajes de nuda debe ser " . $pn_transmitentes . '%.');
 
@@ -467,13 +467,13 @@ class RevisarTraslado extends Component
 
         }else{
 
-            if(($pn_adquirientes + $pp) != $pp_transmitentes){
+            if(($pn_adquirientes + $pn_transmitentes + $pp) != $pp){
 
                 throw new Exception("La suma de los porcentajes de nuda debe ser " . $pp_transmitentes . '%.');
 
             }
 
-            if(($pu_adquirientes + $pp) != $pp_transmitentes){
+            if(($pu_adquirientes + $pu_transmitentes + $pp) != $pp){
 
                 throw new Exception("La suma de los porcentajes de usufructo debe ser " . $pp_transmitentes . '%.');
 
@@ -508,9 +508,9 @@ class RevisarTraslado extends Component
                         'ap_paterno' => $transmitente['ap_paterno'],
                         'ap_materno' => $transmitente['ap_materno'],
                         'razon_social' => $transmitente['razon_social'],
-                        'porcentaje' => $transmitente['porcentaje'],
-                        'porcentaje_nuda' => $transmitente['porcentaje_nuda'],
-                        'porcentaje_usufructo' => $transmitente['porcentaje_usufructo'],
+                        'porcentaje' => (int)$transmitente['porcentaje'],
+                        'porcentaje_nuda' => (int)$transmitente['porcentaje_nuda'],
+                        'porcentaje_usufructo' => (int)$transmitente['porcentaje_usufructo'],
                     ];
                 }
 
