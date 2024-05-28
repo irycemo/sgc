@@ -445,9 +445,9 @@ class RevisarTraslado extends Component
 
         }
 
-        if($pp_adquirientes != $pp_transmitentes){
+        if($pp_adquirientes != $pp){
 
-            throw new Exception("La suma de los porcentajes de propiedad debe ser " . $pp_transmitentes . '%.');
+            throw new Exception("La suma de los porcentajes de propiedad debe ser " . $pp . '%.');
 
         }
 
