@@ -437,15 +437,15 @@ class RevisarTraslado extends Component
 
         foreach($this->transmitentes as $transmitente){
 
-            $pn = $pn + intval($transmitente['porcentaje_nuda']);
+            $pn = $pn + floatval($transmitente['porcentaje_nuda']);
 
-            $pu = $pu + intval($transmitente['porcentaje_usufructo']);
+            $pu = $pu + floatval($transmitente['porcentaje_usufructo']);
 
-            $pp = $pp + intval($transmitente['porcentaje']);
+            $pp = $pp + floatval($transmitente['porcentaje']);
 
         }
 
-        dd($pp_adquirientes, $pp,  $pp_transmitentes, $pn_adquirientes, $pn,  $pn_transmitentes, $pu_adquirientes, $pu,  $pu_transmitentes);
+        /* dd($pp_adquirientes, $pp,  $pp_transmitentes, $pn_adquirientes, $pn,  $pn_transmitentes, $pu_adquirientes, $pu,  $pu_transmitentes); */
 
         if(($pp_adquirientes + $pp) > $pp_transmitentes){
 
