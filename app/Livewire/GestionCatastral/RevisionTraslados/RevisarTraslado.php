@@ -183,8 +183,6 @@ class RevisarTraslado extends Component
 
         } catch (\Exception $th) {
 
-            Log::error("Error al operar traslado: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
-
             $this->dispatch('mostrarMensaje', ['error', $th->getMessage()]);
 
         } catch (\Throwable $th) {
@@ -447,11 +445,7 @@ class RevisarTraslado extends Component
 
         $suma = $pp_adquirientes + $pp;
 
-        info($suma);
-        info($pp_transmitentes);
-        info($suma > $pp_transmitentes);
-
-        if((float)$suma > (float)$pp_transmitentes){
+        if(round($suma,2) > round($pp_transmitentes,2)){
 
             throw new Exception("La suma de los porcentajes de propiedad no puede superar el " . $pp_transmitentes . '%.');
 
@@ -459,7 +453,7 @@ class RevisarTraslado extends Component
 
         $suma = $pn_adquirientes + $pn;
 
-        if($suma > $pn_transmitentes){
+        if(round($suma, 2) > round($pn_transmitentes,2)){
 
             throw new Exception("La suma de los porcentajes de nuda no puede superar el " . $pn_transmitentes . '%.');
 
@@ -467,7 +461,7 @@ class RevisarTraslado extends Component
 
         $suma = $pu_adquirientes + $pu;
 
-        if($suma > $pu_transmitentes){
+        if(round($suma, 2) > round($pu_transmitentes, 2)){
 
             throw new Exception("La suma de los porcentajes de usufructo no puede superar el " . $pu_transmitentes . '%.');
 
