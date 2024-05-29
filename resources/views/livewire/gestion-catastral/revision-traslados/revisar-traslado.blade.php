@@ -32,16 +32,20 @@
 
         @endif
 
-        <x-button-green
-            wire:click="$toggle('modalAutorizar')"
-            wire:loading.attr="disabled"
-            wire:target="$toggle('modalAutorizar')">
+        @if($traslado->estado != 'operado')
 
-            <img wire:loading wire:target="$toggle('modalAutorizar')" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+            <x-button-green
+                wire:click="$toggle('modalAutorizar')"
+                wire:loading.attr="disabled"
+                wire:target="$toggle('modalAutorizar')">
 
-            Autorizar
+                <img wire:loading wire:target="$toggle('modalAutorizar')" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-        </x-button-green>
+                Autorizar
+
+            </x-button-green>
+
+        @endif
 
         <x-button-red
             wire:click="$toggle('modalRechazar')"

@@ -165,7 +165,8 @@ class Propietarios extends Component
             'modal',
             'partes_iguales',
             'ciudad',
-            'correo'
+            'correo',
+            'modalBorrar'
         ]);
     }
 
