@@ -445,7 +445,7 @@ class RevisarTraslado extends Component
 
         }
 
-        dd($pp_adquirientes, $pp,  $pp_transmitentes, $pn_adquirientes, $pn,  $pn_transmitentes, $pu_adquirientes, $pu,  $pu_transmitentes);
+        /* dd($pp_adquirientes, $pp,  $pp_transmitentes, $pn_adquirientes, $pn,  $pn_transmitentes, $pu_adquirientes, $pu,  $pu_transmitentes); */
 
         dd(($pp_adquirientes + $pp) > $pp_transmitentes);
 
