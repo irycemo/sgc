@@ -540,8 +540,6 @@ class Propietarios extends Component
 
         }
 
-        $pp = $pp + (float)$this->porcentaje;
-
         $pn = $pn + (float)$this->porcentaje_nuda + $pp;
 
         $pu = $pu + (float)$this->porcentaje_usufructo + $pp;
