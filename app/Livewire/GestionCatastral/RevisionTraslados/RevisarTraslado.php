@@ -445,6 +445,8 @@ class RevisarTraslado extends Component
 
         }
 
+        dd($pp_adquirientes, $pp, $pp_adquirientes + $pp, ($pp_adquirientes + $pp) > $pp_transmitentes);
+
         if(($pp_adquirientes + $pp) > $pp_transmitentes){
 
             throw new Exception("La suma de los porcentajes de propiedad no puede superar el " . $pp_transmitentes . '%.');
