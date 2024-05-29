@@ -437,11 +437,11 @@ class RevisarTraslado extends Component
 
         foreach($this->transmitentes as $transmitente){
 
-            $pn = $pn + floatval($transmitente['porcentaje_nuda']);
+            $pn = $pn + $transmitente['porcentaje_nuda'];
 
-            $pu = $pu + floatval($transmitente['porcentaje_usufructo']);
+            $pu = $pu + $transmitente['porcentaje_usufructo'];
 
-            $pp = $pp + floatval($transmitente['porcentaje']);
+            $pp = $pp + $transmitente['porcentaje'];
 
         }
 
