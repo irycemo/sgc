@@ -445,9 +445,7 @@ class RevisarTraslado extends Component
 
         }
 
-        dd($pp_adquirientes, $pp, $pp_transmitentes, $pp_adquirientes + $pp, 22.87 > 22.87);
-
-        if(($pp_adquirientes + $pp) > $pp_transmitentes){
+        if(floatval($pp_adquirientes + $pp) > floatval($pp_transmitentes)){
 
             throw new Exception("La suma de los porcentajes de propiedad no puede superar el " . $pp_transmitentes . '%.');
 
@@ -465,54 +463,6 @@ class RevisarTraslado extends Component
 
         }
 
-        /* if($pp_transmitentes == 0){
-
-            if(($pn_adquirientes + $pn) != $pn_transmitentes){
-
-                throw new Exception("La suma de los porcentajes de nuda debe ser " . $pn_transmitentes . '%.');
-
-            }
-
-            if(($pu_adquirientes + $pu) != $pu_transmitentes){
-
-                throw new Exception("La suma de los porcentajes de usufructo debe ser " . $pu_transmitentes . '%.');
-
-            }
-
-        }else{
-
-            if(($pp_adquirientes + $pp) != 0){
-
-                if(($pn_adquirientes + $pn + $pp_adquirientes + $pp) != $pp_transmitentes){
-
-                    throw new Exception("La suma de los porcentajes de nuda debe ser " . $pp_transmitentes . '%.');
-
-                }
-
-                if(($pu_adquirientes + $pu + $pp_adquirientes + $pp) != $pp_transmitentes){
-
-                    throw new Exception("La suma de los porcentajes de nuda debe ser " . $pp_transmitentes . '%.');
-
-                }
-
-            }else{
-
-                if(($pn_adquirientes + $pn) != $pp_transmitentes){
-
-                    throw new Exception("La suma de los porcentajes de nuda debe ser " . $pp_transmitentes . '%.');
-
-                }
-
-                if(($pu_adquirientes + $pu) != $pp_transmitentes){
-
-                    throw new Exception("La suma de los porcentajes de usufructo debe ser " . $pp_transmitentes . '%.');
-
-                }
-
-            }
-
-        }
- */
     }
 
     public function mount(){
