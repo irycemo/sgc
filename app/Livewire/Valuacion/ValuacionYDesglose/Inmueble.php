@@ -76,11 +76,11 @@ class Inmueble extends Component
             'predio.zutm' => 'nullable',
             'predio.lat' => 'required',
             'predio.lon' => 'required',
-            'ap_paterno' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
-            'ap_materno' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
-            'nombre' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
+            'ap_paterno' => [Rule::requiredIf($this->tipo_persona === 'FÍSICA')],
+            'ap_materno' => [Rule::requiredIf($this->tipo_persona === 'FÍSICA')],
+            'nombre' => [Rule::requiredIf($this->tipo_persona === 'FÍSICA')],
             'razon_social' => [Rule::requiredIf($this->tipo_persona === 'MORAL')],
-            'tipo_persona' => 'required|'. Rule::in(['FISICA', 'MORAL']),
+            'tipo_persona' => 'required|'. Rule::in(['FÍSICA', 'MORAL']),
             'porcentaje' => 'nullable|numeric|max:100',
          ];
     }
@@ -102,7 +102,7 @@ class Inmueble extends Component
 
     public function updatedTipoPersona(){
 
-        if($this->tipo_persona == 'FISICA'){
+        if($this->tipo_persona == 'FÍSICA'){
 
             $this->reset(['razon_social', 'nombre', 'ap_paterno', 'ap_materno']);
 

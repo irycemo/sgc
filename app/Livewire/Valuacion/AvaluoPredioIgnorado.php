@@ -31,8 +31,8 @@ class AvaluoPredioIgnorado extends Component
     public $ap_materno;
     public $nombre;
     public $tipo_persona;
-    public $tipo_propietario;
     public $porcentaje;
+    public $razon_social;
 
     public $modal = false;
     public $modal2 = false;
@@ -103,7 +103,6 @@ class AvaluoPredioIgnorado extends Component
             'ap_materno' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
             'nombre' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
             'tipo_persona' => 'required',
-            'tipo_propietario' => 'required',
             'porcentaje' => 'required|numeric|max:100',
          ];
     }
@@ -114,7 +113,6 @@ class AvaluoPredioIgnorado extends Component
         'ap_paterno' => 'apellido paterno',
         'ap_materno' => 'apellido materno',
         'tipo_persona' => 'tipo de persona',
-        'tipo_propietario' => 'tipo de propietario',
         'propietario_nombre' => 'nombre',
         'propietario_ap_paterno' => 'apellido paterno',
         'propietario_ap_materno' => 'apellido materno',
@@ -166,6 +164,20 @@ class AvaluoPredioIgnorado extends Component
 
     }
 
+    public function updatedTipoPersona(){
+
+        if($this->tipo_persona == 'FÍSICA'){
+
+            $this->reset(['razon_social', 'nombre', 'ap_paterno', 'ap_materno']);
+
+        }elseif($this->tipo_persona == 'MORAL'){
+
+            $this->reset(['razon_social', 'nombre', 'ap_paterno', 'ap_materno']);
+
+        }
+
+    }
+
     public function buscarClaveCatastral(){
 
         try {
@@ -213,7 +225,6 @@ class AvaluoPredioIgnorado extends Component
             $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
             $this->nombre = $this->predio->propietarios()->first()->persona->nombre;
             $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
-            $this->tipo_propietario = $this->predio->propietarios()->first()->tipo;
             $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
 
             $this->editar = true;
@@ -539,7 +550,7 @@ class AvaluoPredioIgnorado extends Component
 
                 $this->predio->propietarios()->create([
                     'persona_id' => $persona->id,
-                    'tipo' => $this->tipo_propietario,
+                    'tipo' => 'PROPIETARIO',
                     'porcentaje' => $this->porcentaje,
                 ]);
 
@@ -615,7 +626,7 @@ class AvaluoPredioIgnorado extends Component
 
                 $this->predio->propietarios()->first()->update([
                     'persona_id' => $persona->id,
-                    'tipo' => $this->tipo_propietario,
+                    'tipo' => 'PROPIETARIO',
                     'porcentaje' => $this->porcentaje,
                 ]);
 
@@ -683,7 +694,6 @@ class AvaluoPredioIgnorado extends Component
             $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
             $this->nombre = $this->predio->propietarios()->first()->persona->nombre;
             $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
-            $this->tipo_propietario = $this->predio->propietarios()->first()->tipo;
             $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
 
             $this->editar = true;
@@ -803,7 +813,6 @@ class AvaluoPredioIgnorado extends Component
 
     public function mount(){
 
-        $this->tipoPropietarios = Constantes::TIPO_PROPIETARIO;
 
         $this->tipoVialidades = Constantes::TIPO_VIALIDADES;
 
@@ -827,7 +836,6 @@ class AvaluoPredioIgnorado extends Component
             $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
             $this->nombre = $this->predio->propietarios()->first()->persona->nombre;
             $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
-            $this->tipo_propietario = $this->predio->propietarios()->first()->tipo;
             $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
 
             $this->editar = true;

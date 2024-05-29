@@ -141,7 +141,7 @@
                     <select class="bg-white rounded text-xs w-full" wire:model.live="tipo_persona" @if($flag) disabled @endif>
 
                         <option value="" selected>Seleccione una opción</option>
-                        <option value="FISICA" selected>Fisica</option>
+                        <option value="FÍSICA" selected>Física</option>
                         <option value="MORAL" selected>Moral</option>
 
                     </select>
@@ -156,7 +156,7 @@
 
             </div>
 
-            @if($tipo_persona == 'FISICA')
+            @if($tipo_persona == 'FÍSICA')
 
                 <div class="flex-auto ">
 

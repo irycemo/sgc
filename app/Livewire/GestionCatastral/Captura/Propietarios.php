@@ -59,9 +59,9 @@ class Propietarios extends Component
             'porcentaje_usufructo' => 'nullable|numeric|max:100',
             'correo' => 'nullable|unique:personas',
             'tipo_persona' => 'required',
-            'nombre' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
-            'ap_paterno' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
-            'ap_materno' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
+            'nombre' => [Rule::requiredIf($this->tipo_persona === 'FÍSICA')],
+            'ap_paterno' => [Rule::requiredIf($this->tipo_persona === 'FÍSICA')],
+            'ap_materno' => [Rule::requiredIf($this->tipo_persona === 'FÍSICA')],
             'curp' => [
                 'nullable',
                 'regex:/^[A-Z]{1}[AEIOUX]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$/i',
@@ -107,7 +107,7 @@ class Propietarios extends Component
 
     public function updatedTipoPersona(){
 
-        if($this->tipo_persona == 'FISICA'){
+        if($this->tipo_persona == 'FÍSICA'){
 
             $this->reset('razon_social');
 
@@ -302,9 +302,9 @@ class Propietarios extends Component
             'porcentaje_usufructo' => 'nullable|numeric|max:100',
             'correo' => 'nullable|unique:personas,correo,' . $this->propietario->persona->id,
             'tipo_persona' => 'required',
-            'nombre' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
-            'ap_paterno' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
-            'ap_materno' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
+            'nombre' => [Rule::requiredIf($this->tipo_persona === 'FÍSICA')],
+            'ap_paterno' => [Rule::requiredIf($this->tipo_persona === 'FÍSICA')],
+            'ap_materno' => [Rule::requiredIf($this->tipo_persona === 'FÍSICA')],
             'curp' => [
                 'nullable',
                 'regex:/^[A-Z]{1}[AEIOUX]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$/i',
@@ -313,7 +313,7 @@ class Propietarios extends Component
                 'nullable',
                 'regex:/^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/',
             ],
-            'razon_social' => [Rule::requiredIf($this->tipo_persona === 'MORAL'), utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.()\/\-," ]*$/'),],
+            'razon_social' => ['nullable', Rule::requiredIf($this->tipo_persona === 'MORAL')],
             'fecha_nacimiento' => 'nullable',
             'nacionalidad' => 'nullable|' . utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
             'estado_civil' => 'nullable',
