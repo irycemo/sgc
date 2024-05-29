@@ -445,19 +445,25 @@ class RevisarTraslado extends Component
 
         }
 
-        if(floatval($pp_adquirientes + $pp) > floatval($pp_transmitentes)){
+        $suma = $pp_adquirientes + $pp;
+
+        if($suma > $pp_transmitentes){
 
             throw new Exception("La suma de los porcentajes de propiedad no puede superar el " . $pp_transmitentes . '%.');
 
         }
 
-        if(($pn_adquirientes + $pn) > $pn_transmitentes){
+        $suma = $pn_adquirientes + $pn;
+
+        if($suma > $pn_transmitentes){
 
             throw new Exception("La suma de los porcentajes de nuda no puede superar el " . $pn_transmitentes . '%.');
 
         }
 
-        if(($pu_adquirientes + $pu) > $pu_transmitentes){
+        $suma = $pu_adquirientes + $pu;
+
+        if($suma > $pu_transmitentes){
 
             throw new Exception("La suma de los porcentajes de usufructo no puede superar el " . $pu_transmitentes . '%.');
 
