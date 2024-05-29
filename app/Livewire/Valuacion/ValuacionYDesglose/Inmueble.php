@@ -9,6 +9,7 @@ use App\Models\Persona;
 use Livewire\Component;
 use App\Models\PredioAvaluo;
 use App\Models\AsignarCuenta;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
@@ -21,15 +22,14 @@ class Inmueble extends Component
 
     public $avaluo_id;
 
-    public $tipoPropietarios;
     public $tipoVialidades;
     public $tipoAsentamientos;
     public $ap_paterno;
     public $ap_materno;
     public $nombre;
     public $tipo_persona;
-    public $tipo_propietario;
     public $porcentaje;
+    public $razon_social;
 
     public $predio_padron;
     public $flag = false;
@@ -44,10 +44,10 @@ class Inmueble extends Component
             'predio.numero_registro' => 'required|numeric|min:1',
             'predio.region_catastral' => 'required|numeric|min:1',
             'predio.municipio' => 'required|numeric|min:1',
-            'predio.localidad' => 'required|numeric|min:1|same:predio.zona_catastral',
+            'predio.localidad' => 'required|numeric|min:1',
             'predio.sector' => 'required|numeric|min:1',
-            'predio.zona_catastral' => 'required|numeric|min:1',
-            'predio.manzana' => 'required|numeric|min:1',
+            'predio.zona_catastral' => 'required|numeric|min:1,|same:predio.localidad',
+            'predio.manzana' => 'required|numeric|min:0',
             'predio.predio' => 'required|numeric|min:1',
             'predio.edificio' => 'required|numeric|min:0',
             'predio.departamento' => 'required|numeric|min:0',
@@ -76,11 +76,11 @@ class Inmueble extends Component
             'predio.zutm' => 'nullable',
             'predio.lat' => 'required',
             'predio.lon' => 'required',
-            'ap_paterno' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
-            'ap_materno' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
-            'nombre' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
-            'tipo_persona' => 'required',
-            'tipo_propietario' => 'required',
+            'ap_paterno' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
+            'ap_materno' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
+            'nombre' => [Rule::requiredIf($this->tipo_persona === 'FISICA')],
+            'razon_social' => [Rule::requiredIf($this->tipo_persona === 'MORAL')],
+            'tipo_persona' => 'required|'. Rule::in(['FISICA', 'MORAL']),
             'porcentaje' => 'nullable|numeric|max:100',
          ];
     }
@@ -98,6 +98,20 @@ class Inmueble extends Component
             'estado' => 16,
             'copia' => false
         ]);
+    }
+
+    public function updatedTipoPersona(){
+
+        if($this->tipo_persona == 'FISICA'){
+
+            $this->reset(['razon_social', 'nombre', 'ap_paterno', 'ap_materno']);
+
+        }elseif($this->tipo_persona == 'MORAL'){
+
+            $this->reset(['razon_social', 'nombre', 'ap_paterno', 'ap_materno']);
+
+        }
+
     }
 
     public function updatedPredioLocalidad(){
@@ -190,8 +204,8 @@ class Inmueble extends Component
             $this->ap_paterno = $this->predio->propietarios()->first()->persona->ap_paterno;
             $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
             $this->nombre = $this->predio->propietarios()->first()->persona->nombre;
+            $this->razon_social = $this->predio_padron->propietarios()->first()->persona->razon_social;
             $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
-            $this->tipo_propietario = $this->predio->propietarios()->first()->tipo;
             $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
 
             $this->editar = true;
@@ -259,8 +273,8 @@ class Inmueble extends Component
                 $this->ap_paterno = $this->predio->propietarios()->first()->persona->ap_paterno;
                 $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
                 $this->nombre = $this->predio->propietarios()->first()->persona->nombre;
+                $this->razon_social = $this->predio_padron->propietarios()->first()->persona->razon_social;
                 $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
-                $this->tipo_propietario = $this->predio->propietarios()->first()->tipo;
                 $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
 
             }
@@ -325,8 +339,8 @@ class Inmueble extends Component
             $this->ap_paterno = $this->predio_padron->propietarios()->first()->persona->ap_paterno;
             $this->ap_materno = $this->predio_padron->propietarios()->first()->persona->ap_materno;
             $this->nombre = $this->predio_padron->propietarios()->first()->persona->nombre;
+            $this->razon_social = $this->predio_padron->propietarios()->first()->persona->razon_social;
             $this->tipo_persona = $this->predio_padron->propietarios()->first()->persona->tipo;
-            $this->tipo_propietario = $this->predio_padron->propietarios()->first()->tipo;
             $this->porcentaje = $this->predio_padron->propietarios()->first()->porcentaje;
 
             if($this->predio_padron->propietarios()->count() > 1){
@@ -621,6 +635,7 @@ class Inmueble extends Component
                             'ap_paterno' => $this->ap_paterno,
                             'ap_materno' => $this->ap_materno,
                             'nombre' => $this->nombre,
+                            'razon_social' => $this->razon_social,
                             'tipo' => $this->tipo_persona,
                         ],
                         [
@@ -628,12 +643,13 @@ class Inmueble extends Component
                             'ap_materno' => $this->ap_materno,
                             'nombre' => $this->nombre,
                             'tipo' => $this->tipo_persona,
+                            'razon_social' => $this->razon_social,
                         ]
                     );
 
                     $this->predio->propietarios()->create([
                         'persona_id' => $persona->id,
-                        'tipo' => $this->tipo_propietario,
+                        'tipo' => 'PROPIETARIO',
                         'porcentaje' => $this->porcentaje,
                     ]);
 
@@ -699,19 +715,21 @@ class Inmueble extends Component
                         'ap_paterno' => $this->ap_paterno,
                         'ap_materno' => $this->ap_materno,
                         'nombre' => $this->nombre,
+                        'razon_social' => $this->razon_social,
                         'tipo' => $this->tipo_persona,
                     ],
                     [
                         'ap_paterno' => $this->ap_paterno,
                         'ap_materno' => $this->ap_materno,
                         'nombre' => $this->nombre,
+                        'razon_social' => $this->razon_social,
                         'tipo' => $this->tipo_persona,
                     ]
                 );
 
                 $this->predio->propietarios()->first()->update([
                     'persona_id' => $persona->id,
-                    'tipo' => $this->tipo_propietario,
+                    'tipo' => 'PROPIETARIO',
                     'porcentaje' => $this->porcentaje,
                 ]);
 
@@ -739,8 +757,6 @@ class Inmueble extends Component
 
     public function mount(){
 
-        $this->tipoPropietarios = Constantes::TIPO_PROPIETARIO;
-
         $this->tipoVialidades = Constantes::TIPO_VIALIDADES;
 
         $this->tipoAsentamientos = Constantes::TIPO_ASENTAMIENTO;
@@ -765,9 +781,7 @@ class Inmueble extends Component
             $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
             $this->nombre = $this->predio->propietarios()->first()->persona->nombre;
             $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
-            $this->tipo_propietario = $this->predio->propietarios()->first()->tipo;
             $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
-
             $this->editar = true;
 
         }
