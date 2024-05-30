@@ -352,6 +352,7 @@ class Propietarios extends Component
                         ->when($this->razon_social, fn($q) => $q->orWhere('razon_social', $this->razon_social))
                         ->when($this->rfc, fn($q) => $q->orWhere('rfc', $this->rfc))
                         ->when($this->curp, fn($q) => $q->orWhere('curp', $this->curp))
+                        ->when($this->correo, fn($q) => $q->orWhere('correo', $this->correo))
                         ->first();
 
         try {
@@ -384,6 +385,8 @@ class Propietarios extends Component
                     ]);
 
                 }else{
+
+                    $this->validate(['correo' => 'nullable|unique:personas,correo']);
 
                     $persona = Persona::create([
                         'tipo' => $this->tipo_persona,
@@ -448,11 +451,11 @@ class Propietarios extends Component
 
         $this->propietario = $propietario;
 
+        $this->tipo_persona = $this->propietario->persona->tipo;
         $this->tipo_propietario = $this->propietario->tipo;
         $this->porcentaje = $this->propietario->porcentaje;
         $this->porcentaje_nuda = $this->propietario->porcentaje_nuda;
         $this->porcentaje_usufructo = $this->propietario->porcentaje_usufructo;
-        $this->tipo_persona = $this->propietario->persona->tipo;
         $this->nombre = $this->propietario->persona->nombre;
         $this->ap_paterno = $this->propietario->persona->ap_paterno;
         $this->ap_materno = $this->propietario->persona->ap_materno;
