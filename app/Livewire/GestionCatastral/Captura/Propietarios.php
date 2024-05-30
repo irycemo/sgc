@@ -358,7 +358,7 @@ class Propietarios extends Component
 
             DB::transaction(function () use($persona){
 
-                if(!$persona){
+                if($persona){
 
                     $this->propietario->persona->update([
                         'tipo' => $this->tipo_persona,
