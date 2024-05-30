@@ -252,6 +252,31 @@ class Propietarios extends Component
                         'creado_por' => auth()->id()
                     ]);
 
+                }else{
+
+                    $persona->update([
+                        'tipo' => $this->tipo_persona,
+                        'nombre' => $this->nombre,
+                        'ap_paterno' => $this->ap_paterno,
+                        'ap_materno' => $this->ap_materno,
+                        'curp' => $this->curp,
+                        'rfc' => $this->rfc,
+                        'razon_social' => $this->razon_social,
+                        'fecha_nacimiento' => $this->fecha_nacimiento,
+                        'nacionalidad' => $this->nacionalidad,
+                        'estado_civil' => $this->estado_civil,
+                        'calle' => $this->calle,
+                        'numero_exterior' => $this->numero_exterior_propietario,
+                        'numero_interior' => $this->numero_interior_propietario,
+                        'colonia' => $this->colonia,
+                        'ciudad' => $this->ciudad,
+                        'correo' => $this->correo,
+                        'cp' => $this->cp,
+                        'entidad' => $this->entidad,
+                        'municipio' => $this->municipio_propietario,
+                        'actualizado_por' => auth()->id()
+                    ]);
+
                 }
 
                 if($this->predio->propietarios()->where('persona_id', $persona->id)->first()){
