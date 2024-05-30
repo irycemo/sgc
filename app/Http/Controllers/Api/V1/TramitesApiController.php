@@ -24,7 +24,9 @@ class TramitesApiController extends Controller
         $tramite = Tramite::where('año', $validated['año'])
                                 ->where('folio', $validated['folio'])
                                 ->where('usuario', $validated['usuario'])
-                                ->where('usuario_tramites_linea_id', $validated['entidad'])
+                                ->when((int)$validated['usuario'] == 11, function ($q) use($validated){
+                                    $q->where('usuario_tramites_linea_id', $validated['entidad']);
+                                })
                                 ->first();
 
         if($tramite){

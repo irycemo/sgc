@@ -18,8 +18,9 @@ class PropietariosApiController extends Controller
         $tramite = Tramite::with('predios')
                                 ->where('año', $validated['año'])
                                 ->where('folio', $validated['folio'])
-                                ->where('usuario', 11)
-                                ->where('usuario_tramites_linea_id', $validated['entidad'])
+                                ->when(isset($validated['usuario']), function ($q) use($validated){
+                                    $q->where('usuario', $validated['usuario']);
+                                })
                                 ->first();
 
         if(!$tramite){
