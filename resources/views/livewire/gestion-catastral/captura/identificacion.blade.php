@@ -318,7 +318,7 @@
 
             <div>
 
-                <input type="text" class="bg-white rounded text-xs w-full" wire:model="predio.tipo_asentamiento" readonly>
+                <input type="text" class="bg-white rounded text-xs w-full" wire:model="predio.tipo_asentamiento">
 
             </div>
 
