@@ -141,7 +141,7 @@ class Captura extends Component
         $this->predio->zona_catastral = $this->predio->localidad;
 
     }
-
+/*
     public function updatedPredioCodigoPostal(){
 
         $this->reset('predio.nombres_asentamientos', 'predio.nombre_asentamiento', 'nombres_asentamientos');
@@ -167,7 +167,7 @@ class Captura extends Component
             $this->predio->tipo_asentamiento = null;
 
     }
-
+ */
     public function updated($value){
 
         if(in_array($value, ['predio.xutm', 'predio.yutm','predio.zutm', 'predio.lat', 'predio.lon']))

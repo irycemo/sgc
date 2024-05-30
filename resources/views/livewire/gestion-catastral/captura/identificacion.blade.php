@@ -297,49 +297,13 @@
 
             <div>
 
-                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="predio.codigo_postal">
+                <input type="number" class="bg-white rounded text-xs w-full" wire:model="predio.codigo_postal">
 
             </div>
 
             <div>
 
                 @error('predio.codigo_postal') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-            </div>
-
-        </div>
-
-        <div class="flex-auto">
-
-            <div class="">
-
-                <label class="text-sm " >Nombre del asentamiento</label>
-
-            </div>
-
-            <div>
-
-                <select class="bg-white rounded text-xs w-full" wire:model.live="predio.nombre_asentamiento">
-
-                    <option value="" selected>Seleccione una opción</option>
-
-                    @if($nombres_asentamientos)
-
-                        @foreach ($nombres_asentamientos as $nombre)
-
-                            <option value="{{ $nombre }}">{{ $nombre }}</option>
-
-                        @endforeach
-
-                    @endif
-
-                </select>
-
-            </div>
-
-            <div>
-
-                @error('predio.nombre_asentamiento') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
             </div>
 
@@ -361,6 +325,28 @@
             <div>
 
                 @error('predio.tipo_asentamiento') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+            </div>
+
+        </div>
+
+        <div class="flex-auto">
+
+            <div class="">
+
+                <label class="text-sm " >Nombre del asentamiento</label>
+
+            </div>
+
+            <div>
+
+                <input type="number" class="bg-white rounded text-xs w-full" wire:model="predio.nombre_asentamiento">
+
+            </div>
+
+            <div>
+
+                @error('predio.nombre_asentamiento') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
             </div>
 
