@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class Propietarios extends Component
 {
@@ -316,6 +317,10 @@ class Propietarios extends Component
 
             });
 
+        } catch (ValidationException $th) {
+
+            $this->dispatch('mostrarMensaje', ['error', $th->getMessage()]);
+
         } catch (\Throwable $th) {
 
             Log::error("Error al guardar propietario en captura del padrón por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
@@ -470,6 +475,10 @@ class Propietarios extends Component
                 $this->predio->load('propietarios.persona');
 
             });
+
+        } catch (ValidationException $th) {
+
+            $this->dispatch('mostrarMensaje', ['error', $th->getMessage()]);
 
         } catch (\Throwable $th) {
 
