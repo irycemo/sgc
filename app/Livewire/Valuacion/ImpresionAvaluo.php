@@ -328,7 +328,7 @@ class ImpresionAvaluo extends Component
 
             }
 
-            if(!$predio->terrenos->count()){
+            if($predio->edificio == 0 && $predio->terrenos->count() == 0){
 
                 $this->dispatch('mostrarMensaje', ['error', "El avaluo con folio: " . $predio->avaluo->año . '-' . $predio->avaluo->folio . ", cuenta predial: " . $predio->localidad . "-" . $predio->oficina . "-" . $predio->tipo_predio . "-" . $predio->numero_registro . " no tiene terrenos."]);
 

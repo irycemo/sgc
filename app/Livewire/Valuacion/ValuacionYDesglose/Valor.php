@@ -182,6 +182,8 @@ class Valor extends Component
             isset($this->terrenosCondominio[$i[0]]['valor_unitario']))
         {
 
+            $this->terrenosCondominio[$i[0]]['superficie_proporcional'] = (float)$this->terrenosCondominio[$i[0]]['area_terreno_comun'] * (float)$this->terrenosCondominio[$i[0]]['indiviso_terreno'];
+
             $this->terrenosCondominio[$i[0]]['valor_terreno_comun'] = ((float)$this->terrenosCondominio[$i[0]]['area_terreno_comun'] *
                                                                                     (float)$this->terrenosCondominio[$i[0]]['indiviso_terreno'] *
                                                                                     (float)$this->terrenosCondominio[$i[0]]['valor_unitario']) / 100 ;
@@ -212,6 +214,8 @@ class Valor extends Component
             isset($this->construccionesCondominio[$i[0]]['indiviso_construccion']) &&
             isset($this->construccionesCondominio[$i[0]]['valor_clasificacion_construccion']))
         {
+
+            $this->construccionesCondominio[$i[0]]['superficie_proporcional'] = (float)$this->construccionesCondominio[$i[0]]['area_comun_construccion'] * (float)$this->construccionesCondominio[$i[0]]['indiviso_construccion'];
 
             $this->construccionesCondominio[$i[0]]['valor_construccion_comun'] = ((float)$this->construccionesCondominio[$i[0]]['area_comun_construccion'] *
                                                                                     (float)$this->construccionesCondominio[$i[0]]['indiviso_construccion'] *
@@ -279,6 +283,7 @@ class Valor extends Component
             $this->terrenosCondominio[] = [
                 'id' => $terreno->id,
                 'area_terreno_comun' => $terreno->area_terreno_comun,
+                'superficie_proporcional' => $terreno->superficie_proporcional,
                 'indiviso_terreno' => $terreno->indiviso_terreno,
                 'valor_unitario' => $terreno->valor_unitario,
                 'valor_terreno_comun' => $terreno->valor_terreno_comun,
@@ -290,6 +295,7 @@ class Valor extends Component
             $this->construccionesCondominio[] = [
                 'id' => $construccion->id,
                 'area_comun_construccion' => $construccion->area_comun_construccion,
+                'superficie_proporcional' => $construccion->superficie_proporcional,
                 'indiviso_construccion' => $construccion->indiviso_construccion,
                 'valor_clasificacion_construccion' => $construccion->valor_clasificacion_construccion,
                 'valor_construccion_comun' => $construccion->valor_construccion_comun,
@@ -351,13 +357,13 @@ class Valor extends Component
 
     public function agregarTerrenoConstruccion(){
 
-        $this->terrenosCondominio[] = ['codigo' => null, 'niveles' => null, 'superficie' => null, 'id' => null, 'valor_unitario' => null, 'valores' => null, 'uso' => null, 'tipo' => null, 'categoria' => null, 'calidad' => null];
+        $this->terrenosCondominio[] = ['codigo' => null, 'niveles' => null, 'superficie' => null, 'id' => null, 'valor_unitario' => null, 'superficie_proporcional' => null, 'valores' => null, 'uso' => null, 'tipo' => null, 'categoria' => null, 'calidad' => null];
 
     }
 
     public function agregarCondominioConstruccion(){
 
-        $this->construccionesCondominio[] = ['area_comun_construccion' => null, 'indiviso_construccion' => null, 'valor_clasificacion_construccion' => null, 'id' => null, 'valor_construccion_comun' => null,];
+        $this->construccionesCondominio[] = ['area_comun_construccion' => null, 'indiviso_construccion' => null, 'superficie_proporcional' => null, 'valor_clasificacion_construccion' => null, 'id' => null, 'valor_construccion_comun' => null,];
 
     }
 
@@ -646,6 +652,7 @@ class Valor extends Component
             'terrenosCondominio.*' => 'required',
             'terrenosCondominio.*.area_terreno_comun' => 'required',
             'terrenosCondominio.*.indiviso_terreno' => 'required|max:100',
+            'terrenosCondominio.*.superficie_proporcional' => 'nullable',
             'terrenosCondominio.*.valor_unitario' => 'required',
         ]);
 
@@ -666,6 +673,7 @@ class Valor extends Component
                         $aux = $this->predio->condominioTerrenos()->create([
                             'area_terreno_comun' => $terreno['area_terreno_comun'],
                             'indiviso_terreno' => $terreno['indiviso_terreno'],
+                            'superficie_proporcional' => $terreno['superficie_proporcional'],
                             'valor_unitario' => $terreno['valor_unitario'],
                             'valor_terreno_comun' => $terreno['valor_terreno_comun'],
                         ]);
@@ -677,6 +685,7 @@ class Valor extends Component
                         Condominioterreno::find($terreno['id'])->update([
                             'area_terreno_comun' => $terreno['area_terreno_comun'],
                             'indiviso_terreno' => $terreno['indiviso_terreno'],
+                            'superficie_proporcional' => $terreno['superficie_proporcional'],
                             'valor_unitario' => $terreno['valor_unitario'],
                             'valor_terreno_comun' => $terreno['valor_terreno_comun'],
                         ]);
@@ -727,6 +736,7 @@ class Valor extends Component
             'construccionesCondominio.*.area_comun_construccion' => 'required',
             'construccionesCondominio.*.indiviso_construccion' => 'required|max:100',
             'construccionesCondominio.*.valor_clasificacion_construccion' => 'required',
+            'construccionesCondominio.*.superficie_proporcional' => 'required',
         ]);
 
         if($this->revisarPorcentaje())
@@ -747,6 +757,7 @@ class Valor extends Component
                         $aux = $this->predio->condominioConstrucciones()->create([
                             'area_comun_construccion' => $construccion['area_comun_construccion'],
                             'indiviso_construccion' => $construccion['indiviso_construccion'],
+                            'superficie_proporcional' => $construccion['superficie_proporcional'],
                             'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
                             'valor_construccion_comun' => $construccion['valor_construccion_comun'],
                         ]);
@@ -758,6 +769,7 @@ class Valor extends Component
                         Condominioconstruccion::find($construccion['id'])->update([
                             'area_comun_construccion' => $construccion['area_comun_construccion'],
                             'indiviso_construccion' => $construccion['indiviso_construccion'],
+                            'superficie_proporcional' => $construccion['superficie_proporcional'],
                             'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
                             'valor_construccion_comun' => $construccion['valor_construccion_comun'],
                         ]);
@@ -948,11 +960,11 @@ class Valor extends Component
         ];
 
         $this->terrenosCondominio = [
-            ['area_terreno_comun' => null, 'indiviso_terreno' => null, 'valor_unitario' => null, 'id' => null, 'valor_terreno_comun' => null,]
+            ['area_terreno_comun' => null, 'indiviso_terreno' => null, 'superficie_proporcional' => null, 'valor_unitario' => null, 'id' => null, 'valor_terreno_comun' => null,]
         ];
 
         $this->construccionesCondominio = [
-            ['area_comun_construccion' => null, 'indiviso_construccion' => null, 'valor_clasificacion_construccion' => null, 'id' => null, 'valor_construccion_comun' => null,]
+            ['area_comun_construccion' => null, 'indiviso_construccion' => null, 'superficie_proporcional' => null, 'valor_clasificacion_construccion' => null, 'id' => null, 'valor_construccion_comun' => null,]
         ];
 
         $this->valores_rusticos = ValoresUnitariosRusticos::all();

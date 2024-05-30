@@ -450,8 +450,6 @@ class Propietarios extends Component
 
             $this->resetear();
 
-            $this->predio->refresh();
-
             $this->predio->load('propietarios.persona');
 
             $this->predio->touch();
