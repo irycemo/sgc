@@ -254,6 +254,12 @@ class Propietarios extends Component
 
                 }else{
 
+                    $this->validate([
+                        'correo' => 'nullable|unique:personas,correo',
+                        'curp' => 'nullable|unique:personas,curp',
+                        'rfc' => 'nullable|unique:personas,rfc',
+                    ]);
+
                     $persona->update([
                         'tipo' => $this->tipo_persona,
                         'nombre' => $this->nombre,
@@ -411,7 +417,11 @@ class Propietarios extends Component
 
                 }else{
 
-                    $this->validate(['correo' => 'nullable|unique:personas,correo']);
+                    $this->validate([
+                        'correo' => 'nullable|unique:personas,correo',
+                        'curp' => 'nullable|unique:personas,curp',
+                        'rfc' => 'nullable|unique:personas,rfc',
+                    ]);
 
                     $persona = Persona::create([
                         'tipo' => $this->tipo_persona,
