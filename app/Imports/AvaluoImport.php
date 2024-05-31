@@ -760,6 +760,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             $terrenosArreglo [] = [
                 'area_terreno_comun' => $campos[0],
                 'indiviso_terreno' => $campos[1],
+                'superficie_proporcional' => ($campos[0] * $campos[1]) / 100,
                 'valor_unitario' => $campos[2],
                 'valor_terreno_comun' => $valorTerreno
             ];
@@ -804,6 +805,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             $construccionesArreglo [] = [
                 'area_comun_construccion' => $campos[0],
                 'indiviso_construccion' => $campos[1],
+                'superficie_proporcional' => ($campos[0] * $campos[1]) / 100,
                 'valor_clasificacion_construccion' => $valorUnitario,
                 'valor_construccion_comun' => $valorConstruccion,
             ];

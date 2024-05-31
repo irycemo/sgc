@@ -182,7 +182,7 @@ class Valor extends Component
             isset($this->terrenosCondominio[$i[0]]['valor_unitario']))
         {
 
-            $this->terrenosCondominio[$i[0]]['superficie_proporcional'] = (float)$this->terrenosCondominio[$i[0]]['area_terreno_comun'] * (float)$this->terrenosCondominio[$i[0]]['indiviso_terreno'];
+            $this->terrenosCondominio[$i[0]]['superficie_proporcional'] = ((float)$this->terrenosCondominio[$i[0]]['area_terreno_comun'] * (float)$this->terrenosCondominio[$i[0]]['indiviso_terreno']) / 100;
 
             $this->terrenosCondominio[$i[0]]['valor_terreno_comun'] = ((float)$this->terrenosCondominio[$i[0]]['area_terreno_comun'] *
                                                                                     (float)$this->terrenosCondominio[$i[0]]['indiviso_terreno'] *
@@ -215,7 +215,7 @@ class Valor extends Component
             isset($this->construccionesCondominio[$i[0]]['valor_clasificacion_construccion']))
         {
 
-            $this->construccionesCondominio[$i[0]]['superficie_proporcional'] = (float)$this->construccionesCondominio[$i[0]]['area_comun_construccion'] * (float)$this->construccionesCondominio[$i[0]]['indiviso_construccion'];
+            $this->construccionesCondominio[$i[0]]['superficie_proporcional'] = ((float)$this->construccionesCondominio[$i[0]]['area_comun_construccion'] * (float)$this->construccionesCondominio[$i[0]]['indiviso_construccion']) / 100;
 
             $this->construccionesCondominio[$i[0]]['valor_construccion_comun'] = ((float)$this->construccionesCondominio[$i[0]]['area_comun_construccion'] *
                                                                                     (float)$this->construccionesCondominio[$i[0]]['indiviso_construccion'] *
