@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use Exception;
 use App\Models\Avaluo;
 use App\Models\Predio;
 use App\Models\Oficina;
@@ -13,9 +14,11 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
 use App\Models\ValoresUnitariosRusticos;
+use Illuminate\Support\Facades\Validator;
 use App\Models\ValoresUnitariosConstruccion;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use App\Http\Services\Coordenadas\Coordenadas;
+use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
@@ -189,25 +192,10 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                     ]);
 
                     /* Asociar relaciones */
-                    $persona = Persona::firstOrCreate(
-                        [
-                            'ap_paterno' => $row['ap_paterno'],
-                            'ap_materno' => $row['ap_materno'],
-                            'nombre' => $row['nombre'],
-                            'razon_social' => $row['razon_social'],
-                            'tipo' => $row['tipo_persona'],
-                        ],
-                        [
-                            'ap_paterno' => $row['ap_paterno'],
-                            'ap_materno' => $row['ap_materno'],
-                            'nombre' => $row['nombre'],
-                            'razon_social' => $row['razon_social'],
-                            'tipo' => $row['tipo_persona'],
-                        ]
-                    );
+                    $personaId = $this->procesarPersona($row, $key);
 
                     $predio->propietarios()->create([
-                        'persona_id' => $persona->id,
+                        'persona_id' => $personaId,
                         'tipo' => $row['tipo_propietario'],
                         'porcentaje' => $row['porcentaje'],
                     ]);
@@ -333,6 +321,14 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
             });
 
+        } catch (ValidationException $th) {
+
+            throw $th->getMessage();
+
+        } catch (Exception $th) {
+
+            throw $th;
+
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -355,18 +351,27 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             'tipo' => 'required|numeric|min:1|max:2',
             'oficina' => 'required|numeric|min:1',
             'estado' => 'required',
-            'ap_paterno' => 'required_if:tipo,FISICA|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
-            'ap_materno' => 'required_if:tipo,FISICA|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
-            'nombre' => 'required_if:tipo,FISICA|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
-            'razon_social' => 'required_if:tipo,MORAL|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
-            'tipo_persona' => ['required', Rule::in(['FISICA', 'MORAL'])],
+            'correo' => 'nullable|email',
+            'rfc' => [
+                'required',
+                'regex:/^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/',
+            ],
+            'curp' => [
+                'nullable',
+                'regex:/^[A-Z]{1}[AEIOUX]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$/i',
+            ],
+            'ap_paterno' => 'required_if:tipo,FÍSICA',
+            'ap_materno' => 'required_if:tipo,FÍSICA',
+            'nombre' => 'required_if:tipo,FÍSICA',
+            'razon_social' => 'required_if:tipo,MORAL',
+            'tipo_persona' => ['required', Rule::in(['FÍSICA', 'MORAL'])],
             'tipo_propietario' => ['required', Rule::in(Constantes::TIPO_PROPIETARIO)],
             'porcentaje' => 'required|numeric|min:1|max:100',
             'sociedad' => ['required', Rule::in(['SI', 'NO'])],
             'tipo_asentamiento' => ['required', Rule::in(Constantes::TIPO_ASENTAMIENTO)],
             'nombre_asentamiento' => 'required',
             'tipo_vialidad' => ['required', Rule::in(Constantes::TIPO_VIALIDADES)],
-            'nombre_vialidad' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
+            'nombre_vialidad' => 'required|',
             'numero_exterior' => 'required',
             'latitud' => 'required',
             'longitud' => 'required',
@@ -808,6 +813,70 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
         $collection = collect($construccionesArreglo);
 
         return $collection;
+
+    }
+
+    public function procesarPersona($row, $linea):int
+    {
+
+        $persona = Persona::where('rfc', $row['rfc'])->first();
+
+        if($persona){
+
+            $v = Validator::make($persona->toArray(), [
+                'curp' => 'unique:personas,curp,' . $persona->id,
+                'correo' => 'unique:personas,correo,' . $persona->id,
+            ]);
+
+            if ($v->fails()){
+
+                throw new Exception($v->errors()->first(). ' en la línea: '. $linea);
+            }
+
+            $persona->update([
+                'ap_paterno' => $row['ap_paterno'],
+                'ap_materno' => $row['ap_materno'],
+                'nombre' => $row['nombre'],
+                'razon_social' => $row['razon_social'],
+                'tipo' => $row['tipo_persona'],
+                'curp' => $row['curp'],
+                'correo' => $row['correo'],
+            ]);
+
+        }else{
+
+            $v = Validator::make(
+                [
+                    'rfc' => $row['rfc'],
+                    'curp' => $row['curp'],
+                    'correo' => $row['correo']
+                ],
+                [
+                    'rfc' => 'unique:personas,rfc',
+                    'curp' => 'unique:personas,curp',
+                    'correo' => 'unique:personas,correo',
+                ]
+            );
+
+            if ($v->fails()){
+
+                throw new Exception($v->errors()->first(). ' en la línea: '. $linea);
+            }
+
+            $persona = Persona::create([
+                'ap_paterno' => $row['ap_paterno'],
+                'ap_materno' => $row['ap_materno'],
+                'nombre' => $row['nombre'],
+                'razon_social' => $row['razon_social'],
+                'tipo' => $row['tipo_persona'],
+                'rfc' => $row['rfc'],
+                'curp' => $row['curp'],
+                'correo' => $row['correo'],
+            ]);
+
+        }
+
+        return $persona->id;
 
     }
 

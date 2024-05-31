@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Valuacion;
 
+use Exception;
 use Livewire\Component;
 use App\Imports\AvaluoImport;
 use Livewire\WithFileUploads;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\ValoresUnitariosRusticos;
 use App\Models\ValoresUnitariosConstruccion;
+use Illuminate\Validation\ValidationException;
 use App\Exceptions\FichaTecnicaImportException;
 
 class FichaTecnica extends Component
@@ -55,11 +57,16 @@ class FichaTecnica extends Component
 
             }
 
-       }catch (FichaTecnicaImportException $e) {
+        }catch (FichaTecnicaImportException $e) {
 
             $this->dispatch('mostrarMensaje', ['error', $e->getMessage()]);
 
-       }catch (\Throwable $th) {
+        } catch (Exception $th) {
+
+            Log::error("Error al importar ficha técnica por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', $th->getMessage()]);
+
+        } catch (\Throwable $th) {
 
             Log::error("Error al importar ficha técnica por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error"]);

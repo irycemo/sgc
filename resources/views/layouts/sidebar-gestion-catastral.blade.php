@@ -50,7 +50,7 @@
 
                 <a href="{{ route('revision_traslados') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
-                    Revisar de avisos
+                    Revisar avisos
 
                 </a>
 
