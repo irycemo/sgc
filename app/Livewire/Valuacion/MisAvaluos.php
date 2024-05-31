@@ -34,19 +34,19 @@ class MisAvaluos extends Component
 
         try{
 
-            DB::transaction(function () {
+            $avaluos = Avaluo::with('predioAvaluo')->whereKey($this->seleccionados)->get();
 
-                $avaluos = Avaluo::with('predioAvaluo.propietarios', 'predioAvaluo.colindancias', 'predioAvaluo.condominioTerrenos', 'predioAvaluo.condominioConstrucciones', 'predioAvaluo.terrenos', 'predioAvaluo.construcciones')->whereKey($this->seleccionados)->get();
+            foreach ($avaluos as $avaluo) {
 
-                foreach ($avaluos as $avaluo) {
+                if($avaluo->estado == 'notificado'){
 
-                    if($avaluo->estado == 'notificado'){
+                    $this->dispatch('mostrarMensaje', ['error', "El avalúo con folio: " . $avaluo->año . '-' . $avaluo->folio . ' no se puede eliminar, está notificado.']);
 
-                        $this->dispatch('mostrarMensaje', ['error', "El avalúo con folio " . $avaluo->folio . ' no se puede eliminar, esta notificado.']);
+                    return;
 
-                        return;
+                }
 
-                    }
+                DB::transaction(function () use($avaluo){
 
                     $predio = $avaluo->predioAvaluo;
 
@@ -72,13 +72,13 @@ class MisAvaluos extends Component
                         Storage::disk('avaluos')->delete($file->url);
                     }
 
-                }
+                });
 
-                $this->resetearTodo($borrado = true);
+            }
 
-                $this->dispatch('mostrarMensaje', ['success', "La información seleccionada se eliminó con éxito."]);
+            $this->resetearTodo($borrado = true);
 
-            });
+            $this->dispatch('mostrarMensaje', ['success', "La información seleccionada se eliminó con éxito."]);
 
         } catch (\Throwable $th) {
 

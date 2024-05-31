@@ -72,7 +72,6 @@
                 <x-table.heading sortable wire:click="sortBy('folio')" :direction="$sort === 'folio' ? $direction : null" >Folio</x-table.heading>
                 <x-table.heading >Cuenta predial</x-table.heading>
                 <x-table.heading >Clave catastral</x-table.heading>
-                <x-table.heading >Propietario</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
                 <x-table.heading >Acciones</x-table.heading>
@@ -132,14 +131,6 @@
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Clave catastral</span>
 
                             {{ $avaluo->predioAvaluo->claveCatastral() }}
-
-                        </x-table.cell>
-
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Propietario</span>
-
-                            {{ $avaluo->predioAvaluo->primerPropietario() }}
 
                         </x-table.cell>
 
@@ -269,6 +260,9 @@
                 wire:loading.attr="disabled"
                 wire:target="eliminar"
             >
+
+                <img wire:loading wire:target="eliminar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
                 Borrar
             </x-danger-button>
 

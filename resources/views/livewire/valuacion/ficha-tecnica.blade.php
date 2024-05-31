@@ -30,12 +30,7 @@
                     wire:loading.attr="disabled"
                     wire:target="procesar">
 
-                    <div wire:loading.flex class="flex absolute top-1 right-1 items-center">
-                        <svg class="animate-spin h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                    </div>
+                    <img wire:loading wire:target="procesar" class="h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Procesar
                 </button>
@@ -98,12 +93,6 @@
 
                         </th>
 
-                        <th class="px-3 py-3 hidden lg:table-cell">
-
-                            Propietario
-
-                        </th>
-
                     </tr>
 
                 </thead>
@@ -135,14 +124,6 @@
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Clave catastral</span>
 
                                 {{ $avaluo->predioAvaluo->claveCatastral() }}
-
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Propietario</span>
-
-                                {{ $avaluo->predioAvaluo->primerPropietario() }}
 
                             </td>
 

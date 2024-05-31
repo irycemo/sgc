@@ -832,10 +832,11 @@ class AvaluoPredioIgnorado extends Component
 
             $this->predio = $avaluo->predioAvaluo;
 
+            $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
             $this->ap_paterno = $this->predio->propietarios()->first()->persona->ap_paterno;
             $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
             $this->nombre = $this->predio->propietarios()->first()->persona->nombre;
-            $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
+            $this->razon_social = $this->predio->propietarios()->first()->persona->razon_social;
             $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
 
             $this->editar = true;

@@ -101,13 +101,9 @@ class Predio extends Model implements Auditable
 
     public function primerPropietario(){
 
-        if($this->propietarios()->first()){
+        $propietario = Propietario::where('propietarioable_type', 'App\Models\PredioAvaluo')->where('propietarioable_id', $this->id)->first();
 
-            $primerPropietario = $this->propietarios()->first();
-
-            return $primerPropietario->persona->nombre . ' ' . $primerPropietario->persona->ap_paterno . ' ' . $primerPropietario->persona->ap_materno . ' ' . $primerPropietario->persona->razon_social;
-
-        }else return null;
+        return $propietario->persona->nombre . ' ' . $propietario->persona->ap_paterno . ' ' . $propietario->persona->ap_materno . ' ' . $propietario->persona->razon_social;
 
     }
 
