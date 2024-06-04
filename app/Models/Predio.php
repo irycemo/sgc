@@ -99,9 +99,19 @@ class Predio extends Model implements Auditable
 
     }
 
+    public function propietarioInicial(){
+
+        return $this->morphOne(Propietario::class, 'propietarioable')->with('persona:id,nombre,ap_paterno,ap_materno,razon_social');
+
+    }
+
     public function primerPropietario(){
 
+        /* return $this->morphOne(Propietario::class, 'propietarioable')->with('persona:id,nombre,ap_paterno,ap_materno,razon_social'); */
+
         $propietario = Propietario::where('propietarioable_type', 'App\Models\Predio')->where('propietarioable_id', $this->id)->first();
+
+        if(!$propietario) return null;
 
         return $propietario->persona->nombre . ' ' . $propietario->persona->ap_paterno . ' ' . $propietario->persona->ap_materno . ' ' . $propietario->persona->razon_social;
 

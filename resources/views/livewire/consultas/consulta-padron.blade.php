@@ -302,7 +302,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Propietario</span>
 
-                                {{ $item->primerPropietario() }}
+                                {{ $item->propietarioInicial->persona->nombre }} {{ $item->propietarioInicial->persona->ap_paterno }} {{ $item->propietarioInicial->persona->ap_materno }} {{ $item->propietarioInicial->persona->razon_social }}
 
                             </x-table.cell>
 

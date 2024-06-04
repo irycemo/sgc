@@ -127,6 +127,7 @@ class ConsultaPadron extends Component
                                         'terrenos',
                                         'construcciones',
                                         'colindancias',
+                                        'propietarioInicial'
                                     )
                                     ->where('tipo_predio', $this->predio->tipo_predio)
                                     ->where('localidad', $this->predio->localidad)
@@ -151,6 +152,7 @@ class ConsultaPadron extends Component
                                         'terrenos',
                                         'construcciones',
                                         'colindancias',
+                                        'propietarioInicial'
                                     )
                                     ->where('status', 'activo')
                                     ->where('estado', 16)
