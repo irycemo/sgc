@@ -52,7 +52,7 @@ Artisan::command('migrar', function(){
                                     ->where('tcpro008.mpio_008', 53)
                                     ->where('tcpro008.nreg_008', '>', 0);
                             })
-                            ->foreach();
+                            ->get();
 
     $this->info('Incia: ' . now());
 
