@@ -12,45 +12,45 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('predios', function (Blueprint $table) {
-            $table->unsignedDecimal('superficie_terreno', 10,4)->nullable()->change();
-            $table->unsignedDecimal('superficie_construccion', 10,4)->nullable()->change();
-            $table->unsignedDecimal('superficie_judicial', 10,4)->nullable()->change();
-            $table->unsignedDecimal('superficie_notarial', 10,4)->nullable()->change();
-            $table->unsignedDecimal('area_comun_terreno', 10,4)->nullable()->change();
-            $table->unsignedDecimal('area_comun_construccion', 10,4)->nullable()->change();
-            $table->unsignedDecimal('valor_terreno_comun', 10,4)->nullable()->change();
-            $table->unsignedDecimal('valor_construccion_comun', 10,4)->nullable()->change();
-            $table->unsignedDecimal('valor_total_terreno', 10,4)->nullable()->change();
-            $table->unsignedDecimal('valor_total_construccion', 10,4)->nullable()->change();
-            $table->unsignedDecimal('valor_catastral', 10,4)->nullable()->change();
+            $table->unsignedDecimal('superficie_terreno', 15,4)->nullable()->change();
+            $table->unsignedDecimal('superficie_construccion', 15,4)->nullable()->change();
+            $table->unsignedDecimal('superficie_judicial', 15,4)->nullable()->change();
+            $table->unsignedDecimal('superficie_notarial', 15,4)->nullable()->change();
+            $table->unsignedDecimal('area_comun_terreno', 15,4)->nullable()->change();
+            $table->unsignedDecimal('area_comun_construccion', 15,4)->nullable()->change();
+            $table->unsignedDecimal('valor_terreno_comun', 15,4)->nullable()->change();
+            $table->unsignedDecimal('valor_construccion_comun', 15,4)->nullable()->change();
+            $table->unsignedDecimal('valor_total_terreno', 15,4)->nullable()->change();
+            $table->unsignedDecimal('valor_total_construccion', 15,4)->nullable()->change();
+            $table->unsignedDecimal('valor_catastral', 15,4)->nullable()->change();
         });
 
         Schema::table('terrenos', function (Blueprint $table) {
-            $table->unsignedDecimal('superficie', 10,4)->change();
-            $table->unsignedDecimal('demerito', 10,4)->nullable()->change();
-            $table->unsignedDecimal('valor_demeritado', 10,4)->nullable()->change();
-            $table->unsignedDecimal('valor_unitario', 10,4)->change();
-            $table->unsignedDecimal('valor_terreno', 10,4)->change();
+            $table->unsignedDecimal('superficie', 15,4)->change();
+            $table->unsignedDecimal('demerito', 15,4)->nullable()->change();
+            $table->unsignedDecimal('valor_demeritado', 15,4)->nullable()->change();
+            $table->unsignedDecimal('valor_unitario', 15,4)->change();
+            $table->unsignedDecimal('valor_terreno', 15,4)->change();
         });
 
         Schema::table('condominioconstruccions', function (Blueprint $table) {
-            $table->unsignedDecimal('area_comun_construccion', 10, 4)->nullable()->change();
-            $table->unsignedDecimal('indiviso_construccion', 10, 4)->nullable()->change();
-            $table->unsignedDecimal('valor_clasificacion_construccion', 10, 4)->nullable()->change();
-            $table->unsignedDecimal('valor_construccion_comun', 10, 4)->nullable()->change();
+            $table->unsignedDecimal('area_comun_construccion', 15,4)->nullable()->change();
+            $table->unsignedDecimal('indiviso_construccion', 15,4)->nullable()->change();
+            $table->unsignedDecimal('valor_clasificacion_construccion', 15,4)->nullable()->change();
+            $table->unsignedDecimal('valor_construccion_comun', 15,4)->nullable()->change();
         });
 
         Schema::table('construccions', function (Blueprint $table) {
-            $table->unsignedDecimal('superficie', 10,4)->change();
-            $table->unsignedDecimal('valor_unitario', 10,4)->change();
-            $table->unsignedDecimal('valor_construccion', 10,4)->change();
+            $table->unsignedDecimal('superficie', 15,4)->change();
+            $table->unsignedDecimal('valor_unitario', 15,4)->change();
+            $table->unsignedDecimal('valor_construccion', 15,4)->change();
         });
 
         Schema::table('condominioterrenos', function (Blueprint $table) {
-            $table->unsignedDecimal('area_terreno_comun', 10,4)->change();
-            $table->unsignedDecimal('indiviso_terreno', 10,4)->change();
-            $table->unsignedDecimal('valor_unitario', 10,4)->change();
-            $table->unsignedDecimal('valor_terreno_comun', 10,4)->change();
+            $table->unsignedDecimal('area_terreno_comun', 15,4)->change();
+            $table->unsignedDecimal('indiviso_terreno', 15,4)->change();
+            $table->unsignedDecimal('valor_unitario', 15,4)->change();
+            $table->unsignedDecimal('valor_terreno_comun', 15,4)->change();
         });
     }
 
