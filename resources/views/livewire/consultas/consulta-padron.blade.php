@@ -269,7 +269,9 @@
                     <x-table.heading >Cuenta predial</x-table.heading>
                     <x-table.heading >Clave catastral</x-table.heading>
                     <x-table.heading >Propietario</x-table.heading>
-                    <x-table.heading >Ubicación</x-table.heading>
+                    <x-table.heading >Asentamiento</x-table.heading>
+                    <x-table.heading >Vialidad</x-table.heading>
+                    <x-table.heading ># Exterior / # Interior</x-table.heading>
                     <x-table.heading ></x-table.heading>
 
                 </x-slot>
@@ -306,9 +308,25 @@
 
                             <x-table.cell>
 
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Ubicación</span>
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Asentamiento</span>
 
-                                {{ $item->tipo_asentamiento . ', ' . $item->nombre_asentamiento . ', ' . $item->tipo_vialidad . ', ' . $item->nombre_vialidad . ', ' . $item->numero_interior }}
+                                {{ $item->tipo_asentamiento . ', ' . $item->nombre_asentamiento }}
+
+                            </x-table.cell>
+
+                            <x-table.cell>
+
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Vialidad</span>
+
+                                {{ $item->tipo_vialidad . ', ' . $item->nombre_vialidad }}
+
+                            </x-table.cell>
+
+                            <x-table.cell>
+
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Vialidad</span>
+
+                                {{ $item->numero_interior . ', ' , $item->numero_exterior }}
 
                             </x-table.cell>
 

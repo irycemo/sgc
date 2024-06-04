@@ -101,7 +101,7 @@ class Predio extends Model implements Auditable
 
     public function primerPropietario(){
 
-        $propietario = Propietario::where('propietarioable_type', 'App\Models\PredioAvaluo')->where('propietarioable_id', $this->id)->first();
+        $propietario = Propietario::where('propietarioable_type', 'App\Models\Predio')->where('propietarioable_id', $this->id)->first();
 
         return $propietario->persona->nombre . ' ' . $propietario->persona->ap_paterno . ' ' . $propietario->persona->ap_materno . ' ' . $propietario->persona->razon_social;
 

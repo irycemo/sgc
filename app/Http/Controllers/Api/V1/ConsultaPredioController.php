@@ -6,6 +6,7 @@ use App\Models\Predio;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PredioConsultaRequest;
+use App\Http\Resources\PredioCompletoResource;
 
 class ConsultaPredioController extends Controller
 {
@@ -95,4 +96,36 @@ class ConsultaPredioController extends Controller
         ], 200);
 
     }
+
+    public function consultarCuentaPredialRpp(PredioConsultaRequest $request)
+    {
+
+        $validated = $request->validated();
+
+        $predio = Predio::where('localidad', $validated['localidad'])
+                            ->where('oficina', $validated['oficina'])
+                            ->where('tipo_predio', $validated['tipo_predio'])
+                            ->where('numero_registro', $validated['numero_registro'])
+                            ->first();
+
+        if(!$predio){
+
+            return response()->json([
+                'error' => "No se encontró el predio.",
+            ], 404);
+
+        }
+
+        if($predio->status === 'bloqueado'){
+
+            return response()->json([
+                'error' => "El predio esta bloqueado.",
+            ], 401);
+
+        }
+
+        return (new PredioCompletoResource($predio))->response()->setStatusCode(200);
+
+    }
+
 }
