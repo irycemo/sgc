@@ -845,6 +845,8 @@ class Valor extends Component
 
             }
 
+            $this->predio->valor_catastral = ceil($this->predio->valor_catastral);
+
             $this->predio->save();
 
             $this->audit('Actualizó valor catastral');

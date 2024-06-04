@@ -3,9 +3,13 @@
 namespace App\Livewire\Admin;
 
 use Livewire\Component;
+use App\Models\Servicio;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Traits\ComponentesTrait;
+use App\Models\ValoresUnitariosRusticos;
+use App\Models\ValoresUnitariosConstruccion;
 use App\Models\FactorIncremento as ModelsFactorIncremento;
 
 class FactorIncremento extends Component
@@ -46,8 +50,46 @@ class FactorIncremento extends Component
 
         try {
 
-            $this->modelo_editar->creado_por = auth()->user()->id;
-            $this->modelo_editar->save();
+            DB::transaction(function () {
+
+                $valores_unitarios_construccion = ValoresUnitariosConstruccion::all();
+
+                $valores_unitarios_rusticos = ValoresUnitariosRusticos::all();
+
+                $servicios = Servicio::where('tipo', 'fija')->get();
+
+                foreach($valores_unitarios_construccion as $valor){
+
+                    $valor->update([
+                        'valor_aterior' => ceil($valor->valor),
+                        'valor' => ceil($valor->valor * $this->modelo_editar->factor),
+                    ]);
+
+                }
+
+                foreach($valores_unitarios_rusticos as $valor){
+
+                    $valor->update([
+                        'valor_aterior' => ceil($valor->valor),
+                        'valor' => ceil($valor->valor * $this->modelo_editar->factor),
+                    ]);
+
+                }
+
+                foreach($servicios as $servicio){
+
+                    $servicio->update([
+                        'ordinario' => ceil($servicio->ordinario * $this->modelo_editar->factor),
+                        'urgente' => ceil($servicio->urgente * $this->modelo_editar->factor),
+                        'extra_urgente' => ceil($servicio->extra_urgente * $this->modelo_editar->factor),
+                    ]);
+
+                }
+
+                $this->modelo_editar->creado_por = auth()->user()->id;
+                $this->modelo_editar->save();
+
+            });
 
             $this->resetearTodo($borrado = true);
 

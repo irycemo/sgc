@@ -227,9 +227,19 @@
 
                 </div>
 
-                <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" wire:loading.delay.longer>
+                <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
-                    <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
+                    <x-input-group for="modelo_editar.mensual" label="mMnsual" :error="$errors->first('modelo_editar.mensual')" class="w-full">
+
+                        <x-input-text id="modelo_editar.mensual" wire:model="modelo_editar.mensual" />
+
+                    </x-input-group>
+
+                    <x-input-group for="modelo_editar.anual" label="Anual" :error="$errors->first('modelo_editar.anual')" class="w-full">
+
+                        <x-input-text id="modelo_editar.anual" wire:model="modelo_editar.anual" />
+
+                    </x-input-group>
 
                 </div>
 

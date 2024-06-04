@@ -33,6 +33,7 @@
 
                 <x-table.heading sortable wire:click="sortBy('concepto')" :direction="$sort === 'concepto' ? $direction : null" >Concepto</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('valor')" :direction="$sort === 'valor' ? $direction : null">Valor</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('valor_aterior')" :direction="$sort === 'valor' ? $direction : null">Valor anterior</x-table.heading>
 
             </x-slot>
 
@@ -55,6 +56,14 @@
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Valor</span>
 
                             ${{ number_format($valor->valor, 2) }}
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Valor anterior</span>
+
+                            ${{ number_format($valor->valor_aterior, 2) }}
 
                         </x-table.cell>
 

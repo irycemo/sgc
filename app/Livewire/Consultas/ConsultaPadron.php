@@ -206,7 +206,8 @@ class ConsultaPadron extends Component
 
             if($propietarios->count()){
 
-                $this->predios = Predio::whereIn('id', $propietarios->pluck('propietarioable_id'))
+                $this->predios = Predio::with('propietarioInicial')
+                                            ->whereIn('id', $propietarios->pluck('propietarioable_id'))
                                             ->when($this->predio->oficina != 101, function($q){
                                                 $q->where('oficina', $this->predio->oficina);
                                             })

@@ -201,9 +201,9 @@
 
                     </x-input-group>
 
-                    <x-input-group for="modelo_editar.ano" label="Año" :error="$errors->first('modelo_editar.ano')" class="w-full">
+                    <x-input-group for="modelo_editar.año" label="Año" :error="$errors->first('modelo_editar.año')" class="w-full">
 
-                        <x-input-text type="number" id="modelo_editar.ano" wire:model="modelo_editar.ano" />
+                        <x-input-text type="number" id="modelo_editar.año" wire:model="modelo_editar.año" />
 
                     </x-input-group>
 

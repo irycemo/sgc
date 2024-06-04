@@ -20,6 +20,8 @@ class Umas extends Component
         return [
             'modelo_editar.año' => 'required|numeric|min:2016|unique:umas,año,' . $this->modelo_editar->id,
             'modelo_editar.diario' => 'required|numeric',
+            'modelo_editar.mensual' => 'required|numeric',
+            'modelo_editar.anual' => 'required|numeric',
          ];
     }
 
@@ -44,8 +46,6 @@ class Umas extends Component
 
         try {
 
-            $this->modelo_editar->anual = $this->modelo_editar->diario * 30.4 *12;
-            $this->modelo_editar->mensual = $this->modelo_editar->diario * 30.4;
             $this->modelo_editar->creado_por = auth()->user()->id;
             $this->modelo_editar->save();
 
@@ -79,8 +79,6 @@ class Umas extends Component
 
         try{
 
-            $this->modelo_editar->anual = $this->modelo_editar->diario * 30.4 *12;
-            $this->modelo_editar->mensual = $this->modelo_editar->diario * 30.4;
             $this->modelo_editar->actualizado_por = auth()->user()->id;
             $this->modelo_editar->save();
 

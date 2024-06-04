@@ -318,7 +318,9 @@
                                 <option value="43">Avaluos de desglose de fraccionamientos, condominios, conjuntos habitacionales y subdivisiones</option>
                                 <option value="44">Avaluos de desglose de cualquier otro tipo de inmueble</option>
                                 <option value="47">Avaluo para predio ignorado</option>
-                                <option value="2">Avaluos de actualización, fusión, cambio de régimen</option>
+                                <option value="2">Avaluos de actualización</option>
+                                <option value="3">Avaluos de fusión</option>
+                                <option value="4">Avaluos de cambio de régimen</option>
 
                             </select>
 

@@ -169,7 +169,15 @@ class ImpresionAvaluo extends Component
 
             }
 
-            if(in_array($this->tramiteAvaluo->servicio_id, [37, 38, 38, 40]) && $this->tramite->avaluo_para != 2){
+            if(!in_array($this->tramiteAvaluo->servicio_id, [43, 44, 45, 46, 47, 37, 38, 38, 40])){
+
+                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a un avalúo."]);
+
+                return true;
+
+            }
+
+            if(in_array($this->tramiteAvaluo->servicio_id, [37, 38, 38, 40]) && !in_array($this->tramiteAvaluo->avaluo_para, [1,2,3,4])){
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite de impresión no es para valúo de actualización, fusión ó cambio de régimen."]);
 
@@ -180,14 +188,6 @@ class ImpresionAvaluo extends Component
             if(($this->cantidad + $this->tramiteAvaluo->usados) > $this->tramiteAvaluo->cantidad){
 
                 $this->dispatch('mostrarMensaje', ['error', "La cantidad de avaluos que avala el trámite ya se usó."]);
-
-                return true;
-
-            }
-
-            if(!in_array($this->tramiteAvaluo->servicio_id, [43, 44, 45, 46, 47])){
-
-                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a un avalúo."]);
 
                 return true;
 

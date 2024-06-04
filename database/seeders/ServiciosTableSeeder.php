@@ -27,9 +27,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '4.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '415.00',
-                'urgente' => '830.00',
-                'extra_urgente' => '1245.00',
+                'ordinario' => '434.00',
+                'urgente' => '869.00',
+                'extra_urgente' => '1303.00',
                 'material' => NULL,
                 'clave_ingreso' => 'D923',
                 'operacion_principal' => NULL,
@@ -38,7 +38,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 15:27:55',
-                'updated_at' => '2024-04-18 12:22:30',
+                'updated_at' => '2024-06-04 14:47:52',
             ),
             1 => 
             array (
@@ -48,9 +48,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '4.50',
                 'porcentaje' => '0.00',
-                'ordinario' => '467.00',
-                'urgente' => '882.00',
-                'extra_urgente' => '1297.00',
+                'ordinario' => '489.00',
+                'urgente' => '977.00',
+                'extra_urgente' => '1466.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -59,7 +59,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 15:29:46',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 14:47:52',
             ),
             2 => 
             array (
@@ -69,9 +69,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '4.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '415.00',
-                'urgente' => '830.00',
-                'extra_urgente' => '1245.00',
+                'ordinario' => '434.00',
+                'urgente' => '869.00',
+                'extra_urgente' => '1303.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -80,7 +80,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 15:30:30',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 14:47:52',
             ),
             3 => 
             array (
@@ -90,9 +90,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '4.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '415.00',
-                'urgente' => '1038.00',
-                'extra_urgente' => '1556.00',
+                'ordinario' => '434.00',
+                'urgente' => '869.00',
+                'extra_urgente' => '1303.00',
                 'material' => NULL,
                 'clave_ingreso' => 'D934',
                 'operacion_principal' => NULL,
@@ -101,7 +101,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 15:33:35',
-                'updated_at' => '2024-04-18 12:28:50',
+                'updated_at' => '2024-06-04 14:47:52',
             ),
             4 => 
             array (
@@ -111,9 +111,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '1.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '104.00',
-                'urgente' => '208.00',
-                'extra_urgente' => '312.00',
+                'ordinario' => '109.00',
+                'urgente' => '217.00',
+                'extra_urgente' => '326.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -122,7 +122,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 15:37:51',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 14:47:52',
             ),
             5 => 
             array (
@@ -132,7 +132,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '207.00',
+                'ordinario' => '216.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403200513',
@@ -143,7 +143,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 15:39:09',
-                'updated_at' => '2023-07-12 13:41:06',
+                'updated_at' => '2024-06-04 15:02:33',
             ),
             6 => 
             array (
@@ -153,7 +153,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '307.00',
+                'ordinario' => '321.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403201013',
@@ -164,7 +164,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 15:41:16',
-                'updated_at' => '2023-07-12 13:41:51',
+                'updated_at' => '2024-06-04 15:02:33',
             ),
             7 => 
             array (
@@ -174,7 +174,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '359.00',
+                'ordinario' => '375.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403201513',
@@ -185,7 +185,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 15:42:40',
-                'updated_at' => '2023-07-12 13:42:26',
+                'updated_at' => '2024-06-04 15:02:33',
             ),
             8 => 
             array (
@@ -195,7 +195,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '521.00',
+                'ordinario' => '544.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403202013',
@@ -206,7 +206,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 15:43:12',
-                'updated_at' => '2023-07-12 13:43:02',
+                'updated_at' => '2024-06-04 15:02:33',
             ),
             9 => 
             array (
@@ -216,7 +216,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '507.00',
+                'ordinario' => '529.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => NULL,
@@ -227,7 +227,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 15:50:44',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             10 => 
             array (
@@ -237,7 +237,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '3140.00',
+                'ordinario' => '3276.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => NULL,
@@ -248,7 +248,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 15:52:42',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             11 => 
             array (
@@ -258,7 +258,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '2391.00',
+                'ordinario' => '2495.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => NULL,
@@ -269,7 +269,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 15:53:29',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             12 => 
             array (
@@ -279,7 +279,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1658.00',
+                'ordinario' => '1730.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => NULL,
@@ -290,7 +290,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 15:54:08',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             13 => 
             array (
@@ -300,9 +300,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1014.00',
-                'urgente' => '2028.00',
-                'extra_urgente' => '3042.00',
+                'ordinario' => '1058.00',
+                'urgente' => '2116.00',
+                'extra_urgente' => '3174.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -311,7 +311,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 15:59:50',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             14 => 
             array (
@@ -321,9 +321,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '6280.00',
-                'urgente' => '12560.00',
-                'extra_urgente' => '18840.00',
+                'ordinario' => '6552.00',
+                'urgente' => '13103.00',
+                'extra_urgente' => '19654.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -332,7 +332,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:02:24',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             15 => 
             array (
@@ -342,9 +342,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '4782.00',
-                'urgente' => '9564.00',
-                'extra_urgente' => '14346.00',
+                'ordinario' => '4989.00',
+                'urgente' => '9978.00',
+                'extra_urgente' => '14966.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -353,7 +353,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:03:26',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             16 => 
             array (
@@ -363,9 +363,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '3316.00',
-                'urgente' => '6632.00',
-                'extra_urgente' => '9948.00',
+                'ordinario' => '3460.00',
+                'urgente' => '6919.00',
+                'extra_urgente' => '10378.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -374,7 +374,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:04:21',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             17 => 
             array (
@@ -384,9 +384,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '586.00',
-                'urgente' => '1172.00',
-                'extra_urgente' => '1758.00',
+                'ordinario' => '612.00',
+                'urgente' => '1223.00',
+                'extra_urgente' => '1834.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -395,7 +395,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:06:12',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             18 => 
             array (
@@ -405,9 +405,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '104.00',
-                'urgente' => '208.00',
-                'extra_urgente' => '312.00',
+                'ordinario' => '109.00',
+                'urgente' => '217.00',
+                'extra_urgente' => '326.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -416,7 +416,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:06:47',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             19 => 
             array (
@@ -426,9 +426,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '800.00',
-                'urgente' => '1600.00',
-                'extra_urgente' => '2400.00',
+                'ordinario' => '835.00',
+                'urgente' => '1670.00',
+                'extra_urgente' => '2504.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -437,7 +437,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 16:07:22',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             20 => 
             array (
@@ -447,9 +447,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '12485.00',
-                'urgente' => '24970.00',
-                'extra_urgente' => '37455.00',
+                'ordinario' => '13025.00',
+                'urgente' => '26049.00',
+                'extra_urgente' => '39074.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -458,7 +458,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 16:08:59',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             21 => 
             array (
@@ -468,9 +468,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '9175.00',
-                'urgente' => '18350.00',
-                'extra_urgente' => '27525.00',
+                'ordinario' => '9572.00',
+                'urgente' => '19143.00',
+                'extra_urgente' => '28715.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -479,7 +479,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 16:09:24',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             22 => 
             array (
@@ -489,9 +489,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '6111.00',
-                'urgente' => '12222.00',
-                'extra_urgente' => '18333.00',
+                'ordinario' => '6375.00',
+                'urgente' => '12750.00',
+                'extra_urgente' => '19125.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -500,7 +500,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 16:09:52',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             23 => 
             array (
@@ -510,9 +510,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '7710.00',
-                'urgente' => '15420.00',
-                'extra_urgente' => '23130.00',
+                'ordinario' => '8044.00',
+                'urgente' => '16087.00',
+                'extra_urgente' => '24130.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -521,7 +521,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 16:11:01',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             24 => 
             array (
@@ -531,9 +531,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '7644.00',
-                'urgente' => '15288.00',
-                'extra_urgente' => '22932.00',
+                'ordinario' => '7975.00',
+                'urgente' => '15949.00',
+                'extra_urgente' => '23923.00',
                 'material' => '2403198013',
                 'clave_ingreso' => 'D221',
                 'operacion_principal' => '2403',
@@ -542,7 +542,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:11:38',
-                'updated_at' => '2023-07-14 15:01:45',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             25 => 
             array (
@@ -552,9 +552,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '806.00',
-                'urgente' => '1612.00',
-                'extra_urgente' => '2418.00',
+                'ordinario' => '841.00',
+                'urgente' => '1682.00',
+                'extra_urgente' => '2523.00',
                 'material' => '2403198513',
                 'clave_ingreso' => 'D222',
                 'operacion_principal' => '2403',
@@ -563,7 +563,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:12:29',
-                'updated_at' => '2023-07-14 15:00:38',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             26 => 
             array (
@@ -573,9 +573,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '4312.00',
-                'urgente' => '8624.00',
-                'extra_urgente' => '12936.00',
+                'ordinario' => '4499.00',
+                'urgente' => '8997.00',
+                'extra_urgente' => '13495.00',
                 'material' => '2403096013',
                 'clave_ingreso' => 'D824',
                 'operacion_principal' => '2403',
@@ -584,7 +584,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:16:07',
-                'updated_at' => '2023-07-14 14:57:46',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             27 => 
             array (
@@ -594,9 +594,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '5468.00',
-                'urgente' => '10936.00',
-                'extra_urgente' => '16404.00',
+                'ordinario' => '5705.00',
+                'urgente' => '11409.00',
+                'extra_urgente' => '17113.00',
                 'material' => '2403096513',
                 'clave_ingreso' => 'D825',
                 'operacion_principal' => '2403',
@@ -605,7 +605,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:16:28',
-                'updated_at' => '2023-08-01 14:47:23',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             28 => 
             array (
@@ -615,9 +615,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '7290.00',
-                'urgente' => '14580.00',
-                'extra_urgente' => '21870.00',
+                'ordinario' => '7605.00',
+                'urgente' => '15210.00',
+                'extra_urgente' => '22815.00',
                 'material' => '2403338013',
                 'clave_ingreso' => 'D627',
                 'operacion_principal' => '2403',
@@ -626,7 +626,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:16:48',
-                'updated_at' => '2023-08-01 14:48:41',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             29 => 
             array (
@@ -636,9 +636,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '10328.00',
-                'urgente' => '20656.00',
-                'extra_urgente' => '30984.00',
+                'ordinario' => '10775.00',
+                'urgente' => '21549.00',
+                'extra_urgente' => '32323.00',
                 'material' => '2403338513',
                 'clave_ingreso' => 'D628',
                 'operacion_principal' => '2403',
@@ -647,7 +647,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:17:15',
-                'updated_at' => '2023-07-14 14:59:12',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             30 => 
             array (
@@ -657,9 +657,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '2337.00',
-                'urgente' => '4674.00',
-                'extra_urgente' => '7011.00',
+                'ordinario' => '2438.00',
+                'urgente' => '4876.00',
+                'extra_urgente' => '7314.00',
                 'material' => '2403141013',
                 'clave_ingreso' => 'D914',
                 'operacion_principal' => '2403',
@@ -668,7 +668,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:22:22',
-                'updated_at' => '2023-07-14 14:52:19',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             31 => 
             array (
@@ -678,9 +678,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '2085.00',
-                'urgente' => '4170.00',
-                'extra_urgente' => '6255.00',
+                'ordinario' => '2176.00',
+                'urgente' => '4351.00',
+                'extra_urgente' => '6526.00',
                 'material' => '2403141513',
                 'clave_ingreso' => 'D915',
                 'operacion_principal' => '2403',
@@ -689,7 +689,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:23:24',
-                'updated_at' => '2023-07-12 13:20:59',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             32 => 
             array (
@@ -699,9 +699,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '2163.00',
-                'urgente' => '4326.00',
-                'extra_urgente' => '6489.00',
+                'ordinario' => '2257.00',
+                'urgente' => '4513.00',
+                'extra_urgente' => '6770.00',
                 'material' => '2403142013',
                 'clave_ingreso' => 'D916',
                 'operacion_principal' => '2403',
@@ -710,7 +710,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:24:02',
-                'updated_at' => '2023-07-12 13:21:35',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             33 => 
             array (
@@ -720,9 +720,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '2949.00',
-                'urgente' => '5898.00',
-                'extra_urgente' => '8847.00',
+                'ordinario' => '3077.00',
+                'urgente' => '6153.00',
+                'extra_urgente' => '9230.00',
                 'material' => '2403142513',
                 'clave_ingreso' => 'D917',
                 'operacion_principal' => '2403',
@@ -731,7 +731,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:24:31',
-                'updated_at' => '2023-07-12 13:22:13',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             34 => 
             array (
@@ -741,9 +741,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '670.00',
-                'urgente' => '1340.00',
-                'extra_urgente' => '2010.00',
+                'ordinario' => '699.00',
+                'urgente' => '1398.00',
+                'extra_urgente' => '2097.00',
                 'material' => '2403275013',
                 'clave_ingreso' => 'D942',
                 'operacion_principal' => '2403',
@@ -752,7 +752,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:32:51',
-                'updated_at' => '2023-08-01 13:51:15',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             35 => 
             array (
@@ -762,9 +762,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1068.00',
-                'urgente' => '2136.00',
-                'extra_urgente' => '3204.00',
+                'ordinario' => '1115.00',
+                'urgente' => '2229.00',
+                'extra_urgente' => '3343.00',
                 'material' => '2403275513',
                 'clave_ingreso' => 'D943',
                 'operacion_principal' => '2403',
@@ -773,7 +773,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:33:14',
-                'updated_at' => '2023-07-12 13:25:08',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             36 => 
             array (
@@ -783,9 +783,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1715.00',
-                'urgente' => '3430.00',
-                'extra_urgente' => '5145.00',
+                'ordinario' => '1790.00',
+                'urgente' => '3579.00',
+                'extra_urgente' => '5368.00',
                 'material' => '2403276013',
                 'clave_ingreso' => 'D944',
                 'operacion_principal' => '2403',
@@ -794,7 +794,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:33:35',
-                'updated_at' => '2023-07-12 13:25:55',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             37 => 
             array (
@@ -804,9 +804,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1931.00',
-                'urgente' => '3862.00',
-                'extra_urgente' => '5793.00',
+                'ordinario' => '2015.00',
+                'urgente' => '4029.00',
+                'extra_urgente' => '6044.00',
                 'material' => '2403276513',
                 'clave_ingreso' => 'D945',
                 'operacion_principal' => '2403',
@@ -815,7 +815,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:33:58',
-                'updated_at' => '2023-07-12 13:26:38',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             38 => 
             array (
@@ -825,9 +825,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '2885.00',
-                'urgente' => '5770.00',
-                'extra_urgente' => '8655.00',
+                'ordinario' => '3010.00',
+                'urgente' => '6020.00',
+                'extra_urgente' => '9029.00',
                 'material' => '2403277013',
                 'clave_ingreso' => 'D946',
                 'operacion_principal' => '2403',
@@ -836,7 +836,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:37:52',
-                'updated_at' => '2023-07-12 13:27:46',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             39 => 
             array (
@@ -846,9 +846,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1899.00',
-                'urgente' => '3798.00',
-                'extra_urgente' => '5697.00',
+                'ordinario' => '1982.00',
+                'urgente' => '3963.00',
+                'extra_urgente' => '5944.00',
                 'material' => '2403278013',
                 'clave_ingreso' => 'D947',
                 'operacion_principal' => '2403',
@@ -857,7 +857,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:38:17',
-                'updated_at' => '2023-07-12 13:28:32',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             40 => 
             array (
@@ -867,9 +867,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '149.00',
-                'urgente' => '298.00',
-                'extra_urgente' => '447.00',
+                'ordinario' => '156.00',
+                'urgente' => '311.00',
+                'extra_urgente' => '467.00',
                 'material' => '2403143013',
                 'clave_ingreso' => 'D918',
                 'operacion_principal' => '2403',
@@ -878,7 +878,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:40:40',
-                'updated_at' => '2023-07-12 13:29:22',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             41 => 
             array (
@@ -888,9 +888,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '207.00',
-                'urgente' => '414.00',
-                'extra_urgente' => '621.00',
+                'ordinario' => '216.00',
+                'urgente' => '432.00',
+                'extra_urgente' => '648.00',
                 'material' => '2403143513',
                 'clave_ingreso' => 'D919',
                 'operacion_principal' => '2403',
@@ -899,7 +899,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:41:08',
-                'updated_at' => '2023-07-12 13:30:07',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             42 => 
             array (
@@ -909,9 +909,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1763.00',
-                'urgente' => '3526.00',
-                'extra_urgente' => '5289.00',
+                'ordinario' => '1840.00',
+                'urgente' => '3679.00',
+                'extra_urgente' => '5518.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -920,7 +920,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:45:09',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             43 => 
             array (
@@ -930,9 +930,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1763.00',
-                'urgente' => '3526.00',
-                'extra_urgente' => '5289.00',
+                'ordinario' => '1840.00',
+                'urgente' => '3679.00',
+                'extra_urgente' => '5518.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -941,7 +941,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:45:48',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             44 => 
             array (
@@ -951,9 +951,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1763.00',
-                'urgente' => '3526.00',
-                'extra_urgente' => '5289.00',
+                'ordinario' => '1840.00',
+                'urgente' => '3679.00',
+                'extra_urgente' => '5518.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -962,7 +962,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 16:48:21',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             45 => 
             array (
@@ -972,9 +972,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '4075.00',
-                'urgente' => '8150.00',
-                'extra_urgente' => '12225.00',
+                'ordinario' => '4252.00',
+                'urgente' => '8503.00',
+                'extra_urgente' => '12754.00',
                 'material' => '2403199013',
                 'clave_ingreso' => 'D921',
                 'operacion_principal' => '2403',
@@ -983,7 +983,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:49:49',
-                'updated_at' => '2023-07-12 13:31:21',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             46 => 
             array (
@@ -993,9 +993,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '2422.00',
-                'urgente' => '4844.00',
-                'extra_urgente' => '7266.00',
+                'ordinario' => '2527.00',
+                'urgente' => '5054.00',
+                'extra_urgente' => '7580.00',
                 'material' => '2403199513',
                 'clave_ingreso' => 'D922',
                 'operacion_principal' => '2403',
@@ -1004,7 +1004,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:50:10',
-                'updated_at' => '2023-07-12 13:32:07',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             47 => 
             array (
@@ -1014,9 +1014,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '916.00',
-                'urgente' => '1832.00',
-                'extra_urgente' => '2748.00',
+                'ordinario' => '956.00',
+                'urgente' => '1912.00',
+                'extra_urgente' => '2867.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1025,7 +1025,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 16:50:42',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             48 => 
             array (
@@ -1035,9 +1035,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '916.00',
-                'urgente' => '1832.00',
-                'extra_urgente' => '2748.00',
+                'ordinario' => '956.00',
+                'urgente' => '1912.00',
+                'extra_urgente' => '2867.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1046,7 +1046,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2023-03-23 16:51:04',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             49 => 
             array (
@@ -1056,9 +1056,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '436.00',
-                'urgente' => '872.00',
-                'extra_urgente' => '1308.00',
+                'ordinario' => '455.00',
+                'urgente' => '910.00',
+                'extra_urgente' => '1365.00',
                 'material' => '2403256013',
                 'clave_ingreso' => 'D928',
                 'operacion_principal' => '2403',
@@ -1067,7 +1067,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:55:49',
-                'updated_at' => '2024-04-18 12:28:18',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             50 => 
             array (
@@ -1077,9 +1077,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '100.00',
-                'urgente' => '200.00',
-                'extra_urgente' => '300.00',
+                'ordinario' => '105.00',
+                'urgente' => '209.00',
+                'extra_urgente' => '313.00',
                 'material' => '2403144513',
                 'clave_ingreso' => 'D929',
                 'operacion_principal' => '2403',
@@ -1088,7 +1088,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 14:56:43',
-                'updated_at' => '2023-07-12 13:49:53',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             51 => 
             array (
@@ -1098,9 +1098,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '116.00',
-                'urgente' => '232.00',
-                'extra_urgente' => '348.00',
+                'ordinario' => '122.00',
+                'urgente' => '243.00',
+                'extra_urgente' => '364.00',
                 'material' => '2403145013',
                 'clave_ingreso' => 'D930',
                 'operacion_principal' => '2403',
@@ -1109,7 +1109,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 14:57:02',
-                'updated_at' => '2023-07-12 13:50:36',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             52 => 
             array (
@@ -1119,9 +1119,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '23.00',
-                'urgente' => '46.00',
-                'extra_urgente' => '69.00',
+                'ordinario' => '24.00',
+                'urgente' => '48.00',
+                'extra_urgente' => '72.00',
                 'material' => '2403204513',
                 'clave_ingreso' => 'D932',
                 'operacion_principal' => '2403',
@@ -1130,7 +1130,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 14:59:02',
-                'updated_at' => '2023-07-12 13:53:34',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             53 => 
             array (
@@ -1140,9 +1140,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '44.00',
-                'urgente' => '88.00',
-                'extra_urgente' => '132.00',
+                'ordinario' => '46.00',
+                'urgente' => '92.00',
+                'extra_urgente' => '138.00',
                 'material' => '2403204013',
                 'clave_ingreso' => 'D931',
                 'operacion_principal' => '2403',
@@ -1151,7 +1151,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 14:59:29',
-                'updated_at' => '2023-07-12 13:52:56',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             54 => 
             array (
@@ -1161,9 +1161,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '1.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '104.00',
-                'urgente' => '208.00',
-                'extra_urgente' => '312.00',
+                'ordinario' => '109.00',
+                'urgente' => '217.00',
+                'extra_urgente' => '326.00',
                 'material' => '2403501313',
                 'clave_ingreso' => NULL,
                 'operacion_principal' => '2403',
@@ -1172,7 +1172,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:05:11',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 14:47:52',
             ),
             55 => 
             array (
@@ -1182,9 +1182,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '2.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '208.00',
-                'urgente' => '416.00',
-                'extra_urgente' => '624.00',
+                'ordinario' => '217.00',
+                'urgente' => '434.00',
+                'extra_urgente' => '651.00',
                 'material' => '2403501413',
                 'clave_ingreso' => NULL,
                 'operacion_principal' => '2403',
@@ -1193,7 +1193,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:05:35',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 14:47:52',
             ),
             56 => 
             array (
@@ -1203,9 +1203,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '4312.00',
-                'urgente' => '8624.00',
-                'extra_urgente' => '12936.00',
+                'ordinario' => '4499.00',
+                'urgente' => '8997.00',
+                'extra_urgente' => '13495.00',
                 'material' => '2403339013',
                 'clave_ingreso' => 'D629',
                 'operacion_principal' => '2403',
@@ -1214,7 +1214,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:10:22',
-                'updated_at' => '2023-07-12 13:59:02',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             57 => 
             array (
@@ -1224,9 +1224,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '5468.00',
-                'urgente' => '10936.00',
-                'extra_urgente' => '16404.00',
+                'ordinario' => '5705.00',
+                'urgente' => '11409.00',
+                'extra_urgente' => '17113.00',
                 'material' => '2403339513',
                 'clave_ingreso' => 'D630',
                 'operacion_principal' => '2403',
@@ -1235,7 +1235,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:10:43',
-                'updated_at' => '2023-07-12 13:55:59',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             58 => 
             array (
@@ -1245,9 +1245,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '7290.00',
-                'urgente' => '14580.00',
-                'extra_urgente' => '21870.00',
+                'ordinario' => '7605.00',
+                'urgente' => '15210.00',
+                'extra_urgente' => '22815.00',
                 'material' => '2403340013',
                 'clave_ingreso' => 'D631',
                 'operacion_principal' => '2403',
@@ -1256,7 +1256,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:11:00',
-                'updated_at' => '2023-07-12 13:56:46',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             59 => 
             array (
@@ -1266,9 +1266,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '10328.00',
-                'urgente' => '20656.00',
-                'extra_urgente' => '30984.00',
+                'ordinario' => '10775.00',
+                'urgente' => '21549.00',
+                'extra_urgente' => '32323.00',
                 'material' => '2403340513',
                 'clave_ingreso' => 'D632',
                 'operacion_principal' => '2403',
@@ -1277,7 +1277,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:11:17',
-                'updated_at' => '2023-07-12 13:59:53',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             60 => 
             array (
@@ -1287,9 +1287,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '267.00',
-                'urgente' => '534.00',
-                'extra_urgente' => '801.00',
+                'ordinario' => '279.00',
+                'urgente' => '558.00',
+                'extra_urgente' => '836.00',
                 'material' => '2403387013',
                 'clave_ingreso' => 'D725',
                 'operacion_principal' => '2403',
@@ -1298,7 +1298,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:13:10',
-                'updated_at' => '2023-07-14 14:33:12',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             61 => 
             array (
@@ -1308,9 +1308,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '267.00',
-                'urgente' => '534.00',
-                'extra_urgente' => '801.00',
+                'ordinario' => '279.00',
+                'urgente' => '558.00',
+                'extra_urgente' => '836.00',
                 'material' => '2403387513',
                 'clave_ingreso' => 'D726',
                 'operacion_principal' => '2403',
@@ -1319,7 +1319,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:14:30',
-                'updated_at' => '2023-07-14 14:34:02',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             62 => 
             array (
@@ -1329,9 +1329,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '267.00',
-                'urgente' => '534.00',
-                'extra_urgente' => '801.00',
+                'ordinario' => '279.00',
+                'urgente' => '558.00',
+                'extra_urgente' => '836.00',
                 'material' => '2403388013',
                 'clave_ingreso' => 'D727',
                 'operacion_principal' => '2403',
@@ -1340,7 +1340,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:14:58',
-                'updated_at' => '2023-07-14 14:35:41',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             63 => 
             array (
@@ -1350,9 +1350,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '288.00',
-                'urgente' => '576.00',
-                'extra_urgente' => '864.00',
+                'ordinario' => '301.00',
+                'urgente' => '601.00',
+                'extra_urgente' => '902.00',
                 'material' => '2403388513',
                 'clave_ingreso' => 'D728',
                 'operacion_principal' => '2403',
@@ -1361,7 +1361,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:17:07',
-                'updated_at' => '2023-07-14 14:36:36',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             64 => 
             array (
@@ -1371,9 +1371,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '288.00',
-                'urgente' => '576.00',
-                'extra_urgente' => '864.00',
+                'ordinario' => '301.00',
+                'urgente' => '601.00',
+                'extra_urgente' => '902.00',
                 'material' => '2403389013',
                 'clave_ingreso' => 'D729',
                 'operacion_principal' => '2403',
@@ -1382,7 +1382,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:17:26',
-                'updated_at' => '2023-07-14 14:37:12',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             65 => 
             array (
@@ -1392,9 +1392,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '267.00',
-                'urgente' => '534.00',
-                'extra_urgente' => '801.00',
+                'ordinario' => '279.00',
+                'urgente' => '558.00',
+                'extra_urgente' => '836.00',
                 'material' => '2403389513',
                 'clave_ingreso' => 'D730',
                 'operacion_principal' => '2403',
@@ -1403,7 +1403,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:18:22',
-                'updated_at' => '2023-07-14 14:38:31',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             66 => 
             array (
@@ -1413,9 +1413,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '961.00',
-                'urgente' => '1922.00',
-                'extra_urgente' => '2883.00',
+                'ordinario' => '1003.00',
+                'urgente' => '2006.00',
+                'extra_urgente' => '3008.00',
                 'material' => '2403390013',
                 'clave_ingreso' => 'D731',
                 'operacion_principal' => '2403',
@@ -1424,7 +1424,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:20:02',
-                'updated_at' => '2023-07-14 14:39:25',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             67 => 
             array (
@@ -1434,9 +1434,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1001.00',
-                'urgente' => '2002.00',
-                'extra_urgente' => '3003.00',
+                'ordinario' => '1045.00',
+                'urgente' => '2089.00',
+                'extra_urgente' => '3133.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1445,7 +1445,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:28:16',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             68 => 
             array (
@@ -1455,9 +1455,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1534.00',
-                'urgente' => '3068.00',
-                'extra_urgente' => '4602.00',
+                'ordinario' => '1601.00',
+                'urgente' => '3201.00',
+                'extra_urgente' => '4801.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1466,7 +1466,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:28:35',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             69 => 
             array (
@@ -1476,9 +1476,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '959.00',
-                'urgente' => '1918.00',
-                'extra_urgente' => '2877.00',
+                'ordinario' => '1001.00',
+                'urgente' => '2001.00',
+                'extra_urgente' => '3002.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1487,7 +1487,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:29:20',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             70 => 
             array (
@@ -1497,9 +1497,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1278.00',
-                'urgente' => '2556.00',
-                'extra_urgente' => '3834.00',
+                'ordinario' => '1334.00',
+                'urgente' => '2667.00',
+                'extra_urgente' => '4000.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1508,7 +1508,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:29:49',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             71 => 
             array (
@@ -1518,9 +1518,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '852.00',
-                'urgente' => '1704.00',
-                'extra_urgente' => '2556.00',
+                'ordinario' => '889.00',
+                'urgente' => '1778.00',
+                'extra_urgente' => '2667.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1529,7 +1529,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:30:28',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             72 => 
             array (
@@ -1539,9 +1539,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1022.00',
-                'urgente' => '2044.00',
-                'extra_urgente' => '3066.00',
+                'ordinario' => '1067.00',
+                'urgente' => '2133.00',
+                'extra_urgente' => '3199.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1550,7 +1550,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:30:51',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             73 => 
             array (
@@ -1560,9 +1560,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '639.00',
-                'urgente' => '1278.00',
-                'extra_urgente' => '1917.00',
+                'ordinario' => '667.00',
+                'urgente' => '1334.00',
+                'extra_urgente' => '2000.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1571,7 +1571,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:31:19',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             74 => 
             array (
@@ -1581,9 +1581,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '767.00',
-                'urgente' => '1534.00',
-                'extra_urgente' => '2301.00',
+                'ordinario' => '801.00',
+                'urgente' => '1601.00',
+                'extra_urgente' => '2401.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1592,7 +1592,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:31:36',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             75 => 
             array (
@@ -1602,9 +1602,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '266.00',
-                'urgente' => '532.00',
-                'extra_urgente' => '798.00',
+                'ordinario' => '278.00',
+                'urgente' => '555.00',
+                'extra_urgente' => '833.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1613,7 +1613,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:32:16',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             76 => 
             array (
@@ -1623,9 +1623,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '320.00',
-                'urgente' => '640.00',
-                'extra_urgente' => '960.00',
+                'ordinario' => '334.00',
+                'urgente' => '668.00',
+                'extra_urgente' => '1002.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1634,7 +1634,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:32:36',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             77 => 
             array (
@@ -1644,9 +1644,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '224.00',
-                'urgente' => '448.00',
-                'extra_urgente' => '672.00',
+                'ordinario' => '234.00',
+                'urgente' => '468.00',
+                'extra_urgente' => '702.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1655,7 +1655,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:33:17',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             78 => 
             array (
@@ -1665,9 +1665,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '13313.00',
-                'urgente' => '26626.00',
-                'extra_urgente' => '39939.00',
+                'ordinario' => '13889.00',
+                'urgente' => '27777.00',
+                'extra_urgente' => '41665.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1676,7 +1676,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:34:02',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             79 => 
             array (
@@ -1686,9 +1686,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '19728.00',
-                'urgente' => '39456.00',
-                'extra_urgente' => '59184.00',
+                'ordinario' => '20581.00',
+                'urgente' => '41161.00',
+                'extra_urgente' => '61741.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1697,7 +1697,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:34:28',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             80 => 
             array (
@@ -1707,9 +1707,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '12248.00',
-                'urgente' => '24496.00',
-                'extra_urgente' => '36744.00',
+                'ordinario' => '12778.00',
+                'urgente' => '25555.00',
+                'extra_urgente' => '38332.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1718,7 +1718,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:35:00',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             81 => 
             array (
@@ -1728,9 +1728,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '15717.00',
-                'urgente' => '31434.00',
-                'extra_urgente' => '47151.00',
+                'ordinario' => '16396.00',
+                'urgente' => '32792.00',
+                'extra_urgente' => '49188.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1739,7 +1739,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:35:19',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             82 => 
             array (
@@ -1749,9 +1749,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '10118.00',
-                'urgente' => '20236.00',
-                'extra_urgente' => '30354.00',
+                'ordinario' => '10556.00',
+                'urgente' => '21111.00',
+                'extra_urgente' => '31666.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1760,7 +1760,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:35:50',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             83 => 
             array (
@@ -1770,9 +1770,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '11635.00',
-                'urgente' => '23270.00',
-                'extra_urgente' => '34905.00',
+                'ordinario' => '12138.00',
+                'urgente' => '24276.00',
+                'extra_urgente' => '36413.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1781,7 +1781,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:36:07',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             84 => 
             array (
@@ -1791,9 +1791,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '8520.00',
-                'urgente' => '17040.00',
-                'extra_urgente' => '25560.00',
+                'ordinario' => '8889.00',
+                'urgente' => '17777.00',
+                'extra_urgente' => '26665.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1802,7 +1802,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:36:35',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             85 => 
             array (
@@ -1812,9 +1812,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '9798.00',
-                'urgente' => '19596.00',
-                'extra_urgente' => '29394.00',
+                'ordinario' => '10222.00',
+                'urgente' => '20443.00',
+                'extra_urgente' => '30664.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1823,7 +1823,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:36:53',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             86 => 
             array (
@@ -1833,9 +1833,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '7455.00',
-                'urgente' => '14910.00',
-                'extra_urgente' => '22365.00',
+                'ordinario' => '7778.00',
+                'urgente' => '15555.00',
+                'extra_urgente' => '23332.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1844,7 +1844,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:37:19',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             87 => 
             array (
@@ -1854,9 +1854,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '8573.00',
-                'urgente' => '17146.00',
-                'extra_urgente' => '25719.00',
+                'ordinario' => '8944.00',
+                'urgente' => '17887.00',
+                'extra_urgente' => '26831.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1865,7 +1865,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:37:39',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             88 => 
             array (
@@ -1875,9 +1875,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '6923.00',
-                'urgente' => '13846.00',
-                'extra_urgente' => '20769.00',
+                'ordinario' => '7223.00',
+                'urgente' => '14445.00',
+                'extra_urgente' => '21667.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1886,7 +1886,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:38:13',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             89 => 
             array (
@@ -1896,9 +1896,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '7961.00',
-                'urgente' => '15922.00',
-                'extra_urgente' => '23883.00',
+                'ordinario' => '8305.00',
+                'urgente' => '16610.00',
+                'extra_urgente' => '24915.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1907,7 +1907,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:38:32',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             90 => 
             array (
@@ -1917,9 +1917,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '2130.00',
-                'urgente' => '4260.00',
-                'extra_urgente' => '6390.00',
+                'ordinario' => '2223.00',
+                'urgente' => '4445.00',
+                'extra_urgente' => '6667.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1928,7 +1928,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:39:29',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             91 => 
             array (
@@ -1938,9 +1938,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '2343.00',
-                'urgente' => '4686.00',
-                'extra_urgente' => '7029.00',
+                'ordinario' => '2445.00',
+                'urgente' => '4889.00',
+                'extra_urgente' => '7333.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1949,7 +1949,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:39:49',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             92 => 
             array (
@@ -1959,9 +1959,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1917.00',
-                'urgente' => '3834.00',
-                'extra_urgente' => '5751.00',
+                'ordinario' => '2000.00',
+                'urgente' => '4000.00',
+                'extra_urgente' => '6000.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1970,7 +1970,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:40:10',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             93 => 
             array (
@@ -1980,9 +1980,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '2109.00',
-                'urgente' => '4218.00',
-                'extra_urgente' => '6327.00',
+                'ordinario' => '2201.00',
+                'urgente' => '4401.00',
+                'extra_urgente' => '6601.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -1991,7 +1991,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:40:24',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             94 => 
             array (
@@ -2001,9 +2001,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1598.00',
-                'urgente' => '3196.00',
-                'extra_urgente' => '4794.00',
+                'ordinario' => '1668.00',
+                'urgente' => '3335.00',
+                'extra_urgente' => '5002.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -2012,7 +2012,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:41:01',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             95 => 
             array (
@@ -2022,9 +2022,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1757.00',
-                'urgente' => '3514.00',
-                'extra_urgente' => '5271.00',
+                'ordinario' => '1833.00',
+                'urgente' => '3666.00',
+                'extra_urgente' => '5499.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -2033,7 +2033,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:41:19',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             96 => 
             array (
@@ -2043,9 +2043,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1385.00',
-                'urgente' => '2770.00',
-                'extra_urgente' => '4155.00',
+                'ordinario' => '1445.00',
+                'urgente' => '2890.00',
+                'extra_urgente' => '4335.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -2054,7 +2054,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:41:42',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             97 => 
             array (
@@ -2064,9 +2064,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '1523.00',
-                'urgente' => '3046.00',
-                'extra_urgente' => '4569.00',
+                'ordinario' => '1589.00',
+                'urgente' => '3178.00',
+                'extra_urgente' => '4767.00',
                 'material' => NULL,
                 'clave_ingreso' => NULL,
                 'operacion_principal' => NULL,
@@ -2075,7 +2075,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:41:57',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             98 => 
             array (
@@ -2085,9 +2085,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '5102.00',
-                'urgente' => '10204.00',
-                'extra_urgente' => '15306.00',
+                'ordinario' => '5323.00',
+                'urgente' => '10645.00',
+                'extra_urgente' => '15968.00',
                 'material' => '2403391513',
                 'clave_ingreso' => 'D734',
                 'operacion_principal' => '2403',
@@ -2096,7 +2096,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:42:43',
-                'updated_at' => '2024-04-18 12:37:04',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             99 => 
             array (
@@ -2106,9 +2106,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '2430.00',
-                'urgente' => '4860.00',
-                'extra_urgente' => '7290.00',
+                'ordinario' => '2535.00',
+                'urgente' => '5070.00',
+                'extra_urgente' => '7605.00',
                 'material' => '2403392013',
                 'clave_ingreso' => 'D735',
                 'operacion_principal' => '2403',
@@ -2117,7 +2117,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:43:01',
-                'updated_at' => '2024-04-18 12:37:09',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             100 => 
             array (
@@ -2127,9 +2127,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '851.00',
-                'urgente' => '1702.00',
-                'extra_urgente' => '2553.00',
+                'ordinario' => '888.00',
+                'urgente' => '1776.00',
+                'extra_urgente' => '2664.00',
                 'material' => '2403392513',
                 'clave_ingreso' => 'D736',
                 'operacion_principal' => '2403',
@@ -2138,7 +2138,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:43:34',
-                'updated_at' => '2024-04-18 12:38:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             101 => 
             array (
@@ -2148,9 +2148,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '12.00',
-                'urgente' => '24.00',
-                'extra_urgente' => '36.00',
+                'ordinario' => '13.00',
+                'urgente' => '26.00',
+                'extra_urgente' => '38.00',
                 'material' => '2403393013',
                 'clave_ingreso' => 'D737',
                 'operacion_principal' => '2403',
@@ -2159,7 +2159,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:44:10',
-                'updated_at' => '2024-04-18 12:38:15',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             102 => 
             array (
@@ -2169,9 +2169,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '180.00',
-                'urgente' => '360.00',
-                'extra_urgente' => '540.00',
+                'ordinario' => '188.00',
+                'urgente' => '376.00',
+                'extra_urgente' => '564.00',
                 'material' => '2403437113',
                 'clave_ingreso' => 'DA88',
                 'operacion_principal' => '2403',
@@ -2180,7 +2180,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:46:01',
-                'updated_at' => '2023-07-14 14:46:01',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             103 => 
             array (
@@ -2190,9 +2190,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '180.00',
-                'urgente' => '360.00',
-                'extra_urgente' => '540.00',
+                'ordinario' => '188.00',
+                'urgente' => '376.00',
+                'extra_urgente' => '564.00',
                 'material' => '2403437213',
                 'clave_ingreso' => 'DA89',
                 'operacion_principal' => '2403',
@@ -2201,7 +2201,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:47:06',
-                'updated_at' => '2023-07-14 14:46:49',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             104 => 
             array (
@@ -2211,9 +2211,9 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
-                'ordinario' => '587.00',
-                'urgente' => '1174.00',
-                'extra_urgente' => '1761.00',
+                'ordinario' => '613.00',
+                'urgente' => '1225.00',
+                'extra_urgente' => '1838.00',
                 'material' => '2403437313',
                 'clave_ingreso' => 'DA90',
                 'operacion_principal' => '2403',
@@ -2222,7 +2222,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:47:58',
-                'updated_at' => '2023-07-14 14:48:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             105 => 
             array (
@@ -2232,7 +2232,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '5362.00',
+                'ordinario' => '5594.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403097013',
@@ -2243,7 +2243,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-19 15:09:41',
-                'updated_at' => '2023-07-11 13:46:22',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             106 => 
             array (
@@ -2253,7 +2253,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '6713.00',
+                'ordinario' => '7004.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403097513',
@@ -2264,7 +2264,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-19 15:10:06',
-                'updated_at' => '2023-07-11 13:48:38',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             107 => 
             array (
@@ -2274,7 +2274,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '8034.00',
+                'ordinario' => '8382.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403098013',
@@ -2285,7 +2285,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-19 15:10:46',
-                'updated_at' => '2023-07-11 13:49:40',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             108 => 
             array (
@@ -2295,7 +2295,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '10802.00',
+                'ordinario' => '11269.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403098513',
@@ -2306,7 +2306,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-19 15:11:26',
-                'updated_at' => '2023-07-11 13:50:25',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             109 => 
             array (
@@ -2316,7 +2316,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '6728.00',
+                'ordinario' => '7019.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403099013',
@@ -2327,7 +2327,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 12:22:59',
-                'updated_at' => '2023-07-11 13:52:37',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             110 => 
             array (
@@ -2337,7 +2337,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '8063.00',
+                'ordinario' => '8412.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403099513',
@@ -2348,7 +2348,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 12:25:33',
-                'updated_at' => '2023-07-11 13:53:21',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             111 => 
             array (
@@ -2358,7 +2358,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '9386.00',
+                'ordinario' => '9792.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403100013',
@@ -2369,7 +2369,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 12:27:02',
-                'updated_at' => '2023-07-11 13:54:07',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             112 => 
             array (
@@ -2379,7 +2379,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '13825.00',
+                'ordinario' => '14423.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403100513',
@@ -2390,7 +2390,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 12:28:20',
-                'updated_at' => '2023-07-11 13:54:56',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             113 => 
             array (
@@ -2400,7 +2400,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '8034.00',
+                'ordinario' => '8382.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403101013',
@@ -2411,7 +2411,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 12:30:55',
-                'updated_at' => '2023-07-11 13:56:38',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             114 => 
             array (
@@ -2421,7 +2421,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '9386.00',
+                'ordinario' => '9792.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403101513',
@@ -2432,7 +2432,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 12:32:59',
-                'updated_at' => '2023-07-11 13:57:25',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             115 => 
             array (
@@ -2442,7 +2442,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '10762.00',
+                'ordinario' => '11227.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403102013',
@@ -2453,7 +2453,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 12:34:23',
-                'updated_at' => '2023-07-11 13:58:05',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             116 => 
             array (
@@ -2463,7 +2463,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '16989.00',
+                'ordinario' => '17723.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403102513',
@@ -2474,7 +2474,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 12:35:36',
-                'updated_at' => '2023-07-11 13:58:44',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             117 => 
             array (
@@ -2484,7 +2484,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '9375.00',
+                'ordinario' => '9780.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403103013',
@@ -2495,7 +2495,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 12:38:15',
-                'updated_at' => '2023-07-11 14:00:48',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             118 => 
             array (
@@ -2505,7 +2505,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '10711.00',
+                'ordinario' => '11174.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403103513',
@@ -2516,7 +2516,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 12:41:01',
-                'updated_at' => '2023-07-11 14:01:29',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             119 => 
             array (
@@ -2526,7 +2526,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '12047.00',
+                'ordinario' => '12568.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403104013',
@@ -2537,7 +2537,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 12:42:19',
-                'updated_at' => '2023-07-11 14:02:15',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             120 => 
             array (
@@ -2547,7 +2547,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '20051.00',
+                'ordinario' => '20918.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403104513',
@@ -2558,7 +2558,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 12:46:59',
-                'updated_at' => '2023-07-11 14:02:52',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             121 => 
             array (
@@ -2568,7 +2568,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '10752.00',
+                'ordinario' => '11217.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403105013',
@@ -2579,7 +2579,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 12:48:54',
-                'updated_at' => '2023-07-11 14:08:20',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             122 => 
             array (
@@ -2589,7 +2589,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '10752.00',
+                'ordinario' => '11217.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403105513',
@@ -2600,7 +2600,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 12:50:12',
-                'updated_at' => '2023-07-11 14:09:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             123 => 
             array (
@@ -2610,7 +2610,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '13435.00',
+                'ordinario' => '14016.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403106013',
@@ -2621,7 +2621,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:02:27',
-                'updated_at' => '2023-07-11 14:09:54',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             124 => 
             array (
@@ -2631,7 +2631,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '23222.00',
+                'ordinario' => '24226.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403106513',
@@ -2642,7 +2642,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:03:42',
-                'updated_at' => '2023-07-11 14:10:41',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             125 => 
             array (
@@ -2652,7 +2652,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '12085.00',
+                'ordinario' => '12608.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403107013',
@@ -2663,7 +2663,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:07:01',
-                'updated_at' => '2023-07-11 14:12:16',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             126 => 
             array (
@@ -2673,7 +2673,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '13435.00',
+                'ordinario' => '14016.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403107513',
@@ -2684,7 +2684,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:09:07',
-                'updated_at' => '2023-07-11 14:13:01',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             127 => 
             array (
@@ -2694,7 +2694,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '14746.00',
+                'ordinario' => '15384.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403108013',
@@ -2705,7 +2705,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:10:31',
-                'updated_at' => '2023-07-11 14:13:46',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             128 => 
             array (
@@ -2715,7 +2715,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '26313.00',
+                'ordinario' => '27450.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403108513',
@@ -2726,7 +2726,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:11:50',
-                'updated_at' => '2023-07-11 14:15:35',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             129 => 
             array (
@@ -2736,7 +2736,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '13450.00',
+                'ordinario' => '14032.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403109013',
@@ -2747,7 +2747,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:16:05',
-                'updated_at' => '2023-07-11 14:16:18',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             130 => 
             array (
@@ -2757,7 +2757,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '14746.00',
+                'ordinario' => '15384.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403109513',
@@ -2768,7 +2768,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:18:33',
-                'updated_at' => '2023-07-11 14:16:53',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             131 => 
             array (
@@ -2778,7 +2778,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '15927.00',
+                'ordinario' => '16616.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403110013',
@@ -2789,7 +2789,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:20:29',
-                'updated_at' => '2023-07-11 14:17:31',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             132 => 
             array (
@@ -2799,7 +2799,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '29444.00',
+                'ordinario' => '30716.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403110513',
@@ -2810,7 +2810,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:22:55',
-                'updated_at' => '2023-07-11 14:18:10',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             133 => 
             array (
@@ -2820,7 +2820,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '14776.00',
+                'ordinario' => '15415.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403111013',
@@ -2831,7 +2831,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:28:10',
-                'updated_at' => '2023-07-11 14:19:42',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             134 => 
             array (
@@ -2841,7 +2841,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '16149.00',
+                'ordinario' => '16847.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403111513',
@@ -2852,7 +2852,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:30:00',
-                'updated_at' => '2023-07-11 14:20:23',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             135 => 
             array (
@@ -2862,7 +2862,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '17184.00',
+                'ordinario' => '17927.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403112013',
@@ -2873,7 +2873,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:31:57',
-                'updated_at' => '2023-07-11 14:21:03',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             136 => 
             array (
@@ -2883,7 +2883,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '32552.00',
+                'ordinario' => '33959.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403112513',
@@ -2894,7 +2894,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:33:12',
-                'updated_at' => '2023-07-11 14:21:44',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             137 => 
             array (
@@ -2904,7 +2904,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '16069.00',
+                'ordinario' => '16764.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403113013',
@@ -2915,7 +2915,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:37:41',
-                'updated_at' => '2023-07-12 10:00:20',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             138 => 
             array (
@@ -2925,7 +2925,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '17445.00',
+                'ordinario' => '18199.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403113513',
@@ -2936,7 +2936,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:39:08',
-                'updated_at' => '2023-07-12 10:01:14',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             139 => 
             array (
@@ -2946,7 +2946,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '18792.00',
+                'ordinario' => '19604.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403114013',
@@ -2957,7 +2957,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:41:08',
-                'updated_at' => '2023-07-12 10:02:04',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             140 => 
             array (
@@ -2967,7 +2967,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '35686.00',
+                'ordinario' => '37228.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403114513',
@@ -2978,7 +2978,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:43:03',
-                'updated_at' => '2023-07-12 10:03:11',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             141 => 
             array (
@@ -2988,7 +2988,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '17485.00',
+                'ordinario' => '18241.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403115013',
@@ -2999,7 +2999,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:55:14',
-                'updated_at' => '2023-07-12 10:04:08',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             142 => 
             array (
@@ -3009,7 +3009,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '18824.00',
+                'ordinario' => '19638.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403115513',
@@ -3020,7 +3020,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:56:47',
-                'updated_at' => '2023-07-12 10:04:46',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             143 => 
             array (
@@ -3030,7 +3030,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '20214.00',
+                'ordinario' => '21088.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403116013',
@@ -3041,7 +3041,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 13:59:09',
-                'updated_at' => '2023-07-12 10:05:47',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             144 => 
             array (
@@ -3051,7 +3051,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '20214.00',
+                'ordinario' => '21088.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403116513',
@@ -3062,7 +3062,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-24 14:00:39',
-                'updated_at' => '2023-07-12 10:06:23',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             145 => 
             array (
@@ -3072,7 +3072,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '18824.00',
+                'ordinario' => '19638.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403117013',
@@ -3083,7 +3083,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 12:47:20',
-                'updated_at' => '2023-07-12 10:08:15',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             146 => 
             array (
@@ -3093,7 +3093,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '20202.00',
+                'ordinario' => '21075.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403117513',
@@ -3104,7 +3104,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 12:48:24',
-                'updated_at' => '2023-07-12 10:08:52',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             147 => 
             array (
@@ -3114,7 +3114,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '21526.00',
+                'ordinario' => '22456.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403118013',
@@ -3125,7 +3125,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 12:51:06',
-                'updated_at' => '2023-07-12 10:09:41',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             148 => 
             array (
@@ -3135,7 +3135,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '41883.00',
+                'ordinario' => '43693.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403118513',
@@ -3146,7 +3146,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 12:53:18',
-                'updated_at' => '2023-07-12 10:10:22',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             149 => 
             array (
@@ -3156,7 +3156,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '20176.00',
+                'ordinario' => '21048.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403119013',
@@ -3167,7 +3167,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 12:54:48',
-                'updated_at' => '2023-07-12 10:11:54',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             150 => 
             array (
@@ -3177,7 +3177,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '21345.00',
+                'ordinario' => '22268.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403119513',
@@ -3188,7 +3188,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 12:56:05',
-                'updated_at' => '2023-07-12 10:12:36',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             151 => 
             array (
@@ -3198,7 +3198,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '22900.00',
+                'ordinario' => '23890.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403120013',
@@ -3209,7 +3209,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 12:57:18',
-                'updated_at' => '2023-07-12 10:13:24',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             152 => 
             array (
@@ -3219,7 +3219,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '44987.00',
+                'ordinario' => '46931.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403120513',
@@ -3230,7 +3230,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 12:59:20',
-                'updated_at' => '2023-07-12 10:14:21',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             153 => 
             array (
@@ -3240,7 +3240,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '21526.00',
+                'ordinario' => '22456.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403121013',
@@ -3251,7 +3251,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 13:14:03',
-                'updated_at' => '2023-07-12 10:16:04',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             154 => 
             array (
@@ -3261,7 +3261,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '22900.00',
+                'ordinario' => '23890.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403121513',
@@ -3272,7 +3272,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 13:15:13',
-                'updated_at' => '2023-07-12 10:16:39',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             155 => 
             array (
@@ -3282,7 +3282,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '24127.00',
+                'ordinario' => '25170.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403122013',
@@ -3293,7 +3293,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 13:22:58',
-                'updated_at' => '2023-07-12 10:17:16',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             156 => 
             array (
@@ -3303,7 +3303,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '48132.00',
+                'ordinario' => '50212.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403122513',
@@ -3314,7 +3314,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 13:24:11',
-                'updated_at' => '2023-07-12 10:17:53',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             157 => 
             array (
@@ -3324,7 +3324,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '22859.00',
+                'ordinario' => '23847.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403123013',
@@ -3335,7 +3335,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 13:25:59',
-                'updated_at' => '2023-07-12 10:24:42',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             158 => 
             array (
@@ -3345,7 +3345,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '24193.00',
+                'ordinario' => '25239.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403123513',
@@ -3356,7 +3356,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 13:44:43',
-                'updated_at' => '2023-07-12 10:25:23',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             159 => 
             array (
@@ -3366,7 +3366,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '25598.00',
+                'ordinario' => '26704.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403124013',
@@ -3377,7 +3377,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 13:46:49',
-                'updated_at' => '2023-07-12 10:26:19',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             160 => 
             array (
@@ -3387,7 +3387,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '51223.00',
+                'ordinario' => '53436.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403124513',
@@ -3398,7 +3398,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 13:48:15',
-                'updated_at' => '2023-07-12 10:26:54',
+                'updated_at' => '2024-06-04 15:02:34',
             ),
             161 => 
             array (
@@ -3408,7 +3408,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '24263.00',
+                'ordinario' => '25312.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403125013',
@@ -3419,7 +3419,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 13:49:57',
-                'updated_at' => '2023-07-12 10:27:48',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             162 => 
             array (
@@ -3429,7 +3429,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '25598.00',
+                'ordinario' => '26704.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403125513',
@@ -3440,7 +3440,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 13:51:01',
-                'updated_at' => '2023-07-12 10:28:21',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             163 => 
             array (
@@ -3450,7 +3450,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '26894.00',
+                'ordinario' => '28056.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403126013',
@@ -3461,7 +3461,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 13:52:03',
-                'updated_at' => '2023-07-12 10:28:54',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             164 => 
             array (
@@ -3471,7 +3471,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '54339.00',
+                'ordinario' => '56687.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403126513',
@@ -3482,7 +3482,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 13:53:03',
-                'updated_at' => '2023-07-12 10:29:30',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             165 => 
             array (
@@ -3492,7 +3492,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '25587.00',
+                'ordinario' => '26693.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403270513',
@@ -3503,7 +3503,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 14:30:48',
-                'updated_at' => '2023-07-12 10:30:20',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             166 => 
             array (
@@ -3513,7 +3513,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '26894.00',
+                'ordinario' => '28056.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403271013',
@@ -3524,7 +3524,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 14:32:08',
-                'updated_at' => '2023-07-12 10:30:52',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             167 => 
             array (
@@ -3534,7 +3534,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '28245.00',
+                'ordinario' => '29466.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403271513',
@@ -3545,7 +3545,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 14:37:37',
-                'updated_at' => '2023-07-12 10:31:29',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             168 => 
             array (
@@ -3555,7 +3555,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '57474.00',
+                'ordinario' => '59957.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403272013',
@@ -3566,7 +3566,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-25 14:39:24',
-                'updated_at' => '2023-07-12 10:32:01',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             169 => 
             array (
@@ -3576,7 +3576,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '26935.00',
+                'ordinario' => '28099.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403127013',
@@ -3587,7 +3587,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 09:49:28',
-                'updated_at' => '2023-07-12 11:59:51',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             170 => 
             array (
@@ -3597,7 +3597,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '28286.00',
+                'ordinario' => '29508.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403127513',
@@ -3608,7 +3608,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 09:51:00',
-                'updated_at' => '2023-07-12 12:00:32',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             171 => 
             array (
@@ -3618,7 +3618,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '29650.00',
+                'ordinario' => '30931.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403128013',
@@ -3629,7 +3629,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 09:52:07',
-                'updated_at' => '2023-07-12 12:01:07',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             172 => 
             array (
@@ -3639,7 +3639,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '60590.00',
+                'ordinario' => '63208.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403128513',
@@ -3650,7 +3650,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 09:53:26',
-                'updated_at' => '2023-07-12 12:01:41',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             173 => 
             array (
@@ -3660,7 +3660,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '28259.00',
+                'ordinario' => '29480.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403129013',
@@ -3671,7 +3671,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 09:54:31',
-                'updated_at' => '2023-07-12 12:02:22',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             174 => 
             array (
@@ -3681,7 +3681,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '29579.00',
+                'ordinario' => '30857.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403129513',
@@ -3692,7 +3692,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 09:55:42',
-                'updated_at' => '2023-07-12 12:03:02',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             175 => 
             array (
@@ -3702,7 +3702,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '30947.00',
+                'ordinario' => '32284.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403130013',
@@ -3713,7 +3713,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 09:56:49',
-                'updated_at' => '2023-07-12 12:03:39',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             176 => 
             array (
@@ -3723,7 +3723,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '63708.00',
+                'ordinario' => '66461.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403130513',
@@ -3734,7 +3734,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 09:57:59',
-                'updated_at' => '2023-07-12 12:04:16',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             177 => 
             array (
@@ -3744,7 +3744,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '29650.00',
+                'ordinario' => '30931.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403131013',
@@ -3755,7 +3755,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 09:59:41',
-                'updated_at' => '2023-07-12 12:06:37',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             178 => 
             array (
@@ -3765,7 +3765,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '30997.00',
+                'ordinario' => '32337.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403131513',
@@ -3776,7 +3776,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 10:00:57',
-                'updated_at' => '2023-07-12 12:07:13',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             179 => 
             array (
@@ -3786,7 +3786,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '32347.00',
+                'ordinario' => '33745.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403132013',
@@ -3797,7 +3797,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 10:02:07',
-                'updated_at' => '2023-07-12 12:07:48',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             180 => 
             array (
@@ -3807,7 +3807,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '66816.00',
+                'ordinario' => '69703.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403132513',
@@ -3818,7 +3818,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 10:03:15',
-                'updated_at' => '2023-07-12 12:08:23',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             181 => 
             array (
@@ -3828,7 +3828,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '30954.00',
+                'ordinario' => '32292.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403133013',
@@ -3839,7 +3839,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:16:34',
-                'updated_at' => '2023-07-12 12:59:55',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             182 => 
             array (
@@ -3849,7 +3849,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '32281.00',
+                'ordinario' => '33676.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403133513',
@@ -3860,7 +3860,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:17:32',
-                'updated_at' => '2023-07-12 13:00:30',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             183 => 
             array (
@@ -3870,7 +3870,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '33659.00',
+                'ordinario' => '35114.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403134013',
@@ -3881,7 +3881,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:20:20',
-                'updated_at' => '2023-07-12 13:01:11',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             184 => 
             array (
@@ -3891,7 +3891,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '69943.00',
+                'ordinario' => '72965.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403134513',
@@ -3902,7 +3902,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:21:29',
-                'updated_at' => '2023-07-12 13:01:55',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             185 => 
             array (
@@ -3912,7 +3912,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '32281.00',
+                'ordinario' => '33676.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403135013',
@@ -3923,7 +3923,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:23:34',
-                'updated_at' => '2023-07-12 13:02:35',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             186 => 
             array (
@@ -3933,7 +3933,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '33659.00',
+                'ordinario' => '35114.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403135513',
@@ -3944,7 +3944,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:24:50',
-                'updated_at' => '2023-07-12 13:03:08',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             187 => 
             array (
@@ -3954,7 +3954,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '34983.00',
+                'ordinario' => '36495.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403136013',
@@ -3965,7 +3965,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:26:24',
-                'updated_at' => '2023-07-12 13:03:52',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             188 => 
             array (
@@ -3975,7 +3975,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '73066.00',
+                'ordinario' => '76223.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403136513',
@@ -3986,7 +3986,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:27:56',
-                'updated_at' => '2023-07-12 13:04:26',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             189 => 
             array (
@@ -3996,7 +3996,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '33698.00',
+                'ordinario' => '35154.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403137013',
@@ -4007,7 +4007,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:31:30',
-                'updated_at' => '2023-07-12 13:05:08',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             190 => 
             array (
@@ -4017,7 +4017,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '34620.00',
+                'ordinario' => '36116.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403137513',
@@ -4028,7 +4028,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:32:57',
-                'updated_at' => '2023-07-12 13:05:42',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             191 => 
             array (
@@ -4038,7 +4038,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '36386.00',
+                'ordinario' => '37958.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403138013',
@@ -4049,7 +4049,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:34:14',
-                'updated_at' => '2023-07-12 13:06:21',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             192 => 
             array (
@@ -4059,7 +4059,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '76141.00',
+                'ordinario' => '79431.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403138513',
@@ -4070,7 +4070,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:38:03',
-                'updated_at' => '2023-07-12 13:06:56',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             193 => 
             array (
@@ -4080,7 +4080,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '225.00',
+                'ordinario' => '235.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403139013',
@@ -4091,7 +4091,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:43:59',
-                'updated_at' => '2023-07-12 13:07:38',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             194 => 
             array (
@@ -4101,7 +4101,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '307.00',
+                'ordinario' => '321.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403139513',
@@ -4112,7 +4112,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:44:46',
-                'updated_at' => '2023-07-12 13:08:16',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             195 => 
             array (
@@ -4122,7 +4122,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '375.00',
+                'ordinario' => '392.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403140013',
@@ -4133,7 +4133,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:45:59',
-                'updated_at' => '2023-07-12 13:08:49',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             196 => 
             array (
@@ -4143,7 +4143,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '424.00',
+                'ordinario' => '443.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403140513',
@@ -4154,7 +4154,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-29 12:46:45',
-                'updated_at' => '2023-07-12 13:09:24',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             197 => 
             array (
@@ -4164,7 +4164,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '5362.00',
+                'ordinario' => '5594.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403341013',
@@ -4175,7 +4175,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-30 11:58:24',
-                'updated_at' => '2023-07-12 14:16:25',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             198 => 
             array (
@@ -4185,7 +4185,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '6713.00',
+                'ordinario' => '7004.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403341513',
@@ -4196,7 +4196,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-30 12:11:27',
-                'updated_at' => '2023-07-12 14:17:00',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             199 => 
             array (
@@ -4206,7 +4206,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '8034.00',
+                'ordinario' => '8382.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403342013',
@@ -4217,7 +4217,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-30 12:12:23',
-                'updated_at' => '2023-07-12 14:17:33',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             200 => 
             array (
@@ -4227,7 +4227,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '10802.00',
+                'ordinario' => '11269.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403342513',
@@ -4238,7 +4238,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-30 12:13:57',
-                'updated_at' => '2023-07-12 14:18:13',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             201 => 
             array (
@@ -4248,7 +4248,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '6728.00',
+                'ordinario' => '7019.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403343013',
@@ -4259,7 +4259,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-30 13:55:59',
-                'updated_at' => '2023-07-12 14:30:59',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             202 => 
             array (
@@ -4269,7 +4269,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '8063.00',
+                'ordinario' => '8412.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403343513',
@@ -4280,7 +4280,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-30 13:57:13',
-                'updated_at' => '2023-07-12 14:37:27',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             203 => 
             array (
@@ -4290,7 +4290,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '9386.00',
+                'ordinario' => '9792.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403344013',
@@ -4301,7 +4301,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-30 13:58:04',
-                'updated_at' => '2023-07-12 14:38:03',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             204 => 
             array (
@@ -4311,7 +4311,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '13825.00',
+                'ordinario' => '14423.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403344513',
@@ -4322,7 +4322,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-30 13:59:01',
-                'updated_at' => '2023-07-12 14:38:41',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             205 => 
             array (
@@ -4332,7 +4332,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '8034.00',
+                'ordinario' => '8382.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403345013',
@@ -4343,7 +4343,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-30 14:03:01',
-                'updated_at' => '2023-07-12 14:40:55',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             206 => 
             array (
@@ -4353,7 +4353,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '9386.00',
+                'ordinario' => '9792.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403345513',
@@ -4364,7 +4364,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:05:38',
-                'updated_at' => '2023-07-12 14:41:35',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             207 => 
             array (
@@ -4374,7 +4374,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '10762.00',
+                'ordinario' => '11227.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403346013',
@@ -4385,7 +4385,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:06:43',
-                'updated_at' => '2023-07-12 14:42:07',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             208 => 
             array (
@@ -4395,7 +4395,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '16989.00',
+                'ordinario' => '17723.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403346513',
@@ -4406,7 +4406,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:08:38',
-                'updated_at' => '2023-07-12 14:42:41',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             209 => 
             array (
@@ -4416,7 +4416,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '9375.00',
+                'ordinario' => '9780.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403347013',
@@ -4427,7 +4427,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:10:57',
-                'updated_at' => '2023-07-12 14:43:34',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             210 => 
             array (
@@ -4437,7 +4437,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '10711.00',
+                'ordinario' => '11174.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403347513',
@@ -4448,7 +4448,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:32:43',
-                'updated_at' => '2023-07-12 14:45:12',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             211 => 
             array (
@@ -4458,7 +4458,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '12047.00',
+                'ordinario' => '12568.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403348013',
@@ -4469,7 +4469,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:33:25',
-                'updated_at' => '2023-07-12 14:46:03',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             212 => 
             array (
@@ -4479,7 +4479,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '20051.00',
+                'ordinario' => '20918.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403348513',
@@ -4490,7 +4490,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:34:06',
-                'updated_at' => '2023-07-12 14:46:39',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             213 => 
             array (
@@ -4500,7 +4500,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '10752.00',
+                'ordinario' => '11217.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403349013',
@@ -4511,7 +4511,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:37:37',
-                'updated_at' => '2023-07-12 14:47:19',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             214 => 
             array (
@@ -4521,7 +4521,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '12110.00',
+                'ordinario' => '12634.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403349513',
@@ -4532,7 +4532,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:38:42',
-                'updated_at' => '2023-07-12 14:47:53',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             215 => 
             array (
@@ -4542,7 +4542,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '13435.00',
+                'ordinario' => '14016.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403350013',
@@ -4553,7 +4553,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:40:00',
-                'updated_at' => '2023-07-12 14:48:44',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             216 => 
             array (
@@ -4563,7 +4563,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '23222.00',
+                'ordinario' => '24226.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403350513',
@@ -4574,7 +4574,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:41:19',
-                'updated_at' => '2023-07-12 14:49:23',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             217 => 
             array (
@@ -4584,7 +4584,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '12085.00',
+                'ordinario' => '12608.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403351013',
@@ -4595,7 +4595,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:43:33',
-                'updated_at' => '2023-07-12 14:51:43',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             218 => 
             array (
@@ -4605,7 +4605,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '13435.00',
+                'ordinario' => '14016.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403351513',
@@ -4616,7 +4616,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:44:41',
-                'updated_at' => '2023-07-12 14:52:15',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             219 => 
             array (
@@ -4626,7 +4626,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '14746.00',
+                'ordinario' => '15384.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403352013',
@@ -4637,7 +4637,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:45:43',
-                'updated_at' => '2023-07-12 14:52:49',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             220 => 
             array (
@@ -4647,7 +4647,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '26313.00',
+                'ordinario' => '27450.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403352513',
@@ -4658,7 +4658,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:46:36',
-                'updated_at' => '2023-07-12 14:53:43',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             221 => 
             array (
@@ -4668,7 +4668,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '13450.00',
+                'ordinario' => '14032.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403353013',
@@ -4679,7 +4679,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:49:57',
-                'updated_at' => '2023-07-12 14:54:19',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             222 => 
             array (
@@ -4689,7 +4689,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '14746.00',
+                'ordinario' => '15384.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403353513',
@@ -4700,7 +4700,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:50:36',
-                'updated_at' => '2023-07-12 14:54:53',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             223 => 
             array (
@@ -4710,7 +4710,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '15927.00',
+                'ordinario' => '16616.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403354013',
@@ -4721,7 +4721,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:51:18',
-                'updated_at' => '2023-07-12 14:55:26',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             224 => 
             array (
@@ -4731,7 +4731,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '29444.00',
+                'ordinario' => '30716.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403354513',
@@ -4742,7 +4742,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:51:59',
-                'updated_at' => '2023-07-12 14:56:01',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             225 => 
             array (
@@ -4752,7 +4752,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '14776.00',
+                'ordinario' => '15415.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403355013',
@@ -4763,7 +4763,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 12:52:59',
-                'updated_at' => '2023-07-14 12:57:31',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             226 => 
             array (
@@ -4773,7 +4773,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '16149.00',
+                'ordinario' => '16847.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403355513',
@@ -4784,7 +4784,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 13:07:58',
-                'updated_at' => '2023-07-14 12:58:09',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             227 => 
             array (
@@ -4794,7 +4794,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '17184.00',
+                'ordinario' => '17927.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403356013',
@@ -4805,7 +4805,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 13:10:46',
-                'updated_at' => '2023-07-14 12:58:49',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             228 => 
             array (
@@ -4815,7 +4815,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '32552.00',
+                'ordinario' => '33959.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403356513',
@@ -4826,7 +4826,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-05-31 13:12:25',
-                'updated_at' => '2023-07-14 12:59:36',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             229 => 
             array (
@@ -4836,7 +4836,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '16069.00',
+                'ordinario' => '16764.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403357013',
@@ -4847,7 +4847,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:45:49',
-                'updated_at' => '2023-07-14 13:01:59',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             230 => 
             array (
@@ -4857,7 +4857,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '17445.00',
+                'ordinario' => '18199.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403357513',
@@ -4868,7 +4868,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:46:24',
-                'updated_at' => '2023-07-14 13:02:40',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             231 => 
             array (
@@ -4878,7 +4878,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '18792.00',
+                'ordinario' => '19604.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403358013',
@@ -4889,7 +4889,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:47:07',
-                'updated_at' => '2023-07-14 13:03:19',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             232 => 
             array (
@@ -4899,7 +4899,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '35686.00',
+                'ordinario' => '37228.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403358513',
@@ -4910,7 +4910,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:47:57',
-                'updated_at' => '2023-07-14 13:04:02',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             233 => 
             array (
@@ -4920,7 +4920,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '17485.00',
+                'ordinario' => '18241.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403359013',
@@ -4931,7 +4931,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:49:05',
-                'updated_at' => '2023-07-14 13:05:02',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             234 => 
             array (
@@ -4941,7 +4941,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '18824.00',
+                'ordinario' => '19638.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403359513',
@@ -4952,7 +4952,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:49:52',
-                'updated_at' => '2023-07-14 13:05:37',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             235 => 
             array (
@@ -4962,7 +4962,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '20214.00',
+                'ordinario' => '21088.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403360013',
@@ -4973,7 +4973,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:51:20',
-                'updated_at' => '2023-07-14 13:09:05',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             236 => 
             array (
@@ -4983,7 +4983,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '38789.00',
+                'ordinario' => '40465.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403360513',
@@ -4994,7 +4994,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:51:58',
-                'updated_at' => '2023-07-14 13:10:47',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             237 => 
             array (
@@ -5004,7 +5004,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '18824.00',
+                'ordinario' => '19638.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403361013',
@@ -5015,7 +5015,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:53:05',
-                'updated_at' => '2023-07-14 13:11:33',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             238 => 
             array (
@@ -5025,7 +5025,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '20202.00',
+                'ordinario' => '21075.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403361513',
@@ -5036,7 +5036,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:53:54',
-                'updated_at' => '2023-07-14 13:12:09',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             239 => 
             array (
@@ -5046,7 +5046,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '21526.00',
+                'ordinario' => '22456.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403362013',
@@ -5057,7 +5057,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:54:46',
-                'updated_at' => '2023-07-14 13:12:55',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             240 => 
             array (
@@ -5067,7 +5067,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '41883.00',
+                'ordinario' => '43693.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403362513',
@@ -5078,7 +5078,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:55:26',
-                'updated_at' => '2023-07-14 13:13:34',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             241 => 
             array (
@@ -5088,7 +5088,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '20176.00',
+                'ordinario' => '21048.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403363013',
@@ -5099,7 +5099,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:56:26',
-                'updated_at' => '2023-07-14 13:14:18',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             242 => 
             array (
@@ -5109,7 +5109,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '21345.00',
+                'ordinario' => '22268.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403363513',
@@ -5120,7 +5120,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:56:58',
-                'updated_at' => '2023-07-14 13:14:59',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             243 => 
             array (
@@ -5130,7 +5130,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '22900.00',
+                'ordinario' => '23890.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403364013',
@@ -5141,7 +5141,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:57:37',
-                'updated_at' => '2023-07-14 13:15:36',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             244 => 
             array (
@@ -5151,7 +5151,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '44987.00',
+                'ordinario' => '46931.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403364513',
@@ -5162,7 +5162,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:58:13',
-                'updated_at' => '2023-07-14 13:19:15',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             245 => 
             array (
@@ -5172,7 +5172,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '21526.00',
+                'ordinario' => '22456.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403365013',
@@ -5183,7 +5183,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 14:59:32',
-                'updated_at' => '2023-07-14 13:20:06',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             246 => 
             array (
@@ -5193,7 +5193,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '22900.00',
+                'ordinario' => '23890.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403365513',
@@ -5204,7 +5204,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 15:00:10',
-                'updated_at' => '2023-07-14 13:27:28',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             247 => 
             array (
@@ -5214,7 +5214,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '24127.00',
+                'ordinario' => '25170.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403366013',
@@ -5225,7 +5225,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 15:00:51',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             248 => 
             array (
@@ -5235,7 +5235,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '48132.00',
+                'ordinario' => '50212.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403366513',
@@ -5246,7 +5246,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-01 15:01:30',
-                'updated_at' => '2023-07-14 13:42:17',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             249 => 
             array (
@@ -5256,7 +5256,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '22859.00',
+                'ordinario' => '23847.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403365013',
@@ -5267,7 +5267,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 08:49:27',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             250 => 
             array (
@@ -5277,7 +5277,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '24193.00',
+                'ordinario' => '25239.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403365513',
@@ -5288,7 +5288,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 08:51:17',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             251 => 
             array (
@@ -5298,7 +5298,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '25598.00',
+                'ordinario' => '26704.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403366013',
@@ -5309,7 +5309,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 08:53:05',
-                'updated_at' => '2023-07-14 13:45:55',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             252 => 
             array (
@@ -5319,7 +5319,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'inactivo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '51223.00',
+                'ordinario' => '53436.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403366513',
@@ -5330,7 +5330,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 08:53:55',
-                'updated_at' => '2024-04-18 12:55:11',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             253 => 
             array (
@@ -5340,7 +5340,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '24263.00',
+                'ordinario' => '25312.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403369013',
@@ -5351,7 +5351,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 08:55:29',
-                'updated_at' => '2023-07-14 14:01:55',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             254 => 
             array (
@@ -5361,7 +5361,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '25598.00',
+                'ordinario' => '26704.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403369513',
@@ -5372,7 +5372,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 08:56:08',
-                'updated_at' => '2023-07-14 14:02:54',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             255 => 
             array (
@@ -5382,7 +5382,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '26894.00',
+                'ordinario' => '28056.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403370013',
@@ -5393,7 +5393,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 08:57:04',
-                'updated_at' => '2023-07-14 14:03:49',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             256 => 
             array (
@@ -5403,7 +5403,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '54339.00',
+                'ordinario' => '56687.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403370513',
@@ -5414,7 +5414,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 08:58:31',
-                'updated_at' => '2023-07-14 14:04:27',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             257 => 
             array (
@@ -5424,7 +5424,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '25587.00',
+                'ordinario' => '26693.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403385013',
@@ -5435,7 +5435,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:31:54',
-                'updated_at' => '2023-07-14 14:07:42',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             258 => 
             array (
@@ -5445,7 +5445,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '26894.00',
+                'ordinario' => '28056.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403385513',
@@ -5456,7 +5456,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:32:41',
-                'updated_at' => '2023-07-14 14:08:56',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             259 => 
             array (
@@ -5466,7 +5466,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '28245.00',
+                'ordinario' => '29466.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403386013',
@@ -5477,7 +5477,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:33:25',
-                'updated_at' => '2023-07-14 14:09:35',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             260 => 
             array (
@@ -5487,7 +5487,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '57474.00',
+                'ordinario' => '59957.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403386513',
@@ -5498,7 +5498,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:34:24',
-                'updated_at' => '2023-07-14 14:10:08',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             261 => 
             array (
@@ -5508,7 +5508,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '26935.00',
+                'ordinario' => '28099.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403371013',
@@ -5519,7 +5519,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:35:39',
-                'updated_at' => '2023-07-14 14:10:54',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             262 => 
             array (
@@ -5529,7 +5529,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '28286.00',
+                'ordinario' => '29508.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403371513',
@@ -5540,7 +5540,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:37:25',
-                'updated_at' => '2023-07-14 14:11:28',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             263 => 
             array (
@@ -5550,7 +5550,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '29650.00',
+                'ordinario' => '30931.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403372013',
@@ -5561,7 +5561,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:38:09',
-                'updated_at' => '2023-07-14 14:12:02',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             264 => 
             array (
@@ -5571,7 +5571,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '60590.00',
+                'ordinario' => '63208.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403372513',
@@ -5582,7 +5582,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:38:52',
-                'updated_at' => '2023-07-14 14:12:37',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             265 => 
             array (
@@ -5592,7 +5592,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '28259.00',
+                'ordinario' => '29480.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403373013',
@@ -5603,7 +5603,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:41:10',
-                'updated_at' => '2023-07-14 14:17:13',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             266 => 
             array (
@@ -5613,7 +5613,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '29579.00',
+                'ordinario' => '30857.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403373513',
@@ -5624,7 +5624,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:42:24',
-                'updated_at' => '2023-07-14 14:17:54',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             267 => 
             array (
@@ -5634,7 +5634,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '30947.00',
+                'ordinario' => '32284.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403374013',
@@ -5645,7 +5645,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:43:55',
-                'updated_at' => '2023-07-14 14:18:32',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             268 => 
             array (
@@ -5655,7 +5655,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '63708.00',
+                'ordinario' => '66461.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403374513',
@@ -5666,7 +5666,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:45:19',
-                'updated_at' => '2023-07-14 14:19:13',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             269 => 
             array (
@@ -5676,7 +5676,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '29650.00',
+                'ordinario' => '30931.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403375013',
@@ -5687,7 +5687,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:46:24',
-                'updated_at' => '2023-07-14 14:20:11',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             270 => 
             array (
@@ -5697,7 +5697,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '30997.00',
+                'ordinario' => '32337.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403375513',
@@ -5708,7 +5708,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:47:20',
-                'updated_at' => '2023-07-14 14:20:44',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             271 => 
             array (
@@ -5718,7 +5718,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '32347.00',
+                'ordinario' => '33745.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403376013',
@@ -5729,7 +5729,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:48:06',
-                'updated_at' => '2023-07-14 14:21:20',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             272 => 
             array (
@@ -5739,7 +5739,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '66816.00',
+                'ordinario' => '69703.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403376513',
@@ -5750,7 +5750,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:48:47',
-                'updated_at' => '2023-07-14 14:21:53',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             273 => 
             array (
@@ -5760,7 +5760,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '30954.00',
+                'ordinario' => '32292.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403377013',
@@ -5771,7 +5771,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:49:45',
-                'updated_at' => '2023-07-14 14:22:35',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             274 => 
             array (
@@ -5781,7 +5781,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '32281.00',
+                'ordinario' => '33676.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403377513',
@@ -5792,7 +5792,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:50:27',
-                'updated_at' => '2023-07-14 14:23:12',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             275 => 
             array (
@@ -5802,7 +5802,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '33659.00',
+                'ordinario' => '35114.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403378013',
@@ -5813,7 +5813,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:51:17',
-                'updated_at' => '2023-07-14 14:23:46',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             276 => 
             array (
@@ -5823,7 +5823,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '69943.00',
+                'ordinario' => '72965.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403378513',
@@ -5834,7 +5834,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:52:04',
-                'updated_at' => '2023-07-14 14:24:18',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             277 => 
             array (
@@ -5844,7 +5844,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '32281.00',
+                'ordinario' => '33676.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403379013',
@@ -5855,7 +5855,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:52:59',
-                'updated_at' => '2023-07-14 14:24:54',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             278 => 
             array (
@@ -5865,7 +5865,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '33659.00',
+                'ordinario' => '35114.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403379513',
@@ -5876,7 +5876,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:53:47',
-                'updated_at' => '2023-07-14 14:25:37',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             279 => 
             array (
@@ -5886,7 +5886,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '34983.00',
+                'ordinario' => '36495.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403380013',
@@ -5897,7 +5897,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:54:41',
-                'updated_at' => '2023-07-14 14:26:28',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             280 => 
             array (
@@ -5907,7 +5907,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '73066.00',
+                'ordinario' => '76223.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403380513',
@@ -5918,7 +5918,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:55:19',
-                'updated_at' => '2023-07-14 14:27:01',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             281 => 
             array (
@@ -5928,7 +5928,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '33698.00',
+                'ordinario' => '35154.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403381013',
@@ -5939,7 +5939,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:56:20',
-                'updated_at' => '2023-07-14 14:27:49',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             282 => 
             array (
@@ -5949,7 +5949,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '34620.00',
+                'ordinario' => '36116.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403381513',
@@ -5960,7 +5960,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:57:00',
-                'updated_at' => '2023-07-14 14:28:23',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             283 => 
             array (
@@ -5970,7 +5970,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '36386.00',
+                'ordinario' => '37958.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403382013',
@@ -5981,7 +5981,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:57:47',
-                'updated_at' => '2023-07-14 14:29:05',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             284 => 
             array (
@@ -5991,7 +5991,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '76141.00',
+                'ordinario' => '79431.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403382513',
@@ -6002,7 +6002,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:58:27',
-                'updated_at' => '2023-07-14 14:29:41',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             285 => 
             array (
@@ -6012,7 +6012,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '225.00',
+                'ordinario' => '235.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403383013',
@@ -6023,7 +6023,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 14:59:40',
-                'updated_at' => '2023-07-14 14:30:22',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             286 => 
             array (
@@ -6033,7 +6033,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '307.00',
+                'ordinario' => '321.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403383513',
@@ -6044,7 +6044,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 15:00:36',
-                'updated_at' => '2023-07-14 14:30:56',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             287 => 
             array (
@@ -6054,7 +6054,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '375.00',
+                'ordinario' => '392.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403384013',
@@ -6065,7 +6065,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 15:01:09',
-                'updated_at' => '2023-07-14 14:31:31',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             288 => 
             array (
@@ -6075,7 +6075,7 @@ class ServiciosTableSeeder extends Seeder
                 'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => NULL,
-                'ordinario' => '424.00',
+                'ordinario' => '443.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403384513',
@@ -6086,7 +6086,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2023-06-02 15:01:48',
-                'updated_at' => '2023-07-14 14:32:08',
+                'updated_at' => '2024-06-04 15:02:35',
             ),
             289 => 
             array (
