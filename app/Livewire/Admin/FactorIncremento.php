@@ -61,8 +61,8 @@ class FactorIncremento extends Component
                 foreach($valores_unitarios_construccion as $valor){
 
                     $valor->update([
-                        'valor_aterior' => ceil($valor->valor),
-                        'valor' => ceil($valor->valor * $this->modelo_editar->factor),
+                        'valor_aterior' => round($valor->valor),
+                        'valor' => round($valor->valor * $this->modelo_editar->factor),
                     ]);
 
                 }
@@ -70,8 +70,8 @@ class FactorIncremento extends Component
                 foreach($valores_unitarios_rusticos as $valor){
 
                     $valor->update([
-                        'valor_aterior' => ceil($valor->valor),
-                        'valor' => ceil($valor->valor * $this->modelo_editar->factor),
+                        'valor_aterior' => round($valor->valor),
+                        'valor' => round($valor->valor * $this->modelo_editar->factor),
                     ]);
 
                 }
@@ -79,9 +79,9 @@ class FactorIncremento extends Component
                 foreach($servicios as $servicio){
 
                     $servicio->update([
-                        'ordinario' => ceil($servicio->ordinario * $this->modelo_editar->factor),
-                        'urgente' => ceil($servicio->urgente * $this->modelo_editar->factor),
-                        'extra_urgente' => ceil($servicio->extra_urgente * $this->modelo_editar->factor),
+                        'ordinario' => round($servicio->ordinario * $this->modelo_editar->factor),
+                        'urgente' => round($servicio->urgente * $this->modelo_editar->factor),
+                        'extra_urgente' => round($servicio->extra_urgente * $this->modelo_editar->factor),
                     ]);
 
                 }

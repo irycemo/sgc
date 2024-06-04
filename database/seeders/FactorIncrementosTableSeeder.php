@@ -14,12 +14,12 @@ class FactorIncrementosTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('factor_incrementos')->delete();
-        
+
         \DB::table('factor_incrementos')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 1,
                 'factor' => '1.19',
@@ -29,7 +29,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 2,
                 'factor' => '1.29',
@@ -39,7 +39,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 3,
                 'factor' => '1.29',
@@ -49,7 +49,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            3 => 
+            3 =>
             array (
                 'id' => 4,
                 'factor' => '1.84',
@@ -59,7 +59,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            4 => 
+            4 =>
             array (
                 'id' => 5,
                 'factor' => '1.92',
@@ -69,7 +69,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            5 => 
+            5 =>
             array (
                 'id' => 6,
                 'factor' => '1.59',
@@ -79,7 +79,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            6 => 
+            6 =>
             array (
                 'id' => 7,
                 'factor' => '1.60',
@@ -89,7 +89,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            7 => 
+            7 =>
             array (
                 'id' => 8,
                 'factor' => '1.51',
@@ -99,7 +99,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            8 => 
+            8 =>
             array (
                 'id' => 9,
                 'factor' => '1.81',
@@ -109,7 +109,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            9 => 
+            9 =>
             array (
                 'id' => 10,
                 'factor' => '1.71',
@@ -119,7 +119,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            10 => 
+            10 =>
             array (
                 'id' => 11,
                 'factor' => '1.18',
@@ -129,340 +129,340 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            11 => 
+            11 =>
             array (
                 'id' => 12,
-                'factor' => '1.30',
+                'factor' => '1.1972',
                 'año' => 1991,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            12 => 
+            12 =>
             array (
                 'id' => 13,
-                'factor' => '1.20',
+                'factor' => '1.1972',
                 'año' => 1992,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            13 => 
+            13 =>
             array (
                 'id' => 14,
-                'factor' => '1.13',
+                'factor' => '1.1296',
                 'año' => 1993,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            14 => 
+            14 =>
             array (
                 'id' => 15,
-                'factor' => '1.09',
+                'factor' => '1.0871',
                 'año' => 1994,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            15 => 
+            15 =>
             array (
                 'id' => 16,
-                'factor' => '1.07',
+                'factor' => '1.0693',
                 'año' => 1995,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            16 => 
+            16 =>
             array (
                 'id' => 17,
-                'factor' => '1.48',
+                'factor' => '1.4846',
                 'año' => 1996,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            17 => 
+            17 =>
             array (
                 'id' => 18,
-                'factor' => '1.28',
+                'factor' => '1.2777',
                 'año' => 1997,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            18 => 
+            18 =>
             array (
                 'id' => 19,
-                'factor' => '1.18',
+                'factor' => '1.1777',
                 'año' => 1998,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            19 => 
+            19 =>
             array (
                 'id' => 20,
-                'factor' => '1.17',
+                'factor' => '1.174',
                 'año' => 1999,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            20 => 
+            20 =>
             array (
                 'id' => 21,
-                'factor' => '1.14',
+                'factor' => '1.1391',
                 'año' => 2000,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            21 => 
+            21 =>
             array (
                 'id' => 22,
-                'factor' => '1.09',
+                'factor' => '1.0887',
                 'año' => 2001,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            22 => 
+            22 =>
             array (
                 'id' => 23,
-                'factor' => '1.05',
+                'factor' => '1.0538',
                 'año' => 2002,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            23 => 
+            23 =>
             array (
                 'id' => 24,
-                'factor' => '1.05',
+                'factor' => '1.0538',
                 'año' => 2003,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            24 => 
+            24 =>
             array (
                 'id' => 25,
-                'factor' => '1.04',
+                'factor' => '1.0398',
                 'año' => 2004,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            25 => 
+            25 =>
             array (
                 'id' => 26,
-                'factor' => '1.05',
+                'factor' => '1.0542',
                 'año' => 2005,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            26 => 
+            26 =>
             array (
                 'id' => 27,
-                'factor' => '1.02',
+                'factor' => '1.0291',
                 'año' => 2006,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            27 => 
+            27 =>
             array (
                 'id' => 28,
-                'factor' => '1.04',
+                'factor' => '1.0409',
                 'año' => 2007,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            28 => 
+            28 =>
             array (
                 'id' => 29,
-                'factor' => '1.04',
+                'factor' => '1.0392',
                 'año' => 2008,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            29 => 
+            29 =>
             array (
                 'id' => 30,
-                'factor' => '1.06',
+                'factor' => '1.0623',
                 'año' => 2009,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            30 => 
+            30 =>
             array (
                 'id' => 31,
-                'factor' => '1.04',
+                'factor' => '1.0386',
                 'año' => 2010,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            31 => 
+            31 =>
             array (
                 'id' => 32,
-                'factor' => '1.04',
+                'factor' => '1.0431',
                 'año' => 2011,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            32 => 
+            32 =>
             array (
                 'id' => 33,
-                'factor' => '1.03',
+                'factor' => '1.0348',
                 'año' => 2012,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            33 => 
+            33 =>
             array (
                 'id' => 34,
-                'factor' => '1.04',
+                'factor' => '1.0418',
                 'año' => 2013,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            34 => 
+            34 =>
             array (
                 'id' => 35,
-                'factor' => '1.04',
+                'factor' => '1.0362',
                 'año' => 2014,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            35 => 
+            35 =>
             array (
                 'id' => 36,
-                'factor' => '1.04',
+                'factor' => '1.0417',
                 'año' => 2015,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            36 => 
+            36 =>
             array (
                 'id' => 37,
-                'factor' => '1.02',
+                'factor' => '1.0221',
                 'año' => 2016,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            37 => 
+            37 =>
             array (
                 'id' => 38,
-                'factor' => '1.03',
+                'factor' => '1.033',
                 'año' => 2017,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            38 => 
+            38 =>
             array (
                 'id' => 39,
-                'factor' => '1.07',
+                'factor' => '1.0663',
                 'año' => 2018,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            39 => 
+            39 =>
             array (
                 'id' => 40,
-                'factor' => '1.05',
+                'factor' => '1.0471',
                 'año' => 2019,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            40 => 
+            40 =>
             array (
                 'id' => 41,
-                'factor' => '1.03',
+                'factor' => '1.0297',
                 'año' => 2020,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            41 => 
+            41 =>
             array (
                 'id' => 42,
-                'factor' => '1.03',
+                'factor' => '1.0333',
                 'año' => 2021,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            42 => 
+            42 =>
             array (
                 'id' => 43,
-                'factor' => '1.07',
+                'factor' => '1.0737',
                 'año' => 2022,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            43 => 
+            43 =>
             array (
                 'id' => 44,
-                'factor' => '1.08',
+                'factor' => '1.0779',
                 'año' => 2023,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            44 => 
+            44 =>
             array (
                 'id' => 45,
-                'factor' => '1.04',
+                'factor' => '1.0432',
                 'año' => 2024,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
@@ -470,7 +470,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'updated_at' => '2024-01-25 13:02:31',
             ),
         ));
-        
-        
+
+
     }
 }
