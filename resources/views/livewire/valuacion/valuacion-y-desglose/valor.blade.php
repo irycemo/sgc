@@ -367,7 +367,7 @@
 
                         <div>
 
-                            <label class="text-sm" >Clasificación de construccion</label>
+                            <label class="text-sm" >Clasificación de construcción</label>
 
                         </div>
 
@@ -1006,11 +1006,11 @@
                         <tbody>
 
                             <tr>
-                                <td class="text-sm">Privatio + Proporcional</td>
+                                <td class="text-sm">Privativa + Proporcional</td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_terreno + $predio->valor_terreno_comun, 2) }}"></td>
                             </tr>
                             <tr>
-                                <td class="text-sm">Privatio + Proporcional</td>
+                                <td class="text-sm">Privativa + Proporcional</td>
                                 <td><input readonly class="bg-white rounded text-xs w-full" type="text" value="${{ number_format($predio->valor_total_construccion + $predio->valor_construccion_comun, 2) }}"></td>
                             </tr>
                             @if($this->predio->ubicacion_en_manzana == 'ESQUINA')
