@@ -362,10 +362,10 @@ class RevisarTraslado extends Component
 
                 $persona = Persona::create([
                     'tipo' =>  $adquiriente['tipo_persona'],
-                    'nombre' => $adquiriente['nombre'],
-                    'ap_paterno' => $adquiriente['ap_paterno'],
-                    'ap_materno' => $adquiriente['ap_materno'],
-                    'razon_social' => $adquiriente['razon_social'],
+                    'nombre' => $adquiriente['nombre'] ?? null,
+                    'ap_paterno' => $adquiriente['ap_paterno'] ?? null,
+                    'ap_materno' => $adquiriente['ap_materno'] ?? null,
+                    'razon_social' => $adquiriente['razon_social'] ?? null,
                     'rfc' => $adquiriente['rfc'],
                     'curp' => $adquiriente['curp'],
                     'nombre' => $adquiriente['nombre'],
