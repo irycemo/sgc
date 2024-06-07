@@ -62,6 +62,16 @@ class LineaCapturaApi
 
         $data = json_decode($response, true);
 
+        if(isset($data['mensaje']) && $data['mensaje'] == 'Error al consumir servicio'){
+
+            Log::error($data['mensaje'] . ' EN SAP');
+
+            throw new ErrorAlGenerarLineaDeCaptura("Error de comunicación con SAP.");
+
+            return;
+
+        }
+
         if(isset($data['ES_MSJ']['TpMens'])){
 
             Log::error($data['ES_MSJ']['V1Mens'] . ' EN SAP');
