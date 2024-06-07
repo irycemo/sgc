@@ -349,15 +349,15 @@ class RevisarTraslado extends Component
         foreach($this->aviso['adquirientes'] as $adquiriente){
 
             $persona = Persona::query()
-                        ->where(function($q){
-                            $q->when($this->nombre, fn($q) => $q->where('nombre', $this->nombre))
-                                ->when($this->ap_paterno, fn($q) => $q->where('ap_paterno', $this->ap_paterno))
-                                ->when($this->ap_materno, fn($q) => $q->where('ap_materno', $this->ap_materno));
+                        ->where(function($q) use($adquiriente){
+                            $q->when($this->nombre, fn($q) => $q->where('nombre',$adquiriente['nombre']))
+                                ->when($this->ap_paterno, fn($q) => $q->where('ap_paterno', $adquiriente['ap_paterno']))
+                                ->when($this->ap_materno, fn($q) => $q->where('ap_materno', $adquiriente['ap_materno']));
                         })
-                        ->when($this->razon_social, fn($q) => $q->orWhere('razon_social', $this->razon_social))
-                        ->when($this->rfc, fn($q) => $q->orWhere('rfc', $this->rfc))
-                        ->when($this->curp, fn($q) => $q->orWhere('curp', $this->curp))
-                        ->when($this->correo, fn($q) => $q->orWhere('correo', $this->correo))
+                        ->when($this->razon_social, fn($q) => $q->orWhere('razon_social', $adquiriente['razon_social']))
+                        ->when($this->rfc, fn($q) => $q->orWhere('rfc', $adquiriente['rfc']))
+                        ->when($this->curp, fn($q) => $q->orWhere('curp', $adquiriente['curp']))
+                        ->when($this->correo, fn($q) => $q->orWhere('correo', $adquiriente['correo']))
                         ->first();
 
             if(!$persona){
@@ -381,6 +381,7 @@ class RevisarTraslado extends Component
                     'entidad' => $adquiriente['entidad'],
                     'municipio' => $adquiriente['municipio'],
                     'ciudad' => $adquiriente['ciudad'],
+                    'correo' => $adquiriente['correo'],
                 ]);
 
             }
