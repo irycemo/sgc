@@ -381,7 +381,7 @@ class RevisarTraslado extends Component
                     'entidad' => $adquiriente['entidad'],
                     'municipio' => $adquiriente['municipio'],
                     'ciudad' => $adquiriente['ciudad'],
-                    'correo' => $adquiriente['correo'],
+                    'correo' => $adquiriente['correo'] ?? null,
                 ]);
 
             }
