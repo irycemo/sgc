@@ -368,7 +368,6 @@ class RevisarTraslado extends Component
                     'razon_social' => $adquiriente['razon_social'] ?? null,
                     'rfc' => $adquiriente['rfc'],
                     'curp' => $adquiriente['curp'],
-                    'nombre' => $adquiriente['nombre'],
                     'fecha_nacimiento' => $adquiriente['fecha_nacimiento'],
                     'nacionalidad' => $adquiriente['nacionalidad'],
                     'estado_civil' => $adquiriente['estado_civil'],
@@ -494,10 +493,10 @@ class RevisarTraslado extends Component
                 foreach ($this->aviso['transmitentes'] as $transmitente) {
                     $this->transmitentes[] = [
                         'id' => $transmitente['id'],
-                        'nombre' => $transmitente['nombre'],
-                        'ap_paterno' => $transmitente['ap_paterno'],
-                        'ap_materno' => $transmitente['ap_materno'],
-                        'razon_social' => $transmitente['razon_social'],
+                        'nombre' => $transmitente['nombre'] ?? null,
+                        'ap_paterno' => $transmitente['ap_paterno'] ?? null,
+                        'ap_materno' => $transmitente['ap_materno'] ?? null,
+                        'razon_social' => $transmitente['razon_social'] ?? null,
                         'porcentaje' => $transmitente['porcentaje'],
                         'porcentaje_nuda' => $transmitente['porcentaje_nuda'],
                         'porcentaje_usufructo' => $transmitente['porcentaje_usufructo'],
