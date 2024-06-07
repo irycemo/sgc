@@ -183,6 +183,8 @@ class RevisarTraslado extends Component
 
         } catch (\Exception $th) {
 
+            Log::error("Error al operar traslado: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
             $this->dispatch('mostrarMensaje', ['error', $th->getMessage()]);
 
         } catch (\Throwable $th) {
