@@ -218,7 +218,7 @@
                     @foreach ($transmitentes as $key => $transmitente)
 
                         <tr class="text-gray-500 text-sm leading-relaxed">
-                            <td class=" px-2">(Tra.) {{ $transmitente['nombre'] }} {{ $transmitente['ap_paterno'] }} {{ $transmitente['ap_materno'] }} {{ $transmitente['razon_social'] }}</td>
+                            <td class=" px-2">(Tra.) {{ $transmitente['nombre'] ?? '' }} {{ $transmitente['ap_paterno'] ?? '' }} {{ $transmitente['ap_materno'] ?? '' }} {{ $transmitente['razon_social'] ?? '' }}</td>
                             <td class=" px-2">
                                 <input wire:model.live="transmitentes.{{ $key }}.porcentaje" type="number" class="bg-white text-sm w-full rounded-md p-2 border border-gray-500 outline-none ring-blue-600 focus:ring-1 focus:border-blue-600">
                             </td>
@@ -235,7 +235,7 @@
                     @foreach ($aviso['adquirientes'] as $adquiriente)
 
                         <tr class="text-gray-500 text-sm leading-relaxed">
-                            <td class=" px-2">(Adq.){{ $adquiriente['nombre'] }} {{ $adquiriente['ap_paterno'] }} {{ $adquiriente['ap_materno'] }} {{ $adquiriente['razon_social'] }}</td>
+                            <td class=" px-2">(Adq.){{ $adquiriente['nombre'] ?? '' }} {{ $adquiriente['ap_paterno'] ?? '' }} {{ $adquiriente['ap_materno'] ?? '' }} {{ $adquiriente['razon_social'] ?? '' }}</td>
                             <td class=" px-2">{{ $adquiriente['porcentaje'] ?? '0' }}</td>
                             <td class=" px-2">{{ $adquiriente['porcentaje_nuda'] ?? '0' }} </td>
                             <td class=" px-2">{{ $adquiriente['porcentaje_usufructo'] ?? '0' }}</td>
