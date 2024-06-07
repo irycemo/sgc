@@ -350,14 +350,14 @@ class RevisarTraslado extends Component
 
             $persona = Persona::query()
                         ->where(function($q) use($adquiriente){
-                            $q->when($this->nombre, fn($q) => $q->where('nombre',$adquiriente['nombre']))
-                                ->when($this->ap_paterno, fn($q) => $q->where('ap_paterno', $adquiriente['ap_paterno']))
-                                ->when($this->ap_materno, fn($q) => $q->where('ap_materno', $adquiriente['ap_materno']));
+                            $q->when(isset($adquiriente['nombre']), fn($q) => $q->where('nombre',$adquiriente['nombre']))
+                                ->when(isset($adquiriente['ap_paterno']), fn($q) => $q->where('ap_paterno', $adquiriente['ap_paterno']))
+                                ->when(isset($adquiriente['ap_materno']), fn($q) => $q->where('ap_materno', $adquiriente['ap_materno']));
                         })
-                        ->when($this->razon_social, fn($q) => $q->orWhere('razon_social', $adquiriente['razon_social']))
-                        ->when($this->rfc, fn($q) => $q->orWhere('rfc', $adquiriente['rfc']))
-                        ->when($this->curp, fn($q) => $q->orWhere('curp', $adquiriente['curp']))
-                        ->when($this->correo, fn($q) => $q->orWhere('correo', $adquiriente['correo']))
+                        ->when(isset($adquiriente['razon_social']), fn($q) => $q->orWhere('razon_social', $adquiriente['razon_social']))
+                        ->when(isset($adquiriente['rfc']), fn($q) => $q->orWhere('rfc', $adquiriente['rfc']))
+                        ->when(isset($adquiriente['curp']), fn($q) => $q->orWhere('curp', $adquiriente['curp']))
+                        ->when(isset($adquiriente['correo']), fn($q) => $q->orWhere('correo', $adquiriente['correo']))
                         ->first();
 
             if(!$persona){
