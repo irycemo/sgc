@@ -451,25 +451,47 @@ class RevisarTraslado extends Component
 
         $suma = $pp_adquirientes + $pp;
 
-        if($suma != 0 && round($suma,2) != round($pp_transmitentes,2)){
+        if($suma == 0){
 
-            throw new Exception("La suma de los porcentajes de propiedad debe ser " . $pp_transmitentes . '%.');
+            $suma = $pn_adquirientes + $pn;
 
-        }
+            if(round($suma, 2) > round($pn_transmitentes + $pp_transmitentes,2)){
 
-        $suma = $pn_adquirientes + $pn;
+                throw new Exception("La suma de los porcentajes de nuda debe ser " . $pn_transmitentes + $pp_transmitentes . '%.');
 
-        if(round($suma, 2) != round($pn_transmitentes,2)){
+            }
 
-            throw new Exception("La suma de los porcentajes de nuda debe ser " . $pn_transmitentes . '%.');
+            $suma = $pu_adquirientes + $pu;
 
-        }
+            if(round($suma, 2) != round($pu_transmitentes + $pp_transmitentes, 2)){
 
-        $suma = $pu_adquirientes + $pu;
+                throw new Exception("La suma de los porcentajes de usufructo debe ser " . $pu_transmitentes + $pp_transmitentes . '%.');
 
-        if(round($suma, 2) != round($pu_transmitentes, 2)){
+            }
 
-            throw new Exception("La suma de los porcentajes de usufructo debe ser " . $pu_transmitentes . '%.');
+        }else{
+
+            if(round($suma,2) != round($pp_transmitentes,2)){
+
+                throw new Exception("La suma de los porcentajes de propiedad debe ser " . $pp_transmitentes . '%.');
+
+            }
+
+            $suma = $pn_adquirientes + $pn;
+
+            if(round($suma, 2) != round($pn_transmitentes,2)){
+
+                throw new Exception("La suma de los porcentajes de nuda debe ser " . $pn_transmitentes . '%.');
+
+            }
+
+            $suma = $pu_adquirientes + $pu;
+
+            if(round($suma, 2) != round($pu_transmitentes, 2)){
+
+                throw new Exception("La suma de los porcentajes de usufructo debe ser " . $pu_transmitentes . '%.');
+
+            }
 
         }
 
