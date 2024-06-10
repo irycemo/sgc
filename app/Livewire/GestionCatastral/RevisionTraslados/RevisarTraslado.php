@@ -451,7 +451,7 @@ class RevisarTraslado extends Component
 
         $suma = $pp_adquirientes + $pp;
 
-        if(round($suma,2) != round($pp_transmitentes,2)){
+        if($suma != 0 && round($suma,2) != round($pp_transmitentes,2)){
 
             throw new Exception("La suma de los porcentajes de propiedad debe ser " . $pp_transmitentes . '%.');
 
