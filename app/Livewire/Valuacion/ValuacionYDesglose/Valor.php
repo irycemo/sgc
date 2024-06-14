@@ -739,8 +739,7 @@ class Valor extends Component
             'construccionesCondominio.*.superficie_proporcional' => 'required',
         ]);
 
-        if($this->revisarPorcentaje())
-            return;
+        /* if($this->revisarPorcentaje())return; */
 
         try {
 
