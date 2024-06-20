@@ -7,6 +7,7 @@ use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Services\Migracion\Migracion;
+use App\Jobs\MigrarPredioJob;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,13 +61,23 @@ Artisan::command('migrar', function(){
 
     $progressbar->start();
 
-    foreach($predios as $predio){
+    $predios::chunck(1000, function($predios) use($referencias){
+
+        foreach ($predios as $predio) {
+
+            MigrarPredioJob::dispatch($referencias, $predio);
+
+        }
+
+    });
+
+    /* foreach($predios as $predio){
 
         (new Migracion($referencias))->run($predio);
 
         $progressbar->advance();
 
-    }
+    } */
 
     $progressbar->finish();
 
