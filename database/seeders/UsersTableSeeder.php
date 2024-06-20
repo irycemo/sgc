@@ -14,12 +14,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('users')->delete();
-
+        
         \DB::table('users')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'clave' => 1,
@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'enrique_j_@hotmail.com',
                 'status' => 'activo',
                 'area' => 'Departamento De Operación Y Desarrollo De Sistemas',
-                'valuador' => 0,
+                'valuador' => 1,
                 'email_verified_at' => NULL,
                 'password' => '$2y$10$M04ifh6P17qqHwAzl8fnjOopIlDfZqj/3Q1LvtJA/kiEt48fUdqXe',
                 'two_factor_secret' => NULL,
@@ -38,12 +38,12 @@ class UsersTableSeeder extends Seeder
                 'current_team_id' => NULL,
                 'profile_photo_path' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2024-05-15 16:20:46',
-                'updated_at' => '2024-05-15 16:24:10',
+                'updated_at' => '2024-06-04 15:25:16',
                 'oficina_id' => 53,
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 2,
                 'clave' => 2,
@@ -67,7 +67,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-15 16:22:59',
                 'oficina_id' => 53,
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 3,
                 'clave' => 3,
@@ -91,7 +91,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-22 12:52:23',
                 'oficina_id' => 53,
             ),
-            3 =>
+            3 => 
             array (
                 'id' => 4,
                 'clave' => 4,
@@ -115,7 +115,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-21 08:45:37',
                 'oficina_id' => 53,
             ),
-            4 =>
+            4 => 
             array (
                 'id' => 5,
                 'clave' => 5,
@@ -139,7 +139,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-21 08:52:22',
                 'oficina_id' => 53,
             ),
-            5 =>
+            5 => 
             array (
                 'id' => 6,
                 'clave' => 6,
@@ -163,7 +163,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-16 09:05:43',
                 'oficina_id' => 53,
             ),
-            6 =>
+            6 => 
             array (
                 'id' => 7,
                 'clave' => 7,
@@ -187,7 +187,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-15 16:20:46',
                 'oficina_id' => 53,
             ),
-            7 =>
+            7 => 
             array (
                 'id' => 8,
                 'clave' => 8,
@@ -211,7 +211,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-15 16:20:46',
                 'oficina_id' => 53,
             ),
-            8 =>
+            8 => 
             array (
                 'id' => 9,
                 'clave' => 9,
@@ -235,7 +235,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-15 16:20:46',
                 'oficina_id' => 53,
             ),
-            9 =>
+            9 => 
             array (
                 'id' => 10,
                 'clave' => 10,
@@ -259,7 +259,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-15 16:20:46',
                 'oficina_id' => 53,
             ),
-            10 =>
+            10 => 
             array (
                 'id' => 11,
                 'clave' => 11,
@@ -283,7 +283,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-15 16:20:46',
                 'oficina_id' => 53,
             ),
-            11 =>
+            11 => 
             array (
                 'id' => 12,
                 'clave' => 12,
@@ -307,7 +307,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-15 16:56:50',
                 'oficina_id' => 53,
             ),
-            12 =>
+            12 => 
             array (
                 'id' => 13,
                 'clave' => 13,
@@ -331,7 +331,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-15 16:20:47',
                 'oficina_id' => 85,
             ),
-            13 =>
+            13 => 
             array (
                 'id' => 14,
                 'clave' => 14,
@@ -355,7 +355,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-16 09:57:12',
                 'oficina_id' => 73,
             ),
-            14 =>
+            14 => 
             array (
                 'id' => 15,
                 'clave' => 15,
@@ -379,7 +379,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 09:03:42',
                 'oficina_id' => 1,
             ),
-            15 =>
+            15 => 
             array (
                 'id' => 16,
                 'clave' => 16,
@@ -403,7 +403,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 09:16:51',
                 'oficina_id' => 1,
             ),
-            16 =>
+            16 => 
             array (
                 'id' => 17,
                 'clave' => 17,
@@ -427,7 +427,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 09:50:23',
                 'oficina_id' => 1,
             ),
-            17 =>
+            17 => 
             array (
                 'id' => 18,
                 'clave' => 18,
@@ -451,7 +451,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 10:08:48',
                 'oficina_id' => 1,
             ),
-            18 =>
+            18 => 
             array (
                 'id' => 19,
                 'clave' => 19,
@@ -475,7 +475,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 10:14:34',
                 'oficina_id' => 2,
             ),
-            19 =>
+            19 => 
             array (
                 'id' => 20,
                 'clave' => 20,
@@ -499,7 +499,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 10:17:40',
                 'oficina_id' => 4,
             ),
-            20 =>
+            20 => 
             array (
                 'id' => 21,
                 'clave' => 21,
@@ -523,7 +523,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 10:25:14',
                 'oficina_id' => 6,
             ),
-            21 =>
+            21 => 
             array (
                 'id' => 22,
                 'clave' => 22,
@@ -547,7 +547,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 10:51:07',
                 'oficina_id' => 6,
             ),
-            22 =>
+            22 => 
             array (
                 'id' => 23,
                 'clave' => 23,
@@ -571,7 +571,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 10:34:13',
                 'oficina_id' => 6,
             ),
-            23 =>
+            23 => 
             array (
                 'id' => 24,
                 'clave' => 24,
@@ -595,7 +595,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 10:36:46',
                 'oficina_id' => 6,
             ),
-            24 =>
+            24 => 
             array (
                 'id' => 25,
                 'clave' => 25,
@@ -619,7 +619,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 10:40:48',
                 'oficina_id' => 8,
             ),
-            25 =>
+            25 => 
             array (
                 'id' => 26,
                 'clave' => 26,
@@ -643,7 +643,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 10:53:07',
                 'oficina_id' => 9,
             ),
-            26 =>
+            26 => 
             array (
                 'id' => 27,
                 'clave' => 27,
@@ -667,7 +667,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 10:55:00',
                 'oficina_id' => 9,
             ),
-            27 =>
+            27 => 
             array (
                 'id' => 28,
                 'clave' => 28,
@@ -691,7 +691,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 11:04:19',
                 'oficina_id' => 46,
             ),
-            28 =>
+            28 => 
             array (
                 'id' => 29,
                 'clave' => 29,
@@ -715,7 +715,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 11:11:32',
                 'oficina_id' => 12,
             ),
-            29 =>
+            29 => 
             array (
                 'id' => 30,
                 'clave' => 30,
@@ -739,7 +739,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 11:17:50',
                 'oficina_id' => 12,
             ),
-            30 =>
+            30 => 
             array (
                 'id' => 31,
                 'clave' => 31,
@@ -763,7 +763,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 11:25:36',
                 'oficina_id' => 13,
             ),
-            31 =>
+            31 => 
             array (
                 'id' => 32,
                 'clave' => 32,
@@ -787,7 +787,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 11:30:31',
                 'oficina_id' => 21,
             ),
-            32 =>
+            32 => 
             array (
                 'id' => 33,
                 'clave' => 33,
@@ -811,7 +811,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 11:42:40',
                 'oficina_id' => 22,
             ),
-            33 =>
+            33 => 
             array (
                 'id' => 34,
                 'clave' => 34,
@@ -835,7 +835,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 11:44:48',
                 'oficina_id' => 22,
             ),
-            34 =>
+            34 => 
             array (
                 'id' => 35,
                 'clave' => 35,
@@ -859,7 +859,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 11:58:07',
                 'oficina_id' => 28,
             ),
-            35 =>
+            35 => 
             array (
                 'id' => 36,
                 'clave' => 36,
@@ -883,7 +883,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 12:16:01',
                 'oficina_id' => 29,
             ),
-            36 =>
+            36 => 
             array (
                 'id' => 37,
                 'clave' => 37,
@@ -907,7 +907,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 12:19:44',
                 'oficina_id' => 16,
             ),
-            37 =>
+            37 => 
             array (
                 'id' => 38,
                 'clave' => 38,
@@ -931,7 +931,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 12:25:47',
                 'oficina_id' => 20,
             ),
-            38 =>
+            38 => 
             array (
                 'id' => 39,
                 'clave' => 39,
@@ -955,7 +955,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 12:28:18',
                 'oficina_id' => 20,
             ),
-            39 =>
+            39 => 
             array (
                 'id' => 40,
                 'clave' => 40,
@@ -979,7 +979,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 12:29:51',
                 'oficina_id' => 63,
             ),
-            40 =>
+            40 => 
             array (
                 'id' => 41,
                 'clave' => 41,
@@ -1003,7 +1003,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 12:41:07',
                 'oficina_id' => 63,
             ),
-            41 =>
+            41 => 
             array (
                 'id' => 42,
                 'clave' => 42,
@@ -1027,7 +1027,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 12:46:25',
                 'oficina_id' => 31,
             ),
-            42 =>
+            42 => 
             array (
                 'id' => 43,
                 'clave' => 43,
@@ -1051,7 +1051,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 12:47:31',
                 'oficina_id' => 31,
             ),
-            43 =>
+            43 => 
             array (
                 'id' => 44,
                 'clave' => 44,
@@ -1075,7 +1075,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 12:50:24',
                 'oficina_id' => 32,
             ),
-            44 =>
+            44 => 
             array (
                 'id' => 45,
                 'clave' => 45,
@@ -1099,7 +1099,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 12:51:35',
                 'oficina_id' => 32,
             ),
-            45 =>
+            45 => 
             array (
                 'id' => 46,
                 'clave' => 46,
@@ -1123,7 +1123,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 12:54:32',
                 'oficina_id' => 37,
             ),
-            46 =>
+            46 => 
             array (
                 'id' => 47,
                 'clave' => 47,
@@ -1147,7 +1147,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 12:57:21',
                 'oficina_id' => 38,
             ),
-            47 =>
+            47 => 
             array (
                 'id' => 48,
                 'clave' => 48,
@@ -1171,7 +1171,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:03:18',
                 'oficina_id' => 38,
             ),
-            48 =>
+            48 => 
             array (
                 'id' => 49,
                 'clave' => 49,
@@ -1195,7 +1195,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:03:12',
                 'oficina_id' => 38,
             ),
-            49 =>
+            49 => 
             array (
                 'id' => 50,
                 'clave' => 50,
@@ -1219,7 +1219,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:08:06',
                 'oficina_id' => 39,
             ),
-            50 =>
+            50 => 
             array (
                 'id' => 51,
                 'clave' => 51,
@@ -1243,7 +1243,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-22 10:17:23',
                 'oficina_id' => 53,
             ),
-            51 =>
+            51 => 
             array (
                 'id' => 52,
                 'clave' => 52,
@@ -1267,7 +1267,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:10:25',
                 'oficina_id' => 39,
             ),
-            52 =>
+            52 => 
             array (
                 'id' => 53,
                 'clave' => 53,
@@ -1291,7 +1291,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:11:33',
                 'oficina_id' => 39,
             ),
-            53 =>
+            53 => 
             array (
                 'id' => 54,
                 'clave' => 54,
@@ -1315,7 +1315,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:13:40',
                 'oficina_id' => 41,
             ),
-            54 =>
+            54 => 
             array (
                 'id' => 55,
                 'clave' => 55,
@@ -1339,7 +1339,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:15:03',
                 'oficina_id' => 41,
             ),
-            55 =>
+            55 => 
             array (
                 'id' => 56,
                 'clave' => 56,
@@ -1363,7 +1363,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:19:38',
                 'oficina_id' => 43,
             ),
-            56 =>
+            56 => 
             array (
                 'id' => 57,
                 'clave' => 57,
@@ -1387,7 +1387,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:21:04',
                 'oficina_id' => 43,
             ),
-            57 =>
+            57 => 
             array (
                 'id' => 58,
                 'clave' => 58,
@@ -1411,7 +1411,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:24:41',
                 'oficina_id' => 45,
             ),
-            58 =>
+            58 => 
             array (
                 'id' => 59,
                 'clave' => 59,
@@ -1435,7 +1435,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:26:03',
                 'oficina_id' => 45,
             ),
-            59 =>
+            59 => 
             array (
                 'id' => 60,
                 'clave' => 60,
@@ -1459,7 +1459,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:27:28',
                 'oficina_id' => 45,
             ),
-            60 =>
+            60 => 
             array (
                 'id' => 61,
                 'clave' => 61,
@@ -1483,7 +1483,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:29:23',
                 'oficina_id' => 45,
             ),
-            61 =>
+            61 => 
             array (
                 'id' => 62,
                 'clave' => 62,
@@ -1507,7 +1507,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:33:27',
                 'oficina_id' => 35,
             ),
-            62 =>
+            62 => 
             array (
                 'id' => 63,
                 'clave' => 63,
@@ -1531,7 +1531,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:36:04',
                 'oficina_id' => 48,
             ),
-            63 =>
+            63 => 
             array (
                 'id' => 64,
                 'clave' => 64,
@@ -1555,7 +1555,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:37:04',
                 'oficina_id' => 48,
             ),
-            64 =>
+            64 => 
             array (
                 'id' => 65,
                 'clave' => 65,
@@ -1579,7 +1579,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:39:38',
                 'oficina_id' => 48,
             ),
-            65 =>
+            65 => 
             array (
                 'id' => 66,
                 'clave' => 66,
@@ -1603,7 +1603,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:42:34',
                 'oficina_id' => 75,
             ),
-            66 =>
+            66 => 
             array (
                 'id' => 67,
                 'clave' => 67,
@@ -1627,7 +1627,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:46:18',
                 'oficina_id' => 49,
             ),
-            67 =>
+            67 => 
             array (
                 'id' => 68,
                 'clave' => 68,
@@ -1651,7 +1651,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:48:12',
                 'oficina_id' => 50,
             ),
-            68 =>
+            68 => 
             array (
                 'id' => 69,
                 'clave' => 69,
@@ -1675,7 +1675,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:51:38',
                 'oficina_id' => 50,
             ),
-            69 =>
+            69 => 
             array (
                 'id' => 70,
                 'clave' => 70,
@@ -1699,7 +1699,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:58:34',
                 'oficina_id' => 51,
             ),
-            70 =>
+            70 => 
             array (
                 'id' => 71,
                 'clave' => 71,
@@ -1723,7 +1723,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 13:58:29',
                 'oficina_id' => 51,
             ),
-            71 =>
+            71 => 
             array (
                 'id' => 72,
                 'clave' => 72,
@@ -1747,7 +1747,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:00:37',
                 'oficina_id' => 55,
             ),
-            72 =>
+            72 => 
             array (
                 'id' => 73,
                 'clave' => 73,
@@ -1771,7 +1771,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:05:16',
                 'oficina_id' => 57,
             ),
-            73 =>
+            73 => 
             array (
                 'id' => 74,
                 'clave' => 74,
@@ -1795,7 +1795,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:07:33',
                 'oficina_id' => 60,
             ),
-            74 =>
+            74 => 
             array (
                 'id' => 75,
                 'clave' => 75,
@@ -1819,7 +1819,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:09:43',
                 'oficina_id' => 62,
             ),
-            75 =>
+            75 => 
             array (
                 'id' => 76,
                 'clave' => 76,
@@ -1843,7 +1843,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:11:01',
                 'oficina_id' => 62,
             ),
-            76 =>
+            76 => 
             array (
                 'id' => 77,
                 'clave' => 77,
@@ -1867,7 +1867,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:13:03',
                 'oficina_id' => 65,
             ),
-            77 =>
+            77 => 
             array (
                 'id' => 78,
                 'clave' => 78,
@@ -1891,7 +1891,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:15:18',
                 'oficina_id' => 64,
             ),
-            78 =>
+            78 => 
             array (
                 'id' => 79,
                 'clave' => 79,
@@ -1915,7 +1915,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:16:29',
                 'oficina_id' => 64,
             ),
-            79 =>
+            79 => 
             array (
                 'id' => 80,
                 'clave' => 80,
@@ -1939,7 +1939,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:19:13',
                 'oficina_id' => 66,
             ),
-            80 =>
+            80 => 
             array (
                 'id' => 81,
                 'clave' => 81,
@@ -1963,7 +1963,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:20:27',
                 'oficina_id' => 66,
             ),
-            81 =>
+            81 => 
             array (
                 'id' => 82,
                 'clave' => 82,
@@ -1987,7 +1987,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:22:15',
                 'oficina_id' => 66,
             ),
-            82 =>
+            82 => 
             array (
                 'id' => 83,
                 'clave' => 83,
@@ -2011,7 +2011,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:25:05',
                 'oficina_id' => 66,
             ),
-            83 =>
+            83 => 
             array (
                 'id' => 84,
                 'clave' => 84,
@@ -2035,7 +2035,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:27:01',
                 'oficina_id' => 66,
             ),
-            84 =>
+            84 => 
             array (
                 'id' => 85,
                 'clave' => 85,
@@ -2059,7 +2059,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:31:02',
                 'oficina_id' => 66,
             ),
-            85 =>
+            85 => 
             array (
                 'id' => 86,
                 'clave' => 86,
@@ -2083,7 +2083,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:45:17',
                 'oficina_id' => 68,
             ),
-            86 =>
+            86 => 
             array (
                 'id' => 87,
                 'clave' => 87,
@@ -2107,7 +2107,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:46:27',
                 'oficina_id' => 68,
             ),
-            87 =>
+            87 => 
             array (
                 'id' => 88,
                 'clave' => 88,
@@ -2131,7 +2131,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:49:09',
                 'oficina_id' => 70,
             ),
-            88 =>
+            88 => 
             array (
                 'id' => 89,
                 'clave' => 89,
@@ -2155,7 +2155,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:52:08',
                 'oficina_id' => 84,
             ),
-            89 =>
+            89 => 
             array (
                 'id' => 90,
                 'clave' => 90,
@@ -2179,7 +2179,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:53:28',
                 'oficina_id' => 84,
             ),
-            90 =>
+            90 => 
             array (
                 'id' => 91,
                 'clave' => 91,
@@ -2203,7 +2203,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:55:22',
                 'oficina_id' => 83,
             ),
-            91 =>
+            91 => 
             array (
                 'id' => 92,
                 'clave' => 92,
@@ -2227,7 +2227,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:56:35',
                 'oficina_id' => 83,
             ),
-            92 =>
+            92 => 
             array (
                 'id' => 93,
                 'clave' => 93,
@@ -2251,7 +2251,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 14:59:30',
                 'oficina_id' => 85,
             ),
-            93 =>
+            93 => 
             array (
                 'id' => 94,
                 'clave' => 94,
@@ -2275,7 +2275,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:01:29',
                 'oficina_id' => 85,
             ),
-            94 =>
+            94 => 
             array (
                 'id' => 95,
                 'clave' => 95,
@@ -2299,7 +2299,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:04:33',
                 'oficina_id' => 86,
             ),
-            95 =>
+            95 => 
             array (
                 'id' => 96,
                 'clave' => 96,
@@ -2323,7 +2323,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:05:30',
                 'oficina_id' => 86,
             ),
-            96 =>
+            96 => 
             array (
                 'id' => 97,
                 'clave' => 97,
@@ -2347,7 +2347,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:10:22',
                 'oficina_id' => 89,
             ),
-            97 =>
+            97 => 
             array (
                 'id' => 98,
                 'clave' => 98,
@@ -2371,7 +2371,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:12:39',
                 'oficina_id' => 90,
             ),
-            98 =>
+            98 => 
             array (
                 'id' => 99,
                 'clave' => 99,
@@ -2395,7 +2395,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:15:25',
                 'oficina_id' => 91,
             ),
-            99 =>
+            99 => 
             array (
                 'id' => 100,
                 'clave' => 100,
@@ -2419,7 +2419,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:17:10',
                 'oficina_id' => 91,
             ),
-            100 =>
+            100 => 
             array (
                 'id' => 101,
                 'clave' => 101,
@@ -2443,7 +2443,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:19:12',
                 'oficina_id' => 92,
             ),
-            101 =>
+            101 => 
             array (
                 'id' => 102,
                 'clave' => 102,
@@ -2467,7 +2467,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:20:01',
                 'oficina_id' => 92,
             ),
-            102 =>
+            102 => 
             array (
                 'id' => 103,
                 'clave' => 103,
@@ -2491,7 +2491,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:23:21',
                 'oficina_id' => 95,
             ),
-            103 =>
+            103 => 
             array (
                 'id' => 104,
                 'clave' => 104,
@@ -2515,7 +2515,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:24:21',
                 'oficina_id' => 95,
             ),
-            104 =>
+            104 => 
             array (
                 'id' => 105,
                 'clave' => 105,
@@ -2539,7 +2539,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:27:41',
                 'oficina_id' => 97,
             ),
-            105 =>
+            105 => 
             array (
                 'id' => 106,
                 'clave' => 106,
@@ -2563,7 +2563,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:29:58',
                 'oficina_id' => 97,
             ),
-            106 =>
+            106 => 
             array (
                 'id' => 107,
                 'clave' => 107,
@@ -2587,7 +2587,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:31:32',
                 'oficina_id' => 98,
             ),
-            107 =>
+            107 => 
             array (
                 'id' => 108,
                 'clave' => 108,
@@ -2611,7 +2611,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:34:11',
                 'oficina_id' => 107,
             ),
-            108 =>
+            108 => 
             array (
                 'id' => 109,
                 'clave' => 109,
@@ -2635,7 +2635,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:35:49',
                 'oficina_id' => 107,
             ),
-            109 =>
+            109 => 
             array (
                 'id' => 110,
                 'clave' => 110,
@@ -2659,7 +2659,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:36:46',
                 'oficina_id' => 107,
             ),
-            110 =>
+            110 => 
             array (
                 'id' => 111,
                 'clave' => 111,
@@ -2683,7 +2683,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:40:01',
                 'oficina_id' => 108,
             ),
-            111 =>
+            111 => 
             array (
                 'id' => 112,
                 'clave' => 112,
@@ -2707,7 +2707,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:42:12',
                 'oficina_id' => 108,
             ),
-            112 =>
+            112 => 
             array (
                 'id' => 113,
                 'clave' => 113,
@@ -2731,7 +2731,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-17 15:44:27',
                 'oficina_id' => 109,
             ),
-            113 =>
+            113 => 
             array (
                 'id' => 114,
                 'clave' => 114,
@@ -2755,7 +2755,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:24:22',
                 'oficina_id' => 53,
             ),
-            114 =>
+            114 => 
             array (
                 'id' => 115,
                 'clave' => 115,
@@ -2779,7 +2779,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:26:00',
                 'oficina_id' => 53,
             ),
-            115 =>
+            115 => 
             array (
                 'id' => 116,
                 'clave' => 116,
@@ -2803,7 +2803,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:27:29',
                 'oficina_id' => 53,
             ),
-            116 =>
+            116 => 
             array (
                 'id' => 117,
                 'clave' => 117,
@@ -2827,7 +2827,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:31:58',
                 'oficina_id' => 53,
             ),
-            117 =>
+            117 => 
             array (
                 'id' => 118,
                 'clave' => 118,
@@ -2851,7 +2851,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:36:42',
                 'oficina_id' => 53,
             ),
-            118 =>
+            118 => 
             array (
                 'id' => 119,
                 'clave' => 119,
@@ -2875,7 +2875,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:39:11',
                 'oficina_id' => 53,
             ),
-            119 =>
+            119 => 
             array (
                 'id' => 120,
                 'clave' => 120,
@@ -2884,7 +2884,7 @@ class UsersTableSeeder extends Seeder
                 'ap_materno' => 'GONZALEZ',
                 'email' => 'hadaramos@gmail.com',
                 'status' => 'activo',
-                'area' => 'Departamento de Valuación',
+                'area' => 'Departamento de Gestión Catastral',
                 'valuador' => 1,
                 'email_verified_at' => NULL,
                 'password' => '$2y$10$cyM31VX.j2YcMSMTlgtb5OgPG1lS9.OV0aZTj8z1uujEnuaG20rnK',
@@ -2894,12 +2894,12 @@ class UsersTableSeeder extends Seeder
                 'current_team_id' => NULL,
                 'profile_photo_path' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2024-05-24 09:42:27',
-                'updated_at' => '2024-05-24 09:42:27',
+                'updated_at' => '2024-06-20 11:51:58',
                 'oficina_id' => 53,
             ),
-            120 =>
+            120 => 
             array (
                 'id' => 121,
                 'clave' => 121,
@@ -2923,7 +2923,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:43:06',
                 'oficina_id' => 53,
             ),
-            121 =>
+            121 => 
             array (
                 'id' => 122,
                 'clave' => 122,
@@ -2947,7 +2947,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:43:42',
                 'oficina_id' => 53,
             ),
-            122 =>
+            122 => 
             array (
                 'id' => 123,
                 'clave' => 123,
@@ -2971,7 +2971,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:44:19',
                 'oficina_id' => 53,
             ),
-            123 =>
+            123 => 
             array (
                 'id' => 124,
                 'clave' => 124,
@@ -2995,7 +2995,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:46:25',
                 'oficina_id' => 53,
             ),
-            124 =>
+            124 => 
             array (
                 'id' => 125,
                 'clave' => 125,
@@ -3019,7 +3019,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:48:45',
                 'oficina_id' => 53,
             ),
-            125 =>
+            125 => 
             array (
                 'id' => 126,
                 'clave' => 126,
@@ -3043,7 +3043,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:49:23',
                 'oficina_id' => 53,
             ),
-            126 =>
+            126 => 
             array (
                 'id' => 127,
                 'clave' => 127,
@@ -3067,7 +3067,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:52:32',
                 'oficina_id' => 53,
             ),
-            127 =>
+            127 => 
             array (
                 'id' => 128,
                 'clave' => 128,
@@ -3091,7 +3091,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:53:54',
                 'oficina_id' => 53,
             ),
-            128 =>
+            128 => 
             array (
                 'id' => 129,
                 'clave' => 129,
@@ -3115,7 +3115,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:54:28',
                 'oficina_id' => 53,
             ),
-            129 =>
+            129 => 
             array (
                 'id' => 130,
                 'clave' => 130,
@@ -3139,7 +3139,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:55:08',
                 'oficina_id' => 53,
             ),
-            130 =>
+            130 => 
             array (
                 'id' => 131,
                 'clave' => 131,
@@ -3163,8 +3163,224 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2024-05-24 09:55:37',
                 'oficina_id' => 53,
             ),
+            131 => 
+            array (
+                'id' => 132,
+                'clave' => 132,
+                'name' => 'Raul',
+                'ap_paterno' => 'Molina',
+                'ap_materno' => 'Posada',
+                'email' => 'raulvent5traslados@gmail.com',
+                'status' => 'activo',
+                'area' => 'Departamento de Gestión Catastral',
+                'valuador' => 0,
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$d9NDOqfS03yLvmjlnDuEDOhkuoMyTLEenJmeXC2XKXKokquLxuIuq',
+                'two_factor_secret' => NULL,
+                'two_factor_recovery_codes' => NULL,
+                'remember_token' => NULL,
+                'current_team_id' => NULL,
+                'profile_photo_path' => NULL,
+                'creado_por' => 1,
+                'actualizado_por' => NULL,
+                'created_at' => '2024-06-20 10:54:52',
+                'updated_at' => '2024-06-20 10:54:52',
+                'oficina_id' => 53,
+            ),
+            132 => 
+            array (
+                'id' => 133,
+                'clave' => 133,
+                'name' => 'Deyanira',
+                'ap_paterno' => 'Echeverria',
+                'ap_materno' => 'Arteaga',
+                'email' => 'echeverria.arteaga.bella.30@gmail.com',
+                'status' => 'activo',
+                'area' => 'Departamento de Gestión Catastral',
+                'valuador' => 0,
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$txGy6ldUyp1PJ1BI24rBSeCZhpsRR4WN1YeZ3JAVrYtRODS.A6W26',
+                'two_factor_secret' => NULL,
+                'two_factor_recovery_codes' => NULL,
+                'remember_token' => NULL,
+                'current_team_id' => NULL,
+                'profile_photo_path' => NULL,
+                'creado_por' => 1,
+                'actualizado_por' => NULL,
+                'created_at' => '2024-06-20 10:55:40',
+                'updated_at' => '2024-06-20 10:55:40',
+                'oficina_id' => 53,
+            ),
+            133 => 
+            array (
+                'id' => 134,
+                'clave' => 134,
+                'name' => 'Cuahutemoc',
+                'ap_paterno' => 'Cardiel',
+                'ap_materno' => 'Lopez',
+                'email' => 'cuatemocardiel@gmail.com',
+                'status' => 'activo',
+                'area' => 'Departamento de Gestión Catastral',
+                'valuador' => 0,
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$BRdGHvTedeTw4WBaZi0.MuBWNtW59tf7awQtmIUrUsfOKwZx4IzcS',
+                'two_factor_secret' => NULL,
+                'two_factor_recovery_codes' => NULL,
+                'remember_token' => NULL,
+                'current_team_id' => NULL,
+                'profile_photo_path' => NULL,
+                'creado_por' => 1,
+                'actualizado_por' => NULL,
+                'created_at' => '2024-06-20 11:50:01',
+                'updated_at' => '2024-06-20 11:50:01',
+                'oficina_id' => 53,
+            ),
+            134 => 
+            array (
+                'id' => 135,
+                'clave' => 135,
+                'name' => 'Berenice',
+                'ap_paterno' => 'Vazquez',
+                'ap_materno' => 'Aparicio',
+                'email' => 'berenicevazquez686@gmail.com',
+                'status' => 'activo',
+                'area' => 'Departamento de Gestión Catastral',
+                'valuador' => 0,
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$bIg0RinZFcG7xn8iWPG5geLU7OOFWzGChCnyUFWKFj4GBOEvp0IVm',
+                'two_factor_secret' => NULL,
+                'two_factor_recovery_codes' => NULL,
+                'remember_token' => NULL,
+                'current_team_id' => NULL,
+                'profile_photo_path' => NULL,
+                'creado_por' => 1,
+                'actualizado_por' => NULL,
+                'created_at' => '2024-06-20 11:50:43',
+                'updated_at' => '2024-06-20 11:50:43',
+                'oficina_id' => 53,
+            ),
+            135 => 
+            array (
+                'id' => 136,
+                'clave' => 136,
+                'name' => 'Ricardo ',
+                'ap_paterno' => 'Guzman ',
+                'ap_materno' => 'Hernandez',
+                'email' => 'ricardopuma91@yahoo.com',
+                'status' => 'activo',
+                'area' => 'Departamento de Gestión Catastral',
+                'valuador' => 0,
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$6lMk.Yejk7r3x2m4btUC5eGYp5fyKt650XOZC87dGGdKoSvpUC4SC',
+                'two_factor_secret' => NULL,
+                'two_factor_recovery_codes' => NULL,
+                'remember_token' => NULL,
+                'current_team_id' => NULL,
+                'profile_photo_path' => NULL,
+                'creado_por' => 1,
+                'actualizado_por' => NULL,
+                'created_at' => '2024-06-20 11:52:38',
+                'updated_at' => '2024-06-20 11:52:38',
+                'oficina_id' => 53,
+            ),
+            136 => 
+            array (
+                'id' => 137,
+                'clave' => 137,
+                'name' => 'Jorge Ignacio',
+                'ap_paterno' => 'Medina',
+                'ap_materno' => 'Renteria',
+                'email' => 'cachmedina69@gmail.com',
+                'status' => 'activo',
+                'area' => 'Departamento de Gestión Catastral',
+                'valuador' => 0,
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$GHiMN62gDj.CNXuNPloP..Aws/txxeGM./WxJiVrnE5xmz/KhqZ.G',
+                'two_factor_secret' => NULL,
+                'two_factor_recovery_codes' => NULL,
+                'remember_token' => NULL,
+                'current_team_id' => NULL,
+                'profile_photo_path' => NULL,
+                'creado_por' => 1,
+                'actualizado_por' => NULL,
+                'created_at' => '2024-06-20 11:53:15',
+                'updated_at' => '2024-06-20 11:53:15',
+                'oficina_id' => 53,
+            ),
+            137 => 
+            array (
+                'id' => 138,
+                'clave' => 138,
+                'name' => 'Claudia Patricia',
+                'ap_paterno' => 'Fuentes',
+                'ap_materno' => 'Murrieta',
+                'email' => 'clauspafuentes@hotmail.com',
+                'status' => 'activo',
+                'area' => 'Departamento de Gestión Catastral',
+                'valuador' => 0,
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$mZW8/0hxgcMbva0VrPUvg.eCcmzbrh/rMVadRewCKyQXq0DICpycu',
+                'two_factor_secret' => NULL,
+                'two_factor_recovery_codes' => NULL,
+                'remember_token' => NULL,
+                'current_team_id' => NULL,
+                'profile_photo_path' => NULL,
+                'creado_por' => 1,
+                'actualizado_por' => NULL,
+                'created_at' => '2024-06-20 11:54:08',
+                'updated_at' => '2024-06-20 11:54:08',
+                'oficina_id' => 53,
+            ),
+            138 => 
+            array (
+                'id' => 139,
+                'clave' => 139,
+                'name' => 'Viridiana',
+                'ap_paterno' => 'Elorza',
+                'ap_materno' => 'Alejandre',
+                'email' => 'viridiana.elorzaa34@gmail.com',
+                'status' => 'activo',
+                'area' => 'Departamento de Gestión Catastral',
+                'valuador' => 0,
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$lCTzToV.Lo2IDi5449oc7udLMkxRtKuJAgPAg6pm5..wwZSuNBemC',
+                'two_factor_secret' => NULL,
+                'two_factor_recovery_codes' => NULL,
+                'remember_token' => NULL,
+                'current_team_id' => NULL,
+                'profile_photo_path' => NULL,
+                'creado_por' => 1,
+                'actualizado_por' => NULL,
+                'created_at' => '2024-06-20 11:54:46',
+                'updated_at' => '2024-06-20 11:54:46',
+                'oficina_id' => 53,
+            ),
+            139 => 
+            array (
+                'id' => 140,
+                'clave' => 140,
+                'name' => 'Ma. de los Angeles',
+                'ap_paterno' => 'Alvarado',
+                'ap_materno' => 'Lopez',
+                'email' => 'angelesalvaradolop@hotmial.com',
+                'status' => 'activo',
+                'area' => 'Departamento de Gestión Catastral',
+                'valuador' => 0,
+                'email_verified_at' => NULL,
+                'password' => '$2y$10$oLRkGKkvlX7rDnW1E2ZekOjwDf6vbN4xAut9kujJ2Y0BNfXmFFMZS',
+                'two_factor_secret' => NULL,
+                'two_factor_recovery_codes' => NULL,
+                'remember_token' => NULL,
+                'current_team_id' => NULL,
+                'profile_photo_path' => NULL,
+                'creado_por' => 1,
+                'actualizado_por' => NULL,
+                'created_at' => '2024-06-20 11:55:25',
+                'updated_at' => '2024-06-20 11:55:25',
+                'oficina_id' => 53,
+            ),
         ));
-
-
+        
+        
     }
 }
