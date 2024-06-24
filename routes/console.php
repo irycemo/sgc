@@ -38,7 +38,7 @@ Artisan::command('migrar', function(){
     DB::table('predios')->truncate();
     Schema::enableForeignKeyConstraints();
 
-    $referencias = ctref007::whereIn('tipo_007', ["TV", "AH", "UP", "UB", "TE", "ED", "TP", "OM"])->get();
+    /* $referencias = ctref007::whereIn('tipo_007', ["TV", "AH", "UP", "UB", "TE", "ED", "TP", "OM"])->get(); */
 
     $predios = DB::connection('sqlsrv')->table('tcpro008')
                             ->join('ctpro003', function($q){
@@ -61,11 +61,11 @@ Artisan::command('migrar', function(){
 
     $progressbar->start();
 
-    $predios::chunck(1000, function($predios) use($referencias){
+    $predios::chunck(1000, function($predios){
 
         foreach ($predios as $predio) {
 
-            MigrarPredioJob::dispatch($referencias, $predio);
+            MigrarPredioJob::dispatch($predio);
 
         }
 
