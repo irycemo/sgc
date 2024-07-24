@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
 
-            $table->index(['condominioconstruccionable_id', 'condominioconstruccionable_type']);
+            $table->index(['condominioconstruccionable_id', 'condominioconstruccionable_type'], 'morph_index');
         });
     }
 

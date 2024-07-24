@@ -28,7 +28,7 @@ return new class extends Migration
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
 
-            $table->index(['construccionable_id', 'construccionable_type']);
+            $table->index(['construccionable_id', 'construccionable_type'], 'morph_index');
         });
     }
 

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
 
-            $table->index(['condominioterrenoable_id', 'condominioterrenoable_type']);
+            $table->index(['condominioterrenoable_id', 'condominioterrenoable_type'], 'morph_index');
         });
     }
 
