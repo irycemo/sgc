@@ -24,24 +24,39 @@ trait ModelosTrait{
     }
 
     public static function boot() {
+
         parent::boot();
 
         static::creating(function($model){
+
             foreach ($model->attributes as $key => $value) {
 
-                $model->{$key} = trim($value);
+                if(is_string($value)){
 
-                $model->{$key} = $value === '' ? null : $value;
+                    $model->{$key} = trim($value);
+
+                    $model->{$key} = $value === '' ? null : $value;
+
+                }
+
             }
+
         });
 
         static::updating(function($model){
+
             foreach ($model->attributes as $key => $value) {
 
-                $model->{$key} = trim($value);
+                if(is_string($value)){
 
-                $model->{$key} = $value === '' ? null : $value;
+                    $model->{$key} = trim($value);
+
+                    $model->{$key} = $value === '' ? null : $value;
+
+                }
+
             }
+
         });
 
     }

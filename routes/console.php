@@ -36,6 +36,9 @@ Artisan::command('migrar', function(){
     DB::table('condominioconstruccions')->truncate();
     DB::table('movimientos')->truncate();
     DB::table('predios')->truncate();
+    DB::table('predio_repetidos')->truncate();
+    DB::table('jobs')->truncate();
+    DB::table('failed_jobs')->truncate();
     Schema::enableForeignKeyConstraints();
 
     /* $referencias = ctref007::whereIn('tipo_007', ["TV", "AH", "UP", "UB", "TE", "ED", "TP", "OM"])->get(); */
@@ -50,26 +53,26 @@ Artisan::command('migrar', function(){
                                     ->on('tcpro008.pred_008', 'ctpro003.pred_003')
                                     ->on('tcpro008.edif_008', 'ctpro003.edif_003')
                                     ->on('tcpro008.dpto_008', 'ctpro003.dpto_003')
-                                    ->where('tcpro008.mpio_008', 53)
+                                    /* ->where('tcpro008.mpio_008', 53) */
                                     ->where('tcpro008.nreg_008', '>', 0);
                             })
                             ->get();
 
-    $this->info('Incia: ' . now());
+    $this->info('Incian ' . $predios->count() . ' predios en chunks de 1000 predios en: ' . now());
+
+    $predios = $predios->chunk(1000);
 
     $progressbar = $this->output->createProgressBar(count($predios));
 
     $progressbar->start();
 
-    $predios::chunck(1000, function($predios){
+    foreach ($predios as $predio) {
 
-        foreach ($predios as $predio) {
+        MigrarPredioJob::dispatch($predio);
 
-            MigrarPredioJob::dispatch($predio);
+        $progressbar->advance();
 
-        }
-
-    });
+    }
 
     /* foreach($predios as $predio){
 

@@ -344,25 +344,25 @@
             <tbody class="divide-y divide-gray-200 flex-1 sm:flex-none ">
 
                 <tr class="text-sm font-medium text-gray-600 bg-white text-center">
-                    <td>{{ $predios->count() }}</td>
-                    <td>{{ $predios_urbanos }}</td>
-                    <td>{{ $predios_rusticos }}</td>
-                    <td>{{ $predios_88 }}</td>
-                    <td>{{ $predios_99 }}</td>
-                    <td>{{ $predios->count() - $predios_99 - $predios_88 }}</td>
+                    <td>{{ number_format($predios) }}</td>
+                    <td>{{ number_format($predios_urbanos) }}</td>
+                    <td>{{ number_format($predios_rusticos) }}</td>
+                    <td>{{ number_format($predios_88) }}</td>
+                    <td>{{ number_format($predios_99) }}</td>
+                    <td>{{ number_format($predios - $predios_99 - $predios_88) }}</td>
                 </tr>
                 <tr>
                     <td colspan="6">
-                        <div class="bg-gray-50 p-1 text-center"><span class="text-sm font-medium text-gray-600">Porcentaje sobre el total de predios del estado ({{ $total_predios }})</span></div>
+                        <div class="bg-gray-50 p-1 text-center"><span class="text-sm font-medium text-gray-600">Porcentaje sobre el total de predios del estado ({{ number_format($total_predios, 2) }})</span></div>
                     </td>
                 </tr>
                 <tr class="text-sm font-medium text-gray-600 bg-white text-center">
-                    <td>{{ ($predios->count() / $total_predios) * 100 }}%</td>
-                    <td>{{ ($predios_urbanos / $total_predios) * 100 }}%</td>
-                    <td>{{ ($predios_rusticos / $total_predios) * 100 }}%</td>
-                    <td>{{ ($predios_88 / $total_predios) * 100 }}%</td>
-                    <td>{{ ($predios_99 / $total_predios) * 100 }}%</td>
-                    <td>{{ (($predios->count() - $predios_99 - $predios_88) / $total_predios) * 100 }}%</td>
+                    <td>{{ number_format(($predios / $total_predios) * 100, 2) }}%</td>
+                    <td>{{ number_format(($predios_urbanos / $total_predios) * 100, 2) }}%</td>
+                    <td>{{ number_format(($predios_rusticos / $total_predios) * 100, 2) }}%</td>
+                    <td>{{ number_format(($predios_88 / $total_predios) * 100, 2) }}%</td>
+                    <td>{{ number_format(($predios_99 / $total_predios) * 100, 2) }}%</td>
+                    <td>{{ number_format((($predios - $predios_99 - $predios_88) / $total_predios) * 100, 2) }}%</td>
                 </tr>
                 <tr>
                     <td colspan="6">
@@ -370,141 +370,15 @@
                     </td>
                 </tr>
                 <tr class="text-sm font-medium text-gray-600 bg-white text-center">
-                    <td>${{ number_format($predios->sum('valor_catastral', 2)) }}</td>
-                    <td>${{ number_format($predios->where('tipo_predio', 1)->sum('valor_catastral', 2)) }}</td>
-                    <td>${{ number_format($predios->where('tipo_predio', 2)->sum('valor_catastral', 2)) }}</td>
+                    <td>${{ number_format($valor_urbanos + $valor_rusticos) }}</td>
+                    <td>${{ number_format($valor_urbanos, 2) }}</td>
+                    <td>${{ number_format($valor_rusticos, 2) }}</td>
                     <td>-</td>
                     <td>-</td>
                     <td>-</td>
                 </tr>
 
             </tbody>
-
-        </table>
-
-    </div>
-
-    <div class="p-4 bg-white rounded-lg mb-5 overflow-auto">
-
-        <h4 class="text-center text-sm text-gray-900 mb-3">Predios por localidad</h4>
-
-        <table class="w-full overflow-scroll">
-
-            <tr class="text-xs font-medium text-gray-600 uppercase text-left traling-wider">
-
-                <th class="bg-gray-50 p-2 border w-28">Localidad</th>
-
-                @foreach ($prediosLocalidad as $key => $predios)
-
-                    <th class="p-2 border">{{ $key }}</th>
-
-                @endforeach
-
-            </tr>
-
-            <tr class="text-xs font-medium text-gray-600 uppercase text-left traling-wider">
-
-                <th class="bg-gray-50 p-2 border w-28">Cantidad</th>
-
-                @foreach ($prediosLocalidad as $predios)
-
-                    <th class="p-2 border">{{ count($predios) }}</th>
-
-                @endforeach
-
-            </tr>
-
-        </table>
-
-    </div>
-
-    <div class="p-4 bg-white rounded-lg mb-5 overflow-auto">
-
-        <h4 class="text-center text-sm text-gray-900 mb-3">Predios por tipo</h4>
-
-        <table class="w-full overflow-scroll">
-
-            <tr class="text-xs font-medium text-gray-600 uppercase text-left traling-wider">
-
-                <th class="bg-gray-50 p-2 border w-28">Localidad</th>
-
-                @foreach ($prediosTipo as $predio)
-
-                    <th class="p-2 border">{{ $predio['localidad'] }}</th>
-
-                @endforeach
-
-            </tr>
-
-            <tr class="text-xs font-medium text-gray-600 uppercase text-left traling-wider">
-
-                <th class="bg-gray-50 p-2 border w-28">Tipo de predio</th>
-
-                @foreach ($prediosTipo as $predio)
-
-                    <th class="p-2 border">{{ $predio['tipo'] }}</th>
-
-                @endforeach
-
-            </tr>
-
-            <tr class="text-xs font-medium text-gray-600 uppercase text-left traling-wider">
-
-                <th class="bg-gray-50 p-2 border w-28">Cantidad</th>
-
-                @foreach ($prediosTipo as $predio)
-
-                    <th class="p-2 border">{{ $predio['cantidad'] }}</th>
-
-                @endforeach
-
-            </tr>
-
-        </table>
-
-    </div>
-
-    <div class="p-4 bg-white rounded-lg mb-5 overflow-auto">
-
-        <h4 class="text-center text-sm text-gray-900 mb-3">Predios por sector</h4>
-
-        <table class="w-full overflow-scroll">
-
-            <tr class="text-xs font-medium text-gray-600 uppercase text-left traling-wider">
-
-                <th class="bg-gray-50 p-2 border w-28">Sector</th>
-
-                @foreach ($prediosSector as $predio)
-
-                    <th class="p-2 border">{{ $predio['sector'] }}</th>
-
-                @endforeach
-
-            </tr>
-
-            <tr class="text-xs font-medium text-gray-600 uppercase text-left traling-wider">
-
-                <th class="bg-gray-50 p-2 border w-28">Localidad</th>
-
-                @foreach ($prediosSector as $predio)
-
-                    <th class="p-2 border">{{ $predio['localidad'] }}</th>
-
-                @endforeach
-
-            </tr>
-
-            <tr class="text-xs font-medium text-gray-600 uppercase text-left traling-wider">
-
-                <th class="bg-gray-50 p-2 border w-28">Cantidad</th>
-
-                @foreach ($prediosSector as $predio)
-
-                    <th class="p-2 border">{{ $predio['cantidad'] }}</th>
-
-                @endforeach
-
-            </tr>
 
         </table>
 
@@ -563,14 +437,13 @@
         <x-slot name="footer">
 
             <div class="float-righ">
-                <button
+
+                <x-button-red
                     wire:click="$toggle('modal')"
                     wire:loading.attr="disabled"
-                    wire:target="$toggle('modal')"
-                    type="button"
-                    class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-sm mb-2 hover:bg-red-700 flaot-left focus:outline-none">
+                    wire:target="$toggle('modal')">
                     Cerrar
-                </button>
+                </x-button-red>
 
             </div>
 

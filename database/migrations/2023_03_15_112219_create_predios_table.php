@@ -81,6 +81,10 @@ return new class extends Migration
 
             $table->unique(['estado', 'region_catastral', 'municipio', 'zona_catastral', 'localidad', 'sector', 'manzana', 'predio', 'edificio', 'departamento'], 'clave_catastral');
 
+            $table->index(['documento_entrada', 'documento_numero']);
+
+            $table->index('oficina');
+
         });
     }
 

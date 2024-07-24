@@ -46,6 +46,12 @@ return new class extends Migration
 
             $table->index('usuario_tramites_linea_id');
 
+            $table->index('estado');
+
+            $table->index('linea_de_captura');
+
+            $table->index('created_at');
+
         });
     }
 

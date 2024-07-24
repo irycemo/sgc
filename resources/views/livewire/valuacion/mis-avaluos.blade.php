@@ -2,7 +2,7 @@
 
     <div class="mb-6">
 
-        <x-header>Mis avaluos</x-header>
+        <x-header>Mis avalúos</x-header>
 
         <div class="flex justify-between">
 

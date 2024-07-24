@@ -44,9 +44,17 @@
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                <strong>Título de propiedad</strong>
+                <strong>Documento de entrada - Número de documento</strong>
 
-                <p>{{ $predio->documento_numero }}</p>
+                <p>{{ $predio->documento_entrada }} - {{ $predio->documento_numero }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Declarante</strong>
+
+                <p>{{ $predio->declarante }}</p>
 
             </div>
 
@@ -151,6 +159,24 @@
                 <strong>Valor catastral</strong>
 
                 <p>${{ number_format($predio->valor_catastral, 2) }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Uso del predio</strong>
+
+                <p>Uso 1: {{ $predio->uso_1 }}</p>
+                <p>Uso 2: {{ $predio->uso_2 }}</p>
+                <p>Uso 3: {{ $predio->uso_3 }}</p>
+
+            </div>
+
+            <div class="col-span-1 sm:col-span-2 lg:col-span-5 rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Observaciones</strong>
+
+                <p>{{ $predio->observaciones }}</p>
 
             </div>
 
@@ -324,6 +350,23 @@
 
                 <p>Lat: {{ $predio->lat }}</p>
                 <p>Lon: {{ $predio->lon }}</p>
+                <div class="flex items-center gap-2">
+
+                    <a href="{{ 'http://mapa.catastro.michoacan.gob.mx:8080/index.html?pzoom=20&plat=' . $predio->lat . '&plon=' . $predio->lon }}" title="SIG" target="_blank">
+                        <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="SIG">
+                    </a>
+
+                    <a href="{{ 'https://www.google.com/maps/?q=' . $predio->lat . ',' . $predio->lon . '&z=5&t=k' }}" title="Google" target="_blank">
+
+                        <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="Google">
+
+                    </a>
+
+                    <a href="" title="Cartografía" target="_blank">
+                        <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="Cartografía">
+                    </a>
+
+                </div>
 
             </div>
 
@@ -461,6 +504,7 @@
 
                     <th class="px-2">Área común de terreno</th>
                     <th class="px-2">Indiviso de terreno</th>
+                    <th class="px-2">Superficie proporcional</th>
                     <th class="px-2">Valor unitario</th>
                     <th class="px-2">Valor de terreno común</th>
 
@@ -475,6 +519,7 @@
                     <tr class="text-gray-500 text-sm leading-relaxed">
                         <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->area_terreno_comun }}</td>
                         <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->indiviso_terreno }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->superficie_proporcional }}</td>
                         <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->valor_unitario }}</td>
                         <td class=" px-2 w-full whitespace-nowrap">${{ number_format($terreno->valor_terreno_comun, 2) }}</td>
                     </tr>
@@ -498,6 +543,8 @@
                 <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
                     <th class="px-2">Área común de construcción</th>
+                    <th class="px-2">Indiviso de construcción</th>
+                    <th class="px-2">Superficie proporcional</th>
                     <th class="px-2">Clasificación de construccion</th>
                     <th class="px-2">Valor de construcción común</th>
 
@@ -511,6 +558,8 @@
 
                     <tr class="text-gray-500 text-sm leading-relaxed">
                         <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->area_comun_construccion }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->indiviso_construccion }}</td>
+                        <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->superficie_proporcional }}</td>
                         <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->valor_clasificacion_construccion }}</td>
                         <td class=" px-2 w-full whitespace-nowrap">${{ number_format($construccion->valor_construccion_comun, 2) }}</td>
                     </tr>

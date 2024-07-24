@@ -28,7 +28,9 @@ class Oficina extends Component
     public $total_predios;
     public $predios;
     public $predios_urbanos;
+    public $valor_urbanos;
     public $predios_rusticos;
+    public $valor_rusticos;
     public $predios_88;
     public $predios_99;
     public $prediosLocalidad;
@@ -106,51 +108,26 @@ class Oficina extends Component
 
         $this->total_predios = Predio::count();
 
-        $this->predios = Predio::select('id', 'tipo_predio', 'sector', 'valor_catastral', 'localidad')->where('oficina', $this->oficina->oficina)->orderBy('localidad')->get();
+        $this->predios = Predio::where('oficina', $this->oficina->oficina)->where('localidad', $this->oficina->localidad)->count();
 
-        $this->predios_urbanos = $this->predios->where('tipo_predio', 1)->count();
+        $this->predios_urbanos =  Predio::where('tipo_predio', 1)->where('oficina', $this->oficina->oficina)->where('localidad', $this->oficina->localidad)->count();
 
-        $this->predios_rusticos = $this->predios->where('tipo_predio', 2)->count();
+        $this->valor_urbanos =  Predio::where('tipo_predio', 1)->where('oficina', $this->oficina->oficina)->where('localidad', $this->oficina->localidad)->sum('valor_catastral');
 
-        $this->predios_88 = $this->predios->where('sector', 88)->count();
+        $this->predios_rusticos =  Predio::where('tipo_predio', 2)->where('oficina', $this->oficina->oficina)->where('localidad', $this->oficina->localidad)->count();
 
-        $this->predios_99 = $this->predios->where('sector', 99)->count();
+        $this->valor_rusticos =  Predio::where('tipo_predio', 2)->where('oficina', $this->oficina->oficina)->where('localidad', $this->oficina->localidad)->sum('valor_catastral');
+
+        $this->predios_88 =  Predio::where('sector', 88)->where('oficina', $this->oficina->oficina)->where('localidad', $this->oficina->localidad)->count();
+
+        $this->predios_99 =  Predio::where('sector', 99)->where('oficina', $this->oficina->oficina)->where('localidad', $this->oficina->localidad)->count();
 
         if(auth()->user()->hasRole('Administrador'))
             $this->usuarios = User::where('status', 'activo')->where('oficina_id', $this->oficina->id)->get();
         else
             $this->usuarios = User::where('status', 'activo')->where('oficina_id', $this->oficina->id)->where('area', auth()->user()->area)->get();
 
-        $this->prediosLocalidad = $this->predios->groupBy('localidad')->toArray();
 
-        foreach ($this->prediosLocalidad as $key => $predio ) {
-
-            $this->prediosTipo [] = [
-                'localidad' => $key,
-                'tipo' => 1,
-                'cantidad' => $this->predios->where('localidad', $key)->where('tipo_predio', 1)->count()
-            ];
-
-            $this->prediosTipo [] = [
-                'localidad' => $key,
-                'tipo' => 2,
-                'cantidad' => $this->predios->where('localidad', $key)->where('tipo_predio', 2)->count()
-            ];
-
-        }
-
-        $orderBySector = $this->predios->groupBy('sector')->toArray();
-
-        foreach ($orderBySector as $key => $predio ) {
-
-
-            $this->prediosSector [] = [
-                'sector' => $key,
-                'localidad' => $predio[0]['localidad'],
-                'cantidad' => $this->predios->where('localidad', $predio[0]['localidad'])->where('tipo_predio', $predio[0]['tipo_predio'])->where('sector', $key)->count()
-            ];
-
-        }
 
     }
 

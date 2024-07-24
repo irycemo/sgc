@@ -45,7 +45,6 @@ use App\Livewire\Certificaciones\CertificadoHistoria;
 use App\Livewire\Certificaciones\CertificadoNegativo;
 use App\Livewire\Certificaciones\CertificadoRegistro;
 use App\Livewire\TramitesAdministrativos\PrediosIgnorados;
-use App\Http\Controllers\Valuacion\AvaluosController as Val;
 use App\Livewire\Ventanilla\Ventanilla as VentanillaVentanilla;
 use App\Http\Controllers\Valuacion\ValuacionYDesgloseController;
 use App\Livewire\TramitesAdministrativos\VariacionesCatastrales;

@@ -565,6 +565,20 @@
 
                     </div>
 
+                    <div class="flex items-center justify-center gap-3">
+
+                        <a href="{{ 'http://mapa.catastro.michoacan.gob.mx:8080/index.html?pzoom=20&plat=' . $predio->lat . '&plon=' . $predio->lon }}" title="SIG" target="_blank">
+                            <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="SIG">
+                        </a>
+
+                        <a href="{{ 'https://www.google.com/maps/?q=' . $predio->lat . ',' . $predio->lon . '&z=5&t=k' }}" title="Google" target="_blank">
+
+                            <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="Google">
+
+                        </a>
+
+                    </div>
+
                 </div>
 
             </div>

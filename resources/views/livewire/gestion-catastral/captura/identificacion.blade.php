@@ -1,30 +1,44 @@
 <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg flex gap-3 justify-center">
 
-    <x-input-group for="origen" label="Origen del movimiento" :error="$errors->first('origen')" class="w-fit">
+    <div>
 
-        <x-input-select id="origen" wire:model="origen" class="">
+        <x-input-group for="origen" label="Origen del movimiento" :error="$errors->first('origen')" class="w-fit mb-2">
 
-            <option value="">Seleccione una opción</option>
+            <x-input-select id="origen" wire:model="origen" class="">
 
-            @foreach ($acciones_padron as $item)
+                <option value="">Seleccione una opción</option>
 
-                    <option value="{{ $item }}">{{ $item }}</option>
+                @foreach ($acciones_padron as $item)
 
-                @endforeach
+                        <option value="{{ $item }}">{{ $item }}</option>
 
-        </x-input-select>
+                    @endforeach
 
-    </x-input-group>
+            </x-input-select>
 
-    <x-input-group for="actualizacion" label="Actualización" :error="$errors->first('actualizacion')">
+        </x-input-group>
 
-        <x-checkbox wire:model.live="actualizacion" id="actualizacion"/>
+        <x-input-group for="observaciones" label="Descripción del movimiento" :error="$errors->first('observaciones')">
 
-    </x-input-group>
+            <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="predio.observaciones" placeholder="Se lo más especifico posible acerca del origen del movimiento"></textarea>
+
+        </x-input-group>
+
+    </div>
 
 </div>
 
 <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg">
+
+    <div class="flex items-center justify-center">
+
+        <x-input-group for="actualizacion" label="Actualización" :error="$errors->first('actualizacion')" class="flex gap-3 items-center">
+
+            <x-checkbox wire:model.live="actualizacion" id="actualizacion"/>
+
+        </x-input-group>
+
+    </div>
 
     <div class="flex-auto ">
 
@@ -738,25 +752,25 @@
 
 <div class="bg-white rounded-lg p-3 flex gap-3 mb-3 shadow-lg">
 
-    <x-input-group for="predio.superficie_terreno" label="Superficie de terreno" :error="$errors->first('predio.superficie_terreno')" class="w-full">
+    <x-input-group for="predio.superficie_terreno" label="Superficie de terreno (mts.)" :error="$errors->first('predio.superficie_terreno')" class="w-full">
 
         <x-input-text type="number" id="predio.superficie_terreno" wire:model="predio.superficie_terreno" />
 
     </x-input-group>
 
-    <x-input-group for="predio.superficie_construccion" label="Superficie de construcción" :error="$errors->first('predio.superficie_construccion')" class="w-full">
+    <x-input-group for="predio.superficie_construccion" label="Superficie de construcción {{ $predio->tipo_predio == 2 ? '(has.)' : '(mts.)' }}" :error="$errors->first('predio.superficie_construccion')" class="w-full">
 
         <x-input-text type="number" id="predio.superficie_construccion" wire:model="predio.superficie_construccion" />
 
     </x-input-group>
 
-    <x-input-group for="predio.superficie_notarial" label="Superficie notarial" :error="$errors->first('predio.superficie_notarial')" class="w-full">
+    <x-input-group for="predio.superficie_notarial" label="Superficie notarial {{ $predio->tipo_predio == 2 ? '(has.)' : '(mts.)' }}" :error="$errors->first('predio.superficie_notarial')" class="w-full">
 
         <x-input-text type="number" id="predio.superficie_notarial" wire:model="predio.superficie_notarial" />
 
     </x-input-group>
 
-    <x-input-group for="predio.superficie_judicial" label="Superficie judicial" :error="$errors->first('predio.superficie_judicial')" class="w-full">
+    <x-input-group for="predio.superficie_judicial" label="Superficie judicial {{ $predio->tipo_predio == 2 ? '(has.)' : '(mts.)' }}" :error="$errors->first('predio.superficie_judicial')" class="w-full">
 
         <x-input-text type="number" id="predio.superficie_judicial" wire:model="predio.superficie_judicial" />
 
@@ -782,13 +796,13 @@
 
         <div>
 
-            <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico posible acerca del origen del movimiento"></textarea>
+            <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="predio.observaciones" placeholder=""></textarea>
 
         </div>
 
         <div>
 
-            @error('observaciones') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+            @error('predio.observaciones') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
         </div>
 

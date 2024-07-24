@@ -35,6 +35,10 @@ return new class extends Migration
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
+
+            $table->index(['nombre', 'ap_paterno', 'ap_materno']);
+
+            $table->index('razon_social');
         });
     }
 

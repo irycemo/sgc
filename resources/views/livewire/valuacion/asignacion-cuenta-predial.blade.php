@@ -107,7 +107,7 @@
 
                 </x-input-select>
 
-                <textarea rows="5" wire:model="observaciones" class="bg-white rounded text-xs w-full mt-2 @error('observaciones') border-red-500 @enderror" placeholder="Se lo mas especifico posible acerca del motivo por el que se asignan las nuevas cuentas prediales"></textarea>
+                <textarea rows="5" wire:model="observaciones" class="bg-white rounded text-xs w-full mt-2 @error('observaciones') border-red-500 @enderror" placeholder="Se lo más específico posible acerca del motivo por el que se asignan las nuevas cuentas prediales"></textarea>
 
             </x-input-group>
 
@@ -124,7 +124,7 @@
 
         <div class="p-4 flex-auto bg-white rounded-lg mb-3 shadow-md space-y-3">
 
-            <h4 class="text-lg mb-5 text-center">Busqueda de cuentas prediales asignadas</h4>
+            <h4 class="text-lg mb-5 text-center">Búsqueda de cuentas prediales asignadas</h4>
 
             <div class="flex flex-wrap space-x-1 justify-center items-center gap-1">
 

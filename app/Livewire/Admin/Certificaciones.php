@@ -5,7 +5,6 @@ namespace App\Livewire\Admin;
 use App\Models\User;
 use App\Models\Oficina;
 use Livewire\Component;
-use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use App\Models\Certificacion;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -119,7 +118,9 @@ class Certificaciones extends Component
 
         $canvas = $dom_pdf->get_canvas();
 
-        $canvas->page_text(480, 794, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+        $canvas->page_text(480, 796, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 7, array(1, 1, 1));
+
+        $canvas->page_text(35, 796, $certificacion->documento . "-" . $certificacion->año . '-' .$certificacion->folio , null, 7, array(1, 1, 1));
 
         $pdf =  $dom_pdf->output();
 
@@ -291,6 +292,8 @@ class Certificaciones extends Component
         $object = (object)[
             'propietarios' => collect(),
             'colindancias' => collect(),
+            'terrenos' => collect(),
+            'construcciones' => collect(),
         ];
 
         $array = explode('|', $cadena);
@@ -300,6 +303,10 @@ class Certificaciones extends Component
             $aux =  explode(': ', $item);
 
             $aux2 = explode('%', $item);
+
+            $aux3 = explode('&', $item);
+
+            $aux4 = explode('?', $item);
 
             if(count($aux2) === 5){
 
@@ -316,6 +323,46 @@ class Certificaciones extends Component
                 $propietario->porcentaje_usufructo = str_replace('Porcentaje usufructo=' , '', $aux2[4]);
 
                 $object->propietarios->push($propietario);
+
+                continue;
+
+            }
+
+            if(count($aux3) === 5){
+
+                $terreno = (object)[];
+
+                $terreno->area_terreno_comun = str_replace('Área común de terreno=' , '', $aux3[0]);
+
+                $terreno->indiviso_terreno = str_replace('Indiviso de terreno=' , '', $aux3[1]);
+
+                $terreno->superficie_proporcional = str_replace('Superficie proporcional=' , '', $aux3[2]);
+
+                $terreno->valor_unitario = str_replace('Valor unitario=' , '', $aux3[3]);
+
+                $terreno->valor_terreno_comun = str_replace('Valor de terreno común=' , '', $aux3[4]);
+
+                $object->terrenos->push($terreno);
+
+                continue;
+
+            }
+
+            if(count($aux4) === 5){
+
+                $construccion = (object)[];
+
+                $construccion->area_comun_construccion = str_replace('Área común de construcción=' , '', $aux4[0]);
+
+                $construccion->indiviso_construccion = str_replace('Indiviso de construcción=' , '', $aux4[1]);
+
+                $construccion->superficie_proporcional = str_replace('Superficie proporcional=' , '', $aux4[2]);
+
+                $construccion->valor_clasificacion_construccion = str_replace('Valor de clasificación=' , '', $aux4[3]);
+
+                $construccion->valor_construccion_comun = str_replace('Valor de construcción común=' , '', $aux4[4]);
+
+                $object->construcciones->push($construccion);
 
                 continue;
 

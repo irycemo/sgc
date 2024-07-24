@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use Throwable;
 use App\Models\Predio;
 use App\Models\Persona;
 use App\Models\Terreno;
@@ -10,6 +11,7 @@ use App\Models\Colindancia;
 use App\Models\Propietario;
 use App\Models\Construccion;
 use Illuminate\Bus\Queueable;
+use App\Models\PredioRepetido;
 use App\Models\Condominioterreno;
 use App\Models\Migracion\ctcdm004;
 use App\Models\Migracion\ctcop005;
@@ -19,8 +21,8 @@ use App\Models\Migracion\tcpro008;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Condominioconstruccion;
-use App\Models\PredioRepetido;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Database\QueryException;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -36,7 +38,7 @@ class MigrarPredioJob implements ShouldQueue
      */
     public function __construct(public $predios){
 
-        $this->referencias = ctref007::whereIn('tipo_007', ["TV", "AH", "UP", "UB", "TE", "ED", "TP", "OM"])->get();
+        $this->referencias = collect(ctref007::whereIn('tipo_007', ["TV", "AH", "UP", "UB", "TE", "ED", "TP", "OM"])->get()->toArray());
     }
 
     /**
@@ -65,8 +67,8 @@ class MigrarPredioJob implements ShouldQueue
                         'oficina' => $predio->ofna_008,
                         'tipo_predio' => $predio->tpre_008,
                         'numero_registro' => $predio->nreg_008,
-                        'tipo_vialidad' => $this->referencias->where('tipo_007', "TV")->where('cven_007', $predio->tvia_008)->first()->desc_007,
-                        'tipo_asentamiento' => $this->referencias->where('tipo_007', "AH")->where('cven_007', $predio->tase_008)->first()->desc_007,
+                        'tipo_vialidad' => $this->referencias->where('tipo_007', "TV")->where('cven_007', $predio->tvia_008)->first()['desc_007'],
+                        'tipo_asentamiento' => $this->referencias->where('tipo_007', "AH")->where('cven_007', $predio->tase_008)->first()['desc_007'],
                         'nombre_vialidad' => $predio->call_008,
                         'numero_exterior' => $predio->next_008,
                         'numero_exterior_2' => $predio->nex2_008,
@@ -82,10 +84,10 @@ class MigrarPredioJob implements ShouldQueue
                         'nombre_edificio' => $predio->nedi_008,
                         'clave_edificio' => NULL,
                         'departamento_edificio' => $predio->ndpt_008,
-                        'uso_1' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usop_003)->first()?->desc_007,
-                        'uso_2' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usp2_003)->first()?->desc_007,
-                        'uso_3' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usp3_003)->first()?->desc_007,
-                        'ubicacion_en_manzana' => $this->referencias->where('tipo_007', "UB")->where('cven_007', $predio->ubic_003)->first()?->desc_007,
+                        'uso_1' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usop_003)->first() ? $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usop_003)->first()['desc_007'] : null,
+                        'uso_2' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usp2_003)->first() ? $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usp2_003)->first()['desc_007'] : null,
+                        'uso_3' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usp3_003)->first() ? $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usp3_003)->first()['desc_007'] : null,
+                        'ubicacion_en_manzana' => $this->referencias->where('tipo_007', "UB")->where('cven_007', $predio->ubic_003)->first() ? $this->referencias->where('tipo_007', "UB")->where('cven_007', $predio->ubic_003)->first()['desc_007'] : null,
                         'superficie_terreno' => $predio->stot_008,
                         'superficie_construccion' => $predio->scon_008,
                         'superficie_judicial' => $predio->sjur_008,
@@ -105,7 +107,7 @@ class MigrarPredioJob implements ShouldQueue
                         'lon' => ($predio->long_003 == NULL) ? 0 : ($predio->long_003 > -103.7 && $predio->long_003 <= -100.06  ? $predio->long_003 : 0),
                         'lat' => ($predio->lati_003 == NULL) ? 0 : ($predio->lati_003 > 17.9 && $predio->lati_003 <= 20.5  ? $predio->lati_003 : 0),
                         'fecha_efectos' => $predio->fecn_008,
-                        'documento_entrada' => $this->referencias->where('tipo_007', "TE")->where('cven_007', $predio->tesc_008)->first()->desc_007,
+                        'documento_entrada' => $this->referencias->where('tipo_007', "TE")->where('cven_007', $predio->tesc_008)->first() ? $this->referencias->where('tipo_007', "TE")->where('cven_007', $predio->tesc_008)->first()['desc_007'] : null,
                         'documento_numero' => $predio->titp_008,
                         'declarante' => 'Notaria ' . $predio->cnot_003,
                         'observaciones' => $predio->obse_008,
@@ -131,31 +133,51 @@ class MigrarPredioJob implements ShouldQueue
 
                 });
 
+            }catch (QueryException $e){
+
+                $errorCode = $e->errorInfo[1];
+
+                if($errorCode == 1062){
+
+                    PredioRepetido::create([
+                        'estado' => $predio->esta_008,
+                        'region_catastral' => $predio->rcat_008,
+                        'municipio' => $predio->mpio_008,
+                        'zona_catastral' => $predio->zcat_008,
+                        'localidad' => $predio->locl_008,
+                        'sector' => $predio->sect_008,
+                        'manzana' => $predio->mzna_008,
+                        'predio' => $predio->pred_008,
+                        'edificio' => $predio->edif_008,
+                        'departamento' => $predio->dpto_008,
+                        'oficina' => $predio->ofna_008,
+                        'tipo_predio' => $predio->tpre_008,
+                        'numero_registro' => $predio->nreg_008,
+                        'error' => $e
+                    ]);
+
+                }
+
             } catch (\Throwable $th) {
 
                 Log::error("El predio: " . $predio->locl_008 . "-" . $predio->ofna_008 . "-" . $predio->tpre_008 . "-" . $predio->nreg_008 . ". " . $th);
 
-                PredioRepetido::create([
-                    'estado' => $predio->esta_008,
-                    'region_catastral' => $predio->rcat_008,
-                    'municipio' => $predio->mpio_008,
-                    'zona_catastral' => $predio->zcat_008,
-                    'localidad' => $predio->locl_008,
-                    'sector' => $predio->sect_008,
-                    'manzana' => $predio->mzna_008,
-                    'predio' => $predio->pred_008,
-                    'edificio' => $predio->edif_008,
-                    'departamento' => $predio->dpto_008,
-                    'oficina' => $predio->ofna_008,
-                    'tipo_predio' => $predio->tpre_008,
-                    'numero_registro' => $predio->nreg_008,
-                    'error' => $th
-                ]);
             }
 
         }
 
+        app('queue.worker')->shouldQuit = 1;
+
+        $this->predios = null;
+        $predio = null;
+        $this->referencias = null;
+
     }
+
+    /* public function failed(?Throwable $exception): void
+    {
+        error($exception);
+    } */
 
     public function condominio($predioss,$idnvo)
     {
@@ -240,12 +262,15 @@ class MigrarPredioJob implements ShouldQueue
 
         }
 
+        $predio_padre = null;
+        $ctcdm004 = null;
+
     }
 
     public function personas($predioss,$idnvo)
     {
 
-        $nombre = str_replace(['Y SOC', 'Y SOCIOS', 'Y SOC.'. 'Y SOCS.', 'Y SOCS', 'Y SOCIOS.'], '', $predioss->nomb_008);
+        $nombre = str_replace(['Y SOC', 'Y SOCIOS', 'Y SOC.'. 'Y SOCS.', 'Y SOCS', 'Y SOCIOS.', 'SOC', 'SOC.'], '', $predioss->nomb_008);
 
         $persona = Persona::firstOrCreate(
             [
@@ -269,7 +294,7 @@ class MigrarPredioJob implements ShouldQueue
                 'numero_interior' => $predioss->inte_008,
                 'colonia' => $predioss->noco_008,
                 'cp' => $predioss->copd_008,
-                'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $predioss->cest_008)->first()?->desc_007,
+                'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $predioss->cest_008)->first() ? $this->referencias->where('tipo_007', "ED")->where('cven_007', $predioss->cest_008)->first()['desc_007'] : null,
                 'municipio' => $predioss->nomu_008,
                 'ciudad' => $predioss->nopo_008
             ]
@@ -281,7 +306,7 @@ class MigrarPredioJob implements ShouldQueue
             'propietarioable_id' => $idnvo,
             'propietarioable_type' => 'App\Models\Predio',
             'persona_id' => $persona->id,
-            'tipo' => $tipo ? $tipo->desc_007 : '0',
+            'tipo' => isset($tipo) ? $tipo['desc_007'] : '0',
             'porcentaje' => ($predioss->tper_008 == 1 || $predioss->tper_008 == 2 || $predioss->tper_008 >= 5) ? $predioss->ppro_008 : 0,
             'porcentaje_nuda' => ($predioss->tper_008 == 3) ? $predioss->ppro_008 : 0,
             'porcentaje_usufructo' => ($predioss->tper_008 == 4) ? $predioss->ppro_008 : 0,
@@ -324,7 +349,7 @@ class MigrarPredioJob implements ShouldQueue
                     'numero_interior' => $propietario->nint_005,
                     'colonia' => $propietario->noco_005,
                     'cp' => $propietario->codp_005,
-                    'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $propietario->cest_005)->first()?->desc_007,
+                    'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $propietario->cest_005)->first() ? $this->referencias->where('tipo_007', "ED")->where('cven_007', $propietario->cest_005)->first()['desc_007'] : null,
                     'municipio' => $propietario->nomu_005,
                     'ciudad' => $propietario->nopo_005,
                 ]
@@ -336,13 +361,18 @@ class MigrarPredioJob implements ShouldQueue
                 'propietarioable_id' => $idnvo,
                 'propietarioable_type' => 'App\Models\Predio',
                 'persona_id' => $persona->id,
-                'tipo' => $tipo ? $tipo->desc_007 : '0',
+                'tipo' => isset($tipo) ? $tipo['desc_007'] : '0',
                 'porcentaje' => ($propietario->tper_005 == 1 || $propietario->tper_005 == 2 || $propietario->tper_005 >= 5) ? $propietario->ppro_005 : 0,
                 'porcentaje_nuda' => ($propietario->tper_005 == 3) ? $propietario->ppro_005 : 0,
                 'porcentaje_usufructo' => ($propietario->tper_005 == 4) ? $propietario->ppro_005 : 0,
             ]);
 
         }
+
+        $nombre = null;
+        $persona = null;
+        $tipo = null;
+        $ctcop005 = null;
 
     }
 
@@ -391,6 +421,8 @@ class MigrarPredioJob implements ShouldQueue
             ]);
 
         }
+
+        $contruccionesSS = null;
     }
 
     public function colindacnias($idnvo, $col1, $col2, $col3, $col4)
@@ -459,12 +491,16 @@ class MigrarPredioJob implements ShouldQueue
 
             Movimiento::create([
                 'predio_id' => $idnvo,
-                'nombre' => $this->referencias->where('cven_007', $movimiento->cmto_021)->where('tipo_007', 'OM')->first()->desc_007,
+                'nombre' => $this->referencias->where('cven_007', $movimiento->cmto_021)->where('tipo_007', 'OM')->first()['desc_007'],
                 'fecha' => $movimiento->femo_021,
                 'descripcion' => $movimiento->obse_021,
                 'actualizado_nombre' => $movimiento->nome_021,
             ]);
 
         }
+
+        $movimientos = null;
+        $movimiento = null;
+
     }
 }

@@ -3,9 +3,9 @@
     <x-slot name="title">
 
         @if($crear)
-            Nueva Variación Catastral
+            Nuevo Predio Ignorado
         @elseif($editar)
-            Editar Variación Catastral
+            Editar Predio Ignorado
         @endif
 
     </x-slot>

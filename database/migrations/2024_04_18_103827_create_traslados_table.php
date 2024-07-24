@@ -24,6 +24,8 @@ return new class extends Migration
             $table->foreignId('asignado_a')->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
+
+            $table->index('estado');
         });
     }
 

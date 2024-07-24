@@ -258,7 +258,7 @@
 
     </div>
 
-    @if($predios)
+    @if($this->predios && !$flag)
 
         <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
 
@@ -278,7 +278,7 @@
 
                 <x-slot name="body">
 
-                    @forelse ($predios as $item)
+                    @forelse ($this->predios as $item)
 
                         <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $item->id }}">
 
@@ -324,9 +324,9 @@
 
                             <x-table.cell>
 
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Vialidad</span>
+                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl"># Exterior / # Interior</span>
 
-                                {{ $item->numero_interior . ', ' , $item->numero_exterior }}
+                                {{ $item->numero_exterior . ', ' , $item->numero_interior }}
 
                             </x-table.cell>
 
@@ -365,6 +365,16 @@
 
                 <x-slot name="tfoot">
 
+                    <x-table.row>
+
+                        <x-table.cell colspan="13" class="bg-gray-50">
+
+                            {{-- {{ $this->prediosLista->links() }} --}}
+
+                        </x-table.cell>
+
+                    </x-table.row>
+
                 </x-slot>
 
             </x-table>
@@ -373,9 +383,22 @@
 
     @endif
 
-    @if($predio->getKey())
+    @if($predio->getKey() && $flag)
 
         <div>
+
+            <div>
+                <x-button-blue
+                        wire:click="$toggle('flag')"
+                        wire:loading.attr="disabled"
+                        wire:target="$toggle('flag')">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                        </svg>
+                    </span>
+                </x-button-blue>
+            </div>
 
             <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Datos generales</h4>
 
@@ -417,9 +440,17 @@
 
                     <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                        <strong>Título de propiedad</strong>
+                        <strong>Documento de entrada - Número de documento</strong>
 
-                        <p>{{ $predio->documento_numero }}</p>
+                        <p>{{ $predio->documento_entrada }} - {{ $predio->documento_numero }}</p>
+
+                    </div>
+
+                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                        <strong>Declarante</strong>
+
+                        <p>{{ $predio->declarante }}</p>
 
                     </div>
 
@@ -524,6 +555,24 @@
                         <strong>Valor catastral</strong>
 
                         <p>${{ number_format($predio->valor_catastral, 2) }}</p>
+
+                    </div>
+
+                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                        <strong>Uso del predio</strong>
+
+                        <p>Uso 1: {{ $predio->uso_1 }}</p>
+                        <p>Uso 2: {{ $predio->uso_2 }}</p>
+                        <p>Uso 3: {{ $predio->uso_3 }}</p>
+
+                    </div>
+
+                    <div class="col-span-1 sm:col-span-2 lg:col-span-5 rounded-lg bg-gray-100 py-1 px-2">
+
+                        <strong>Observaciones</strong>
+
+                        <p>{{ $predio->observaciones }}</p>
 
                     </div>
 
@@ -683,7 +732,7 @@
 
                     <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                        <strong>Coordenadas geográficas UTM</strong>
+                        <strong>Coordenadas UTM</strong>
 
                         <p>X: {{ $predio->xutm }}</p>
                         <p>Y: {{ $predio->yutm }}</p>
@@ -693,10 +742,27 @@
 
                     <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                        <strong>Coordenadas geográficas GEO</strong>
+                        <strong>Coordenadas geográficas</strong>
 
                         <p>Lat: {{ $predio->lat }}</p>
                         <p>Lon: {{ $predio->lon }}</p>
+                        <div class="flex items-center gap-2">
+
+                            <a href="{{ 'http://mapa.catastro.michoacan.gob.mx:8080/index.html?pzoom=20&plat=' . $predio->lat . '&plon=' . $predio->lon }}" title="SIG" target="_blank">
+                                <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="SIG">
+                            </a>
+
+                            <a href="{{ 'https://www.google.com/maps/?q=' . $predio->lat . ',' . $predio->lon . '&z=5&t=k' }}" title="Google" target="_blank">
+
+                                <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="Google">
+
+                            </a>
+
+                            <a href="" title="Cartografía" target="_blank">
+                                <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="Cartografía">
+                            </a>
+
+                        </div>
 
                     </div>
 
@@ -729,7 +795,7 @@
                             <tr class="text-gray-500 text-sm leading-relaxed">
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $colindancia->viento }}</td>
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $colindancia->longitud }}</td>
-                                <td class=" px-2 w-full whitespace-nowrap">{{ $colindancia->descripcion }}</td>
+                                <td class=" px-2 w-full">{{ $colindancia->descripcion }}</td>
                             </tr>
 
                         @endforeach
@@ -752,7 +818,7 @@
 
                             <th class="px-2">Superficie</th>
                             <th class="px-2">Valor unitario</th>
-                            <th class="px-2">Demerito</th>
+                            <th class="px-2">Demérito</th>
                             <th class="px-2">Valor demeritado</th>
                             <th class="px-2">Valor del terreno</th>
 
@@ -807,7 +873,7 @@
 
                             <tr class="text-gray-500 text-sm leading-relaxed">
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->referencia }}</td>
-                                <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->tipo }}-{{ $construccion->uso }}-{{ $construccion->calidad }}-{{ $construccion->estado }}</td>
+                                <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->tipo }}-{{ $construccion->uso }}-{{ $construccion->estado }}-{{ $construccion->calidad }}</td>
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->niveles }}</td>
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->superficie }}</td>
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->valor_unitario }}</td>
@@ -834,6 +900,7 @@
 
                             <th class="px-2">Área común de terreno</th>
                             <th class="px-2">Indiviso de terreno</th>
+                            <th class="px-2">Superficie proporcional</th>
                             <th class="px-2">Valor unitario</th>
                             <th class="px-2">Valor de terreno común</th>
 
@@ -848,6 +915,7 @@
                             <tr class="text-gray-500 text-sm leading-relaxed">
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->area_terreno_comun }}</td>
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->indiviso_terreno }}</td>
+                                <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->superficie_proporcional }}</td>
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->valor_unitario }}</td>
                                 <td class=" px-2 w-full whitespace-nowrap">${{ number_format($terreno->valor_terreno_comun, 2) }}</td>
                             </tr>
@@ -871,7 +939,9 @@
                         <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
                             <th class="px-2">Área común de construcción</th>
-                            <th class="px-2">Clasificación de construccion</th>
+                            <th class="px-2">Indiviso de construcción</th>
+                            <th class="px-2">Superficie proporcional</th>
+                            <th class="px-2">Clasificación de construcción</th>
                             <th class="px-2">Valor de construcción común</th>
 
                         </tr>
@@ -884,6 +954,8 @@
 
                             <tr class="text-gray-500 text-sm leading-relaxed">
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->area_comun_construccion }}</td>
+                                <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->indiviso_construccion }}</td>
+                                <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->superficie_proporcional }}</td>
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->valor_clasificacion_construccion }}</td>
                                 <td class=" px-2 w-full whitespace-nowrap">${{ number_format($construccion->valor_construccion_comun, 2) }}</td>
                             </tr>

@@ -23,6 +23,10 @@ class ReactivarTramites extends Component
 
     public $tramite;
 
+    public $modal;
+    public $selected_id;
+    public $observaciones;
+
     public function buscarTramite(){
 
         $this->validate([
@@ -65,27 +69,46 @@ class ReactivarTramites extends Component
 
     }
 
-    public function reactivarPredio($id){
+    public function abrirReactivarModal($id){
+
+        $this->modal = true;
+
+        $this->selected_id = $id;
+
+    }
+
+    public function reactivarPredio(){
+
+        $this->validate([
+            'observaciones' => 'required'
+        ]);
 
         try {
 
-            DB::transaction(function () use ($id){
+            DB::transaction(function (){
 
-                $certificacion = Certificacion::where('tramite_id', $this->tramite->id)->where('predio_id', $id)->first();
+                $certificacion = Certificacion::where('tramite_id', $this->tramite->id)->where('predio_id', $this->selected_id)->where('estado', 'activo')->first();
 
                 if($certificacion){
 
-                    $certificacion->update(['estado' => 'cancelado']);
+                    $certificacion->update([
+                        'estado' => 'cancelado',
+                        'observaciones' => $this->observaciones
+                    ]);
+
+                    $certificacion->audits()->latest()->first()->update(['tags' => 'Canceló certificado']);
 
                 }
 
-                $this->tramite->predios()->updateExistingPivot($id, ['estado' => 'A']);
+                $this->tramite->predios()->updateExistingPivot($this->selected_id, ['estado' => 'A']);
 
                 if($this->tramite->estado === 'concluido') $this->tramite->update(['estado' => 'pagado']);
 
-                $this->tramite->audits()->latest()->first()->update(['tags' => 'Reactivo cuenta predial']);
+                $this->tramite->audits()->latest()->first()->update(['tags' => 'Reactivó cuenta predial']);
 
                 $this->tramite->load('predios');
+
+                $this->reset('selected_id', 'modal', 'observaciones');
 
                 $this->dispatch('mostrarMensaje', ['warning', "La cuenta predial se reactivó con éxito, si tenia un certificado este ha sido cancelado."]);
 

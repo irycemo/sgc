@@ -6,9 +6,14 @@ use App\Models\Predio;
 use App\Models\Oficina;
 use Livewire\Component;
 use App\Models\Propietario;
+use Livewire\WithPagination;
+use Illuminate\Validation\Rule;
+use Livewire\Attributes\Computed;
 
 class ConsultaPadron extends Component
 {
+
+    use WithPagination;
 
     public Predio $predio;
     public $predios;
@@ -23,6 +28,9 @@ class ConsultaPadron extends Component
     public $curp;
     public $ubicacion;
     public $diez = false;
+    public $prediosIds;
+    public $flag = false;
+    public $buscarClave = true;
 
     protected function rules(){
         return [
@@ -84,6 +92,13 @@ class ConsultaPadron extends Component
 
         $this->predio->id = null;
 
+        $this->validate([
+            'predio.numero_registro' => 'required|numeric|min:1',
+            'predio.tipo_predio' => 'required|numeric|min:1|max:2',
+            'predio.oficina' => 'required|numeric|min:1',
+            'predio.localidad' => 'required|numeric|min:1',
+        ]);
+
         if(!$this->diez){
 
             try {
@@ -111,6 +126,8 @@ class ConsultaPadron extends Component
                 }
 
                 if($this->predioInactivo()) return;
+
+                $this->flag = true;
 
             } catch (\Throwable $th) {
 
@@ -141,19 +158,20 @@ class ConsultaPadron extends Component
 
     public function buscarClaveCatastral(){
 
-        $this->predio->id = null;
+        /* $this->predio->id = null; */
+
+        $this->validate([
+            'predio.region_catastral' => 'required|numeric|min:1',
+            'predio.municipio' => 'required|numeric|min:1',
+            'predio.localidad' => 'required|numeric|min:1',
+            'predio.sector' => 'required|numeric|min:1',
+            'predio.zona_catastral' => 'required|numeric|min:1,|same:predio.localidad',
+            'predio.manzana' => 'required|numeric|min:1',
+        ]);
 
         try {
 
-            $this->predios = Predio::with(
-                                        'propietarios.persona',
-                                        'condominioTerrenos',
-                                        'condominioConstrucciones',
-                                        'terrenos',
-                                        'construcciones',
-                                        'colindancias',
-                                        'propietarioInicial'
-                                    )
+            $this->predios = Predio::with('propietarioInicial')
                                     ->where('status', 'activo')
                                     ->where('estado', 16)
                                     ->where('region_catastral', $this->predio->region_catastral)
@@ -179,32 +197,41 @@ class ConsultaPadron extends Component
 
         $this->predio->id = null;
 
+        $this->validate([
+            'nombre' => Rule::requiredIf($this->ap_paterno != null || $this->ap_materno != null),
+            'ap_paterno' => Rule::requiredIf($this->ap_materno != null || $this->nombre != null),
+            'ap_materno' => Rule::requiredIf($this->nombre != null || $this->ap_materno != null),
+            'razon_social' => Rule::requiredIf($this->nombre == null && $this->ap_materno == null && $this->ap_paterno == null && $this->rfc == null && $this->curp == null),
+            'rfc' => Rule::requiredIf($this->nombre == null && $this->ap_materno == null && $this->ap_paterno == null && $this->razon_social == null && $this->curp == null),
+            'curp' => Rule::requiredIf($this->nombre == null && $this->ap_materno == null && $this->ap_paterno == null && $this->rfc == null && $this->razon_social == null),
+        ]);
+
         try {
 
             $propietarios = Propietario::whereHas('persona', function($q){
                                                     $q->when($this->nombre != '' && $this->nombre != null, function($q){
-                                                        $q->where('nombre', 'like', '%'. $this->nombre . '%');
+                                                        $q->where('nombre', $this->nombre);
                                                     })
                                                     ->when($this->ap_paterno != '' && $this->ap_paterno != null, function($q){
-                                                        $q->where('ap_paterno', 'like', '%'. $this->ap_paterno . '%');
+                                                        $q->where('ap_paterno', $this->ap_paterno);
                                                     })
                                                     ->when($this->ap_materno != '' && $this->ap_materno != null, function($q){
-                                                        $q->where('ap_materno', 'like', '%'. $this->ap_materno . '%');
+                                                        $q->where('ap_materno', $this->ap_materno);
                                                     })
                                                     ->when($this->razon_social != '' && $this->razon_social != null, function($q){
-                                                        $q->where('razon_social', 'like', '%'. $this->razon_social . '%');
+                                                        $q->where('razon_social', $this->razon_social);
                                                     })
                                                     ->when($this->rfc != '' && $this->rfc != null, function($q){
-                                                        $q->where('rfc', 'like', '%'. $this->rfc . '%');
+                                                        $q->where('rfc', $this->rfc);
                                                     })
                                                     ->when($this->curp != '' && $this->curp != null, function($q){
-                                                        $q->where('curp', 'like', '%'. $this->curp . '%');
+                                                        $q->where('curp', $this->curp);
                                                     });
                                             })
                                             ->where('propietarioable_type', 'App\Models\Predio')
                                             ->get();
 
-            if($propietarios->count()){
+
 
                 $this->predios = Predio::with('propietarioInicial')
                                             ->whereIn('id', $propietarios->pluck('propietarioable_id'))
@@ -214,7 +241,7 @@ class ConsultaPadron extends Component
                                             ->orderBy('oficina')
                                             ->get();
 
-            }
+
 
         } catch (\Throwable $th) {
 
@@ -227,6 +254,8 @@ class ConsultaPadron extends Component
     public function buscarPorUbicacion(){
 
         $this->predio->id = null;
+
+        $this->validate(['ubicacion' => 'required']);
 
         try {
 
@@ -257,19 +286,19 @@ class ConsultaPadron extends Component
 
     public function verPredio(Predio $predio){
 
-        $this->reset('predios');
-
         $this->predio = $predio;
 
         $this->predio->load(
-                                'propietarios.persona',
-                                'condominioTerrenos',
-                                'condominioConstrucciones',
-                                'terrenos',
-                                'construcciones',
-                                'colindancias',
-                                'movimientos'
+                            'propietarios.persona',
+                            'condominioTerrenos',
+                            'condominioConstrucciones',
+                            'terrenos',
+                            'construcciones',
+                            'colindancias',
+                            'movimientos'
                             );
+
+        $this->flag = true;
 
     }
 
@@ -286,6 +315,24 @@ class ConsultaPadron extends Component
         }
 
     }
+
+    /* #[Computed]
+    public function prediosLista(){
+
+        return Predio::with('propietarioInicial')
+                        ->where('status', 'activo')
+                        ->where('estado', 16)
+                        ->where('region_catastral', $this->predio->region_catastral)
+                        ->where('municipio', $this->predio->municipio)
+                        ->where('zona_catastral', $this->predio->zona_catastral)
+                        ->where('localidad', $this->predio->localidad)
+                        ->where('sector', $this->predio->sector)
+                        ->where('manzana', $this->predio->manzana)
+                        ->when($this->predio->oficina != 101, function($q){
+                            $q->where('oficina', $this->predio->oficina);
+                        })->get();
+
+    } */
 
     public function mount(){
 

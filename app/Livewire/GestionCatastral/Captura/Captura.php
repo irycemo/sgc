@@ -4,6 +4,7 @@ namespace App\Livewire\GestionCatastral\Captura;
 
 
 use Carbon\Carbon;
+use App\Models\Uma;
 use App\Models\Predio;
 use App\Models\Notaria;
 use App\Models\Oficina;
@@ -26,7 +27,7 @@ class Captura extends Component
     public $notarias;
     public $acccion;
 
-    public $actualizacion = false;
+    public $actualizacion = true;
     public $modalIndexar = false;
     public $modalBaja = false;
     public $label = 'Número de documento';
@@ -530,6 +531,7 @@ class Captura extends Component
             DB::transaction(function () {
 
                 $this->predio->creado_por = auth()->id();
+                $this->predio->valor_catastral = $this->revisarValorMinimo($this->predio->valor_catastral);
                 $this->predio->save();
 
                 $this->predio->audits()->latest()->first()->update(['tags' => 'Dió de alta predio']);
@@ -572,6 +574,7 @@ class Captura extends Component
 
                 $this->predio->actualizado_por = auth()->id();
                 $this->predio->observaciones = $this->observaciones . '. ' . $this->observaciones;
+                $this->predio->valor_catastral = $this->revisarValorMinimo($this->predio->valor_catastral);
                 $this->predio->save();
 
                 $this->predio->audits()->latest()->first()->update(['tags' => 'Actualizo información de identificación']);
@@ -595,6 +598,18 @@ class Captura extends Component
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 
         }
+
+    }
+
+    public function revisarValorMinimo($valor){
+
+        $uma = Uma::where('año', now()->format('Y'))->first();
+
+        if($this->predio->tipo_predio == 1 && $this->predio->valor_catastral < $uma->minimo_urbano) return $uma->minimo_urbano;
+
+        if($this->predio->tipo_predio == 2 && $this->predio->valor_catastral < $uma->minimo_rustico) return $uma->minimo_rustico;
+
+        return ceil($valor);
 
     }
 

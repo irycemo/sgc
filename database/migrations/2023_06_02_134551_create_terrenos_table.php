@@ -23,6 +23,8 @@ return new class extends Migration
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
+
+            $table->index(['terrenoable_id', 'terrenoable_type']);
         });
     }
 

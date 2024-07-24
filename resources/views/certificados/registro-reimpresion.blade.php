@@ -321,16 +321,120 @@
             <div class="informacion">
 
                 <p style=" margin: 4px 0 4px 0;">
-                    @if(isset($objeto->superficie_notarial))<strong>Superficie notarial:</strong> {{ number_format((float)$objeto->superficie_notarial, 2) }},@endif
-                    @if(isset($objeto->superficie_judicial))<strong>Superficie judicial:</strong> {{ number_format((float)$objeto->superficie_judicial, 2) }},@endif
-                    @if(isset($objeto->superficie_terreno))<strong>Superficie de terreno:</strong> {{ number_format((float)$objeto->superficie_terreno, 2) }},@endif
-                    @if(isset($objeto->superficie_construccion))<strong>Superficie de construcción:</strong> {{ number_format((float)$objeto->superficie_construccion, 2) }},@endif
-                    @if(isset($objeto->area_comun_terreno))<strong>Superficie de terreno común:</strong> {{ number_format((float)$objeto->area_comun_terreno, 2) }},@endif
-                    @if(isset($objeto->area_comun_construccion))<strong>Superficie de construcción común:</strong> {{ number_format((float)$objeto->area_comun_construccion, 2) }},@endif
+                    @if(isset($objeto->superficie_notarial))<strong>Superficie notarial:</strong> {{ number_format((float)$objeto->superficie_notarial, 2) }}.@endif
+                    @if(isset($objeto->superficie_judicial))<strong>Superficie judicial:</strong> {{ number_format((float)$objeto->superficie_judicial, 2) }}.@endif
+                    @if(isset($objeto->superficie_terreno))<strong>Superficie de terreno:</strong> {{ number_format((float)$objeto->superficie_terreno, 2) }}.@endif
+                    @if(isset($objeto->superficie_construccion))<strong>Superficie de construcción:</strong> {{ number_format((float)$objeto->superficie_construccion, 2) }}.@endif
+                    @if(isset($objeto->area_comun_terreno))<strong>Superficie de terreno común:</strong> {{ number_format((float)$objeto->area_comun_terreno, 2) }}.@endif
+                    @if(isset($objeto->area_comun_construccion))<strong>Superficie de construcción común:</strong> {{ number_format((float)$objeto->area_comun_construccion, 2) }}.@endif
 
                 </p>
 
                 <p><strong>Valor catastral: </strong>${{ number_format($objeto->valor_catastral, 2) }}</p>
+
+                @if($objeto->terrenos->count())
+
+                    <div class="caracteristicas-tabla">
+
+                        <p style="text-align: center; margin-top: 20px;"><strong>Condominios</strong></p>
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th style="text-align: left;">Área común de terreno</th>
+                                    <th style="text-align: left;">Indiviso de terreno</th>
+                                    <th style="text-align: left;">Superficie proporcional</th>
+                                    <th style="text-align: left;">Valor unitario</th>
+                                    <th style="text-align: left;">Valor de terreno común</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                @foreach ($objeto->terrenos as $constr)
+
+                                    <tr>
+                                        <td style="padding-right: 40px; border: 1px solid black;">
+                                            <p>{{ $constr->area_terreno_comun }}</p>
+                                        </td>
+                                        <td style="padding-right: 40px; border: 1px solid black;">
+                                            <p>{{ $constr->indiviso_terreno }}</p>
+                                        </td>
+                                        <td style="padding-right: 40px; border: 1px solid black;">
+                                            <p>{{ $constr->superficie_proporcional }}</p>
+                                        </td>
+                                        <td style="padding-right: 40px; border: 1px solid black;">
+                                            <p>{{ $constr->valor_unitario }}</p>
+                                        </td>
+                                        <td style="padding-right: 40px; border: 1px solid black;">
+                                            <p>${{ number_format($constr->valor_terreno_comun, 2) }}</p>
+                                        </td>
+                                    </tr>
+
+                                @endforeach
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                @endif
+
+                @if($objeto->construcciones->count())
+
+                    <div class="caracteristicas-tabla">
+
+                        <p style="text-align: center; margin-top: 20px;"><strong>Construcciones de área común</strong></p>
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th style="text-align: left;">Área común de construcción</th>
+                                    <th style="text-align: left;">Indiviso de construcción</th>
+                                    <th style="text-align: left;">Superficie proporcional</th>
+                                    <th style="text-align: left;">Clasificación de construccion</th>
+                                    <th style="text-align: left;">Valor de construcción común</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                @foreach ($objeto->construcciones as $constr)
+
+                                    <tr>
+                                        <td style="padding-right: 40px; border: 1px solid black;">
+                                            <p>{{ $constr->area_comun_construccion }}</p>
+                                        </td>
+                                        <td style="padding-right: 40px; border: 1px solid black;">
+                                            <p>{{ $constr->indiviso_construccion }}</p>
+                                        </td>
+                                        <td style="padding-right: 40px; border: 1px solid black;">
+                                            <p>{{ $constr->superficie_proporcional }}</p>
+                                        </td>
+                                        <td style="padding-right: 40px; border: 1px solid black;">
+                                            <p>{{ $constr->valor_clasificacion_construccion }}</p>
+                                        </td>
+                                        <td style="padding-right: 40px; border: 1px solid black;">
+                                            <p>${{ number_format($constr->valor_construccion_comun, 2) }}</p>
+                                        </td>
+                                    </tr>
+
+                                @endforeach
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                @endif
 
             </div>
 

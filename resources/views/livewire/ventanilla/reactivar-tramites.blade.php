@@ -129,8 +129,16 @@
 
                                 <tr class="border-b py-1">
 
-                                    <td class="px-2">
-                                        <span class="rounded-full px-1 text-white @if($item->pivot->estado === 'A') bg-green-500 @else bg-gray-500 @endif">{{ $item->pivot->estado }}</span>
+                                    <td class="p-2">
+                                        @if($item->pivot->estado === 'A')
+
+                                            <span class="rounded-full text-white bg-green-500 px-2">Activo</span>
+
+                                        @elseif($item->pivot->estado === 'I')
+
+                                            <span class="rounded-full text-white bg-gray-500 px-2">Impreso</span>
+
+                                        @endif
                                     </td>
                                     <td class="px-2">
                                         {{ $item->localidad }}
@@ -144,14 +152,15 @@
                                     <td class="px-2">
                                         <p>{{ $item->numero_registro }}</p>
                                     </td>
-                                    <td class="px-2 flex items-center space-x-2">
+                                    <td class="p-2">
 
                                         @if($item->pivot->estado === 'I')
 
                                             <button
-                                                wire:click="reactivarPredio({{ $item['id'] }})"
+                                                title="Reactivar"
+                                                wire:click="abrirReactivarModal({{ $item['id'] }})"
                                                 wire:loading.attr="disabled"
-                                                wire:target="reactivarPredio({{ $item['id'] }})"
+                                                wire:target="abrirReactivarModal({{ $item['id'] }})"
                                                 class=" bg-blue-400 text-white text-xs p-1 items-center rounded-full hover:bg-blue-700 flex justify-center focus:outline-none"
                                             >
 
@@ -221,5 +230,44 @@
         </div>
 
     @endif
+
+    <x-confirmation-modal wire:model="modal" maxWidth="sm">
+
+        <x-slot name="title">
+            Reactivar certificado
+        </x-slot>
+
+        <x-slot name="content">
+            ¿Esta seguro que desea reactivar el certificado? El certificado ya impreso será cancelado.
+
+            <x-input-group for="observaciones" label="" :error="$errors->first('observaciones')">
+
+                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico posible acerca del motivo por el cual se cancela el certificado"></textarea>
+
+            </x-input-group>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <x-secondary-button
+                wire:click="$toggle('modal')"
+                wire:loading.attr="disabled"
+            >
+                No
+            </x-secondary-button>
+
+            <x-danger-button
+                class="ml-2"
+                wire:click="reactivarPredio"
+                wire:loading.attr="disabled"
+                wire:target="reactivarPredio"
+            >
+                Rectivar
+            </x-danger-button>
+
+        </x-slot>
+
+    </x-confirmation-modal>
 
 </div>

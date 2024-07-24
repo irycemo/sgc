@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Valuacion\ValuacionYDesglose;
 
+use App\Models\Uma;
 use App\Models\Avaluo;
 use App\Models\Predio;
 use App\Models\Terreno;
@@ -844,7 +845,7 @@ class Valor extends Component
 
             }
 
-            $this->predio->valor_catastral = ceil($this->predio->valor_catastral);
+            $this->predio->valor_catastral = $this->revisarValorMinimo($this->predio->valor_catastral);
 
             $this->predio->save();
 
@@ -858,6 +859,18 @@ class Valor extends Component
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 
         }
+
+    }
+
+    public function revisarValorMinimo($valor){
+
+        $uma = Uma::where('año', now()->format('Y'))->first();
+
+        if($this->predio->tipo_predio == 1 && $this->predio->valor_catastral < $uma->minimo_urbano) return $uma->minimo_urbano;
+
+        if($this->predio->tipo_predio == 2 && $this->predio->valor_catastral < $uma->minimo_rustico) return $uma->minimo_rustico;
+
+        return ceil($valor);
 
     }
 

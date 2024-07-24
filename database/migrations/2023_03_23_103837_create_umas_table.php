@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedFloat('diario');
             $table->unsignedFloat('mensual');
             $table->unsignedFloat('anual');
+            $table->unsignedFloat('minimo_rustico')->nullable();
+            $table->unsignedFloat('minimo_urbano')->nullable();
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

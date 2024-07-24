@@ -211,6 +211,8 @@ class Conciliar extends Component
 
             if($this->predioInactivo()) return;
 
+            $this->updatedPredioCodigoPostal();
+
         } catch (\Throwable $th) {
 
             $this->dispatch('mostrarMensaje', ['error', "No se encontro predio con la cuenta predial ingresada."]);
@@ -245,6 +247,8 @@ class Conciliar extends Component
             }
 
             if($this->predioInactivo()) return;
+
+            $this->updatedPredioCodigoPostal();
 
         } catch (\Throwable $th) {
 
@@ -296,7 +300,7 @@ class Conciliar extends Component
             'localidad' => 'required|numeric|min:1',
             'sector' => 'required|numeric|min:1',
             'zona_catastral' => 'required|numeric|min:1,|same:localidad',
-            'manzana' => 'required|numeric|min:1',
+            'manzana' => 'required|numeric|min:0',
             'predio_cc' => 'required|numeric|min:1',
             'edificio' => 'required|numeric|min:0',
             'departamento' => 'required|numeric|min:0',

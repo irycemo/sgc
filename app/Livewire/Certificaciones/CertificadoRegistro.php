@@ -216,6 +216,26 @@ class CertificadoRegistro extends Component
 
         }
 
+        if($this->predio->condominioTerrenos->count()){
+
+            foreach ($this->predio->condominioTerrenos as $terreno) {
+
+                $this->cadena = $this->cadena . '|' . 'Área común de terreno=' . $terreno->area_terreno_comun . '&Indiviso de terreno=' . $terreno->indiviso_terreno . '&Superficie proporcional=' . $terreno->superficie_proporcional . '&Valor unitario=' . $terreno->valor_unitario . '&Valor de terreno común=' . $terreno->valor_terreno_comun;
+
+            }
+
+        }
+
+        if($this->predio->condominioConstrucciones->count()){
+
+            foreach ($this->predio->condominioConstrucciones as $construccion) {
+
+                $this->cadena = $this->cadena . '|' . 'Área común de construcción=' . $construccion->area_comun_construccion . '?Indiviso de construcción=' . $construccion->indiviso_construccion . '?Superficie proporcional=' . $construccion->superficie_proporcional . '?Valor de clasificación=' . $construccion->valor_clasificacion_construccion . '?Valor de construcción común=' . $construccion->valor_construccion_comun;
+
+            }
+
+        }
+
     }
 
     public function revisarOficina(){
@@ -387,12 +407,12 @@ class CertificadoRegistro extends Component
 
             return response()->streamDownload(
                 fn () => print($pdf),
-                'certificado_de_historia.pdf'
+                'certificado_de_registro.pdf'
             );
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al actualizar permisos usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al generar certificado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
         }

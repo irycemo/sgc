@@ -28,6 +28,8 @@ return new class extends Migration
 
             $table->unique(['año', 'folio']);
 
+            $table->index('estado');
+
         });
     }
 

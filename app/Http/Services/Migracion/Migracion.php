@@ -192,6 +192,7 @@ class Migracion
                 'indiviso_terreno' => $ctcdm004->ipre_004 ?? 0,
                 'valor_unitario' => 0,
                 'valor_terreno_comun' => $ctcdm004->vter_004 ?? 0,
+                'superficie_proporcional' => $ctcdm004->prot_004 ?? 0,
             ]);
 
             Condominioconstruccion::create([
@@ -200,7 +201,8 @@ class Migracion
                 'area_comun_construccion' => ($predio_padre) ? $area_comun_construccion : 0,
                 'indiviso_construccion' => $ctcdm004->icon_004 ?? 0,
                 'valor_clasificacion_construccion' => 0,
-                'valor_construccion_comun' => $ctcdm004->vcon_004 ?? 0
+                'valor_construccion_comun' => $ctcdm004->vcon_004 ?? 0,
+                'superficie_proporcional' => $ctcdm004->proc_004 ?? 0,
             ]);
 
         }
@@ -426,7 +428,7 @@ class Migracion
                 'predio_id' => $idnvo,
                 'nombre' => $this->referencias->where('cven_007', $movimiento->cmto_021)->where('tipo_007', 'OM')->first()->desc_007,
                 'fecha' => $movimiento->femo_021,
-                'descripcion' => $movimiento->obse_021,
+                'descripcion' => $predioss->cona_008 . ':' . $movimiento->obse_021,
                 'actualizado_nombre' => $movimiento->nome_021,
             ]);
 

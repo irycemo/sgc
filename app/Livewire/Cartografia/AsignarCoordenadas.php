@@ -19,7 +19,11 @@ class AsignarCoordenadas extends Component
             'predio.yutm' => 'nullable|string',
             'predio.zutm' => 'nullable',
             'predio.lat' => 'required|numeric',
-            'predio.lon' => 'required|numeric'
+            'predio.lon' => 'required|numeric',
+            'predio.localidad' => 'required|numeric',
+            'predio.oficina' => 'required|numeric',
+            'predio.tipo_predio' => 'required|numeric',
+            'predio.numero_registro' => 'required|numeric'
         ];
 
     }
