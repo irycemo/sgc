@@ -72,7 +72,7 @@
 
     <div>
 
-        @if($radio === 'clave' && $predio)
+        @if($radio === 'clave')
 
             <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg">
 
@@ -90,16 +90,16 @@
 
                             <div class="space-y-1">
 
-                                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('predio.localidad') border-1 border-red-500 @enderror" wire:model.blur="predio.localidad">
+                                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-                                <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('predio.oficina') border-1 border-red-500 @enderror" wire:model.blur="predio.oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                                <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.blur="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                                <input title="Tipo de predio" placeholder="Tipo" type="number" min="1" max="2" class="bg-white rounded text-xs w-20 @error('predio.tipo_predio') border-1 border-red-500 @enderror" wire:model="predio.tipo_predio">
+                                <input title="Tipo de predio" placeholder="Tipo" type="number" min="1" max="2" class="bg-white rounded text-xs w-20 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
 
-                                <input title="Número de registro" placeholder="Registro" type="number" class="bg-white rounded text-xs w-20 @error('predio.numero_registro') border-1 border-red-500 @enderror" wire:model.blur="predio.numero_registro">
+                                <input title="Número de registro" placeholder="Registro" type="number" class="bg-white rounded text-xs w-20 @error('numero_registro') border-1 border-red-500 @enderror" wire:model="numero_registro">
 
                                 <div class="inline-flex items-center">
-                                    <span class="text-xs mr-2">+/- 10</span><x-checkbox wire:model.live="diez"></x-checkbox>
+                                    <span class="text-xs mr-2">+/- 10</span><x-checkbox wire:model="diez"></x-checkbox>
                                 </div>
 
                             </div>
@@ -118,17 +118,17 @@
 
                                 <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-20" title="Estado" value="16" readonly>
 
-                                <input title="Región catastral" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('predio.region_catastral') border-1 border-red-500 @enderror" wire:model="predio.region_catastral">
+                                <input title="Región catastral" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral" readonly>
 
-                                <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('predio.municipio') border-1 border-red-500 @enderror" wire:model="predio.municipio" readonly>
+                                <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio" readonly>
 
-                                <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('predio.zona_catastral') border-1 border-red-500 @enderror" wire:model="predio.zona_catastral">
+                                <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model="zona_catastral">
 
-                                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('predio.localidad') border-1 border-red-500 @enderror" wire:model.blur="predio.localidad">
+                                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-                                <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-20 @error('predio.sector') border-1 border-red-500 @enderror" wire:model="predio.sector">
+                                <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-20 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
 
-                                <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-20 @error('predio.manzana') border-1 border-red-500 @enderror" wire:model="predio.manzana">
+                                <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-20 @error('manzana') border-1 border-red-500 @enderror" wire:model="manzana">
 
                             </div>
 
@@ -258,7 +258,24 @@
 
     </div>
 
-    @if($this->predios && !$flag)
+    @if($this->prediosLista->count() && $flag)
+
+        <div class="flex justify-end mb-3">
+            <x-button-blue
+                    wire:click="$toggle('flag')"
+                    wire:loading.attr="disabled"
+                    wire:target="$toggle('flag')">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                    </svg>
+                </span>
+            </x-button-blue>
+        </div>
+
+    @endif
+
+    @if(!$flag)
 
         <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
 
@@ -278,7 +295,7 @@
 
                 <x-slot name="body">
 
-                    @forelse ($this->predios as $item)
+                    @forelse ($this->prediosLista as $item)
 
                         <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $item->id }}">
 
@@ -334,8 +351,7 @@
 
                                 <x-button-green
                                     wire:click="verPredio({{ $item->id }})"
-                                    wire:loading.attr="disabled"
-                                    wire:target="verPredio({{ $item->id }})">
+                                    wire:loading.attr="disabled">
                                     Ver
                                 </x-button-green>
 
@@ -369,7 +385,7 @@
 
                         <x-table.cell colspan="13" class="bg-gray-50">
 
-                            {{-- {{ $this->prediosLista->links() }} --}}
+                            {{ $this->prediosLista->links() }}
 
                         </x-table.cell>
 
@@ -383,22 +399,9 @@
 
     @endif
 
-    @if($predio->getKey() && $flag)
+    @if($flag)
 
-        <div>
-
-            <div>
-                <x-button-blue
-                        wire:click="$toggle('flag')"
-                        wire:loading.attr="disabled"
-                        wire:target="$toggle('flag')">
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
-                        </svg>
-                    </span>
-                </x-button-blue>
-            </div>
+        <div wire:loading.class.delaylongest="opacity-50">
 
             <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Datos generales</h4>
 
@@ -410,7 +413,7 @@
 
                         <strong>Cuenta predial</strong>
 
-                        <p>{{ $predio->localidad }}-{{ $predio->oficina }}-{{ $predio->tipo_predio }}-{{ $predio->numero_registro }}</p>
+                        <p>{{ $this->predio->localidad }}-{{ $this->predio->oficina }}-{{ $this->predio->tipo_predio }}-{{ $this->predio->numero_registro }}</p>
 
                     </div>
 
@@ -418,7 +421,7 @@
 
                         <strong>Clave catastral</strong>
 
-                        <p>{{ $predio->estado }}-{{ $predio->region_catastral }}-{{ $predio->municipio }}-{{ $predio->zona_catastral }}-{{ $predio->localidad }}-{{ $predio->sector }}-{{ $predio->manzana }}-{{ $predio->predio }}-{{ $predio->edificio }}-{{ $predio->departamento }}</p>
+                        <p>{{ $this->predio->estado }}-{{ $this->predio->region_catastral }}-{{ $this->predio->municipio }}-{{ $this->predio->zona_catastral }}-{{ $this->predio->localidad }}-{{ $this->predio->sector }}-{{ $this->predio->manzana }}-{{ $this->predio->predio }}-{{ $this->predio->edificio }}-{{ $this->predio->departamento }}</p>
 
                     </div>
 
@@ -426,7 +429,7 @@
 
                         <strong>Estado</strong>
 
-                        <p>{{ $predio->status }}</p>
+                        <p>{{ $this->predio->status }}</p>
 
                     </div>
 
@@ -434,7 +437,7 @@
 
                         <strong>Folio real</strong>
 
-                        <p>{{ $predio->folio_real }}</p>
+                        <p>{{ $this->predio->folio_real }}</p>
 
                     </div>
 
@@ -442,7 +445,7 @@
 
                         <strong>Documento de entrada - Número de documento</strong>
 
-                        <p>{{ $predio->documento_entrada }} - {{ $predio->documento_numero }}</p>
+                        <p>{{ $this->predio->documento_entrada }} - {{ $this->predio->documento_numero }}</p>
 
                     </div>
 
@@ -450,7 +453,7 @@
 
                         <strong>Declarante</strong>
 
-                        <p>{{ $predio->declarante }}</p>
+                        <p>{{ $this->predio->declarante }}</p>
 
                     </div>
 
@@ -458,7 +461,7 @@
 
                         <strong>CURT</strong>
 
-                        <p>{{ $predio->curt }}</p>
+                        <p>{{ $this->predio->curt }}</p>
 
                     </div>
 
@@ -466,7 +469,7 @@
 
                         <strong>Fecha de efectos</strong>
 
-                        <p>{{ $predio->fecha_efectos }}</p>
+                        <p>{{ $this->predio->fecha_efectos }}</p>
 
                     </div>
 
@@ -474,7 +477,7 @@
 
                         <strong>Superficie notarial</strong>
 
-                        <p>{{ number_format($predio->superficie_notarial, 2) }}</p>
+                        <p>{{ number_format($this->predio->superficie_notarial, 2) }}</p>
 
                     </div>
 
@@ -482,7 +485,7 @@
 
                         <strong>Superficie judicial</strong>
 
-                        <p>{{ number_format($predio->superficie_judicial, 2) }}</p>
+                        <p>{{ number_format($this->predio->superficie_judicial, 2) }}</p>
 
                     </div>
 
@@ -490,7 +493,7 @@
 
                         <strong>Superficie de terreno</strong>
 
-                        <p>{{ number_format($predio->superficie_terreno, 2) }}</p>
+                        <p>{{ number_format($this->predio->superficie_terreno, 2) }}</p>
 
                     </div>
 
@@ -498,7 +501,7 @@
 
                         <strong>Valor de terreno</strong>
 
-                        <p>{{ number_format($predio->valor_total_terreno, 2) }}</p>
+                        <p>{{ number_format($this->predio->valor_total_terreno, 2) }}</p>
 
                     </div>
 
@@ -506,7 +509,7 @@
 
                         <strong>Superficie de construcción</strong>
 
-                        <p>{{ number_format($predio->superficie_construccion, 2) }}</p>
+                        <p>{{ number_format($this->predio->superficie_construccion, 2) }}</p>
 
                     </div>
 
@@ -514,7 +517,7 @@
 
                         <strong>Valor de construcción</strong>
 
-                        <p>{{ number_format($predio->valor_total_construccion, 2) }}</p>
+                        <p>{{ number_format($this->predio->valor_total_construccion, 2) }}</p>
 
                     </div>
 
@@ -522,7 +525,7 @@
 
                         <strong>Área común de terreno</strong>
 
-                        <p>{{ number_format($predio->area_comun_terreno, 2) }}</p>
+                        <p>{{ number_format($this->predio->area_comun_terreno, 2) }}</p>
 
                     </div>
 
@@ -530,7 +533,7 @@
 
                         <strong>Valor de terreno común</strong>
 
-                        <p>{{ number_format($predio->valor_terreno_comun, 2) }}</p>
+                        <p>{{ number_format($this->predio->valor_terreno_comun, 2) }}</p>
 
                     </div>
 
@@ -538,7 +541,7 @@
 
                         <strong>Área común de construcción</strong>
 
-                        <p>{{ number_format($predio->area_comun_construccion, 2) }}</p>
+                        <p>{{ number_format($this->predio->area_comun_construccion, 2) }}</p>
 
                     </div>
 
@@ -546,7 +549,7 @@
 
                         <strong>Valor de construcción común</strong>
 
-                        <p>{{ number_format($predio->valor_construccion_comun, 2) }}</p>
+                        <p>{{ number_format($this->predio->valor_construccion_comun, 2) }}</p>
 
                     </div>
 
@@ -554,7 +557,7 @@
 
                         <strong>Valor catastral</strong>
 
-                        <p>${{ number_format($predio->valor_catastral, 2) }}</p>
+                        <p>${{ number_format($this->predio->valor_catastral, 2) }}</p>
 
                     </div>
 
@@ -562,9 +565,9 @@
 
                         <strong>Uso del predio</strong>
 
-                        <p>Uso 1: {{ $predio->uso_1 }}</p>
-                        <p>Uso 2: {{ $predio->uso_2 }}</p>
-                        <p>Uso 3: {{ $predio->uso_3 }}</p>
+                        <p>Uso 1: {{ $this->predio->uso_1 }}</p>
+                        <p>Uso 2: {{ $this->predio->uso_2 }}</p>
+                        <p>Uso 3: {{ $this->predio->uso_3 }}</p>
 
                     </div>
 
@@ -572,7 +575,7 @@
 
                         <strong>Observaciones</strong>
 
-                        <p>{{ $predio->observaciones }}</p>
+                        <p>{{ $this->predio->observaciones }}</p>
 
                     </div>
 
@@ -590,7 +593,7 @@
 
                         <strong>Tipo de asentamiento</strong>
 
-                        <p>{{ $predio->tipo_asentamiento }}</p>
+                        <p>{{ $this->predio->tipo_asentamiento }}</p>
 
                     </div>
 
@@ -598,7 +601,7 @@
 
                         <strong>Nombre del asentamiento</strong>
 
-                        <p>{{ $predio->nombre_asentamiento }}</p>
+                        <p>{{ $this->predio->nombre_asentamiento }}</p>
 
                     </div>
 
@@ -606,7 +609,7 @@
 
                         <strong>Tipo de vialidad</strong>
 
-                        <p>{{ $predio->tipo_vialidad }}</p>
+                        <p>{{ $this->predio->tipo_vialidad }}</p>
 
                     </div>
 
@@ -614,7 +617,7 @@
 
                         <strong>Nombre de la vialidad</strong>
 
-                        <p>{{ $predio->nombre_vialidad }}</p>
+                        <p>{{ $this->predio->nombre_vialidad }}</p>
 
                     </div>
 
@@ -622,7 +625,7 @@
 
                         <strong>Número exterior</strong>
 
-                        <p>{{ $predio->numero_exterior }}</p>
+                        <p>{{ $this->predio->numero_exterior }}</p>
 
                     </div>
 
@@ -630,7 +633,7 @@
 
                         <strong>Número exterior 2</strong>
 
-                        <p>{{ $predio->numero_exterior_2 }}</p>
+                        <p>{{ $this->predio->numero_exterior_2 }}</p>
 
                     </div>
 
@@ -638,7 +641,7 @@
 
                         <strong>Número interior</strong>
 
-                        <p>{{ $predio->numero_interior }}</p>
+                        <p>{{ $this->predio->numero_interior }}</p>
 
                     </div>
 
@@ -646,7 +649,7 @@
 
                         <strong>Número adicional</strong>
 
-                        <p>{{ $predio->numero_adicional }}</p>
+                        <p>{{ $this->predio->numero_adicional }}</p>
 
                     </div>
 
@@ -654,7 +657,7 @@
 
                         <strong>Número adicional 2</strong>
 
-                        <p>{{ $predio->numero_adicional_2 }}</p>
+                        <p>{{ $this->predio->numero_adicional_2 }}</p>
 
                     </div>
 
@@ -662,7 +665,7 @@
 
                         <strong>Código postal</strong>
 
-                        <p>{{ $predio->codigo_postal }}</p>
+                        <p>{{ $this->predio->codigo_postal }}</p>
 
                     </div>
 
@@ -670,7 +673,7 @@
 
                         <strong>Lote del fraccionador</strong>
 
-                        <p>{{ $predio->lote_fraccionador }}</p>
+                        <p>{{ $this->predio->lote_fraccionador }}</p>
 
                     </div>
 
@@ -678,7 +681,7 @@
 
                         <strong>Manzana del fraccionador</strong>
 
-                        <p>{{ $predio->manzana_fraccionador }}</p>
+                        <p>{{ $this->predio->manzana_fraccionador }}</p>
 
                     </div>
 
@@ -686,7 +689,7 @@
 
                         <strong>Etapa o zona del fraccionador</strong>
 
-                        <p>{{ $predio->etapa_fraccionador }}</p>
+                        <p>{{ $this->predio->etapa_fraccionador }}</p>
 
                     </div>
 
@@ -694,7 +697,7 @@
 
                         <strong>Nombre del Edificio</strong>
 
-                        <p>{{ $predio->nombre_edificio }}</p>
+                        <p>{{ $this->predio->nombre_edificio }}</p>
 
                     </div>
 
@@ -702,7 +705,7 @@
 
                         <strong>Clave del edificio</strong>
 
-                        <p>{{ $predio->clave_edificio }}</p>
+                        <p>{{ $this->predio->clave_edificio }}</p>
 
                     </div>
 
@@ -710,7 +713,7 @@
 
                         <strong>Departamento</strong>
 
-                        <p>{{ $predio->departamento_edificio }}</p>
+                        <p>{{ $this->predio->departamento_edificio }}</p>
 
                     </div>
 
@@ -718,7 +721,7 @@
 
                         <strong>Predio Rústico Denominado ó Antecedente</strong>
 
-                        <p>{{ $predio->nombre_predio }}</p>
+                        <p>{{ $this->predio->nombre_predio }}</p>
 
                     </div>
 
@@ -726,7 +729,7 @@
 
                         <strong>Ubicación en manzana</strong>
 
-                        <p>{{ $predio->ubicacion_en_manzana }}</p>
+                        <p>{{ $this->predio->ubicacion_en_manzana }}</p>
 
                     </div>
 
@@ -734,9 +737,9 @@
 
                         <strong>Coordenadas UTM</strong>
 
-                        <p>X: {{ $predio->xutm }}</p>
-                        <p>Y: {{ $predio->yutm }}</p>
-                        <p>Z: {{ $predio->zutm }}</p>
+                        <p>X: {{ $this->predio->xutm }}</p>
+                        <p>Y: {{ $this->predio->yutm }}</p>
+                        <p>Z: {{ $this->predio->zutm }}</p>
 
                     </div>
 
@@ -744,15 +747,15 @@
 
                         <strong>Coordenadas geográficas</strong>
 
-                        <p>Lat: {{ $predio->lat }}</p>
-                        <p>Lon: {{ $predio->lon }}</p>
+                        <p>Lat: {{ $this->predio->lat }}</p>
+                        <p>Lon: {{ $this->predio->lon }}</p>
                         <div class="flex items-center gap-2">
 
-                            <a href="{{ 'http://mapa.catastro.michoacan.gob.mx:8080/index.html?pzoom=20&plat=' . $predio->lat . '&plon=' . $predio->lon }}" title="SIG" target="_blank">
+                            <a href="{{ 'http://mapa.catastro.michoacan.gob.mx:8080/index.html?pzoom=20&plat=' . $this->predio->lat . '&plon=' . $this->predio->lon }}" title="SIG" target="_blank">
                                 <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="SIG">
                             </a>
 
-                            <a href="{{ 'https://www.google.com/maps/?q=' . $predio->lat . ',' . $predio->lon . '&z=5&t=k' }}" title="Google" target="_blank">
+                            <a href="{{ 'https://www.google.com/maps/?q=' . $this->predio->lat . ',' . $this->predio->lon . '&z=5&t=k' }}" title="Google" target="_blank">
 
                                 <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="Google">
 
@@ -770,7 +773,7 @@
 
             </div>
 
-            <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Colindancias ({{ $predio->colindancias->count() }})</h4>
+            <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Colindancias ({{ $this->predio->colindancias->count() }})</h4>
 
             <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
@@ -790,7 +793,7 @@
 
                     <tbody class="divide-y divide-gray-200">
 
-                        @foreach ($predio->colindancias as $colindancia)
+                        @foreach ($this->predio->colindancias as $colindancia)
 
                             <tr class="text-gray-500 text-sm leading-relaxed">
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $colindancia->viento }}</td>
@@ -806,7 +809,7 @@
 
             </div>
 
-            <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terrenos ({{ $predio->terrenos->count() }})</h4>
+            <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terrenos ({{ $this->predio->terrenos->count() }})</h4>
 
             <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
@@ -828,7 +831,7 @@
 
                     <tbody class="divide-y divide-gray-200">
 
-                        @foreach ($predio->terrenos as $terreno)
+                        @foreach ($this->predio->terrenos as $terreno)
 
                             <tr class="text-gray-500 text-sm leading-relaxed">
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->superficie }}</td>
@@ -846,7 +849,7 @@
 
             </div>
 
-            <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Construcciones ({{ $predio->construcciones->count() }})</h4>
+            <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Construcciones ({{ $this->predio->construcciones->count() }})</h4>
 
             <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
@@ -869,7 +872,7 @@
 
                     <tbody class="divide-y divide-gray-200">
 
-                        @foreach ($predio->construcciones as $construccion)
+                        @foreach ($this->predio->construcciones as $construccion)
 
                             <tr class="text-gray-500 text-sm leading-relaxed">
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->referencia }}</td>
@@ -888,7 +891,7 @@
 
             </div>
 
-            <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terrenos de área común ({{ $predio->condominioTerrenos->count() }})</h4>
+            <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terrenos de área común ({{ $this->predio->condominioTerrenos->count() }})</h4>
 
             <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
@@ -910,7 +913,7 @@
 
                     <tbody class="divide-y divide-gray-200">
 
-                        @foreach ($predio->condominioTerrenos as $terreno)
+                        @foreach ($this->predio->condominioTerrenos as $terreno)
 
                             <tr class="text-gray-500 text-sm leading-relaxed">
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->area_terreno_comun }}</td>
@@ -928,7 +931,7 @@
 
             </div>
 
-            <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Construcciones de área común ({{ $predio->condominioConstrucciones->count() }})</h4>
+            <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Construcciones de área común ({{ $this->predio->condominioConstrucciones->count() }})</h4>
 
             <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
@@ -950,7 +953,7 @@
 
                     <tbody class="divide-y divide-gray-200">
 
-                        @foreach ($predio->condominioConstrucciones as $construccion)
+                        @foreach ($this->predio->condominioConstrucciones as $construccion)
 
                             <tr class="text-gray-500 text-sm leading-relaxed">
                                 <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->area_comun_construccion }}</td>
@@ -968,7 +971,7 @@
 
             </div>
 
-            <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Propietarios ({{ $predio->propietarios->count() }})</h4>
+            <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Propietarios ({{ $this->predio->propietarios->count() }})</h4>
 
             <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
@@ -991,7 +994,7 @@
 
                     <tbody class="divide-y divide-gray-200">
 
-                        @foreach ($predio->propietarios as $propietario)
+                        @foreach ($this->predio->propietarios as $propietario)
 
                             <tr class="text-gray-500 text-sm leading-relaxed">
                                 <td class=" px-2 w-full ">{{ $propietario->tipo }}</td>
@@ -1010,7 +1013,7 @@
 
             </div>
 
-            <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Movimientos ({{ $predio->movimientos->count() }})</h4>
+            <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Movimientos ({{ $this->predio->movimientos->count() }})</h4>
 
             <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
@@ -1030,7 +1033,7 @@
 
                     <tbody class="divide-y divide-gray-200">
 
-                        @foreach ($predio->movimientos as $movimiento)
+                        @foreach ($this->predio->movimientos as $movimiento)
 
                             <tr class="text-gray-500 text-sm leading-relaxed">
                                 <td class=" px-2 w-full ">{{ $movimiento->nombre }}</td>

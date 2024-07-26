@@ -9,16 +9,24 @@ use App\Models\Propietario;
 use Livewire\WithPagination;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
+use Illuminate\Support\Facades\Cache;
 
 class ConsultaPadron extends Component
 {
 
     use WithPagination;
 
-    public Predio $predio;
-    public $predios;
-
     public $radio = 'clave';
+
+    public $numero_registro;
+    public $region_catastral;
+    public $municipio;
+    public $localidad;
+    public $sector;
+    public $zona_catastral;
+    public $manzana;
+    public $tipo_predio;
+    public $oficina;
 
     public $nombre;
     public $ap_paterno;
@@ -32,17 +40,21 @@ class ConsultaPadron extends Component
     public $flag = false;
     public $buscarClave = true;
 
+    public $propietariosIds = [];
+
+    public $selected_id;
+
     protected function rules(){
         return [
-            'predio.numero_registro' => 'required|numeric|min:1',
-            'predio.region_catastral' => 'required|numeric|min:1',
-            'predio.municipio' => 'required|numeric|min:1',
-            'predio.localidad' => 'required|numeric|min:1',
-            'predio.sector' => 'required|numeric|min:1',
-            'predio.zona_catastral' => 'required|numeric|min:1,|same:predio.localidad',
-            'predio.manzana' => 'required|numeric|min:1',
-            'predio.tipo_predio' => 'required|numeric|min:1|max:2',
-            'predio.oficina' => 'required|numeric|min:1',
+            'numero_registro' => 'required|numeric|min:1',
+            'region_catastral' => 'required|numeric|min:1',
+            'municipio' => 'required|numeric|min:1',
+            'localidad' => 'required|numeric|min:1',
+            'sector' => 'required|numeric|min:1',
+            'zona_catastral' => 'required|numeric|min:1,|same:localidad',
+            'manzana' => 'required|numeric|min:1',
+            'tipo_predio' => 'required|numeric|min:1|max:2',
+            'oficina' => 'required|numeric|min:1',
          ];
     }
 
@@ -56,146 +68,106 @@ class ConsultaPadron extends Component
 
     }
 
-    public function crearModeloVacio(){
-        $this->predio = Predio::make();
-    }
-
     public function updatedRadio(){
 
         $this->reset([
             'predio',
-            'predios',
             'nombre',
             'ap_paterno',
             'ap_materno',
             'razon_social',
             'rfc',
             'curp',
-            'ubicacion'
+            'ubicacion',
+            'flag',
+            'numero_registro',
+            'region_catastral',
+            'municipio',
+            'localidad',
+            'sector',
+            'zona_catastral',
+            'manzana',
+            'tipo_predio',
+            'oficina',
         ]);
 
-        $this->crearModeloVacio();
+        $this->oficina = auth()->user()->oficina->oficina;
 
-        $this->predio->oficina = auth()->user()->oficina->oficina;
+        $this->municipio = auth()->user()->oficina->municipio;
 
-        $this->predio->municipio = auth()->user()->oficina->municipio;
+        $this->region_catastral = auth()->user()->oficina->region;
 
     }
 
-    public function updatedPredioOficina(){
+    public function updatedOficina(){
 
-        $this->predio->municipio = Oficina::where('oficina', $this->predio->oficina)->first()?->municipio;
+        $oficina = Oficina::where('oficina', $this->oficina)->first();
+
+        $this->municipio = $oficina->municipio;
+
+        $this->region_catastral = $oficina->region;
 
     }
 
     public function buscarCuentaPredial(){
 
-        $this->predio->id = null;
-
         $this->validate([
-            'predio.numero_registro' => 'required|numeric|min:1',
-            'predio.tipo_predio' => 'required|numeric|min:1|max:2',
-            'predio.oficina' => 'required|numeric|min:1',
-            'predio.localidad' => 'required|numeric|min:1',
+            'numero_registro' => 'required|numeric|min:1',
+            'tipo_predio' => 'required|numeric|min:1|max:2',
+            'oficina' => 'required|numeric|min:1',
+            'localidad' => 'required|numeric|min:1',
         ]);
 
-        if(!$this->diez){
+        Cache::forget('consulta-predio-' . $this->getId());
 
-            try {
+        $this->reset('selected_id', 'flag');
 
-                $this->predio = Predio::with(
-                                            'propietarios.persona',
-                                            'condominioTerrenos',
-                                            'condominioConstrucciones',
-                                            'terrenos',
-                                            'construcciones',
-                                            'colindancias',
-                                        )
-                                        ->where('numero_registro', $this->predio->numero_registro)
-                                        ->where('tipo_predio', $this->predio->tipo_predio)
-                                        ->where('localidad', $this->predio->localidad)
-                                        ->where('oficina', $this->predio->oficina)
-                                        ->firstOrFail();
+        if($this->diez){
 
-                if($this->predio->bloqueadoActivo()){
+            Cache::forget('consulta-predios-' . $this->getId());
 
-                    $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
-                    $this->predio = $this->crearModeloVacio();
-                    return;
-
-                }
-
-                if($this->predioInactivo()) return;
-
-                $this->flag = true;
-
-            } catch (\Throwable $th) {
-
-                $this->dispatch('mostrarMensaje', ['error', "No se encontro predio con la cuenta predial ingresada."]);
-
-            }
-
-        }else{
-
-            $this->predios = Predio::with(
-                                        'propietarios.persona',
-                                        'condominioTerrenos',
-                                        'condominioConstrucciones',
-                                        'terrenos',
-                                        'construcciones',
-                                        'colindancias',
-                                        'propietarioInicial'
-                                    )
-                                    ->where('tipo_predio', $this->predio->tipo_predio)
-                                    ->where('localidad', $this->predio->localidad)
-                                    ->where('oficina', $this->predio->oficina)
-                                    ->whereBetween('numero_registro', [($this->predio->numero_registro - 10), ($this->predio->numero_registro + 10)])
-                                    ->get();
+            return;
 
         }
+
+        if($this->predio->bloqueadoActivo()){
+
+            $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
+
+            Cache::forget('consulta-predio-' . $this->getId());
+
+        }
+
+        if($this->predio->status != 'activo'){
+
+            $this->dispatch('mostrarMensaje', ['error', "El predio no esta activo."]);
+
+            Cache::forget('consulta-predio-' . $this->getId());
+
+        }
+
+        $this->flag = true;
 
     }
 
     public function buscarClaveCatastral(){
 
-        /* $this->predio->id = null; */
-
         $this->validate([
-            'predio.region_catastral' => 'required|numeric|min:1',
-            'predio.municipio' => 'required|numeric|min:1',
-            'predio.localidad' => 'required|numeric|min:1',
-            'predio.sector' => 'required|numeric|min:1',
-            'predio.zona_catastral' => 'required|numeric|min:1,|same:predio.localidad',
-            'predio.manzana' => 'required|numeric|min:1',
+            'region_catastral' => 'required|numeric|min:1',
+            'municipio' => 'required|numeric|min:1',
+            'localidad' => 'required|numeric|min:1',
+            'sector' => 'required|numeric|min:1',
+            'zona_catastral' => 'required|numeric|min:1,|same:localidad',
+            'manzana' => 'required|numeric|min:1',
         ]);
 
-        try {
+        $this->reset('flag');
 
-            $this->predios = Predio::with('propietarioInicial')
-                                    ->where('status', 'activo')
-                                    ->where('estado', 16)
-                                    ->where('region_catastral', $this->predio->region_catastral)
-                                    ->where('municipio', $this->predio->municipio)
-                                    ->where('zona_catastral', $this->predio->zona_catastral)
-                                    ->where('localidad', $this->predio->localidad)
-                                    ->where('sector', $this->predio->sector)
-                                    ->where('manzana', $this->predio->manzana)
-                                    ->when($this->predio->oficina != 101, function($q){
-                                        $q->where('oficina', $this->predio->oficina);
-                                    })
-                                    ->get();
-
-        } catch (\Throwable $th) {
-
-            $this->dispatch('mostrarMensaje', ['error', "No se encontro predio con la clave catastral ingresada."]);
-
-        }
+        Cache::forget('consulta-predios-' . $this->getId());
 
     }
 
     public function buscarPorPropietario(){
-
-        $this->predio->id = null;
 
         $this->validate([
             'nombre' => Rule::requiredIf($this->ap_paterno != null || $this->ap_materno != null),
@@ -206,60 +178,98 @@ class ConsultaPadron extends Component
             'curp' => Rule::requiredIf($this->nombre == null && $this->ap_materno == null && $this->ap_paterno == null && $this->rfc == null && $this->razon_social == null),
         ]);
 
-        try {
+        $this->reset('flag');
 
-            $propietarios = Propietario::whereHas('persona', function($q){
-                                                    $q->when($this->nombre != '' && $this->nombre != null, function($q){
-                                                        $q->where('nombre', $this->nombre);
-                                                    })
-                                                    ->when($this->ap_paterno != '' && $this->ap_paterno != null, function($q){
-                                                        $q->where('ap_paterno', $this->ap_paterno);
-                                                    })
-                                                    ->when($this->ap_materno != '' && $this->ap_materno != null, function($q){
-                                                        $q->where('ap_materno', $this->ap_materno);
-                                                    })
-                                                    ->when($this->razon_social != '' && $this->razon_social != null, function($q){
-                                                        $q->where('razon_social', $this->razon_social);
-                                                    })
-                                                    ->when($this->rfc != '' && $this->rfc != null, function($q){
-                                                        $q->where('rfc', $this->rfc);
-                                                    })
-                                                    ->when($this->curp != '' && $this->curp != null, function($q){
-                                                        $q->where('curp', $this->curp);
-                                                    });
-                                            })
-                                            ->where('propietarioable_type', 'App\Models\Predio')
-                                            ->get();
+        Cache::forget('consulta-predios-' . $this->getId());
 
+        $propietarios = Propietario::whereHas('persona', function($q){
+                                                $q->when($this->nombre != '' && $this->nombre != null, function($q){
+                                                    $q->where('nombre', $this->nombre);
+                                                })
+                                                ->when($this->ap_paterno != '' && $this->ap_paterno != null, function($q){
+                                                    $q->where('ap_paterno', $this->ap_paterno);
+                                                })
+                                                ->when($this->ap_materno != '' && $this->ap_materno != null, function($q){
+                                                    $q->where('ap_materno', $this->ap_materno);
+                                                })
+                                                ->when($this->razon_social != '' && $this->razon_social != null, function($q){
+                                                    $q->where('razon_social', $this->razon_social);
+                                                })
+                                                ->when($this->rfc != '' && $this->rfc != null, function($q){
+                                                    $q->where('rfc', $this->rfc);
+                                                })
+                                                ->when($this->curp != '' && $this->curp != null, function($q){
+                                                    $q->where('curp', $this->curp);
+                                                });
+                                        })
+                                        ->where('propietarioable_type', 'App\Models\Predio')
+                                        ->get();
 
-
-                $this->predios = Predio::with('propietarioInicial')
-                                            ->whereIn('id', $propietarios->pluck('propietarioable_id'))
-                                            ->when($this->predio->oficina != 101, function($q){
-                                                $q->where('oficina', $this->predio->oficina);
-                                            })
-                                            ->orderBy('oficina')
-                                            ->get();
-
-
-
-        } catch (\Throwable $th) {
-
-            $this->dispatch('mostrarMensaje', ['error', $th->getMessage()]);
-
-        }
+        $this->propietariosIds = $propietarios->pluck('propietarioable_id');
 
     }
 
     public function buscarPorUbicacion(){
 
-        $this->predio->id = null;
-
         $this->validate(['ubicacion' => 'required']);
 
-        try {
+        $this->reset('flag');
 
-            $this->predios = Predio::whereAny([
+        Cache::forget('consulta-predios-' . $this->getId());
+
+    }
+
+    public function verPredio($predio){
+
+        Cache::forget('consulta-predio-' . $this->getId());
+
+        $this->selected_id = $predio;
+
+        $this->flag = true;
+
+    }
+
+    #[Computed]
+    public function prediosLista(){
+
+        $key = 'consulta-predios-' . $this->getId();
+
+        return Cache::remember($key, 300, function(){
+
+            if($this->radio == 'clave' && $this->diez){
+
+                return Predio::with('propietarioInicial')
+                                ->whereBetween('numero_registro', [$this->numero_registro - 10 , $this->numero_registro + 10 ])
+                                ->where('tipo_predio', $this->tipo_predio)
+                                ->where('localidad', $this->localidad)
+                                ->where('oficina', $this->oficina)
+                                ->paginate(20);
+
+            }elseif($this->radio == 'clave'){
+
+                return Predio::with('propietarioInicial')
+                        ->where('status', 'activo')
+                        ->where('estado', 16)
+                        ->where('region_catastral', $this->region_catastral)
+                        ->where('municipio', $this->municipio)
+                        ->where('zona_catastral', $this->zona_catastral)
+                        ->where('localidad', $this->localidad)
+                        ->where('sector', $this->sector)
+                        ->where('manzana', $this->manzana)
+                        ->where('oficina', $this->oficina)
+                        ->paginate(20);
+
+            }elseif($this->radio == 'propietario'){
+
+                return Predio::with('propietarioInicial')
+                                ->whereIn('id', $this->propietariosIds)
+                                ->where('oficina', $this->oficina)
+                                ->orderBy('oficina')
+                                ->paginate(20);
+
+            }elseif($this->radio == 'ubicacion'){
+
+                return Predio::whereAny([
                                             'tipo_vialidad',
                                             'tipo_asentamiento',
                                             'nombre_vialidad',
@@ -271,76 +281,63 @@ class ConsultaPadron extends Component
                                         ],
                                         'like', '%' . $this->ubicacion . '%'
                                     )
-                                    ->when($this->predio->oficina != 101, function($q){
-                                        $q->where('oficina', $this->predio->oficina);
-                                    })
-                                    ->get();
+                                    ->where('oficina', $this->oficina)
+                                    ->paginate(20);
+            }
 
-        } catch (\Throwable $th) {
-
-            $this->dispatch('mostrarMensaje', ['error', $th->getMessage()]);
-
-        }
+        });
 
     }
 
-    public function verPredio(Predio $predio){
+    #[Computed]
+    public function predio(){
 
-        $this->predio = $predio;
+        $key = 'consulta-predio-' . $this->getId();
 
-        $this->predio->load(
-                            'propietarios.persona',
-                            'condominioTerrenos',
-                            'condominioConstrucciones',
-                            'terrenos',
-                            'construcciones',
-                            'colindancias',
-                            'movimientos'
-                            );
+        return Cache::remember($key, 300, function(){
 
-        $this->flag = true;
+            if($this->radio == 'clave' && $this->selected_id){
+
+                return Predio::with(
+                                'propietarios.persona',
+                                'condominioTerrenos',
+                                'condominioConstrucciones',
+                                'terrenos',
+                                'construcciones',
+                                'colindancias',
+                            )
+                            ->whereKey($this->selected_id)
+                            ->first();
+
+            }elseif($this->radio == 'clave'){
+
+                return Predio::with(
+                                        'propietarios.persona',
+                                        'condominioTerrenos',
+                                        'condominioConstrucciones',
+                                        'terrenos',
+                                        'construcciones',
+                                        'colindancias',
+                                    )
+                                    ->where('numero_registro', $this->numero_registro)
+                                    ->where('tipo_predio', $this->tipo_predio)
+                                    ->where('localidad', $this->localidad)
+                                    ->where('oficina', $this->oficina)
+                                    ->first();
+
+            }
+
+        });
 
     }
-
-    public function predioInactivo(){
-
-        if($this->predio->status != 'activo'){
-
-            $this->dispatch('mostrarMensaje', ['error', "El predio no esta activo."]);
-
-            $this->predio = $this->crearModeloVacio();
-
-            return true;
-
-        }
-
-    }
-
-    /* #[Computed]
-    public function prediosLista(){
-
-        return Predio::with('propietarioInicial')
-                        ->where('status', 'activo')
-                        ->where('estado', 16)
-                        ->where('region_catastral', $this->predio->region_catastral)
-                        ->where('municipio', $this->predio->municipio)
-                        ->where('zona_catastral', $this->predio->zona_catastral)
-                        ->where('localidad', $this->predio->localidad)
-                        ->where('sector', $this->predio->sector)
-                        ->where('manzana', $this->predio->manzana)
-                        ->when($this->predio->oficina != 101, function($q){
-                            $q->where('oficina', $this->predio->oficina);
-                        })->get();
-
-    } */
 
     public function mount(){
 
-        $this->crearModeloVacio();
+        $this->oficina = auth()->user()->oficina->oficina;
 
-        $this->predio->oficina = auth()->user()->oficina->oficina;
+        $this->municipio = auth()->user()->oficina->municipio;
 
-        $this->predio->municipio = auth()->user()->oficina->municipio;
+        $this->region_catastral = auth()->user()->oficina->region;
 
     }
 
