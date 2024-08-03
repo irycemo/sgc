@@ -399,7 +399,7 @@
 
     @endif
 
-    @if($flag)
+    @if($flag && $this->predio)
 
         <div wire:loading.class.delaylongest="opacity-50">
 

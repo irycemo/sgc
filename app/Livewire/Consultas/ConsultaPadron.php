@@ -71,7 +71,6 @@ class ConsultaPadron extends Component
     public function updatedRadio(){
 
         $this->reset([
-            'predio',
             'nombre',
             'ap_paterno',
             'ap_materno',
@@ -120,7 +119,7 @@ class ConsultaPadron extends Component
 
         Cache::forget('consulta-predio-' . $this->getId());
 
-        $this->reset('selected_id', 'flag');
+        $this->reset(['selected_id', 'flag']);
 
         if($this->diez){
 
@@ -161,7 +160,7 @@ class ConsultaPadron extends Component
             'manzana' => 'required|numeric|min:1',
         ]);
 
-        $this->reset('flag');
+        $this->reset(['flag', 'diez']);
 
         Cache::forget('consulta-predios-' . $this->getId());
 
