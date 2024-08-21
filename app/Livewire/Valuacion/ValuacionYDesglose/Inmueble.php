@@ -150,6 +150,18 @@ class Inmueble extends Component
         $this->convertirCoordenadas();
     }
 
+    public function resetearCoordenadas(){
+
+        $this->reset([
+            'predio.xutm',
+            'predio.yutm',
+            'predio.zutm',
+            'predio.lat' ,
+            'predio.lon' ,
+        ]);
+
+    }
+
     public function buscarClaveCatastral(){
 
         $this->reset('editar');

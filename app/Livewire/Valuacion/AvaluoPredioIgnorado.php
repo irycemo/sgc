@@ -178,6 +178,18 @@ class AvaluoPredioIgnorado extends Component
 
     }
 
+    public function resetearCoordenadas(){
+
+        $this->reset([
+            'predio.xutm',
+            'predio.yutm',
+            'predio.zutm',
+            'predio.lat' ,
+            'predio.lon' ,
+        ]);
+
+    }
+
     public function buscarClaveCatastral(){
 
         try {

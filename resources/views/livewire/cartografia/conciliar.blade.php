@@ -563,17 +563,30 @@
 
                         </div>
 
+                        <button
+                            wire:click="resetearCoordenadas"
+                            wire:loading.attr="disabled"
+                            wire:target="resetearCoordenadas"
+                            type="button"
+                            class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                            </svg>
+
+                        </button>
+
                     </div>
 
                     <div class="flex items-center justify-center gap-3">
 
-                        <a href="{{ 'http://mapa.catastro.michoacan.gob.mx:8080/index.html?pzoom=20&plat=' . $predio->lat . '&plon=' . $predio->lon }}" title="SIG" target="_blank">
-                            <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="SIG">
+                        <a href="{{ 'http://mapa.catastro.michoacan.gob.mx:8080/index.html?pzoom=20&plat=' . ($predio->lat ?? '') . '&plon=' . ($predio->lon ?? '') }}" title="SIG" target="_blank">
+                            <img class="h-8 cursor-pointer" src="{{ asset('storage/img/sig.png') }}" alt="SIG">
                         </a>
 
-                        <a href="{{ 'https://www.google.com/maps/?q=' . $predio->lat . ',' . $predio->lon . '&z=5&t=k' }}" title="Google" target="_blank">
+                        <a href="{{ 'https://www.google.com/maps/?q=' . ($predio->lat ?? '') . ',' . ($predio->lon ?? '') . '&z=5&t=k' }}" title="Google" target="_blank">
 
-                            <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="Google">
+                            <img class="h-8 cursor-pointer" src="{{ asset('storage/img/google.png') }}" alt="Google">
 
                         </a>
 

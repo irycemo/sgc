@@ -5,7 +5,6 @@ namespace App\Livewire\Ventanilla;
 use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\Servicio;
-use Livewire\Attributes\On;
 use App\Models\CategoriaServicio;
 use App\Http\Constantes\Constantes;
 use App\Http\Traits\ComponentesTrait;
