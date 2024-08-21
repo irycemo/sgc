@@ -39,11 +39,11 @@ class AppServiceProvider extends ServiceProvider
         if(false){
 
             Livewire::setScriptRoute(function ($handle) {
-                return Route::get('public/livewire/livewire.js', $handle);
+                return Route::get('/sgc/public/vendor/livewire/livewire.js', $handle);
             });
 
             Livewire::setUpdateRoute(function ($handle) {
-                return Route::post('public/livewire/update', $handle);
+                return Route::post('/sgc/public/livewire/update', $handle);
             });
 
         }
