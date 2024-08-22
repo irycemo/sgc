@@ -569,7 +569,7 @@ class Inmueble extends Component
 
         $sectores = json_decode($oficina->sectores, true);
 
-        if(count($sectores) == 0){
+        if(is_null($sectores)){
 
             $this->dispatch('mostrarMensaje', ['error', "La oficina no tiene sectores."]);
 
