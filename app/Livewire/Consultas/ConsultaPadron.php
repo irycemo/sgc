@@ -129,23 +129,27 @@ class ConsultaPadron extends Component
 
         }
 
-        if($this->predio->bloqueadoActivo()){
+        if($this->predio){
 
-            $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
+            if($this->predio->bloqueadoActivo()){
 
-            Cache::forget('consulta-predio-' . $this->getId());
+                $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
+
+                Cache::forget('consulta-predio-' . $this->getId());
+
+            }
+
+            if($this->predio->status != 'activo'){
+
+                $this->dispatch('mostrarMensaje', ['error', "El predio no esta activo."]);
+
+                Cache::forget('consulta-predio-' . $this->getId());
+
+            }
+
+            $this->flag = true;
 
         }
-
-        if($this->predio->status != 'activo'){
-
-            $this->dispatch('mostrarMensaje', ['error', "El predio no esta activo."]);
-
-            Cache::forget('consulta-predio-' . $this->getId());
-
-        }
-
-        $this->flag = true;
 
     }
 

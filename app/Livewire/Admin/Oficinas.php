@@ -117,7 +117,7 @@ class Oficinas extends Component
 
                 sort($this->sectores);
 
-                $this->modelo_editar->sectores = json_encode($this->sectores);
+                $this->modelo_editar->sectores = $this->sectores;
                 $this->modelo_editar->actualizado_por = auth()->user()->id;
                 $this->modelo_editar->save();
 

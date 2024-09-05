@@ -9,7 +9,6 @@ use App\Models\Predio;
 use App\Models\Notaria;
 use App\Models\Oficina;
 use Livewire\Component;
-use App\Models\CodigoPostal;
 use Illuminate\Validation\Rule;
 use App\Models\FactorIncremento;
 use Illuminate\Support\Facades\DB;
@@ -89,6 +88,7 @@ class Captura extends Component
             'predio.documento_numero' => Rule::requiredIf(!$this->actualizacion),
             'predio.fecha_efectos' => Rule::requiredIf(!$this->actualizacion),
             'origen' => 'required',
+            'predio.observaciones' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.()\/\-," ]*$/'),
             'observaciones' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.()\/\-," ]*$/'),
          ];
     }
@@ -173,6 +173,18 @@ class Captura extends Component
 
         if(in_array($value, ['predio.xutm', 'predio.yutm','predio.zutm', 'predio.lat', 'predio.lon']))
             $this->convertirCoordenadas();
+
+    }
+
+    public function resetearCoordenadas(){
+
+        $this->reset([
+            'predio.xutm',
+            'predio.yutm',
+            'predio.zutm',
+            'predio.lat' ,
+            'predio.lon' ,
+        ]);
 
     }
 

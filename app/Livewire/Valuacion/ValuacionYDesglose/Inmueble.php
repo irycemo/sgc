@@ -150,6 +150,18 @@ class Inmueble extends Component
         $this->convertirCoordenadas();
     }
 
+    public function resetearCoordenadas(){
+
+        $this->reset([
+            'predio.xutm',
+            'predio.yutm',
+            'predio.zutm',
+            'predio.lat' ,
+            'predio.lon' ,
+        ]);
+
+    }
+
     public function buscarClaveCatastral(){
 
         $this->reset('editar');
@@ -556,6 +568,14 @@ class Inmueble extends Component
         }
 
         $sectores = json_decode($oficina->sectores, true);
+
+        if(is_null($sectores)){
+
+            $this->dispatch('mostrarMensaje', ['error', "La oficina no tiene sectores."]);
+
+            return true;
+
+        }
 
         if(!$sectores){
 

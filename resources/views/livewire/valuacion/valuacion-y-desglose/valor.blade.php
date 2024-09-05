@@ -232,7 +232,7 @@
 
                         <div>
 
-                            <label class="text-sm" >Demerito</label>
+                            <label class="text-sm" >Demérito</label>
 
                         </div>
 
