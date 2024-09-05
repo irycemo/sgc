@@ -20,7 +20,7 @@
 
         <x-input-group for="observaciones" label="Descripción del movimiento" :error="$errors->first('observaciones')">
 
-            <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="predio.observaciones" placeholder="Se lo más especifico posible acerca del origen del movimiento"></textarea>
+            <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico posible acerca del origen del movimiento"></textarea>
 
         </x-input-group>
 
