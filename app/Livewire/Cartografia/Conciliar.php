@@ -117,6 +117,18 @@ class Conciliar extends Component
 
     }
 
+    public function resetearCoordenadas(){
+
+        $this->reset([
+            'predio.xutm',
+            'predio.yutm',
+            'predio.zutm',
+            'predio.lat' ,
+            'predio.lon' ,
+        ]);
+
+    }
+
     public function convertirCoordenadas(){
 
         if($this->predio->xutm && $this->predio->yutm && $this->predio->zutm){

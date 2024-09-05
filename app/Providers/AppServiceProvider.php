@@ -36,10 +36,10 @@ class AppServiceProvider extends ServiceProvider
 
         }); */
 
-        if(!env('LOCAL')){
+        if(env('LOCAL') == "0"){
 
             Livewire::setScriptRoute(function ($handle) {
-                return Route::get('/sgc/public/livewire/livewire.js', $handle);
+                return Route::get('/sgc/public/vendor/livewire/livewire.js', $handle);
             });
 
             Livewire::setUpdateRoute(function ($handle) {

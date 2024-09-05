@@ -12,17 +12,12 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
 use App\Http\Services\Tramites\TramiteService;
+use App\Http\Traits\Ventanilla\ComunTrait;
 
 class PredioIgnorado extends Component
 {
 
-    public $servicio;
-    public $tramite;
-
-    public $adicionaTramite;
-    public $tramitesAdicionados;
-    public $tramiteAdicionadoSeleccionado;
-    public $tramiteAdicionado;
+    use ComunTrait;
 
     public $region_catastral;
     public $municipio;
@@ -35,34 +30,6 @@ class PredioIgnorado extends Component
     public $departamento;
 
     public $predioAvaluo;
-
-    public $editar = false;
-
-    public Tramite $modelo_editar;
-
-    public $solicitantes;
-    public $dependencias;
-    public $notarias;
-    public $notaria;
-
-    public $flags = [
-        'tipo_de_tramite' => true,
-        'tipo_de_servicio' => true,
-        'cantidad' => true,
-        'solicitante' => true,
-        'nombre_solicitante' => false,
-        'predios' => true,
-        'observaciones' => true,
-        'adiciona' => true,
-        'numero_oficio' => false,
-        'dependencias' => false,
-        'notarias' => false,
-    ];
-
-    protected $listeners = [
-        'cambioServicio' => 'cambiarFlags',
-        'cargarTramite' => 'cargarTramite'
-    ];
 
     protected function rules(){
 
@@ -83,28 +50,12 @@ class PredioIgnorado extends Component
 
     }
 
-    protected $validationAttributes  = [
-        'modelo_editar.adiciona' => 'trámite',
-        'tramiteAdicionadoSeleccionado' => 'trámite adiciona',
-        'predioAvaluo' => 'La clave catastral es obligatoria',
-        'modelo_editar.numero_oficio' => 'número de oficio',
-        'modelo_editar.nombre_solicitante' => 'nombre del solicitante',
-    ];
-
     public function crearModeloVacio(){
         return Tramite::make([
                                 'cantidad' => 1,
                                 'tipo_servicio' => 'ordinario',
                                 'tipo_tramite' => 'normal'
                             ]);
-    }
-
-    public function cargarTramite(Tramite $tramtie){
-
-        $this->tramite = $tramtie;
-
-        $this->tramite->load('servicio');
-
     }
 
     public function updatedModeloEditarTipoTramite(){
@@ -185,28 +136,6 @@ class PredioIgnorado extends Component
             $this->modelo_editar->nombre_solicitante = $this->modelo_editar->solicitante;
 
         }
-
-    }
-
-    public function updatedNotaria(){
-
-        if($this->notaria == ""){
-
-            $this->reset(['notaria']);
-
-            $this->modelo_editar->numero_notaria = null;
-            $this->modelo_editar->nombre_notario = null;
-            $this->modelo_editar->nombre_solicitante = null;
-
-            return;
-
-        }
-
-        $notaria = json_decode($this->notaria);
-
-        $this->modelo_editar->numero_notaria = $notaria->numero;
-        $this->modelo_editar->nombre_notario = $notaria->notario;
-        $this->modelo_editar->nombre_solicitante = $notaria->numero . ' ' .$notaria->notario;
 
     }
 
@@ -350,28 +279,6 @@ class PredioIgnorado extends Component
 
         $this->editar = true;
 
-    }
-
-    public function validar(){
-
-        try {
-
-            DB::transaction(function () {
-
-                (new TramiteService($this->tramite))->procesarPago();
-
-                $this->resetearTodo();
-
-                $this->dispatch('reset');
-
-                $this->dispatch('mostrarMensaje', ['success', "El trámite se valido con éxito."]);
-
-            });
-
-        } catch (\Throwable $th) {
-            Log::error("Error al validar trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
-            $this->dispatch('mostrarMensaje', ['error', $th->getMessage()]);
-        }
     }
 
     public function mount(){

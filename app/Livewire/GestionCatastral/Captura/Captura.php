@@ -9,7 +9,6 @@ use App\Models\Predio;
 use App\Models\Notaria;
 use App\Models\Oficina;
 use Livewire\Component;
-use App\Models\CodigoPostal;
 use Illuminate\Validation\Rule;
 use App\Models\FactorIncremento;
 use Illuminate\Support\Facades\DB;
@@ -174,6 +173,18 @@ class Captura extends Component
 
         if(in_array($value, ['predio.xutm', 'predio.yutm','predio.zutm', 'predio.lat', 'predio.lon']))
             $this->convertirCoordenadas();
+
+    }
+
+    public function resetearCoordenadas(){
+
+        $this->reset([
+            'predio.xutm',
+            'predio.yutm',
+            'predio.zutm',
+            'predio.lat' ,
+            'predio.lon' ,
+        ]);
 
     }
 

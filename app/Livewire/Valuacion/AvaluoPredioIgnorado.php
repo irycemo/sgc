@@ -11,11 +11,12 @@ use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\Propietario;
 use App\Models\PredioAvaluo;
+use App\Models\AsignarCuenta;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
 use App\Http\Services\Coordenadas\Coordenadas;
-use App\Models\AsignarCuenta;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -99,10 +100,11 @@ class AvaluoPredioIgnorado extends Component
             'predio.zutm' => 'nullable',
             'predio.lat' => 'required',
             'predio.lon' => 'required',
-            'ap_paterno' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
-            'ap_materno' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
-            'nombre' => 'required|'. utf8_encode('regex:/^[áéíóúÁÉÍÓÚñÑa-zA-Z-0-9$#.() ]*$/'),
-            'tipo_persona' => 'required',
+            'ap_paterno' => [Rule::requiredIf($this->tipo_persona === 'FÍSICA')],
+            'ap_materno' => [Rule::requiredIf($this->tipo_persona === 'FÍSICA')],
+            'nombre' => [Rule::requiredIf($this->tipo_persona === 'FÍSICA')],
+            'razon_social' => [Rule::requiredIf($this->tipo_persona === 'MORAL')],
+            'tipo_persona' => 'required|'. Rule::in(['FÍSICA', 'MORAL']),
             'porcentaje' => 'required|numeric|max:100',
          ];
     }
@@ -175,6 +177,18 @@ class AvaluoPredioIgnorado extends Component
             $this->reset(['razon_social', 'nombre', 'ap_paterno', 'ap_materno']);
 
         }
+
+    }
+
+    public function resetearCoordenadas(){
+
+        $this->reset([
+            'predio.xutm',
+            'predio.yutm',
+            'predio.zutm',
+            'predio.lat' ,
+            'predio.lon' ,
+        ]);
 
     }
 
@@ -474,6 +488,14 @@ class AvaluoPredioIgnorado extends Component
         }
 
         $sectores = json_decode($oficina->sectores, true);
+
+        if(is_null($sectores)){
+
+            $this->dispatch('mostrarMensaje', ['error', "La oficina no tiene sectores."]);
+
+            return true;
+
+        }
 
         if(!in_array($this->predio->sector, $sectores)){
 
