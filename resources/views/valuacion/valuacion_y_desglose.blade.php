@@ -26,7 +26,7 @@
                 @click="activeTab = 2"
                 class="px-6 py-1 text-gray-600 rounded-xl border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white"
                 :class="{'active  bg-gray-200 rounded-full px-3 py-1 text-gray-500 no-underline': activeTab === 2 }"
-            >Caracteristicas
+            >Características
             </label>
 
             <label
@@ -40,7 +40,7 @@
                 @click="activeTab = 4"
                 class="px-6 py-1 text-gray-600 rounded-xl border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white"
                 :class="{'active  bg-gray-200 rounded-full px-3 py-1 text-gray-500 no-underline': activeTab === 4 }"
-            >Imagenes y observaciones
+            >Imágenes y observaciones
             </label>
 
         </div>

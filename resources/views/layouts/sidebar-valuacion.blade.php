@@ -92,7 +92,7 @@
 
                 <a href="{{ route('avaluo_predio_ignorado') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
-                    Avaluos de p. ignorados
+                    Avalúos de p. ignorados
 
                 </a>
 
@@ -106,7 +106,7 @@
 
                 <a href="{{ route('mis_avaluos') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
-                    Mis avaluos
+                    Mis avalúos
 
                 </a>
 

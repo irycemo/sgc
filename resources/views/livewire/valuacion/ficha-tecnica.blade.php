@@ -185,7 +185,7 @@
 
                 <p class="">Los terrenos deben tener la siguiente estrctura: <strong>SUPERFICIE:VALOR UNITARIO:VALOR DEMERITADO</strong>. Cada elemento separado por el carácter '<strong>:</strong>'. Debe usar el carácter '<strong>|</strong>' para separar terrenos.</p>
 
-                <p class="">Si el predio es urbano ingresa el valor numérico del valor unitario, si es un predio rustico debe usar uno de los siguientes valores:</p>
+                <p class="">Si el predio es urbano ingresa el valor numérico del valor unitario, si es un predio rústico debe usar uno de los siguientes valores:</p>
 
                 <ul class="ml-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
 
@@ -199,11 +199,11 @@
 
                 <p class="">Ejemplo para un terreno urbano: <strong>100:250:30</strong></p>
 
-                <p class="">Ejemplo para un terreno rustico: <strong>100:RIEGO POR GRAVEDAD:30</strong></p>
+                <p class="">Ejemplo para un terreno rústico: <strong>100:RIEGO POR GRAVEDAD:30</strong></p>
 
                 <p class="">Ejemplo para más de un terreno urbano: <strong>100:250:30|200:50:10|50:30:10</strong></p>
 
-                <p class="">Ejemplo para más de un terreno rustico: <strong>100:TEMPORAL DE SEGUNDA:30|200:ERIAZO:10|50:TEMPORAL DE PRIMERA:10</strong></p>
+                <p class="">Ejemplo para más de un terreno rústico: <strong>100:TEMPORAL DE SEGUNDA:30|200:ERIAZO:10|50:TEMPORAL DE PRIMERA:10</strong></p>
 
             </div>
 

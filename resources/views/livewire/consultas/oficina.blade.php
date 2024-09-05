@@ -322,7 +322,7 @@
 
     </div>
 
-    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Estadisticos del municipio (@if($oficina->cabeceraMunicipal) {{ $oficina->cabeceraMunicipal->nombre }} @else {{ $oficina->nombre }} @endif)</h4>
+    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Estadísticos del municipio (@if($oficina->cabeceraMunicipal) {{ $oficina->cabeceraMunicipal->nombre }} @else {{ $oficina->nombre }} @endif)</h4>
 
     <div class="p-4 bg-white rounded-lg mb-5 overflow-auto">
 
@@ -333,7 +333,7 @@
                 <tr class="text-xs font-medium text-gray-600 uppercase text-left traling-wider">
                     <th class="px-3 py-3">Total de predios</th>
                     <th class="px-3 py-3">Predios urbanos</th>
-                    <th class="px-3 py-3">Predios rusticos</th>
+                    <th class="px-3 py-3">Predios rústicos</th>
                     <th class="px-3 py-3">Predios en sector 88</th>
                     <th class="px-3 py-3">Predios en sector 99</th>
                     <th class="px-3 py-3">Predios con clave definitiva</th>
