@@ -300,7 +300,7 @@ class Captura extends Component
 
             if($this->predioInactivo()) return;
 
-            $this->dispatch('cargarPredio', $this->predio->id);
+            $this->dispatch('cargarPredio', $this->predio->id, flag: true);
 
         } catch (\Throwable $th) {
 
