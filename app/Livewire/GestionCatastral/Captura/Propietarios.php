@@ -303,9 +303,9 @@ class Propietarios extends Component
                     'creado_por' => auth()->id()
                 ]);
 
-                $this->predio->audits()->latest()->first()?->update(['tags' => 'Agregó propietario']);
-
                 $this->predio->touch();
+
+                $this->predio->audits()->latest()->first()->update(['tags' => 'Agregó propietario']);
 
                 $this->dispatch('mostrarMensaje', ['success', "El propietario se guardó con éxito."]);
 
@@ -571,6 +571,8 @@ class Propietarios extends Component
 
             $this->resetear();
 
+            $this->predio->refresh();
+
             $this->predio->load('propietarios.persona');
 
             $this->predio->touch();
@@ -615,8 +617,7 @@ class Propietarios extends Component
 
         foreach($this->predio->propietarios as $propietario){
 
-            if($id == $propietario->id)
-                continue;
+            if($id == $propietario->id) continue;
 
             $pn = $pn + $propietario->porcentaje_nuda;
 
