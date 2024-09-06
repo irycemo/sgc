@@ -303,7 +303,7 @@ class Propietarios extends Component
                     'creado_por' => auth()->id()
                 ]);
 
-                $this->predio->audits()->latest()->first()->update(['tags' => 'Agregó propietario']);
+                $this->predio->audits()->latest()->first()?->update(['tags' => 'Agregó propietario']);
 
                 $this->predio->touch();
 
@@ -625,6 +625,8 @@ class Propietarios extends Component
             $pp = $pp + $propietario->porcentaje;
 
         }
+
+        $pp = $pp + (float)$this->porcentaje;
 
         $pn = $pn + (float)$this->porcentaje_nuda + $pp;
 
