@@ -24,7 +24,7 @@ class ConciliarManzanas extends Component
 
     public $flag = false;
 
-    public Predio $predio;
+    public $predios;
 
     public function cambiarManzana(){
 
@@ -41,7 +41,9 @@ class ConciliarManzanas extends Component
             'predio_final' => 'required|numeric|min:1',
         ]);
 
-        $predios = Predio::where('region_catastral', $this->region_catastral)
+        $this->predios = Predio::where('status', 'activo')
+                            ->where('estado', 16)
+                            ->where('region_catastral', $this->region_catastral)
                             ->where('municipio', $this->municipio)
                             ->where('zona_catastral', $this->zona_catastral)
                             ->where('localidad', $this->localidad)
@@ -50,7 +52,7 @@ class ConciliarManzanas extends Component
                             ->whereBetween('predio', [$this->predio_inicial, $this->predio_final])
                             ->get();
 
-        if($predios->count() == 0){
+        if($this->predios->count() == 0){
 
             $this->dispatch('mostrarMensaje', ['error', "No se encontraron predios con los datos ingresados."]);
 
@@ -60,15 +62,16 @@ class ConciliarManzanas extends Component
 
         try {
 
-            DB::transaction(function () use($predios){
+            DB::transaction(function () {
 
-                foreach ($predios as $predio) {
+                foreach ($this->predios as $predio) {
 
-                    $aux = Predio::where('region_catastral', $this->region_catastral)
+                    $aux = Predio::where('status', 'activo')
+                                    ->where('estado', 16)
+                                    ->where('region_catastral', $this->region_catastral)
                                     ->where('municipio', $this->municipio)
                                     ->where('zona_catastral', $this->zona_catastral)
                                     ->where('localidad', $this->localidad)
-                                    ->where('sector', $this->sector)
                                     ->where('sector', $this->nuevo_sector)
                                     ->where('manzana', $this->nueva_manzana)
                                     ->where('predio', $predio->predio)
@@ -94,17 +97,17 @@ class ConciliarManzanas extends Component
 
                     if($this->nueva_manzana == 0 && ($predio->predio != $predio->numero_registro)){
 
-                        throw new Exception("El predio y el número de registro noson iguales en el predio: " .
-                                                $aux->estado . '-' .
-                                                $aux->region_catastral . '-' .
-                                                $aux->municipio. '-' .
-                                                $aux->zona_catastral. '-'.
-                                                $aux->localidad . '-' .
-                                                $aux->sector . '-' .
-                                                $aux->manzana . '-' .
-                                                $aux->predio .
-                                                $aux->edificio .
-                                                $aux->departamento
+                        throw new Exception("El número de predio y el número de registro no son iguales en el predio: " .
+                                                $predio->estado . '-' .
+                                                $predio->region_catastral . '-' .
+                                                $predio->municipio. '-' .
+                                                $predio->zona_catastral. '-'.
+                                                $predio->localidad . '-' .
+                                                $predio->sector . '-' .
+                                                $predio->manzana . '-' .
+                                                $predio->predio .
+                                                $predio->edificio .
+                                                $predio->departamento
                                             );
 
                     }
@@ -115,13 +118,15 @@ class ConciliarManzanas extends Component
                         'actualizado_por' => auth()->id()
                     ]);
 
-                    $predio->audits()->latest()->first()->update(['tags' => 'Concilió sector / numero de manzana']);
+                    $predio->audits()->latest()->first()->update(['tags' => 'Concilió sector / número de manzana']);
 
                 }
 
             });
 
             $this->dispatch('mostrarMensaje', ['success', "Se concilió con éxito."]);
+
+            $this->flag = true;
 
         }catch (\Exception $th) {
 

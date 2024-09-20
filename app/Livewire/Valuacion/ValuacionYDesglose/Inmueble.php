@@ -285,7 +285,7 @@ class Inmueble extends Component
                 $this->ap_paterno = $this->predio->propietarios()->first()->persona->ap_paterno;
                 $this->ap_materno = $this->predio->propietarios()->first()->persona->ap_materno;
                 $this->nombre = $this->predio->propietarios()->first()->persona->nombre;
-                $this->razon_social = $this->predio_padron->propietarios()->first()->persona->razon_social;
+                $this->razon_social = $this->predio->propietarios()->first()->persona->razon_social;
                 $this->tipo_persona = $this->predio->propietarios()->first()->persona->tipo;
                 $this->porcentaje = $this->predio->propietarios()->first()->porcentaje;
 

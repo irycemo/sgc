@@ -60,7 +60,7 @@
 
             <div class="text-center">
 
-                <input title="Nueva manzana" placeholder="Nuevo sector" type="number" class="bg-white rounded text-xs w-28 @error('nuevo_sector') border-1 border-red-500 @enderror" wire:model="nuevo_sector">
+                <input title="Nuevo sector" placeholder="Nuevo sector" type="number" class="bg-white rounded text-xs w-28 @error('nuevo_sector') border-1 border-red-500 @enderror" wire:model="nuevo_sector">
 
                 <input title="Nueva manzana" placeholder="Nueva manzana" type="number" class="bg-white rounded text-xs w-28 @error('nueva_manzana') border-1 border-red-500 @enderror" wire:model="nueva_manzana">
 
@@ -82,5 +82,15 @@
         </button>
 
     </div>
+
+    @if($flag)
+
+        <div class="mb-5 bg-white rounded-lg p-4 shadow-lg">
+
+            <span class="block text-center tracking-wider font-bold">{{ $predio_final  - $predio_inicial}} predios conciliados</span>
+
+        </div>
+
+    @endif
 
 </div>
