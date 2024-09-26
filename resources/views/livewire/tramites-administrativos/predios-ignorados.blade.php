@@ -197,12 +197,6 @@
                                         Ver requerimientos
                                     </button>
 
-                                    @if($predio->archivo)
-
-                                        <a href="{{ Storage::disk('prediosignorados')->url($predio->archivo) }}" target="_blank" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" role="menuitem">Descargar archivo</a>
-
-                                    @endif
-
                                     @if(!$predio->folio)
 
                                         @can('Asignar Folio')
@@ -248,6 +242,12 @@
                                             role="menuitem">
                                             Subir archivo
                                         </button>
+
+                                        @if($predio->archivo)
+
+                                            <a href="{{ Storage::disk('prediosignorados')->url($predio->archivo) }}" target="_blank" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" role="menuitem">Ver archivo</a>
+
+                                        @endif
 
                                         @can('Editar variación')
 

@@ -133,13 +133,13 @@
             <div class="mb-2 flex-col sm:flex-row mx-auto mt-5 flex space-y-2 sm:space-y-0 sm:space-x-3 justify-center">
 
                 <button
-                    wire:click="buscarCuentaPredial"
+                    wire:click="asignarCoordenadas"
                     wire:loading.attr="disabled"
-                    wire:target="buscarCuentaPredial"
+                    wire:target="asignarCoordenadas"
                     type="button"
                     class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
 
-                    <img wire:loading wire:target="buscarCuentaPredial" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    <img wire:loading wire:target="asignarCoordenadas" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Asignar coordenadas
 

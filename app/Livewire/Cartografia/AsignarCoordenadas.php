@@ -149,6 +149,8 @@ class AsignarCoordenadas extends Component
 
             $this->predio->audits()->latest()->first()->update(['tags' => 'Asignó coordenadas']);
 
+            $this->dispatch('mostrarMensaje', ['success', "Las coordenadas se actualizaron con éxito."]);
+
         } catch (\Throwable $th) {
 
             Log::error("Error al asignar coordenadas predio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
