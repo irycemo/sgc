@@ -520,7 +520,7 @@ class AvaluoPredioIgnorado extends Component
         $cuenta = AsignarCuenta::where('localidad', $this->localidad)
                                 ->where('oficina', $this->oficina)
                                 ->where('tipo_predio', $this->tipo)
-                                ->where('registro', $this->numero_registro)
+                                ->where('numero_registro', $this->numero_registro)
                                 ->where('valuador', auth()->id())
                                 ->first();
 
