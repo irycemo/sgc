@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use Throwable;
 use App\Models\Predio;
 use App\Models\Persona;
 use App\Models\Terreno;

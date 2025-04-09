@@ -10,6 +10,10 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 .h-menu{
     max-height: calc(100vh - 80px);
 }

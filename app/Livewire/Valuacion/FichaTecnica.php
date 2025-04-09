@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\ValoresUnitariosRusticos;
 use App\Models\ValoresUnitariosConstruccion;
-use Illuminate\Validation\ValidationException;
 use App\Exceptions\FichaTecnicaImportException;
 
 class FichaTecnica extends Component

@@ -38,7 +38,7 @@
             @else
 
                 <button
-                    class="bg-green-400 hover:shadow-lg w-full justify-center text-white text-xs md:text-sm px-3 py-1 items-center rounded-full mr-2 hover:bg-green-700 flex focus:outline-none"
+                    class="bg-green-400 hover:shadow-lg justify-center text-white text-xs md:text-sm px-3 py-1 items-center rounded-full mr-2 hover:bg-green-700 flex focus:outline-none"
                     wire:click="descargarFicha"
                     wire:loading.attr="disabled"
                     wire:target="descargarFicha">

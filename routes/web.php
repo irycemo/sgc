@@ -178,24 +178,3 @@ Route::get('setpassword/{email}', [SetPasswordController::class, 'create'])->nam
 Route::post('setpassword', [SetPasswordController::class, 'store'])->name('setpassword.store');
 
 Route::get('manual', ManualController::class)->name('manual');
-
-
-Route::get('migracion', [Migracion::class , 'run']);
-
-Artisan::command('migrar', function(){
-
-    $prediosSSQL =  DB::connection('sqlsrv')->table('tcpro008')
-                                            ->join('ctpro003', function($q){
-                                                $q->on('tcpro008.mpio_008', 'ctpro003.mpio_003')
-                                                    ->on('tcpro008.zcat_008', 'ctpro003.zcat_003')
-                                                    ->on('tcpro008.locl_008', 'ctpro003.locl_003')
-                                                    ->on('tcpro008.sect_008', 'ctpro003.sect_003')
-                                                    ->on('tcpro008.mzna_008', 'ctpro003.mzna_003')
-                                                    ->on('tcpro008.pred_008', 'ctpro003.pred_003')
-                                                    ->on('tcpro008.edif_008', 'ctpro003.edif_003')
-                                                    ->on('tcpro008.dpto_008', 'ctpro003.dpto_003');
-                                            })->count();
-
-    info($prediosSSQL);
-
-});
