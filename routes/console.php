@@ -1,6 +1,9 @@
 <?php
 
+use App\Jobs\MigrarPredioJob;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
 
 Artisan::command('inspire', function () {
@@ -15,8 +18,8 @@ Artisan::command('migrar', function(){
     DB::table('personas')->truncate();
     DB::table('terrenos')->truncate();
     DB::table('construccions')->truncate();
-    DB::table('condominioterrenos')->truncate();
-    DB::table('condominioconstruccions')->truncate();
+    DB::table('terrenos_comuns')->truncate();
+    DB::table('construcciones_comuns')->truncate();
     DB::table('movimientos')->truncate();
     DB::table('predios')->truncate();
     DB::table('predio_repetidos')->truncate();
