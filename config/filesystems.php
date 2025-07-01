@@ -100,6 +100,14 @@ return [
             'throw' => false,
         ],
 
+        'preguntas' => [
+            'driver' => 'local',
+            'root' => storage_path('app/preguntas'),
+            'url' => env('APP_URL').'/preguntas',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
     ],
 
     /*
@@ -120,6 +128,7 @@ return [
         public_path('variacionescatastrales') => storage_path('app/variacionescatastrales'),
         public_path('prediosignorados') => storage_path('app/prediosignorados'),
         public_path('certificaciones') => storage_path('app/certificaciones'),
+        public_path('preguntas') => storage_path('app/preguntas'),
     ],
 
 ];
