@@ -32,7 +32,6 @@ return new class extends Migration
             $table->string('entidad')->nullable();
             $table->string('municipio')->nullable();
             $table->string('ciudad')->nullable();
-            $table->string('correo')->nullable()->unique();
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

@@ -31,7 +31,7 @@
 
             </select>
 
-            <select class="bg-white rounded-full text-sm w-60" wire:model.live="filters.servicio">
+            {{-- <select class="bg-white rounded-full text-sm w-60" wire:model.live="filters.servicio">
 
                 <option value="" selected>Servicio</option>
 
@@ -41,7 +41,7 @@
 
                 @endforeach
 
-            </select>
+            </select> --}}
 
             <input type="text" wire:model.live.debounce.500ms="filters.search" placeholder="Solicitante" class="bg-white rounded-full text-sm">
 
@@ -77,8 +77,6 @@
                 <x-table.heading sortable wire:click="sortBy('fecha_pago')" :direction="$sort === 'fecha_pago' ? $direction : null" >Fecha de pago</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('tipo_servicio')" :direction="$sort === 'tipo_servicio' ? $direction : null" >Tipo de servicio</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
-                <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
-                <x-table.heading >Acciones</x-table.heading>
 
             </x-slot>
 
@@ -192,54 +190,6 @@
                             <span class="font-semibold">@if($tramite->creadoPor != null)Registrado por: {{$tramite->creadoPor->name}} @else Registro: @endif</span> <br>
 
                             {{ $tramite->created_at }}
-
-                        </x-table.cell>
-
-                        <x-table.cell>
-
-                            <span class="font-semibold">@if($tramite->actualizadoPor != null)Actualizado por: {{$tramite->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
-
-                            {{ $tramite->updated_at }}
-
-                        </x-table.cell>
-
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
-
-                            <div class="flex flex-col justify-center lg:justify-start gap-2">
-
-                                <x-button-green
-                                    wire:click="abrirModalVer({{ $tramite->id }})"
-                                    wire:loading.attr="disabled"
-                                >
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-
-                                    <span>Ver</span>
-
-                                </x-button-green>
-
-                                @can('Editar trámite')
-
-                                    <x-button-blue
-                                        wire:click="abrirModalEditar({{ $tramite->id }})"
-                                        wire:loading.attr="disabled"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                        </svg>
-
-                                        <span>Editar</span>
-
-                                    </x-button-blue>
-
-                                @endcan
-
-                            </div>
 
                         </x-table.cell>
 

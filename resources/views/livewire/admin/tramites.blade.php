@@ -322,7 +322,7 @@
 
                 </div>
 
-                @if($modelo_editar->predios->count())
+                @if(true)
 
                     <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
@@ -591,11 +591,11 @@
 
                         </div>
 
-                        @if($modelo_editar->avaluoPara)
+                        @if($modelo_editar->avaluo_para)
 
                             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                                <p><strong>Avaluo para:</strong> {{ $modelo_editar->avaluoPara->nombre }}</p>
+                                <p><strong>Avaluo para:</strong> {{ $modelo_editar->avaluo_para->label() }}</p>
 
                             </div>
 
@@ -743,7 +743,7 @@
 
                     @endif
 
-                    @if($modelo_editar->adicionaA?->count())
+                    @if($modelo_editar->ligadoA?->count())
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
 
@@ -751,7 +751,7 @@
 
                             <div class="flex space-x-2 flex-row">
 
-                                <p><strong>NC:</strong>{{ $modelo_editar->adicionaA->folio }}</p>
+                                <p><strong>NC:</strong>{{ $modelo_editar->ligadoA->folio }}</p>
 
                             </div>
 

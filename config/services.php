@@ -43,4 +43,18 @@ return [
         'SAP_VALIDAR_LINEA_DE_CAPTURA_URL' => env('SAP_VALIDAR_LINEA_DE_CAPTURA_URL')
     ],
 
+    'sistema_tramites_en_linea' => [
+        'token' => env('SISTEMA_TRAMITES_EN_LINEA_TOKEN'),
+        'consultar_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_CONSULTAR_AVISO'),
+        'rechazar_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_RECHAZAR_AVISO'),
+        'autorizar_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_AUTORIZAR_AVISO'),
+        'operar_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_OPERAR_AVISO'),
+    ],
+
+    'sistema_peritos_externos' => [
+        'token' => env('SISTEMA_PERITOS_EXTERNOS_TOKEN'),
+        'consultar_avaluo' => env('SISTEMA_PERITOS_EXTERNOS_CONSULTAR_AVALUO'),
+        'operar_avaluo' => env('SISTEMA_PERITOS_EXTERNOS_OPERAR_AVALUO'),
+    ],
+
 ];

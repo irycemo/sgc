@@ -44,13 +44,15 @@ class TramitesLinea extends Component
                 ->select('id', 'año', 'folio', 'usuario', 'estado', 'servicio_id', 'cantidad', 'monto', 'fecha_entrega', 'fecha_pago', 'tipo_tramite', 'tipo_servicio', 'nombre_solicitante', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
                 ->with('servicio', 'creadoPor', 'actualizadoPor')
                 ->where('usuario', 11)
-                /* ->whereNotIn('estado', ['nuevo', 'concluido']) */
+                ->whereIn('estado', ['pagado', 'autorizado'])
+                ->whereHas('servicio', function ($q){
+                    $q->where('clave_ingreso', 'DM34');
+                })
                 ->when($this->filters['search'], fn($q, $search) => $q->where('nombre_solicitante', 'LIKE', '%' . $search . '%'))
                 ->when($this->filters['año'], fn($q, $año) => $q->where('año', $año))
                 ->when($this->filters['folio'], fn($q, $folio) => $q->where('folio', $folio))
                 ->when($this->filters['estado'], fn($q, $estado) => $q->where('estado', $estado))
                 ->when($this->filters['tipoServicio'], fn($q, $tipoServicio) => $q->where('tipo_servicio', $tipoServicio))
-                ->when($this->filters['servicio'], fn($q, $servicio) => $q->where('servicio_id', $servicio))
                 ->orderBy($this->sort, $this->direction)
                 ->paginate($this->pagination);
 
@@ -62,7 +64,7 @@ class TramitesLinea extends Component
 
         array_push($this->fields, 'predios', 'predio', 'localidad', 'oficina', 'tipo', 'registro');
 
-        $this->servicios = Servicio::select('id', 'nombre')->whereIn('id', [3,4,5,6,7,8,9,10,11,66,67,68,64,65,57,55])->orderBy('nombre')->get();
+        /* $this->servicios = Servicio::select('id', 'nombre')->whereIn('id', [3,4,5,6,7,8,9,10,11,66,67,68,64,65,57,55])->orderBy('nombre')->get(); */
 
         $this->años = Constantes::AÑOS;
 

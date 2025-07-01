@@ -28,7 +28,7 @@ return new class extends Migration
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
 
-            $table->unique(['tipo_titulo', 'titulo_propiedad']);
+            $table->index(['documento_entrada', 'documento_numero']);
         });
     }
 

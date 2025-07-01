@@ -20,7 +20,11 @@ trait ValidarSector
 
         }
 
-        $sectores = json_decode($oficina->sectores, true);
+        $sectores = json_decode($oficina->sectores,true);
+
+       /*  $sectores2 = json_decode($sectores,true);
+
+        $sectores = json_decode($sectores2,true); */
 
         if(is_null($sectores)){
 

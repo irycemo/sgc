@@ -77,7 +77,7 @@
 
             <x-slot name="body">
 
-                @forelse ($audits as $audit)
+                @forelse ($this->audits as $audit)
 
                     <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $audit->id }}">
 
@@ -198,7 +198,7 @@
 
                     <x-table.cell colspan="9" class="bg-gray-50">
 
-                        {{ $audits->links()}}
+                        {{ $this->audits->links()}}
 
                     </x-table.cell>
 

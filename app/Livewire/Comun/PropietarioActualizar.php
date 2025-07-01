@@ -169,7 +169,6 @@ class PropietarioActualizar extends Component
         if(isset($this->propietario)){
 
             $this->persona = $this->propietario->persona;
-            $this->tipo_actor = $this->propietario->tipo_actor;
             $this->tipo_persona = $this->propietario->persona->tipo;
             $this->nombre = $this->propietario->persona->nombre;
             $this->multiple_nombre = $this->propietario->persona->multiple_nombre;

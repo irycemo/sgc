@@ -130,7 +130,24 @@
 
     <div class="bg-white rounded-lg p-4 flex justify-end  shadow-xl">
 
-        @if($predio?->avaluo?->estado === 'nuevo')
+        @if(isset($predio->avaluo))
+
+            @if($predio?->avaluo?->estado === 'nuevo')
+
+                <x-button-green
+                    wire:click="guardar"
+                    wire:loading.attr="disabled"
+                    wire:target="guardar">
+
+                    <img wire:loading wire:target="guardar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Guardar colindancias
+
+                </x-button-green>
+
+            @endif
+
+        @else
 
             <x-button-green
                 wire:click="guardar"

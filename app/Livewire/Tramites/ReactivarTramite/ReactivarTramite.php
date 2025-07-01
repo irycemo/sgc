@@ -94,14 +94,15 @@ class ReactivarTramite extends Component
 
                     $certificacion->update([
                         'estado' => 'cancelado',
-                        'observaciones' => $this->observaciones
+                        'observaciones' => $this->observaciones,
+                        'actualizado_por' => auth()->id()
                     ]);
 
                     $certificacion->audits()->latest()->first()->update(['tags' => 'Canceló certificado']);
 
                 }else{
 
-                    $this->dispatch('mostrarMensaje', ['warning', "nel."]);
+                    $this->dispatch('mostrarMensaje', ['warning', "No se encontro la certificación"]);
 
                     return;
 

@@ -1,4 +1,4 @@
-<div x-data="{openRoles:true, openDistritos:true, openValores:true, openPredios:true}" class="mb-5">
+<div class="mb-5">
 
     <p class="uppercase text-base mb-2 border-b border-rojo rounded-lg px-1.5 w-full">Administración</p>
 

@@ -22,7 +22,7 @@ class TramiteService{
 
     }
 
-    public function crear(array $predios = null):Tramite
+    public function crear(array | null $predios = null):Tramite
     {
 
         try {

@@ -18,6 +18,7 @@ class PrediosController extends Controller
             'construcciones',
             'colindancias',
             'audits.user:id,name',
+            'audits.tramite:id,año,folio,usuario',
             'bloqueos.creadoPor',
             'bloqueos.actualizadoPor',
             'movimientos.creadoPor'

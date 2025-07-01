@@ -30,9 +30,9 @@ class Ventanilla extends Component
     public $servicio_seleccionado;
 
     public $tramite;
-    public $tramtie_año;
-    public $tramtie_folio;
-    public $tramtie_usuario;
+    public $tramite_año;
+    public $tramite_folio;
+    public $tramite_usuario;
 
     public $flag = false;
     public $flags = [
@@ -182,7 +182,7 @@ class Ventanilla extends Component
 
         $this->años = Constantes::AÑOS;
 
-        $this->año = now()->format('Y');
+        $this->tramite_año = now()->format('Y');
 
     }
 

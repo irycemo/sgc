@@ -295,7 +295,7 @@
 
                             <strong>Porcentaje de propiedad</strong>
 
-                            <p>{{ $propietario->porcentaje }}</p>
+                            <p>{{ $propietario->porcentaje_propiedad }}</p>
 
                         </div>
 

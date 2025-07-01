@@ -2,7 +2,7 @@
 
 <p class="parrafo">
 
-    <strong>Superficie de terreno:</strong>  {{ $predio->superficie_terreno }}  {{ $predio->unidad_area }}
+    <strong>Superficie de terreno:</strong>  {{ $predio->superficie_terreno }}
 
     @if ($predio->superficie_construccion)
 
@@ -11,11 +11,11 @@
     @endif
 
     @if ($predio->superficie_judicial)
-        <strong>superficie judicial:</strong>  {{ $predio->superficie_judicial }}  {{ $predio->unidad_area }};
+        <strong>superficie judicial:</strong>  {{ $predio->superficie_judicial }};
     @endif
 
     @if ($predio->superficie_notarial)
-        <strong>superficie notarial:</strong> {{ $predio->superficie_notarial }}  {{ $predio->unidad_area }};
+        <strong>superficie notarial:</strong> {{ $predio->superficie_notarial }};
     @endif
 
     @if ($predio->area_comun_terreno)
@@ -27,19 +27,19 @@
     @endif
 
     @if ($predio->valor_terreno_comun)
-        <strong>valor de terreno común:</strong> {{ number_format($predio->valor_terreno_comun, 2) }} {{ $predio->divisa }};
+        <strong>valor de terreno común:</strong> {{ number_format($predio->valor_terreno_comun, 2) }}
     @endif
 
     @if ($predio->valor_construccion_comun)
-        <strong>valor de construcción común:</strong> {{ number_format($predio->valor_construccion_comun, 2) }} {{ $predio->divisa }};
+        <strong>valor de construcción común:</strong> {{ number_format($predio->valor_construccion_comun, 2) }}
     @endif
 
     @if ($predio->valor_total_terreno)
-        <strong>valor total de terreno:</strong> {{ number_format($predio->valor_total_terreno, 2) }} {{ $predio->divisa }};
+        <strong>valor total de terreno:</strong> {{ number_format($predio->valor_total_terreno, 2) }}
     @endif
 
     @if ($predio->valor_total_construccion)
-        <strong>valor total de construcción:</strong> {{ number_format($predio->valor_total_construccion, 2) }} {{ $predio->divisa }};
+        <strong>valor total de construcción:</strong> {{ number_format($predio->valor_total_construccion, 2) }}
     @endif
 
 </p>

@@ -7,6 +7,7 @@ use App\Models\Oficina;
 use App\Models\Tramite;
 use Illuminate\Support\Str;
 use App\Traits\ModelosTrait;
+use App\Models\Requerimiento;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use App\Enums\Certificaciones\CertificacionesEnum;
@@ -71,6 +72,10 @@ class Certificacion extends Model implements Auditable
 
     public function predio(){
         return $this->belongsTo(Predio::class);
+    }
+
+    public function requerimientos(){
+        return $this->morphMany(Requerimiento::class, 'requerimientoable');
     }
 
 }

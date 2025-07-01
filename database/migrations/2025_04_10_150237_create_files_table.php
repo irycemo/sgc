@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('url');
             $table->string('descripcion')->nullable();
             $table->timestamps();
+
+            $table->index(['fileable_id', 'fileable_type'], 'morph_index');
         });
     }
 

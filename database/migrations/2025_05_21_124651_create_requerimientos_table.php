@@ -15,9 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('requerimientoable_id');
             $table->string('requerimientoable_type');
+            $table->string('estado');
+            $table->string('archivo_url')->nullable();
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->text('descripcion')->nullable();
             $table->timestamps();
+
+            $table->index(['requerimientoable_id', 'requerimientoable_type'], 'morph_index');
+
         });
     }
 

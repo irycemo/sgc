@@ -30,7 +30,7 @@ trait PredioTrait
 
         $terrenosComun = collect();
 
-        $predio->load('terrenos');
+        $predio->load('terrenosComun');
 
         foreach ($predio->terrenosComun as $terrenoComun) {
 
@@ -48,7 +48,7 @@ trait PredioTrait
 
         $construcciones = collect();
 
-        $predio->load('terrenos');
+        $predio->load('construcciones');
 
         foreach ($predio->construcciones as $construccion) {
 
@@ -65,7 +65,7 @@ trait PredioTrait
 
         $construccionesComun = collect();
 
-        $predio->load('terrenos');
+        $predio->load('construccionesComun');
 
         foreach ($predio->construccionesComun as $construccionComun) {
 
@@ -90,7 +90,7 @@ trait PredioTrait
             $item = (object)[];
 
             $item->viento = $colindancia->viento;
-            $item->longitud = $colindancia->longitud_formateada;
+            $item->longitud = $colindancia->longitud;
             $item->descripcion = $colindancia->descripcion;
 
             $colindancias->push($item);
@@ -98,6 +98,8 @@ trait PredioTrait
         }
 
         $propietarios = collect();
+
+        $predio->load('propietarios.persona');
 
         foreach ($predio->propietarios as $propietario) {
 
@@ -131,9 +133,6 @@ trait PredioTrait
         $object->valor_total_terreno = $predio->valor_total_terreno;
         $object->valor_total_construccion = $predio->valor_total_construccion;
         $object->valor_catastral = $predio->valor_catastral;
-        $object->monto_transaccion = $predio->monto_transaccion;
-        $object->divisa = $predio->divisa;
-        $object->unidad_area = $predio->unidad_area;
         $object->tipo_vialidad = $predio->tipo_vialidad;
         $object->tipo_asentamiento = $predio->tipo_asentamiento;
         $object->nombre_vialidad = $predio->nombre_vialidad;
@@ -143,7 +142,6 @@ trait PredioTrait
         $object->numero_adicional = $predio->numero_adicional;
         $object->numero_adicional_2 = $predio->numero_adicional_2;
         $object->numero_interior = $predio->numero_interior;
-        $object->lote = $predio->lote;
         $object->manzana = $predio->manzana;
         $object->codigo_postal = $predio->codigo_postal;
         $object->lote_fraccionador = $predio->lote_fraccionador;
@@ -152,25 +150,16 @@ trait PredioTrait
         $object->nombre_edificio = $predio->nombre_edificio;
         $object->clave_edificio = $predio->clave_edificio;
         $object->departamento_edificio = $predio->departamento_edificio;
-        $object->entre_vialidades = $predio->entre_vialidades;
         $object->nombre_predio = $predio->nombre_predio;
         $object->estado = $predio->estado;
         $object->municipio = $predio->municipio;
-        $object->ciudad = $predio->ciudad;
         $object->localidad = $predio->localidad;
-        $object->poblado = $predio->poblado;
-        $object->ejido = $predio->ejido;
-        $object->zona_ubicacion = $predio->zona_ubicacion;
-        $object->parcela = $predio->parcela;
-        $object->solar = $predio->solar;
-        $object->uso_suelo = $predio->uso_suelo;
         $object->xutm = $predio->xutm;
         $object->yutm = $predio->yutm;
         $object->zutm = $predio->zutm;
         $object->lon = $predio->lon;
         $object->lat = $predio->lat;
         $object->observaciones = $predio->observaciones;
-        $object->partes_iguales = $predio->partes_iguales;
         $object->colindancias = $colindancias;
         $object->propietarios = $propietarios;
         $object->terrenos = $terrenos;
@@ -178,9 +167,9 @@ trait PredioTrait
         $object->construcciones = $construcciones;
         $object->construccionesComun = $construccionesComun;
         $object->ubicacion_en_manzana  = $predio->ubicacion_en_manzana;
-        $object->superficie_terreno = $predio->superficie_terreno_formateada;
-        $object->superficie_judicial = $predio->superficie_judicial_formateada;
-        $object->superficie_notarial = $predio->superficie_notarial_formateada;
+        $object->superficie_terreno = $predio->superficie_terreno;
+        $object->superficie_judicial = $predio->superficie_judicial;
+        $object->superficie_notarial = $predio->superficie_notarial;
 
         return $object;
 

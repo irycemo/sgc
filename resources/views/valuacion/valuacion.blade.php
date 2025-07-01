@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <x-header>Avalúo de predio ignorado</x-header>
+    <x-header>Valuación y desglose</x-header>
 
     <div class="tab-wrapper" x-data="{ activeTab:  0 }">
 

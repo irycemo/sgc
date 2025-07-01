@@ -25,7 +25,7 @@
                     <td class=" px-2 w-full ">{{ $movimiento->nombre }}</td>
                     <td class=" px-2 w-full ">{{ $movimiento->fecha->format('d-m-Y') }}</td>
                     <td class=" px-2 w-full ">{{ $movimiento->descripcion }}</td>
-                    @if($movimiento->actualizado_nombre)
+                    @if(isset($movimiento->actualizado_nombre))
 
                         <td class=" px-2 w-full ">{{ $movimiento->actualizado_nombre }}</td>
 

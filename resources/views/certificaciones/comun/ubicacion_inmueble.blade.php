@@ -22,10 +22,6 @@
         <strong>MUNICIPIO:</strong> {{ $predio->municipio }};
     @endif
 
-    @if ($predio->ciudad)
-        <strong>CIUDAD:</strong> {{ $predio->ciudad }};
-    @endif
-
     @if ($predio->localidad)
         <strong>LOCALIDAD:</strong> {{ $predio->localidad }};
     @endif
@@ -58,32 +54,8 @@
         <strong>DEPARTAMENTO:</strong> {{ $predio->departamento_edificio }};
     @endif
 
-    @if ($predio->zona_ubicacion)
-        <strong>Zona:</strong> {{ $predio->zona_ubicacion }};
-    @endif
-
-    @if ($predio->lote)
-        <strong>LOTE:</strong> {{ $predio->lote }};
-    @endif
-
     @if ($predio->manzana)
         <strong>MANZANA:</strong> {{ $predio->manzana }};
-    @endif
-
-    @if ($predio->ejido)
-        <strong>ejido:</strong> {{ $predio->ejido }};
-    @endif
-
-    @if ($predio->parcela)
-        <strong>parcela:</strong> {{ $predio->parcela }};
-    @endif
-
-    @if ($predio->solar)
-        <strong>solar:</strong> {{ $predio->solar }};
-    @endif
-
-    @if ($predio->poblado)
-        <strong>poblado:</strong> {{ $predio->poblado }};
     @endif
 
     @if ($predio->numero_exterior_2)

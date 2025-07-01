@@ -75,7 +75,7 @@ class AsignarCuentaPredial extends Component
 
             if($cuenta){
 
-                $this->dispatch('mostrarMensaje', ['error', "El título de propiedad ya esta registrado con el predio: " . $cuenta->localidad . '-'  . $cuenta->oficina . '-'  . $cuenta->tipo_predio . '-' . $cuenta->numero_registro]);
+                $this->dispatch('mostrarMensaje', ['warning', "El título de propiedad ya esta registrado con el predio: " . $cuenta->localidad . '-'  . $cuenta->oficina . '-'  . $cuenta->tipo_predio . '-' . $cuenta->numero_registro]);
 
                 return;
 
@@ -92,7 +92,7 @@ class AsignarCuentaPredial extends Component
 
         if(!$ultimaCuentaAsignada){
 
-            $this->dispatch('mostrarMensaje', ['error', "No hay cuentas asignadas a la oficina " . $this->oficina . " localidad: " . $this->localidad]);
+            $this->dispatch('mostrarMensaje', ['warning', "No hay cuentas asignadas a la oficina " . $this->oficina . " localidad: " . $this->localidad]);
 
             return;
 

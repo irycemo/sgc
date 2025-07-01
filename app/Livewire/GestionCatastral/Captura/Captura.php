@@ -96,7 +96,7 @@ class Captura extends Component
             'predio.documento_numero' => Rule::requiredIf(!$this->actualizacion),
             'predio.fecha_efectos' => Rule::requiredIf(!$this->actualizacion),
             'accion' => 'required',
-            'predio.observaciones' => 'required',
+            'predio.observaciones' => 'nullable',
             'observaciones' => 'required',
          ];
     }
@@ -397,7 +397,7 @@ class Captura extends Component
                     'creado_por' => auth()->id()
                 ]);
 
-                $this->dispatch('cargarPredio', id:$this->predio->id, flag:true);
+                $this->dispatch('cargarPredioPadron', $this->predio->id);
 
                 $this->dispatch('mostrarMensaje', ['success', "El predio se dió de alta correctamente."]);
 

@@ -47,7 +47,7 @@
 
                 <div class="flex-auto ">
 
-                    @include('livewire.comun.cuenta-clave')
+                    @include('livewire.comun.cuenta-clave-captura')
 
                     @if($actualizacion)
 
@@ -273,6 +273,16 @@
                     </div>
 
                 </div>
+
+            </div>
+
+            <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-lg">
+
+                <x-input-group for="predio.observaciones" label="Observaciones del predio" :error="$errors->first('predio.observaciones')">
+
+                    <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="predio.observaciones"></textarea>
+
+                </x-input-group>
 
             </div>
 

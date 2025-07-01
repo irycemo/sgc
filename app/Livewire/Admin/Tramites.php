@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Predio;
 use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\Servicio;
 use Livewire\WithPagination;
+use App\Models\Certificacion;
 use App\Constantes\Constantes;
 use App\Traits\ComponentesTrait;
 use Livewire\Attributes\Computed;
@@ -132,7 +134,7 @@ class Tramites extends Component
                                 ->first();
 
         if(!$this->predio){
-            $this->dispatch('mostrarMensaje', ['error', "La cuenta predial no esta registrada."]);
+            $this->dispatch('mostrarMensaje', ['warning', "La cuenta predial no esta registrada."]);
             return;
         }
 
@@ -142,7 +144,7 @@ class Tramites extends Component
 
         if($this->modelo_editar->cantidad === $this->modelo_editar->predios()->count()){
 
-            $this->dispatch('mostrarMensaje', ['error', "El trámite ya tiene la cantidad de predios por la que se pagó."]);
+            $this->dispatch('mostrarMensaje', ['warning', "El trámite ya tiene la cantidad de predios por la que se pagó."]);
 
             return;
 
@@ -210,7 +212,11 @@ class Tramites extends Component
 
                 if($certificacion){
 
-                    $certificacion->update(['estado' => 'cancelado']);
+                    $certificacion->update([
+                        'estado' => 'cancelado',
+                        'actualizado_por' => auth()->id(),
+                        'observaciones' => 'Reemplazo'
+                    ]);
 
                 }
 

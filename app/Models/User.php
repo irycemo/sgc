@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Models\Efirma;
 use App\Models\Oficina;
+use App\Models\Traslado;
 use App\Traits\ModelosTrait;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -86,6 +87,10 @@ class User extends Authenticatable implements Auditable
 
     public function efirma(){
         return $this->hasOne(Efirma::class);
+    }
+
+    public function traslados(){
+        return $this->hasMany(Traslado::class, 'asignado_a');
     }
 
 }

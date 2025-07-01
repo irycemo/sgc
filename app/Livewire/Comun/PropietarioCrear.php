@@ -46,13 +46,13 @@ class PropietarioCrear extends Component
 
         $pu = 0;
 
-        foreach($this->modelo->propietarios as $propietario){
+        foreach($this->modelo->propietarios() as $adquiriente){
 
-            $pn = $pn + $propietario->porcentaje_nuda;
+            $pn = $pn + $adquiriente->porcentaje_nuda;
 
-            $pu = $pu + $propietario->porcentaje_usufructo;
+            $pu = $pu + $adquiriente->porcentaje_usufructo;
 
-            $pp = $pp + $propietario->porcentaje_propiedad;
+            $pp = $pp + $adquiriente->porcentaje_propiedad;
 
         }
 
@@ -186,7 +186,7 @@ class PropietarioCrear extends Component
 
                 $actor = $this->modelo->propietarios()->create([
                     'persona_id' => $persona->id,
-                    'tipo_actor' => 'propietario',
+                    'tipo' => 'propietario',
                     'porcentaje_propiedad' => $this->porcentaje_propiedad,
                     'porcentaje_nuda' => $this->porcentaje_nuda,
                     'porcentaje_usufructo' => $this->porcentaje_usufructo,

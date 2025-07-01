@@ -25,7 +25,7 @@
                         <option value="">Seleccione una opción</option>
                         @foreach ($valuadores as $item)
 
-                            <option value="{{ $item->id }}">{{ $item->ap_paterno }} {{ $item->ap_materno }} {{ $item->name }}</option>
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
 
                         @endforeach
 
@@ -167,7 +167,7 @@
                     <option value="">Seleccione un valuador</option>
                     @foreach ($valuadores as $item)
 
-                        <option value="{{ $item->id }}">{{ $item->ap_paterno }} {{ $item->ap_materno }} {{ $item->name }}</option>
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
 
                     @endforeach
 
@@ -212,7 +212,7 @@
 
                 <strong>Cuenta inicial</strong>
 
-                <p>{{ $cuentasAsignadas[0]['localidad'] }}-{{ $cuentasAsignadas[0]['oficina'] }}-{{ $cuentasAsignadas[0]['tipo_predio'] }}{{ $cuentasAsignadas[0]['numero_registro'] }}</p>
+                <p>{{ $cuentasAsignadas[0]['localidad'] }}-{{ $cuentasAsignadas[0]['oficina'] }}-{{ $cuentasAsignadas[0]['tipo_predio'] }}-{{ $cuentasAsignadas[0]['numero_registro'] }}</p>
 
             </div>
 
@@ -220,7 +220,7 @@
 
                 <strong>Cuenta final</strong>
 
-                <p>{{ end($cuentasAsignadas)['localidad'] }}-{{ end($cuentasAsignadas)['oficina'] }}-{{ end($cuentasAsignadas)['tipo_predio'] }}{{ end($cuentasAsignadas)['numero_registro'] }}</p>
+                <p>{{ end($cuentasAsignadas)['localidad'] }}-{{ end($cuentasAsignadas)['oficina'] }}-{{ end($cuentasAsignadas)['tipo_predio'] }}-{{ end($cuentasAsignadas)['numero_registro'] }}</p>
 
             </div>
 
