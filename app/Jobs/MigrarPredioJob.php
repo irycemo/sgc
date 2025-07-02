@@ -262,6 +262,7 @@ class MigrarPredioJob implements ShouldQueue
                 'terrenos_comunsable_type' => 'App\Models\Predio',
                 'area_terreno_comun' => ($predio_padre) ? $superficie_total : 0,
                 'indiviso_terreno' => $ctcdm004->ipre_004 ?? 0,
+                'superficie_proporcional' => $ctcdm004->prot_004 ?? 0,
                 'valor_unitario' => 0,
                 'valor_terreno_comun' => $ctcdm004->vter_004 ?? 0,
             ]);
@@ -269,6 +270,7 @@ class MigrarPredioJob implements ShouldQueue
             ConstruccionesComun::create([
                 'construcciones_comunsable_id' => $idnvo,
                 'construcciones_comunsable_type' => 'App\Models\Predio',
+                'superficie_proporcional' => $ctcdm004->proc_004 ?? 0,
                 'area_comun_construccion' => ($predio_padre) ? $area_comun_construccion : 0,
                 'indiviso_construccion' => $ctcdm004->icon_004 ?? 0,
                 'valor_clasificacion_construccion' => 0,
