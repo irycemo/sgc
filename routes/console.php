@@ -44,9 +44,9 @@ Artisan::command('migrar', function(){
                             })
                             ->get();
 
-    $this->info('Incian ' . $predios->count() . ' predios en chunks de 1000 predios en: ' . now());
+    $this->info('Incian ' . $predios->count() . ' predios en chunks de 100 predios en: ' . now());
 
-    $predios = $predios->chunk(1000);
+    $predios = $predios->chunk(100);
 
     $progressbar = $this->output->createProgressBar(count($predios));
 

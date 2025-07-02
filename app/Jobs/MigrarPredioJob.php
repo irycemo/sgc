@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use Throwable;
 use App\Models\Predio;
 use App\Models\Persona;
 use App\Models\Terreno;
@@ -128,6 +129,8 @@ class MigrarPredioJob implements ShouldQueue
 
             }catch (QueryException $e){
 
+                info($e);
+
                 $errorCode = $e->errorInfo[1];
 
                 if($errorCode == 1062){
@@ -186,10 +189,10 @@ class MigrarPredioJob implements ShouldQueue
 
     }
 
-    /* public function failed(?Throwable $exception): void
+    public function failed(?Throwable $exception): void
     {
-        error($exception);
-    } */
+        Log::error($exception);
+    }
 
     public function condominio($predioss,$idnvo)
     {
@@ -255,8 +258,8 @@ class MigrarPredioJob implements ShouldQueue
         if ($ctcdm004) {
 
             TerrenosComun::create([
-                'condominioterrenoable_id' => $idnvo,
-                'condominioterrenoable_type' => 'App\Models\Predio',
+                'terrenos_comunsable_id' => $idnvo,
+                'terrenos_comunsable_type' => 'App\Models\Predio',
                 'area_terreno_comun' => ($predio_padre) ? $superficie_total : 0,
                 'indiviso_terreno' => $ctcdm004->ipre_004 ?? 0,
                 'valor_unitario' => 0,
@@ -264,8 +267,8 @@ class MigrarPredioJob implements ShouldQueue
             ]);
 
             ConstruccionesComun::create([
-                'condominioconstruccionable_id' => $idnvo,
-                'condominioconstruccionable_type' => 'App\Models\Predio',
+                'construcciones_comunsable_id' => $idnvo,
+                'construcciones_comunsable_type' => 'App\Models\Predio',
                 'area_comun_construccion' => ($predio_padre) ? $area_comun_construccion : 0,
                 'indiviso_construccion' => $ctcdm004->icon_004 ?? 0,
                 'valor_clasificacion_construccion' => 0,
@@ -319,7 +322,7 @@ class MigrarPredioJob implements ShouldQueue
             'propietarioable_type' => 'App\Models\Predio',
             'persona_id' => $persona->id,
             'tipo' => isset($tipo) ? $tipo['desc_007'] : '0',
-            'porcentaje' => ($predioss->tper_008 == 1 || $predioss->tper_008 == 2 || $predioss->tper_008 >= 5) ? $predioss->ppro_008 : 0,
+            'porcentaje_propiedad' => ($predioss->tper_008 == 1 || $predioss->tper_008 == 2 || $predioss->tper_008 >= 5) ? $predioss->ppro_008 : 0,
             'porcentaje_nuda' => ($predioss->tper_008 == 3) ? $predioss->ppro_008 : 0,
             'porcentaje_usufructo' => ($predioss->tper_008 == 4) ? $predioss->ppro_008 : 0,
         ]);
@@ -374,7 +377,7 @@ class MigrarPredioJob implements ShouldQueue
                 'propietarioable_type' => 'App\Models\Predio',
                 'persona_id' => $persona->id,
                 'tipo' => isset($tipo) ? $tipo['desc_007'] : '0',
-                'porcentaje' => ($propietario->tper_005 == 1 || $propietario->tper_005 == 2 || $propietario->tper_005 >= 5) ? $propietario->ppro_005 : 0,
+                'porcentaje_propiedad' => ($propietario->tper_005 == 1 || $propietario->tper_005 == 2 || $propietario->tper_005 >= 5) ? $propietario->ppro_005 : 0,
                 'porcentaje_nuda' => ($propietario->tper_005 == 3) ? $propietario->ppro_005 : 0,
                 'porcentaje_usufructo' => ($propietario->tper_005 == 4) ? $propietario->ppro_005 : 0,
             ]);

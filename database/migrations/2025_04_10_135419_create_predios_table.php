@@ -73,6 +73,7 @@ return new class extends Migration
             $table->text('observaciones')->nullable();
             $table->string('origen')->nullable();
             $table->dateTime('indexado_en')->nullable();
+            $table->string('actualizado_nombre')->nullable();
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->date('fecha');
             $table->text('descripcion');
+            $table->string('actualizado_nombre')->nullable();
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
