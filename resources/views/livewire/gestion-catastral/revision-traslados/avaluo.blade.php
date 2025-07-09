@@ -320,4 +320,15 @@
 
     </div>
 
+    <x-button-blue
+        wire:click="imprimirAvaluo({{ $traslado->id }})"
+        wire:loading.attr="disabled"
+        wire:target="imprimirAvaluo({{ $traslado->id }})">
+
+        <img wire:loading wire:target="imprimirAvaluo({{ $traslado->id }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+        Ver avalúo
+
+    </x-button-blue>
+
 </div>

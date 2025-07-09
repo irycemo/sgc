@@ -76,7 +76,11 @@ class Oficinas extends Component
                 $array = [];
 
                 for ($i=$this->sectorInicial; $i <= $this->sectorFinal ; $i++) {
+
+                    if( $i == 0) continue;
+
                     array_push($array, (int)$i);
+
                 }
 
                 $this->modelo_editar->sectores = $array;
@@ -109,8 +113,9 @@ class Oficinas extends Component
 
                 for ($i=$this->sectorInicial; $i <= $this->sectorFinal ; $i++) {
 
-                    if($this->sectores && in_array($i, $this->sectores))
-                        continue;
+                    if( $i == 0) continue;
+
+                    if($this->sectores && in_array($i, $this->sectores)) continue;
 
                     array_push($this->sectores, (int)$i);
 

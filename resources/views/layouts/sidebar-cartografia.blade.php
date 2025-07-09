@@ -32,15 +32,25 @@
 
         @can('Asignación de cuentas')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <x-nav-dropdown>
 
-                <a href="{{ route('asignacion_cuenta') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
+                <x-slot name="head">
 
-                    Asignar cuenta predial
+                        <a href="{{ route('asignacion_cuenta') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
-                </a>
+                            Asignar cuenta predial
 
-            </div>
+                        </a>
+
+                </x-slot>
+
+                <x-slot name="body">
+
+                    <a href="{{ route('cuentas_asignadas') }}" class="capitalize font-medium text-sm  flex w-full  hover:bg-gray-100 p-2 px-4  rounded-xl hover:text-red-600">Cuentas asignadas</a>
+
+                </x-slot>
+
+            </x-nav-dropdown>
 
         @endcan
 

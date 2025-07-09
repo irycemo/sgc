@@ -228,6 +228,18 @@
                                         Reimprimir
                                     </button>
 
+                                    @if($certificacion->estado != 'activo')
+
+                                        <button
+                                            wire:click="abrirModalEditar('{{ $certificacion->uuid }}')"
+                                            wire:loading.attr="disabled"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Ver observación
+                                        </button>
+
+                                    @endif
+
                                 </div>
 
                             </div>
@@ -278,31 +290,28 @@
 
         <x-slot name="title">
 
-                Editar Certificación
+            Observación
 
         </x-slot>
 
         <x-slot name="content">
+
+            <div>
+
+                {{ $modelo_editar->observaciones }}
+
+            </div>
+
         </x-slot>
 
         <x-slot name="footer">
 
             <div class="flex gap-3">
 
-                <x-button-blue
-                    wire:click="actualizar"
-                    wire:loading.attr="disabled"
-                    wire:target="actualizar">
-
-                    <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-
-                    <span>Actualizar</span>
-                </x-button-blue>
-
                 <x-button-red
-                    wire:click="resetearTodo"
+                    wire:click="$toggle('modal')"
                     wire:loading.attr="disabled"
-                    wire:target="resetearTodo"
+                    wire:target="$toggle('modal')"
                     type="button">
                     Cerrar
                 </x-button-red>

@@ -472,4 +472,15 @@
 
     </div>
 
+    <x-button-blue
+        wire:click="imprimirAviso({{ $traslado->id }})"
+        wire:loading.attr="disabled"
+        wire:target="imprimirAviso({{ $traslado->id }})">
+
+        <img wire:loading wire:target="imprimirAviso({{ $traslado->id }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+        Ver traslado
+
+    </x-button-blue>
+
 </div>

@@ -280,7 +280,14 @@ class Notificacion extends Component
             'actualizado_por' => auth()->user()->id
         ]);
 
-        $predio->audits()->latest()->first()->update(['tags' => 'Actualización mediante avalúo: ' . $this->avaluo->folio]);
+        $predio->movimientos()->create([
+            'nombre' => 'Actualización mediante avalúo',
+            'fecha' => $this->fecha_notificacion,
+            'descripcion' => 'Se actualiza el predio mediante el avalúo con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '.',
+            'creado_por' => auth()->id()
+        ]);
+
+        $predio->audits()->latest()->first()->update(['tags' => 'Actualización mediante avalúo: ' . $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '.']);
 
         $this->procesarRelaciones($predio);
 

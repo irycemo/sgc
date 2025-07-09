@@ -150,4 +150,39 @@ class SistemaTramitesLineaService{
 
     }
 
+    public function generarAvisoPdf(int $aviso_id):array
+    {
+
+        $response = Http::withToken(config('services.sistema_tramites_en_linea.token'))
+                            ->accept('application/json')
+                            ->asForm()
+                            ->post(
+                                config('services.sistema_tramites_en_linea.generar_aviso_pdf'),
+                                [
+                                    'id' => $aviso_id,
+                                ]
+                            );
+
+        if($response->status() !== 200){
+
+            Log::error("Error al generar pdf del aviso. " . $response);
+
+            $data = json_decode($response, true);
+
+            if(isset($data['error'])){
+
+                throw new GeneralException($data['error']);
+
+            }
+
+            throw new GeneralException("Error al generar pdf del aviso.");
+
+        }else{
+
+            return json_decode($response, true);
+
+        }
+
+    }
+
 }

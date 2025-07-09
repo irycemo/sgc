@@ -300,7 +300,7 @@
 
                     <x-table.row wire:key="row-empty">
 
-                        <x-table.cell colspan="12">
+                        <x-table.cell colspan="13">
 
                             <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
 
@@ -320,7 +320,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="12" class="bg-gray-50">
+                    <x-table.cell colspan="13" class="bg-gray-50">
 
                         {{ $this->predios->links()}}
 

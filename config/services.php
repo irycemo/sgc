@@ -49,12 +49,14 @@ return [
         'rechazar_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_RECHAZAR_AVISO'),
         'autorizar_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_AUTORIZAR_AVISO'),
         'operar_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_OPERAR_AVISO'),
+        'generar_aviso_pdf' => env('SISTEMA_TRAMITES_EN_LINEA_GENERAR_AVISO_PDF'),
     ],
 
     'sistema_peritos_externos' => [
         'token' => env('SISTEMA_PERITOS_EXTERNOS_TOKEN'),
         'consultar_avaluo' => env('SISTEMA_PERITOS_EXTERNOS_CONSULTAR_AVALUO'),
         'operar_avaluo' => env('SISTEMA_PERITOS_EXTERNOS_OPERAR_AVALUO'),
+        'generar_avaluo_pdf' => env('SISTEMA_PERITOS_EXTERNOS_GENERAR_AVALUO_PDF'),
     ],
 
 ];

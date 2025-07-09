@@ -322,7 +322,7 @@
 
                 </div>
 
-                @if(true)
+                @if(in_array($modelo_editar->servicio?->clave_ingreso, $tramties_con_predio))
 
                     <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
@@ -831,23 +831,5 @@
         </x-slot>
 
     </x-confirmation-modal>
-
-    {{-- @push('scripts')
-
-        <script>
-
-            window.addEventListener('imprimir_recibo', event => {
-
-                const tramite = event.detail[0].tramite;
-
-                var url_orden = "{{ route('tramites.orden', '')}}" + "/" + tramite;
-
-                window.open(url_orden, '_blank');
-
-            });
-
-        </script>
-
-    @endpush --}}
 
 </div>

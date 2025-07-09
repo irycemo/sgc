@@ -4,7 +4,7 @@
 
     <div class="bg-white p-4 rounded-lg shadow-lg mb-10">
 
-        <ul class="grid w-full  mx-auto gap-6 md:grid-cols-2">
+        <ul class="grid w-full mx-auto gap-6 md:grid-cols-3">
 
             <li>
 
@@ -877,85 +877,93 @@
 
                 </div>
 
-                <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terrenos de área común ({{ $this->predio->terrenosComun->count() }})</h4>
+                @if($this->predio->terrenosComun->count())
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+                    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terrenos de área común ({{ $this->predio->terrenosComun->count() }})</h4>
 
-                    <table class="w-full overflow-x-auto table-fixed">
+                    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-                        <thead class="border-b border-gray-300 ">
+                        <table class="w-full overflow-x-auto table-fixed">
 
-                            <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                            <thead class="border-b border-gray-300 ">
 
-                                <th class="px-2">Área común de terreno</th>
-                                <th class="px-2">Indiviso de terreno</th>
-                                <th class="px-2">Superficie proporcional</th>
-                                <th class="px-2">Valor unitario</th>
-                                <th class="px-2">Valor de terreno común</th>
+                                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-                            </tr>
+                                    <th class="px-2">Área común de terreno</th>
+                                    <th class="px-2">Indiviso de terreno</th>
+                                    <th class="px-2">Superficie proporcional</th>
+                                    <th class="px-2">Valor unitario</th>
+                                    <th class="px-2">Valor de terreno común</th>
 
-                        </thead>
-
-                        <tbody class="divide-y divide-gray-200">
-
-                            @foreach ($this->predio->terrenosComun as $terreno)
-
-                                <tr class="text-gray-500 text-sm leading-relaxed">
-                                    <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->area_terreno_comun }}</td>
-                                    <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->indiviso_terreno }}</td>
-                                    <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->superficie_proporcional }}</td>
-                                    <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->valor_unitario }}</td>
-                                    <td class=" px-2 w-full whitespace-nowrap">${{ number_format($terreno->valor_terreno_comun, 2) }}</td>
                                 </tr>
 
-                            @endforeach
+                            </thead>
 
-                        </tbody>
+                            <tbody class="divide-y divide-gray-200">
 
-                    </table>
+                                @foreach ($this->predio->terrenosComun as $terreno)
 
-                </div>
+                                    <tr class="text-gray-500 text-sm leading-relaxed">
+                                        <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->area_terreno_comun }}</td>
+                                        <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->indiviso_terreno }}</td>
+                                        <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->superficie_proporcional }}</td>
+                                        <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->valor_unitario }}</td>
+                                        <td class=" px-2 w-full whitespace-nowrap">${{ number_format($terreno->valor_terreno_comun, 2) }}</td>
+                                    </tr>
 
-                <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Construcciones de área común ({{ $this->predio->construccionesComun->count() }})</h4>
+                                @endforeach
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+                            </tbody>
 
-                    <table class="w-full overflow-x-auto table-fixed">
+                        </table>
 
-                        <thead class="border-b border-gray-300 ">
+                    </div>
 
-                            <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                @endif
 
-                                <th class="px-2">Área común de construcción</th>
-                                <th class="px-2">Indiviso de construcción</th>
-                                <th class="px-2">Superficie proporcional</th>
-                                <th class="px-2">Clasificación de construcción</th>
-                                <th class="px-2">Valor de construcción común</th>
+                @if($this->predio->construccionesComun->count())
 
-                            </tr>
+                    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Construcciones de área común ({{ $this->predio->construccionesComun->count() }})</h4>
 
-                        </thead>
+                    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
 
-                        <tbody class="divide-y divide-gray-200">
+                        <table class="w-full overflow-x-auto table-fixed">
 
-                            @foreach ($this->predio->construccionesComun as $construccion)
+                            <thead class="border-b border-gray-300 ">
 
-                                <tr class="text-gray-500 text-sm leading-relaxed">
-                                    <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->area_comun_construccion }}</td>
-                                    <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->indiviso_construccion }}</td>
-                                    <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->superficie_proporcional }}</td>
-                                    <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->valor_clasificacion_construccion }}</td>
-                                    <td class=" px-2 w-full whitespace-nowrap">${{ number_format($construccion->valor_construccion_comun, 2) }}</td>
+                                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+
+                                    <th class="px-2">Área común de construcción</th>
+                                    <th class="px-2">Indiviso de construcción</th>
+                                    <th class="px-2">Superficie proporcional</th>
+                                    <th class="px-2">Clasificación de construcción</th>
+                                    <th class="px-2">Valor de construcción común</th>
+
                                 </tr>
 
-                            @endforeach
+                            </thead>
 
-                        </tbody>
+                            <tbody class="divide-y divide-gray-200">
 
-                    </table>
+                                @foreach ($this->predio->construccionesComun as $construccion)
 
-                </div>
+                                    <tr class="text-gray-500 text-sm leading-relaxed">
+                                        <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->area_comun_construccion }}</td>
+                                        <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->indiviso_construccion }}</td>
+                                        <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->superficie_proporcional }}</td>
+                                        <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->valor_clasificacion_construccion }}</td>
+                                        <td class=" px-2 w-full whitespace-nowrap">${{ number_format($construccion->valor_construccion_comun, 2) }}</td>
+                                    </tr>
+
+                                @endforeach
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                @endif
 
                 <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Propietarios ({{ $this->predio->propietarios->count() }})</h4>
 
@@ -967,12 +975,11 @@
 
                             <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-                                <th class="px-2">Tipo de propietario</th>
+                                <th class="px-2">Nombre / Razón social</th>
                                 <th class="px-2">Porcentaje de propiedad</th>
                                 <th class="px-2">Porcentaje de nuda</th>
                                 <th class="px-2">Porcentaje de usufructo</th>
                                 <th class="px-2">Tipo de persona</th>
-                                <th class="px-2">Nombre / Razón social</th>
 
                             </tr>
 
@@ -983,12 +990,11 @@
                             @foreach ($this->predio->propietarios as $propietario)
 
                                 <tr class="text-gray-500 text-sm leading-relaxed">
-                                    <td class=" px-2 w-full ">{{ $propietario->tipo }}</td>
+                                    <td class=" px-2 w-full ">{{ $propietario->persona->nombre }} {{ $propietario->persona->ap_paterno }} {{ $propietario->persona->ap_materno }} {{ $propietario->persona->razon_social }}</td>
                                     <td class=" px-2 w-full ">{{ $propietario->porcentaje_propiedad }}%</td>
                                     <td class=" px-2 w-full ">{{ $propietario->porcentaje_nuda }}%</td>
                                     <td class=" px-2 w-full ">{{ $propietario->porcentaje_usufructo }}%</td>
                                     <td class=" px-2 w-full ">{{ $propietario->persona->tipo }}</td>
-                                    <td class=" px-2 w-full ">{{ $propietario->persona->nombre }} {{ $propietario->persona->ap_paterno }} {{ $propietario->persona->ap_materno }} {{ $propietario->persona->razon_social }}</td>
                                 </tr>
 
                             @endforeach

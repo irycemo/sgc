@@ -288,7 +288,7 @@
                     <tr class="text-sm font-medium text-gray-600 bg-white ">
 
                         <td class="p-2">{{ $usuario->clave }}</td>
-                        <td class="p-2">{{ $usuario->name }} {{ $usuario->ap_paterno }} {{ $usuario->ap_materno }}</td>
+                        <td class="p-2">{{ $usuario->name }}</td>
                         <td class="p-2">{{ $usuario->email }}</td>
                         <td class="p-2">
                             <button

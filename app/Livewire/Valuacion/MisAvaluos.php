@@ -103,9 +103,9 @@ class MisAvaluos extends Component
 
         $canvas = $dom_pdf->get_canvas();
 
-        $canvas->page_text(480, 796, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 7, array(1, 1, 1));
+        $canvas->page_text(480, 745, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
 
-        $canvas->page_text(35, 796, "Avalúo: " . $avaluo->año . "-" . $avaluo->folio . "-" . $avaluo->usuario , null, 7, array(1, 1, 1));
+        $canvas->page_text(35, 745, "Avalúo: " . $avaluo->año . "-" . $avaluo->folio . "-" . $avaluo->usuario , null, 9, array(1, 1, 1));
 
         $pdf = $dom_pdf->output();
 

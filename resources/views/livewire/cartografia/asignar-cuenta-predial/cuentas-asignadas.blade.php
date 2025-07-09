@@ -2,7 +2,7 @@
 
     <div class="mb-6">
 
-        <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Predios asignados a valuadores</h1>
+        <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Cuentas asignadas</h1>
 
         <div class="flex justify-between">
 
@@ -14,7 +14,7 @@
 
                     @foreach ($valuadoresAsignados as $valuador)
 
-                        <option value="{{ $valuador->id }}">{{ $valuador->ap_paterno }} {{ $valuador->ap_materno }} {{ $valuador->name }}</option>
+                        <option value="{{ $valuador->id }}">{{ $valuador->name }}</option>
 
                     @endforeach
 
@@ -76,7 +76,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Valuador</span>
 
-                            {{ $predio->valuadorAsignado->name }} {{ $predio->valuadorAsignado->ap_paterno }} {{ $predio->valuadorAsignado->ap_materno }}
+                            {{ $predio->asignadoA->name }}
 
                         </x-table.cell>
 
@@ -220,7 +220,7 @@
 
                                 @foreach ($valuadores as $valuador)
 
-                                    <option value="{{ $valuador->id }}">{{ $valuador->ap_paterno }} {{ $valuador->ap_materno }} {{ $valuador->name }}</option>
+                                    <option value="{{ $valuador->id }}">{{ $valuador->name }}</option>
 
                                 @endforeach
 

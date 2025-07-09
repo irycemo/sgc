@@ -29,6 +29,8 @@ class Tramites extends Component
     public $modalVer = false;
     public $años;
 
+    public $tramties_con_predio = ['DM31', 'DM34', 'D727', 'D728', 'D729', 'D730'];
+
     public $filters = [
         'search' => '',
         'año' => '',

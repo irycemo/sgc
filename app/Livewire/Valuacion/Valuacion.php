@@ -5,10 +5,16 @@ namespace App\Livewire\Valuacion;
 use App\Models\Avaluo;
 use App\Models\Predio;
 use App\Models\Oficina;
+use App\Models\Terreno;
 use Livewire\Component;
+use App\Models\Colindancia;
+use App\Models\Propietario;
+use App\Models\Construccion;
 use App\Models\PredioAvaluo;
+use App\Models\TerrenosComun;
 use App\Constantes\Constantes;
 use Illuminate\Support\Facades\DB;
+use App\Models\ConstruccionesComun;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
 use App\Traits\Predios\ValidarSector;
@@ -289,7 +295,7 @@ class Valuacion extends Component
 
             $this->validarCuentaAsignada();
 
-            $this->validarDisponibilidad();
+            if(!$this->predio->copia) $this->validarDisponibilidad();
 
             $this->validarSector();
 
@@ -297,6 +303,8 @@ class Valuacion extends Component
 
                 $this->predio->actualizado_por = auth()->user()->id;
                 $this->predio->save();
+
+                if($this->predio->copia) $this->copiarRelaciones();
 
                 $avaluo = Avaluo::create([
                     'año' => now()->format('Y'),
@@ -326,6 +334,102 @@ class Valuacion extends Component
 
             Log::error("Error al crear avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
+    public function copiarRelaciones(){
+
+        foreach($this->predio_padron->propietarios as $propietario){
+
+            Propietario::create([
+                'propietarioable_id' => $this->predio->id,
+                'propietarioable_type' => 'App\Models\PredioAvaluo',
+                'persona_id' => $propietario->persona_id,
+                'porcentaje_propiedad' => $propietario->porcentaje_propiedad,
+                'porcentaje_nuda' => $propietario->porcentaje_nuda,
+                'porcentaje_usufructo' => $propietario->porcentaje_usufructo,
+                'tipo' => 'PROPIETARIO',
+                'creado_por' => auth()->id()
+            ]);
+
+        }
+
+        foreach($this->predio_padron->colindancias as $colindancia){
+
+            Colindancia::create([
+                'colindanciaable_id' => $this->predio->id,
+                'colindanciaable_type' => 'App\Models\PredioAvaluo',
+                'viento' => $colindancia->viento,
+                'longitud' => $colindancia->longitud,
+                'descripcion' => $colindancia->descripcion,
+                'creado_por' => auth()->id()
+            ]);
+
+        }
+
+        foreach($this->predio_padron->terrenos as $terreno){
+
+            Terreno::create([
+                'terrenoable_id' => $this->predio->id,
+                'terrenoable_type' => 'App\Models\PredioAvaluo',
+                'superficie' => $terreno->superficie,
+                'demerito' => $terreno->demerito,
+                'valor_demeritado' => $terreno->valor_demeritado,
+                'valor_unitario' => $terreno->valor_unitario,
+                'valor_terreno' => $terreno->valor_terreno,
+                'creado_por' => auth()->id()
+            ]);
+
+        }
+
+        foreach($this->predio_padron->terrenosComun as $terrenoComun){
+
+            TerrenosComun::create([
+                'terrenos_comunsable_id' => $this->predio->id,
+                'terrenos_comunsable_type' => 'App\Models\PredioAvaluo',
+                'area_terreno_comun' => $terrenoComun->area_terreno_comun,
+                'indiviso_terreno' => $terrenoComun->indiviso_terreno,
+                'valor_unitario' => $terrenoComun->valor_unitario,
+                'superficie_proporcional' => $terrenoComun->superficie_proporcional,
+                'valor_terreno_comun' => $terrenoComun->valor_terreno_comun,
+                'creado_por' => auth()->id()
+            ]);
+
+        }
+
+        foreach($this->predio_padron->construcciones as $construccion){
+
+            Construccion::create([
+                'construccionable_id' => $this->predio->id,
+                'construccionable_type' => 'App\Models\PredioAvaluo',
+                'referencia' => $construccion->referencia,
+                'tipo' => $construccion->tipo,
+                'uso' => $construccion->uso,
+                'estado' => $construccion->estado,
+                'calidad' => $construccion->calidad,
+                'niveles' => $construccion->niveles,
+                'superficie' => $construccion->superficie,
+                'valor_unitario' => $construccion->valor_unitario,
+                'valor_construccion' => $construccion->valor_construccion,
+                'creado_por' => auth()->id()
+            ]);
+
+        }
+
+        foreach($this->predio_padron->construccionesComun as $construccionComun){
+
+            ConstruccionesComun::create([
+                'construcciones_comunsable_id' => $this->predio->id,
+                'construcciones_comunsable_type' => 'App\Models\PredioAvaluo',
+                'area_comun_construccion' => $construccionComun->area_comun_construccion,
+                'superficie_proporcional' => $construccionComun->superficie_proporcional,
+                'indiviso_construccion' => $construccionComun->indiviso_construccion,
+                'valor_clasificacion_construccion' => $construccionComun->valor_clasificacion_construccion,
+                'valor_construccion_comun' => $construccionComun->valor_construccion_comun,
+                'creado_por' => auth()->id()
+            ]);
 
         }
 

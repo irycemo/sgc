@@ -14,12 +14,12 @@ class OficinasTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('oficinas')->delete();
-
+        
         \DB::table('oficinas')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'region' => 101,
@@ -41,7 +41,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 13:51:51',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 2,
                 'region' => 1401,
@@ -63,7 +63,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:22:47',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 3,
                 'region' => 201,
@@ -85,7 +85,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 12:23:31',
             ),
-            3 =>
+            3 => 
             array (
                 'id' => 4,
                 'region' => 1901,
@@ -107,7 +107,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:35:25',
             ),
-            4 =>
+            4 => 
             array (
                 'id' => 5,
                 'region' => 501,
@@ -129,7 +129,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:37:46',
             ),
-            5 =>
+            5 => 
             array (
                 'id' => 6,
                 'region' => 1401,
@@ -137,7 +137,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1401,
                 'localidad' => 1,
                 'tipo' => 'ADMINISTRACIÓN',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35]"',
                 'nombre' => 'APATZINGAN',
                 'ubicacion' => 'AV. CONSTITUCIÓN DE 1814 1 COL. CENTRO C.P 60600 ENTRE CALLES AV JOSE MA MORELOS Y ESTEBAN VACA CALDERÓN.',
                 'titular' => 'C. MA. GUADALUPE HUERTA RICO',
@@ -151,7 +151,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:10:47',
             ),
-            6 =>
+            6 => 
             array (
                 'id' => 7,
                 'region' => 401,
@@ -173,7 +173,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:38:59',
             ),
-            7 =>
+            7 => 
             array (
                 'id' => 8,
                 'region' => 2201,
@@ -195,7 +195,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 11:50:57',
             ),
-            8 =>
+            8 => 
             array (
                 'id' => 9,
                 'region' => 801,
@@ -217,7 +217,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:40:25',
             ),
-            9 =>
+            9 => 
             array (
                 'id' => 10,
                 'region' => 901,
@@ -239,7 +239,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:41:57',
             ),
-            10 =>
+            10 => 
             array (
                 'id' => 11,
                 'region' => 2001,
@@ -261,7 +261,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:42:31',
             ),
-            11 =>
+            11 => 
             array (
                 'id' => 12,
                 'region' => 1401,
@@ -269,7 +269,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1403,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]"',
                 'nombre' => 'BUENAVISTA',
             'ubicacion' => 'ÁLVARO OBREGÓN S/N COL. CENTRO C.P 60500 ENTRE CALLE NARCISO MENDOZA Y LÁZARO CÁRDENAS (DENTRO DE LA PRESIDENCIA).',
                 'titular' => 'LIC. GUSTAVO ANGEL RODRIGUEZ GUZMAN',
@@ -283,7 +283,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 13:53:28',
             ),
-            12 =>
+            12 => 
             array (
                 'id' => 13,
                 'region' => 601,
@@ -305,7 +305,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:46:00',
             ),
-            13 =>
+            13 => 
             array (
                 'id' => 14,
                 'region' => 2201,
@@ -327,7 +327,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 12:15:02',
             ),
-            14 =>
+            14 => 
             array (
                 'id' => 15,
                 'region' => 1501,
@@ -335,7 +335,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1501,
                 'localidad' => 1,
                 'tipo' => 'ADMINISTRACIÓN',
-                'sectores' => '"[0,1,2,3,4]"',
+                'sectores' => '"[1,2,3,4]"',
                 'nombre' => 'COALCOMAN',
                 'ubicacion' => 'Salazar esquina con Melchor Ocampo',
                 'titular' => 'José Roberto reyes Álvarez',
@@ -349,7 +349,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 13:38:14',
             ),
-            15 =>
+            15 => 
             array (
                 'id' => 16,
                 'region' => 1101,
@@ -371,7 +371,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:46:42',
             ),
-            16 =>
+            16 => 
             array (
                 'id' => 17,
                 'region' => 401,
@@ -393,7 +393,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:47:06',
             ),
-            17 =>
+            17 => 
             array (
                 'id' => 18,
                 'region' => 101,
@@ -415,7 +415,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:47:24',
             ),
-            18 =>
+            18 => 
             array (
                 'id' => 19,
                 'region' => 1301,
@@ -437,7 +437,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:47:56',
             ),
-            19 =>
+            19 => 
             array (
                 'id' => 20,
                 'region' => 101,
@@ -459,7 +459,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:48:26',
             ),
-            20 =>
+            20 => 
             array (
                 'id' => 21,
                 'region' => 1201,
@@ -481,7 +481,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:48:57',
             ),
-            21 =>
+            21 => 
             array (
                 'id' => 22,
                 'region' => 101,
@@ -503,7 +503,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:49:16',
             ),
-            22 =>
+            22 => 
             array (
                 'id' => 23,
                 'region' => 1601,
@@ -511,7 +511,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1602,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'CHAVINDA',
                 'ubicacion' => 'gomez ferias #5 altos  col centro Entre Izquierda: Nicolas bravo. derecha: galeana. atrás: Javier mina. ',
                 'titular' => 'LIC. KAREN LUCERO GUERRERO HUERTA',
@@ -525,7 +525,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 12:06:13',
             ),
-            23 =>
+            23 => 
             array (
                 'id' => 24,
                 'region' => 1201,
@@ -547,7 +547,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 12:59:05',
             ),
-            24 =>
+            24 => 
             array (
                 'id' => 25,
                 'region' => 1701,
@@ -569,7 +569,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:02:46',
             ),
-            25 =>
+            25 => 
             array (
                 'id' => 26,
                 'region' => 1301,
@@ -577,7 +577,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1502,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4]"',
+                'sectores' => '"[1,2,3,4]"',
                 'nombre' => 'CHINICUILA',
                 'ubicacion' => 'Villa Victoria, Chinicuila  Francisco I Madero #7 Centro',
                 'titular' => 'Leonel Huato Peñaloza',
@@ -591,7 +591,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-03-19 11:40:39',
             ),
-            26 =>
+            26 => 
             array (
                 'id' => 27,
                 'region' => 101,
@@ -599,7 +599,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 106,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'CHUCANDIRO',
                 'ubicacion' => 'BENITO JUÁREZ 150 COL. CENTRO C.P 58860. AL ORIENTE RAMÓN Y ALCARAZ, AL PONIENTE JUAN ALDAMA, AL SUR CON EPITACIO HUERTA Y AL NORTE CON MIGUEL HIDALGO.',
                 'titular' => 'C. MAYRA LOPEZ JIMENEZ',
@@ -613,7 +613,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:14:15',
             ),
-            27 =>
+            27 => 
             array (
                 'id' => 28,
                 'region' => 1802,
@@ -621,7 +621,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1802,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"',
                 'nombre' => 'CHURINTZIO',
                 'ubicacion' => 'HIDALGO 40 COL. CENTRO C.P 59440. ENTRE CALLE 5 DE FEBRERO Y CALLE INDEPENDENCIA.',
                 'titular' => 'L.T.S ADRIANA ELIZABETH SORIA PULIDO ',
@@ -635,7 +635,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 12:46:39',
             ),
-            28 =>
+            28 => 
             array (
                 'id' => 29,
                 'region' => 801,
@@ -657,7 +657,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:04:55',
             ),
-            29 =>
+            29 => 
             array (
                 'id' => 30,
                 'region' => 1701,
@@ -679,7 +679,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:05:26',
             ),
-            30 =>
+            30 => 
             array (
                 'id' => 31,
                 'region' => 401,
@@ -687,7 +687,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 404,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4]"',
+                'sectores' => '"[1,2,3,4]"',
                 'nombre' => 'EPITACIO HUERTA',
                 'ubicacion' => 'Melchor Ocampo número 1 entre calle  vasco de Quiroga e Hidalgo  ',
                 'titular' => 'Ignacio Pérez Saucedo',
@@ -701,7 +701,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 12:41:37',
             ),
-            31 =>
+            31 => 
             array (
                 'id' => 32,
                 'region' => 1002,
@@ -709,7 +709,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1002,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"',
                 'nombre' => 'ERONGARICUARO',
                 'ubicacion' => 'AV. MARÍA LUISA MARTÍNEZ S/N BARRIO SAN MIGUEL C.P 61630. ENTRE ALFONSO URRUETA Y ROMERO.',
                 'titular' => 'LIC. JAZMIN CORTES SEPTIMO',
@@ -723,10 +723,10 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 12:06:51',
             ),
-            32 =>
+            32 => 
             array (
                 'id' => 33,
-                'region' => NULL,
+                'region' => 1201,
                 'municipio' => 33,
                 'oficina' => 1204,
                 'localidad' => 1,
@@ -741,14 +741,14 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-30 09:09:16',
+                'updated_at' => '2025-07-03 13:37:57',
             ),
-            33 =>
+            33 => 
             array (
                 'id' => 34,
-                'region' => NULL,
+                'region' => 301,
                 'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 1,
@@ -763,11 +763,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => 'LIC. EN NUTRICION KAREN VENECIA ALCANTAR HERNANDEZ ',
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-30 09:10:01',
+                'updated_at' => '2025-07-03 13:38:43',
             ),
-            34 =>
+            34 => 
             array (
                 'id' => 35,
                 'region' => 501,
@@ -789,7 +789,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:12:20',
             ),
-            35 =>
+            35 => 
             array (
                 'id' => 36,
                 'region' => 803,
@@ -811,7 +811,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:13:30',
             ),
-            36 =>
+            36 => 
             array (
                 'id' => 37,
                 'region' => 107,
@@ -833,7 +833,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:14:00',
             ),
-            37 =>
+            37 => 
             array (
                 'id' => 38,
                 'region' => 1103,
@@ -855,7 +855,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:14:40',
             ),
-            38 =>
+            38 => 
             array (
                 'id' => 39,
                 'region' => 601,
@@ -877,7 +877,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:15:48',
             ),
-            39 =>
+            39 => 
             array (
                 'id' => 40,
                 'region' => 1001,
@@ -885,7 +885,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 203,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'INDAPARAPEO',
                 'ubicacion' => 'MORELOS 76 CENTRO C.P. 58970 ENTRE LA CALLE PRIMERA DE ZARAGOZA, TERCERA DE BRAVO Y LA CARRETERA AV. ADOLFO LÓPEZ.',
                 'titular' => 'C. PEDRO CRUZ MALDONADO',
@@ -899,7 +899,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-11 11:42:43',
             ),
-            40 =>
+            40 => 
             array (
                 'id' => 41,
                 'region' => 201,
@@ -907,7 +907,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 302,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10]"',
                 'nombre' => 'IRIMBO',
                 'ubicacion' => 'AV. MORELOS 32 COL. CENTRO C.P 61280 UBICADOS AL INTERIOR DE LA PRESIDENCIA MUNICIPAL.',
                 'titular' => 'C. ERWING SOTO MEDINA',
@@ -921,7 +921,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-08 08:23:48',
             ),
-            41 =>
+            41 => 
             array (
                 'id' => 42,
                 'region' => 301,
@@ -943,7 +943,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:43:00',
             ),
-            42 =>
+            42 => 
             array (
                 'id' => 43,
                 'region' => 1701,
@@ -965,15 +965,15 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:43:25',
             ),
-            43 =>
+            43 => 
             array (
                 'id' => 44,
-                'region' => NULL,
+                'region' => 1101,
                 'municipio' => 44,
                 'oficina' => 1105,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]"',
                 'nombre' => 'JIMENEZ',
                 'ubicacion' => '1 DE MAYO 3 COL. CENTRO C.P 58780 ENTRE CALLE IGNACIO ALLENDE Y MIGUEL HIDALGO.',
                 'titular' => 'L.I.A OSCAR JARAMILLO AMBRIZ',
@@ -983,11 +983,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2024-02-07 16:16:42',
+                'updated_at' => '2025-07-03 13:38:54',
             ),
-            44 =>
+            44 => 
             array (
                 'id' => 45,
                 'region' => 1101,
@@ -995,7 +995,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1601,
                 'localidad' => 1,
                 'tipo' => 'ADMINISTRACIÓN',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]"',
                 'nombre' => 'JIQUILPAN',
             'ubicacion' => 'DIEGO JOSE ABAD 1 PLANTA ALTA COL. CENTRO C.P 59510 ENTRE PROFESOR FAJARDO Y DIEGO JOSE ABAD (UBICADOS EN LA ESQUINA).',
                 'titular' => 'C. CARLOS GERARDO GARIBAY ESPINOZA',
@@ -1009,7 +1009,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:17:59',
             ),
-            45 =>
+            45 => 
             array (
                 'id' => 46,
                 'region' => 1601,
@@ -1031,7 +1031,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:48:49',
             ),
-            46 =>
+            46 => 
             array (
                 'id' => 47,
                 'region' => 501,
@@ -1053,7 +1053,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:50:27',
             ),
-            47 =>
+            47 => 
             array (
                 'id' => 48,
                 'region' => 1601,
@@ -1075,15 +1075,15 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 12:31:09',
             ),
-            48 =>
+            48 => 
             array (
                 'id' => 49,
-                'region' => NULL,
+                'region' => 101,
                 'municipio' => 49,
                 'oficina' => 108,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]"',
                 'nombre' => 'MADERO',
                 'ubicacion' => 'PORTAL HIDALGO 35-A COL. CENTRO C.P 58480 ENTRE AV. MORELOS Y CALLE VENUSTIANO CARRANZA JUNTO AL PALACIO MUNICIPAL.',
                 'titular' => 'LIC. IVAN JOAQUIN AYALA MENDOZA',
@@ -1093,11 +1093,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2024-02-07 13:24:41',
+                'updated_at' => '2025-07-03 13:39:14',
             ),
-            49 =>
+            49 => 
             array (
                 'id' => 50,
                 'region' => 101,
@@ -1119,15 +1119,15 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 10:00:22',
             ),
-            50 =>
+            50 => 
             array (
                 'id' => 51,
-                'region' => NULL,
+                'region' => 1601,
                 'municipio' => 51,
                 'oficina' => 1603,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]"',
                 'nombre' => 'MARCOS CASTELLANOS',
                 'ubicacion' => 'INDEPENDENCIA 101 COL. CENTRO, C.P 59500 ENTRE CALLE MORELOS Y GALEANA.',
                 'titular' => 'C.P. JAVIER SOLIS BENTANCOURT',
@@ -1137,11 +1137,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-08 09:42:45',
+                'updated_at' => '2025-07-03 13:39:24',
             ),
-            51 =>
+            51 => 
             array (
                 'id' => 52,
                 'region' => 2301,
@@ -1163,7 +1163,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 10:01:44',
             ),
-            52 =>
+            52 => 
             array (
                 'id' => 53,
                 'region' => 101,
@@ -1171,7 +1171,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 101,
                 'localidad' => 1,
                 'tipo' => 'ADMINISTRACIÓN',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98]"',
                 'nombre' => 'MORELIA',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS  1016, COL. VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
                 'titular' => 'DIRECCION DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL ',
@@ -1185,15 +1185,15 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-05-21 14:05:26',
             ),
-            53 =>
+            53 => 
             array (
                 'id' => 54,
-                'region' => NULL,
+                'region' => 1901,
                 'municipio' => 54,
                 'oficina' => 1904,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'MORELOS',
                 'ubicacion' => 'PORTAL MORELOS 1 COL. CENTRO C.P 58802 ENTRE CALLE ITURBIDE, AL ORIENTE MARIANO JIMÉNEZ AL PONIENTE CALLE SIN NOMBRE Y PLAZA PRINCIPAL.',
                 'titular' => 'T.A. FABIOLA RANGEL CHÁVEZ',
@@ -1203,14 +1203,14 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2024-02-07 12:44:13',
+                'updated_at' => '2025-07-03 13:39:35',
             ),
-            54 =>
+            54 => 
             array (
                 'id' => 55,
-                'region' => NULL,
+                'region' => 1401,
                 'municipio' => 55,
                 'oficina' => 1404,
                 'localidad' => 1,
@@ -1225,11 +1225,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-01 11:29:49',
+                'updated_at' => '2025-07-03 13:39:46',
             ),
-            55 =>
+            55 => 
             array (
                 'id' => 56,
                 'region' => 1201,
@@ -1251,7 +1251,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:30:41',
             ),
-            56 =>
+            56 => 
             array (
                 'id' => 57,
                 'region' => 601,
@@ -1273,10 +1273,10 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:31:11',
             ),
-            57 =>
+            57 => 
             array (
                 'id' => 58,
-                'region' => NULL,
+                'region' => 1201,
                 'municipio' => 58,
                 'oficina' => 1205,
                 'localidad' => 1,
@@ -1291,11 +1291,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-01 11:37:04',
+                'updated_at' => '2025-07-03 13:39:56',
             ),
-            58 =>
+            58 => 
             array (
                 'id' => 59,
                 'region' => 801,
@@ -1317,7 +1317,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:37:32',
             ),
-            59 =>
+            59 => 
             array (
                 'id' => 60,
                 'region' => 1801,
@@ -1325,7 +1325,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1803,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11]"',
                 'nombre' => 'NUMARAN',
                 'ubicacion' => 'PLAZA CUAUHTÉMOC COL. CENTRO S/N C.P 59430 ENTRE CALLE GUERRERO E ISAAC CALDERÓN PARALELA ZARAGOZA Y JUÁREZ DENTRO DEL PALACIO MUNICIPAL.',
                 'titular' => 'LIC. JOSE MADRIGAL ORTIZ',
@@ -1339,7 +1339,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:29:49',
             ),
-            60 =>
+            60 => 
             array (
                 'id' => 61,
                 'region' => 501,
@@ -1361,7 +1361,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:37:58',
             ),
-            61 =>
+            61 => 
             array (
                 'id' => 62,
                 'region' => 1101,
@@ -1369,7 +1369,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 2103,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12]"',
                 'nombre' => 'PAJACUARAN',
                 'ubicacion' => 'ALDAMA 1 PALACIO MUNICIPAL COL. CENTRO. C.P 59180 ENTRE MORELOS Y JOSE MORA DEL RIO.',
                 'titular' => 'C. CLAUDIO ANDRES RINCON DEL PRADO',
@@ -1383,7 +1383,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:38:58',
             ),
-            62 =>
+            62 => 
             array (
                 'id' => 63,
                 'region' => 1201,
@@ -1405,7 +1405,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:39:11',
             ),
-            63 =>
+            63 => 
             array (
                 'id' => 64,
                 'region' => 1001,
@@ -1413,7 +1413,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1405,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]"',
                 'nombre' => 'PARACUARO',
                 'ubicacion' => 'PORTAL OCAMPO 34 COL. CENTRO, C.P. 60760. CALLES QUE LO RODEAN, AV LÁZARO CÁRDENAS Y CALLE CORREGIDORA.',
                 'titular' => 'L.C. CLAUDIA ISABEL FRANCO CARDENAS',
@@ -1427,7 +1427,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 14:31:04',
             ),
-            64 =>
+            64 => 
             array (
                 'id' => 65,
                 'region' => 1001,
@@ -1435,7 +1435,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1207,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27]"',
                 'nombre' => 'PARACHO',
                 'ubicacion' => 'EMILIO CARRANZA 58 COL. CENTRO C.P 60250 ENTRE DOCTOR VERDUZCO , E HIDALGO. Esquina con 20 noviembre',
                 'titular' => 'LIC. ANGELICA NAYELI MONTECILLO GARCIA',
@@ -1449,7 +1449,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 12:02:09',
             ),
-            65 =>
+            65 => 
             array (
                 'id' => 66,
                 'region' => 1801,
@@ -1471,7 +1471,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:40:21',
             ),
-            66 =>
+            66 => 
             array (
                 'id' => 67,
                 'region' => 1301,
@@ -1479,7 +1479,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1804,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'PENJAMILLO',
                 'ubicacion' => 'ALLENDE 500 COL. CENTRO C.P 59470 ENTRE CALLE MADERO Y JARDÍN DE PRESIDENCIA.',
                 'titular' => 'C. YAZMIN ARCELIA LEON ALVARADO',
@@ -1493,7 +1493,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:46:17',
             ),
-            67 =>
+            67 => 
             array (
                 'id' => 68,
                 'region' => 1301,
@@ -1515,7 +1515,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:48:56',
             ),
-            68 =>
+            68 => 
             array (
                 'id' => 69,
                 'region' => 101,
@@ -1537,7 +1537,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 14:26:16',
             ),
-            69 =>
+            69 => 
             array (
                 'id' => 70,
                 'region' => 1801,
@@ -1559,7 +1559,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:52:36',
             ),
-            70 =>
+            70 => 
             array (
                 'id' => 71,
                 'region' => 1701,
@@ -1581,7 +1581,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:53:13',
             ),
-            71 =>
+            71 => 
             array (
                 'id' => 72,
                 'region' => 1901,
@@ -1603,7 +1603,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:55:49',
             ),
-            72 =>
+            72 => 
             array (
                 'id' => 73,
                 'region' => 201,
@@ -1625,7 +1625,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:56:13',
             ),
-            73 =>
+            73 => 
             array (
                 'id' => 74,
                 'region' => 1501,
@@ -1647,7 +1647,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:56:43',
             ),
-            74 =>
+            74 => 
             array (
                 'id' => 75,
                 'region' => 2301,
@@ -1669,7 +1669,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:57:44',
             ),
-            75 =>
+            75 => 
             array (
                 'id' => 76,
                 'region' => 1001,
@@ -1677,7 +1677,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 2101,
                 'localidad' => 1,
                 'tipo' => 'ADMINISTRACIÓN',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34]"',
                 'nombre' => 'SAHUAYO',
             'ubicacion' => 'GUERRERO 290 COL. CENTRO C.P 59000 ENTRE BOULEVARD LÁZARO CÁRDENAS Y CALLE CONSTITUCIÓN (enfrente de la preparatoria hermanos López Rayón )',
                 'titular' => 'C. MARIANO SÁNCHEZ SÁNCHEZ',
@@ -1691,7 +1691,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:59:59',
             ),
-            76 =>
+            76 => 
             array (
                 'id' => 77,
                 'region' => 2101,
@@ -1713,7 +1713,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 12:05:32',
             ),
-            77 =>
+            77 => 
             array (
                 'id' => 78,
                 'region' => 601,
@@ -1735,15 +1735,15 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 12:00:11',
             ),
-            78 =>
+            78 => 
             array (
                 'id' => 79,
-                'region' => NULL,
+                'region' => 1001,
                 'municipio' => 79,
                 'oficina' => 1006,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14]"',
                 'nombre' => 'SALVADOR ESCALANTE',
                 'ubicacion' => 'PORTAL ALLENDE 56 COL CENTRO C.P 61800 ENTRE AV. MORELOS ORIENTE Y MIGUEL HIDALGO, DENTRO DE LA PRESIDENCIA MUNICIPAL.',
                 'titular' => 'L. D. JORGE SAENZ REYES',
@@ -1753,11 +1753,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-08 09:45:12',
+                'updated_at' => '2025-07-03 13:40:09',
             ),
-            79 =>
+            79 => 
             array (
                 'id' => 80,
                 'region' => 401,
@@ -1779,7 +1779,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 12:00:56',
             ),
-            80 =>
+            80 => 
             array (
                 'id' => 81,
                 'region' => 501,
@@ -1787,7 +1787,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 506,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"',
                 'nombre' => 'SUSUPUATO',
                 'ubicacion' => 'VICENTE GUERRO 6 INT.  PRESIDENCIA MUNICIPAL PLANTA BAJA.',
                 'titular' => 'C. JAVIER MILLAN VELAZQUEZ',
@@ -1801,7 +1801,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 12:01:42',
             ),
-            81 =>
+            81 => 
             array (
                 'id' => 82,
                 'region' => 701,
@@ -1809,7 +1809,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 701,
                 'localidad' => 1,
                 'tipo' => 'ADMINISTRACIÓN',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]"',
                 'nombre' => 'TACAMBARO',
                 'ubicacion' => 'HIDALGO NTE. 103 COL. CENTRO C.P 61650 ENTRE VICENTE GUERRERO Y MADERO',
                 'titular' => 'LIC. MOISES PEREZ BELTRAN',
@@ -1823,7 +1823,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 10:01:16',
             ),
-            82 =>
+            82 => 
             array (
                 'id' => 83,
                 'region' => 1201,
@@ -1845,7 +1845,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:50:09',
             ),
-            83 =>
+            83 => 
             array (
                 'id' => 84,
                 'region' => 1001,
@@ -1853,7 +1853,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1707,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9]"',
                 'nombre' => 'SANTIAGO TANGAMANDAPIO',
                 'ubicacion' => 'Abasolo #7 por la calle de la iglesia a media cuadra, entre calles Madero y Juárez. Planta Alta',
                 'titular' => 'C. ROSA ISELA ARROYO LARA',
@@ -1867,15 +1867,15 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 12:02:49',
             ),
-            84 =>
+            84 => 
             array (
                 'id' => 85,
-                'region' => NULL,
+                'region' => 1701,
                 'municipio' => 85,
                 'oficina' => 1708,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]"',
                 'nombre' => 'TANGANCICUARO',
                 'ubicacion' => 'MIGUEL  SILVA  # 170. ENTRE:   RAMON  SILVA Y  CUAHUTEMOC. ',
                 'titular' => 'C. JOSE LUIS ALVAREZ MENDEZ',
@@ -1885,11 +1885,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2024-02-07 12:08:02',
+                'updated_at' => '2025-07-03 13:40:20',
             ),
-            85 =>
+            85 => 
             array (
                 'id' => 86,
                 'region' => 1701,
@@ -1911,7 +1911,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 13:12:33',
             ),
-            86 =>
+            86 => 
             array (
                 'id' => 87,
                 'region' => 1701,
@@ -1933,7 +1933,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 13:13:55',
             ),
-            87 =>
+            87 => 
             array (
                 'id' => 88,
                 'region' => 1701,
@@ -1941,7 +1941,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 110,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]"',
                 'nombre' => 'TARIMBARO',
                 'ubicacion' => '16 DE SEPTIEMBRE 10 CENTRO C.P 5880 ENTRE CALLES LÁZARO CÁRDENAS, JOSÉ MARÍA MORELOS Y PAVÓN E IGNACIO ZARAGOZA.',
                 'titular' => 'C. RODOLFO FERNANDO YAÑEZ SANTOYO',
@@ -1955,7 +1955,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-12-01 15:00:34',
             ),
-            88 =>
+            88 => 
             array (
                 'id' => 89,
                 'region' => 1401,
@@ -1963,7 +1963,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1406,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13]"',
                 'nombre' => 'TEPALCATEPEC',
                 'ubicacion' => 'MELCHOR OCAMPO 135 COL. CENTRO C.P 60540 ENTRE DOCTOR MIGUEL SILVA Y CARLOS SALAZAR.',
                 'titular' => 'MA. CANDELARIA SÁNCHEZ VEGA',
@@ -1977,7 +1977,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 13:22:49',
             ),
-            89 =>
+            89 => 
             array (
                 'id' => 90,
                 'region' => 1201,
@@ -1999,7 +1999,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 13:17:48',
             ),
-            90 =>
+            90 => 
             array (
                 'id' => 91,
                 'region' => 1301,
@@ -2007,7 +2007,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1304,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]"',
                 'nombre' => 'TINGUINDIN',
                 'ubicacion' => 'PORTAL HIDALGO  4, CENTRO, C.P. 58980 ENTRE LAS CALLES EMILIANO ZAPATA Y JAVIER MINA DENTRO DE LA PRESIDENCIA MUNICIPAL.',
                 'titular' => 'L.A.E. LIZETH FABIAN MONTUFAR',
@@ -2021,7 +2021,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:35:00',
             ),
-            91 =>
+            91 => 
             array (
                 'id' => 92,
                 'region' => 1301,
@@ -2043,7 +2043,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 13:45:03',
             ),
-            92 =>
+            92 => 
             array (
                 'id' => 93,
                 'region' => 1301,
@@ -2065,7 +2065,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            93 =>
+            93 => 
             array (
                 'id' => 94,
                 'region' => 1301,
@@ -2073,7 +2073,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1805,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102]"',
                 'nombre' => 'TLAZAZALCA',
                 'ubicacion' => 'PALACIO MUNICIPAL S/N C.P 58740 EN CALLE JOSE MA. MORELOS ENTRE CALLES AQUILES SERDAN Y MIGUEL HIDALGO.',
                 'titular' => 'LIC. JUAN GABRIEL MENDEZ AGUILAR',
@@ -2087,7 +2087,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 13:23:22',
             ),
-            94 =>
+            94 => 
             array (
                 'id' => 95,
                 'region' => 601,
@@ -2109,10 +2109,10 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 13:46:09',
             ),
-            95 =>
+            95 => 
             array (
                 'id' => 96,
-                'region' => NULL,
+                'region' => 901,
                 'municipio' => 96,
                 'oficina' => 902,
                 'localidad' => 1,
@@ -2127,11 +2127,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-12 13:18:52',
+                'updated_at' => '2025-07-03 13:40:30',
             ),
-            96 =>
+            96 => 
             array (
                 'id' => 97,
                 'region' => 1801,
@@ -2153,7 +2153,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 13:46:44',
             ),
-            97 =>
+            97 => 
             array (
                 'id' => 98,
                 'region' => 1301,
@@ -2161,7 +2161,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 507,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10]"',
                 'nombre' => 'TUXPAN',
                 'ubicacion' => 'AV. MORELOS NORTE S/N COL CENTRO C.P. 61420 ENTRE LA CALLE FRANCISCO J. MÚGICA Y LA COLONIA RIO GRANDE',
                 'titular' => 'C. ELSA ANGELICA RODRIGUEZ PEREGRINO',
@@ -2175,7 +2175,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 13:32:45',
             ),
-            98 =>
+            98 => 
             array (
                 'id' => 99,
                 'region' => 901,
@@ -2197,7 +2197,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 13:48:47',
             ),
-            99 =>
+            99 => 
             array (
                 'id' => 100,
                 'region' => 701,
@@ -2219,7 +2219,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:21:29',
             ),
-            100 =>
+            100 => 
             array (
                 'id' => 101,
                 'region' => 501,
@@ -2241,7 +2241,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:10:43',
             ),
-            101 =>
+            101 => 
             array (
                 'id' => 102,
                 'region' => 101,
@@ -2263,7 +2263,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:11:23',
             ),
-            102 =>
+            102 => 
             array (
                 'id' => 103,
                 'region' => 2101,
@@ -2285,7 +2285,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:12:05',
             ),
-            103 =>
+            103 => 
             array (
                 'id' => 104,
                 'region' => 2001,
@@ -2307,7 +2307,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:13:31',
             ),
-            104 =>
+            104 => 
             array (
                 'id' => 105,
                 'region' => 1101,
@@ -2329,7 +2329,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:14:29',
             ),
-            105 =>
+            105 => 
             array (
                 'id' => 106,
                 'region' => 1101,
@@ -2351,7 +2351,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:14:56',
             ),
-            106 =>
+            106 => 
             array (
                 'id' => 107,
                 'region' => 1701,
@@ -2373,7 +2373,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:15:22',
             ),
-            107 =>
+            107 => 
             array (
                 'id' => 108,
                 'region' => 1701,
@@ -2381,7 +2381,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1701,
                 'localidad' => 1,
                 'tipo' => 'ADMINISTRACIÓN',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100]"',
                 'nombre' => 'ZAMORA',
             'ubicacion' => 'GUERRERO 82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS).',
                 'titular' => 'C. MARIA TERESA OREGEL AYALA',
@@ -2395,7 +2395,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:16:57',
             ),
-            108 =>
+            108 => 
             array (
                 'id' => 109,
                 'region' => 1701,
@@ -2403,7 +2403,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1806,
                 'localidad' => 1,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11]"',
                 'nombre' => 'ZINAPARO',
                 'ubicacion' => 'AV COLON 2 CENTRO C.P 5946 ENTRE AV FRANCISCO I MADERO Y PLAZUELA INDEPENDENCIA.',
                 'titular' => 'LIC. SERGIO ALBERTO GUIDO RAMIREZ',
@@ -2417,7 +2417,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 13:23:55',
             ),
-            109 =>
+            109 => 
             array (
                 'id' => 110,
                 'region' => 1701,
@@ -2439,7 +2439,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:19:10',
             ),
-            110 =>
+            110 => 
             array (
                 'id' => 111,
                 'region' => 201,
@@ -2461,15 +2461,15 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 11:56:53',
             ),
-            111 =>
+            111 => 
             array (
                 'id' => 112,
-                'region' => NULL,
+                'region' => 501,
                 'municipio' => 112,
                 'oficina' => 501,
                 'localidad' => 1,
                 'tipo' => 'ADMINISTRACIÓN',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50]"',
                 'nombre' => 'ZITACUARO',
                 'ubicacion' => 'BENEDICTO LOPEZ SUR 7 COL. CENTRO C.P 61500 ENTRE  IGNACIO LÓPEZ RAYÓN Y MIGUEL HIDALGO.',
                 'titular' => 'LIC. OMAR CONTRERAS RAMIREZ',
@@ -2479,14 +2479,14 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2024-02-07 12:44:37',
+                'updated_at' => '2025-07-03 13:40:43',
             ),
-            112 =>
+            112 => 
             array (
                 'id' => 113,
-                'region' => NULL,
+                'region' => 1901,
                 'municipio' => 113,
                 'oficina' => 1903,
                 'localidad' => 1,
@@ -2501,11 +2501,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => NULL,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-05 12:05:40',
+                'updated_at' => '2025-07-03 13:40:54',
             ),
-            113 =>
+            113 => 
             array (
                 'id' => 114,
                 'region' => 401,
@@ -2527,7 +2527,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 11:49:48',
             ),
-            114 =>
+            114 => 
             array (
                 'id' => 115,
                 'region' => 1001,
@@ -2549,7 +2549,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:41:24',
             ),
-            115 =>
+            115 => 
             array (
                 'id' => 116,
                 'region' => 301,
@@ -2571,10 +2571,10 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:45:33',
             ),
-            116 =>
+            116 => 
             array (
                 'id' => 117,
-                'region' => NULL,
+                'region' => 301,
                 'municipio' => 34,
                 'oficina' => 301,
                 'localidad' => 2,
@@ -2589,11 +2589,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => 'LIC. EN NUTRICION KAREN VENECIA ALCANTAR HERNANDEZ ',
                 'cabecera' => 34,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-30 09:10:43',
+                'updated_at' => '2025-07-03 13:41:04',
             ),
-            117 =>
+            117 => 
             array (
                 'id' => 118,
                 'region' => 301,
@@ -2615,7 +2615,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:11:21',
             ),
-            118 =>
+            118 => 
             array (
                 'id' => 119,
                 'region' => 1401,
@@ -2637,7 +2637,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:11:36',
             ),
-            119 =>
+            119 => 
             array (
                 'id' => 120,
                 'region' => 1201,
@@ -2659,7 +2659,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:11:49',
             ),
-            120 =>
+            120 => 
             array (
                 'id' => 121,
                 'region' => 1701,
@@ -2681,15 +2681,15 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:12:51',
             ),
-            121 =>
+            121 => 
             array (
                 'id' => 122,
-                'region' => NULL,
+                'region' => 101,
                 'municipio' => 49,
                 'oficina' => 108,
                 'localidad' => 2,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7]"',
+                'sectores' => '"[1,2,3,4,5,6,7]"',
                 'nombre' => 'D CURUCUPATZEO',
                 'ubicacion' => 'PORTAL HIDALGO 35-A COL. CENTRO C.P 58480 ENTRE AV. MORELOS Y CALLE VENUSTIANO CARRANZA JUNTO AL PALACIO MUNICIPAL.',
                 'titular' => 'LIC. IVAN JOAQUIN AYALA MENDOZA',
@@ -2699,11 +2699,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => 49,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-01 09:59:47',
+                'updated_at' => '2025-07-03 13:41:14',
             ),
-            122 =>
+            122 => 
             array (
                 'id' => 123,
                 'region' => 1001,
@@ -2711,7 +2711,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 2301,
                 'localidad' => 2,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"',
                 'nombre' => 'LA MIRA',
                 'ubicacion' => 'AV. ZARAGOZA 128 COL CENTRO C.P 60950 ENTRE CALLES JUAN ÁLVAREZ Y AV. REFORMA. ',
                 'titular' => 'LIC. ARACELI GARCIA PICASO ',
@@ -2725,7 +2725,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:18:12',
             ),
-            123 =>
+            123 => 
             array (
                 'id' => 124,
                 'region' => 301,
@@ -2733,7 +2733,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 2301,
                 'localidad' => 3,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]"',
                 'nombre' => 'GUACAMAYAS',
                 'ubicacion' => 'AV. ZARAGOZA 128 COL CENTRO C.P 60950 ENTRE CALLES JUAN ÁLVAREZ Y AV. REFORMA.',
                 'titular' => 'LIC. ARACELI GARCIA PICASO',
@@ -2747,15 +2747,15 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:18:22',
             ),
-            124 =>
+            124 => 
             array (
                 'id' => 125,
-                'region' => NULL,
+                'region' => 101,
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 2,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,60,61,62,76,77,78,79,80,81,82,89,90,91,92,97,98,99,100]"',
+                'sectores' => '"[60,61,62,76,77,78,79,80,81,82,89,90,91,92,97,98,99,100]"',
                 'nombre' => 'SANTIAGO UNDAMEO',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS  1016, COL. VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA',
                 'titular' => 'DIRECTOR DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRA',
@@ -2765,19 +2765,19 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => 'ARQ. RAFAEL CELAYA AVILA ',
                 'cabecera' => 53,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-11 11:47:34',
+                'updated_at' => '2025-07-03 13:41:22',
             ),
-            125 =>
+            125 => 
             array (
                 'id' => 126,
-                'region' => NULL,
+                'region' => 101,
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 3,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,70,71,72,93,94,95,96]"',
+                'sectores' => '"[70,71,72,93,94,95,96]"',
                 'nombre' => 'CHIQUIMITIO',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS  1016, COL. VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA',
                 'titular' => 'DIRECTOR DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRA',
@@ -2787,19 +2787,19 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => 'ARQ. RAFAEL CELAYA AVILA ',
                 'cabecera' => 53,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-11 11:47:23',
+                'updated_at' => '2025-07-03 13:41:31',
             ),
-            126 =>
+            126 => 
             array (
                 'id' => 127,
-                'region' => NULL,
+                'region' => 101,
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 4,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,91,92,93,94]"',
+                'sectores' => '"[91,92,93,94]"',
                 'nombre' => 'TIRIPETIO',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS 1016, COL. VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
                 'titular' => 'DIRECTOR DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL ',
@@ -2809,19 +2809,19 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => 'ARQ. RAFAEL CELAYA AVILA',
                 'cabecera' => 53,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-11 11:47:12',
+                'updated_at' => '2025-07-03 13:41:39',
             ),
-            127 =>
+            127 => 
             array (
                 'id' => 128,
-                'region' => NULL,
+                'region' => 101,
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 5,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,72,73,74,96,97,98,99,100,101]"',
+                'sectores' => '"[72,73,74,96,97,98,99,100,101]"',
                 'nombre' => 'CAPULA',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS  1016, COL. VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
                 'titular' => ' 	DIRECTOR DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL ',
@@ -2831,19 +2831,19 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => 'ARQ. RAFAEL CELAYA AVILA ',
                 'cabecera' => 53,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-11 11:47:00',
+                'updated_at' => '2025-07-03 13:41:47',
             ),
-            128 =>
+            128 => 
             array (
                 'id' => 129,
-                'region' => NULL,
+                'region' => 101,
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 6,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,44,94,95,96,97]"',
+                'sectores' => '"[44,94,95,96,97]"',
                 'nombre' => 'TEREMENDO',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS 1016, COL. VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA. ',
                 'titular' => 'DIRECTOR DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL 	',
@@ -2853,19 +2853,19 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => 'ARQ. RAFAEL CELAYA AVILA ',
                 'cabecera' => 53,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-11 11:46:42',
+                'updated_at' => '2025-07-03 13:41:55',
             ),
-            129 =>
+            129 => 
             array (
                 'id' => 130,
-                'region' => NULL,
+                'region' => 101,
                 'municipio' => 53,
                 'oficina' => 101,
                 'localidad' => 7,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,55,86]"',
+                'sectores' => '"[55,86]"',
                 'nombre' => 'TENENCIA MORELIA',
                 'ubicacion' => 'AVENIDA LÁZARO CÁRDENAS 1016, COL. VENTURA PUENTE, C.P. 58020, SEGUNDO PISO ENTRE MIGUEL DE CERVANTES SAAVEDRA, SÁNCHEZ DE TAGLE Y LAGO DE CHAPALA.',
                 'titular' => 'DIRECTOR DE CATASTRO LIC. SERGIO ARTURO CALVILLO CORRAL',
@@ -2875,11 +2875,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => 'ARQ. RAFAEL CELAYA AVILA',
                 'cabecera' => 53,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-11 11:45:59',
+                'updated_at' => '2025-07-03 13:42:04',
             ),
-            130 =>
+            130 => 
             array (
                 'id' => 131,
                 'region' => 401,
@@ -2901,10 +2901,10 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:40:45',
             ),
-            131 =>
+            131 => 
             array (
                 'id' => 132,
-                'region' => NULL,
+                'region' => 1001,
                 'municipio' => 66,
                 'oficina' => 1001,
                 'localidad' => 3,
@@ -2915,15 +2915,15 @@ class OficinasTableSeeder extends Seeder
                 'titular' => 'MARIA ESTER MOLINERO MAGAÑA',
                 'email' => 'rentaspatzcuaro3076@gmail.com',
                 'telefonos' => '4341007715',
-                'autoridad_municipal' => '',
+                'autoridad_municipal' => NULL,
                 'valuador_municipal' => NULL,
                 'cabecera' => 66,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-01 11:45:10',
+                'updated_at' => '2025-07-03 13:42:12',
             ),
-            132 =>
+            132 => 
             array (
                 'id' => 133,
                 'region' => 1001,
@@ -2945,7 +2945,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:46:40',
             ),
-            133 =>
+            133 => 
             array (
                 'id' => 134,
                 'region' => 1801,
@@ -2967,10 +2967,10 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:48:23',
             ),
-            134 =>
+            134 => 
             array (
                 'id' => 135,
-                'region' => NULL,
+                'region' => 1301,
                 'municipio' => 68,
                 'oficina' => 1303,
                 'localidad' => 2,
@@ -2985,14 +2985,14 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => 68,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-11 12:47:41',
+                'updated_at' => '2025-07-03 13:42:20',
             ),
-            135 =>
+            135 => 
             array (
                 'id' => 136,
-                'region' => NULL,
+                'region' => 1901,
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 2,
@@ -3007,14 +3007,14 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => 71,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-01 11:53:59',
+                'updated_at' => '2025-07-03 13:42:28',
             ),
-            136 =>
+            136 => 
             array (
                 'id' => 137,
-                'region' => NULL,
+                'region' => 1901,
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 3,
@@ -3029,14 +3029,14 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => 71,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-01 11:54:46',
+                'updated_at' => '2025-07-03 13:42:39',
             ),
-            137 =>
+            137 => 
             array (
                 'id' => 138,
-                'region' => NULL,
+                'region' => 1901,
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 4,
@@ -3051,14 +3051,14 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => 71,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-01 11:55:06',
+                'updated_at' => '2025-07-03 13:42:48',
             ),
-            138 =>
+            138 => 
             array (
                 'id' => 139,
-                'region' => NULL,
+                'region' => 1901,
                 'municipio' => 71,
                 'oficina' => 1901,
                 'localidad' => 5,
@@ -3073,11 +3073,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => 71,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-01 11:55:26',
+                'updated_at' => '2025-07-03 13:43:03',
             ),
-            139 =>
+            139 => 
             array (
                 'id' => 140,
                 'region' => 1401,
@@ -3099,7 +3099,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:58:09',
             ),
-            140 =>
+            140 => 
             array (
                 'id' => 141,
                 'region' => 101,
@@ -3121,7 +3121,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:58:24',
             ),
-            141 =>
+            141 => 
             array (
                 'id' => 142,
                 'region' => 201,
@@ -3129,7 +3129,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1006,
                 'localidad' => 2,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9]"',
                 'nombre' => 'ZIRAHUEN',
                 'ubicacion' => 'PORTAL ALLENDE 56 COL. CENTRO C.P 61800 ENTRE AV. MORELOS ORIENTE Y MIGUEL HIDALGO, DENTRO DE LA PRESIDENCIA MUNICIPAL.',
                 'titular' => 'L. D. JORGE SAENZ REYES',
@@ -3143,7 +3143,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:46:36',
             ),
-            142 =>
+            142 => 
             array (
                 'id' => 143,
                 'region' => 2101,
@@ -3151,7 +3151,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1006,
                 'localidad' => 3,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9]"',
                 'nombre' => 'OPOPEO',
                 'ubicacion' => 'PORTAL ALLENDE 56 COL CENTRO C.P 61800 ENTRE AV. MORELOS ORIENTE Y MIGUEL HIDALGO, DENTRO DE LA PRESIDENCIA MUNICIPAL.',
                 'titular' => 'L. D. JORGE SAENZ REYES',
@@ -3165,15 +3165,15 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:46:05',
             ),
-            143 =>
+            143 => 
             array (
                 'id' => 144,
-                'region' => NULL,
+                'region' => 701,
                 'municipio' => 82,
                 'oficina' => 701,
                 'localidad' => 2,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9]"',
                 'nombre' => 'TECARIO',
                 'ubicacion' => 'HIDALGO NTE. 103 COL. CENTRO C.P 61650 ENTRE VICENTE GUERRERO Y MADERO.',
                 'titular' => 'LIC. MOISES PEREZ BELTRAN',
@@ -3183,11 +3183,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => 82,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-08 10:01:37',
+                'updated_at' => '2025-07-03 13:43:12',
             ),
-            144 =>
+            144 => 
             array (
                 'id' => 145,
                 'region' => 1401,
@@ -3195,7 +3195,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1208,
                 'localidad' => 2,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10]"',
                 'nombre' => 'APO',
                 'ubicacion' => 'MIGUEL HIDALGO 1 COL. CENTRO C.P 60460 ENTRE CALLE JUÁREZ, INDEPENDENCIA Y LÁZARO CÁRDENAS AUN COSTADO DEL H. AYUNTAMIENTO.',
                 'titular' => 'LIC ARISTEO JACOBO RAMIREZ ',
@@ -3209,7 +3209,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:51:43',
             ),
-            145 =>
+            145 => 
             array (
                 'id' => 146,
                 'region' => 1001,
@@ -3217,7 +3217,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1208,
                 'localidad' => 3,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10]"',
                 'nombre' => 'PAREO',
                 'ubicacion' => 'MIGUEL HIDALGO 1 COL. CENTRO C.P 60460  ENTRE CALLE JUÁREZ, INDEPENDENCIA Y LÁZARO CÁRDENAS AUN COSTADO DEL H. AYUNTAMIENTO',
                 'titular' => 'LIC ARISTEO JACOBO RAMIREZ',
@@ -3231,7 +3231,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:51:30',
             ),
-            146 =>
+            146 => 
             array (
                 'id' => 147,
                 'region' => 1707,
@@ -3253,7 +3253,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 12:05:30',
             ),
-            147 =>
+            147 => 
             array (
                 'id' => 148,
                 'region' => 1801,
@@ -3275,7 +3275,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 12:15:26',
             ),
-            148 =>
+            148 => 
             array (
                 'id' => 149,
                 'region' => 2001,
@@ -3297,10 +3297,10 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 12:12:51',
             ),
-            149 =>
+            149 => 
             array (
                 'id' => 150,
-                'region' => NULL,
+                'region' => 1201,
                 'municipio' => 90,
                 'oficina' => 1210,
                 'localidad' => 2,
@@ -3315,11 +3315,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => 90,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-01 13:18:30',
+                'updated_at' => '2025-07-03 13:43:22',
             ),
-            150 =>
+            150 => 
             array (
                 'id' => 151,
                 'region' => 1201,
@@ -3327,7 +3327,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1304,
                 'localidad' => 2,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1]"',
+                'sectores' => '"[1]"',
                 'nombre' => 'TACATZCUARO',
                 'ubicacion' => 'PORTAL HIDALGO  4 COL. CENTRO, C.P. 58980 ENTRE LA CALLE EMILIANO ZAPATA Y JAVIER MINA, DENTRO DE LA PRESIDENCIA MUNICIPAL.',
                 'titular' => 'L.A.E. LIZETH FABIAN MONTUFAR',
@@ -3341,7 +3341,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:38:31',
             ),
-            151 =>
+            151 => 
             array (
                 'id' => 152,
                 'region' => 2201,
@@ -3349,7 +3349,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1304,
                 'localidad' => 3,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2]"',
+                'sectores' => '"[1,2]"',
                 'nombre' => 'AQUILES SERDAN',
                 'ubicacion' => 'PORTAL HIDALGO 4 COL. CENTRO, C.P. 58980 ENTRE LA CALLE EMILIANO ZAPATA Y JAVIER MINA, DENTRO DE LA PRESIDENCIA MUNICIPAL',
                 'titular' => 'L.A.E. LIZETH FABIAN MONTUFAR',
@@ -3363,10 +3363,10 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:36:21',
             ),
-            152 =>
+            152 => 
             array (
                 'id' => 153,
-                'region' => NULL,
+                'region' => 701,
                 'municipio' => 97,
                 'oficina' => 702,
                 'localidad' => 2,
@@ -3381,11 +3381,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => 97,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-10 11:46:46',
+                'updated_at' => '2025-07-03 13:43:30',
             ),
-            153 =>
+            153 => 
             array (
                 'id' => 154,
                 'region' => 101,
@@ -3408,7 +3408,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:12:27',
             ),
-            154 =>
+            154 => 
             array (
                 'id' => 155,
                 'region' => 1701,
@@ -3416,7 +3416,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1604,
                 'localidad' => 2,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8,9,10,11,12,13,14]"',
                 'nombre' => 'JARIPO',
                 'ubicacion' => 'FELICITAS DEL RIO S/N COL. CENTRO C.P  59550 ENTRE CALLE SAN FRANCISCO Y COMONFORT.',
                 'titular' => 'C. IMELDA MENDOZA FIGUEROA',
@@ -3430,7 +3430,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-06 09:50:30',
             ),
-            155 =>
+            155 => 
             array (
                 'id' => 156,
                 'region' => 101,
@@ -3438,7 +3438,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1101,
                 'localidad' => 2,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6]"',
+                'sectores' => '"[1,2,3,4,5,6]"',
                 'nombre' => 'TENENCIA ZACAPU',
                 'ubicacion' => 'AV. MORELOS 61 COL. CENTRO C.P 58600 ENTRE ZARAGOZA Y CALLE JUÁREZ.',
                 'titular' => 'C. JUAN MANUEL LEMUS MAGAÑA ',
@@ -3452,7 +3452,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:15:37',
             ),
-            156 =>
+            156 => 
             array (
                 'id' => 157,
                 'region' => 801,
@@ -3460,7 +3460,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1701,
                 'localidad' => 2,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5,6,7,8]"',
+                'sectores' => '"[1,2,3,4,5,6,7,8]"',
                 'nombre' => 'ARIO DE RAYON',
             'ubicacion' => 'GUERRERO 82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS).',
                 'titular' => 'C. MARIA TERESA OREGEL AYALA',
@@ -3474,7 +3474,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:17:16',
             ),
-            157 =>
+            157 => 
             array (
                 'id' => 158,
                 'region' => 2001,
@@ -3482,7 +3482,7 @@ class OficinasTableSeeder extends Seeder
                 'oficina' => 1701,
                 'localidad' => 3,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0,1,2,3,4,5]"',
+                'sectores' => '"[1,2,3,4,5]"',
                 'nombre' => 'ATACHEO',
             'ubicacion' => 'GUERRERO 82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS).',
                 'titular' => 'C. MARIA TERESA OREGEL AYALA',
@@ -3496,15 +3496,15 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:18:11',
             ),
-            158 =>
+            158 => 
             array (
                 'id' => 159,
-                'region' => NULL,
+                'region' => 1701,
                 'municipio' => 108,
                 'oficina' => 1701,
                 'localidad' => 4,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0]"',
+                'sectores' => '"[]"',
                 'nombre' => 'ATECUCARIO',
             'ubicacion' => 'GUERRERO 82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS)',
                 'titular' => 'C. MARIA TERESA OREGEL AYALA',
@@ -3514,19 +3514,19 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => 108,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-01 13:42:14',
+                'updated_at' => '2025-07-03 13:43:38',
             ),
-            159 =>
+            159 => 
             array (
                 'id' => 160,
-                'region' => NULL,
+                'region' => 1701,
                 'municipio' => 108,
                 'oficina' => 1701,
                 'localidad' => 5,
                 'tipo' => 'RECEPTORIA',
-                'sectores' => '"[0]"',
+                'sectores' => '"[]"',
                 'nombre' => 'LA SAUCEDAD',
             'ubicacion' => 'GUERRERO 82 COL. CENTRO C.P 59600 UBICADO EN LA PLAZA PRINCIPAL, EN EL EDIFICIO DE PALACIO MUNICIPAL (AUN COSTADO DE LA CALLE MORELOS).',
                 'titular' => 'C. MARIA TERESA OREGEL AYALA',
@@ -3536,11 +3536,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => 108,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-09-01 13:42:03',
+                'updated_at' => '2025-07-03 13:43:45',
             ),
-            160 =>
+            160 => 
             array (
                 'id' => 161,
                 'region' => 501,
@@ -3562,7 +3562,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 12:08:50',
             ),
-            161 =>
+            161 => 
             array (
                 'id' => 162,
                 'region' => 1201,
@@ -3584,10 +3584,10 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 11:55:36',
             ),
-            162 =>
+            162 => 
             array (
                 'id' => 163,
-                'region' => NULL,
+                'region' => 1201,
                 'municipio' => 111,
                 'oficina' => 1211,
                 'localidad' => 3,
@@ -3602,11 +3602,11 @@ class OficinasTableSeeder extends Seeder
                 'valuador_municipal' => NULL,
                 'cabecera' => 111,
                 'creado_por' => NULL,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2023-06-27 15:48:13',
-                'updated_at' => '2023-08-28 14:54:42',
+                'updated_at' => '2025-07-03 13:43:55',
             ),
-            163 =>
+            163 => 
             array (
                 'id' => 164,
                 'region' => 1701,
@@ -3629,7 +3629,7 @@ class OficinasTableSeeder extends Seeder
                 'updated_at' => '2024-03-19 11:36:49',
             ),
         ));
-
-
+        
+        
     }
 }

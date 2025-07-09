@@ -7,6 +7,7 @@ use App\Livewire\Admin\Efirmas;
 use App\Livewire\Admin\Predios;
 use App\Livewire\Admin\Oficinas;
 use App\Livewire\Admin\Permisos;
+use App\Livewire\Admin\Personas;
 use App\Livewire\Admin\Tramites;
 use App\Livewire\Admin\Usuarios;
 use App\Livewire\Admin\Auditoria;
@@ -14,7 +15,6 @@ use App\Livewire\Admin\Servicios;
 use App\Livewire\Admin\Categorias;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Certificaciones;
-use App\Livewire\Admin\PrediosAsignados;
 use App\Livewire\Admin\FactorIncrementos;
 use App\Http\Controllers\DashboardController;
 use App\Livewire\Admin\ValoresUnitariosRusticos;
@@ -39,6 +39,8 @@ Route::group([], function(){
 
     Route::get('servicios', Servicios::class)->middleware('permission:Lista de servicios')->name('servicios');
 
+    Route::get('personas', Personas::class)->middleware('permission:Lista de personas')->name('personas');
+
     Route::get('categorias_servicios', Categorias::class)->middleware('permission:Lista de categorías')->name('categorias_servicios');
 
     Route::get('umas', Umas::class)->middleware('permission:Lista de umas')->name('umas');
@@ -52,8 +54,6 @@ Route::group([], function(){
 
     Route::get('avaluos_lista', Avaluos::class)->middleware('permission:Lista de avaluos')->name('avaluos_lista');
     Route::get('avaluos/{predio}', AvaluosController::class)->middleware('permission:Ver predio avaluo')->name('ver_predio_avaluo');
-
-    Route::get('predios_asignado', PrediosAsignados::class)->middleware('permission:Lista de predios asignados')->name('predios_asignado');
 
     Route::get('oficinas', Oficinas::class)->middleware('permission:Lista de oficinas')->name('oficinas');
 

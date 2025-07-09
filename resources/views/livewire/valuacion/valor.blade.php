@@ -94,7 +94,7 @@
 
         </div>
 
-        <div class="bg-white rounded-lg p-3 flex justify-end  shadow-xl">
+        <div class="bg-white rounded-lg p-3 flex justify-end  shadow-xl mb-5">
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 items-center justify-center  mx-auto">
 

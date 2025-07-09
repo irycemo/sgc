@@ -6,7 +6,7 @@
 
         <thead class="border-b border-gray-300 ">
 
-            <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+            <tr class="text-sm text-gray-500 text-left traling-wider">
 
                 <th class="px-2">Viento</th>
                 <th class="px-2">Longitud(mts.)</th>
@@ -21,9 +21,9 @@
             @foreach ($predio->colindancias as $colindancia)
 
                 <tr class="text-gray-500 text-sm leading-relaxed">
-                    <td class=" px-2 w-full whitespace-nowrap">{{ $colindancia->viento }}</td>
-                    <td class=" px-2 w-full whitespace-nowrap">{{ $colindancia->longitud }}</td>
-                    <td class=" px-2 w-full whitespace-nowrap">{{ $colindancia->descripcion }}</td>
+                    <td class=" px-2 w-full">{{ $colindancia->viento }}</td>
+                    <td class=" px-2 w-full">{{ $colindancia->longitud }}</td>
+                    <td class=" px-2 w-full">{{ $colindancia->descripcion }}</td>
                 </tr>
 
             @endforeach

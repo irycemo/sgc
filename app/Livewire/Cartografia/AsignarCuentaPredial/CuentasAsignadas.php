@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Cartografia\AsignarCuentaPredial;
 
 use App\Models\User;
 use Livewire\Component;
@@ -10,7 +10,7 @@ use App\Traits\ComponentesTrait;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Log;
 
-class PrediosAsignados extends Component
+class CuentasAsignadas extends Component
 {
 
     use WithPagination;
@@ -44,7 +44,7 @@ class PrediosAsignados extends Component
             $this->modelo_editar = $modelo;
 
         $this->valuadores = User::select('id', 'name', 'valuador')
-                                    ->whereNotNull('valuador')
+                                    ->where('valuador', 1)
                                     ->whereHas('oficina', function($q){
                                         $q->where('oficina', $this->modelo_editar->oficina);
                                     })
@@ -77,13 +77,13 @@ class PrediosAsignados extends Component
     #[Computed]
     public function predios(){
 
-        return  CuentaAsignada::with('actualizadoPor', 'valuadorAsignado', 'creadoPor')
+        return  CuentaAsignada::with('actualizadoPor', 'asignadoA', 'creadoPor')
                                 ->when($this->filters['localidad'], fn($q, $localidad) => $q->where('localidad', $localidad))
                                 ->when($this->filters['oficina'], fn($q, $oficina) => $q->where('oficina', $oficina))
                                 ->when($this->filters['tipo'], fn($q, $tipo) => $q->where('tipo_predio', $tipo))
                                 ->when($this->filters['registro'], fn($q, $registro) => $q->where('numero_registro', $registro))
                                 ->when($this->filters['valuador'], function($q, $valuador){
-                                    $q->WhereHas('valuadorAsignado', function($q) use($valuador){
+                                    $q->WhereHas('asignadoA', function($q) use($valuador){
                                         $q->where('id', $valuador);
                                     });
                                 })
@@ -95,12 +95,12 @@ class PrediosAsignados extends Component
 
         $this->modelo_editar = $this->crearModeloVacio();
 
-        $this->valuadoresAsignados = User::select('id', 'name', 'valuador')->whereNotNull('valuador')->orderBy('name')->get();
+        $this->valuadoresAsignados = User::select('id', 'name', 'valuador')->where('valuador', 1)->orderBy('name')->get();
 
     }
 
     public function render()
     {
-        return view('livewire.admin.predios-asignados')->extends('layouts.admin');
+        return view('livewire.cartografia.asignar-cuenta-predial.cuentas-asignadas')->extends('layouts.admin');
     }
 }

@@ -303,7 +303,7 @@
 
                             <strong>Valores anteriores</strong>
 
-                            @foreach (json_decode($selecetedAudit['old_values']) as $key => $value)
+                            @foreach ($selecetedAudit['old_values'] as $key => $value)
 
                                 <p>{{ $key }} = {{ $value ?? 'null' }}</p>
 
@@ -315,7 +315,7 @@
 
                             <strong>Valores nuevos</strong>
 
-                            @foreach (json_decode($selecetedAudit['new_values']) as $key => $value)
+                            @foreach ($selecetedAudit['new_values'] as $key => $value)
 
                                 <p>{{ $key }} = {{ $value ?? 'null' }}</p>
 

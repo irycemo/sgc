@@ -212,8 +212,13 @@ class Impresion extends Component
 
             $this->numero_avaluos = $this->avaluos->count();
 
-            if(!auth()->user()->hasRole(['Convenio municipal']))
-                if(($this->numero_avaluos + $this->tramite_inspeccion->usuados) > $this->tramite_inspeccion->cantidad) throw new GeneralException('La cantidad de avaluos que avala el trámite de inspección ocular no es suficiente.');
+            if(!auth()->user()->hasRole(['Convenio municipal'])){
+
+                if(($this->numero_avaluos + $this->tramite_inspeccion->usados) > $this->tramite_inspeccion->cantidad)
+
+                    throw new GeneralException('La cantidad de avaluos que avala el trámite de inspección ocular no es suficiente.');
+
+            }
 
         }else{
 
@@ -245,6 +250,8 @@ class Impresion extends Component
     }
 
     public function revisarAvaluoCompleto(Avaluo $avaluo){
+
+        $avaluo->predioAvaluo->load('colindancias');
 
         if($avaluo->predioAvaluo->colindancias->count() == 0)
             throw new GeneralException('El avalúo: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' del predio: ' . $avaluo->predioAvaluo->cuentaPredial() . ' no tiene colindancias.');

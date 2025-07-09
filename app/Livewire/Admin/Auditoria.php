@@ -28,19 +28,25 @@ class Auditoria extends Component
     public $newValues;
     public $modelos = [
         'User' => 'App\Models\User',
-        'MovimientoRegistral' => 'App\Models\MovimientoRegistral',
+        'Avalúo' => 'App\Models\Avaluo',
         'Certificacion' => 'App\Models\Certificacion',
         'Rol' => 'App\Models\Rol',
         'Permiso' => 'App\Models\Permiso',
-        'Propiedadold' => 'App\Models\Propiedadold',
-        'FolioReal' => 'App\Models\FolioReal',
-        'FolioRealPersonaMoral' => 'App\Models\FolioRealPersona',
-        'Gravamen' => 'App\Models\Gravamen',
-        'Propiedad' => 'App\Models\Propiedad',
-        'Cancelacion' => 'App\Models\Cancelacion',
-        'Sentencia' => 'App\Models\Sentencia',
-        'Vario' => 'App\Models\Vario',
-        'Reforma' => 'App\Models\ReformaMoral',
+        'Cuenta Asignada' => 'App\Models\CuentaAsignada',
+        'Efirma' => 'App\Models\Efirma',
+        'Movimiento' => 'App\Models\Movimiento',
+        'Oficina' => 'App\Models\Oficina',
+        'Predio' => 'App\Models\Predio',
+        'PredioAvaluo' => 'App\Models\PredioAvaluo',
+        'Pregunta' => 'App\Models\Pregunta',
+        'Propietario' => 'App\Models\Propietario',
+        'Servicio' => 'App\Models\Servicio',
+        'Tramite' => 'App\Models\Tramite',
+        'Servicio' => 'App\Models\Servicio',
+        'Traslado' => 'App\Models\Traslado',
+        'Uma' => 'App\Models\Uma',
+        'Variación Catastral' => 'App\Models\VariacionCatastral',
+        'Predio Ignorado' => 'App\Models\PredioIgnorado',
     ];
 
     public function ver(Audit $audit){
@@ -49,9 +55,9 @@ class Auditoria extends Component
 
         if($this->selecetedAudit->event === 'attach' || $this->selecetedAudit->event === 'sync'){
 
-            $this->oldValues = json_decode($this->selecetedAudit->old_values, true);
+            $this->oldValues = $this->selecetedAudit->old_values;
 
-            $this->newValues = json_decode($this->selecetedAudit->new_values, true);
+            $this->newValues = $this->selecetedAudit->new_values;
 
             /* dd($this->oldValues['roles'][0]); */
 
