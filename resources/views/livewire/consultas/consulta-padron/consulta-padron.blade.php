@@ -1041,6 +1041,29 @@
 
                 </div>
 
+                <div class="grid grid-cols-3 gap-4">
+
+                    <div>
+
+                        @livewire('comun.consultas.certificaciones-consulta', ['predio_id' => $this->predio->id])
+
+                    </div>
+
+                    <div>
+
+                        @livewire('comun.consultas.traslados-consulta', ['predio_id' => $this->predio->id])
+
+                    </div>
+
+                    <div>
+
+                        @livewire('comun.consultas.archivo-consulta', ['predio_id' => $this->predio->id])
+
+                    </div>
+
+
+                </div>
+
             </div>
 
         @endif

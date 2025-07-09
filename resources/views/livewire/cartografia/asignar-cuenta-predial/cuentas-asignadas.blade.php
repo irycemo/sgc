@@ -4,7 +4,7 @@
 
         <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Cuentas asignadas</h1>
 
-        <div class="flex justify-between">
+        <div class=" space-y-2">
 
             <div>
 
@@ -34,6 +34,8 @@
 
                 <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="Número de registro" class="bg-white rounded-full text-sm">
 
+                <input type="number" wire:model.live.debounce.500ms="filters.documento" placeholder="# de documento" class="bg-white rounded-full text-sm">
+
                 <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>
@@ -44,6 +46,8 @@
                 </select>
 
             </div>
+
+            <input wire:model.live.debounce.500ms="filters.observaciones" placeholder="Observaciones" class="bg-white rounded-full text-sm lg:w-1/2">
 
         </div>
 
@@ -60,6 +64,8 @@
                 <x-table.heading sortable wire:click="sortBy('oficina')" :direction="$sort === 'oficina' ? $direction : null" >Oficina</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('tipo_predio')" :direction="$sort === 'tipo_predio' ? $direction : null" >Tipo de predio</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('numero_registro')" :direction="$sort === 'numero_registro' ? $direction : null" >Número de registro</x-table.heading>
+                <x-table.heading >Documento</x-table.heading>
+                <x-table.heading >Observaciones</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
                 <x-table.heading >Acciones</x-table.heading>
@@ -114,7 +120,26 @@
 
                         <x-table.cell>
 
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Documento</span>
+
+                            {{ $predio->tipo_titulo ?? 'N/A' }}-{{ $predio->titulo_propiedad }}
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Observaciones</span>
+
+                            {{ $predio->observaciones }}
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
+
+
+                            <span class="font-semibold">@if($predio->creadoPor != null)Registrado por: {{$predio->creadoPor->name}} @else Registro: @endif</span> <br>
 
                             {{ $predio->created_at }}
 
@@ -162,7 +187,7 @@
 
                     <x-table.row wire:key="row-empty">
 
-                        <x-table.cell colspan="9">
+                        <x-table.cell colspan="11">
 
                             <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
 
@@ -182,7 +207,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="9" class="bg-gray-50">
+                    <x-table.cell colspan="11" class="bg-gray-50">
 
                         {{ $this->predios->links()}}
 

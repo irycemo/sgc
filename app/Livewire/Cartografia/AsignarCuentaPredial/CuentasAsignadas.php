@@ -29,7 +29,9 @@ class CuentasAsignadas extends Component
         'oficina' => '',
         'tipo' => '',
         'registro' => '',
-        'valuador' => ''
+        'valuador' => '',
+        'documento' => '',
+        'observaciones' => ''
     ];
 
     public function updatedFilters() { $this->resetPage(); }
@@ -82,6 +84,8 @@ class CuentasAsignadas extends Component
                                 ->when($this->filters['oficina'], fn($q, $oficina) => $q->where('oficina', $oficina))
                                 ->when($this->filters['tipo'], fn($q, $tipo) => $q->where('tipo_predio', $tipo))
                                 ->when($this->filters['registro'], fn($q, $registro) => $q->where('numero_registro', $registro))
+                                ->when($this->filters['documento'], fn($q, $documento) => $q->where('titulo_propiedad', $documento))
+                                ->when($this->filters['observaciones'], fn($q, $observaciones) => $q->where('observaciones', 'LIKE', '%' . $observaciones . '%'))
                                 ->when($this->filters['valuador'], function($q, $valuador){
                                     $q->WhereHas('asignadoA', function($q) use($valuador){
                                         $q->where('id', $valuador);

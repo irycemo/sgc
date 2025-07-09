@@ -210,30 +210,6 @@ class AsignarCuentaPredial extends Component
 
     }
 
-    public function buscarCampos(){
-
-        $this->cuentasAsignadas = CuentaAsignada::with('valuadorAsignado', 'creadoPor')
-                                                    ->when($this->titulo_busqueda != '' || $this->titulo_busqueda != null, function($q){
-                                                        $q->where('titulo_propiedad', $this->titulo_busqueda);
-                                                    })
-                                                    ->when($this->oficio_busqueda != '' || $this->oficio_busqueda != null, function($q){
-                                                        $q->where('oficio', $this->oficio_busqueda);
-                                                    })
-                                                    ->when($this->observaciones_busqueda != '' || $this->observaciones_busqueda != null, function($q){
-                                                        $q->where('observaciones', 'LIKE' . '%' . $this->observaciones_busqueda . '%');
-                                                    })
-                                                    ->when($this->valuador_busqueda != '' || $this->valuador_busqueda != null, function($q){
-                                                        $q->where('valuador', $this->valuador_busqueda);
-                                                    })
-                                                    ->orderBy('numero_registro', 'desc')
-                                                    ->latest()
-                                                    ->get();
-
-        if(count($this->cuentasAsignadas) == 0)
-            $this->dispatch('mostrarMensaje', ['error', "No hay resultados con los datos ingresado."]);
-
-    }
-
     public function updatedOficina(){
 
         $this->valuadores = User::where('estado', 'activo')
