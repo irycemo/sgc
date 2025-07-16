@@ -264,7 +264,7 @@
 
         <div>
 
-            @livewire('comun.consultas.archivo-consulta', ['predio_id' => $predio->id])
+            <livewire:comun.consultas.archivo-consulta lazy :predio_id="$predio->id" />
 
         </div>
 

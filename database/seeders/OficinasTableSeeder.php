@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class OficinasTableSeeder extends Seeder
 {
@@ -14,12 +15,12 @@ class OficinasTableSeeder extends Seeder
      */
     public function run()
     {
-        
+        Schema::disableForeignKeyConstraints();
 
         \DB::table('oficinas')->delete();
-        
+
         \DB::table('oficinas')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 1,
                 'region' => 101,
@@ -41,7 +42,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 13:51:51',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 2,
                 'region' => 1401,
@@ -63,7 +64,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:22:47',
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 3,
                 'region' => 201,
@@ -85,7 +86,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 12:23:31',
             ),
-            3 => 
+            3 =>
             array (
                 'id' => 4,
                 'region' => 1901,
@@ -107,7 +108,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:35:25',
             ),
-            4 => 
+            4 =>
             array (
                 'id' => 5,
                 'region' => 501,
@@ -129,7 +130,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:37:46',
             ),
-            5 => 
+            5 =>
             array (
                 'id' => 6,
                 'region' => 1401,
@@ -151,7 +152,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:10:47',
             ),
-            6 => 
+            6 =>
             array (
                 'id' => 7,
                 'region' => 401,
@@ -173,7 +174,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:38:59',
             ),
-            7 => 
+            7 =>
             array (
                 'id' => 8,
                 'region' => 2201,
@@ -195,7 +196,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 11:50:57',
             ),
-            8 => 
+            8 =>
             array (
                 'id' => 9,
                 'region' => 801,
@@ -217,7 +218,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:40:25',
             ),
-            9 => 
+            9 =>
             array (
                 'id' => 10,
                 'region' => 901,
@@ -239,7 +240,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:41:57',
             ),
-            10 => 
+            10 =>
             array (
                 'id' => 11,
                 'region' => 2001,
@@ -261,7 +262,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:42:31',
             ),
-            11 => 
+            11 =>
             array (
                 'id' => 12,
                 'region' => 1401,
@@ -283,7 +284,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 13:53:28',
             ),
-            12 => 
+            12 =>
             array (
                 'id' => 13,
                 'region' => 601,
@@ -305,7 +306,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:46:00',
             ),
-            13 => 
+            13 =>
             array (
                 'id' => 14,
                 'region' => 2201,
@@ -327,7 +328,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 12:15:02',
             ),
-            14 => 
+            14 =>
             array (
                 'id' => 15,
                 'region' => 1501,
@@ -349,7 +350,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 13:38:14',
             ),
-            15 => 
+            15 =>
             array (
                 'id' => 16,
                 'region' => 1101,
@@ -371,7 +372,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:46:42',
             ),
-            16 => 
+            16 =>
             array (
                 'id' => 17,
                 'region' => 401,
@@ -393,7 +394,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:47:06',
             ),
-            17 => 
+            17 =>
             array (
                 'id' => 18,
                 'region' => 101,
@@ -415,7 +416,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:47:24',
             ),
-            18 => 
+            18 =>
             array (
                 'id' => 19,
                 'region' => 1301,
@@ -437,7 +438,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:47:56',
             ),
-            19 => 
+            19 =>
             array (
                 'id' => 20,
                 'region' => 101,
@@ -459,7 +460,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:48:26',
             ),
-            20 => 
+            20 =>
             array (
                 'id' => 21,
                 'region' => 1201,
@@ -481,7 +482,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:48:57',
             ),
-            21 => 
+            21 =>
             array (
                 'id' => 22,
                 'region' => 101,
@@ -503,7 +504,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:49:16',
             ),
-            22 => 
+            22 =>
             array (
                 'id' => 23,
                 'region' => 1601,
@@ -525,7 +526,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 12:06:13',
             ),
-            23 => 
+            23 =>
             array (
                 'id' => 24,
                 'region' => 1201,
@@ -547,7 +548,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 12:59:05',
             ),
-            24 => 
+            24 =>
             array (
                 'id' => 25,
                 'region' => 1701,
@@ -569,7 +570,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:02:46',
             ),
-            25 => 
+            25 =>
             array (
                 'id' => 26,
                 'region' => 1301,
@@ -591,7 +592,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-03-19 11:40:39',
             ),
-            26 => 
+            26 =>
             array (
                 'id' => 27,
                 'region' => 101,
@@ -613,7 +614,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:14:15',
             ),
-            27 => 
+            27 =>
             array (
                 'id' => 28,
                 'region' => 1802,
@@ -635,7 +636,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 12:46:39',
             ),
-            28 => 
+            28 =>
             array (
                 'id' => 29,
                 'region' => 801,
@@ -657,7 +658,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:04:55',
             ),
-            29 => 
+            29 =>
             array (
                 'id' => 30,
                 'region' => 1701,
@@ -679,7 +680,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:05:26',
             ),
-            30 => 
+            30 =>
             array (
                 'id' => 31,
                 'region' => 401,
@@ -701,7 +702,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 12:41:37',
             ),
-            31 => 
+            31 =>
             array (
                 'id' => 32,
                 'region' => 1002,
@@ -723,7 +724,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 12:06:51',
             ),
-            32 => 
+            32 =>
             array (
                 'id' => 33,
                 'region' => 1201,
@@ -745,7 +746,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:37:57',
             ),
-            33 => 
+            33 =>
             array (
                 'id' => 34,
                 'region' => 301,
@@ -767,7 +768,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:38:43',
             ),
-            34 => 
+            34 =>
             array (
                 'id' => 35,
                 'region' => 501,
@@ -789,7 +790,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:12:20',
             ),
-            35 => 
+            35 =>
             array (
                 'id' => 36,
                 'region' => 803,
@@ -811,7 +812,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:13:30',
             ),
-            36 => 
+            36 =>
             array (
                 'id' => 37,
                 'region' => 107,
@@ -833,7 +834,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:14:00',
             ),
-            37 => 
+            37 =>
             array (
                 'id' => 38,
                 'region' => 1103,
@@ -855,7 +856,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:14:40',
             ),
-            38 => 
+            38 =>
             array (
                 'id' => 39,
                 'region' => 601,
@@ -877,7 +878,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:15:48',
             ),
-            39 => 
+            39 =>
             array (
                 'id' => 40,
                 'region' => 1001,
@@ -899,7 +900,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-11 11:42:43',
             ),
-            40 => 
+            40 =>
             array (
                 'id' => 41,
                 'region' => 201,
@@ -921,7 +922,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-08 08:23:48',
             ),
-            41 => 
+            41 =>
             array (
                 'id' => 42,
                 'region' => 301,
@@ -943,7 +944,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:43:00',
             ),
-            42 => 
+            42 =>
             array (
                 'id' => 43,
                 'region' => 1701,
@@ -965,7 +966,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:43:25',
             ),
-            43 => 
+            43 =>
             array (
                 'id' => 44,
                 'region' => 1101,
@@ -987,7 +988,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:38:54',
             ),
-            44 => 
+            44 =>
             array (
                 'id' => 45,
                 'region' => 1101,
@@ -1009,7 +1010,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:17:59',
             ),
-            45 => 
+            45 =>
             array (
                 'id' => 46,
                 'region' => 1601,
@@ -1031,7 +1032,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:48:49',
             ),
-            46 => 
+            46 =>
             array (
                 'id' => 47,
                 'region' => 501,
@@ -1053,7 +1054,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:50:27',
             ),
-            47 => 
+            47 =>
             array (
                 'id' => 48,
                 'region' => 1601,
@@ -1075,7 +1076,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 12:31:09',
             ),
-            48 => 
+            48 =>
             array (
                 'id' => 49,
                 'region' => 101,
@@ -1097,7 +1098,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:39:14',
             ),
-            49 => 
+            49 =>
             array (
                 'id' => 50,
                 'region' => 101,
@@ -1119,7 +1120,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 10:00:22',
             ),
-            50 => 
+            50 =>
             array (
                 'id' => 51,
                 'region' => 1601,
@@ -1141,7 +1142,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:39:24',
             ),
-            51 => 
+            51 =>
             array (
                 'id' => 52,
                 'region' => 2301,
@@ -1163,7 +1164,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 10:01:44',
             ),
-            52 => 
+            52 =>
             array (
                 'id' => 53,
                 'region' => 101,
@@ -1185,7 +1186,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-05-21 14:05:26',
             ),
-            53 => 
+            53 =>
             array (
                 'id' => 54,
                 'region' => 1901,
@@ -1207,7 +1208,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:39:35',
             ),
-            54 => 
+            54 =>
             array (
                 'id' => 55,
                 'region' => 1401,
@@ -1229,7 +1230,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:39:46',
             ),
-            55 => 
+            55 =>
             array (
                 'id' => 56,
                 'region' => 1201,
@@ -1251,7 +1252,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:30:41',
             ),
-            56 => 
+            56 =>
             array (
                 'id' => 57,
                 'region' => 601,
@@ -1273,7 +1274,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:31:11',
             ),
-            57 => 
+            57 =>
             array (
                 'id' => 58,
                 'region' => 1201,
@@ -1295,7 +1296,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:39:56',
             ),
-            58 => 
+            58 =>
             array (
                 'id' => 59,
                 'region' => 801,
@@ -1317,7 +1318,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:37:32',
             ),
-            59 => 
+            59 =>
             array (
                 'id' => 60,
                 'region' => 1801,
@@ -1339,7 +1340,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:29:49',
             ),
-            60 => 
+            60 =>
             array (
                 'id' => 61,
                 'region' => 501,
@@ -1361,7 +1362,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:37:58',
             ),
-            61 => 
+            61 =>
             array (
                 'id' => 62,
                 'region' => 1101,
@@ -1383,7 +1384,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:38:58',
             ),
-            62 => 
+            62 =>
             array (
                 'id' => 63,
                 'region' => 1201,
@@ -1405,7 +1406,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:39:11',
             ),
-            63 => 
+            63 =>
             array (
                 'id' => 64,
                 'region' => 1001,
@@ -1427,7 +1428,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 14:31:04',
             ),
-            64 => 
+            64 =>
             array (
                 'id' => 65,
                 'region' => 1001,
@@ -1449,7 +1450,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 12:02:09',
             ),
-            65 => 
+            65 =>
             array (
                 'id' => 66,
                 'region' => 1801,
@@ -1471,7 +1472,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:40:21',
             ),
-            66 => 
+            66 =>
             array (
                 'id' => 67,
                 'region' => 1301,
@@ -1493,7 +1494,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:46:17',
             ),
-            67 => 
+            67 =>
             array (
                 'id' => 68,
                 'region' => 1301,
@@ -1515,7 +1516,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:48:56',
             ),
-            68 => 
+            68 =>
             array (
                 'id' => 69,
                 'region' => 101,
@@ -1537,7 +1538,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 14:26:16',
             ),
-            69 => 
+            69 =>
             array (
                 'id' => 70,
                 'region' => 1801,
@@ -1559,7 +1560,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:52:36',
             ),
-            70 => 
+            70 =>
             array (
                 'id' => 71,
                 'region' => 1701,
@@ -1581,7 +1582,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:53:13',
             ),
-            71 => 
+            71 =>
             array (
                 'id' => 72,
                 'region' => 1901,
@@ -1603,7 +1604,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:55:49',
             ),
-            72 => 
+            72 =>
             array (
                 'id' => 73,
                 'region' => 201,
@@ -1625,7 +1626,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:56:13',
             ),
-            73 => 
+            73 =>
             array (
                 'id' => 74,
                 'region' => 1501,
@@ -1647,7 +1648,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:56:43',
             ),
-            74 => 
+            74 =>
             array (
                 'id' => 75,
                 'region' => 2301,
@@ -1669,7 +1670,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:57:44',
             ),
-            75 => 
+            75 =>
             array (
                 'id' => 76,
                 'region' => 1001,
@@ -1691,7 +1692,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:59:59',
             ),
-            76 => 
+            76 =>
             array (
                 'id' => 77,
                 'region' => 2101,
@@ -1713,7 +1714,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 12:05:32',
             ),
-            77 => 
+            77 =>
             array (
                 'id' => 78,
                 'region' => 601,
@@ -1735,7 +1736,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 12:00:11',
             ),
-            78 => 
+            78 =>
             array (
                 'id' => 79,
                 'region' => 1001,
@@ -1757,7 +1758,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:40:09',
             ),
-            79 => 
+            79 =>
             array (
                 'id' => 80,
                 'region' => 401,
@@ -1779,7 +1780,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 12:00:56',
             ),
-            80 => 
+            80 =>
             array (
                 'id' => 81,
                 'region' => 501,
@@ -1801,7 +1802,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 12:01:42',
             ),
-            81 => 
+            81 =>
             array (
                 'id' => 82,
                 'region' => 701,
@@ -1823,7 +1824,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 10:01:16',
             ),
-            82 => 
+            82 =>
             array (
                 'id' => 83,
                 'region' => 1201,
@@ -1845,7 +1846,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:50:09',
             ),
-            83 => 
+            83 =>
             array (
                 'id' => 84,
                 'region' => 1001,
@@ -1867,7 +1868,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 12:02:49',
             ),
-            84 => 
+            84 =>
             array (
                 'id' => 85,
                 'region' => 1701,
@@ -1889,7 +1890,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:40:20',
             ),
-            85 => 
+            85 =>
             array (
                 'id' => 86,
                 'region' => 1701,
@@ -1911,7 +1912,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 13:12:33',
             ),
-            86 => 
+            86 =>
             array (
                 'id' => 87,
                 'region' => 1701,
@@ -1933,7 +1934,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 13:13:55',
             ),
-            87 => 
+            87 =>
             array (
                 'id' => 88,
                 'region' => 1701,
@@ -1955,7 +1956,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-12-01 15:00:34',
             ),
-            88 => 
+            88 =>
             array (
                 'id' => 89,
                 'region' => 1401,
@@ -1977,7 +1978,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 13:22:49',
             ),
-            89 => 
+            89 =>
             array (
                 'id' => 90,
                 'region' => 1201,
@@ -1999,7 +2000,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 13:17:48',
             ),
-            90 => 
+            90 =>
             array (
                 'id' => 91,
                 'region' => 1301,
@@ -2021,7 +2022,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:35:00',
             ),
-            91 => 
+            91 =>
             array (
                 'id' => 92,
                 'region' => 1301,
@@ -2043,7 +2044,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 13:45:03',
             ),
-            92 => 
+            92 =>
             array (
                 'id' => 93,
                 'region' => 1301,
@@ -2065,7 +2066,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-06-27 15:48:20',
             ),
-            93 => 
+            93 =>
             array (
                 'id' => 94,
                 'region' => 1301,
@@ -2087,7 +2088,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 13:23:22',
             ),
-            94 => 
+            94 =>
             array (
                 'id' => 95,
                 'region' => 601,
@@ -2109,7 +2110,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 13:46:09',
             ),
-            95 => 
+            95 =>
             array (
                 'id' => 96,
                 'region' => 901,
@@ -2131,7 +2132,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:40:30',
             ),
-            96 => 
+            96 =>
             array (
                 'id' => 97,
                 'region' => 1801,
@@ -2153,7 +2154,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 13:46:44',
             ),
-            97 => 
+            97 =>
             array (
                 'id' => 98,
                 'region' => 1301,
@@ -2175,7 +2176,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 13:32:45',
             ),
-            98 => 
+            98 =>
             array (
                 'id' => 99,
                 'region' => 901,
@@ -2197,7 +2198,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 13:48:47',
             ),
-            99 => 
+            99 =>
             array (
                 'id' => 100,
                 'region' => 701,
@@ -2219,7 +2220,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:21:29',
             ),
-            100 => 
+            100 =>
             array (
                 'id' => 101,
                 'region' => 501,
@@ -2241,7 +2242,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:10:43',
             ),
-            101 => 
+            101 =>
             array (
                 'id' => 102,
                 'region' => 101,
@@ -2263,7 +2264,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:11:23',
             ),
-            102 => 
+            102 =>
             array (
                 'id' => 103,
                 'region' => 2101,
@@ -2285,7 +2286,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:12:05',
             ),
-            103 => 
+            103 =>
             array (
                 'id' => 104,
                 'region' => 2001,
@@ -2307,7 +2308,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:13:31',
             ),
-            104 => 
+            104 =>
             array (
                 'id' => 105,
                 'region' => 1101,
@@ -2329,7 +2330,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:14:29',
             ),
-            105 => 
+            105 =>
             array (
                 'id' => 106,
                 'region' => 1101,
@@ -2351,7 +2352,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:14:56',
             ),
-            106 => 
+            106 =>
             array (
                 'id' => 107,
                 'region' => 1701,
@@ -2373,7 +2374,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:15:22',
             ),
-            107 => 
+            107 =>
             array (
                 'id' => 108,
                 'region' => 1701,
@@ -2395,7 +2396,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:16:57',
             ),
-            108 => 
+            108 =>
             array (
                 'id' => 109,
                 'region' => 1701,
@@ -2417,7 +2418,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2024-02-07 13:23:55',
             ),
-            109 => 
+            109 =>
             array (
                 'id' => 110,
                 'region' => 1701,
@@ -2439,7 +2440,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:19:10',
             ),
-            110 => 
+            110 =>
             array (
                 'id' => 111,
                 'region' => 201,
@@ -2461,7 +2462,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 11:56:53',
             ),
-            111 => 
+            111 =>
             array (
                 'id' => 112,
                 'region' => 501,
@@ -2483,7 +2484,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:40:43',
             ),
-            112 => 
+            112 =>
             array (
                 'id' => 113,
                 'region' => 1901,
@@ -2505,7 +2506,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:40:54',
             ),
-            113 => 
+            113 =>
             array (
                 'id' => 114,
                 'region' => 401,
@@ -2527,7 +2528,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 11:49:48',
             ),
-            114 => 
+            114 =>
             array (
                 'id' => 115,
                 'region' => 1001,
@@ -2549,7 +2550,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:41:24',
             ),
-            115 => 
+            115 =>
             array (
                 'id' => 116,
                 'region' => 301,
@@ -2571,7 +2572,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-29 14:45:33',
             ),
-            116 => 
+            116 =>
             array (
                 'id' => 117,
                 'region' => 301,
@@ -2593,7 +2594,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:41:04',
             ),
-            117 => 
+            117 =>
             array (
                 'id' => 118,
                 'region' => 301,
@@ -2615,7 +2616,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:11:21',
             ),
-            118 => 
+            118 =>
             array (
                 'id' => 119,
                 'region' => 1401,
@@ -2637,7 +2638,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:11:36',
             ),
-            119 => 
+            119 =>
             array (
                 'id' => 120,
                 'region' => 1201,
@@ -2659,7 +2660,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:11:49',
             ),
-            120 => 
+            120 =>
             array (
                 'id' => 121,
                 'region' => 1701,
@@ -2681,7 +2682,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-08-30 09:12:51',
             ),
-            121 => 
+            121 =>
             array (
                 'id' => 122,
                 'region' => 101,
@@ -2703,7 +2704,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:41:14',
             ),
-            122 => 
+            122 =>
             array (
                 'id' => 123,
                 'region' => 1001,
@@ -2725,7 +2726,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:18:12',
             ),
-            123 => 
+            123 =>
             array (
                 'id' => 124,
                 'region' => 301,
@@ -2747,7 +2748,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:18:22',
             ),
-            124 => 
+            124 =>
             array (
                 'id' => 125,
                 'region' => 101,
@@ -2769,7 +2770,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:41:22',
             ),
-            125 => 
+            125 =>
             array (
                 'id' => 126,
                 'region' => 101,
@@ -2791,7 +2792,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:41:31',
             ),
-            126 => 
+            126 =>
             array (
                 'id' => 127,
                 'region' => 101,
@@ -2813,7 +2814,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:41:39',
             ),
-            127 => 
+            127 =>
             array (
                 'id' => 128,
                 'region' => 101,
@@ -2835,7 +2836,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:41:47',
             ),
-            128 => 
+            128 =>
             array (
                 'id' => 129,
                 'region' => 101,
@@ -2857,7 +2858,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:41:55',
             ),
-            129 => 
+            129 =>
             array (
                 'id' => 130,
                 'region' => 101,
@@ -2879,7 +2880,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:42:04',
             ),
-            130 => 
+            130 =>
             array (
                 'id' => 131,
                 'region' => 401,
@@ -2901,7 +2902,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:40:45',
             ),
-            131 => 
+            131 =>
             array (
                 'id' => 132,
                 'region' => 1001,
@@ -2923,7 +2924,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:42:12',
             ),
-            132 => 
+            132 =>
             array (
                 'id' => 133,
                 'region' => 1001,
@@ -2945,7 +2946,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:46:40',
             ),
-            133 => 
+            133 =>
             array (
                 'id' => 134,
                 'region' => 1801,
@@ -2967,7 +2968,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:48:23',
             ),
-            134 => 
+            134 =>
             array (
                 'id' => 135,
                 'region' => 1301,
@@ -2989,7 +2990,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:42:20',
             ),
-            135 => 
+            135 =>
             array (
                 'id' => 136,
                 'region' => 1901,
@@ -3011,7 +3012,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:42:28',
             ),
-            136 => 
+            136 =>
             array (
                 'id' => 137,
                 'region' => 1901,
@@ -3033,7 +3034,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:42:39',
             ),
-            137 => 
+            137 =>
             array (
                 'id' => 138,
                 'region' => 1901,
@@ -3055,7 +3056,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:42:48',
             ),
-            138 => 
+            138 =>
             array (
                 'id' => 139,
                 'region' => 1901,
@@ -3077,7 +3078,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:43:03',
             ),
-            139 => 
+            139 =>
             array (
                 'id' => 140,
                 'region' => 1401,
@@ -3099,7 +3100,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:58:09',
             ),
-            140 => 
+            140 =>
             array (
                 'id' => 141,
                 'region' => 101,
@@ -3121,7 +3122,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 11:58:24',
             ),
-            141 => 
+            141 =>
             array (
                 'id' => 142,
                 'region' => 201,
@@ -3143,7 +3144,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:46:36',
             ),
-            142 => 
+            142 =>
             array (
                 'id' => 143,
                 'region' => 2101,
@@ -3165,7 +3166,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:46:05',
             ),
-            143 => 
+            143 =>
             array (
                 'id' => 144,
                 'region' => 701,
@@ -3187,7 +3188,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:43:12',
             ),
-            144 => 
+            144 =>
             array (
                 'id' => 145,
                 'region' => 1401,
@@ -3209,7 +3210,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:51:43',
             ),
-            145 => 
+            145 =>
             array (
                 'id' => 146,
                 'region' => 1001,
@@ -3231,7 +3232,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:51:30',
             ),
-            146 => 
+            146 =>
             array (
                 'id' => 147,
                 'region' => 1707,
@@ -3253,7 +3254,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 12:05:30',
             ),
-            147 => 
+            147 =>
             array (
                 'id' => 148,
                 'region' => 1801,
@@ -3275,7 +3276,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 12:15:26',
             ),
-            148 => 
+            148 =>
             array (
                 'id' => 149,
                 'region' => 2001,
@@ -3297,7 +3298,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 12:12:51',
             ),
-            149 => 
+            149 =>
             array (
                 'id' => 150,
                 'region' => 1201,
@@ -3319,7 +3320,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:43:22',
             ),
-            150 => 
+            150 =>
             array (
                 'id' => 151,
                 'region' => 1201,
@@ -3341,7 +3342,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:38:31',
             ),
-            151 => 
+            151 =>
             array (
                 'id' => 152,
                 'region' => 2201,
@@ -3363,7 +3364,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-08 09:36:21',
             ),
-            152 => 
+            152 =>
             array (
                 'id' => 153,
                 'region' => 701,
@@ -3385,7 +3386,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:43:30',
             ),
-            153 => 
+            153 =>
             array (
                 'id' => 154,
                 'region' => 101,
@@ -3408,7 +3409,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:12:27',
             ),
-            154 => 
+            154 =>
             array (
                 'id' => 155,
                 'region' => 1701,
@@ -3430,7 +3431,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-06 09:50:30',
             ),
-            155 => 
+            155 =>
             array (
                 'id' => 156,
                 'region' => 101,
@@ -3452,7 +3453,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:15:37',
             ),
-            156 => 
+            156 =>
             array (
                 'id' => 157,
                 'region' => 801,
@@ -3474,7 +3475,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:17:16',
             ),
-            157 => 
+            157 =>
             array (
                 'id' => 158,
                 'region' => 2001,
@@ -3496,7 +3497,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 12:18:11',
             ),
-            158 => 
+            158 =>
             array (
                 'id' => 159,
                 'region' => 1701,
@@ -3518,7 +3519,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:43:38',
             ),
-            159 => 
+            159 =>
             array (
                 'id' => 160,
                 'region' => 1701,
@@ -3540,7 +3541,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:43:45',
             ),
-            160 => 
+            160 =>
             array (
                 'id' => 161,
                 'region' => 501,
@@ -3562,7 +3563,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-01 12:08:50',
             ),
-            161 => 
+            161 =>
             array (
                 'id' => 162,
                 'region' => 1201,
@@ -3584,7 +3585,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2023-09-05 11:55:36',
             ),
-            162 => 
+            162 =>
             array (
                 'id' => 163,
                 'region' => 1201,
@@ -3606,7 +3607,7 @@ class OficinasTableSeeder extends Seeder
                 'created_at' => '2023-06-27 15:48:13',
                 'updated_at' => '2025-07-03 13:43:55',
             ),
-            163 => 
+            163 =>
             array (
                 'id' => 164,
                 'region' => 1701,
@@ -3629,7 +3630,7 @@ class OficinasTableSeeder extends Seeder
                 'updated_at' => '2024-03-19 11:36:49',
             ),
         ));
-        
-        
+
+
     }
 }

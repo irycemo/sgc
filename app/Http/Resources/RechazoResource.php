@@ -16,7 +16,7 @@ class RechazoResource extends JsonResource
     {
         return [
             'observaciones' => $this->observaciones,
-            'creado_por' => $this->creadoPor->name,
+            'creado_por' => $this->creadoPor->name ?? '',
             'created_at' => $this->created_at
         ];
     }

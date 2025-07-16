@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('ciudad')->nullable();
             $table->string('imprimio')->nullable();
             $table->string('actualizo')->nullable();
-            $table->date('fecha ')->nullable();
+            $table->date('fecha')->nullable();
             $table->string('acer')->nullable();
             $table->unsignedInteger('atra')->nullable();
             $table->unsignedInteger('foli')->nullable();

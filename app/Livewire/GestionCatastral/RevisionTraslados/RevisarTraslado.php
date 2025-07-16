@@ -66,6 +66,7 @@ class RevisarTraslado extends Component
 
                 $this->traslado->rechazos()->create([
                     'observaciones' => $observacion,
+                    'creado_por' => auth()->id()
                 ]);
 
             });

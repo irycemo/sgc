@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('ofna')->nullable();
             $table->unsignedInteger('tpre')->nullable();
             $table->unsignedInteger('nreg')->nullable();
-            $table->date('fecha ')->nullable();
+            $table->date('fecha')->nullable();
             $table->string('emple')->nullable();
             $table->string('expe')->nullable();
             $table->unsignedInteger('ania')->nullable();
