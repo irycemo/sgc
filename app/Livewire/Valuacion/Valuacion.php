@@ -249,8 +249,6 @@ class Valuacion extends Component
 
         try {
 
-            $this->validarCuentaAsignada();
-
             $this->predio_padron = Predio::with('propietarios.persona')
                                     ->where('numero_registro', $this->predio->numero_registro)
                                     ->where('tipo_predio', $this->predio->tipo_predio)
