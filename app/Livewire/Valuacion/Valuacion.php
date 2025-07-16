@@ -293,9 +293,13 @@ class Valuacion extends Component
 
         try {
 
-            $this->validarCuentaAsignada();
+            if(!$this->predio->copia) {
 
-            if(!$this->predio->copia) $this->validarDisponibilidad();
+                $this->validarCuentaAsignada();
+
+                $this->validarDisponibilidad();
+
+            }
 
             $this->validarSector();
 
