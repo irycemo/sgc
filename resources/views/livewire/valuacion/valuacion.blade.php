@@ -21,7 +21,7 @@
 
                     <img wire:loading wire:target="buscarCuentaPredial" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                    Consultar cuenta predial
+                    Consultar avalúo concuenta predial
 
                 </button>
 
@@ -34,7 +34,7 @@
 
                     <img wire:loading wire:target="buscarClaveCatastral" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                    Consultar clave catastral
+                    Consultar avalúo con clave catastral
 
                 </button>
 

@@ -209,7 +209,7 @@ class Valuacion extends Component
 
                 $this->predio = $this->crearModeloVacio();
 
-                $this->dispatch('mostrarMensaje', ['error', "El avaluo está asinagnado a otro valuador."]);
+                $this->dispatch('mostrarMensaje', ['error', "El avalúo está asinagnado a otro valuador."]);
 
                 return;
 
@@ -225,7 +225,7 @@ class Valuacion extends Component
 
         } catch(ModelNotFoundException $e){
 
-            $this->dispatch('mostrarMensaje', ['error', "No existen avaluos relacionados a la clavae catastral."]);
+            $this->dispatch('mostrarMensaje', ['error', "No existen avaluos relacionados a la clave catastral."]);
 
         } catch (\Throwable $th) {
 
