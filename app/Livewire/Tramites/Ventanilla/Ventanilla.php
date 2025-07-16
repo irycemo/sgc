@@ -141,7 +141,7 @@ class Ventanilla extends Component
         $this->reset(['categoria_seleccionada', 'servicio_seleccionado', 'flags']);
 
         $this->tramite = Tramite::with('predios.propietarios.persona', 'servicio')
-                                    ->where('año', $this->año)
+                                    ->where('año', $this->tramite_año)
                                     ->where('folio', $this->tramite_folio)
                                     ->where('usuario', $this->tramite_usuario)
                                     ->first();

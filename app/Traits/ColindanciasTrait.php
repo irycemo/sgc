@@ -96,8 +96,7 @@ trait ColindanciasTrait
                 Colindancia::find($medida['id'])->update([
                     'viento' => $medida['viento'],
                     'longitud' => $medida['longitud'],
-                    'descripcion' => $medida['descripcion'],
-                    'predio_id' => $predio->id
+                    'descripcion' => $medida['descripcion']
                 ]);
 
             }

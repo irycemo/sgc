@@ -2,7 +2,7 @@
 
     <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-        <p><strong>Número de control:</strong> {{ $tramite->año }}-{{ $tramite->numero_control }}-{{ $tramite->usuario }} </p>
+        <p><strong>Número de control:</strong> {{ $tramite->año }}-{{ $tramite->folio }}-{{ $tramite->usuario }} </p>
 
     </div>
 
@@ -35,26 +35,6 @@
         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
             <p><strong>Número de oficio:</strong> {{ $tramite->numero_oficio }}</p>
-
-        </div>
-
-    @endif
-
-    @if ($tramite->numero_notaria)
-
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-            <p><strong>Número de notaría:</strong> {{ $tramite->numero_notaria }}</p>
-
-        </div>
-
-    @endif
-
-    @if ($tramite->nombre_notario)
-
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-            <p><strong>Nombre del notarío:</strong> {{ $tramite->nombre_notario }}</p>
 
         </div>
 
