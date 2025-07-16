@@ -21,7 +21,7 @@
 
                     <img wire:loading wire:target="buscarCuentaPredial" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                    Consultar avalúo concuenta predial
+                    Consultar avalúo con cuenta predial
 
                 </button>
 

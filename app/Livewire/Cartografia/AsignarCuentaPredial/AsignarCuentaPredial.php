@@ -86,7 +86,6 @@ class AsignarCuentaPredial extends Component
         $ultimaCuentaAsignada = CuentaAsignada::where('localidad', $this->localidad)
                                             ->where('oficina', $this->oficina)
                                             ->where('tipo_predio', $this->tipo)
-                                            ->latest()
                                             ->orderBy('numero_registro','desc')
                                             ->first();
 
@@ -129,12 +128,10 @@ class AsignarCuentaPredial extends Component
                             'numero_registro' => $registroSolicitado,
                             'estatus' => 1,
                             'predio_origen' => $this->origen ? $this->origen : null,
-                            'observaciones' => 'Cuenta preexistente',
-                            'asignado_a' => $this->valuador,
+                            'observaciones' => 'Cuenta preexistente en el padrón catastral',
+                            'asignado_a' => null,
                             'creado_por' => auth()->user()->id
                         ]);
-
-                        $cuenta->valuadorAsignado = $cuenta->asignadoA->name;
 
                         $this->cuentasAsignadas[] = $cuenta;
 
@@ -183,30 +180,6 @@ class AsignarCuentaPredial extends Component
         }
 
         $this->reset(['localidad', 'tipo', 'observaciones', 'cantidad', 'valuador', 'origen', 'titulo', 'tipo_titulo', 'oficio']);
-
-    }
-
-    public function buscarCuentas(){
-
-        $this->validate([
-            'localidad_busqueda' => 'nullable',
-            'oficina_busqueda' => Rule::requiredIf($this->localidad_busqueda != null),
-            'tipo_busqueda' => Rule::requiredIf($this->localidad_busqueda != null),
-            'registro_inicio' => Rule::requiredIf($this->localidad_busqueda != null),
-            'registro_final' => Rule::requiredIf($this->localidad_busqueda != null),
-        ]);
-
-        $this->cuentasAsignadas = CuentaAsignada::with('valuadorAsignado', 'creadoPor')
-                                                    ->where('localidad', $this->localidad_busqueda)
-                                                    ->where('oficina', $this->oficina_busqueda)
-                                                    ->where('tipo_predio', $this->tipo_busqueda)
-                                                    ->whereBetween('numero_registro', [$this->registro_inicio, $this->registro_final])
-                                                    ->orderBy('numero_registro', 'desc')
-                                                    ->latest()
-                                                    ->get();
-
-        if(count($this->cuentasAsignadas) == 0)
-            $this->dispatch('mostrarMensaje', ['error', "No hay resultados con los datos ingresado."]);
 
     }
 
