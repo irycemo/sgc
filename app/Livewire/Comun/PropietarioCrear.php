@@ -46,7 +46,7 @@ class PropietarioCrear extends Component
 
         $pu = 0;
 
-        foreach($this->modelo->propietarios() as $adquiriente){
+        foreach($this->modelo->propietarios as $adquiriente){
 
             $pn = $pn + $adquiriente->porcentaje_nuda;
 
@@ -61,8 +61,6 @@ class PropietarioCrear extends Component
         $pn = $pn + (float)$this->porcentaje_nuda + $pp;
 
         $pu = $pu + (float)$this->porcentaje_usufructo + $pp;
-
-        dd($pn, $pu);
 
         if((float)$pn > 100 || (float)$pu > 100) throw new GeneralException("La suma de los porcentajes no puede exceder el 100%.");
 
@@ -260,7 +258,7 @@ class PropietarioCrear extends Component
 
         } catch (GeneralException $ex) {
 
-            $this->dispatch('mostrarMensaje', ['error', $ex->getMessage()]);
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
         } catch (\Throwable $th) {
 
@@ -310,7 +308,7 @@ class PropietarioCrear extends Component
 
         } catch (GeneralException $ex) {
 
-            $this->dispatch('mostrarMensaje', ['error', $ex->getMessage()]);
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
         } catch (\Throwable $th) {
 
