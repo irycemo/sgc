@@ -71,10 +71,15 @@ trait PrediosTrait
 
         $colection = collect($this->predios);
 
-        if($colection->contains('id', $this->predio->id))
+        if($colection->contains('id', $this->predio->id)){
+
             $this->dispatch('mostrarMensaje', ['warning', "La cuenta predial ya esta agregada."]);
-        else
+
+        }else{
+
             array_push($this->predios, $this->predio->toArray());
+
+        }
 
         $this->predio = null;
 

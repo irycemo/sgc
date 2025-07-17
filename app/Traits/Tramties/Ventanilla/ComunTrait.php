@@ -320,4 +320,21 @@ trait ComunTrait
 
     }
 
+    public function editarTramite(){
+
+        if($this->modelo_editar->isNot($this->tramite))
+        $this->modelo_editar = $this->tramite;
+
+        $this->reset(['tramite']);
+
+        $this->servicio = $this->modelo_editar->servicio;
+
+        foreach ($this->modelo_editar->predios as $predio) {
+
+            array_push($this->predios, $predio->toArray());
+
+        }
+
+    }
+
 }

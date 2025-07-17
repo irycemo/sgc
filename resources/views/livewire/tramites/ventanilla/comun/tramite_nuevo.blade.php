@@ -38,26 +38,6 @@
 
         @endif
 
-        @if ($modelo_editar->numero_notaria)
-
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                <p><strong>Número de notaría:</strong> {{ $modelo_editar->numero_notaria }}</p>
-
-            </div>
-
-        @endif
-
-        @if ($modelo_editar->nombre_notario)
-
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                <p><strong>Nombre del notarío:</strong> {{ $modelo_editar->nombre_notario }}</p>
-
-            </div>
-
-        @endif
-
         @if ($modelo_editar->cantidad)
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
