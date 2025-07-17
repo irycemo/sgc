@@ -28,7 +28,7 @@ class SapService{
 
         $url = config('services.sap.SAP_GENERAR_LINEA_DE_CAPTURA_URL');
 
-        $observaciones = "Numero de control: " . $this->tramite->año . '-' . $this->tramite->numero_control . '-' . $this->tramite->usuario .  " Tipo de servicio: " . $this->tramite->tipo_servicio;
+        $observaciones = "Numero de control: " . $this->tramite->año . '-' . $this->tramite->folio . '-' . $this->tramite->usuario .  " Tipo de servicio: " . $this->tramite->tipo_servicio;
 
         try {
 
