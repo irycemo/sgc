@@ -106,7 +106,7 @@ class MigrarPredioJob implements ShouldQueue
                         'declarante' => 'Notaria ' . $predio->cnot_003,
                         'observaciones' => $predio->obse_008,
                         'origen' => 0,
-                        'actualizado_nombre' => $predio->nome_008
+                        'actualizado_nombre' => trim($predio->nome_008)
                     ]);
 
                     $this->colindacnias($p->id, $predio->col1_003, $predio->col2_003, $predio->col3_003, $predio->col4_003);
@@ -291,29 +291,29 @@ class MigrarPredioJob implements ShouldQueue
 
         $persona = Persona::firstOrCreate(
             [
-                'nombre' => $predioss->nomb_008,
-                'ap_paterno' => $predioss->apat_008,
-                'ap_materno' => $predioss->amat_008
+                'nombre' => trim($predioss->nomb_008),
+                'ap_paterno' => trim($predioss->apat_008),
+                'ap_materno' => trim($predioss->amat_008)
             ],
             [
                 'tipo' => ($predioss->tper_008 == 1) ? 'FÍSICA' : ($predioss->tper_008 == 2 ? 'MORAL' : '0'),
-                'nombre' => $nombre,
-                'ap_paterno' => $predioss->apat_008,
-                'ap_materno' => $predioss->amat_008,
+                'nombre' => trim($nombre),
+                'ap_paterno' => trim($predioss->apat_008),
+                'ap_materno' => trim($predioss->amat_008),
                 'curp' => NULL,
                 'rfc' => NULL,
                 'razon_social' => ($predioss->tper_008 == 2) ? $predioss->nomb_008." ".$predioss->apat_008." ".$predioss->amat_008 : '',
                 'fecha_nacimiento' => NULL,
                 'nacionalidad' => NULL,
                 'estado_civil' => NULL,
-                'calle' => $predioss->noca_008,
-                'numero_exterior' => $predioss->exte_008,
-                'numero_interior' => $predioss->inte_008,
-                'colonia' => $predioss->noco_008,
+                'calle' => trim($predioss->noca_008),
+                'numero_exterior' => trim($predioss->exte_008),
+                'numero_interior' => trim($predioss->inte_008),
+                'colonia' => trim($predioss->noco_008),
                 'cp' => $predioss->copd_008,
                 'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $predioss->cest_008)->first() ? $this->referencias->where('tipo_007', "ED")->where('cven_007', $predioss->cest_008)->first()['desc_007'] : null,
-                'municipio' => $predioss->nomu_008,
-                'ciudad' => $predioss->nopo_008
+                'municipio' => trim($predioss->nomu_008),
+                'ciudad' => trim($predioss->nopo_008)
             ]
         );
 
@@ -346,29 +346,29 @@ class MigrarPredioJob implements ShouldQueue
 
             $persona = Persona::firstOrCreate(
                 [
-                    'nombre' => $propietario->nomb_005,
-                    'ap_paterno' => $propietario->apat_005,
-                    'ap_materno' => $propietario->amat_005
+                    'nombre' => trim($propietario->nomb_005),
+                    'ap_paterno' => trim($propietario->apat_005),
+                    'ap_materno' => trim($propietario->amat_005)
                 ],
                 [
                     'tipo' => ($propietario->tper_005 == 1) ? 'FÍSICA' : ($propietario->tper_005 == 2 ? 'MORAL' : '0'),
-                    'nombre' => $nombre,
-                    'ap_paterno' => $propietario->apat_005,
-                    'ap_materno' => $propietario->amat_005,
+                    'nombre' => trim($nombre),
+                    'ap_paterno' => trim($propietario->apat_005),
+                    'ap_materno' => trim($propietario->amat_005),
                     'curp' => NULL,
                     'rfc' => NULL,
                     'razon_social' => ($propietario->tper_005 == 2) ? $propietario->nomb_005." ".$propietario->apat_005." ".$propietario->amat_005 : '',
                     'fecha_nacimiento' => NULL,
                     'nacionalidad' => NULL,
                     'estado_civil' => NULL,
-                    'calle' => $propietario->noca_005,
-                    'numero_exterior' => $propietario->next_005,
-                    'numero_interior' => $propietario->nint_005,
-                    'colonia' => $propietario->noco_005,
+                    'calle' => trim($propietario->noca_005),
+                    'numero_exterior' => trim($propietario->next_005),
+                    'numero_interior' => trim($propietario->nint_005),
+                    'colonia' => trim($propietario->noco_005),
                     'cp' => $propietario->codp_005,
                     'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $propietario->cest_005)->first() ? $this->referencias->where('tipo_007', "ED")->where('cven_007', $propietario->cest_005)->first()['desc_007'] : null,
-                    'municipio' => $propietario->nomu_005,
-                    'ciudad' => $propietario->nopo_005,
+                    'municipio' => trim($propietario->nomu_005),
+                    'ciudad' => trim($propietario->nopo_005),
                 ]
             );
 
@@ -511,7 +511,7 @@ class MigrarPredioJob implements ShouldQueue
                 'nombre' => $this->referencias->where('cven_007', $movimiento->cmto_021)->where('tipo_007', 'OM')->first()['desc_007'],
                 'fecha' => $movimiento->femo_021,
                 'descripcion' => $movimiento->obse_021,
-                'actualizado_nombre' => $movimiento->nome_021,
+                'actualizado_nombre' => trim($movimiento->nome_021),
             ]);
 
         }
