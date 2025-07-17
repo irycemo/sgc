@@ -20,15 +20,15 @@ return new class extends Migration
             $table->text('observaciones');
             $table->string('predio_origen')->nullable();
             $table->string('oficio')->nullable();
-            $table->string('documento_entrada')->nullable();
-            $table->string('documento_numero')->nullable();
+            $table->string('tipo_titulo')->nullable();
+            $table->string('titulo_propiedad')->nullable();
             $table->boolean('estatus')->default(0);
             $table->foreignId('asignado_a')->nullable()->references('id')->on('users');
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
 
-            $table->index(['documento_entrada', 'documento_numero']);
+            $table->index(['tipo_titulo', 'titulo_propiedad']);
         });
     }
 

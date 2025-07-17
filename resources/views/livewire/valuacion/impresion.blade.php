@@ -56,7 +56,7 @@
 
                     </div>
 
-                    @if (in_array($avaluo_para, [3,4,5,6,9]))
+                    @if (in_array($avaluo_para, [3,4,5,6,9,10]))
 
                         <div class="flex-auto  text-center">
 

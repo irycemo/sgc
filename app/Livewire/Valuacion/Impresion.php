@@ -55,9 +55,9 @@ class Impresion extends Component
             'inspeccion_año' => Rule::requiredIf(!auth()->user()->hasRole(['Convenio municipal'])),
             'inspeccion_folio' => Rule::requiredIf(!auth()->user()->hasRole(['Convenio municipal'])),
             'inspeccion_usuario' => Rule::requiredIf(!auth()->user()->hasRole(['Convenio municipal'])),
-            'desglose_año' => Rule::requiredIf(in_array($this->avaluo_para, [3, 4, 5 , 6, 9]) && !auth()->user()->hasRole(['Convenio municipal'])),
-            'desglose_folio' => Rule::requiredIf(in_array($this->avaluo_para, [3, 4, 5 , 6, 9]) && !auth()->user()->hasRole(['Convenio municipal'])),
-            'desglose_usuario' => Rule::requiredIf(in_array($this->avaluo_para, [3, 4, 5 , 6, 9]) && !auth()->user()->hasRole(['Convenio municipal'])),
+            'desglose_año' => Rule::requiredIf(in_array($this->avaluo_para, [3, 4, 5 , 6, 9, 10]) && !auth()->user()->hasRole(['Convenio municipal'])),
+            'desglose_folio' => Rule::requiredIf(in_array($this->avaluo_para, [3, 4, 5 , 6, 9, 10]) && !auth()->user()->hasRole(['Convenio municipal'])),
+            'desglose_usuario' => Rule::requiredIf(in_array($this->avaluo_para, [3, 4, 5 , 6, 9, 10]) && !auth()->user()->hasRole(['Convenio municipal'])),
             'localidad' => 'required',
             'tipo' => Rule::requiredIf($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO),
             'registro_inicio' => Rule::requiredIf($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO),
@@ -102,6 +102,10 @@ class Impresion extends Component
             'edificio',
             'departamento',
         ]);
+
+        $this->inspeccion_año  = now()->format('Y');
+
+        $this->desglose_año = now()->format('Y');
 
     }
 
@@ -156,9 +160,13 @@ class Impresion extends Component
 
         if($this->tramite_inspeccion->estado != 'pagado') throw new GeneralException('El trámite de inspección ocular no esta pagado o ha sido concluido.');
 
-        if($this->tramite_inspeccion->avaluo_para->value != $this->avaluo_para) throw new GeneralException('El trámite de inspección ocular no corresponde a un avalúo para ' . $this->lista_avaluo_para[$this->avaluo_para - 1]->label());
+        if(! (in_array($this->tramite_inspeccion->avaluo_para->value, [3,4,5]) && $this->avaluo_para == 10)){
 
-        if(in_array($this->avaluo_para, [3, 4, 5 , 6, 9])){
+            if($this->tramite_inspeccion->avaluo_para->value != $this->avaluo_para) throw new GeneralException('El trámite de inspección ocular no corresponde a un avalúo para ' . $this->lista_avaluo_para[$this->avaluo_para - 1]->label());
+
+        }
+
+        if(in_array($this->avaluo_para, [3, 4, 5 , 6, 9, 10])){
 
             $this->tramite_desglose = Tramite::where('año', $this->desglose_año)
                                             ->where('folio', $this->desglose_folio)
@@ -169,7 +177,11 @@ class Impresion extends Component
 
             if($this->tramite_desglose->servicio->categoria->nombre != 'Desglose de predios y valuación') throw new GeneralException('El trámite ingresado para desglose no corresponde a un desglose.');
 
-            if($this->tramite_desglose->estado != 'pagado') throw new GeneralException('El trámite de desglose no esta pagado o ha sido concluido.');
+            if(! (in_array($this->tramite_inspeccion->avaluo_para->value, [3,4,5]) && $this->avaluo_para == 10)){
+
+                if($this->tramite_desglose->estado != 'pagado') throw new GeneralException('El trámite de desglose no esta pagado o ha sido concluido.');
+
+            }
 
             if($this->tramite_inspeccion->ligado_a && ($this->tramite_inspeccion->ligado_a != $this->tramite_desglose->id)) throw new GeneralException('El trámite de inspección ocular esta ligado a otro trámite.');
 
@@ -187,7 +199,7 @@ class Impresion extends Component
 
     public function buscarPredios(){
 
-        if($this->avaluo_para != 6){
+        if($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO){
 
             $this->avaluos = Avaluo::withWhereHas('predioAvaluo', function($q){
                                     $q->where('localidad', $this->localidad)
@@ -369,10 +381,6 @@ class Impresion extends Component
         $this->oficina = auth()->user()->oficina->oficina;
 
         $this->lista_avaluo_para = AvaluoPara::cases();
-
-        $this->inspeccion_año  = now()->format('Y');
-
-        $this->desglose_año = now()->format('Y');
 
         $this->años = Constantes::AÑOS;
 
