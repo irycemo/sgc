@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\OldTraslado;
 use App\Jobs\MigrarPredioJob;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Inspiring;

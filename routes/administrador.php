@@ -15,13 +15,15 @@ use App\Livewire\Admin\Servicios;
 use App\Livewire\Admin\Categorias;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Certificaciones;
+use App\Livewire\Admin\OldBD\Auditoria as AuditoriaOLD;
 use App\Livewire\Admin\FactorIncrementos;
 use App\Http\Controllers\DashboardController;
 use App\Livewire\Admin\ValoresUnitariosRusticos;
 use App\Livewire\Admin\ValoresUnitariosConstruccion;
 use App\Http\Controllers\Admin\Avaluos\AvaluosController;
 use App\Http\Controllers\Admin\Predios\PrediosController;
-
+use App\Livewire\Admin\OldBD\Certificados;
+use App\Livewire\Admin\OldBD\Traslados;
 
 Route::group([], function(){
 
@@ -62,5 +64,11 @@ Route::group([], function(){
     Route::get('valores_unitarios_construccion', ValoresUnitariosConstruccion::class)->middleware('permission:Lista de valores unitarios')->name('unitarios_construccion');
 
     Route::get('valores_unitarios_rusticos', ValoresUnitariosRusticos::class)->middleware('permission:Lista de valores unitarios')->name('unitarios_rusticos');
+
+    Route::get('auditoria_old', AuditoriaOLD::class)->middleware('permission:Auditoria')->name('auditoria_old');
+
+    Route::get('certificados_old', Certificados::class)->middleware('permission:Auditoria')->name('certificados_old');
+
+    Route::get('traslados_old', Traslados::class)->middleware('permission:Auditoria')->name('traslados_old');
 
 });
