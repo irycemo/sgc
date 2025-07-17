@@ -53,6 +53,17 @@
 
             </div>
 
+            @if($predio->copia)
+
+                <div class="flex items-center justify-center text-sm gap-3">
+
+                    <x-checkbox wire:model.live="es_nuevo"></x-checkbox>
+                    <span> Predio nuevo</span>
+
+                </div>
+
+            @endif
+
         </div>
 
     </div>

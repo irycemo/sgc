@@ -26,7 +26,7 @@ class ArchivoConsulta extends Component
 
             $response = Http::accept('application/json')
                                 ->get(
-                                    'http://10.0.253.223:8095/sgcpredio.asmx/sgc_predio?tipo=1&locl=' .
+                                    'http://10.0.253.223:8095/sgcpredio.asmx/sgc_predio?tipo=2&locl=' .
                                     $this->predio->localidad .
                                     '&ofna=' . $this->predio->oficina .
                                     '&tpre=' . $this->predio->tipo_predio .
