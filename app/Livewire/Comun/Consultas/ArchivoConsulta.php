@@ -42,9 +42,11 @@ class ArchivoConsulta extends Component
 
                 $this->archivos = json_decode($response, true);
 
-                info($response, $this->archivos);
+                if(!isset($this->archivos['avaluos'])){
 
-                /* dd($this->archivos); */
+                    $this->archivos = [];
+
+                }
 
             }
 
