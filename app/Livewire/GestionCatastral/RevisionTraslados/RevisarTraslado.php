@@ -11,9 +11,12 @@ use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
 use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
 use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
+use App\Traits\Personas\BuscarPersonaTrait;
 
 class RevisarTraslado extends Component
 {
+
+    use BuscarPersonaTrait;
 
     public Traslado $traslado;
 
@@ -121,6 +124,8 @@ class RevisarTraslado extends Component
 
             DB::transaction(function () {
 
+                $this->actualizarPredio();
+
                 (new SistemaTramitesLineaService())->operarAviso($this->traslado->aviso_stl);
 
                 if($this->traslado->tipo == 'aclaratorio'){
@@ -129,7 +134,7 @@ class RevisarTraslado extends Component
 
                 }
 
-                $this->actualizarPredio();
+                /* dd(); */
 
                 $this->traslado->update(['estado' => 'operado', 'actualizado_por' => auth()->id()]);
 
@@ -290,6 +295,7 @@ class RevisarTraslado extends Component
                                                         })
                                                         ->delete();
 
+
             }else{
 
                  $aux = $this->traslado->predio->propietarios()->whereHas('persona', function($q) use($propietario){
@@ -312,7 +318,9 @@ class RevisarTraslado extends Component
 
         foreach($this->aviso['predio']['adquirientes'] as $adquiriente){
 
-            $persona = Persona::query()
+            $persona = $this->buscarPersona($adquiriente['rfc'], $adquiriente['curp'], $adquiriente['tipo_persona'], $adquiriente['nombre'], $adquiriente['ap_paterno'], $adquiriente['ap_materno'], $adquiriente['razon_social']);
+
+            /* Persona::query()
                         ->where(function($q) use($adquiriente){
                             $q->when(isset($adquiriente['nombre']), fn($q) => $q->where('nombre',$adquiriente['nombre']))
                                 ->when(isset($adquiriente['ap_paterno']), fn($q) => $q->where('ap_paterno', $adquiriente['ap_paterno']))
@@ -322,7 +330,7 @@ class RevisarTraslado extends Component
                         ->when(isset($adquiriente['rfc']), fn($q) => $q->orWhere('rfc', $adquiriente['rfc']))
                         ->when(isset($adquiriente['curp']), fn($q) => $q->orWhere('curp', $adquiriente['curp']))
                         ->when(isset($adquiriente['correo']), fn($q) => $q->orWhere('correo', $adquiriente['correo']))
-                        ->first();
+                        ->first(); */
 
             if(!$persona){
 

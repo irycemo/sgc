@@ -295,7 +295,7 @@ class ConsultaPadron extends Component
 
         return Cache::remember($key, 300, function(){
 
-            if($this->radio == 'clave' && $this->selected_id){
+            if(in_array($this->radio, ['clave', 'propietario', 'ubicacion']) && $this->selected_id){
 
                 return Predio::with(
                                 'propietarios.persona',
@@ -308,7 +308,7 @@ class ConsultaPadron extends Component
                             ->whereKey($this->selected_id)
                             ->first();
 
-            }elseif($this->radio == 'clave'){
+            }elseif(in_array($this->radio, ['clave', 'propietario', 'ubicacion'])){
 
                 return Predio::with(
                                         'propietarios.persona',

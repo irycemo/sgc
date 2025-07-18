@@ -70,13 +70,13 @@
 
     </div>
 
-    <div>
+    <div id="inputs">
 
         @if($radio === 'clave')
 
-            <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg">
+            <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg" id="claves-div">
 
-                <div class="flex-auto ">
+                <div class="flex-auto " >
 
                     <div class="">
 
@@ -233,7 +233,7 @@
 
     </div>
 
-    <div>
+    <div id="toggle">
 
         @if($this->prediosLista->count() && $flag)
 
@@ -254,7 +254,7 @@
 
     </div>
 
-    <div>
+    <div id="table-list">
 
         @if(!$flag)
 
@@ -382,10 +382,9 @@
 
     </div>
 
-    <div>
+    <div id="predio">
 
         @if($flag && $this->predio)
-
 
             <div wire:loading.class.delaylongest="opacity-50">
 
@@ -1060,7 +1059,6 @@
                         @livewire('comun.consultas.archivo-consulta', ['predio_id' => $this->predio->id])
 
                     </div>
-
 
                 </div>
 

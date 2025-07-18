@@ -32,7 +32,7 @@ class AsignacionTrasladosService{
 
         }else{
 
-            $user =  User::inRandomOrder()
+            $users =  User::inRandomOrder()
                             ->where('estado', 'activo')
                             ->where('oficina_id', $oficina_id)
                             ->whereHas('roles', function($q){
@@ -41,13 +41,15 @@ class AsignacionTrasladosService{
                             ->withCount('traslados')
                             ->get();
 
-            if(!$user){
+
+
+            if(!$users->count()){
 
                 throw new GeneralException('No se encontraron usuarios de ' . $oficina->nombre . ' para asignar el traslado.');
 
             }else{
 
-                return $user->sortByDesc('traslados_count')->first()->id;
+                return $users->sortByDesc('traslados_count')->first()->id;
 
             }
 
