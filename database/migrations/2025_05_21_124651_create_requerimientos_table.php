@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('requerimientoable_type');
             $table->string('estado');
             $table->string('archivo_url')->nullable();
+            $table->string('usuario_stl')->nullable();
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->text('descripcion')->nullable();
             $table->timestamps();

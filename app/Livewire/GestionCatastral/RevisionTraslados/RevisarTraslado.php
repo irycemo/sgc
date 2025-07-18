@@ -187,6 +187,8 @@ class RevisarTraslado extends Component
             'area_comun_construccion' => $this->avaluo['predio']['area_comun_construccion']  ?? null,
             'valor_total_terreno' => $this->avaluo['predio']['valor_total_terreno']  ?? null,
             'valor_total_construccion' => $this->avaluo['predio']['valor_total_construccion']  ?? null,
+            'superficie_total_terreno' => $this->avaluo['predio']['superficie_total_terreno']  ?? null,
+            'superficie_total_construccion' => $this->avaluo['predio']['superficie_total_construccion']  ?? null,
             'valor_catastral' => $this->aviso['predio']['valor_catastral']  ?? null,
         ]);
 

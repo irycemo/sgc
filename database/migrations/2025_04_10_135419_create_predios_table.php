@@ -58,6 +58,8 @@ return new class extends Migration
             $table->decimal('valor_construccion_comun', 15,4)->nullable();
             $table->decimal('valor_total_terreno', 15,4)->nullable();
             $table->decimal('valor_total_construccion', 15,4)->nullable();
+            $table->decimal('superficie_total_terreno', 15,4)->nullable();
+            $table->decimal('superficie_total_construccion', 15,4)->nullable();
             $table->decimal('valor_catastral', 15,4)->nullable();
             $table->string('curt')->nullable();
             $table->unsignedInteger('folio_real')->nullable();

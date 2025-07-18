@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string("folio_pago")->nullable();
             $table->string('orden_de_pago')->nullable();
             $table->string('linea_de_captura')->nullable();
+            $table->string('documento_de_pago')->nullable();
             $table->date("limite_de_pago")->nullable();
             $table->decimal("monto", 18, 2);
             $table->unsignedInteger('cantidad')->default(1);

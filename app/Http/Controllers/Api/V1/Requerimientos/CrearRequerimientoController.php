@@ -27,7 +27,7 @@ class CrearRequerimientoController extends Controller
                 'creado_por' => 11,
                 'usuario_stl' => $validated['usuario'],
                 'estado' => 'nuevo',
-                'archivo_url' => $validated['archivo_url'],
+                'archivo_url' => $validated['archivo_url'] ?? null,
             ]);
 
             return (new RequerimientoResource($requerimiento))->response()->setStatusCode(200);

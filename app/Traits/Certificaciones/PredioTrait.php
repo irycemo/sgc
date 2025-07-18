@@ -168,8 +168,10 @@ trait PredioTrait
         $object->construccionesComun = $construccionesComun;
         $object->ubicacion_en_manzana  = $predio->ubicacion_en_manzana;
         $object->superficie_terreno = $predio->superficie_terreno;
-        $object->superficie_judicial = $predio->superficie_judicial;
         $object->superficie_notarial = $predio->superficie_notarial;
+        $object->superficie_judicial = $predio->superficie_judicial;
+        $object->superficie_total_construccion = $predio->superficie_total_construccion;
+        $object->superficie_total_terreno = $predio->superficie_total_terreno;
 
         return $object;
 

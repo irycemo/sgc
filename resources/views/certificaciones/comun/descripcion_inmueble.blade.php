@@ -2,11 +2,11 @@
 
 <p class="parrafo">
 
-    <strong>Superficie de terreno:</strong>  {{ $predio->superficie_terreno }}
+    <strong>Superficie total de terreno:</strong>  {{ $predio->superficie_total_terreno }} Metros cuadrados
 
     @if ($predio->superficie_construccion)
 
-        <strong>Superficie de construcción:</strong> {{ $predio->superficie_construccion }} Metros cuadrados
+        <strong>Superficie total de construcción:</strong> {{ $predio->superficie_total_construccion }} Metros cuadrados
 
     @endif
 

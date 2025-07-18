@@ -126,7 +126,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                     $key = $key + 3;
 
-                    /* $this->revisarAsignacionCuentaPredia($row, $key); */
+                    $this->revisarAsignacionCuentaPredia($row, $key);
 
                     $this->validarDisponibilidad($row, $key);
 
@@ -136,7 +136,25 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                     $colindancias = $this->procesarColindacias($row['colindancias'], $key);
 
-                    $terrenos = $this->procesarTerrenos($row['terrenos'], $row['tipo'], $key);
+                    /* $terrenos = $this->procesarTerrenos($row['terrenos'], $row['tipo'], $key); */
+
+                    if(isset($row['terrenos'])){
+
+                        $terrenos = $this->procesarTerrenos($row['terrenos'], $row['tipo'], $key);
+
+                        $sumValorTerrenos = $terrenos->sum('valor_terreno');
+
+                        $sumSuperficieTerrenos = $terrenos->sum('superficie');
+
+                    }else{
+
+                        $terrenos = null;
+
+                        $sumValorTerrenos = 0;
+
+                        $sumSuperficieTerrenos = 0;
+
+                    }
 
                     if(isset($row['construcciones'])){
 
@@ -162,7 +180,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                         $sumValorTerenosComun = $terrenosComun->sum('valor_terreno_comun');
 
-                        $sumAreaTerrenosComun = $terrenosComun->sum('area_terreno_comun');
+                        $sumAreaTerrenosComun = $terrenosComun->sum('superficie_proporcional');
 
                     }else{
 
@@ -180,7 +198,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                         $sumValorConstruccionesComun = $construccionesComun->sum('valor_construccion_comun');
 
-                        $sumAreaConstruccionComun = $construccionesComun->sum('area_comun_construccion');
+                        $sumAreaConstruccionComun = $construccionesComun->sum('superficie_proporcional');
 
                     }else{
 
@@ -192,7 +210,11 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                     }
 
-                    $valorCatastral = $terrenos->sum('valor_terreno')
+                    $superficie_total_terreno = $sumAreaTerrenosComun + $sumSuperficieTerrenos;
+
+                    $superficie_total_construccion =  $sumAreaConstruccionComun + $sumSuperficieConstrucciones;
+
+                    $valorCatastral = $sumValorTerrenos
                                             + $sumValorConstrucciones
                                             + $sumValorTerenosComun
                                             + $sumValorConstruccionesComun;
@@ -203,7 +225,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                     }
 
-                    $predio = $this->crearPredio($row, $coordenadas, $terrenos, $sumSuperficieConstrucciones, $sumAreaTerrenosComun, $sumValorTerenosComun, $sumAreaConstruccionComun, $sumValorConstruccionesComun, $sumValorConstrucciones, $valorCatastral);
+                    $predio = $this->crearPredio($row, $coordenadas, $terrenos, $sumSuperficieConstrucciones, $sumAreaTerrenosComun, $sumValorTerenosComun, $sumAreaConstruccionComun, $sumValorConstruccionesComun, $sumValorConstrucciones,  $superficie_total_terreno, $superficie_total_construccion,$valorCatastral);
 
                     $this->procesarPropietario($predio->id, $row, $key);
 
@@ -657,7 +679,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
     }
 
-    public function crearPredio($row, $coordenadas, $terrenos, $sumSuperficieConstrucciones, $sumAreaTerrenosComun, $sumValorTerenosComun, $sumAreaConstruccionComun, $sumValorConstruccionesComun, $sumValorConstrucciones, $valorCatastral): PredioAvaluo
+    public function crearPredio($row, $coordenadas, $terrenos, $sumSuperficieConstrucciones, $sumAreaTerrenosComun, $sumValorTerenosComun, $sumAreaConstruccionComun, $sumValorConstruccionesComun, $sumValorConstrucciones, $superficie_total_terreno, $superficie_total_construccion, $valorCatastral): PredioAvaluo
     {
 
         return PredioAvaluo::create([
@@ -711,6 +733,8 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             'area_comun_construccion' => $sumAreaConstruccionComun,
             'valor_construccion_comun' => $sumValorConstruccionesComun,
             'valor_total_construccion' => $sumValorConstrucciones,
+            'superficie_total_terreno' => $superficie_total_terreno,
+            'superficie_total_construccion' => $superficie_total_construccion,
             'valor_catastral' => $valorCatastral,
             'actualizado_por' => auth()->id()
         ]);
