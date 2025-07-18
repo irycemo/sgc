@@ -44,7 +44,9 @@ class ArchivoConsulta extends Component
             }
 
         } catch (\Throwable $th) {
-            //throw $th;
+
+            $this->archivos = [];
+
         }
 
     }
