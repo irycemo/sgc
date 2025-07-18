@@ -263,7 +263,7 @@ class Impresion extends Component
 
     public function revisarAvaluoCompleto(Avaluo $avaluo){
 
-        $avaluo->predioAvaluo->load('colindancias');
+        $avaluo->predioAvaluo->load('colindancias', 'terrenos', 'terrenosComun');
 
         if($avaluo->predioAvaluo->colindancias->count() == 0)
             throw new GeneralException('El avalúo: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' del predio: ' . $avaluo->predioAvaluo->cuentaPredial() . ' no tiene colindancias.');
