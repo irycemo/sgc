@@ -16,8 +16,6 @@ class CrearRequerimientoController extends Controller
 
         $validated = $request->validated();
 
-        info($validated);
-
         try {
 
             $requerimiento = Requerimiento::create([
