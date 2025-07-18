@@ -39,7 +39,12 @@ class ArchivoConsulta extends Component
 
             }else{
 
+
                 $this->archivos = json_decode($response, true);
+
+                info($response, $this->archivos);
+
+                /* dd($this->archivos); */
 
             }
 
