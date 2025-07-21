@@ -70,6 +70,7 @@
                 <x-table.heading sortable wire:click="sortBy('estado')" :direction="$sort === 'estado' ? $direction : null" >Estado</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('año')" :direction="$sort === 'año' ? $direction : null" >Año</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('folio')" :direction="$sort === 'folio' ? $direction : null" >Folio</x-table.heading>
+                <x-table.heading >Usuario</x-table.heading>
                 <x-table.heading >Cuenta predial</x-table.heading>
                 <x-table.heading >Clave catastral</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
@@ -115,6 +116,14 @@
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Folio</span>
 
                             {{ $avaluo->folio }}
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Usuario</span>
+
+                            {{ $avaluo->usuario }}
 
                         </x-table.cell>
 
@@ -203,6 +212,14 @@
                                             Imprimir
                                         </button>
 
+                                        <button
+                                            wire:click="abrirModalCorreccion({{ $avaluo->id }})"
+                                            wire:loading.attr="disabled"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Corregir
+                                        </button>
+
                                     @endif
 
                                 </div>
@@ -280,6 +297,47 @@
                 <img wire:loading wire:target="eliminar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                 Borrar
+            </x-danger-button>
+
+        </x-slot>
+
+    </x-confirmation-modal>
+
+    <x-confirmation-modal wire:model.live="modalCorregir" maxWidth="sm">
+
+        <x-slot name="title">
+            Corregir avalúo
+        </x-slot>
+
+        <x-slot name="content">
+            <p class="font-bold">¿Esta seguro que desea corregir el avalúo?</p>
+
+            <br>
+
+            <p>
+                Las certificaciones de notificación catastral asociadas al tramite de inspección seran canceladas y los trámite de inspección y desglose seran reactivados.
+            </p>
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <x-secondary-button
+                wire:click="$toggle('modal')"
+                wire:loading.attr="disabled"
+            >
+                No
+            </x-secondary-button>
+
+            <x-danger-button
+                class="ml-2"
+                wire:click="corregir"
+                wire:loading.attr="disabled"
+                wire:target="corregir"
+            >
+
+                <img wire:loading wire:target="corregir" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                Corregir
             </x-danger-button>
 
         </x-slot>

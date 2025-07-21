@@ -366,7 +366,7 @@
 
                     <x-input-group for="modelo_editar.ordinario" label="Ordinario" :error="$errors->first('modelo_editar.ordinario')" class="w-full">
 
-                        <x-input-text type="number" id="modelo_editar.ordinario" wire:model.debounce="modelo_editar.ordinario" />
+                        <x-input-text type="number" id="modelo_editar.ordinario" wire:model.lazy="modelo_editar.ordinario" />
 
                     </x-input-group>
 

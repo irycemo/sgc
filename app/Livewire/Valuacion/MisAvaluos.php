@@ -4,6 +4,7 @@ namespace App\Livewire\Valuacion;
 
 use App\Models\File;
 use App\Models\Avaluo;
+use App\Models\Certificacion;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -23,11 +24,87 @@ class MisAvaluos extends Component
     public $paginaSeleccionada = false;
     public $todosSelecionados = false;
     public $modal = false;
+    public $modalCorregir = false;
 
     public Avaluo $modelo_editar;
 
     public function crearModeloVacio(){
         return Avaluo::make();
+    }
+
+    public function abrirModalCorreccion(Avaluo $modelo){
+
+        $this->resetearTodo();
+        $this->modalCorregir = true;
+        $this->editar = true;
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
+    }
+
+    public function corregir(){
+
+
+        try {
+
+            DB::transaction(function () {
+
+            $tramiteInspeccion = $this->modelo_editar->tramiteInspeccion;
+
+            $tramiteDesglose = $this->modelo_editar->tramiteDesglose;
+
+            $notificacionDeValorCatastral = Certificacion::where('tramite_id', $tramiteInspeccion->id)->first();
+
+                $notificacionDeValorCatastral->update([
+                    'estado' => 'cancelado',
+                    'observaciones' => 'Cancelado para corrección de avalúo',
+                    'actualizado_por' => auth()->id()
+                ]);
+
+                $notificacionDeValorCatastral->audits()->latest()->first()->update(['tags' => 'Canceló para corrección de avalúo']);
+
+                $avaluos = Avaluo::where('tramite_inspeccion', $tramiteInspeccion->id)->get();
+
+                foreach ($avaluos as $avaluo) {
+
+                    $avaluo->update([
+                        'tramite_inspeccion' => null,
+                        'tramite_desglose' => null,
+                        'actualizado_por' => auth()->id(),
+                        'estado' => 'nuevo'
+                    ]);
+
+                    $avaluo->audits()->latest()->first()->update(['tags' => 'Reactivó para corrección']);
+
+                }
+
+                $tramiteInspeccion->update([
+                    'usados' => 0,
+                    'estado' => 'pagado'
+                ]);
+
+                $tramiteInspeccion->audits()->latest()->first()->update(['tags' => 'Reactivó para corrección']);
+
+                $tramiteDesglose->update([
+                    'usados' => 0,
+                    'estado' => 'pagado'
+                ]);
+
+                $tramiteDesglose->audits()->latest()->first()->update(['tags' => 'Reactivó para corrección']);
+
+            });
+
+            $this->modalCorregir = true;
+
+            $this->dispatch('mostrarMensaje', ['success', "Los avaluos y trámites han sido reactivados con éxito. La notificación de valor catastral ha sido cancelada"]);
+
+        } catch (\Throwable $th) {
+            Log::error("Error al corregir avalúo usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+            $this->resetearTodo();
+        }
+
     }
 
     public function eliminar(){
