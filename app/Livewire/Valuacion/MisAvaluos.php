@@ -86,12 +86,16 @@ class MisAvaluos extends Component
 
                 $tramiteInspeccion->audits()->latest()->first()->update(['tags' => 'Reactivó para corrección']);
 
-                $tramiteDesglose->update([
-                    'usados' => 0,
-                    'estado' => 'pagado'
-                ]);
+                if($tramiteDesglose){
 
-                $tramiteDesglose->audits()->latest()->first()->update(['tags' => 'Reactivó para corrección']);
+                    $tramiteDesglose->update([
+                        'usados' => 0,
+                        'estado' => 'pagado'
+                    ]);
+
+                    $tramiteDesglose->audits()->latest()->first()->update(['tags' => 'Reactivó para corrección']);
+
+                }
 
             });
 
