@@ -186,9 +186,9 @@
                 </x-button-blue>
 
                 <x-button-red
-                    wire:click="$toggle('modalAutorizar')"
+                    wire:click="$toggle('modalOperar')"
                     wire:loading.attr="disabled"
-                    wire:target="$toggle('modalAutorizar')"
+                    wire:target="$toggle('modalOperar')"
                     type="button">
                     Cerrar
                 </x-button-red>
