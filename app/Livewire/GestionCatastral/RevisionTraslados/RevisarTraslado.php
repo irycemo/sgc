@@ -318,7 +318,7 @@ class RevisarTraslado extends Component
 
         foreach($this->aviso['predio']['adquirientes'] as $adquiriente){
 
-            $persona = $this->buscarPersona($adquiriente['persona']['rfc'], $adquiriente['persona']['curp'], $adquiriente['persona']['tipo_persona'], $adquiriente['persona']['nombre'], $adquiriente['persona']['ap_paterno'], $adquiriente['persona']['ap_materno'], $adquiriente['persona']['razon_social']);
+            $persona = $this->buscarPersona($adquiriente['persona']['rfc'], $adquiriente['persona']['curp'], $adquiriente['persona']['tipo'], $adquiriente['persona']['nombre'], $adquiriente['persona']['ap_paterno'], $adquiriente['persona']['ap_materno'], $adquiriente['persona']['razon_social']);
 
             /* Persona::query()
                         ->where(function($q) use($adquiriente){
@@ -335,24 +335,24 @@ class RevisarTraslado extends Component
             if(!$persona){
 
                 $persona = Persona::create([
-                    'tipo' =>  $adquiriente['tipo_persona'],
-                    'nombre' => $adquiriente['nombre'] ?? null,
-                    'ap_paterno' => $adquiriente['ap_paterno'] ?? null,
-                    'ap_materno' => $adquiriente['ap_materno'] ?? null,
-                    'razon_social' => $adquiriente['razon_social'] ?? null,
-                    'rfc' => $adquiriente['rfc'],
-                    'curp' => $adquiriente['curp'],
-                    'fecha_nacimiento' => $adquiriente['fecha_nacimiento'],
-                    'nacionalidad' => $adquiriente['nacionalidad'],
-                    'estado_civil' => $adquiriente['estado_civil'],
-                    'calle' => $adquiriente['calle'],
-                    'numero_exterior' => $adquiriente['numero_exterior'],
-                    'numero_interior' => $adquiriente['numero_interior'],
-                    'colonia' => $adquiriente['colonia'],
-                    'cp' => $adquiriente['cp'],
-                    'entidad' => $adquiriente['entidad'],
-                    'municipio' => $adquiriente['municipio'],
-                    'ciudad' => $adquiriente['ciudad'],
+                    'tipo' =>  $adquiriente['persona']['tipo_persona'],
+                    'nombre' => $adquiriente['persona']['nombre'] ?? null,
+                    'ap_paterno' => $adquiriente['persona']['ap_paterno'] ?? null,
+                    'ap_materno' => $adquiriente['persona']['ap_materno'] ?? null,
+                    'razon_social' => $adquiriente['persona']['razon_social'] ?? null,
+                    'rfc' => $adquiriente['persona']['rfc'],
+                    'curp' => $adquiriente['persona']['curp'],
+                    'fecha_nacimiento' => $adquiriente['persona']['fecha_nacimiento'],
+                    'nacionalidad' => $adquiriente['persona']['nacionalidad'],
+                    'estado_civil' => $adquiriente['persona']['estado_civil'],
+                    'calle' => $adquiriente['persona']['calle'],
+                    'numero_exterior' => $adquiriente['persona']['numero_exterior'],
+                    'numero_interior' => $adquiriente['persona']['numero_interior'],
+                    'colonia' => $adquiriente['persona']['colonia'],
+                    'cp' => $adquiriente['persona']['cp'],
+                    'entidad' => $adquiriente['persona']['entidad'],
+                    'municipio' => $adquiriente['persona']['municipio'],
+                    'ciudad' => $adquiriente['persona']['ciudad'],
                 ]);
 
             }
