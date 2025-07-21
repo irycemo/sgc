@@ -318,6 +318,8 @@ class RevisarTraslado extends Component
 
         foreach($this->aviso['predio']['adquirientes'] as $adquiriente){
 
+            info($adquiriente);
+
             $persona = $this->buscarPersona($adquiriente['rfc'], $adquiriente['curp'], $adquiriente['tipo_persona'], $adquiriente['nombre'], $adquiriente['ap_paterno'], $adquiriente['ap_materno'], $adquiriente['razon_social']);
 
             /* Persona::query()
