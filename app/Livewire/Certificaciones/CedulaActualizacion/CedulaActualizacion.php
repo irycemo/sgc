@@ -146,7 +146,7 @@ class CedulaActualizacion extends Component
 
         return response()->streamDownload(
             fn () => print($pdf->output()),
-            'cedula_actualizacion.pdf'
+            $this->predio->cuentaPredial() . '-cedula_actualizacion.pdf'
         );
 
     }

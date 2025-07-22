@@ -4,12 +4,25 @@ namespace App\Services\Asignacion;
 
 use App\Models\User;
 use App\Models\Oficina;
+use App\Models\Traslado;
 use App\Exceptions\GeneralException;
 
 class AsignacionTrasladosService{
 
-    public function obtenerUsuariosTraslado($oficina_id):int
+    public function obtenerUsuariosTraslado($oficina_id, $predio_id):int
     {
+
+        $traslado = Traslado::where('predio_id', $predio_id)->first();
+
+        if($traslado) {
+
+            if($traslado->asignadoA->estado == 'activo'){
+
+                return $traslado->asignado_a;
+
+            }
+
+        }
 
         $oficina = Oficina::find($oficina_id);
 

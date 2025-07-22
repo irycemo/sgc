@@ -50,7 +50,7 @@ class IngresarTrasladoController extends Controller
                                             'aviso_stl' => $validated['aviso_stl'],
                                             'entidad_stl' => $validated['entidad_stl'],
                                             'entidad_nombre' => $validated['entidad_nombre'],
-                                            'asignado_a' => (new AsignacionTrasladosService())->obtenerUsuariosTraslado($certificacion->oficina_id)
+                                            'asignado_a' => (new AsignacionTrasladosService())->obtenerUsuariosTraslado($certificacion->oficina_id, $validated['predio_id'])
                                         ]
                                     );
 

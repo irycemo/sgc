@@ -189,7 +189,7 @@ class CertificadoRegistro extends Component
 
             return response()->streamDownload(
                 fn () => print($pdf->output()),
-                'certificado_de_registro.pdf'
+                $this->predio->cuentaPredial() . '-certificado_de_registro.pdf'
             );
 
         } catch (\Throwable $th) {

@@ -93,8 +93,6 @@ class Certificaciones extends Component
 
                 $pdf = (new CertificacionesController())->reimprimirNotifiacionValorCatastral($modelo);
 
-            }elseif($modelo->tipo == CertificacionesEnum::CERTIFICADO_CATASTRAL){
-
             }elseif($modelo->tipo == CertificacionesEnum::CERTIFICADO_HISTORIA){
 
                 $pdf = (new CertificadoHistoriaController())->reimprimirCertificado($modelo);

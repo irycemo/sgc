@@ -364,7 +364,7 @@ class CertificadoHistoria extends Component
 
         return response()->streamDownload(
             fn () => print($pdf->output()),
-            'certificado_de_historia.pdf'
+            $this->predio->cuentaPredial() . '-certificado_de_historia.pdf'
         );
 
     }
