@@ -1,4 +1,4 @@
-<x-dialog-modal wire:model="modalVerRequerimiento" maxWidth="lg">
+<x-dialog-modal wire:model="modalVerRequerimiento" maxWidth="md">
 
     <x-slot name="title">
 
@@ -14,13 +14,18 @@
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
 
-                    <p class="font-semibold text-gray-900">Requerimiento</p>
+                    <div>
 
-                    <p class="text-gray-500 text-sm leading-relaxed">{{ $requermiento->descripcion }}</p>
+                        <p>{{ $requermiento->descripcion }}</p>
 
-                    <p class="font-semibold text-gray-900">Registrado por:</p>
+                    </div>
 
-                    <p class="text-gray-500 text-sm leading-relaxed">{{ $requermiento->creadoPor->name }}, {{ $requermiento->created_at }}</p>
+                    <div class="text-xs text-right">
+
+                        <p>{{ $requermiento->creadoPor->name }}</p>
+                        <p>{{ $requermiento->created_at }}</p>
+
+                    </div>
 
                 </div>
 

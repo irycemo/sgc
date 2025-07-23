@@ -90,7 +90,7 @@ class VariacionesCatastrales extends Component
 
         if(!$this->tramite){
 
-            $this->dispatch('mostrarMensaje', ['error', "El trámite no existe."]);
+            $this->dispatch('mostrarMensaje', ['warning', "El trámite no existe."]);
 
             return true;
 
@@ -100,7 +100,7 @@ class VariacionesCatastrales extends Component
 
         if($variacion){
 
-            $this->dispatch('mostrarMensaje', ['error', "El trámite ya esta usado por una variación catastral."]);
+            $this->dispatch('mostrarMensaje', ['warning', "El trámite ya esta usado por una variación catastral."]);
 
             return true;
 
@@ -108,7 +108,7 @@ class VariacionesCatastrales extends Component
 
         if(!in_array($this->tramite->servicio->clave_ingreso, ['DM27', 'DM27'])){
 
-            $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a una variación catastral."]);
+            $this->dispatch('mostrarMensaje', ['warning', "El trámite no corresponde a una variación catastral."]);
 
             return true;
 
@@ -116,7 +116,7 @@ class VariacionesCatastrales extends Component
 
         if($this->tramite->estado != 'pagado'){
 
-            $this->dispatch('mostrarMensaje', ['error', "El trámite no esta pagado."]);
+            $this->dispatch('mostrarMensaje', ['warning', "El trámite no esta pagado."]);
 
             return true;
 
@@ -124,7 +124,7 @@ class VariacionesCatastrales extends Component
 
         if($this->tramite->estado === 'concluido'){
 
-            $this->dispatch('mostrarMensaje', ['error', "El trámite esta concluido."]);
+            $this->dispatch('mostrarMensaje', ['warning', "El trámite esta concluido."]);
 
             return true;
 
@@ -226,6 +226,7 @@ class VariacionesCatastrales extends Component
             DB::transaction(function () {
 
                 $this->modelo_editar->requerimientos()->create([
+                    'estado' => 'nuevo',
                     'descripcion' => $this->requerimiento,
                     'creado_por' => auth()->id()
                 ]);

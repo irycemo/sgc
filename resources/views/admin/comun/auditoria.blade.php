@@ -22,10 +22,10 @@
             @foreach ($predio->audits as $audit)
 
                 <tr class="text-gray-500 text-sm leading-relaxed">
-                    <td class=" px-2 w-full whitespace-nowrap">{{ $audit->user->name }}</td>
-                    <td class=" px-2 w-full whitespace-nowrap">{{ Str::ucfirst($audit->event) }}: {{ $audit->tags }}</td>
-                    <td class=" px-2 w-full whitespace-nowrap">{{ $audit->tramite ? $audit->tramite->numeroControl() : 'N/A' }}</td>
-                    <td class=" px-2 w-full whitespace-nowrap">{{ $audit->created_at }}</td>
+                    <td class=" px-2 w-full">{{ $audit->user->name }}</td>
+                    <td class=" px-2 w-full">{{ Str::ucfirst($audit->event) }}: {{ $audit->tags }}</td>
+                    <td class=" px-2 w-full">{{ $audit->tramite ? $audit->tramite->numeroControl() : 'N/A' }}</td>
+                    <td class=" px-2 w-full">{{ $audit->created_at }}</td>
                 </tr>
 
             @endforeach

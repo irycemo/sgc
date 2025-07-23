@@ -183,13 +183,15 @@ class CertificadoRegistro extends Component
 
             });
 
+            $cuenta_predial = $this->predio->cuentaPredial();
+
             $this->reset('predio');
 
             $this->tramite->load('predios');
 
             return response()->streamDownload(
                 fn () => print($pdf->output()),
-                $this->predio->cuentaPredial() . '-certificado_de_registro.pdf'
+                $cuenta_predial . '-certificado_de_registro.pdf'
             );
 
         } catch (\Throwable $th) {

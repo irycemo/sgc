@@ -345,7 +345,7 @@
 
                     <strong>Valor catastral</strong>
 
-                    <p>{{ $aviso['valor_catastral'] }}</p>
+                    <p>{{ $aviso['predio']['valor_catastral'] }}</p>
 
                 </div>
 
