@@ -140,13 +140,16 @@ class CedulaActualizacion extends Component
 
         });
 
+
+        $cuenta_predial = $this->predio->cuentaPredial();
+
         $this->reset('predio');
 
         $this->tramite->load('predios');
 
         return response()->streamDownload(
             fn () => print($pdf->output()),
-            $this->predio->cuentaPredial() . '-cedula_actualizacion.pdf'
+            $cuenta_predial . '-cedula_actualizacion.pdf'
         );
 
     }
