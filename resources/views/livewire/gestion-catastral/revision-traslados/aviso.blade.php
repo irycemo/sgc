@@ -337,7 +337,7 @@
 
                     <strong>Superficie de construcción</strong>
 
-                    <p>{{ $aviso['predio']['superficie_construccion'] }}</p>
+                    <p>{{ $aviso['predio']['superficie_total?construccion'] }}</p>
 
                 </div>
 
