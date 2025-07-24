@@ -278,7 +278,7 @@
 
                     <strong>Superficie de terreno</strong>
 
-                    <p>{{ $avaluo['superficie_terreno'] }}</p>
+                    <p>{{ $avaluo['superficie_total_terreno'] }}</p>
 
                 </div>
 
@@ -286,7 +286,7 @@
 
                     <strong>Superficie de construcción</strong>
 
-                    <p>{{ $avaluo['superficie_construccion'] }}</p>
+                    <p>{{ $avaluo['superficie_total_construccion'] }}</p>
 
                 </div>
 
