@@ -2,11 +2,11 @@
 
 <p class="parrafo">
 
-    <strong>Superficie total de terreno:</strong>  {{ $predio->superficie_total_terreno }} Metros cuadrados
+    <strong>Superficie total de terreno:</strong>  {{ $predio->superficie_total_terreno }} @if($predio->tipo_predio == 1) Metros cuadrados; @else Hectáreas; @endif
 
     @if ($predio->superficie_construccion)
 
-        <strong>Superficie total de construcción:</strong> {{ $predio->superficie_total_construccion }} Metros cuadrados
+        <strong>Superficie total de construcción:</strong> {{ $predio->superficie_total_construccion }} @if($predio->tipo_predio == 1) Metros cuadrados; @else Hectáreas; @endif
 
     @endif
 
@@ -19,12 +19,16 @@
     @endif
 
     @if ($predio->area_comun_terreno)
-        <strong>área de terreno común:</strong> {{ $predio->area_comun_terreno }} Metros cuadrados;
+        <strong>área de terreno común:</strong> {{ $predio->area_comun_terreno }} @if($predio->tipo_predio == 1) Metros cuadrados; @else Hectáreas; @endif
     @endif
 
     @if ($predio->area_comun_construccion)
-        <strong>área de construcción común:</strong> {{ $predio->area_comun_construccion }} Metros cuadrados;
+        <strong>área de construcción común:</strong> {{ $predio->area_comun_construccion }} @if($predio->tipo_predio == 1) Metros cuadrados; @else Hectáreas; @endif
     @endif
+
+</p>
+
+<p>
 
     @if ($predio->valor_terreno_comun)
         <strong>valor de terreno común:</strong> ${{ number_format($predio->valor_terreno_comun, 2) }};
@@ -40,6 +44,12 @@
 
     @if ($predio->valor_total_construccion)
         <strong>valor total de construcción:</strong> ${{ number_format($predio->valor_total_construccion, 2) }};
+    @endif
+
+    @if($predio->ubicacion_en_manzana == 'ESQUINA')
+
+        <strong>Ubicación en esquina:</strong> ${{ number_format(($predio->valor_total_terreno + $predio->valor_total_construccion) * 0.15, 2) }}
+
     @endif
 
 </p>
