@@ -27,19 +27,19 @@
     @endif
 
     @if ($predio->valor_terreno_comun)
-        <strong>valor de terreno común:</strong> {{ number_format($predio->valor_terreno_comun, 2) }};
+        <strong>valor de terreno común:</strong> ${{ number_format($predio->valor_terreno_comun, 2) }};
     @endif
 
     @if ($predio->valor_construccion_comun)
-        <strong>valor de construcción común:</strong> {{ number_format($predio->valor_construccion_comun, 2) }};
+        <strong>valor de construcción común:</strong> ${{ number_format($predio->valor_construccion_comun, 2) }};
     @endif
 
     @if ($predio->valor_total_terreno)
-        <strong>valor total de terreno:</strong> {{ number_format($predio->valor_total_terreno, 2) }};
+        <strong>valor total de terreno:</strong> ${{ number_format($predio->valor_total_terreno, 2) }};
     @endif
 
     @if ($predio->valor_total_construccion)
-        <strong>valor total de construcción:</strong> {{ number_format($predio->valor_total_construccion, 2) }};
+        <strong>valor total de construcción:</strong> ${{ number_format($predio->valor_total_construccion, 2) }};
     @endif
 
 </p>
