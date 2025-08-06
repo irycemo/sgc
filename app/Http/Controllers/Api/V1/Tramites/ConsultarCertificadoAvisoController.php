@@ -49,6 +49,7 @@ class ConsultarCertificadoAvisoController extends Controller
 
         $certificacion = Certificacion::where('tramite_id', $tramite->id)
                                         ->where('predio_id', $predio->id)
+                                        ->where('estado', 'activo')
                                         ->first();
 
         if(!$certificacion){
@@ -59,13 +60,6 @@ class ConsultarCertificadoAvisoController extends Controller
 
         }
 
-        if($certificacion->estado != 'activo'){
-
-            return response()->json([
-                'error' => "El certificado no esta activo.",
-            ], 401);
-
-        }
         if(Carbon::parse($certificacion->created_at)->diffInMonths() > 3){
 
             return response()->json([
