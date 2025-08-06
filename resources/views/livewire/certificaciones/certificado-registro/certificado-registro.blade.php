@@ -271,53 +271,39 @@
 
             <div class="overflow-auto w-full mx-auto lg:w-1/2 space-y-2">
 
-                @foreach ($predio->propietarios as $propietario)
+                <table class="w-full overflow-x-auto table-fixed">
 
-                    <div class="flex gap-3 justify-center">
+                    <thead class="border-b border-gray-300 ">
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-                            <strong>Tipo</strong>
+                            <th class="px-2">Tipo de persona</th>
+                            <th class="px-2">Nombre / Razón social</th>
+                            <th class="px-2">% de propiedad</th>
+                            <th class="px-2">% de nuda</th>
+                            <th class="px-2">% de usufructo</th>
 
-                            <p>{{ $propietario->persona->tipo }}</p>
+                        </tr>
 
-                        </div>
+                    </thead>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    <tbody class="divide-y divide-gray-200">
 
-                            <strong>Nombre</strong>
+                        @foreach ($predio->propietarios->sortBy('persona.nombre') as $propietario)
 
-                            <p>{{ $propietario->persona->nombre }} {{ $propietario->persona->ap_paterno }} {{ $propietario->persona->ap_materno }} {{ $propietario->persona->razon_social }}</p>
+                            <tr class="text-gray-500 text-sm leading-relaxed">
+                                <td class=" px-2 w-full ">{{ $propietario->persona->tipo }}</td>
+                                <td class=" px-2 w-full ">{{ $propietario->persona->nombre }} {{ $propietario->persona->ap_paterno }} {{ $propietario->persona->ap_materno }} {{ $propietario->persona->razon_social }}</td>
+                                <td class=" px-2 w-full ">{{ $propietario->porcentaje_propiedad }}%</td>
+                                <td class=" px-2 w-full ">{{ $propietario->porcentaje_nuda }}%</td>
+                                <td class=" px-2 w-full ">{{ $propietario->porcentaje_usufructo }}%</td>
+                            </tr>
 
-                        </div>
+                        @endforeach
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    </tbody>
 
-                            <strong>Porcentaje de propiedad</strong>
-
-                            <p>{{ $propietario->porcentaje_propiedad }}</p>
-
-                        </div>
-
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                            <strong>Porcentaje de nuda</strong>
-
-                            <p>{{ $propietario->porcentaje_nuda }}</p>
-
-                        </div>
-
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                            <strong>Porcentaje de usufructo</strong>
-
-                            <p>{{ $propietario->porcentaje_usufructo }}</p>
-
-                        </div>
-
-                    </div>
-
-                @endforeach
+                </table>
 
             </div>
 

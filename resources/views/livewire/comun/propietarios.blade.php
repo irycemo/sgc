@@ -32,7 +32,7 @@
 
                     @if($predio)
 
-                        @foreach ($predio->propietarios as $propietario)
+                        @foreach ($predio->propietarios->sortBy('persona.nombre') as $propietario)
 
                             <x-table.row wire:key="row-{{ $propietario->id }}">
 

@@ -101,7 +101,7 @@ trait PredioTrait
 
         $predio->load('propietarios.persona');
 
-        foreach ($predio->propietarios as $propietario) {
+        foreach ($predio->propietarios->sortBy('persona.nombre') as $propietario) {
 
             $item = (object)[];
 

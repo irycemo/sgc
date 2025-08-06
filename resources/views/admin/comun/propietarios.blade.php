@@ -20,7 +20,7 @@
 
         <tbody class="divide-y divide-gray-200">
 
-            @foreach ($predio->propietarios as $propietario)
+            @foreach ($predio->propietarios->sortBy('persona.nombre') as $propietario)
 
                 <tr class="text-gray-500 text-sm leading-relaxed">
                     <td class=" px-2 w-full ">{{ $propietario->persona->tipo }}</td>

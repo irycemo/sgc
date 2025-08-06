@@ -49,7 +49,7 @@ class CertificadoRegistro extends Component
                                         ->where('usuario', $this->usuario)
                                         ->firstOrFail();
 
-            if(!in_array($this->tramite->servicio->clave_ingreso, ['DM31', 'DM34', 'D934'])){
+            if(!in_array($this->tramite->servicio->clave_ingreso, ['DM31', 'DM34', 'D934', 'DM32'])){
 
                 $this->dispatch('mostrarMensaje', ['warning', "El trámite no corresponde a un certificado de registro."]);
 

@@ -65,7 +65,7 @@ class PredioPropietarioColindanciaResource extends JsonResource
             'superficie_total_construccion' => $this->superficie_total_construccion,
             'valor_catastral' => $this->valor_catastral,
             'colindancias' => ColindanciaResource::collection($this->colindancias),
-            'propietarios' => PropietarioResource::collection($this->propietarios),
+            'propietarios' => PropietarioResource::collection($this->propietarios->sortBy('persona.nombre')),
         ];
     }
 }

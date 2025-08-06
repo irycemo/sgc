@@ -30,7 +30,7 @@ class PredioPropietariosResource extends JsonResource
             'oficina' => $this->oficina,
             'tipo_predio' => $this->tipo_predio,
             'numero_registro' => $this->numero_registro,
-            'propietarios' => PropietarioResource::collection($this->propietarios)
+            'propietarios' => PropietarioResource::collection($this->propietarios->sortBy('persona.nombre'))
         ];
     }
 }
