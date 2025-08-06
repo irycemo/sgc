@@ -18,6 +18,8 @@ use App\Http\Controllers\Api\V1\Certificaciones\GenerarCertificadoPdfController;
 
 Route::middleware('auth:sanctum')->group(function () {
 
+    Route::post('consultar_predio', [ConsultarPredioController::class, 'consultarPredio']);
+
     Route::post('consulta_cuenta_predial', [ConsultarPredioController::class, 'consultarCuentaPredial']);
 
     Route::post('consultar_propietarios', [ConsultarPropietariosController::class, 'consultarPropietariosCertificado']);

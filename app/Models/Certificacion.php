@@ -78,4 +78,9 @@ class Certificacion extends Model implements Auditable
         return $this->morphMany(Requerimiento::class, 'requerimientoable');
     }
 
+    protected $auditEvents = [
+        'updated',
+        'deleted',
+    ];
+
 }
