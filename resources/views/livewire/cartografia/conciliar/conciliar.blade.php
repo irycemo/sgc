@@ -6,7 +6,7 @@
 
         <div class="flex-auto ">
 
-            @include('livewire.comun.cuenta-clave')
+            @include('livewire.comun.cuenta-clave-captura')
 
             <div class="mb-2 flex-col sm:flex-row mx-auto mt-5 flex space-y-2 sm:space-y-0 sm:space-x-3 justify-center">
 
