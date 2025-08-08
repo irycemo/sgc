@@ -6,6 +6,8 @@ use App\Models\Predio;
 use Livewire\Component;
 use App\Constantes\Constantes;
 use Illuminate\Support\Facades\Log;
+use App\Exceptions\GeneralException;
+use App\Traits\Predios\ValidarSector;
 use App\Traits\Predios\CoordenadasTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -13,6 +15,7 @@ class Conciliar extends Component
 {
 
     use CoordenadasTrait;
+    use ValidarSector;
 
     public $tipoVialidades;
     public $tipoAsentamientos;
@@ -240,6 +243,8 @@ class Conciliar extends Component
 
         try {
 
+            $this->validarSector();
+
             $this->predio->region_catastral = $this->region_catastral;
             $this->predio->municipio = $this->municipio;
             $this->predio->zona_catastral = $this->zona_catastral;
@@ -260,6 +265,10 @@ class Conciliar extends Component
             $this->dispatch('mostrarMensaje', ['success', "La conciliación finalizó con éxito."]);
 
             $this->crearModeloVacio();
+
+        } catch(GeneralException $e){
+
+            $this->dispatch('mostrarMensaje', ['error', $e->getMessage()]);
 
         } catch (\Throwable $th) {
 
