@@ -174,7 +174,7 @@
 
                                 <tr>
                                     <td class="text-sm text-right">Total</td>
-                                    <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_terreno + $predio->valor_total_construccion, 2) }}"></td>
+                                    <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($this->predio->valor_catastral, 2) }}"></td>
                                 </tr>
 
                             @endif

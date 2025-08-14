@@ -140,7 +140,7 @@
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                <strong>Valor de terreno</strong>
+                <strong>Valor total de terreno</strong>
 
                 <p>{{ number_format($predio->valor_total_terreno, 2) }}</p>
 
@@ -148,49 +148,17 @@
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                <strong>Superficie de construcción</strong>
+                <strong>Superficie total de construcción</strong>
 
-                <p>{{ number_format($predio->superficie_construccion, 2) }}</p>
+                <p>{{ number_format($predio->superficie_total_construccion, 2) }}</p>
 
             </div>
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                <strong>Valor de construcción</strong>
+                <strong>Valor total de construcción</strong>
 
                 <p>{{ number_format($predio->valor_total_construccion, 2) }}</p>
-
-            </div>
-
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                <strong>Área común de terreno</strong>
-
-                <p>{{ number_format($predio->area_comun_terreno, 2) }}</p>
-
-            </div>
-
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                <strong>Valor de terreno común</strong>
-
-                <p>{{ number_format($predio->valor_terreno_comun, 2) }}</p>
-
-            </div>
-
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                <strong>Área común de construcción</strong>
-
-                <p>{{ number_format($predio->area_comun_construccion, 2) }}</p>
-
-            </div>
-
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                <strong>Valor de construcción común</strong>
-
-                <p>{{ number_format($predio->valor_construccion_comun, 2) }}</p>
 
             </div>
 

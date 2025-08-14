@@ -14,23 +14,23 @@ enum AvaluoPara: int
     case ACTUALIZACION = 7;
     case FUSION = 8;
     case CAMBIO_REGIMEN = 9;
-    case ACTUALIZACION_RESTO = 10;
+    /* case ACTUALIZACION_RESTO = 10; */
 
     public function label(): string
     {
 
         return match($this){
 
-            AvaluoPara::VARIACION_VIVIENDA => 'Variación catastral vivienda', /* T-Inscección */
-            AvaluoPara::VARIACION_OTRO => 'Variación catastral otro tipo de inmueble',/* T-Inscección */
-            AvaluoPara::DESGLOSE_FRACCIONAMIENTOS => 'Avalúo de desglose de fraccionamientos, condominios y conjuntos habitacionales',/* T-Inscección  T-Desglose*/
-            AvaluoPara::DESGLOSE_OTRO => 'Avalúos de desglose de cualquier otro tipo de inmueble',/* T-Inscección T-Desglose*/
-            AvaluoPara::DESGLOSE_SUBDIVISIONES => 'Avalúos de desglose de subdivisiones',/* T-Inscección T-Desglose*/
-            AvaluoPara::PREDIO_IGNORADO => 'Avalúo para predio ignorado',/* T-Inscección T-Desglose*/
-            AvaluoPara::ACTUALIZACION => 'Avalúo de actualización',/* T-Inscección */
-            AvaluoPara::ACTUALIZACION_RESTO => 'Avalúo de actualización (resto)',/* T-Inscección */
-            AvaluoPara::FUSION => 'Avalúo de fusión',/* T-Inscección */
-            AvaluoPara::CAMBIO_REGIMEN => 'Avalúo de cambio de régimen'/* T-Inscección T-Desglose*/
+            AvaluoPara::VARIACION_VIVIENDA => 'Variación catastral vivienda', /* T-Inspección */
+            AvaluoPara::VARIACION_OTRO => 'Variación catastral otro tipo de inmueble',/* T-Inspección */
+            AvaluoPara::DESGLOSE_FRACCIONAMIENTOS => 'Avalúo de desglose de fraccionamientos, condominios y conjuntos habitacionales',/* T-Inspección  T-Desglose*/
+            AvaluoPara::DESGLOSE_OTRO => 'Avalúos de desglose de cualquier otro tipo de inmueble',/* T-Inspección T-Desglose*/
+            AvaluoPara::DESGLOSE_SUBDIVISIONES => 'Avalúos de desglose de subdivisiones',/* T-Inspección T-Desglose*/
+            AvaluoPara::PREDIO_IGNORADO => 'Avalúo para predio ignorado',/* T-Inspección T-Desglose*/
+            AvaluoPara::ACTUALIZACION => 'Avalúo de actualización',/* T-Inspección */
+            /* AvaluoPara::ACTUALIZACION_RESTO => 'Avalúo de actualización (resto)', *//* T-Inspección */
+            AvaluoPara::FUSION => 'Avalúo de fusión',/* T-Inspección */
+            AvaluoPara::CAMBIO_REGIMEN => 'Avalúo de cambio de régimen'/* T-Inspección T-Desglose*/
 
         };
 

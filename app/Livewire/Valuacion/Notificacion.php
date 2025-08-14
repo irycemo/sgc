@@ -12,6 +12,7 @@ use App\Models\Colindancia;
 use App\Models\Propietario;
 use App\Models\Construccion;
 use App\Constantes\Constantes;
+use App\Enums\Tramites\AvaluoPara;
 use App\Models\ConstruccionesComun;
 use App\Models\TerrenosComun;
 use Livewire\Attributes\Computed;
@@ -145,6 +146,28 @@ class Notificacion extends Component
 
         }
 
+        if($this->tramite->avaluo_para === AvaluoPara::FUSION){
+
+            foreach ($this->tramite->predios as $predio_fusionante) {
+
+                if($predio->id === $predio_fusionante->id) continue;
+
+                $predio_fusionante->update([
+                    'status' => 'fusionado',
+                    'actualizado_por' => auth()->id(),
+                ]);
+
+                $predio_fusionante->movimientos()->create([
+                    'nombre' => $this->tramite->avaluo_para->label(),
+                    'fecha' => $this->fecha_notificacion,
+                    'descripcion' => 'Se fusiona el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . ' resultando el predio ' . $predio->cuentaPredial(). '.',
+                    'creado_por' => auth()->id()
+                ]);
+
+            }
+
+        }
+
     }
 
     public function creaPredio(){
@@ -209,13 +232,13 @@ class Notificacion extends Component
         ]);
 
         $predio->movimientos()->create([
-            'nombre' => 'Alta mediante avalúo',
+            'nombre' => 'Alta mediante ' . $this->tramite->avaluo_para->label(),
             'fecha' => $this->fecha_notificacion,
-            'descripcion' => 'Se da de alta predio en el padrón catastral mediante el avalúo con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '.',
+            'descripcion' => 'Se da de alta predio en el padrón catastral mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '.',
             'creado_por' => auth()->id()
         ]);
 
-        $predio->audits()->latest()->first()->update(['tags' => 'Se genera predio apartir de avalúo: ' . $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario]);
+        $predio->audits()->latest()->first()->update(['tags' => 'Se genera predio apartir de ' . $this->tramite->avaluo_para->label() . ': ' . $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario]);
 
         $this->procesarRelaciones($predio);
 
@@ -285,13 +308,13 @@ class Notificacion extends Component
         ]);
 
         $predio->movimientos()->create([
-            'nombre' => 'Actualización mediante avalúo',
+            'nombre' => 'Actualización mediante ' . $this->tramite->avaluo_para->label(),
             'fecha' => $this->fecha_notificacion,
-            'descripcion' => 'Se actualiza el predio mediante el avalúo con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '.',
+            'descripcion' => 'Se actualiza el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '.',
             'creado_por' => auth()->id()
         ]);
 
-        $predio->audits()->latest()->first()->update(['tags' => 'Actualización mediante avalúo: ' . $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '.']);
+        $predio->audits()->latest()->first()->update(['tags' => 'Actualización mediante  ' . $this->tramite->avaluo_para->label() . ': ' . $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '.']);
 
         $this->procesarRelaciones($predio);
 

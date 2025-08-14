@@ -1,24 +1,20 @@
 <?php
 
-namespace App\Livewire\Valuacion;
+namespace App\Traits\Valuacion;
 
 use App\Models\Avaluo;
+use App\Models\Predio;
 use App\Models\Oficina;
 use App\Models\Tramite;
-use Livewire\Component;
-use App\Constantes\Constantes;
-use Illuminate\Validation\Rule;
+use Livewire\Attributes\On;
 use App\Enums\Tramites\AvaluoPara;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
-use App\Http\Controllers\Certificaciones\CertificacionesController;
 
-class Impresion extends Component
+trait ImpresionTrait
 {
 
-    public $lista_avaluo_para;
     public int|null $avaluo_para;
+
     public $años;
     public $numero_avaluos;
 
@@ -50,34 +46,24 @@ class Impresion extends Component
     public $edificio;
     public $departamento;
 
-    protected function rules(){
-        return [
-            'inspeccion_año' => Rule::requiredIf(!auth()->user()->hasRole(['Convenio municipal'])),
-            'inspeccion_folio' => Rule::requiredIf(!auth()->user()->hasRole(['Convenio municipal'])),
-            'inspeccion_usuario' => Rule::requiredIf(!auth()->user()->hasRole(['Convenio municipal'])),
-            'desglose_año' => Rule::requiredIf(in_array($this->avaluo_para, [3, 4, 5 , 6, 9, 10]) && !auth()->user()->hasRole(['Convenio municipal'])),
-            'desglose_folio' => Rule::requiredIf(in_array($this->avaluo_para, [3, 4, 5 , 6, 9, 10]) && !auth()->user()->hasRole(['Convenio municipal'])),
-            'desglose_usuario' => Rule::requiredIf(in_array($this->avaluo_para, [3, 4, 5 , 6, 9, 10]) && !auth()->user()->hasRole(['Convenio municipal'])),
-            'localidad' => 'required',
-            'tipo' => Rule::requiredIf($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO),
-            'registro_inicio' => Rule::requiredIf($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO),
-            'registro_final' => Rule::requiredIf($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO),
-            'region_catastral' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'municipio' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'zona_catastral' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'sector' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'manzana' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'predio' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'edificio' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'departamento' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'registro_inicio' => ['nullable', 'lte:registro_final'],
-            'registro_final' => ['nullable', 'gte:registro_inicio']
-         ];
+    public $predios_cuentas = [];
+    public $predios_fusionantes;
+
+    protected $validationAttributes  = [
+        'predios_cuentas.*.localidad' => 'localidad',
+        'predios_cuentas.*.oficina' => 'oficina',
+        'predios_cuentas.*.tipo_predio' => 'tipo de predio',
+        'predios_cuentas.*.numero_registro' => 'número de registro',
+    ];
+
+    #[On('changeAvaluoPara')]
+    public function changeAvaluoPara($value){
+
+        $this->avaluo_para = $value;
+
     }
 
-    public function updatedAvaluoPara(){
-
-        if($this->avaluo_para === '') $this->avaluo_para = null;
+    public function resetarTodo(){
 
         $this->reset([
             'inspeccion_año',
@@ -101,11 +87,14 @@ class Impresion extends Component
             'predio',
             'edificio',
             'departamento',
+            'predios_cuentas'
         ]);
 
         $this->inspeccion_año  = now()->format('Y');
 
         $this->desglose_año = now()->format('Y');
+
+        $this->dispatch('resetAvaluoPara');
 
     }
 
@@ -160,13 +149,9 @@ class Impresion extends Component
 
         if($this->tramite_inspeccion->estado != 'pagado') throw new GeneralException('El trámite de inspección ocular no esta pagado o ha sido concluido.');
 
-        if(! (in_array($this->tramite_inspeccion->avaluo_para->value, [3,4,5]) && $this->avaluo_para == 10)){
+        if($this->tramite_inspeccion->avaluo_para->value != $this->avaluo_para) throw new GeneralException('El trámite de inspección ocular no corresponde a un avalúo para ' . $this->lista_avaluo_para[$this->avaluo_para - 1]->label());
 
-            if($this->tramite_inspeccion->avaluo_para->value != $this->avaluo_para) throw new GeneralException('El trámite de inspección ocular no corresponde a un avalúo para ' . $this->lista_avaluo_para[$this->avaluo_para - 1]->label());
-
-        }
-
-        if(in_array($this->avaluo_para, [3, 4, 5 , 6, 9, 10])){
+        if(in_array($this->avaluo_para, [3, 4, 5 , 6, 9])){
 
             $this->tramite_desglose = Tramite::where('año', $this->desglose_año)
                                             ->where('folio', $this->desglose_folio)
@@ -177,11 +162,7 @@ class Impresion extends Component
 
             if($this->tramite_desglose->servicio->categoria->nombre != 'Desglose de predios y valuación') throw new GeneralException('El trámite ingresado para desglose no corresponde a un desglose.');
 
-            if(! (in_array($this->tramite_inspeccion->avaluo_para->value, [3,4,5]) && $this->avaluo_para == 10)){
-
-                if($this->tramite_desglose->estado != 'pagado') throw new GeneralException('El trámite de desglose no esta pagado o ha sido concluido.');
-
-            }
+            if($this->tramite_desglose->estado != 'pagado') throw new GeneralException('El trámite de desglose no esta pagado o ha sido concluido.');
 
             if($this->tramite_inspeccion->ligado_a && ($this->tramite_inspeccion->ligado_a != $this->tramite_desglose->id)) throw new GeneralException('El trámite de inspección ocular esta ligado a otro trámite.');
 
@@ -189,7 +170,7 @@ class Impresion extends Component
 
         if($this->tramite_inspeccion->ligado_a && !$this->tramite_desglose) throw new GeneralException('El trámite de inspección ocular esta ligado a otro trámite.');
 
-        $this->numero_avaluos = $this->registro_final - $this->registro_inicio + 1;
+        $this->numero_avaluos = $this->registro_final - $this->registro_inicio + 1 + count($this->predios_cuentas);
 
         if($this->registro_final == $this->registro_inicio) $this->numero_avaluos = 1;
 
@@ -198,6 +179,7 @@ class Impresion extends Component
     }
 
     public function buscarPredios(){
+
 
         if($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO){
 
@@ -212,7 +194,38 @@ class Impresion extends Component
                                 })
                                 ->get();
 
-            if($this->avaluos->count() == 0) throw new GeneralException('No se encontraron avaluos en el rango de cuentas prediales.');
+            if(in_array($this->avaluo_para, [3,4,5])){
+
+                $this->predio_padre = Predio::where('localidad', $this->localidad)
+                                        ->where('oficina', $this->oficina)
+                                        ->where('tipo_predio', $this->tipo)
+                                        ->where('numero_registro', $this->registro_padre)
+                                        ->first();
+
+                $avaluo_predio_padre = Avaluo::with('predioAvaluo')->where('estado', '!=', 'notificado')->where('predio', $this->predio_padre->id)->get();
+
+                $this->avaluos = $this->avaluos->merge($avaluo_predio_padre);
+
+            }
+
+            if(count($this->predios_cuentas)){
+
+                $avaluos_extra = Avaluo::withWhereHas('predioAvaluo', function($q){
+                                        $q->where('localidad', $this->localidad)
+                                            ->where('oficina', $this->oficina)
+                                            ->where('tipo_predio', $this->tipo)
+                                            ->whereIn('numero_registro', collect($this->predios_cuentas)->pluck('numero_registro'))
+                                            ->whereHas('avaluo', function($q){
+                                                $q->where('estado', '!=', 'notificado');
+                                            });
+                                    })
+                                    ->get();
+
+                $this->avaluos = $this->avaluos->merge($avaluos_extra);
+
+            }
+
+            if($this->avaluos->count() == 0) throw new GeneralException('No se encontraron avalúos en el rango de cuentas prediales.');
 
             foreach($this->avaluos as $avaluo){
 
@@ -226,9 +239,27 @@ class Impresion extends Component
 
             if(!auth()->user()->hasRole(['Convenio municipal'])){
 
-                if(($this->numero_avaluos + $this->tramite_inspeccion->usados) > $this->tramite_inspeccion->cantidad)
+                if($this->avaluo_para !== AvaluoPara::FUSION->value){
 
-                    throw new GeneralException('La cantidad de avaluos que avala el trámite de inspección ocular no es suficiente.');
+                    if(($this->numero_avaluos + $this->tramite_inspeccion->usados) > $this->tramite_inspeccion->cantidad){
+
+                        throw new GeneralException('La cantidad de avalúos que avala el trámite de inspección ocular no es suficiente.');
+
+                    }
+
+                }
+
+                if(in_array($this->avaluo_para, [3, 4, 5])){
+
+                    $this->numero_avaluos --;
+
+                    if(($this->numero_avaluos + $this->tramite_desglose->usados) > $this->tramite_desglose->cantidad){
+
+                        throw new GeneralException('La cantidad de avalúos que avala el trámite de desglose ocular no es suficiente.');
+
+                    }
+
+                }
 
             }
 
@@ -263,7 +294,10 @@ class Impresion extends Component
 
     public function revisarAvaluoCompleto(Avaluo $avaluo){
 
-        $avaluo->predioAvaluo->load('colindancias', 'terrenos', 'terrenosComun');
+        $avaluo->predioAvaluo->load('colindancias', 'terrenos', 'terrenosComun', 'propietarios');
+
+        if($avaluo->predioAvaluo->propietarios->count() == 0)
+            throw new GeneralException('El avalúo: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' del predio: ' . $avaluo->predioAvaluo->cuentaPredial() . ' no tiene propietarios.');
 
         if($avaluo->predioAvaluo->colindancias->count() == 0)
             throw new GeneralException('El avalúo: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' del predio: ' . $avaluo->predioAvaluo->cuentaPredial() . ' no tiene colindancias.');
@@ -320,75 +354,18 @@ class Impresion extends Component
 
     }
 
-    public function imprimir(){
+    public function agregarPredio(){
 
-        $this->validate();
-
-        try {
-
-            $this->validaciones();
-
-            $pdf = null;
-
-            DB::transaction(function () use (&$pdf){
-
-                foreach ($this->avaluos as $avaluo) {
-
-                    $avaluo->update([
-                        'tramite_inspeccion' => $this->tramite_inspeccion?->id,
-                        'tramite_desglose' => $this->tramite_desglose?->id,
-                        'actualizado_por' => auth()->id(),
-                        'estado' => 'impreso'
-                    ]);
-
-                    $avaluo->predioAvaluo->update(['status' => 'impreso']);
-
-                    $avaluo->audits()->latest()->first()->update(['tags' => 'Imprimió avalúo', 'tramite_id' => $this->tramite_inspeccion?->id]);
-
-                }
-
-                if(!auth()->user()->hasRole('Convenio municipal')) $this->actualizarTramites();
-
-                $avaluo_ids = $this->avaluos->pluck('id');
-
-                $pdf = (new CertificacionesController())->notifiacionValorCatastral($avaluo_ids, $this->tramite_inspeccion, $this->tramite_desglose);
-
-            });
-
-            $this->avaluo_para = null;
-
-            return response()->streamDownload(
-                fn () => print($pdf->output()),
-                'notificacion_de_valor_catastral.pdf'
-            );
-
-
-        } catch (GeneralException $ex) {
-
-            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
-
-        } catch (\Throwable $th) {
-
-            Log::error("Error al imprimir notificación de avalúo usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
-            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
-
-        }
+        $this->predios_cuentas[] = ['localidad' => $this->localidad, 'oficina' => $this->oficina, 'tipo_predio' => $this->tipo, 'numero_registro' => null];
 
     }
 
-    public function mount(){
+    public function borrarPredio($index){
 
-        $this->oficina = auth()->user()->oficina->oficina;
+        unset($this->predios_cuentas[$index]);
 
-        $this->lista_avaluo_para = AvaluoPara::cases();
-
-        $this->años = Constantes::AÑOS;
+        $this->predios_cuentas = array_values($this->predios_cuentas);
 
     }
 
-    public function render()
-    {
-        return view('livewire.valuacion.impresion')->extends('layouts.admin');
-    }
 }
-

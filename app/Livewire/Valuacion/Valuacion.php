@@ -260,6 +260,26 @@ class Valuacion extends Component
 
         try {
 
+            $predio_avaluo = PredioAvaluo::where('estado', '!=', 'notificado')
+                                            ->where('numero_registro', $this->predio->numero_registro)
+                                            ->where('tipo_predio', $this->predio->tipo_predio)
+                                            ->where('localidad', $this->predio->localidad)
+                                            ->where('oficina', $this->predio->oficina)
+                                            ->whereHas('avaluo', function($q){
+                                                $q->whereNotIn('estado', ['notificado', 'concluido']);
+                                            })
+                                            ->first();
+
+            if($predio_avaluo){
+
+                $this->predio = $this->crearModeloVacio();
+
+                $this->dispatch('mostrarMensaje', ['warning', "El predio tiene un avalúo activo con folio: " . $predio_avaluo->avaluo->año . '-' . $predio_avaluo->avaluo->folio . '-' . $predio_avaluo->avaluo->usuario . '.']);
+
+                return;
+
+            }
+
             $this->predio_padron = Predio::with('propietarios.persona')
                                     ->where('numero_registro', $this->predio->numero_registro)
                                     ->where('tipo_predio', $this->predio->tipo_predio)
@@ -267,6 +287,11 @@ class Valuacion extends Component
                                     ->where('oficina', $this->predio->oficina)
                                     ->firstOrFail();
 
+            if($this->predio_padron->status != 'activo'){
+
+                throw new GeneralException('El predio ' . $this->predio_padron->cuentaPredial() . ' no esta activo.');
+
+            }
 
             foreach($this->predio_padron->getAttributes() as $attribute => $value){
 
@@ -324,6 +349,7 @@ class Valuacion extends Component
                     'folio' => (Avaluo::where('año', now()->format('Y'))->where('usuario', auth()->user()->clave)->max('folio') ?? 0) + 1,
                     'usuario' => auth()->user()->clave,
                     'predio_avaluo' => $this->predio->id,
+                    'predio' => $this->predio_padron ? $this->predio_padron->id : null,
                     'estado' => 'nuevo',
                     'creado_por' => auth()->id(),
                     'asignado_a' => auth()->id(),

@@ -121,15 +121,15 @@
 
             <div class="bg-white rounded-lg p-4 flex gap-3 mb-3 shadow-lg">
 
-                <x-input-group for="predio.superficie_terreno" label="Superficie de terreno (mts.)" :error="$errors->first('predio.superficie_terreno')" class="w-full">
+                <x-input-group for="predio.superficie_total_terreno" label="Superficie total de terreno {{ $predio->tipo_predio == 2 ? '(has.)' : '(mts.)' }}" :error="$errors->first('predio.superficie_total_terreno')" class="w-full">
 
-                    <x-input-text type="number" id="predio.superficie_terreno" wire:model="predio.superficie_terreno" />
+                    <x-input-text type="number" id="predio.superficie_total_terreno" wire:model="predio.superficie_total_terreno" />
 
                 </x-input-group>
 
-                <x-input-group for="predio.superficie_construccion" label="Superficie de construcción {{ $predio->tipo_predio == 2 ? '(has.)' : '(mts.)' }}" :error="$errors->first('predio.superficie_construccion')" class="w-full">
+                <x-input-group for="predio.superficie_total_construccion" label="Superficie total de construcción {{ $predio->tipo_predio == 2 ? '(has.)' : '(mts.)' }}" :error="$errors->first('predio.superficie_total_construccion')" class="w-full">
 
-                    <x-input-text type="number" id="predio.superficie_construccion" wire:model="predio.superficie_construccion" />
+                    <x-input-text type="number" id="predio.superficie_total_construccion" wire:model="predio.superficie_total_construccion" />
 
                 </x-input-group>
 

@@ -1,11 +1,11 @@
 <?php
 
-use App\Livewire\Valuacion\Impresion;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Valuacion\MisAvaluos;
 use App\Livewire\Valuacion\FichaTecnica;
 use App\Livewire\Valuacion\Notificacion;
 use App\Http\Controllers\Valuacion\Valuacion;
+use App\Livewire\Valuacion\Impresion\Impresion;
 use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
 
 Route::group([], function(){

@@ -82,8 +82,8 @@ class MigrarPredioJob implements ShouldQueue
                         'uso_2' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usp2_003)->first() ? $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usp2_003)->first()['desc_007'] : null,
                         'uso_3' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usp3_003)->first() ? $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usp3_003)->first()['desc_007'] : null,
                         'ubicacion_en_manzana' => $this->referencias->where('tipo_007', "UB")->where('cven_007', $predio->ubic_003)->first() ? $this->referencias->where('tipo_007', "UB")->where('cven_007', $predio->ubic_003)->first()['desc_007'] : null,
-                        'superficie_terreno' => $predio->stot_008,
-                        'superficie_construccion' => $predio->scon_008,
+                        'superficie_total_terreno' => $predio->stot_008,
+                        'superficie_total_construccion' => $predio->scon_008,
                         'superficie_judicial' => $predio->sjur_008,
                         'superficie_notarial' => $predio->snot_008,
                         'area_comun_terreno' => 0,
@@ -122,6 +122,11 @@ class MigrarPredioJob implements ShouldQueue
                     if ($predio->edif_008 > 0 && $predio->dpto_008 > 0){
 
                         $this->condominio($predio,$p->id);
+
+                        $p->superficie_total_terreno = $p->terrenos->sum('superficie') + $p->terrenosComun->sum('superficie_proporcional');
+                        $p->superficie_total_construccion = $p->construcciones->sum('superficie') + $p->construccionesComun->sum('superficie_proporcional');
+
+                        $p->save();
 
                     }
 

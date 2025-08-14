@@ -13,6 +13,7 @@ use App\Http\Controllers\Certificaciones\CertificacionesController;
 use App\Http\Controllers\Certificaciones\CertificadoHistoriaController;
 use App\Http\Controllers\Certificaciones\CertificadoNegativoController;
 use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
+use App\Http\Controllers\Certificaciones\NotificacionValorCatastralController;
 use App\Traits\ComponentesTrait;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Log;
@@ -91,7 +92,7 @@ class Certificaciones extends Component
 
             if($modelo->tipo == CertificacionesEnum::NOTIFICACION_VALOR_CATASTRAL){
 
-                $pdf = (new CertificacionesController())->reimprimirNotifiacionValorCatastral($modelo);
+                $pdf = (new NotificacionValorCatastralController())->reimprimirNotifiacionValorCatastral($modelo);
 
             }elseif($modelo->tipo == CertificacionesEnum::CERTIFICADO_HISTORIA){
 
@@ -138,7 +139,7 @@ class Certificaciones extends Component
                                 ->when($this->filters['año'], fn($q, $año) => $q->where('año', $año))
                                 ->when($this->filters['folio'], fn($q, $folio) => $q->where('folio', $folio))
                                 ->when($this->filters['estado'], fn($q, $estado) => $q->where('estado', $estado))
-                                ->when($this->filters['documento'], fn($q, $documento) => $q->where('documento', $documento))
+                                ->when($this->filters['documento'], fn($q, $documento) => $q->where('tipo', $documento))
                                 ->when($this->filters['oficina'], fn($q, $oficina) => $q->where('oficina_id', $oficina))
                                 ->when($this->filters['tAño'], function($q, $tAño){
                                     $q->WhereHas('tramite', function($q) use($tAño){

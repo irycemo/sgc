@@ -10,8 +10,6 @@ trait NotificacionValorCatastral{
 
         $avaluos_procesados = collect();
 
-        $avaluos = Avaluo::with('predioAvaluo')->whereKey($avaluos)->get();
-
         foreach($avaluos as $avaluo){
 
             $item = (object)[];

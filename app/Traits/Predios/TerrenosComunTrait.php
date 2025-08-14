@@ -89,8 +89,6 @@ trait TerrenosComunTrait
             'terrenosComun.*.valor_unitario' => 'required',
         ]);
 
-        /* if($this->revisarPorcentaje()) return; */
-
         try {
 
             DB::transaction(function () {
@@ -134,7 +132,7 @@ trait TerrenosComunTrait
                 $this->predio->area_comun_terreno = $sum2;
                 $this->predio->valor_terreno_comun = $sum;
 
-                $this->predio->valor_total_terreno = $this->predio->superficie_terreno + $sum;
+                $this->predio->valor_total_terreno = $sum + $this->predio->terrenos->sum('valor_terreno');
 
                 $this->predio->save();
 

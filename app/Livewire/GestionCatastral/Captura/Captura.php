@@ -85,11 +85,11 @@ class Captura extends Component
             'predio.zutm' => 'nullable',
             'predio.lat' => 'required|numeric',
             'predio.lon' => 'required|numeric',
-            'predio.superficie_terreno' => 'required|numeric',
-            'predio.superficie_construccion' => 'nullable|numeric',
             'predio.superficie_judicial' => 'nullable|numeric',
             'predio.superficie_notarial' => 'nullable|numeric',
             'predio.valor_catastral' => 'required|numeric',
+            'predio.superficie_total_construccion' => 'nullable|numeric',
+            'predio.superficie_total_terreno' => 'required|numeric',
             'predio.documento_entrada' => Rule::requiredIf(!$this->actualizacion),
             'predio.declarante' => Rule::requiredIf(!$this->actualizacion),
             'predio.documento_numero' => Rule::requiredIf(!$this->actualizacion),
@@ -440,7 +440,6 @@ class Captura extends Component
             DB::transaction(function () {
 
                 $this->predio->actualizado_por = auth()->id();
-                $this->predio->observaciones = $this->observaciones . '. ' . $this->observaciones;
                 $this->predio->valor_catastral = $this->revisarValorMinimo($this->predio->valor_catastral);
                 $this->predio->save();
 

@@ -10,6 +10,7 @@
 
                 <th class="px-2">Área común de construcción</th>
                 <th class="px-2">Indiviso de construcción</th>
+                <th class="px-2">Superficie proporcional</th>
                 <th class="px-2">Clasificación de construccion</th>
                 <th class="px-2">Valor de construcción común</th>
 
@@ -24,6 +25,7 @@
                 <tr class="text-gray-500 text-sm leading-relaxed">
                     <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->area_comun_construccion }}</td>
                     <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->indiviso_construccion }}</td>
+                    <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->superficie_proporcional }}</td>
                     <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->valor_clasificacion_construccion }}</td>
                     <td class=" px-2 w-full whitespace-nowrap">${{ number_format($construccion->valor_construccion_comun, 2) }}</td>
                 </tr>

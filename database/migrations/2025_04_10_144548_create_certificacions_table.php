@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedInteger('tipo');
             $table->unsignedInteger('año');
             $table->unsignedInteger('folio');
-            $table->text('cadena_original');
+            $table->mediumText('cadena_original');
             $table->text('cadena_encriptada')->nullable();
             $table->string('estado');
             $table->foreignId('oficina_id')->nullable()->references('id')->on('oficinas');

@@ -219,6 +219,30 @@
 
             </table>
 
+            @if (isset($datos_control->predio_padre))
+
+                <p class="parrafo">
+                    Los avalúos son resultado de un desglose del predio {{ $datos_control->predio_padre }}, al cual se actualiza su superficie con valor: {{ $datos_control->predio_padre_superficie }} {{ $datos_control->predio_padre_unidad }}
+                </p>
+
+            @endif
+
+            @if(isset($datos_control->predios_fusionantes))
+
+                <p>El avalúo es resultado de la fusión de los siguientes predios:</p>
+
+                <p>
+
+                    @foreach ($datos_control->predios_fusionantes as $predio)
+
+                        {{ $predio }} @if(!$loop->last) , @else . @endif
+
+                    @endforeach
+
+                </p>
+
+            @endif
+
             <p class="parrafo">
                 EL PRESENTE ACTO ES RECURRIBLE, POR LO CUAL DEBERÁ SER IMPUGNADO DENTRO DEL TÉRMINO DE 10 DÍAS HÁBILES SIGUIENTES A SU NOTIFICACIÓN ANTE ESTA DIRECCIÓN DE CATASTRO DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO
                 DE MICHOACÁN DE OCAMPO O BIEN ANTE EL TRIBUNAL DE JUSTICIA ADMINISTRATIVA DEL ESTADO DE MICHOACÁN, DE CONFORMIDAD CON EL ARTÍCULO 128 Y 129 DEL CÓDIGO DE JUSTICIA ADMINISTRATIVA DEL ESTADO DE MICHOACÁN DE OCAMPO.
@@ -327,8 +351,8 @@
 
                         <div style="text-align: center;">
 
-                            <p style="text-transform: uppercase;">{{ $datos_control->jefe_departamento }}</p>
-                            <p class="borde" style="width: ">JEFE DE DEPARTAMENTO DE VALUACIÓN</p>
+                            <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $datos_control->jefe_departamento }}</p>
+                            <p>JEFE DE DEPARTAMENTO DE VALUACIÓN</p>
                             <p>Firma Electrónica:</p>
 
                         </div>
@@ -369,7 +393,7 @@
 
                             @if (isset($datos_control->tramite_desglose))
 
-                                <p><strong>Trámite de impresión: </strong> {{ $datos_control->tramite_desglose }}</p>
+                                <p><strong>Trámite de desglose: </strong> {{ $datos_control->tramite_desglose }}</p>
 
                             @endif
 
