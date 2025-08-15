@@ -57,6 +57,8 @@ return [
         'consultar_avaluo' => env('SISTEMA_PERITOS_EXTERNOS_CONSULTAR_AVALUO'),
         'operar_avaluo' => env('SISTEMA_PERITOS_EXTERNOS_OPERAR_AVALUO'),
         'generar_avaluo_pdf' => env('SISTEMA_PERITOS_EXTERNOS_GENERAR_AVALUO_PDF'),
+        'consultar_cartografia' => env('SISTEMA_PERITOS_EXTERNOS_CONSULTAR_CARTOGRAFIA'),
+        'validar_cartografia' => env('SISTEMA_PERITOS_EXTERNOS_VALIDAR_CARTOGRAFIA'),
     ],
 
 ];

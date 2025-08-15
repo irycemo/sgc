@@ -37,9 +37,41 @@
 
             <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
 
+                <x-input-group for="origen" label="Origen" :error="$errors->first('origen')" class="w-full">
+
+                    <x-input-select id="origen" wire:model.lazy="origen" class="w-full">
+
+                        <option value="">Seleccione una opción</option>
+
+                        @foreach ($origenes as $origen_item)
+
+                            <option value="{{ $origen_item }}">{{ $origen_item }}</option>
+
+                        @endforeach
+
+                    </x-input-select>
+
+                </x-input-group>
+
+                <x-input-group for="predio_origen" label="Predio origen" :error="$errors->first('predio_origen')" class="w-full">
+
+                    <x-input-text id="predio_origen" wire:model="predio_origen" />
+
+                </x-input-group>
+
+                <x-input-group for="oficio" label="Número de oficio" :error="$errors->first('oficio')" class="w-full">
+
+                    <x-input-text id="oficio" wire:model="oficio" />
+
+                </x-input-group>
+
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
+
                 <x-input-group for="tipo_titulo" label="Tipo de título" :error="$errors->first('tipo_titulo')" class="w-full">
 
-                    <x-input-select id="tipo_titulo" wire:model.live="tipo_titulo" class="w-full">
+                    <x-input-select id="tipo_titulo" wire:model.live="tipo_titulo" class="w-full" :disabled="$origen == 'ALTA POR RAN' ? false : true">
 
                         <option value="">Seleccione una opción</option>
                         <option value="TÍTULO DE PROPIEDAD PARCELARIO">TÍTULO DE PROPIEDAD PARCELARIO</option>
@@ -51,31 +83,13 @@
 
                 <x-input-group for="titulo" label="Título de propiedad" :error="$errors->first('titulo')" class="w-full">
 
-                    <x-input-text id="titulo" wire:model="titulo" />
+                    <x-input-text id="titulo" wire:model="titulo" :readonly="$origen == 'ALTA POR RAN' ? false : true" />
 
                 </x-input-group>
 
                 <x-input-group for="cantidad" label="Cantidad solicitada" :error="$errors->first('cantidad')" class="w-full">
 
-                    <x-input-text type="number" id="cantidad" wire:model="cantidad"/>
-
-                </x-input-group>
-
-
-
-            </div>
-
-            <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
-
-                <x-input-group for="origen" label="Predio de origen" :error="$errors->first('origen')" class="w-full">
-
-                    <x-input-text id="origen" wire:model="origen" />
-
-                </x-input-group>
-
-                <x-input-group for="oficio" label="Número de oficio" :error="$errors->first('oficio')" class="w-full">
-
-                    <x-input-text id="oficio" wire:model="oficio" />
+                    <x-input-text type="number" id="cantidad" wire:model="cantidad" :readonly="$origen == 'ALTA POR RAN' ? true : false" />
 
                 </x-input-group>
 

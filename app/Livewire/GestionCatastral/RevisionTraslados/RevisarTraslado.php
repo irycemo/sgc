@@ -134,11 +134,13 @@ class RevisarTraslado extends Component
 
                 }
 
-                /* dd(); */
-
                 $this->traslado->update(['estado' => 'operado', 'actualizado_por' => auth()->id()]);
 
                 $this->traslado->audits()->latest()->first()->update(['tags' => 'Operó traslado']);
+
+                $this->traslado->tramite->update(['estado' => 'concluido', 'actualizado_por' => auth()->id()]);
+
+                $this->traslado->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
 
             });
 

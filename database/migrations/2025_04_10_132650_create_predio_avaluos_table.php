@@ -68,6 +68,8 @@ return new class extends Migration
             $table->unsignedInteger('zutm')->nullable();
             $table->decimal('lon', 11, 8)->nullable();
             $table->decimal('lat', 11, 8)->nullable();
+            $table->string('documento_entrada')->nullable();
+            $table->string('documento_numero')->nullable();
             $table->text('observaciones')->nullable();
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

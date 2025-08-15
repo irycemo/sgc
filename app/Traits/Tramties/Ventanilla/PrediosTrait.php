@@ -18,14 +18,16 @@ trait PrediosTrait
 
         if($this->modelo_editar->clave_ingreso == 'D726' && $this->tipo != 2){
 
-            $this->dispatch('mostrarMensaje', ['error', "El predio no es rustico."]);
+            $this->dispatch('mostrarMensaje', ['warning', "El predio no es rustico."]);
+
             return;
 
         }
 
         if($this->modelo_editar->clave_ingreso == 'D727' && $this->tipo != 1){
 
-            $this->dispatch('mostrarMensaje', ['error', "El predio no es urbano."]);
+            $this->dispatch('mostrarMensaje', ['warning', "El predio no es urbano."]);
+
             return;
 
         }
@@ -38,15 +40,21 @@ trait PrediosTrait
                                 ->first();
 
         if(!$this->predio){
-            $this->dispatch('mostrarMensaje', ['error', "La cuenta predial no esta registrada."]);
+
+            $this->dispatch('mostrarMensaje', ['warning', "La cuenta predial no esta registrada."]);
+
             return;
+
         }
 
-        if($this->predio->estado == 'bloqueado'){
+        if($this->predio->estado !== 'activo'){
 
-            $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
+            $this->dispatch('mostrarMensaje', ['warning', "El predio no esta activo."]);
+
             $this->predio = null;
+
             return;
+
         }
 
     }

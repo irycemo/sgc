@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('observaciones');
             $table->string('predio_origen')->nullable();
             $table->string('oficio')->nullable();
+            $table->string('origen')->nullable();
             $table->string('tipo_titulo')->nullable();
             $table->string('titulo_propiedad')->nullable();
             $table->boolean('estatus')->default(0);
@@ -29,6 +30,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->index(['tipo_titulo', 'titulo_propiedad']);
+
+            $table->index(['localidad', 'oficina', 'tipo_predio', 'numero_registro']);
         });
     }
 

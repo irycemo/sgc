@@ -329,7 +329,10 @@ class Valuacion extends Component
 
             if(!$this->predio->copia) {
 
-                $this->validarCuentaAsignada();
+                $cuenta_asignada = $this->validarCuentaAsignada();
+
+                $this->predio->documento_entrada = $cuenta_asignada->tipo_titulo;
+                $this->predio->documento_numero = $cuenta_asignada->titulo_propiedad;
 
                 $this->validarDisponibilidad();
 

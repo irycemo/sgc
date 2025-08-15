@@ -703,4 +703,14 @@ class Constantes{
         'VENTA TOTAL' => 'ACTUALIZACION'
     ];
 
+    const ASIGNACION_CUENTAS_ORIGEN = [
+        'DESGLOSE',
+        'PREDIO IGNORADO',
+        'ALTA POR OMISIÓN',
+        'CAMBIO POR LOCALIDAD',
+        'ALTA POR RAN',
+        'ALTA POR INSUS',
+        'SUBDIVISIÓN'
+    ];
+
 }

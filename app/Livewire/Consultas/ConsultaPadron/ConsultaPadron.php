@@ -132,7 +132,7 @@ class ConsultaPadron extends Component
 
             if($this->predio->status == 'bloqueado'){
 
-                $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
+                $this->dispatch('mostrarMensaje', ['warning', "El predio se encuentra bloqueado."]);
 
                 Cache::forget('consulta-predio-' . $this->getId());
 
@@ -140,7 +140,7 @@ class ConsultaPadron extends Component
 
             if($this->predio->status != 'activo'){
 
-                $this->dispatch('mostrarMensaje', ['error', "El predio no esta activo."]);
+                $this->dispatch('mostrarMensaje', ['warning', "El predio no esta activo."]);
 
                 Cache::forget('consulta-predio-' . $this->getId());
 

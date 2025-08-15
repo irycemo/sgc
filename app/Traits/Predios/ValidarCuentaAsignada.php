@@ -19,6 +19,8 @@ trait ValidarCuentaAsignada
 
         if(!$cuenta) throw new GeneralException("No tienes asignada la cuenta ingresada.");
 
+        return $cuenta;
+
     }
 
 }

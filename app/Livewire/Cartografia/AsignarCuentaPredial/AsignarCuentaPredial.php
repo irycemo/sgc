@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Cartografia\AsignarCuentaPredial;
 
+use App\Constantes\Constantes;
 use App\Models\User;
 use App\Models\Predio;
 use Livewire\Component;
@@ -20,6 +21,7 @@ class AsignarCuentaPredial extends Component
     public $tipo;
     public $titulo;
     public $cantidad;
+    public $predio_origen;
     public $origen;
     public $observaciones;
     public $localidad_busqueda;
@@ -35,6 +37,7 @@ class AsignarCuentaPredial extends Component
     public $oficio_busqueda;
     public $observaciones_busqueda;
     public $valuador_busqueda;
+    public $origenes;
 
     protected function rules(){
         return [
@@ -45,10 +48,17 @@ class AsignarCuentaPredial extends Component
             'titulo' => Rule::requiredIf($this->tipo_titulo != null),
             'tipo_titulo' => 'nullable',
             'oficio' => 'nullable',
+            'origen' => 'required',
+            'predio_origen' => 'nullable',
             'cantidad' => 'required',
-            'origen' => 'nullable',
             'observaciones' => 'required',
          ];
+    }
+
+    public function updatedOrigen(){
+
+        $this->reset(['tipo_titulo', 'titulo']);
+
     }
 
     public function updatedTipoTitulo(){
@@ -70,12 +80,24 @@ class AsignarCuentaPredial extends Component
         if($this->tipo_titulo && $this->titulo){
 
             $cuenta = CuentaAsignada::where('tipo_titulo', $this->tipo_titulo)
-                            ->where('titulo_propiedad', $this->titulo)
-                            ->first();
+                                        ->where('titulo_propiedad', $this->titulo)
+                                        ->first();
 
             if($cuenta){
 
                 $this->dispatch('mostrarMensaje', ['warning', "El título de propiedad ya esta registrado con el predio: " . $cuenta->localidad . '-'  . $cuenta->oficina . '-'  . $cuenta->tipo_predio . '-' . $cuenta->numero_registro]);
+
+                return;
+
+            }
+
+            $predio = Predio::where('documento_entrada', $this->tipo_titulo)
+                                ->where('documento_numero', $this->titulo)
+                                ->first();
+
+            if($predio){
+
+                $this->dispatch('mostrarMensaje', ['warning', "El título de propiedad ya esta registrado con el predio: " . $predio->cuentaPredial()]);
 
                 return;
 
@@ -127,7 +149,7 @@ class AsignarCuentaPredial extends Component
                             'tipo_predio' => $this->tipo,
                             'numero_registro' => $registroSolicitado,
                             'estatus' => 1,
-                            'predio_origen' => $this->origen ? $this->origen : null,
+                            'predio_origen' => $this->predio_origen ? $this->predio_origen : null,
                             'observaciones' => 'Cuenta preexistente en el padrón catastral',
                             'asignado_a' => null,
                             'creado_por' => auth()->user()->id
@@ -151,7 +173,7 @@ class AsignarCuentaPredial extends Component
                             'tipo_titulo' => $this->tipo_titulo,
                             'oficio' => $this->oficio,
                             'asignado_a' => $this->valuador,
-                            'predio_origen' => $this->origen ? $this->origen : null,
+                            'predio_origen' => $this->predio_origen ? $this->predio_origen : null,
                             'creado_por' => auth()->user()->id
                         ]);
 
@@ -218,6 +240,8 @@ class AsignarCuentaPredial extends Component
         $this->oficina = auth()->user()->oficina->oficina;
 
         $this->oficina_busqueda = $this->oficina;
+
+        $this->origenes = Constantes::ASIGNACION_CUENTAS_ORIGEN;
 
     }
 
