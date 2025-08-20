@@ -77,7 +77,7 @@
 
             </div>
 
-            @if($tramite->estado == 'pagado' && in_array($this->tramite->servicio->clave_ingreso, ['DM31', 'DM34', 'DM32']))
+            @if($tramite->estado == 'pagado' && in_array($this->tramite->servicio->clave_ingreso, ['DM31', 'DM34', 'DM32', 'DM35']))
 
                 @can('Autorizar tramite')
 
