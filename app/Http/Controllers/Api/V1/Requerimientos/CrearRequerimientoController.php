@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Requerimientos;
 
 use App\Models\Requerimiento;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Controller;
@@ -18,15 +19,28 @@ class CrearRequerimientoController extends Controller
 
         try {
 
-            $requerimiento = Requerimiento::create([
-                'requerimientoable_type' => 'App\Models\Certificacion',
-                'requerimientoable_id' => $validated['certificacion_id'],
-                'descripcion' => $validated['observacion'],
-                'creado_por' => 11,
-                'usuario_stl' => $validated['usuario'],
-                'estado' => 'nuevo',
-                'archivo_url' => $validated['archivo_url'] ?? null,
-            ]);
+            $requerimiento = null;
+
+            DB::transaction(function () use ($validated, &$requerimiento){
+
+                $requerimientos = Requerimiento::where('requerimientoable_type', 'App\Models\Certificacion')
+                                                    ->where('requerimientoable_id', $validated['certificacion_id'])
+                                                    ->where('estado', 'finalizado')
+                                                    ->get();
+
+                $requerimientos->each->update(['estado' => 'nuevo']);
+
+                $requerimiento = Requerimiento::create([
+                    'requerimientoable_type' => 'App\Models\Certificacion',
+                    'requerimientoable_id' => $validated['certificacion_id'],
+                    'descripcion' => $validated['observacion'],
+                    'creado_por' => 11,
+                    'usuario_stl' => $validated['usuario'],
+                    'estado' => 'nuevo',
+                    'archivo_url' => $validated['archivo_url'] ?? null,
+                ]);
+
+            });
 
             return (new RequerimientoResource($requerimiento))->response()->setStatusCode(200);
 
