@@ -2,7 +2,7 @@
 
     <div class="mb-6">
 
-        <x-header>Avalúos de peritos externos</x-header>
+        <x-header>Validar cartografía <small>(peritos externos)</small></x-header>
 
         <div class="flex justify-between items-center">
 
@@ -46,7 +46,7 @@
                 <x-table.heading>Año</x-table.heading>
                 <x-table.heading>Folio</x-table.heading>
                 <x-table.heading>Usuario</x-table.heading>
-                <x-table.heading>Valuador</x-table.heading>
+                <x-table.heading>Perito externo</x-table.heading>
                 <x-table.heading>Acciones</x-table.heading>
 
             </x-slot>
@@ -107,7 +107,7 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 absolute origin-top-right mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     <a
                                         href="{{ $avaluo['cartografia'] }}"

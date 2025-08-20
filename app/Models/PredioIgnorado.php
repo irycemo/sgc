@@ -30,6 +30,8 @@ class PredioIgnorado extends Model implements Auditable
             'concluido' => 'gray-400',
             'firma' => 'indigo-400',
             'revisión' => 'teal-400',
+            'asignar clave' => 'rose-400',
+            'clave asignada' => 'green-400',
             'periódico oficial' => 'teal-400',
         ][$this->estado] ?? 'gray-400';
     }

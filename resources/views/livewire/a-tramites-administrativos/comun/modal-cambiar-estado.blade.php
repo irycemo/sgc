@@ -14,9 +14,11 @@
 
                 <option value="">Seleccione una opción</option>
                 <option value="publicación">Publicación</option>
-                @if($this->modelo_editar->tramite?->servicio_id === 47)
+                @if($this->modelo_editar->tramite?->servicio->clave_ingreso === 'DM27')
+                    <option value="periódico oficial">Asignar clave catastral</option>
                     <option value="periódico oficial">Periódico oficial</option>
                 @endif
+                <option value="firma">Oposición</option>
                 <option value="firma">Firma</option>
                 <option value="concluido">Concluido</option>
 

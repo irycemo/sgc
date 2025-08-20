@@ -47,7 +47,7 @@ trait PrediosTrait
 
         }
 
-        if($this->predio->estado !== 'activo'){
+        if($this->predio->status !== 'activo'){
 
             $this->dispatch('mostrarMensaje', ['warning', "El predio no esta activo."]);
 

@@ -19,6 +19,16 @@
 
                 <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
 
+                <x-input-select class="bg-white rounded-full text-sm w-min" wire:model.live="oficina">
+
+                    @foreach ($oficinas as $item)
+
+                        <option value="{{ $item->oficina }}">{{ $item->oficina }} - {{ $item->nombre }}</option>
+
+                    @endforeach
+
+                </x-input-select>
+
                 <x-input-select class="bg-white rounded-full text-sm w-min" wire:model.live="pagination">
 
                     <option value="10">10</option>

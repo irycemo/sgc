@@ -64,7 +64,7 @@ class Ventanilla extends Component
 
         $this->categoria = json_decode($this->categoria_seleccionada, true);
 
-        $this->servicios = Servicio::with('categoria')->where('categoria_servicio_id', $this->categoria['id'])->where('estado', 'activo')->get();
+        $this->servicios = Servicio::with('categoria')->where('categoria_servicio_id', $this->categoria['id'])->where('estado', 'activo')->orderBy('nombre')->get();
 
         $this->reset('flags');
 

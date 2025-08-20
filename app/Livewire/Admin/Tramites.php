@@ -152,6 +152,14 @@ class Tramites extends Component
 
         }
 
+        if($this->modelo_editar->predios()->where('predio_id', $this->predio->id)->first()){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El predio ya esta agregado."]);
+
+            return;
+
+        }
+
         try {
 
             $this->modelo_editar->predios()->attach($this->predio->id);

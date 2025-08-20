@@ -226,7 +226,8 @@ class PrediosIgnorados extends Component
 
                 $this->modelo_editar->requerimientos()->create([
                     'descripcion' => $this->requerimiento,
-                    'creado_por' => auth()->id()
+                    'creado_por' => auth()->id(),
+                    'estado' => 'nuevo'
                 ]);
 
                 $this->modelo_editar->update(['estado' => 'requerimineto']);
@@ -265,7 +266,7 @@ class PrediosIgnorados extends Component
         $this->valuadores = User::where('valuador', true)
                                     ->where('estado', 'activo')
                                     ->whereHas('oficina', function($q) {
-                                        $q->where('oficina', 101);
+                                        $q->where('oficina', $this->modelo_editar->oficina_id);
                                     })
                                     ->orderBy('name')
                                     ->get();
@@ -281,6 +282,38 @@ class PrediosIgnorados extends Component
 
         try {
 
+            $this->modelo_editar->estado = 'valuación';
+            $this->modelo_editar->actualizado_por = auth()->id();
+            $this->modelo_editar->save();
+
+            $this->resetearTodo($borrado = true);
+
+            $this->dispatch('mostrarMensaje', ['success', "Se asignó el valuador con éxito."]);
+
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al asignar valuador en predio ignorado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+            $this->resetearTodo();
+
+        }
+
+    }
+
+    public function asignarAleatoriamente(){
+
+        if(!$this->valuadores->count()){
+
+            $this->dispatch('mostrarMensaje', ['success', "No hay valuadores activos para la oficina " . $this->modelo_editar->oficina->nombre . '.']);
+
+            return;
+
+        }
+
+        try {
+
+            $this->modelo_editar->valuador = $this->valuadores->random()->id;
             $this->modelo_editar->estado = 'valuación';
             $this->modelo_editar->actualizado_por = auth()->id();
             $this->modelo_editar->save();
@@ -453,6 +486,7 @@ class PrediosIgnorados extends Component
             'concluido',
             'firma',
             'revisión',
+            'asignar clave'
         ];
 
     }

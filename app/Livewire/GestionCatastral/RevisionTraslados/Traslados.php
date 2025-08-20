@@ -3,6 +3,7 @@
 namespace App\Livewire\GestionCatastral\RevisionTraslados;
 
 use App\Models\User;
+use App\Models\Oficina;
 use Livewire\Component;
 use App\Models\Traslado;
 use Livewire\WithPagination;
@@ -24,6 +25,8 @@ class Traslados extends Component
 
     public $fiscales = [];
     public $fiscal;
+    public $oficinas;
+    public $oficina;
 
     protected function rules(){
         return [
@@ -92,10 +95,15 @@ class Traslados extends Component
     #[Computed]
     public function traslados(){
 
-        if(auth()->user()->hasRole('Administrador')){
+        if(auth()->user()->hasRole(['Administrador', 'Jefe de departamento'])){
 
             return Traslado::with('actualizadoPor', 'asignadoA', 'predio')
                                 ->when($this->estado, fn($q, $estado) => $q->where('estado', $estado))
+                                ->when($this->oficina, function($q) {
+                                    $q->whereHas('predio', function($q) {
+                                        $q->where('oficina', $this->oficina);
+                                    });
+                                })
                                 ->where('entidad_nombre', 'LIKE', '%' . $this->search . '%')
                                 ->orderBy($this->sort, $this->direction)
                                 ->paginate($this->pagination);
@@ -112,6 +120,14 @@ class Traslados extends Component
 
 
         }
+
+    }
+
+    public function mount(){
+
+        $this->crearModeloVacio();
+
+        $this->oficinas = Oficina::select('id', 'nombre', 'oficina')->where('cabecera', null)->orderBy('oficina')->get();
 
     }
 

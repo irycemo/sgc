@@ -73,9 +73,7 @@ class TrasladosConsulta extends Component
 
     public function mount(){
 
-        $this->traslados = Traslado::where('predio_id', $this->predio_id)
-                                        ->where('estado', 'operado')
-                                        ->get();
+        $this->traslados = Traslado::where('predio_id', $this->predio_id)->get();
 
     }
 

@@ -163,6 +163,21 @@
 
             <p class="titulo">CÉDULA DE ACTUALIZACIÓN CATASTRAL</p>
 
+            <div>
+
+                <p class="parrafo">
+                    CON FUNDAMENTO EN LOS ARTICULOS 18° FRACCIÓN VI DE LA LEY DE LA FUNCIÓN REGISTRAL Y CATASTRAL
+                    DEL ESTADO DE MICHOACÁN DE OCAMPO,8 FRACCIONES XI Y XVIII,DEL REGLAMENTO DE LA LEY DE LA
+                    FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO,Y II FRACCIONES I,II,VI,XXVII
+                    Y XXXIV DEL REGLAMENTO INTERIOR DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN
+                    DE OCAMPO EL SUSCRITO
+                    @if(isset($datos_control->director)) <strong style="text-transform: uppercase;"> {{ $datos_control->director }} DIRECTOR DE CATASTRO.</strong> @elseif(isset($datos_control->titular)) <strong style="text-transform: uppercase;"> {{ $datos_control->titular }}, {{ $datos_control->titular_cargo }}.</strong> @endif
+                    CERTIFICA QUE EN LOS ARCHIVOS CATASTRALES EXISTENTES EN ESTA OFICINA A MI CARGO, SE ENCONTRARON
+                    REGISTROS HISTORICOS DE LA SIGUIENTE PROPIEDAD:
+                </p>
+
+            </div>
+
         </div>
 
         @include('certificaciones.comun.ubicacion_inmueble')
