@@ -212,7 +212,7 @@ class AsignarCuentaPredial extends Component
                                         ->whereHas('oficina', function($q){
                                             $q->where('oficina', $this->oficina);
                                         })
-                                        ->orderBy('ap_paterno')
+                                        ->orderBy('name')
                                         ->get();
 
         $this->reset('valuador');
