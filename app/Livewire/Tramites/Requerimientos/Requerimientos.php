@@ -60,18 +60,18 @@ class Requerimientos extends Component
 
     }
 
-    public function responder(){
+    public function responder($string = null){
 
         $this->validate();
 
         try {
 
-            DB::transaction(function () {
+            DB::transaction(function () use ($string){
 
                 $this->modelo_editar->requerimientos()->create([
                     'descripcion' => $this->observacion,
                     'creado_por' => auth()->id(),
-                    'estado' => 'respuesta'
+                    'estado' => $string ?? 'respuesta'
                 ]);
 
                 foreach ($this->modelo_editar->requerimientos as $requerimiento) {
@@ -104,9 +104,8 @@ class Requerimientos extends Component
     public function certificaciones(){
 
         return Certificacion::with('tramite:id,año,folio,usuario', 'predio:id,localidad,oficina,tipo_predio,numero_registro')
-                                ->whereHas('requerimientos', function($q){
-                                    $q->where('estado', 'nuevo')  ;
-                                })
+                                ->has('requerimientos')
+                                ->doesntHave('ultimoRequerimientoFinalizado')
                                 ->where('estado', 'activo')
                                 ->when(!auth()->user()->hasRole('Administrador'), function($q){
                                     $q->where('oficina_id', auth()->user()->oficina_id);

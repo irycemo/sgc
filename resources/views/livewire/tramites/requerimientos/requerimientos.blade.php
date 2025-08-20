@@ -254,6 +254,13 @@
 
             <div class="flex gap-3">
 
+                <x-button-green
+                    wire:click="responder('finalizado')"
+                    wire:loading.attr="disabled"
+                    wire:target="responder('finalizado')">
+                    Finalizar
+                </x-button-green>
+
                 <x-button-blue
                     wire:click="responder"
                     wire:loading.attr="disabled"
@@ -261,17 +268,13 @@
                     Responder
                 </x-button-blue>
 
-                <div class="flex gap-3">
-
-                    <x-button-red
-                        wire:click="$toggle('modal')"
-                        wire:loading.attr="disabled"
-                        wire:target="$toggle('modal')"
-                        type="button">
-                        Cerrar
-                    </x-button-red>
-
-                </div>
+                <x-button-red
+                    wire:click="$toggle('modal')"
+                    wire:loading.attr="disabled"
+                    wire:target="$toggle('modal')"
+                    type="button">
+                    Cerrar
+                </x-button-red>
 
             </div>
 
