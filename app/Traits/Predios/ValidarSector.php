@@ -46,4 +46,42 @@ trait ValidarSector
 
     }
 
+    public function validarSectorNoBinding($localidad, $oficina, $municipio, $sector){
+
+        $oficina = Oficina::where('localidad', $localidad)
+                            ->where('oficina', $oficina)
+                            ->first();
+
+        if(!$oficina){
+
+            throw new GeneralException("No se encontraron oficinas con los datos ingresados.");
+
+        }
+
+        $sectores = json_decode($oficina->sectores, true);
+
+       /*  $sectores2 = json_decode($sectores,true);
+
+        $sectores = json_decode($sectores2,true); */
+
+        if(is_null($sectores)){
+
+            throw new GeneralException("La oficina no tiene sectores.");
+
+        }
+
+        if(!in_array($sector, $sectores)){
+
+            throw new GeneralException("El sector no corresponde a la zona.");
+
+        }
+
+        if($oficina->municipio != $municipio){
+
+            throw new GeneralException("El municipio no corresponde a la oficina.");
+
+        }
+
+    }
+
 }

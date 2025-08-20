@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Cartografia\AsignarClaveCatastral\AsignarClaveCatastral;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Cartografia\Conciliar\Conciliar;
 use App\Livewire\Cartografia\Conciliar\ConciliarManzanas;
@@ -11,6 +12,8 @@ use App\Livewire\Cartografia\ValidarCartografia\ValidarCartografia;
 Route::group([], function(){
 
     Route::get('asignacion_cuenta', AsignarCuentaPredial::class)->middleware('permission:Asignación de cuentas')->name('asignacion_cuenta');
+
+    Route::get('asignacion_clave_catastral', AsignarClaveCatastral::class)->middleware('permission:Asignación de claves')->name('asignacion_clave_catastral');
 
     Route::get('conciliar', Conciliar::class)->middleware('permission:Conciliar')->name('conciliar');
 

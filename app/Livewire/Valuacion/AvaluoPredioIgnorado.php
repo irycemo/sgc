@@ -380,9 +380,6 @@ class AvaluoPredioIgnorado extends Component
 
         try {
 
-            $this->predio->localidad = $this->localidad;
-            $this->predio->oficina = $this->oficina;
-            $this->predio->tipo_predio = $this->tipo;
             $this->predio->numero_registro = $this->numero_registro;
 
             $this->validacionesAsignar();
@@ -391,7 +388,7 @@ class AvaluoPredioIgnorado extends Component
 
                 $this->predio->save();
 
-                $this->predio->avaluo->update(['estado' => 'concluido']);
+                $this->predio->avaluo->touch();
 
                 $this->predio->avaluo->audits()->latest()->first()->update(['tags' => 'Asigno cuenta predial a avalúo de predio ignorado']);
 

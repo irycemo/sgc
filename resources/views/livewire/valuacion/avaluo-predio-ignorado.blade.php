@@ -298,7 +298,7 @@
 
                     <x-input-group for="numero_registro" label="Número de Registro" :error="$errors->first('numero_registro')" >
 
-                        <x-input-text type="number" id="numero_registro" wire:model="numero_registro" max="2" min="1"/>
+                        <x-input-text type="number" id="numero_registro" wire:model="numero_registro" min="1"/>
 
                     </x-input-group>
 

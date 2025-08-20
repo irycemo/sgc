@@ -144,6 +144,7 @@ class RoleSeeder extends Seeder
 
         Permission::create(['name' => 'Área de cartografía', 'area' => 'Cartografía'])->syncRoles([$role1, $role2, $role4]);
         Permission::create(['name' => 'Asignación de cuentas', 'area' => 'Cartografía'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'Asignación de claves', 'area' => 'Cartografía'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'Conciliar', 'area' => 'Cartografía'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'Conciliar manzanas', 'area' => 'Cartografía'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'Asignar coordenadas', 'area' => 'Cartografía'])->syncRoles([$role1, $role2]);

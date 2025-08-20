@@ -60,31 +60,31 @@
 
         <div class="tab-panel" :class="{ 'active': activeTab === 5 }" x-show.transition.in.opacity.duration.800="activeTab === 5">
 
-            @livewire('comun.propietarios')
+            @livewire('comun.propietarios', ['avaluo_id' => $id])
 
         </div>
 
         <div class="tab-panel" :class="{ 'active': activeTab === 1 }" x-show.transition.in.opacity.duration.800="activeTab === 1" x-cloak>
 
-            @livewire('valuacion.colindancias')
+            @livewire('valuacion.colindancias', ['avaluo_id' => $id])
 
         </div>
 
         <div class="tab-panel" :class="{ 'active': activeTab === 2 }" x-show.transition.in.opacity.duration.800="activeTab === 2" x-cloak>
 
-            @livewire('valuacion.caracteristicas')
+            @livewire('valuacion.caracteristicas', ['avaluo_id' => $id])
 
         </div>
 
         <div class="tab-panel" :class="{ 'active': activeTab === 3 }" x-show.transition.in.opacity.duration.800="activeTab === 3" x-cloak>
 
-            @livewire('valuacion.valor')
+            @livewire('valuacion.valor', ['avaluo_id' => $id])
 
         </div>
 
         <div class="tab-panel" :class="{ 'active': activeTab === 4 }" x-show.transition.in.opacity.duration.800="activeTab === 4" x-cloak>
 
-            @livewire('valuacion.imagenes')
+            @livewire('valuacion.imagenes', ['avaluo_id' => $id])
 
         </div>
 

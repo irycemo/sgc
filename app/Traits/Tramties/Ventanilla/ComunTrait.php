@@ -277,12 +277,6 @@ trait ComunTrait
 
         }
 
-        if(in_array($this->servicio['clave_ingreso'], ['DM31', 'DM34', 'D934'])){
-
-            $this->flags['tipo_de_servicio'] = true;
-
-        }
-
     }
 
     public function crear(){
@@ -323,7 +317,7 @@ trait ComunTrait
     public function editarTramite(){
 
         if($this->modelo_editar->isNot($this->tramite))
-        $this->modelo_editar = $this->tramite;
+            $this->modelo_editar = $this->tramite;
 
         $this->reset(['tramite']);
 

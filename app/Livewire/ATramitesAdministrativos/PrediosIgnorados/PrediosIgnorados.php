@@ -9,6 +9,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Constantes\Constantes;
+use App\Exceptions\GeneralException;
 use App\Models\PredioIgnorado;
 use Illuminate\Validation\Rule;
 use App\Traits\ComponentesTrait;
@@ -265,9 +266,7 @@ class PrediosIgnorados extends Component
 
         $this->valuadores = User::where('valuador', true)
                                     ->where('estado', 'activo')
-                                    ->whereHas('oficina', function($q) {
-                                        $q->where('oficina', $this->modelo_editar->oficina_id);
-                                    })
+                                    ->where('oficina_id', $this->modelo_editar->oficina_id)
                                     ->orderBy('name')
                                     ->get();
 
@@ -305,7 +304,7 @@ class PrediosIgnorados extends Component
 
         if(!$this->valuadores->count()){
 
-            $this->dispatch('mostrarMensaje', ['success', "No hay valuadores activos para la oficina " . $this->modelo_editar->oficina->nombre . '.']);
+            $this->dispatch('mostrarMensaje', ['warning', "No hay valuadores activos para la oficina " . $this->modelo_editar->oficina->nombre . '.']);
 
             return;
 
@@ -411,6 +410,12 @@ class PrediosIgnorados extends Component
 
         try {
 
+            if($this->estado === 'asignar clave' && !$this->modelo_editar->valuador){
+
+                throw new GeneralException('Primero debe asignar al valuador.');
+
+            }
+
             DB::transaction(function () {
 
                 if($this->estado === 'concluido'){
@@ -428,6 +433,10 @@ class PrediosIgnorados extends Component
                 $this->dispatch('mostrarMensaje', ['success', "Se actualizó con éxito."]);
 
             });
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
         } catch (\Throwable $th) {
 
