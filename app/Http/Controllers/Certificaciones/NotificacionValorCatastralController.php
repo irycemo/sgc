@@ -158,7 +158,7 @@ class NotificacionValorCatastralController extends Controller
 
         $this->crearImagenConMarcaDeAgua($object, $qr, $certificacion);
 
-        $pdf = Pdf::loadView('certificaciones.notificacion_valor_catastral.blade', [
+        $pdf = Pdf::loadView('certificaciones.notificacion_valor_catastral', [
             'datos_control' => $object->datos_control,
             'avaluos' => $object->avaluos,
             'qr' => $qr,
