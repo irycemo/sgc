@@ -71,6 +71,8 @@ class NotificacionValorCatastralController extends Controller
 
         $object = (object)[];
 
+        $avaluos = Avaluo::whereKey($avaluos)->get();
+
         $object->avaluos = $this->avaluos($avaluos);
 
         if(auth()->user()->hasRole(['Convenio municipal'])){

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\V1\Predios;
 
 use App\Models\Predio;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PredioConsultaRequest;
 use App\Http\Resources\PredioPropietarioColindanciaResource;
