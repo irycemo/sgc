@@ -154,7 +154,8 @@ class AsignarClaveCatastral extends Component
                         'año' => now()->format('Y'),
                         'usuario' => $this->modelo_editar->valuadorAsignado->clave,
                         'folio' => (Avaluo::where('año', now()->format('Y'))->where('usuario', $this->modelo_editar->valuadorAsignado->clave)->max('folio') ?? 0) + 1,
-                        'creado_por' => auth()->id()
+                        'creado_por' => auth()->id(),
+                        'predio_ignorado_id' => $this->modelo_editar->id
                     ]);
 
                     $this->modelo_editar->update(['estado' => 'clave asignada', 'actualizado_por' => auth()->id()]);

@@ -206,7 +206,7 @@ class MisAvaluos extends Component
     public function render()
     {
 
-        $avaluos = Avaluo::with('predioAvaluo', 'creadoPor', 'actualizadoPor')
+        $avaluos = Avaluo::with('predioAvaluo', 'creadoPor', 'actualizadoPor', 'predioIgnorado', 'variacionCatastral')
                             ->where('asignado_a', auth()->user()->id)
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);

@@ -99,7 +99,23 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Estado</span>
 
-                            <span class="bg-{{ $avaluo->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($avaluo->estado) }}</span>
+                            <div class="text-center">
+
+                                <span class="bg-{{ $avaluo->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($avaluo->estado) }}</span>
+
+                                <br>
+
+                                @if($avaluo->predio_ignorado_id)
+
+                                    <span class="bg-green-400 px-2 rounded-full text-white text-xs">PI</span>
+
+                                @elseif($avaluo->variacion_catastral_id)
+
+                                    <span class="bg-green-400 px-2 rounded-full text-white text-xs">VC</span>
+
+                                @endif
+
+                            </div>
 
                         </x-table.cell>
 
@@ -219,6 +235,30 @@
                                             role="menuitem">
                                             Corregir
                                         </button>
+
+                                    @endif
+
+                                    @if($avaluo->predio_ignorado_id)
+
+                                        <a
+                                            href="{{ $avaluo->predioIgnorado->archivo() }}"
+                                            target="_blank"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Ver archivo
+                                        </a>
+
+                                    @endif
+
+                                    @if($avaluo->variacion_catastral_id)
+
+                                        <a
+                                            href="{{ $avaluo->variacionCatastral->archivo() }}"
+                                            target="_blank"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Ver archivo
+                                        </a>
 
                                     @endif
 

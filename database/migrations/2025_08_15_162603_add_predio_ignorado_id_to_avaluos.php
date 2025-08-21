@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('avaluos', function (Blueprint $table) {
             $table->foreignId('predio_ignorado_id')->after('notificado_en')->nullable()->references('id')->on('predio_ignorados');
+            $table->foreignId('variacion_catastral_id')->after('notificado_en')->nullable()->references('id')->on('variacion_catastrals');
         });
     }
 

@@ -227,7 +227,7 @@
 
                 <p class="">Ejemplo para una construcción: <strong>A:1:1:1:1:2:50</strong></p>
 
-                <p class="">Ejemplo para más de una construcción: <strong>A:1:1:1:1:2:50|B:1:1:1:2:3:20|B:1:1:1:3:2:30</strong></p>
+                <p class="">Ejemplo para más de una construcción: <strong>A:1:1:1:1:2:50|B:1:1:1:2:3:20|C:1:1:1:3:2:30</strong></p>
 
             </div>
 

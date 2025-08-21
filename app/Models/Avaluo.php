@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Tramite;
 use App\Models\PredioAvaluo;
 use App\Traits\ModelosTrait;
+use App\Models\PredioIgnorado;
+use App\Models\VariacionCatastral;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -51,6 +53,14 @@ class Avaluo extends Model implements Auditable
 
     public function tramiteDesglose(){
         return $this->belongsTo(Tramite::class, 'tramite_desglose');
+    }
+
+    public function predioIgnorado(){
+        return $this->belongsTo(PredioIgnorado::class, 'predio_ignorado_id');
+    }
+
+    public function variacionCatastral(){
+        return $this->belongsTo(VariacionCatastral::class, 'variacion_catastral_id');
     }
 
     public function imagenes(){

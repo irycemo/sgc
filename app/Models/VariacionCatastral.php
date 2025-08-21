@@ -8,6 +8,7 @@ use App\Models\Tramite;
 use App\Traits\ModelosTrait;
 use App\Models\Requerimiento;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class VariacionCatastral extends Model implements Auditable
@@ -47,6 +48,12 @@ class VariacionCatastral extends Model implements Auditable
 
     public function requerimientos(){
         return $this->morphMany(Requerimiento::class, 'requerimientoable');
+    }
+
+    public function archivo(){
+
+        return Storage::disk('variacionescatastrales')->url($this->archivo);
+
     }
 
 }
