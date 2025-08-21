@@ -76,6 +76,8 @@ class Traslados extends Component
 
         try {
 
+            $this->modelo_editar->load('rechazos.creadoPor');
+
             $this->modelo_editar->actualizado_por = auth()->id();
             $this->modelo_editar->save();
 

@@ -285,6 +285,7 @@
 
                     <div>
                         <p class="text-xs mb-1">Ley de la Función Registral y Catastral del Estado de Michoacán de Ocampo</p>
+                        <br>
                         {!! $rechazo->observaciones !!}
                     </div>
 
