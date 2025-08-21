@@ -136,13 +136,17 @@
 
                                     @can('Reasignar traslados')
 
-                                        <button
-                                            wire:click="abrirModalReasignar({{ $traslado->id }})"
-                                            wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                            role="menuitem">
-                                            Reasignar fiscal
-                                        </button>
+                                        @if($traslado->estado != 'operado')
+
+                                            <button
+                                                wire:click="abrirModalReasignar({{ $traslado->id }})"
+                                                wire:loading.attr="disabled"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                role="menuitem">
+                                                Reasignar fiscal
+                                            </button>
+
+                                        @endif
 
                                     @endcan
 
