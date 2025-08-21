@@ -46,6 +46,8 @@ class Traslados extends Component
 
         $this->modelo_editar = $traslado;
 
+        $this->modelo_editar->load('rechazos.creadoPor');
+
         $this->fiscales = User::whereHas('oficina', function($q) {
                                     $q->where('oficina', $this->modelo_editar->predio->oficina);
                                 })
@@ -75,8 +77,6 @@ class Traslados extends Component
         $this->validate();
 
         try {
-
-            $this->modelo_editar->load('rechazos.creadoPor');
 
             $this->modelo_editar->actualizado_por = auth()->id();
             $this->modelo_editar->save();
