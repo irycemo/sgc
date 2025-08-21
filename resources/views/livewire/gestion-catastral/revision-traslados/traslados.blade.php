@@ -155,7 +155,7 @@
 
                                     </a>
 
-                                    @if($traslado->estado == 'rechazado')
+                                    @if($traslado->rechazos_count)
 
                                         <button
                                             wire:click="abrirModalRechazos({{ $traslado->id }})"

@@ -98,6 +98,7 @@ class Traslados extends Component
         if(auth()->user()->hasRole(['Administrador', 'Jefe de departamento'])){
 
             return Traslado::with('actualizadoPor', 'asignadoA', 'predio')
+                                ->withCount(['rechazos'])
                                 ->when($this->estado, fn($q, $estado) => $q->where('estado', $estado))
                                 ->when($this->oficina, function($q) {
                                     $q->whereHas('predio', function($q) {
@@ -112,6 +113,7 @@ class Traslados extends Component
         }else{
 
             return Traslado::with('actualizadoPor', 'asignadoA', 'predio')
+                                ->withCount(['rechazos'])
                                 ->when($this->estado, fn($q, $estado) => $q->where('estado', $estado))
                                 ->where('entidad_nombre', 'LIKE', '%' . $this->search . '%')
                                 ->where('asignado_a', auth()->id())
