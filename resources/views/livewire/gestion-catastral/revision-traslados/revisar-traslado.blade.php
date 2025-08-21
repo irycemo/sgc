@@ -157,7 +157,7 @@
                     @foreach ($aviso['predio']['adquirientes'] as $adquiriente)
 
                         <tr class="text-gray-500 text-sm leading-relaxed">
-                            <td class=" px-2">(Adq.){{ $adquiriente['nombre'] ?? '' }} {{ $adquiriente['ap_paterno'] ?? '' }} {{ $adquiriente['ap_materno'] ?? '' }} {{ $adquiriente['razon_social'] ?? '' }}</td>
+                            <td class=" px-2">(Adq.){{ $adquiriente['persona']['nombre'] ?? '' }} {{ $adquiriente['persona']['ap_paterno'] ?? '' }} {{ $adquiriente['persona']['ap_materno'] ?? '' }} {{ $adquiriente['persona']['razon_social'] ?? '' }}</td>
                             <td class=" px-2">{{ $adquiriente['porcentaje_propiedad'] ?? '0' }}</td>
                             <td class=" px-2">{{ $adquiriente['porcentaje_nuda'] ?? '0' }} </td>
                             <td class=" px-2">{{ $adquiriente['porcentaje_usufructo'] ?? '0' }}</td>
