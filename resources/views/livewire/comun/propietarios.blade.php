@@ -10,7 +10,7 @@
 
             <div class="flex justify-end mb-2">
 
-                @if(!$this->avaluo_flag)
+                @if($this->editar_propietarios)
 
                     <div class="flex justify-end mb-2">
 
@@ -47,7 +47,7 @@
                                 <x-table.cell>
                                     <div class="flex items-center gap-3">
 
-                                        @if(!$this->avaluo_flag)
+                                        @if($this->editar_propietarios)
                                             <div>
 
                                                 <livewire:comun.propietario-actualizar :propietario="$propietario" :predio="$predio" wire:key="button-propietario-{{ $propietario->id }}" />

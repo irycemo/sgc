@@ -209,13 +209,13 @@ class MisAvaluos extends Component
 
         if($this->modelo_editar->predioIgnorado?->estado == 'concluido'){
 
-            throw new GeneralException('El proceso de predio ignorado ha sido conlcuido, no esposible enviar a corrección.');
+            throw new GeneralException('El proceso de predio ignorado ha sido conlcuido, no es posible enviar a corrección.');
 
         }
 
         if($this->modelo_editar->variacionCatastral?->estado == 'concluido'){
 
-            throw new GeneralException('El proceso de predio ignorado ha sido conlcuido, no esposible enviar a corrección.');
+            throw new GeneralException('El proceso de variación catastral ha sido conlcuido, no es posible enviar a corrección.');
 
         }
 

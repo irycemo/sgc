@@ -15,7 +15,7 @@ class Propietarios extends Component
 
     public $predio;
     public $avaluo_id;
-    public $avaluo_flag = false;
+    public $editar_propietarios = true;
 
     protected $listeners = ['refresh'];
 
@@ -24,9 +24,9 @@ class Propietarios extends Component
 
         $this->predio = PredioAvaluo::with('propietarios.persona')->find($id);
 
-        if(!$this->predio->avaluo->predio){
+        if($this->predio->avaluo->predio){
 
-            $this->avaluo_flag = true;
+            $this->editar_propietarios = false;
 
         }
 
