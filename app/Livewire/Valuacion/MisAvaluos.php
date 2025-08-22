@@ -36,11 +36,12 @@ class MisAvaluos extends Component
     public function abrirModalCorreccion(Avaluo $modelo){
 
         $this->resetearTodo();
-        $this->modalCorregir = true;
-        $this->editar = true;
 
         if($this->modelo_editar->isNot($modelo))
             $this->modelo_editar = $modelo;
+
+        $this->editar = true;
+        $this->modalCorregir = true;
 
     }
 
@@ -202,13 +203,13 @@ class MisAvaluos extends Component
 
     public function revisarProcesosConcluidos(){
 
-        if($this->modelo_editar->predioIgnorado->estado == 'concluido'){
+        if($this->modelo_editar->predioIgnorado?->estado == 'concluido'){
 
             throw new GeneralException('El proceso de predio ignorado ha sido conlcuido, no esposible enviar a corrección.');
 
         }
 
-        if($this->modelo_editar->variacionCatastral->estado == 'concluido'){
+        if($this->modelo_editar->variacionCatastral?->estado == 'concluido'){
 
             throw new GeneralException('El proceso de predio ignorado ha sido conlcuido, no esposible enviar a corrección.');
 
