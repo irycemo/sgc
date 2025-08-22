@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Valuacion;
 
+use App\Exceptions\GeneralException;
 use App\Models\File;
 use App\Models\Avaluo;
 use App\Models\Certificacion;
@@ -47,6 +48,8 @@ class MisAvaluos extends Component
 
 
         try {
+
+            $this->revisarProcesosConcluidos();
 
             DB::transaction(function () {
 
@@ -194,6 +197,22 @@ class MisAvaluos extends Component
             fn () => print($pdf),
             'avaluo.pdf'
         );
+
+    }
+
+    public function revisarProcesosConcluidos(){
+
+        if($this->modelo_editar->predioIgnorado->estado == 'concluido'){
+
+            throw new GeneralException('El proceso de predio ignorado ha sido conlcuido, no esposible enviar a corrección.');
+
+        }
+
+        if($this->modelo_editar->variacionCatastral->estado == 'concluido'){
+
+            throw new GeneralException('El proceso de predio ignorado ha sido conlcuido, no esposible enviar a corrección.');
+
+        }
 
     }
 
