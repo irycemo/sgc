@@ -49,7 +49,7 @@ class FichaTecnica extends Component
                 $failure->errors(); // Actual error messages from Laravel validator
                 $failure->values(); // The values of the row that has failed.
 
-                $this->dispatch('mostrarMensaje', ['error', "Error en la fila: " . $failure->row() . ", campo: " . $failure->attribute() ." ".$failure->errors()[0] ]);
+                $this->dispatch('mostrarMensaje', ['warning', "Error en la fila: " . $failure->row() + 2 . ", campo: " . $failure->attribute() ." ". $failure->errors()[0] ]);
 
                 break;
 

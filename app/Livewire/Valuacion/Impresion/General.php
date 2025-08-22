@@ -104,6 +104,8 @@ class General extends Component
 
         $this->años = Constantes::AÑOS;
 
+        $this->lista_avaluo_para = AvaluoPara::cases();
+
     }
 
     public function render()

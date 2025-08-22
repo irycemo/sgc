@@ -15,6 +15,7 @@ class Propietarios extends Component
 
     public $predio;
     public $avaluo_id;
+    public $avaluo_flag = false;
 
     protected $listeners = ['refresh'];
 
@@ -22,6 +23,12 @@ class Propietarios extends Component
     public function cargarPredioAvaluo($id){
 
         $this->predio = PredioAvaluo::with('propietarios.persona')->find($id);
+
+        if(!$this->predio->avaluo->predio){
+
+            $this->avaluo_flag = true;
+
+        }
 
         $this->dispatch('cargarModelo', [get_class($this->predio), $this->predio->id]);
 

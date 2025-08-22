@@ -14,6 +14,7 @@ trait ImpresionTrait
 {
 
     public int|null $avaluo_para;
+    public $lista_avaluo_para;
 
     public $años;
     public $numero_avaluos;

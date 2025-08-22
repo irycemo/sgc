@@ -10,11 +10,15 @@
 
             <div class="flex justify-end mb-2">
 
-                <div class="flex justify-end mb-2">
+                @if(!$this->avaluo_flag)
 
-                    @livewire('comun.propietario-crear', ['modelo' => $predio])
+                    <div class="flex justify-end mb-2">
 
-                </div>
+                        @livewire('comun.propietario-crear', ['modelo' => $predio])
+
+                    </div>
+
+                @endif
 
             </div>
 
@@ -42,16 +46,22 @@
                                 <x-table.cell>{{ $propietario->porcentaje_usufructo }}%</x-table.cell>
                                 <x-table.cell>
                                     <div class="flex items-center gap-3">
-                                        <div>
 
-                                            <livewire:comun.propietario-actualizar :propietario="$propietario" :predio="$predio" wire:key="button-propietario-{{ $propietario->id }}" />
+                                        @if(!$this->avaluo_flag)
+                                            <div>
 
-                                        </div>
-                                        <x-button-red
-                                            wire:click="borrarActor({{ $propietario->id }})"
-                                            wire:loading.attr="disabled">
-                                            Borrar
-                                        </x-button-red>
+                                                <livewire:comun.propietario-actualizar :propietario="$propietario" :predio="$predio" wire:key="button-propietario-{{ $propietario->id }}" />
+
+                                            </div>
+
+                                            <x-button-red
+                                                wire:click="borrarActor({{ $propietario->id }})"
+                                                wire:loading.attr="disabled">
+                                                Borrar
+                                            </x-button-red>
+
+                                        @endif
+
                                     </div>
                                 </x-table.cell>
 

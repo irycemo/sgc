@@ -185,6 +185,16 @@ class Captura extends Component
 
             }
 
+            if($this->predio->status != 'activo'){
+
+                $this->dispatch('mostrarMensaje', ['warning', "El predio no esta activo."]);
+
+                $this->crearModeloVacio();
+
+                return;
+
+            }
+
             $this->dispatch('cargarPredioPadron', $this->predio->id);
 
         } catch(ModelNotFoundException $e){
@@ -229,6 +239,16 @@ class Captura extends Component
             if($this->predio->status == 'baja'){
 
                 $this->dispatch('mostrarMensaje', ['warning', "El predio se encuentra dado de baja."]);
+
+                $this->crearModeloVacio();
+
+                return;
+
+            }
+
+            if($this->predio->status != 'activo'){
+
+                $this->dispatch('mostrarMensaje', ['warning', "El predio no esta activo."]);
 
                 $this->crearModeloVacio();
 

@@ -38,7 +38,7 @@ class Valuacion extends Component
 
     public $predio_padron;
     public $editar = false;
-    public $es_nuevo = false;
+    public $es_copia_editable = false;
 
     public PredioAvaluo $predio;
 
@@ -94,7 +94,7 @@ class Valuacion extends Component
 
     public function updatedEsNuevo(){
 
-        if($this->es_nuevo){
+        if($this->es_copia_editable){
 
             $this->predio->copia = false;
 
@@ -345,7 +345,7 @@ class Valuacion extends Component
                 $this->predio->actualizado_por = auth()->user()->id;
                 $this->predio->save();
 
-                if($this->predio->copia || $this->es_nuevo) $this->copiarRelaciones();
+                if($this->predio->copia || $this->es_copia_editable) $this->copiarRelaciones();
 
                 $avaluo = Avaluo::create([
                     'año' => now()->format('Y'),

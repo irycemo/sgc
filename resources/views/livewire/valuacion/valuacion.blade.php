@@ -57,7 +57,7 @@
 
                 <div class="flex items-center justify-center text-sm gap-3">
 
-                    <x-checkbox wire:model.live="es_nuevo"></x-checkbox>
+                    <x-checkbox wire:model.live="es_copia_editable"></x-checkbox>
                     <span> Predio nuevo</span>
 
                 </div>
