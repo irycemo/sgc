@@ -162,7 +162,7 @@ class AsignarClaveCatastral extends Component
 
                     $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Asignó clave catastral']);
 
-                    $this->dispatch('mostrarMensaje', ['success', "La clave catastral se asigno con éxito, se generó el avalúo de predio ignorado: " . $avaluo->año .'-' . $avaluo->folio . '-' . $avaluo->usuario. ' asignado al valuaodor: ' . $this->modelo_editar->valuadorAsignado->name]);
+                    $this->dispatch('mostrarMensaje', ['success', "La clave catastral se asignó con éxito, se generó el avalúo de predio ignorado: " . $avaluo->año .'-' . $avaluo->folio . '-' . $avaluo->usuario. ' asignado al valuador: ' . $this->modelo_editar->valuadorAsignado->name]);
 
                 });
 
