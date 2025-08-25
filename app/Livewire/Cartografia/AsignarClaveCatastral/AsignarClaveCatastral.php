@@ -144,7 +144,7 @@ class AsignarClaveCatastral extends Component
                         'departamento' =>  $this->departamento,
                         'numero_registro' => 0,
                         'tipo_predio' => $this->tipo_predio,
-                        'oficina' => $this->oficina
+                        'oficina' => $this->modelo_editar->oficina->oficina
                     ]);
 
                     $avaluo = Avaluo::create([

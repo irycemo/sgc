@@ -24,7 +24,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('consultar_propietarios', [ConsultarPropietariosController::class, 'consultarPropietariosCertificado']);
 
-    Route::post('consultar_tramite_aviso', [ConsultarTramiteAvisoController::class, 'consultarTramiteAviso']);
+    Route::post('consultar_tramite_aviso', [ConsultarTramiteAvisoController::class, 'consultarTramiteAvisoRevision']);
+
+    Route::post('consultar_tramite_aviso_aclaratorio', [ConsultarTramiteAvisoController::class, 'consultarTramiteAvisoAclaratorio']);
 
     Route::post('consultar_certificado_aviso', [ConsultarCertificadoAvisoController::class, 'consultarCertificadoAviso']);
 
