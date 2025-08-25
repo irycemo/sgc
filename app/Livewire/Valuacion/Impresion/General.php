@@ -106,6 +106,10 @@ class General extends Component
 
         $this->lista_avaluo_para = AvaluoPara::cases();
 
+        $this->desglose_año = now()->format('Y');
+
+        $this->inspeccion_año = now()->format('Y');
+
     }
 
     public function render()

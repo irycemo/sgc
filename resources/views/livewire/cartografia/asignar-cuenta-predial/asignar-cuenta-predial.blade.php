@@ -100,7 +100,7 @@
                 <x-input-select id="observaciones" wire:model="observaciones" class="w-full">
 
                     <option value="">Seleccione una opción</option>
-                    <option value="AVALUO PARA EFECTOS DE ACTULIZACION DE VALOR CATASTRAL POR SUBDIVICION AUTORIZADA POR LA SUOP OFICIO SUOP-DOU-RU-XXXXX  DE FECHA XX/XX/XXXX">
+                    <option value="AVALUO PARA EFECTOS DE ACTULIZACION DE VALOR CATASTRAL POR SUBDIVISION AUTORIZADA POR LA SUOP OFICIO SUOP-DOU-RU-XXXXX  DE FECHA XX/XX/XXXX">
                         AVALUO PARA EFECTOS DE ACTULIZACION DE VALOR CATASTRAL POR SUBDIVICION AUTORIZADA POR LA SUOP OFICIO SUOP-DOU-RU-XXXXX  DE FECHA XX/XX/XXXX
                     </option>
                     <option value="SURGE POR SUB-DIVISION AUTORIZADO POR EL MUNICIPIO EN OFICIO XXXX/XXXX, DE FECHA XX DE XXXXXXX DEL XXXX">

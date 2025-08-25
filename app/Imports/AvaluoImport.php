@@ -48,8 +48,8 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             'zona' => 'required|numeric|min:1',
             'manzana' => 'required|numeric|min:1',
             'predio' => 'required|numeric|min:1',
-            'edificio' => 'required|numeric|min:0',
-            'departamento' => 'required|numeric|min:0',
+            'edificio' => ['required', 'numeric', 'min:0', Rule::when('departamento' >= 1, 'min:1')],
+            'departamento' => ['required', 'numeric', 'min:0', Rule::when('edificio' >= 1, 'min:1')],
             'tipo' => 'required|numeric|min:1|max:2',
             'oficina' => 'required|numeric|min:1',
             'estado' => 'required',
@@ -120,7 +120,6 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
             DB::transaction(function () use($rows){
 
-
                 foreach ($rows as $key => $row)
                 {
 
@@ -177,6 +176,8 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                     if(isset($row['terrenos_comun'])){
 
                         $terrenosComun = $this->procesarTerrenosComun($row['terrenos_comun'], $key);
+
+                        $this->validarTerrenosComun($row, $terrenosComun);
 
                         $sumValorTerenosComun = $terrenosComun->sum('valor_terreno_comun');
 
@@ -633,6 +634,40 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
         }
 
         return collect($terrenosArreglo);
+
+    }
+
+    public function validarTerrenosComun($row, $terrenosComun):void
+    {
+
+        $prediosAvaluo = PredioAvaluo::with('terrenosComun')
+                                        ->where('estado', $row['estado'])
+                                        ->where('region_catastral', $row['region'])
+                                        ->where('municipio', $row['municipio'])
+                                        ->where('zona_catastral', $row['zona'])
+                                        ->where('localidad', $row['localidad'])
+                                        ->where('sector', $row['sector'])
+                                        ->where('manzana', $row['manzana'])
+                                        ->where('predio', $row['predio'])
+                                        ->get();
+
+        if($prediosAvaluo->count()){
+
+            foreach($terrenosComun as $terrenoComun){
+
+                foreach ($prediosAvaluo as $predioAvaluo) {
+
+                    if(! $predioAvaluo->terrenosComun()->where('area_terreno_comun', $terrenoComun['area_terreno_comun'])->first()){
+
+                        throw new GeneralException('Las áreas de los terrenos en común deben ser iguales.');
+
+                    }
+
+                }
+
+            }
+
+        }
 
     }
 

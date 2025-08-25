@@ -205,6 +205,51 @@ class MisAvaluos extends Component
 
     }
 
+    public function imprimirAvaluoPredioIgnorado(Avaluo $avaluo){
+
+        if(!$avaluo->predioAvaluo->colindancias->count()){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El avalúo no tiene colindancias."]);
+
+        }
+
+        if(!$avaluo->predioAvaluo->propietarios->count()){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El avalúo no tiene propietarios."]);
+
+        }
+
+        if(!$avaluo->predioAvaluo->valor_catastral){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El avalúo no tiene valor catastral."]);
+
+        }
+
+        $predio = $avaluo->predioAvaluo;
+
+        $predio->load('propietarios.persona');
+
+        $pdf = Pdf::loadView('avaluos.avaluo', compact('predio'));
+
+        $pdf->render();
+
+        $dom_pdf = $pdf->getDomPDF();
+
+        $canvas = $dom_pdf->get_canvas();
+
+        $canvas->page_text(480, 745, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+
+        $canvas->page_text(35, 745, "Avalúo: " . $avaluo->año . "-" . $avaluo->folio . "-" . $avaluo->usuario , null, 9, array(1, 1, 1));
+
+        $pdf = $dom_pdf->output();
+
+        return response()->streamDownload(
+            fn () => print($pdf),
+            'avaluo.pdf'
+        );
+
+    }
+
     public function revisarProcesosConcluidos(){
 
         if($this->modelo_editar->predioIgnorado?->estado == 'concluido'){
