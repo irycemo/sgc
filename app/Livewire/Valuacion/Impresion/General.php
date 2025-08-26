@@ -26,19 +26,10 @@ class General extends Component
             'desglose_folio' => Rule::requiredIf(in_array($this->avaluo_para, [6, 9]) && !auth()->user()->hasRole(['Convenio municipal'])),
             'desglose_usuario' => Rule::requiredIf(in_array($this->avaluo_para, [6, 9]) && !auth()->user()->hasRole(['Convenio municipal'])),
             'localidad' => 'required',
-            'tipo' => Rule::requiredIf($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO),
-            'registro_inicio' => Rule::requiredIf($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO),
-            'registro_final' => Rule::requiredIf($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO),
-            'region_catastral' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'municipio' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'zona_catastral' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'sector' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'manzana' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'predio' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'edificio' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'departamento' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO),
-            'registro_inicio' => ['nullable', 'lte:registro_final'],
-            'registro_final' => ['nullable', 'gte:registro_inicio']
+            'tipo' => Rule::requiredIf($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO->value),
+            'registro_inicio' => ['nullable', Rule::requiredIf($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO->value), Rule::when('registro_final' != null, 'lte:registro_final')],
+            'registro_final' => ['nullable', Rule::requiredIf($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO->value), Rule::when('registro_inicio' != null, 'gte:registro_inicio')],
+            'numero_registro' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO->value)
          ];
     }
 

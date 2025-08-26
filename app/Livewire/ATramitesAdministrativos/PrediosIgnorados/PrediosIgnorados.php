@@ -262,14 +262,15 @@ class PrediosIgnorados extends Component
 
     public function abrirAsignarValuador(PredioIgnorado $modelo){
 
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
         $this->valuadores = User::where('valuador', true)
                                     ->where('estado', 'activo')
                                     ->where('oficina_id', $this->modelo_editar->oficina_id)
                                     ->orderBy('name')
                                     ->get();
 
-        if($this->modelo_editar->isNot($modelo))
-            $this->modelo_editar = $modelo;
 
         $this->modalAsignarValuador = true;
 

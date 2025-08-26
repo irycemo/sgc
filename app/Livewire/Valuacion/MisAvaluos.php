@@ -207,9 +207,19 @@ class MisAvaluos extends Component
 
     public function imprimirAvaluoPredioIgnorado(Avaluo $avaluo){
 
+        if(!$avaluo->predioAvaluo->lat){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El avalúo no tiene coordenadas geográficas."]);
+
+            return;
+
+        }
+
         if(!$avaluo->predioAvaluo->colindancias->count()){
 
             $this->dispatch('mostrarMensaje', ['warning', "El avalúo no tiene colindancias."]);
+
+            return;
 
         }
 
@@ -217,13 +227,26 @@ class MisAvaluos extends Component
 
             $this->dispatch('mostrarMensaje', ['warning', "El avalúo no tiene propietarios."]);
 
+            return;
+
+        }
+
+        if(!$avaluo->clasificacion_zona){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El avalúo no tiene caracteristicas."]);
+
+            return;
+
         }
 
         if(!$avaluo->predioAvaluo->valor_catastral){
 
             $this->dispatch('mostrarMensaje', ['warning', "El avalúo no tiene valor catastral."]);
 
+            return;
+
         }
+
 
         $predio = $avaluo->predioAvaluo;
 

@@ -39,6 +39,7 @@ trait ImpresionTrait
     public $registro_inicio;
     public $registro_final;
     public $region_catastral;
+    public $numero_registro;
     public $municipio;
     public $sector;
     public $zona_catastral;
@@ -181,8 +182,7 @@ trait ImpresionTrait
 
     public function buscarPredios(){
 
-
-        if($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO){
+        if($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO->value){
 
             $this->avaluos = Avaluo::withWhereHas('predioAvaluo', function($q){
                                     $q->where('localidad', $this->localidad)
@@ -266,22 +266,16 @@ trait ImpresionTrait
 
         }else{
 
-            $this->avaluo_predio_ignorado = Avaluo::withWhereHas('predioAvaluo', function($q){
-                                                $q->where('localidad', $this->localidad)
-                                                    ->where('localidad', $this->localidad)
-                                                    ->where('region_catastral', $this->region_catastral)
-                                                    ->where('municipio', $this->municipio)
-                                                    ->where('zona_catastral', $this->zona_catastral)
-                                                    ->where('sector', $this->sector)
-                                                    ->where('manzana', $this->manzana)
-                                                    ->where('predio', $this->predio)
-                                                    ->where('edificio', $this->edificio)
-                                                    ->where('departamento', $this->departamento)
-                                                    ->whereHas('avaluo', function($q){
-                                                        $q->where('estado', '!=', 'notificado');
-                                                    });
-                                            })
-                                            ->first();
+             $this->avaluos = Avaluo::where('estado', '!=', 'notificado')
+                                                        ->withWhereHas('predioAvaluo', function($q){
+                                                            $q->where('localidad', $this->localidad)
+                                                                ->where('oficina', $this->oficina)
+                                                                ->where('tipo_predio', $this->tipo)
+                                                                ->where('numero_registro', $this->numero_registro);
+                                                        })
+                                                        ->get();
+
+            $this->avaluo_predio_ignorado = $this->avaluos->first();
 
             if(!$this->avaluo_predio_ignorado) throw new GeneralException('No se encontró el avalúo para la clave catastral.');
 
