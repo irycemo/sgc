@@ -83,11 +83,15 @@ trait ConstruccionesTrait
 
     public function guardarConstrucciones(){
 
-        if($this->predio?->avaluo?->estado == 'notificado'){
+        if(isset($this->predio->avaluo)){
 
-            $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
+            if($this->predio?->avaluo?->estado == 'notificado'){
 
-            return;
+                $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
+
+                return;
+
+            }
 
         }
 
@@ -154,6 +158,7 @@ trait ConstruccionesTrait
                 $this->predio->update([
                     'superficie_construccion' => $sum2,
                     'valor_total_construccion' => $sum,
+                    'superficie_total_construccion' => $sum2 + $this->predio->construccionesComun->sum('superficie_proporcional')
                 ]);
 
                 $this->dispatch('mostrarMensaje', ['success', "Las construcciones se guardaron con éxito"]);
@@ -168,6 +173,8 @@ trait ConstruccionesTrait
     }
 
     public function cargarConstrucciones(){
+
+        $this->reset('construcciones');
 
         foreach ($this->predio->construcciones as $construccion) {
 

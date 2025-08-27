@@ -72,11 +72,15 @@ trait TerrenosComunTrait
 
     public function guardarTerrenosComun(){
 
-        if($this->predio?->avaluo?->estado == 'notificado'){
+        if(isset($this->predio->avaluo)){
 
-            $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
+            if($this->predio?->avaluo?->estado == 'notificado'){
 
-            return;
+                $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
+
+                return;
+
+            }
 
         }
 
@@ -131,6 +135,7 @@ trait TerrenosComunTrait
 
                 $this->predio->area_comun_terreno = $sum2;
                 $this->predio->valor_terreno_comun = $sum;
+                $this->predio->superficie_total_terreno =  $sum2 + $this->predio->terrenos->sum('superficie');
 
                 $this->predio->valor_total_terreno = $sum + $this->predio->terrenos->sum('valor_terreno');
 
@@ -150,6 +155,8 @@ trait TerrenosComunTrait
     }
 
     public function cargarTerrenosComun(){
+
+        $this->reset('terrenosComun');
 
         foreach ($this->predio->terrenosComun as $terreno) {
 

@@ -72,11 +72,15 @@ trait ConstruccionesComunTrait
 
     public function guardarConstruccionComun(){
 
-        if($this->predio?->avaluo?->estado == 'notificado'){
+        if(isset($this->predio->avaluo)){
 
-            $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
+            if($this->predio?->avaluo?->estado == 'notificado'){
 
-            return;
+                $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
+
+                return;
+
+            }
 
         }
 
@@ -131,6 +135,7 @@ trait ConstruccionesComunTrait
 
                 $this->predio->area_comun_construccion = $sum2;
                 $this->predio->valor_construccion_comun = $sum;
+                $this->predio->superficie_total_construccion = $sum2 + $this->predio->construccionesComun->sum('superficie');
 
                 $this->predio->valor_total_construccion = $this->predio->superficie_construccion + $sum;
 
@@ -150,6 +155,8 @@ trait ConstruccionesComunTrait
     }
 
     public function cargarConstruccionesComun(){
+
+        $this->reset('construccionesComun');
 
         foreach ($this->predio->construccionesComun as $construccion) {
 

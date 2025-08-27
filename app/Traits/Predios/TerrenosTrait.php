@@ -78,11 +78,15 @@ trait TerrenosTrait
 
     public function guardarTerrenos(){
 
-        if($this->predio?->avaluo?->estado == 'notificado'){
+        if(isset($this->predio->avaluo)){
 
-            $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
+            if($this->predio?->avaluo?->estado == 'notificado'){
 
-            return;
+                $this->dispatch('mostrarMensaje', ['error', "No puedes modificar un avalúo notificado."]);
+
+                return;
+
+            }
 
         }
 
@@ -136,6 +140,7 @@ trait TerrenosTrait
 
                 $this->predio->update([
                     'superficie_terreno' => $sum2,
+                    'superficie_total_terreno' => $sum2 + $this->predio->terrenosComun->sum('superficie_proporcional'),
                     'valor_total_terreno' => $sum + $this->predio->terrenosComun->sum('valor_terreno_comun'),
                 ]);
 
@@ -152,6 +157,8 @@ trait TerrenosTrait
 
     public function cargarTerrenos(){
 
+        $this->reset('terrenos');
+
         foreach ($this->predio->terrenos as $terreno) {
 
             $this->terrenos[] = [
@@ -167,22 +174,26 @@ trait TerrenosTrait
 
         $this->porcentajeDemerito = null;
 
-        if(!$this->predio->avaluo->agua)
-            $this->porcentajeDemerito = 5;
-        if(!$this->predio->avaluo->drenaje)
-            $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
-        if(!$this->predio->avaluo->pavimento)
-            $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
-        if(!$this->predio->avaluo->energia_electrica)
-            $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
-        if(!$this->predio->avaluo->alumbrado_publico)
-            $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
-        if(!$this->predio->avaluo->banqueta)
-            $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
+        if(isset($this->predio->avaluo)){
 
-        foreach ($this->terrenos as $terreno) {
+            if(!$this->predio->avaluo->agua)
+                $this->porcentajeDemerito = 5;
+            if(!$this->predio->avaluo->drenaje)
+                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
+            if(!$this->predio->avaluo->pavimento)
+                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
+            if(!$this->predio->avaluo->energia_electrica)
+                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
+            if(!$this->predio->avaluo->alumbrado_publico)
+                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
+            if(!$this->predio->avaluo->banqueta)
+                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
 
-            $terreno['demerito'] = $this->porcentajeDemerito;
+            foreach ($this->terrenos as $terreno) {
+
+                $terreno['demerito'] = $this->porcentajeDemerito;
+
+            }
 
         }
 

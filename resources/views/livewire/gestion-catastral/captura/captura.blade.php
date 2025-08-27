@@ -27,6 +27,17 @@
             >Propietarios
             </label>
 
+            @if($predio?->edificio)
+
+                <label
+                    @click="activeTab = 3"
+                    class="px-6 py-1 text-gray-600 rounded-xl border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white"
+                    :class="{'active  bg-gray-200 rounded-full px-3 py-1 text-gray-500 no-underline': activeTab === 3 }"
+                >Terrenos - Construcciones
+                </label>
+
+            @endif
+
         </div>
 
         <div x-cloak class="tab-panel" :class="{ 'active': activeTab === 0 }" x-show.transition.in.opacity.duration.800="activeTab === 0"  wire:key="tab-0">
@@ -328,6 +339,12 @@
             @include('livewire.comun.errores')
 
             @include('livewire.gestion-catastral.captura.comun.guardar-actualizar')
+
+        </div>
+
+        <div x-cloak class="tab-panel" :class="{ 'active': activeTab === 3 }" x-show.transition.in.opacity.duration.800="activeTab === 3"  wire:key="tab-3">
+
+            @livewire('gestion-catastral.captura.terrenos-construcciones')
 
         </div>
 
