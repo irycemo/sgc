@@ -19,14 +19,14 @@ class ConsultarTramiteAvisoController extends Controller
                                 ->where('folio', $validated['folio'])
                                 ->where('usuario', $validated['usuario'])
                                 ->whereHas('servicio', function($q){
-                                    $q->where('clave_ingreso', 'D730');
+                                    $q->whereIn('clave_ingreso', ['D729', 'D728']);
                                 })
                                 ->first();
 
         if(!$tramite){
 
             return response()->json([
-                'error' => "El trámite de aviso no existe.",
+                'error' => "El trámite de revisión de aviso no existe.",
             ], 404);
 
         }
@@ -34,7 +34,7 @@ class ConsultarTramiteAvisoController extends Controller
         if($tramite->estado != 'pagado'){
 
             return response()->json([
-                'error' => "El trámite de aviso no esta pagado.",
+                'error' => "El trámite de revisión de aviso no esta pagado.",
             ], 401);
 
         }
@@ -68,14 +68,14 @@ class ConsultarTramiteAvisoController extends Controller
                                 ->where('folio', $validated['folio'])
                                 ->where('usuario', $validated['usuario'])
                                 ->whereHas('servicio', function($q){
-                                    $q->whereIn('clave_ingreso', ['D729', 'D728']);
+                                    $q->where('clave_ingreso', 'D730');
                                 })
                                 ->first();
 
         if(!$tramite){
 
             return response()->json([
-                'error' => "El trámite de aviso no existe.",
+                'error' => "El trámite de aviso aclaratorio no existe.",
             ], 404);
 
         }
@@ -83,7 +83,7 @@ class ConsultarTramiteAvisoController extends Controller
         if($tramite->estado != 'pagado'){
 
             return response()->json([
-                'error' => "El trámite de aviso no esta pagado.",
+                'error' => "El trámite de aviso aclaratorio no esta pagado.",
             ], 401);
 
         }

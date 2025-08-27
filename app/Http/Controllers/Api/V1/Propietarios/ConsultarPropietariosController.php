@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1\Propietarios;
 
+use App\Models\Predio;
 use App\Models\Tramite;
+use Illuminate\Http\Request;
+use App\Models\Certificacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ConsultarPropietariosRequest;
-use App\Models\Certificacion;
+use App\Http\Resources\PropietariosResource;
 
 class ConsultarPropietariosController extends Controller
 {
@@ -46,6 +49,14 @@ class ConsultarPropietariosController extends Controller
 
         }
 
+        if($predio->status != 'activo'){
+
+            return response()->json([
+                'error' => "El predio no esta activo.",
+            ], 401);
+
+        }
+
         $certificacion = Certificacion::where('tramite_id', $tramite->id)->where('predio_id', $predio->id)->first();
 
         $data = json_decode($certificacion->cadena_original, true);
@@ -53,6 +64,32 @@ class ConsultarPropietariosController extends Controller
         return response()->json([
             'data' => $data['predio']['propietarios'],
         ], 200);
+
+    }
+
+    public function consultarPropietariosPredioId(Request $request){
+
+        $validated = $request->validate(['id' => 'required|numeric|min:1']);
+
+        $predio = Predio::find($validated['id']);
+
+        if(!$predio){
+
+            return response()->json([
+                'error' => "El predio no existe.",
+            ], 404);
+
+        }
+
+        if($predio->status != 'activo'){
+
+            return response()->json([
+                'error' => "El predio no esta activo.",
+            ], 401);
+
+        }
+
+        return PropietariosResource::collection($predio->propietarios)->response()->setStatusCode(200);
 
     }
 

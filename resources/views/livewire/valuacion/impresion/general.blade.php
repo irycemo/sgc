@@ -94,7 +94,7 @@
 
         <div class="p-4 flex-auto bg-white rounded-lg mb-3 shadow-md space-y-3">
 
-            <h4 class="text-lg mb-5 text-center">Cuenta prediale</h4>
+            <h4 class="text-lg mb-5 text-center">Cuenta predial</h4>
 
             <div class="flex flex-wrap space-x-1 justify-center items-center">
 

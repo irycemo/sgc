@@ -24,6 +24,8 @@ class IngresarRevisionAvisoRequest extends FormRequest
         return [
             'predio_id' => 'required',
             'tramite_aviso' => 'required',
+            'certificacion_id' => 'required',
+            'avaluo_spe' => 'required',
             'aviso_stl' => 'required',
             'entidad_stl' => 'required',
             'entidad_nombre' => 'required',

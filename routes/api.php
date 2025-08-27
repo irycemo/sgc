@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\Tramites\ConsultarTramitesController;
 use App\Http\Controllers\Api\V1\Traslados\IngresarTrasladoController;
 use App\Http\Controllers\Api\V1\Traslados\ConsultarRechazosController;
 use App\Http\Controllers\Api\V1\Traslados\InactivarTrasladoController;
+use App\Http\Controllers\Api\V1\Traslados\RegistrarPagoIsaiController;
 use App\Http\Controllers\Api\V1\Servicios\ConsultarServiciosController;
 use App\Http\Controllers\Api\V1\Tramites\ConsultarTramiteAvisoController;
 use App\Http\Controllers\Api\V1\Requerimientos\CrearRequerimientoController;
@@ -23,6 +24,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('consulta_cuenta_predial', [ConsultarPredioController::class, 'consultarCuentaPredial']);
 
     Route::post('consultar_propietarios', [ConsultarPropietariosController::class, 'consultarPropietariosCertificado']);
+
+    Route::post('consultar_propietarios_predio_id', [ConsultarPropietariosController::class, 'consultarPropietariosPredioId']);
 
     Route::post('consultar_tramite_aviso', [ConsultarTramiteAvisoController::class, 'consultarTramiteAvisoRevision']);
 
@@ -51,5 +54,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('generar_certificado_pdf', [GenerarCertificadoPdfController::class, 'generarPdf']);
 
     Route::post('acreditar_pago', [AcreditarPagoController::class, 'acreditarPago']);
+
+    Route::post('registrar_pago_isai', [RegistrarPagoIsaiController::class, 'registrarPagoIsai']);
 
 });

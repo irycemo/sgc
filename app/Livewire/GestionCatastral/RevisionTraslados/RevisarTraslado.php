@@ -97,7 +97,11 @@ class RevisarTraslado extends Component
 
             (new SistemaTramitesLineaService())->autorizarAviso($this->traslado->aviso_stl, $this->observaciones);
 
-            $this->traslado->update(['estado' => 'autorizado', 'actualizado_por' => auth()->id()]);
+            $this->traslado->update([
+                'valor_isai' => $this->aviso['valor_isai'],
+                'estado' => 'autorizado',
+                'actualizado_por' => auth()->id()
+            ]);
 
             $this->traslado->audits()->latest()->first()->update(['tags' => 'Autorizó traslado']);
 
@@ -119,6 +123,8 @@ class RevisarTraslado extends Component
     public function operarTraslado(){
 
         try {
+
+            $this->revisarPagoIsai();
 
             $this->revisarProcentajes();
 
@@ -474,6 +480,16 @@ class RevisarTraslado extends Component
                 }
 
             }
+
+        }
+
+    }
+
+    public function revisarPagoIsai(){
+
+        if($this->traslado->valor_isai > 0 && !$this->traslado->pago_isai){
+
+            throw new GeneralException('No se tiene registro del pago de ISAI.');
 
         }
 

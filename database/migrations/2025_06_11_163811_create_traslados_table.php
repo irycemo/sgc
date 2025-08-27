@@ -19,6 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('aviso_stl')->index();
             $table->unsignedBigInteger('entidad_stl')->index();
             $table->string('entidad_nombre');
+            $table->boolean('pago_isai')->default(false);
+            $table->unsignedBigInteger('valor_isai')->nullable();
             $table->foreignId('predio_id')->constrained();
             $table->foreignId('certificacion_id')->nullable()->constrained();
             $table->foreignId('tramite_aviso')->references('id')->on('tramites');

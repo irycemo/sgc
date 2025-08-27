@@ -18,7 +18,7 @@ use App\Services\Asignacion\AsignacionTrasladosService;
 class IngresarTrasladoController extends Controller
 {
 
-    public function ingresarAvisoAclaratorio(IngresarAvisoAclaratorioRequest $request){
+    public function ingresarRevisionAviso(IngresarRevisionAvisoRequest $request){
 
         $validated = $request->validated();
 
@@ -82,13 +82,13 @@ class IngresarTrasladoController extends Controller
 
     }
 
-    public function ingresarRevisionAviso(IngresarRevisionAvisoRequest $request){
+    public function ingresarAvisoAclaratorio(IngresarAvisoAclaratorioRequest $request){
 
         $validated = $request->validated();
 
         $predio = Predio::find($validated['predio_id']);
 
-        $oficina = Oficina::where('oficina', $predio->oficina)->first();
+        $oficina = Oficina::where('oficina', $predio->oficina)->where('localidad', $predio->localidad)->first();
 
         try {
 
@@ -112,7 +112,7 @@ class IngresarTrasladoController extends Controller
                                             'aviso_stl' => $validated['aviso_stl'],
                                             'entidad_stl' => $validated['entidad_stl'],
                                             'entidad_nombre' => $validated['entidad_nombre'],
-                                            'asignado_a' => (new AsignacionTrasladosService())->obtenerUsuariosTraslado($oficina->id)
+                                            'asignado_a' => (new AsignacionTrasladosService())->obtenerUsuariosTraslado($oficina->id, $validated['predio_id'])
                                         ]
                                     );
 
@@ -128,7 +128,7 @@ class IngresarTrasladoController extends Controller
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al ingresar información de revisión de aviso desde Sistema Trámites en Lína." . $th);
+            Log::error("Error al ingresar información de aviso aclaratorio desde Sistema Trámites en Lína." . $th);
 
             return response()->json([
                 'error' => 'Hubo un error al ingresar la información.',

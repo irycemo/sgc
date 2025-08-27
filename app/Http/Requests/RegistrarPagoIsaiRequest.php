@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class IngresarAvisoAclaratorioRequest extends FormRequest
+class RegistrarPagoIsaiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,14 @@ class IngresarAvisoAclaratorioRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'predio_id' => 'required',
-            'tramite_aviso' => 'required',
-            'aviso_stl' => 'required',
-            'entidad_stl' => 'required',
-            'entidad_nombre' => 'required',
+            'localidad' => 'required|numeric|min:1',
+            'oficina' => 'required|numeric|min:1',
+            'tipo_predio' => 'required|numeric|min:1',
+            'numero_registro' => 'required|numeric|min:1',
+            'año_aviso' => 'required|numeric|min:1',
+            'folio_aviso' => 'required|numeric|min:1',
+            'usuario_aviso' => 'required|numeric|min:1',
+            'valor_isai' => 'required|numeric'
         ];
     }
 }
