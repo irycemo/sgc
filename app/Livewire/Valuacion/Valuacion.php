@@ -92,7 +92,7 @@ class Valuacion extends Component
         ]);
     }
 
-    public function updatedEsNuevo(){
+    public function updatedEsCopiaEditable(){
 
         if($this->es_copia_editable){
 
