@@ -163,6 +163,8 @@ trait ConstruccionesTrait
 
                 $this->dispatch('mostrarMensaje', ['success', "Las construcciones se guardaron con éxito"]);
 
+                $this->dispatch('recargarPredio');
+
             });
 
         } catch (\Throwable $th) {

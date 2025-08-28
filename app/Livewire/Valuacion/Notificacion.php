@@ -172,12 +172,12 @@ class Notificacion extends Component
 
             $predio = Predio::find($this->avaluo->predio);
 
-            $predio_fusionante->update([
+            $predio->update([
                 'status' => 'baja',
                 'actualizado_por' => auth()->id(),
             ]);
 
-            $predio_fusionante->movimientos()->create([
+            $predio->movimientos()->create([
                 'nombre' => $this->tramite->avaluo_para->label(),
                 'fecha' => $this->fecha_notificacion,
                 'descripcion' => 'Se da de baja el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . ' por cambio de regimen.',
