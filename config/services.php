@@ -23,6 +23,8 @@ return [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+        'ruta_predios' => 'sgc/predios/',
+        'ruta_certificaciones' => 'sgc/certificaciones/',
     ],
 
     'resend' => [
@@ -60,6 +62,11 @@ return [
         'generar_avaluo_pdf' => env('SISTEMA_PERITOS_EXTERNOS_GENERAR_AVALUO_PDF'),
         'consultar_cartografia' => env('SISTEMA_PERITOS_EXTERNOS_CONSULTAR_CARTOGRAFIA'),
         'validar_cartografia' => env('SISTEMA_PERITOS_EXTERNOS_VALIDAR_CARTOGRAFIA'),
+    ],
+
+    'consulta_archivos_anterior' => [
+        'archivos_url' => env('CONSULTA_ARCHIVOS_ANTERIOR_URL'),
+        'cartografia_url' => env('CONSULTA_CARTOGRAFIA_ANTERIOR_URL'),
     ],
 
 ];

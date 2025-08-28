@@ -63,7 +63,7 @@
 
             <div class="mb-5 text-sm">
 
-                <p class="p-2 border border-red-500 text-red-500 font-semibold rounded-xl text-center w-full mx-auto lg:w-1/2 mb-4">No se puede expedir un certificado negativo de registro se encontro la siguiente información:</p>
+                <p class="p-2 border border-red-500 text-red-500 font-semibold rounded-xl text-center w-full mx-auto lg:w-1/2 mb-4">No se puede expedir un certificado negativo de registro, se encontro la siguiente información:</p>
 
                 <div class="flex flex-col lg:flex-row gap-3 justify-center w-full mx-auto lg:w-1/2">
 
@@ -87,8 +87,7 @@
 
                         <strong>Propietario</strong>
 
-                        <p>{{ $predio->primerPropietario() }}</p>
-                        <p>
+                        <p class="uppercase">
                             {{ $nombre }} {{ $ap_paterno }} {{ $ap_materno }} {{ $razon_social }}
                         </p>
 

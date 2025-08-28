@@ -11,9 +11,7 @@ use App\Constantes\Constantes;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Exceptions\GeneralException;
 use App\Http\Controllers\Certificaciones\CertificadoNegativoController;
-use Endroid\QrCode\Writer\PngWriter;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CertificadoNegativo extends Component

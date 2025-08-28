@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\File;
 use App\Models\Bloqueo;
 use App\Models\Terreno;
 use App\Models\Movimiento;
@@ -61,6 +62,12 @@ class Predio extends Model implements Auditable
 
     public function bloqueos(){
         return $this->hasMany(Bloqueo::class);
+    }
+
+    public function archivos(){
+
+        return $this->morphMany(File::class, 'fileable');
+
     }
 
     public function cuentaPredial(){

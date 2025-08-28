@@ -62,9 +62,9 @@ trait CrearImagenTrait
         $combined = $all->appendImages(true);
         $combined->setImageFormat("jpg");
 
-        if(config('services.ses.AWS_FLAG')){
+        if(app()->isProduction()){
 
-            $nombre = $combined->store('sgc/certificaciones/', 's3');
+            $nombre = $combined->store(config('services.ses.ruta_certificaciones'), 's3');
 
         }else{
 
@@ -76,7 +76,7 @@ trait CrearImagenTrait
             'fileable_id' => $certificacion->id,
             'fileable_type' => 'App\Models\Certificacion',
             'descripcion' => 'certificacion',
-            'url' => $nombre
+            'url' => $nombre . '.jpg'
         ]);
 
         unlink('certificaciones/' . $nombreFinal);

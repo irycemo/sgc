@@ -2,6 +2,7 @@
 
     <x-slot name="head">
         <x-table.heading >Nombre / Razón social</x-table.heading>
+        <x-table.heading >RFC / CURP</x-table.heading>
         <x-table.heading ></x-table.heading>
     </x-slot>
 
@@ -12,6 +13,7 @@
             <x-table.row wire:key="row-{{ $persona->id }}">
 
                 <x-table.cell>{{ $persona->nombre }} {{ $persona->ap_paterno }} {{ $persona->ap_materno }} {{ $persona->razon_social }}</x-table.cell>
+                <x-table.cell>{{ $persona->rfc ?? 'N/A' }} / {{ $persona->curp ?? 'N/A' }}</x-table.cell>
                 <x-table.cell>
                     <div class="flex items-center gap-3">
                         <x-button-green
