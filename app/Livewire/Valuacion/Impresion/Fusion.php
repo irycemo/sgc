@@ -180,6 +180,8 @@ class Fusion extends Component
 
         $this->desglose_año = now()->format('Y');
 
+        $this->lista_avaluo_para = AvaluoPara::cases();
+
     }
 
     public function render()
