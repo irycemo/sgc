@@ -243,8 +243,6 @@ class Conciliar extends Component
 
         try {
 
-            $this->validarSector();
-
             $this->predio->region_catastral = $this->region_catastral;
             $this->predio->municipio = $this->municipio;
             $this->predio->zona_catastral = $this->zona_catastral;
@@ -257,6 +255,8 @@ class Conciliar extends Component
             $this->predio->oficina = $this->predio->oficina;
             $this->predio->tipo_predio = $this->predio->tipo_predio;
             $this->predio->numero_registro = $this->predio->numero_registro;
+
+            $this->validarSector();
 
             $this->predio->save();
 
