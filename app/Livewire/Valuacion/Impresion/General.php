@@ -54,6 +54,12 @@ class General extends Component
                         'estado' => 'impreso'
                     ]);
 
+                    if($this->tramite_inspeccion->avaluo_para === AvaluoPara::CAMBIO_REGIMEN){
+
+                        $this->tramite_inspeccion->predios()->attach($this->avaluos->first()->predio);
+
+                    }
+
                     $avaluo->predioAvaluo->update(['status' => 'impreso']);
 
                     $avaluo->audits()->latest()->first()->update(['tags' => 'Imprimió avalúo', 'tramite_id' => $this->tramite_inspeccion?->id]);

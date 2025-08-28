@@ -170,14 +170,14 @@ class Notificacion extends Component
 
         if($this->tramite->avaluo_para === AvaluoPara::CAMBIO_REGIMEN){
 
-            $predio = Predio::find($this->avaluo->predio);
+            $predio_rustico = Predio::find($this->tramite->predios->first()->id);
 
-            $predio->update([
+            $predio_rustico->update([
                 'status' => 'baja',
                 'actualizado_por' => auth()->id(),
             ]);
 
-            $predio->movimientos()->create([
+            $predio_rustico->movimientos()->create([
                 'nombre' => $this->tramite->avaluo_para->label(),
                 'fecha' => $this->fecha_notificacion,
                 'descripcion' => 'Se da de baja el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . ' por cambio de regimen.',

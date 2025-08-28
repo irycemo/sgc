@@ -103,7 +103,7 @@ class MisAvaluos extends Component
 
             });
 
-            $this->modalCorregir = true;
+            $this->modalCorregir = false;
 
             $this->dispatch('mostrarMensaje', ['success', "Los avaluos y trámites han sido reactivados con éxito. La notificación de valor catastral ha sido cancelada"]);
 

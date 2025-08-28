@@ -228,6 +228,10 @@
                                             Imprimir
                                         </button>
 
+                                    @endif
+
+                                    @if($avaluo->estado == 'impreso')
+
                                         <button
                                             wire:click="abrirModalCorreccion({{ $avaluo->id }})"
                                             wire:loading.attr="disabled"
@@ -370,7 +374,7 @@
         <x-slot name="footer">
 
             <x-secondary-button
-                wire:click="$toggle('modal')"
+                wire:click="$toggle('modalCorregir')"
                 wire:loading.attr="disabled"
             >
                 No

@@ -8,12 +8,13 @@ use App\Models\Predio;
 use App\Models\Notaria;
 use App\Models\Oficina;
 use Livewire\Component;
+use Livewire\Attributes\On;
 use App\Constantes\Constantes;
-use App\Exceptions\GeneralException;
 use Illuminate\Validation\Rule;
 use App\Models\FactorIncremento;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Exceptions\GeneralException;
 use App\Traits\Predios\ValidarSector;
 use App\Traits\Predios\CoordenadasTrait;
 use App\Traits\Predios\ValidarCuentaAsignada;
@@ -484,6 +485,13 @@ class Captura extends Component
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 
         }
+
+    }
+
+    #[On('recargarPredio')]
+    public function recargarPredio(){
+
+        $this->predio->refresh();
 
     }
 
