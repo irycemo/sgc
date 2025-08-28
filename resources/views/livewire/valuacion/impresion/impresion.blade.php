@@ -24,15 +24,15 @@
 
     @if(in_array($avaluo_para, [1,2,6,7,9]))
 
-        @livewire('valuacion.impresion.general', ['avaluo_para' => $avaluo_para])
+        @livewire('valuacion.impresion.general', ['avaluo_para' => $avaluo_para, 'lista_avaluo_para' => $lista_avaluo_para])
 
     @elseif(in_array($avaluo_para, [3,4,5]))
 
-        @livewire('valuacion.impresion.desglose', ['avaluo_para' => $avaluo_para])
+        @livewire('valuacion.impresion.desglose', ['avaluo_para' => $avaluo_para, 'lista_avaluo_para' => $lista_avaluo_para])
 
     @elseif(in_array($avaluo_para, [8]))
 
-        @livewire('valuacion.impresion.fusion', ['avaluo_para' => $avaluo_para])
+        @livewire('valuacion.impresion.fusion', ['avaluo_para' => $avaluo_para, 'lista_avaluo_para' => $lista_avaluo_para])
 
     @endif
 

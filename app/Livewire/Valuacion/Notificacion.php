@@ -168,6 +168,24 @@ class Notificacion extends Component
 
         }
 
+        if($this->tramite->avaluo_para === AvaluoPara::CAMBIO_REGIMEN){
+
+            $predio = Predio::find($this->avaluo->predio);
+
+            $predio_fusionante->update([
+                'status' => 'baja',
+                'actualizado_por' => auth()->id(),
+            ]);
+
+            $predio_fusionante->movimientos()->create([
+                'nombre' => $this->tramite->avaluo_para->label(),
+                'fecha' => $this->fecha_notificacion,
+                'descripcion' => 'Se da de baja el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . ' por cambio de regimen.',
+                'creado_por' => auth()->id()
+            ]);
+
+        }
+
     }
 
     public function creaPredio(){

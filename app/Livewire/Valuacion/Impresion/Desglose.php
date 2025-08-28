@@ -154,6 +154,8 @@ class Desglose extends Component
 
         $this->desglose_año = now()->format('Y');
 
+        dd($this->lista_avaluo_para);
+
     }
 
     public function render()
