@@ -72,7 +72,7 @@ class ArchivoPredioService{
 
     public function guardarConUrl($archivo_nuevo){
 
-        if(!$this->predio){
+        if(!$this->predio->getKey()){
 
             throw new GeneralException('El predio es obligatorio para guardar el documento.');
 

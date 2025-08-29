@@ -2,16 +2,19 @@
 
 namespace App\Livewire\GestionCatastral\RevisionTraslados;
 
-use App\Constantes\Constantes;
 use App\Models\Persona;
 use Livewire\Component;
 use App\Models\Traslado;
+use Illuminate\Support\Str;
+use App\Constantes\Constantes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
+use Illuminate\Support\Facades\Storage;
+use App\Traits\Personas\BuscarPersonaTrait;
+use App\Services\Predio\ArchivoPredioService;
 use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
 use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
-use App\Traits\Personas\BuscarPersonaTrait;
 
 class RevisarTraslado extends Component
 {
@@ -148,6 +151,8 @@ class RevisarTraslado extends Component
 
                 $this->traslado->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
 
+                $this->anexarArchivoAlPredio();
+
             });
 
             return redirect()->route('revision_traslados');
@@ -162,6 +167,18 @@ class RevisarTraslado extends Component
 
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
         }
+
+    }
+
+    public function anexarArchivoAlPredio(){
+
+        $pdfContent = file_get_contents($this->aviso['archivo']);
+
+        $nombre_temp = Str::random(40) . '.pdf';
+
+        Storage::put('livewire-tmp/'. $nombre_temp, $pdfContent);
+
+        (new ArchivoPredioService($this->traslado->predio, null))->guardarConUrl('livewire-tmp/'. $nombre_temp);
 
     }
 

@@ -424,8 +424,6 @@ class PrediosIgnorados extends Component
 
                     $this->modelo_editar->tramite->update(['estado' => 'concluido']);
 
-                    (new ArchivoPredioService($this->modelo_editar->tramite->predios()->first(), $this->file))->guardarConUrl('prediosignorados/'. $this->modelo_editar->archivo);
-
                 }
 
                 $this->modelo_editar->estado = $this->estado;

@@ -11,13 +11,14 @@ use Livewire\Component;
 use App\Models\Colindancia;
 use App\Models\Propietario;
 use App\Models\Construccion;
-use App\Constantes\Constantes;
-use App\Enums\Tramites\AvaluoPara;
-use App\Models\ConstruccionesComun;
 use App\Models\TerrenosComun;
+use App\Constantes\Constantes;
 use Livewire\Attributes\Computed;
+use App\Enums\Tramites\AvaluoPara;
 use Illuminate\Support\Facades\DB;
+use App\Models\ConstruccionesComun;
 use Illuminate\Support\Facades\Log;
+use App\Services\Predio\ArchivoPredioService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Notificacion extends Component
@@ -37,6 +38,8 @@ class Notificacion extends Component
     public $fecha_notificacion;
 
     public $tramite;
+
+    public $predio;
 
     public function buscarTramite(){
 
@@ -128,9 +131,9 @@ class Notificacion extends Component
 
                 DB::transaction(function () {
 
-                    $predio_id = $this->creaPredio();
+                    $this->predio = $this->creaPredio();
 
-                    $this->actualizarAvaluo($predio_id);
+                    $this->actualizarAvaluo($this->predio->id);
 
                     $this->dispatch('mostrarMensaje', ['success', "El predio se creó correctamente en el padrón catastral."]);
 
@@ -143,6 +146,12 @@ class Notificacion extends Component
                 $this->modal = false;
 
             }
+
+        }
+
+        if($this->tramite->avaluo_para === AvaluoPara::PREDIO_IGNORADO){
+
+            (new ArchivoPredioService($this->predio, null))->guardarConUrl('prediosignorados/'. $this->avaluo->predioIgnorado->archivo);
 
         }
 
@@ -260,7 +269,7 @@ class Notificacion extends Component
 
         $this->procesarRelaciones($predio);
 
-        return $predio->id;
+        return $predio;
 
     }
 
