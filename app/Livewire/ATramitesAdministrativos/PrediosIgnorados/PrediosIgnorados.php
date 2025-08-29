@@ -9,14 +9,15 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Constantes\Constantes;
-use App\Exceptions\GeneralException;
 use App\Models\PredioIgnorado;
 use Illuminate\Validation\Rule;
 use App\Traits\ComponentesTrait;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Exceptions\GeneralException;
 use Illuminate\Support\Facades\Storage;
+use App\Services\Predio\ArchivoPredioService;
 use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 
 class PrediosIgnorados extends Component
@@ -422,6 +423,8 @@ class PrediosIgnorados extends Component
                 if($this->estado === 'concluido'){
 
                     $this->modelo_editar->tramite->update(['estado' => 'concluido']);
+
+                    (new ArchivoPredioService($this->modelo_editar->tramite->predios()->first(), $this->file))->guardarConUrl('prediosignorados/'. $this->modelo_editar->archivo);
 
                 }
 

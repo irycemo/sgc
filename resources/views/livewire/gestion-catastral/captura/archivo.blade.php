@@ -9,7 +9,7 @@
                 @if(app()->isProduction())
 
                     <x-link-blue
-                        href="{{ Storage::disk('s3')->url(config('services.ses.ruta_predios') . $predio->archivos->where('descripcion', 'archivo')->first()->url) }}"
+                        href="{{ Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_predios') . $predio->archivos->where('descripcion', 'archivo')->first()->url, now()->addMinutes(10)) }}"
                         target="_blank"
                         >
                         Descargar archivo actual

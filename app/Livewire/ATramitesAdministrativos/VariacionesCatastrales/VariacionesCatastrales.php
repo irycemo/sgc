@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ConstruccionesComun;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
+use App\Services\Predio\ArchivoPredioService;
 use Illuminate\Support\Facades\Storage;
 use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 
@@ -550,6 +551,8 @@ class VariacionesCatastrales extends Component
 
                     $this->modelo_editar->tramite->update(['estado' => 'concluido']);
 
+                    (new ArchivoPredioService($this->modelo_editar->tramite->predios()->first(), $this->file))->guardarConUrl('variacionescatastrales/'. $this->modelo_editar->archivo);
+
                 }
 
                 $this->modelo_editar->estado = $this->estado;
@@ -561,6 +564,10 @@ class VariacionesCatastrales extends Component
                 $this->dispatch('mostrarMensaje', ['success', "Se actualizó con éxito."]);
 
             });
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
         } catch (\Throwable $th) {
 
