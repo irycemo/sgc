@@ -153,6 +153,8 @@ class RevisarTraslado extends Component
 
                 $this->anexarArchivoAlPredio();
 
+                $this->anexarFotosAlPredio();
+
             });
 
             return redirect()->route('revision_traslados');
@@ -179,6 +181,21 @@ class RevisarTraslado extends Component
         Storage::put('livewire-tmp/'. $nombre_temp, $pdfContent);
 
         (new ArchivoPredioService($this->traslado->predio, null))->guardarConUrl('livewire-tmp/'. $nombre_temp);
+
+    }
+
+    public function anexarFotosAlPredio(){
+
+        $urls = [
+            'croquis' => $this->avaluo['croquis'],
+            'fachada' => $this->avaluo['fachada'],
+            'foto2' => $this->avaluo['foto2'],
+            'foto3' => $this->avaluo['foto3'],
+            'foto4' => $this->avaluo['foto4'],
+            'microlocalizacion' => $this->avaluo['microlocalizacion'],
+            'poligonoImagen' => $this->avaluo['poligonoImagen']];
+
+        (new ArchivoPredioService($this->traslado->predio, null))->anexarFotosAlPredio($urls);
 
     }
 
@@ -578,7 +595,7 @@ class RevisarTraslado extends Component
 
             $this->aviso = (new SistemaTramitesLineaService())->consultarAviso($this->traslado->aviso_stl);
 
-            if($this->traslado->tipo == 'aclaratorio'){
+            if($this->traslado->tipo != 'aclaratorio'){
 
                 $this->avaluo = (new SistemaPeritosExternosService())->consultarAvaluo($this->traslado->avaluo_spe);
 

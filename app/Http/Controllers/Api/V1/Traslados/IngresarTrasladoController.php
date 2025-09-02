@@ -42,7 +42,7 @@ class IngresarTrasladoController extends Controller
                                         ],
                                         [
                                             'estado' => 'cerrado',
-                                            'tipo' => 'aclaratorio',
+                                            'tipo' => 'revision',
                                             'predio_id' => $validated['predio_id'],
                                             'tramite_aviso' => $validated['tramite_aviso'],
                                             'certificacion_id' => $validated['certificacion_id'],
@@ -106,7 +106,7 @@ class IngresarTrasladoController extends Controller
                                         ],
                                         [
                                             'estado' => 'cerrado',
-                                            'tipo' => 'revision',
+                                            'tipo' => 'aclaratorio',
                                             'predio_id' => $validated['predio_id'],
                                             'tramite_aviso' => $validated['tramite_aviso'],
                                             'aviso_stl' => $validated['aviso_stl'],

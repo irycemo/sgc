@@ -405,4 +405,39 @@ class ArchivoPredioService{
 
     }
 
+    public function anexarFotosAlPredio($urls){
+
+        foreach ($urls as $key => $value) {
+
+            $image_contents = file_get_contents($value);
+
+            $extension = pathinfo(parse_url($value, PHP_URL_PATH), PATHINFO_EXTENSION);
+
+            $nombre_temp = Str::random(40) . '.' .$extension;
+
+            if(app()->isProduction()){
+
+                Storage::disk('s3')->put('sgc/predios_fotos/' . $nombre_temp, $image_contents);
+
+            }else{
+
+                Storage::put('predios_fotos/'. $nombre_temp, $image_contents);
+
+            }
+
+            File::create([
+                'fileable_type' => 'App\Models\Predio',
+                'fileable_id' => $this->predio->id,
+                'url' => $nombre_temp,
+                'descripcion' => $key
+            ]);
+
+            $nombre_temp = null;
+
+            $$extension = null;
+
+        }
+
+    }
+
 }

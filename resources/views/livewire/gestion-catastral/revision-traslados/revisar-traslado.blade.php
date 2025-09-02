@@ -12,7 +12,7 @@
 
         @include('livewire.gestion-catastral.revision-traslados.aviso')
 
-        @if($this->traslado->tipo == 'aclaratorio')
+        @if($this->traslado->tipo == 'revision')
 
             @include('livewire.gestion-catastral.revision-traslados.avaluo')
 

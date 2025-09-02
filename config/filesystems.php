@@ -116,6 +116,14 @@ return [
             'throw' => false,
         ],
 
+        'predios_fotos' => [
+            'driver' => 'local',
+            'root' => storage_path('app/predios_fotos'),
+            'url' => env('APP_URL').'/predios_fotos',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
     ],
 
     /*
@@ -138,6 +146,7 @@ return [
         public_path('certificaciones') => storage_path('app/certificaciones'),
         public_path('preguntas') => storage_path('app/preguntas'),
         public_path('predios_archivo') => storage_path('app/predios_archivo'),
+        public_path('predios_fotos') => storage_path('app/predios_fotos'),
     ],
 
 ];

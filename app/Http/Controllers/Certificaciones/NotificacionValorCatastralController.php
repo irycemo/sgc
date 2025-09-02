@@ -14,6 +14,7 @@ use Luecano\NumeroALetras\NumeroALetras;
 use App\Traits\Certificaciones\CrearImagenTrait;
 use App\Traits\Certificaciones\GeneradorQRTrait;
 use App\Enums\Certificaciones\CertificacionesEnum;
+use App\Exceptions\GeneralException;
 use App\Traits\Certificaciones\NotificacionValorCatastral;
 
 class NotificacionValorCatastralController extends Controller
@@ -196,6 +197,12 @@ class NotificacionValorCatastralController extends Controller
         $avaluos = Avaluo::with('predioAvaluo')->whereKey($avaluos)->get();
 
         $avaluo_predio_padre = $avaluos->where('predio', $predio_padre_id)->first();
+
+        if(!$avaluo_predio_padre){
+
+            throw new GeneralException('El predio padre no tiene un avalúo valido.');
+
+        }
 
         $datos_control->predio_padre = $avaluo_predio_padre->predioAvaluo->cuentaPredial();
         $datos_control->predio_padre_superficie = $avaluo_predio_padre->predioAvaluo->superficie_total_terreno;

@@ -70,6 +70,12 @@ class Predio extends Model implements Auditable
 
     }
 
+    public function fotos(){
+
+        return $this->archivos()->whereIn('descripcion', ['croquis', 'fachada', 'foto2', 'foto3', 'foto4', 'microlocalizacion', 'poligonoImagen'])->get();
+
+    }
+
     public function cuentaPredial(){
 
         return $this->localidad . '-' . $this->oficina . '-' . $this->tipo_predio . '-' . $this->numero_registro;
