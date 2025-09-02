@@ -244,6 +244,18 @@
 
                                     @if($avaluo->predio_ignorado_id)
 
+                                        @if(!in_array($avaluo->estado, ['impreso', 'notificado']))
+
+                                            <button
+                                                wire:click="imprimirAvaluoPredioIgnorado({{ $avaluo->id }})"
+                                                wire:loading.attr="disabled"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                role="menuitem">
+                                                Imprimir
+                                            </button>
+
+                                        @endif
+
                                         <a
                                             href="{{ $avaluo->predioIgnorado->archivo() }}"
                                             target="_blank"
@@ -251,14 +263,6 @@
                                             role="menuitem">
                                             Ver archivo
                                         </a>
-
-                                        <button
-                                            wire:click="imprimirAvaluoPredioIgnorado({{ $avaluo->id }})"
-                                            wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                            role="menuitem">
-                                            Imprimir
-                                        </button>
 
                                     @endif
 

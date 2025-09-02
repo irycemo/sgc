@@ -48,8 +48,8 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             'zona' => 'required|numeric|min:1',
             'manzana' => 'required|numeric|min:1',
             'predio' => 'required|numeric|min:1',
-            'edificio' => ['required', 'numeric', 'min:0', Rule::when('departamento' >= 1, 'min:1')],
-            'departamento' => ['required', 'numeric', 'min:0', Rule::when('edificio' >= 1, 'min:1')],
+            'edificio' => [ 'required', 'numeric'],
+            'departamento' => [ 'required', 'numeric'],
             'tipo' => 'required|numeric|min:1|max:2',
             'oficina' => 'required|numeric|min:1',
             'estado' => 'required',
@@ -112,6 +112,36 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             'uso_3' =>  ['nullable', Rule::in(Constantes::USO_PREDIO)],
             'ubicacion_manzana' => ['required', Rule::in(Constantes::UBICACION_PREDIO)],
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+
+            $rows = $validator->getData(); // Todas las filas
+
+            foreach ($rows as $index => $row) {
+
+                $edificio = $row['edificio'] ?? null;
+
+                $departamento = $row['departamento'] ?? null;
+
+                if ($edificio == 0 && $departamento > 0) {
+
+                    throw new GeneralException("En la fila ".($index + 2).": Si edificio es 0, el departamento debe ser 0.");
+
+                }
+
+                if ($departamento == 0 && $edificio > 0) {
+
+                    throw new GeneralException("En la fila ".($index + 2).": Si departamento es 0, el edificio debe ser 0.");
+
+                }
+
+            }
+
+        });
+
     }
 
     public function collection(Collection $rows){
@@ -783,13 +813,17 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
         if($persona){
 
-            $v = Validator::make($persona->toArray(), [
-                'curp' => 'unique:personas,curp,' . $persona->id,
-            ]);
+            if($row['tipo_persona'] == 'FÍSICA'){
 
-            if ($v->fails()){
+                $v = Validator::make($persona->toArray(), [
+                    'curp' => 'unique:personas,curp,' . $persona->id,
+                ]);
 
-                throw new GeneralException($v->errors()->first(). ' en la línea: '. $linea);
+                if ($v->fails()){
+
+                    throw new GeneralException($v->errors()->first(). ' en la línea: '. $linea);
+                }
+
             }
 
             $persona->update([

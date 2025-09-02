@@ -64,7 +64,7 @@ trait CrearImagenTrait
 
         if(app()->isProduction()){
 
-            $nombre = $combined->store(config('services.ses.ruta_certificaciones'), 's3');
+            Storage::disk('s3')->put(config('services.ses.ruta_certificaciones') . $nombre . '.jpg', $combined);
 
         }else{
 

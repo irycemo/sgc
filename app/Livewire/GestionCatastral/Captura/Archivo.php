@@ -6,6 +6,7 @@ use App\Models\Predio;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
 use App\Services\Predio\ArchivoPredioService;
@@ -32,7 +33,13 @@ class Archivo extends Component
 
         try {
 
-            (new ArchivoPredioService($this->predio, $this->documento))->guardar();
+            DB::transaction(function () {
+
+                (new ArchivoPredioService($this->predio, $this->documento))->guardar();
+
+                $this->predio->audits()->latest()->first()->update(['tags' => 'Actualizó archivo']);
+
+            });
 
             $this->dispatch('mostrarMensaje', ['success', "El archivo se guradó con éxito."]);
 

@@ -44,13 +44,17 @@
             <span>Agregar</span>
         </x-button-green>
 
-        <x-button-red
-            wire:click="resetearTodo"
-            wire:loading.attr="disabled"
-            wire:target="resetearTodo"
-            type="button">
-            Cerrar
-        </x-button-red>
+        @if(!$persona->getKey())
+
+            <x-button-red
+                wire:click="resetearTodo"
+                wire:loading.attr="disabled"
+                wire:target="resetearTodo"
+                type="button">
+                Cerrar
+            </x-button-red>
+
+        @endif
 
     @endif
 

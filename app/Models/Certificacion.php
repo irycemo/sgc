@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\File;
 use App\Models\Predio;
 use App\Models\Oficina;
 use App\Models\Tramite;
@@ -80,6 +81,10 @@ class Certificacion extends Model implements Auditable
 
     public function ultimoRequerimientoFinalizado(){
         return $this->requerimientos()->where('estado', 'finalizado')->limit(1);
+    }
+
+    public function archivo(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'certificacion');
     }
 
     protected $auditEvents = [

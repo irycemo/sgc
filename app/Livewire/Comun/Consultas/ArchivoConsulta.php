@@ -12,6 +12,7 @@ class ArchivoConsulta extends Component
     public $predio_id;
     public Predio $predio;
     public $archivos = [];
+    public $fotos;
 
     public function placeholder()
     {
@@ -22,37 +23,45 @@ class ArchivoConsulta extends Component
 
         $this->predio = Predio::find($this->predio_id);
 
-        try {
+        if(!$this->predio->archivos->where('descripcion', 'archivo')->first()){
 
-            $response = Http::accept('application/json')
-                                ->get(
-                                    config('services.consulta_archivos_anterior.archivos_url') .
-                                    $this->predio->localidad .
-                                    '&ofna=' . $this->predio->oficina .
-                                    '&tpre=' . $this->predio->tipo_predio .
-                                    '&nreg=' . $this->predio->numero_registro
-                                );
+            try {
 
-            if($response->status() !== 200){
+                $response = Http::accept('application/json')
+                                    ->get(
+                                        config('services.consulta_archivos_anterior.archivos_url') .
+                                        $this->predio->localidad .
+                                        '&ofna=' . $this->predio->oficina .
+                                        '&tpre=' . $this->predio->tipo_predio .
+                                        '&nreg=' . $this->predio->numero_registro
+                                    );
 
-                $this->archivos = [];
-
-            }else{
-
-
-                $this->archivos = json_decode($response, true);
-
-                if(!isset($this->archivos['avaluos'])){
+                if($response->status() !== 200){
 
                     $this->archivos = [];
 
+                }else{
+
+
+                    $this->archivos = json_decode($response, true);
+
+                    if(!isset($this->archivos['avaluos'])){
+
+                        $this->archivos = [];
+
+                    }
+
                 }
+
+            } catch (\Throwable $th) {
+
+                $this->archivos = [];
 
             }
 
-        } catch (\Throwable $th) {
+        }else{
 
-            $this->archivos = [];
+
 
         }
 
