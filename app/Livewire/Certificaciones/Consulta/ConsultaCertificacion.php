@@ -10,11 +10,11 @@ use App\Constantes\Constantes;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Log;
 use App\Enums\Certificaciones\CertificacionesEnum;
-use App\Http\Controllers\Certificaciones\CertificacionesController;
 use App\Http\Controllers\Certificaciones\CertificadoHistoriaController;
 use App\Http\Controllers\Certificaciones\CertificadoNegativoController;
 use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
 use App\Http\Controllers\Certificaciones\CedulaActualizcacionController;
+use App\Http\Controllers\Certificaciones\NotificacionValorCatastralController;
 
 class ConsultaCertificacion extends Component
 {
@@ -95,7 +95,7 @@ class ConsultaCertificacion extends Component
 
             if($modelo->tipo == CertificacionesEnum::NOTIFICACION_VALOR_CATASTRAL){
 
-                $pdf = (new CertificacionesController())->reimprimirNotifiacionValorCatastral($modelo);
+                $pdf = (new NotificacionValorCatastralController())->reimprimirNotifiacionValorCatastral($modelo);
 
             }elseif($modelo->tipo == CertificacionesEnum::CERTIFICADO_HISTORIA){
 
@@ -133,10 +133,10 @@ class ConsultaCertificacion extends Component
     public function certificaciones(){
 
         if($this->tramite)
-            return Certificacion::where('tramite_id', $this->tramite->id)->get();
+            return Certificacion::with('predio:id,localidad,oficina,tipo_predio,numero_registro', 'oficina:id,nombre', 'tramite:id,año,folio,usuario', 'creadoPor:id,name', 'actualizadoPor:id,name')->where('tramite_id', $this->tramite->id)->get();
 
         if($this->predio)
-            return Certificacion::where('predio_id', $this->predio->id)->get();
+            return Certificacion::with('predio:id,localidad,oficina,tipo_predio,numero_registro', 'oficina:id,nombre', 'tramite:id,año,folio,usuario', 'creadoPor:id,name', 'actualizadoPor:id,name')->where('predio_id', $this->predio->id)->get();
 
         return [];
 
