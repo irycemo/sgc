@@ -27,7 +27,10 @@ class Tramites extends Component
     public $tipo;
     public $registro;
     public $modalVer = false;
+    public $modalObservaciones = false;
     public $años;
+    public $predio_id;
+    public $observaciones;
 
     public $tramties_con_predio = ['DM31', 'DM34', 'D727', 'D728', 'D729', 'D730'];
 
@@ -91,6 +94,18 @@ class Tramites extends Component
 
         if($this->modelo_editar->isNot($modelo))
             $this->modelo_editar = $modelo;
+
+    }
+
+    public function abrirModalObservacions($id){
+
+        $this->modal = false;
+
+        $this->resetearTodo();
+
+        $this->predio_id = $id;
+
+        $this->modalObservaciones = true;
 
     }
 
@@ -177,21 +192,27 @@ class Tramites extends Component
 
     }
 
-    public function reactivarPredio($id){
+    public function reactivarPredio(){
 
         try {
 
-            DB::transaction(function () use ($id){
+            DB::transaction(function (){
 
-                $certificacion = Certificacion::where('tramite_id', $this->modelo_editar->id)->where('predio_id', $id)->first();
+                $certificacion = Certificacion::where('tramite_id', $this->modelo_editar->id)->where('predio_id', $this->predio_id)->first();
 
                 if($certificacion){
 
-                    $certificacion->update(['estado' => 'cancelado']);
+                    $certificacion->update([
+                        'estado' => 'cancelado',
+                        'observaciones' => $this->observaciones,
+                        'actualizado_por' => auth()->id()
+                    ]);
+
+                    $certificacion->audits()->latest()->first()->update(['tags' => 'Canceló certificación']);
 
                 }
 
-                $this->modelo_editar->predios()->updateExistingPivot($id, ['estado' => 'A']);
+                $this->modelo_editar->predios()->updateExistingPivot($this->predio_id, ['estado' => 'A']);
 
                 if($this->modelo_editar->estado === 'concluido') $this->modelo_editar->update(['estado' => 'pagado']);
 
@@ -202,6 +223,10 @@ class Tramites extends Component
                 $this->dispatch('mostrarMensaje', ['warning', "La cuenta predial se reactivó con éxito, si tenia un certificado este ha sido cancelado."]);
 
             });
+
+            $this->modalObservaciones = false;
+
+            $this->modal = true;
 
         } catch (\Throwable $th) {
 
@@ -218,25 +243,13 @@ class Tramites extends Component
 
             DB::transaction(function () use ($id){
 
-                $certificacion = Certificacion::where('tramite_id', $this->modelo_editar->id)->where('predio_id', $id)->first();
-
-                if($certificacion){
-
-                    $certificacion->update([
-                        'estado' => 'cancelado',
-                        'actualizado_por' => auth()->id(),
-                        'observaciones' => 'Reemplazo'
-                    ]);
-
-                }
-
                 $this->modelo_editar->predios()->detach($id);
 
                 $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Eliminó cuenta predial']);
 
                 $this->modelo_editar->load('predios');
 
-                $this->dispatch('mostrarMensaje', ['warning', "La cuenta predial se eliminó con éxito, si tenia un certificado este ha sido cancelado."]);
+                $this->dispatch('mostrarMensaje', ['warning', "La cuenta predial se eliminó con éxito."]);
 
             });
 

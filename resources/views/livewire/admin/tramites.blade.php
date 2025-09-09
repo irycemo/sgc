@@ -443,9 +443,9 @@
                                                             @if($item->pivot->estado === 'I')
 
                                                                 <button
-                                                                    wire:click="reactivarPredio({{ $item['id'] }})"
+                                                                    wire:click="abrirModalObservacions({{ $item['id'] }})"
                                                                     wire:loading.attr="disabled"
-                                                                    wire:target="reactivarPredio({{ $item['id'] }})"
+                                                                    wire:target="abrirModalObservacions({{ $item['id'] }})"
                                                                     class=" bg-blue-400 text-white text-xs p-1 items-center rounded-full hover:bg-blue-700 flex justify-center focus:outline-none"
                                                                 >
 
@@ -841,5 +841,50 @@
         </x-slot>
 
     </x-confirmation-modal>
+
+    <x-dialog-modal wire:model.live="modalObservaciones" maxWidth="sm">
+
+        <x-slot name="title">
+
+            Observaciones
+
+        </x-slot>
+
+        <x-slot name="content">
+
+            <x-input-group for="observaciones" label="" :error="$errors->first('observaciones')">
+
+                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico posible acerca del motivo por el cual se cancela el certificado"></textarea>
+
+            </x-input-group>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex gap-3">
+
+                <x-button-blue
+                    wire:click="reactivarPredio"
+                    wire:loading.attr="disabled"
+                    wire:target="reactivarPredio">
+
+                    <img wire:loading wire:target="reactivarPredio" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Reactivar
+                </x-button-blue>
+
+                <x-button-red
+                    wire:click="$toggle('modalObservaciones')"
+                    wire:loading.attr="disabled"
+                    wire:target="$toggle('modalObservaciones')">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
 
 </div>
