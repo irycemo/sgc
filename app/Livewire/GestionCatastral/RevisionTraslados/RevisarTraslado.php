@@ -253,7 +253,7 @@ class RevisarTraslado extends Component
 
         }
 
-        if($this->traslado->tipo == 'aclaratorio'){
+        if($this->traslado->tipo == 'revision'){
 
             $this->traslado->predio->terrenos()->delete();
 
@@ -264,7 +264,6 @@ class RevisarTraslado extends Component
                     'demerito' => $terreno['demerito'],
                     'valor_demeritado' => $terreno['valor_demeritado'],
                     'valor_unitario' => $terreno['valor_unitario'],
-                    'valor_terreno' => $terreno['valor_terreno'],
                     'valor_terreno' => $terreno['valor_terreno'],
                 ]);
 
