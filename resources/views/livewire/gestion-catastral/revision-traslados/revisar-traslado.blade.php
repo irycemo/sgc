@@ -36,7 +36,7 @@
 
         @endif
 
-        @if($traslado->estado != 'operado')
+        @if($traslado->estado != 'autorizado')
 
             <x-button-green
                 wire:click="$toggle('modalAutorizar')"
