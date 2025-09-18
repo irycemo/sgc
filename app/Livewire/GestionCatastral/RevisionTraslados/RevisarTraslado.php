@@ -638,9 +638,9 @@ class RevisarTraslado extends Component
 
         } catch (\Throwable $th) {
 
-            abort(403, message:"Error al conectar con los sistemas externos");
-
             Log::error("Error al consultar sistemas externos en revisión de aviso por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            abort(403, message:"Error al conectar con los sistemas externos");
 
         }
 
