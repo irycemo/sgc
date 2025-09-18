@@ -178,7 +178,7 @@ class RevisarTraslado extends Component
 
         $this->traslado->tramite->update(['usados' => $usados]);
 
-        $this->traslado->tramite->audits()->latest()->first()->update(['tags' => 'Operó traslado ' . $this->predio->cuentaPredial()]);
+        $this->traslado->tramite->audits()->latest()->first()->update(['tags' => 'Operó traslado ' . $this->traslado->predio->cuentaPredial()]);
 
         if($this->traslado->tramite->cantidad === $usados){
 
