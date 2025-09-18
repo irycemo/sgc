@@ -6,6 +6,7 @@ use App\Models\Predio;
 use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\Servicio;
+use App\Models\Traslado;
 use Livewire\WithPagination;
 use App\Models\Certificacion;
 use App\Constantes\Constantes;
@@ -13,6 +14,7 @@ use App\Traits\ComponentesTrait;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Exceptions\GeneralException;
 
 class Tramites extends Component
 {
@@ -202,6 +204,14 @@ class Tramites extends Component
 
                 if($certificacion){
 
+                    $traslado = Traslado::where(['certificacion_id' => $certificacion->id])->first();
+
+                    if($traslado){
+
+                        throw new GeneralException('El certificado esta ligado a un aviso no es posible reactivarlo.');
+
+                    }
+
                     $certificacion->update([
                         'estado' => 'cancelado',
                         'observaciones' => $this->observaciones,
@@ -227,6 +237,10 @@ class Tramites extends Component
             $this->modalObservaciones = false;
 
             $this->modal = true;
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
         } catch (\Throwable $th) {
 

@@ -147,9 +147,7 @@ class RevisarTraslado extends Component
 
                 $this->traslado->audits()->latest()->first()->update(['tags' => 'Operó traslado']);
 
-                $this->traslado->tramite->update(['estado' => 'concluido', 'actualizado_por' => auth()->id()]);
-
-                $this->traslado->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
+                $this->procesarTramtie();
 
                 $this->anexarArchivoAlPredio();
 
@@ -168,6 +166,26 @@ class RevisarTraslado extends Component
             Log::error("Error al operar traslado: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
 
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+        }
+
+    }
+
+    public function procesarTramtie(){
+
+        $this->traslado->tramite->predios()->updateExistingPivot($this->traslado->predio_id, ['estado' => 'O']);
+
+        $usados = $this->traslado->tramite->predios()->wherePivot('estado', 'O')->count();
+
+        $this->traslado->tramite->update(['usados' => $usados]);
+
+        $this->traslado->tramite->audits()->latest()->first()->update(['tags' => 'Operó traslado ' . $this->predio->cuentaPredial()]);
+
+        if($this->traslado->tramite->cantidad === $usados){
+
+            $this->traslado->tramite->update(['estado' => 'concluido']);
+
+            $this->traslado->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
+
         }
 
     }

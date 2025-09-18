@@ -4,10 +4,12 @@ namespace App\Livewire\Tramites\ReactivarTramite;
 
 use App\Models\Tramite;
 use Livewire\Component;
+use App\Models\Traslado;
 use App\Models\Certificacion;
 use App\Constantes\Constantes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Exceptions\GeneralException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ReactivarTramite extends Component
@@ -92,6 +94,14 @@ class ReactivarTramite extends Component
 
                 if($certificacion){
 
+                    $traslado = Traslado::where(['certificacion_id' => $certificacion->id])->first();
+
+                    if($traslado){
+
+                        throw new GeneralException('El certificado esta ligado a un aviso no es posible reactivarlo.');
+
+                    }
+
                     $certificacion->update([
                         'estado' => 'cancelado',
                         'observaciones' => $this->observaciones,
@@ -121,6 +131,10 @@ class ReactivarTramite extends Component
                 $this->dispatch('mostrarMensaje', ['warning', "La cuenta predial se reactivó con éxito, si tenia un certificado este ha sido cancelado."]);
 
             });
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
         } catch (\Throwable $th) {
 

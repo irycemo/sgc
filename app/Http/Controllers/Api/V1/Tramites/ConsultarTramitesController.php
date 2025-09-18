@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Tramites;
 
 use App\Models\Tramite;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TramiteRequest;
 use App\Http\Resources\TramiteResource;
@@ -52,6 +53,26 @@ class ConsultarTramitesController extends Controller
                                 ->paginate($validated['pagination'], ['*'], 'page', $validated['pagina']);
 
         return TramiteResource::collection($tramites)->response()->setStatusCode(200);
+
+    }
+
+    public function consultarTramiteId(Request $request){
+
+        $validated = $request->validate(['id' => 'required|numeric|min:1']);
+
+        $tramite = Tramite::find($validated['id']);
+
+        if($tramite){
+
+            return (new TramiteResource($tramite))->response()->setStatusCode(200);
+
+        }else{
+
+            return response()->json([
+                'error' => "No se encontraron resultados.",
+            ], 404);
+
+        }
 
     }
 

@@ -71,7 +71,7 @@ class ConsultarPropietariosController extends Controller
 
         $validated = $request->validate(['id' => 'required|numeric|min:1']);
 
-        $predio = Predio::find($validated['id']);
+        $predio = Predio::with('propietarios.persona')->find($validated['id']);
 
         if(!$predio){
 
