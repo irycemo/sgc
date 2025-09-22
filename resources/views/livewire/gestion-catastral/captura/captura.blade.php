@@ -376,7 +376,7 @@
         <x-slot name="footer">
 
             <x-danger-button
-                wire:click="$toggle('modalBorrar')"
+                wire:click="$toggle('modalIndexar')"
                 wire:loading.attr="disabled"
             >
                 No
