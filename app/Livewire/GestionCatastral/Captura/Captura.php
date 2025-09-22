@@ -479,6 +479,10 @@ class Captura extends Component
 
             $this->reset(['accion', 'observaciones']);
 
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['error', $ex->getMessage()]);
+
         } catch (\Throwable $th) {
 
             Log::error("Error al actualizar predio por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
