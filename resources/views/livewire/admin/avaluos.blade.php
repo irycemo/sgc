@@ -264,13 +264,17 @@
 
                                     @endcan
 
-                                    <button
-                                        wire:click="imprimirAvaluo({{ $predio->id }})"
-                                        wire:loading.attr="disabled"
-                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                        role="menuitem">
-                                        Imprimir
-                                    </button>
+                                    @if(in_array($predio->avaluo->estado, ['notificado', 'impreso']))
+
+                                        <button
+                                            wire:click="imprimirAvaluo({{ $predio->id }})"
+                                            wire:loading.attr="disabled"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Imprimir
+                                        </button>
+
+                                    @endif
 
                                     @if($predio->avaluo->estado != 'notificado')
 
