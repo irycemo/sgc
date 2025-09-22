@@ -710,7 +710,8 @@ class Constantes{
         'CAMBIO POR LOCALIDAD',
         'ALTA POR RAN',
         'ALTA POR INSUS',
-        'SUBDIVISIÓN'
+        'SUBDIVISIÓN',
+        'ACTUALIZACIÓN'
     ];
 
 }
