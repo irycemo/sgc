@@ -190,45 +190,49 @@ class ArchivoPredioService{
 
             $archivos = json_decode($response, true);
 
-            foreach ($archivos['archivos'] as $archivo) {
+            if(!isset($archivos['status'])) {
 
-                $pdfContent = file_get_contents($archivo['url']);
+                foreach ($archivos['archivos'] as $archivo) {
 
-                $nombre_temp = Str::random(40) . '.pdf';
+                    $pdfContent = file_get_contents($archivo['url']);
 
-                Storage::put('livewire-tmp/'. $nombre_temp, $pdfContent);
+                    $nombre_temp = Str::random(40) . '.pdf';
 
-                $oMerger->addPDF(Storage::path('livewire-tmp/'. $nombre_temp), 'all');
+                    Storage::put('livewire-tmp/'. $nombre_temp, $pdfContent);
 
-                $nombre_temp = null;
+                    $oMerger->addPDF(Storage::path('livewire-tmp/'. $nombre_temp), 'all');
 
-            }
+                    $nombre_temp = null;
 
-            foreach ($archivos['traslados'] as $archivo) {
+                }
 
-                $pdfContent = file_get_contents($archivo['url']);
+                foreach ($archivos['traslados'] as $archivo) {
 
-                $nombre_temp = Str::random(40) . '.pdf';
+                    $pdfContent = file_get_contents($archivo['url']);
 
-                Storage::put('livewire-tmp/'. $nombre_temp, $pdfContent);
+                    $nombre_temp = Str::random(40) . '.pdf';
 
-                $oMerger->addPDF(Storage::path('livewire-tmp/'. $nombre_temp), 'all');
+                    Storage::put('livewire-tmp/'. $nombre_temp, $pdfContent);
 
-                $nombre_temp = null;
+                    $oMerger->addPDF(Storage::path('livewire-tmp/'. $nombre_temp), 'all');
 
-            }
+                    $nombre_temp = null;
 
-            foreach ($archivos['avaluos'] as $archivo) {
+                }
 
-                $pdfContent = file_get_contents($archivo['url']);
+                foreach ($archivos['avaluos'] as $archivo) {
 
-                $nombre_temp = Str::random(40) . '.pdf';
+                    $pdfContent = file_get_contents($archivo['url']);
 
-                Storage::put('livewire-tmp/'. $nombre_temp, $pdfContent);
+                    $nombre_temp = Str::random(40) . '.pdf';
 
-                $oMerger->addPDF(Storage::path('livewire-tmp/'. $nombre_temp), 'all');
+                    Storage::put('livewire-tmp/'. $nombre_temp, $pdfContent);
 
-                $nombre_temp = null;
+                    $oMerger->addPDF(Storage::path('livewire-tmp/'. $nombre_temp), 'all');
+
+                    $nombre_temp = null;
+
+                }
 
             }
 
