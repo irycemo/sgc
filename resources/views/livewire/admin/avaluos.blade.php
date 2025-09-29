@@ -44,28 +44,38 @@
 
                 </select>
 
-                <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+                <div class="flex gap-1 p-1">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+                    <input type="number" wire:model.live.debounce.500ms="filters.tAño" placeholder="T. año" class="bg-white rounded-full text-sm w-24">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="filters.tipo">
+                    <input type="number" wire:model.live.debounce.500ms="filters.tFolio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
 
-                    <option value="" selected>Tipo</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
+                    <input type="number" wire:model.live.debounce.500ms="filters.tUsuario" placeholder="T. Usuario" class="bg-white rounded-full text-sm w-24">
 
-                </select>
+                    <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+                    <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+                    <select class="bg-white rounded-full text-sm" wire:model.live="filters.tipo">
 
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
+                        <option value="" selected>Tipo</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
 
-                </select>
+                    </select>
+
+                    <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+
+                    <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+
+                    </select>
+
+                </div>
 
             </div>
 

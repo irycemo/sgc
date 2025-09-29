@@ -22,12 +22,12 @@ class ServiciosTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 3,
-                'nombre' => 'Certificado catastral',
+                'nombre' => 'Certificado catastral ordinario',
                 'tipo' => 'uma',
                 'estado' => 'activo',
-                'umas' => '6.00',
+                'umas' => '4.00',
                 'porcentaje' => NULL,
-                'ordinario' => '678.00',
+                'ordinario' => '452.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403603213',
@@ -38,7 +38,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 15:27:55',
-                'updated_at' => '2025-07-18 15:53:44',
+                'updated_at' => '2025-09-23 14:36:33',
             ),
             1 => 
             array (
@@ -46,11 +46,11 @@ class ServiciosTableSeeder extends Seeder
                 'nombre' => 'Certificado catastral electrónico ordinario',
                 'tipo' => 'uma',
                 'estado' => 'activo',
-                'umas' => '6.50',
+                'umas' => '4.50',
                 'porcentaje' => NULL,
-                'ordinario' => '735.00',
-                'urgente' => '0.00',
-                'extra_urgente' => '0.00',
+                'ordinario' => '509.00',
+                'urgente' => NULL,
+                'extra_urgente' => NULL,
                 'material' => '2403603513',
                 'clave_ingreso' => 'DM34',
                 'operacion_principal' => '2403',
@@ -59,7 +59,7 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 15:29:46',
-                'updated_at' => '2025-07-18 15:49:06',
+                'updated_at' => '2025-09-23 14:38:05',
             ),
             2 => 
             array (
@@ -68,42 +68,21 @@ class ServiciosTableSeeder extends Seeder
                 'tipo' => 'uma',
                 'estado' => 'activo',
                 'umas' => '4.00',
-                'porcentaje' => '0.00',
-                'ordinario' => '434.00',
+                'porcentaje' => NULL,
+                'ordinario' => '452.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403200013',
-                'clave_ingreso' => 'D923',
+                'clave_ingreso' => 'DM31',
                 'operacion_principal' => '2403',
                 'operacion_parcial' => '2000',
                 'categoria_servicio_id' => 4,
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 15:30:30',
-                'updated_at' => '2025-07-21 12:43:17',
+                'updated_at' => '2025-09-23 15:05:24',
             ),
             3 => 
-            array (
-                'id' => 6,
-                'nombre' => 'Certificado de registro con colindancias',
-                'tipo' => 'uma',
-                'estado' => 'inactivo',
-                'umas' => '4.00',
-                'porcentaje' => '0.00',
-                'ordinario' => '434.00',
-                'urgente' => '0.00',
-                'extra_urgente' => '0.00',
-                'material' => NULL,
-                'clave_ingreso' => 'D934',
-                'operacion_principal' => NULL,
-                'operacion_parcial' => NULL,
-                'categoria_servicio_id' => 4,
-                'creado_por' => NULL,
-                'actualizado_por' => 1,
-                'created_at' => '2023-03-23 15:33:35',
-                'updated_at' => '2024-06-04 14:47:52',
-            ),
-            4 => 
             array (
                 'id' => 7,
                 'nombre' => 'Certificado de historia catastral',
@@ -124,28 +103,28 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 15:37:51',
                 'updated_at' => '2025-07-18 15:56:23',
             ),
-            5 => 
+            4 => 
             array (
                 'id' => 8,
                 'nombre' => 'Certificado de historia catastral hasta 5 movimientos',
                 'tipo' => 'fija',
-                'estado' => 'activo',
+                'estado' => 'inactivo',
                 'umas' => NULL,
                 'porcentaje' => NULL,
                 'ordinario' => '215.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403200513',
-                'clave_ingreso' => 'D924',
+                'clave_ingreso' => 'DM24',
                 'operacion_principal' => '2403',
                 'operacion_parcial' => '2005',
                 'categoria_servicio_id' => 4,
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 15:39:09',
-                'updated_at' => '2025-07-21 12:48:10',
+                'updated_at' => '2025-09-23 14:23:38',
             ),
-            6 => 
+            5 => 
             array (
                 'id' => 9,
                 'nombre' => 'Certificado de historia catastral de 6 a 10 movimientos',
@@ -157,16 +136,16 @@ class ServiciosTableSeeder extends Seeder
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403201013',
-                'clave_ingreso' => 'D925',
+                'clave_ingreso' => 'DM25',
                 'operacion_principal' => '2403',
                 'operacion_parcial' => '2010',
                 'categoria_servicio_id' => 4,
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 15:41:16',
-                'updated_at' => '2025-07-18 15:57:25',
+                'updated_at' => '2025-09-23 14:24:39',
             ),
-            7 => 
+            6 => 
             array (
                 'id' => 10,
                 'nombre' => 'Certificado de historia catastral de 11 a 15 movimientos',
@@ -178,37 +157,37 @@ class ServiciosTableSeeder extends Seeder
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403201513',
-                'clave_ingreso' => 'D926',
+                'clave_ingreso' => 'DM26',
                 'operacion_principal' => '2403',
                 'operacion_parcial' => '2015',
                 'categoria_servicio_id' => 4,
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 15:42:40',
-                'updated_at' => '2025-07-18 15:57:50',
+                'updated_at' => '2025-09-23 14:24:52',
             ),
-            8 => 
+            7 => 
             array (
                 'id' => 11,
                 'nombre' => 'Certificado de historia catastral de mas de 15 movimientos',
                 'tipo' => 'fija',
-                'estado' => 'inactivo',
+                'estado' => 'activo',
                 'umas' => NULL,
                 'porcentaje' => NULL,
-                'ordinario' => '545.00',
-                'urgente' => '0.00',
+                'ordinario' => '563.00',
+                'urgente' => NULL,
                 'extra_urgente' => '0.00',
                 'material' => '2403202013',
-                'clave_ingreso' => 'D927',
+                'clave_ingreso' => 'DM27',
                 'operacion_principal' => '2403',
                 'operacion_parcial' => '2020',
                 'categoria_servicio_id' => 4,
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 15:43:12',
-                'updated_at' => '2025-07-18 15:58:12',
+                'updated_at' => '2025-09-23 14:25:25',
             ),
-            9 => 
+            8 => 
             array (
                 'id' => 12,
                 'nombre' => ' Copias impresas de planos catastrales digitalizados: Manzaneros',
@@ -229,7 +208,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 15:50:44',
                 'updated_at' => '2024-09-05 12:56:33',
             ),
-            10 => 
+            9 => 
             array (
                 'id' => 13,
                 'nombre' => ' Copias impresas de planos catastrales digitalizados: De los Municipios de Morelia, Uruapan y Zamora, escala 1:10,000.',
@@ -250,7 +229,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 15:52:42',
                 'updated_at' => '2024-09-05 12:57:34',
             ),
-            11 => 
+            10 => 
             array (
                 'id' => 14,
                 'nombre' => ' Copias impresas de planos catastrales digitalizados: De los Municipios de Apatzingán, Cd. Hidalgo, Jacona, La Piedad, Lázaro Cárdenas, Los Reyes, Pátzcuaro, Puruándiro, Tacámbaro, Sahuayo y Zitácuaro, escala 1:7,500.	',
@@ -271,7 +250,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 15:53:29',
                 'updated_at' => '2024-09-05 12:58:16',
             ),
-            12 => 
+            11 => 
             array (
                 'id' => 15,
                 'nombre' => 'Copias impresas de planos catastrales digitalizados: De los Municipios de Coeneo, Cotija, Cuitzeo, Huandacareo, Jiquilpan, Maravatío, Paracho, Purépero, Quiroga, Salvador Escalante, Tangancícuaro, Tarímbaro, Venustiano Carranza, Yurécuaro, Zacapu y Zinapécuaro, escala 1:7,500.',
@@ -292,7 +271,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 15:54:08',
                 'updated_at' => '2024-09-05 12:58:48',
             ),
-            13 => 
+            12 => 
             array (
                 'id' => 16,
                 'nombre' => 'Copias impresas de planos catastrales digitalizados: Manzaneros. Concurvas de nivel',
@@ -313,7 +292,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 15:59:50',
                 'updated_at' => '2024-09-05 12:56:30',
             ),
-            14 => 
+            13 => 
             array (
                 'id' => 17,
                 'nombre' => 'Copias impresas de planos catastrales digitalizados: Con curvas de nivel. De los Municipios de Morelia, Uruapan y Zamora, escala 1:10,000',
@@ -334,7 +313,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:02:24',
                 'updated_at' => '2024-09-05 16:11:02',
             ),
-            15 => 
+            14 => 
             array (
                 'id' => 18,
                 'nombre' => 'Copias impresas de planos catastrales digitalizados: Con curvas de nivel. De los Municipios de Apatzingán, Cd. Hidalgo, Jacona, La Piedad, Lázaro Cárdenas, Los Reyes, Pátzcuaro, Puruándiro, Tacámbaro, Sahuayo y Zitácuaro, escala 1:7,500.	',
@@ -355,7 +334,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:03:26',
                 'updated_at' => '2024-09-05 16:12:20',
             ),
-            16 => 
+            15 => 
             array (
                 'id' => 19,
                 'nombre' => 'Copias impresas de planos catastrales digitalizados: Con curvas de nivel. De los Municipios de Coeneo, Cotija, Cuitzeo, Huandacareo, Jiquilpan, Maravatío, Paracho, Purépero, Quiroga, Salvador Escalante, Tangancícuaro, Tarímbaro, Venustiano Carranza, Yurécuaro, Zacapu y Zinapécuaro, escala 1:7,500.',
@@ -376,7 +355,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:04:21',
                 'updated_at' => '2024-09-05 16:31:00',
             ),
-            17 => 
+            16 => 
             array (
                 'id' => 20,
                 'nombre' => 'Copias impresas de planos catastrales digitalizados: Manzanero, en formato dwf.',
@@ -397,7 +376,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:06:12',
                 'updated_at' => '2024-09-05 16:13:45',
             ),
-            18 => 
+            17 => 
             array (
                 'id' => 21,
                 'nombre' => 'Copias impresas de planos catastrales digitalizados: De sector, en formato dwf, por cada manzana existente en el mismo.	',
@@ -418,7 +397,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:06:47',
                 'updated_at' => '2024-09-05 16:14:26',
             ),
-            19 => 
+            18 => 
             array (
                 'id' => 22,
                 'nombre' => 'Copias impresas de planos catastrales digitalizados: Por fotografía aérea escaneada en archivo digital en formato dwf.',
@@ -439,7 +418,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:07:22',
                 'updated_at' => '2024-09-05 16:15:02',
             ),
-            20 => 
+            19 => 
             array (
                 'id' => 23,
                 'nombre' => 'Copias en archivo digital en formato dwf: De los municipios de La Piedad, Morelia, Uruapan y Zamora.	',
@@ -460,7 +439,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:08:59',
                 'updated_at' => '2024-09-05 16:15:49',
             ),
-            21 => 
+            20 => 
             array (
                 'id' => 24,
                 'nombre' => 'Copias en archivo digital en formato dwf: De los municipios de Apatzingán, Jacona, Jiquilpan, Los Reyes, Lázaro Cárdenas, Maravatío, Pátzcuaro, Puruándiro, Sahuayo y Zitácuaro.	',
@@ -481,7 +460,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:09:24',
                 'updated_at' => '2024-09-05 16:16:25',
             ),
-            22 => 
+            21 => 
             array (
                 'id' => 25,
                 'nombre' => 'Copias en archivo digital en formato dwf: De los municipios de Ciudad Hidalgo, Coeneo, Cotija, Cuitzeo, Huandacareo, Paracho, Purépero, Quiroga, Salvador Escalante, Tacámbaro, Tangancícuaro, Venustiano Carranza, Yurécuaro, Zacapu y Zinapécuaro.	',
@@ -502,7 +481,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:09:52',
                 'updated_at' => '2024-09-05 16:16:50',
             ),
-            23 => 
+            22 => 
             array (
                 'id' => 26,
                 'nombre' => 'Copias en archivo digital en formato dwf: De los planos de valores unitarios de terreno urbano por sector de los municipios de Apatzingán, La Piedad, Lázaro Cárdenas, Morelia, Uruapan y Zamora.	',
@@ -523,7 +502,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:11:01',
                 'updated_at' => '2024-09-05 16:18:12',
             ),
-            24 => 
+            23 => 
             array (
                 'id' => 27,
                 'nombre' => 'Copias en archivo digital en formato dwf: De los planos de valores unitarios de terreno urbano de los demás municipios con los que se cuenta planos de valores autorizados por el Congreso.	',
@@ -544,7 +523,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:11:38',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            25 => 
+            24 => 
             array (
                 'id' => 28,
                 'nombre' => 'Copias en archivo digital en formato dwf: Planos catastrales no digitalizados.	',
@@ -565,7 +544,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:12:29',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            26 => 
+            25 => 
             array (
                 'id' => 29,
                 'nombre' => 'Para predios urbanos, de 1 a 1,000 m²',
@@ -586,7 +565,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:16:07',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            27 => 
+            26 => 
             array (
                 'id' => 30,
                 'nombre' => 'Para predios urbanos, de 1,001 m²  a  5,000 m²	',
@@ -607,7 +586,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:16:28',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            28 => 
+            27 => 
             array (
                 'id' => 31,
                 'nombre' => 'Para predios urbanos, de 5,001 m²  a 10,000 m²	',
@@ -628,7 +607,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:16:48',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            29 => 
+            28 => 
             array (
                 'id' => 32,
                 'nombre' => 'Para predios urbanos, de 10,001 m² en adelante.	',
@@ -649,7 +628,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:17:15',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            30 => 
+            29 => 
             array (
                 'id' => 33,
                 'nombre' => 'Urbanos, ubicados en cualquier población del Estado.	',
@@ -670,7 +649,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:22:22',
                 'updated_at' => '2025-07-18 15:23:22',
             ),
-            31 => 
+            30 => 
             array (
                 'id' => 34,
                 'nombre' => 'Rústicos en cualquier lugar del Estado: Ubicados dentro de un radio hasta de 20 kilómetros, teniendo como centro la oficina recaudadora donde se registra.	',
@@ -691,7 +670,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:23:24',
                 'updated_at' => '2025-07-18 15:24:49',
             ),
-            32 => 
+            31 => 
             array (
                 'id' => 35,
                 'nombre' => 'Rústicos en cualquier lugar del Estado: Ubicados dentro de un radio hasta de 50 kilómetros, teniendo como centro la oficina recaudadora donde se registra.	',
@@ -712,7 +691,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:24:02',
                 'updated_at' => '2025-07-18 15:25:22',
             ),
-            33 => 
+            32 => 
             array (
                 'id' => 36,
                 'nombre' => 'Rústicos en cualquier lugar del Estado: Ubicados dentro de un radio superior a los 50 kilómetros, teniendo como centro la oficina recaudadora donde se registra.	',
@@ -733,7 +712,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:24:31',
                 'updated_at' => '2025-07-18 15:23:17',
             ),
-            34 => 
+            33 => 
             array (
                 'id' => 37,
                 'nombre' => 'Sobre predios ubicados dentro del área de la población donde se encuentra la oficina recaudadora.	',
@@ -754,7 +733,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:32:51',
                 'updated_at' => '2025-07-18 15:32:04',
             ),
-            35 => 
+            34 => 
             array (
                 'id' => 38,
                 'nombre' => 'Sobre predios ubicados fuera de la localidad donde se encuentre la oficina recaudadora dentro de un radio hasta de 20 kilómetros.	',
@@ -775,7 +754,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:33:14',
                 'updated_at' => '2025-07-18 15:32:24',
             ),
-            36 => 
+            35 => 
             array (
                 'id' => 39,
                 'nombre' => 'Sobre predios ubicados fuera de la localidad donde se encuentre la oficina recaudadora dentro de un radio hasta de 50 kilómetros.	',
@@ -796,7 +775,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:33:35',
                 'updated_at' => '2025-07-18 15:32:29',
             ),
-            37 => 
+            36 => 
             array (
                 'id' => 40,
                 'nombre' => 'Sobre predios ubicados fuera de la localidad donde se encuentre la oficina recaudadora dentro de un radio superior a 50 kilómetros.	',
@@ -817,12 +796,12 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:33:58',
                 'updated_at' => '2025-07-18 15:32:33',
             ),
-            38 => 
+            37 => 
             array (
                 'id' => 41,
                 'nombre' => 'Por cuenta catastral analizada y reestructurada, tratándose de fraccionamientos y condominios.	',
                 'tipo' => 'fija',
-                'estado' => 'inactivo',
+                'estado' => 'activo',
                 'umas' => NULL,
                 'porcentaje' => NULL,
                 'ordinario' => '3114.00',
@@ -836,14 +815,14 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:37:52',
-                'updated_at' => '2025-07-18 15:36:41',
+                'updated_at' => '2025-09-23 14:20:17',
             ),
-            39 => 
+            38 => 
             array (
                 'id' => 42,
                 'nombre' => 'Otras cuentas catastrales analizadas y reestructuradas distintas de fraccionamientos y condominios.	',
                 'tipo' => 'fija',
-                'estado' => 'inactivo',
+                'estado' => 'activo',
                 'umas' => NULL,
                 'porcentaje' => NULL,
                 'ordinario' => '2049.00',
@@ -857,9 +836,9 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:38:17',
-                'updated_at' => '2025-07-18 15:36:56',
+                'updated_at' => '2025-09-23 14:20:41',
             ),
-            40 => 
+            39 => 
             array (
                 'id' => 43,
                 'nombre' => 'De fraccionamientos, condominios y conjuntos habitacionales, por cada predio que surja.	',
@@ -880,7 +859,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:40:40',
                 'updated_at' => '2025-07-18 15:38:00',
             ),
-            41 => 
+            40 => 
             array (
                 'id' => 44,
                 'nombre' => 'De cualquier otro tipo de inmueble.',
@@ -901,7 +880,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:41:08',
                 'updated_at' => '2025-07-18 15:37:56',
             ),
-            42 => 
+            41 => 
             array (
                 'id' => 45,
                 'nombre' => 'Variación Catastral Vivienda',
@@ -922,7 +901,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:45:09',
                 'updated_at' => '2025-07-18 15:40:18',
             ),
-            43 => 
+            42 => 
             array (
                 'id' => 46,
                 'nombre' => 'Variación Catastral Otro tipo de inmueble',
@@ -943,7 +922,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:45:48',
                 'updated_at' => '2025-07-18 15:40:21',
             ),
-            44 => 
+            43 => 
             array (
                 'id' => 47,
                 'nombre' => 'Solicitud de Predio Ignorado',
@@ -964,12 +943,12 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:48:21',
                 'updated_at' => '2025-07-18 15:41:18',
             ),
-            45 => 
+            44 => 
             array (
                 'id' => 48,
                 'nombre' => 'Por autorización e inscripción de peritos valuadores de bienes inmuebles.	',
                 'tipo' => 'fija',
-                'estado' => 'inactivo',
+                'estado' => 'activo',
                 'umas' => NULL,
                 'porcentaje' => NULL,
                 'ordinario' => '4400.00',
@@ -983,14 +962,14 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:49:49',
-                'updated_at' => '2025-07-18 15:43:26',
+                'updated_at' => '2025-09-23 14:21:35',
             ),
-            46 => 
+            45 => 
             array (
                 'id' => 49,
                 'nombre' => 'Por refrendo anual de la autorización de perito valuador.	',
                 'tipo' => 'fija',
-                'estado' => 'inactivo',
+                'estado' => 'activo',
                 'umas' => NULL,
                 'porcentaje' => NULL,
                 'ordinario' => '2615.00',
@@ -1004,9 +983,9 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-23 16:50:10',
-                'updated_at' => '2025-07-18 15:43:52',
+                'updated_at' => '2025-09-23 14:21:59',
             ),
-            47 => 
+            46 => 
             array (
                 'id' => 50,
                 'nombre' => 'Derecho a examen de conocimientos que al efecto practique el Instituto a través de la Dirección de Catastro',
@@ -1027,7 +1006,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:50:42',
                 'updated_at' => '2025-07-18 15:44:22',
             ),
-            48 => 
+            47 => 
             array (
                 'id' => 51,
                 'nombre' => 'Por revisión de examen que solicite el sustentante	',
@@ -1048,7 +1027,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:51:04',
                 'updated_at' => '2025-07-18 15:44:53',
             ),
-            49 => 
+            48 => 
             array (
                 'id' => 52,
                 'nombre' => 'Por información respecto de los nombres de colindantes, a propietarios o poseedores de predios registrados.',
@@ -1069,7 +1048,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-23 16:55:49',
                 'updated_at' => '2025-07-18 15:59:26',
             ),
-            50 => 
+            49 => 
             array (
                 'id' => 53,
                 'nombre' => 'Si la información que proporcionen los interesados es suficiente.	',
@@ -1090,12 +1069,12 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 14:56:43',
                 'updated_at' => '2025-07-18 16:01:15',
             ),
-            51 => 
+            50 => 
             array (
                 'id' => 54,
                 'nombre' => 'Si se requieren investigaciones adicionales a la información proporcionada por los interesados.',
                 'tipo' => 'fija',
-                'estado' => 'inactivo',
+                'estado' => 'activo',
                 'umas' => NULL,
                 'porcentaje' => NULL,
                 'ordinario' => '124.00',
@@ -1109,18 +1088,18 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 14:57:02',
-                'updated_at' => '2025-07-18 16:04:28',
+                'updated_at' => '2025-09-23 14:26:38',
             ),
-            52 => 
+            51 => 
             array (
                 'id' => 55,
                 'nombre' => 'Copias simples, por página',
                 'tipo' => 'fija',
-                'estado' => 'inactivo',
-                'umas' => '0.00',
-                'porcentaje' => '0.00',
-                'ordinario' => '24.00',
-                'urgente' => '0.00',
+                'estado' => 'activo',
+                'umas' => NULL,
+                'porcentaje' => NULL,
+                'ordinario' => '21.00',
+                'urgente' => NULL,
                 'extra_urgente' => '0.00',
                 'material' => '2403204513',
                 'clave_ingreso' => 'D932',
@@ -1130,14 +1109,14 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 14:59:02',
-                'updated_at' => '2024-06-04 15:02:34',
+                'updated_at' => '2025-09-23 14:27:10',
             ),
-            53 => 
+            52 => 
             array (
                 'id' => 56,
                 'nombre' => 'Copias certificadas, por página',
                 'tipo' => 'fija',
-                'estado' => 'inactivo',
+                'estado' => 'activo',
                 'umas' => '0.00',
                 'porcentaje' => '0.00',
                 'ordinario' => '46.00',
@@ -1151,51 +1130,51 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 14:59:29',
-                'updated_at' => '2024-06-04 15:02:34',
+                'updated_at' => '2025-09-23 14:27:39',
             ),
-            54 => 
+            53 => 
             array (
                 'id' => 57,
                 'nombre' => 'Consulta del acervo catastral',
                 'tipo' => 'uma',
-                'estado' => 'inactivo',
+                'estado' => 'activo',
                 'umas' => '1.00',
                 'porcentaje' => '0.00',
                 'ordinario' => '109.00',
                 'urgente' => '0.00',
                 'extra_urgente' => '0.00',
                 'material' => '2403501313',
-                'clave_ingreso' => NULL,
+                'clave_ingreso' => 'DC88',
                 'operacion_principal' => '2403',
                 'operacion_parcial' => '5013',
                 'categoria_servicio_id' => 16,
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:05:11',
-                'updated_at' => '2024-06-04 14:47:52',
+                'updated_at' => '2025-09-23 14:28:54',
             ),
-            55 => 
+            54 => 
             array (
                 'id' => 58,
                 'nombre' => 'Consulta del acervo catastral cuando se trate de oficinas foráneas	',
                 'tipo' => 'uma',
-                'estado' => 'inactivo',
-                'umas' => '2.00',
-                'porcentaje' => '0.00',
-                'ordinario' => '217.00',
-                'urgente' => '0.00',
-                'extra_urgente' => '0.00',
+                'estado' => 'activo',
+                'umas' => '1.00',
+                'porcentaje' => NULL,
+                'ordinario' => '113.00',
+                'urgente' => NULL,
+                'extra_urgente' => NULL,
                 'material' => '2403501413',
-                'clave_ingreso' => NULL,
+                'clave_ingreso' => 'DC88',
                 'operacion_principal' => '2403',
                 'operacion_parcial' => '5014',
                 'categoria_servicio_id' => 16,
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:05:35',
-                'updated_at' => '2024-06-04 14:47:52',
+                'updated_at' => '2025-09-23 14:28:50',
             ),
-            56 => 
+            55 => 
             array (
                 'id' => 59,
                 'nombre' => 'Para predios urbanos, de 1 a 1,000 m²',
@@ -1216,7 +1195,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:10:22',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            57 => 
+            56 => 
             array (
                 'id' => 60,
                 'nombre' => 'Para predios urbanos, de 1,001 m² a 5,000 m²',
@@ -1237,7 +1216,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:10:43',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            58 => 
+            57 => 
             array (
                 'id' => 61,
                 'nombre' => 'Para predios urbanos, de 5,001 m² a 10,000 m²',
@@ -1258,7 +1237,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:11:00',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            59 => 
+            58 => 
             array (
                 'id' => 62,
                 'nombre' => 'Para predios urbanos, de 10,001 m² en adelante',
@@ -1279,12 +1258,12 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:11:17',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            60 => 
+            59 => 
             array (
                 'id' => 63,
                 'nombre' => 'Modificación de datos administrativos catastrales',
                 'tipo' => 'fija',
-                'estado' => 'inactivo',
+                'estado' => 'activo',
                 'umas' => NULL,
                 'porcentaje' => NULL,
                 'ordinario' => '289.00',
@@ -1298,14 +1277,14 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:13:10',
-                'updated_at' => '2025-07-18 16:12:51',
+                'updated_at' => '2025-09-23 14:29:27',
             ),
-            61 => 
+            60 => 
             array (
                 'id' => 64,
                 'nombre' => 'Cédula de actualización de predios rústicos',
                 'tipo' => 'fija',
-                'estado' => 'inactivo',
+                'estado' => 'activo',
                 'umas' => NULL,
                 'porcentaje' => NULL,
                 'ordinario' => '289.00',
@@ -1319,9 +1298,9 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:14:30',
-                'updated_at' => '2025-07-18 16:13:29',
+                'updated_at' => '2025-09-23 14:29:56',
             ),
-            62 => 
+            61 => 
             array (
                 'id' => 65,
                 'nombre' => 'Cédula de actualización de predios urbanos',
@@ -1342,7 +1321,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:14:58',
                 'updated_at' => '2025-07-21 12:55:46',
             ),
-            63 => 
+            62 => 
             array (
                 'id' => 66,
             'nombre' => 'Revisión de Aviso y/o cancelación (predio rústico)',
@@ -1363,7 +1342,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:17:07',
                 'updated_at' => '2025-07-18 16:14:15',
             ),
-            64 => 
+            63 => 
             array (
                 'id' => 67,
             'nombre' => 'Revisión de Aviso y/o cancelación (predio urbano)',
@@ -1384,7 +1363,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:17:26',
                 'updated_at' => '2025-07-18 16:14:25',
             ),
-            65 => 
+            64 => 
             array (
                 'id' => 68,
                 'nombre' => 'Aviso Aclaratorio de predio rústico o urbano.',
@@ -1405,12 +1384,12 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:18:22',
                 'updated_at' => '2025-07-18 16:16:11',
             ),
-            66 => 
+            65 => 
             array (
                 'id' => 69,
                 'nombre' => 'Por resolución administrativa emitida por el Registro Agrario Nacional o Instituto Nacional del Suelo Sustentable.',
                 'tipo' => 'fija',
-                'estado' => 'inactivo',
+                'estado' => 'activo',
                 'umas' => NULL,
                 'porcentaje' => NULL,
                 'ordinario' => '1039.00',
@@ -1424,9 +1403,9 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:20:02',
-                'updated_at' => '2025-07-18 16:17:45',
+                'updated_at' => '2025-09-23 14:31:06',
             ),
-            67 => 
+            66 => 
             array (
                 'id' => 70,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 1 a 4. Vegetación no densa',
@@ -1447,7 +1426,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:28:16',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            68 => 
+            67 => 
             array (
                 'id' => 71,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 1 a 4. Vegetación densa',
@@ -1468,7 +1447,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:28:35',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            69 => 
+            68 => 
             array (
                 'id' => 72,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 5 a 20. Vegetación no densa',
@@ -1489,7 +1468,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:29:20',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            70 => 
+            69 => 
             array (
                 'id' => 73,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 5 a 20. Vegetación densa',
@@ -1510,7 +1489,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:29:49',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            71 => 
+            70 => 
             array (
                 'id' => 74,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 21 a 50. Vegetación no densa',
@@ -1531,7 +1510,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:30:28',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            72 => 
+            71 => 
             array (
                 'id' => 75,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 21 a 50. Vegetación densa',
@@ -1552,7 +1531,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:30:51',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            73 => 
+            72 => 
             array (
                 'id' => 76,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 51 a 100. Vegetación no densa',
@@ -1573,7 +1552,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:31:19',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            74 => 
+            73 => 
             array (
                 'id' => 77,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 51 a 100. Vegetación densa',
@@ -1594,7 +1573,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:31:36',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            75 => 
+            74 => 
             array (
                 'id' => 78,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 101 a 500. Vegetación no densa',
@@ -1615,7 +1594,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:32:16',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            76 => 
+            75 => 
             array (
                 'id' => 79,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 101 a 500. Vegetación densa',
@@ -1636,7 +1615,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:32:36',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            77 => 
+            76 => 
             array (
                 'id' => 80,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 501 a 1000. Vegetación no densa',
@@ -1657,7 +1636,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:33:17',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            78 => 
+            77 => 
             array (
                 'id' => 81,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 1 a 4. Vegetación no densa',
@@ -1678,7 +1657,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:34:02',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            79 => 
+            78 => 
             array (
                 'id' => 82,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 1 a 4. Vegetación densa',
@@ -1699,7 +1678,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:34:28',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            80 => 
+            79 => 
             array (
                 'id' => 83,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 5 a 10. Vegetación no densa',
@@ -1720,7 +1699,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:35:00',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            81 => 
+            80 => 
             array (
                 'id' => 84,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 5 a 10. Vegetación densa',
@@ -1741,7 +1720,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:35:19',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            82 => 
+            81 => 
             array (
                 'id' => 85,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 11 a 20. Vegetación no densa',
@@ -1762,7 +1741,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:35:50',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            83 => 
+            82 => 
             array (
                 'id' => 86,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 11 a 20. Vegetación densa',
@@ -1783,7 +1762,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:36:07',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            84 => 
+            83 => 
             array (
                 'id' => 87,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 21 a 50. Vegetación no densa',
@@ -1804,7 +1783,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:36:35',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            85 => 
+            84 => 
             array (
                 'id' => 88,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 21 a 50. Vegetación densa',
@@ -1825,7 +1804,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:36:53',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            86 => 
+            85 => 
             array (
                 'id' => 89,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 51 a 100. Vegetación no densa',
@@ -1846,7 +1825,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:37:19',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            87 => 
+            86 => 
             array (
                 'id' => 90,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de 51 a 100. Vegetación densa',
@@ -1867,7 +1846,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:37:39',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            88 => 
+            87 => 
             array (
                 'id' => 91,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de más de 100. Vegetación no densa',
@@ -1888,7 +1867,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:38:13',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            89 => 
+            88 => 
             array (
                 'id' => 92,
                 'nombre' => 'Hectareas o kilometro lineal de cobertura de más de 100. Vegetación densa',
@@ -1909,7 +1888,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:38:32',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            90 => 
+            89 => 
             array (
                 'id' => 93,
                 'nombre' => 'Puntos decontrol de 1 a 5 Vegetación no densa',
@@ -1930,7 +1909,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:39:29',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            91 => 
+            90 => 
             array (
                 'id' => 94,
                 'nombre' => 'Puntos decontrol de 1 a 5 Vegetación densa',
@@ -1951,7 +1930,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:39:49',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            92 => 
+            91 => 
             array (
                 'id' => 95,
                 'nombre' => 'Puntos decontrol de 6 a 20 Vegetación no densa',
@@ -1972,7 +1951,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:40:10',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            93 => 
+            92 => 
             array (
                 'id' => 96,
                 'nombre' => 'Puntos decontrol de 6 a 20 Vegetación densa',
@@ -1993,7 +1972,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:40:24',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            94 => 
+            93 => 
             array (
                 'id' => 97,
                 'nombre' => 'Puntos de control de 21 a 50 Vegetación no densa',
@@ -2014,7 +1993,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:41:01',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            95 => 
+            94 => 
             array (
                 'id' => 98,
                 'nombre' => 'Puntos de control de 21 a 50 Vegetación densa',
@@ -2035,7 +2014,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:41:19',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            96 => 
+            95 => 
             array (
                 'id' => 99,
                 'nombre' => 'Puntos de control de 51 a 100 Vegetación no densa',
@@ -2056,7 +2035,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:41:42',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            97 => 
+            96 => 
             array (
                 'id' => 100,
                 'nombre' => 'Puntos de control de 51 a 100 Vegetación densa',
@@ -2077,7 +2056,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:41:57',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            98 => 
+            97 => 
             array (
                 'id' => 101,
             'nombre' => 'Apoyo terrestre con Sistema de Posicionamiento Global (GPS) por kilómetro cuadrado de cobertura',
@@ -2098,7 +2077,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:42:43',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            99 => 
+            98 => 
             array (
                 'id' => 102,
             'nombre' => 'Fotografía aérea georeferenciada (Ortofoto) digital, por mosaico de un kilómetro cuadrado de cobertura',
@@ -2119,7 +2098,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:43:01',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            100 => 
+            99 => 
             array (
                 'id' => 103,
             'nombre' => 'Restitución de manzana (sujeta a disposición de software, equipo y personal capacitado)',
@@ -2140,7 +2119,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:43:34',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            101 => 
+            100 => 
             array (
                 'id' => 104,
                 'nombre' => 'Frente Lineal de Manzanas, por predio',
@@ -2161,12 +2140,12 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-03-27 15:44:10',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            102 => 
+            101 => 
             array (
                 'id' => 105,
                 'nombre' => 'Ubicación cartográfica para la asignación correcta de clave catastral',
                 'tipo' => 'fija',
-                'estado' => 'inactivo',
+                'estado' => 'activo',
                 'umas' => NULL,
                 'porcentaje' => NULL,
                 'ordinario' => '194.00',
@@ -2180,14 +2159,14 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:46:01',
-                'updated_at' => '2025-07-18 16:22:05',
+                'updated_at' => '2025-09-23 14:31:55',
             ),
-            103 => 
+            102 => 
             array (
                 'id' => 106,
                 'nombre' => 'Ubicación cartográfica por cambio de localidad',
                 'tipo' => 'fija',
-                'estado' => 'inactivo',
+                'estado' => 'activo',
                 'umas' => NULL,
                 'porcentaje' => NULL,
                 'ordinario' => '194.00',
@@ -2201,14 +2180,14 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:47:06',
-                'updated_at' => '2025-07-18 16:22:37',
+                'updated_at' => '2025-09-23 14:32:15',
             ),
-            104 => 
+            103 => 
             array (
                 'id' => 107,
                 'nombre' => 'Georreferenciación de croquis administrativos del catastro',
                 'tipo' => 'fija',
-                'estado' => 'inactivo',
+                'estado' => 'activo',
                 'umas' => NULL,
                 'porcentaje' => NULL,
                 'ordinario' => '633.00',
@@ -2222,9 +2201,9 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => NULL,
                 'actualizado_por' => 1,
                 'created_at' => '2023-03-27 15:47:58',
-                'updated_at' => '2025-07-18 16:23:16',
+                'updated_at' => '2025-09-23 14:32:38',
             ),
-            105 => 
+            104 => 
             array (
                 'id' => 108,
                 'nombre' => 'Para predios rústicos Hasta de 00-00-01 A  01-00-00 HAS GRUPO 1',
@@ -2245,7 +2224,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-19 15:09:41',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            106 => 
+            105 => 
             array (
                 'id' => 109,
                 'nombre' => 'Para predios rústicos Hasta de 00-00-01 A  01-00-00 HAS GRUPO 2',
@@ -2266,7 +2245,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-19 15:10:06',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            107 => 
+            106 => 
             array (
                 'id' => 110,
                 'nombre' => 'Para predios rústicos Hasta de 00-00-01 A  01-00-00 HAS GRUPO 3',
@@ -2287,7 +2266,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-19 15:10:46',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            108 => 
+            107 => 
             array (
                 'id' => 111,
                 'nombre' => 'Para predios rústicos Hasta de 00-00-01 A 01-00-00 HAS GRUPO 4',
@@ -2308,7 +2287,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-19 15:11:26',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            109 => 
+            108 => 
             array (
                 'id' => 112,
                 'nombre' => 'Para predios rústicos Hasta de De 01-00-01  A 03-00-00 HAS. GRUPO 1',
@@ -2329,7 +2308,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 12:22:59',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            110 => 
+            109 => 
             array (
                 'id' => 113,
                 'nombre' => 'Para predios rústicos Hasta de De 03-00-01  A 06-00-00 HAS. GRUPO 2',
@@ -2350,7 +2329,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 12:25:33',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            111 => 
+            110 => 
             array (
                 'id' => 114,
                 'nombre' => 'Para predios rústicos Hasta de 01-00-01  A 03-00-00 HAS. GRUPO 3',
@@ -2371,7 +2350,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 12:27:02',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            112 => 
+            111 => 
             array (
                 'id' => 115,
                 'nombre' => 'Para predios rústicos Hasta de  01-00-01  A 03-00-00 HAS. GRUPO 4',
@@ -2392,7 +2371,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 12:28:20',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            113 => 
+            112 => 
             array (
                 'id' => 116,
                 'nombre' => 'Para predios rústicos Hasta de 03-00-01  A 06-00-00 HAS. GRUPO 1 ',
@@ -2413,7 +2392,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 12:30:55',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            114 => 
+            113 => 
             array (
                 'id' => 117,
                 'nombre' => 'Para predios rústicos Hasta de 03-00-01  A 06-00-00 HAS. GRUPO 2',
@@ -2434,7 +2413,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 12:32:59',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            115 => 
+            114 => 
             array (
                 'id' => 118,
                 'nombre' => 'Para predios rústicos Hasta de  03-00-01  A 06-00-00 HAS. GRUPO 3',
@@ -2455,7 +2434,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 12:34:23',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            116 => 
+            115 => 
             array (
                 'id' => 119,
                 'nombre' => 'Para predios rústicos Hasta de 03-00-01  A 06-00-00 HAS. GRUPO 4',
@@ -2476,7 +2455,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 12:35:36',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            117 => 
+            116 => 
             array (
                 'id' => 120,
                 'nombre' => 'Para predios rústicos Hasta de 06-00-01  A 10-00-00 HAS. GRUPO 1',
@@ -2497,7 +2476,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 12:38:15',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            118 => 
+            117 => 
             array (
                 'id' => 121,
                 'nombre' => 'Para predios rústicos Hasta de 06-00-01  A 10-00-00 HAS. GRUPO 2',
@@ -2518,7 +2497,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 12:41:01',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            119 => 
+            118 => 
             array (
                 'id' => 122,
                 'nombre' => 'Para predios rústicos Hasta de 06-00-01  A 10-00-00 HAS. GRUPO 3',
@@ -2539,7 +2518,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 12:42:19',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            120 => 
+            119 => 
             array (
                 'id' => 123,
                 'nombre' => 'Para predios rústicos Hasta de 06-00-01  A 10-00-00 HAS. GRUPO 4',
@@ -2560,7 +2539,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 12:46:59',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            121 => 
+            120 => 
             array (
                 'id' => 124,
                 'nombre' => 'Para predios rústicos Hasta de 10-00-01  A 15-00-00 HAS. GRUPI 1',
@@ -2581,7 +2560,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 12:48:54',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            122 => 
+            121 => 
             array (
                 'id' => 125,
                 'nombre' => 'Para predios rústicos Hasta de 10-00-01  A 15-00-00 HAS. GRUPO 2',
@@ -2602,7 +2581,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 12:50:12',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            123 => 
+            122 => 
             array (
                 'id' => 126,
                 'nombre' => 'Para predios rústicos Hasta de 10-00-01  A 15-00-00 HAS. GRUPO 3',
@@ -2623,7 +2602,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:02:27',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            124 => 
+            123 => 
             array (
                 'id' => 127,
                 'nombre' => 'Para predios rústicos Hasta de 10-00-01  A 15-00-00 HAS. GRUPO 4',
@@ -2644,7 +2623,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:03:42',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            125 => 
+            124 => 
             array (
                 'id' => 128,
                 'nombre' => 'Para predios rústicos Hasta de 15-00-01  A 20-00-00 HAS. GRUPO 1',
@@ -2665,7 +2644,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:07:01',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            126 => 
+            125 => 
             array (
                 'id' => 129,
                 'nombre' => 'Para predios rústicos Hasta de 15-00-01  A 20-00-00 HAS. GRUPO 2 ',
@@ -2686,7 +2665,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:09:07',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            127 => 
+            126 => 
             array (
                 'id' => 130,
                 'nombre' => 'Para predios rústicos Hasta de 15-00-01  A 20-00-00 HAS. GRUPO 3 ',
@@ -2707,7 +2686,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:10:31',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            128 => 
+            127 => 
             array (
                 'id' => 131,
                 'nombre' => 'Para predios rústicos Hasta de 15-00-01  A 20-00-00 HAS. GRUPO 4',
@@ -2728,7 +2707,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:11:50',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            129 => 
+            128 => 
             array (
                 'id' => 132,
                 'nombre' => 'Para predios rústicos Hasta de 20-00-01   A 25-00-00 HAS. GRUPO 1',
@@ -2749,7 +2728,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:16:05',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            130 => 
+            129 => 
             array (
                 'id' => 133,
                 'nombre' => 'Para predios rústicos Hasta de 20-00-01   A 25-00-00 HAS. GRUPO 2',
@@ -2770,7 +2749,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:18:33',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            131 => 
+            130 => 
             array (
                 'id' => 134,
                 'nombre' => 'Para predios rústicos Hasta de 20-00-01   A 25-00-00 HAS. GRUPO 3 ',
@@ -2791,7 +2770,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:20:29',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            132 => 
+            131 => 
             array (
                 'id' => 135,
                 'nombre' => 'Para predios rústicos Hasta de  20-00-01   A 25-00-00 HAS. GRUPO 4',
@@ -2812,7 +2791,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:22:55',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            133 => 
+            132 => 
             array (
                 'id' => 136,
                 'nombre' => 'Para predios rústicos Hasta de 25-00-01   A 30-00-00 HAS. GRUPO 1',
@@ -2833,7 +2812,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:28:10',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            134 => 
+            133 => 
             array (
                 'id' => 137,
                 'nombre' => 'Para predios rústicos Hasta de 25-00-01   A 30-00-00 HAS. GRUPO 2',
@@ -2854,7 +2833,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:30:00',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            135 => 
+            134 => 
             array (
                 'id' => 138,
                 'nombre' => 'Para predios rústicos Hasta de De 25-00-01   A 30-00-00 HAS. GRUPO 3',
@@ -2875,7 +2854,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:31:57',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            136 => 
+            135 => 
             array (
                 'id' => 139,
                 'nombre' => 'Para predios rústicos Hasta de 25-00-01   A 30-00-00 HAS. GRUPO 4',
@@ -2896,7 +2875,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:33:12',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            137 => 
+            136 => 
             array (
                 'id' => 140,
                 'nombre' => 'Para predios rústicos Hasta de 30-00-01   A 35-00-00 HAS. GRUPO 1',
@@ -2917,7 +2896,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:37:41',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            138 => 
+            137 => 
             array (
                 'id' => 141,
                 'nombre' => 'Para predios rústicos Hasta de 30-00-01   A 35-00-00 HAS. GRUPO 2',
@@ -2938,7 +2917,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:39:08',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            139 => 
+            138 => 
             array (
                 'id' => 142,
                 'nombre' => 'Para predios rústicos Hasta de 30-00-01   A 35-00-00 HAS. GRUPO 3 ',
@@ -2959,7 +2938,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:41:08',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            140 => 
+            139 => 
             array (
                 'id' => 143,
                 'nombre' => 'Para predios rústicos Hasta de De 30-00-01   A 35-00-00 HAS. GRUPO 4',
@@ -2980,7 +2959,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:43:03',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            141 => 
+            140 => 
             array (
                 'id' => 144,
                 'nombre' => 'Para predios rústicos Hasta de 35-00-01  A 40-00-00 HAS. GRUPO 1',
@@ -3001,7 +2980,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:55:14',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            142 => 
+            141 => 
             array (
                 'id' => 145,
                 'nombre' => 'Para predios rústicos Hasta de 35-00-01  A 40-00-00 HAS. GRUPO 2',
@@ -3022,7 +3001,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:56:47',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            143 => 
+            142 => 
             array (
                 'id' => 146,
                 'nombre' => 'Para predios rústicos Hasta de 35-00-01  A 40-00-00 HAS. GRUPO 3',
@@ -3043,7 +3022,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 13:59:09',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            144 => 
+            143 => 
             array (
                 'id' => 147,
                 'nombre' => 'Para predios rústicos Hasta de 35-00-01  A 40-00-00 HAS. GRUPO 4',
@@ -3064,7 +3043,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-24 14:00:39',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            145 => 
+            144 => 
             array (
                 'id' => 148,
                 'nombre' => 'Para predios rústicos Hasta de 40-00-01  A 45-00-00 HAS. GRUPO 1',
@@ -3085,7 +3064,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 12:47:20',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            146 => 
+            145 => 
             array (
                 'id' => 149,
                 'nombre' => 'Para predios rústicos Hasta de 40-00-01  A 45-00-00 HAS.  	GRUPO 2',
@@ -3106,7 +3085,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 12:48:24',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            147 => 
+            146 => 
             array (
                 'id' => 150,
                 'nombre' => 'Para predios rústicos Hasta de 40-00-01  A 45-00-00 HAS. GRUPO 3',
@@ -3127,7 +3106,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 12:51:06',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            148 => 
+            147 => 
             array (
                 'id' => 151,
                 'nombre' => 'Para predios rústicos Hasta de 40-00-01  A 45-00-00 HAS. GRUPO 4',
@@ -3148,7 +3127,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 12:53:18',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            149 => 
+            148 => 
             array (
                 'id' => 152,
                 'nombre' => 'Para predios rústicos Hasta de 45-00-01  A 50-00-00 HAS. GRUPO 1',
@@ -3169,7 +3148,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 12:54:48',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            150 => 
+            149 => 
             array (
                 'id' => 153,
                 'nombre' => 'Para predios rústicos Hasta de 45-00-01  A 50-00-00 HAS. GRUPO 2',
@@ -3190,7 +3169,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 12:56:05',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            151 => 
+            150 => 
             array (
                 'id' => 154,
                 'nombre' => 'Para predios rústicos Hasta de 45-00-01  A 50-00-00 HAS. GRUPO 3 ',
@@ -3211,7 +3190,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 12:57:18',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            152 => 
+            151 => 
             array (
                 'id' => 155,
                 'nombre' => 'Para predios rústicos Hasta de 45-00-01  A 50-00-00 HAS. GRUPO 4',
@@ -3232,7 +3211,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 12:59:20',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            153 => 
+            152 => 
             array (
                 'id' => 156,
                 'nombre' => 'Para predios rústicos Hasta de 50-00-01  A 55-00-00 HAS. GRUPO 1',
@@ -3253,7 +3232,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 13:14:03',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            154 => 
+            153 => 
             array (
                 'id' => 157,
                 'nombre' => 'Para predios rústicos Hasta de 50-00-01  A 55-00-00 HAS. GRUPO 2',
@@ -3274,7 +3253,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 13:15:13',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            155 => 
+            154 => 
             array (
                 'id' => 158,
                 'nombre' => 'Para predios rústicos Hasta de 50-00-01  A 55-00-00 HAS. GRUPO 3',
@@ -3295,7 +3274,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 13:22:58',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            156 => 
+            155 => 
             array (
                 'id' => 159,
                 'nombre' => 'Para predios rústicos Hasta de 50-00-01  A 55-00-00 HAS. GRUPO 4',
@@ -3316,7 +3295,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 13:24:11',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            157 => 
+            156 => 
             array (
                 'id' => 160,
                 'nombre' => 'Para predios rústicos Hasta de 55-00-01  A 60-00-00 HAS. GRUPO 1',
@@ -3337,7 +3316,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 13:25:59',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            158 => 
+            157 => 
             array (
                 'id' => 161,
                 'nombre' => 'Para predios rústicos Hasta de 55-00-01  A 60-00-00 HAS. GRUPO 2',
@@ -3358,7 +3337,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 13:44:43',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            159 => 
+            158 => 
             array (
                 'id' => 162,
                 'nombre' => 'Para predios rústicos Hasta de 55-00-01  A 60-00-00 HAS. GRUPO 3',
@@ -3379,7 +3358,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 13:46:49',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            160 => 
+            159 => 
             array (
                 'id' => 163,
                 'nombre' => 'Para predios rústicos Hasta de 55-00-01  A 60-00-00 HAS. GRUPO 4 ',
@@ -3400,7 +3379,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 13:48:15',
                 'updated_at' => '2024-06-04 15:02:34',
             ),
-            161 => 
+            160 => 
             array (
                 'id' => 164,
                 'nombre' => 'Para predios rústicos Hasta de 60-00-01  A 65-00-00 HAS. GRUPO 1',
@@ -3421,7 +3400,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 13:49:57',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            162 => 
+            161 => 
             array (
                 'id' => 165,
                 'nombre' => 'Para predios rústicos Hasta de 60-00-01  A 65-00-00 HAS. GRUPO 2',
@@ -3442,7 +3421,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 13:51:01',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            163 => 
+            162 => 
             array (
                 'id' => 166,
                 'nombre' => 'Para predios rústicos Hasta de 60-00-01  A 65-00-00 HAS. GRUPO 3',
@@ -3463,7 +3442,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 13:52:03',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            164 => 
+            163 => 
             array (
                 'id' => 167,
                 'nombre' => 'Para predios rústicos Hasta de  60-00-01  A 65-00-00 HAS. GRUPO 4 ',
@@ -3484,7 +3463,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 13:53:03',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            165 => 
+            164 => 
             array (
                 'id' => 168,
                 'nombre' => 'Para predios rústicos Hasta de 65-00-01  A 70-00-00 HAS. GRUPO 1',
@@ -3505,7 +3484,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 14:30:48',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            166 => 
+            165 => 
             array (
                 'id' => 169,
                 'nombre' => 'Para predios rústicos Hasta de 65-00-01  A 70-00-00 HAS. GRUPO 2',
@@ -3526,7 +3505,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 14:32:08',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            167 => 
+            166 => 
             array (
                 'id' => 170,
                 'nombre' => 'Para predios rústicos Hasta de 65-00-01  A 70-00-00 HAS. GRUPO 3',
@@ -3547,7 +3526,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 14:37:37',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            168 => 
+            167 => 
             array (
                 'id' => 171,
                 'nombre' => 'Para predios rústicos Hasta de 65-00-01  A 70-00-00 HAS. GRUPO 4',
@@ -3568,7 +3547,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-25 14:39:24',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            169 => 
+            168 => 
             array (
                 'id' => 172,
                 'nombre' => 'Para predios rústicos Hasta de 70-00-01  A 75-00-00 HAS. GRUPO 1',
@@ -3589,7 +3568,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 09:49:28',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            170 => 
+            169 => 
             array (
                 'id' => 173,
                 'nombre' => 'Para predios rústicos Hasta de 70-00-01  A 75-00-00 HAS. GRUPO 2',
@@ -3610,7 +3589,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 09:51:00',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            171 => 
+            170 => 
             array (
                 'id' => 174,
                 'nombre' => 'Para predios rústicos Hasta de 70-00-01  A 75-00-00 HAS. GRUPO 3 ',
@@ -3631,7 +3610,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 09:52:07',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            172 => 
+            171 => 
             array (
                 'id' => 175,
                 'nombre' => 'Para predios rústicos Hasta de 70-00-01  A 75-00-00 HAS. GRUPO 4',
@@ -3652,7 +3631,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 09:53:26',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            173 => 
+            172 => 
             array (
                 'id' => 176,
                 'nombre' => 'Para predios rústicos Hasta de 75-00-01  A 80-00-00 HAS. GRUPO 1',
@@ -3673,7 +3652,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 09:54:31',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            174 => 
+            173 => 
             array (
                 'id' => 177,
                 'nombre' => 'Para predios rústicos Hasta de 75-00-01  A 80-00-00 HAS. GRUPO 2',
@@ -3694,7 +3673,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 09:55:42',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            175 => 
+            174 => 
             array (
                 'id' => 178,
                 'nombre' => 'Para predios rústicos Hasta de 75-00-01  A 80-00-00 HAS. GRUPO 3',
@@ -3715,7 +3694,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 09:56:49',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            176 => 
+            175 => 
             array (
                 'id' => 179,
                 'nombre' => 'Para predios rústicos Hasta de 75-00-01  A 80-00-00 HAS. GRUPO 4',
@@ -3736,7 +3715,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 09:57:59',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            177 => 
+            176 => 
             array (
                 'id' => 180,
                 'nombre' => 'Para predios rústicos Hasta de  80-00-01  A 85-00-00 HAS. GRUPO 1',
@@ -3757,7 +3736,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 09:59:41',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            178 => 
+            177 => 
             array (
                 'id' => 181,
                 'nombre' => 'Para predios rústicos Hasta de  80-00-01  A 85-00-00 HAS. GRUPO 2',
@@ -3778,7 +3757,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 10:00:57',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            179 => 
+            178 => 
             array (
                 'id' => 182,
                 'nombre' => 'Para predios rústicos Hasta de  80-00-01  A 85-00-00 HAS. GRUPO 3',
@@ -3799,7 +3778,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 10:02:07',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            180 => 
+            179 => 
             array (
                 'id' => 183,
                 'nombre' => 'Para predios rústicos Hasta de  80-00-01  A 85-00-00 HAS. GRUPO 4 ',
@@ -3820,7 +3799,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 10:03:15',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            181 => 
+            180 => 
             array (
                 'id' => 184,
                 'nombre' => 'Para predios rústicos Hasta de  85-00-01  A 90-00-00 HAS. GRUPO 1 ',
@@ -3841,7 +3820,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:16:34',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            182 => 
+            181 => 
             array (
                 'id' => 185,
                 'nombre' => 'Para predios rústicos Hasta de 85-00-01  A 90-00-00 HAS. GRUPO 2',
@@ -3862,7 +3841,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:17:32',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            183 => 
+            182 => 
             array (
                 'id' => 186,
                 'nombre' => 'Para predios rústicos Hasta de 85-00-01  A 90-00-00 HAS. GRUPO 3',
@@ -3883,7 +3862,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:20:20',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            184 => 
+            183 => 
             array (
                 'id' => 187,
                 'nombre' => 'Para predios rústicos Hasta de  85-00-01  A 90-00-00 HAS. GRUPO 4',
@@ -3904,7 +3883,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:21:29',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            185 => 
+            184 => 
             array (
                 'id' => 188,
                 'nombre' => 'Para predios rústicos Hasta de 90-00-01  A 95-00-00 HAS. GRUPO 1 ',
@@ -3925,7 +3904,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:23:34',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            186 => 
+            185 => 
             array (
                 'id' => 189,
                 'nombre' => 'Para predios rústicos Hasta de 90-00-01  A 95-00-00 HAS. GRUPO 2',
@@ -3946,7 +3925,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:24:50',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            187 => 
+            186 => 
             array (
                 'id' => 190,
                 'nombre' => 'Para predios rústicos Hasta de 90-00-01  A 95-00-00 HAS. GRUPO 3 ',
@@ -3967,7 +3946,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:26:24',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            188 => 
+            187 => 
             array (
                 'id' => 191,
                 'nombre' => 'Para predios rústicos Hasta de 90-00-01  A 95-00-00 HAS. GRUPO 4 ',
@@ -3988,7 +3967,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:27:56',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            189 => 
+            188 => 
             array (
                 'id' => 192,
                 'nombre' => 'Para predios rústicos Hasta de 95-00-01  A 100-00-00 HAS. GRUPO 1',
@@ -4009,7 +3988,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:31:30',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            190 => 
+            189 => 
             array (
                 'id' => 193,
                 'nombre' => 'Para predios rústicos Hasta de 95-00-01  A 100-00-00 HAS. GRUPO 2',
@@ -4030,7 +4009,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:32:57',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            191 => 
+            190 => 
             array (
                 'id' => 194,
                 'nombre' => 'Para predios rústicos Hasta de 95-00-01  A 100-00-00 HAS. GRUPO 3',
@@ -4051,7 +4030,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:34:14',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            192 => 
+            191 => 
             array (
                 'id' => 195,
                 'nombre' => 'Para predios rústicos Hasta de 95-00-01  A 100-00-00 HAS. GRUPO 4 ',
@@ -4072,7 +4051,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:38:03',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            193 => 
+            192 => 
             array (
                 'id' => 196,
                 'nombre' => 'Para predios rústicos, por cada hectárea o fracción que exceda : 100-00-00 HAS. GRUPO 1',
@@ -4093,7 +4072,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:43:59',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            194 => 
+            193 => 
             array (
                 'id' => 197,
                 'nombre' => 'Para predios rústicos, por cada hectárea o fracción que exceda : 100-00-00 HAS. GRUPO 2',
@@ -4114,7 +4093,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:44:46',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            195 => 
+            194 => 
             array (
                 'id' => 198,
                 'nombre' => 'Para predios rústicos, por cada hectárea o fracción que exceda : 100-00-00 HAS. GRUPO 3',
@@ -4135,7 +4114,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:45:59',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            196 => 
+            195 => 
             array (
                 'id' => 199,
                 'nombre' => 'Para predios rústicos, por cada hectárea o fracción que exceda : 100-00-00 HAS. GRUPO 4',
@@ -4156,7 +4135,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-29 12:46:45',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            197 => 
+            196 => 
             array (
                 'id' => 200,
                 'nombre' => 'Para predios rústicos Hasta de  01-00-00 A 01-00-01 HAS. GRUPO 1 ',
@@ -4177,7 +4156,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-30 11:58:24',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            198 => 
+            197 => 
             array (
                 'id' => 201,
                 'nombre' => 'Para predios rústicos Hasta de 01-00-00 A 01-00-01 HAS. GRUPO 2',
@@ -4198,7 +4177,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-30 12:11:27',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            199 => 
+            198 => 
             array (
                 'id' => 202,
                 'nombre' => 'Para predios rústicos Hasta de 01-00-00 A 01-00-01 HAS. GRUPO 3',
@@ -4219,7 +4198,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-30 12:12:23',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            200 => 
+            199 => 
             array (
                 'id' => 203,
                 'nombre' => 'Para predios rústicos Hasta de 01-00-00 A 01-00-01 HAS. GRUPO 4',
@@ -4240,7 +4219,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-30 12:13:57',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            201 => 
+            200 => 
             array (
                 'id' => 204,
                 'nombre' => 'Para predios rústicos Hasta de  01-00-01 A 03-00-00 HAS. GRUPO 1',
@@ -4261,7 +4240,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-30 13:55:59',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            202 => 
+            201 => 
             array (
                 'id' => 205,
                 'nombre' => 'Para predios rústicos Hasta de 01-00-01 A 03-00-00 HAS. GRUPO 2',
@@ -4282,7 +4261,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-30 13:57:13',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            203 => 
+            202 => 
             array (
                 'id' => 206,
                 'nombre' => 'Para predios rústicos Hasta de 01-00-01 A 03-00-00 HAS. GRUPO 3',
@@ -4303,7 +4282,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-30 13:58:04',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            204 => 
+            203 => 
             array (
                 'id' => 207,
                 'nombre' => 'Para predios rústicos Hasta de 01-00-01 A 03-00-00 HAS. GRUPO 4',
@@ -4324,7 +4303,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-30 13:59:01',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            205 => 
+            204 => 
             array (
                 'id' => 208,
                 'nombre' => 'Para predios rústicos Hasta de 03-00-01 A 06-00-00 HAS. GRUPO 1',
@@ -4345,7 +4324,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-30 14:03:01',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            206 => 
+            205 => 
             array (
                 'id' => 209,
                 'nombre' => 'Para predios rústicos Hasta de 03-00-01 A 06-00-00 HAS. GRUPO 2',
@@ -4366,7 +4345,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:05:38',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            207 => 
+            206 => 
             array (
                 'id' => 210,
                 'nombre' => 'Para predios rústicos Hasta de 03-00-01 A 06-00-00 HAS. GRUPO 3',
@@ -4387,7 +4366,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:06:43',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            208 => 
+            207 => 
             array (
                 'id' => 211,
                 'nombre' => 'Para predios rústicos Hasta de 03-00-01 A 06-00-00 HAS. GRUPO 4',
@@ -4408,7 +4387,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:08:38',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            209 => 
+            208 => 
             array (
                 'id' => 212,
                 'nombre' => 'Para predios rústicos Hasta de 06-00-01 A 10-00-00 HAS. GRUPO 1',
@@ -4429,7 +4408,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:10:57',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            210 => 
+            209 => 
             array (
                 'id' => 213,
                 'nombre' => 'Para predios rústicos Hasta de 06-00-01 A 10-00-00 HAS. GRUPO 2',
@@ -4450,7 +4429,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:32:43',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            211 => 
+            210 => 
             array (
                 'id' => 214,
                 'nombre' => 'Para predios rústicos Hasta de 06-00-01 A 10-00-00 HAS. GRUPO 3',
@@ -4471,7 +4450,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:33:25',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            212 => 
+            211 => 
             array (
                 'id' => 215,
                 'nombre' => 'Para predios rústicos Hasta de 06-00-01 A 10-00-00 HAS. GRUPO 4',
@@ -4492,7 +4471,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:34:06',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            213 => 
+            212 => 
             array (
                 'id' => 216,
                 'nombre' => 'Para predios rústicos Hasta de 10-00-01 A 15-00-00 HAS. GRUPO 1 ',
@@ -4513,7 +4492,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:37:37',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            214 => 
+            213 => 
             array (
                 'id' => 217,
                 'nombre' => 'Para predios rústicos Hasta de 10-00-01 A 15-00-00 HAS. GRUPO 2',
@@ -4534,7 +4513,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:38:42',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            215 => 
+            214 => 
             array (
                 'id' => 218,
                 'nombre' => 'Para predios rústicos Hasta de 10-00-01 A 15-00-00 HAS. GRUPO 3',
@@ -4555,7 +4534,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:40:00',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            216 => 
+            215 => 
             array (
                 'id' => 219,
                 'nombre' => 'Para predios rústicos Hasta de 10-00-01 A 15-00-00 HAS. GRUPO 4',
@@ -4576,7 +4555,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:41:19',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            217 => 
+            216 => 
             array (
                 'id' => 220,
                 'nombre' => 'Para predios rústicos Hasta de  15-00-01 A 20-00-00 HAS. GRUPO 1',
@@ -4597,7 +4576,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:43:33',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            218 => 
+            217 => 
             array (
                 'id' => 221,
                 'nombre' => 'Para predios rústicos Hasta de 15-00-01 A 20-00-00 HAS. GRUPO 2',
@@ -4618,7 +4597,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:44:41',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            219 => 
+            218 => 
             array (
                 'id' => 222,
                 'nombre' => 'Para predios rústicos Hasta de 15-00-01 A 20-00-00 HAS. GRUPO 3',
@@ -4639,7 +4618,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:45:43',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            220 => 
+            219 => 
             array (
                 'id' => 223,
                 'nombre' => 'Para predios rústicos Hasta de 15-00-01 A 20-00-00 HAS. GRUPO 4',
@@ -4660,7 +4639,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:46:36',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            221 => 
+            220 => 
             array (
                 'id' => 224,
                 'nombre' => 'Para predios rústicos Hasta de 20-00-01 A 25-00-00 HAS. GRUPO 1',
@@ -4681,7 +4660,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:49:57',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            222 => 
+            221 => 
             array (
                 'id' => 225,
                 'nombre' => 'Para predios rústicos Hasta de 20-00-01 A 25-00-00 HAS. GRUPO 2',
@@ -4702,7 +4681,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:50:36',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            223 => 
+            222 => 
             array (
                 'id' => 226,
                 'nombre' => 'Para predios rústicos Hasta de 20-00-01 A 25-00-00 HAS. GRUPO 3',
@@ -4723,7 +4702,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:51:18',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            224 => 
+            223 => 
             array (
                 'id' => 227,
                 'nombre' => 'Para predios rústicos Hasta de 20-00-01 A 25-00-00 HAS. GRUPO 4',
@@ -4744,7 +4723,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:51:59',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            225 => 
+            224 => 
             array (
                 'id' => 228,
                 'nombre' => 'Para predios rústicos Hasta de 25-00-01 A 30-00-00 HAS. GRUPO 1',
@@ -4765,7 +4744,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 12:52:59',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            226 => 
+            225 => 
             array (
                 'id' => 229,
                 'nombre' => 'Para predios rústicos Hasta de 25-00-01 A 30-00-00 HAS. GRUPO 2',
@@ -4786,7 +4765,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 13:07:58',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            227 => 
+            226 => 
             array (
                 'id' => 230,
                 'nombre' => 'Para predios rústicos Hasta de 25-00-01 A 30-00-00 HAS. GRUPO 3',
@@ -4807,7 +4786,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 13:10:46',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            228 => 
+            227 => 
             array (
                 'id' => 231,
                 'nombre' => 'Para predios rústicos Hasta de 25-00-01 A 30-00-00 HAS. GRUPO 4',
@@ -4828,7 +4807,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-05-31 13:12:25',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            229 => 
+            228 => 
             array (
                 'id' => 232,
                 'nombre' => 'Para predios rústicos Hasta de  30-00-01 A 35-00-00 HAS. GRUPO 1',
@@ -4849,7 +4828,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:45:49',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            230 => 
+            229 => 
             array (
                 'id' => 233,
                 'nombre' => 'Para predios rústicos Hasta de 30-00-01 A 35-00-00 HAS. GRUPO 2',
@@ -4870,7 +4849,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:46:24',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            231 => 
+            230 => 
             array (
                 'id' => 234,
                 'nombre' => 'Para predios rústicos Hasta de 30-00-01 A 35-00-00 HAS. GRUPO 3',
@@ -4891,7 +4870,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:47:07',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            232 => 
+            231 => 
             array (
                 'id' => 235,
                 'nombre' => 'Para predios rústicos Hasta de 30-00-01 A 35-00-00 HAS. GRUPO 4',
@@ -4912,7 +4891,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:47:57',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            233 => 
+            232 => 
             array (
                 'id' => 236,
                 'nombre' => 'Para predios rústicos Hasta de 35-00-01 A 40-00-00 HAS. GRUPO 1 ',
@@ -4933,7 +4912,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:49:05',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            234 => 
+            233 => 
             array (
                 'id' => 237,
                 'nombre' => 'Para predios rústicos Hasta de 35-00-01 A 40-00-00 HAS. GRUPO 2',
@@ -4954,7 +4933,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:49:52',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            235 => 
+            234 => 
             array (
                 'id' => 238,
                 'nombre' => 'Para predios rústicos Hasta de 35-00-01 A 40-00-00 HAS. GRUPO 3',
@@ -4975,7 +4954,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:51:20',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            236 => 
+            235 => 
             array (
                 'id' => 239,
                 'nombre' => 'Para predios rústicos Hasta de 35-00-01 A 40-00-00 HAS. GRUPO 4',
@@ -4996,7 +4975,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:51:58',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            237 => 
+            236 => 
             array (
                 'id' => 240,
                 'nombre' => 'Para predios rústicos Hasta de 40-00-01 A 45-00-00 HAS. GRUPO 1',
@@ -5017,7 +4996,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:53:05',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            238 => 
+            237 => 
             array (
                 'id' => 241,
                 'nombre' => 'Para predios rústicos Hasta de 40-00-01 A 45-00-00 HAS. GRUPO 2',
@@ -5038,7 +5017,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:53:54',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            239 => 
+            238 => 
             array (
                 'id' => 242,
                 'nombre' => 'Para predios rústicos Hasta de 40-00-01 A 45-00-00 HAS. GRUPO 3',
@@ -5059,7 +5038,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:54:46',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            240 => 
+            239 => 
             array (
                 'id' => 243,
                 'nombre' => 'Para predios rústicos Hasta de 40-00-01 A 45-00-00 HAS. GRUPO 4',
@@ -5080,7 +5059,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:55:26',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            241 => 
+            240 => 
             array (
                 'id' => 244,
                 'nombre' => 'Para predios rústicos Hasta de 45-00-01 A 50-00-00 HAS. GRUPO 1',
@@ -5101,7 +5080,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:56:26',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            242 => 
+            241 => 
             array (
                 'id' => 245,
                 'nombre' => 'Para predios rústicos Hasta de 45-00-01 A 50-00-00 HAS. GRUPO 2',
@@ -5122,7 +5101,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:56:58',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            243 => 
+            242 => 
             array (
                 'id' => 246,
                 'nombre' => 'Para predios rústicos Hasta de 45-00-01 A 50-00-00 HAS. GRUPO 3',
@@ -5143,7 +5122,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:57:37',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            244 => 
+            243 => 
             array (
                 'id' => 247,
                 'nombre' => 'Para predios rústicos Hasta de 45-00-01 A 50-00-00 HAS. GRUPO 4',
@@ -5164,7 +5143,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:58:13',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            245 => 
+            244 => 
             array (
                 'id' => 248,
                 'nombre' => 'Para predios rústicos Hasta de 50-00-01 A 55-00-00 HAS. GRUPO 1 ',
@@ -5185,7 +5164,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 14:59:32',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            246 => 
+            245 => 
             array (
                 'id' => 249,
                 'nombre' => 'Para predios rústicos Hasta de 50-00-01 A 55-00-00 HAS. GRUPO 2',
@@ -5206,7 +5185,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 15:00:10',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            247 => 
+            246 => 
             array (
                 'id' => 250,
                 'nombre' => 'Para predios rústicos Hasta de 50-00-01 A 55-00-00 HAS. GRUPO 3',
@@ -5227,7 +5206,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 15:00:51',
                 'updated_at' => '2024-09-05 16:26:36',
             ),
-            248 => 
+            247 => 
             array (
                 'id' => 251,
                 'nombre' => 'Para predios rústicos Hasta de 50-00-01 A 55-00-00 HAS. GRUPO 4',
@@ -5248,7 +5227,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-01 15:01:30',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            249 => 
+            248 => 
             array (
                 'id' => 252,
                 'nombre' => 'Para predios rústicos Hasta de 55-00-01 A 60-00-00 HAS. GRUPO 1',
@@ -5269,7 +5248,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 08:49:27',
                 'updated_at' => '2024-09-05 16:27:46',
             ),
-            250 => 
+            249 => 
             array (
                 'id' => 253,
                 'nombre' => 'Para predios rústicos Hasta de 55-00-01 A 60-00-00 HAS. GRUPO 2',
@@ -5290,7 +5269,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 08:51:17',
                 'updated_at' => '2024-09-05 16:28:19',
             ),
-            251 => 
+            250 => 
             array (
                 'id' => 254,
                 'nombre' => 'Para predios rústicos Hasta de 55-00-01 A 60-00-00 HAS. GRUPO 3',
@@ -5311,7 +5290,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 08:53:05',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            252 => 
+            251 => 
             array (
                 'id' => 255,
                 'nombre' => 'Para predios rústicos Hasta de 55-00-01 A 60-00-00 HAS. GRUPO 4',
@@ -5332,7 +5311,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 08:53:55',
                 'updated_at' => '2024-09-05 16:28:44',
             ),
-            253 => 
+            252 => 
             array (
                 'id' => 256,
                 'nombre' => 'Para predios rústicos Hasta de 60-00-01 A 65-00-00 HAS. GRUPO 1',
@@ -5353,7 +5332,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 08:55:29',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            254 => 
+            253 => 
             array (
                 'id' => 257,
                 'nombre' => 'Para predios rústicos Hasta de 60-00-01 A 65-00-00 HAS. GRUPO 2',
@@ -5374,7 +5353,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 08:56:08',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            255 => 
+            254 => 
             array (
                 'id' => 258,
                 'nombre' => 'Para predios rústicos Hasta de 60-00-01 A 65-00-00 HAS. GRUPO 3',
@@ -5395,7 +5374,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 08:57:04',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            256 => 
+            255 => 
             array (
                 'id' => 259,
                 'nombre' => 'Para predios rústicos Hasta de 60-00-01 A 65-00-00 HAS. GRUPO 4',
@@ -5416,7 +5395,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 08:58:31',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            257 => 
+            256 => 
             array (
                 'id' => 260,
                 'nombre' => 'Para predios rústicos Hasta de 65-00-01 A 70-00-00 HAS. GRUPO 1',
@@ -5437,7 +5416,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:31:54',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            258 => 
+            257 => 
             array (
                 'id' => 261,
                 'nombre' => 'Para predios rústicos Hasta de 65-00-01 A 70-00-00 HAS. GRUPO 2',
@@ -5458,7 +5437,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:32:41',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            259 => 
+            258 => 
             array (
                 'id' => 262,
                 'nombre' => 'Para predios rústicos Hasta de 65-00-01 A 70-00-00 HAS. GRUPO 3',
@@ -5479,7 +5458,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:33:25',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            260 => 
+            259 => 
             array (
                 'id' => 263,
                 'nombre' => 'Para predios rústicos Hasta de 65-00-01 A 70-00-00 HAS. GRUPO 4',
@@ -5500,7 +5479,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:34:24',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            261 => 
+            260 => 
             array (
                 'id' => 264,
                 'nombre' => 'Para predios rústicos Hasta de 70-00-01 A 75-00-00 HAS. GRUPO 1',
@@ -5521,7 +5500,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:35:39',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            262 => 
+            261 => 
             array (
                 'id' => 265,
                 'nombre' => 'Para predios rústicos Hasta de 70-00-01 A 75-00-00 HAS. GRUPO 2',
@@ -5542,7 +5521,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:37:25',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            263 => 
+            262 => 
             array (
                 'id' => 266,
                 'nombre' => 'Para predios rústicos Hasta de 70-00-01 A 75-00-00 HAS. GRUPO 3',
@@ -5563,7 +5542,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:38:09',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            264 => 
+            263 => 
             array (
                 'id' => 267,
                 'nombre' => 'Para predios rústicos Hasta de 70-00-01 A 75-00-00 HAS. GRUPO 4',
@@ -5584,7 +5563,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:38:52',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            265 => 
+            264 => 
             array (
                 'id' => 268,
                 'nombre' => 'Para predios rústicos Hasta de 75-00-01 A 80-00-00 HAS. GRUPO 1',
@@ -5605,7 +5584,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:41:10',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            266 => 
+            265 => 
             array (
                 'id' => 269,
                 'nombre' => 'Para predios rústicos Hasta de 75-00-01 A 80-00-00 HAS. GRUPO 2',
@@ -5626,7 +5605,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:42:24',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            267 => 
+            266 => 
             array (
                 'id' => 270,
                 'nombre' => 'Para predios rústicos Hasta de 75-00-01 A 80-00-00 HAS. GRUPO 3',
@@ -5647,7 +5626,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:43:55',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            268 => 
+            267 => 
             array (
                 'id' => 271,
                 'nombre' => 'Para predios rústicos Hasta de 75-00-01 A 80-00-00 HAS. GRUPO 4',
@@ -5668,7 +5647,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:45:19',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            269 => 
+            268 => 
             array (
                 'id' => 272,
                 'nombre' => 'Para predios rústicos Hasta de 80-00-01 A 85-00-00 HAS. GRUPO 1',
@@ -5689,7 +5668,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:46:24',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            270 => 
+            269 => 
             array (
                 'id' => 273,
                 'nombre' => 'Para predios rústicos Hasta de 80-00-01 A 85-00-00 HAS. GRUPO 2',
@@ -5710,7 +5689,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:47:20',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            271 => 
+            270 => 
             array (
                 'id' => 274,
                 'nombre' => 'Para predios rústicos Hasta de 80-00-01 A 85-00-00 HAS. GRUPO 3',
@@ -5731,7 +5710,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:48:06',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            272 => 
+            271 => 
             array (
                 'id' => 275,
                 'nombre' => 'Para predios rústicos Hasta de 80-00-01 A 85-00-00 HAS. GRUPO 4',
@@ -5752,7 +5731,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:48:47',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            273 => 
+            272 => 
             array (
                 'id' => 276,
                 'nombre' => 'Para predios rústicos Hasta de 85-00-01 A 90-00-00 HAS. GRUPO 1',
@@ -5773,7 +5752,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:49:45',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            274 => 
+            273 => 
             array (
                 'id' => 277,
                 'nombre' => 'Para predios rústicos Hasta de 85-00-01 A 90-00-00 HAS. GRUPO 2',
@@ -5794,7 +5773,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:50:27',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            275 => 
+            274 => 
             array (
                 'id' => 278,
                 'nombre' => 'Para predios rústicos Hasta de 85-00-01 A 90-00-00 HAS. GRUPO 3',
@@ -5815,7 +5794,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:51:17',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            276 => 
+            275 => 
             array (
                 'id' => 279,
                 'nombre' => 'Para predios rústicos Hasta de 85-00-01 A 90-00-00 HAS. GRUPO 4',
@@ -5836,7 +5815,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:52:04',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            277 => 
+            276 => 
             array (
                 'id' => 280,
                 'nombre' => 'Para predios rústicos Hasta de 90-00-01 A 95-00-00 HAS. GRUPO 1',
@@ -5857,7 +5836,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:52:59',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            278 => 
+            277 => 
             array (
                 'id' => 281,
                 'nombre' => 'Para predios rústicos Hasta de 90-00-01 A 95-00-00 HAS. GRUPO 2',
@@ -5878,7 +5857,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:53:47',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            279 => 
+            278 => 
             array (
                 'id' => 282,
                 'nombre' => 'Para predios rústicos Hasta de 90-00-01 A 95-00-00 HAS. GRUPO 3',
@@ -5899,7 +5878,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:54:41',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            280 => 
+            279 => 
             array (
                 'id' => 283,
                 'nombre' => 'Para predios rústicos Hasta de 90-00-01 A 95-00-00 HAS. GRUPO 4',
@@ -5920,7 +5899,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:55:19',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            281 => 
+            280 => 
             array (
                 'id' => 284,
                 'nombre' => 'Para predios rústicos Hasta de 95-00-01 A 100-00-00  HAS. GRUPO 1',
@@ -5941,7 +5920,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:56:20',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            282 => 
+            281 => 
             array (
                 'id' => 285,
                 'nombre' => 'Para predios rústicos Hasta de 95-00-01 A 100-00-00 HAS. GRUPO 2',
@@ -5962,7 +5941,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:57:00',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            283 => 
+            282 => 
             array (
                 'id' => 286,
                 'nombre' => 'Para predios rústicos Hasta de 95-00-01 A 100-00-00 HAS. GRUPO 3',
@@ -5983,7 +5962,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:57:47',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            284 => 
+            283 => 
             array (
                 'id' => 287,
                 'nombre' => 'Para predios rústicos Hasta de 95-00-01 A 100-00-00 HAS. GRUPO 4',
@@ -6004,7 +5983,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:58:27',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            285 => 
+            284 => 
             array (
                 'id' => 288,
                 'nombre' => 'Para predios rústicos Hasta  Por cada hectárea o fracción que exceda a 100-00-00  HAS. GRUPO 1',
@@ -6025,7 +6004,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 14:59:40',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            286 => 
+            285 => 
             array (
                 'id' => 289,
                 'nombre' => 'Para predios rústicos Hasta Por cada hectárea o fracción que exceda a 100-00-00 HAS. GRUPO 2',
@@ -6046,7 +6025,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 15:00:36',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            287 => 
+            286 => 
             array (
                 'id' => 290,
                 'nombre' => 'Para predios rústicos Hasta Por cada hectárea o fracción que exceda a 100-00-00 HAS. GRUPO 3',
@@ -6067,7 +6046,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 15:01:09',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            288 => 
+            287 => 
             array (
                 'id' => 291,
                 'nombre' => 'Para predios rústicos Hasta Por cada hectárea o fracción que exceda a 100-00-00 HAS. GRUPO 4',
@@ -6088,7 +6067,7 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-02 15:01:48',
                 'updated_at' => '2024-06-04 15:02:35',
             ),
-            289 => 
+            288 => 
             array (
                 'id' => 292,
                 'nombre' => 'Inscripción o registro de predios ignorados',
@@ -6109,17 +6088,17 @@ class ServiciosTableSeeder extends Seeder
                 'created_at' => '2023-06-20 11:57:57',
                 'updated_at' => '2025-08-20 13:50:32',
             ),
-            290 => 
+            289 => 
             array (
                 'id' => 293,
                 'nombre' => 'Certificado catastral electrónico urgente',
-                'tipo' => 'uma',
+                'tipo' => 'fija',
                 'estado' => 'activo',
-                'umas' => '12.50',
+                'umas' => NULL,
                 'porcentaje' => NULL,
-                'ordinario' => '1414.00',
-                'urgente' => '0.00',
-                'extra_urgente' => '0.00',
+                'ordinario' => '962.00',
+                'urgente' => NULL,
+                'extra_urgente' => NULL,
                 'material' => '2403603513',
                 'clave_ingreso' => 'DM35',
                 'operacion_principal' => '2403',
@@ -6128,28 +6107,28 @@ class ServiciosTableSeeder extends Seeder
                 'creado_por' => 1,
                 'actualizado_por' => 1,
                 'created_at' => '2025-07-18 15:52:23',
-                'updated_at' => '2025-07-18 15:52:48',
+                'updated_at' => '2025-09-23 14:39:54',
             ),
-            291 => 
+            290 => 
             array (
                 'id' => 294,
                 'nombre' => 'Certificado catastral urgente',
                 'tipo' => 'uma',
                 'estado' => 'activo',
-                'umas' => '12.00',
+                'umas' => '8.00',
                 'porcentaje' => NULL,
-                'ordinario' => '1357.00',
-                'urgente' => '0.00',
-                'extra_urgente' => '0.00',
+                'ordinario' => '905.00',
+                'urgente' => NULL,
+                'extra_urgente' => NULL,
                 'material' => '2403603313',
                 'clave_ingreso' => 'DM32',
                 'operacion_principal' => '2403',
                 'operacion_parcial' => '6033',
                 'categoria_servicio_id' => 4,
                 'creado_por' => 1,
-                'actualizado_por' => NULL,
+                'actualizado_por' => 1,
                 'created_at' => '2025-07-18 15:54:44',
-                'updated_at' => '2025-07-18 15:54:44',
+                'updated_at' => '2025-09-23 14:40:17',
             ),
         ));
         

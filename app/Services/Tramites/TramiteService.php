@@ -132,8 +132,6 @@ class TramiteService{
 
             $this->tramite->limite_de_pago = now()->toDateString();
 
-            $this->tramite->fecha_prelacion = now()->toDateString();
-
             return;
 
         }
