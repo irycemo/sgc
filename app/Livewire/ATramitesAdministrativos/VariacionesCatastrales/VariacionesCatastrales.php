@@ -159,6 +159,7 @@ class VariacionesCatastrales extends Component
 
                     $this->modelo_editar->estado = 'revisión';
                     $this->modelo_editar->oficina_id = auth()->user()->oficina_id;
+                    $this->modelo_editar->folio = (VariacionCatastral::where('año', now()->format('Y'))->max('folio') ?? 0) + 1;
 
                 }else{
 
@@ -276,7 +277,7 @@ class VariacionesCatastrales extends Component
         $this->valuadores = User::where('valuador', true)
                                     ->where('estado', 'activo')
                                     ->whereHas('oficina', function($q) {
-                                        $q->where('oficina', 101);
+                                        $q->where('oficina', $this->modelo_editar->oficina->oficina);
                                     })
                                     ->orderBy('name')
                                     ->get();

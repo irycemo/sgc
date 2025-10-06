@@ -543,6 +543,10 @@ class Valuacion extends Component
 
         }
 
+        $this->predio->load('propietarios.persona', 'terrenos', 'colindancias', 'construcciones', 'terrenosComun', 'construccionesComun');
+
+        /* dd($this->predio); */
+
     }
 
     public function render()
