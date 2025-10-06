@@ -88,14 +88,14 @@ class Conciliar extends Component
         ]);
     }
 
-    public function updatedPredioNombreAsentamiento(){
+    /* public function updatedPredioNombreAsentamiento(){
 
         if($this->predio->nombre_asentamiento != "")
             $this->predio->tipo_asentamiento = $this->codigos_postales->where('nombre_asentamiento', $this->predio->nombre_asentamiento)->first()->tipo_asentamiento;
         else
             $this->predio->tipo_asentamiento = null;
 
-    }
+    } */
 
     public function buscarCuentaPredial(){
 
@@ -287,7 +287,7 @@ class Conciliar extends Component
 
         $this->crearModeloVacio();
 
-        $this->oficina = auth()->user()->oficina->oficina;
+        $this->predio->oficina = auth()->user()->oficina->oficina;
 
     }
     public function render()

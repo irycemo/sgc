@@ -261,13 +261,13 @@
 
             <div>
 
-                <div class="flex space-x-4 items-center">
+                {{-- <div class="flex space-x-4 items-center">
 
                     <x-checkbox wire:model="impresionDirector"></x-checkbox>
 
                     <Label>Imprimir cedula con firma del director de catastro</Label>
 
-                </div>
+                </div> --}}
 
             </div>
 

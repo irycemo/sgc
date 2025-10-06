@@ -230,7 +230,7 @@ class NotificacionValorCatastralController extends Controller
 
             $qr = $this->generadorQr($certificacion->uuid);
 
-        }elseif(auth()->user()->oficina->oficina == 101){
+        }else{
 
             $fielDirector = Credential::openFiles(
                                                     Storage::disk('efirmas')->path($this->director->efirma->cer),
@@ -270,7 +270,9 @@ class NotificacionValorCatastralController extends Controller
 
             $qr = $this->generadorQr($certificacion->uuid);
 
-        }else{
+        }
+
+        /* }else{
 
             $datos_control->titular = auth()->user()->oficina->titular;
 
@@ -291,7 +293,7 @@ class NotificacionValorCatastralController extends Controller
 
             $qr = $this->generadorQr($certificacion->uuid);
 
-        }
+        } */
 
         $this->crearImagenConMarcaDeAgua($object, $qr, $certificacion);
 

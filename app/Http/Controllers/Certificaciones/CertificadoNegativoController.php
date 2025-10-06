@@ -47,7 +47,7 @@ class CertificadoNegativoController extends Controller
 
         $object = (object)[];
 
-        if(auth()->user()->oficina->oficina == 101){
+        /* if(auth()->user()->oficina->oficina == 101){ */
 
             $fielDirector = Credential::openFiles(
                                                     Storage::disk('efirmas')->path($this->director->efirma->cer),
@@ -79,7 +79,7 @@ class CertificadoNegativoController extends Controller
 
             $qr = $this->generadorQr($certificacion->uuid);
 
-        }else{
+        /* }else{
 
             $datos_control->titular = auth()->user()->oficina->titular;
 
@@ -102,7 +102,7 @@ class CertificadoNegativoController extends Controller
 
             $qr = $this->generadorQr($certificacion->uuid);
 
-        }
+        } */
 
         $this->crearImagenConMarcaDeAgua($object, $qr, $certificacion);
 

@@ -52,7 +52,7 @@ class CertificadoHistoriaController extends Controller
 
         $object->predio = $this->predio($predio);
 
-        if(auth()->user()->oficina->oficina == 101){
+        /* if(auth()->user()->oficina->oficina == 101){ */
 
             $fielDirector = Credential::openFiles(
                                                     Storage::disk('efirmas')->path($this->director->efirma->cer),
@@ -85,7 +85,7 @@ class CertificadoHistoriaController extends Controller
 
             $qr = $this->generadorQr($certificacion->uuid);
 
-        }else{
+        /* }else{
 
             $datos_control->titular = auth()->user()->oficina->titular;
 
@@ -109,7 +109,7 @@ class CertificadoHistoriaController extends Controller
 
             $qr = $this->generadorQr($certificacion->uuid);
 
-        }
+        } */
 
         $this->crearImagenConMarcaDeAgua($object, $qr, $certificacion);
 

@@ -8,7 +8,13 @@
 
             <div>
 
-                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+                <input type="text" wire:model.live.debounce.500ms="tipo" placeholder="Tipo" class="bg-white rounded-full text-sm">
+
+                <input type="text" wire:model.live.debounce.500ms="uso" placeholder="Uso" class="bg-white rounded-full text-sm">
+
+                <input type="text" wire:model.live.debounce.500ms="categoria" placeholder="Categoría" class="bg-white rounded-full text-sm">
+
+                <input type="text" wire:model.live.debounce.500ms="calidad" placeholder="Calidad" class="bg-white rounded-full text-sm">
 
                 <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
@@ -33,8 +39,8 @@
 
                 <x-table.heading sortable wire:click="sortBy('tipo')" :direction="$sort === 'tipo' ? $direction : null" >Tipo</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('uso')" :direction="$sort === 'uso' ? $direction : null" >Uso</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('estado')" :direction="$sort === 'estado' ? $direction : null" >Categoría</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('calidad')" :direction="$sort === 'calidad' ? $direction : null" >Calidad</x-table.heading>
-                <x-table.heading sortable wire:click="sortBy('estado')" :direction="$sort === 'estado' ? $direction : null" >Estado</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('valor')" :direction="$sort === 'valor' ? $direction : null" >Valor</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('valor_aterior')" :direction="$sort === 'valor' ? $direction : null" >Valor anterior</x-table.heading>
 
@@ -64,17 +70,17 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Calidad</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Categoría</span>
 
-                            {{ $valor->calidad }}
+                            {{ $valor->estado }}
 
                         </x-table.cell>
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Estado</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Calidad</span>
 
-                            {{ $valor->estado }}
+                            {{ $valor->calidad }}
 
                         </x-table.cell>
 
