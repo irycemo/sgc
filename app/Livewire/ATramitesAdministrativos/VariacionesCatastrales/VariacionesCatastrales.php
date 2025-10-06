@@ -274,6 +274,9 @@ class VariacionesCatastrales extends Component
 
     public function abrirAsignarValuador(VariacionCatastral $modelo){
 
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
         $this->valuadores = User::where('valuador', true)
                                     ->where('estado', 'activo')
                                     ->whereHas('oficina', function($q) {
@@ -281,9 +284,6 @@ class VariacionesCatastrales extends Component
                                     })
                                     ->orderBy('name')
                                     ->get();
-
-        if($this->modelo_editar->isNot($modelo))
-            $this->modelo_editar = $modelo;
 
         $this->modalAsignarValuador = true;
 
