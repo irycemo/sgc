@@ -62,7 +62,7 @@ return [
         'generar_avaluo_pdf' => env('SISTEMA_PERITOS_EXTERNOS_GENERAR_AVALUO_PDF'),
         'consultar_cartografia' => env('SISTEMA_PERITOS_EXTERNOS_CONSULTAR_CARTOGRAFIA'),
         'validar_cartografia' => env('SISTEMA_PERITOS_EXTERNOS_VALIDAR_CARTOGRAFIA'),
-        'consultar_avaluos_conciliar' => env('SISTEMA_PERITOS_EXTERNOS_CONCULTAR_AVALUOS_CONCILIAR'),
+        'consultar_avaluos_conciliar' => env('SISTEMA_PERITOS_EXTERNOS_CONSULTAR_AVALUOS_CONCILIAR'),
         'conciliar_predio' => env('SISTEMA_PERITOS_EXTERNOS_CONCILIAR_PREDIO'),
     ],
 
