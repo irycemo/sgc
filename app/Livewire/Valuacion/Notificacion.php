@@ -349,37 +349,41 @@ class Notificacion extends Component
 
     public function procesarRelaciones($predio){
 
-        /* Propietarios */
-        foreach($predio->propietarios as $propietario){
+        if(!$this->avaluo->predio){
 
-            Propietario::destroy($propietario->id);
+            /* Propietarios */
+            foreach($predio->propietarios as $propietario){
 
-        }
+                Propietario::destroy($propietario->id);
 
-        foreach($this->avaluo->predioAvaluo->propietarios as $propietario){
+            }
 
-            $persona = Persona::firstOrCreate(
-                [
-                    'ap_paterno' => $propietario->persona->ap_paterno,
-                    'ap_materno' => $propietario->persona->ap_materno,
-                    'nombre' => $propietario->persona->nombre,
-                    'tipo' => $propietario->persona->tipo,
-                ],
-                [
-                    'ap_paterno' => $propietario->persona->ap_paterno,
-                    'ap_materno' => $propietario->persona->ap_materno,
-                    'nombre' => $propietario->persona->nombre,
-                    'tipo' => $propietario->persona->tipo,
-                ]
-            );
+            foreach($this->avaluo->predioAvaluo->propietarios as $propietario){
 
-            $predio->propietarios()->create([
-                'persona_id' => $persona->id,
-                'tipo' => $propietario->tipo,
-                'porcentaje_propiedad' => $propietario->porcentaje_propiedad,
-                'porcentaje_nuda' => $propietario->porcentaje_nuda,
-                'porcentaje_usufructo' => $propietario->porcentaje_usufructo,
-            ]);
+                $persona = Persona::firstOrCreate(
+                    [
+                        'ap_paterno' => $propietario->persona->ap_paterno,
+                        'ap_materno' => $propietario->persona->ap_materno,
+                        'nombre' => $propietario->persona->nombre,
+                        'tipo' => $propietario->persona->tipo,
+                    ],
+                    [
+                        'ap_paterno' => $propietario->persona->ap_paterno,
+                        'ap_materno' => $propietario->persona->ap_materno,
+                        'nombre' => $propietario->persona->nombre,
+                        'tipo' => $propietario->persona->tipo,
+                    ]
+                );
+
+                $predio->propietarios()->create([
+                    'persona_id' => $persona->id,
+                    'tipo' => $propietario->tipo,
+                    'porcentaje_propiedad' => $propietario->porcentaje_propiedad,
+                    'porcentaje_nuda' => $propietario->porcentaje_nuda,
+                    'porcentaje_usufructo' => $propietario->porcentaje_usufructo,
+                ]);
+
+            }
 
         }
 

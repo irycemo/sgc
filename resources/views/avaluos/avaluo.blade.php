@@ -177,11 +177,11 @@
 
         @include('avaluos.descripcion_inmueble')
 
-        @include('avaluos.caracteristicas')
-
         @include('avaluos.terrenos_construcciones')
 
         @include('avaluos.propietarios')
+
+        @include('avaluos.bloques')
 
         <p class="separador">Imágenes</p>
 

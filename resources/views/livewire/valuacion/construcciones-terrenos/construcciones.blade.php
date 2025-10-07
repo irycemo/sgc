@@ -62,7 +62,7 @@
 
                     </div>
 
-                    <div class="flex space-x-1 lg:col-span-2">
+                    {{-- <div class="flex space-x-1 lg:col-span-2">
 
                         <div class="flex-auto">
 
@@ -150,7 +150,7 @@
 
                         </div>
 
-                    </div>
+                    </div> --}}
 
                     <div class="flex-auto lg:col-span-1">
 

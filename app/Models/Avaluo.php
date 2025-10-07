@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\File;
 use App\Models\User;
+use App\Models\Bloque;
 use App\Models\Tramite;
 use App\Models\PredioAvaluo;
 use App\Traits\ModelosTrait;
@@ -65,6 +66,10 @@ class Avaluo extends Model implements Auditable
 
     public function imagenes(){
         return $this->morphMany(File::class, 'fileable');
+    }
+
+    public function bloques(){
+        return $this->hasMany(Bloque::class);
     }
 
     public function encabezado(){
