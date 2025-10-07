@@ -2,7 +2,7 @@
 
     <div class="mb-6">
 
-        <x-header>Revisar traslado</x-header>
+        <x-header>Revisar aviso</x-header>
 
     </div>
 
@@ -114,60 +114,74 @@
 
         <x-slot name="title">
 
-            Definir porcentajes
+           Operar
 
         </x-slot>
 
         <x-slot name="content">
 
-            <table class="w-full">
+            @if($traslado->tipo == 'revision')
 
-                <thead class="border-b border-gray-300 ">
+                <span>
+                    Definir porcentajes
+                </span>
 
-                    <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                <table class="w-full">
 
-                        <th class="px-2">Nombre / Razón social</th>
-                        <th class="px-2">% Porpiedad</th>
-                        <th class="px-2">% Nuda</th>
-                        <th class="px-2">% Usufructo</th>
+                    <thead class="border-b border-gray-300 ">
 
-                    </tr>
+                        <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-                </thead>
+                            <th class="px-2">Nombre / Razón social</th>
+                            <th class="px-2">% Porpiedad</th>
+                            <th class="px-2">% Nuda</th>
+                            <th class="px-2">% Usufructo</th>
 
-                <tbody class="divide-y divide-gray-200">
-
-                    @foreach ($transmitentes as $key => $transmitente)
-
-                        <tr class="text-gray-500 text-sm leading-relaxed">
-                            <td class="p-1">(Tra.) {{ $transmitente['nombre'] ?? '' }} {{ $transmitente['ap_paterno'] ?? '' }} {{ $transmitente['ap_materno'] ?? '' }} {{ $transmitente['razon_social'] ?? '' }}</td>
-                            <td class="p-1">
-                                <input wire:model.live="transmitentes.{{ $key }}.porcentaje_propiedad" type="number" class="bg-white text-sm w-full rounded-md p-2 border border-gray-500 outline-none ring-blue-600 focus:ring-1 focus:border-blue-600">
-                            </td>
-                            <td class="p-1">
-                                <input wire:model.live="transmitentes.{{ $key }}.porcentaje_nuda" type="number" class="bg-white text-sm w-full rounded-md p-2 border border-gray-500 outline-none ring-blue-600 focus:ring-1 focus:border-blue-600">
-                            </td>
-                            <td class="p-1">
-                                <input wire:model.live="transmitentes.{{ $key }}.porcentaje_usufructo" type="number" class="bg-white text-sm w-full rounded-md p-2 border border-gray-500 outline-none ring-blue-600 focus:ring-1 focus:border-blue-600">
-                            </td>
                         </tr>
 
-                    @endforeach
+                    </thead>
 
-                    @foreach ($aviso['predio']['adquirientes'] as $adquiriente)
+                    <tbody class="divide-y divide-gray-200">
 
-                        <tr class="text-gray-500 text-sm leading-relaxed">
-                            <td class=" px-2">(Adq.){{ $adquiriente['persona']['nombre'] ?? '' }} {{ $adquiriente['persona']['ap_paterno'] ?? '' }} {{ $adquiriente['persona']['ap_materno'] ?? '' }} {{ $adquiriente['persona']['razon_social'] ?? '' }}</td>
-                            <td class=" px-2">{{ $adquiriente['porcentaje_propiedad'] ?? '0' }}</td>
-                            <td class=" px-2">{{ $adquiriente['porcentaje_nuda'] ?? '0' }} </td>
-                            <td class=" px-2">{{ $adquiriente['porcentaje_usufructo'] ?? '0' }}</td>
-                        </tr>
+                        @foreach ($transmitentes as $key => $transmitente)
 
-                    @endforeach
+                            <tr class="text-gray-500 text-sm leading-relaxed">
+                                <td class="p-1">(Tra.) {{ $transmitente['nombre'] ?? '' }} {{ $transmitente['ap_paterno'] ?? '' }} {{ $transmitente['ap_materno'] ?? '' }} {{ $transmitente['razon_social'] ?? '' }}</td>
+                                <td class="p-1">
+                                    <input wire:model.live="transmitentes.{{ $key }}.porcentaje_propiedad" type="number" class="bg-white text-sm w-full rounded-md p-2 border border-gray-500 outline-none ring-blue-600 focus:ring-1 focus:border-blue-600">
+                                </td>
+                                <td class="p-1">
+                                    <input wire:model.live="transmitentes.{{ $key }}.porcentaje_nuda" type="number" class="bg-white text-sm w-full rounded-md p-2 border border-gray-500 outline-none ring-blue-600 focus:ring-1 focus:border-blue-600">
+                                </td>
+                                <td class="p-1">
+                                    <input wire:model.live="transmitentes.{{ $key }}.porcentaje_usufructo" type="number" class="bg-white text-sm w-full rounded-md p-2 border border-gray-500 outline-none ring-blue-600 focus:ring-1 focus:border-blue-600">
+                                </td>
+                            </tr>
 
-                </tbody>
+                        @endforeach
 
-            </table>
+                        @foreach ($aviso['predio']['adquirientes'] as $adquiriente)
+
+                            <tr class="text-gray-500 text-sm leading-relaxed">
+                                <td class=" px-2">(Adq.){{ $adquiriente['persona']['nombre'] ?? '' }} {{ $adquiriente['persona']['ap_paterno'] ?? '' }} {{ $adquiriente['persona']['ap_materno'] ?? '' }} {{ $adquiriente['persona']['razon_social'] ?? '' }}</td>
+                                <td class=" px-2">{{ $adquiriente['porcentaje_propiedad'] ?? '0' }}</td>
+                                <td class=" px-2">{{ $adquiriente['porcentaje_nuda'] ?? '0' }} </td>
+                                <td class=" px-2">{{ $adquiriente['porcentaje_usufructo'] ?? '0' }}</td>
+                            </tr>
+
+                        @endforeach
+
+                    </tbody>
+
+                </table>
+
+            @else
+
+                <p>
+                    Si en las observaciones del aviso se indica corregir los porcentajes de los propietarios o sus nombres, ir directamente a el área de "Captura al padron" y hacer las modificaciones pertinentes.
+                </p>
+
+            @endif
 
         </x-slot>
 

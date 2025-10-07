@@ -7,6 +7,7 @@ use App\Livewire\Cartografia\Conciliar\ConciliarManzanas;
 use App\Livewire\Cartografia\AsignarCoordenadas\AsignarCoordenadas;
 use App\Livewire\Cartografia\AsignarCuentaPredial\AsignarCuentaPredial;
 use App\Livewire\Cartografia\AsignarCuentaPredial\CuentasAsignadas;
+use App\Livewire\Cartografia\Conciliar\ConciliarAvaluosPeritosExternos;
 use App\Livewire\Cartografia\ValidarCartografia\ValidarCartografia;
 
 Route::group([], function(){
@@ -18,6 +19,8 @@ Route::group([], function(){
     Route::get('conciliar', Conciliar::class)->middleware('permission:Conciliar')->name('conciliar');
 
     Route::get('conciliar_manzanas', ConciliarManzanas::class)->middleware('permission:Conciliar manzanas')->name('conciliar_manzanas');
+
+    Route::get('conciliar_avaluos_peritos_externos', ConciliarAvaluosPeritosExternos::class)->middleware('permission:Conciliar avalúos peritos externos')->name('conciliar_avaluos_peritos_externos');
 
     Route::get('asignar_coordenadas', AsignarCoordenadas::class)->middleware('permission:Asignar coordenadas')->name('asignar_coordenadas');
 

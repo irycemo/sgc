@@ -11,6 +11,7 @@ trait ValidarSector
     public function validarSector(){
 
         $oficina = Oficina::where('localidad', $this->predio->localidad)
+                            ->where('municipio', $this->predio->municipio)
                             ->where('oficina', $this->predio->oficina)
                             ->first();
 
@@ -49,6 +50,7 @@ trait ValidarSector
     public function validarSectorNoBinding($localidad, $oficina, $municipio, $sector){
 
         $oficina = Oficina::where('localidad', $localidad)
+                            ->where('municipio', $municipio)
                             ->where('oficina', $oficina)
                             ->first();
 

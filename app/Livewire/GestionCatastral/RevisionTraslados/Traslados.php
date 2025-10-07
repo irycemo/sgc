@@ -19,7 +19,7 @@ class Traslados extends Component
 
     public Traslado $modelo_editar;
 
-    public $estado = 'cerrado';
+    public $estado = '';
     public $modalReasignar = false;
     public $modalRechazos = false;
 
@@ -101,7 +101,7 @@ class Traslados extends Component
 
             return Traslado::with('actualizadoPor', 'asignadoA', 'predio')
                                 ->withCount(['rechazos'])
-                                ->when($this->estado, fn($q, $estado) => $q->where('estado', $estado))
+                                ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $estado))
                                 ->when($this->oficina, function($q) {
                                     $q->whereHas('predio', function($q) {
                                         $q->where('oficina', $this->oficina);
@@ -116,7 +116,7 @@ class Traslados extends Component
 
             return Traslado::with('actualizadoPor', 'asignadoA', 'predio')
                                 ->withCount(['rechazos'])
-                                ->when($this->estado, fn($q, $estado) => $q->where('estado', $estado))
+                                ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $estado))
                                 ->where('entidad_nombre', 'LIKE', '%' . $this->search . '%')
                                 ->where('asignado_a', auth()->id())
                                 ->orderBy($this->sort, $this->direction)

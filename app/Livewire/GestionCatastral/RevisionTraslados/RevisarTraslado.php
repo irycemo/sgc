@@ -129,7 +129,11 @@ class RevisarTraslado extends Component
 
             $this->revisarPagoIsai();
 
-            $this->revisarProcentajes();
+            if($this->traslado->tipo == 'revision'){
+
+                $this->revisarProcentajes();
+
+            }
 
             DB::transaction(function () {
 
@@ -137,9 +141,11 @@ class RevisarTraslado extends Component
 
                 (new SistemaTramitesLineaService())->operarAviso($this->traslado->aviso_stl);
 
-                if($this->traslado->tipo == 'aclaratorio'){
+                if($this->traslado->tipo == 'revision'){
 
                     (new SistemaPeritosExternosService())->operarAvaluo($this->traslado->avaluo_spe);
+
+                    $this->anexarFotosAlPredio();
 
                 }
 
@@ -150,8 +156,6 @@ class RevisarTraslado extends Component
                 $this->procesarTramtie();
 
                 $this->anexarArchivoAlPredio();
-
-                $this->anexarFotosAlPredio();
 
             });
 
@@ -333,6 +337,91 @@ class RevisarTraslado extends Component
 
             }
 
+            foreach($this->transmitentes as $propietario){
+
+                if($propietario['porcentaje_propiedad'] == 0 && $propietario['porcentaje_nuda'] == 0 && $propietario['porcentaje_usufructo'] == 0){
+
+                    $this->traslado->predio->propietarios()->whereHas('persona', function($q) use($propietario){
+                                                            $q->where('nombre', $propietario['nombre'])
+                                                                ->where('ap_paterno', $propietario['ap_paterno'])
+                                                                ->where('ap_materno', $propietario['ap_materno'])
+                                                                ->where('razon_social', $propietario['razon_social']);
+                                                            })
+                                                            ->delete();
+
+
+                }else{
+
+                     $aux = $this->traslado->predio->propietarios()->whereHas('persona', function($q) use($propietario){
+                                                                                        $q->where('nombre', $propietario['nombre'])
+                                                                                            ->where('ap_paterno', $propietario['ap_paterno'])
+                                                                                            ->where('ap_materno', $propietario['ap_materno'])
+                                                                                            ->where('razon_social', $propietario['razon_social']);
+                                                                                        })
+                                                                                        ->first();
+
+                    $aux->update([
+                        'porcentaje_propiedad' => $propietario['porcentaje_propiedad'],
+                        'porcentaje_nuda' => $propietario['porcentaje_nuda'],
+                        'porcentaje_usufructo' => $propietario['porcentaje_usufructo'],
+                    ]);
+
+                }
+
+            }
+
+            foreach($this->aviso['predio']['adquirientes'] as $adquiriente){
+
+                $persona = $this->buscarPersona($adquiriente['persona']['rfc'], $adquiriente['persona']['curp'], $adquiriente['persona']['tipo'], $adquiriente['persona']['nombre'], $adquiriente['persona']['ap_materno'], $adquiriente['persona']['ap_paterno'], $adquiriente['persona']['razon_social']);
+
+                /* Persona::query()
+                            ->where(function($q) use($adquiriente){
+                                $q->when(isset($adquiriente['nombre']), fn($q) => $q->where('nombre',$adquiriente['nombre']))
+                                    ->when(isset($adquiriente['ap_paterno']), fn($q) => $q->where('ap_paterno', $adquiriente['ap_paterno']))
+                                    ->when(isset($adquiriente['ap_materno']), fn($q) => $q->where('ap_materno', $adquiriente['ap_materno']));
+                            })
+                            ->when(isset($adquiriente['razon_social']), fn($q) => $q->orWhere('razon_social', $adquiriente['razon_social']))
+                            ->when(isset($adquiriente['rfc']), fn($q) => $q->orWhere('rfc', $adquiriente['rfc']))
+                            ->when(isset($adquiriente['curp']), fn($q) => $q->orWhere('curp', $adquiriente['curp']))
+                            ->when(isset($adquiriente['correo']), fn($q) => $q->orWhere('correo', $adquiriente['correo']))
+                            ->first(); */
+
+                if(!$persona){
+
+                    $persona = Persona::create([
+                        'tipo' =>  $adquiriente['persona']['tipo'],
+                        'nombre' => $adquiriente['persona']['nombre'] ?? null,
+                        'ap_paterno' => $adquiriente['persona']['ap_paterno'] ?? null,
+                        'ap_materno' => $adquiriente['persona']['ap_materno'] ?? null,
+                        'razon_social' => $adquiriente['persona']['razon_social'] ?? null,
+                        'rfc' => $adquiriente['persona']['rfc'],
+                        'curp' => $adquiriente['persona']['curp'],
+                        'fecha_nacimiento' => $adquiriente['persona']['fecha_nacimiento'],
+                        'nacionalidad' => $adquiriente['persona']['nacionalidad'],
+                        'estado_civil' => $adquiriente['persona']['estado_civil'],
+                        'calle' => $adquiriente['persona']['calle'],
+                        'numero_exterior' => $adquiriente['persona']['numero_exterior'],
+                        'numero_interior' => $adquiriente['persona']['numero_interior'],
+                        'colonia' => $adquiriente['persona']['colonia'],
+                        'cp' => $adquiriente['persona']['cp'],
+                        'entidad' => $adquiriente['persona']['entidad'],
+                        'municipio' => $adquiriente['persona']['municipio'],
+                        'ciudad' => $adquiriente['persona']['ciudad'],
+                    ]);
+
+                }
+
+                $this->traslado->predio->propietarios()->create([
+                    'persona_id' => $persona->id,
+                    'tipo' => 'PROPIETARIO',
+                    'porcentaje_propiedad' => $adquiriente['porcentaje_propiedad'],
+                    'porcentaje_nuda' => $adquiriente['porcentaje_nuda'],
+                    'porcentaje_usufructo' => $adquiriente['porcentaje_usufructo'],
+                    'creado_por' => auth()->id()
+                ]);
+
+            }
+
         }
 
         $this->traslado->predio->movimientos()->create([
@@ -341,91 +430,6 @@ class RevisarTraslado extends Component
             'descripcion' => 'Se actualiza predio mediante aviso: ' . $this->aviso['año'] . '-' . $this->aviso['folio'] . '-' . $this->aviso['usuario'],
             'creado_por' => auth()->id()
         ]);
-
-        foreach($this->transmitentes as $propietario){
-
-            if($propietario['porcentaje_propiedad'] == 0 && $propietario['porcentaje_nuda'] == 0 && $propietario['porcentaje_usufructo'] == 0){
-
-                $this->traslado->predio->propietarios()->whereHas('persona', function($q) use($propietario){
-                                                        $q->where('nombre', $propietario['nombre'])
-                                                            ->where('ap_paterno', $propietario['ap_paterno'])
-                                                            ->where('ap_materno', $propietario['ap_materno'])
-                                                            ->where('razon_social', $propietario['razon_social']);
-                                                        })
-                                                        ->delete();
-
-
-            }else{
-
-                 $aux = $this->traslado->predio->propietarios()->whereHas('persona', function($q) use($propietario){
-                                                                                    $q->where('nombre', $propietario['nombre'])
-                                                                                        ->where('ap_paterno', $propietario['ap_paterno'])
-                                                                                        ->where('ap_materno', $propietario['ap_materno'])
-                                                                                        ->where('razon_social', $propietario['razon_social']);
-                                                                                    })
-                                                                                    ->first();
-
-                $aux->update([
-                    'porcentaje_propiedad' => $propietario['porcentaje_propiedad'],
-                    'porcentaje_nuda' => $propietario['porcentaje_nuda'],
-                    'porcentaje_usufructo' => $propietario['porcentaje_usufructo'],
-                ]);
-
-            }
-
-        }
-
-        foreach($this->aviso['predio']['adquirientes'] as $adquiriente){
-
-            $persona = $this->buscarPersona($adquiriente['persona']['rfc'], $adquiriente['persona']['curp'], $adquiriente['persona']['tipo'], $adquiriente['persona']['nombre'], $adquiriente['persona']['ap_materno'], $adquiriente['persona']['ap_paterno'], $adquiriente['persona']['razon_social']);
-
-            /* Persona::query()
-                        ->where(function($q) use($adquiriente){
-                            $q->when(isset($adquiriente['nombre']), fn($q) => $q->where('nombre',$adquiriente['nombre']))
-                                ->when(isset($adquiriente['ap_paterno']), fn($q) => $q->where('ap_paterno', $adquiriente['ap_paterno']))
-                                ->when(isset($adquiriente['ap_materno']), fn($q) => $q->where('ap_materno', $adquiriente['ap_materno']));
-                        })
-                        ->when(isset($adquiriente['razon_social']), fn($q) => $q->orWhere('razon_social', $adquiriente['razon_social']))
-                        ->when(isset($adquiriente['rfc']), fn($q) => $q->orWhere('rfc', $adquiriente['rfc']))
-                        ->when(isset($adquiriente['curp']), fn($q) => $q->orWhere('curp', $adquiriente['curp']))
-                        ->when(isset($adquiriente['correo']), fn($q) => $q->orWhere('correo', $adquiriente['correo']))
-                        ->first(); */
-
-            if(!$persona){
-
-                $persona = Persona::create([
-                    'tipo' =>  $adquiriente['persona']['tipo'],
-                    'nombre' => $adquiriente['persona']['nombre'] ?? null,
-                    'ap_paterno' => $adquiriente['persona']['ap_paterno'] ?? null,
-                    'ap_materno' => $adquiriente['persona']['ap_materno'] ?? null,
-                    'razon_social' => $adquiriente['persona']['razon_social'] ?? null,
-                    'rfc' => $adquiriente['persona']['rfc'],
-                    'curp' => $adquiriente['persona']['curp'],
-                    'fecha_nacimiento' => $adquiriente['persona']['fecha_nacimiento'],
-                    'nacionalidad' => $adquiriente['persona']['nacionalidad'],
-                    'estado_civil' => $adquiriente['persona']['estado_civil'],
-                    'calle' => $adquiriente['persona']['calle'],
-                    'numero_exterior' => $adquiriente['persona']['numero_exterior'],
-                    'numero_interior' => $adquiriente['persona']['numero_interior'],
-                    'colonia' => $adquiriente['persona']['colonia'],
-                    'cp' => $adquiriente['persona']['cp'],
-                    'entidad' => $adquiriente['persona']['entidad'],
-                    'municipio' => $adquiriente['persona']['municipio'],
-                    'ciudad' => $adquiriente['persona']['ciudad'],
-                ]);
-
-            }
-
-            $this->traslado->predio->propietarios()->create([
-                'persona_id' => $persona->id,
-                'tipo' => 'PROPIETARIO',
-                'porcentaje_propiedad' => $adquiriente['porcentaje_propiedad'],
-                'porcentaje_nuda' => $adquiriente['porcentaje_nuda'],
-                'porcentaje_usufructo' => $adquiriente['porcentaje_usufructo'],
-                'creado_por' => auth()->id()
-            ]);
-
-        }
 
     }
 

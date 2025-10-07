@@ -187,4 +187,83 @@ class SistemaPeritosExternosService{
 
     }
 
+    public function consultarAvaluosConciliar(int | null $año, int | null $folio, int | null $usuario, int $pagina_actual, int $pagination):array
+    {
+
+        $response = Http::withToken(config('services.sistema_peritos_externos.token'))
+                            ->accept('application/json')
+                            ->asForm()
+                            ->post(
+                                config('services.sistema_peritos_externos.consultar_avaluos_conciliar'),
+                                [
+                                    'año' => $año,
+                                    'folio' => $folio,
+                                    'usuario' => $usuario,
+                                    'pagina' => $pagina_actual,
+                                    'pagination' => $pagination,
+                                ]
+                            );
+
+        if($response->status() !== 200){
+
+            Log::error("Error al consultar avaluós a conciliar. " . $response);
+
+            $data = json_decode($response, true);
+
+            if(isset($data['error'])){
+
+                throw new GeneralException($data['error']);
+
+            }
+
+            throw new GeneralException("Error al consultar avaluós a conciliar.");
+
+        }else{
+
+            return json_decode($response, true);
+
+        }
+
+    }
+
+    public function conciliarPredio(array $avaluo):array
+    {
+
+        $response = Http::withToken(config('services.sistema_peritos_externos.token'))
+                            ->accept('application/json')
+                            ->asForm()
+                            ->post(
+                                config('services.sistema_peritos_externos.conciliar_predio'),
+                                [
+                                    'id' => $avaluo['id'],
+                                    'sector' => $avaluo['sector'],
+                                    'manzana' => $avaluo['manzana'],
+                                    'predio' => $avaluo['predio'],
+                                    'edificio' => $avaluo['edificio'],
+                                    'departamento' => $avaluo['departamento'],
+                                ]
+                            );
+
+        if($response->status() !== 200){
+
+            Log::error("Error al validar cartografia. " . $response);
+
+            $data = json_decode($response, true);
+
+            if(isset($data['error'])){
+
+                throw new GeneralException($data['error']);
+
+            }
+
+            throw new GeneralException("Error al validar cartografia.");
+
+        }else{
+
+            return json_decode($response, true);
+
+        }
+
+    }
+
 }
