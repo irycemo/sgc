@@ -207,11 +207,11 @@ class NotificacionValorCatastralController extends Controller
 
             }
 
-        }
+            $datos_control->predio_padre = $avaluo_predio_padre->predioAvaluo->cuentaPredial();
+            $datos_control->predio_padre_superficie = $avaluo_predio_padre->predioAvaluo->superficie_total_terreno;
+            $datos_control->predio_padre_unidad = $avaluo_predio_padre->predioAvaluo->tipo_predio == 1 ? 'metros cuadrados' : 'hectáreas';
 
-        $datos_control->predio_padre = $avaluo_predio_padre->predioAvaluo->cuentaPredial();
-        $datos_control->predio_padre_superficie = $avaluo_predio_padre->predioAvaluo->superficie_total_terreno;
-        $datos_control->predio_padre_unidad = $avaluo_predio_padre->predioAvaluo->tipo_predio == 1 ? 'metros cuadrados' : 'hectáreas';
+        }
 
         $object = (object)[];
 
