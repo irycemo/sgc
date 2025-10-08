@@ -199,18 +199,22 @@ class Notificacion extends Component
 
             $predio_padre = Predio::find($this->tramite->predios->first()->id);
 
-            $predio_padre->update([
-                'status' => 'baja',
-                'superficie_total_terreno' => 0,
-                'actualizado_por' => auth()->id(),
-            ]);
+            if($predio_padre->status != 'baja'){
 
-            $predio_padre->movimientos()->create([
-                'nombre' => $this->tramite->avaluo_para->label(),
-                'fecha' => $this->fecha_notificacion,
-                'descripcion' => 'Se da de baja el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario,
-                'creado_por' => auth()->id()
-            ]);
+                $predio_padre->update([
+                    'status' => 'baja',
+                    'superficie_total_terreno' => 0,
+                    'actualizado_por' => auth()->id(),
+                ]);
+
+                $predio_padre->movimientos()->create([
+                    'nombre' => $this->tramite->avaluo_para->label(),
+                    'fecha' => $this->fecha_notificacion,
+                    'descripcion' => 'Se da de baja el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario,
+                    'creado_por' => auth()->id()
+                ]);
+
+            }
 
         }
 
