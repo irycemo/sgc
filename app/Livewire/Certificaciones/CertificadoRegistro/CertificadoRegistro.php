@@ -89,7 +89,9 @@ class CertificadoRegistro extends Component
 
             }
 
-            $this->tipo_certificado = mb_strtoupper($this->tramite->servicio->nombre, 'utf-8');
+            /* $this->tipo_certificado = mb_strtoupper($this->tramite->servicio->nombre, 'utf-8'); */
+
+            $this->tipo_certificado = 'CERTIFICADO DE REGISTRO CATASTRAL';
 
             if($this->tramite->predios()->count() === 1){
 

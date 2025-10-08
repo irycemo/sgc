@@ -277,7 +277,6 @@
 
                         <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-                            <th class="px-2">Tipo de persona</th>
                             <th class="px-2">Nombre / Razón social</th>
                             <th class="px-2">% de propiedad</th>
                             <th class="px-2">% de nuda</th>
@@ -292,7 +291,6 @@
                         @foreach ($predio->propietarios->sortBy('persona.nombre') as $propietario)
 
                             <tr class="text-gray-500 text-sm leading-relaxed">
-                                <td class=" px-2 w-full ">{{ $propietario->persona->tipo }}</td>
                                 <td class=" px-2 w-full ">{{ $propietario->persona->nombre }} {{ $propietario->persona->ap_paterno }} {{ $propietario->persona->ap_materno }} {{ $propietario->persona->razon_social }}</td>
                                 <td class=" px-2 w-full ">{{ $propietario->porcentaje_propiedad }}%</td>
                                 <td class=" px-2 w-full ">{{ $propietario->porcentaje_nuda }}%</td>

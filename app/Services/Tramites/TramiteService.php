@@ -75,33 +75,27 @@ class TramiteService{
     public function calcularFechaEntrega():?string
     {
 
-        if($this->tramite->servicio->nombre == 'Certificado de historia catastral'){
+        if(in_array($this->tramite->servicio->clave_ingreso, ['DM35', 'DM32'])){
 
-            return now()->addDays(10)->toDateString();
+            $actual = now();
 
-        }else{
+            $actual->addDays(1);
 
-            if($this->tramite->tipo_servicio == 'ordinario'){
+            while($actual->isWeekend()){
 
-                $actual = now();
+                $actual->addDay();
 
-                for ($i=0; $i < 5; $i++) {
+            }
 
-                    $actual->addDays(1);
+            return $actual->toDateString();
 
-                    while($actual->isWeekend()){
+        }elseif($this->tramite->servicio->nombre == 'Certificado de historia catastral'){
 
-                        $actual->addDay();
+            $actual = now();
 
-                    }
+            for ($i=0; $i < 10; $i++) {
 
-                }
-
-                return $actual->toDateString();
-
-            }elseif($this->tramite->tipo_servicio == 'urgente'){
-
-                $actual = now()->addDays(1);
+                $actual->addDays(1);
 
                 while($actual->isWeekend()){
 
@@ -109,13 +103,27 @@ class TramiteService{
 
                 }
 
-                return $actual->toDateString();
+            }
 
-            }else{
+            return $actual->toDateString();
 
-                return now()->toDateString();
+        }elseif($this->tramite->tipo_servicio == 'ordinario'){
+
+            $actual = now();
+
+            for ($i=0; $i < 5; $i++) {
+
+                $actual->addDays(1);
+
+                while($actual->isWeekend()){
+
+                    $actual->addDay();
+
+                }
 
             }
+
+            return $actual->toDateString();
 
         }
 
