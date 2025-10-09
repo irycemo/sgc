@@ -47,6 +47,14 @@ class MisAvaluos extends Component
 
     public function corregir(){
 
+        if(in_array($this->modelo_editar->estado, ['notificado', 'concluido'])){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El avalúo: " . $this->modelo_editar->año . '-' . $this->modelo_editar->folio . '-' . $this->modelo_editar->usuario . ' no se puede eliminar.']);
+
+            return;
+
+        }
+
 
         try {
 
