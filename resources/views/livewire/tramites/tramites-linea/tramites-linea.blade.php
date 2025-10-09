@@ -22,15 +22,6 @@
 
             </div>
 
-            <select class="bg-white rounded-full  text-sm" wire:model.live="filters.tipoServicio">
-
-                <option value="" selected>Tipo de servicio</option>
-                <option value="ordinario">Ordinario</option>
-                <option value="urgente">Urgente</option>
-                <option value="extra urgente">Extra urgente</option>
-
-            </select>
-
             {{-- <select class="bg-white rounded-full text-sm w-60" wire:model.live="filters.servicio">
 
                 <option value="" selected>Servicio</option>
@@ -75,7 +66,6 @@
                 <x-table.heading sortable wire:click="sortBy('monto')" :direction="$sort === 'monto' ? $direction : null" >Monto</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('fecha_entrega')" :direction="$sort === 'fecha_entrega' ? $direction : null" >Fecha de entrega</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('fecha_pago')" :direction="$sort === 'fecha_pago' ? $direction : null" >Fecha de pago</x-table.heading>
-                <x-table.heading sortable wire:click="sortBy('tipo_servicio')" :direction="$sort === 'tipo_servicio' ? $direction : null" >Tipo de servicio</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
 
             </x-slot>
@@ -171,14 +161,6 @@
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Fecha de pago</span>
 
                             {{ $tramite->fecha_pago ? $tramite->fecha_pago->format('d-m-Y') : 'N/A'}}
-
-                        </x-table.cell>
-
-                        <x-table.cell class="capitalize">
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Tipo de servicio</span>
-
-                            {{ $tramite->tipo_servicio }}
 
                         </x-table.cell>
 

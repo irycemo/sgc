@@ -23,7 +23,6 @@ class TramitesLinea extends Component
         'año' => '',
         'folio' => '',
         'estado' => '',
-        'tipoServicio' => '',
         'servicio' => '',
     ];
 
@@ -46,13 +45,12 @@ class TramitesLinea extends Component
                 ->where('usuario', 11)
                 ->whereIn('estado', ['pagado', 'autorizado'])
                 ->whereHas('servicio', function ($q){
-                    $q->where('clave_ingreso', 'DM34');
+                    $q->whereIn('clave_ingreso', ['DM34', 'DM32', 'DM35', 'DM31']);
                 })
                 ->when($this->filters['search'], fn($q, $search) => $q->where('nombre_solicitante', 'LIKE', '%' . $search . '%'))
                 ->when($this->filters['año'], fn($q, $año) => $q->where('año', $año))
                 ->when($this->filters['folio'], fn($q, $folio) => $q->where('folio', $folio))
                 ->when($this->filters['estado'], fn($q, $estado) => $q->where('estado', $estado))
-                ->when($this->filters['tipoServicio'], fn($q, $tipoServicio) => $q->where('tipo_servicio', $tipoServicio))
                 ->orderBy($this->sort, $this->direction)
                 ->paginate($this->pagination);
 
