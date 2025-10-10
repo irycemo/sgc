@@ -47,18 +47,18 @@
 
             @if($tramite)
 
-                <button
-                    wire:click="notificarTodos"
+                <x-button-blue
+                    wire:click="abrirModal({{$avaluo->id}})"
                     wire:loading.attr="disabled"
-                    wire:target="notificarTodos"
-                    type="button"
-                    class="bg-blue-400 mx-auto hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+                    wire:target="abrirModal({{$avaluo->id}})">
 
-                    <img wire:loading wire:target="notificarTodos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                    </svg>
 
-                    Notificar todos
+                    Notificar
 
-                </button>
+                </x-button-blue>
 
             @endif
 
@@ -95,8 +95,6 @@
                         <th class="px-3 py-3 hidden lg:table-cell">
                             valor catastral
                         </th>
-
-                        <th class="px-3 py-3 hidden lg:table-cell">Acciones</th>
 
                     </tr>
 
@@ -148,24 +146,6 @@
 
                             </td>
 
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
-
-                                <x-button-blue
-                                    wire:click="abrirModal({{$avaluo->id}})"
-                                    wire:loading.attr="disabled"
-                                    wire:target="abrirModal({{$avaluo->id}})">
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-3">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                                    </svg>
-
-                                    Notificar
-
-                                </x-button-blue>
-
-                            </td>
                         </tr>
 
                     @empty
@@ -237,11 +217,11 @@
             <div class="flex gap-3 items-center">
 
                 <x-button-blue
-                    wire:click="notificar"
+                    wire:click="notificarTodos"
                     wire:loading.attr="disabled"
-                    wire:target="notificar">
+                    wire:target="notificarTodos">
 
-                    <img wire:loading wire:target="notificar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    <img wire:loading wire:target="notificarTodos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Notificar
                 </x-button-blue>
