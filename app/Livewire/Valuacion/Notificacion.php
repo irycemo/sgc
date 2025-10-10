@@ -11,8 +11,10 @@ use Livewire\Component;
 use App\Models\Colindancia;
 use App\Models\Propietario;
 use App\Models\Construccion;
+use Livewire\WithPagination;
 use App\Models\TerrenosComun;
 use App\Constantes\Constantes;
+use App\Traits\ComponentesTrait;
 use Livewire\Attributes\Computed;
 use App\Enums\Tramites\AvaluoPara;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +25,9 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Notificacion extends Component
 {
+
+    use WithPagination;
+    use ComponentesTrait;
 
     public $años;
     public $año;
