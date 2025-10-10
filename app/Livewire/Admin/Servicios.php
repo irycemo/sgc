@@ -81,17 +81,21 @@ class Servicios extends Component
 
         if($this->modelo_editar->tipo == 'uma'){
 
+            if($this->modelo_editar->umas == ''){
+
+                return ;
+
+            }
+
             $uma = Uma::orderBy('año', 'desc')->first();
 
             $this->modelo_editar->ordinario = $uma->diario * $this->modelo_editar->umas;
 
-            $this->modelo_editar->ordinario = floor($this->modelo_editar->ordinario);
+            $this->modelo_editar->ordinario = ceil($this->modelo_editar->ordinario);
 
             $this->modelo_editar->urgente = floor($this->modelo_editar->ordinario * 2);
 
             $this->modelo_editar->extra_urgente = floor($this->modelo_editar->ordinario * 3);
-
-            $this->modelo_editar->fija = null;
 
             $this->modelo_editar->porcentaje = null;
 
@@ -108,8 +112,6 @@ class Servicios extends Component
         }else{
 
             $this->modelo_editar->umas = null;
-
-            $this->modelo_editar->fija = null;
 
             $this->modelo_editar->ordinario = 0;
 

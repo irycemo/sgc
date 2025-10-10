@@ -57,8 +57,6 @@ class Umas extends Component
 
                 $servicio->update([
                     'ordinario' => round($servicio->umas * $this->modelo_editar->diario),
-                    'urgente' => round($servicio->umas * $this->modelo_editar->diario * 2),
-                    'extra_urgente' => round($servicio->umas * $this->modelo_editar->diario * 3),
                 ]);
 
             }

@@ -36,18 +36,15 @@ class Valor extends Component
     protected function rules(){
         return [
             'predio' => 'required',
-            'predio.uso_1' => 'required',
-            'predio.uso_2' => 'nullable',
-            'predio.uso_3' => 'nullable',
-            'predio.superficie_terreno' => 'nullable',
-            'predio.superficie_construccion' => 'nullable',
-            'predio.ubicacion_en_manzana' => 'required',
+            'predio.superficie_total_terreno' => 'required',
+            'predio.superficie_total_construccion' => 'nullable',
             'predio.valor_catastral' => 'nullable',
          ];
     }
 
     protected $messages = [
-        'predio.required' => 'Primero debe cargar el predio'
+        'predio.required' => 'Primero debe cargar el predio.',
+        'predio.superficie_total_terreno.required' => 'Debe tener una superficie de terreno.',
     ];
 
     protected $validationAttributes  = [
