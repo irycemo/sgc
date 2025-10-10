@@ -201,6 +201,8 @@ class Notificacion extends Component
 
         foreach ($this->avaluos as $avaluo) {
 
+            if($avaluo->estado == 'notificado') continue;
+
             $this->avaluo = $avaluo;
 
             $this->avaluo->load('predioAvaluo.colindancias', 'predioAvaluo.terrenosComun', 'predioAvaluo.construccionesComun', 'predioAvaluo.terrenos', 'predioAvaluo.construcciones', 'predioAvaluo.propietarios.persona');
