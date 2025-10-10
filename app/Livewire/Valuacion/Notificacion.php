@@ -34,8 +34,6 @@ class Notificacion extends Component
     public $folio;
     public $usuario;
 
-    public $pagination = 50;
-
     public $modal = false;
 
     public $avaluo;
