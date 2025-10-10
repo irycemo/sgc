@@ -198,9 +198,14 @@ class Notificacion extends Component
 
     public function notificarTodos(){
 
-        $this->dispatch('mostrarMensaje', ['success', $this->avaluos->count()]);
+        $avaluos = Avaluo::with('predioAvaluo')
+                            ->whereIn('estado', ['impreso', 'concluido'])
+                            ->whereNull('notificado_en')
+                            ->whereNull('notificado_por')
+                            ->where('tramite_inspeccion', $this->tramite->id)
+                            ->get();
 
-        foreach ($this->avaluos as $avaluo) {
+        foreach ($avaluos as $avaluo) {
 
             if($avaluo->estado == 'notificado') continue;
 
