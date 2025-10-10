@@ -44,6 +44,7 @@ class Avaluos extends Component
         'oficina' => '',
         'tipo' => '',
         'registro' => '',
+        'estado' => ''
     ];
 
     public function crearModeloVacio(){
@@ -191,6 +192,11 @@ class Avaluos extends Component
                             ->when($this->filters['valuador'], function($q, $valuador) {
                                 $q->whereHas('avaluo', function($q) use($valuador){
                                         $q->where('asignado_a', $this->filters['valuador']);
+                                });
+                            })
+                            ->when($this->filters['estado'], function($q, $estado) {
+                                $q->whereHas('avaluo', function($q) use($estado){
+                                        $q->where('estado', $this->filters['estado']);
                                 });
                             })
                             ->when($this->filters['localidad'], fn($q, $localidad) => $q->where('localidad', $this->filters['localidad']))

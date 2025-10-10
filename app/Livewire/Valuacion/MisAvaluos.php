@@ -42,6 +42,7 @@ class MisAvaluos extends Component
         'p_oficina' => '',
         't_predio' => '',
         'registro' => '',
+        'estado' => ''
     ];
 
     public function crearModeloVacio(){
@@ -331,6 +332,11 @@ class MisAvaluos extends Component
 
         $avaluos = Avaluo::with('predioAvaluo', 'creadoPor', 'actualizadoPor', 'predioIgnorado', 'variacionCatastral')
                             ->where('asignado_a', auth()->user()->id)
+                            ->when($this->filters['estado'], function($q, $estado){
+                                $q->WhereHas('predioAvaluo', function($q) use($estado){
+                                    $q->where('estado', $estado);
+                                });
+                            })
                             ->when($this->filters['localidad'], function($q, $localidad){
                                 $q->WhereHas('predioAvaluo', function($q) use($localidad){
                                     $q->where('localidad', $localidad);
