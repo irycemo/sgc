@@ -56,7 +56,7 @@ class Desglose extends Component
 
         if($this->predio_padre->estado != 'activo'){
 
-            throw new GeneralException('El predio padre no esta activo.');
+            throw new GeneralException('El predio origen no esta activo.');
 
         }
 
