@@ -188,7 +188,7 @@ trait ImpresionTrait
 
         }
 
-        if($this->predio_padre->estado != 'activo'){
+        if($this->predio_padre->status != 'activo'){
 
             throw new GeneralException('El predio origen no esta activo.');
 
