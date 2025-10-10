@@ -223,46 +223,6 @@ class RevisarTraslado extends Component
 
     public function actualizarPredio(){
 
-        $this->traslado->predio->update([
-            'codigo_postal' => $this->aviso['predio']['codigo_postal'] ?? null,
-            'nombre_asentamiento' => $this->aviso['predio']['nombre_asentamiento']  ?? null,
-            'tipo_asentamiento' => $this->aviso['predio']['tipo_asentamiento']  ?? null,
-            'nombre_vialidad' => $this->aviso['predio']['nombre_vialidad']  ?? null,
-            'tipo_vialidad' => $this->aviso['predio']['tipo_vialidad']  ?? null,
-            'numero_exterior' => $this->aviso['predio']['numero_exterior']  ?? null,
-            'numero_exterior_2' => $this->aviso['predio']['numero_exterior_2']  ?? null,
-            'numero_interior' => $this->aviso['predio']['numero_interior']  ?? null,
-            'numero_adicional' => $this->aviso['predio']['numero_adicional']  ?? null,
-            'numero_adicional_2' => $this->aviso['predio']['numero_adicional_2']  ?? null,
-            'numero_interior' => $this->aviso['predio']['numero_interior']  ?? null,
-            'lote_fraccionador' => $this->aviso['predio']['lote_fraccionador']  ?? null,
-            'manzana_fraccionador' => $this->aviso['predio']['manzana_fraccionador']  ?? null,
-            'etapa_fraccionador' => $this->aviso['predio']['etapa_fraccionador']  ?? null,
-            'nombre_predio' => $this->aviso['predio']['nombre_predio']  ?? null,
-            'nombre_edificio' => $this->aviso['predio']['nombre_edificio']  ?? null,
-            'clave_edificio' => $this->aviso['predio']['clave_edificio']  ?? null,
-            'departamento_edificio' => $this->aviso['predio']['departamento_edificio']  ?? null,
-            'xutm' => $this->aviso['predio']['xutm']  ?? null,
-            'yutm' => $this->aviso['predio']['yutm']  ?? null,
-            'zutm' => $this->aviso['predio']['zutm']  ?? null,
-            'lon' => $this->aviso['predio']['lon']  ?? null,
-            'lat' => $this->aviso['predio']['lat']  ?? null,
-            'uso_1' => $this->avaluo['predio']['uso_1']  ?? null,
-            'uso_2' => $this->avaluo['predio']['uso_2']  ?? null,
-            'uso_3' => $this->avaluo['predio']['uso_3']  ?? null,
-            'superficie_terreno' => $this->avaluo['predio']['superficie_terreno']  ?? null,
-            'superficie_construccion' => $this->avaluo['predio']['superficie_construccion']  ?? null,
-            'area_comun_terreno' => $this->avaluo['predio']['area_comun_terreno']  ?? null,
-            'area_comun_construccion' => $this->avaluo['predio']['area_comun_construccion']  ?? null,
-            'valor_total_terreno' => $this->avaluo['predio']['valor_total_terreno']  ?? null,
-            'valor_total_construccion' => $this->avaluo['predio']['valor_total_construccion']  ?? null,
-            'superficie_total_terreno' => $this->avaluo['predio']['superficie_total_terreno']  ?? null,
-            'superficie_total_construccion' => $this->avaluo['predio']['superficie_total_construccion']  ?? null,
-            'valor_catastral' => $this->aviso['predio']['valor_catastral']  ?? null,
-        ]);
-
-        $this->traslado->predio->audits()->latest()->first()->update(['tags' => 'Actualizó mediante traslado de dominio', 'tramite_id' => $this->traslado->tramite_aviso]);
-
         $this->traslado->predio->colindancias()->delete();
 
         foreach($this->aviso['predio']['colindancias'] as $colindancia){
@@ -276,6 +236,46 @@ class RevisarTraslado extends Component
         }
 
         if($this->traslado->tipo == 'revision'){
+
+            $this->traslado->predio->update([
+                'codigo_postal' => $this->aviso['predio']['codigo_postal'] ?? null,
+                'nombre_asentamiento' => $this->aviso['predio']['nombre_asentamiento']  ?? null,
+                'tipo_asentamiento' => $this->aviso['predio']['tipo_asentamiento']  ?? null,
+                'nombre_vialidad' => $this->aviso['predio']['nombre_vialidad']  ?? null,
+                'tipo_vialidad' => $this->aviso['predio']['tipo_vialidad']  ?? null,
+                'numero_exterior' => $this->aviso['predio']['numero_exterior']  ?? null,
+                'numero_exterior_2' => $this->aviso['predio']['numero_exterior_2']  ?? null,
+                'numero_interior' => $this->aviso['predio']['numero_interior']  ?? null,
+                'numero_adicional' => $this->aviso['predio']['numero_adicional']  ?? null,
+                'numero_adicional_2' => $this->aviso['predio']['numero_adicional_2']  ?? null,
+                'numero_interior' => $this->aviso['predio']['numero_interior']  ?? null,
+                'lote_fraccionador' => $this->aviso['predio']['lote_fraccionador']  ?? null,
+                'manzana_fraccionador' => $this->aviso['predio']['manzana_fraccionador']  ?? null,
+                'etapa_fraccionador' => $this->aviso['predio']['etapa_fraccionador']  ?? null,
+                'nombre_predio' => $this->aviso['predio']['nombre_predio']  ?? null,
+                'nombre_edificio' => $this->aviso['predio']['nombre_edificio']  ?? null,
+                'clave_edificio' => $this->aviso['predio']['clave_edificio']  ?? null,
+                'departamento_edificio' => $this->aviso['predio']['departamento_edificio']  ?? null,
+                'xutm' => $this->aviso['predio']['xutm']  ?? null,
+                'yutm' => $this->aviso['predio']['yutm']  ?? null,
+                'zutm' => $this->aviso['predio']['zutm']  ?? null,
+                'lon' => $this->aviso['predio']['lon']  ?? null,
+                'lat' => $this->aviso['predio']['lat']  ?? null,
+                'uso_1' => $this->avaluo['predio']['uso_1']  ?? null,
+                'uso_2' => $this->avaluo['predio']['uso_2']  ?? null,
+                'uso_3' => $this->avaluo['predio']['uso_3']  ?? null,
+                'superficie_terreno' => $this->avaluo['predio']['superficie_terreno']  ?? null,
+                'superficie_construccion' => $this->avaluo['predio']['superficie_construccion']  ?? null,
+                'area_comun_terreno' => $this->avaluo['predio']['area_comun_terreno']  ?? null,
+                'area_comun_construccion' => $this->avaluo['predio']['area_comun_construccion']  ?? null,
+                'valor_total_terreno' => $this->avaluo['predio']['valor_total_terreno']  ?? null,
+                'valor_total_construccion' => $this->avaluo['predio']['valor_total_construccion']  ?? null,
+                'superficie_total_terreno' => $this->avaluo['predio']['superficie_total_terreno']  ?? null,
+                'superficie_total_construccion' => $this->avaluo['predio']['superficie_total_construccion']  ?? null,
+                'valor_catastral' => $this->aviso['predio']['valor_catastral']  ?? null,
+            ]);
+
+            $this->traslado->predio->audits()->latest()->first()->update(['tags' => 'Actualizó mediante revision de aviso', 'tramite_id' => $this->traslado->tramite_aviso]);
 
             $this->traslado->predio->terrenos()->delete();
 
@@ -421,6 +421,48 @@ class RevisarTraslado extends Component
                 ]);
 
             }
+
+        }else{
+
+            $this->traslado->predio->update([
+                'codigo_postal' => $this->aviso['predio']['codigo_postal'] ?? null,
+                'nombre_asentamiento' => $this->aviso['predio']['nombre_asentamiento']  ?? null,
+                'tipo_asentamiento' => $this->aviso['predio']['tipo_asentamiento']  ?? null,
+                'nombre_vialidad' => $this->aviso['predio']['nombre_vialidad']  ?? null,
+                'tipo_vialidad' => $this->aviso['predio']['tipo_vialidad']  ?? null,
+                'numero_exterior' => $this->aviso['predio']['numero_exterior']  ?? null,
+                'numero_exterior_2' => $this->aviso['predio']['numero_exterior_2']  ?? null,
+                'numero_interior' => $this->aviso['predio']['numero_interior']  ?? null,
+                'numero_adicional' => $this->aviso['predio']['numero_adicional']  ?? null,
+                'numero_adicional_2' => $this->aviso['predio']['numero_adicional_2']  ?? null,
+                'numero_interior' => $this->aviso['predio']['numero_interior']  ?? null,
+                'lote_fraccionador' => $this->aviso['predio']['lote_fraccionador']  ?? null,
+                'manzana_fraccionador' => $this->aviso['predio']['manzana_fraccionador']  ?? null,
+                'etapa_fraccionador' => $this->aviso['predio']['etapa_fraccionador']  ?? null,
+                'nombre_predio' => $this->aviso['predio']['nombre_predio']  ?? null,
+                'nombre_edificio' => $this->aviso['predio']['nombre_edificio']  ?? null,
+                'clave_edificio' => $this->aviso['predio']['clave_edificio']  ?? null,
+                'departamento_edificio' => $this->aviso['predio']['departamento_edificio']  ?? null,
+                'xutm' => $this->aviso['predio']['xutm']  ?? null,
+                'yutm' => $this->aviso['predio']['yutm']  ?? null,
+                'zutm' => $this->aviso['predio']['zutm']  ?? null,
+                'lon' => $this->aviso['predio']['lon']  ?? null,
+                'lat' => $this->aviso['predio']['lat']  ?? null,
+                'uso_1' => $this->avaluo['predio']['uso_1']  ?? null,
+                'uso_2' => $this->avaluo['predio']['uso_2']  ?? null,
+                'uso_3' => $this->avaluo['predio']['uso_3']  ?? null,
+                'superficie_terreno' => $this->Aviso['predio']['superficie_terreno']  ?? null,
+                'superficie_construccion' => $this->Aviso['predio']['superficie_construccion']  ?? null,
+                'area_comun_terreno' => $this->Aviso['predio']['area_comun_terreno']  ?? null,
+                'area_comun_construccion' => $this->Aviso['predio']['area_comun_construccion']  ?? null,
+                'valor_total_terreno' => $this->Aviso['predio']['valor_total_terreno']  ?? null,
+                'valor_total_construccion' => $this->Aviso['predio']['valor_total_construccion']  ?? null,
+                'superficie_total_terreno' => $this->Aviso['predio']['superficie_total_terreno']  ?? null,
+                'superficie_total_construccion' => $this->Aviso['predio']['superficie_total_construccion']  ?? null,
+                'valor_catastral' => $this->aviso['predio']['valor_catastral']  ?? null,
+            ]);
+
+            $this->traslado->predio->audits()->latest()->first()->update(['tags' => 'Actualizó mediante aviso aclaratorio', 'tramite_id' => $this->traslado->tramite_aviso]);
 
         }
 
