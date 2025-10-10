@@ -48,6 +48,8 @@ class Certificaciones extends Component
 
     public Certificacion $modelo_editar;
 
+    public function updatedFilters() { $this->resetPage(); }
+
     public function crearModeloVacio(){
         $this->modelo_editar = Certificacion::make();
     }
@@ -187,11 +189,11 @@ class Certificaciones extends Component
 
         $this->años = Constantes::AÑOS;
 
-        $this->año = now()->format('Y');
-
         $this->documentos = CertificacionesEnum::cases();
 
         $this->oficinas = Oficina::select('id','nombre','oficina')->orderBy('nombre')->get();
+
+        $this->filters['año'] = now()->format('Y');
 
     }
 

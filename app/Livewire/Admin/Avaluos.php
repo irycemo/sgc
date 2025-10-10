@@ -47,6 +47,8 @@ class Avaluos extends Component
         'estado' => ''
     ];
 
+    public function updatedFilters() { $this->resetPage(); }
+
     public function crearModeloVacio(){
         $this->modelo_editar = PredioAvaluo::make();
     }
@@ -174,35 +176,35 @@ class Avaluos extends Component
     public function predios(){
 
         return PredioAvaluo::with('actualizadoPor', 'avaluo.asignadoA')
-                            ->when($this->filters['año'], function($q, $año) {
+                            ->when($this->filters['año'] != '', function($q, $año) {
                                 $q->whereHas('avaluo', function($q) use($año){
-                                        $q->where('año', $this->filters['año']);
+                                        $q->where('año', (int)$this->filters['año']);
                                 });
                             })
-                            ->when($this->filters['folio'], function($q, $folio) {
-                                $q->whereHas('avaluo', function($q) use($folio){
-                                        $q->where('folio', $this->filters['folio']);
+                            ->when($this->filters['folio'] != '', function($q) {
+                                $q->whereHas('avaluo', function($q) {
+                                        $q->where('folio', (int)$this->filters['folio']);
                                 });
                             })
-                            ->when($this->filters['usuario'], function($q, $usuario) {
+                            ->when($this->filters['usuario'] != '', function($q, $usuario) {
                                 $q->whereHas('avaluo', function($q) use($usuario){
-                                        $q->where('usuario', $this->filters['usuario']);
+                                        $q->where('usuario', (int)$this->filters['usuario']);
                                 });
                             })
-                            ->when($this->filters['valuador'], function($q, $valuador) {
+                            ->when($this->filters['valuador'] != '', function($q, $valuador) {
                                 $q->whereHas('avaluo', function($q) use($valuador){
-                                        $q->where('asignado_a', $this->filters['valuador']);
+                                        $q->where('asignado_a', (int)$this->filters['valuador']);
                                 });
                             })
-                            ->when($this->filters['estado'], function($q, $estado) {
+                            ->when($this->filters['estado'] != '', function($q, $estado) {
                                 $q->whereHas('avaluo', function($q) use($estado){
                                         $q->where('estado', $this->filters['estado']);
                                 });
                             })
-                            ->when($this->filters['localidad'], fn($q, $localidad) => $q->where('localidad', $this->filters['localidad']))
-                            ->when($this->filters['oficina'], fn($q, $oficina) => $q->where('oficina', $this->filters['oficina']))
-                            ->when($this->filters['tipo'], fn($q, $tipo) => $q->where('tipo_predio', $this->filters['tipo']))
-                            ->when($this->filters['registro'] != '', fn($q, $registro) => $q->where('numero_registro', $this->filters['registro']))
+                            ->when($this->filters['localidad'] != '', fn($q, $localidad) => $q->where('localidad', (int)$this->filters['localidad']))
+                            ->when($this->filters['oficina'] != '', fn($q, $oficina) => $q->where('oficina', (int)$this->filters['oficina']))
+                            ->when($this->filters['tipo'] != '', fn($q, $tipo) => $q->where('tipo_predio', (int)$this->filters['tipo']))
+                            ->when($this->filters['registro'] != '', fn($q, $registro) => $q->where('numero_registro', (int)$this->filters['registro']))
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 

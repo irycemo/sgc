@@ -45,6 +45,8 @@ class MisAvaluos extends Component
         'estado' => ''
     ];
 
+    public function updatedFilters() { $this->resetPage(); }
+
     public function crearModeloVacio(){
         return Avaluo::make();
     }
@@ -325,6 +327,8 @@ class MisAvaluos extends Component
 
         $this->años = Constantes::AÑOS;
 
+        $this->filters['año'] = now()->format('Y');
+
     }
 
     public function render()
@@ -333,9 +337,16 @@ class MisAvaluos extends Component
         $avaluos = Avaluo::with('predioAvaluo', 'creadoPor', 'actualizadoPor', 'predioIgnorado', 'variacionCatastral')
                             ->where('asignado_a', auth()->user()->id)
                             ->when($this->filters['estado'], function($q, $estado){
-                                $q->WhereHas('predioAvaluo', function($q) use($estado){
                                     $q->where('estado', $estado);
-                                });
+                            })
+                            ->when($this->filters['año'], function($q, $año){
+                                    $q->where('año', $año);
+                            })
+                            ->when($this->filters['folio'], function($q, $folio){
+                                $q->where('folio', $folio);
+                            })
+                            ->when($this->filters['usuario'], function($q, $usuario){
+                                $q->where('usuario', $usuario);
                             })
                             ->when($this->filters['localidad'], function($q, $localidad){
                                 $q->WhereHas('predioAvaluo', function($q) use($localidad){
