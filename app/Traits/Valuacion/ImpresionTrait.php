@@ -300,9 +300,6 @@ trait ImpresionTrait
         if(!$avaluo->clasificacion_zona)
             throw new GeneralException('El avalúo: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' del predio: ' . $avaluo->predioAvaluo->cuentaPredial() . ' no tiene caracteristicas.');
 
-        if(!$avaluo->predioAvaluo->uso_1)
-            throw new GeneralException('El avalúo: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' del predio: ' . $avaluo->predioAvaluo->cuentaPredial() . ' no tiene uso de predio.');
-
         if($avaluo->predioAvaluo->edificio === 0 && $avaluo->predioAvaluo->terrenos->count() === 0)
             throw new GeneralException('El avalúo: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' del predio: ' . $avaluo->predioAvaluo->cuentaPredial() . ' no tiene terrenos.');
 
