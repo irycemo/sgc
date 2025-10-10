@@ -198,6 +198,8 @@ class Notificacion extends Component
 
     public function notificarTodos(){
 
+        $this->dispatch('mostrarMensaje', ['success', $this->avaluos->count()]);
+
         foreach ($this->avaluos as $avaluo) {
 
             if($avaluo->estado == 'notificado') continue;
