@@ -44,9 +44,19 @@
 
                 </select>
 
-                <div class="flex gap-1 p-1">
+                <div class="flex gap-1 mt-2">
 
-                    <input type="number" wire:model.live.debounce.500ms="filters.tAño" placeholder="T. año" class="bg-white rounded-full text-sm w-24">
+                    <select class="bg-white rounded-full text-sm" wire:model.live="filters.tAño">
+
+                        <option value="" selected>T. año</option>
+
+                        @foreach ($años as $año)
+
+                            <option value="{{ $año }}">{{ $año }}</option>
+
+                        @endforeach
+
+                    </select>
 
                     <input type="number" wire:model.live.debounce.500ms="filters.tFolio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
 

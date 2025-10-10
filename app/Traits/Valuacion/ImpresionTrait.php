@@ -361,17 +361,6 @@ trait ImpresionTrait
 
     public function actualizarTramites(){
 
-        $this->tramite_inspeccion->update([
-            'usados' => $this->numero_avaluos + $this->tramite_inspeccion->usados,
-            'ligado_a' => $this->tramite_desglose?->id
-        ]);
-
-        if($this->tramite_inspeccion->cantidad == $this->tramite_inspeccion->usados){
-
-            $this->tramite_inspeccion->update(['estado' => 'concluido']);
-
-        }
-
         if($this->tramite_desglose){
 
             $this->tramite_desglose->update([
@@ -381,6 +370,24 @@ trait ImpresionTrait
 
             if($this->tramite_desglose->cantidad == $this->tramite_desglose->usados)
                 $this->tramite_desglose->update(['estado' => 'concluido']);
+
+        }
+
+        /* Desgloses */
+        if(in_array($this->avaluo_para, [3,4,5])){
+
+            $this->numero_avaluos ++;
+
+        }
+
+        $this->tramite_inspeccion->update([
+            'usados' => $this->numero_avaluos + $this->tramite_inspeccion->usados,
+            'ligado_a' => $this->tramite_desglose?->id
+        ]);
+
+        if($this->tramite_inspeccion->cantidad == $this->tramite_inspeccion->usados){
+
+            $this->tramite_inspeccion->update(['estado' => 'concluido']);
 
         }
 

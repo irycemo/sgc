@@ -24,6 +24,16 @@
 
                     <input type="number" wire:model.live.debounce.500mse="filters.usuario" placeholder="Usuario" class="bg-white rounded-full text-sm w-24">
 
+                    <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
+
+                        <option value="" selected>Estado</option>
+                        <option value="nuevo">Nuevo</option>
+                        <option value="impreso">Impreso</option>
+                        <option value="concluido">Concluido</option>
+                        <option value="notificado">Notificado</option>
+
+                    </select>
+
                 </div>
 
                 <div class="flex gap-1 ">

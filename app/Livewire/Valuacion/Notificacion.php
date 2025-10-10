@@ -219,6 +219,8 @@ class Notificacion extends Component
 
         }
 
+        $this->reset('tramite');
+
     }
 
     public function creaPredio(){
