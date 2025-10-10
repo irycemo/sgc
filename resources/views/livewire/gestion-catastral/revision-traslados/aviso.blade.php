@@ -327,7 +327,7 @@
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
 
-                    <strong>Superficie de terreno</strong>
+                    <strong>Superficie total de terreno</strong>
 
                     <p>{{ $aviso['predio']['superficie_total_terreno'] }}</p>
 
@@ -335,7 +335,7 @@
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
 
-                    <strong>Superficie de construcción</strong>
+                    <strong>Superficie total de construcción</strong>
 
                     <p>{{ $aviso['predio']['superficie_total_construccion'] }}</p>
 
