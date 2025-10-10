@@ -180,6 +180,44 @@ trait ImpresionTrait
 
     }
 
+    public function validarPredioPadre(){
+
+        if(!$this->predio_padre){
+
+            throw new GeneralException('El predio padre no existe.');
+
+        }
+
+        if($this->predio_padre->estado != 'activo'){
+
+            throw new GeneralException('El predio origen no esta activo.');
+
+        }
+
+        if(!$this->predio_padre->superficie_total_terreno){
+
+            throw new GeneralException('El predio padre no tiene superficie de terreno.');
+
+        }
+
+        $superficie_terreno = 0;
+
+        foreach ($this->avaluos as $avaluo) {
+
+            if($avaluo->predioAvaluo->numero_registro == $this->predio_padre->numero_registro) continue;
+
+            $superficie_terreno += $avaluo->predioAvaluo->superficie_total_terreno;
+
+        }
+
+        if($this->predio_padre->superficie_total_terreno < $superficie_terreno){
+
+            throw new GeneralException('La suma de la superfice de terreno de los avalúos es mayor a la superficie del predio padre.');
+
+        }
+
+    }
+
     public function buscarPredios(){
 
         if($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO->value){
@@ -202,6 +240,8 @@ trait ImpresionTrait
                                         ->where('tipo_predio', $this->tipo)
                                         ->where('numero_registro', $this->registro_padre)
                                         ->first();
+
+                $this->validarPredioPadre();
 
                 $avaluo_predio_padre = Avaluo::with('predioAvaluo')->where('estado', '!=', 'notificado')->where('predio', $this->predio_padre->id)->get();
 
