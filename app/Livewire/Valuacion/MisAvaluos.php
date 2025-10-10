@@ -95,6 +95,12 @@ class MisAvaluos extends Component
 
                 foreach ($avaluos as $avaluo) {
 
+                    if($avaluo->estado == 'notificado'){
+
+                        throw new GeneralException('El avalúo: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' esta notificado no es posible enviar a corrección.');
+
+                    }
+
                     $avaluo->update([
                         'tramite_inspeccion' => null,
                         'tramite_desglose' => null,
