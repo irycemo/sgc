@@ -4,20 +4,48 @@
 
         <x-header>Mis avalúos</x-header>
 
-        <div class="flex justify-between">
+        <div class="flex justify-between ">
 
             <div>
 
-                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+                <div class="flex gap-2 flex-nowrap mb-2">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+                    <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
 
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
+                        @foreach ($años as $año)
 
-                </select>
+                            <option value="{{ $año }}">{{ $año }}</option>
+
+                        @endforeach
+
+                    </select>
+
+                    <input type="number" wire:model.live.debounce.500mse="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+
+                    <input type="number" wire:model.live.debounce.500mse="filters.usuario" placeholder="Usuario" class="bg-white rounded-full text-sm w-24">
+
+                </div>
+
+                <div class="flex gap-1 ">
+
+                    <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+
+                    <input type="number" wire:model.live.debounce.500ms="filters.p_oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+
+                    <input type="number" wire:model.live.debounce.500ms="filters.t_predio" placeholder="T. Predio" class="bg-white rounded-full text-sm w-24">
+
+                    <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+
+                    <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+
+                    </select>
+
+                </div>
 
             </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Valuacion;
 
+use App\Constantes\Constantes;
 use App\Exceptions\GeneralException;
 use App\Models\File;
 use App\Models\Avaluo;
@@ -26,8 +27,22 @@ class MisAvaluos extends Component
     public $todosSelecionados = false;
     public $modal = false;
     public $modalCorregir = false;
+    public $años;
 
     public Avaluo $modelo_editar;
+
+    public $filters = [
+        'año' => '',
+        'folio' => '',
+        'usuario' => '',
+        'estado' => '',
+        'tipoTramite' => '',
+        'servicio' => '',
+        'localidad' => '',
+        'p_oficina' => '',
+        't_predio' => '',
+        'registro' => '',
+    ];
 
     public function crearModeloVacio(){
         return Avaluo::make();
@@ -301,6 +316,8 @@ class MisAvaluos extends Component
 
         $this->modelo_editar = $this->crearModeloVacio();
 
+        $this->años = Constantes::AÑOS;
+
     }
 
     public function render()
@@ -308,6 +325,26 @@ class MisAvaluos extends Component
 
         $avaluos = Avaluo::with('predioAvaluo', 'creadoPor', 'actualizadoPor', 'predioIgnorado', 'variacionCatastral')
                             ->where('asignado_a', auth()->user()->id)
+                            ->when($this->filters['localidad'], function($q, $localidad){
+                                $q->WhereHas('predioAvaluo', function($q) use($localidad){
+                                    $q->where('localidad', $localidad);
+                                });
+                            })
+                            ->when($this->filters['p_oficina'], function($q, $oficina){
+                                $q->WhereHas('predioAvaluo', function($q) use($oficina){
+                                    $q->where('oficina', $oficina);
+                                });
+                            })
+                            ->when($this->filters['t_predio'], function($q, $t_predio){
+                                $q->WhereHas('predioAvaluo', function($q) use($t_predio){
+                                    $q->where('tipo_predio', $t_predio);
+                                });
+                            })
+                            ->when($this->filters['registro'], function($q, $registro){
+                                $q->WhereHas('predioAvaluo', function($q) use($registro){
+                                    $q->where('numero_registro', $registro);
+                                });
+                            })
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 
