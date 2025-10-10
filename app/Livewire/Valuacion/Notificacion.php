@@ -72,11 +72,7 @@ class Notificacion extends Component
 
     }
 
-    public function abrirModal(Avaluo $avaluo){
-
-        $this->avaluo = $avaluo;
-
-        $this->avaluo->load('predioAvaluo.colindancias', 'predioAvaluo.terrenosComun', 'predioAvaluo.construccionesComun', 'predioAvaluo.terrenos', 'predioAvaluo.construcciones', 'predioAvaluo.propietarios.persona');
+    public function abrirModal(){
 
         $this->modal = true;
 
