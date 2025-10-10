@@ -45,6 +45,23 @@
 
             </button>
 
+            @if($tramite)
+
+                <button
+                    wire:click="notificarTodos"
+                    wire:loading.attr="disabled"
+                    wire:target="notificarTodos"
+                    type="button"
+                    class="bg-blue-400 mx-auto hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+
+                    <img wire:loading wire:target="notificarTodos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Notificar todos
+
+                </button>
+
+            @endif
+
         </div>
 
     </div>

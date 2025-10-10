@@ -197,6 +197,22 @@ class Notificacion extends Component
 
     }
 
+    public function notificarTodos(){
+
+        foreach ($this->avaluos as $avaluo) {
+
+            $this->avaluo = $avaluo;
+
+            $this->avaluo->load('predioAvaluo.colindancias', 'predioAvaluo.terrenosComun', 'predioAvaluo.construccionesComun', 'predioAvaluo.terrenos', 'predioAvaluo.construcciones', 'predioAvaluo.propietarios.persona');
+
+            $this->notificar();
+
+            $this->dispatch('mostrarMensaje', ['success', "Los avalúos se notificaron con éxito."]);
+
+        }
+
+    }
+
     public function creaPredio(){
 
         $predio = Predio::create([
@@ -527,4 +543,5 @@ class Notificacion extends Component
     {
         return view('livewire.valuacion.notificacion')->extends('layouts.admin');
     }
+
 }
