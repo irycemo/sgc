@@ -54,9 +54,9 @@ class Desglose extends Component
 
         }
 
-        if($this->predio_padre->estado === 'bloqueado'){
+        if($this->predio_padre->estado != 'activo'){
 
-            throw new GeneralException('El predio padre esta bloqueado.');
+            throw new GeneralException('El predio padre no esta activo.');
 
         }
 
