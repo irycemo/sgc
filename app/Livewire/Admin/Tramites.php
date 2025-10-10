@@ -44,6 +44,10 @@ class Tramites extends Component
         'estado' => '',
         'tipoTramite' => '',
         'servicio' => '',
+        'localidad' => '',
+        'p_oficina' => '',
+        't_predio' => '',
+        'registro' => '',
     ];
 
     public $servicios;
@@ -319,6 +323,26 @@ class Tramites extends Component
                         ->when($this->filters['estado'], fn($q, $estado) => $q->where('estado', $estado))
                         ->when($this->filters['tipoTramite'], fn($q, $tipoTramite) => $q->where('tipo_tramite', $tipoTramite))
                         ->when($this->filters['servicio'], fn($q, $servicio) => $q->where('servicio_id', $servicio))
+                        ->when($this->filters['localidad'], function($q, $localidad){
+                            $q->WhereHas('predios', function($q) use($localidad){
+                                $q->where('localidad', $localidad);
+                            });
+                        })
+                        ->when($this->filters['p_oficina'], function($q, $oficina){
+                            $q->WhereHas('predios', function($q) use($oficina){
+                                $q->where('oficina', $oficina);
+                            });
+                        })
+                        ->when($this->filters['t_predio'], function($q, $t_predio){
+                            $q->WhereHas('predios', function($q) use($t_predio){
+                                $q->where('tipo_predio', $t_predio);
+                            });
+                        })
+                        ->when($this->filters['registro'], function($q, $registro){
+                            $q->WhereHas('predios', function($q) use($registro){
+                                $q->where('numero_registro', $registro);
+                            });
+                        })
                         ->orderBy($this->sort, $this->direction)
                         ->paginate($this->pagination);
 
@@ -330,7 +354,7 @@ class Tramites extends Component
 
         array_push($this->fields, 'predios', 'predio', 'localidad', 'oficina', 'tipo', 'registro', 'modalVer');
 
-        $this->servicios = Servicio::select('id', 'nombre')->orderBy('nombre')->get();
+        $this->servicios = Servicio::select('id', 'nombre')->where('estado', 'activo')->orderBy('nombre')->get();
 
         $this->años = Constantes::AÑOS;
 

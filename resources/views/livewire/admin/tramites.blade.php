@@ -48,7 +48,19 @@
 
             <input type="text" wire:model.live.debounce.500ms="filters.search" placeholder="Solicitante" class="bg-white rounded-full text-sm">
 
-            <select class="bg-white rounded-full text-sm w-fit" wire:model.live="pagination">
+        </div>
+
+        <div class="flex gap-1 p-1">
+
+            <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+
+            <input type="number" wire:model.live.debounce.500ms="filters.p_oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+
+            <input type="number" wire:model.live.debounce.500ms="filters.t_predio" placeholder="T. Predio" class="bg-white rounded-full text-sm w-24">
+
+            <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+
+            <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                 <option value="10">10</option>
                 <option value="25">25</option>
@@ -779,7 +791,7 @@
 
             <div class="flex justify-end items-center gap-3">
 
-                @if(!app()->isProduction())
+                @if(!app()->isProduction() && $modelo_editar->estado == 'nuevo')
 
                     <x-button-gray
                         wire:click="simularPago({{ $modelo_editar->id }})"
