@@ -29,9 +29,9 @@ return new class extends Migration
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();
 
-            $table->index(['tipo_titulo', 'titulo_propiedad']);
+            $table->index(['tipo_titulo', 'titulo_propiedad'], 'cuenta_predial');
 
-            $table->index(['localidad', 'oficina', 'tipo_predio', 'numero_registro']);
+            $table->index(['localidad', 'oficina', 'tipo_predio', 'numero_registro'], 'clave_catastral');
         });
     }
 

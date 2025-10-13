@@ -46,7 +46,7 @@
 
                 <div class="flex gap-1 mt-2">
 
-                    <select class="bg-white rounded-full text-sm" wire:model.live="filters.tAño">
+                    <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
 
                         <option value="" selected>T. año</option>
 
@@ -58,9 +58,9 @@
 
                     </select>
 
-                    <input type="number" wire:model.live.debounce.500ms="filters.tFolio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
+                    <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
 
-                    <input type="number" wire:model.live.debounce.500ms="filters.tUsuario" placeholder="T. Usuario" class="bg-white rounded-full text-sm w-24">
+                    <input type="number" wire:model.live.debounce.500ms="filters.usuario" placeholder="T. Usuario" class="bg-white rounded-full text-sm w-24">
 
                     <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
 
