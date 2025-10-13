@@ -44,7 +44,10 @@ class Avaluos extends Component
         'oficina' => '',
         'tipo' => '',
         'registro' => '',
-        'estado' => ''
+        'estado' => '',
+        'tAño' => '',
+        'tFolio' => '',
+        'tUsuario' => '',
     ];
 
     public function updatedFilters() { $this->resetPage(); }
@@ -175,36 +178,57 @@ class Avaluos extends Component
     #[Computed]
     public function predios(){
 
-        return PredioAvaluo::with('actualizadoPor', 'avaluo.asignadoA')
+        return Avaluo::with('actualizadoPor', 'predioAvaluo', 'tramiteInspeccion:id,año,folio,usuario', 'asignadoA:id,name')
                             ->when($this->filters['año'] != '', function($q, $año) {
-                                $q->whereHas('avaluo', function($q) use($año){
-                                        $q->where('año', (int)$this->filters['año']);
-                                });
+                                $q->where('año', (int)$this->filters['año']);
                             })
                             ->when($this->filters['folio'] != '', function($q) {
-                                $q->whereHas('avaluo', function($q) {
-                                        $q->where('folio', (int)$this->filters['folio']);
-                                });
+                                $q->where('folio', (int)$this->filters['folio']);
                             })
                             ->when($this->filters['usuario'] != '', function($q, $usuario) {
-                                $q->whereHas('avaluo', function($q) use($usuario){
-                                        $q->where('usuario', (int)$this->filters['usuario']);
-                                });
+                                $q->where('usuario', (int)$this->filters['usuario']);
                             })
                             ->when($this->filters['valuador'] != '', function($q, $valuador) {
-                                $q->whereHas('avaluo', function($q) use($valuador){
-                                        $q->where('asignado_a', (int)$this->filters['valuador']);
-                                });
+                                $q->where('asignado_a', (int)$this->filters['valuador']);
                             })
                             ->when($this->filters['estado'] != '', function($q, $estado) {
-                                $q->whereHas('avaluo', function($q) use($estado){
-                                        $q->where('estado', $this->filters['estado']);
+                                $q->where('estado', $this->filters['estado']);
+                            })
+                            ->when($this->filters['tAño'] != '', function($q, $localidad) {
+                                $q->whereHas('tramiteInspeccion', function($q){
+                                    $q->where('año', (int)$this->filters['tAño']);
                                 });
                             })
-                            ->when($this->filters['localidad'] != '', fn($q, $localidad) => $q->where('localidad', (int)$this->filters['localidad']))
-                            ->when($this->filters['oficina'] != '', fn($q, $oficina) => $q->where('oficina', (int)$this->filters['oficina']))
-                            ->when($this->filters['tipo'] != '', fn($q, $tipo) => $q->where('tipo_predio', (int)$this->filters['tipo']))
-                            ->when($this->filters['registro'] != '', fn($q, $registro) => $q->where('numero_registro', (int)$this->filters['registro']))
+                            ->when($this->filters['tFolio'] != '', function($q, $localidad) {
+                                $q->whereHas('tramiteInspeccion', function($q){
+                                    $q->where('folio', (int)$this->filters['tFolio']);
+                                });
+                            })
+                            ->when($this->filters['tUsuario'] != '', function($q, $localidad) {
+                                $q->whereHas('tramiteInspeccion', function($q){
+                                    $q->where('usuario', (int)$this->filters['tUsuario']);
+                                });
+                            })
+                            ->when($this->filters['localidad'] != '', function($q, $localidad) {
+                                $q->whereHas('predioAvaluo', function($q){
+                                    $q->where('localidad', (int)$this->filters['localidad']);
+                                });
+                            })
+                            ->when($this->filters['oficina'] != '', function($q, $oficina) {
+                                $q->whereHas('predioAvaluo', function($q){
+                                    $q->where('oficina', (int)$this->filters['oficina']);
+                                });
+                            })
+                            ->when($this->filters['tipo'] != '', function($q, $tipo) {
+                                $q->whereHas('predioAvaluo', function($q){
+                                    $q->where('tipo_predio', (int)$this->filters['tipo']);
+                                });
+                            })
+                            ->when($this->filters['registro'] != '', function($q, $registro) {
+                                $q->whereHas('predioAvaluo', function($q){
+                                    $q->where('numero_registro', (int)$this->filters['registro']);
+                                });
+                            })
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);
 

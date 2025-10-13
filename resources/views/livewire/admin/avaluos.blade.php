@@ -46,7 +46,7 @@
 
                 <div class="flex gap-1 mt-2">
 
-                    <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
+                    <select class="bg-white rounded-full text-sm" wire:model.live="filters.tAño">
 
                         <option value="" selected>T. año</option>
 
@@ -58,9 +58,9 @@
 
                     </select>
 
-                    <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
+                    <input type="number" wire:model.live.debounce.500ms="filters.tFolio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
 
-                    <input type="number" wire:model.live.debounce.500ms="filters.usuario" placeholder="T. Usuario" class="bg-white rounded-full text-sm w-24">
+                    <input type="number" wire:model.live.debounce.500ms="filters.tUsuario" placeholder="T. Usuario" class="bg-white rounded-full text-sm w-24">
 
                     <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
 
@@ -140,6 +140,7 @@
                 <x-table.heading >Usuario</x-table.heading>
                 <x-table.heading >Estado</x-table.heading>
                 <x-table.heading >Valuador</x-table.heading>
+                <x-table.heading >Trámite</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('localidad')" :direction="$sort === 'localidad' ? $direction : null">Localidad</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('oficina')" :direction="$sort === 'oficina' ? $direction : null">Oficina</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('tipo_predio')" :direction="$sort === 'tipo_predio' ? $direction : null">Tipo de predio</x-table.heading>
@@ -152,15 +153,15 @@
 
             <x-slot name="body">
 
-                @forelse ($this->predios as $predio)
+                @forelse ($this->predios as $avaluo)
 
-                    <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $predio->id }}">
+                    <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $avaluo->id }}">
 
                         <x-table.cell>
 
                             <div class="felx items-center">
 
-                                <input type="checkbox" wire:model="seleccionados" value="{{ $predio->avaluo->id }}" class="rounded">
+                                <input type="checkbox" wire:model="seleccionados" value="{{ $avaluo->id }}" class="rounded">
 
                             </div>
 
@@ -169,7 +170,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Año</span>
 
-                            {{ $predio->avaluo->año }}
+                            {{ $avaluo->año }}
 
                         </x-table.cell>
 
@@ -177,7 +178,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Folio</span>
 
-                            {{ $predio->avaluo->folio }}
+                            {{ $avaluo->folio }}
 
                         </x-table.cell>
 
@@ -185,7 +186,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Usuario</span>
 
-                            {{ $predio->avaluo->usuario }}
+                            {{ $avaluo->usuario }}
 
                         </x-table.cell>
 
@@ -193,7 +194,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Estado</span>
 
-                            <span class="bg-{{ $predio->avaluo->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($predio->avaluo->estado) }}</span>
+                            <span class="bg-{{ $avaluo->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($avaluo->estado) }}</span>
 
                         </x-table.cell>
 
@@ -201,7 +202,15 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Valuador</span>
 
-                            {{ $predio->avaluo->asignadoA->name }}
+                            {{ $avaluo->asignadoA->name }}
+
+                        </x-table.cell>
+
+                        <x-table.cell>
+
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Trámite</span>
+
+                            <span class="spacenow">{{ $avaluo->tramiteInspeccion?->año }}-{{ $avaluo->tramiteInspeccion?->folio }}-{{ $avaluo->tramiteInspeccion?->usuario }}</span>
 
                         </x-table.cell>
 
@@ -209,7 +218,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Localidad</span>
 
-                            {{ $predio->localidad }}
+                            {{ $avaluo->predioAvaluo->localidad }}
 
                         </x-table.cell>
 
@@ -217,7 +226,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Oficina</span>
 
-                            {{ $predio->oficina }}
+                            {{ $avaluo->predioAvaluo->oficina }}
 
                         </x-table.cell>
 
@@ -225,7 +234,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Tipo de predio</span>
 
-                            {{ $predio->tipo_predio }}
+                            {{ $avaluo->predioAvaluo->tipo_predio }}
 
                         </x-table.cell>
 
@@ -233,7 +242,7 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Número de registro</span>
 
-                            {{ $predio->numero_registro }}
+                            {{ $avaluo->predioAvaluo->numero_registro }}
 
                         </x-table.cell>
 
@@ -241,15 +250,15 @@
 
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
-                            {{ $predio->created_at }}
+                            {{ $avaluo->created_at }}
 
                         </x-table.cell>
 
                         <x-table.cell>
 
-                            <span class="font-semibold">@if($predio->actualizadoPor != null)Actualizado por: {{$predio->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
+                            <span class="font-semibold">@if($avaluo->actualizadoPor != null)Actualizado por: {{$avaluo->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
 
-                            {{ $predio->updated_at }}
+                            {{ $avaluo->updated_at }}
 
                         </x-table.cell>
 
@@ -276,7 +285,7 @@
                                     @can('Ver predio')
 
                                         <a
-                                            href="{{ route('ver_predio_avaluo', $predio->id) }}"
+                                            href="{{ route('ver_predio_avaluo', $avaluo->id) }}"
                                             class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                             role="menuitem">
                                             Ver
@@ -284,10 +293,10 @@
 
                                     @endcan
 
-                                    @if(in_array($predio->avaluo->estado, ['notificado', 'impreso']))
+                                    @if(in_array($avaluo->estado, ['notificado', 'impreso']))
 
                                         <button
-                                            wire:click="imprimirAvaluo({{ $predio->id }})"
+                                            wire:click="imprimirAvaluo({{ $avaluo->id }})"
                                             wire:loading.attr="disabled"
                                             class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                             role="menuitem">
@@ -296,12 +305,12 @@
 
                                     @endif
 
-                                    @if($predio->avaluo->estado != 'notificado')
+                                    @if($avaluo->estado != 'notificado')
 
                                         @can('Reasignar valuador')
 
                                             <button
-                                                wire:click="abrirModal({{ $predio->id }})"
+                                                wire:click="abrirModal({{ $avaluo->id }})"
                                                 wire:loading.attr="disabled"
                                                 class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                 role="menuitem">
@@ -324,7 +333,7 @@
 
                     <x-table.row wire:key="row-empty">
 
-                        <x-table.cell colspan="13">
+                        <x-table.cell colspan="14">
 
                             <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
 
@@ -344,7 +353,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="13" class="bg-gray-50">
+                    <x-table.cell colspan="14" class="bg-gray-50">
 
                         {{ $this->predios->links()}}
 

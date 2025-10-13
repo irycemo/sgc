@@ -376,7 +376,11 @@ trait ImpresionTrait
         /* Desgloses */
         if(in_array($this->avaluo_para, [3,4,5])){
 
-            $this->numero_avaluos ++;
+            if($this->tramite_desglose->estado == 'concluido'){
+
+                $this->numero_avaluos ++;
+
+            }
 
         }
 

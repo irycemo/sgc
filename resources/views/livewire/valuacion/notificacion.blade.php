@@ -45,7 +45,7 @@
 
             </button>
 
-            @if($tramite)
+            @if($tramite && $flag_notificar)
 
                 <button
                     wire:click="abrirModal"

@@ -44,7 +44,11 @@ class Notificacion extends Component
 
     public $predio;
 
+    public $flag_notificar = false;
+
     public function buscarTramite(){
+
+        $this->flag_notificar = false;
 
         $this->validate([
             'año' => 'required',
@@ -58,6 +62,18 @@ class Notificacion extends Component
                                         ->where('folio', $this->folio)
                                         ->where('usuario', $this->usuario)
                                         ->firstOrFail();
+
+            $avaluo = Avaluo::whereIn('estado', ['impreso', 'concluido'])
+                            ->whereNull('notificado_en')
+                            ->whereNull('notificado_por')
+                            ->where('tramite_inspeccion', $this->tramite->id)
+                            ->first();
+
+            if($avaluo){
+
+                $this->flag_notificar = true;
+
+            }
 
             $this->reset(['folio', 'usuario']);
 
