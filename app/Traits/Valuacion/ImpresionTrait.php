@@ -216,6 +216,18 @@ trait ImpresionTrait
 
         }
 
+        if($this->tramite_inspeccion->predios()->count()){
+
+            $predio = $this->tramite_inspeccion->predios()->first();
+
+            if($this->predio_padre->id != $predio->id){
+
+                throw new GeneralException('El trámite de inspección tiene asociado un predio origen diferente.');
+
+            }
+
+        }
+
     }
 
     public function buscarPredios(){

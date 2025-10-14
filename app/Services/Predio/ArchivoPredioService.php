@@ -125,7 +125,11 @@ class ArchivoPredioService{
 
             $archivo_preexistente = $this->predio->archivos->where('descripcion', 'archivo')->first()->url;
 
-            $oMerger->addPDF(Storage::path('predios_archivo/'. $archivo_preexistente), 'all');
+            if(Storage::exists('predios_archivo/'. $archivo_preexistente)){
+
+                $oMerger->addPDF(Storage::path('predios_archivo/'. $archivo_preexistente), 'all');
+
+            }
 
         }
 
@@ -294,9 +298,13 @@ class ArchivoPredioService{
 
         }else{
 
-            $archivo_preexistente = $this->predio->archivos->where('descripcion', 'archivo')->first()->url;
+            $archivo_preexistente = $this->predio->archivos->where('descripcion', 'archivo')->first()?->url;
 
-            $oMerger->addPDF(Storage::path('predios_archivo/'. $archivo_preexistente), 'all');
+            if(Storage::exists('predios_archivo/'. $archivo_preexistente)){
+
+                $oMerger->addPDF(Storage::path('predios_archivo/'. $archivo_preexistente), 'all');
+
+            }
 
         }
 
