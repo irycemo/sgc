@@ -157,7 +157,11 @@ class ArchivoPredioService{
 
         }else{
 
-            $oMerger->addPDF(Storage::path('predios_archivo/'. $archivo_nuevo), 'all');
+            if(Storage::exists('predios_archivo/'. $archivo_nuevo)){
+
+                $oMerger->addPDF(Storage::path('predios_archivo/'. $archivo_nuevo), 'all');
+
+            }
 
             $oMerger->merge();
 
