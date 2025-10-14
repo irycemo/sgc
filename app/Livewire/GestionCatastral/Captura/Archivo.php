@@ -37,6 +37,8 @@ class Archivo extends Component
 
                 (new ArchivoPredioService($this->predio, $this->documento))->guardar();
 
+                $this->predio->touch();
+
                 $this->predio->audits()->latest()->first()->update(['tags' => 'Actualizó archivo']);
 
             });
