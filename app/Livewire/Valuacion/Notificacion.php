@@ -100,7 +100,10 @@ class Notificacion extends Component
     public function notificar(){
 
         $this->validate(
-            ['fecha_notificacion' => 'required|before:tomorrow']
+            [
+                'fecha_notificacion' => 'required|before:tomorrow',
+                'tramite' => 'required'
+            ]
         );
 
         $predio = Predio::where('estado', $this->avaluo->predioAvaluo->estado)
@@ -166,7 +169,11 @@ class Notificacion extends Component
 
         if($this->tramite->avaluo_para === AvaluoPara::PREDIO_IGNORADO){
 
-            (new ArchivoPredioService($this->predio, null))->guardarConUrl('prediosignorados/'. $this->avaluo->predioIgnorado->archivo);
+            if($this->avaluo->predioIgnorado->archivo){
+
+                (new ArchivoPredioService($this->predio, null))->guardarConUrl('prediosignorados/'. $this->avaluo->predioIgnorado->archivo);
+
+            }
 
         }
 
