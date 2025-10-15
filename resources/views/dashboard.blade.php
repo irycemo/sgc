@@ -42,25 +42,34 @@
 
         <script>
 
-            const colors = [
-                ['#985F99', '#9684A1'],
-                ['#595959', '#808F85'],
-                ['#918868', '#CBD081'],
-                ['#F7934C', '#CC5803'],
-                ['#273043', '#9197AE'],
-                ['#F02D3A', '#EFF6EE'],
-                ['#000000', '#695B5C'],
-                ['#4A5043', '#8AA1B1'],
-                ['#A5B452', '#C8D96F'],
-                ['#14591D', '#99AA38'],
-                ['#003459', '#00A8E8'],
-                ['#5C7457', '#C1BCAC'],
-                ['#FF8360', '#E8E288'],
-                ['#B96AC9', '#E980FC'],
-                ['#63768D', '#8AC6D0'],
-                ['#56445D', '#548687'],
-                ['#8FBC94', '#C5E99B']
-            ]
+            function generateRandomHexColor() {
+
+                // Generate a random number between 0 and 16777215 (0xFFFFFF)
+                const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+
+                // Pad the hex string with leading zeros if necessary to ensure 6 characters
+                return `#${randomColor.padStart(6, '0')}`;
+
+            }
+
+            function getInverseHexColor(hexColor) {
+
+                // Remove the '#' if present
+                const cleanHex = hexColor.startsWith('#') ? hexColor.slice(1) : hexColor;
+
+                // Convert the hex color to a decimal integer
+                const num = parseInt(cleanHex, 16);
+
+                // Invert the color by XORing with 0xFFFFFF (white)
+                const invertedNum = 0xFFFFFF ^ num;
+
+                // Convert the inverted decimal back to a hex string
+                const invertedHex = invertedNum.toString(16);
+
+                // Pad with leading zeros and add '#'
+                return `#${invertedHex.padStart(6, '0')}`;
+
+            }
 
             const aux = {!! json_encode($data) !!}
 
@@ -69,18 +78,23 @@
             let aux2 = new Array();
 
             for(let key in aux){
+
                 for (let key2 in aux[key]) {
+
                     aux2.push(aux[key][key2])
+
                 }
 
-                var color = colors[Math.floor(Math.random()*colors.length)]
+                var color = generateRandomHexColor();
+
+                var inverse_color = getInverseHexColor(color);
 
                 dataArray.push(
                     {
                         label: key,
                         data: aux2,
-                        borderColor: color[0],
-                        backgroundColor: color[1],
+                        borderColor: color,
+                        backgroundColor: inverse_color,
                         pointStyle: 'circle',
                         pointRadius: 5,
                         pointHoverRadius: 10
@@ -88,6 +102,7 @@
                 )
 
                 aux2 = new Array();
+
             }
 
             const labels=  ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
@@ -96,6 +111,8 @@
                 labels: labels,
                 datasets:dataArray
             }
+
+            console.log(window.screen.width);
 
             const config = {
                 type: 'line',
@@ -106,12 +123,14 @@
                     scales:{
                         y:{
                             ticks:{
-                                callback:(value, index, values) => {
-                                    return new Intl.NumberFormat('es-MX', {
-                                        style: 'currency',
-                                        currency: 'MXN',
-                                    }).format(value);
-                                }
+                                    display: window.screen.width > 500,
+                                    callback:(value, index, values) => {
+                                        return new Intl.NumberFormat('es-MX', {
+                                                                                style: 'currency',
+                                                                                currency: 'MXN',
+                                                                            }
+                                                                    ).format(value);
+                                    }
                             },
                             beginAtZero: true
                         }

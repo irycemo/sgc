@@ -99,6 +99,12 @@ class ConsultaPadron extends Component
 
     public function updatedOficina(){
 
+        if($this->oficina == '') {
+
+            $this->oficina = auth()->user()->oficina->oficina;
+
+        }
+
         $oficina = Oficina::where('oficina', $this->oficina)->first();
 
         $this->municipio = $oficina->municipio;
