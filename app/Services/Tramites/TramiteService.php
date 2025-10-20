@@ -72,20 +72,12 @@ class TramiteService{
 
     }
 
-    public function calcularFechaEntrega():?string
+    public function calcularFechaEntrega()
     {
 
         if(in_array($this->tramite->servicio->clave_ingreso, ['DM35', 'DM32'])){
 
             $actual = now();
-
-            $actual->addDays(1);
-
-            while($actual->isWeekend()){
-
-                $actual->addDay();
-
-            }
 
             return $actual->toDateString();
 
@@ -111,7 +103,7 @@ class TramiteService{
 
             $actual = now();
 
-            for ($i=0; $i < 5; $i++) {
+            for ($i=0; $i < 1; $i++) {
 
                 $actual->addDays(1);
 

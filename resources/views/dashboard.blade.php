@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @if(auth()->user()->hasRole(['Administrador', 'Oficina rentistica']))
+    @if(auth()->user()->hasRole(['Administrador', 'Jefe de departamento']))
 
         <div class="mb-10">
 
@@ -18,7 +18,7 @@
 
         @livewire('dashboard.administrador-dashboard', ['lazy' => true])
 
-    @elseif(auth()->user()->hasRole(['Jefe de departamento']))
+    @elseif(auth()->user()->hasRole(['Oficina rentistica']))
 
     @elseif(auth()->user()->hasRole(['Valuador predio ignorado', 'Valuador variación catastral', 'Valuador subdivisiones', 'Valuación']))
 

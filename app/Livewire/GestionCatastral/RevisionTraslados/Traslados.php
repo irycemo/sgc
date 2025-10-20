@@ -101,7 +101,7 @@ class Traslados extends Component
 
             return Traslado::with('actualizadoPor', 'asignadoA', 'predio')
                                 ->withCount(['rechazos'])
-                                ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $estado))
+                                ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $this->estado))
                                 ->when($this->oficina, function($q) {
                                     $q->whereHas('predio', function($q) {
                                         $q->where('oficina', $this->oficina);
@@ -116,7 +116,7 @@ class Traslados extends Component
 
             return Traslado::with('actualizadoPor', 'asignadoA', 'predio')
                                 ->withCount(['rechazos'])
-                                ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $estado))
+                                ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $this->estado))
                                 ->where('entidad_nombre', 'LIKE', '%' . $this->search . '%')
                                 ->where('asignado_a', auth()->id())
                                 ->orderBy($this->sort, $this->direction)
@@ -128,6 +128,8 @@ class Traslados extends Component
     }
 
     public function mount(){
+
+        $this->estado = request()->query('estado');
 
         $this->crearModeloVacio();
 

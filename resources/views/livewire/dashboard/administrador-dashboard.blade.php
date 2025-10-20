@@ -1,4 +1,4 @@
-<div>
+    <div>
 
     <x-header>Estadisticas del mes actual</x-header>
 
@@ -12,19 +12,9 @@
 
                 @foreach ($certificaciones as $certificacion)
 
-                    @if($certificacion['estado'] == 'activo')
+                    <span class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($certificacion['estado']) }}</span>
 
-                        <a href="#" class="text-left text-sm text-green-700 hover:underline ">Activos</a>
-
-                        <span class="text-right text-sm text-green-700">{{ $certificacion['total'] }}</span>
-
-                    @else
-
-                        <span class=" text-left text-sm text-red-700 hover:underline">Cancelados</span>
-
-                        <span class="text-right text-sm text-red-700">{{ $certificacion['total'] }}</span>
-
-                    @endif
+                    <span class="text-right text-sm text-gray-600">{{ $certificacion['total'] }}</span>
 
                 @endforeach
 
@@ -32,15 +22,9 @@
 
                     @if($certificado['estado'] == 'A')
 
-                        <a href="{{ route('tramites_linea') }}" class="text-left text-sm text-yellow-700 hover:underline">Pendientes</a>
+                        <a href="{{ route('tramites_linea') }}" class="text-left text-sm text-gray-600 hover:underline ">Pendientes</a>
 
-                        <span class="text-right text-sm text-yellow-700">{{ $certificado['total'] }}</span>
-
-                    @elseif($certificado['estado'] == 'O')
-
-                        <span class=" text-left text-sm text-red-700">Operados</span>
-
-                        <span class="text-right text-sm text-red-700">{{ $certificado['total'] }}</span>
+                        <span class="text-right text-sm text-gray-600">{{ $certificado['total'] }}</span>
 
                     @endif
 
@@ -58,31 +42,9 @@
 
                 @foreach ($traslados as $aviso)
 
-                    @if($aviso['estado'] == 'cerrado')
+                    <a href="{{ route('revision_traslados') .'?estado=' . $aviso['estado'] }}" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($aviso['estado']) }}</a>
 
-                        <span class="text-left text-sm text-blue-700 hover:underline">Cerrados</span>
-
-                        <span class="text-right text-sm text-blue-700">{{ $aviso['total'] }}</span>
-
-                    @elseif($aviso['estado'] == 'autorizado')
-
-                        <span class=" text-left text-sm text-indigo-700 hover:underline">Autorizados</span>
-
-                        <span class="text-right text-sm text-indigo-700">{{ $aviso['total'] }}</span>
-
-                    @elseif($aviso['estado'] == 'rechazado')
-
-                        <span class=" text-left text-sm text-red-700 hover:underline">Rechazados</span>
-
-                        <span class="text-right text-sm text-red-700">{{ $aviso['total'] }}</span>
-
-                    @elseif($aviso['estado'] == 'operado')
-
-                        <span class=" text-left text-sm text-gray-700 hover:underline">Operados</span>
-
-                        <span class="text-right text-sm text-gray-700">{{ $aviso['total'] }}</span>
-
-                    @endif
+                    <span class="text-right text-sm text-gray-600">{{ $aviso['total'] }}</span>
 
                 @endforeach
 
@@ -98,25 +60,9 @@
 
                 @foreach ($avaluos as $avaluo)
 
-                    @if($avaluo['estado'] == 'nuevo')
+                    <a href="#" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($avaluo['estado']) }}</a>
 
-                        <span class="text-left text-sm text-green-700 hover:underline">Nuevos</span>
-
-                        <span class="text-right text-sm text-green-700">{{ $avaluo['total'] }}</span>
-
-                    @elseif($avaluo['estado'] == 'impreso')
-
-                        <span class=" text-left text-sm text-red-700 hover:underline">Impreso</span>
-
-                        <span class="text-right text-sm text-red-700">{{ $avaluo['total'] }}</span>
-
-                    @elseif($avaluo['estado'] == 'notificado')
-
-                        <span class=" text-left text-sm text-red-700 hover:underline">Notificado</span>
-
-                        <span class="text-right text-sm text-red-700">{{ $avaluo['total'] }}</span>
-
-                    @endif
+                    <span class="text-right text-sm text-gray-600">{{ $avaluo['total'] }}</span>
 
                 @endforeach
 
@@ -132,9 +78,9 @@
 
                 @foreach ($predios_ignorados as $predio)
 
-                    <span class="text-left text-sm text-gary-700 hover:underline">{{ ucfirst($predio['estado']) }}</span>
+                    <a href="#" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($predio['estado']) }}</a>
 
-                    <span class="text-right text-sm text-gary-700">{{ $predio['total'] }}</span>
+                    <span class="text-right text-sm text-gray-600">{{ $predio['total'] }}</span>
 
                 @endforeach
 
@@ -150,9 +96,9 @@
 
                 @foreach ($variaciones_catastrales as $variacion)
 
-                    <span class="text-left text-sm text-gary-700 hover:underline">{{ ucfirst($variacion['estado']) }}</span>
+                    <a href="#" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($variacion['estado']) }}</a>
 
-                    <span class="text-right text-sm text-gary-700">{{ $variacion['total'] }}</span>
+                    <span class="text-right text-sm text-gray-600">{{ $variacion['total'] }}</span>
 
                 @endforeach
 
