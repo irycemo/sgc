@@ -354,6 +354,7 @@ class Valuacion extends Component
                     'predio_avaluo' => $this->predio->id,
                     'predio' => $this->predio_padron ? $this->predio_padron->id : null,
                     'estado' => 'nuevo',
+                    'oficina_id' => auth()->user()->oficina_id,
                     'creado_por' => auth()->id(),
                     'asignado_a' => auth()->id(),
                 ]);

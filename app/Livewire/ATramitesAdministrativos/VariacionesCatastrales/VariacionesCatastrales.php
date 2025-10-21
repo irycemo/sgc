@@ -365,6 +365,7 @@ class VariacionesCatastrales extends Component
             'usuario' => $valuador->clave,
             'folio' => (Avaluo::where('año', now()->format('Y'))->where('usuario', $valuador->clave)->max('folio') ?? 0) + 1,
             'creado_por' => auth()->id(),
+            'oficina_id' => $this->modelo_editar->oficina_id,
             'variacion_catastral_id' => $this->modelo_editar->id
         ]);
 

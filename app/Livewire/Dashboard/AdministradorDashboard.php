@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Traslado;
 use App\Models\Certificacion;
 use App\Models\PredioIgnorado;
+use App\Models\PredioTramite;
 use App\Models\VariacionCatastral;
 use Illuminate\Support\Facades\DB;
 
@@ -23,6 +24,9 @@ class AdministradorDashboard extends Component
     public function mount(){
 
         $certificaciones = Certificacion::select('estado', DB::raw('count(*) as total'))
+                                        ->when(auth()->user()->hasRole('Oficina rentistica'), function($q){
+                                            $q->where('oficina_id', auth()->user()->oficina_id);
+                                        })
                                         ->groupBy('estado')
                                         ->where('created_at', '>' , now()->startOfMonth()->toDateString())
                                         ->get();
@@ -34,8 +38,12 @@ class AdministradorDashboard extends Component
         }
 
 
-        $certificados = DB::table('predio_tramite')
-                            ->select('estado', DB::raw('count(*) as total'))
+        $certificados = PredioTramite::select('estado', DB::raw('count(*) as total'))
+                            ->when(auth()->user()->hasRole('Oficina rentistica'), function($q){
+                                $q->whereHas('tramite', function($q){
+                                    $q->where('oficina_id', auth()->user()->oficina_id);
+                                });
+                            })
                             ->groupBy('estado')
                             ->where('created_at', '>' , now()->startOfMonth()->toDateString())
                             ->get();
@@ -47,6 +55,9 @@ class AdministradorDashboard extends Component
         }
 
         $traslados = Traslado::select('estado', DB::raw('count(*) as total'))
+                                ->when(auth()->user()->hasRole('Oficina rentistica'), function($q){
+                                    $q->where('oficina_id', auth()->user()->oficina_id);
+                                })
                                 ->groupBy('estado')
                                 ->where('created_at', '>' , now()->startOfMonth()->toDateString())
                                 ->get();
@@ -58,6 +69,9 @@ class AdministradorDashboard extends Component
         }
 
         $avaluos = Avaluo::select('estado', DB::raw('count(*) as total'))
+                                ->when(auth()->user()->hasRole('Oficina rentistica'), function($q){
+                                    $q->where('oficina_id', auth()->user()->oficina_id);
+                                })
                                 ->groupBy('estado')
                                 ->where('created_at', '>' , now()->startOfMonth()->toDateString())
                                 ->get();
@@ -69,6 +83,9 @@ class AdministradorDashboard extends Component
         }
 
         $predios_ignorados = PredioIgnorado::select('estado', DB::raw('count(*) as total'))
+                                            ->when(auth()->user()->hasRole('Oficina rentistica'), function($q){
+                                                $q->where('oficina_id', auth()->user()->oficina_id);
+                                            })
                                             ->groupBy('estado')
                                             ->where('created_at', '>' , now()->startOfMonth()->toDateString())
                                             ->get();
@@ -80,6 +97,9 @@ class AdministradorDashboard extends Component
         }
 
         $variaciones_catastrales = VariacionCatastral::select('estado', DB::raw('count(*) as total'))
+                                            ->when(auth()->user()->hasRole('Oficina rentistica'), function($q){
+                                                $q->where('oficina_id', auth()->user()->oficina_id);
+                                            })
                                             ->groupBy('estado')
                                             ->where('created_at', '>' , now()->startOfMonth()->toDateString())
                                             ->get();

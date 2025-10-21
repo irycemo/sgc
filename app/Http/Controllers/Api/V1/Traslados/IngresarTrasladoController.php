@@ -46,6 +46,7 @@ class IngresarTrasladoController extends Controller
                                             'predio_id' => $validated['predio_id'],
                                             'tramite_aviso' => $validated['tramite_aviso'],
                                             'certificacion_id' => $validated['certificacion_id'],
+                                            'oficina_id' => $certificacion->oficina_id,
                                             'avaluo_spe' => $validated['avaluo_spe'],
                                             'aviso_stl' => $validated['aviso_stl'],
                                             'entidad_stl' => $validated['entidad_stl'],
@@ -111,6 +112,7 @@ class IngresarTrasladoController extends Controller
                                             'tramite_aviso' => $validated['tramite_aviso'],
                                             'aviso_stl' => $validated['aviso_stl'],
                                             'entidad_stl' => $validated['entidad_stl'],
+                                            'oficina_id' => $oficina->id,
                                             'entidad_nombre' => $validated['entidad_nombre'],
                                             'asignado_a' => (new AsignacionTrasladosService())->obtenerUsuariosTraslado($oficina->id, $validated['predio_id'])
                                         ]

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreignId('predio_id')->constrained();
             $table->foreignId('certificacion_id')->nullable()->constrained();
             $table->foreignId('tramite_aviso')->references('id')->on('tramites');
+            $table->foreignId('oficina_id')->nullable()->references('id')->on('oficinas');
             $table->foreignId('asignado_a')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

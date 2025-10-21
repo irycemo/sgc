@@ -32,6 +32,7 @@ return new class extends Migration
             $table->foreignId('tramite_inspeccion')->nullable()->references('id')->on('tramites');
             $table->foreignId('tramite_desglose')->nullable()->references('id')->on('tramites');
             $table->foreignId('asignado_a')->nullable()->references('id')->on('users');
+            $table->foreignId('oficina_id')->nullable()->references('id')->on('oficinas');
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->foreignId('notificado_por')->nullable()->references('id')->on('users');

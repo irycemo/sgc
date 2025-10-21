@@ -284,6 +284,7 @@ class AvaluoPredioIgnorado extends Component
                     'usuario' => auth()->user()->clave,
                     'predio_avaluo' => $this->predio->id,
                     'estado' => 'nuevo',
+                    'oficina_id' => auth()->user()->oficina_id,
                     'creado_por' => auth()->id(),
                     'asignado_a' => auth()->id()
                 ]);

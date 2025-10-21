@@ -20,15 +20,23 @@
 
     @elseif(auth()->user()->hasRole(['Oficina rentistica']))
 
+        @livewire('dashboard.administrador-dashboard', ['lazy' => true])
+
     @elseif(auth()->user()->hasRole(['Valuador predio ignorado', 'Valuador variación catastral', 'Valuador subdivisiones', 'Valuación']))
 
-    @elseif(auth()->user()->hasRole(['Fiscal']))
+        @livewire('dashboard.valuacion', ['lazy' => true])
 
-    @elseif(auth()->user()->hasRole(['Gestion catastral']))
+    @elseif(auth()->user()->hasRole(['Fiscal', 'Gestión Catastral']))
+
+        @livewire('dashboard.gestion-catastral', ['lazy' => true])
 
     @elseif(auth()->user()->hasRole(['Cartografía']))
 
+        @livewire('dashboard.cartografia', ['lazy' => true])
+
     @elseif(auth()->user()->hasRole(['A y T Administrativos']))
+
+        @livewire('dashboard.a-t-administrativos', ['lazy' => true])
 
     @endif
 

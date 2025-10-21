@@ -40,6 +40,7 @@ return new class extends Migration
             $table->foreignId('adiciona')->nullable()->references('id')->on('tramites');
             $table->foreignId('predio_avaluo')->nullable()->references('id')->on('predio_avaluos');
             $table->unsignedInteger('usuario_tramites_linea_id')->nullable()->index();
+            $table->foreignId('oficina_id')->nullable()->references('id')->on('oficinas');
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

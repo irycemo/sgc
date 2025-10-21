@@ -51,6 +51,16 @@ class Preguntas extends Component
 
     public function marcarComoLeido(){
 
+        $pregunta_leida = PreguntaLeida::where('user_id', auth()->id())->where('pregunta_id', $this->pregunta->id)->first();
+
+        if($pregunta_leida){
+
+            $this->dispatch('mostrarMensaje', ['success', "Ya ha sido marcada como leida."]);
+
+            return;
+
+        }
+
         PreguntaLeida::create(['user_id' => auth()->id(), 'pregunta_id' => $this->pregunta->id]);
 
         $this->dispatch('mostrarMensaje', ['success', "La información de guardó con éxito."]);
