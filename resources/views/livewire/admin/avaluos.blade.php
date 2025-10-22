@@ -285,7 +285,7 @@
                                     @can('Ver predio')
 
                                         <a
-                                            href="{{ route('ver_predio_avaluo', $avaluo->id) }}"
+                                            href="{{ route('ver_predio_avaluo', $avaluo->predio_avaluo) }}"
                                             class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                             role="menuitem">
                                             Ver

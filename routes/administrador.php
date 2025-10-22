@@ -55,7 +55,7 @@ Route::group([], function(){
     Route::get('certificaciones_admin', Certificaciones::class)->middleware('permission:Lista de certificaciones')->name('certificaciones');
 
     Route::get('avaluos_lista', Avaluos::class)->middleware('permission:Lista de avaluos')->name('avaluos_lista');
-    Route::get('avaluos/{predio}', AvaluosController::class)->middleware('permission:Ver predio avaluo')->name('ver_predio_avaluo');
+    Route::get('avaluo_ver/{predio}', AvaluosController::class)->middleware('permission:Ver predio avaluo')->name('ver_predio_avaluo');
 
     Route::get('oficinas', Oficinas::class)->middleware('permission:Lista de oficinas')->name('oficinas');
 
