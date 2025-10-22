@@ -183,7 +183,7 @@ class MisAvaluos extends Component
 
                     $predio->terrenos()->delete();
 
-                    $predio->bloques()->delete();
+                    $avaluo->bloques()->delete();
 
                     $avaluo->delete();
 
