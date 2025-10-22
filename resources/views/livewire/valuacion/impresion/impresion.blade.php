@@ -22,11 +22,11 @@
 
     </div>
 
-    @if(in_array($avaluo_para, [1,2,6,7,9]))
+    @if(in_array($avaluo_para, [1,2,6,7]))
 
         @livewire('valuacion.impresion.general', ['avaluo_para' => $avaluo_para])
 
-    @elseif(in_array($avaluo_para, [3,4,5]))
+    @elseif(in_array($avaluo_para, [3,4,5,9]))
 
         @livewire('valuacion.impresion.desglose', ['avaluo_para' => $avaluo_para])
 

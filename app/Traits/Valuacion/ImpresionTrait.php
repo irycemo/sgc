@@ -180,7 +180,7 @@ trait ImpresionTrait
 
     }
 
-    public function validarPredioPadre(){
+    public function validarPredio(){
 
         if(!$this->predio_padre){
 
@@ -199,6 +199,12 @@ trait ImpresionTrait
             throw new GeneralException('El predio padre no tiene superficie de terreno.');
 
         }
+
+    }
+
+    public function validarPredioPadre(){
+
+        $this->validarPredio();
 
         $superficie_terreno = 0;
 
@@ -245,7 +251,7 @@ trait ImpresionTrait
                                 })
                                 ->get();
 
-            if(in_array($this->avaluo_para, [3,4,5])){
+            if(in_array($this->avaluo_para, [3,4,5, 9])){
 
                 $this->predio_padre = Predio::where('localidad', $this->localidad)
                                         ->where('oficina', $this->oficina)
@@ -253,11 +259,27 @@ trait ImpresionTrait
                                         ->where('numero_registro', $this->registro_padre)
                                         ->first();
 
-                $this->validarPredioPadre();
+                if($this->avaluo_para === AvaluoPara::CAMBIO_REGIMEN->value){
 
-                $avaluo_predio_padre = Avaluo::with('predioAvaluo')->where('estado', '!=', 'notificado')->where('predio', $this->predio_padre->id)->get();
+                    $this->validarPredio();
 
-                $this->avaluos = $this->avaluos->merge($avaluo_predio_padre);
+                    $avaluo_predio_padre = Avaluo::with('predioAvaluo')->where('estado', '!=', 'notificado')->where('predio', $this->predio_padre->id)->get();
+
+                    if($avaluo_predio_padre){
+
+                        throw new GeneralException('El predio origen no debe tener avalúos nuevos deben ser borrados.');
+
+                    }
+
+                }else{
+
+                    $this->validarPredioPadre();
+
+                    $avaluo_predio_padre = Avaluo::with('predioAvaluo')->where('estado', '!=', 'notificado')->where('predio', $this->predio_padre->id)->get();
+
+                    $this->avaluos = $this->avaluos->merge($avaluo_predio_padre);
+
+                }
 
             }
 
