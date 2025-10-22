@@ -114,6 +114,8 @@ class Fusion extends Component
 
         $superficie_total = 0;
 
+        $this->tramite_inspeccion->predios()->detach();
+
         foreach ($this->predios_fusionantes as $predio) {
 
             if($predio->status != 'activo'){
@@ -131,8 +133,6 @@ class Fusion extends Component
                 $superficie_total = $superficie_total + $predio->superficie_total_terreno;
 
             }
-
-            $this->tramite_inspeccion->predios()->detach();
 
             $this->tramite_inspeccion->predios()->attach($predio->id);
 
