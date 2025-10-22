@@ -706,6 +706,7 @@ class Constantes{
         'DESGLOSE',
         'PREDIO IGNORADO',
         'ALTA POR OMISIÓN',
+        'CAMBIO DE REGIMEN',
         'CAMBIO POR LOCALIDAD',
         'ALTA POR RAN',
         'ALTA POR INSUS',
