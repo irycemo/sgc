@@ -41,7 +41,7 @@ class Fusion extends Component
 
         try {
 
-            $this->validaciones();
+            $this->validarTramites();
 
             $this->buscarPrediosFusionantes();
 
@@ -131,6 +131,8 @@ class Fusion extends Component
                 $superficie_total = $superficie_total + $predio->superficie_total_terreno;
 
             }
+
+            $this->tramite_inspeccion->predios()->each->delete();
 
             $this->tramite_inspeccion->predios()->attach($predio->id);
 
