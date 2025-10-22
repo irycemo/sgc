@@ -41,7 +41,7 @@ class Fusion extends Component
 
         try {
 
-            $this->validarTramites();
+            $this->validaciones();
 
             $this->buscarPrediosFusionantes();
 
