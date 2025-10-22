@@ -132,7 +132,7 @@ class Fusion extends Component
 
             }
 
-            $this->tramite_inspeccion->predios()->each->delete();
+            $this->tramite_inspeccion->predios()->delete();
 
             $this->tramite_inspeccion->predios()->attach($predio->id);
 
