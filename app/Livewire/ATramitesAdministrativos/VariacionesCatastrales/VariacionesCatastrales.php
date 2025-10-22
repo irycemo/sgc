@@ -629,6 +629,8 @@ class VariacionesCatastrales extends Component
             'revisión',
         ];
 
+        $this->filters['estado'] = request()->query('estado');
+
     }
 
     #[Computed]

@@ -48,7 +48,7 @@
 
                 @foreach ($variaciones_catastrales as $variacion)
 
-                    <a href="#" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($variacion['estado']) }}</a>
+                    <a href="#" class="text-left text-sm text-gray-600 ">{{ ucfirst($variacion['estado']) }}</a>
 
                     <span class="text-right text-sm text-gray-600">{{ $variacion['total'] }}</span>
 

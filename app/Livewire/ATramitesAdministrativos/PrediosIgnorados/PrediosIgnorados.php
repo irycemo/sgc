@@ -500,6 +500,8 @@ class PrediosIgnorados extends Component
             'asignar clave'
         ];
 
+        $this->filters['estado'] = request()->query('estado');
+
     }
 
     #[Computed]

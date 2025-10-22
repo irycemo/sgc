@@ -12,7 +12,7 @@
 
                 @foreach ($predios_ignorados as $predio)
 
-                    <a href="#" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($predio['estado']) }}</a>
+                    <a href="{{ route('predios_ignorados') .'?estado=' . $predio['estado'] }}" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($predio['estado']) }}</a>
 
                     <span class="text-right text-sm text-gray-600">{{ $predio['total'] }}</span>
 
@@ -30,7 +30,7 @@
 
                 @foreach ($variaciones_catastrales as $variacion)
 
-                    <a href="#" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($variacion['estado']) }}</a>
+                    <a href="{{ route('variaciones_catastrales') .'?estado=' . $variacion['estado'] }}" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($variacion['estado']) }}</a>
 
                     <span class="text-right text-sm text-gray-600">{{ $variacion['total'] }}</span>
 

@@ -244,6 +244,8 @@ class Avaluos extends Component
 
         $this->filters['año'] = now()->format('Y');
 
+        $this->filters['estado'] = request()->query('estado');
+
         $this->crearModeloVacio();
 
     }
