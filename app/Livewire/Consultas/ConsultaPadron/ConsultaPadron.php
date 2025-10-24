@@ -107,6 +107,12 @@ class ConsultaPadron extends Component
 
         $oficina = Oficina::where('oficina', $this->oficina)->first();
 
+        if(!$oficina){
+
+            $this->oficina = auth()->user()->oficina->oficina;
+
+        }
+
         $this->municipio = $oficina->municipio;
 
         $this->region_catastral = $oficina->region;

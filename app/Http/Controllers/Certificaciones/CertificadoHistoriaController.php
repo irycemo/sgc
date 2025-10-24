@@ -36,7 +36,7 @@ class CertificadoHistoriaController extends Controller
 
     }
 
-    public function certificado($tramite_anticipo, $tramite_historia, $predio, $historia){
+    public function certificado($tramite_historia, $tramite_anticipo, $predio, $historia){
 
         $datos_control = (object)[];
 

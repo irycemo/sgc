@@ -28,13 +28,13 @@ class Certificaciones extends Component
             'modelo_editar.monto' => 'required',
             'modelo_editar.tipo_servicio' => 'required',
             'modelo_editar.cantidad' => 'required|numeric',
-            'modelo_editar.ligado_a' => ['nullable', Rule::requiredIf(in_array($this->servicio['clave_ingreso'], ['D924', 'D925', 'D926', 'D927']))],
+            'modelo_editar.ligado_a' => ['nullable', Rule::requiredIf(in_array($this->servicio['clave_ingreso'], ['DM24', 'DM25', 'DM26', 'DM27']))],
             'modelo_editar.observaciones' => Rule::requiredIf($this->modelo_editar->tipo_tramite === "exento"),
             'modelo_editar.numero_oficio' => Rule::requiredIf(
                                                                 $this->modelo_editar->solicitante == 'Oficialia de partes' ||
                                                                 $this->modelo_editar->solicitante == 'Escrituración social'
                                                             ),
-            'predios' => ['nullable', Rule::requiredIf(in_array($this->servicio['clave_ingreso'], ['DM30', 'D934', 'DM34', 'DM31']))]
+            'predios' => ['nullable', Rule::requiredIf(in_array($this->servicio['clave_ingreso'], ['DM30', 'DM35', 'DM34', 'DM31']))]
         ];
 
     }
@@ -101,7 +101,14 @@ class Certificaciones extends Component
 
                 $tramite = (new TramiteService($this->modelo_editar))->crear($this->predios);
 
-                $this->tramiteAdicionado?->update(['ligado_a' => $tramite->id]);
+                /* Ligar predio del anticipo de historia */
+                if($this->modelo_editar->ligado_a){
+
+                    $this->tramiteAdicionado?->update(['ligado_a' => $tramite->id]);
+
+                    $tramite->predios()->attach($this->tramiteAdicionado->predios()->first()->id);
+
+                }
 
                 $this->js('window.open(\' '. route('tramites.orden', $tramite) . '\', \'_blank\');');
 

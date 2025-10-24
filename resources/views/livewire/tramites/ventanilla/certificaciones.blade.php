@@ -23,7 +23,7 @@
 
                     </div>
 
-                    @if(!in_array($servicio['clave_ingreso'], ['D924', 'D925', 'D926', 'D927', 'D923']))
+                    @if(!in_array($servicio['clave_ingreso'], ['DM24', 'DM25', 'DM26', 'DM27', 'DM23']))
 
                         @include('livewire.tramites.ventanilla.comun.predios')
 

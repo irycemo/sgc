@@ -271,7 +271,7 @@ trait ComunTrait
             'editar'
         ]);
 
-        if(in_array($this->servicio['clave_ingreso'], ['D924', 'D925', 'D926', 'D927'])){
+        if(in_array($this->servicio['clave_ingreso'], ['DM24', 'DM25', 'DM26', 'DM27'])){
 
             $this->flags['adiciona'] = true;
 

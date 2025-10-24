@@ -59,8 +59,6 @@ class ConsultarTramiteAvisoController extends Controller
 
     public function consultarTramiteAvisoAclaratorio(ConsultarTramiteRevisionAviso $request){
 
-        info("Entra");
-
         $validated = $request->validated();
 
         $tramite = Tramite::with('predios')

@@ -18,7 +18,7 @@ Route::group([], function(){
 
     Route::get('preguntas_frecuentes', Preguntas::class)->middleware('permission:Preguntas')->name('preguntas_frecuentes');
 
-    Route::get('nueva_pregunta', NuevaPregunta::class)->middleware('permission:Preguntas')->name('nueva_pregunta');
+    Route::get('nueva_pregunta/{pregunta?}', NuevaPregunta::class)->middleware('permission:Preguntas')->name('nueva_pregunta');
 
     Route::post('image-upload', [PreguntasController::class, 'storeImage'])->name('ckImage');
 
