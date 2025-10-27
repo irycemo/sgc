@@ -138,7 +138,11 @@ class CertificadoNegativo extends Component
 
     public function buscarPropietario(){
 
+        info("entra");
+
         $this->reset(['predioFlag', 'tramiteFlag', 'predio']);
+
+        info("entras");
 
         $this->validate([
             'nombre' => Rule::requiredIf($this->razon_social === null || $this->razon_social === ''),
@@ -172,8 +176,6 @@ class CertificadoNegativo extends Component
             $this->reset('predio');
 
         }
-
-        info("entra");
 
     }
 
