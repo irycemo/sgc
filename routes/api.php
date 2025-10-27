@@ -59,4 +59,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('registrar_pago_isai', [RegistrarPagoIsaiController::class, 'registrarPagoIsai']);
 
+    Route::post('consultar_estadisticas', [ConsultarTramitesController::class, 'consultarEstadisticas']);
+
 });

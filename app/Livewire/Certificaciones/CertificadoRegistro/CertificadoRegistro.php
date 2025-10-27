@@ -5,10 +5,11 @@ namespace App\Livewire\Certificaciones\CertificadoRegistro;
 use App\Models\Tramite;
 use Livewire\Component;
 use App\Constantes\Constantes;
-use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
 
 class CertificadoRegistro extends Component
 {
@@ -190,6 +191,12 @@ class CertificadoRegistro extends Component
             $this->reset('predio');
 
             $this->tramite->load('predios');
+
+            if($this->tramite->usuario == 11){
+
+                Cache::forget('estadisticas_tramites_en_linea_' . $this->tramite->usuario_tramites_linea_id);
+
+            }
 
             return response()->streamDownload(
                 fn () => print($pdf->output()),

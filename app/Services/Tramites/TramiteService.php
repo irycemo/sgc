@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Services\SAP\SapService;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
+use Illuminate\Support\Facades\Cache;
 
 class TramiteService{
 
@@ -174,6 +175,12 @@ class TramiteService{
                 'documento_de_pago' => $documento,
                 'fecha_entrega' => $this->calcularFechaEntrega()
             ]);
+
+            if($this->tramite->usuario == 11){
+
+                Cache::forget('estadisticas_tramites_en_linea_' . $this->tramite->usuario_tramites_linea_id);
+
+            }
 
         } catch (GeneralException $th) {
 

@@ -138,6 +138,26 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                 }
 
+                if(isset($row['terrenos_comun'])){
+
+                    $terrenos_comun[] = explode(':', $row['terrenos_comun']);
+
+                }
+
+            }
+
+            $aux = $terrenos_comun[0][0];
+
+            foreach($terrenos_comun as $terreno){
+
+                if($terreno[0] === '') continue;
+
+                if($terreno[0] != $aux){
+
+                    throw new GeneralException('Las áreas de los terrenos en común deben ser iguales.');
+
+                }
+
             }
 
         });
@@ -207,7 +227,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                         $terrenosComun = $this->procesarTerrenosComun($row['terrenos_comun'], $key);
 
-                        $this->validarTerrenosComun($row, $terrenosComun);
+                        /* $this->validarTerrenosComun($row, $terrenosComun); */
 
                         $sumValorTerenosComun = $terrenosComun->sum('valor_terreno_comun');
 
@@ -681,11 +701,15 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                                         ->where('predio', $row['predio'])
                                         ->get();
 
+                                        dd($prediosAvaluo);
+
         if($prediosAvaluo->count()){
 
             foreach($terrenosComun as $terrenoComun){
 
                 foreach ($prediosAvaluo as $predioAvaluo) {
+
+                    dd($predioAvaluo->terrenosComun()->where('area_terreno_comun', $terrenoComun['area_terreno_comun'])->first());
 
                     if(! $predioAvaluo->terrenosComun()->where('area_terreno_comun', $terrenoComun['area_terreno_comun'])->first()){
 

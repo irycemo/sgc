@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Api\V1\Tramites;
 
+use Carbon\Carbon;
 use App\Models\Tramite;
 use Illuminate\Http\Request;
+use App\Models\Certificacion;
+use App\Models\PredioTramite;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TramiteRequest;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Resources\TramiteResource;
 use App\Http\Requests\TramiteListaRequest;
 
@@ -73,6 +78,74 @@ class ConsultarTramitesController extends Controller
             ], 404);
 
         }
+
+    }
+
+    public function consultarEstadisticas(Request $request){
+
+        $validated = $request->validate(['entidad_id' => 'required|numeric|min:1']);
+
+        $array = cache()->get('estadisticas_tramites_en_linea_' . $validated['entidad_id']);
+
+        if(!$array){
+
+            $array = Cache::rememberForever('estadisticas_tramites_en_linea_' . $validated['entidad_id'], function() use ($validated){
+
+                $array = [];
+
+                $certificaciones = Certificacion::select('estado', DB::raw('count(*) as total'))
+                                                    ->whereHas('tramite', function($q) use($validated){
+                                                        $q->select('id', 'usuario_tramites_linea_id')
+                                                            ->where('usuario_tramites_linea_id', $validated['entidad_id']);
+                                                    })
+                                                    ->groupBy('estado')
+                                                    ->whereMonth('created_at', Carbon::now()->month)
+                                                    ->get();
+
+                foreach ($certificaciones as $certificacion) {
+
+                    $color = null;
+
+                    if($certificacion->estado == 'activo'){
+
+                        $color = 'green';
+
+                    }elseif($certificacion->estado == 'cancelado'){
+
+                        $color = 'red';
+
+                    }
+
+                    $array [] = ['estado' => $certificacion->estado, 'total' => $certificacion->total, 'color' => $color];
+
+                }
+
+                $certificados = PredioTramite::select('estado', DB::raw('count(*) as total'))
+                                                ->whereHas('tramite', function($q) use($validated){
+                                                    $q->select('id', 'usuario_tramites_linea_id', 'estado')
+                                                        ->where('usuario_tramites_linea_id', $validated['entidad_id'])
+                                                        ->where('estado', 'pagado');
+                                                })
+                                                ->where('estado', 'A')
+                                                ->groupBy('estado')
+                                                ->whereMonth('created_at', Carbon::now()->month)
+                                                ->get();
+
+                foreach ($certificados as $certificado) {
+
+                    $array [] = ['estado' => 'pendientes', 'total' => $certificado->total, 'color' => 'gray'];
+
+                }
+
+                return $array;
+
+            });
+
+        }
+
+        return response()->json([
+            'data' => $array
+        ], 200);
 
     }
 
