@@ -195,6 +195,14 @@ class VariacionesCatastrales extends Component
 
             DB::transaction(function () {
 
+                $avaluo = Avaluo::where('variacion_catastral_id', $this->selected_id)->first();
+
+                if($avaluo){
+
+                    throw new GeneralException('Existe un avalúo de variación catastral, no es posible eliminar.');
+
+                }
+
                 $variacion = VariacionCatastral::find($this->selected_id);
 
                 if($variacion->archivo !== null)

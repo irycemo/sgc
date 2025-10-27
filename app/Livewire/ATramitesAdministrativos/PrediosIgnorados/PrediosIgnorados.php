@@ -3,6 +3,7 @@
 namespace App\Livewire\ATramitesAdministrativos\PrediosIgnorados;
 
 use App\Models\User;
+use App\Models\Avaluo;
 use App\Models\Oficina;
 use App\Models\Tramite;
 use Livewire\Component;
