@@ -167,6 +167,8 @@ class CertificadoNegativo extends Component
 
             $this->predioFlag = true;
 
+            info($this->predio);
+
         }else{
 
             $this->tramiteFlag = true;
