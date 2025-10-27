@@ -173,6 +173,8 @@ class CertificadoNegativo extends Component
 
         }
 
+        info("entra");
+
     }
 
     public function generarCertificado(){
