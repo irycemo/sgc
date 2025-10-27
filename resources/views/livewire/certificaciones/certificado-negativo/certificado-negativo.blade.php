@@ -188,18 +188,6 @@
 
                 <div class="flex flex-col lg:flex-row gap-3 mb-5 bg-white rounded-lg p-2 shadow-lg justify-center lg:justify-between items-center">
 
-                    <div>
-
-                        {{-- <div class="flex space-x-4 items-center">
-
-                            <x-checkbox wire:model="impresionDirector"></x-checkbox>
-
-                            <Label>Imprimir certificado con firma del director de catastro</Label>
-
-                        </div> --}}
-
-                    </div>
-
                     <x-button-green
                         wire:click="generarCertificado"
                         wire:loading.attr="disabled"

@@ -42,7 +42,7 @@ class CertificadoNegativo extends Component
 
     public function updated($property, $value){
 
-        if(in_array($property, ['nombre', 'ap_paterno', 'ap_materno'])){
+        if(in_array($property, ['nombre', 'ap_paterno', 'ap_materno', 'predio', 'tramiteFlag', 'predioFlag'])){
 
             $this->razon_social = null;
 
@@ -50,7 +50,7 @@ class CertificadoNegativo extends Component
 
         if($property == 'razon_social'){
 
-            $this->reset(['nombre', 'ap_paterno', 'ap_materno']);
+            $this->reset(['nombre', 'ap_paterno', 'ap_materno', 'predio', 'tramiteFlag', 'predioFlag']);
 
         }
 
@@ -156,8 +156,8 @@ class CertificadoNegativo extends Component
         if($persona){
 
             $propietariosId = Propietario::select('propietarioable_id')
-                                        ->where('persona_id', $persona->id)
                                         ->where('propietarioable_type', 'App\Models\Predio')
+                                        ->where('persona_id', $persona->id)
                                         ->get()
                                         ->toArray();
 
