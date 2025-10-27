@@ -137,12 +137,7 @@ class CertificadoNegativo extends Component
     }
 
     public function buscarPropietario(){
-
-        info("entra");
-
         $this->reset(['predioFlag', 'tramiteFlag', 'predio']);
-
-        info("entras");
 
         $this->validate([
             'nombre' => Rule::requiredIf($this->razon_social === null || $this->razon_social === ''),
@@ -156,6 +151,8 @@ class CertificadoNegativo extends Component
                                 ->when($this->ap_materno && $this->ap_materno != '', fn($q) => $q->where('ap_materno', $this->ap_materno))
                                 ->when($this->razon_social && $this->razon_social != '', fn($q) => $q->where('razon_social', $this->razon_social))
                                 ->first();
+
+                                info('Entra', $persona);
 
         if($persona){
 
