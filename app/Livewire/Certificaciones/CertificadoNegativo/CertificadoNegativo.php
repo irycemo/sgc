@@ -152,8 +152,6 @@ class CertificadoNegativo extends Component
                                 ->when($this->razon_social && $this->razon_social != '', fn($q) => $q->where('razon_social', $this->razon_social))
                                 ->first();
 
-                                info('Entra', $persona);
-
         if($persona){
 
             $propietariosId = Propietario::select('propietarioable_id')
@@ -173,7 +171,7 @@ class CertificadoNegativo extends Component
             $this->reset('predio');
 
         }
-
+        info($persona);
     }
 
     public function generarCertificado(){
