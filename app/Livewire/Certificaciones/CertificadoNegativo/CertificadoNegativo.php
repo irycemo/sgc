@@ -157,12 +157,13 @@ class CertificadoNegativo extends Component
 
         if($persona){
 
-            info("entra");
             $propietariosId = Propietario::select('propietarioable_id')
                                         ->where('propietarioable_type', 'App\Models\Predio')
                                         ->where('persona_id', $persona->id)
                                         ->get()
                                         ->toArray();
+
+            dd($propietariosId);
 
             $this->predio = Predio::whereKey($propietariosId)->where('status', 'activo')->first();
 
