@@ -184,6 +184,14 @@ class PrediosIgnorados extends Component
 
             DB::transaction(function () {
 
+                $avaluo = Avaluo::where('predio_ignorado_id', $this->selected_id)->first();
+
+                if($avaluo){
+
+                    throw new GeneralException('Existe un avalúo de predio ignorado, no es posible eliminar.');
+
+                }
+
                 $predioIgnorado = PredioIgnorado::find($this->selected_id);
 
                 if($predioIgnorado->archivo !== null)
@@ -196,6 +204,10 @@ class PrediosIgnorados extends Component
                 $this->dispatch('mostrarMensaje', ['success', "El predio ignorado se eliminó con exito."]);
 
             });
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['error', $ex->getMessage()]);
 
         } catch (\Throwable $th) {
 
