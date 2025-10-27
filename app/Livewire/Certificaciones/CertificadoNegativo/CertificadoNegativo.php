@@ -42,7 +42,9 @@ class CertificadoNegativo extends Component
 
     public function updated($property, $value){
 
-        if(in_array($property, ['nombre', 'ap_paterno', 'ap_materno', 'predio', 'tramiteFlag', 'predioFlag'])){
+        $this->reset(['predio', 'tramiteFlag', 'predioFlag']);
+
+        if(in_array($property, ['nombre', 'ap_paterno', 'ap_materno'])){
 
             $this->razon_social = null;
 
@@ -50,7 +52,7 @@ class CertificadoNegativo extends Component
 
         if($property == 'razon_social'){
 
-            $this->reset(['nombre', 'ap_paterno', 'ap_materno', 'predio', 'tramiteFlag', 'predioFlag']);
+            $this->reset(['nombre', 'ap_paterno', 'ap_materno']);
 
         }
 
@@ -137,6 +139,7 @@ class CertificadoNegativo extends Component
     }
 
     public function buscarPropietario(){
+
         $this->reset(['predioFlag', 'tramiteFlag', 'predio']);
 
         $this->validate([
@@ -171,7 +174,7 @@ class CertificadoNegativo extends Component
             $this->reset('predio');
 
         }
-        info($persona);
+
     }
 
     public function generarCertificado(){
