@@ -93,7 +93,7 @@ class MisAvaluos extends Component
 
                 $notificacionDeValorCatastral->audits()->latest()->first()->update(['tags' => 'Canceló para corrección de avalúo']);
 
-                $avaluos = Avaluo::where('tramite_inspeccion', $tramiteInspeccion->id)->get();
+                $avaluos = Avaluo::where('tramite_inspeccion', $tramiteInspeccion->id)->where('estado', '!=', 'notificado')->get();
 
                 foreach ($avaluos as $avaluo) {
 
@@ -114,9 +114,10 @@ class MisAvaluos extends Component
 
                 }
 
-                $tramiteInspeccion->decrement('usados', $avaluos->count());
+                $cantidad = ($tramiteInspeccion->usados - $avaluos->count()) < 0 ? 0 : ($tramiteInspeccion->usados - $avaluos->count());
 
                 $tramiteInspeccion->update([
+                    'usados' => $cantidad,
                     'estado' => 'pagado'
                 ]);
 
@@ -124,9 +125,10 @@ class MisAvaluos extends Component
 
                 if($tramiteDesglose){
 
-                    $tramiteDesglose->decrement('usados', $avaluos->count());
+                    $cantidad = ($tramiteInspeccion->usados - $avaluos->count()) < 0 ? 0 : ($tramiteInspeccion->usados - $avaluos->count());
 
                     $tramiteDesglose->update([
+                        'usados' => $cantidad,
                         'estado' => 'pagado'
                     ]);
 

@@ -106,7 +106,7 @@
 
         <div class="bg-white p-4 rounded-lg mb-5 shadow-lg text-sm my-3">
 
-            @if($tramite->predios()->count() > 0)
+            @if(in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM35', 'DM27', 'DM26', 'DM25', 'DM24', 'DM30', 'DM31', 'DM34', 'DM31']))
 
                 <div class="overflow-auto">
 
