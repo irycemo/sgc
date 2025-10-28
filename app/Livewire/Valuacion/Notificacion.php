@@ -362,8 +362,6 @@ class Notificacion extends Component
             'ubicacion_en_manzana' => $this->avaluo->predioAvaluo->ubicacion_en_manzana,
             'superficie_terreno' => $this->avaluo->predioAvaluo->superficie_terreno,
             'superficie_construccion' => $this->avaluo->predioAvaluo->superficie_construccion,
-            'superficie_judicial' => $this->avaluo->predioAvaluo->superficie_judicial,
-            'superficie_notarial' => $this->avaluo->predioAvaluo->superficie_notarial,
             'area_comun_terreno' => $this->avaluo->predioAvaluo->area_comun_terreno,
             'area_comun_construccion' => $this->avaluo->predioAvaluo->area_comun_construccion,
             'valor_terreno_comun' => $this->avaluo->predioAvaluo->valor_terreno_comun,

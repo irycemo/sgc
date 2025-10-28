@@ -297,16 +297,6 @@ trait ImpresionTrait
 
             if(!auth()->user()->hasRole(['Convenio municipal'])){
 
-                if($this->avaluo_para !== AvaluoPara::FUSION->value){
-
-                    if(($this->numero_avaluos + $this->tramite_inspeccion->usados) > $this->tramite_inspeccion->cantidad){
-
-                        throw new GeneralException('La cantidad de avalúos que avala el trámite de inspección ocular no es suficiente.');
-
-                    }
-
-                }
-
                 if(in_array($this->avaluo_para, [3, 4, 5])){
 
                     $this->numero_avaluos --;
@@ -314,6 +304,16 @@ trait ImpresionTrait
                     if(($this->numero_avaluos + $this->tramite_desglose->usados) > $this->tramite_desglose->cantidad){
 
                         throw new GeneralException('La cantidad de avalúos que avala el trámite de desglose ocular no es suficiente.');
+
+                    }
+
+                }
+
+                if($this->avaluo_para !== AvaluoPara::FUSION->value){
+
+                    if(($this->numero_avaluos + $this->tramite_inspeccion->usados) > $this->tramite_inspeccion->cantidad){
+
+                        throw new GeneralException('La cantidad de avalúos que avala el trámite de inspección ocular no es suficiente.');
 
                     }
 
@@ -390,23 +390,12 @@ trait ImpresionTrait
 
         }
 
-        /* Desgloses */
-        if(in_array($this->avaluo_para, [3,4,5])){
-
-            if($this->tramite_desglose->estado == 'concluido'){
-
-                $this->numero_avaluos ++;
-
-            }
-
-        }
-
         $this->tramite_inspeccion->update([
             'usados' => $this->numero_avaluos + $this->tramite_inspeccion->usados,
             'ligado_a' => $this->tramite_desglose?->id
         ]);
 
-        if($this->tramite_inspeccion->cantidad == $this->tramite_inspeccion->usados){
+        if($this->tramite_inspeccion->cantidad >= $this->tramite_inspeccion->usados){
 
             $this->tramite_inspeccion->update(['estado' => 'concluido']);
 

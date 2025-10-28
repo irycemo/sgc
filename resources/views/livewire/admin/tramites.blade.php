@@ -769,11 +769,11 @@
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
 
-                            <p>Adiciona a:</p>
+                            <strong>Adiciona a:</strong>
 
                             <div class="flex space-x-2 flex-row">
 
-                                <p><strong>NC:</strong>{{ $modelo_editar->ligadoA->folio }}</p>
+                                <p>{{ $modelo_editar->ligadoA->año }}-{{ $modelo_editar->ligadoA->folio }}-{{ $modelo_editar->ligadoA->usuario }}</p>
 
                             </div>
 

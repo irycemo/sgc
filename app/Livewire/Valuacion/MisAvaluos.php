@@ -65,14 +65,13 @@ class MisAvaluos extends Component
 
     public function corregir(){
 
-        if(in_array($this->modelo_editar->estado, ['notificado', 'concluido'])){
+        if($this->modelo_editar->estado === 'notificado'){
 
-            $this->dispatch('mostrarMensaje', ['warning', "El avalúo: " . $this->modelo_editar->año . '-' . $this->modelo_editar->folio . '-' . $this->modelo_editar->usuario . ' no se puede eliminar.']);
+            $this->dispatch('mostrarMensaje', ['warning', "El avalúo: " . $this->modelo_editar->año . '-' . $this->modelo_editar->folio . '-' . $this->modelo_editar->usuario . ' esta notificado no se puede corregir.']);
 
             return;
 
         }
-
 
         try {
 
@@ -80,11 +79,11 @@ class MisAvaluos extends Component
 
             DB::transaction(function () {
 
-            $tramiteInspeccion = $this->modelo_editar->tramiteInspeccion;
+                $tramiteInspeccion = $this->modelo_editar->tramiteInspeccion;
 
-            $tramiteDesglose = $this->modelo_editar->tramiteDesglose;
+                $tramiteDesglose = $this->modelo_editar->tramiteDesglose;
 
-            $notificacionDeValorCatastral = Certificacion::where('tramite_id', $tramiteInspeccion->id)->first();
+                $notificacionDeValorCatastral = Certificacion::where('tramite_id', $tramiteInspeccion->id)->first();
 
                 $notificacionDeValorCatastral->update([
                     'estado' => 'cancelado',
@@ -115,8 +114,9 @@ class MisAvaluos extends Component
 
                 }
 
+                $tramiteInspeccion->decrement('usados', $avaluos->count());
+
                 $tramiteInspeccion->update([
-                    'usados' => 0,
                     'estado' => 'pagado'
                 ]);
 
@@ -124,8 +124,9 @@ class MisAvaluos extends Component
 
                 if($tramiteDesglose){
 
+                    $tramiteDesglose->decrement('usados', $avaluos->count());
+
                     $tramiteDesglose->update([
-                        'usados' => 0,
                         'estado' => 'pagado'
                     ]);
 
@@ -159,7 +160,7 @@ class MisAvaluos extends Component
 
             foreach ($avaluos as $avaluo) {
 
-                if(in_array($avaluo->estado, ['impreso', 'notificado', 'concluido'])){
+                if($avaluo->estado !== 'nuevo'){
 
                     $this->dispatch('mostrarMensaje', ['warning', "El avalúo: " . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' no se puede eliminar.']);
 
