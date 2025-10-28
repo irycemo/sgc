@@ -94,7 +94,7 @@ class ReactivarTramite extends Component
 
                 if($certificacion){
 
-                    $traslado = Traslado::where('certificacion_id', $certificacion->id)->where('estado', '!=', 'operado')->first();
+                    $traslado = Traslado::where('certificacion_id', $certificacion->id)->where('estado', 'operado')->first();
 
                     if($traslado){
 
