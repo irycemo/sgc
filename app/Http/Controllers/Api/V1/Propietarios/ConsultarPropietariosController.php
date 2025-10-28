@@ -39,7 +39,7 @@ class ConsultarPropietariosController extends Controller
 
         }
 
-        $predio = $tramite->predios()->wherePivot('predio_id', $validated['predio'])->first();
+        $predio = $tramite->predios()->wherePivot('predio_id', $validated['predio'])->wherePivot('estado', 'I')->first();
 
         if(!$predio){
 
@@ -57,7 +57,15 @@ class ConsultarPropietariosController extends Controller
 
         }
 
-        $certificacion = Certificacion::where('tramite_id', $tramite->id)->where('predio_id', $predio->id)->first();
+        $certificacion = Certificacion::where('tramite_id', $tramite->id)->where('predio_id', $predio->id)->where('estado', 'activo')->first();
+
+        if(!$certificacion){
+
+            return response()->json([
+                'error' => "No se encontro el certificado.",
+            ], 401);
+
+        }
 
         $data = json_decode($certificacion->cadena_original, true);
 
