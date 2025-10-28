@@ -85,11 +85,23 @@ class PredioIgnorado extends Component
             return;
         }
 
-        $this->modelo_editar->monto = (float)$this->servicio['porcentaje'] / 100 * $this->predio_avaluo->valor_catastral;
+        if($this->predio_avaluo->valor_catastral < 500000){
+
+            $this->modelo_editar->monto = 1 / 100 * $this->predio_avaluo->valor_catastral;
+
+        }elseif($this->predio_avaluo->valor_catastral > 500000 && $this->predio_avaluo->valor_catastral < 1000000){
+
+            $this->modelo_editar->monto = 2 / 100 * $this->predio_avaluo->valor_catastral;
+
+        }elseif($this->predio_avaluo->valor_catastral > 1000000){
+
+            $this->modelo_editar->monto = 3 / 100 * $this->predio_avaluo->valor_catastral;
+
+        }
 
         $this->modelo_editar->predio_avaluo = $this->predio_avaluo->id;
 
-        $this->dispatch('mostrarMensaje', ['success', 'Se cargo correctamente el 2% del valor del predio.']);
+        $this->dispatch('mostrarMensaje', ['success', 'Se cargo correctamente porcentaje del valor del predio.']);
 
     }
 

@@ -32,36 +32,6 @@
 
                 </div>
 
-                @if (in_array($avaluo_para, [3,4,5,6,9,10]))
-
-                    <div class="flex-auto  text-center">
-
-                        <div >
-
-                            <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite de desglose</Label>
-
-                        </div>
-
-                        <div class="inline-flex">
-
-                            <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="desglose_año">
-                                @foreach ($años as $año)
-
-                                    <option value="{{ $año }}">{{ $año }}</option>
-
-                                @endforeach
-                            </select>
-
-                            <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('desglose_folio') border-red-500 @enderror" wire:model="desglose_folio">
-
-                            <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('desglose_usuario') border-red-500 @enderror" wire:model="desglose_usuario">
-
-                        </div>
-
-                    </div>
-
-                @endif
-
             </div>
 
         </div>
@@ -70,7 +40,7 @@
 
     <div class="p-4 flex-auto bg-white rounded-lg mb-3 shadow-md space-y-3">
 
-        <h4 class="text-lg mb-5 text-center">Cuentas prediales</h4>
+        <h4 class="text-lg mb-5 text-center">Cuenta predial</h4>
 
         <div class="flex flex-wrap space-x-1 justify-center items-center">
 
@@ -80,9 +50,7 @@
 
             <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo') border-1 border-red-500 @enderror" wire:model="tipo">
 
-            <input title="Registro inicial" placeholder="Registro inicial" type="number" class="bg-white rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model.live="registro_inicio">
-            <p class="text-sm mb-0">a</p>
-            <input title="Registro final" placeholder="Registro final" type="number" class="bg-white rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model="registro_final">
+            <input title="Número de registro" placeholder="Número de registro" type="number" class="bg-white rounded text-xs @error('numero_registro') border-1 border-red-500 @enderror" wire:model.live="numero_registro">
 
         </div>
 

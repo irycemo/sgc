@@ -216,6 +216,10 @@ class VariacionesCatastrales extends Component
 
             });
 
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
         } catch (\Throwable $th) {
 
             Log::error("Error al borrar variación catastral por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);

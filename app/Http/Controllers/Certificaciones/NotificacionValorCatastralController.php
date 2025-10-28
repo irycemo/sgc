@@ -57,12 +57,11 @@ class NotificacionValorCatastralController extends Controller
 
     }
 
-    public function general($avaluos, $tramite_inspeccion, $tramite_desglose){
+    public function general($avaluos, $tramite_inspeccion){
 
         $datos_control = (object)[];
 
         $datos_control->tramite_inspeccion = $tramite_inspeccion?->año . '-' . $tramite_inspeccion?->folio . '-' . $tramite_inspeccion?->usuario;
-        $datos_control->tramite_desglose = $tramite_desglose?->año . '-' . $tramite_desglose?->folio . '-' . $tramite_desglose?->usuario;
         $datos_control->jefe_departamento = $this->jefe_departamento_valuacion->name;
         $datos_control->director = $this->director->name;
         $datos_control->impreso_por = auth()->user()->name;

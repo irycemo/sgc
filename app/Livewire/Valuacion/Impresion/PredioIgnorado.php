@@ -12,21 +12,26 @@ use App\Exceptions\GeneralException;
 use App\Traits\Valuacion\ImpresionTrait;
 use App\Http\Controllers\Certificaciones\NotificacionValorCatastralController;
 
-class General extends Component
+class PredioIgnorado extends Component
 {
 
     use ImpresionTrait;
+
+    public $localidad;
+    public $oficina;
+    public $tipo;
+    public $registro;
+    public $predio;
 
     protected function rules(){
         return [
             'inspeccion_año' => Rule::requiredIf(!auth()->user()->hasRole(['Convenio municipal'])),
             'inspeccion_folio' => Rule::requiredIf(!auth()->user()->hasRole(['Convenio municipal'])),
             'inspeccion_usuario' => Rule::requiredIf(!auth()->user()->hasRole(['Convenio municipal'])),
-            'localidad' => 'required',
-            'tipo' => Rule::requiredIf($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO->value),
-            'registro_inicio' => ['nullable', Rule::requiredIf($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO->value), Rule::when('registro_final' != null, 'lte:registro_final')],
-            'registro_final' => ['nullable', Rule::requiredIf($this->avaluo_para != AvaluoPara::PREDIO_IGNORADO->value), Rule::when('registro_inicio' != null, 'gte:registro_inicio')],
-            'numero_registro' => Rule::requiredIf($this->avaluo_para === AvaluoPara::PREDIO_IGNORADO->value)
+            'localidad' => 'required|numeric',
+            'oficina' => 'required|numeric',
+            'tipo' => 'required|numeric',
+            'numero_registro' => 'required|numeric',
          ];
     }
 
@@ -45,17 +50,10 @@ class General extends Component
                 foreach ($this->avaluos as $avaluo) {
 
                     $avaluo->update([
-                        'tramite_inspeccion' => $this->tramite_inspeccion?->id,
-                        'tramite_desglose' => $this->tramite_desglose?->id,
+                        'tramite_inspeccion' => $this->tramite_inspeccion->id,
                         'actualizado_por' => auth()->id(),
                         'estado' => 'impreso'
                     ]);
-
-                    if($this->tramite_inspeccion->avaluo_para === AvaluoPara::CAMBIO_REGIMEN){
-
-                        $this->tramite_inspeccion->predios()->attach($this->avaluos->first()->predio);
-
-                    }
 
                     $avaluo->predioAvaluo->update(['status' => 'impreso']);
 
@@ -98,16 +96,16 @@ class General extends Component
 
         $this->años = Constantes::AÑOS;
 
-        $this->lista_avaluo_para = AvaluoPara::cases();
+        $this->inspeccion_año  = now()->format('Y');
 
         $this->desglose_año = now()->format('Y');
 
-        $this->inspeccion_año = now()->format('Y');
+        $this->lista_avaluo_para = AvaluoPara::cases();
 
     }
 
     public function render()
     {
-        return view('livewire.valuacion.impresion.general');
+        return view('livewire.valuacion.impresion.predio-ignorado');
     }
 }

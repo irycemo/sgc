@@ -22,7 +22,7 @@
 
     </div>
 
-    @if(in_array($avaluo_para, [1,2,6,7]))
+    @if(in_array($avaluo_para, [1,2,7]))
 
         @livewire('valuacion.impresion.general', ['avaluo_para' => $avaluo_para])
 
@@ -37,6 +37,10 @@
     @elseif(in_array($avaluo_para, [9]))
 
         @livewire('valuacion.impresion.cambio-regimen', ['avaluo_para' => $avaluo_para])
+
+    @elseif(in_array($avaluo_para, [6]))
+
+        @livewire('valuacion.impresion.predio-ignorado', ['avaluo_para' => $avaluo_para])
 
     @endif
 

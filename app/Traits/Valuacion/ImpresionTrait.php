@@ -153,7 +153,8 @@ trait ImpresionTrait
 
         if($this->tramite_inspeccion->avaluo_para->value != $this->avaluo_para) throw new GeneralException('El trámite de inspección ocular no corresponde a un avalúo para ' . $this->lista_avaluo_para[$this->avaluo_para - 1]->label());
 
-        if(in_array($this->avaluo_para, [3, 4, 5 , 6, 9])){
+        /* Desgloses */
+        if(in_array($this->avaluo_para, [3, 4, 5, 9])){
 
             $this->tramite_desglose = Tramite::where('año', $this->desglose_año)
                                             ->where('folio', $this->desglose_folio)
@@ -249,7 +250,7 @@ trait ImpresionTrait
                                 ->where('estado', '!=', 'notificado')
                                 ->get();
 
-            if(in_array($this->avaluo_para, [3,4,5, 9])){
+            if(in_array($this->avaluo_para, [3, 4, 5, 9])){
 
                 $this->predio_padre = Predio::where('localidad', $this->localidad)
                                         ->where('oficina', $this->oficina)
@@ -323,17 +324,17 @@ trait ImpresionTrait
         }else{
 
              $this->avaluos = Avaluo::where('estado', '!=', 'notificado')
-                                                        ->withWhereHas('predioAvaluo', function($q){
-                                                            $q->where('localidad', $this->localidad)
-                                                                ->where('oficina', $this->oficina)
-                                                                ->where('tipo_predio', $this->tipo)
-                                                                ->where('numero_registro', $this->numero_registro);
-                                                        })
-                                                        ->get();
+                                    ->withWhereHas('predioAvaluo', function($q){
+                                        $q->where('localidad', $this->localidad)
+                                            ->where('oficina', $this->oficina)
+                                            ->where('tipo_predio', $this->tipo)
+                                            ->where('numero_registro', $this->numero_registro);
+                                    })
+                                    ->get();
 
             $this->avaluo_predio_ignorado = $this->avaluos->first();
 
-            if(!$this->avaluo_predio_ignorado) throw new GeneralException('No se encontró el avalúo para la clave catastral.');
+            if(!$this->avaluo_predio_ignorado) throw new GeneralException('No se encontró el avalúo para la cuenta predial.');
 
             if($this->avaluo_predio_ignorado->asignado_a != auth()->id()) throw new GeneralException('El avalúo: ' . $this->avaluo_predio_ignorado->año . '-' . $this->avaluo_predio_ignorado->folio . '-' . $this->avaluo_predio_ignorado->usuario . ' esta asignado a otro valuador.');
 
