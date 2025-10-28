@@ -252,7 +252,7 @@
 
                             <tr class="text-gray-500 text-sm leading-relaxed">
                                 <td class=" px-2 w-full">{{ $propietario['persona']['nombre'] }} {{ $propietario['persona']['ap_paterno'] }} {{ $propietario['persona']['ap_materno'] }} {{ $propietario['persona']['razon_social'] }}</td>
-                                <td class=" px-2 w-min">{{ $propietario['porcentaje'] ?? '0' }}</td>
+                                <td class=" px-2 w-min">{{ $propietario['porcentaje_propiedad'] ?? '0' }}</td>
                                 <td class=" px-2 w-min">{{ $propietario['porcentaje_nuda'] ?? '0' }}</td>
                                 <td class=" px-2 w-min">{{ $propietario['porcentaje_usufructo'] ?? '0' }}</td>
                             </tr>

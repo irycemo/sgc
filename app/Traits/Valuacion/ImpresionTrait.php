@@ -395,7 +395,7 @@ trait ImpresionTrait
             'ligado_a' => $this->tramite_desglose?->id
         ]);
 
-        if($this->tramite_inspeccion->cantidad >= $this->tramite_inspeccion->usados){
+        if($this->tramite_inspeccion->usados >= $this->tramite_inspeccion->cantidad){
 
             $this->tramite_inspeccion->update(['estado' => 'concluido']);
 

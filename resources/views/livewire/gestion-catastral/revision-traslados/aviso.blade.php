@@ -260,7 +260,7 @@
 
                             <tr class="text-gray-500 text-sm leading-relaxed">
                                 <td class=" px-2 w-full">{{ $transmitente['persona']['nombre'] }} {{ $transmitente['persona']['ap_paterno'] }} {{ $transmitente['persona']['ap_materno'] }} {{ $transmitente['persona']['razon_social'] }}</td>
-                                <td class=" px-2 w-min">{{ $transmitente['porcentaje'] ?? '0' }}</td>
+                                <td class=" px-2 w-min">{{ $transmitente['porcentaje_propiedad'] ?? '0' }}</td>
                                 <td class=" px-2 w-min">{{ $transmitente['porcentaje_nuda'] ?? '0' }}</td>
                                 <td class=" px-2 w-min">{{ $transmitente['porcentaje_usufructo'] ?? '0' }}</td>
                             </tr>

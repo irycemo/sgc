@@ -61,6 +61,7 @@ class Valor extends Component
         'construcciones.*.niveles' => 'niveles',
         'construcciones.*.superficie' => 'superficie',
         'construccionesComun.*.area_comun_construccion' => 'área común de construcción',
+        'construccionesComun.*.superficie_proporcional' => 'superficie proporcional',
         'construccionesComun.*.indiviso_construccion' => 'indiviso de construcción',
         'terrenosComun.*.area_terreno_comun' => 'área de terreno común',
         'terrenosComun.*.indiviso_terreno' => 'indiviso de terreno',
