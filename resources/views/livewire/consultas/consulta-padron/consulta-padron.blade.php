@@ -229,6 +229,12 @@
 
             </div>
 
+        @elseif($radio === 'ubicacion')
+
+            <div class="mb-5 bg-white rounded-lg p-4 shadow-lg" id="ubicacion-div">
+                UBICACION
+            </div>
+
         @endif
 
     </div>
@@ -282,7 +288,7 @@
 
                                 <x-table.cell>
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Cuenta predial</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Cuenta predial</span>
 
                                     <span class="whitespace-nowrap">{{ $item->cuentaPredial() }}</span>
 
@@ -290,39 +296,39 @@
 
                                 <x-table.cell>
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Clave catastral</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Clave catastral</span>
 
-                                    <span class="whitespace-nowrap">{{ $item->claveCatastral() }}</span>
-
-                                </x-table.cell>
-
-                                <x-table.cell>
-
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Propietario</span>
-
-                                    {{ $item->primerPropietario() }}
+                                    <p class="mt-2"><span class="whitespace-nowrap">{{ $item->claveCatastral() }}</span></p>
 
                                 </x-table.cell>
 
                                 <x-table.cell>
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Asentamiento</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Propietario</span>
 
-                                    {{ $item->tipo_asentamiento . ', ' . $item->nombre_asentamiento }}
-
-                                </x-table.cell>
-
-                                <x-table.cell>
-
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Vialidad</span>
-
-                                    {{ $item->tipo_vialidad . ', ' . $item->nombre_vialidad }}
+                                    <p class="mt-2">{{ $item->primerPropietario() }}</p>
 
                                 </x-table.cell>
 
                                 <x-table.cell>
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl"># Exterior / # Interior</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Asentamiento</span>
+
+                                    <p class="mt-2">{{ $item->tipo_asentamiento . ', ' . $item->nombre_asentamiento }}</p>
+
+                                </x-table.cell>
+
+                                <x-table.cell>
+
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Vialidad</span>
+
+                                    <p class="mt-2">{{ $item->tipo_vialidad . ', ' . $item->nombre_vialidad }}</p>
+
+                                </x-table.cell>
+
+                                <x-table.cell>
+
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl"># Exterior / # Interior</span>
 
                                     {{ $item->numero_exterior . ', ' , $item->numero_interior }}
 
@@ -388,7 +394,7 @@
 
             <div wire:loading.class.delaylongest="opacity-50">
 
-                <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Datos generales</h4>
+                <x-h4>Datos generales</x-h4>
 
                 <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600">
 
@@ -536,7 +542,7 @@
 
                 </div>
 
-                <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Ubicación del predio</h4>
+                <x-h4>Ubicación del predio</x-h4>
 
                 <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600">
 
@@ -726,11 +732,11 @@
 
                 </div>
 
-                <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Colindancias ({{ $this->predio->colindancias->count() }})</h4>
+                <x-h4>Colindancias ({{ $this->predio->colindancias->count() }})</x-h4>
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                    <table class="w-full overflow-x-auto table-fixed">
+                    <table class="w-full">
 
                         <thead class="border-b border-gray-300 ">
 
@@ -762,11 +768,11 @@
 
                 </div>
 
-                <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terrenos ({{ $this->predio->terrenos->count() }})</h4>
+                <x-h4>Terrenos ({{ $this->predio->terrenos->count() }})</x-h4>
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                    <table class="w-full overflow-x-auto table-fixed">
+                    <table class="w-full">
 
                         <thead class="border-b border-gray-300 ">
 
@@ -802,11 +808,11 @@
 
                 </div>
 
-                <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Construcciones ({{ $this->predio->construcciones->count() }})</h4>
+                <x-h4>Construcciones ({{ $this->predio->construcciones->count() }})</x-h4>
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                    <table class="w-full overflow-x-auto table-fixed">
+                    <table class="w-full">
 
                         <thead class="border-b border-gray-300 ">
 
@@ -846,11 +852,11 @@
 
                 @if($this->predio->terrenosComun->count())
 
-                    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Terrenos de área común ({{ $this->predio->terrenosComun->count() }})</h4>
+                    <x-h4>Terrenos de área común ({{ $this->predio->terrenosComun->count() }})</x-h4>
 
-                    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+                    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                        <table class="w-full overflow-x-auto table-fixed">
+                        <table class="w-full">
 
                             <thead class="border-b border-gray-300 ">
 
@@ -890,11 +896,11 @@
 
                 @if($this->predio->construccionesComun->count())
 
-                    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Construcciones de área común ({{ $this->predio->construccionesComun->count() }})</h4>
+                    <x-h4>Construcciones de área común ({{ $this->predio->construccionesComun->count() }})</x-h4>
 
-                    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+                    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                        <table class="w-full overflow-x-auto table-fixed">
+                        <table class="w-full">
 
                             <thead class="border-b border-gray-300 ">
 
@@ -932,11 +938,11 @@
 
                 @endif
 
-                <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Propietarios ({{ $this->predio->propietarios->count() }})</h4>
+                <x-h4>Propietarios ({{ $this->predio->propietarios->count() }})</x-h4>
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                    <table class="w-full overflow-x-auto table-fixed">
+                    <table class="w-full">
 
                         <thead class="border-b border-gray-300 ">
 
@@ -972,11 +978,11 @@
 
                 </div>
 
-                <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Movimientos ({{ $this->predio->movimientos->count() }})</h4>
+                <x-h4>Movimientos ({{ $this->predio->movimientos->count() }})</x-h4>
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                    <table class="w-full overflow-x-auto table-fixed">
+                    <table class="w-full">
 
                         <thead class="border-b border-gray-300 ">
 
@@ -1008,7 +1014,7 @@
 
                 </div>
 
-                <div class="grid grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
                     <div>
 

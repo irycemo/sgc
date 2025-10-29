@@ -1,31 +1,27 @@
 <div class="">
 
-    <div class="mb-6">
+    <div class="mb-2 lg:mb-5">
 
         <x-header>Valores unitarios de construcción</x-header>
 
-        <div class="flex justify-between">
+        <div class="flex gap-3 overflow-auto p-1">
 
-            <div>
+            <input type="text" wire:model.live.debounce.500ms="tipo" placeholder="Tipo" class="bg-white rounded-full text-sm">
 
-                <input type="text" wire:model.live.debounce.500ms="tipo" placeholder="Tipo" class="bg-white rounded-full text-sm">
+            <input type="text" wire:model.live.debounce.500ms="uso" placeholder="Uso" class="bg-white rounded-full text-sm">
 
-                <input type="text" wire:model.live.debounce.500ms="uso" placeholder="Uso" class="bg-white rounded-full text-sm">
+            <input type="text" wire:model.live.debounce.500ms="categoria" placeholder="Categoría" class="bg-white rounded-full text-sm">
 
-                <input type="text" wire:model.live.debounce.500ms="categoria" placeholder="Categoría" class="bg-white rounded-full text-sm">
+            <input type="text" wire:model.live.debounce.500ms="calidad" placeholder="Calidad" class="bg-white rounded-full text-sm">
 
-                <input type="text" wire:model.live.debounce.500ms="calidad" placeholder="Calidad" class="bg-white rounded-full text-sm">
+            <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
 
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-
-                </select>
-
-            </div>
+            </select>
 
         </div>
 
@@ -54,7 +50,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Tipo</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Tipo</span>
 
                             {{ $valor->tipo }}
 
@@ -62,7 +58,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Uso</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Uso</span>
 
                             {{ $valor->uso }}
 
@@ -70,7 +66,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Categoría</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Categoría</span>
 
                             {{ $valor->estado }}
 
@@ -78,7 +74,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Calidad</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Calidad</span>
 
                             {{ $valor->calidad }}
 
@@ -86,7 +82,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Valor</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Valor</span>
 
                             ${{ number_format($valor->valor, 2) }}
 
@@ -94,7 +90,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Valor anterior</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Valor anterior</span>
 
                             ${{ number_format($valor->valor_aterior, 2) }}
 

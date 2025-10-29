@@ -50,7 +50,7 @@
 
             <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo') border-1 border-red-500 @enderror" wire:model="tipo">
 
-            <input title="Número de registro" placeholder="Número de registro" type="number" class="bg-white rounded text-xs @error('numero_registro') border-1 border-red-500 @enderror" wire:model.live="numero_registro">
+            <input title="Número de registro" placeholder="Número de registro" type="number" class="bg-white rounded text-xs  mt-2 sm:mt-0 @error('numero_registro') border-1 border-red-500 @enderror" wire:model.live="numero_registro">
 
         </div>
 

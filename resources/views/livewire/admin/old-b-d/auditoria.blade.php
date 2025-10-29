@@ -1,4 +1,3 @@
-
 <div class="">
 
     <div class="mb-6">
@@ -7,13 +6,13 @@
 
         <div class=" mx-auto">
 
-            <div class="flex gap-1 p-1 justify-center">
+            <div class="flex gap-1 justify-">
 
                 <input type="number" wire:model.live.debounce.500ms="filters.locl" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.ofna" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.ofna" placeholder="Oficina" class="bg-white rounded-full text-sm w-20">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.tpre" placeholder="T. Predio" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.tpre" placeholder="Tipo" class="bg-white rounded-full text-sm w-16">
 
                 <input type="number" wire:model.live.debounce.500ms="filters.nreg" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
 
@@ -28,12 +27,6 @@
                 <input type="number" wire:model.live.debounce.500ms="filters.usua" placeholder="T. Usuario" class="bg-white rounded-full text-sm w-24">
 
             </div>
-
-            {{-- <div class="flex gap-1 p-1 justify-center">
-
-                <input wire:model.live.debounce.500ms="search" placeholder="Tipo / Empleado" class="bg-white rounded-full text-sm">
-
-            </div> --}}
 
             <div class="flex gap-1 p-1 justify-center">
 
@@ -77,7 +70,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Tipo</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Tipo</span>
 
                             {{ $audit->tipo }}
 
@@ -85,7 +78,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Cuenta predial</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Cuenta predial</span>
 
                             {{ $audit->locl }}-{{ $audit->ofna }}-{{ $audit->tpre }}-{{ $audit->nreg }}
 
@@ -93,7 +86,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Fecha</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Fecha</span>
 
                             {{ $audit->fecha }}
 
@@ -101,15 +94,15 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Empleado</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Empleado</span>
 
-                            {{ $audit->emple }}
+                            <p class="mt-2">{{ $audit->emple }}</p>
 
                         </x-table.cell>
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Trámite</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Trámite</span>
 
                             {{ $audit->ania }}-{{ $audit->foli }}-{{ $audit->usua }}
 

@@ -1,14 +1,52 @@
 <div class="">
 
-    <div class="mb-6">
+    <div class="mb-2 lg:mb-5">
 
-        <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Avaluos</h1>
+        <x-header>Avaluos</x-header>
 
-        <div class="flex justify-between">
+        <div class="flex gap-3 overflow-auto p-1">
 
-            <div>
+            <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
+                @foreach ($años as $año)
+
+                    <option value="{{ $año }}">{{ $año }}</option>
+
+                @endforeach
+
+            </select>
+
+            <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+
+            <input type="number" wire:model.live.debounce.500ms="filters.usuario" placeholder="Usuario" class="bg-white rounded-full text-sm w-24">
+
+            <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
+
+                <option value="" selected>Estado</option>
+                <option value="nuevo">Nuevo</option>
+                <option value="impreso">Impreso</option>
+                <option value="concluido">Concluido</option>
+                <option value="notificado">Notificado</option>
+
+            </select>
+
+            <select class="bg-white rounded-full text-sm" wire:model.live="filters.valuador">
+
+                <option value="" selected>Valuador</option>
+
+                @foreach ($valuadores as $valuador)
+
+                    <option value="{{ $valuador->id }}">{{ $valuador->name }}</option>
+
+                @endforeach
+
+            </select>
+
+            <div class="flex gap-1">
+
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.tAño">
+
+                    <option value="" selected>T. año</option>
 
                     @foreach ($años as $año)
 
@@ -18,74 +56,32 @@
 
                 </select>
 
-                <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.tFolio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.usuario" placeholder="Usuario" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.tUsuario" placeholder="T. Usuario" class="bg-white rounded-full text-sm w-24">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
+                <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
 
-                    <option value="" selected>Estado</option>
-                    <option value="nuevo">Nuevo</option>
-                    <option value="impreso">Impreso</option>
-                    <option value="concluido">Concluido</option>
-                    <option value="notificado">Notificado</option>
+                <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
 
-                </select>
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.tipo">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="filters.valuador">
-
-                    <option value="" selected>Valuador</option>
-
-                    @foreach ($valuadores as $valuador)
-
-                        <option value="{{ $valuador->id }}">{{ $valuador->name }}</option>
-
-                    @endforeach
+                    <option value="" selected>Tipo</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
 
                 </select>
 
-                <div class="flex gap-1 mt-2">
+                <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
 
-                    <select class="bg-white rounded-full text-sm" wire:model.live="filters.tAño">
+                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
-                        <option value="" selected>T. año</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
 
-                        @foreach ($años as $año)
-
-                            <option value="{{ $año }}">{{ $año }}</option>
-
-                        @endforeach
-
-                    </select>
-
-                    <input type="number" wire:model.live.debounce.500ms="filters.tFolio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
-
-                    <input type="number" wire:model.live.debounce.500ms="filters.tUsuario" placeholder="T. Usuario" class="bg-white rounded-full text-sm w-24">
-
-                    <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
-
-                    <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
-
-                    <select class="bg-white rounded-full text-sm" wire:model.live="filters.tipo">
-
-                        <option value="" selected>Tipo</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-
-                    </select>
-
-                    <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
-
-                    <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
-
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-
-                    </select>
-
-                </div>
+                </select>
 
             </div>
 
@@ -168,7 +164,7 @@
                         </x-table.cell>
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Año</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Año</span>
 
                             {{ $avaluo->año }}
 
@@ -176,7 +172,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Folio</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Folio</span>
 
                             {{ $avaluo->folio }}
 
@@ -184,7 +180,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Usuario</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Usuario</span>
 
                             {{ $avaluo->usuario }}
 
@@ -192,7 +188,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Estado</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Estado</span>
 
                             <span class="bg-{{ $avaluo->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($avaluo->estado) }}</span>
 
@@ -200,7 +196,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Valuador</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Valuador</span>
 
                             {{ $avaluo->asignadoA->name }}
 
@@ -208,7 +204,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Trámite</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Trámite</span>
 
                             <span class="spacenow">{{ $avaluo->tramiteInspeccion?->año }}-{{ $avaluo->tramiteInspeccion?->folio }}-{{ $avaluo->tramiteInspeccion?->usuario }}</span>
 
@@ -216,7 +212,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Localidad</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Localidad</span>
 
                             {{ $avaluo->predioAvaluo->localidad }}
 
@@ -224,7 +220,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Oficina</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Oficina</span>
 
                             {{ $avaluo->predioAvaluo->oficina }}
 
@@ -232,7 +228,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Tipo de predio</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Tipo de predio</span>
 
                             {{ $avaluo->predioAvaluo->tipo_predio }}
 
@@ -240,7 +236,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Número de registro</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Número de registro</span>
 
                             {{ $avaluo->predioAvaluo->numero_registro }}
 
@@ -248,7 +244,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
                             {{ $avaluo->created_at }}
 
@@ -264,7 +260,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Acciones</span>
 
                             <div class="ml-3 relative" x-data="{ open_drop_down:false }">
 

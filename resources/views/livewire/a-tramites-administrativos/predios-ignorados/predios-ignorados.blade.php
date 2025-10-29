@@ -2,60 +2,56 @@
 
     <x-header>Predios ignorados</x-header>
 
-    <div class="mb-6">
+    <div class="mb-2 lg:mb-5">
 
-        <div class="flex justify-between">
+        <div class="flex gap-3 overflow-auto p-1">
 
-            <div>
+            <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
+                <option value="" selected>Año</option>
 
-                    <option value="" selected>Año</option>
+                @foreach ($años as $año)
 
-                    @foreach ($años as $año)
+                    <option value="{{ $año }}">{{ $año }}</option>
 
-                        <option value="{{ $año }}">{{ $año }}</option>
+                @endforeach
 
-                    @endforeach
+            </select>
 
-                </select>
+            <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+            <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
+                <option value="" selected>Estado</option>
 
-                    <option value="" selected>Estado</option>
+                <option value="nuevo">Nuevo</option>
+                <option value="revisión">Revisión</option>
+                <option value="requerimineto">Requerimineto</option>
+                <option value="valuación">Valuación</option>
+                <option value="publicación">Publicación</option>
+                <option value="periódico oficial">Periódico oficial</option>
+                <option value="firma">Firma</option>
+                <option value="concluido">Concluido</option>
 
-                    <option value="nuevo">Nuevo</option>
-                    <option value="revisión">Revisión</option>
-                    <option value="requerimineto">Requerimineto</option>
-                    <option value="valuación">Valuación</option>
-                    <option value="publicación">Publicación</option>
-                    <option value="periódico oficial">Periódico oficial</option>
-                    <option value="firma">Firma</option>
-                    <option value="concluido">Concluido</option>
+            </select>
 
-                </select>
+            <select class="bg-white rounded-full text-sm" wire:model.live="filters.taño">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="filters.taño">
+                <option value="" selected>T. Año</option>
 
-                    <option value="" selected>T. Año</option>
+                @foreach ($años as $año)
 
-                    @foreach ($años as $año)
+                    <option value="{{ $año }}">{{ $año }}</option>
 
-                        <option value="{{ $año }}">{{ $año }}</option>
+                @endforeach
 
-                    @endforeach
+            </select>
 
-                </select>
+            <input type="number" wire:model.live.debounce.500ms="filters.tfolio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.tfolio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.tusuario" placeholder="T. Usuario" class="bg-white rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.tusuario" placeholder="T. Usuario" class="bg-white rounded-full text-sm w-24">
-
-                <input type="number" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
-
-            </div>
+            <input type="number" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
 
             @can('Crear variación')
 
@@ -104,7 +100,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Año</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Año</span>
 
                             {{ $predio->año }}
 
@@ -112,7 +108,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Folio</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Folio</span>
 
                             {{ $predio->folio }}
 
@@ -120,7 +116,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Estado</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Estado</span>
 
                             <span class="bg-{{ $predio->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($predio->estado) }}</span>
 
@@ -128,7 +124,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Trámite</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Trámite</span>
 
                             {{ $predio->tramite->año }}-{{ $predio->tramite->folio }}-{{ $predio->tramite->usuario }}
 
@@ -136,7 +132,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Municipio</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Municipio</span>
 
                             {{ $predio->oficina->nombre }}
 
@@ -144,15 +140,15 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Promovente</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Promovente</span>
 
-                            {{ $predio->promovente }}
+                            <p class="mt-2">{{ $predio->promovente }}</p>
 
                         </x-table.cell>
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
 
                             <span class="font-semibold">@if($predio->creadoPor != null)Registrado por: {{$predio->creadoPor->name}} @else Registro: @endif</span> <br>
@@ -171,7 +167,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acciones</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Acciones</span>
 
                             <div class="ml-3 relative" x-data="{ open_drop_down:false }">
 

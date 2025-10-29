@@ -178,7 +178,7 @@
 
                                 <x-table.cell>
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Año</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Año</span>
 
                                     {{ $tramite->año }}-{{ $tramite->folio }}-{{ $tramite->usuario }}
 
@@ -186,7 +186,7 @@
 
                                 <x-table.cell>
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Estado</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Estado</span>
 
                                     <span class="bg-{{ $tramite->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($tramite->estado) }}</span>
 
@@ -194,7 +194,7 @@
 
                                 <x-table.cell class="capitalize">
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Tipo de trámite</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Tipo de trámite</span>
 
                                     {{ $tramite->tipo_tramite }}
 
@@ -202,7 +202,7 @@
 
                                 <x-table.cell class="capitalize">
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Tipo de servicio</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Tipo de servicio</span>
 
                                     {{ $tramite->tipo_servicio }}
 
@@ -210,23 +210,23 @@
 
                                 <x-table.cell>
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Servicio</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Servicio</span>
 
-                                    {{ $tramite->servicio->nombre }}
-
-                                </x-table.cell>
-
-                                <x-table.cell>
-
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Nombre del solicitante</span>
-
-                                    {{ $tramite->nombre_solicitante }}
+                                    <p class="mt-2">{{ $tramite->servicio->nombre }}</p>
 
                                 </x-table.cell>
 
                                 <x-table.cell>
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Número de oficio</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Nombre del solicitante</span>
+
+                                    <p class="mt-2">{{ $tramite->nombre_solicitante }}</p>
+
+                                </x-table.cell>
+
+                                <x-table.cell>
+
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Número de oficio</span>
 
                                     {{ $tramite->numero_oficio ?? 'N/A' }}
 
@@ -234,7 +234,7 @@
 
                                 <x-table.cell>
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Cantidad</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Cantidad</span>
 
                                     {{ $tramite->cantidad }}
 
@@ -242,7 +242,7 @@
 
                                 <x-table.cell>
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Monto</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Monto</span>
 
                                     ${{ number_format($tramite->monto, 2) }}
 
@@ -250,7 +250,7 @@
 
                                 <x-table.cell>
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Fecha de pago</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Fecha de pago</span>
 
                                     {{ $tramite->fecha_pago ? $tramite->fecha_pago->format('d-m-Y') : 'N/A'}}
 
@@ -258,23 +258,23 @@
 
                                 <x-table.cell>
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Línea de captura</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Línea de captura</span>
 
-                                    {{ $tramite->linea_de_captura }}
-
-                                </x-table.cell>
-
-                                <x-table.cell>
-
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Folio de pago</span>
-
-                                    {{ $tramite->folio_pago }}
+                                    <p class="mt-2">{{ $tramite->linea_de_captura }}</p>
 
                                 </x-table.cell>
 
                                 <x-table.cell>
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Registrado</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Folio de pago</span>
+
+                                    <p class="mt-2">{{ $tramite->folio_pago }}</p>
+
+                                </x-table.cell>
+
+                                <x-table.cell>
+
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Registrado</span>
 
                                     {{ $tramite->created_at }}
 
@@ -282,9 +282,9 @@
 
                                 <x-table.cell>
 
-                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Observaciones</span>
+                                    <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Observaciones</span>
 
-                                    {{ $tramite->observaciones ?? 'N/A' }}
+                                    <p class="mt-2">{{ $tramite->observaciones ?? 'N/A' }}</p>
 
                                 </x-table.cell>
 

@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Predio</h1>
+    <x-header>Predio</x-header>
 
-    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Datos generales</h4>
+    <x-h4>Datos generales</x-h4>
 
     <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600">
 
@@ -170,9 +170,9 @@
 
     <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Bloqueos ({{ $predio->bloqueos->count() }})</h4>
 
-    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5">
+    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-        <table class="w-full overflow-x-auto table-fixed">
+        <table class="w-full">
 
             <thead class="border-b border-gray-300 ">
 
@@ -216,7 +216,7 @@
 
     @include('admin.comun.auditoria')
 
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
         <div>
 

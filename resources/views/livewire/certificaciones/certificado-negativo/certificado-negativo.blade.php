@@ -186,7 +186,7 @@
 
             @if($tramite)
 
-                <div class="flex flex-col lg:flex-row gap-3 mb-5 bg-white rounded-lg p-2 shadow-lg justify-center lg:justify-between items-center">
+                <div class="flex flex-col lg:flex-row gap-3 mb-5 bg-white rounded-lg p-2 shadow-lg justify-center lg:justify-end items-center">
 
                     <x-button-green
                         wire:click="generarCertificado"

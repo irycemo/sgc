@@ -1,4 +1,4 @@
-<div class="p-4 mb-1">
+<div class="">
 
     @include('livewire.comun.avaluo-folio')
 

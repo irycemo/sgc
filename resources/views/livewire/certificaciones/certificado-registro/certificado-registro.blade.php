@@ -269,9 +269,9 @@
 
             <p class="text-center my-4">Propietarios</p>
 
-            <div class="overflow-auto w-full mx-auto lg:w-1/2 space-y-2">
+            <div class="overflow-auto w-full mx-auto lg:w-1/2 space-y-2 overflow-x-auto">
 
-                <table class="w-full overflow-x-auto table-fixed">
+                <table class="w-full">
 
                     <thead class="border-b border-gray-300 ">
 

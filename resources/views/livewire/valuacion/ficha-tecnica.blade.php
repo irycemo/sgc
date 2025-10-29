@@ -145,7 +145,7 @@
 
     @else
 
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl">
+        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl overflow-auto">
 
             <div class="space-y-2">
 
@@ -173,7 +173,7 @@
 
         </div>
 
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl">
+        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl overflow-auto">
 
             <div class="space-y-2">
 
@@ -199,13 +199,13 @@
 
                 <p class="">Ejemplo para más de un terreno urbano: <strong>100:250:30|200:50:10|50:30:10</strong></p>
 
-                <p class="">Ejemplo para más de un terreno rústico: <strong>100:TEMPORAL DE SEGUNDA:30|200:ERIAZO:10|50:TEMPORAL DE PRIMERA:10</strong></p>
+                <p class="">Ejemplo para más de un terreno rústico: <strong class="flex-wrap">100:TEMPORAL DE SEGUNDA:30|200:ERIAZO:10|50:TEMPORAL DE PRIMERA:10</strong></p>
 
             </div>
 
         </div>
 
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl">
+        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl overflow-auto">
 
             <div class="space-y-2">
 
@@ -233,7 +233,7 @@
 
         </div>
 
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl">
+        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl overflow-auto">
 
             <div class="space-y-2">
 
@@ -249,7 +249,7 @@
 
         </div>
 
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl">
+        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl overflow-auto">
 
             <div class="space-y-2">
 

@@ -42,7 +42,7 @@
 
         <h4 class="text-lg mb-5 text-center">Cuentas prediales desglosadas</h4>
 
-        <div class="flex flex-wrap space-x-1 justify-center items-center">
+        <div class="flex flex-wrap justify-center items-center gap-2">
 
             <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
@@ -50,9 +50,15 @@
 
             <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo') border-1 border-red-500 @enderror" wire:model="tipo">
 
-            <input title="Registro inicial" placeholder="Registro inicial" type="number" class="bg-white rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model.live="registro_inicio">
-            <p class="text-sm mb-0">a</p>
-            <input title="Registro final" placeholder="Registro final" type="number" class="bg-white rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model="registro_final">
+            <div class="sm:flex items-center gap-2">
+
+                <input title="Registro inicial" placeholder="Registro inicial" type="number" class="bg-white rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model.live="registro_inicio">
+
+                <p class="text-sm text-center mb-0">a</p>
+
+                <input title="Registro final" placeholder="Registro final" type="number" class="bg-white rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model="registro_final">
+
+            </div>
 
         </div>
 
@@ -60,7 +66,7 @@
 
             @foreach ($predios_cuentas as $index => $predio)
 
-                <div class="flex flex-wrap space-x-1 justify-center items-center">
+                <div class="flex flex-wrap justify-start items-center gap-2">
 
                     <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('predios_cuentas.' . $index . '.localidad') border-1 border-red-500 @enderror" wire:model="localidad">
 
@@ -70,7 +76,7 @@
 
                     <input title="Registro" placeholder="Registro" type="number" class="bg-white rounded text-xs @error('predios_cuentas.' . $index . '.numero_registro') border-1 border-red-500 @enderror" wire:model="predios_cuentas.{{ $index }}.numero_registro">
 
-                    <div class="flex-auto lg:col-span-1 my-auto">
+                    <div class="flex-auto my-auto">
 
                         <x-button-red
                             wire:click="borrarPredio({{ $index }})"

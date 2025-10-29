@@ -14,7 +14,7 @@
 
                 @if($this->modelo_editar->tipo_tramite != 'complemento')
 
-                    <div class="flex-row lg:flex lg:space-x-2 items-start justify-between ">
+                    <div class="flex-row lg:flex lg:space-x-2 items-start justify-between space-y-2 lg:space-y-0">
 
                         <div>
 

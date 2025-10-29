@@ -34,7 +34,13 @@ class Certificaciones extends Component
                                                                 $this->modelo_editar->solicitante == 'Oficialia de partes' ||
                                                                 $this->modelo_editar->solicitante == 'Escrituración social'
                                                             ),
-            'predios' => ['nullable', Rule::requiredIf(in_array($this->servicio['clave_ingreso'], ['DM30', 'DM35', 'DM34', 'DM31']))]
+            'predios' => ['nullable', Rule::requiredIf(
+                                                            in_array($this->servicio['clave_ingreso'], ['DM30', 'DM35', 'DM34', 'DM32'])
+
+                                                            ||
+
+                                                            ($this->servicio['clave_ingreso'] == 'DM31' && $this->servicio['nombre'] != 'Certificado negativo catastral')
+                                                    )]
         ];
 
     }

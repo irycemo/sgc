@@ -11,9 +11,9 @@
 
                 <input type="number" wire:model.live.debounce.500ms="filters.locl" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.ofna" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.ofna" placeholder="Oficina" class="bg-white rounded-full text-sm w-20">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.tpre" placeholder="T. Predio" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.tpre" placeholder="Tipo" class="bg-white rounded-full text-sm w-16">
 
                 <input type="number" wire:model.live.debounce.500ms="filters.nreg" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
 
@@ -79,7 +79,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Cuenta predial</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Cuenta predial</span>
 
                             {{ $traslado->locl }}-{{ $traslado->ofna }}-{{ $traslado->tpre }}-{{ $traslado->nreg }}
 
@@ -87,7 +87,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Folio</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Folio</span>
 
                             {{ $traslado->anit }}-{{ $traslado->cont }}-{{ $traslado->cnot }}
 
@@ -95,7 +95,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Status</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Status</span>
 
                             {{ $traslado->stat }}
 
@@ -103,15 +103,15 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Acto</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Acto</span>
 
-                            {{ $traslado->act1 }}
+                            <p class="mt-2">{{ $traslado->act1 }}</p>
 
                         </x-table.cell>
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Fecha firma</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Fecha firma</span>
 
                             {{ $traslado->ffir }}
 
@@ -119,7 +119,7 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Transmitente</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Transmitente</span>
 
                             {{ $traslado->nven }}
 
@@ -127,9 +127,9 @@
 
                         <x-table.cell>
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Adquiriente</span>
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Adquiriente</span>
 
-                            {{ $traslado->adquiriente }}
+                            <p class="mt-2">{{ $traslado->adquiriente }}</p>
 
                         </x-table.cell>
 

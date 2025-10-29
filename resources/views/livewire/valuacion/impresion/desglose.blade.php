@@ -4,7 +4,7 @@
 
         <div class="bg-white rounded-lg shadow-xl p-4 mb-5">
 
-            <div class="flex justify-center mx-auto gap-33">
+            <div class="flex-col justify-center mx-auto space-y-3">
 
                 <div class="flex-auto text-center">
 
@@ -76,7 +76,7 @@
 
             <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo') border-1 border-red-500 @enderror" wire:model="tipo">
 
-            <input title="Número de registro" placeholder="# de Registro" type="number" class="bg-white rounded text-xs @error('registro_padre') border-1 border-red-500 @enderror" wire:model.live="registro_padre">
+            <input title="Número de registro" placeholder="# de Registro" type="number" class="bg-white rounded text-xs mt-2 sm:mt-0 @error('registro_padre') border-1 border-red-500 @enderror" wire:model.live="registro_padre">
 
         </div>
 
@@ -86,7 +86,7 @@
 
         <h4 class="text-lg mb-5 text-center">Cuentas prediales desglosadas</h4>
 
-        <div class="flex flex-wrap space-x-1 justify-center items-center">
+        <div class="flex flex-wrap justify-center items-center gap-2">
 
             <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
@@ -94,9 +94,15 @@
 
             <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo') border-1 border-red-500 @enderror" wire:model="tipo">
 
-            <input title="Registro inicial" placeholder="Registro inicial" type="number" class="bg-white rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model.live="registro_inicio">
-            <p class="text-sm mb-0">a</p>
-            <input title="Registro final" placeholder="Registro final" type="number" class="bg-white rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model="registro_final">
+            <div class="sm:flex items-center gap-2">
+
+                <input title="Registro inicial" placeholder="Registro inicial" type="number" class="bg-white rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model.live="registro_inicio">
+
+                <p class="text-sm text-center mb-0">a</p>
+
+                <input title="Registro final" placeholder="Registro final" type="number" class="bg-white rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model="registro_final">
+
+            </div>
 
         </div>
 

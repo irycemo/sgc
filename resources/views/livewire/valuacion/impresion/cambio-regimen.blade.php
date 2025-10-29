@@ -4,7 +4,7 @@
 
         <div class="bg-white rounded-lg shadow-xl p-4 mb-5">
 
-            <div class="flex justify-center mx-auto gap-33">
+            <div class="flex-col justify-center mx-auto space-y-3">
 
                 <div class="flex-auto text-center">
 
@@ -76,7 +76,7 @@
 
             <input readonly title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo_origen') border-1 border-red-500 @enderror" wire:model="tipo_origen">
 
-            <input title="Número de registro" placeholder="# de Registro" type="number" class="bg-white rounded text-xs @error('registro_origen') border-1 border-red-500 @enderror" wire:model.live="registro_origen">
+            <input title="Número de registro" placeholder="# de Registro" type="number" class="bg-white rounded text-xs mt-2 sm:mt-0 @error('registro_origen') border-1 border-red-500 @enderror" wire:model.live="registro_origen">
 
         </div>
 
@@ -94,7 +94,7 @@
 
             <input readonly title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo_nuevo') border-1 border-red-500 @enderror" wire:model="tipo_nuevo">
 
-            <input title="Registro inicial" placeholder="Registro" type="number" class="bg-white rounded text-xs @error('registro_nuevo') border-1 border-red-500 @enderror" wire:model.live="registro_nuevo">
+            <input title="Registro inicial" placeholder="Registro" type="number" class="bg-white rounded text-xs mt-2 sm:mt-0 @error('registro_nuevo') border-1 border-red-500 @enderror" wire:model.live="registro_nuevo">
 
         </div>
     </div>

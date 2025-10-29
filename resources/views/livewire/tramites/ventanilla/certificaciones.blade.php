@@ -23,11 +23,15 @@
 
                     </div>
 
-                    @if(!in_array($servicio['clave_ingreso'], ['DM24', 'DM25', 'DM26', 'DM27', 'DM23']))
+                    <div>
 
-                        @include('livewire.tramites.ventanilla.comun.predios')
+                        @if(!in_array($servicio['clave_ingreso'], ['DM24', 'DM25', 'DM26', 'DM27', 'DM23']) && $servicio['nombre'] != 'Certificado negativo catastral')
 
-                    @endif
+                            @include('livewire.tramites.ventanilla.comun.predios')
+
+                        @endif
+
+                    </div>
 
                     @include('livewire.tramites.ventanilla.comun.observaciones')
 

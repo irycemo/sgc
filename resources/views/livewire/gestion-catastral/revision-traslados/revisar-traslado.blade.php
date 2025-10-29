@@ -6,7 +6,7 @@
 
     </div>
 
-    <div class="grid grid-cols-3 gap-3 mb-5 text-sm">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-5 text-sm">
 
         @include('livewire.gestion-catastral.revision-traslados.padron')
 

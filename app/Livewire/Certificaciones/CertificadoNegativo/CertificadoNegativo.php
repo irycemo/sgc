@@ -84,7 +84,7 @@ class CertificadoNegativo extends Component
                                         ->where('usuario', $this->usuario)
                                         ->firstOrFail();
 
-            if($this->tramite->servicio->clave_ingreso !== 'D923'){
+            if($this->tramite->servicio->clave_ingreso !== 'DM31'){
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a un certificado negativo de registro catastral."]);
 
@@ -114,17 +114,7 @@ class CertificadoNegativo extends Component
 
             }
 
-            /* if($this->tramite->fecha_entrega >= now()){
-
-                $this->dispatch('mostrarMensaje', ['error', "La fecha de entrega del trámite es: " . $this->tramite->fecha_entrega->format('d-m-Y')]);
-
-                $this->reset('tramite');
-
-                return;
-
-            } */
-
-
+            $this->tramiteFlag = true;
         } catch (ModelNotFoundException $th) {
 
             $this->dispatch('mostrarMensaje', ['warning', "El trámite no existe."]);

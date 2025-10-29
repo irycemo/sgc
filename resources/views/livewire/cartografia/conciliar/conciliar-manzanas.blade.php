@@ -12,7 +12,7 @@
 
             </div>
 
-            <div class="text-center">
+            <div class="text-center space-y-2">
 
                 <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-20" title="Estado" value="16" readonly>
 
