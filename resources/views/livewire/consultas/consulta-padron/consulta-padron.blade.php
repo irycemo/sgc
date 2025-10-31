@@ -736,7 +736,7 @@
 
                 <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                    <table class="w-full">
+                    <table class="table-auto lg:table-fixed w-full">
 
                         <thead class="border-b border-gray-300 ">
 
@@ -772,7 +772,7 @@
 
                 <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                    <table class="w-full">
+                    <table class="table-auto lg:table-fixed w-full">
 
                         <thead class="border-b border-gray-300 ">
 
@@ -812,7 +812,7 @@
 
                 <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                    <table class="w-full">
+                    <table class="table-auto lg:table-fixed w-full">
 
                         <thead class="border-b border-gray-300 ">
 
@@ -856,7 +856,7 @@
 
                     <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                        <table class="w-full">
+                        <table class="table-auto lg:table-fixed w-full">
 
                             <thead class="border-b border-gray-300 ">
 
@@ -900,7 +900,7 @@
 
                     <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                        <table class="w-full">
+                        <table class="table-auto lg:table-fixed w-full">
 
                             <thead class="border-b border-gray-300 ">
 
@@ -942,7 +942,7 @@
 
                 <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                    <table class="w-full">
+                    <table class="table-auto lg:table-fixed w-full">
 
                         <thead class="border-b border-gray-300 ">
 
@@ -982,7 +982,7 @@
 
                 <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                    <table class="w-full">
+                    <table class="table-auto lg:table-fixed w-full">
 
                         <thead class="border-b border-gray-300 ">
 

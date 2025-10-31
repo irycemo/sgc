@@ -102,6 +102,14 @@ class Preguntas extends Component
 
     }
 
+    public function mount(){
+
+        $this->crearModeloVacio();
+
+        $this->search = request()->query('search');
+
+    }
+
     public function render()
     {
         return view('livewire.consultas.preguntas.preguntas')->extends('layouts.admin');

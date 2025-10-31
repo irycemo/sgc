@@ -20,7 +20,7 @@
 
     <div class="bg-white shadow-xl rounded-lg p-4 mb-5">
 
-        <input type="text" class="rounded-lg w-full lg:w-1/2 mx-auto flex" placeholder="Buscar.." autofocus wire:model.live="search">
+        <input type="text" class="rounded-lg w-full lg:w-1/2 mx-auto flex" placeholder="Buscar.." autofocus wire:model.live.debounce.200ms="search">
 
     </div>
 

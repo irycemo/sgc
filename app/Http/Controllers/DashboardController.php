@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pregunta;
 use Carbon\Carbon;
 use App\Models\Tramite;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
 
     public function __invoke()
     {
+
+        $preguntas = Pregunta::latest()->take(5)->get();
 
         if(auth()->user()->hasRole('Administrador')){
 
@@ -54,11 +56,11 @@ class DashboardController extends Controller
 
             }
 
-            return view('dashboard', compact('data', 'tramtiesEstado'));
+            return view('dashboard', compact('data', 'tramtiesEstado', 'preguntas'));
 
         }
 
-        return view('dashboard');
+        return view('dashboard', compact('preguntas'));
 
     }
 
