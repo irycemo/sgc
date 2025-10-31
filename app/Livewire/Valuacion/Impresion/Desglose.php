@@ -75,6 +75,8 @@ class Desglose extends Component
 
                 if(!auth()->user()->hasRole('Convenio municipal')) $this->actualizarTramites();
 
+                $this->tramite_inspeccion->predios()->detach();
+
                 $this->tramite_inspeccion->predios()->attach($this->predio_padre->id);
 
                 $avaluo_ids = $this->avaluos->pluck('id');

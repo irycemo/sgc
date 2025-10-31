@@ -298,7 +298,7 @@ class MigrarPredioJob implements ShouldQueue
             [
                 'nombre' => trim($predioss->nomb_008),
                 'ap_paterno' => trim($predioss->apat_008),
-                'ap_materno' => trim($predioss->amat_008)
+                'ap_materno' => trim($predioss->amat_008),
             ],
             [
                 'tipo' => ($predioss->tper_008 == 1) ? 'FÍSICA' : ($predioss->tper_008 == 2 ? 'MORAL' : '0'),

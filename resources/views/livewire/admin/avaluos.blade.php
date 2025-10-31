@@ -131,16 +131,16 @@
                     </div>
 
                 </x-table.heading>
-                <x-table.heading >Año</x-table.heading>
-                <x-table.heading >Folio</x-table.heading>
-                <x-table.heading >Usuario</x-table.heading>
-                <x-table.heading >Estado</x-table.heading>
-                <x-table.heading >Valuador</x-table.heading>
-                <x-table.heading >Trámite</x-table.heading>
-                <x-table.heading sortable wire:click="sortBy('localidad')" :direction="$sort === 'localidad' ? $direction : null">Localidad</x-table.heading>
-                <x-table.heading sortable wire:click="sortBy('oficina')" :direction="$sort === 'oficina' ? $direction : null">Oficina</x-table.heading>
-                <x-table.heading sortable wire:click="sortBy('tipo_predio')" :direction="$sort === 'tipo_predio' ? $direction : null">Tipo de predio</x-table.heading>
-                <x-table.heading sortable wire:click="sortBy('numero_registro')" :direction="$sort === 'numero_registro' ? $direction : null">Número de registro</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('año')" :direction="$sort === 'año' ? $direction : null">Año</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('folio')" :direction="$sort === 'folio' ? $direction : null">Folio</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('usuario')" :direction="$sort === 'usuario' ? $direction : null">Usuario</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('estado')" :direction="$sort === 'estado' ? $direction : null">Estado</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('asignado_a')" :direction="$sort === 'asignado_a' ? $direction : null">Valuador</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('tramite_inspeccion')" :direction="$sort === 'tramite_inspeccion' ? $direction : null">Trámite</x-table.heading>
+                <x-table.heading >Localidad</x-table.heading>
+                <x-table.heading >Oficina</x-table.heading>
+                <x-table.heading >Tipo de predio</x-table.heading>
+                <x-table.heading >Número de registro</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
                 <x-table.heading >Acciones</x-table.heading>

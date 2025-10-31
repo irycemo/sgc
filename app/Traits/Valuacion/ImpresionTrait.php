@@ -254,7 +254,7 @@ trait ImpresionTrait
 
                 $this->predio_padre = Predio::where('localidad', $this->localidad)
                                         ->where('oficina', $this->oficina)
-                                        ->where('tipo_predio', $this->tipo)
+                                        ->where('tipo_predio', $this->tipo_padre)
                                         ->where('numero_registro', $this->registro_padre)
                                         ->first();
 

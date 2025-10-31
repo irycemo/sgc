@@ -17,6 +17,7 @@ use App\Constantes\Constantes;
 use App\Traits\ComponentesTrait;
 use Livewire\Attributes\Computed;
 use App\Enums\Tramites\AvaluoPara;
+use App\Exceptions\GeneralException;
 use Illuminate\Support\Facades\DB;
 use App\Models\ConstruccionesComun;
 use Illuminate\Support\Facades\Log;
@@ -99,13 +100,6 @@ class Notificacion extends Component
 
     public function notificar(){
 
-        $this->validate(
-            [
-                'fecha_notificacion' => 'required|before:tomorrow',
-                'tramite' => 'required'
-            ]
-        );
-
         $predio = Predio::where('estado', $this->avaluo->predioAvaluo->estado)
                             ->where('region_catastral', $this->avaluo->predioAvaluo->region_catastral)
                             ->where('municipio', $this->avaluo->predioAvaluo->municipio)
@@ -123,47 +117,19 @@ class Notificacion extends Component
 
         if($predio){
 
-            try {
+            $this->actualizaPredio($predio);
 
-                DB::transaction(function () use($predio){
+            $this->actualizarAvaluo($predio->id);
 
-                    $this->actualizaPredio($predio);
-
-                    $this->actualizarAvaluo($predio->id);
-
-                    $this->dispatch('mostrarMensaje', ['success', "El predio se actualizó correctamente en el padrón catastral."]);
-
-                });
-
-            } catch (\Throwable $th) {
-
-                Log::error("Error al actualizar predio en el padron desde notificación de avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
-                $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
-                $this->modal = false;
-
-            }
+            $this->dispatch('mostrarMensaje', ['success', "El predio se actualizó correctamente en el padrón catastral."]);
 
         }else{
 
-            try {
+            $this->predio = $this->creaPredio();
 
-                DB::transaction(function () {
+            $this->actualizarAvaluo($this->predio->id);
 
-                    $this->predio = $this->creaPredio();
-
-                    $this->actualizarAvaluo($this->predio->id);
-
-                    $this->dispatch('mostrarMensaje', ['success', "El predio se creó correctamente en el padrón catastral."]);
-
-                });
-
-            } catch (\Throwable $th) {
-
-                Log::error("Error al crear predio desde notificación de avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
-                $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
-                $this->modal = false;
-
-            }
+            $this->dispatch('mostrarMensaje', ['success', "El predio se creó correctamente en el padrón catastral."]);
 
         }
 
@@ -178,6 +144,8 @@ class Notificacion extends Component
         }
 
         if($this->tramite->avaluo_para === AvaluoPara::FUSION){
+
+            if(!$predio) throw new GeneralException('No se encontro el predio a fusionar.');
 
             foreach ($this->tramite->predios as $predio_fusionante) {
 
@@ -221,24 +189,49 @@ class Notificacion extends Component
 
     public function notificarTodos(){
 
-        $avaluos = Avaluo::with('predioAvaluo')
-                            ->whereIn('estado', ['impreso', 'concluido'])
-                            ->whereNull('notificado_en')
-                            ->whereNull('notificado_por')
-                            ->where('tramite_inspeccion', $this->tramite->id)
-                            ->get();
+        $this->validate(
+            [
+                'fecha_notificacion' => 'required|before:tomorrow',
+                'tramite' => 'required'
+            ]
+        );
 
-        foreach ($avaluos as $avaluo) {
+        try {
 
-            if($avaluo->estado == 'notificado') continue;
+            DB::transaction(function (){
 
-            $this->avaluo = $avaluo;
+                $avaluos = Avaluo::with('predioAvaluo')
+                                    ->whereIn('estado', ['impreso', 'concluido'])
+                                    ->whereNull('notificado_en')
+                                    ->whereNull('notificado_por')
+                                    ->where('tramite_inspeccion', $this->tramite->id)
+                                    ->get();
 
-            $this->avaluo->load('predioAvaluo.colindancias', 'predioAvaluo.terrenosComun', 'predioAvaluo.construccionesComun', 'predioAvaluo.terrenos', 'predioAvaluo.construcciones', 'predioAvaluo.propietarios.persona');
+                foreach ($avaluos as $avaluo) {
 
-            $this->notificar();
+                    if($avaluo->estado == 'notificado') continue;
 
-            $this->dispatch('mostrarMensaje', ['success', "Los avalúos se notificaron con éxito."]);
+                    $this->avaluo = $avaluo;
+
+                    $this->avaluo->load('predioAvaluo.colindancias', 'predioAvaluo.terrenosComun', 'predioAvaluo.construccionesComun', 'predioAvaluo.terrenos', 'predioAvaluo.construcciones', 'predioAvaluo.propietarios.persona');
+
+                    $this->notificar();
+
+                    $this->dispatch('mostrarMensaje', ['success', "Los avalúos se notificaron con éxito."]);
+
+                }
+
+            });
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al notificar por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+            $this->modal = false;
 
         }
 
