@@ -163,6 +163,16 @@
                         @if($tramite->observaciones)
                             <p>Observaciones:{{ $tramite->observaciones }}</p>
                         @endif
+                        @if($tramite->predios)
+                            <p>
+                                @foreach ($tramite->predios as $predio)
+
+                                    {{ $predio->cuentaPredial() }},
+
+                                @endforeach
+
+                            </p>
+                        @endif
                     </th>
 
                     <th style="vertical-align: middle">

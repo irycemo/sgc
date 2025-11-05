@@ -10,7 +10,7 @@
 
                 @foreach ($terrenos as $index => $terreno)
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-12 gap-3 items-start mb-2 bg-gray-50 p-4 rounded-lg" wire:key="row-{{ $loop->index }}">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-12 gap-3 items-start mb-2 bg-gray-50 p-4 rounded-lg" wire:key="terreno-{{ $index }}">
 
                         <div class="flex-auto lg:col-span-2">
 
@@ -46,7 +46,7 @@
 
                                 <div>
 
-                                    <select class="bg-white rounded text-xs w-full" wire:model.live="terrenos.{{ $index }}.valor_unitario">
+                                    <select class="bg-white rounded text-xs w-full" wire:model.live="terrenos.{{ $index }}.valor_unitario" readonly>
 
                                         <option value="" selected>Seleccione una opción</option>
 
@@ -80,51 +80,13 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.valor_unitario" @if($predio && $predio->tipo_predio == 2) readonly @endif>
+                                <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.valor_unitario" @if($predio && $predio->tipo_predio == 2) readonly @endif>
 
                             </div>
 
                             <div>
 
                                 @error('terrenos.' . $index . '.valor_unitario') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                            </div>
-
-                        </div>
-
-                        <div class="flex-auto lg:col-span-2 xl:col-span-1">
-
-                            <div>
-
-                                <label class="text-sm" >Demérito</label>
-
-                            </div>
-
-                            <div>
-
-                                <input type="number" min="0" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.demerito">
-
-                            </div>
-
-                            <div>
-
-                                @error('terrenos.' . $index . '.demerito') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                            </div>
-
-                        </div>
-
-                        <div class="flex-auto lg:col-span-2">
-
-                            <div>
-
-                                <label class="text-sm" >Valor demeritado</label>
-
-                            </div>
-
-                            <div>
-
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model="terrenos.{{ $index }}.valor_demeritado" readonly>
 
                             </div>
 
@@ -146,37 +108,11 @@
 
                         </div>
 
-                        <div class="flex-auto lg:col-span-1 my-auto">
-
-                            <x-button-red
-                                wire:click="borrarTerreno({{ $index }})"
-                                wire:loading.attr="disabled"
-                                wire:target="borrarTerreno({{ $index }})">
-
-                                <img wire:loading wire:target="borrarTerreno({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-
-                                Borrar
-
-                            </x-button-red>
-
-                        </div>
-
                     </div>
 
                 @endforeach
 
             </div>
-
-            <x-button-blue
-                wire:click="agregarTerreno"
-                wire:loading.attr="disabled"
-                wire:target="agregarTerreno">
-
-                <img wire:loading wire:target="agregarTerreno" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-
-                Agregar nuevo
-
-            </x-button-blue>
 
             <div class="flex justify-end">
 
@@ -203,7 +139,7 @@
 
                 @foreach ($construcciones as $index => $construccion)
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-3 mb-2 bg-gray-50 p-4 rounded-lg items-start">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-3 mb-2 bg-gray-50 p-4 rounded-lg items-start" wire:key="construccion-"{{ $index }}>
 
                         <div class="flex-auto lg:col-span-1">
 
@@ -227,106 +163,6 @@
 
                         </div>
 
-                        <div class="flex-auto lg:col-span-3">
-
-                            <div>
-
-                                <label class="text-sm" >Clasificación de construcción</label>
-
-                            </div>
-
-                            <div>
-
-                                <select class="bg-white rounded text-xs w-full" wire:model.live="construcciones.{{ $index }}.valores">
-
-                                    <option value="" selected>Seleccione una opción</option>
-
-                                    @foreach ($valores_construccion as $item)
-
-                                        <option value="{{ $item }}" selected>{{ $item->tipo }}{{ $item->uso }}{{ $item->calidad }}{{ $item->estado }} - ${{ number_format($item->valor, 2) }}</option>
-
-                                    @endforeach
-
-                                </select>
-
-                            </div>
-
-                            <div>
-
-                                @error('construcciones.{{ $index }}.valores') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                            </div>
-
-                        </div>
-
-                        <div class="flex space-x-1 lg:col-span-2">
-
-                            <div class="flex-auto">
-
-                                <div>
-
-                                    <label class="text-sm" >Tipo</label>
-
-                                </div>
-
-                                <div>
-
-                                    <input type="number" class="bg-white rounded text-xs w-full" readonly wire:model.blur="construcciones.{{ $index }}.tipo">
-
-                                </div>
-
-                            </div>
-
-                            <div class="flex-auto">
-
-                                <div>
-
-                                    <label class="text-sm" >Uso</label>
-
-                                </div>
-
-                                <div>
-
-                                    <input type="number" class="bg-white rounded text-xs w-full" readonly wire:model.blur="construcciones.{{ $index }}.uso">
-
-                                </div>
-
-                            </div>
-
-                            <div class="flex-auto">
-
-                                <div>
-
-                                    <label class="text-sm" >Calidad</label>
-
-                                </div>
-
-                                <div>
-
-                                    <input type="number" class="bg-white rounded text-xs w-full" readonly wire:model.blur="construcciones.{{ $index }}.calidad">
-
-                                </div>
-
-                            </div>
-
-                            <div class="flex-auto">
-
-                                <div>
-
-                                    <label class="text-sm" >Estado</label>
-
-                                </div>
-
-                                <div>
-
-                                    <input type="number" class="bg-white rounded text-xs w-full" readonly wire:model.blur="construcciones.{{ $index }}.estado">
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
                         <div class="flex-auto lg:col-span-2">
 
                             <div>
@@ -337,7 +173,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.valor_unitario" readonly>
+                                <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.valor_unitario" readonly>
 
                             </div>
 
@@ -359,7 +195,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.niveles">
+                                <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.niveles">
 
                             </div>
 
@@ -415,37 +251,11 @@
 
                         </div>
 
-                        <div class="flex-auto lg:col-span-1 my-auto">
-
-                            <x-button-red
-                                wire:click="borrarConstruccion({{ $index }})"
-                                wire:loading.attr="disabled"
-                                wire:target="borrarConstruccion({{ $index }})">
-
-                                <img wire:loading wire:target="borrarConstruccion({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-
-                                Borrar
-
-                            </x-button-red>
-
-                        </div>
-
                     </div>
 
                 @endforeach
 
             </div>
-
-            <x-button-blue
-                wire:click="agregarConstruccion"
-                wire:loading.attr="disabled"
-                wire:target="agregarConstruccion">
-
-                <img wire:loading wire:target="agregarConstruccion" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-
-                Agregar nuevo
-
-            </x-button-blue>
 
             <div class="flex justify-end">
 
@@ -474,7 +284,7 @@
 
                     @foreach ($terrenosComun as $index => $item)
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-3 items-start mb-2 bg-gray-50 p-4 rounded-lg">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-3 items-start mb-2 bg-gray-50 p-4 rounded-lg" wire:key="terrenoComun-"{{ $index }}>
 
                             <div class="flex-auto lg:col-span-1">
 
@@ -530,7 +340,7 @@
 
                                 <div>
 
-                                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenosComun.{{ $index }}.valor_unitario">
+                                    <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenosComun.{{ $index }}.valor_unitario">
 
                                 </div>
 
@@ -586,35 +396,9 @@
 
                             </div>
 
-                            <div class="flex-auto lg:col-span-1 my-auto">
-
-                                <x-button-red
-                                    wire:click="borrarTerrenoComun({{ $index }})"
-                                    wire:loading.attr="disabled"
-                                    wire:target="borrarTerrenoComun({{ $index }})">
-
-                                    <img wire:loading wire:target="borrarTerrenoComun({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-
-                                    Borrar
-
-                                </x-button-red>
-
-                            </div>
-
                         </div>
 
                     @endforeach
-
-                    <x-button-blue
-                        wire:click="agregarTerrenoComun"
-                        wire:loading.attr="disabled"
-                        wire:target="agregarTerrenoComun">
-
-                        <img wire:loading wire:target="agregarTerrenoComun" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-
-                        Agregar nuevo
-
-                    </x-button-blue>
 
                 </div>
 
@@ -643,39 +427,7 @@
 
                     @foreach ($construccionesComun as $index => $item)
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-3 items-end mb-2 bg-gray-50 p-4 rounded-lg">
-
-                            <div class="flex-auto lg:col-span-1">
-
-                                <div>
-
-                                    <label class="text-sm" >Clasificación de construccion</label>
-
-                                </div>
-
-                                <div>
-
-                                    <select class="bg-white rounded text-xs w-full" wire:model.blur="construccionesComun.{{ $index }}.valor_clasificacion_construccion">
-
-                                        <option value="" selected>Seleccione una opción</option>
-
-                                        @foreach ($valores_construccion as $item)
-
-                                            <option value="{{ $item->valor }}" selected>{{ $item->tipo }}{{ $item->uso }}{{ $item->calidad }}{{ $item->estado }} - ${{ number_format($item->valor, 2) }}</option>
-
-                                        @endforeach
-
-                                    </select>
-
-                                </div>
-
-                                <div>
-
-                                    @error('construccionesComun.' . $index . '.valor_clasificacion_construccion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                                </div>
-
-                            </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-3 items-end mb-2 bg-gray-50 p-4 rounded-lg" wire:key="construccionComun-"{{ $index }}>
 
                             <div class="flex-auto lg:col-span-1">
 
@@ -765,35 +517,9 @@
 
                             </div>
 
-                            <div class="flex-auto lg:col-span-1 my-auto">
-
-                                <x-button-red
-                                    wire:click="borrarConstruccionComun({{ $index }})"
-                                    wire:loading.attr="disabled"
-                                    wire:target="borrarConstruccionComun({{ $index }})">
-
-                                    <img wire:loading wire:target="borrarConstruccionComun({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-
-                                    Borrar
-
-                                </x-button-red>
-
-                            </div>
-
                         </div>
 
                     @endforeach
-
-                    <x-button-blue
-                        wire:click="agregarConstruccionComun"
-                        wire:loading.attr="disabled"
-                        wire:target="agregarConstruccionComun">
-
-                        <img wire:loading wire:target="agregarConstruccionComun" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-
-                        Agregar nuevo
-
-                    </x-button-blue>
 
                 </div>
 
@@ -815,6 +541,102 @@
             </div>
 
         @endif
+
+    </div>
+
+    <div class="bg-white rounded-lg p-3 flex justify-end  shadow-xl mb-5">
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 items-center justify-center  mx-auto">
+
+            <div class="bg-gray-100 p-4 rounded-xl  overflow-auto">
+
+                <h4 class="text-lg mb-5 text-center">Superficies</h4>
+
+                <table class=" w-full">
+
+                    <thead>
+
+                        <tr>
+                            <th></th>
+                            <th class="text-sm font-light tracking-widest rounded-xl border-gray-500">Privativa</th>
+                            <th class="text-sm font-light tracking-widest rounded-xl border-gray-500">Proporcional</th>
+                            <th class="text-sm font-light tracking-widest rounded-xl border-gray-500">Total</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td class="text-right text-xs lg:text-sm whitespace-nowrap">Superficie de terreno</td>
+                            <td><input readonly class="bg-white rounded text-xs w-fit text-right" type="text" value="{{ $predio->superficie_terreno }}"></td>
+                            <td><input readonly class="bg-white rounded text-xs w-fit text-right" type="text" value="{{ $predio->terrenosComun->sum('superficie_proporcional') }}"></td>
+                            <td><input readonly class="bg-white rounded text-xs w-fit text-right" type="text" value="{{ $predio->superficie_terreno + $predio->terrenosComun->sum('superficie_proporcional') }}"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-right text-xs lg:text-sm whitespace-nowrap">Superficie de construcción</td>
+                            <td><input readonly class="bg-white rounded text-xs w-fit text-right" type="text" value="{{ $predio->superficie_construccion }}"></td>
+                            <td><input readonly class="bg-white rounded text-xs w-fit text-right" type="text" value="{{ $predio->construccionesComun->sum('superficie_proporcional') }}"></td>
+                            <td><input readonly class="bg-white rounded text-xs w-fit text-right" type="text" value="{{ $predio->superficie_construccion  + $predio->construccionesComun->sum('superficie_proporcional') }}"></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="bg-gray-100 p-4 rounded-xl">
+
+                <h4 class="text-lg mb-5 text-center">Valores</h4>
+
+                <table class="mr-3 lg:mr-0">
+
+                    <tbody>
+
+                        <tr>
+                            <td class="text-xs lg:text-sm text-right">Privativa + Proporcional Terrno</td>
+                            <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_terreno, 2) }}"></td>
+                        </tr>
+                        <tr>
+                            <td class="text-xs lg:text-sm text-right">Privativa + Proporcional Construcción</td>
+                            <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_construccion, 2) }}"></td>
+                        </tr>
+
+                        @if($this->predio->ubicacion_en_manzana == 'ESQUINA')
+
+                            <tr>
+                                <td class="text-xs lg:text-sm text-right">Sub Total</td>
+                                <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_terreno + $predio->valor_total_construccion, 2) }}"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-xs lg:text-sm text-right">Ubicación en esquina</td>
+                                <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format(($predio->valor_total_terreno + $predio->valor_total_construccion) * 0.15, 2) }}"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-xs lg:text-sm text-right">Total</td>
+                                <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format(($predio->valor_total_terreno + $predio->valor_total_construccion) + ($predio->valor_total_terreno + $predio->valor_total_construccion) * 0.15, 2) }}"></td>
+                            </tr>
+
+                        @else
+
+                            <tr>
+                                <td class="text-sm text-right">Total</td>
+                                <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($this->predio->valor_catastral, 2) }}"></td>
+                            </tr>
+
+                        @endif
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
 
     </div>
 

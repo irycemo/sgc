@@ -17,7 +17,7 @@ class RegistroUsuarioMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public User $user, public string $password)
+    public function __construct(public User $user)
     {}
 
     /**
@@ -39,7 +39,6 @@ class RegistroUsuarioMail extends Mailable
             markdown: 'emails.usuarios.usuario_registrado',
             with:[
                 'user' => $this->user,
-                'password' => $this->password,
                 'url' => route('login')
             ]
         );

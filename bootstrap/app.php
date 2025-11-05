@@ -19,21 +19,21 @@ return Application::configure(basePath: dirname(__DIR__))
         apiPrefix: 'api/v1',
         then: function(){
 
-            Route::middleware(['web', 'auth', 'esta.activo'])->group(base_path('routes/administrador.php'));
+            Route::middleware(['web', 'auth', 'esta.activo', 'verified'])->group(base_path('routes/administrador.php'));
 
-            Route::middleware(['web', 'auth', 'esta.activo'])->group(base_path('routes/valuacion.php'));
+            Route::middleware(['web', 'auth', 'esta.activo', 'verified'])->group(base_path('routes/valuacion.php'));
 
-            Route::middleware(['web', 'auth', 'esta.activo'])->group(base_path('routes/gestion_catastral.php'));
+            Route::middleware(['web', 'auth', 'esta.activo', 'verified'])->group(base_path('routes/gestion_catastral.php'));
 
-            Route::middleware(['web', 'auth', 'esta.activo'])->group(base_path('routes/anotaciones_tramites_administrativos.php'));
+            Route::middleware(['web', 'auth', 'esta.activo', 'verified'])->group(base_path('routes/anotaciones_tramites_administrativos.php'));
 
-            Route::middleware(['web', 'auth', 'esta.activo'])->group(base_path('routes/cartografia.php'));
+            Route::middleware(['web', 'auth', 'esta.activo', 'verified'])->group(base_path('routes/cartografia.php'));
 
-            Route::middleware(['web', 'auth', 'esta.activo', 'director.activo'])->group(base_path('routes/certificaciones.php'));
+            Route::middleware(['web', 'auth', 'esta.activo', 'director.activo', 'verified'])->group(base_path('routes/certificaciones.php'));
 
-            Route::middleware(['web', 'auth', 'esta.activo'])->group(base_path('routes/tramites.php'));
+            Route::middleware(['web', 'auth', 'esta.activo', 'verified'])->group(base_path('routes/tramites.php'));
 
-            Route::middleware(['web', 'auth', 'esta.activo'])->group(base_path('routes/consultas.php'));
+            Route::middleware(['web', 'auth', 'esta.activo', 'verified'])->group(base_path('routes/consultas.php'));
 
         },
     )

@@ -26,6 +26,12 @@ class TerrenosConstrucciones extends Component
     public $valores_construccion;
 
     protected $validationAttributes  = [
+        'predio.uso_1' => 'uso de predio',
+        'predio.ubicacion_en_manzana' => 'ubicación en manzana',
+        'predio.area_comun_terreno' => 'No se han guardado los terrenos de área común',
+        'predio.area_comun_construccion' => 'No se han guardado las construcciones de área común',
+        'predio.valor_terreno_comun' => 'No se han guardado los terrenos de área común',
+        'predio.valor_construccion_comun' => 'No se han guardado las construcciones de área común',
         'terrenos.*.superficie' => 'superficie',
         'terrenos.*.valor_unitario' => 'valor unitario',
         'construcciones.*.referencia' => 'referencia',
@@ -33,10 +39,12 @@ class TerrenosConstrucciones extends Component
         'construcciones.*.niveles' => 'niveles',
         'construcciones.*.superficie' => 'superficie',
         'construccionesComun.*.area_comun_construccion' => 'área común de construcción',
+        'construccionesComun.*.superficie_proporcional' => 'superficie proporcional',
         'construccionesComun.*.indiviso_construccion' => 'indiviso de construcción',
         'terrenosComun.*.area_terreno_comun' => 'área de terreno común',
         'terrenosComun.*.indiviso_terreno' => 'indiviso de terreno',
         'terrenosComun.*.valor_unitario' => 'valor unitario',
+        'terrenosComun.*.superficie_proporcional' => 'superficie proporcional',
         'construccionesComun.*.valor_clasificacion_construccion' => 'valor de clasificación',
     ];
 

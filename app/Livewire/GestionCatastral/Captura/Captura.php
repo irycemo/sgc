@@ -477,8 +477,6 @@ class Captura extends Component
 
             $this->dispatch('mostrarMensaje', ['success', "El predio se actualizó correctamente."]);
 
-            $this->reset(['accion', 'observaciones']);
-
         } catch (GeneralException $ex) {
 
             $this->dispatch('mostrarMensaje', ['error', $ex->getMessage()]);
