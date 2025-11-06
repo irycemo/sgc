@@ -146,15 +146,19 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
             }
 
-            $aux = $terrenos_comun[0][0];
+            if(isset($row['terrenos_comun'])){
 
-            foreach($terrenos_comun as $terreno){
+                $aux = $terrenos_comun[0][0];
 
-                if($terreno[0] === '') continue;
+                foreach($terrenos_comun as $terreno){
 
-                if($terreno[0] != $aux){
+                    if($terreno[0] === '') continue;
 
-                    throw new GeneralException('Las áreas de los terrenos en común deben ser iguales.');
+                    if($terreno[0] != $aux){
+
+                        throw new GeneralException('Las áreas de los terrenos en común deben ser iguales.');
+
+                    }
 
                 }
 
