@@ -231,8 +231,27 @@
 
         @elseif($radio === 'ubicacion')
 
-            <div class="mb-5 bg-white rounded-lg p-4 shadow-lg" id="ubicacion-div">
-                UBICACION
+            <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg" id="ubicacion-div">
+
+                <x-input-group for="ubicacion" label="Ubicación" :error="$errors->first('ubicacion')" class="w-full lg:w-1/2 mx-auto mb-5">
+
+                    <x-input-text id="ubicacion" wire:model="ubicacion" placeholder="Ingresa el texto para buscar en todos los campos de ubicación del predio"/>
+
+                </x-input-group>
+
+                <button
+                    wire:click="buscarPorUbicacion"
+                    wire:loading.attr="disabled"
+                    wire:target="buscarPorUbicacion"
+                    type="button"
+                    class="bg-blue-400 hover:shadow-lg text-white mx-auto font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+
+                    <img wire:loading wire:target="buscarPorUbicacion" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Buscar
+
+                </button>
+
             </div>
 
         @endif

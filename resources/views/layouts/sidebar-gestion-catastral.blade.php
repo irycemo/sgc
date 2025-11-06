@@ -58,6 +58,20 @@
 
         @endcan
 
+        @can('Lista traslados')
+
+            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+
+                <a href="{{ route('lista_avisos') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
+
+                    Lista de avisos
+
+                </a>
+
+            </div>
+
+        @endcan
+
     </div>
 
 </div>

@@ -2,7 +2,6 @@
 
 namespace App\Traits\Personas;
 
-use App\Exceptions\GeneralException;
 use App\Models\Persona;
 
 trait BuscarPersonaTrait
@@ -13,7 +12,7 @@ trait BuscarPersonaTrait
 
         $persona = null;
 
-        if($rfc && $curp){
+        /* if($rfc && $curp){
 
             $personaRfc = Persona::where('rfc', $rfc)->first();
 
@@ -29,7 +28,9 @@ trait BuscarPersonaTrait
 
             }
 
-        }elseif($rfc){
+        }else */
+
+        if($rfc){
 
             $persona = Persona::where('rfc', $rfc)->first();
 
