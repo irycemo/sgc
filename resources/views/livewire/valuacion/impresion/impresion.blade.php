@@ -22,7 +22,11 @@
 
     </div>
 
-    @if(in_array($avaluo_para, [1,2,7]))
+    @if(in_array($avaluo_para, [1,2]))
+
+        @livewire('valuacion.impresion.variacion_catastral', ['avaluo_para' => $avaluo_para])
+
+    @elseif($avaluo_para == 7)
 
         @livewire('valuacion.impresion.general', ['avaluo_para' => $avaluo_para])
 

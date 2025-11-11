@@ -163,6 +163,8 @@ class Constantes{
         'SUROESTE',
         'SURORIENTE',
         'SURPONIENTE',
+        'ARRIBA',
+        'ABAJO'
     ];
 
     const CLASIFICACION_ZONA = [
