@@ -34,7 +34,7 @@ class Tramites extends Component
     public $predio_id;
     public $observaciones;
 
-    public $tramties_con_predio = ['DM31', 'DM34', 'D727', 'D728', 'D729', 'D730'];
+    public $tramties_con_predio = ['DM31', 'DM34', 'DM32', 'DM35', 'DM30'];
 
     public $filters = [
         'search' => '',

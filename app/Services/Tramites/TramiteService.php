@@ -127,10 +127,6 @@ class TramiteService{
 
         if($this->tramite->solicitante == 'Oficialia de partes'){
 
-            $this->tramite->orden_de_pago = 0;
-
-            $this->tramite->linea_de_captura = 0;
-
             $this->tramite->limite_de_pago = now()->toDateString();
 
             return;
