@@ -69,6 +69,8 @@ class VariacionCatastral extends Component
 
         }
 
+        $this->tramite_inspeccion->avaluo_para = AvaluoPara::VARIACION_VIVIENDA;
+
     }
 
     public function imprimir(){
