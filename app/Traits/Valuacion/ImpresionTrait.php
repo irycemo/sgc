@@ -9,6 +9,7 @@ use App\Models\Tramite;
 use Livewire\Attributes\On;
 use App\Enums\Tramites\AvaluoPara;
 use App\Exceptions\GeneralException;
+use App\Models\PredioIgnorado;
 
 trait ImpresionTrait
 {
@@ -331,6 +332,8 @@ trait ImpresionTrait
                                             ->where('numero_registro', $this->numero_registro);
                                     })
                                     ->get();
+
+            if(!$this->avaluos->first()->predio_ignorado_id) throw new GeneralException('El avalúo no esta relacionado con un proceso de predio ignorado.');
 
             $this->avaluo_predio_ignorado = $this->avaluos->first();
 
