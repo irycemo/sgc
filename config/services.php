@@ -52,6 +52,7 @@ return [
         'rechazar_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_RECHAZAR_AVISO'),
         'autorizar_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_AUTORIZAR_AVISO'),
         'operar_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_OPERAR_AVISO'),
+        'revertir_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_REVERTIR_AVISO'),
         'generar_aviso_pdf' => env('SISTEMA_TRAMITES_EN_LINEA_GENERAR_AVISO_PDF'),
     ],
 
@@ -59,6 +60,7 @@ return [
         'token' => env('SISTEMA_PERITOS_EXTERNOS_TOKEN'),
         'consultar_avaluo' => env('SISTEMA_PERITOS_EXTERNOS_CONSULTAR_AVALUO'),
         'operar_avaluo' => env('SISTEMA_PERITOS_EXTERNOS_OPERAR_AVALUO'),
+        'revertir_avaluo' => env('SISTEMA_PERITOS_EXTERNOS_REVERTIR_AVALUO'),
         'generar_avaluo_pdf' => env('SISTEMA_PERITOS_EXTERNOS_GENERAR_AVALUO_PDF'),
         'consultar_cartografia' => env('SISTEMA_PERITOS_EXTERNOS_CONSULTAR_CARTOGRAFIA'),
         'validar_cartografia' => env('SISTEMA_PERITOS_EXTERNOS_VALIDAR_CARTOGRAFIA'),

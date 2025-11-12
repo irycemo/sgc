@@ -433,7 +433,7 @@ class ArchivoPredioService{
 
             $extension = pathinfo(parse_url($value, PHP_URL_PATH), PATHINFO_EXTENSION);
 
-            $nombre_temp = Str::random(40) . '.' .$extension;
+            $nombre_temp = Str::random(40) . '.' . $extension;
 
             if(app()->isProduction()){
 
@@ -454,7 +454,7 @@ class ArchivoPredioService{
 
             $nombre_temp = null;
 
-            $$extension = null;
+            $extension = null;
 
         }
 

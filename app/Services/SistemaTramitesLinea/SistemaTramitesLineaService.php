@@ -187,6 +187,41 @@ class SistemaTramitesLineaService{
 
     }
 
+    public function revertirAviso(int $aviso_stl):array
+    {
+
+        $response = Http::withToken(config('services.sistema_tramites_en_linea.token'))
+                            ->accept('application/json')
+                            ->asForm()
+                            ->post(
+                                config('services.sistema_tramites_en_linea.revertir_aviso'),
+                                [
+                                    'id' => $aviso_stl,
+                                ]
+                            );
+
+        if($response->status() !== 200){
+
+            Log::error("Error al revertir aviso. " . $response);
+
+            $data = json_decode($response, true);
+
+            if(isset($data['error'])){
+
+                throw new GeneralException($data['error']);
+
+            }
+
+            throw new GeneralException("Error al revertir aviso.");
+
+        }else{
+
+            return json_decode($response, true);
+
+        }
+
+    }
+
     public function generarAvisoPdf(int $aviso_id):array
     {
 

@@ -165,7 +165,23 @@ class RevisarTraslado extends Component
 
             $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
+            (new SistemaTramitesLineaService())->revertirAviso($this->traslado->aviso_stl);
+
+            if($this->traslado->tipo == 'revision'){
+
+                (new SistemaPeritosExternosService())->revertirAvaluo($this->traslado->avaluo_spe);
+
+            }
+
         } catch (\Throwable $th) {
+
+            (new SistemaTramitesLineaService())->revertirAviso($this->traslado->aviso_stl);
+
+            if($this->traslado->tipo == 'revision'){
+
+                (new SistemaPeritosExternosService())->revertirAvaluo($this->traslado->avaluo_spe);
+
+            }
 
             Log::error("Error al operar traslado: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
 
@@ -373,18 +389,6 @@ class RevisarTraslado extends Component
             foreach($this->aviso['predio']['adquirientes'] as $adquiriente){
 
                 $persona = $this->buscarPersona($adquiriente['persona']['rfc'], $adquiriente['persona']['curp'], $adquiriente['persona']['tipo'], $adquiriente['persona']['nombre'], $adquiriente['persona']['ap_materno'], $adquiriente['persona']['ap_paterno'], $adquiriente['persona']['razon_social']);
-
-                /* Persona::query()
-                            ->where(function($q) use($adquiriente){
-                                $q->when(isset($adquiriente['nombre']), fn($q) => $q->where('nombre',$adquiriente['nombre']))
-                                    ->when(isset($adquiriente['ap_paterno']), fn($q) => $q->where('ap_paterno', $adquiriente['ap_paterno']))
-                                    ->when(isset($adquiriente['ap_materno']), fn($q) => $q->where('ap_materno', $adquiriente['ap_materno']));
-                            })
-                            ->when(isset($adquiriente['razon_social']), fn($q) => $q->orWhere('razon_social', $adquiriente['razon_social']))
-                            ->when(isset($adquiriente['rfc']), fn($q) => $q->orWhere('rfc', $adquiriente['rfc']))
-                            ->when(isset($adquiriente['curp']), fn($q) => $q->orWhere('curp', $adquiriente['curp']))
-                            ->when(isset($adquiriente['correo']), fn($q) => $q->orWhere('correo', $adquiriente['correo']))
-                            ->first(); */
 
                 if(!$persona){
 

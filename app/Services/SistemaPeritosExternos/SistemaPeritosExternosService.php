@@ -78,6 +78,41 @@ class SistemaPeritosExternosService{
 
     }
 
+    public function revertirAvaluo(int $avaluo_spe):array
+    {
+
+        $response = Http::withToken(config('services.sistema_peritos_externos.token'))
+                            ->accept('application/json')
+                            ->asForm()
+                            ->post(
+                                config('services.sistema_peritos_externos.revertir_avaluo'),
+                                [
+                                    'id' => $avaluo_spe,
+                                ]
+                            );
+
+        if($response->status() !== 200){
+
+            Log::error("Error al revertir avalúo. " . $response);
+
+            $data = json_decode($response, true);
+
+            if(isset($data['error'])){
+
+                throw new GeneralException($data['error']);
+
+            }
+
+            throw new GeneralException("Error al revertir avalúo.");
+
+        }else{
+
+            return json_decode($response, true);
+
+        }
+
+    }
+
     public function generarAvaluoPdf(int $aviso_id):array
     {
 
