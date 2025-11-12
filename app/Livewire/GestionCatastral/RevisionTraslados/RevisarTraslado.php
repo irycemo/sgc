@@ -127,7 +127,7 @@ class RevisarTraslado extends Component
 
         try {
 
-            $this->revisarPagoIsai();
+            /* $this->revisarPagoIsai(); */
 
             if($this->traslado->tipo == 'revision'){
 
