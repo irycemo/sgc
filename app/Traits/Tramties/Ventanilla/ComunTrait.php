@@ -156,6 +156,18 @@ trait ComunTrait
 
         }elseif($this->modelo_editar->solicitante == 'Oficialia de partes' || $this->modelo_editar->solicitante == 'Escrituración social'){
 
+            if(!auth()->user()->can('Trámite exento')){
+
+                $this->dispatch('mostrarMensaje', ['warning', "No tiene permiso para elaborar trámites exentos."]);
+
+                $this->modelo_editar->tipo_tramite = 'normal';
+
+                $this->modelo_editar->solicitante = '';
+
+                return;
+
+            }
+
             $this->flags['dependencias'] = true;
             $this->flags['numero_oficio'] = true;
             $this->modelo_editar->tipo_tramite = 'exento';
@@ -174,7 +186,7 @@ trait ComunTrait
 
             if(!auth()->user()->can('Trámite exento')){
 
-                $this->dispatch('mostrarMensaje', ['error', "No tiene permiso para elaborar trámites exentos."]);
+                $this->dispatch('mostrarMensaje', ['warning', "No tiene permiso para elaborar trámites exentos."]);
 
                 $this->modelo_editar->tipo_tramite = 'normal';
 
