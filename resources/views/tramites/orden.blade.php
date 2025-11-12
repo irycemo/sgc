@@ -123,7 +123,7 @@
                     <th width="80%" style="vertical-align: middle">
                         <div >
                             <p style="font-size: 12px; text-align: center">GOBIERNO DEL ESTADO DE MICHOACÁN DE OCAMPO</p>
-                            <p style="font-size: 12px; text-align: center">DIRECCIÓN DECATASTRO</p>
+                            <p style="font-size: 12px; text-align: center">DIRECCIÓN DE CATASTRO</p>
                         </div>
                     </th>
 
