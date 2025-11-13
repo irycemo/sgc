@@ -127,7 +127,7 @@ class RevisarTraslado extends Component
 
         try {
 
-            /* $this->revisarPagoIsai(); */
+            $this->revisarPagoIsai();
 
             if($this->traslado->tipo == 'revision'){
 
@@ -139,6 +139,14 @@ class RevisarTraslado extends Component
 
                 $this->actualizarPredio();
 
+                $this->traslado->update(['estado' => 'operado', 'actualizado_por' => auth()->id()]);
+
+                $this->traslado->audits()->latest()->first()->update(['tags' => 'Operó traslado']);
+
+                $this->procesarTramtie();
+
+                $this->anexarArchivoAlPredio();
+
                 (new SistemaTramitesLineaService())->operarAviso($this->traslado->aviso_stl);
 
                 if($this->traslado->tipo == 'revision'){
@@ -148,14 +156,6 @@ class RevisarTraslado extends Component
                     $this->anexarFotosAlPredio();
 
                 }
-
-                $this->traslado->update(['estado' => 'operado', 'actualizado_por' => auth()->id()]);
-
-                $this->traslado->audits()->latest()->first()->update(['tags' => 'Operó traslado']);
-
-                $this->procesarTramtie();
-
-                $this->anexarArchivoAlPredio();
 
             });
 

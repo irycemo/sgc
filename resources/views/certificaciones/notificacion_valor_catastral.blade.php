@@ -336,9 +336,9 @@
 
                         <div style="text-align: center">
 
-                            <p><img style="height: 40px;" src="{{ public_path('efirmas/' . $datos_control->imagen_director) }}" alt=""></p>
+                            <p><img style="width:100px; height:auto; align-self: center;" src="{{ public_path('efirmas/' . $datos_control->imagen_director) }}" alt="Firma"></p>
                             <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $datos_control->director }}</p>
-                            <p >DIRECTOR DE CATASTRO</p>
+                            <p style="text-align: center; margin: 0;">{{ $datos_control->titular_cargo }}</p>
                             <p>Firma Electrónica:</p>
 
                         </div>

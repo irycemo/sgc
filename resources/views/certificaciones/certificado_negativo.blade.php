@@ -194,9 +194,9 @@
                 <table style="margin-top: 20px">
 
                     @if(isset($datos_control->director))
-                        <p><img style="height: 40px;" src="{{ public_path('efirmas/' . $datos_control->imagen_director) }}" alt=""></p>
+                        <p><img style="width:100px; height:auto; align-self: center;" src="{{ public_path('efirmas/' . $datos_control->imagen_director) }}" alt="Firma"></p>
                         <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $datos_control->director }}</p>
-                        <p style="text-align: center;">DIRECTOR DE CATASTRO</p>
+                        <p style="text-align: center;">{{ $datos_control->titular_cargo }}</p>
 
                     @else
 

@@ -64,6 +64,7 @@ class NotificacionValorCatastralController extends Controller
         $datos_control->tramite_inspeccion = $tramite_inspeccion?->año . '-' . $tramite_inspeccion?->folio . '-' . $tramite_inspeccion?->usuario;
         $datos_control->jefe_departamento = $this->jefe_departamento_valuacion->name;
         $datos_control->director = $this->director->name;
+        $datos_control->titular_cargo = 'Director general';
         $datos_control->impreso_por = auth()->user()->name;
         $datos_control->impreso_en = now()->format('d/m/Y H:i:s');
         $datos_control->numero_avaluos = count($avaluos);

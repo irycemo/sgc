@@ -45,6 +45,7 @@ class CertificadoHistoriaController extends Controller
         $datos_control->solicitante = $tramite_historia->nombre_solicitante;
         $datos_control->historia = $historia;
         $datos_control->director = $this->director->name;
+        $datos_control->titular_cargo = 'Director general';
         $datos_control->impreso_por = auth()->user()->name;
         $datos_control->impreso_en = now()->format('d/m/Y H:i:s');
 

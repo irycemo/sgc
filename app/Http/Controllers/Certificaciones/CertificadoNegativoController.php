@@ -42,6 +42,7 @@ class CertificadoNegativoController extends Controller
         $datos_control->tramite = $tramite->año . '-' . $tramite->folio . '-' . $tramite->usuario;
         $datos_control->solicitante = $tramite->nombre_solicitante;
         $datos_control->director = $this->director->name;
+        $datos_control->titular_cargo = 'Director general';
         $datos_control->impreso_por = auth()->user()->name;
         $datos_control->impreso_en = now()->format('d/m/Y H:i:s');
 
