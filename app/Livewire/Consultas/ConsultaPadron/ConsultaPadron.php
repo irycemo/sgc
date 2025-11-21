@@ -150,13 +150,13 @@ class ConsultaPadron extends Component
 
             }
 
-            if($this->predio->status != 'activo'){
+            /* if($this->predio->status != 'activo'){
 
                 $this->dispatch('mostrarMensaje', ['warning', "El predio no esta activo."]);
 
                 Cache::forget('consulta-predio-' . $this->getId());
 
-            }
+            } */
 
             $this->flag = true;
 

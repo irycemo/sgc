@@ -170,7 +170,7 @@
                     DEL ESTADO DE MICHOACÁN DE OCAMPO, 8 FRACCIONES XI Y XVIII,DEL REGLAMENTO DE LA LEY DE LA
                     FUNCIÓN REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN DE OCAMPO,Y II FRACCIONES I,II,VI,XXVII
                     Y XXXIV DEL REGLAMENTO INTERIOR DEL INSTITUTO REGISTRAL Y CATASTRAL DEL ESTADO DE MICHOACÁN
-                    DE OCAMPO EL SUSCRITO  @if(isset($datos_control->director)) <strong style="text-transform: uppercase;"> {{ $datos_control->director }}, DIRECTOR DE CATASTRO.</strong> @elseif(isset($datos_control->titular)) <strong style="text-transform: uppercase;">{{ $datos_control->titular }}, {{ $datos_control->titular_cargo }}. </strong> @endif
+                    DE OCAMPO EL SUSCRITO  @if(isset($datos_control->director)) <strong style="text-transform: uppercase;"> {{ $datos_control->director }}, {{ $datos_control->titular_cargo }}.</strong> @elseif(isset($datos_control->titular)) <strong style="text-transform: uppercase;">{{ $datos_control->titular }}, {{ $datos_control->titular_cargo }}. </strong> @endif
                     QUE HABIENDO EFECTUADO UNA REVISIÓN DE LOS PADRONES CATASTRALES EXISTENTES EN ESTA OFICINA A MI CARGO, NO SE ENCONTRÓ REGISTRO DE PROPIEDAD A NOMBRE DE: <strong> {{ $datos_control->nombre }}.</strong>
                 </p>
 

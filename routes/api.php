@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\V1\Propietarios\ConsultarPropietariosController;
 use App\Http\Controllers\Api\V1\Tramites\ConsultarCertificadoAvisoController;
 use App\Http\Controllers\Api\V1\Certificaciones\ConsultarCertificadosController;
 use App\Http\Controllers\Api\V1\Certificaciones\GenerarCertificadoPdfController;
+use App\Http\Controllers\Api\V1\Oficinas\OficinasController;
 
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -60,5 +61,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('registrar_pago_isai', [RegistrarPagoIsaiController::class, 'registrarPagoIsai']);
 
     Route::post('consultar_estadisticas', [ConsultarTramitesController::class, 'consultarEstadisticas']);
+
+    Route::post('consultar_oficinas', [OficinasController::class, 'consultarOficinas']);
 
 });

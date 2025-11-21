@@ -14,7 +14,7 @@
 
                 <option value="">Seleccione una opción</option>
                 <option value="publicación">Publicación</option>
-                @if($this->modelo_editar->tramite?->servicio->clave_ingreso === 'DM27')
+                @if($this->modelo_editar->tramite?->servicio->nombre === 'Solicitud de Predio Ignorado')
                     <option value="asignar clave">Asignar clave catastral</option>
                     <option value="periódico oficial">Periódico oficial</option>
                 @endif
