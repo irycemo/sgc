@@ -218,7 +218,9 @@ class RevisarTraslado extends Component
 
         Storage::put('livewire-tmp/'. $nombre_temp, $pdfContent);
 
-        (new ArchivoPredioService($this->traslado->predio, null))->guardarConUrl('livewire-tmp/'. $nombre_temp);
+        $descripcion = 'aviso_' . $this->traslado->tipo . '_' . $this->aviso['año'] . '_' . $this->aviso['folio'] . '_' . $this->aviso['usuario'];
+
+        (new ArchivoPredioService($this->traslado->predio, null, $descripcion))->guardarConUrl('livewire-tmp/'. $nombre_temp);
 
     }
 
@@ -233,7 +235,7 @@ class RevisarTraslado extends Component
             'microlocalizacion' => $this->avaluo['microlocalizacion'],
             'poligonoImagen' => $this->avaluo['poligonoImagen']];
 
-        (new ArchivoPredioService($this->traslado->predio, null))->anexarFotosAlPredio($urls);
+        (new ArchivoPredioService($this->traslado->predio, null, null))->anexarFotosAlPredio($urls);
 
     }
 

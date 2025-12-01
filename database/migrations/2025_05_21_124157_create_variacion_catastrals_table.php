@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedInteger('folio')->nullable();
             $table->string('estado');
             $table->foreignId('tramite_id')->constrained();
+            $table->foreignId('predio_id')->constrained();
             $table->string('promovente');
             $table->string('finado')->nullable();
             $table->string('archivo')->nullable();

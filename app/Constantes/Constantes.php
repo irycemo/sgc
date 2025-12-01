@@ -718,4 +718,25 @@ class Constantes{
         'ACTUALIZACIÓN'
     ];
 
+    const ESTADOS_VARIACION_CATASTRAL = [
+        1 => 'nuevo',
+        2 => 'publicacion',
+        3 => 'valuacion',
+        4 => 'resolucion',
+        5 => 'firma',
+        6 => 'concluido',
+        7 => 'rechazado'
+    ];
+
+    const ESTADOS_PREDIO_IGNORADO = [
+        1 => 'nuevo',
+        2 => 'publicacion',
+        3 => 'asignar clave',
+        3 => 'valuacion',
+        4 => 'resolucion',
+        5 => 'firma',
+        6 => 'concluido',
+        7 => 'rechazado'
+    ];
+
 }

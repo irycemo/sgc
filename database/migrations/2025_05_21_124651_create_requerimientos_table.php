@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('requerimientoable_id');
             $table->string('requerimientoable_type');
+            $table->foreignId('requerimiento_id')->nullable()->references('id')->on('requerimientos');
             $table->string('estado');
             $table->string('archivo_url')->nullable();
             $table->string('usuario_stl')->nullable();

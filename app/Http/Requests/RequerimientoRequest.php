@@ -26,7 +26,7 @@ class RequerimientoRequest extends FormRequest
             'documento' => 'nullable',
             'certificacion_id' => 'required',
             'usuario' => 'required',
-            'archivo_url' => 'nullable'
+            'archivo_url' => 'nullable',
         ];
     }
 }

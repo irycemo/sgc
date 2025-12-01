@@ -54,6 +54,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('crear_requerimiento', [CrearRequerimientoController::class, 'crearRequerimiento']);
 
+    Route::post('responder_requerimiento', [CrearRequerimientoController::class, 'responderRequerimiento']);
+
+    Route::post('crear_requerimiento_oficina', [CrearRequerimientoController::class, 'crearRequerimientoOficina']);
+
+    Route::post('consultar_requerimiento', [CrearRequerimientoController::class, 'consultarRequerimiento']);
+
+    Route::post('consultar_requerimientos_oficina', [CrearRequerimientoController::class, 'consultarRequerimientosOficina']);
+
     Route::post('generar_certificado_pdf', [GenerarCertificadoPdfController::class, 'generarPdf']);
 
     Route::post('acreditar_pago', [AcreditarPagoController::class, 'acreditarPago']);

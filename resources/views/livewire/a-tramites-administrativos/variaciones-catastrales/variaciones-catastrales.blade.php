@@ -52,7 +52,7 @@
 
             @can('Crear variación')
 
-                <div class="">
+                <div class="ml-auto">
 
                     <button wire:click="abrirModalCrear" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 text-sm py-2 px-4 text-white rounded-full hidden md:block items-center justify-center focus:outline-gray-400 focus:outline-offset-2">
 
@@ -215,7 +215,7 @@
 
                                     @endif
 
-                                    @if($variacion->estado !== 'concluido')
+                                    @if(!in_array($variacion->estado, ['rechazado', 'aprovado']))
 
                                         @can('Editar variación')
 
@@ -247,7 +247,9 @@
 
                                         @if($variacion->archivo)
 
-                                            <a href="{{ Storage::disk('variacionescatastrales')->url($variacion->archivo) }}" target="_blank" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" role="menuitem">Ver archivo</a>
+                                            <a href="{{ Storage::disk('variacionescatastrales')->url($variacion->archivo) }}" target="_blank" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" role="menuitem">
+                                                Ver archivo
+                                            </a>
 
                                         @endif
 
@@ -274,6 +276,15 @@
                                             </button>
 
                                         @endcan
+
+                                        <button
+                                            wire:confirm="¿Esta seguro que desea rechazar la variacióin catastral?"
+                                            wire:click="rechazar({{ $variacion->id }})"
+                                            wire:loading.attr="disabled"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Rechazar
+                                        </button>
 
                                     @endif
 

@@ -2,11 +2,13 @@
 
 namespace App\Livewire\ATramitesAdministrativos\PrediosIgnorados;
 
+use App\Models\File;
 use App\Models\User;
 use App\Models\Avaluo;
 use App\Models\Oficina;
 use App\Models\Tramite;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Constantes\Constantes;
@@ -18,7 +20,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
 use Illuminate\Support\Facades\Storage;
-use App\Services\Predio\ArchivoPredioService;
 use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 
 class PrediosIgnorados extends Component

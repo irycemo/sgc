@@ -63,7 +63,9 @@
                 <p>Registrado por: {{ $avaluo->creadoPor->name }}</p>
                 <p>Registrado en: {{ $avaluo->created_at }}</p>
 
-            </div><div class="rounded-lg bg-gray-100 py-1 px-2">
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
 
                 <strong>Notificación</strong>
 
@@ -71,6 +73,30 @@
                 <p>Notificado en: {{ $avaluo->notificado_en?->format('d-m-Y') }}</p>
 
             </div>
+
+            @if($avaluo->predioIgnorado)
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Predio ignorado</strong>
+
+                    <p>{{ $avaluo->predioIgnorado->año }}-{{ $avaluo->predioIgnorado->folio }}</p>
+
+                </div>
+
+            @endif
+
+            @if($avaluo->variacionCatastral)
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Variación catastral</strong>
+
+                    <p>{{ $avaluo->variacionCatastral->año }}-{{ $avaluo->variacionCatastral->folio }}</p>
+
+                </div>
+
+            @endif
 
         </div>
 

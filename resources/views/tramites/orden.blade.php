@@ -177,7 +177,7 @@
 
                     <th style="vertical-align: middle">
 
-                        @if($tramite->solicitante != 'Oficialia de partes')
+                        @if($tramite->solicitante != 'Oficialia de partes' && $tramite->tipo_tramite != 'exento')
 
                             <div class="text-center" >
 

@@ -24,6 +24,7 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
         'ruta_predios' => 'sgc/predios_archivo/',
+        'ruta_predios_fotos' => 'sgc/predios_fotos/',
         'ruta_certificaciones' => 'sgc/certificaciones/',
     ],
 

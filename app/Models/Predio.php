@@ -64,15 +64,41 @@ class Predio extends Model implements Auditable
         return $this->hasMany(Bloqueo::class);
     }
 
-    public function archivos(){
+    public function files(){
 
         return $this->morphMany(File::class, 'fileable');
 
     }
 
+    public function archivos(){
+
+        return File::where('fileable_id', $this->id)
+                ->where('fileable_type', 'App\Models\Predio')
+                ->where(function($q){
+                    $q->whereNotIn('descripcion', ['croquis', 'fachada', 'foto2', 'foto3', 'foto4', 'microlocalizacion', 'poligonoImagen'])
+                        ->where('descripcion', 'not like', '%foto_anterior%');
+                })
+                ->get();
+
+        /* return $this->files()->whereNotIn('descripcion', ['croquis', 'fachada', 'foto2', 'foto3', 'foto4', 'microlocalizacion', 'poligonoImagen'])
+                                ->where('descripcion', 'not like', '%foto_anterior%')->get(); */
+
+    }
+
     public function fotos(){
 
-        return $this->archivos()->whereIn('descripcion', ['croquis', 'fachada', 'foto2', 'foto3', 'foto4', 'microlocalizacion', 'poligonoImagen'])->get();
+        return File::where('fileable_id', $this->id)
+                ->where('fileable_type', 'App\Models\Predio')
+                ->where(function($q){
+                    $q->whereIn('descripcion', ['croquis', 'fachada', 'foto2', 'foto3', 'foto4', 'microlocalizacion', 'poligonoImagen'])
+                    ->orWhere('descripcion', 'like', '%foto_anterior%');
+                })
+                ->get();
+
+        /* return $this->files()
+                        ->whereIn('descripcion', ['croquis', 'fachada', 'foto2', 'foto3', 'foto4', 'microlocalizacion', 'poligonoImagen'])
+                        ->orWhere('descripcion', 'like', '%foto_anterior%')
+                        ->get(); */
 
     }
 

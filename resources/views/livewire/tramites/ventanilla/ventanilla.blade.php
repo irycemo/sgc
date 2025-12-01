@@ -169,6 +169,12 @@
 
         @endif
 
+        @if($flags['Variaciones Catastrales'])
+
+            @livewire('tramites.ventanilla.variaciones-catastrales', ['servicio' => $servicio, 'tramite' => $tramite, 'años' => $años, 'solicitantes' => $solicitantes, 'dependencias' => $dependencias, 'notarias' => $notarias])
+
+        @endif
+
     </div>
 
 </div>

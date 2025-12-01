@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\GestionCatastral\Captura\Captura;
 use App\Livewire\GestionCatastral\ListaAvisos\ListaAvisos;
 use App\Livewire\GestionCatastral\RevisionTraslados\Traslados;
+use App\Livewire\GestionCatastral\Requerimientos\Requerimientos;
 use App\Livewire\GestionCatastral\RevisionTraslados\RevisarTraslado;
 
 Route::group([], function(){
@@ -15,5 +16,7 @@ Route::group([], function(){
     Route::get('revisar_traslado/{traslado}', RevisarTraslado::class)->middleware('permission:Revisar traslados')->name('revisar_traslado');
 
     Route::get('lista_avisos', ListaAvisos::class)->middleware('permission:Lista traslados')->name('lista_avisos');
+
+    Route::get('requerimientos', Requerimientos::class)->name('requerimientos');
 
 });

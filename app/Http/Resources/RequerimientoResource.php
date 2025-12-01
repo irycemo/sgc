@@ -20,7 +20,9 @@ class RequerimientoResource extends JsonResource
             'descripcion' => $this->descripcion,
             'creado_por' => $this->creadoPor->name,
             'created_at' => $this->created_at,
-            'usuario_stl' => $this->usuario_stl
+            'usuario_stl' => $this->usuario_stl,
+            'archivo_url' => $this->archivo_url,
+            'estado' => $this->estado,
         ];
     }
 }

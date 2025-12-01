@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Valuacion;
 
+use App\Models\File;
 use App\Models\Avaluo;
 use App\Models\Predio;
 use App\Models\Persona;
@@ -10,6 +11,7 @@ use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\Colindancia;
 use App\Models\Propietario;
+use Illuminate\Support\Str;
 use App\Models\Construccion;
 use Livewire\WithPagination;
 use App\Models\TerrenosComun;
@@ -17,11 +19,11 @@ use App\Constantes\Constantes;
 use App\Traits\ComponentesTrait;
 use Livewire\Attributes\Computed;
 use App\Enums\Tramites\AvaluoPara;
-use App\Exceptions\GeneralException;
 use Illuminate\Support\Facades\DB;
 use App\Models\ConstruccionesComun;
 use Illuminate\Support\Facades\Log;
-use App\Services\Predio\ArchivoPredioService;
+use App\Exceptions\GeneralException;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Notificacion extends Component
@@ -71,6 +73,22 @@ class Notificacion extends Component
                             ->first();
 
             if($avaluo){
+
+                if($avaluo->predioIgnorado && $avaluo->predioIgnorado->estado != 'aprovado'){
+
+                    $this->dispatch('mostrarMensaje', ['warning', "El proceso de predio ignorado asociado al trámite no ha sido aprovado."]);
+
+                    return;
+
+                }
+
+                if($avaluo->variacionCatastral && $avaluo->variacionCatastral?->estado != 'aprovado'){
+
+                    $this->dispatch('mostrarMensaje', ['warning', "El proceso de variación catastral asociado al trámite no ha sido aprovado."]);
+
+                    return;
+
+                }
 
                 $this->flag_notificar = true;
 
@@ -135,11 +153,26 @@ class Notificacion extends Component
 
         if($this->tramite->avaluo_para === AvaluoPara::PREDIO_IGNORADO){
 
-            if($this->avaluo->predioIgnorado->archivo){
+            $pdfContent = file_get_contents($this->avaluo->predioIgnorado->archivo);
 
-                (new ArchivoPredioService($this->predio, null))->guardarConUrl('prediosignorados/'. $this->avaluo->predioIgnorado->archivo);
+            $nombre_temp = Str::random(40) . '.pdf';
+
+            if(app()->isProduction()){
+
+                Storage::disk('s3')->put(config('services.ses.ruta_predios') . $nombre_temp, $pdfContent);
+
+            }else{
+
+                Storage::put('predios_archivo/' . $nombre_temp, $pdfContent);
 
             }
+
+            File::create([
+                'fileable_id' => $this->predio->id,
+                'fileable_type' => 'App\Models\Predio',
+                'descripcion' => 'predio_ignorado_' . $this->modelo_editar->año . '_' . $this->modelo_editar->folio,
+                'url' => $nombre_temp
+            ]);
 
         }
 

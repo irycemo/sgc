@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Models\Oficina;
 use Livewire\Component;
 use App\Models\Permission;
-use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use App\Constantes\Constantes;
 use App\Traits\ComponentesTrait;

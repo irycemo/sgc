@@ -110,7 +110,7 @@ class AsignarCoordenadas extends Component
 
             if($this->predio->status == 'bloqueado'){
 
-                $this->dispatch('mostrarMensaje', ['error', "El predio se encuentra bloqueado."]);
+                $this->dispatch('mostrarMensaje', ['warning', "El predio se encuentra bloqueado."]);
                 $this->crearModeloVacio();
                 return;
 
@@ -118,7 +118,7 @@ class AsignarCoordenadas extends Component
 
         } catch(ModelNotFoundException $e){
 
-            $this->dispatch('mostrarMensaje', ['error', "No se encontro predio con la cuenta predial ingresada."]);
+            $this->dispatch('mostrarMensaje', ['warning', "No se encontro predio con la cuenta predial ingresada."]);
 
         } catch (\Throwable $th) {
 

@@ -16,11 +16,10 @@
                 <option value="publicación">Publicación</option>
                 @if($this->modelo_editar->tramite?->servicio->nombre === 'Solicitud de Predio Ignorado')
                     <option value="asignar clave">Asignar clave catastral</option>
-                    <option value="periódico oficial">Periódico oficial</option>
                 @endif
-                <option value="oposición">Oposición</option>
+                <option value="resolucion">Resolución</option>
                 <option value="firma">Firma</option>
-                <option value="concluido">Concluido</option>
+                <option value="aprovado">Aprovar</option>
 
             </x-input-select>
 

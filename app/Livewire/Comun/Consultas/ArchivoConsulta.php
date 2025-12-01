@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Comun\Consultas;
 
+use App\Models\File;
 use App\Models\Predio;
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
@@ -13,6 +14,7 @@ class ArchivoConsulta extends Component
     public Predio $predio;
     public $archivos = [];
     public $fotos;
+    public $archivos_anteriores;
 
     public function placeholder()
     {
@@ -23,7 +25,17 @@ class ArchivoConsulta extends Component
 
         $this->predio = Predio::find($this->predio_id);
 
-        if(!$this->predio->archivos->where('descripcion', 'archivo')->first()){
+        $this->archivos_anteriores = File::where('fileable_id', $this->predio->id)
+                                        ->where('fileable_type', 'App\Models\Predio')
+                                        ->where(function($q){
+                                            $q->where('descripcion', 'LIKE' , '%archivo_anterior%')
+                                                ->orWhere('descripcion', 'LIKE' , '%traslado_anterior%')
+                                                ->orWhere('descripcion', 'LIKE' , '%avaluo_anterior%')
+                                                ->orWhere('descripcion', 'LIKE' , '%foto_anterior%');
+                                        })
+                                        ->first();
+
+        if(!$this->archivos_anteriores){
 
             try {
 
@@ -58,10 +70,6 @@ class ArchivoConsulta extends Component
                 $this->archivos = [];
 
             }
-
-        }else{
-
-
 
         }
 

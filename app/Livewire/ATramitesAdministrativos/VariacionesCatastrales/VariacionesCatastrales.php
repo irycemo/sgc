@@ -2,6 +2,7 @@
 
 namespace App\Livewire\ATramitesAdministrativos\VariacionesCatastrales;
 
+use App\Models\File;
 use App\Models\User;
 use App\Models\Avaluo;
 use App\Models\Predio;
@@ -11,6 +12,7 @@ use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\Colindancia;
 use App\Models\Propietario;
+use Illuminate\Support\Str;
 use App\Models\Construccion;
 use App\Models\PredioAvaluo;
 use Livewire\WithPagination;
@@ -25,7 +27,6 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ConstruccionesComun;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
-use App\Services\Predio\ArchivoPredioService;
 use Illuminate\Support\Facades\Storage;
 use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 
@@ -117,7 +118,7 @@ class VariacionesCatastrales extends Component
 
         }
 
-        if(!in_array($this->tramite->servicio->clave_ingreso, ['DM27', 'DM27'])){
+        if(!in_array($this->tramite->servicio->clave_ingreso, ['DM27'])){
 
             $this->dispatch('mostrarMensaje', ['warning', "El trámite no corresponde a una variación catastral."]);
 
@@ -155,23 +156,34 @@ class VariacionesCatastrales extends Component
 
             DB::transaction(function () {
 
-                if(auth()->user()->hasRole('Oficina rentistica')){
+                foreach($this->tramite->predios as $predio){
 
-                    $this->modelo_editar->estado = 'revisión';
-                    $this->modelo_editar->oficina_id = auth()->user()->oficina_id;
-                    $this->modelo_editar->folio = (VariacionCatastral::where('año', now()->format('Y'))->max('folio') ?? 0) + 1;
+                    $variacion = VariacionCatastral::make();
 
-                }else{
+                    if(auth()->user()->hasRole('Oficina rentistica')){
 
-                    $this->modelo_editar->estado = 'nuevo';
-                    $this->modelo_editar->folio = (VariacionCatastral::where('año', now()->format('Y'))->max('folio') ?? 0) + 1;
+                        $variacion->estado = 'revisión';
+                        $variacion->oficina_id = auth()->user()->oficina_id;
+                        $variacion->folio = (VariacionCatastral::where('año', now()->format('Y'))->max('folio') ?? 0) + 1;
+
+                    }else{
+
+                        $variacion->estado = 'nuevo';
+                        $variacion->folio = (VariacionCatastral::where('año', now()->format('Y'))->max('folio') ?? 0) + 1;
+
+                    }
+
+                    $variacion->promovente = $this->modelo_editar->promovente;
+                    $variacion->finado = $this->modelo_editar->finado;
+                    $variacion->oficina_id = $this->modelo_editar->oficina_id;
+
+                    $variacion->tramite_id = $this->tramite->id;
+                    $variacion->predio_id = $predio->id;
+                    $variacion->año = now()->format('Y');
+                    $variacion->creado_por = auth()->id();
+                    $variacion->save();
 
                 }
-
-                $this->modelo_editar->tramite_id = $this->tramite->id;
-                $this->modelo_editar->año = now()->format('Y');
-                $this->modelo_editar->creado_por = auth()->id();
-                $this->modelo_editar->save();
 
                 $this->resetearTodo($borrado = true);
 
@@ -336,17 +348,15 @@ class VariacionesCatastrales extends Component
 
     public function revisarAvaluosActivosDelPredio(){
 
-        $predio = $this->modelo_editar->tramite->predios()->first();
-
-        $avaluo = Avaluo::where('estado', '!=', 'notificado')->where('predio', $predio->id)->first();
+        $avaluo = Avaluo::where('estado', '!=', 'notificado')->where('predio', $this->modelo_editar->predio->id)->first();
 
         if($avaluo){
 
-            throw new GeneralException('Ya existe un avalúo del predio ' . $predio->cuentaPredial() . ' es necesario concluirlo o eliminarlo.');
+            throw new GeneralException('Ya existe un avalúo del predio ' . $this->modelo_editar->predio->cuentaPredial() . ' es necesario concluirlo o eliminarlo.');
 
         }
 
-        $this->generarAvaluo($predio);
+        $this->generarAvaluo($this->modelo_editar->predio);
 
     }
 
@@ -360,7 +370,17 @@ class VariacionesCatastrales extends Component
 
         }
 
-        unset($predio_avaluo->id,$predio_avaluo->curt, $predio_avaluo->folio_real, $predio_avaluo->fecha_efectos, $predio_avaluo->declarante, $predio_avaluo->origen, $predio_avaluo->indexado_en, $predio_avaluo->actualizado_nombre, $predio_avaluo->creado_por);
+        unset(
+                $predio_avaluo->id,
+                $predio_avaluo->curt,
+                $predio_avaluo->folio_real,
+                $predio_avaluo->fecha_efectos,
+                $predio_avaluo->declarante,
+                $predio_avaluo->origen,
+                $predio_avaluo->indexado_en,
+                $predio_avaluo->actualizado_nombre,
+                $predio_avaluo->creado_por
+            );
 
         $predio_avaluo->save();
 
@@ -561,11 +581,11 @@ class VariacionesCatastrales extends Component
 
             DB::transaction(function () {
 
-                if($this->estado === 'concluido'){
+                if($this->estado === 'aprovado'){
 
-                    $this->modelo_editar->tramite->update(['estado' => 'concluido']);
+                    $this->modelo_editar->tramite->update(['estado' => 'aprovado']);
 
-                    (new ArchivoPredioService($this->modelo_editar->tramite->predios()->first(), $this->file))->guardarConUrl('variacionescatastrales/'. $this->modelo_editar->archivo);
+                    $this->anexarArchivoAPredio();
 
                 }
 
@@ -615,6 +635,35 @@ class VariacionesCatastrales extends Component
 
     }
 
+    public function anexarArchivoAPredio(){
+
+        $pdfContent = file_get_contents(Storage::path('variacionescatastrales/'. $this->modelo_editar->archivo));
+
+        $nombre_temp = Str::random(40) . '.pdf';
+
+        if(app()->isProduction()){
+
+            Storage::disk('s3')->put(config('services.ses.ruta_predios') . $nombre_temp, $pdfContent);
+
+        }else{
+
+            Storage::put('predios_archivo/' . $nombre_temp, $pdfContent);
+
+        }
+
+        File::create([
+            'fileable_id' => $this->modelo_editar->predio_id,
+            'fileable_type' => 'App\Models\Predio',
+            'descripcion' => 'variacion_catastral' . $this->modelo_editar->año . '_' . $this->modelo_editar->folio,
+            'url' => $nombre_temp
+        ]);
+
+        Storage::disk('variacionescatastrales')->delete($this->modelo_editar->archivo);
+
+        $this->modelo_editar->update(['archivo' => null]);
+
+    }
+
     public function mount(){
 
         array_push($this->fields, 'requerimiento', 'tramite', 'modalHacerRequerimiento', 'tfolio', 'tusuario', 'modalVerRequerimiento', 'modalAsignarValuador', 'modalSubirArchivo', 'file', 'modalCambiarEstado');
@@ -629,19 +678,29 @@ class VariacionesCatastrales extends Component
 
         $this->crearModeloVacio();
 
-        $this->estados = [
-            'nuevo',
-            'requerimineto',
-            'valuación',
-            'actualizado',
-            'publicación',
-            'oposición',
-            'concluido',
-            'firma',
-            'revisión',
-        ];
+        $this->estados = Constantes::ESTADOS_VARIACION_CATASTRAL;
 
         $this->filters['estado'] = request()->query('estado');
+
+    }
+
+    public function rechazar(VariacionCatastral $modelo){
+
+        try {
+
+            $modelo->update(['estado' => 'rechazado', 'actualizado_por' => auth()->id()]);
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al actualizar variación catastral por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+            $this->resetearTodo();
+
+        }
 
     }
 

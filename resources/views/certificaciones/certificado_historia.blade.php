@@ -173,7 +173,7 @@
                     DE OCAMPO EL SUSCRITO
                     @if(isset($datos_control->director)) <strong style="text-transform: uppercase;"> {{ $datos_control->director }} {{ $datos_control->titular_cargo }}.</strong> @elseif(isset($datos_control->titular)) <strong style="text-transform: uppercase;"> {{ $datos_control->titular }}, {{ $datos_control->titular_cargo }}.</strong> @endif
                     CERTIFICA QUE EN LOS ARCHIVOS CATASTRALES EXISTENTES EN ESTA OFICINA A MI CARGO, SE ENCONTRARON
-                    REGISTROS HISTORICOS DE LA SIGUIENTE PROPIEDAD:
+                    REGISTROS HISTORICOS DE LA SIGUIENTE PROPIEDAD, en la localidad de {{ $datos_control->localidad }}, municipio de {{ $datos_control->municipio }}:
                 </p>
 
             </div>

@@ -35,7 +35,7 @@ class Archivo extends Component
 
             DB::transaction(function () {
 
-                (new ArchivoPredioService($this->predio, $this->documento))->guardar();
+                (new ArchivoPredioService($this->predio, $this->documento, 'archivo'))->guardar();
 
                 $this->predio->touch();
 

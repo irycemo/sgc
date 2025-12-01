@@ -125,7 +125,7 @@ class TramiteService{
     public function procesarLineaCaptura():void
     {
 
-        if($this->tramite->solicitante == 'Oficialia de partes'){
+        if($this->tramite->solicitante == 'Oficialia de partes' || $this->tramite->tipo_tramite == 'exento'){
 
             $this->tramite->limite_de_pago = now()->toDateString();
 

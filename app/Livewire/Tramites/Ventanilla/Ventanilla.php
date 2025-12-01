@@ -42,7 +42,8 @@ class Ventanilla extends Component
         'Predio Ignorado' => false,
         'Inspecciones Oculares' => false,
         'Expedición de duplicados de documentos catastrales' => false,
-        'Levantamientos topográficos' => false
+        'Levantamientos topográficos' => false,
+        'Variaciones Catastrales' => false
     ];
 
     #[On('reset')]
@@ -111,7 +112,7 @@ class Ventanilla extends Component
                             'Modificación de datos administrativos catastrales'  => 'Completo',
                             'Ubicación de predios en cartografía'  => 'Completo',
                             'Información a propietarios o poseedores de predios registrados'   => 'Completo',
-                            'Solicitud de Variación Catastral'  => 'Completo',
+                            'Solicitud de Variación Catastral'  => 'Variaciones Catastrales',
                             'Reestructuración de cuentas catastrales'  => 'Completo',
                             'Determinación de la ubicación física de predios'=> 'Completo',
                             'Expedición de planos catastrales'  => 'Simple',

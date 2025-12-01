@@ -6,6 +6,7 @@ use App\Livewire\Certificaciones\CertificadoHistoria\CertificadoHistoria;
 use App\Livewire\Certificaciones\CertificadoNegativo\CertificadoNegativo;
 use App\Livewire\Certificaciones\CertificadoRegistro\CertificadoRegistro;
 use App\Livewire\Certificaciones\Consulta\ConsultaCertificacion;
+use App\Livewire\Certificaciones\Requerimientos\RequerimientosCertificaciones;
 
 Route::group([], function(){
 
@@ -18,5 +19,7 @@ Route::group([], function(){
     Route::get('certificado_negativo', CertificadoNegativo::class)->middleware('permission:Certificado negativo')->name('certificado_negativo');
 
     Route::get('consulta_certificacion', ConsultaCertificacion::class)->middleware('permission:Consulta certificación')->name('consulta_certificacion');
+
+    Route::get('requerimientos_certificaciones', RequerimientosCertificaciones::class)->middleware('permission:Requerimientos')->name('requerimientos_certificaciones');
 
 });

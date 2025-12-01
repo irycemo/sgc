@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Predio;
 use App\Models\Oficina;
 use App\Models\Tramite;
 use App\Traits\ModelosTrait;
@@ -31,6 +32,8 @@ class VariacionCatastral extends Model implements Auditable
             'concluido' => 'gray-400',
             'firma' => 'indigo-400',
             'revisión' => 'teal-400',
+            'rechazado' => 'red-400',
+            'aprovado' => 'green-400'
         ][$this->estado] ?? 'gray-400';
     }
 
@@ -51,9 +54,11 @@ class VariacionCatastral extends Model implements Auditable
     }
 
     public function archivo(){
-
         return Storage::disk('variacionescatastrales')->url($this->archivo);
+    }
 
+    public function predio(){
+        return $this->belongsTo(Predio::class);
     }
 
 }
