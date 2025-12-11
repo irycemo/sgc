@@ -2,7 +2,7 @@
 
     <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
 
-        @if($predio?->archivos->where('descripcion', 'archivo')->first())
+        @if($predio?->archivos()->where('descripcion', 'archivo')->first())
 
             <div class="flex justify-center">
 

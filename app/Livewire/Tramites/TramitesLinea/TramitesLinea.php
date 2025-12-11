@@ -47,6 +47,9 @@ class TramitesLinea extends Component
                 ->whereHas('servicio', function ($q){
                     $q->whereIn('clave_ingreso', ['DM34', 'DM32', 'DM35', 'DM31']);
                 })
+                ->whereHas('predios', function($q){
+                    $q->where('oficina', auth()->user()->oficina->oficina);
+                })
                 ->when($this->filters['search'], fn($q, $search) => $q->where('nombre_solicitante', 'LIKE', '%' . $search . '%'))
                 ->when($this->filters['año'], fn($q, $año) => $q->where('año', $año))
                 ->when($this->filters['folio'], fn($q, $folio) => $q->where('folio', $folio))
@@ -61,8 +64,6 @@ class TramitesLinea extends Component
         $this->crearModeloVacio();
 
         array_push($this->fields, 'predios', 'predio', 'localidad', 'oficina', 'tipo', 'registro');
-
-        /* $this->servicios = Servicio::select('id', 'nombre')->whereIn('id', [3,4,5,6,7,8,9,10,11,66,67,68,64,65,57,55])->orderBy('nombre')->get(); */
 
         $this->años = Constantes::AÑOS;
 
