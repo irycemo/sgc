@@ -69,6 +69,8 @@ class CertificadoHistoriaController extends Controller
 
             $datos_control->oficina = auth()->user()->oficina->nombre;
 
+            $datos_control->municipio = auth()->user()->oficina->cabeceraMunicipal ? auth()->user()->oficina->cabeceraMunicipal->nombre : auth()->user()->oficina->nombre;
+
             $object->datos_control = $datos_control;
 
             $certificacion = Certificacion::create([

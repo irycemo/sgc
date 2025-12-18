@@ -2,7 +2,7 @@
 
     <x-header>Estadisticas del mes actual</x-header>
 
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-6 gap-6">
 
         <div class="">
 
@@ -90,7 +90,7 @@
 
         <div>
 
-            <x-h4>Variaciones catastrales</x-h4>
+            <x-h4>Variaciones</x-h4>
 
             <div class="grid grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-lg">
 
@@ -101,6 +101,24 @@
                     <span class="text-right text-sm text-gray-600">{{ $variacion['total'] }}</span>
 
                 @endforeach
+
+            </div>
+
+        </div>
+
+        <div>
+
+            <x-h4>Requerimientos</x-h4>
+
+            <div class="grid grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-lg">
+
+                <a href="{{ route('requerimientos_certificaciones') }}" class="text-left text-sm text-gray-600 hover:underline ">Certificados catastrales</a>
+
+                <span class="text-right text-sm text-gray-600">{{ $requerimientos_certificados }}</span>
+
+                <a href="{{ route('requerimientos') }}" class="text-left text-sm text-gray-600 hover:underline ">Generales</a>
+
+                <span class="text-right text-sm text-gray-600">{{ $requerimientos_oficina }}</span>
 
             </div>
 

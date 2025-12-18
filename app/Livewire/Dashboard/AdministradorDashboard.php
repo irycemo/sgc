@@ -6,8 +6,9 @@ use App\Models\Avaluo;
 use Livewire\Component;
 use App\Models\Traslado;
 use App\Models\Certificacion;
-use App\Models\PredioIgnorado;
 use App\Models\PredioTramite;
+use App\Models\Requerimiento;
+use App\Models\PredioIgnorado;
 use App\Models\VariacionCatastral;
 use Illuminate\Support\Facades\DB;
 
@@ -16,6 +17,8 @@ class AdministradorDashboard extends Component
 
     public $certificaciones = [];
     public $certificados = [];
+    public $requerimientos_certificados;
+    public $requerimientos_oficina;
     public $traslados = [];
     public $avaluos = [];
     public $predios_ignorados = [];
@@ -109,6 +112,17 @@ class AdministradorDashboard extends Component
             $this->variaciones_catastrales [] = ['estado' => $variaciones_catastrale->estado, 'total' => $variaciones_catastrale->total];
 
         }
+
+        $this->requerimientos_certificados = Certificacion::has('requerimientos')
+                                ->doesntHave('ultimoRequerimientoFinalizado')
+                                ->where('estado', 'activo')
+                                ->count();
+
+        $this->requerimientos_oficina = Requerimiento::where('requerimientoable_id', auth()->user()->oficina_id)
+                                                        ->where('requerimientoable_type', 'App\Models\Oficina')
+                                                        ->whereNull('requerimiento_id')
+                                                        ->where('estado', '!=', 'finalizado')
+                                                        ->count();
 
     }
 

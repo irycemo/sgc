@@ -26,6 +26,7 @@ return [
         'ruta_predios' => 'sgc/predios_archivo/',
         'ruta_predios_fotos' => 'sgc/predios_fotos/',
         'ruta_certificaciones' => 'sgc/certificaciones/',
+        'ruta_avaluos_fotos' => 'sgc/avaluos_fotos/',
     ],
 
     'resend' => [
@@ -72,6 +73,10 @@ return [
     'consulta_archivos_anterior' => [
         'archivos_url' => env('CONSULTA_ARCHIVOS_ANTERIOR_URL'),
         'cartografia_url' => env('CONSULTA_CARTOGRAFIA_ANTERIOR_URL'),
+    ],
+
+    'google' => [
+        'maps_key' => env('GOOGLE_MAPS_API_KEY'),
     ],
 
 ];

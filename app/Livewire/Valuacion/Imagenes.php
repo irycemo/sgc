@@ -5,9 +5,11 @@ namespace App\Livewire\Valuacion;
 use App\Models\File;
 use App\Models\Avaluo;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use App\Models\PredioAvaluo;
 use Livewire\WithFileUploads;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -33,14 +35,14 @@ class Imagenes extends Component
 
     protected function rules(){
         return [
-            'fachada' => 'nullable|image|max:5000',
-            'foto2' => 'nullable|image|max:5000',
-            'foto3' => 'nullable|image|max:5000',
-            'foto4' => 'nullable|image|max:5000',
-            'macrolocalizacion' => 'nullable|image|max:5000',
-            'microlocalizacion' => 'nullable|image|max:5000',
-            'poligonoDwg' => 'nullable|mimes:dwg',
-            'poligonoImagen' => 'nullable|image|max:5000',
+            'fachada' => ['nullable','image','max:5000'],
+            'foto2' => ['nullable','image','max:5000'],
+            'foto3' => ['nullable','image','max:5000'],
+            'foto4' => ['nullable','image','max:5000'],
+            'macrolocalizacion' => ['nullable','image','max:5000'],
+            'microlocalizacion' => ['nullable','image','max:5000'],
+            'poligonoDwg' => ['nullable','mimes:dwg'],
+            'poligonoImagen' => ['nullable','image','max:5000'],
             'predio' => 'required',
             'predio.avaluo.observaciones' => 'nullable',
          ];
@@ -61,6 +63,52 @@ class Imagenes extends Component
 
     }
 
+    public function procesarImagen($imagen, $descripcion){
+
+        $file = File::where('fileable_type', 'App\Models\Avaluo')
+                        ->where('fileable_id', $this->predio->avaluo->id)
+                        ->where('descripcion' , $descripcion)
+                        ->first();
+
+        $url = Str::random(40) . '.' . $imagen->getClientOriginalExtension();
+
+        if(app()->isProduction()){
+
+            Storage::disk('s3')->putFileAs(config('services.ses.ruta_avaluos_fotos'), $imagen, $url, 'private');
+
+        }else{
+
+            $url = $imagen->store('/', 'avaluos');
+
+        }
+
+        if(!$file)
+
+            File::create([
+                            'fileable_type' => 'App\Models\Avaluo',
+                            'fileable_id' => $this->predio->avaluo->id,
+                            'url' => $url,
+                            'descripcion' => $descripcion
+                        ]);
+
+        else{
+
+            if(app()->isProduction()){
+
+                Storage::disk('s3')->delete(config('services.ses.ruta_avaluos_fotos') . $file->url);
+
+            }else{
+
+                Storage::disk('avaluos')->delete($file->url);
+
+            }
+
+            $file->update(['url' => $url]);
+
+        }
+
+    }
+
     public function guardar(){
 
         $this->validate();
@@ -69,255 +117,51 @@ class Imagenes extends Component
 
             DB::transaction(function () {
 
-                if($this->encabezado){
-
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)
-                                    ->where('fileable_type', 'App\Models\Avaluo')
-                                    ->where('descripcion' , 'encabezado')
-                                    ->first();
-
-                    $encabezado = $this->encabezado->store('/', 'avaluos');
-
-                    if(!$file)
-
-                        File::create([
-                            'fileable_id' => $this->predio->avaluo->id,
-                            'fileable_type' => 'App\Models\Avaluo',
-                            'url' => $encabezado,
-                            'descripcion' => 'encabezado'
-                        ]);
-
-                    else{
-
-                        Storage::disk('avaluos')->delete($file->url);
-
-                        $file->update(['url' => $encabezado]);
-
-                    }
-
-                }
-
                 if($this->fachada){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)
-                                    ->where('fileable_type', 'App\Models\Avaluo')
-                                    ->where('descripcion' , 'fachada')
-                                    ->first();
-
-                    $fachada = $this->fachada->store('/', 'avaluos');
-
-                    if(!$file)
-
-                        File::create([
-                            'fileable_id' => $this->predio->avaluo->id,
-                            'fileable_type' => 'App\Models\Avaluo',
-                            'url' => $fachada,
-                            'descripcion' => 'fachada'
-                        ]);
-
-                    else{
-
-                        Storage::disk('avaluos')->delete($file->url);
-
-                        $file->update(['url' => $fachada]);
-
-                    }
+                    $this->procesarImagen($this->fachada,'fachada');
 
                 }
 
                 if($this->foto2){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)
-                                    ->where('fileable_type', 'App\Models\Avaluo')
-                                    ->where('descripcion' , 'foto2')
-                                    ->first();
-
-                    $foto2 = $this->foto2->store('/', 'avaluos');
-
-                    if(!$file)
-
-                        File::create([
-                            'fileable_id' => $this->predio->avaluo->id,
-                            'fileable_type' => 'App\Models\Avaluo',
-                            'url' => $foto2,
-                            'descripcion' => 'foto2'
-                        ]);
-
-                    else{
-
-                        Storage::disk('avaluos')->delete($file->url);
-
-                        $file->update(['url' => $foto2]);
-
-                    }
-
+                    $this->procesarImagen($this->foto2,'foto2');
 
                 }
 
                 if($this->foto3){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)
-                                    ->where('fileable_type', 'App\Models\Avaluo')
-                                    ->where('descripcion' , 'foto3')
-                                    ->first();
-
-                    $foto3 = $this->foto3->store('/', 'avaluos');
-
-                    if(!$file)
-
-                        File::create([
-                            'fileable_id' => $this->predio->avaluo->id,
-                            'fileable_type' => 'App\Models\Avaluo',
-                            'url' => $foto3,
-                            'descripcion' => 'foto3'
-                        ]);
-
-                    else{
-
-                        Storage::disk('avaluos')->delete($file->url);
-
-                        $file->update(['url' => $foto3]);
-
-                    }
+                    $this->procesarImagen($this->foto3,'foto3');
 
                 }
 
                 if($this->foto4){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)
-                                    ->where('fileable_type', 'App\Models\Avaluo')
-                                    ->where('descripcion' , 'foto4')
-                                    ->first();
-
-                    $foto4 = $this->foto4->store('/', 'avaluos');
-
-                    if(!$file)
-
-                        File::create([
-                            'fileable_id' => $this->predio->avaluo->id,
-                            'fileable_type' => 'App\Models\Avaluo',
-                            'url' => $foto4,
-                            'descripcion' => 'foto4'
-                        ]);
-
-                    else{
-
-                        Storage::disk('avaluos')->delete($file->url);
-
-                        $file->update(['url' => $foto4]);
-                    }
+                    $this->procesarImagen($this->foto4,'foto4');
 
                 }
 
                 if($this->macrolocalizacion){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)
-                                    ->where('fileable_type', 'App\Models\Avaluo')
-                                    ->where('descripcion' , 'macrolocalizacion')
-                                    ->first();
-
-                    $macrolocalizacion = $this->macrolocalizacion->store('/', 'avaluos');
-
-                    if(!$file)
-
-                        File::create([
-                            'fileable_id' => $this->predio->avaluo->id,
-                            'fileable_type' => 'App\Models\Avaluo',
-                            'url' => $macrolocalizacion,
-                            'descripcion' => 'macrolocalizacion'
-                        ]);
-
-                    else{
-
-                        Storage::disk('avaluos')->delete($file->url);
-
-                        $file->update(['url' => $macrolocalizacion]);
-
-                    }
+                    $this->procesarImagen($this->macrolocalizacion,'macrolocalizacion');
 
                 }
 
                 if($this->microlocalizacion){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)
-                                    ->where('fileable_type', 'App\Models\Avaluo')
-                                    ->where('descripcion' , 'microlocalizacion')
-                                    ->first();
-
-                    $microlocalizacion = $this->microlocalizacion->store('/', 'avaluos');
-
-                    if(!$file)
-
-                        File::create([
-                            'fileable_id' => $this->predio->avaluo->id,
-                            'fileable_type' => 'App\Models\Avaluo',
-                            'url' => $microlocalizacion,
-                            'descripcion' => 'microlocalizacion'
-                        ]);
-
-                    else{
-
-                        Storage::disk('avaluos')->delete($file->url);
-
-                        $file->update(['url' => $microlocalizacion]);
-
-                    }
+                    $this->procesarImagen($this->microlocalizacion,'microlocalizacion');
 
                 }
 
                 if($this->poligonoImagen){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)
-                                    ->where('fileable_type', 'App\Models\Avaluo')
-                                    ->where('descripcion' , 'poligonoImagen')
-                                    ->first();
-
-                    $poligonoImagen = $this->poligonoImagen->store('/', 'avaluos');
-
-                    if(!$file)
-
-                        File::create([
-                            'fileable_id' => $this->predio->avaluo->id,
-                            'fileable_type' => 'App\Models\Avaluo',
-                            'url' => $poligonoImagen,
-                            'descripcion' => 'poligonoImagen'
-                        ]);
-
-                    else{
-
-                        Storage::disk('avaluos')->delete($file->url);
-
-                        $file->update(['url' => $poligonoImagen]);
-
-                    }
+                    $this->procesarImagen($this->poligonoImagen,'poligonoImagen');
 
                 }
 
                 if($this->poligonoDwg){
 
-                    $file = File::where('fileable_id', $this->predio->avaluo->id)
-                                    ->where('fileable_type', 'App\Models\Avaluo')
-                                    ->where('descripcion' , 'poligonoDwg')
-                                    ->first();
-
-                    $poligonoDwg = $this->poligonoDwg->store('/', 'avaluos');
-
-                    if(!$file)
-
-                        File::create([
-                            'fileable_id' => $this->predio->avaluo->id,
-                            'fileable_type' => 'App\Models\Avaluo',
-                            'url' => $poligonoDwg,
-                            'descripcion' => 'poligonoDwg'
-                        ]);
-
-                    else{
-
-                        Storage::disk('avaluos')->delete($file->url);
-
-                        $file->update(['url' => $poligonoDwg]);
-
-                    }
+                    $this->procesarImagen($this->poligonoDwg,'poligonoDwg');
 
                 }
 
