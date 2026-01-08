@@ -163,7 +163,7 @@ class CertificadoHistoria extends Component
                                         ->where('usuario', $this->usuario)
                                         ->firstOrFail();
 
-            if(!in_array($this->tramite->servicio->clave_ingreso, ['DM27', 'DM26', 'DM25', 'DM24'])){
+            if(!in_array($this->tramite->servicio->clave_ingreso, ['D924', 'D925', 'D926', 'D927'])){
 
                 $this->dispatch('mostrarMensaje', ['warning', "El trámite no corresponde a una historia catastral."]);
 
@@ -196,10 +196,10 @@ class CertificadoHistoria extends Component
             $this->predio = $this->tramite->ligadoA->predios()->first();
 
             $cantidad = match($this->tramite->servicio->clave_ingreso){
-                'DM24' => 5,
-                'DM25' => 10,
-                'DM26' => 15,
-                'DM27' => 100
+                'D924' => 5,
+                'D925' => 10,
+                'D926' => 15,
+                'D927' => 100
             };
 
             $movimientos = $this->predio->movimientos->sortByDesc('fecha')->take($cantidad)->reverse();
