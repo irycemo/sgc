@@ -289,6 +289,18 @@ trait ComunTrait
 
         }
 
+        if(in_array($this->servicio['clave_ingreso'], ['D914', 'D727' , 'D729'])){
+
+            $this->tipo = 1;
+
+        }
+
+        if(in_array($this->servicio['clave_ingreso'], ['D726', 'D728'])){
+
+            $this->tipo = 2;
+
+        }
+
     }
 
     public function crear(){

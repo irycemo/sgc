@@ -19,6 +19,7 @@ class Archivo extends Component
     public $predio;
 
     public $documento;
+    public $descripcion;
 
     #[On('cargarPredioPadron')]
     public function cargarPredio($id){
@@ -29,13 +30,16 @@ class Archivo extends Component
 
     public function guardar(){
 
-        $this->validate(['documento' => 'required']);
+        $this->validate([
+            'documento' => 'required',
+            'descripcion' => 'required'
+        ]);
 
         try {
 
             DB::transaction(function () {
 
-                (new ArchivoPredioService($this->predio, $this->documento, 'archivo'))->guardar();
+                (new ArchivoPredioService($this->predio, $this->documento, $this->descripcion))->guardar();
 
                 $this->predio->touch();
 
@@ -48,6 +52,8 @@ class Archivo extends Component
             $this->predio->refresh();
 
             $this->dispatch('removeFiles');
+
+            $this->reset(['descripcion', 'documento']);
 
         } catch (GeneralException $ex) {
 

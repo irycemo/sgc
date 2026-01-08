@@ -126,6 +126,7 @@ trait CrearImagenTrait
                 'datos_control' => $object->datos_control,
                 'qr' => $qr,
                 'predio' => $object->predio,
+                'ultimo_movimiento' => $object->ultimo_movimiento,
                 'certificacion' => $certificacion
             ]);
 

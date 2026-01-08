@@ -228,6 +228,8 @@ class CertificadoHistoria extends Component
     public function abrirModalCrear():void
     {
 
+        $this->reset(['nombre', 'fecha', 'descripcion']);
+
         $this->modal = true;
         $this->crear =true;
 

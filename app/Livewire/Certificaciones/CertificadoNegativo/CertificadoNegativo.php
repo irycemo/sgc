@@ -28,8 +28,6 @@ class CertificadoNegativo extends Component
     public $tramite;
     public $predio;
 
-    public $cadena;
-
     public $impresionDirector = false;
 
     public $nombre;
@@ -186,6 +184,8 @@ class CertificadoNegativo extends Component
                 $pdf = (new CertificadoNegativoController())->certificado($this->tramite, $nombre);
 
             });
+
+            $this->reset(['tramite', 'nombre', 'ap_paterno', 'ap_materno', 'razon_social', 'predioFlag', 'tramiteFlag', 'año', 'folio', 'usuario']);
 
             return response()->streamDownload(
                 fn () => print($pdf->output()),

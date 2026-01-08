@@ -78,6 +78,7 @@ class Predio extends Model implements Auditable
                     $q->whereNotIn('descripcion', ['croquis', 'fachada', 'foto2', 'foto3', 'foto4', 'microlocalizacion', 'poligonoImagen'])
                         ->where('descripcion', 'not like', '%foto_anterior%');
                 })
+                ->orderBy('created_at', 'desc')
                 ->get();
 
         /* return $this->files()->whereNotIn('descripcion', ['croquis', 'fachada', 'foto2', 'foto3', 'foto4', 'microlocalizacion', 'poligonoImagen'])

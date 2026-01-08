@@ -150,6 +150,12 @@ class Valor extends Component
 
         $uma = Uma::where('año', now()->format('Y'))->first();
 
+        if(!$uma){
+
+            $uma = Uma::where('año', now()->format('Y') - 1)->first();
+
+        }
+
         if($this->predio->tipo_predio == 1 && $this->predio->valor_catastral < $uma->minimo_urbano) return $uma->minimo_urbano;
 
         if($this->predio->tipo_predio == 2 && $this->predio->valor_catastral < $uma->minimo_rustico) return $uma->minimo_rustico;

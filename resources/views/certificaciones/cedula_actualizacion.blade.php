@@ -186,6 +186,12 @@
 
         @include('certificaciones.comun.propietarios')
 
+        <p class="separador">Último movimiento</p>
+
+        <p><strong>Fecha: </strong> {{ $ultimo_movimiento->fecha }}; <strong>Movimiento: </strong> {{ $ultimo_movimiento->nombre }}</p>
+
+        <p>{{ $ultimo_movimiento->descripcion }}</p>
+
         <p class="separador">Datos de control</p>
 
         <div class="informacion">

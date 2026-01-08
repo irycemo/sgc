@@ -43,7 +43,7 @@
 
                         <div>
 
-                            <input placeholder="Tipo de predio" type="number" class="bg-white rounded text-sm w-full" wire:model="tipo">
+                            <input placeholder="Tipo de predio" type="number" class="bg-white rounded text-sm w-full" wire:model="tipo" @if(in_array($servicio['clave_ingreso'], ['D914', 'D727' , 'D729', 'D728' ,'D726'])) readonly @endif>
 
                             <div>
 

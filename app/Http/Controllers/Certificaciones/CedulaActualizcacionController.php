@@ -51,6 +51,14 @@ class CedulaActualizcacionController extends Controller
 
         $object->predio = $this->predio($predio);
 
+        $ultimo_movimiento = (object)[];
+
+        $ultimo_movimiento->nombre = $predio->movimientos->first()->nombre;
+        $ultimo_movimiento->fecha = $predio->movimientos->first()->fecha;
+        $ultimo_movimiento->descripcion = $predio->movimientos->first()->descripcion;
+
+        $object->ultimo_movimiento = $ultimo_movimiento;
+
         /* if(auth()->user()->oficina->oficina == 101){ */
 
             $fielDirector = Credential::openFiles(
@@ -116,6 +124,7 @@ class CedulaActualizcacionController extends Controller
             'datos_control' => $object->datos_control,
             'qr' => $qr,
             'predio' => $object->predio,
+            'ultimo_movimiento' => $object->ultimo_movimiento,
             'certificacion' => $certificacion
         ]);
 
@@ -143,6 +152,7 @@ class CedulaActualizcacionController extends Controller
             'datos_control' => $object->datos_control,
             'qr' => $qr,
             'predio' => $object->predio,
+            'ultimo_movimiento' => $object->ultimo_movimiento,
             'certificacion' => $certificacion
         ]);
 
