@@ -82,7 +82,7 @@ class CertificadoNegativo extends Component
                                         ->where('usuario', $this->usuario)
                                         ->firstOrFail();
 
-            if($this->tramite->servicio->clave_ingreso !== 'DM31'){
+            if($this->tramite->servicio->clave_ingreso !== 'D923'){
 
                 $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a un certificado negativo de registro catastral."]);
 

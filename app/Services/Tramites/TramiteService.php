@@ -26,50 +26,37 @@ class TramiteService{
     public function crear(array | null $predios = null):Tramite
     {
 
-        try {
+        $this->tramite->estado = 'nuevo';
+        $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
+        $this->tramite->año = now()->format('Y');
+        $this->tramite->usuario = auth()->user()->clave;
+        $this->tramite->creado_por = auth()->id();
+        $this->tramite->folio = (Tramite::where('año', $this->tramite->año)->where('usuario', auth()->user()->clave)->max('folio') ?? 0) + 1;
 
-            $this->tramite->estado = 'nuevo';
-            $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
-            $this->tramite->año = now()->format('Y');
-            $this->tramite->usuario = auth()->user()->clave;
-            $this->tramite->creado_por = auth()->id();
-            $this->tramite->folio = (Tramite::where('año', $this->tramite->año)->where('usuario', auth()->user()->clave)->max('folio') ?? 0) + 1;
+        $this->procesarLineaCaptura();
 
-            $this->procesarLineaCaptura();
+        $this->tramite->save();
 
-            $this->tramite->save();
+        if($this->tramite->solicitante == 'Oficialia de partes'){
 
-            if($this->tramite->solicitante == 'Oficialia de partes'){
+            $this->tramite->update([
+                'estado' => 'pagado',
+                'fecha_pago' => now(),
+            ]);
 
-                $this->tramite->update([
-                    'estado' => 'pagado',
-                    'fecha_pago' => now(),
-                ]);
-
-            }
-
-            if($predios && count($predios) > 0){
-
-                foreach($predios as $predio){
-
-                    $this->tramite->predios()->attach($predio['id']);
-
-                }
-
-            }
-
-            return $this->tramite;
-
-        } catch (GeneralException $ex) {
-
-            throw new GeneralException($ex->getMessage());
-
-        } catch (\Throwable $th) {
-
-            Log::error("Error al crear trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". Trámite: " . $this->tramite->año . '-' . $this->tramite->numero_control . '-' . $this->tramite->usuario . '. ' . $th);
-
-            throw new GeneralException("Error al crear trámite");
         }
+
+        if($predios && count($predios) > 0){
+
+            foreach($predios as $predio){
+
+                $this->tramite->predios()->attach($predio['id']);
+
+            }
+
+        }
+
+        return $this->tramite;
 
     }
 
@@ -157,36 +144,22 @@ class TramiteService{
     public function procesarPago():void
     {
 
-        try {
+        $array = (new SapService($this->tramite))->validarLineaDeCaptura();
 
-            $array = (new SapService($this->tramite))->validarLineaDeCaptura();
+        $fecha = $this->convertirFecha($array['FEC_PAGO']);
 
-            $fecha = $this->convertirFecha($array['FEC_PAGO']);
+        $documento = $array['DOC_PAGO'];
 
-            $documento = $array['DOC_PAGO'];
+        $this->tramite->update([
+            'estado' => 'pagado',
+            'fecha_pago' => $this->convertirFecha($fecha),
+            'documento_de_pago' => $documento,
+            'fecha_entrega' => $this->calcularFechaEntrega()
+        ]);
 
-            $this->tramite->update([
-                'estado' => 'pagado',
-                'fecha_pago' => $this->convertirFecha($fecha),
-                'documento_de_pago' => $documento,
-                'fecha_entrega' => $this->calcularFechaEntrega()
-            ]);
+        if($this->tramite->usuario == 11){
 
-            if($this->tramite->usuario == 11){
-
-                Cache::forget('estadisticas_tramites_en_linea_' . $this->tramite->usuario_tramites_linea_id);
-
-            }
-
-        } catch (GeneralException $th) {
-
-            throw new GeneralException($th->getMessage());
-
-        } catch (\Throwable $th) {
-
-            Log::error("Error al procesar pago de trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". Trámite: " . $this->tramite->año . '-' . $this->tramite->folio . '-' . $this->tramite->usuario . '. ' . $th);
-
-            throw new GeneralException("Error al procesar pago del trámite");
+            Cache::forget('estadisticas_tramites_en_linea_' . $this->tramite->usuario_tramites_linea_id);
 
         }
 

@@ -115,6 +115,9 @@
                     <option value="SE ASIGNA CUENTA PREDIAL POR ALTA EN EL RAN DEL TITULO NO. xxxxxxx QUE AMPARA EL SOLAR LOTE xxx MZNA xxxx ZONA x ubicado en POBLADO CON SUPERFICIE xxxxxxxxxxxx A NOMBRE DE xxxxxxxxxxxxxxxx">
                         SE ASIGNA CUENTA PREDIAL POR ALTA EN EL RAN DEL TITULO NO. xxxxxxx QUE AMPARA EL SOLAR LOTE xxx MZNA xxxx ZONA x ubicado en POBLADO CON SUPERFICIE xxxxxxxxxxxx A NOMBRE DE xxxxxxxxxxxxxxxx
                     </option>
+                    <option value="SE ASIGNA CUENTA PREDIAL POR ALTA MEDIANTE SENTENCIA XXX-XXXX-XXXX">
+                        SE ASIGNA CUENTA PREDIAL POR ALTA MEDIANTE SENTENCIA XXX-XXXX-XXXX
+                    </option>
 
                 </x-input-select>
 

@@ -62,13 +62,19 @@ class SapService{
 
         $data = json_decode($response, true);
 
+        if($response->status() != 200){
+
+            Log::error($response);
+
+            throw new GeneralException("Error de comunicación con SAP.");
+
+        }
+
         if(isset($data['mensaje']) && $data['mensaje'] == 'Error al consumir servicio'){
 
             Log::error($data['mensaje'] . ' EN SAP');
 
             throw new GeneralException("Error de comunicación con SAP.");
-
-            return;
 
         }
 
@@ -78,8 +84,6 @@ class SapService{
 
             throw new GeneralException("Error de comunicación con SAP.");
 
-            return;
-
         }
 
         if(isset($data['ERROR'])){
@@ -87,8 +91,6 @@ class SapService{
             Log::error($data['ERROR'] . ' SAP');
 
             throw new GeneralException("Error de comunicación con SAP.");
-
-            return;
 
         }
 

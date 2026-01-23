@@ -9,6 +9,7 @@ use App\Models\Certificacion;
 use App\Models\PredioTramite;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ConsultarTramiteRefrendoRequest;
 use App\Http\Requests\TramiteRequest;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Resources\TramiteResource;
@@ -146,6 +147,47 @@ class ConsultarTramitesController extends Controller
         return response()->json([
             'data' => $array
         ], 200);
+
+    }
+
+    public function consultarTramiteRefrendo(ConsultarTramiteRefrendoRequest $request){
+
+        $validated = $request->validated();
+
+        $tramite = Tramite::where('año', $validated['año'])
+                                ->where('folio', $validated['folio'])
+                                ->where('usuario', $validated['usuario'])
+                                ->first();
+
+        if($tramite){
+
+            info($tramite);
+
+            if($tramite->estado != 'pagado'){
+
+                return response()->json([
+                    'error' => "El trámite no esta pagado.",
+                ], 401);
+
+            }
+
+            if($tramite->servicio->clave_ingreso != 'D922'){
+
+                return response()->json([
+                    'error' => "El trámite ingresado no corresponde a refrendo.",
+                ], 401);
+
+            }
+
+            return (new TramiteResource($tramite))->response()->setStatusCode(200);
+
+        }else{
+
+            return response()->json([
+                'error' => "No se encontró el trámite.",
+            ], 404);
+
+        }
 
     }
 

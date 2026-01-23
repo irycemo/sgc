@@ -200,7 +200,7 @@ class Efirmas extends Component
 
 
         } catch (\Throwable $th) {
-            dd($th);
+            $this->dispatch('mostrarMensaje', ['error', "La firma no funciona correctamente."]);
         }
 
 

@@ -9,7 +9,6 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use App\Models\PredioAvaluo;
 use Livewire\WithFileUploads;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;

@@ -63,7 +63,7 @@
 
                     <a href="{{ $foto2->temporaryUrl() }}" data-lightbox="imagen" data-title="Foto 2">
 
-                        <img class="h-20 w-20 mx-auto my-3" src="{{ $foto2->temporaryUrl() }}" alt="">
+                        <img class="h-20 w-20 mx-auto my-3" src="{{ $foto2->temporaryUrl() }}" alt="Foto 2">
 
                     </a>
 
@@ -72,7 +72,7 @@
                     @if($predio)
 
                         <a href="{{ $predio->avaluo->foto2() }}" data-lightbox="imagen" data-title="Foto 2">
-                            <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->foto2() }}" alt="">
+                            <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->foto2() }}" alt="Foto 2">
 
                         </a>
 
@@ -80,7 +80,7 @@
 
                         <a href="{{ asset('storage/img/ico.png') }}" data-lightbox="imagen" data-title="Foto 2">
 
-                            <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/ico.png') }}" alt="">
+                            <img class="h-20 w-20 mx-auto my-3" src="{{ asset('storage/img/ico.png') }}" alt="Foto 2">
 
                         </a>
 
@@ -305,7 +305,7 @@
 
                 @if($poligonoImagen)
 
-                    <a href="{{ $predio->avaluo->microlocalizacion() }}" data-lightbox="imagen" data-title="Representación del poligono">
+                    <a href="{{ $poligonoImagen->temporaryUrl() }}" data-lightbox="imagen" data-title="Representación del poligono">
 
                         <img class="h-20 w-20 mx-auto my-3" src="{{ $poligonoImagen->temporaryUrl() }}" alt="Representación del poligono">
 

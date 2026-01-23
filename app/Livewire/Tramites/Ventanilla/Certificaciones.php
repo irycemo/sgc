@@ -39,7 +39,7 @@ class Certificaciones extends Component
 
                                                             ||
 
-                                                            ($this->servicio['clave_ingreso'] == 'DM31' && $this->servicio['nombre'] != 'Certificado negativo catastral')
+                                                            ($this->servicio['clave_ingreso'] == 'D923' && $this->servicio['nombre'] != 'Certificado negativo catastral')
                                                     )]
         ];
 

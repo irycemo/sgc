@@ -718,7 +718,8 @@ class Constantes{
         'ALTA POR RAN',
         'ALTA POR INSUS',
         'SUBDIVISIÓN',
-        'ACTUALIZACIÓN'
+        'ACTUALIZACIÓN',
+        'SENTENCIA'
     ];
 
     const ESTADOS_VARIACION_CATASTRAL = [
