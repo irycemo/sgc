@@ -14,122 +14,122 @@ class FactorIncrementosTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('factor_incrementos')->delete();
-
+        
         \DB::table('factor_incrementos')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
-                'factor' => '1.19',
+                'factor' => '1.1900',
                 'año' => 1980,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 2,
-                'factor' => '1.29',
+                'factor' => '1.2900',
                 'año' => 1981,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 3,
-                'factor' => '1.29',
+                'factor' => '1.2900',
                 'año' => 1982,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            3 =>
+            3 => 
             array (
                 'id' => 4,
-                'factor' => '1.84',
+                'factor' => '1.8400',
                 'año' => 1983,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            4 =>
+            4 => 
             array (
                 'id' => 5,
-                'factor' => '1.92',
+                'factor' => '1.9200',
                 'año' => 1984,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            5 =>
+            5 => 
             array (
                 'id' => 6,
-                'factor' => '1.59',
+                'factor' => '1.5900',
                 'año' => 1985,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            6 =>
+            6 => 
             array (
                 'id' => 7,
-                'factor' => '1.60',
+                'factor' => '1.6000',
                 'año' => 1986,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            7 =>
+            7 => 
             array (
                 'id' => 8,
-                'factor' => '1.51',
+                'factor' => '1.5100',
                 'año' => 1987,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            8 =>
+            8 => 
             array (
                 'id' => 9,
-                'factor' => '1.81',
+                'factor' => '1.8100',
                 'año' => 1988,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            9 =>
+            9 => 
             array (
                 'id' => 10,
-                'factor' => '1.71',
+                'factor' => '1.7100',
                 'año' => 1989,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            10 =>
+            10 => 
             array (
                 'id' => 11,
-                'factor' => '1.18',
+                'factor' => '1.1800',
                 'año' => 1990,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            11 =>
+            11 => 
             array (
                 'id' => 12,
                 'factor' => '1.1972',
@@ -139,7 +139,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            12 =>
+            12 => 
             array (
                 'id' => 13,
                 'factor' => '1.1972',
@@ -149,7 +149,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            13 =>
+            13 => 
             array (
                 'id' => 14,
                 'factor' => '1.1296',
@@ -159,7 +159,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            14 =>
+            14 => 
             array (
                 'id' => 15,
                 'factor' => '1.0871',
@@ -169,7 +169,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            15 =>
+            15 => 
             array (
                 'id' => 16,
                 'factor' => '1.0693',
@@ -179,7 +179,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            16 =>
+            16 => 
             array (
                 'id' => 17,
                 'factor' => '1.4846',
@@ -189,7 +189,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            17 =>
+            17 => 
             array (
                 'id' => 18,
                 'factor' => '1.2777',
@@ -199,7 +199,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            18 =>
+            18 => 
             array (
                 'id' => 19,
                 'factor' => '1.1777',
@@ -209,17 +209,17 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            19 =>
+            19 => 
             array (
                 'id' => 20,
-                'factor' => '1.174',
+                'factor' => '1.1740',
                 'año' => 1999,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            20 =>
+            20 => 
             array (
                 'id' => 21,
                 'factor' => '1.1391',
@@ -229,7 +229,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            21 =>
+            21 => 
             array (
                 'id' => 22,
                 'factor' => '1.0887',
@@ -239,7 +239,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            22 =>
+            22 => 
             array (
                 'id' => 23,
                 'factor' => '1.0538',
@@ -249,7 +249,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            23 =>
+            23 => 
             array (
                 'id' => 24,
                 'factor' => '1.0538',
@@ -259,7 +259,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            24 =>
+            24 => 
             array (
                 'id' => 25,
                 'factor' => '1.0398',
@@ -269,7 +269,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            25 =>
+            25 => 
             array (
                 'id' => 26,
                 'factor' => '1.0542',
@@ -279,7 +279,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            26 =>
+            26 => 
             array (
                 'id' => 27,
                 'factor' => '1.0291',
@@ -289,7 +289,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            27 =>
+            27 => 
             array (
                 'id' => 28,
                 'factor' => '1.0409',
@@ -299,7 +299,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            28 =>
+            28 => 
             array (
                 'id' => 29,
                 'factor' => '1.0392',
@@ -309,7 +309,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            29 =>
+            29 => 
             array (
                 'id' => 30,
                 'factor' => '1.0623',
@@ -319,7 +319,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            30 =>
+            30 => 
             array (
                 'id' => 31,
                 'factor' => '1.0386',
@@ -329,7 +329,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            31 =>
+            31 => 
             array (
                 'id' => 32,
                 'factor' => '1.0431',
@@ -339,7 +339,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            32 =>
+            32 => 
             array (
                 'id' => 33,
                 'factor' => '1.0348',
@@ -349,7 +349,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            33 =>
+            33 => 
             array (
                 'id' => 34,
                 'factor' => '1.0418',
@@ -359,7 +359,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            34 =>
+            34 => 
             array (
                 'id' => 35,
                 'factor' => '1.0362',
@@ -369,7 +369,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            35 =>
+            35 => 
             array (
                 'id' => 36,
                 'factor' => '1.0417',
@@ -379,7 +379,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            36 =>
+            36 => 
             array (
                 'id' => 37,
                 'factor' => '1.0221',
@@ -389,17 +389,17 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            37 =>
+            37 => 
             array (
                 'id' => 38,
-                'factor' => '1.033',
+                'factor' => '1.0330',
                 'año' => 2017,
                 'creado_por' => NULL,
                 'actualizado_por' => NULL,
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            38 =>
+            38 => 
             array (
                 'id' => 39,
                 'factor' => '1.0663',
@@ -409,7 +409,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            39 =>
+            39 => 
             array (
                 'id' => 40,
                 'factor' => '1.0471',
@@ -419,7 +419,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            40 =>
+            40 => 
             array (
                 'id' => 41,
                 'factor' => '1.0297',
@@ -429,7 +429,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            41 =>
+            41 => 
             array (
                 'id' => 42,
                 'factor' => '1.0333',
@@ -439,7 +439,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            42 =>
+            42 => 
             array (
                 'id' => 43,
                 'factor' => '1.0737',
@@ -449,7 +449,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            43 =>
+            43 => 
             array (
                 'id' => 44,
                 'factor' => '1.0779',
@@ -459,7 +459,7 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
-            44 =>
+            44 => 
             array (
                 'id' => 45,
                 'factor' => '1.0432',
@@ -469,8 +469,28 @@ class FactorIncrementosTableSeeder extends Seeder
                 'created_at' => '2024-01-25 13:02:31',
                 'updated_at' => '2024-01-25 13:02:31',
             ),
+            45 => 
+            array (
+                'id' => 46,
+                'factor' => '1.0454',
+                'año' => 2025,
+                'creado_por' => NULL,
+                'actualizado_por' => NULL,
+                'created_at' => '2026-01-28 10:43:44',
+                'updated_at' => '2026-01-28 10:43:44',
+            ),
+            46 => 
+            array (
+                'id' => 47,
+                'factor' => '1.0379',
+                'año' => 2026,
+                'creado_por' => NULL,
+                'actualizado_por' => NULL,
+                'created_at' => '2026-01-28 10:43:44',
+                'updated_at' => '2026-01-28 10:43:44',
+            ),
         ));
-
-
+        
+        
     }
 }
