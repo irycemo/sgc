@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api\V1\Oficinas;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\OficinaListRequest;
-use App\Http\Resources\OficinaResource;
 use App\Models\Oficina;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\OficinaResource;
+use Illuminate\Support\Facades\Request;
+use App\Http\Requests\OficinaListRequest;
 
 class OficinasController extends Controller
 {
@@ -28,6 +29,17 @@ class OficinasController extends Controller
                                 })
                                 ->orderBy('id', 'desc')
                                 ->paginate($validated['pagination'], ['*'], 'page', $validated['pagina']);
+
+        return OficinaResource::collection($oficinas)->response()->setStatusCode(200);
+
+    }
+
+    public function consultarOficinasCabeceras(Request $request){
+
+        $oficinas = Oficina::with('cabeceraMunicipal:id,nombre')
+                            ->whereNull('cabecera')
+                            ->orderBy('nombre')
+                            ->get();
 
         return OficinaResource::collection($oficinas)->response()->setStatusCode(200);
 

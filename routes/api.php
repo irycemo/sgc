@@ -72,6 +72,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('consultar_oficinas', [OficinasController::class, 'consultarOficinas']);
 
+    Route::get('consultar_oficinas_cabeceras', [OficinasController::class, 'consultarOficinasCabeceras']);
+
     Route::post('consultar_tramite_refrendo', [ConsultarTramitesController::class, 'consultarTramiteRefrendo']);
 
     Route::post('crear_tramite_refrendo', [CrearTramiteController::class, 'crearTramiteRefrendo']);

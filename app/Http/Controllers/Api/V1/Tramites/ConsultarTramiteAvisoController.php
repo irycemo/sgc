@@ -66,7 +66,7 @@ class ConsultarTramiteAvisoController extends Controller
                                 ->where('folio', $validated['folio'])
                                 ->where('usuario', $validated['usuario'])
                                 ->whereHas('servicio', function($q){
-                                    $q->where('clave_ingreso', 'D730');
+                                    $q->whereIn('clave_ingreso', ['DÑ34', 'DÑ33']);
                                 })
                                 ->first();
 

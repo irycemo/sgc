@@ -35,7 +35,7 @@ class Certificaciones extends Component
                                                                 $this->modelo_editar->solicitante == 'Escrituración social'
                                                             ),
             'predios' => ['nullable', Rule::requiredIf(
-                                                            in_array($this->servicio['clave_ingreso'], ['DM30', 'DM35', 'DM34', 'DM32'])
+                                                            in_array($this->servicio['clave_ingreso'], ['DM30', 'DM32', 'DM31'])
 
                                                             ||
 
