@@ -9,7 +9,7 @@
 <p><strong>Solicitante: </strong>{{ $tramite->solicitante }}, {{ $tramite->nombre_solicitante }}</p>
 <p><strong>Fecha de vencimiento: </strong>{{ $tramite->fecha_vencimiento }}</p>
 <p><strong>Línea de captura: </strong>{{ $tramite->linea_de_captura }}</p>
-<p><strong>Monto: </strong>${{ number_format($tramite->linea_de_captura, 2) }}</p>
+<p><strong>Monto: </strong>${{ number_format($tramite->monto, 2) }}</p>
 <p><strong>Fecha de creación: </strong>{{ $tramite->created_at }}</p>
 
 <p>La orden de pago de este trámite se ha adjuntado a este correo.</p>

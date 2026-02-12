@@ -161,6 +161,8 @@ trait ConstruccionesTrait
                     'superficie_total_construccion' => $sum2 + $this->predio->construccionesComun->sum('superficie_proporcional')
                 ]);
 
+                $this->predio->refresh();
+
                 $this->dispatch('mostrarMensaje', ['success', "Las construcciones se guardaron con éxito"]);
 
                 $this->dispatch('recargarPredio');

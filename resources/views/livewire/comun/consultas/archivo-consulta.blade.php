@@ -4,7 +4,7 @@
 
     @if(!$archivos_anteriores && $this->predio->files->count() == 0)
 
-        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-500" wire:loading.class.delaylongest="opacity-50">
+        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-500 overflow-auto" wire:loading.class.delaylongest="opacity-50">
 
             <table class="w-full overflow-x-auto table-fixed">
 
@@ -51,9 +51,9 @@
 
     @else
 
-        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-500" wire:loading.class.delaylongest="opacity-50">
+        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-500 overflow-auto" wire:loading.class.delaylongest="opacity-50">
 
-            <table class="w-full overflow-x-auto table-fixed">
+            <table class="w-full table table-auto">
 
                 <thead class="border-b border-gray-300 ">
 
@@ -72,9 +72,9 @@
                     @foreach ($this->predio->archivos() as $archivo)
 
                         <tr class="text-gray-500 text-sm leading-relaxed">
-                            <td class=" px-2 w-full capitalize">{{ Str::ucfirst($archivo->descripcion) }}</td>
-                            <td class=" px-2 w-full capitalize">{{ $archivo->created_at }}</td>
-                            <td class="px-2 w-full">
+                            <td class=" px-2  capitalize">{{ Str::ucfirst($archivo->descripcion) }}</td>
+                            <td class=" px-2  capitalize">{{ $archivo->created_at }}</td>
+                            <td class="px-2">
 
                                 <a href="{{ $archivo->getLinkArchivo() }}" class="text-blue-300 cursor-pointer" target="_blank">
 
@@ -94,9 +94,9 @@
                     @foreach ($this->predio->fotos() as $foto)
 
                         <tr class="text-gray-500 text-sm leading-relaxed">
-                            <td class=" px-2 w-full capitalize">{{ $foto->descripcion }}</td>
-                            <td class=" px-2 w-full capitalize">{{ $foto->created_at }}</td>
-                            <td class="px-2 w-full">
+                            <td class=" px-2  capitalize">{{ $foto->descripcion }}</td>
+                            <td class=" px-2  capitalize">{{ $foto->created_at }}</td>
+                            <td class="px-2">
                                 <a href="{{ $foto->getLinkFoto() }}" class="text-blue-300 cursor-pointer" target="_blank">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

@@ -14,12 +14,12 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('valores_unitarios_construccions')->delete();
-        
+
         \DB::table('valores_unitarios_construccions')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 1,
                 'tipo' => 1,
@@ -28,10 +28,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '788.00',
                 'valor_aterior' => '723.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 2,
                 'tipo' => 1,
@@ -40,10 +40,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '1053.00',
                 'valor_aterior' => '965.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 3,
                 'tipo' => 1,
@@ -52,10 +52,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '1331.00',
                 'valor_aterior' => '1220.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            3 => 
+            3 =>
             array (
                 'id' => 4,
                 'tipo' => 1,
@@ -64,10 +64,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '1588.00',
                 'valor_aterior' => '1456.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            4 => 
+            4 =>
             array (
                 'id' => 5,
                 'tipo' => 1,
@@ -76,10 +76,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '1858.00',
                 'valor_aterior' => '1703.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            5 => 
+            5 =>
             array (
                 'id' => 6,
                 'tipo' => 1,
@@ -88,10 +88,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '2118.00',
                 'valor_aterior' => '1942.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            6 => 
+            6 =>
             array (
                 'id' => 7,
                 'tipo' => 1,
@@ -100,10 +100,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '2639.00',
                 'valor_aterior' => '2419.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            7 => 
+            7 =>
             array (
                 'id' => 8,
                 'tipo' => 1,
@@ -112,10 +112,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '3190.00',
                 'valor_aterior' => '2925.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            8 => 
+            8 =>
             array (
                 'id' => 9,
                 'tipo' => 1,
@@ -124,10 +124,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '3339.00',
                 'valor_aterior' => '3062.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            9 => 
+            9 =>
             array (
                 'id' => 10,
                 'tipo' => 1,
@@ -136,10 +136,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '3710.00',
                 'valor_aterior' => '3402.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            10 => 
+            10 =>
             array (
                 'id' => 11,
                 'tipo' => 1,
@@ -148,10 +148,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '788.00',
                 'valor_aterior' => '723.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            11 => 
+            11 =>
             array (
                 'id' => 12,
                 'tipo' => 1,
@@ -160,10 +160,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '1053.00',
                 'valor_aterior' => '965.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            12 => 
+            12 =>
             array (
                 'id' => 13,
                 'tipo' => 1,
@@ -172,10 +172,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '1331.00',
                 'valor_aterior' => '1220.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            13 => 
+            13 =>
             array (
                 'id' => 14,
                 'tipo' => 1,
@@ -184,10 +184,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '1588.00',
                 'valor_aterior' => '1456.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            14 => 
+            14 =>
             array (
                 'id' => 15,
                 'tipo' => 1,
@@ -196,10 +196,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '1858.00',
                 'valor_aterior' => '1703.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            15 => 
+            15 =>
             array (
                 'id' => 16,
                 'tipo' => 1,
@@ -208,10 +208,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '2118.00',
                 'valor_aterior' => '1942.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            16 => 
+            16 =>
             array (
                 'id' => 17,
                 'tipo' => 1,
@@ -220,10 +220,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '2639.00',
                 'valor_aterior' => '2419.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            17 => 
+            17 =>
             array (
                 'id' => 18,
                 'tipo' => 1,
@@ -232,10 +232,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '3190.00',
                 'valor_aterior' => '2925.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            18 => 
+            18 =>
             array (
                 'id' => 19,
                 'tipo' => 1,
@@ -244,10 +244,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '3339.00',
                 'valor_aterior' => '3062.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            19 => 
+            19 =>
             array (
                 'id' => 20,
                 'tipo' => 1,
@@ -256,10 +256,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '3710.00',
                 'valor_aterior' => '3402.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            20 => 
+            20 =>
             array (
                 'id' => 21,
                 'tipo' => 2,
@@ -268,10 +268,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '1331.00',
                 'valor_aterior' => '1220.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            21 => 
+            21 =>
             array (
                 'id' => 22,
                 'tipo' => 2,
@@ -280,10 +280,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '1588.00',
                 'valor_aterior' => '1456.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            22 => 
+            22 =>
             array (
                 'id' => 23,
                 'tipo' => 2,
@@ -292,10 +292,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '1858.00',
                 'valor_aterior' => '1703.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            23 => 
+            23 =>
             array (
                 'id' => 24,
                 'tipo' => 2,
@@ -304,10 +304,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '2118.00',
                 'valor_aterior' => '1942.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            24 => 
+            24 =>
             array (
                 'id' => 25,
                 'tipo' => 2,
@@ -316,10 +316,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '2639.00',
                 'valor_aterior' => '2419.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            25 => 
+            25 =>
             array (
                 'id' => 26,
                 'tipo' => 2,
@@ -328,10 +328,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '3190.00',
                 'valor_aterior' => '2925.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            26 => 
+            26 =>
             array (
                 'id' => 27,
                 'tipo' => 2,
@@ -340,10 +340,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '3710.00',
                 'valor_aterior' => '3402.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            27 => 
+            27 =>
             array (
                 'id' => 28,
                 'tipo' => 2,
@@ -352,10 +352,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '4234.00',
                 'valor_aterior' => '3882.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            28 => 
+            28 =>
             array (
                 'id' => 29,
                 'tipo' => 2,
@@ -364,10 +364,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '5284.00',
                 'valor_aterior' => '4846.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            29 => 
+            29 =>
             array (
                 'id' => 30,
                 'tipo' => 2,
@@ -376,10 +376,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '6343.00',
                 'valor_aterior' => '5817.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            30 => 
+            30 =>
             array (
                 'id' => 31,
                 'tipo' => 2,
@@ -388,10 +388,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '1331.00',
                 'valor_aterior' => '1220.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            31 => 
+            31 =>
             array (
                 'id' => 32,
                 'tipo' => 2,
@@ -400,10 +400,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '1588.00',
                 'valor_aterior' => '1456.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            32 => 
+            32 =>
             array (
                 'id' => 33,
                 'tipo' => 2,
@@ -412,10 +412,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '1858.00',
                 'valor_aterior' => '1703.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            33 => 
+            33 =>
             array (
                 'id' => 34,
                 'tipo' => 2,
@@ -424,10 +424,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '2118.00',
                 'valor_aterior' => '1942.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            34 => 
+            34 =>
             array (
                 'id' => 35,
                 'tipo' => 2,
@@ -436,10 +436,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '2639.00',
                 'valor_aterior' => '2419.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            35 => 
+            35 =>
             array (
                 'id' => 36,
                 'tipo' => 2,
@@ -448,10 +448,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '3190.00',
                 'valor_aterior' => '2925.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            36 => 
+            36 =>
             array (
                 'id' => 37,
                 'tipo' => 2,
@@ -460,10 +460,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '3710.00',
                 'valor_aterior' => '3402.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            37 => 
+            37 =>
             array (
                 'id' => 38,
                 'tipo' => 2,
@@ -472,10 +472,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '4234.00',
                 'valor_aterior' => '3882.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            38 => 
+            38 =>
             array (
                 'id' => 39,
                 'tipo' => 2,
@@ -484,10 +484,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '5284.00',
                 'valor_aterior' => '4846.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            39 => 
+            39 =>
             array (
                 'id' => 40,
                 'tipo' => 2,
@@ -496,10 +496,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '6343.00',
                 'valor_aterior' => '5817.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            40 => 
+            40 =>
             array (
                 'id' => 41,
                 'tipo' => 2,
@@ -508,10 +508,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '1053.00',
                 'valor_aterior' => '965.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            41 => 
+            41 =>
             array (
                 'id' => 42,
                 'tipo' => 2,
@@ -520,10 +520,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '1588.00',
                 'valor_aterior' => '1456.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            42 => 
+            42 =>
             array (
                 'id' => 43,
                 'tipo' => 2,
@@ -532,10 +532,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '2118.00',
                 'valor_aterior' => '1942.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            43 => 
+            43 =>
             array (
                 'id' => 44,
                 'tipo' => 2,
@@ -544,10 +544,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '2118.00',
                 'valor_aterior' => '1942.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            44 => 
+            44 =>
             array (
                 'id' => 45,
                 'tipo' => 2,
@@ -556,10 +556,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '2742.00',
                 'valor_aterior' => '2514.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            45 => 
+            45 =>
             array (
                 'id' => 46,
                 'tipo' => 2,
@@ -568,10 +568,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '3190.00',
                 'valor_aterior' => '2925.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            46 => 
+            46 =>
             array (
                 'id' => 47,
                 'tipo' => 2,
@@ -580,10 +580,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '3190.00',
                 'valor_aterior' => '2925.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            47 => 
+            47 =>
             array (
                 'id' => 48,
                 'tipo' => 2,
@@ -592,10 +592,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '3710.00',
                 'valor_aterior' => '3402.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            48 => 
+            48 =>
             array (
                 'id' => 49,
                 'tipo' => 2,
@@ -604,10 +604,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '4234.00',
                 'valor_aterior' => '3882.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            49 => 
+            49 =>
             array (
                 'id' => 50,
                 'tipo' => 2,
@@ -616,10 +616,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '1053.00',
                 'valor_aterior' => '965.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            50 => 
+            50 =>
             array (
                 'id' => 51,
                 'tipo' => 2,
@@ -628,10 +628,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '1588.00',
                 'valor_aterior' => '1456.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            51 => 
+            51 =>
             array (
                 'id' => 52,
                 'tipo' => 2,
@@ -640,10 +640,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 1,
                 'valor' => '2118.00',
                 'valor_aterior' => '1942.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            52 => 
+            52 =>
             array (
                 'id' => 53,
                 'tipo' => 2,
@@ -652,10 +652,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '2118.00',
                 'valor_aterior' => '1942.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            53 => 
+            53 =>
             array (
                 'id' => 54,
                 'tipo' => 2,
@@ -664,10 +664,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '2742.00',
                 'valor_aterior' => '2514.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            54 => 
+            54 =>
             array (
                 'id' => 55,
                 'tipo' => 2,
@@ -676,10 +676,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 2,
                 'valor' => '3190.00',
                 'valor_aterior' => '2925.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            55 => 
+            55 =>
             array (
                 'id' => 56,
                 'tipo' => 2,
@@ -688,10 +688,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '3184.00',
                 'valor_aterior' => '2920.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            56 => 
+            56 =>
             array (
                 'id' => 57,
                 'tipo' => 2,
@@ -700,10 +700,10 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '3710.00',
                 'valor_aterior' => '3402.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
-            57 => 
+            57 =>
             array (
                 'id' => 58,
                 'tipo' => 2,
@@ -712,11 +712,11 @@ class ValoresUnitariosConstruccionsTableSeeder extends Seeder
                 'estado' => 3,
                 'valor' => '4234.00',
                 'valor_aterior' => '3882.00',
-                'created_at' => NULL,
-                'updated_at' => NULL,
+                'created_at' => now(),
+                'updated_at' => now(),
             ),
         ));
-        
-        
+
+
     }
 }

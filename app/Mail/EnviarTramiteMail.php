@@ -39,7 +39,7 @@ class EnviarTramiteMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.usuarios.usuario_registrado',
+            markdown: 'emails.tramites.nuevo_tramite',
             with:[
                 'tramite' => $this->tramite,
             ]
@@ -64,7 +64,7 @@ class EnviarTramiteMail extends Mailable
         ]);
 
         return [
-            Attachment::fromData($pdf->output(), 'order_de_pago.pdf')
+            Attachment::fromData(fn () => $pdf->output(), 'order_de_pago.pdf')
                 ->withMime('application/pdf'),
         ];
 

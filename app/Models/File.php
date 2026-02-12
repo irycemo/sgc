@@ -42,4 +42,18 @@ class File extends Model
 
     }
 
+    public function getLinkFotoAvaluo(){
+
+        if(app()->isProduction()){
+
+            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_avaluos_fotos') . $this->url, now()->addMinutes(10));
+
+        }else{
+
+            return Storage::disk('avaluos')->url($this->url);
+
+        }
+
+    }
+
 }

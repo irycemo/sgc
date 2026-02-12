@@ -312,7 +312,7 @@
 
             <div class="flex gap-3">
 
-                <x-button-blue|
+                <x-button-blue>
                     wire:click="asignarCuenta"
                     wire:loading.attr="disabled"
                     wire:target="asignarCuenta">

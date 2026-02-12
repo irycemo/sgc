@@ -141,6 +141,8 @@ trait ConstruccionesComunTrait
 
                 $this->predio->save();
 
+                $this->predio->refresh();
+
                 $this->dispatch('mostrarMensaje', ['success', "La información de condominio se guardó con éxito"]);
 
                 $this->dispatch('recargarPredio');

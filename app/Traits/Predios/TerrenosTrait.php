@@ -144,6 +144,8 @@ trait TerrenosTrait
                     'valor_total_terreno' => $sum + $this->predio->terrenosComun->sum('valor_terreno_comun'),
                 ]);
 
+                $this->predio->refresh();
+
                 $this->dispatch('mostrarMensaje', ['success', "Los terrenos se guardaron con éxito"]);
 
                 $this->dispatch('recargarPredio');

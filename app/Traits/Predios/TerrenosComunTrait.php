@@ -141,6 +141,8 @@ trait TerrenosComunTrait
 
                 $this->predio->save();
 
+                $this->predio->refresh();
+
                 $this->dispatch('mostrarMensaje', ['success', "La información de terrenos en común se guardó con éxito"]);
 
                 $this->dispatch('recargarPredio');
