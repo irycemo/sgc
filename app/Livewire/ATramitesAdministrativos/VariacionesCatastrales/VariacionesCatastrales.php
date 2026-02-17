@@ -787,6 +787,7 @@ class VariacionesCatastrales extends Component
 
             $variaciones = VariacionCatastral::select('id', 'año', 'folio', 'estado', 'tramite_id', 'promovente', 'finado', 'archivo', 'oficina_id', 'valuador', 'creado_por', 'actualizado_por','created_at', 'updated_at')
                                             ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
+                                            ->withCount('archivos')
                                             ->where(function($q){
                                                 $q->where('promovente', 'LIKE', '%' . $this->search . '%')
                                                     ->orWhere('finado', 'LIKE', '%' . $this->search . '%');
