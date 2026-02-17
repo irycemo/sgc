@@ -226,11 +226,19 @@
                                             Subir archivo
                                         </button>
 
-                                        @if($variacion->archivo)
+                                        @if($variacion->archivos->count())
 
                                             <a href="{{ Storage::disk('variacionescatastrales')->url($variacion->archivo) }}" target="_blank" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100" role="menuitem">
                                                 Ver archivo
                                             </a>
+
+                                            <button
+                                                wire:click="abrirVerArchivos({{ $variacion->id }})"
+                                                wire:loading.attr="disabled"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                role="menuitem">
+                                                Ver archivos
+                                            </button>
 
                                         @endif
 
@@ -328,5 +336,7 @@
     @include('livewire.a-tramites-administrativos.comun.modal-subir-archivo')
 
     @include('livewire.a-tramites-administrativos.comun.modal-cambiar-estado')
+
+    @include('livewire.a-tramites-administrativos.comun.modal-ver-archivos')
 
 </div>
