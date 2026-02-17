@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use App\Models\Predio;
+use App\Models\File;
 use App\Models\Oficina;
-use App\Models\Tramite;
-use App\Traits\ModelosTrait;
+use App\Models\Predio;
 use App\Models\Requerimiento;
+use App\Models\Tramite;
+use App\Models\User;
+use App\Traits\ModelosTrait;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 

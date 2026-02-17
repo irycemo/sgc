@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\User;
+use App\Models\File;
 use App\Models\Oficina;
-use App\Models\Tramite;
-use App\Traits\ModelosTrait;
 use App\Models\Requerimiento;
+use App\Models\Tramite;
+use App\Models\User;
+use App\Traits\ModelosTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class PredioIgnorado extends Model implements Auditable
@@ -55,10 +55,8 @@ class PredioIgnorado extends Model implements Auditable
         return $this->morphMany(Requerimiento::class, 'requerimientoable');
     }
 
-    public function archivo(){
-
-        return Storage::disk('prediosignorados')->url($this->archivo);
-
+    public function archivos(){
+        return $this->morphMany(File::class, 'fileable');
     }
 
 }

@@ -160,7 +160,7 @@
 
             <div class="">
 
-                <div class="flex flex-col md:flex-row justify-start md:space-x-1 mb-5">
+                <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
 
                     <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-24" title="Estado" value="16" readonly>
 
@@ -172,7 +172,7 @@
 
                 </div>
 
-                <div class="flex flex-col md:flex-row justify-start md:space-x-1 mb-5">
+                <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
 
 
                     <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-24 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
@@ -185,7 +185,7 @@
 
                 </div>
 
-                <div class="flex flex-col md:flex-row justify-start md:space-x-1 mb-5">
+                <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
 
                     <input title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-24 @error('edificio') border-1 border-red-500 @enderror" wire:model="edificio">
 

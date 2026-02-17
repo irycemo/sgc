@@ -2,7 +2,7 @@
 
     <x-header>Oficina ({{ $oficina->nombre }})</x-header>
 
-    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Datos generales</h4>
+    <x-h4>Datos generales</x-h4>
 
     <div class="p-4 bg-white rounded-lg mb-5 text-sm">
 
@@ -264,7 +264,7 @@
 
     </div>
 
-    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Usuarios</h4>
+    <x-h4>Usuarios</x-h4>
 
     <div class="p-4 bg-white rounded-lg mb-5 overflow-auto">
 
@@ -317,68 +317,6 @@
         </table>
 
     </div>
-
-    {{-- <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Estadísticos del municipio (@if($oficina->cabeceraMunicipal) {{ $oficina->cabeceraMunicipal->nombre }} @else {{ $oficina->nombre }} @endif)</h4>
-
-    <div class="p-4 bg-white rounded-lg mb-5 overflow-auto">
-
-        <table class="w-full">
-
-            <thead class="border-b border-gray-300 bg-gray-50">
-
-                <tr class="text-xs font-medium text-gray-600 uppercase text-left traling-wider">
-                    <th class="px-3 py-3">Total de predios</th>
-                    <th class="px-3 py-3">Predios urbanos</th>
-                    <th class="px-3 py-3">Predios rústicos</th>
-                    <th class="px-3 py-3">Predios en sector 88</th>
-                    <th class="px-3 py-3">Predios en sector 99</th>
-                    <th class="px-3 py-3">Predios con clave definitiva</th>
-                </tr>
-
-            </thead>
-
-            <tbody class="divide-y divide-gray-200 flex-1 sm:flex-none ">
-
-                <tr class="text-sm font-medium text-gray-600 bg-white text-center">
-                    <td>{{ number_format($predios) }}</td>
-                    <td>{{ number_format($predios_urbanos) }}</td>
-                    <td>{{ number_format($predios_rusticos) }}</td>
-                    <td>{{ number_format($predios_88) }}</td>
-                    <td>{{ number_format($predios_99) }}</td>
-                    <td>{{ number_format($predios - $predios_99 - $predios_88) }}</td>
-                </tr>
-                <tr>
-                    <td colspan="6">
-                        <div class="bg-gray-50 p-1 text-center"><span class="text-sm font-medium text-gray-600">Porcentaje sobre el total de predios del estado ({{ number_format($total_predios, 2) }})</span></div>
-                    </td>
-                </tr>
-                <tr class="text-sm font-medium text-gray-600 bg-white text-center">
-                    <td>{{ number_format(($predios / $total_predios) * 100, 2) }}%</td>
-                    <td>{{ number_format(($predios_urbanos / $total_predios) * 100, 2) }}%</td>
-                    <td>{{ number_format(($predios_rusticos / $total_predios) * 100, 2) }}%</td>
-                    <td>{{ number_format(($predios_88 / $total_predios) * 100, 2) }}%</td>
-                    <td>{{ number_format(($predios_99 / $total_predios) * 100, 2) }}%</td>
-                    <td>{{ number_format((($predios - $predios_99 - $predios_88) / $total_predios) * 100, 2) }}%</td>
-                </tr>
-                <tr>
-                    <td colspan="6">
-                        <div class="bg-gray-50 p-1 text-center"><span class="text-sm font-medium text-gray-600">Valores catastrales</span></div>
-                    </td>
-                </tr>
-                <tr class="text-sm font-medium text-gray-600 bg-white text-center">
-                    <td>${{ number_format($valor_urbanos + $valor_rusticos) }}</td>
-                    <td>${{ number_format($valor_urbanos, 2) }}</td>
-                    <td>${{ number_format($valor_rusticos, 2) }}</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div> --}}
 
     <x-dialog-modal wire:model.live="modal">
 
