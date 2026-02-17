@@ -103,7 +103,7 @@ class RequerimientosCertificaciones extends Component
     #[Computed]
     public function certificaciones(){
 
-        return Certificacion::select('id', 'estado', 'tipo', 'año', 'folio', 'predio_id', 'tramite_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+        return Certificacion::select('id', 'estado', 'tipo', 'año', 'folio', 'predio_id', 'tramite_id', 'uuid', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
                                 ->with('tramite:id,año,folio,usuario', 'predio:id,localidad,oficina,tipo_predio,numero_registro')
                                 ->has('requerimientos')
                                 ->doesntHave('ultimoRequerimientoFinalizado')
