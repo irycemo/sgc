@@ -5,8 +5,6 @@ namespace App\Services\Tramites;
 use App\Models\Tramite;
 use Illuminate\Support\Str;
 use App\Services\SAP\SapService;
-use Illuminate\Support\Facades\Log;
-use App\Exceptions\GeneralException;
 use Illuminate\Support\Facades\Cache;
 
 class TramiteService{
@@ -114,6 +112,7 @@ class TramiteService{
 
         if($this->tramite->solicitante == 'Oficialia de partes' || $this->tramite->tipo_tramite == 'exento'){
 
+            $this->tramite->estado = 'pagado';
             $this->tramite->limite_de_pago = now()->toDateString();
 
             return;

@@ -44,53 +44,41 @@
 
             <x-slot name="body">
 
-                @forelse ($valores as $valor)
+                @forelse ($this->valores as $valor)
 
                     <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $valor->id }}">
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Tipo</span>
+                        <x-table.cell title="Tipo">
 
                             {{ $valor->tipo }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Uso</span>
+                        <x-table.cell title="Uso">
 
                             {{ $valor->uso }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Categoría</span>
+                        <x-table.cell title="Categoría">
 
                             {{ $valor->estado }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Calidad</span>
+                        <x-table.cell title="Calidad">
 
                             {{ $valor->calidad }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Valor</span>
+                        <x-table.cell title="Valor">
 
                             ${{ number_format($valor->valor, 2) }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Valor anterior</span>
+                        <x-table.cell title="Valor anterior">
 
                             ${{ number_format($valor->valor_aterior, 2) }}
 
@@ -124,7 +112,7 @@
 
                     <x-table.cell colspan="9" class="bg-gray-50">
 
-                        {{ $valores->links()}}
+                        {{ $this->valores->links()}}
 
                     </x-table.cell>
 

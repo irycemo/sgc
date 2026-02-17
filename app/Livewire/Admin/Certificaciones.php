@@ -131,9 +131,10 @@ class Certificaciones extends Component
     #[Computed]
     public function certificaciones(){
 
-        return Certificacion::with(
-                                    'creadoPor',
-                                    'actualizadoPor',
+        return Certificacion::select('id', 'uuid', 'tipo', 'año', 'folio', 'estado', 'oficina_id', 'tramite_id', 'predio_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                                ->with(
+                                    'creadoPor:id,name',
+                                    'actualizadoPor:id,name',
                                     'tramite:id,año,folio,usuario',
                                     'oficina:id,nombre',
                                     'predio:id,localidad,oficina,tipo_predio,numero_registro'

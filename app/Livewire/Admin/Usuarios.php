@@ -152,11 +152,7 @@ class Usuarios extends Component
 
                 $this->modelo_editar->auditAttach('roles', $this->role);
 
-                if(app()->isProduction()){
-
-                    Mail::to($this->modelo_editar->email)->send(new RegistroUsuarioMail($this->modelo_editar));
-
-                }
+                Mail::to($this->modelo_editar->email)->send(new RegistroUsuarioMail($this->modelo_editar));
 
                 $this->resetearTodo();
 
@@ -190,11 +186,7 @@ class Usuarios extends Component
 
                     $this->modelo_editar->update(['password' => bcrypt('sistema')]);
 
-                    if(app()->isProduction()){
-
-                        Mail::to($this->modelo_editar->email)->send(new RegistroUsuarioMail($this->modelo_editar));
-
-                    }
+                    Mail::to($this->modelo_editar->email)->send(new RegistroUsuarioMail($this->modelo_editar));
 
                 }
 
@@ -244,11 +236,7 @@ class Usuarios extends Component
 
             $usuario->password = bcrypt('sistema');
 
-            if(app()->isProduction()){
-
-                Mail::to($usuario->email)->send(new RegistroUsuarioMail($usuario));
-
-            }
+            Mail::to($usuario->email)->send(new RegistroUsuarioMail($usuario));
 
             $usuario->save();
 
@@ -320,7 +308,8 @@ class Usuarios extends Component
     #[Computed]
     public function usuarios(){
 
-        return User::with('creadoPor:id,name', 'actualizadoPor:id,name', 'oficina:id,oficina,nombre')
+        return User::select('id', 'name', 'email', 'clave', 'profile_photo_path', 'oficina_id', 'area', 'estado', 'valuador', 'created_at', 'updated_at', 'creado_por', 'actualizado_por')
+                        ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'oficina:id,oficina,nombre')
                         ->where(function($q){
                             $q->where('name', 'LIKE', '%' . $this->search . '%')
                                 ->orWhere('clave', 'LIKE', '%' . $this->search . '%')

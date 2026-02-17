@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Api\V1\Tramites;
 
-use App\Models\Tramite;
-use App\Models\Servicio;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Mail;
-use App\Http\Resources\TramiteResource;
-use App\Services\Tramites\TramiteService;
-use App\Http\Requests\CrearTramiteRequest;
 use App\Http\Requests\CrearTramiteRefrendoRequest;
-use App\Mail\EnviarTramiteMail;
+use App\Http\Requests\CrearTramiteRequest;
+use App\Http\Resources\TramiteResource;
+use App\Models\Servicio;
+use App\Models\Tramite;
+use App\Services\Tramites\OrdenPagoService;
+use App\Services\Tramites\TramiteService;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CrearTramiteController extends Controller
 {
@@ -83,8 +82,6 @@ class CrearTramiteController extends Controller
         $tramite->cantidad = 1;
         $tramite->creado_por = 10;
 
-        $nuevo_tramite = null;
-
         $tramite_existente = Tramite::where('año', now()->year)
                                     ->where('estado', 'nuevo')
                                     ->where('solicitante', 'Perito externo')
@@ -94,25 +91,23 @@ class CrearTramiteController extends Controller
 
         if($tramite_existente){
 
-            return response()->json([
-                'error' => "Ya ha hecho una solicitud, la información se hizó llegar mediante correo electrónico.",
-            ], 500);
+            $pdf = (new OrdenPagoService())->generarOrdenPago($tramite_existente);
+
+            return (new TramiteResource($tramite_existente))->additional(['pdf' => base64_encode($pdf->stream()), 'nuevo' => false])->response()->setStatusCode(200);
 
         }
 
         try {
 
-            DB::transaction(function () use($tramite, $validated, &$nuevo_tramite){
+            $nuevo_tramite = DB::transaction(function () use($tramite){
 
-                $nuevo_tramite = (new TramiteService($tramite))->crear();
-
-                $titulo = 'Se envia trámite de refrendo anual de la autorización de perito valuador';
-
-                Mail::to($validated['email'])->send(new EnviarTramiteMail($titulo, $nuevo_tramite));
+                return (new TramiteService($tramite))->crear();
 
             }, 5);
 
-            return (new TramiteResource($nuevo_tramite))->response()->setStatusCode(200);
+            $pdf = (new OrdenPagoService())->generarOrdenPago($nuevo_tramite);
+
+            return (new TramiteResource($nuevo_tramite))->additional(['pdf' => base64_encode($pdf->stream()), 'nuevo' => true])->response()->setStatusCode(200);
 
         } catch (GeneralException $ex) {
 

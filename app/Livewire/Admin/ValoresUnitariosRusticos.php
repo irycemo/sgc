@@ -2,10 +2,11 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\ValoresUnitariosRusticos as Model;
+use App\Traits\ComponentesTrait;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Traits\ComponentesTrait;
-use App\Models\ValoresUnitariosRusticos as Model;
 
 class ValoresUnitariosRusticos extends Component
 {
@@ -19,12 +20,16 @@ class ValoresUnitariosRusticos extends Component
         return Model::make();
     }
 
+    #[Computed]
+    public function valores(){
+
+        return Model::select('id', 'concepto', 'valor', 'valor_aterior')
+                        ->orderBy($this->sort, $this->direction)
+                        ->paginate($this->pagination);
+    }
+
     public function render()
     {
-
-        $valores = Model::orderBy($this->sort, $this->direction)->paginate($this->pagination);
-
-        return view('livewire.admin.valores-unitarios-rusticos',compact('valores'))->extends('layouts.admin');
-
+        return view('livewire.admin.valores-unitarios-rusticos')->extends('layouts.admin');
     }
 }

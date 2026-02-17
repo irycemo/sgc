@@ -315,7 +315,7 @@ class Tramites extends Component
 
         return  Tramite::query()
                         ->select('id', 'año', 'folio', 'usuario', 'estado', 'servicio_id', 'cantidad', 'monto', 'fecha_entrega', 'fecha_pago', 'tipo_tramite', 'tipo_servicio', 'nombre_solicitante', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
-                        ->with('servicio', 'creadoPor', 'actualizadoPor')
+                        ->with('servicio:id,nombre', 'creadoPor:id,name', 'actualizadoPor:id,name')
                         ->when($this->filters['search'], fn($q, $search) => $q->where('nombre_solicitante', 'LIKE', '%' . $search . '%'))
                         ->when($this->filters['año'], fn($q, $año) => $q->where('año', $año))
                         ->when($this->filters['folio'], fn($q, $folio) => $q->where('folio', $folio))

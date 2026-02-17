@@ -107,7 +107,8 @@ class Categorias extends Component
     #[Computed]
     public function categorias(){
 
-        return CategoriaServicio::with('creadoPor', 'actualizadoPor')
+        return CategoriaServicio::select('id', 'nombre', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                    ->with('creadoPor:id,name', 'actualizadoPor:id,name')
                     ->where('nombre', 'LIKE', '%' . $this->search . '%')
                     ->orderBy($this->sort, $this->direction)
                     ->paginate($this->pagination);

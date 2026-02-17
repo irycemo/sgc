@@ -154,7 +154,8 @@ class FactorIncrementos extends Component
     #[Computed]
     public function factores(){
 
-        return FactorIncremento::with('creadoPor', 'actualizadoPor')
+        return FactorIncremento::select('id', 'año', 'factor', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                                ->with('creadoPor:id,name', 'actualizadoPor:id,name')
                                 ->orderBy($this->sort, $this->direction)
                                 ->paginate($this->pagination);
 

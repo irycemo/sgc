@@ -166,7 +166,8 @@ class Oficinas extends Component
     #[Computed]
     public function oficinas(){
 
-        return Oficina::with('creadoPor', 'actualizadoPor', 'cabeceraMunicipal')
+        return Oficina::select('id', 'region', 'municipio', 'nombre', 'oficina', 'cabecera', 'localidad', 'titular', 'tipo', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                        ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'cabeceraMunicipal:id,nombre')
                         ->where('municipio', 'LIKE', '%'. $this->search . '%')
                         ->orWhere('oficina', 'LIKE', '%'. $this->search . '%')
                         ->orWhere('localidad', 'LIKE', '%'. $this->search . '%')

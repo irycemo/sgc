@@ -64,8 +64,7 @@ class EnviarTramiteMail extends Mailable
         ]);
 
         return [
-            Attachment::fromData(fn () => $pdf->output(), 'order_de_pago.pdf')
-                ->withMime('application/pdf'),
+            Attachment::fromData(fn () => $pdf->output(), 'order_de_pago.pdf')->withMime('application/pdf'),
         ];
 
     }

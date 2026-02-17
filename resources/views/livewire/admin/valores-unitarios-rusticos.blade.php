@@ -39,29 +39,23 @@
 
             <x-slot name="body">
 
-                @forelse ($valores as $valor)
+                @forelse ($this->valores as $valor)
 
                     <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $valor->id }}">
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Concepto</span>
+                        <x-table.cell title="Concepto">
 
                             {{ $valor->concepto }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Valor</span>
+                        <x-table.cell title="Valor">
 
                             ${{ number_format($valor->valor, 2) }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Valor anterior</span>
+                        <x-table.cell title="Valor anterior">
 
                             ${{ number_format($valor->valor_aterior, 2) }}
 
@@ -95,7 +89,7 @@
 
                     <x-table.cell colspan="9" class="bg-gray-50">
 
-                        {{ $valores->links()}}
+                        {{ $this->valores->links()}}
 
                     </x-table.cell>
 

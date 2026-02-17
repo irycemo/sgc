@@ -99,106 +99,79 @@
 
                     <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $tramite->id }}">
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Año</span>
+                        <x-table.cell title="Año">
 
                             {{ $tramite->año }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Folio</span>
+                        <x-table.cell title="Folio">
 
                             {{ $tramite->folio }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Usuario</span>
+                        <x-table.cell title="Usuario">
 
                             {{ $tramite->usuario }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Estado</span>
+                        <x-table.cell title="Estado">
 
                             <span class="bg-{{ $tramite->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($tramite->estado) }}</span>
 
                         </x-table.cell>
 
-                        <x-table.cell class="capitalize">
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Tipo de trámite</span>
+                        <x-table.cell title="Tipo de trámite">
 
                             {{ $tramite->tipo_tramite }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell title="Servicio">
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Servicio</span>
-
-                            <p class="mt-2">{{ $tramite->servicio->nombre }}</p>
+                            {{ $tramite->servicio->nombre }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell title="Nombre del solicitante">
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Nombre del solicitante</span>
-
-                            <p class="mt-2">{{ $tramite->nombre_solicitante }}</p>
+                            {{ $tramite->nombre_solicitante }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Cantidad</span>
+                        <x-table.cell title="Cantidad">
 
                             {{ $tramite->cantidad }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Monto</span>
+                        <x-table.cell title="Monto">
 
                             ${{ number_format($tramite->monto, 2) }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell title="Fecha de entrega">
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Fecha de entrega</span>
-
-                            {{ $tramite->fecha_entrega->format('d-m-Y') }}
+                            {{ $tramite->fecha_entrega->format('d/m/Y') }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell title="Fecha de pago">
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Fecha de pago</span>
-
-                            {{ $tramite->fecha_pago ? $tramite->fecha_pago->format('d-m-Y') : 'N/A'}}
+                            {{ $tramite->fecha_pago ? $tramite->fecha_pago->format('d/m/Y') : 'N/A'}}
 
                         </x-table.cell>
 
-                        <x-table.cell class="capitalize">
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Tipo de servicio</span>
+                        <x-table.cell title="Tipo de servicio">
 
                             {{ $tramite->tipo_servicio }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Registrado</span>
-
+                        <x-table.cell title="Registrado">
 
                             <span class="font-semibold">@if($tramite->creadoPor != null)Registrado por: {{$tramite->creadoPor->name}} @else Registro: @endif</span> <br>
 
@@ -206,7 +179,7 @@
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell title="Actualizado">
 
                             <span class="font-semibold">@if($tramite->actualizadoPor != null)Actualizado por: {{$tramite->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
 
@@ -214,9 +187,7 @@
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Acciones</span>
+                        <x-table.cell title="ActuaAccioneslizado">
 
                             <div class="ml-3 relative" x-data="{ open_drop_down:false }">
 
