@@ -8,7 +8,7 @@
 
     <x-slot name="content">
 
-        <x-input-group for="descripcion_documento" label="Descripción" :error="$errors->first('descripcion_documento')" class="w-full">
+        <x-input-group for="descripcion_documento" label="Descripción" :error="$errors->first('descripcion_documento')" class="w-full mb-5">
 
             <x-input-text id="descripcion_documento" wire:model="descripcion_documento" />
 

@@ -56,4 +56,32 @@ class File extends Model
 
     }
 
+    public function getLinkVariacionCatastral(){
+
+        if(app()->isProduction()){
+
+            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_predios') . $this->url, now()->addMinutes(10));
+
+        }else{
+
+            return Storage::disk('variacionescatastrales')->url($this->url);
+
+        }
+
+    }
+
+    public function getLinkPredioIgnorado(){
+
+        if(app()->isProduction()){
+
+            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_predios') . $this->url, now()->addMinutes(10));
+
+        }else{
+
+            return Storage::disk('prediosignorados')->url($this->url);
+
+        }
+
+    }
+
 }

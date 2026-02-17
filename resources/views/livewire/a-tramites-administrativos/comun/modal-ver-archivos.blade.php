@@ -8,39 +8,44 @@
 
     <x-slot name="content">
 
-        <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
+        <table class="table-auto lg:table-fixed w-full">
 
-            <table class="table-auto lg:table-fixed w-full">
+            <thead class="border-b border-gray-300 ">
 
-                <thead class="border-b border-gray-300 ">
+                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
-                    <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                    <th class="px-2">Descripción</th>
+                    <th class="px-2">Link</th>
 
-                        <th class="px-2">Descripción</th>
-                        <th class="px-2">Link</th>
+                </tr>
 
+            </thead>
+
+            <tbody class="divide-y divide-gray-200">
+
+                @foreach ($this->modelo_editar->archivos as $archivo)
+
+                    <tr class="text-gray-500 text-sm leading-relaxed">
+                        <td class=" px-2 w-full ">{{ $archivo->descripcion }}</td>
+                        <td class=" p-2 w-full ">
+
+                            @if(get_class($this->modelo_editar) === 'App\Models\VariacionCatastral')
+
+                                <x-link-blue class="w-min whitespace-nowrap" href="{{ $archivo->getLinkVariacionCatastral() }}" target="_blank">Ver archivo</x-link-blue>
+
+                            @else
+
+                                <x-link-blue class="w-min whitespace-nowrap" href="{{ $archivo->getLinkPredioIgnorado() }}" target="_blank">Ver archivo</x-link-blue>
+
+                            @endif
+                        </td>
                     </tr>
 
-                </thead>
+                @endforeach
 
-                <tbody class="divide-y divide-gray-200">
+            </tbody>
 
-                    @foreach ($this->modelo_editar->archivos as $archivo)
-
-                        <tr class="text-gray-500 text-sm leading-relaxed">
-                            <td class=" px-2 w-full ">{{ $archivo->descripcion }}</td>
-                            <td class=" px-2 w-full ">
-                                <x-link-blue href="{{ $archivo->getLinkArchivo() }}" target="_blank">Ver archivo</x-link-blue>
-                            </td>
-                        </tr>
-
-                    @endforeach
-
-                </tbody>
-
-            </table>
-
-        </div>
+        </table>
 
     </x-slot>
 

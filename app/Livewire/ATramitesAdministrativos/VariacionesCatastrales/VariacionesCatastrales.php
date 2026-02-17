@@ -524,7 +524,7 @@ class VariacionesCatastrales extends Component
             $this->modelo_editar = $modelo;
     }
 
-    public function guardarDocumento(){
+    public function guardarArchivo(){
 
         $this->validate(['file' => 'required|mimes:pdf', 'descripcion_documento' => 'required']);
 
@@ -532,7 +532,7 @@ class VariacionesCatastrales extends Component
 
             DB::transaction(function () {
 
-                $archivo = $this->modelo_editar->archivos()->where('descripcion', $this->descripcion)->first();
+                $archivo = $this->modelo_editar->archivos()->where('descripcion', $this->descripcion_documento)->first();
 
                 if($archivo){
 

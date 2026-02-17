@@ -48,6 +48,7 @@ class PrediosIgnorados extends Component
     public $modalAsignarValuador = false;
     public $modalSubirArchivo = false;
     public $modalCambiarEstado = false;
+    public $modalVerArchivos = false;
 
     public PredioIgnorado $modelo_editar;
 
@@ -291,6 +292,15 @@ class PrediosIgnorados extends Component
 
     }
 
+    public function abrirVerArchivos(PredioIgnorado $modelo){
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
+        $this->modalVerArchivos = true;
+
+    }
+
     public function asignar(){
 
         $this->validate(['modelo_editar.valuador' => 'required']);
@@ -356,6 +366,69 @@ class PrediosIgnorados extends Component
 
         if($this->modelo_editar->isNot($modelo))
             $this->modelo_editar = $modelo;
+    }
+
+    public function guardarArchivo(){
+
+        $this->validate(['file' => 'required|mimes:pdf', 'descripcion_documento' => 'required']);
+
+        try {
+
+            DB::transaction(function () {
+
+                $archivo = $this->modelo_editar->archivos()->where('descripcion', $this->descripcion_documento)->first();
+
+                if($archivo){
+
+                    if(app()->isProduction()){
+
+                        Storage::disk('s3')->delete(config('services.ses.ruta_predios') . $archivo->url);
+
+                    }else{
+
+                        Storage::disk('prediosignorados')->delete($archivo->url);
+
+                    }
+
+                    $archivo->delete();
+
+                }
+
+                if(app()->isProduction()){
+
+                    $file  = $this->file->store(config('services.ses.ruta_predios'), 's3');
+
+                }else{
+
+                    $file  = $this->file->store('/', 'prediosignorados');
+
+                }
+
+                File::create([
+                    'fileable_id' => $this->modelo_editar->id,
+                    'fileable_type' => 'App\Models\PredioIgnorado',
+                    'descripcion' => $this->descripcion_documento,
+                    'url' => $file
+                ]);
+
+                $this->modelo_editar->estado = 'actualizado';
+                $this->modelo_editar->actualizado_por = auth()->id();
+                $this->modelo_editar->save();
+
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Subio archivo: ' . $this->descripcion_documento]);
+
+            });
+
+            $this->resetearTodo($borrado = true);
+
+            $this->dispatch('mostrarMensaje', ['success', "Se subio el archivo con éxito."]);
+
+        } catch (\Throwable $th) {
+            Log::error("Error al subir archivo en variación catastral por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+            $this->resetearTodo();
+        }
+
     }
 
     public function anexar(){
