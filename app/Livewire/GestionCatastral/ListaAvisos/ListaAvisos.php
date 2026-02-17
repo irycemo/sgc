@@ -75,7 +75,8 @@ class ListaAvisos extends Component
 
         if(auth()->user()->hasRole(['Administrador', 'Jefe de departamento'])){
 
-            return Traslado::with('actualizadoPor', 'asignadoA', 'predio')
+            return Traslado::select('id','estado', 'predio_id', 'entidad_nombre', 'asignado_a', 'actualizado_por', 'created_at', 'updated_at')
+                                ->with('actualizadoPor:id,name', 'asignadoA:id,name', 'predio:id,localidad,oficina,tipo_predio,numero_registro')
                                 ->withCount(['rechazos'])
                                 ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $this->estado))
                                 ->when($this->oficina, function($q) {
@@ -110,7 +111,8 @@ class ListaAvisos extends Component
 
         }else{
 
-            return Traslado::with('actualizadoPor', 'asignadoA', 'predio')
+            return Traslado::select('id','estado', 'predio_id', 'entidad_nombre', 'asignado_a', 'actualizado_por', 'created_at', 'updated_at')
+                                ->with('actualizadoPor:id,name', 'asignadoA:id,name', 'predio:id,localidad,oficina,tipo_predio,numero_registro')
                                 ->withCount(['rechazos'])
                                 ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $this->estado))
                                 ->where('entidad_nombre', 'LIKE', '%' . $this->search . '%')

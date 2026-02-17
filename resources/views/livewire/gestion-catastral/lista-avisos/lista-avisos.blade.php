@@ -75,47 +75,37 @@
 
                     <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $traslado->id }}">
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Estado</span>
+                        <x-table.cell title="Estado">
 
                             <span class="bg-{{ $traslado->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($traslado->estado) }}</span>
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Cuenta predial</span>
+                        <x-table.cell title="Cuenta predial">
 
                             {{ $traslado->predio->cuentaPredial() }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Entidad</span>
+                        <x-table.cell title="Entidad">
 
                             {{ $traslado->entidad_nombre }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell title="Asignado a">
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Asignado a</span>
-
-                            <p class="mt-2">{{ $traslado->asignadoA->name }}</p>
+                            {{ $traslado->asignadoA->name }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Registrado</span>
+                        <x-table.cell title="Registrado">
 
                             {{ $traslado->created_at }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell title="Actualizado">
 
                             <span class="font-semibold">@if($traslado->actualizadoPor != null)Actualizado por: {{$traslado->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
 
@@ -123,9 +113,7 @@
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Acciones</span>
+                        <x-table.cell title="Acciones">
 
                             <div class="ml-3 relative" x-data="{ open_drop_down:false }">
 

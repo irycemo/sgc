@@ -46,27 +46,21 @@
 
                     <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $predio->id }}">
 
-                        <x-table.cell>
+                        <x-table.cell title="Promovente">
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Promovente</span>
-
-                            <p class="mt-2">{{ $predio->promovente }}</p>
+                            {{ $predio->promovente }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell title="Valuador">
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Valuador</span>
-
-                            <p class="mt-2">{{ $predio->valuadorAsignado->name }}</p>
+                            {{ $predio->valuadorAsignado->name }}
 
                         </x-table.cell>
 
                         @if(auth()->user()->hasRole(['Administrador', 'Jefe de departamento']))
 
-                            <x-table.cell>
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Oficina</span>
+                            <x-table.cell title="Oficina">
 
                                 {{ $predio->oficina->nombre }}
 
@@ -74,9 +68,7 @@
 
                         @endif
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Acciones</span>
+                        <x-table.cell title="Acciones">
 
                             <div class="ml-3 relative" x-data="{ open_drop_down:false }">
 

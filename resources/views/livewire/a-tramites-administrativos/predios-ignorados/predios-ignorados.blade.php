@@ -98,58 +98,43 @@
 
                     <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $predio->id }}">
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Año</span>
+                        <x-table.cell title="Año">
 
                             {{ $predio->año }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Folio</span>
+                        <x-table.cell title="Folio">
 
                             {{ $predio->folio }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Estado</span>
+                        <x-table.cell title="Estado">
 
                             <span class="bg-{{ $predio->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($predio->estado) }}</span>
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Trámite</span>
+                        <x-table.cell title="Trámite">
 
                             {{ $predio->tramite->año }}-{{ $predio->tramite->folio }}-{{ $predio->tramite->usuario }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Municipio</span>
+                        <x-table.cell title="Municipio">
 
                             {{ $predio->oficina->nombre }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell title="Promovente">
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Promovente</span>
-
-                            <p class="mt-2">{{ $predio->promovente }}</p>
+                            {{ $predio->promovente }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Registrado</span>
-
+                        <x-table.cell title="Registrado">
 
                             <span class="font-semibold">@if($predio->creadoPor != null)Registrado por: {{$predio->creadoPor->name}} @else Registro: @endif</span> <br>
 
@@ -157,7 +142,7 @@
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell  title="Actualizado">
 
                             <span class="font-semibold">@if($predio->actualizadoPor != null)Actualizado por: {{$predio->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
 
@@ -165,9 +150,7 @@
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Acciones</span>
+                        <x-table.cell title="Acciones">
 
                             <div class="ml-3 relative" x-data="{ open_drop_down:false }">
 

@@ -71,98 +71,75 @@
 
         <div class="relative overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
 
-            <table class="rounded-lg w-full" wire:loading.class.delaylongest="opacity-50">
+            <x-table>
 
-                <thead class="border-b border-gray-300 bg-gray-50">
+                <x-slot name="head">
 
-                    <tr class="text-xs font-medium text-gray-500 uppercase text-left traling-wider">
+                    <x-table.heading >Folio</x-table.heading>
 
-                        <th class="px-3 py-3 hidden lg:table-cell">
-                            Folio
-                        </th>
+                    <x-table.heading >Cuenta predial</x-table.heading>
 
-                        <th class="px-3 py-3 hidden lg:table-cell">
-                            Cuenta predial
-                        </th>
+                    <x-table.heading >Clave catastral</x-table.heading>
 
-                        <th class="px-3 py-3 hidden lg:table-cell">
-                            Clave catastral
-                        </th>
+                    <x-table.heading >Propietario</x-table.heading>
 
-                        <th class="px-3 py-3 hidden lg:table-cell">
-                            Propietario
-                        </th>
-
-                        <th class="px-3 py-3 hidden lg:table-cell">
-                            valor catastral
-                        </th>
+                    <x-table.heading >Valor catastral</x-table.heading>
 
                     </tr>
 
-                </thead>
+                </x-slot>
 
-                <tbody class="divide-y divide-gray-200 flex-1 sm:flex-none ">
+                <x-slot name="body">
 
                     @forelse($this->avaluos as $avaluo)
 
-                        <tr class="text-sm font-medium text-gray-500 bg-white flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+                        <x-table.row wire:key="row-{{ $propietario->id }}">
 
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
+                            <x-table.cell title="Folio">
 
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Folio</span>
+                                    {{ $avaluo->año }}-{{ $avaluo->folio }}-{{ $avaluo->usuario }}
 
-                                {{ $avaluo->año }}-{{ $avaluo->folio }}-{{ $avaluo->usuario }}
+                            </x-table.cell>
 
-                            </td>
-
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Cuenta predial</span>
+                            <x-table.cell title="Cuenta predial">
 
                                 {{ $avaluo->predioAvaluo->cuentaPredial() }}
 
-                            </td>
+                            </x-table.cell>
 
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Clave catastral</span>
+                            <x-table.cell title="Clave catastral">
 
                                 {{ $avaluo->predioAvaluo->claveCatastral()  }}
 
-                            </td>
+                            </x-table.cell>
 
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Propietario</span>
+                            <x-table.cell title="Propietario">
 
                                 <p class="mt-2">{{ $avaluo->predioAvaluo->primerPropietario() }}</p>
 
-                            </td>
+                            </x-table.cell>
 
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
-
-                                <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Valor catastral</span>
+                            <x-table.cell title="Propietario">
 
                                 ${{ number_format($avaluo->predioAvaluo->valor_catastral, 2) }}
 
-                            </td>
+                            </x-table.cell>
 
-                        </tr>
+                        </x-table.row>
 
                     @empty
 
-                    <tr>
-                        <td colspan="6">
-                            <p class="text-center text-xl tracking-widest text-gray-500 bg-white py-5"> No hay resultados.</p>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td colspan="6">
+                                <p class="text-center text-xl tracking-widest text-gray-500 bg-white py-5"> No hay resultados.</p>
+                            </td>
+                        </tr>
 
                     @endforelse
 
-                </tbody>
+                </x-slot>
 
-                <tfoot class="border-gray-300 bg-gray-50">
-
+                <x-slot name="tfoot">
                     <tr>
 
                         <td colspan="16" class="py-2 px-5">
@@ -170,10 +147,9 @@
                         </td>
 
                     </tr>
+                </x-slot>
 
-                </tfoot>
-
-            </table>
+            </x-table>
 
         </div>
 
@@ -183,7 +159,7 @@
 
         <x-slot name="title">
 
-            Notificar avaluo
+            Notificar avaluos
 
         </x-slot>
 

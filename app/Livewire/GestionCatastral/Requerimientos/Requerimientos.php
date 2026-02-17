@@ -128,7 +128,8 @@ class Requerimientos extends Component
 
         if(auth()->user()->hasRole(['Administrador', 'Jefe de departamento'])){
 
-            return Requerimiento::with('creadoPor:id,name')
+            return Requerimiento::select('id', 'estado', 'descripcion', 'link', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                                ->with('creadoPor:id,name')
                                 ->where('requerimientoable_id', $this->oficina)
                                 ->where('requerimientoable_type', 'App\Models\Oficina')
                                 ->whereNull('requerimiento_id')
@@ -138,7 +139,8 @@ class Requerimientos extends Component
 
         }else{
 
-            return Requerimiento::with('creadoPor:id,name')
+            return Requerimiento::select('id', 'estado', 'descripcion', 'link', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                                ->with('creadoPor:id,name')
                                 ->where('requerimientoable_id', auth()->user()->oficina_id)
                                 ->where('requerimientoable_type', 'App\Models\Oficina')
                                 ->whereNull('requerimiento_id')

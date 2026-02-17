@@ -188,7 +188,8 @@ class AsignarClaveCatastral extends Component
     #[Computed]
     public function prediosIgnorados(){
 
-        return PredioIgnorado::with('creadoPor', 'actualizadoPor', 'valuadorAsignado:id,name', 'oficina:id,nombre')
+        return PredioIgnorado::select('id,', 'promovente', 'valuador', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                    ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'valuadorAsignado:id,name', 'oficina:id,nombre')
                     ->when(!auth()->user()->hasRole(['Administrador', 'Jefe de departamento']), function($q){
                         $q->where('oficina_id', auth()->user()->oficina_id);
                     })

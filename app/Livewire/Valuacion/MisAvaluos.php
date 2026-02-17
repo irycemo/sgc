@@ -339,7 +339,12 @@ class MisAvaluos extends Component
     public function render()
     {
 
-        $avaluos = Avaluo::with('predioAvaluo', 'creadoPor', 'actualizadoPor', 'predioIgnorado', 'variacionCatastral')
+        $avaluos = Avaluo::with('predioAvaluo:id,localidad,oficina,tipo_predio,numero_registro,estado,region_catastral,municipio,zona_catastral,sector,manzana,predio,edificio,departamento',
+                                'creadoPor:id,name',
+                                'actualizadoPor:id,name',
+                                'predioIgnorado:id',
+                                'variacionCatastral:id'
+                                )
                             ->where('asignado_a', auth()->user()->id)
                             ->when($this->filters['estado'], function($q, $estado){
                                     $q->where('estado', $estado);
