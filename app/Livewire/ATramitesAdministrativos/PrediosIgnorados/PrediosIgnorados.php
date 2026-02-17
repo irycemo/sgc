@@ -523,7 +523,7 @@ class PrediosIgnorados extends Component
 
         if(auth()->user()->hasRole('Oficina rentistica')){
 
-            $prediosIgnorados = PredioIgnorado::select('id', 'año', 'folio', 'estado', 'tramite_id', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+            $prediosIgnorados = PredioIgnorado::select('id', 'año', 'folio', 'estado', 'tramite_id', 'promovente', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
                                             ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
                                             ->where(function($q){
                                                 $q->where('promovente', 'LIKE', '%' . $this->search . '%');
@@ -541,7 +541,7 @@ class PrediosIgnorados extends Component
 
         }elseif(auth()->user()->hasRole('Valuador')){
 
-            $prediosIgnorados = PredioIgnorado::select('id', 'año', 'folio', 'estado', 'tramite_id', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+            $prediosIgnorados = PredioIgnorado::select('id', 'año', 'folio', 'estado', 'tramite_id', 'promovente', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
                                             ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
                                             ->where(function($q){
                                                 $q->where('promovente', 'LIKE', '%' . $this->search . '%');
@@ -558,7 +558,7 @@ class PrediosIgnorados extends Component
 
         }elseif(auth()->user()->can('Variaciones catastrales')){
 
-            $prediosIgnorados = PredioIgnorado::select('id', 'año', 'folio', 'estado', 'tramite_id', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+            $prediosIgnorados = PredioIgnorado::select('id', 'año', 'folio', 'estado', 'tramite_id', 'promovente', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
                                             ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
                                                 ->where(function($q){
                                                     $q->where('promovente', 'LIKE', '%' . $this->search . '%');
