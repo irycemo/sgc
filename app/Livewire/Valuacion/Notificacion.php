@@ -153,26 +153,41 @@ class Notificacion extends Component
 
         if($this->tramite->avaluo_para === AvaluoPara::PREDIO_IGNORADO){
 
-            $pdfContent = file_get_contents($this->avaluo->predioIgnorado->archivo);
+            if($this->avaluo->predioIgnorado->estado !== 'concluido'){
 
-            $nombre_temp = Str::random(40) . '.pdf';
-
-            if(app()->isProduction()){
-
-                Storage::disk('s3')->put(config('services.ses.ruta_predios') . $nombre_temp, $pdfContent);
-
-            }else{
-
-                Storage::put('predios_archivo/' . $nombre_temp, $pdfContent);
+                throw new GeneralException('El proceso de predio ignorado no esta concluido.');
 
             }
 
-            File::create([
-                'fileable_id' => $this->predio->id,
-                'fileable_type' => 'App\Models\Predio',
-                'descripcion' => 'predio_ignorado_' . $this->modelo_editar->año . '_' . $this->modelo_editar->folio,
-                'url' => $nombre_temp
-            ]);
+            foreach ($this->avaluo->predioIgnorado->archivo as $archivo) {
+
+                $archivo->update([
+                    'fileable_id' => $this->predio->id,
+                    'fileable_type' => 'App\Models\Predio',
+                    'descripcion' => 'Predio ignorado - ' . $this->avaluo->predioIgnorado->año . '-' . $this->avaluo->predioIgnorado->folio . ' / ' . $archivo->descripcion,
+                ]);
+
+            }
+
+        }
+
+        if(in_array($this->tramite->avaluo_para, [AvaluoPara::VARIACION_VIVIENDA, AvaluoPara::VARIACION_OTRO])){
+
+            if($this->avaluo->variacionCatastral->estado !== 'aprovado'){
+
+                throw new GeneralException('La variación catastral no esta aprovada.');
+
+            }
+
+            foreach ($this->avaluo->variacionCatastral->archivo as $archivo) {
+
+                $archivo->update([
+                    'fileable_id' => $this->predio->id,
+                    'fileable_type' => 'App\Models\Predio',
+                    'descripcion' => 'Predio ignorado - ' . $this->avaluo->variacionCatastral->año . '-' . $this->avaluo->variacionCatastral->folio . ' / ' . $archivo->descripcion,
+                ]);
+
+            }
 
         }
 

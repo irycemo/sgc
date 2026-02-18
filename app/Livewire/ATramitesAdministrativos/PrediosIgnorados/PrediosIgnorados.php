@@ -52,6 +52,9 @@ class PrediosIgnorados extends Component
 
     public PredioIgnorado $modelo_editar;
 
+    public $descripcion_documento;
+    public $documentos;
+
     public $filters = [
         'estado' => '',
         'año' => '',
@@ -77,7 +80,8 @@ class PrediosIgnorados extends Component
 
     protected $validationAttributes  = [
         'modelo_editar.oficina_id' => 'oficina',
-        'file' => 'archivo'
+        'file' => 'archivo',
+        'descripcion_documento' => 'descripción'
     ];
 
     public function crearModeloVacio(){
@@ -588,6 +592,8 @@ class PrediosIgnorados extends Component
         ];
 
         $this->filters['estado'] = request()->query('estado');
+
+        $this->documentos = Constantes::PREDIOS_IGNORADOS_DOCUMENTOS;
 
     }
 

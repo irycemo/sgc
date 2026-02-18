@@ -10,7 +10,17 @@
 
         <x-input-group for="descripcion_documento" label="Descripción" :error="$errors->first('descripcion_documento')" class="w-full mb-5">
 
-            <x-input-text id="descripcion_documento" wire:model="descripcion_documento" />
+            <x-input-select id="descripcion_documento" wire:model="descripcion_documento" class="w-full">
+
+                <option value="">Seleccione una opción</option>
+
+                @foreach ($documentos as $documento)
+
+                    <option value="{{ $documento }}">{{ $documento }}</option>
+
+                @endforeach
+
+            </x-input-select>
 
         </x-input-group>
 

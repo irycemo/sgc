@@ -59,6 +59,7 @@ class VariacionesCatastrales extends Component
     public $modalVerArchivos = false;
 
     public $descripcion_documento;
+    public $documentos;
 
     public VariacionCatastral $modelo_editar;
 
@@ -661,13 +662,15 @@ class VariacionesCatastrales extends Component
 
                     $this->modelo_editar->tramite->update(['estado' => 'aprovado']);
 
-                    $this->anexarArchivoAPredio();
+                    /* $this->anexarArchivoAPredio(); */
 
                 }
 
                 $this->modelo_editar->estado = $this->estado;
                 $this->modelo_editar->actualizado_por = auth()->id();
                 $this->modelo_editar->save();
+
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Cambio estado a: ' . $this->estado]);
 
                 $this->resetearTodo($borrado = true);
 
@@ -758,6 +761,8 @@ class VariacionesCatastrales extends Component
 
         $this->filters['estado'] = request()->query('estado');
 
+        $this->documentos = Constantes::VARIACIONES_CATASTRALES_DOCUMENTOS;
+
     }
 
     public function rechazar(VariacionCatastral $modelo){
@@ -765,6 +770,8 @@ class VariacionesCatastrales extends Component
         try {
 
             $modelo->update(['estado' => 'rechazado', 'actualizado_por' => auth()->id()]);
+
+            $modelo->audits()->latest()->first()->update(['tags' => 'Rechazo variación']);
 
         } catch (GeneralException $ex) {
 
