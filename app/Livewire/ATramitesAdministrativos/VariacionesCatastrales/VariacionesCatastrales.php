@@ -353,6 +353,8 @@ class VariacionesCatastrales extends Component
                 $this->modelo_editar->actualizado_por = auth()->id();
                 $this->modelo_editar->save();
 
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Asignó valuador']);
+
                 $this->revisarAvaluosActivosDelPredio();
 
             });

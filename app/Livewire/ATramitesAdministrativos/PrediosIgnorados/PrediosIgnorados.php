@@ -329,6 +329,8 @@ class PrediosIgnorados extends Component
             $this->modelo_editar->actualizado_por = auth()->id();
             $this->modelo_editar->save();
 
+            $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Asignó valuador']);
+
             $this->resetearTodo($borrado = true);
 
             $this->dispatch('mostrarMensaje', ['success', "Se asignó el valuador con éxito."]);
