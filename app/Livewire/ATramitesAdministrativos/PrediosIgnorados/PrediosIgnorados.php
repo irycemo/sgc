@@ -2,24 +2,25 @@
 
 namespace App\Livewire\ATramitesAdministrativos\PrediosIgnorados;
 
-use App\Models\File;
-use App\Models\User;
-use App\Models\Avaluo;
-use App\Models\Oficina;
-use App\Models\Tramite;
-use Livewire\Component;
-use Illuminate\Support\Str;
-use Livewire\WithPagination;
-use Livewire\WithFileUploads;
 use App\Constantes\Constantes;
+use App\Exceptions\GeneralException;
+use App\Models\Audit;
+use App\Models\Avaluo;
+use App\Models\File;
+use App\Models\Oficina;
 use App\Models\PredioIgnorado;
-use Illuminate\Validation\Rule;
+use App\Models\Tramite;
+use App\Models\User;
 use App\Traits\ComponentesTrait;
-use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Exceptions\GeneralException;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 
 class PrediosIgnorados extends Component
@@ -49,11 +50,13 @@ class PrediosIgnorados extends Component
     public $modalSubirArchivo = false;
     public $modalCambiarEstado = false;
     public $modalVerArchivos = false;
+    public $modalVerAudits = false;
 
     public PredioIgnorado $modelo_editar;
 
     public $descripcion_documento;
     public $documentos;
+    public $audits = [];
 
     public $filters = [
         'estado' => '',
@@ -305,6 +308,17 @@ class PrediosIgnorados extends Component
 
     }
 
+    public function abrirModalAuditoria(PredioIgnorado $modelo){
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
+        $this->audits = Audit::with('user:id,name')->where('auditable_type', 'App\Models\PredioIgnorado')->where('auditable_id', $this->modelo_editar->id)->get();
+
+        $this->modalVerAudits = true;
+
+    }
+
     public function asignar(){
 
         $this->validate(['modelo_editar.valuador' => 'required']);
@@ -520,6 +534,8 @@ class PrediosIgnorados extends Component
                 $this->modelo_editar->estado = $this->estado;
                 $this->modelo_editar->actualizado_por = auth()->id();
                 $this->modelo_editar->save();
+
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Cambio estado a: ' . $this->estado]);
 
                 $this->resetearTodo($borrado = true);
 

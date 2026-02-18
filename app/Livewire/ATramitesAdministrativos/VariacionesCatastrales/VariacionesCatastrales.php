@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ConstruccionesComun;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
+use App\Models\Audit;
 use Illuminate\Support\Facades\Storage;
 use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 
@@ -57,9 +58,11 @@ class VariacionesCatastrales extends Component
     public $modalSubirArchivo = false;
     public $modalCambiarEstado = false;
     public $modalVerArchivos = false;
+    public $modalVerAudits = false;
 
     public $descripcion_documento;
     public $documentos;
+    public $audits = [];
 
     public VariacionCatastral $modelo_editar;
 
@@ -324,6 +327,17 @@ class VariacionesCatastrales extends Component
             $this->modelo_editar = $modelo;
 
         $this->modalVerArchivos = true;
+
+    }
+
+    public function abrirModalAuditoria(VariacionCatastral $modelo){
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
+        $this->audits = Audit::with('user:id,name')->where('auditable_type', 'App\Models\VariacionCatastral')->where('auditable_id', $this->modelo_editar->id)->get();
+
+        $this->modalVerAudits = true;
 
     }
 

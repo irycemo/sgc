@@ -141,6 +141,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'Editar predio ignorado', 'area' => 'Anotaciones y T. A.'])->syncRoles([$role1, $role4]);
         Permission::create(['name' => 'Borrar predio ignorado', 'area' => 'Anotaciones y T. A.'])->syncRoles([$role1, $role4]);
         Permission::create(['name' => 'Asignar Folio', 'area' => 'Anotaciones y T. A.'])->syncRoles([$role1, $role4]);
+        Permission::create(['name' => 'Auditar', 'area' => 'Anotaciones y T. A.'])->syncRoles([$role1, $role4]);
 
         Permission::create(['name' => 'Área de cartografía', 'area' => 'Cartografía'])->syncRoles([$role1, $role2, $role4]);
         Permission::create(['name' => 'Asignación de cuentas', 'area' => 'Cartografía'])->syncRoles([$role1, $role2]);
