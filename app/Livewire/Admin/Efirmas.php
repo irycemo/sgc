@@ -219,7 +219,8 @@ class Efirmas extends Component
     #[Computed]
     public function efirmas(){
 
-        return Efirma::with('creadoPor', 'actualizadoPor', 'user')
+        return Efirma::select('id', 'user_id', 'estado', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                        ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'user:id,name')
                         ->whereHas('user',function($q){
                             $q->where('name', 'LIKE', '%' . $this->search . '%');
                         })

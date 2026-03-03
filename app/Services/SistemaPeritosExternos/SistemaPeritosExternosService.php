@@ -43,7 +43,7 @@ class SistemaPeritosExternosService{
 
     }
 
-    public function operarAvaluo(int $avaluo_spe):array
+    public function operarAvaluo(int $avaluo_spe, string $entidad_nombre):array
     {
 
         $response = Http::withToken(config('services.sistema_peritos_externos.token'))
@@ -53,6 +53,7 @@ class SistemaPeritosExternosService{
                                 config('services.sistema_peritos_externos.operar_avaluo'),
                                 [
                                     'id' => $avaluo_spe,
+                                    'entidad' => $entidad_nombre
                                 ]
                             );
 

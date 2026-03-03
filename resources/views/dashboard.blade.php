@@ -158,8 +158,6 @@
                 datasets:dataArray
             }
 
-            console.log(window.screen.width);
-
             const config = {
                 type: 'line',
                 data: data,

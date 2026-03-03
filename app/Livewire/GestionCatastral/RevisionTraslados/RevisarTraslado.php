@@ -151,7 +151,7 @@ class RevisarTraslado extends Component
 
                 if($this->traslado->tipo == 'revision'){
 
-                    (new SistemaPeritosExternosService())->operarAvaluo($this->traslado->avaluo_spe);
+                    (new SistemaPeritosExternosService())->operarAvaluo($this->traslado->avaluo_spe, $this->traslado->entidad_nombre);
 
                     $this->anexarFotosAlPredio();
 
