@@ -373,6 +373,7 @@ class MisAvaluos extends Component
                             'predioIgnorado:id,año,folio',
                             'variacionCatastral:id,año,folio'
                         )
+                        ->where('asignado_a', auth()->id())
                         ->when($this->filters['año'] != '', function($q, $año) {
                             $q->where('año', (int)$this->filters['año']);
                         })
