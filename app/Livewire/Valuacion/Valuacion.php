@@ -637,5 +637,7 @@ class Valuacion extends Component
         if(in_array($this->predio?->avaluo, ['notificado', 'concluido'])) abort(403, 'No es posible cargar el avalúo');
 
         return view('livewire.valuacion.valuacion');
+
     }
+
 }
