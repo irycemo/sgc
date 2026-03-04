@@ -4,16 +4,19 @@ namespace App\Livewire\Valuacion;
 
 use App\Constantes\Constantes;
 use App\Exceptions\GeneralException;
-use App\Models\File;
 use App\Models\Avaluo;
 use App\Models\Certificacion;
-use Livewire\Component;
-use Livewire\WithPagination;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\File;
+use App\Models\PredioIgnorado;
+use App\Models\VariacionCatastral;
 use App\Traits\ComponentesTrait;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class MisAvaluos extends Component
 {
@@ -27,7 +30,9 @@ class MisAvaluos extends Component
     public $todosSelecionados = false;
     public $modal = false;
     public $modalCorregir = false;
+    public $modalVerArchivos = false;
     public $años;
+    public $modelo_administrativo;
 
     public Avaluo $modelo_editar;
 
@@ -60,6 +65,25 @@ class MisAvaluos extends Component
 
         $this->editar = true;
         $this->modalCorregir = true;
+
+    }
+
+    public function abrirModalVerArchivos($id, $modelo){
+
+        $this->resetearTodo();
+
+        if($modelo === 'variacion'){
+
+            $this->modelo_administrativo = VariacionCatastral::with('archivos')->find($id);
+
+        }else{
+
+            $this->modelo_administrativo = PredioIgnorado::with('archivos')->find($id);
+
+        }
+
+
+        $this->modalVerArchivos = true;
 
     }
 
@@ -336,54 +360,61 @@ class MisAvaluos extends Component
 
     }
 
+    #[Computed]
+    public function avaluos(){
+
+        return Avaluo::select('id', 'año', 'folio', 'usuario', 'estado', 'asignado_a', 'tramite_inspeccion', 'variacion_catastral_id', 'predio_ignorado_id', 'predio_avaluo', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                        ->with(
+                            'creadoPor:id,name',
+                            'actualizadoPor:id,name',
+                            'predioAvaluo:id,localidad,oficina,tipo_predio,numero_registro,estado,region_catastral,municipio,zona_catastral,sector,manzana,predio,edificio,departamento',
+                            'tramiteInspeccion:id,año,folio,usuario',
+                            'asignadoA:id,name',
+                            'predioIgnorado:id',
+                            'variacionCatastral:id'
+                        )
+                        ->when($this->filters['año'] != '', function($q, $año) {
+                            $q->where('año', (int)$this->filters['año']);
+                        })
+                        ->when($this->filters['folio'] != '', function($q) {
+                            $q->where('folio', (int)$this->filters['folio']);
+                        })
+                        ->when($this->filters['usuario'] != '', function($q, $usuario) {
+                            $q->where('usuario', (int)$this->filters['usuario']);
+                        })
+                        ->when($this->filters['estado'] != '', function($q, $estado) {
+                            $q->where('estado', $this->filters['estado']);
+                        })
+                        ->when($this->filters['localidad'] != '', function($q, $localidad) {
+                            $q->whereHas('predioAvaluo', function($q){
+                                $q->where('localidad', (int)$this->filters['localidad']);
+                            });
+                        })
+                        ->when($this->filters['p_oficina'] != '', function($q, $oficina) {
+                            $q->whereHas('predioAvaluo', function($q){
+                                $q->where('oficina', (int)$this->filters['p_oficina']);
+                            });
+                        })
+                        ->when($this->filters['t_predio'] != '', function($q, $tipo) {
+                            $q->whereHas('predioAvaluo', function($q){
+                                $q->where('tipo_predio', (int)$this->filters['t_predio']);
+                            });
+                        })
+                        ->when($this->filters['registro'] != '', function($q, $registro) {
+                            $q->whereHas('predioAvaluo', function($q){
+                                $q->where('numero_registro', (int)$this->filters['registro']);
+                            });
+                        })
+                        ->orderBy($this->sort, $this->direction)
+                        ->paginate($this->pagination);
+    }
+
     public function render()
     {
 
-        $avaluos = Avaluo::with('predioAvaluo:id,localidad,oficina,tipo_predio,numero_registro,estado,region_catastral,municipio,zona_catastral,sector,manzana,predio,edificio,departamento',
-                                'creadoPor:id,name',
-                                'actualizadoPor:id,name',
-                                'predioIgnorado:id',
-                                'variacionCatastral:id'
-                                )
-                            ->where('asignado_a', auth()->user()->id)
-                            ->when($this->filters['estado'], function($q, $estado){
-                                    $q->where('estado', $estado);
-                            })
-                            ->when($this->filters['año'], function($q, $año){
-                                    $q->where('año', $año);
-                            })
-                            ->when($this->filters['folio'], function($q, $folio){
-                                $q->where('folio', $folio);
-                            })
-                            ->when($this->filters['usuario'], function($q, $usuario){
-                                $q->where('usuario', $usuario);
-                            })
-                            ->when($this->filters['localidad'], function($q, $localidad){
-                                $q->WhereHas('predioAvaluo', function($q) use($localidad){
-                                    $q->where('localidad', $localidad);
-                                });
-                            })
-                            ->when($this->filters['p_oficina'], function($q, $oficina){
-                                $q->WhereHas('predioAvaluo', function($q) use($oficina){
-                                    $q->where('oficina', $oficina);
-                                });
-                            })
-                            ->when($this->filters['t_predio'], function($q, $t_predio){
-                                $q->WhereHas('predioAvaluo', function($q) use($t_predio){
-                                    $q->where('tipo_predio', $t_predio);
-                                });
-                            })
-                            ->when($this->filters['registro'], function($q, $registro){
-                                $q->WhereHas('predioAvaluo', function($q) use($registro){
-                                    $q->where('numero_registro', $registro);
-                                });
-                            })
-                            ->orderBy($this->sort, $this->direction)
-                            ->paginate($this->pagination);
+        /* $this->idsEnPagina = $avaluos->map(fn ($avaluo) => (string)$avaluo->id)->toArray(); */
 
-        $this->idsEnPagina = $avaluos->map(fn ($avaluo) => (string)$avaluo->id)->toArray();
-
-        return view('livewire.valuacion.mis-avaluos', compact('avaluos'))->extends('layouts.admin');
+        return view('livewire.valuacion.mis-avaluos')->extends('layouts.admin');
 
     }
 }

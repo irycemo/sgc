@@ -129,7 +129,7 @@ class Personas extends Component
             ],
         ]);
 
-        $this->personas = Persona::with('creadoPor', 'actualizadoPor')
+        $this->personas = Persona::with('creadoPor:id,name', 'actualizadoPor:id,name')
                                     ->when($this->rfc && $this->rfc != '', function($q){
                                         $q->where('rfc', $this->rfc);
                                     })

@@ -107,7 +107,7 @@
 
             <x-slot name="body">
 
-                @forelse ($avaluos as $avaluo)
+                @forelse ($this->avaluos as $avaluo)
 
                     <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $avaluo->id }}">
 
@@ -265,25 +265,25 @@
 
                                         @endif
 
-                                        {{-- <a
-                                            href="{{ $avaluo->predioIgnorado->archivo() }}"
-                                            target="_blank"
+                                        <button
+                                            wire:click="abrirModalVerArchivos({{ $avaluo->predio_ignorado_id }}, 'predio_ignorado')"
+                                            wire:loading.attr="disabled"
                                             class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                             role="menuitem">
-                                            Ver archivo
-                                        </a> --}}
+                                            Ver archivos
+                                        </button>
 
                                     @endif
 
                                     @if($avaluo->variacion_catastral_id)
 
-                                        {{-- <a
-                                            href="{{ $avaluo->variacionCatastral->archivo() }}"
-                                            target="_blank"
+                                        <button
+                                            wire:click="abrirModalVerArchivos({{ $avaluo->variacion_catastral_id }}, 'variacion')"
+                                            wire:loading.attr="disabled"
                                             class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                             role="menuitem">
-                                            Ver archivo
-                                        </a> --}}
+                                            Ver archivos
+                                        </button>
 
                                     @endif
 
@@ -321,7 +321,7 @@
 
                     <x-table.cell colspan="10" class="bg-gray-50">
 
-                        {{ $avaluos->links()}}
+                        {{ $this->avaluos->links()}}
 
                     </x-table.cell>
 
@@ -408,6 +408,79 @@
         </x-slot>
 
     </x-confirmation-modal>
+
+    <x-dialog-modal wire:model="modalVerArchivos" maxWidth="sm">
+
+        <x-slot name="title">
+
+            Archivos
+
+        </x-slot>
+
+        <x-slot name="content">
+
+            <table class="table-auto lg:table-fixed w-full">
+
+                <thead class="border-b border-gray-300 ">
+
+                    <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+
+                        <th class="px-2">Descripción</th>
+                        <th class="px-2">Link</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody class="divide-y divide-gray-200">
+
+                    @if($this->modelo_administrativo)
+
+                        @foreach ($this->modelo_administrativo->archivos as $archivo)
+
+                            <tr class="text-gray-500 text-sm leading-relaxed">
+                                <td class=" px-2 w-full ">{{ $archivo->descripcion }}</td>
+                                <td class=" p-2 w-full ">
+
+                                    @if(get_class($this->modelo_administrativo) === 'App\Models\VariacionCatastral')
+
+                                        <x-link-blue class="w-min whitespace-nowrap" href="{{ $archivo->getLinkVariacionCatastral() }}" target="_blank">Ver archivo</x-link-blue>
+
+                                    @else
+
+                                        <x-link-blue class="w-min whitespace-nowrap" href="{{ $archivo->getLinkPredioIgnorado() }}" target="_blank">Ver archivo</x-link-blue>
+
+                                    @endif
+                                </td>
+                            </tr>
+
+                        @endforeach
+
+                    @endif
+
+                </tbody>
+
+            </table>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex gap-3">
+
+                <x-button-red
+                    wire:click="$toggle('modalVerArchivos')"
+                    wire:loading.attr="disabled"
+                    wire:target="$toggle('modalVerArchivos')"
+                    type="button">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
 
     @script
 

@@ -207,7 +207,8 @@ class Servicios extends Component
     #[Computed]
     public function servicios(){
 
-        return Servicio::with('categoria:id,nombre', 'creadoPor:id,name', 'actualizadoPor:id,name')
+        return Servicio::select('id', 'categoria_servicio_id', 'nombre', 'estado', 'tipo', 'clave_ingreso', 'ordinario', 'urgente', 'extra_urgente', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                            ->with('categoria:id,nombre', 'creadoPor:id,name', 'actualizadoPor:id,name')
                             ->where(function($q){
                                 $q->where('nombre', 'LIKE', '%' . $this->search . '%')
                                 ->orWhere('tipo', 'LIKE', '%' . $this->search . '%')

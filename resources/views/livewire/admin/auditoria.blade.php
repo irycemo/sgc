@@ -79,7 +79,7 @@
 
                         <x-table.cell title="Usuario">
 
-                            {{ $audit->user->name ?? 'N/A' }}<
+                            {{ $audit->user->name ?? 'N/A' }}
 
                         </x-table.cell>
 

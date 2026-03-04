@@ -81,7 +81,7 @@ class Auditoria extends Component
     public function audits(){
 
         return Audit::select('id', 'user_id', 'event', 'auditable_type', 'auditable_id', 'ip_address', 'created_at', 'updated_at', 'tags')
-                        ->with('user')
+                        ->with('user:id,name')
                         ->when(isset($this->usuario) && $this->usuario != "", function($q){
                             return $q->where('user_id', $this->usuario);
 
