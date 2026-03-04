@@ -1,4 +1,4 @@
-<x-dialog-modal wire:model="modalVerAudits" maxWidth="sm">
+<x-dialog-modal wire:model="modalVerAudits" maxWidth="md">
 
     <x-slot name="title">
 
