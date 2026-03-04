@@ -184,6 +184,16 @@
 
                             <span class="bg-{{ $avaluo->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($avaluo->estado) }}</span>
 
+                            @if($avaluo->predio_ignorado_id)
+
+                                <span class="bg-green-400 px-2 rounded-full text-white text-xs">PI {{ $avaluo->predioIgnorado->año }}-{{ $avaluo->predioIgnorado->folio }}</span>
+
+                            @elseif($avaluo->variacion_catastral_id)
+
+                                <span class="bg-green-400 px-2 rounded-full text-white text-xs">VC {{ $avaluo->variacionCatastral->año }}-{{ $avaluo->variacionCatastral->folio }}</span>
+
+                            @endif
+
                         </x-table.cell>
 
                         <x-table.cell title="Valuador">

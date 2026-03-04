@@ -131,11 +131,11 @@
 
                                 @if($avaluo->predio_ignorado_id)
 
-                                    <span class="bg-green-400 px-2 rounded-full text-white text-xs">PI</span>
+                                    <span class="bg-green-400 px-2 rounded-full text-white text-xs">PI {{ $avaluo->predioIgnorado->año }}-{{ $avaluo->predioIgnorado->folio }}</span>
 
                                 @elseif($avaluo->variacion_catastral_id)
 
-                                    <span class="bg-green-400 px-2 rounded-full text-white text-xs">VC</span>
+                                    <span class="bg-green-400 px-2 rounded-full text-white text-xs">VC {{ $avaluo->variacionCatastral->año }}-{{ $avaluo->variacionCatastral->folio }}</span>
 
                                 @endif
 

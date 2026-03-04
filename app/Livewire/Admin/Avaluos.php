@@ -2,19 +2,21 @@
 
 namespace App\Livewire\Admin;
 
-use App\Models\File;
-use App\Models\User;
-use App\Models\Avaluo;
-use Livewire\Component;
-use App\Models\PredioAvaluo;
-use Livewire\WithPagination;
 use App\Constantes\Constantes;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Avaluo;
+use App\Models\File;
+use App\Models\PredioAvaluo;
+use App\Models\PredioIgnorado;
+use App\Models\User;
+use App\Models\VariacionCatastral;
 use App\Traits\ComponentesTrait;
-use Livewire\Attributes\Computed;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class Avaluos extends Component
 {
@@ -34,6 +36,9 @@ class Avaluos extends Component
     public $años;
 
     public $modalReasignar = false;
+    public $modalVerArchivos = false;
+
+    public $modelo_administrativo;
 
     public $filters = [
         'año' => '',
@@ -54,6 +59,25 @@ class Avaluos extends Component
 
     public function crearModeloVacio(){
         $this->modelo_editar = Avaluo::make();
+    }
+
+    public function abrirModalVerArchivos($id, $modelo){
+
+        $this->resetearTodo();
+
+        if($modelo === 'variacion'){
+
+            $this->modelo_administrativo = VariacionCatastral::with('archivos')->find($id);
+
+        }else{
+
+            $this->modelo_administrativo = PredioIgnorado::with('archivos')->find($id);
+
+        }
+
+
+        $this->modalVerArchivos = true;
+
     }
 
     public function abrirModal(Avaluo $avaluo){
@@ -184,8 +208,15 @@ class Avaluos extends Component
     #[Computed]
     public function predios(){
 
-        return Avaluo::select('id', 'año', 'folio', 'usuario', 'estado', 'asignado_a', 'tramite_inspeccion', 'predio_avaluo', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
-                            ->with('actualizadoPor:id,name', 'predioAvaluo:id,localidad,oficina,tipo_predio,numero_registro', 'tramiteInspeccion:id,año,folio,usuario', 'asignadoA:id,name')
+        return Avaluo::select('id', 'año', 'folio', 'usuario', 'estado', 'asignado_a', 'tramite_inspeccion', 'variacion_catastral_id', 'predio_ignorado_id', 'predio_avaluo', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                            ->with(
+                                'actualizadoPor:id,name',
+                                'predioAvaluo:id,localidad,oficina,tipo_predio,numero_registro',
+                                'tramiteInspeccion:id,año,folio,usuario',
+                                'asignadoA:id,name',
+                                'predioIgnorado:id,año,folio',
+                                'variacionCatastral:id,año,folio'
+                            )
                             ->when($this->filters['año'] != '', function($q, $año) {
                                 $q->where('año', (int)$this->filters['año']);
                             })
