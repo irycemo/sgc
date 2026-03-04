@@ -355,9 +355,9 @@ trait ComunTrait
 
     }
 
-    public function reimprimir(Tramite $tramite){
+    public function reimprimir(){
 
-        $this->js('window.open(\' '. route('tramites.orden', $tramite) . '\', \'_blank\');');
+        $this->js('window.open(\' '. route('tramites.orden', $this->modelo_editar) . '\', \'_blank\');');
 
     }
 
