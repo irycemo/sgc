@@ -11,7 +11,7 @@ class Valuacion extends Controller
     public function __invoke(Avaluo $avaluo)
     {
 
-        if($avaluo){
+        if($avaluo->getKey()){
 
             if($avaluo->asignado_a !== auth()->id()) abort(403, 'No tienes asginado este avalúo.');
 
