@@ -172,6 +172,8 @@ class PrediosIgnorados extends Component
                 $this->modelo_editar->creado_por = auth()->id();
                 $this->modelo_editar->save();
 
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Generó predio ignorado']);
+
                 $this->resetearTodo($borrado = true);
 
                 $this->dispatch('mostrarMensaje', ['success', "El predio ignorado se creó con éxito."]);
@@ -255,6 +257,8 @@ class PrediosIgnorados extends Component
                 ]);
 
                 $this->modelo_editar->update(['estado' => 'requerimineto']);
+
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Hizó requerimiento']);
 
                 $this->resetearTodo($borrado = true);
 

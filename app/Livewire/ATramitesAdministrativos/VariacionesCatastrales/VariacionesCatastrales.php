@@ -193,6 +193,8 @@ class VariacionesCatastrales extends Component
 
                 }
 
+                $variacion->audits()->latest()->first()->update(['tags' => 'Generó variación catastral']);
+
                 $this->resetearTodo($borrado = true);
 
                 $this->dispatch('mostrarMensaje', ['success', "La variación catastral se creó con éxito."]);
@@ -276,6 +278,8 @@ class VariacionesCatastrales extends Component
                 ]);
 
                 $this->modelo_editar->update(['estado' => 'requerimineto']);
+
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Hizó requerimiento']);
 
                 $this->resetearTodo($borrado = true);
 
