@@ -23,6 +23,12 @@ class Servicios extends Component
     public $flag_uma = false;
     public $flag_fija = false;
 
+    public $filters = [
+        'categoria' => ''
+    ];
+
+    public function updatedFilters() { $this->resetPage(); }
+
     protected function rules(){
         return [
             'modelo_editar.nombre' => 'required',
@@ -201,19 +207,24 @@ class Servicios extends Component
     #[Computed]
     public function servicios(){
 
-        return Servicio::with('categoria', 'creadoPor', 'actualizadoPor')
-                            ->where('nombre', 'LIKE', '%' . $this->search . '%')
-                            ->orWhere('tipo', 'LIKE', '%' . $this->search . '%')
-                            ->orWhere('umas', 'LIKE', '%' . $this->search . '%')
-                            ->orWhere('estado', 'LIKE', '%' . $this->search . '%')
-                            ->orWhere('ordinario', 'LIKE', '%' . $this->search . '%')
-                            ->orWhere('clave_ingreso', 'LIKE', '%' . $this->search . '%')
-                            ->orWhere('urgente', 'LIKE', '%' . $this->search . '%')
-                            ->orWhere('extra_urgente', 'LIKE', '%' . $this->search . '%')
-                            ->orWhere(function($q){
-                                return $q->whereHas('categoria', function($q){
-                                    return $q->where('nombre', 'LIKE', '%' . $this->search . '%');
+        return Servicio::with('categoria:id,nombre', 'creadoPor:id,name', 'actualizadoPor:id,name')
+                            ->where(function($q){
+                                $q->where('nombre', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('tipo', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('umas', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('estado', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('ordinario', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('clave_ingreso', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('urgente', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere('extra_urgente', 'LIKE', '%' . $this->search . '%')
+                                ->orWhere(function($q){
+                                    return $q->whereHas('categoria', function($q){
+                                        return $q->where('nombre', 'LIKE', '%' . $this->search . '%');
+                                    });
                                 });
+                            })
+                            ->when(! empty($this->filters['categoria']), function($q){
+                                $q->where('categoria_servicio_id', (int)$this->filters['categoria']);
                             })
                             ->orderBy($this->sort, $this->direction)
                             ->paginate($this->pagination);

@@ -10,6 +10,18 @@
 
                 <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
 
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.categoria">
+
+                    <option value="">Categoría</option>
+
+                    @foreach ($categorias as $item_cat)
+
+                        <option value="{{ $item_cat->id }}">{{ $item_cat->nombre }}</option>
+
+                    @endforeach
+
+                </select>
+
                 <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>

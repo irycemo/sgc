@@ -61,7 +61,7 @@ trait PrediosTrait
 
     public function agregarPredio(){
 
-        if(in_array($this->servicio['clave_ingreso'], ['D731', 'D150', 'D726', 'D727', 'DM30'])  && count($this->predios) == 1){
+        if(in_array($this->servicio['clave_ingreso'], ['D731', 'D150', 'DM30'])  && count($this->predios) == 1){
 
             $this->dispatch('mostrarMensaje', ['warning', "Solo es posible agregar 1 predio al servicio."]);
 
