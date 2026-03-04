@@ -22,7 +22,9 @@ class Avaluos extends Component
     use WithPagination;
     use ComponentesTrait;
 
-    public PredioAvaluo $modelo_editar;
+    public Avaluo $modelo_editar;
+
+    public $avaluo;
 
     public $seleccionados = [];
     public $idsEnPagina = [];
@@ -56,9 +58,9 @@ class Avaluos extends Component
         $this->modelo_editar = PredioAvaluo::make();
     }
 
-    public function abrirModal(PredioAvaluo $predio){
+    public function abrirModal(Avaluo $avaluo){
 
-        $this->modelo_editar = $predio;
+        $this->avaluo = $avaluo;
 
         $this->modalReasignar = true;
 
@@ -72,9 +74,9 @@ class Avaluos extends Component
 
             DB::transaction(function () {
 
-                $this->modelo_editar->avaluo->update(['asignado_a' => $this->valuador_id]);
+                $this->avaluo->update(['asignado_a' => $this->valuador_id]);
 
-                $this->modelo_editar->avaluo->audits()->latest()->first()->update(['tags' => 'Reasignó valuador']);
+                $this->avaluo->audits()->latest()->first()->update(['tags' => 'Reasignó valuador']);
 
                 $this->dispatch('mostrarMensaje', ['success', "Se reasigno valuador con éxito."]);
 
@@ -91,9 +93,13 @@ class Avaluos extends Component
 
     }
 
-    public function imprimirAvaluo(PredioAvaluo $predio){
+    public function imprimirAvaluo(Avaluo $avaluo){
 
-        $predio = $predio->load('propietarios.persona');
+        $this->avaluo = $avaluo;
+
+        $predio = $this->avaluo->predio;
+
+        $predio->load('propietarios.persona');
 
         $pdf = Pdf::loadView('avaluos.avaluo', compact('predio'));
 
@@ -238,7 +244,7 @@ class Avaluos extends Component
 
         array_push($this->fields, 'modalReasignar', 'valuador_id');
 
-        $this->valuadores = User::whereNotNull('valuador')->orderBy('name')->get();
+        $this->valuadores = User::select('id', 'name')->whereNotNull('valuador')->orderBy('name')->get();
 
         $this->años = Constantes::AÑOS;
 

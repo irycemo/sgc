@@ -53,7 +53,7 @@
 
             <input type="number" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
 
-            @can('Crear variación')
+            @can('Crear predio ignorado')
 
                 <div class="ml-auto">
 
@@ -206,7 +206,7 @@
 
                                     @if($predio->estado !== 'concluido')
 
-                                        @can('Editar variación')
+                                        @can('Editar predio ignorado')
 
                                             <button
                                                 wire:click="abrirHacerRequerimiento({{ $predio->id }})"
@@ -246,7 +246,7 @@
 
                                         @endif
 
-                                        @can('Editar variación')
+                                        @can('Editar predio ignorado')
 
                                             <button
                                                 wire:click="abrirCambiarEstado({{ $predio->id }})"
@@ -258,7 +258,7 @@
 
                                         @endcan
 
-                                        @can('Borrar variación')
+                                        @can('Borrar predio ignorado')
 
                                             <button
                                                 wire:click="abrirModalBorrar({{ $predio->id }})"
