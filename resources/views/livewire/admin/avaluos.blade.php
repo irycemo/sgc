@@ -301,6 +301,30 @@
 
                                     @endif
 
+                                    @if($avaluo->predio_ignorado_id)
+
+                                        <button
+                                            wire:click="abrirModalVerArchivos({{ $avaluo->predio_ignorado_id }}, 'predio_ignorado')"
+                                            wire:loading.attr="disabled"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Ver archivos
+                                        </button>
+
+                                    @endif
+
+                                    @if($avaluo->variacion_catastral_id)
+
+                                        <button
+                                            wire:click="abrirModalVerArchivos({{ $avaluo->variacion_catastral_id }}, 'variacion')"
+                                            wire:loading.attr="disabled"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Ver archivos
+                                        </button>
+
+                                    @endif
+
                                 </div>
 
                             </div>
