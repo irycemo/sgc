@@ -81,7 +81,15 @@ class VariacionesCatastrales extends Component
 
         $this->cargaInicial($this->servicio);
 
-        $this->umas = Uma::where('año', now()->format('Y'))->first()->diario * 5000;
+        $uma_actual = Uma::where('año', now()->format('Y'))->first();
+
+        if(! $uma_actual){
+
+            abort(403, 'No se tiene el valor de la Uma actual.');
+
+        }
+
+        $this->umas = $uma_actual->diario * 5000;
 
     }
 

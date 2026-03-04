@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Tramties\Ventanilla;
+namespace App\Livewire\Tramites\Ventanilla;
 
 use App\Models\Dependencia;
 use App\Traits\ComponentesTrait;
@@ -130,7 +130,7 @@ class Dependencias extends Component
 
     public function render()
     {
-        return view('livewire.tramties.ventanilla.dependencias')->extends('layouts.admin');
+        return view('livewire.tramites.ventanilla.dependencias')->extends('layouts.admin');
     }
 
 }

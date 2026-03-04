@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Livewire\Tramites\Ventanilla\Ventanilla;
 use App\Http\Controllers\Tramites\OrdenController;
-use App\Livewire\Tramites\TramitesLinea\TramitesLinea;
 use App\Livewire\Tramites\ReactivarTramite\ReactivarTramite;
-use App\Livewire\Tramties\Ventanilla\Dependencias;
+use App\Livewire\Tramites\TramitesLinea\TramitesLinea;
+use App\Livewire\Tramites\Ventanilla\Dependencias;
+use App\Livewire\Tramites\Ventanilla\Ventanilla;
+use Illuminate\Support\Facades\Route;
 
 Route::group([], function(){
 
