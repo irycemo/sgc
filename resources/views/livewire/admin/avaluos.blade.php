@@ -182,17 +182,23 @@
 
                         <x-table.cell title="Estado">
 
-                            <span class="bg-{{ $avaluo->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($avaluo->estado) }}</span>
+                            <div class="text-center">
 
-                            @if($avaluo->predio_ignorado_id)
+                                <span class="bg-{{ $avaluo->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($avaluo->estado) }}</span>
 
-                                <span class="bg-green-400 px-2 rounded-full text-white text-xs">PI {{ $avaluo->predioIgnorado->año }}-{{ $avaluo->predioIgnorado->folio }}</span>
+                                <br>
 
-                            @elseif($avaluo->variacion_catastral_id)
+                                @if($avaluo->predio_ignorado_id)
 
-                                <span class="bg-green-400 px-2 rounded-full text-white text-xs">VC {{ $avaluo->variacionCatastral->año }}-{{ $avaluo->variacionCatastral->folio }}</span>
+                                    <span class="bg-green-400 px-2 rounded-full text-white text-xs">PI {{ $avaluo->predioIgnorado->año }}-{{ $avaluo->predioIgnorado->folio }}</span>
 
-                            @endif
+                                @elseif($avaluo->variacion_catastral_id)
+
+                                    <span class="bg-green-400 px-2 rounded-full text-white text-xs">VC {{ $avaluo->variacionCatastral->año }}-{{ $avaluo->variacionCatastral->folio }}</span>
+
+                                @endif
+
+                            </div>
 
                         </x-table.cell>
 
