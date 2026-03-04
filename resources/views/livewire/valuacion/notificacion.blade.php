@@ -93,7 +93,7 @@
 
                     @forelse($this->avaluos as $avaluo)
 
-                        <x-table.row wire:key="row-{{ $propietario->id }}">
+                        <x-table.row wire:key="row-{{ $avaluo->id }}">
 
                             <x-table.cell title="Folio">
 
