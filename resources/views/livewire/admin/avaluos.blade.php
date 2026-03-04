@@ -162,105 +162,79 @@
                             </div>
 
                         </x-table.cell>
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Año</span>
+                        <x-table.cell title="Año">
 
                             {{ $avaluo->año }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Folio</span>
+                        <x-table.cell title="Folio">
 
                             {{ $avaluo->folio }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Usuario</span>
+                        <x-table.cell title="Usuario">
 
                             {{ $avaluo->usuario }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Estado</span>
+                        <x-table.cell title="Estado">
 
                             <span class="bg-{{ $avaluo->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($avaluo->estado) }}</span>
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Valuador</span>
+                        <x-table.cell title="Valuador">
 
                             {{ $avaluo->asignadoA->name }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Trámite</span>
+                        <x-table.cell title="Trámite">
 
                             <span class="spacenow">{{ $avaluo->tramiteInspeccion?->año }}-{{ $avaluo->tramiteInspeccion?->folio }}-{{ $avaluo->tramiteInspeccion?->usuario }}</span>
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Localidad</span>
+                        <x-table.cell title="Localidad">
 
                             {{ $avaluo->predioAvaluo->localidad }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Oficina</span>
+                        <x-table.cell title="Oficina">
 
                             {{ $avaluo->predioAvaluo->oficina }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Tipo de predio</span>
+                        <x-table.cell title="Tipo de predio">
 
                             {{ $avaluo->predioAvaluo->tipo_predio }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Número de registro</span>
+                        <x-table.cell title="Número de registro">
 
                             {{ $avaluo->predioAvaluo->numero_registro }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Registrado</span>
+                        <x-table.cell title="Registrado">
 
                             {{ $avaluo->created_at }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="font-semibold">@if($avaluo->actualizadoPor != null)Actualizado por: {{$avaluo->actualizadoPor->name}} @else Actualizado: @endif</span> <br>
+                        <x-table.cell title="Actualizado">
 
                             {{ $avaluo->updated_at }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Acciones</span>
+                        <x-table.cell title="Acciones">
 
                             <div class="ml-3 relative" x-data="{ open_drop_down:false }">
 

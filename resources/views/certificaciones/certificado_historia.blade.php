@@ -163,6 +163,12 @@
 
             <p class="titulo">CERTIFICADO DE HISTORIA CATASTRAL</p>
 
+            @if(! app()->isProduction())
+
+                <p class="titulo">Este documento no tiene validez oficial, es un documento de prueba.</p>
+
+            @endif
+
             <div>
 
                 <p class="parrafo">
@@ -270,6 +276,12 @@
                 SE EXPIDE EL PRESENTE CONFORME A LOS DATOS CONTENIDOS EN EL SISTEMA DE GESTIÓN CATASTRAL
                 A PETICIÓN DEL INTERESADO, SIN REPOSICIÓN POR FALTA DE ACTUALIZACIÓN.
             </p>
+
+            @if(! app()->isProduction())
+
+                <p class="titulo">Este documento no tiene validez oficial, es un documento de prueba.</p>
+
+            @endif
 
         </div>
 

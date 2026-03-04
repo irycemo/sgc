@@ -163,6 +163,12 @@
 
             <p class="titulo">NOTIFICACIÓN DE VALOR CATASTRAL</p>
 
+            @if(! app()->isProduction())
+
+                <p class="titulo">Este documento no tiene validez oficial, es un documento de prueba.</p>
+
+            @endif
+
             <div>
 
                 <p class="parrafo">
@@ -412,6 +418,13 @@
                 </tbody>
 
             </table>
+
+            @if(! app()->isProduction())
+
+                <p class="titulo">Este documento no tiene validez oficial, es un documento de prueba.</p>
+
+            @endif
+
         </div>
 
     </main>

@@ -179,7 +179,7 @@
                                     @can('Auditar')
 
                                         <button
-                                            wire:click="abrirModalAuditoria({{ $variacion->id }})"
+                                            wire:click="abrirModalAuditoria({{ $predio->id }})"
                                             wire:loading.attr="disabled"
                                             class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                             role="menuitem">
@@ -237,7 +237,7 @@
                                         @if($predio->archivos_count > 0)
 
                                             <button
-                                                wire:click="abrirVerArchivos({{ $variacion->id }})"
+                                                wire:click="abrirVerArchivos({{ $predio->id }})"
                                                 wire:loading.attr="disabled"
                                                 class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                 role="menuitem">
