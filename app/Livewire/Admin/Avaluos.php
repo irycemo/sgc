@@ -24,8 +24,6 @@ class Avaluos extends Component
 
     public Avaluo $modelo_editar;
 
-    public $avaluo;
-
     public $seleccionados = [];
     public $idsEnPagina = [];
 
@@ -55,12 +53,12 @@ class Avaluos extends Component
     public function updatedFilters() { $this->resetPage(); }
 
     public function crearModeloVacio(){
-        $this->modelo_editar = PredioAvaluo::make();
+        $this->modelo_editar = Avaluo::make();
     }
 
     public function abrirModal(Avaluo $avaluo){
 
-        $this->avaluo = $avaluo;
+        $this->modelo_editar = $avaluo;
 
         $this->modalReasignar = true;
 
@@ -74,9 +72,9 @@ class Avaluos extends Component
 
             DB::transaction(function () {
 
-                $this->avaluo->update(['asignado_a' => $this->valuador_id]);
+                $this->modelo_editar->update(['asignado_a' => $this->valuador_id]);
 
-                $this->avaluo->audits()->latest()->first()->update(['tags' => 'Reasignó valuador']);
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Reasignó valuador']);
 
                 $this->dispatch('mostrarMensaje', ['success', "Se reasigno valuador con éxito."]);
 
@@ -95,9 +93,9 @@ class Avaluos extends Component
 
     public function imprimirAvaluo(Avaluo $avaluo){
 
-        $this->avaluo = $avaluo;
+        $this->modelo_editar = $avaluo;
 
-        $predio = $this->avaluo->predio;
+        $predio = $this->modelo_editar->predioAvaluo;
 
         $predio->load('propietarios.persona');
 
@@ -184,7 +182,8 @@ class Avaluos extends Component
     #[Computed]
     public function predios(){
 
-        return Avaluo::with('actualizadoPor', 'predioAvaluo', 'tramiteInspeccion:id,año,folio,usuario', 'asignadoA:id,name')
+        return Avaluo::select('id', 'año', 'folio', 'usuario', 'estado', 'asignado_a', 'tramite_inspeccion', 'predio_avaluo', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                            ->with('actualizadoPor:id,name', 'predioAvaluo:id,localidad,oficina,tipo_predio,numero_registro', 'tramiteInspeccion:id,año,folio,usuario', 'asignadoA:id,name')
                             ->when($this->filters['año'] != '', function($q, $año) {
                                 $q->where('año', (int)$this->filters['año']);
                             })
