@@ -355,4 +355,10 @@ trait ComunTrait
 
     }
 
+    public function reimprimir(Tramite $tramite){
+
+        $this->js('window.open(\' '. route('tramites.orden', $tramite) . '\', \'_blank\');');
+
+    }
+
 }
