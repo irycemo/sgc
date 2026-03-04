@@ -152,6 +152,8 @@ class Avaluos extends Component
 
                     $predio->terrenos()->delete();
 
+                    $avaluo->bloques()->delete();
+
                     $avaluo->delete();
 
                     $predio->delete();
