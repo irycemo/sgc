@@ -9,7 +9,6 @@ use App\Models\Tramite;
 use Livewire\Attributes\On;
 use App\Enums\Tramites\AvaluoPara;
 use App\Exceptions\GeneralException;
-use App\Models\PredioIgnorado;
 
 trait ImpresionTrait
 {

@@ -32,7 +32,7 @@ class AcreditarPagoController extends Controller
                     'fecha_pago' => now()->toDateString(),
                 ]);
 
-                if($tramite->servicio->clave_ingreso == 'DM34'){
+                if(in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM32'])){
 
                     $this->generarCertificadosElectronicos($tramite);
 
