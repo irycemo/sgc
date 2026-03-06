@@ -2,18 +2,19 @@
 
 namespace App\Livewire\Cartografia\AsignarClaveCatastral;
 
+use App\Exceptions\GeneralException;
 use App\Models\Avaluo;
 use App\Models\Predio;
-use Livewire\Component;
 use App\Models\PredioAvaluo;
-use Livewire\WithPagination;
 use App\Models\PredioIgnorado;
+use App\Models\VariacionCatastral;
 use App\Traits\ComponentesTrait;
-use Livewire\Attributes\Computed;
+use App\Traits\Predios\ValidarSector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Exceptions\GeneralException;
-use App\Traits\Predios\ValidarSector;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class AsignarClaveCatastral extends Component
 {
@@ -35,6 +36,9 @@ class AsignarClaveCatastral extends Component
     public $departamento;
     public $oficina;
     public $tipo_predio;
+    public $modalVerArchivos = false;
+    public $modalHacerRequerimiento = false;
+    public $requerimiento;
 
     protected function rules(){
         return [
@@ -81,6 +85,60 @@ class AsignarClaveCatastral extends Component
 
         if($this->modelo_editar->isNot($modelo))
             $this->modelo_editar = $modelo;
+
+    }
+
+    public function abrirVerArchivos(PredioIgnorado $modelo){
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
+        $this->modalVerArchivos = true;
+
+    }
+
+    public function abrirHacerRequerimiento(PredioIgnorado $modelo){
+
+        $this->reset('requerimiento');
+
+        $this->modalHacerRequerimiento = true;
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
+    }
+
+    public function requerir(){
+
+        $this->validate(['requerimiento' => 'required']);
+
+        try {
+
+            DB::transaction(function () {
+
+                $this->modelo_editar->requerimientos()->create([
+                    'descripcion' => $this->requerimiento,
+                    'creado_por' => auth()->id(),
+                    'estado' => 'nuevo'
+                ]);
+
+                $this->modelo_editar->update(['estado' => 'requerimineto']);
+
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Hizó requerimiento']);
+
+                $this->reset(['modalHacerRequerimiento', 'requerimiento']);
+
+                $this->dispatch('mostrarMensaje', ['success', "El requerimiento se creó con éxito."]);
+
+            });
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al crear requerimiento en predio ignorado catastral por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+            $this->resetearTodo();
+
+        }
 
     }
 

@@ -94,13 +94,21 @@
                                         Asignar clave catastral
                                     </button>
 
-                                    {{-- <a
-                                        href="{{ $predio->archivo() }}"
-                                        target="_blank"
+                                    <button
+                                        wire:click="abrirVerArchivos({{ $predio->id }})"
+                                        wire:loading.attr="disabled"
                                         class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                         role="menuitem">
-                                        Ver archivo
-                                    </a> --}}
+                                        Ver archivos
+                                    </button>
+
+                                    <button
+                                        wire:click="abrirHacerRequerimiento({{ $predio->id }})"
+                                        wire:loading.attr="disabled"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        role="menuitem">
+                                        Hacer requerimiento
+                                    </button>
 
                                 </div>
 
@@ -227,5 +235,9 @@
         </x-slot>
 
     </x-dialog-modal>
+
+    @include('livewire.a-tramites-administrativos.comun.modal-ver-archivos')
+
+    @include('livewire.a-tramites-administrativos.comun.modal-hacer-requerimiento')
 
 </div>
