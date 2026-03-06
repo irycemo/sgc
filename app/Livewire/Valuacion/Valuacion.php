@@ -91,7 +91,8 @@ class Valuacion extends Component
         return PredioAvaluo::make([
             'sociedad' => false,
             'estado' => 16,
-            'copia' => false
+            'copia' => false,
+            'oficina' => auth()->user()->oficina->oficina
         ]);
     }
 

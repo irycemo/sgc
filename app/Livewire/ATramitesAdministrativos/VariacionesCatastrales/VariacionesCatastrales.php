@@ -439,6 +439,38 @@ class VariacionesCatastrales extends Component
 
     }
 
+    public function asignarAleatoriamente(){
+
+        if(!$this->valuadores->count()){
+
+            $this->dispatch('mostrarMensaje', ['warning', "No hay valuadores activos para la oficina " . $this->modelo_editar->oficina->nombre . '.']);
+
+            return;
+
+        }
+
+        try {
+
+            $this->modelo_editar->valuador = $this->valuadores->random()->id;
+            $this->modelo_editar->estado = 'valuación';
+            $this->modelo_editar->actualizado_por = auth()->id();
+            $this->modelo_editar->save();
+
+            $this->resetearTodo($borrado = true);
+
+            $this->dispatch('mostrarMensaje', ['success', "Se asignó el valuador con éxito."]);
+
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al asignar valuador en predio ignorado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+            $this->resetearTodo();
+
+        }
+
+    }
+
     public function copiarRelaciones($predio, $predio_avaluo){
 
         foreach($predio->propietarios as $propietario){

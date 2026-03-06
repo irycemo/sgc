@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('estado');
             $table->foreignId('tramite_id')->constrained();
             $table->string('promovente');
-            $table->string('archivo')->nullable();
             $table->foreignId('oficina_id')->constrained();
             $table->foreignId('predio_id')->nullable()->references('id')->on('predio_avaluos');
             $table->foreignId('valuador')->nullable()->references('id')->on('users');

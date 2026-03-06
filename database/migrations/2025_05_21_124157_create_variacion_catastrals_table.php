@@ -20,7 +20,6 @@ return new class extends Migration
             $table->foreignId('predio_id')->constrained();
             $table->string('promovente');
             $table->string('finado')->nullable();
-            $table->string('archivo')->nullable();
             $table->foreignId('oficina_id')->constrained();
             $table->foreignId('valuador')->nullable()->references('id')->on('users');
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
