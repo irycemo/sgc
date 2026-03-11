@@ -132,7 +132,7 @@ class Oficinas extends Component
                     $localidad->update([
                         'region' => $this->modelo_editar->region,
                         'municipio' => $this->modelo_editar->municipio,
-                        'sectores' => $this->modelo_editar->sectores,
+                        'sectores' => $this->sectores,
                         'ubicacion' => $this->modelo_editar->ubicacion,
                         'titular' => $this->modelo_editar->titular,
                         'email' => $this->modelo_editar->email,
