@@ -182,7 +182,7 @@
                             <div class="text-center" >
 
                                 <p>La vigencia para el pago de este trámite es:</p>
-                                <p>{{ $tramite->limite_de_pago->format('d-m-Y') }}.</p>
+                                <p>{{ $tramite->fecha_vencimiento?->format('d-m-Y') }}.</p>
 
                                 <p >Referencia de pago:</p>
                                 <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode($tramite->linea_de_captura, $generatorPNG::TYPE_CODE_128)) }}">

@@ -40,7 +40,7 @@ Artisan::command('migrar', function(){
                                     ->on('tcpro008.pred_008', 'ctpro003.pred_003')
                                     ->on('tcpro008.edif_008', 'ctpro003.edif_003')
                                     ->on('tcpro008.dpto_008', 'ctpro003.dpto_003')
-                                    /* ->where('tcpro008.mpio_008', 53) */
+                                    ->where('tcpro008.mpio_008', 53)
                                     ->where('tcpro008.nreg_008', '>', 0);
                             })
                             ->get();
@@ -297,7 +297,10 @@ Artisan::command('migrar-traslados', function(){
 
 });
 
-Artisan::command('migrar', function(){
+Artisan::command('migrar-tramites', function(){
+
+    Schema::disableForeignKeyConstraints();
+    DB::table('tramites')->truncate();
 
     $tramites = DB::connection('sqlsrv')->table('ctatr013')
                     ->join('ctrec024', function($q){
@@ -305,10 +308,14 @@ Artisan::command('migrar', function(){
                             ->on('ctatr013.foli_013', 'ctrec024.foli_024')
                             ->on('ctatr013.usua_013', 'ctrec024.usu_024');
                     })
-                    ->where('atra_013', 2025)
+                    ->where('atra_013', 2026)
                     ->get();
 
     $this->info('Incia migración de trámites el: ' . now());
+
+    $progressbar = $this->output->createProgressBar(count($tramites));
+
+    $progressbar->start();
 
     foreach ($tramites as $tramite) {
 
@@ -324,36 +331,47 @@ Artisan::command('migrar', function(){
 
             foreach ($predios_300 as $predio) {
 
-                $predio_prod = Predio::where('localidad', $predio->locl_300)
-                                        ->where('oficina', $predio->ofna_300)
-                                        ->where('tipo_predio', $predio->tpre_300)
-                                        ->where('numero_registro', $predio->nreg_300)
+                $predio_prod = Predio::where('localidad', (int)$predio->locl_300)
+                                        ->where('oficina', (int)$predio->ofna_300)
+                                        ->where('tipo_predio', (int)$predio->tpre_300)
+                                        ->where('numero_registro', (int)$predio->nreg_300)
                                         ->first();
 
-                array_push($array_predios_id, $predio_prod->id);
+                if($predio_prod){
+
+                dd($predio_prod);
+
+                    array_push($array_predios_id, $predio_prod->id);
+                }
 
             }
 
         }else{
 
-            $predio_prod = Predio::where('localidad', $tramite->locl_013)
-                                ->where('oficina', $tramite->ofna_013)
-                                ->where('tipo_predio', $tramite->tpre_013)
-                                ->where('numero_registro', $tramite->nreg_013)
+            $predio_prod = Predio::where('localidad', (int)$tramite->locl_013)
+                                ->where('oficina', (int)$tramite->ofna_013)
+                                ->where('tipo_predio', (int)$tramite->tpre_013)
+                                ->where('numero_registro', (int)$tramite->nreg_013)
                                 ->first();
 
-            array_push($array_predios_id, $predio_prod->id);
+            if($predio_prod){
+
+                    array_push($array_predios_id, $predio_prod->id);
+            }
 
         }
 
         $servicios_server = [
-            '34-5-1' => 1,      //'CERTIFICADO DE REGISTRO ordinario'
+            '34-5-1' => 3,      //'CERTIFICADO DE REGISTRO ordinario'
             '34-5-2' => 293,    //'CERTIFICADO DE REGISTRO urgente',
+            '34-5-3' => 293,    //'CERTIFICADO DE REGISTRO urgente',
             '34-2-1' => 5,      //'CERTIFICADO negativo',
+            '34-4-1' => 297,    //'CERTIFICADO ordinario colindancias',
+            '34-4-2' => 296,    //'CERTIFICADO ordinario colindancias',
             '34-3-1' => 7,      //'Historia anticipo',
             '34-3-2' => 8,      //'Historia 5 movimientos',
             '34-3-3' => 9,      //'Historia 6 a 10 movimientos',
-            '34-3-4' => 10,     //'Historia 11 a 15 movimientos',
+            '34-3-4' => 10,     //'Historia 11 a 15 modvimientos',
             '34-3-5' => 11,     //'Historia > 15 movimientos',
             '40-1-0' => 66,     //'Revision aviso rustico',
             '40-2-0' => 67,     //'Revision aviso urbano',
@@ -365,11 +383,13 @@ Artisan::command('migrar', function(){
             '39-2-0' => 65,     //'Cedula urbano',
             '39-3-0' => 65,     //'Cedula ran, insus coret',
             '31-1-2' => 44,     //'Desglose otro tipo',
+            '31-1-3' => 44,     //'Desglose otro tipo',
             '31-1-1' => 43,     //'Desglose fraccionamientos',
             '26-2-3' => 36,     //'Determinación ubicación superior 50 km',
             '26-2-2' => 35,     //'Determinación ubicación 20 a 50 km',
             '26-2-1' => 34,     //'Determinación ubicación 20 km',
             '26-2-0' => 33,     //'Determinación ubicación cualquier lado',
+            '26-1-0' => 33,     //'Determinación ubicación cualquier lado',
             '35-1-0' => 55,     //'Copia simple',
             '35-2-0' => 56,     //'Copia certificada',
             '35-3-0' => 57,     //'Consulta de acervo',
@@ -394,13 +414,18 @@ Artisan::command('migrar', function(){
             '37-0-0' => 52,     //'Por información respecto de los nombres de colindantes, a propietarios o poseedores de predios registrados.',
             '42-1-0' => 69,     //'Por resolución administrativa emitida por el Registro Agrario Nacional o Instituto Nacional del Suelo Sustentable.',
             '42-2-0' => 69,     //'Por resolución administrativa emitida por el Registro Agrario Nacional o Instituto Nacional del Suelo Sustentable.',
+            '42-3-0' => 300,    //'Por resolución judicial  cuando la regulación provenga de prescripción positiva',
             '29-4-0' => 40,     //'Sobre predios ubicados fuera de la localidad donde se encuentre la oficina recaudadora dentro de un radio superior a 50 kilómetros.',
             '29-3-0' => 39,     //'Sobre predios ubicados fuera de la localidad donde se encuentre la oficina recaudadora dentro de un radio hasta de 50 kilómetros.',
             '29-2-0' => 38,     //'Sobre predios ubicados fuera de la localidad donde se encuentre la oficina recaudadora dentro de un radio hasta de 20 kilómetros.',
             '29-1-0' => 37,     //'Sobre predios ubicados dentro del área de la población donde se encuentra la oficina recaudadora.',
-            '24-0-0' => 29,     //'Levantamientos topograficos',
+            '24' => 29,         //'Levantamientos topograficos',
             '38-0-0' => 63,     //'Modificación de datos administrativos catastrales',
+            '38-1-0' => 63,     //'Modificación de datos administrativos catastrales',
             '32-2-0' => 292,    //'Inscripción o registro de predios ignorados',
+            '32-2-1' => 292,    //'Inscripción o registro de predios ignorados',
+            '32-2-2' => 292,    //'Inscripción o registro de predios ignorados',
+            '32-2-3' => 292,    //'Inscripción o registro de predios ignorados',
             '32-5-0' => 47,     //'Solicitud de Predio Ignorado',
             '30-2-0' => 42,     //'Otras cuentas catastrales analizadas y reestructuradas distintas de fraccionamientos y condominios.',
             '30-1-0' => 41,     //'Por cuenta catastral analizada y reestructurada, tratándose de fraccionamientos y condominios.',
@@ -410,9 +435,33 @@ Artisan::command('migrar', function(){
             '45-0-0' => 106,    //'Ubicación cartográfica por cambio de localidad',
             '27-2-0' => 54,     //'Si se requieren investigaciones adicionales a la información proporcionada por los interesados.',
             '27-1-0' => 53,     //'Si la información que proporcionen los interesados es suficiente.',
+            '33-4-0' => 53,     //'Por revisión de examen que solicite el sustentante',
+            '33-3-0' => 53,     //'Derecho a examen de conocimientos que al efecto practique el Instituto a través de la Dirección de Catastro',
+            '33-2-0' => 53,     //'Por refrendo anual de la autorización de perito valuador.',
+            '33-1-0' => 53,     //'Por autorización e inscripción de peritos valuadores de bienes inmuebles..',
         ];
 
-        $servicio_id = $servicios_server[$tramite->conc_013 . '-' . $tramite->clas_013 . '-' . $tramite->subc_013];
+        $key = trim($tramite->conc_013) . '-' . trim($tramite->clas_013) . '-' . trim($tramite->subc_013);
+
+        if(trim($tramite->conc_013) == '24'){
+
+            $servicio_id = $servicios_server['24'];
+
+        }else{
+
+            if(isset($servicios_server[$key])){
+
+                $servicio_id = $servicios_server[$key];
+
+            }else{
+
+                $this->info('No se encontro: ' . $key);
+
+                continue;
+
+            }
+
+        }
 
         $tramite = Tramite::create([
             'estado' => 'pagado',
@@ -423,7 +472,7 @@ Artisan::command('migrar', function(){
             'usuario' => $tramite->usua_013,
             'solicitante' => 'usuario',
             'nombre_solicitante' => $tramite->nomb_013,
-            'fecha_pago' => $tramite->fech_24,
+            'fecha_pago' => $tramite->fech_024,
             'folio_pago' => $tramite->frec_024,
             'orden_de_pago' => $tramite->orde_013,
             'linea_de_captura' => $tramite->line_013,
@@ -436,6 +485,12 @@ Artisan::command('migrar', function(){
 
         $tramite->predios()->sync($array_predios_id);
 
+        $progressbar->advance();
+
     }
+
+    $progressbar->finish();
+
+    $this->info('Finaliza: ' . now());
 
 });
