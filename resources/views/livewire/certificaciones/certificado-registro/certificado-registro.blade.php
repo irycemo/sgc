@@ -305,7 +305,7 @@
 
             </div>
 
-            @if($tramite->servicio->id == 6)
+            @if($tramite->servicio->clave_ingreso == 'D774')
 
                 <p class="text-center my-4">Colindancias</p>
 

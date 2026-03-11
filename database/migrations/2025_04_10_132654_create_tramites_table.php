@@ -24,11 +24,9 @@ return new class extends Migration
             $table->date("fecha_entrega")->nullable();
             $table->date("fecha_pago")->nullable()->index();
             $table->date("fecha_vencimiento")->nullable();
-            $table->string("folio_pago")->nullable();
             $table->string('orden_de_pago')->nullable();
             $table->string('linea_de_captura')->nullable();
             $table->string('documento_de_pago')->nullable();
-            $table->date("limite_de_pago")->nullable();
             $table->decimal("monto", 18, 2);
             $table->unsignedInteger('cantidad')->default(1);
             $table->unsignedInteger('usados')->default(0);

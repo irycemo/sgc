@@ -33,7 +33,7 @@ class TramiteResource extends JsonResource
             'tipo_servicio' => $this->tipo_servicio,
             'tipo_tramite' => $this->tipo_tramite,
             'numero_oficio' => $this->numero_oficio,
-            'fecha_vencimiento' => $this->limite_de_pago?->format('d/m/Y'),
+            'fecha_vencimiento' => $this->fecha_vencimiento?->format('d/m/Y'),
             'nombre_solicitante' => $this->nombre_solicitante,
             'solicitante' => $this->solicitante,
             'created_at' => $this->created_at,

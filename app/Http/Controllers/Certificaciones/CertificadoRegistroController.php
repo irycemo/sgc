@@ -48,6 +48,12 @@ class CertificadoRegistroController extends Controller
         $datos_control->impreso_por = auth()->user()->name;
         $datos_control->impreso_en = now()->format('d/m/Y H:i:s');
 
+        if(in_array($tramite->servicio->nombre, ['Certificado catastral ordinario con colindancias', 'Certificado catastral urgente con colindancias'])){
+
+            $datos_control->tipo_certificado = 'COLINDANCIAS';
+
+        }
+
         $object = (object)[];
 
         $object->predio = $this->predio($predio);

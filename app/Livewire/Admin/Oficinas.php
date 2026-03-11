@@ -127,6 +127,23 @@ class Oficinas extends Component
                 $this->modelo_editar->actualizado_por = auth()->user()->id;
                 $this->modelo_editar->save();
 
+                foreach($this->modelo_editar->localidades as $localidad){
+
+                    $localidad->update([
+                        'region' => $this->modelo_editar->region,
+                        'municipio' => $this->modelo_editar->municipio,
+                        'sectores' => $this->modelo_editar->sectores,
+                        'ubicacion' => $this->modelo_editar->ubicacion,
+                        'titular' => $this->modelo_editar->titular,
+                        'email' => $this->modelo_editar->email,
+                        'telefonos' => $this->modelo_editar->telefonos,
+                        'autoridad_municipal' => $this->modelo_editar->autoridad_municipal,
+                        'valuador_municipal' => $this->modelo_editar->valuador_municipal,
+                        'actualizado_por' => auth()->id(),
+                    ]);
+
+                }
+
                 $this->resetearTodo($borrado = true);
 
                 $this->dispatch('mostrarMensaje', ['success', "La oficina se actualizó con éxito."]);

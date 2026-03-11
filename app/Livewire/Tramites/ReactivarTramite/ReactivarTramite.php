@@ -233,4 +233,5 @@ class ReactivarTramite extends Component
     {
         return view('livewire.tramites.reactivar-tramite.reactivar-tramite')->extends('layouts.admin');
     }
+
 }

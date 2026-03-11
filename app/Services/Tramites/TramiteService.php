@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Cache;
 class TramiteService{
 
     public $tramite;
-    public $fecha_vencimiento;
     public $orden_de_pago;
     public $linea;
 
@@ -123,7 +122,7 @@ class TramiteService{
 
         $this->tramite->orden_de_pago = $array['ES_OPAG']['NRO_ORD_PAGO'];
         $this->tramite->linea_de_captura = $array['ES_OPAG']['LINEA_CAPTURA'];
-        $this->tramite->limite_de_pago = $this->convertirFecha($array['ES_OPAG']['FECHA_VENCIMIENTO']);
+        $this->tramite->fecha_vencimiento = $this->convertirFecha($array['ES_OPAG']['FECHA_VENCIMIENTO']);
 
         /* $this->oxxo_cod = $array['SOAPBody']['ns0MT_ServGralLC_PI_Receiver']['TB_CONV_BANCARIOS'];
 

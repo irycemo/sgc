@@ -1,11 +1,13 @@
 <?php
 
-use App\Models\OldTraslado;
 use App\Jobs\MigrarPredioJob;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
+use App\Models\OldTraslado;
+use App\Models\Predio;
+use App\Models\Tramite;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schedule;
+use Illuminate\Support\Facades\Schema;
 
 Schedule::command('cache:recaudacion')->dailyAt('23:10');
 
@@ -290,6 +292,137 @@ Artisan::command('migrar-traslados', function(){
             'adquiriente' => $adquirientes_text,
             'ffir' => $traslado->ffir_108,
         ]);
+
+    }
+
+});
+
+Artisan::command('migrar', function(){
+
+    $tramites = DB::connection('sqlsrv')->table('ctatr013')
+                    ->join('ctrec024', function($q){
+                        $q->on('ctatr013.atra_013', 'ctrec024.atra_024')
+                            ->on('ctatr013.foli_013', 'ctrec024.foli_024')
+                            ->on('ctatr013.usua_013', 'ctrec024.usu_024');
+                    })
+                    ->where('atra_013', 2025)
+                    ->get();
+
+    $this->info('Incia migración de trámites el: ' . now());
+
+    foreach ($tramites as $tramite) {
+
+        $predios_300 = DB::connection('sqlsrv')->table('ctcta300')
+                                                ->where('atra_300', $tramite->atra_013)
+                                                ->where('foli_300', $tramite->foli_013)
+                                                ->where('usua_300', $tramite->usua_013)
+                                                ->get();
+
+        if($predios_300->count()){
+
+            $array_predios_id = [];
+
+            foreach ($predios_300 as $predio) {
+
+                $predio_prod = Predio::where('localidad', $predio->locl_300)
+                                        ->where('oficina', $predio->ofna_300)
+                                        ->where('tipo_predio', $predio->tpre_300)
+                                        ->where('numero_registro', $predio->nreg_300)
+                                        ->first();
+
+                array_push($array_predios_id, $predio_prod->id);
+
+            }
+
+        }
+
+        $servicios_server = [
+            '34-5-1' => 'CERTIFICADO DE REGISTRO ordinario',
+            '34-5-2' => 'CERTIFICADO DE REGISTRO urgente',
+            '34-2-1' => 'CERTIFICADO negativo',
+            '34-2-1' => 'CERTIFICADO negativo',
+            '34-3-1' => 'Historia anticipo',
+            '34-3-2' => 'Historia 5 movimientos',
+            '34-3-3' => 'Historia 6 a 10 movimientos',
+            '34-3-4' => 'Historia 11 a 15 movimientos',
+            '34-3-5' => 'Historia > 15 movimientos',
+            '40-1-0' => 'Revision aviso rustico',
+            '40-2-0' => 'Revision aviso urbano',
+            '40-4-0' => 'Revision aviso urbano sentencia',
+            '40-3-0' => 'Revision aviso rustico sentencia',
+            '41-1-0' => 'Aviso aclaratorio rustico',
+            '41-2-0' => 'Aviso aclaratorio urbano',
+            '39-1-0' => 'Cedula rustico',
+            '39-2-0' => 'Cedula urbano',
+            '39-3-0' => 'Cedula ran, insus coret',
+            '31-1-2' => 'Desglose otro tipo',
+            '31-1-1' => 'Desglose fraccionamientos',
+            '26-2-3' => 'Determinación ubicación superior 50 km',
+            '26-2-2' => 'Determinación ubicación 20 a 50 km',
+            '26-2-1' => 'Determinación ubicación 20 km',
+            '26-2-0' => 'Determinación ubicación cualquier lado',
+            '35-1-0' => 'Copia simple',
+            '35-2-0' => 'Copia certificada',
+            '35-3-0' => 'Consulta de acervo',
+            '23-8-0' => 'Copias en archivo digital en formato dwf: Planos catastrales no digitalizados',
+            '23-6-5' => 'Copias en archivo digital en formato dwf: De los planos de valores unitarios de terreno urbano de los demás municipios con los que se cuenta planos de valores autorizados por el Congreso.',
+            '23-6-4' => 'Copias en archivo digital en formato dwf: De los planos de valores unitarios de terreno urbano por sector de los municipios de Apatzingán, La Piedad, Lázaro Cárdenas, Morelia, Uruapan y Zamora.',
+            '23-6-1' => 'Copias en archivo digital en formato dwf: De los municipios de La Piedad, Morelia, Uruapan y Zamora.',
+            '23-6-2' => 'Copias en archivo digital en formato dwf: De los municipios de Apatzingán, Jacona, Jiquilpan, Los Reyes, Lázaro Cárdenas, Maravatío, Pátzcuaro, Puruándiro, Sahuayo y Zitácuaro.',
+            '23-6-3' => 'Copias en archivo digital en formato dwf: De los municipios de Ciudad Hidalgo, Coeneo, Cotija, Cuitzeo, Huandacareo, Paracho, Purépero, Quiroga, Salvador Escalante, Tacámbaro, Tangancícuaro, Venustiano Carranza, Yurécuaro, Zacapu y Zinapécuaro.',
+            '23-5-0' => 'Copias impresas de planos catastrales digitalizados: Por fotografía aérea escaneada en archivo digital en formato dwf.',
+            '23-4-0' => 'Copias impresas de planos catastrales digitalizados: De sector, en formato dwf, por cada manzana existente en el mismo.',
+            '23-3-0' => 'Copias impresas de planos catastrales digitalizados: Manzanero, en formato dwf.',
+            '23-2-4' => 'Copias impresas de planos catastrales digitalizados: Con curvas de nivel. De los Municipios de Coeneo, Cotija, Cuitzeo, Huandacareo, Jiquilpan, Maravatío, Paracho, Purépero, Quiroga, Salvador Escalante, Tangancícuaro, Tarímbaro, Venustiano Carranza, Yurécuaro, Zacapu y Zinapécuaro, escala 1:7,500.',
+            '23-2-3' => 'Copias impresas de planos catastrales digitalizados: Con curvas de nivel. De los Municipios de Apatzingán, Cd. Hidalgo, Jacona, La Piedad, Lázaro Cárdenas, Los Reyes, Pátzcuaro, Puruándiro, Tacámbaro, Sahuayo y Zitácuaro, escala 1:7,500.',
+            '23-2-2' => 'Copias impresas de planos catastrales digitalizados: Con curvas de nivel. De los Municipios de Morelia, Uruapan y Zamora, escala 1:10,000',
+            '23-2-1' => 'Copias impresas de planos catastrales digitalizados: Manzaneros. Concurvas de nivel',
+            '23-1-4' => 'Copias impresas de planos catastrales digitalizados: De los Municipios de Coeneo, Cotija, Cuitzeo, Huandacareo, Jiquilpan, Maravatío, Paracho, Purépero, Quiroga, Salvador Escalante, Tangancícuaro, Tarímbaro, Venustiano Carranza, Yurécuaro, Zacapu y Zinapécuaro, escala 1:7,500.',
+            '23-1-3' => 'Copias impresas de planos catastrales digitalizados: De los Municipios de Apatzingán, Cd. Hidalgo, Jacona, La Piedad, Lázaro Cárdenas, Los Reyes, Pátzcuaro, Puruándiro, Tacámbaro, Sahuayo y Zitácuaro, escala 1:7,500.',
+            '23-1-2' => 'Copias impresas de planos catastrales digitalizados: De los Municipios de Morelia, Uruapan y Zamora, escala 1:10,000.',
+            '23-1-1' => 'Copias impresas de planos catastrales digitalizados: Manzaneros',
+            '46-0-0' => 'Georreferenciación de croquis administrativos del catastro',
+            '37-0-0' => 'Por información respecto de los nombres de colindantes, a propietarios o poseedores de predios registrados.',
+            '42-1-0' => 'Por resolución administrativa emitida por el Registro Agrario Nacional o Instituto Nacional del Suelo Sustentable.',
+            '42-2-0' => 'Por resolución administrativa emitida por el Registro Agrario Nacional o Instituto Nacional del Suelo Sustentable.',
+            '29-4-0' => 'Sobre predios ubicados fuera de la localidad donde se encuentre la oficina recaudadora dentro de un radio superior a 50 kilómetros.',
+            '29-3-0' => 'Sobre predios ubicados fuera de la localidad donde se encuentre la oficina recaudadora dentro de un radio hasta de 50 kilómetros.',
+            '29-2-0' => 'Sobre predios ubicados fuera de la localidad donde se encuentre la oficina recaudadora dentro de un radio hasta de 20 kilómetros.',
+            '29-1-0' => 'Sobre predios ubicados dentro del área de la población donde se encuentra la oficina recaudadora.',
+            '24-0-0' => 'Levantamientos topograficos',
+            '38-0-0' => 'Modificación de datos administrativos catastrales',
+            '32-2-0' => 'Inscripción o registro de predios ignorados',
+            '32-5-0' => 'Solicitud de Predio Ignorado',
+            '30-2-0' => 'Otras cuentas catastrales analizadas y reestructuradas distintas de fraccionamientos y condominios.',
+            '30-1-0' => 'Por cuenta catastral analizada y reestructurada, tratándose de fraccionamientos y condominios.',
+            '72-3-0' => 'Variación Catastral Otro tipo de inmueble',
+            '72-4-0' => 'Variación Catastral Vivienda',
+            '44-0-0' => 'Ubicación cartográfica para la asignación correcta de clave catastral',
+            '45-0-0' => 'Ubicación cartográfica por cambio de localidad',
+            '27-2-0' => 'Si se requieren investigaciones adicionales a la información proporcionada por los interesados.',
+            '27-1-0' => 'Si la información que proporcionen los interesados es suficiente.',
+        ];
+
+        $tramite = Tramite::create([
+            'estado' => 'pagado',
+            'tipo_tramite' => trim($tramite->iden_013) == 'E' ? 'exento' : 'normal',
+            'tipo_servicio' => 'ordinario',
+            'año' => $tramite->atra_013,
+            'folio' => $tramite->foli_013,
+            'usuario' => $tramite->usua_013,
+            'solicitante' => 'usuario',
+            'nombre_solicitante' => $tramite->nomb_013,
+            'fecha_pago' => $tramite->fech_24,
+            'folio_pago' => $tramite->frec_024,
+            'orden_de_pago' => $tramite->orde_013,
+            'linea_de_captura' => $tramite->line_013,
+            'monto' => $tramite->tot1_013,
+            'cantidad' => $tramite->can2_013,
+            'observaciones' => $tramite->obse_013,
+            'oficina_id' => 53,
+        ]);
+
+        $tramite->predios()->sync($array_predios_id);
 
     }
 
