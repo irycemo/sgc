@@ -261,6 +261,10 @@ Artisan::command('migrar-traslados', function(){
 
     $this->info('Incia migración de traslados el: ' . now());
 
+    $progressbar = $this->output->createProgressBar(count($traslados));
+
+    $progressbar->start();
+
     foreach ($traslados as $traslado) {
 
         $adquirientes = DB::connection('sqlsrv')->table('ctcop105')
@@ -273,7 +277,7 @@ Artisan::command('migrar-traslados', function(){
 
         foreach ($adquirientes as $adquiriente) {
 
-            $adquirientes_text = $adquirientes_text . '\n Tipo: ' . trim($adquiriente->tper_105) . ', ' . trim($adquiriente->apat_105) . ' ' . trim($adquiriente->amat_105) . ' ' . trim($adquiriente->nomb_105) . ' ' . trim($adquiriente->ppro_105);
+            $adquirientes_text = $adquirientes_text . ' Tipo: ' . trim($adquiriente->tper_105) . ', ' . trim($adquiriente->apat_105) . ' ' . trim($adquiriente->amat_105) . ' ' . trim($adquiriente->nomb_105) . ' ' . trim($adquiriente->ppro_105);
 
         }
 
@@ -326,7 +330,13 @@ Artisan::command('migrar-traslados', function(){
             'certificado_folio' => trim($traslado->ncer_108),
         ]);
 
+        $progressbar->advance();
+
     }
+
+    $progressbar->finish();
+
+    $this->info('Finaliza: ' . now());
 
 });
 
@@ -342,6 +352,7 @@ Artisan::command('migrar-tramites', function(){
                             ->on('ctatr013.usua_013', 'ctrec024.usu_024');
                     })
                     ->where('atra_013', 2026)
+                    ->where('ofna_013', 101)
                     ->get();
 
     $this->info('Incia migración de trámites el: ' . now());

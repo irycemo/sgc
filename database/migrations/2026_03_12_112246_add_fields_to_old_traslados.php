@@ -12,20 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('old_traslados', function (Blueprint $table) {
-            $table->string('nombre_predio')->nullable();
+            $table->text('nombre_predio')->nullable();
             $table->string('superficie_notarial')->nullable();
             $table->string('superficie_construccion')->nullable();
             $table->string('antecedente_tomo')->nullable();
             $table->string('antecedente_registro')->nullable();
-            $table->string('antecedente_acto')->nullable();
+            $table->text('antecedente_acto')->nullable();
             $table->string('documento_entrada')->nullable();
             $table->string('documento_numero')->nullable();
             $table->string('distrito')->nullable();
             $table->string('seccion')->nullable();
-            $table->string('observacion')->nullable();
+            $table->text('observacion')->nullable();
             $table->string('lugar_firma')->nullable();
             $table->string('fecha_firma')->nullable();
-            $table->string('anexos')->nullable();
+            $table->text('anexos')->nullable();
             $table->string('valor_base')->nullable();
             $table->string('reduccion')->nullable();
             $table->string('tasa')->nullable();
