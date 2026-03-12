@@ -255,10 +255,9 @@ Artisan::command('migrar-traslados', function(){
     DB::table('old_traslados')->truncate();
 
     $traslados = DB::connection('sqlsrv')->table('cttra108')
-                            ->whereIn('stat_108', ['OPERADO', 'AUTORIZADO'])
+                            ->whereIn('stat_108', ['OPERADO', 'AUTORIZADO', 'RECHAZADO'])
+                            ->where('mpio_108', 53)
                             ->get();
-
-    /* $traslados = $traslados->chunk(100); */
 
     $this->info('Incia migración de traslados el: ' . now());
 
@@ -274,23 +273,57 @@ Artisan::command('migrar-traslados', function(){
 
         foreach ($adquirientes as $adquiriente) {
 
-            $adquirientes_text = $adquirientes_text . '\n' . trim($adquiriente->apat_105) . ' ' . trim($adquiriente->amat_105) . ' ' . trim($adquiriente->nomb_105) . ' ' . trim($adquiriente->ppro_105);
+            $adquirientes_text = $adquirientes_text . '\n Tipo: ' . trim($adquiriente->tper_105) . ', ' . trim($adquiriente->apat_105) . ' ' . trim($adquiriente->amat_105) . ' ' . trim($adquiriente->nomb_105) . ' ' . trim($adquiriente->ppro_105);
 
         }
 
         OldTraslado::create([
-            'locl' => $traslado->locl_108,
-            'ofna' => $traslado->ofna_108,
-            'tpre' => $traslado->tpre_108,
-            'nreg' => $traslado->nreg_108,
-            'anit' => $traslado->anit_108,
-            'cont' => $traslado->cont_108,
-            'cnot' => $traslado->cnot_108,
-            'stat' => $traslado->stat_108,
-            'act1' => $traslado->act1_108,
-            'nven' => $traslado->nven_108,
+            'locl' => trim($traslado->locl_108),
+            'ofna' => trim($traslado->ofna_108),
+            'tpre' => trim($traslado->tpre_108),
+            'nreg' => trim($traslado->nreg_108),
+            'anit' => trim($traslado->anit_108),
+            'cont' => trim($traslado->cont_108),
+            'cnot' => trim($traslado->cnot_108),
+            'stat' => trim($traslado->stat_108),
+            'act1' => trim($traslado->act1_108),
+            'nven' => trim($traslado->nven_108),
             'adquiriente' => $adquirientes_text,
-            'ffir' => $traslado->ffir_108,
+            'ffir' => trim($traslado->ffir_108),
+            'nombre_predio' => trim($traslado->nomp_108),
+            'superficie_notarial' => trim($traslado->ster_108),
+            'superficie_construccion' => trim($traslado->scon_108),
+            'antecedente_tomo' => trim($traslado->tomo_108),
+            'antecedente_registro' => trim($traslado->regi_108),
+            'antecedente_acto' => trim($traslado->nact_108),
+            'documento_entrada' => trim($traslado->nesc_108),
+            'documento_numero' => trim($traslado->volu_108),
+            'distrito' => trim($traslado->dtop_108),
+            'seccion' => trim($traslado->libr_108),
+            'observacion' => trim($traslado->obse_108),
+            'lugar_firma' => trim($traslado->lfir_108),
+            'fecha_firma' => trim($traslado->ffir_108),
+            'anexos' => trim($traslado->anex_108),
+            'valor_base' => trim($traslado->vbas_108),
+            'reduccion' => trim($traslado->redu_108),
+            'tasa' => trim($traslado->tasa_108),
+            'valor_avaluo' => trim($traslado->vava_108),
+            'valor_vivienda_mixto' => trim($traslado->cviv_108),
+            'valor_otro_uso_mixto' => trim($traslado->cotr_108),
+            'isai' => trim($traslado->isai_108),
+            'fecha_reduccion' => trim($traslado->fsai_108),
+            'valor_catastral'=> trim($traslado->vcas_108),
+            'latitud' => trim($traslado->lati_108),
+            'longitud' => trim($traslado->long_108),
+            'tramtie_año' => trim($traslado->atra_108),
+            'tramtie_folio' => trim($traslado->foli_108),
+            'tramtie_usuario' => trim($traslado->usua_108),
+            'avaluo_año' => trim($traslado->ania_108),
+            'avaluo_folio' => trim($traslado->cona_108),
+            'avaluo_usuario' => trim($traslado->cvev_108),
+            'nombre_notario' => trim($traslado->notn_108),
+            'certificado_año' => trim($traslado->acer_108),
+            'certificado_folio' => trim($traslado->ncer_108),
         ]);
 
     }
@@ -339,9 +372,8 @@ Artisan::command('migrar-tramites', function(){
 
                 if($predio_prod){
 
-                dd($predio_prod);
-
                     array_push($array_predios_id, $predio_prod->id);
+
                 }
 
             }
@@ -356,7 +388,8 @@ Artisan::command('migrar-tramites', function(){
 
             if($predio_prod){
 
-                    array_push($array_predios_id, $predio_prod->id);
+                array_push($array_predios_id, $predio_prod->id);
+
             }
 
         }
@@ -467,18 +500,18 @@ Artisan::command('migrar-tramites', function(){
             'estado' => 'pagado',
             'tipo_tramite' => trim($tramite->iden_013) == 'E' ? 'exento' : 'normal',
             'tipo_servicio' => 'ordinario',
-            'año' => $tramite->atra_013,
-            'folio' => $tramite->foli_013,
-            'usuario' => $tramite->usua_013,
+            'año' => trim($tramite->atra_013),
+            'folio' => trim($tramite->foli_013),
+            'usuario' => trim($tramite->usua_013),
             'solicitante' => 'usuario',
-            'nombre_solicitante' => $tramite->nomb_013,
-            'fecha_pago' => $tramite->fech_024,
-            'folio_pago' => $tramite->frec_024,
-            'orden_de_pago' => $tramite->orde_013,
-            'linea_de_captura' => $tramite->line_013,
-            'monto' => $tramite->tot1_013,
-            'cantidad' => $tramite->can2_013,
-            'observaciones' => $tramite->obse_013 . ' Creado mediante migración de base de datos 2026.',
+            'nombre_solicitante' => trim($tramite->nomb_013),
+            'fecha_pago' => trim($tramite->fech_024),
+            'folio_pago' => trim($tramite->frec_024),
+            'orden_de_pago' => trim($tramite->orde_013),
+            'linea_de_captura' => trim($tramite->line_013),
+            'monto' => trim($tramite->tot1_013),
+            'cantidad' => trim($tramite->can2_013),
+            'observaciones' => trim($tramite->obse_013) . ' Creado mediante migración de base de datos 2026.',
             'oficina_id' => 53,
             'servicio_id' => $servicio_id
         ]);
@@ -494,3 +527,5 @@ Artisan::command('migrar-tramites', function(){
     $this->info('Finaliza: ' . now());
 
 });
+
+

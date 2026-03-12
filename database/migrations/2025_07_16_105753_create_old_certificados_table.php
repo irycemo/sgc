@@ -31,6 +31,10 @@ return new class extends Migration
             $table->timestamps();
 
             $table->index(['locl', 'ofna', 'tpre', 'nreg'], 'cuenta_predial');
+
+            $table->index(['atra', 'foli', 'usua'], 'tramite');
+
+
         });
     }
 
