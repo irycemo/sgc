@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Certificaciones;
 
-use App\Models\User;
-use App\Models\Certificacion;
-use Barryvdh\DomPDF\Facade\Pdf;
-use PhpCfdi\Credentials\Credential;
+use App\Enums\Certificaciones\CertificacionesEnum;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
-use App\Traits\Certificaciones\PredioTrait;
+use App\Models\Certificacion;
+use App\Models\Oficina;
+use App\Models\User;
 use App\Traits\Certificaciones\CrearImagenTrait;
 use App\Traits\Certificaciones\GeneradorQRTrait;
-use App\Enums\Certificaciones\CertificacionesEnum;
+use App\Traits\Certificaciones\PredioTrait;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
+use PhpCfdi\Credentials\Credential;
 
 class CertificadoRegistroController extends Controller
 {
@@ -36,7 +37,9 @@ class CertificadoRegistroController extends Controller
 
     }
 
-    public function certificado($tramite, $predio, $tipo){
+    public function certificado($tramite, $predio, $tipo, $usuario){
+
+        $oficina = Oficina::where('oficina', $predio->oficina)->where('localidad', $predio->localidad)->first();
 
         $datos_control = (object)[];
 
@@ -45,7 +48,7 @@ class CertificadoRegistroController extends Controller
         $datos_control->tipo_certificado = $tipo;
         $datos_control->director = $this->director->name;
         $datos_control->titular_cargo = 'Director de catastro';
-        $datos_control->impreso_por = auth()->user()->name;
+        $datos_control->impreso_por = $usuario->name;
         $datos_control->impreso_en = now()->format('d/m/Y H:i:s');
 
         if(in_array($tramite->servicio->nombre, ['Certificado catastral ordinario con colindancias', 'Certificado catastral urgente con colindancias'])){
@@ -72,7 +75,7 @@ class CertificadoRegistroController extends Controller
 
             $datos_control->imagen_director = $this->director->efirma->imagen;
 
-            $datos_control->oficina = auth()->user()->oficina->nombre;
+            $datos_control->oficina = $oficina->nombre;
 
             $object->datos_control = $datos_control;
 
@@ -84,9 +87,9 @@ class CertificadoRegistroController extends Controller
                                                         'cadena_encriptada' => base64_encode($firmaDirector),
                                                         'estado' => 'activo',
                                                         'predio_id' => $predio->id,
-                                                        'oficina_id' => auth()->user()->oficina_id,
+                                                        'oficina_id' => $oficina->id,
                                                         'tramite_id' => $tramite->id,
-                                                        'creado_por' => auth()->id()
+                                                        'creado_por' => $usuario->id
                                                     ]);
 
             $qr = $this->generadorQr($certificacion->uuid);

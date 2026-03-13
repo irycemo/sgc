@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\ValoresUnitariosConstruccion as Model;
 use App\Traits\ComponentesTrait;
+use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -18,11 +19,75 @@ class ValoresUnitariosConstruccion extends Component
 
     public $tipo;
     public $uso;
-    public $categoria;
+    public $estado;
     public $calidad;
 
+    protected function rules(){
+        return [
+            'modelo_editar.tipo' => 'required|numeric',
+            'modelo_editar.uso' => 'required|numeric',
+            'modelo_editar.estado' => 'required|numeric',
+            'modelo_editar.calidad' => 'required|numeric',
+            'modelo_editar.valor' => 'required|numeric',
+            'modelo_editar.valor_aterior' => 'required|numeric'
+         ];
+    }
+
     public function crearModeloVacio(){
-        return Model::make();
+        $this->modelo_editar = Model::make();
+    }
+
+    public function abrirModalEditar(Model $modelo){
+
+        $this->resetearTodo();
+        $this->modal = true;
+        $this->editar = true;
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
+    }
+
+    public function actualizar(){
+
+        try{
+
+            $this->modelo_editar->save();
+
+            $this->resetearTodo($borrado = true);
+
+            $this->dispatch('mostrarMensaje', ['success', "El valor se actualizó con éxito."]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al actualizar valor unitario de construcción por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+            $this->resetearTodo();
+
+        }
+
+    }
+
+    public function borrar(){
+
+        try{
+
+            $valor = Model::find($this->selected_id);
+
+            $valor->delete();
+
+            $this->resetearTodo($borrado = true);
+
+            $this->dispatch('mostrarMensaje', ['success', "El valor se eliminó con éxito."]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al borrar valor unitario de construcción por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+            $this->resetearTodo();
+
+        }
+
     }
 
     #[Computed]
@@ -35,8 +100,8 @@ class ValoresUnitariosConstruccion extends Component
                         ->when($this->uso && $this->uso != '', function($q){
                             $q->where('uso', $this->uso);
                         })
-                        ->when($this->categoria && $this->categoria != '', function($q){
-                            $q->where('estado', $this->categoria);
+                        ->when($this->estado && $this->estado != '', function($q){
+                            $q->where('estado', $this->estado);
                         })
                         ->when($this->calidad && $this->calidad != '', function($q){
                             $q->where('calidad', $this->calidad);

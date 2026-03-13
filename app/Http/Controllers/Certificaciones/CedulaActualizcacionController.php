@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Certificaciones;
 
-use App\Models\User;
-use App\Models\Certificacion;
-use Barryvdh\DomPDF\Facade\Pdf;
-use PhpCfdi\Credentials\Credential;
+use App\Enums\Certificaciones\CertificacionesEnum;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
-use App\Traits\Certificaciones\PredioTrait;
+use App\Models\Certificacion;
+use App\Models\Oficina;
+use App\Models\User;
 use App\Traits\Certificaciones\CrearImagenTrait;
 use App\Traits\Certificaciones\GeneradorQRTrait;
-use App\Enums\Certificaciones\CertificacionesEnum;
+use App\Traits\Certificaciones\PredioTrait;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
+use PhpCfdi\Credentials\Credential;
 
 class CedulaActualizcacionController extends Controller
 {
@@ -36,7 +37,9 @@ class CedulaActualizcacionController extends Controller
 
     }
 
-    public function cedula($tramite, $predio){
+    public function cedula($tramite, $predio, $usuario){
+
+        $oficina = Oficina::where('oficina', $predio->oficina)->where('localidad', $predio->localidad)->first();
 
         $datos_control = (object)[];
 
@@ -44,7 +47,7 @@ class CedulaActualizcacionController extends Controller
         $datos_control->solicitante = $tramite->nombre_solicitante;
         $datos_control->director = $this->director->name;
         $datos_control->titular_cargo = 'Director de catastro';
-        $datos_control->impreso_por = auth()->user()->name;
+        $datos_control->impreso_por = $usuario->name;
         $datos_control->impreso_en = now()->format('d/m/Y H:i:s');
 
         $object = (object)[];
@@ -73,7 +76,7 @@ class CedulaActualizcacionController extends Controller
 
             $datos_control->imagen_director = $this->director->efirma->imagen;
 
-            $datos_control->oficina = auth()->user()->oficina->nombre;
+            $datos_control->oficina = $oficina->nombre;
 
             $object->datos_control = $datos_control;
 
@@ -84,10 +87,10 @@ class CedulaActualizcacionController extends Controller
                                                         'cadena_original' => json_encode($object),
                                                         'cadena_encriptada' => base64_encode($firmaDirector),
                                                         'estado' => 'activo',
-                                                        'oficina_id' => auth()->user()->oficina_id,
+                                                        'oficina_id' => $oficina->id,
                                                         'tramite_id' => $tramite->id,
                                                         'predio_id' => $predio->id,
-                                                        'creado_por' => auth()->id()
+                                                        'creado_por' => $usuario->id
                                                     ]);
 
             $qr = $this->generadorQr($certificacion->uuid);

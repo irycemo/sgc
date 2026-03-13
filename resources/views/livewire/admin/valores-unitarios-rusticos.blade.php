@@ -34,6 +34,7 @@
                 <x-table.heading sortable wire:click="sortBy('concepto')" :direction="$sort === 'concepto' ? $direction : null" >Concepto</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('valor')" :direction="$sort === 'valor' ? $direction : null">Valor</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('valor_aterior')" :direction="$sort === 'valor' ? $direction : null">Valor anterior</x-table.heading>
+                <x-table.heading>Acciones</x-table.heading>
 
             </x-slot>
 
@@ -58,6 +59,39 @@
                         <x-table.cell title="Valor anterior">
 
                             ${{ number_format($valor->valor_aterior, 2) }}
+
+                        </x-table.cell>
+
+                        <x-table.cell title="Acciones">
+
+                            <div class="ml-3 relative" x-data="{ open_drop_down:false }">
+
+                                <div>
+
+                                    <button x-on:click="open_drop_down=true" type="button" class="rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                        </svg>
+
+                                    </button>
+
+                                </div>
+
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+
+                                    <button
+                                        wire:click="abrirModalEditar({{ $valor->id }})"
+                                        wire:target="abrirModalEditar({{ $valor->id }})"
+                                        wire:loading.attr="disabled"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        role="menuitem">
+                                        Editar
+                                    </button>
+
+                                </div>
+
+                            </div>
 
                         </x-table.cell>
 
@@ -100,5 +134,57 @@
         </x-table>
 
     </div>
+
+    <x-dialog-modal wire:model="modal" maxWidth="sm">
+
+        <x-slot name="title">
+
+            Editar Valor
+
+        </x-slot>
+
+        <x-slot name="content">
+
+            <x-input-group for="modelo_editar.valor" label="Valor" :error="$errors->first('modelo_editar.valor')" class="w-full">
+
+                <x-input-text type="number" id="modelo_editar.valor" wire:model="modelo_editar.valor" />
+
+            </x-input-group>
+
+            <x-input-group for="modelo_editar.valor_aterior" label="Valor anterior" :error="$errors->first('modelo_editar.valor_aterior')" class="w-full">
+
+                <x-input-text type="number" id="modelo_editar.valor_aterior" wire:model="modelo_editar.valor_aterior" />
+
+            </x-input-group>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex gap-3">
+
+                <x-button-blue
+                    wire:click="actualizar"
+                    wire:loading.attr="disabled"
+                    wire:target="actualizar">
+
+                    <img wire:loading wire:target="actualizar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    <span>Actualizar</span>
+                </x-button-blue>
+
+                <x-button-red
+                    wire:click="resetearTodo"
+                    wire:loading.attr="disabled"
+                    wire:target="resetearTodo"
+                    type="button">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
 
 </div>

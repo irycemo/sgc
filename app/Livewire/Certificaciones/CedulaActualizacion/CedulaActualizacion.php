@@ -136,7 +136,7 @@ class CedulaActualizacion extends Component
 
             }
 
-            $pdf = (new CedulaActualizcacionController())->cedula($this->tramite, $this->predio);
+            $pdf = (new CedulaActualizcacionController())->cedula($this->tramite, $this->predio, auth()->user());
 
         });
 

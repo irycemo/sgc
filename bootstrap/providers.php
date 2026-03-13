@@ -3,7 +3,8 @@
 return [
     App\Providers\AppServiceProvider::class,
     App\Providers\FortifyServiceProvider::class,
+    App\Providers\HorizonServiceProvider::class,
     App\Providers\JetstreamServiceProvider::class,
-    OwenIt\Auditing\AuditingServiceProvider::class,
     Maatwebsite\Excel\ExcelServiceProvider::class,
+    OwenIt\Auditing\AuditingServiceProvider::class,
 ];

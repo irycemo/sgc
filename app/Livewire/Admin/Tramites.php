@@ -48,6 +48,7 @@ class Tramites extends Component
         'p_oficina' => '',
         't_predio' => '',
         'registro' => '',
+        'estado' => ''
     ];
 
     public $servicios;
@@ -320,7 +321,7 @@ class Tramites extends Component
                         ->when($this->filters['año'], fn($q, $año) => $q->where('año', $año))
                         ->when($this->filters['folio'], fn($q, $folio) => $q->where('folio', $folio))
                         ->when($this->filters['usuario'], fn($q, $usuario) => $q->where('usuario', $usuario))
-                        ->when($this->filters['estado'], fn($q, $estado) => $q->where('estado', $estado))
+                        ->when($this->filters['estado'], fn($q) => $q->where('estado', $this->filters['estado']))
                         ->when($this->filters['tipoTramite'], fn($q, $tipoTramite) => $q->where('tipo_tramite', $tipoTramite))
                         ->when($this->filters['servicio'], fn($q, $servicio) => $q->where('servicio_id', $servicio))
                         ->when($this->filters['localidad'], function($q, $localidad){

@@ -31,6 +31,7 @@ class CertificacionListaResource extends JsonResource
             'oficina' => $this->predio->oficina,
             'tipo_predio' => $this->predio->tipo_predio,
             'numero_registro' => $this->predio->numero_registro,
+            'fecha_elaboracion' => $this->created_at,
             'requerimientos' => RequerimientoResource::collection($this->requerimientos)
         ];
     }

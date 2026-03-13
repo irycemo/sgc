@@ -24,6 +24,16 @@
 
             </div>
 
+            <select class="bg-white rounded-full  text-sm" wire:model.live="filters.estado">
+
+                <option value="" selected>Estado</option>
+                <option value="nuevo">Nuevo</option>
+                <option value="pagado">Pagado</option>
+                <option value="concluido">Concluido</option>
+                <option value="expirado">Expirado</option>
+
+            </select>
+
             <select class="bg-white rounded-full  text-sm" wire:model.live="filters.tipoTramite">
 
                 <option value="" selected>Tipo de trámtie</option>

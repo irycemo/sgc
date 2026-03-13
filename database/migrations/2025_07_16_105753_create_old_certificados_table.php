@@ -28,6 +28,7 @@ return new class extends Migration
             $table->unsignedInteger('atra')->nullable();
             $table->unsignedInteger('foli')->nullable();
             $table->unsignedInteger('usua')->nullable();
+            $table->text('observaciones')->nullable();
             $table->timestamps();
 
             $table->index(['locl', 'ofna', 'tpre', 'nreg'], 'cuenta_predial');

@@ -1,6 +1,8 @@
 <?php
 
+use App\Jobs\GenerarCertificacionMigracionJob;
 use App\Jobs\MigrarPredioJob;
+use App\Models\OldCertificado;
 use App\Models\OldTraslado;
 use App\Models\Predio;
 use App\Models\Tramite;
@@ -8,6 +10,9 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schedule;
 use Illuminate\Support\Facades\Schema;
+
+Schedule::command('backup:clean')->daily()->at('01:00');
+Schedule::command('backup:run')->daily()->at('01:30');
 
 Schedule::command('cache:recaudacion')->dailyAt('23:10');
 
@@ -165,86 +170,44 @@ Artisan::command('migrar-certificados', function(){
 
     DB::table('old_certificados')->truncate();
 
+    $certificados = DB::connection('sqlsrv')->table('certificaciones')
+                            ->whereIn('ofna', 101)
+                            ->get();
+
     $this->info('Incia migración de certificados el: ' . now());
 
-    $now = now()->format('Y-m-d H:i:s');
+    $progressbar = $this->output->createProgressBar(count($certificados));
 
-    $handle = fopen(storage_path('app/public/certificados.csv'), 'r');
+    $progressbar->start();
 
-    fgets($handle);
+    foreach ($certificados as $certificado) {
 
-    $chunkSize = 500;
+        OldCertificado::create([
+            'locl' => $certificado->locl,
+            'ofna' => $certificado->ofna,
+            'tpre' => $certificado->tpre,
+            'nreg' => $certificado->nreg,
+            'tipo' => trim($certificado->anit),
+            'stat' => trim($certificado->cont),
+            'tipo_cer' => $certificado->cnot,
+            'ciudad' => trim($certificado->stat),
+            'imprimio' => trim($certificado->act1),
+            'actualizo' => trim($certificado->nven),
+            'fecha' => $certificado->fecha,
+            'acer' => $certificado->ffir,
+            'atra' => $certificado->nomp,
+            'foli' => $certificado->ster,
+            'usua' => $certificado->scon,
+            'observaciones' => $certificado->obse,
+        ]);
 
-    $chunks = [];
-
-    try {
-
-        $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?)';
-
-        $placeholders = implode(',', array_fill(0, $chunkSize, $rowPlaceholders));
-
-        $stmt =  DB::connection()->getPdo()->prepare("
-                                                        INSERT INTO old_certificados (locl, ofna, tpre, nreg, tipo, stat, tipo_cer, ciudad, imprimio, actualizo, fecha, acer, atra, foli, usua, created_at, updated_at)
-                                                        VALUES {$placeholders}
-                                                    ");
-
-        while(($line = fgetcsv($handle)) !== false){
-
-            $chunks = array_merge($chunks, [
-                $line[0], //Localidad
-                $line[1], //Oficina
-                $line[2], //T Predio
-                $line[3], //Registro
-                trim($line[4]), //Tipo
-                trim($line[5]), //Status
-                trim($line[6]), //Tipo certificado
-                trim($line[7]), //Ciudad
-                trim($line[8]), //Imprimio
-                trim($line[9]), //Actualizo
-                $line[10], // Fecha
-                $line[11], // Acer
-                $line[12], // Atra
-                $line[13], // Foli
-                $line[14], // Usua
-                $now,
-                $now
-            ]);
-
-            if(count($chunks) === $chunkSize * 17){
-
-                $stmt->execute($chunks);
-
-                $chunks = [];
-
-            }
-
-        }
-
-        if(!empty($chunks)){
-
-
-            $remainingRows = count($chunks) / 17;
-
-            $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?)';
-
-            $placeholders = implode(',', array_fill(0, $remainingRows, $rowPlaceholders));
-
-            $stmt = DB::connection()->getPdo()->prepare("
-                                                        INSERT INTO old_certificados (locl, ofna, tpre, nreg, tipo, stat, tipo_cer, ciudad, imprimio, actualizo, fecha, acer, atra, foli, usua, created_at, updated_at)
-                                                        VALUES {$placeholders}
-                                                    ");
-
-            $stmt->execute($chunks);
-
-        }
-
-        $this->info('Finaliza migración de certificados el: ' . now());
-
-    }  finally {
-
-        fclose($handle);
+        $progressbar->advance();
 
     }
+
+    $progressbar->finish();
+
+    $this->info('Finaliza: ' . now());
 
 });
 
@@ -528,6 +491,33 @@ Artisan::command('migrar-tramites', function(){
         ]);
 
         $tramite->predios()->sync($array_predios_id);
+
+        $progressbar->advance();
+
+    }
+
+    $progressbar->finish();
+
+    $this->info('Finaliza: ' . now());
+
+});
+
+Artisan::command('generar-certificados', function(){
+
+    Schema::disableForeignKeyConstraints();
+    DB::table('certificacions')->truncate();
+
+    $tramites = Tramite::whereIn('servicio_id', [3, 293, 297, 296, 64, 65])->get();
+
+    $this->info('Incia migración de trámites el: ' . now());
+
+    $progressbar = $this->output->createProgressBar(count($tramites));
+
+    $progressbar->start();
+
+    foreach ($tramites as $tramite) {
+
+        GenerarCertificacionMigracionJob::dispatch($tramite);
 
         $progressbar->advance();
 
