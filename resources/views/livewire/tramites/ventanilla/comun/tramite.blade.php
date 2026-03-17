@@ -84,7 +84,7 @@
 
     <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-        <p><strong>Registrado por:</strong> {{ $tramite->creadoPor->name }} el {{ $tramite->created_at }}</p>
+        <p><strong>Registrado por:</strong> {{ $tramite->creadoPor?->name }} el {{ $tramite->created_at }}</p>
 
     </div>
 
