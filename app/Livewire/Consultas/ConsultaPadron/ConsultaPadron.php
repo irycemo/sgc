@@ -244,11 +244,11 @@ class ConsultaPadron extends Component
     }
 
     #[Computed]
-    public function prediosLista(){
+    public function prediosLista(){/*  */
 
         $key = 'consulta-predios-' . $this->getId();
 
-        return Cache::remember($key, 300, function(){
+        /* return Cache::remember($key, 300, function(){ */
 
             if($this->radio == 'clave' && $this->diez){
 
@@ -296,7 +296,7 @@ class ConsultaPadron extends Component
                                     ->paginate(20);
             }
 
-        });
+        /* }); */
 
     }
 
