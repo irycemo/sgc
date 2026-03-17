@@ -44,19 +44,15 @@
                 Reimprimir
             </button>
 
-            @can('Validar pago')
-
-                <button
-                    wire:click="validarPago"
-                    wire:loading.attr="disabled"
-                    wire:target="validarPago"
-                    type="button"
-                    class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-red-700 focus:outline-none ">
-                    <img wire:loading wire:target="validarPago" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-                    Validar
-                </button>
-
-            @endif
+            <button
+                wire:click="validarPago"
+                wire:loading.attr="disabled"
+                wire:target="validarPago"
+                type="button"
+                class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-sm hover:bg-red-700 focus:outline-none ">
+                <img wire:loading wire:target="validarPago" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                Validar
+            </button>
 
         @endif
 
