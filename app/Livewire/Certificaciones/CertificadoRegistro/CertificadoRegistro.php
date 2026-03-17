@@ -80,13 +80,17 @@ class CertificadoRegistro extends Component
 
             }
 
-            if($this->tramite->estado !== 'autorizado' && $this->tramite->fecha_entrega >= now()){
+            if($this->tramite->tipo_tramite !== 'exento'){
 
-                $this->dispatch('mostrarMensaje', ['warning', "La fecha de entrega del trámite es: " . $this->tramite->fecha_entrega->format('d-m-Y')]);
+                if($this->tramite->estado !== 'autorizado' && $this->tramite->fecha_entrega >= now()){
 
-                $this->reset('tramite');
+                    $this->dispatch('mostrarMensaje', ['warning', "La fecha de entrega del trámite es: " . $this->tramite->fecha_entrega->format('d-m-Y')]);
 
-                return;
+                    $this->reset('tramite');
+
+                    return;
+
+                }
 
             }
 
