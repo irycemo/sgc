@@ -72,11 +72,11 @@
 
     @endif
 
-    @if ($tramite->limite_de_pago)
+    @if ($tramite->fecha_vencimiento)
 
         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-            <p><strong>Límite de pago:</strong> {{ $tramite->limite_de_pago }}</p>
+            <p><strong>Límite de pago:</strong> {{ $tramite->fecha_vencimiento }}</p>
 
         </div>
 
