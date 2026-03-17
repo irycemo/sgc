@@ -184,7 +184,7 @@ class CertificadoRegistro extends Component
 
                 $pdf = (new CertificadoRegistroController())->certificado($this->tramite, $this->predio, $this->tipo_certificado, auth()->user());
 
-            });
+            }, 3);
 
             $cuenta_predial = $this->predio->cuentaPredial();
 
