@@ -82,8 +82,8 @@ class Valuacion extends Component
             'predio.xutm' => 'nullable|string',
             'predio.yutm' => 'nullable|string',
             'predio.zutm' => 'nullable',
-            'predio.lat' => 'required',
-            'predio.lon' => 'required',
+            'predio.lat' => 'required|decimal:11,8',
+            'predio.lon' => 'required|decimal:11,8',
          ];
     }
 
