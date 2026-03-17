@@ -54,10 +54,6 @@
         <strong>DEPARTAMENTO:</strong> {{ $predio->departamento_edificio }};
     @endif
 
-    @if ($predio->manzana)
-        <strong>MANZANA:</strong> {{ $predio->manzana }};
-    @endif
-
     @if ($predio->numero_exterior_2)
         <strong>número exterior 2:</strong> {{ $predio->numero_exterior_2 }};
     @endif

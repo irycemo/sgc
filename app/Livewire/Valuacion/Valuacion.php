@@ -154,7 +154,7 @@ class Valuacion extends Component
 
                 $this->predio = $this->crearModeloVacio();
 
-                $this->dispatch('mostrarMensaje', ['error', "El avaluo está asinagnado a otro valuador."]);
+                $this->dispatch('mostrarMensaje', ['warning', "El avaluo está asinagnado a otro valuador."]);
 
                 return;
 
@@ -166,11 +166,11 @@ class Valuacion extends Component
 
         } catch(GeneralException $e){
 
-            $this->dispatch('mostrarMensaje', ['error', $e->getMessage()]);
+            $this->dispatch('mostrarMensaje', ['warning', $e->getMessage()]);
 
         } catch(ModelNotFoundException $e){
 
-            $this->dispatch('mostrarMensaje', ['error', "No existen avaluos relacionados a la cuenta predial."]);
+            $this->dispatch('mostrarMensaje', ['warning', "No existen avaluos relacionados a la cuenta predial."]);
 
         } catch (\Throwable $th) {
 
@@ -224,7 +224,7 @@ class Valuacion extends Component
 
                 $this->predio = $this->crearModeloVacio();
 
-                $this->dispatch('mostrarMensaje', ['error', "El avalúo está asinagnado a otro valuador."]);
+                $this->dispatch('mostrarMensaje', ['warning', "El avalúo está asinagnado a otro valuador."]);
 
                 return;
 
@@ -236,11 +236,11 @@ class Valuacion extends Component
 
         } catch(GeneralException $e){
 
-            $this->dispatch('mostrarMensaje', ['error', $e->getMessage()]);
+            $this->dispatch('mostrarMensaje', ['warning', $e->getMessage()]);
 
         } catch(ModelNotFoundException $e){
 
-            $this->dispatch('mostrarMensaje', ['error', "No existen avaluos relacionados a la clave catastral."]);
+            $this->dispatch('mostrarMensaje', ['warning', "No existen avaluos relacionados a la clave catastral."]);
 
         } catch (\Throwable $th) {
 
