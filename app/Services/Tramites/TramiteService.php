@@ -112,7 +112,7 @@ class TramiteService{
         if($this->tramite->solicitante == 'Oficialia de partes' || $this->tramite->tipo_tramite == 'exento'){
 
             $this->tramite->estado = 'pagado';
-            $this->tramite->limite_de_pago = now()->toDateString();
+            $this->tramite->fecha_vencimiento = now()->toDateString();
 
             return;
 
