@@ -35,6 +35,17 @@ class InspeccionOcular extends Component
 
     }
 
+    public function updatedModeloEditarCantidad()
+    {
+
+        if($this->modelo_editar->cantidad > 1){
+
+
+
+        }
+
+    }
+
     public function mount(){
 
         $this->lista_avaluo_para = AvaluoPara::cases();
