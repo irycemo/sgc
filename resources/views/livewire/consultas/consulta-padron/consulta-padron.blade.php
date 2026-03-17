@@ -4,7 +4,7 @@
 
     <div class="bg-white p-4 rounded-lg shadow-lg mb-10">
 
-        <ul class="grid w-full mx-auto gap-6 md:grid-cols-3">
+        <ul class="grid w-full mx-auto gap-6 md:grid-cols-4">
 
             <li>
 
@@ -55,6 +55,26 @@
                     <div class="block">
 
                         <div class="w-full font-semibold">Buscar por ubicación</div>
+
+                    </div>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+                    </svg>
+
+                </label>
+
+            </li>
+
+            <li>
+
+                <input type="radio" id="documento" name="hosting" value="documento" class="hidden peer" wire:model.live="radio">
+
+                <label for="documento" class="inline-flex items-center justify-between w-full p-1 px-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+
+                    <div class="block">
+
+                        <div class="w-full font-semibold">Buscar por documento de entrada</div>
 
                     </div>
 
@@ -233,11 +253,27 @@
 
             <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg" id="ubicacion-div">
 
-                <x-input-group for="ubicacion" label="Ubicación" :error="$errors->first('ubicacion')" class="w-full lg:w-1/2 mx-auto mb-5">
+                <div class="flex gap-4">
 
-                    <x-input-text id="ubicacion" wire:model="ubicacion" placeholder="Ingresa el texto para buscar en todos los campos de ubicación del predio"/>
+                    <x-input-group for="nombre_vialidad" label="Nombre de la vialidad" :error="$errors->first('nombre_vialidad')" class="w-full lg:w-1/2 mx-auto mb-5">
 
-                </x-input-group>
+                        <x-input-text id="nombre_vialidad" wire:model="nombre_vialidad"/>
+
+                    </x-input-group>
+
+                    <x-input-group for="nombre_asentamiento" label="Nombre del asentamiento" :error="$errors->first('nombre_asentamiento')" class="w-full lg:w-1/2 mx-auto mb-5">
+
+                        <x-input-text id="nombre_asentamiento" wire:model="nombre_asentamiento"/>
+
+                    </x-input-group>
+
+                    <x-input-group for="nombre_predio" label="Nombre del predio" :error="$errors->first('nombre_predio')" class="w-full lg:w-1/2 mx-auto mb-5">
+
+                        <x-input-text id="nombre_predio" wire:model="nombre_predio"/>
+
+                    </x-input-group>
+
+                </div>
 
                 <button
                     wire:click="buscarPorUbicacion"
@@ -247,6 +283,51 @@
                     class="bg-blue-400 hover:shadow-lg text-white mx-auto font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
 
                     <img wire:loading wire:target="buscarPorUbicacion" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Buscar
+
+                </button>
+
+            </div>
+
+        @elseif($radio === 'documento')
+
+            <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg" id="ubicacion-div">
+
+                <div class="flex gap-4">
+
+                    <x-input-group for="documento_entrada" label="Documento de entrada" :error="$errors->first('documento_entrada')" class="w-full">
+
+                        <x-input-select id="documento_entrada" wire:model="documento_entrada" class="w-full">
+
+                            <option value="">Seleccione una opción</option>
+
+                            @foreach ($documentos_entrada as $doc)
+
+                                <option value="{{ $doc }}">{{ $doc }}</option>
+
+                            @endforeach
+
+                        </x-input-select>
+
+                    </x-input-group>
+
+                    <x-input-group for="documento_numero" label="Número de documento" :error="$errors->first('documento_numero')" class="w-full lg:w-1/2 mx-auto mb-5">
+
+                        <x-input-text id="documento_numero" wire:model="documento_numero"/>
+
+                    </x-input-group>
+
+                </div>
+
+                <button
+                    wire:click="buscarPorDocumento"
+                    wire:loading.attr="disabled"
+                    wire:target="buscarPorDocumento"
+                    type="button"
+                    class="bg-blue-400 hover:shadow-lg text-white mx-auto font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+
+                    <img wire:loading wire:target="buscarPorDocumento" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Buscar
 

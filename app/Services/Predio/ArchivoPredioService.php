@@ -69,10 +69,12 @@ class ArchivoPredioService{
 
             }
 
+            $descripcion = Str::replace('sgc/predios_archivo', '' , $archivo_nuevo);
+
             File::create([
                 'fileable_id' => $this->predio->id,
                 'fileable_type' => 'App\Models\Predio',
-                'descripcion' => $this->descripcion,
+                'descripcion' => $descripcion,
                 'url' => $archivo_nuevo
             ]);
 

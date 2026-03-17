@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Consultas\ConsultaPadron;
 
+use App\Constantes\Constantes;
 use App\Models\Predio;
 use App\Models\Oficina;
 use Livewire\Component;
@@ -43,6 +44,14 @@ class ConsultaPadron extends Component
     public $propietariosIds = [];
 
     public $selected_id;
+
+    public $nombre_vialidad;
+    public $nombre_predio;
+    public $nombre_asentamiento;
+
+    public $documentos_entrada;
+    public $documento_entrada;
+    public $documento_numero;
 
     protected function rules(){
         return [
@@ -185,8 +194,8 @@ class ConsultaPadron extends Component
 
         $this->validate([
             'nombre' => Rule::requiredIf($this->ap_paterno != null || $this->ap_materno != null),
-            'ap_paterno' => Rule::requiredIf($this->ap_materno != null || $this->nombre != null),
-            'ap_materno' => Rule::requiredIf($this->nombre != null || $this->ap_materno != null),
+            'ap_paterno' => 'nullable',
+            'ap_materno' => 'nullable',
             'razon_social' => Rule::requiredIf($this->nombre == null && $this->ap_materno == null && $this->ap_paterno == null && $this->rfc == null && $this->curp == null),
             'rfc' => Rule::requiredIf($this->nombre == null && $this->ap_materno == null && $this->ap_paterno == null && $this->razon_social == null && $this->curp == null),
             'curp' => Rule::requiredIf($this->nombre == null && $this->ap_materno == null && $this->ap_paterno == null && $this->rfc == null && $this->razon_social == null),
@@ -233,6 +242,16 @@ class ConsultaPadron extends Component
 
     }
 
+    public function buscarPorDocumento(){
+
+        $this->validate(['documento_entrada' => 'nullable', 'documento_numero' => 'required']);
+
+        $this->reset('flag');
+
+        Cache::forget('consulta-predios-' . $this->getId());
+
+    }
+
     public function verPredio($predio){
 
         Cache::forget('consulta-predio-' . $this->getId());
@@ -244,7 +263,7 @@ class ConsultaPadron extends Component
     }
 
     #[Computed]
-    public function prediosLista(){/*  */
+    public function prediosLista(){
 
         $key = 'consulta-predios-' . $this->getId();
 
@@ -280,20 +299,29 @@ class ConsultaPadron extends Component
 
             }elseif($this->radio == 'ubicacion'){
 
-                return Predio::whereAny([
-                                            'tipo_vialidad',
-                                            'tipo_asentamiento',
-                                            'nombre_vialidad',
-                                            'nombre_asentamiento',
-                                            'nombre_predio',
-                                            'nombre_edificio',
-                                            'clave_edificio',
-                                            'departamento_edificio',
-                                        ],
-                                        'like', '%' . $this->ubicacion . '%'
-                                    )
-                                    ->where('oficina', $this->oficina)
-                                    ->paginate(20);
+                return Predio::when(!empty($this->nombre_vialidad), function($q){
+                                    $q->where('nombre_vialidad', 'like', '%' . $this->nombre_vialidad . '%');
+                                })
+                                ->when(!empty($this->nombre_asentamiento), function($q){
+                                    $q->where('nombre_asentamiento', 'like', '%' . $this->nombre_asentamiento . '%');
+                                })
+                                ->when(!empty($this->nombre_predio), function($q){
+                                    $q->where('nombre_predio', 'like', '%' . $this->nombre_predio . '%');
+                                })
+                                ->where('oficina', $this->oficina)
+                                ->paginate(20);
+
+            }elseif($this->radio == 'documento'){
+
+                return Predio::when(!empty($this->documento_entrada), function($q){
+                                    $q->where('documento_entrada', $this->documento_entrada);
+                                })
+                                ->when(!empty($this->documento_numero), function($q){
+                                    $q->where('documento_numero', $this->documento_numero);
+                                })
+                                ->where('oficina', $this->oficina)
+                                ->paginate(20);
+
             }
 
         /* }); */
@@ -350,10 +378,13 @@ class ConsultaPadron extends Component
 
         $this->region_catastral = auth()->user()->oficina->region;
 
+        $this->documentos_entrada = Constantes::DOCUMENTO_ENTRADA;
+
     }
 
     public function render()
     {
         return view('livewire.consultas.consulta-padron.consulta-padron')->extends('layouts.admin');
     }
+
 }
