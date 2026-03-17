@@ -237,6 +237,10 @@ trait ComunTrait
                 $this->updatedModeloEditarTipoTramite();
             }
 
+        }elseif($this->modelo_editar->tipo_servicio == 'ordinario'){
+
+            $this->modelo_editar->monto = $this->modelo_editar->cantidad * $this->servicio['ordinario'];
+
         }
 
     }
