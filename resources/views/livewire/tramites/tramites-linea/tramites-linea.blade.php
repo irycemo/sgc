@@ -127,7 +127,7 @@
 
                         <x-table.cell title="Fecha de entrega">
 
-                            {{ $tramite->fecha_entrega->format('d-m-Y') }}
+                            {{ $tramite->fecha_entrega?->format('d-m-Y') }}
 
                         </x-table.cell>
 
