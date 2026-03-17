@@ -27,7 +27,7 @@ class TramiteResource extends JsonResource
             'cantidad' => $this->cantidad,
             'linea_de_captura' => $this->linea_de_captura,
             'orden_de_pago' => $this->orden_de_pago,
-            'folio_pago' => $this->folio_pago,
+            'documento_de_pago' => $this->documento_de_pago,
             'fecha_pago' => $this->fecha_pago?->format('d/m/Y'),
             'fecha_entrega' => $this->fecha_entrega?->format('d/m/Y'),
             'tipo_servicio' => $this->tipo_servicio,
