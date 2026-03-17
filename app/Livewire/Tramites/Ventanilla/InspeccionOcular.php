@@ -40,7 +40,15 @@ class InspeccionOcular extends Component
 
         if($this->modelo_editar->cantidad > 1){
 
+            $cantidad_20 = $this->modelo_editar->cantidad - 1;
 
+            $consto_20 = $this->servicio['ordinario'] * 0.2 * $cantidad_20;
+
+            $this->modelo_editar->monto = $this->servicio['ordinario'] + $consto_20;
+
+        }else{
+
+            $this->modelo_editar->monto = $this->servicio['ordinario'];
 
         }
 
