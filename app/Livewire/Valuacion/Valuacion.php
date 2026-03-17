@@ -135,7 +135,7 @@ class Valuacion extends Component
 
         try {
 
-            $this->validarCuentaAsignada();
+            /* $this->validarCuentaAsignada(); */
 
             $this->predio = PredioAvaluo::with('propietarios', 'avaluo')
                                     ->where('estado', '!=', 'notificado')
@@ -199,7 +199,7 @@ class Valuacion extends Component
 
         try {
 
-            $this->validarCuentaAsignada();
+            /* $this->validarCuentaAsignada(); */
 
             $this->predio = PredioAvaluo::with('propietarios', 'avaluo')
                                         ->where('estado', 16)
