@@ -156,7 +156,6 @@
                             @endif
                         </p>
                         <p>Solicitante: {{ $tramite->nombre_solicitante }}</p>
-                        <p>Tipo de servicio: {{ $tramite->tipo_servicio }}</p>
                         <p>Orden de pago: {{ $tramite->orden_de_pago }}</p>
                         <p>Total a pagar: ${{ number_format($tramite->monto, 2) }}</p>
                         @if($tramite->cantidad) Cantidad: {{ $tramite->cantidad}}@endif
