@@ -190,6 +190,8 @@ class PropietarioCrear extends Component
 
             /* $persona = $this->buscarPersona($this->rfc, $this->curp, $this->tipo_persona, $this->nombre, $this->ap_materno, $this->ap_paterno, $this->razon_social); */
 
+            $persona = null;
+
             if($this->persona->getKey() && $persona){
 
                 foreach($this->modelo->propietarios as $actor){
