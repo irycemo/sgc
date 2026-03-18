@@ -188,7 +188,7 @@ class PropietarioCrear extends Component
 
             $this->validaciones();
 
-            $persona = $this->buscarPersona($this->rfc, $this->curp, $this->tipo_persona, $this->nombre, $this->ap_materno, $this->ap_paterno, $this->razon_social);
+            /* $persona = $this->buscarPersona($this->rfc, $this->curp, $this->tipo_persona, $this->nombre, $this->ap_materno, $this->ap_paterno, $this->razon_social); */
 
             if($this->persona->getKey() && $persona){
 

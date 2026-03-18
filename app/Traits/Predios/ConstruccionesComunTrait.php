@@ -177,4 +177,5 @@ trait ConstruccionesComunTrait
         if(count($this->construccionesComun) == 0) $this->agregarConstruccionComun();
 
     }
+
 }
