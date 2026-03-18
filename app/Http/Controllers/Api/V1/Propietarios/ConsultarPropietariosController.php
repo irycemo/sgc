@@ -23,6 +23,8 @@ class ConsultarPropietariosController extends Controller
                                 ->where('usuario', $validated['usuario'])
                                 ->first();
 
+                                info($tramite);
+
         if(!$tramite){
 
             return response()->json([

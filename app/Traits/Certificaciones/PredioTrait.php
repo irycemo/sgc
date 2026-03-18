@@ -105,6 +105,7 @@ trait PredioTrait
 
             $item = (object)[];
 
+            $item->tipo = $propietario->persona->tipo;
             $item->nombre = $propietario->persona->nombre;
             $item->ap_paterno = $propietario->persona->ap_paterno;
             $item->ap_materno = $propietario->persona->ap_materno;
