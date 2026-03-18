@@ -68,7 +68,7 @@ class CrearTramiteController extends Controller
 
         $tramite = Tramite::make();
 
-        $servicio_refrendo = Servicio::where('clave_ingreso', 'D922')->first();
+        $servicio_refrendo = Servicio::where('clave_ingreso', 'D921')->first();
 
         $tramite->año = now()->year;
         $tramite->usuario = 10;
