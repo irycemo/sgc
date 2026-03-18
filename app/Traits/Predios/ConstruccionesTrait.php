@@ -15,6 +15,8 @@ trait ConstruccionesTrait
 
         $i = explode('.', $index);
 
+        info($index);
+
         if($i[1] === 'valores'){
 
             if($this->construcciones[$i[0]]['valores'] === "" ){
