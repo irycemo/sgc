@@ -19,9 +19,9 @@ class Certificados extends Component
         'ofna' => '',
         'tpre' => '',
         'nreg' => '',
-        'ania' => '',
-        'foli' => '',
         'atra' => '',
+        'foli' => '',
+        'usua' => '',
     ];
 
     public function buscar(){
@@ -30,9 +30,9 @@ class Certificados extends Component
                                         ->when($this->filters['ofna'], fn($q, $ofna) => $q->where('ofna', $ofna))
                                         ->when($this->filters['tpre'], fn($q, $tpre) => $q->where('tpre', $tpre))
                                         ->when($this->filters['nreg'], fn($q, $nreg) => $q->where('nreg', $nreg))
-                                        ->when($this->filters['ania'], fn($q, $ania) => $q->where('ania', $ania))
-                                        ->when($this->filters['foli'], fn($q, $foli) => $q->where('foli', $foli))
                                         ->when($this->filters['atra'], fn($q, $atra) => $q->where('atra', $atra))
+                                        ->when($this->filters['foli'], fn($q, $foli) => $q->where('foli', $foli))
+                                        ->when($this->filters['usua'], fn($q, $usua) => $q->where('usua', $usua))
                                         ->orderBy('fecha', 'desc')
                                         ->get();
 
