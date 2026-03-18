@@ -195,6 +195,12 @@ class CertificadoHistoria extends Component
 
             $this->predio = $this->tramite->ligadoA->predios()->first();
 
+            if(!$this->predio){
+
+                $this->predio = $this->tramite->predios()->first();
+
+            }
+
             $cantidad = match($this->tramite->servicio->clave_ingreso){
                 'D924' => 5,
                 'D925' => 10,

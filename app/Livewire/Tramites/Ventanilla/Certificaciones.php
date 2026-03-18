@@ -71,13 +71,17 @@ class Certificaciones extends Component
 
         }
 
-        if(!$this->tramiteAdicionado->fecha_pago){
+        if($this->tramiteAdicionado->tipo_tramite != 'exento'){
 
-            $this->dispatch('mostrarMensaje', ['warning', "El trámite a adicionar no esta pagado."]);
+            if(!$this->tramiteAdicionado->fecha_pago){
 
-            $this->modelo_editar->ligado_a = null;
+                $this->dispatch('mostrarMensaje', ['warning', "El trámite a adicionar no esta pagado."]);
 
-            return;
+                $this->modelo_editar->ligado_a = null;
+
+                return;
+
+            }
 
         }
 
