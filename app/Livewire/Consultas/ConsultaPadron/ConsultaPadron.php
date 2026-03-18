@@ -282,7 +282,7 @@ class ConsultaPadron extends Component
 
         $key = 'consulta-predios-' . $this->page_number . $this->getId();
 
-        return Cache::remember($key, 300, function(){
+        /* return Cache::remember($key, 300, function(){ */
 
             if($this->radio == 'clave' && $this->diez){
 
@@ -338,7 +338,7 @@ class ConsultaPadron extends Component
 
             }
 
-        });
+        /* }); */
 
     }
 
