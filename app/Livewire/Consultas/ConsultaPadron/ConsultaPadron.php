@@ -53,6 +53,8 @@ class ConsultaPadron extends Component
     public $documento_entrada;
     public $documento_numero;
 
+    public $page_number = 0;
+
     protected function rules(){
         return [
             'numero_registro' => 'required|numeric|min:1',
@@ -72,6 +74,21 @@ class ConsultaPadron extends Component
         if($value == ''){
 
             $this->$property = null;
+
+        }
+
+    }
+
+    public function updatingPage($page)
+    {
+
+        if($page){
+
+            $this->page_number = $page;
+
+        }else{
+
+            $this->reset('page_number');
 
         }
 
@@ -203,7 +220,7 @@ class ConsultaPadron extends Component
 
         $this->reset('flag');
 
-        Cache::forget('consulta-predios-' . $this->getId());
+        Cache::forget('consulta-predios-' . $this->page_number . $this->getId());
 
         $propietarios = Propietario::whereHas('persona', function($q){
                                                 $q->when($this->nombre != '' && $this->nombre != null, function($q){
@@ -234,11 +251,9 @@ class ConsultaPadron extends Component
 
     public function buscarPorUbicacion(){
 
-        $this->validate(['ubicacion' => 'required']);
-
         $this->reset('flag');
 
-        Cache::forget('consulta-predios-' . $this->getId());
+        Cache::forget('consulta-predios-' . $this->page_number . $this->getId());
 
     }
 
@@ -248,7 +263,7 @@ class ConsultaPadron extends Component
 
         $this->reset('flag');
 
-        Cache::forget('consulta-predios-' . $this->getId());
+        Cache::forget('consulta-predios-' . $this->page_number . $this->getId());
 
     }
 
@@ -265,9 +280,9 @@ class ConsultaPadron extends Component
     #[Computed]
     public function prediosLista(){
 
-        $key = 'consulta-predios-' . $this->getId();
+        $key = 'consulta-predios-' . $this->page_number . $this->getId();
 
-        /* return Cache::remember($key, 300, function(){ */
+        return Cache::remember($key, 300, function(){
 
             if($this->radio == 'clave' && $this->diez){
 
@@ -279,8 +294,7 @@ class ConsultaPadron extends Component
 
             }elseif($this->radio == 'clave'){
 
-                return Predio::where('status', 'activo')
-                        ->where('estado', 16)
+                return Predio::where('estado', 16)
                         ->where('region_catastral', $this->region_catastral)
                         ->where('municipio', $this->municipio)
                         ->where('zona_catastral', $this->zona_catastral)
@@ -324,7 +338,7 @@ class ConsultaPadron extends Component
 
             }
 
-        /* }); */
+        });
 
     }
 
