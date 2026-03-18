@@ -210,7 +210,7 @@ class ConsultaPadron extends Component
     public function buscarPorPropietario(){
 
         $this->validate([
-            'nombre' => Rule::requiredIf($this->ap_paterno != null || $this->ap_materno != null),
+            'nombre' => 'nullable',
             'ap_paterno' => 'nullable',
             'ap_materno' => 'nullable',
             'razon_social' => Rule::requiredIf($this->nombre == null && $this->ap_materno == null && $this->ap_paterno == null && $this->rfc == null && $this->curp == null),
