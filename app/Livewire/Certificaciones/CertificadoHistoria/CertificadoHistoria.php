@@ -193,11 +193,13 @@ class CertificadoHistoria extends Component
 
             }
 
-            $this->predio = $this->tramite->ligadoA->predios()->first();
-
-            if(!$this->predio){
+            if(! $this->tramite->ligadoA){
 
                 $this->predio = $this->tramite->predios()->first();
+
+            }else{
+
+                $this->predio = $this->tramite->ligadoA->predios()->first();
 
             }
 
@@ -360,7 +362,7 @@ class CertificadoHistoria extends Component
 
             $this->tramite->update(['estado' => 'concluido']);
 
-            $this->tramite->ligadoA->update(['estado' => 'concluido']);
+            $this->tramite->ligadoA?->update(['estado' => 'concluido']);
 
             $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
 

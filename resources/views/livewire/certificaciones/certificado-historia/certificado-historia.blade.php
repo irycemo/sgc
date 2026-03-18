@@ -348,33 +348,37 @@
 
                 </div>
 
-                <div class="flex flex-col lg:flex-row gap-3 justify-center text-sm">
+                @if($predio)
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    <div class="flex flex-col lg:flex-row gap-3 justify-center text-sm">
 
-                        <strong>Cuenta predial</strong>
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                        <p>{{ $predio->cuentaPredial() }}</p>
+                            <strong>Cuenta predial</strong>
+
+                            <p>{{ $predio->cuentaPredial() }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <strong>Clave catastral</strong>
+
+                            <p>{{ $predio->claveCatastral() }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <strong>Propietario</strong>
+
+                            <p>{{ $predio->primerPropietario() }}</p>
+
+                        </div>
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                        <strong>Clave catastral</strong>
-
-                        <p>{{ $predio->claveCatastral() }}</p>
-
-                    </div>
-
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                        <strong>Propietario</strong>
-
-                        <p>{{ $predio->primerPropietario() }}</p>
-
-                    </div>
-
-                </div>
+                @endif
 
             @endif
 

@@ -40,7 +40,16 @@ class CertificadoHistoriaController extends Controller
 
         $datos_control = (object)[];
 
-        $datos_control->tramite_anticipo = $tramite_anticipo->año . '-' . $tramite_anticipo->folio . '-' . $tramite_anticipo->usuario;
+        if($tramite_anticipo){
+
+            $datos_control->tramite_anticipo = $tramite_anticipo->año . '-' . $tramite_anticipo->folio . '-' . $tramite_anticipo->usuario;
+
+        }else{
+
+            $datos_control->tramite_anticipo = null;
+
+        }
+
         $datos_control->tramite_historia = $tramite_historia->año . '-' . $tramite_historia->folio . '-' . $tramite_historia->usuario;
         $datos_control->solicitante = $tramite_historia->nombre_solicitante;
         $datos_control->historia = $historia;
