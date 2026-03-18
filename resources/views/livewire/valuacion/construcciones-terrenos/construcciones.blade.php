@@ -18,7 +18,7 @@
 
                         <div>
 
-                            <input type="text" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.referencia">
+                            <input type="text" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.referencia">
 
                         </div>
 
@@ -40,7 +40,7 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-xs w-full" wire:model.live="construcciones.{{ $index }}.valores">
+                            <select class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.valores">
 
                                 <option value="" selected>Seleccione una opción</option>
 
@@ -72,7 +72,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.niveles">
+                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.niveles">
 
                         </div>
 
@@ -94,7 +94,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.superficie">
+                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.superficie">
 
                         </div>
 
@@ -116,7 +116,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.valor_construccion" readonly>
+                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.valor_construccion" readonly>
 
                         </div>
 
