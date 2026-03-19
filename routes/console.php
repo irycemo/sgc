@@ -540,11 +540,82 @@ Artisan::command('migrar-historico', function(){
 
     $progressbar->start();
 
-    foreach ($tramites as $tramite) {
+    $now = now()->format('Y-m-d H:i:s');
 
-        GenerarCertificacionMigracionJob::dispatch($tramite);
+    $handle = fopen(storage_path('app/public/historico.csv'), 'r');
 
-        $progressbar->advance();
+    fgets($handle);
+
+    $chunkSize = 500;
+
+    $chunks = [];
+
+    try {
+
+        $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?)';
+
+        $placeholders = implode(',', array_fill(0, $chunkSize, $rowPlaceholders));
+
+        $stmt =  DB::connection()->getPdo()->prepare("
+                                                        INSERT INTO old_certificados (locl, ofna, tpre, nreg, tipo, stat, tipo_cer, ciudad, imprimio, actualizo, fecha, acer, atra, foli, usua, created_at, updated_at)
+                                                        VALUES {$placeholders}
+                                                    ");
+
+        while(($line = fgetcsv($handle)) !== false){
+
+            $chunks = array_merge($chunks, [
+                $line[0], //fecha_actualizacion
+                $line[1], //fecha_escritura
+                $line[2], //fecha_movimiento
+                $line[3], //empleado
+                trim($line[4]), //movimiento
+                trim($line[5]), //adquiriente
+                trim($line[6]), //transmitente
+                trim($line[7]), //numero_registro_inicial
+                trim($line[8]), //numero_registro_final
+                trim($line[9]), //valor_catastral
+                $line[10], // numero_documento
+                $line[11], // Acer
+                $line[12], // Atra
+                $line[13], // Foli
+                $line[14], // Usua
+                $now,
+                $now
+            ]);
+
+            if(count($chunks) === $chunkSize * 17){
+
+                $stmt->execute($chunks);
+
+                $chunks = [];
+
+            }
+
+        }
+
+        if(!empty($chunks)){
+
+
+            $remainingRows = count($chunks) / 17;
+
+            $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?)';
+
+            $placeholders = implode(',', array_fill(0, $remainingRows, $rowPlaceholders));
+
+            $stmt = DB::connection()->getPdo()->prepare("
+                                                        INSERT INTO old_certificados (locl, ofna, tpre, nreg, tipo, stat, tipo_cer, ciudad, imprimio, actualizo, fecha, acer, atra, foli, usua, created_at, updated_at)
+                                                        VALUES {$placeholders}
+                                                    ");
+
+            $stmt->execute($chunks);
+
+        }
+
+        $this->info('Finaliza migración de certificados el: ' . now());
+
+    }  finally {
+
+        fclose($handle);
 
     }
 

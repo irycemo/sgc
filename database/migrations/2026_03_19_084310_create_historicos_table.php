@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('historicos', function (Blueprint $table) {
             $table->id();
-            $table->timestamps('fecha_actualizacion')->nullable();
-            $table->timestamps('fecha_escritura')->nullable();
-            $table->timestamps('fecha_movimiento')->nullable();
+            $table->timestamp('fecha_actualizacion')->nullable();
+            $table->timestamp('fecha_escritura')->nullable();
+            $table->timestamp('fecha_movimiento')->nullable();
             $table->string('empleado')->nullable();
             $table->string('movimiento')->nullable();
             $table->string('adquiriente')->nullable();
