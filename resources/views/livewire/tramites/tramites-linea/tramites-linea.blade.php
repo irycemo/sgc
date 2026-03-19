@@ -251,9 +251,9 @@
             <div class="flex gap-3">
 
                 <x-button-red
-                    wire:click="resetearTodo"
+                    wire:click="$toggle('modal')"
                     wire:loading.attr="disabled"
-                    wire:target="resetearTodo">
+                    wire:target="$toggle('modal')">
                     Cerrar
                 </x-button-red>
 
