@@ -97,7 +97,7 @@ class Ventanilla extends Component
                             'Inspecciones Oculares' => 'Inspecciones Oculares',
                             'Simple' => 'Simple',
                             'Completo' => 'Completo',
-                            'Expedición de duplicados de documentos catastrales' => 'Expedición de duplicados de documentos catastrales',
+                            'Expedición de duplicados de documentos catastrales' => 'Simple',
                             'Levantamientos topográficos' => 'Levantamientos topográficos',
                             'Autorización e inscripción de peritos valuadores de bienes inmuebles' => 'Simple',
                             'Desglose de predios y valuación' => 'Simple',
