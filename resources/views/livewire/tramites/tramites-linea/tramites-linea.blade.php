@@ -20,7 +20,7 @@
 
             <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
 
-                <option value="" selected>Mes</option>
+                <option value="" selected>Estado</option>
                 <option value="pagado" selected>Pagado</option>
                 <option value="concluido" selected>Concluido</option>
 
