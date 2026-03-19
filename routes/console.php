@@ -552,12 +552,16 @@ Artisan::command('migrar-historico', function(){
 
     try {
 
-        $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ? , ?, ? , ?, ? , ?)';
+        $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ? , ?, ? , ?, ? , ?)';
 
         $placeholders = implode(',', array_fill(0, $chunkSize, $rowPlaceholders));
 
         $stmt =  DB::connection()->getPdo()->prepare("
                                                         INSERT INTO historicos (
+                                                            localidad,
+                                                            oficina,
+                                                            tipo_predio,
+                                                            numero_registro,
                                                             fecha_actualizacion,
                                                             fecha_escritura,
                                                             fecha_movimiento,
@@ -628,12 +632,16 @@ Artisan::command('migrar-historico', function(){
 
             $remainingRows = count($chunks) / 23;
 
-            $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ? , ?, ? , ?, ? , ?)';
+            $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ? , ?, ? , ?, ? , ?)';
 
             $placeholders = implode(',', array_fill(0, $remainingRows, $rowPlaceholders));
 
             $stmt = DB::connection()->getPdo()->prepare("
                                                         INSERT INTO old_certificados (
+                                                                localidad,
+                                                                oficina,
+                                                                tipo_predio,
+                                                                numero_registro,
                                                                 fecha_actualizacion,
                                                                 fecha_escritura,
                                                                 fecha_movimiento,
@@ -676,6 +684,18 @@ Artisan::command('migrar-historico', function(){
     $progressbar->finish();
 
     $this->info('Finaliza: ' . now());
+
+});
+
+Artisan::command('concluir-tramties', function(){
+
+
+    $certifados_old = OldCertificado::whereIn('atra', [2025, 2026])->get();
+
+    foreach($certifados_old as $certificados){
+
+
+    }
 
 });
 

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('historicos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('localidad');
+            $table->unsignedInteger('oficina');
+            $table->unsignedInteger('tipo_predio');
+            $table->unsignedInteger('numero_registro');
             $table->timestamp('fecha_actualizacion')->nullable();
             $table->timestamp('fecha_escritura')->nullable();
             $table->timestamp('fecha_movimiento')->nullable();
@@ -35,6 +39,9 @@ return new class extends Migration
             $table->text('ubicacion')->nullable();
             $table->text('observaciones')->nullable();
             $table->timestamps();
+
+            $table->index(['localidad', 'oficina', 'tipo_predio', 'numero_registro'], 'cuenta_predial');
+
         });
     }
 
