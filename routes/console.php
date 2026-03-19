@@ -687,13 +687,15 @@ Artisan::command('migrar-historico', function(){
 
 });
 
-Artisan::command('concluir-tramties', function(){
-
+Artisan::command('concluir-tramites', function(){
 
     $certifados_old = OldCertificado::whereIn('atra', [2025, 2026])->get();
 
-    foreach($certifados_old as $certificados){
+    foreach($certifados_old as $certificado){
 
+        $tramite = Tramite::where('año', $certificado->atra)->where('folio', $certificado->foli)->where('usuario', $certificado->usua)->first();
+
+        $tramite?->update(['estado' => 'concluido']);
 
     }
 
