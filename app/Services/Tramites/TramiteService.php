@@ -162,6 +162,8 @@ class TramiteService{
 
         $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
 
+        $this->tramite->save();
+
     }
 
 }
