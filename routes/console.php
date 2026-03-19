@@ -529,4 +529,29 @@ Artisan::command('generar-certificados', function(){
 
 });
 
+Artisan::command('migrar-historico', function(){
+
+    Schema::disableForeignKeyConstraints();
+    DB::table('historicos')->truncate();
+
+    $this->info('Incia migración del historico el: ' . now());
+
+    $progressbar = $this->output->createProgressBar(count($tramites));
+
+    $progressbar->start();
+
+    foreach ($tramites as $tramite) {
+
+        GenerarCertificacionMigracionJob::dispatch($tramite);
+
+        $progressbar->advance();
+
+    }
+
+    $progressbar->finish();
+
+    $this->info('Finaliza: ' . now());
+
+});
+
 

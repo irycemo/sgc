@@ -88,7 +88,7 @@ class TramiteService{
 
             $actual = now();
 
-            for ($i=0; $i < 3; $i++) {
+            for ($i=0; $i < 2; $i++) {
 
                 $actual->addDays(1);
 

@@ -14,5 +14,4 @@ class Persona extends Model implements Auditable
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-
 }
