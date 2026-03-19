@@ -29,7 +29,7 @@ class Completo extends Component
                                                                 $this->modelo_editar->solicitante == 'Oficialia de partes' ||
                                                                 $this->modelo_editar->solicitante == 'Escrituración social'
                                                             ),
-            'predios' => Rule::requiredIf(! in_array($this->servicio['clave_ingreso'], ['D930', 'D929']))
+            'predios' => Rule::requiredIf(! in_array($this->servicio['clave_ingreso'], ['DA88']))
         ];
 
     }
