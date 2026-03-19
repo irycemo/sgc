@@ -70,6 +70,7 @@ class NotificacionValorCatastralController extends Controller
         $datos_control->numero_avaluos = count($avaluos);
         $datos_control->numero_avaluos_letra = $this->formatter->toWords($datos_control->numero_avaluos);
         $datos_control->valuador = auth()->user()->name;
+        $datos_control->titular = auth()->user()->oficina->titular;
 
         $object = (object)[];
 
@@ -137,8 +138,6 @@ class NotificacionValorCatastralController extends Controller
 
         }else{
 
-            $datos_control->titular = auth()->user()->oficina->titular;
-
             $datos_control->titular_cargo = auth()->user()->oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR(A) DE RENTAS';
 
             $object->datos_control = $datos_control;
@@ -195,6 +194,7 @@ class NotificacionValorCatastralController extends Controller
         $datos_control->numero_avaluos = count($avaluos);
         $datos_control->numero_avaluos_letra = $this->formatter->toWords($datos_control->numero_avaluos);
         $datos_control->valuador = auth()->user()->name;
+        $datos_control->titular = auth()->user()->oficina->titular;
 
         $avaluos = Avaluo::with('predioAvaluo')->whereKey($avaluos)->get();
 
@@ -337,6 +337,7 @@ class NotificacionValorCatastralController extends Controller
         $datos_control->numero_avaluos = count($avaluos);
         $datos_control->numero_avaluos_letra = $this->formatter->toWords($datos_control->numero_avaluos);
         $datos_control->valuador = auth()->user()->name;
+        $datos_control->titular = auth()->user()->oficina->titular;
 
         $avaluos = Avaluo::with('predioAvaluo')->whereKey($avaluos)->get();
 

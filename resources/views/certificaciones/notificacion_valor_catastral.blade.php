@@ -340,39 +340,37 @@
 
                     <div style="margin-top: 30px; page-break-inside: avoid;">
 
-                        <div style="text-align: center">
+                        <table style="margin-top: 10px">
 
-                            <p><img style="width:100px; height:auto; align-self: center;" src="{{ public_path('efirmas/' . $datos_control->imagen_director) }}" alt="Firma"></p>
-                            <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $datos_control->director }}</p>
-                            <p style="text-align: center; margin: 0;">{{ $datos_control->titular_cargo }}</p>
-                            <p>Firma Electrónica:</p>
+                            <tbody>
+                                <tr>
+                                    <td style="padding-right: 80px;">
 
-                        </div>
+                                        <div style="text-align: center">
 
-                        <p style="overflow-wrap: break-word;">{{ $datos_control->firma_director }}</p>
+                                            <p class="borde">{{ $datos_control->titular }}</p>
+                                            <p style="margin:0;">director de catastro</p>
 
-                    </div>
+                                        </div>
 
-                    <div style="page-break-inside: avoid;">
+                                    </td>
 
-                        <div style="text-align: center;">
+                                    <td style="padding-right: 80px;">
 
-                            <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $datos_control->jefe_departamento }}</p>
-                            <p>JEFE DE DEPARTAMENTO DE VALUACIÓN</p>
-                            <p>Firma Electrónica:</p>
+                                        <div style="text-align: center">
 
-                        </div>
+                                            <p class="borde" style="margin:0;">{{ $datos_control->jefe_departamento }}</p>
+                                            <p style="margin:0;">JEFE DE DEPARTAMENTO DE VALUACIÓN</p>
 
-                        <p style="overflow-wrap: break-word;">{{ $datos_control->firma_jefe_departamento }}</p>
+                                        </div>
 
-                    </div>
+                                    </td>
 
-                @else
+                                </tr>
 
-                    <div style="text-align: center; margin-top: 30px">
+                            </tbody>
 
-                        <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $datos_control->titular }}</p>
-                        <p style="text-transform: uppercase;">{{ $datos_control->titular_cargo }}</p>
+                        </table>
 
                     </div>
 

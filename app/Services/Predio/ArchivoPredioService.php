@@ -69,7 +69,7 @@ class ArchivoPredioService{
 
             }
 
-            $url = Str::replace('sgc/predios_archivo', '' , $archivo_nuevo);
+            $url = Str::replace('sgc/predios_archivo/', '' , $archivo_nuevo);
 
             File::create([
                 'fileable_id' => $this->predio->id,

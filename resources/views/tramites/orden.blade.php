@@ -15,11 +15,11 @@
 <style>
 
     body{
-        font-size: 13px;
+        font-size: 15px;
     }
 
     h1{
-        font-size: 13;
+        font-size: 15;
         font:bold;
         margin: 0;
     }
@@ -65,7 +65,7 @@
     .footer{
         margin-top: 10px;
         width: 100%;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: bold;
         text-align: center;
 
@@ -85,14 +85,14 @@
     }
 
     .titulo{
-        font-size: 14px;
+        font-size: 16px;
         font-weight: bold;
         margin: 0;
         text-align: center;
     }
 
     .leyenda{
-        font-size: 9px;
+        font-size: 11px;
     }
 
     .punteada{
@@ -171,6 +171,9 @@
                                 @endforeach
 
                             </p>
+                        @endif
+                        @if($tramite->avaluo_para)
+                            <p>Avalúo para: {{ $tramite->avaluo_para->label() }}</p>
                         @endif
                     </th>
 

@@ -2,9 +2,13 @@
 
 <p class="parrafo">
 
-    <strong>Cuenta predial:</strong> {{ $predio->cuenta_predial }};
+    <strong>Cuenta predial:</strong> {{ $predio->cuenta_predial }}
 
-    <strong>Clave catastral:</strong> {{ $predio->clave_catastral }};
+    <strong>Clave catastral:</strong> {{ $predio->clave_catastral }}
+
+</p>
+
+<p class="parrafo">
 
     @if ($predio->codigo_postal)
         <strong>CÓDIGO POSTAL:</strong> {{ $predio->codigo_postal }};

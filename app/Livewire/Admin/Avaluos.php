@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Constantes\Constantes;
 use App\Models\Avaluo;
+use App\Models\Certificacion;
 use App\Models\File;
 use App\Models\PredioAvaluo;
 use App\Models\PredioIgnorado;
@@ -123,7 +124,12 @@ class Avaluos extends Component
 
         $predio->load('propietarios.persona');
 
-        $pdf = Pdf::loadView('avaluos.avaluo', compact('predio'));
+        $certificacion = Certificacion::where('tramite_id', $this->modelo_editar->tramite_inspeccion)->first();
+
+        $pdf = Pdf::loadView('avaluos.avaluo', [
+            'predio' => $predio,
+            'certificacion' => $certificacion
+        ]);
 
         $pdf->render();
 
@@ -131,9 +137,9 @@ class Avaluos extends Component
 
         $canvas = $dom_pdf->get_canvas();
 
-        $canvas->page_text(480, 794, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+        $canvas->page_text(480, 745, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
 
-        $canvas->page_text(35, 794, "Avalúo: " . $predio->avaluo->año . "-" . $predio->avaluo->folio , null, 10, array(1, 1, 1));
+        $canvas->page_text(35, 745, "Avalúo: " . $predio->avaluo->año . "-" . $predio->avaluo->folio . "-" . $predio->avaluo->usuario , null, 10, array(1, 1, 1));
 
         $pdf = $dom_pdf->output();
 

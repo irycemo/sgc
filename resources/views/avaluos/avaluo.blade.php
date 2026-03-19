@@ -171,6 +171,26 @@
 
         </div>
 
+        <div style="text-align: right">
+
+            <strong>Folio:</strong> {{ $predio->avaluo->año }}-{{ $predio->avaluo->folio }}-{{ $predio->avaluo->usuario }}
+
+        </div>
+
+        <p class="parrafo">
+
+            <strong>Cuenta predial:</strong> {{ $predio->cuentaPredial() }}
+
+            <strong>Clave catastral:</strong> {{ $predio->claveCatastral() }}
+
+            @if($certificacion)
+
+                <strong>Certificacion:</strong> {{ $certificacion->tipo->label() }}-{{ $certificacion->año }}-{{ $certificacion->folio }}
+
+            @endif
+
+        </p>
+
         @include('avaluos.ubicacion_inmueble')
 
         @include('avaluos.colindancias')
@@ -191,7 +211,7 @@
 
                 <tbody>
                         <tr>
-                            <td style="font-size:12px; display: flex; align-content: start;">
+                            <td style="font-size:12px; width: 50%">
 
                                 <div>
 
@@ -202,7 +222,7 @@
                                 </div>
 
                             </td>
-                            <td style="font-size:12px; ">
+                            <td style="font-size:12px; width: 50%">
 
                                 <div>
 
@@ -216,7 +236,7 @@
                         </tr>
 
                         <tr>
-                            <td style="font-size:12px;">
+                            <td style="font-size:12px; width: 50%">
                                 <div>
 
                                     <p style="margin-bottom: 10px;">Fotografía 3</p>
@@ -225,7 +245,7 @@
 
                                 </div>
                             </td>
-                            <td style="font-size:12px;">
+                            <td style="font-size:12px; width: 50%">
                                 <div>
 
                                     <p style="margin-bottom: 10px;">Fotografía 4</p>
@@ -237,7 +257,7 @@
                         </tr>
 
                         <tr>
-                            <td style="font-size:12px;">
+                            <td style="font-size:12px; width: 50%">
                                 <div>
 
                                     <p style="margin-bottom: 10px;">Macrolocalización</p>
@@ -246,7 +266,7 @@
 
                                 </div>
                             </td>
-                            <td style="font-size:12px;">
+                            <td style="font-size:12px; width: 50%">
                                 <div>
 
                                     <p style="margin-bottom: 10px;">Microlocalización</p>
@@ -258,7 +278,7 @@
                         </tr>
 
                         <tr>
-                            <td style="font-size:12px;">
+                            <td style="font-size:12px; width: 50%">
                                 <div>
 
                                     <p style="margin-bottom: 10px;">Representación del polígono</p>
