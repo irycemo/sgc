@@ -68,7 +68,7 @@ class TramiteService{
 
         }elseif($this->tramite->servicio->nombre == 'Certificado de historia catastral'){
 
-            $actual = $this->tramite->fecha_pago;
+            $actual = now();
 
             for ($i=0; $i < 9; $i++) {
 
@@ -86,7 +86,7 @@ class TramiteService{
 
         }elseif($this->tramite->tipo_servicio == 'ordinario'){
 
-            $actual = $this->tramite->fecha_pago;
+            $actual = now();
 
             for ($i=0; $i < 2; $i++) {
 
