@@ -62,7 +62,8 @@ class Dependencias extends Component
 
             Log::error("Error al crear dependencia por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
-            $this->resetearTodo();
+
+            $this->cargaInicial($this->servicio);
 
         }
 
@@ -89,7 +90,8 @@ class Dependencias extends Component
 
             Log::error("Error al actualzar dependencia por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
-            $this->resetearTodo();
+
+            $this->cargaInicial($this->servicio);
 
         }
 
@@ -111,7 +113,8 @@ class Dependencias extends Component
 
             Log::error("Error al borrar dependencia por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
-            $this->resetearTodo();
+
+            $this->cargaInicial($this->servicio);
 
         }
 

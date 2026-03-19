@@ -2,10 +2,12 @@
 
 namespace App\Services\Tramites;
 
+use App\Exceptions\GeneralException;
+use App\Models\Predio;
 use App\Models\Tramite;
-use Illuminate\Support\Str;
 use App\Services\SAP\SapService;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class TramiteService{
 
@@ -45,6 +47,26 @@ class TramiteService{
         if($predios && count($predios) > 0){
 
             foreach($predios as $predio){
+
+                if(isset($predio['sector'])){
+
+                    if(in_array($predio['sector'], [88, 99])) {
+
+                        throw new GeneralException("El predio se encuentra en sector 88 0 99 es necesario conciliarlo.");
+
+                    }
+
+                }elseif(isset($predio['id'])){
+
+                    $predio = Predio::find($predio['id']);
+
+                    if(in_array($predio->sector, [88, 99])) {
+
+                        throw new GeneralException("El predio se encuentra en sector 88 0 99 es necesario conciliarlo.");
+
+                    }
+
+                }
 
                 $this->tramite->predios()->attach($predio['id']);
 
