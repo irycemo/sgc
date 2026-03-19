@@ -264,7 +264,11 @@ class Tramites extends Component
 
                 $this->modelo_editar->predios()->detach($id);
 
-                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Eliminó cuenta predial']);
+                if($this->modelo_editar->audits()->count()){
+
+                    $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Eliminó cuenta predial']);
+
+                }
 
                 $this->modelo_editar->load('predios');
 
