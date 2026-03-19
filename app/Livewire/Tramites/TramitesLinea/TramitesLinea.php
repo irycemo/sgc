@@ -4,7 +4,6 @@ namespace App\Livewire\Tramites\TramitesLinea;
 
 use App\Models\Tramite;
 use Livewire\Component;
-use App\Models\Servicio;
 use Livewire\WithPagination;
 use App\Constantes\Constantes;
 use App\Traits\ComponentesTrait;
@@ -24,6 +23,7 @@ class TramitesLinea extends Component
         'folio' => '',
         'estado' => '',
         'servicio' => '',
+        'mes' => ''
     ];
 
     public $servicios;
@@ -34,6 +34,16 @@ class TramitesLinea extends Component
 
     public function crearModeloVacio(){
         $this->modelo_editar = Tramite::make();
+    }
+
+    public function abrirModal(Tramite $modelo){
+
+        $this->modal = true;
+        $this->editar = true;
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
     }
 
     #[Computed]
@@ -54,6 +64,7 @@ class TramitesLinea extends Component
                 ->when($this->filters['año'], fn($q, $año) => $q->where('año', $año))
                 ->when($this->filters['folio'], fn($q, $folio) => $q->where('folio', $folio))
                 ->when($this->filters['estado'], fn($q, $estado) => $q->where('estado', $estado))
+                ->when($this->filters['mes'], fn($q, $mes) => $q->whereMonth('created_at', $mes))
                 ->orderBy($this->sort, $this->direction)
                 ->paginate($this->pagination);
 
