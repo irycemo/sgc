@@ -24,7 +24,6 @@ class TramiteService{
     {
 
         $this->tramite->estado = 'nuevo';
-        $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
         $this->tramite->año = now()->format('Y');
         $this->tramite->usuario = auth()->user()->clave;
         $this->tramite->creado_por = auth()->id();
@@ -68,7 +67,7 @@ class TramiteService{
 
         }elseif($this->tramite->servicio->nombre == 'Certificado de historia catastral'){
 
-            $actual = now();
+            $actual = $this->tramite->fecha_pago;
 
             for ($i=0; $i < 9; $i++) {
 
@@ -86,7 +85,7 @@ class TramiteService{
 
         }elseif($this->tramite->tipo_servicio == 'ordinario'){
 
-            $actual = now();
+            $actual = $this->tramite->fecha_pago;
 
             for ($i=0; $i < 2; $i++) {
 
@@ -160,6 +159,8 @@ class TramiteService{
             Cache::forget('estadisticas_tramites_en_linea_' . $this->tramite->usuario_tramites_linea_id);
 
         }
+
+        $this->tramite->fecha_entrega = $this->calcularFechaEntrega();
 
     }
 
