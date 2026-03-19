@@ -222,9 +222,9 @@ class Constantes{
     const ESTRUCTURAS = [
         'NO APLICA',
         'COLUMNAS CANTERA O MADERA',
-        'TRABES, CASTILLOS, CADENA DE CERRAMIENTO',
-        'C. CONCRE., TRABES, CAST. Y C. DE CERRAM',
-        'C. METALI., TRABES, CAST. Y C. DE CERRAM',
+        'TRABES CASTILLOS CADENA DE CERRAMIENTO',
+        'C. CONCRE. TRABES CAST. Y C. DE CERRAM',
+        'C. METALI. TRABES, CAST. Y C. DE CERRAM',
         'MUROS DE CARGA DE CONCRETO ARMADO',
     ];
 
@@ -341,7 +341,7 @@ class Constantes{
     const HIDRAULICA = [
         'NO APLICA',
         'GALVANIZADA',
-        'GALVANIZADA, COBRE',
+        'GALVANIZADA COBRE',
         'COBRE Y/O PVC',
     ];
 
@@ -607,6 +607,7 @@ class Constantes{
 
     const MOVIMIENTOS = [
         'ALTA MEDIANTE AVALÚO' => 'ALTA',
+        'ALTA POR AVALÚO' => 'ALTA',
         'ALTA POR AUTORIZACIÓN DE SUBDIVISIÓN' => 'ALTA',
         'ALTA POR CAMBIO DE OFICINA' => 'ALTA',
         'ALTA POR CAMBIO DE REGIMEN' => 'ALTA',
