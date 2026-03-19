@@ -52,8 +52,8 @@ class TramitesLinea extends Component
         return Tramite::query()
                 ->select('id', 'año', 'folio', 'usuario', 'estado', 'servicio_id', 'cantidad', 'monto', 'fecha_entrega', 'fecha_pago', 'tipo_tramite', 'tipo_servicio', 'nombre_solicitante', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
                 ->with('servicio:id,nombre,clave_ingreso', 'creadoPor:id,name', 'actualizadoPor:id,name')
-                ->whereIn('usuario', [11, 1202])
-                ->whereIn('estado', ['pagado', 'autorizado'])
+                ->whereIn('usuario', [11])
+                ->whereIn('estado', ['pagado', 'autorizado', 'concluido'])
                 ->whereHas('servicio', function ($q){
                     $q->whereIn('clave_ingreso', ['DM34', 'DM32', 'DM35', 'DM31']);
                 })

@@ -18,6 +18,14 @@
 
             <input type="number" wire:model.live.debounce.500mse="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
 
+            <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
+
+                <option value="" selected>Mes</option>
+                <option value="pagado" selected>Pagado</option>
+                <option value="concluido" selected>Concluido</option>
+
+            </select>
+
             <select class="bg-white rounded-full text-sm w-60" wire:model.live="filters.mes">
 
                 <option value="" selected>Mes</option>
