@@ -245,7 +245,12 @@ class MisAvaluos extends Component
 
         $predio->load('propietarios.persona');
 
-        $pdf = Pdf::loadView('avaluos.avaluo', compact('predio'));
+        $certificacion = Certificacion::where('tramite_id', $this->modelo_editar->tramite_inspeccion)->first();
+
+        $pdf = Pdf::loadView('avaluos.avaluo', [
+            'predio' => $predio,
+            'certificacion' => $certificacion
+        ]);
 
         $pdf->render();
 
