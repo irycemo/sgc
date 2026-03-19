@@ -151,7 +151,6 @@ class TramiteService{
             'estado' => 'pagado',
             'fecha_pago' => $this->convertirFecha($fecha),
             'documento_de_pago' => $documento,
-            'fecha_entrega' => $this->calcularFechaEntrega()
         ]);
 
         if($this->tramite->usuario == 11){
