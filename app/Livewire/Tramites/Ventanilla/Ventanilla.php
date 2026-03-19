@@ -98,7 +98,7 @@ class Ventanilla extends Component
                             'Simple' => 'Simple',
                             'Completo' => 'Completo',
                             'Expedición de duplicados de documentos catastrales' => 'Simple',
-                            'Levantamientos topográficos' => 'Levantamientos topográficos',
+                            'Levantamientos topográficos' => 'Simple',
                             'Autorización e inscripción de peritos valuadores de bienes inmuebles' => 'Simple',
                             'Desglose de predios y valuación' => 'Simple',
                             'Inscripción Catastral para Registro de Predios por Regularizar' => 'Simple',

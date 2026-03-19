@@ -552,12 +552,36 @@ Artisan::command('migrar-historico', function(){
 
     try {
 
-        $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?)';
+        $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ? , ?, ? , ?, ? , ?)';
 
         $placeholders = implode(',', array_fill(0, $chunkSize, $rowPlaceholders));
 
         $stmt =  DB::connection()->getPdo()->prepare("
-                                                        INSERT INTO old_certificados (locl, ofna, tpre, nreg, tipo, stat, tipo_cer, ciudad, imprimio, actualizo, fecha, acer, atra, foli, usua, created_at, updated_at)
+                                                        INSERT INTO historicos (
+                                                            fecha_actualizacion,
+                                                            fecha_escritura,
+                                                            fecha_movimiento,
+                                                            empleado,
+                                                            movimiento,
+                                                            adquiriente,
+                                                            transmitente,
+                                                            numero_registro_inicial,
+                                                            numero_registro_final,
+                                                            valor_catastral,
+                                                            numero_documento,
+                                                            numero_fojas,
+                                                            numero_tomo,
+                                                            capital_mayor_fojas,
+                                                            capital_mayor_tomo,
+                                                            numero_comprobante,
+                                                            superficie_notaria,
+                                                            superficie_terreno,
+                                                            superficie_construccion,
+                                                            ubicacion,
+                                                            observaciones,
+                                                            created_at,
+                                                            updated_at
+                                                        )
                                                         VALUES {$placeholders}
                                                     ");
 
@@ -567,7 +591,7 @@ Artisan::command('migrar-historico', function(){
                 $line[0], //fecha_actualizacion
                 $line[1], //fecha_escritura
                 $line[2], //fecha_movimiento
-                $line[3], //empleado
+                trim($line[3]), //empleado
                 trim($line[4]), //movimiento
                 trim($line[5]), //adquiriente
                 trim($line[6]), //transmitente
@@ -575,15 +599,21 @@ Artisan::command('migrar-historico', function(){
                 trim($line[8]), //numero_registro_final
                 trim($line[9]), //valor_catastral
                 $line[10], // numero_documento
-                $line[11], // Acer
-                $line[12], // Atra
-                $line[13], // Foli
-                $line[14], // Usua
+                $line[11], // numero_fojas
+                $line[12], // numero_tomo
+                $line[13], // capital_mayor_fojas
+                $line[14], // capital_mayor_tomo
+                $line[15], // numero_comprobante
+                $line[14], // superficie_notaria
+                $line[14], // superficie_terreno
+                $line[14], // superficie_construccion
+                trim($line[14]), // ubicacion
+                trim($line[14]), // observaciones
                 $now,
                 $now
             ]);
 
-            if(count($chunks) === $chunkSize * 17){
+            if(count($chunks) === $chunkSize * 23){
 
                 $stmt->execute($chunks);
 
@@ -596,14 +626,38 @@ Artisan::command('migrar-historico', function(){
         if(!empty($chunks)){
 
 
-            $remainingRows = count($chunks) / 17;
+            $remainingRows = count($chunks) / 23;
 
-            $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?)';
+            $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ? , ?, ? , ?, ? , ?)';
 
             $placeholders = implode(',', array_fill(0, $remainingRows, $rowPlaceholders));
 
             $stmt = DB::connection()->getPdo()->prepare("
-                                                        INSERT INTO old_certificados (locl, ofna, tpre, nreg, tipo, stat, tipo_cer, ciudad, imprimio, actualizo, fecha, acer, atra, foli, usua, created_at, updated_at)
+                                                        INSERT INTO old_certificados (
+                                                                fecha_actualizacion,
+                                                                fecha_escritura,
+                                                                fecha_movimiento,
+                                                                empleado,
+                                                                movimiento,
+                                                                adquiriente,
+                                                                transmitente,
+                                                                numero_registro_inicial,
+                                                                numero_registro_final,
+                                                                valor_catastral,
+                                                                numero_documento,
+                                                                numero_fojas,
+                                                                numero_tomo,
+                                                                capital_mayor_fojas,
+                                                                capital_mayor_tomo,
+                                                                numero_comprobante,
+                                                                superficie_notaria,
+                                                                superficie_terreno,
+                                                                superficie_construccion,
+                                                                ubicacion,
+                                                                observaciones,
+                                                                created_at,
+                                                                updated_at
+                                                            )
                                                         VALUES {$placeholders}
                                                     ");
 
