@@ -175,6 +175,12 @@
 
         @endif
 
+        @if($flags['Cedulas'])
+
+            @livewire('tramites.ventanilla.cedulas', ['servicio' => $servicio, 'tramite' => $tramite, 'años' => $años, 'solicitantes' => $solicitantes, 'dependencias' => $dependencias, 'notarias' => $notarias])
+
+        @endif
+
     </div>
 
 </div>

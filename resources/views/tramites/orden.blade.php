@@ -162,7 +162,7 @@
                         @if($tramite->observaciones)
                             <p>Observaciones:{{ $tramite->observaciones }}</p>
                         @endif
-                        @if($tramite->predios)
+                        @if($tramite->predios->count())
                             <p>
                                 @foreach ($tramite->predios as $predio)
 

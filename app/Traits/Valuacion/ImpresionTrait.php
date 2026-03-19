@@ -195,9 +195,9 @@ trait ImpresionTrait
 
         }
 
-        if(!$this->predio_padre->superficie_terreno){
+        if(!$this->predio_padre->superficie_total_terreno){
 
-            throw new GeneralException('El predio origen no tiene superficie notarial.');
+            throw new GeneralException('El predio origen no tiene superficie de terrno.');
 
         }
 
@@ -217,7 +217,7 @@ trait ImpresionTrait
 
         }
 
-        if($this->predio_padre->superficie_terreno <= $superficie_terreno){
+        if($this->predio_padre->superficie_total_terreno <= $superficie_terreno){
 
             throw new GeneralException('La suma de la superfice de terreno de los avalúos es mayor a la superficie del predio padre.');
 

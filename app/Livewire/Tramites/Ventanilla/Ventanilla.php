@@ -43,7 +43,8 @@ class Ventanilla extends Component
         'Inspecciones Oculares' => false,
         'Expedición de duplicados de documentos catastrales' => false,
         'Levantamientos topográficos' => false,
-        'Variaciones Catastrales' => false
+        'Variaciones Catastrales' => false,
+        'Cedulas' => false
     ];
 
     #[On('reset')]
@@ -108,7 +109,7 @@ class Ventanilla extends Component
                             'Levantamientos aerofotogramétricos y otros servicios de alta precisión' => 'Completo',
                             'Aviso Aclaratorio' => 'Completo',
                             'Revisión de Aviso y/o cancelación' => 'Completo',
-                            'Cédula de actualización' => 'Completo',
+                            'Cédula de actualización' => 'Cedulas',
                             'Modificación de datos administrativos catastrales'  => 'Completo',
                             'Ubicación de predios en cartografía'  => 'Completo',
                             'Información a propietarios o poseedores de predios registrados'   => 'Completo',
