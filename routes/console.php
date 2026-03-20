@@ -593,7 +593,7 @@ Artisan::command('migrar-historico', function(){
                 $line[2], //tipo_predio
                 $line[3], //numero_registro
                 $line[4], //fecha_actualizacion
-                $line[13], //fecha_escritura
+                $line[12], //fecha_escritura
                 $line[24], //fecha_movimiento
                 trim($line[27]), //empleado
                 trim($line[28]), //movimiento
@@ -602,12 +602,12 @@ Artisan::command('migrar-historico', function(){
                 trim($line[8]), //numero_registro_inicial
                 trim($line[9]), //numero_registro_final
                 trim($line[10]), //valor_catastral
-                $line[12], // numero_documento
-                $line[14], // numero_fojas
-                $line[15], // numero_tomo
-                $line[16], // capital_mayor_fojas
-                $line[17], // capital_mayor_tomo
-                $line[19], // numero_comprobante
+                $line[11], // numero_documento
+                $line[13], // numero_fojas
+                $line[14], // numero_tomo
+                $line[15], // capital_mayor_fojas
+                $line[16], // capital_mayor_tomo
+                $line[18], // numero_comprobante
                 $line[20], // superficie_notaria
                 $line[21], // superficie_terreno
                 $line[22], // superficie_construccion
