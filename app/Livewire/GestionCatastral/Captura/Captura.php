@@ -527,4 +527,5 @@ class Captura extends Component
     {
         return view('livewire.gestion-catastral.captura.captura')->extends('layouts.admin');
     }
+
 }
