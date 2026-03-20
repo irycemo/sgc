@@ -588,31 +588,31 @@ Artisan::command('migrar-historico', function(){
             dd($line);
 
             $chunks = array_merge($chunks, [
-                $line[1], //localidad
-                $line[8], //oficina
-                $line[9], //tipo_predio
-                $line[10], //numero_registro
-                $line[11], //fecha_actualizacion
-                $line[19], //fecha_escritura
-                $line[31], //fecha_movimiento
-                trim($line[35]), //empleado
-                trim($line[35]), //movimiento
-                trim($line[13]), //adquiriente
-                trim($line[14]), //transmitente
-                trim($line[15]), //numero_registro_inicial
-                trim($line[16]), //numero_registro_final
-                trim($line[17]), //valor_catastral
-                $line[18], // numero_documento
-                $line[20], // numero_fojas
-                $line[21], // numero_tomo
-                $line[22], // capital_mayor_fojas
-                $line[23], // capital_mayor_tomo
-                $line[24], // numero_comprobante
-                $line[27], // superficie_notaria
-                $line[28], // superficie_terreno
-                $line[29], // superficie_construccion
-                trim($line[30]), // ubicacion
-                trim($line[34]), // observaciones
+                $line[0], //localidad
+                $line[1], //oficina
+                $line[2], //tipo_predio
+                $line[3], //numero_registro
+                $line[4], //fecha_actualizacion
+                $line[13], //fecha_escritura
+                $line[24], //fecha_movimiento
+                trim($line[27]), //empleado
+                trim($line[28]), //movimiento
+                trim($line[6]), //adquiriente
+                trim($line[7]), //transmitente
+                trim($line[8]), //numero_registro_inicial
+                trim($line[9]), //numero_registro_final
+                trim($line[10]), //valor_catastral
+                $line[12], // numero_documento
+                $line[14], // numero_fojas
+                $line[15], // numero_tomo
+                $line[16], // capital_mayor_fojas
+                $line[17], // capital_mayor_tomo
+                $line[19], // numero_comprobante
+                $line[20], // superficie_notaria
+                $line[21], // superficie_terreno
+                $line[22], // superficie_construccion
+                trim($line[23]), // ubicacion
+                trim($line[27]), // observaciones
                 $now,
                 $now
             ]);
