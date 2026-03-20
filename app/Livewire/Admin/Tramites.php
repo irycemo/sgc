@@ -2,19 +2,20 @@
 
 namespace App\Livewire\Admin;
 
-use App\Models\Predio;
-use App\Models\Tramite;
-use Livewire\Component;
-use App\Models\Servicio;
-use App\Models\Traslado;
-use Livewire\WithPagination;
-use App\Models\Certificacion;
 use App\Constantes\Constantes;
+use App\Enums\Tramites\AvaluoPara;
+use App\Exceptions\GeneralException;
+use App\Models\Certificacion;
+use App\Models\Predio;
+use App\Models\Servicio;
+use App\Models\Tramite;
+use App\Models\Traslado;
 use App\Traits\ComponentesTrait;
-use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Exceptions\GeneralException;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class Tramites extends Component
 {
@@ -33,6 +34,7 @@ class Tramites extends Component
     public $años;
     public $predio_id;
     public $observaciones;
+    public $lista_avaluo_para;
 
     public $tramties_con_predio = ['DM31', 'DM34', 'DM32', 'DM35', 'DM30'];
 
@@ -366,6 +368,8 @@ class Tramites extends Component
         $this->filters['año'] = now()->format('Y');
 
         $this->oficina = auth()->user()->oficina->oficina;
+
+        $this->lista_avaluo_para = AvaluoPara::cases();
 
     }
 

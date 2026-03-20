@@ -80,7 +80,7 @@ class CedulaActualizacion extends Component
 
             $this->predio = $this->tramite->predios()->first();
 
-            if($this->predio->status == 'bloqueado'){
+            if($this->predio?->status == 'bloqueado'){
 
                 $this->dispatch('mostrarMensaje', ['warning', "El predio se encuentra bloqueado."]);
 

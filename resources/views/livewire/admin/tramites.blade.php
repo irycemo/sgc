@@ -311,6 +311,26 @@
 
                 </div>
 
+                @if(in_array($modelo_editar->servicio?->clave_ingreso, ['D945', 'D944', 'D943', 'D942']))
+
+                    <x-input-group for="modelo_editar.avaluo_para" label="Avalúo para" :error="$errors->first('modelo_editar.avaluo_para')" class="w-full">
+
+                        <x-input-select id="modelo_editar.avaluo_para" wire:model="modelo_editar.avaluo_para" class="w-full">
+
+                            <option value="">Seleccione una opción</option>
+
+                            @foreach ($lista_avaluo_para as $item)
+
+                                <option value="{{ $item->value }}">{{ $item->label() }}</option>
+
+                            @endforeach
+
+                        </x-input-select>
+
+                    </x-input-group>
+
+                @endif
+
                 @if(in_array($modelo_editar->servicio?->clave_ingreso, $tramties_con_predio))
 
                     <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
