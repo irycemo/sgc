@@ -163,11 +163,23 @@
 
                 </x-input-group>
 
-                <x-input-group for="predio.valor_catastral" label="Valor catastral" :error="$errors->first('predio.valor_catastral')" class="w-full">
+                @if($actualizacion)
 
-                    <x-input-text type="number" id="predio.valor_catastral" wire:model="predio.valor_catastral" :readonly="!auth()->user()->can('Valor catastral')"/>
+                    <x-input-group for="predio.valor_catastral" label="Valor catastral" :error="$errors->first('predio.valor_catastral')" class="w-full">
 
-                </x-input-group>
+                        <x-input-text type="number" id="predio.valor_catastral" wire:model="predio.valor_catastral" :readonly="!auth()->user()->can('Valor catastral')"/>
+
+                    </x-input-group>
+
+                @else
+
+                    <x-input-group for="predio.valor_catastral" label="Valor catastral" :error="$errors->first('predio.valor_catastral')" class="w-full">
+
+                        <x-input-text type="number" id="predio.valor_catastral" wire:model="predio.valor_catastral"/>
+
+                    </x-input-group>
+
+                @endif
 
             </div>
 
