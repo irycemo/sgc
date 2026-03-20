@@ -370,7 +370,7 @@ class Captura extends Component
 
     public function validarTitulo(){
 
-        $predio = Predio::whereIn('documento_entrada', $this->predio->documento_entrada)
+        $predio = Predio::where('documento_entrada', $this->predio->documento_entrada)
                             ->where('documento_numero', $this->predio->documento_numero)
                             ->first();
 
