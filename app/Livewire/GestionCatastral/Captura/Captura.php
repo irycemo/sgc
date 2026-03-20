@@ -370,11 +370,15 @@ class Captura extends Component
 
     public function validarTitulo(){
 
-        $predio = Predio::where('documento_entrada', $this->predio->documento_entrada)
-                            ->where('documento_numero', $this->predio->documento_numero)
-                            ->first();
+        if($this->predio->isDirty('documento_entrada') || $this->predio->isDirty('documento_numero')){
 
-        if($predio) throw new GeneralException("El título de propiedad ya esta registrado.");
+            $predio = Predio::where('documento_entrada', $this->predio->documento_entrada)
+                                ->where('documento_numero', $this->predio->documento_numero)
+                                ->first();
+
+            if($predio) throw new GeneralException("El título de propiedad ya esta registrado.");
+
+        }
 
     }
 
