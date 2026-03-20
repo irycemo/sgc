@@ -613,11 +613,13 @@ class VariacionesCatastrales extends Component
 
                 }
 
+                $url = Str::replace('sgc/predios_archivo/', '' , $file);
+
                 File::create([
                     'fileable_id' => $this->modelo_editar->id,
                     'fileable_type' => 'App\Models\VariacionCatastral',
                     'descripcion' => $this->descripcion_documento,
-                    'url' => $file
+                    'url' => $url
                 ]);
 
                 $this->modelo_editar->estado = 'actualizado';
