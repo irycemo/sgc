@@ -10,7 +10,9 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-Route::get('verificacion/{certificacion:uuid}', VerificacionController::class)->name('verificacion');
+Route::get('verificacion/{certificacion:uuid}', [VerificacionController::class, 'certificacion'])->name('verificacion_certificacion');
+
+Route::get('verificacion_avaluo/{avaluo:uuid}', [VerificacionController::class, 'avaluo'])->name('verificacion_avaluo');
 
 Route::get('setpassword/{email}', [SetPasswordController::class, 'create'])->name('setpassword');
 Route::post('setpassword', [SetPasswordController::class, 'store'])->name('setpassword.store');

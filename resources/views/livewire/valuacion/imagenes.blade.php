@@ -22,6 +22,18 @@
 
                     @if($predio)
 
+                        <x-button-red
+                            wire:click="borrarArchivo('fachada')"
+                            wire:loading.attr="disabled"
+                            wire:target="borrarArchivo('fachada')"
+                            wire:confirm="¿Esta seguro que quiere borrar el archivo?"
+                            type="button"
+                            class="w-min rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </x-button-red>
+
                         <a href="{{ $predio->avaluo->fachada() }}" data-lightbox="imagen" data-title="Fachada">
 
                             <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->fachada() }}" alt="Fachada">
@@ -71,6 +83,18 @@
 
                     @if($predio)
 
+                        <x-button-red
+                            wire:click="borrarArchivo('foto2')"
+                            wire:loading.attr="disabled"
+                            wire:target="borrarArchivo('foto2')"
+                            wire:confirm="¿Esta seguro que quiere borrar el archivo?"
+                            type="button"
+                            class="w-min rounded-full px-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </x-button-red>
+
                         <a href="{{ $predio->avaluo->foto2() }}" data-lightbox="imagen" data-title="Foto 2">
                             <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->foto2() }}" alt="Foto 2">
 
@@ -118,6 +142,18 @@
                 @else
 
                     @if($predio)
+
+                        <x-button-red
+                            wire:click="borrarArchivo('foto3')"
+                            wire:loading.attr="disabled"
+                            wire:target="borrarArchivo('foto3')"
+                            wire:confirm="¿Esta seguro que quiere borrar el archivo?"
+                            type="button"
+                            class="w-min rounded-full px-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </x-button-red>
 
                         <a href="{{ $predio->avaluo->foto3() }}" data-lightbox="imagen" data-title="Foto 3">
 
@@ -168,6 +204,18 @@
 
                     @if($predio)
 
+                        <x-button-red
+                            wire:click="borrarArchivo('foto4')"
+                            wire:loading.attr="disabled"
+                            wire:target="borrarArchivo('foto4')"
+                            wire:confirm="¿Esta seguro que quiere borrar el archivo?"
+                            type="button"
+                            class="w-min rounded-full px-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </x-button-red>
+
                         <a href="{{  $predio->avaluo->foto4() }}" data-lightbox="imagen" data-title="Foto 4">
 
                             <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->foto4() }}" alt="Foto 4">
@@ -216,6 +264,18 @@
                 @else
 
                       @if($predio)
+
+                        <x-button-red
+                            wire:click="borrarArchivo('macrolocalizacion')"
+                            wire:loading.attr="disabled"
+                            wire:target="borrarArchivo('macrolocalizacion')"
+                            wire:confirm="¿Esta seguro que quiere borrar el archivo?"
+                            type="button"
+                            class="w-min rounded-full px-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </x-button-red>
 
                         <a href="{{ $predio->avaluo->macrolocalizacion() }}" data-lightbox="imagen" data-title="Macrolocalización">
 
@@ -266,6 +326,18 @@
 
                     @if($predio)
 
+                        <x-button-red
+                            wire:click="borrarArchivo('microlocalizacion')"
+                            wire:loading.attr="disabled"
+                            wire:target="borrarArchivo('microlocalizacion')"
+                            wire:confirm="¿Esta seguro que quiere borrar el archivo?"
+                            type="button"
+                            class="w-min rounded-full px-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </x-button-red>
+
                         <a href="{{ $predio->avaluo->microlocalizacion() }}" data-lightbox="imagen" data-title="Microlocalización">
 
                             <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->microlocalizacion() }}" alt="Microlocalización">
@@ -315,6 +387,18 @@
 
                     @if($predio)
 
+                        <x-button-red
+                            wire:click="borrarArchivo('poligonoImagen')"
+                            wire:loading.attr="disabled"
+                            wire:target="borrarArchivo('poligonoImagen')"
+                            wire:confirm="¿Esta seguro que quiere borrar el archivo?"
+                            type="button"
+                            class="w-min rounded-full px-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </x-button-red>
+
                         <a href="{{ $predio->avaluo->poligonoImagen() }}" data-lightbox="imagen" data-title="Representación del poligono">
 
                             <img class="h-20 w-20 mx-auto my-3" src="{{ $predio->avaluo->poligonoImagen() }}" alt="Representación del poligono">
@@ -351,6 +435,12 @@
             <div class="bg-white rounded-lg p-1 px-4 flex flex-col text-center">
 
                 <p>Representación del poligono (DWG)</p>
+
+                @if($predio?->avaluo?->poligonoDwg())
+
+                    <x-link-blue class="w-fit mx-auto mb-3" href="{{ $predio->avaluo->poligonoDwg() }}" target="_blank">Ver archivo</x-link-blue>
+
+                @endif
 
                 <label for="poligonoDwg" class="bg-gray-400 hover:shadow-lg text-white font-bold px-4 py-1 rounded-full text-sm mb-2 hover:bg-gray-700 cursor-pointer">
                     <img wire:loading wire:target="poligonoDwg" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">

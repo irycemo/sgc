@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Avaluo;
 use App\Models\Certificacion;
 use Illuminate\Support\Facades\Storage;
 
 class VerificacionController extends Controller
 {
 
-    public function __invoke(Certificacion $certificacion){
+    public function certificacion(Certificacion $certificacion){
 
         if($certificacion->estado != 'activo'){
 
-            return view('verificacion', compact('certificacion'));
+            return view('verificacion.certificacion', compact('certificacion'));
 
         }
 
@@ -26,6 +27,15 @@ class VerificacionController extends Controller
             return redirect(Storage::disk('certificaciones')->url($certificacion->archivo->url));
 
         }
+
+    }
+
+    public function avaluo(Avaluo $avaluo){
+
+        return view('verificacion.avaluo', [
+            'avaluo' => $avaluo,
+            'predio' => $avaluo->predioAvaluo
+        ]);
 
     }
 

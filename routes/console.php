@@ -538,15 +538,77 @@ Artisan::command('migrar-historico', function(){
 
     $now = now()->format('Y-m-d H:i:s');
 
-    $handle = fopen(storage_path('app/public/historico.csv'), 'r');
+    $handle = fopen(storage_path('app/public/historico100.csv'), 'r');
 
-    $chunkSize = 500;
+    $chunkSize = 1;
 
     $chunks = [];
 
     try {
 
-        $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ? , ?, ? , ?, ? , ?)';
+        $counter = 0;
+
+        while (($line = fgetcsv($handle, 0, '|', '"')) !== false) {
+
+            /* if(!isset($line[0]) || !isset($line[1]) || !isset($line[2]) || !isset($line[3])) continue; */
+
+            $data[] = [
+                'localidad' => $line[0] ?? null,
+                'oficina' => $line[1] ?? null,
+                'tipo_predio' => $line[2] ?? null,
+                'numero_registro' => $line[3] ?? null,
+                'fecha_actualizacion' => $line[4] ?? null,
+                'fecha_escritura' => $line[12] ?? null,
+                'fecha_movimiento' => $line[24] ?? null,
+                'empleado' => $line[27] ?? null,
+                'movimiento' => $line[28] ?? null,
+                'adquiriente' => $line[6] ?? null,
+                'transmitente' => $line[7] ?? null,
+                'numero_registro_inicial' => $line[8] ?? null,
+                'numero_registro_final' => $line[9] ?? null,
+                'valor_catastral' => $line[10] ?? null,
+                'numero_documento' => $line[11] ?? null,
+                'numero_fojas' => $line[13] ?? null,
+                'numero_tomo' => $line[14] ?? null,
+                'capital_mayor_fojas' => $line[15] ?? null,
+                'capital_mayor_tomo' => $line[16] ?? null,
+                'numero_comprobante' => $line[18] ?? null,
+                'superficie_notaria' => $line[20] ?? null,
+                'superficie_terreno' => $line[21] ?? null,
+                'superficie_construccion' => $line[22] ?? null,
+                'ubicacion' => $line[23] ?? null,
+                'observaciones' => $line[27] ?? null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+
+            $counter++;
+
+            if (count($data) === $chunkSize) {
+
+                DB::table('historicos')->insert($data);
+
+                $this->info("Insertados: $counter");
+
+                $data = [];
+
+                // liberar memoria manual
+                gc_collect_cycles();
+
+            }
+        }
+
+
+
+    }  finally {
+
+        fclose($handle);
+
+    }
+
+    $this->info('Finaliza: ' . now());
+
+    $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ? , ?, ? , ?, ? , ?)';
 
         $placeholders = implode(',', array_fill(0, $chunkSize, $rowPlaceholders));
 
@@ -583,41 +645,44 @@ Artisan::command('migrar-historico', function(){
                                                         VALUES {$placeholders}
                                                     ");
 
-        while(($line = fgetcsv($handle, null, '|')) !== false){
+        while(($line = fgetcsv($handle, 0, '|')) !== false){
 
-            dd($line);
+            if(!isset($line[0]) || !isset($line[1]) || !isset($line[2]) || !isset($line[3])) continue;
 
+            /* dd($line[28]); */
             $chunks = array_merge($chunks, [
                 $line[0], //localidad
                 $line[1], //oficina
                 $line[2], //tipo_predio
                 $line[3], //numero_registro
-                $line[4], //fecha_actualizacion
-                $line[12], //fecha_escritura
-                $line[24], //fecha_movimiento
-                trim($line[27]), //empleado
-                trim($line[28]), //movimiento
-                trim($line[6]), //adquiriente
-                trim($line[7]), //transmitente
-                trim($line[8]), //numero_registro_inicial
-                trim($line[9]), //numero_registro_final
-                trim($line[10]), //valor_catastral
-                $line[11], // numero_documento
-                $line[13], // numero_fojas
-                $line[14], // numero_tomo
-                $line[15], // capital_mayor_fojas
-                $line[16], // capital_mayor_tomo
-                $line[18], // numero_comprobante
-                $line[20], // superficie_notaria
-                $line[21], // superficie_terreno
-                $line[22], // superficie_construccion
-                trim($line[23]), // ubicacion
-                trim($line[27]), // observaciones
+                $line[4] ?? null, //fecha_actualizacion
+                $line[12] ?? null, //fecha_escritura
+                $line[24] ?? null, //fecha_movimiento
+                $line[27] ?? null, //empleado
+                $line[28] ?? null, //movimiento
+                $line[6] ?? null, //adquiriente
+                $line[7] ?? null, //transmitente
+                $line[8] ?? null, //numero_registro_inicial
+                $line[9] ?? null, //numero_registro_final
+                $line[10] ?? null, //valor_catastral
+                $line[11] ?? null, // numero_documento
+                $line[13] ?? null, // numero_fojas
+                $line[14] ?? null, // numero_tomo
+                $line[15] ?? null, // capital_mayor_fojas
+                $line[16] ?? null, // capital_mayor_tomo
+                $line[18] ?? null, // numero_comprobante
+                $line[20] ?? null, // superficie_notaria
+                $line[21] ?? null, // superficie_terreno
+                $line[22] ?? null, // superficie_construccion
+                $line[23] ?? null, // ubicacion
+                $line[27] ?? null, // observaciones
                 $now,
                 $now
             ]);
 
-            if(count($chunks) === $chunkSize * 23){
+            if(count($chunks) === $chunkSize * 27){
+
+                dd($chunks);
 
                 $stmt->execute($chunks);
 
@@ -630,14 +695,14 @@ Artisan::command('migrar-historico', function(){
         if(!empty($chunks)){
 
 
-            $remainingRows = count($chunks) / 23;
+            $remainingRows = count($chunks) / 27;
 
             $rowPlaceholders = '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ? , ?, ? , ?, ? , ?)';
 
             $placeholders = implode(',', array_fill(0, $remainingRows, $rowPlaceholders));
 
             $stmt = DB::connection()->getPdo()->prepare("
-                                                        INSERT INTO old_certificados (
+                                                        INSERT INTO historicos (
                                                                 localidad,
                                                                 oficina,
                                                                 tipo_predio,
@@ -674,16 +739,6 @@ Artisan::command('migrar-historico', function(){
         }
 
         $this->info('Finaliza migración de certificados el: ' . now());
-
-    }  finally {
-
-        fclose($handle);
-
-    }
-
-    $progressbar->finish();
-
-    $this->info('Finaliza: ' . now());
 
 });
 

@@ -92,7 +92,7 @@ class CertificadoRegistroController extends Controller
                                                         'creado_por' => $usuario->id
                                                     ]);
 
-            $qr = $this->generadorQr($certificacion->uuid);
+            $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         /* }else{
 
@@ -147,7 +147,7 @@ class CertificadoRegistroController extends Controller
 
         $object = json_decode($certificacion->cadena_original);
 
-        $qr = $this->generadorQr($certificacion->uuid);
+        $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         $pdf = Pdf::loadView('certificaciones.certificado_registro', [
             'datos_control' => $object->datos_control,

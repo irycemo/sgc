@@ -1,26 +1,27 @@
+<x-app-layout>
+
 @push('styles')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" integrity="sha512-ZKX+BvQihRJPA8CROKBhDNvoc2aDMOdAlcm7TUQY+35XYtrd3yh95QOOhsPDQY9QnKE0Wqag9y38OIgEvb88cA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 @endpush
 
-@extends('layouts.admin')
+<div class="max-w-7xl mx-auto p-6 lg:p-8">
 
-@section('content')
+    <div class="flex justify-center mb-5">
+        <a href="/">
+            <img src="{{ asset('storage/img/logo2.png') }}" alt="Logo" class="w-96">
+        </a>
+
+    </div>
 
     <x-header>Avaluo</x-header>
 
-    <x-h4>Datos generales</x-h4>
-
     @include('admin.comun.datos_generales_avaluo')
-
-    <x-h4>Datos generales del predio</x-h4>
 
     @include('admin.comun.datos_generales_predio')
 
     @include('admin.comun.ubicacion')
-
-    <x-h4>Caracteristicas</x-h4>
 
     @include('admin.comun.colindancias')
 
@@ -32,15 +33,15 @@
 
     @include('admin.comun.construcciones_comun')
 
+    @include('admin.comun.caracteristicas_avaluo')
+
     @include('admin.comun.propietarios')
 
     <x-h4>Imágenes</x-h4>
 
-    @include('admin.comun.imagenes')
+    @include('admin.comun.imagenes_avaluo')
 
-    @include('admin.comun.auditoria')
-
-@endsection
+</div>
 
 @push('scripts')
 
@@ -48,3 +49,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js" integrity="sha512-k2GFCTbp9rQU412BStrcD/rlwv1PYec9SNrkbQlo6RZCf75l6KcC3UwDY8H5n5hl4v77IDtIPwOk9Dqjs/mMBQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 @endpush
+
+</x-app-layout>

@@ -95,7 +95,7 @@ class CertificadoHistoriaController extends Controller
                                                         'creado_por' => auth()->id()
                                                     ]);
 
-            $qr = $this->generadorQr($certificacion->uuid);
+            $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         /* }else{
 
@@ -150,7 +150,7 @@ class CertificadoHistoriaController extends Controller
 
         $object = json_decode($certificacion->cadena_original);
 
-        $qr = $this->generadorQr($certificacion->uuid);
+        $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         $pdf = Pdf::loadView('certificaciones.certificado_historia', [
             'datos_control' => $object->datos_control,

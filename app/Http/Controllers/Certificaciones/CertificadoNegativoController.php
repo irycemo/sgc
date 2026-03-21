@@ -78,7 +78,7 @@ class CertificadoNegativoController extends Controller
                                                         'creado_por' => auth()->id()
                                                     ]);
 
-            $qr = $this->generadorQr($certificacion->uuid);
+            $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         /* }else{
 
@@ -131,7 +131,7 @@ class CertificadoNegativoController extends Controller
 
         $object = json_decode($certificacion->cadena_original);
 
-        $qr = $this->generadorQr($certificacion->uuid);
+        $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         $pdf = Pdf::loadView('certificaciones.certificado_negativo', [
             'datos_control' => $object->datos_control,

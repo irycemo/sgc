@@ -94,7 +94,7 @@ class NotificacionValorCatastralController extends Controller
                                                     'creado_por' => auth()->id()
                                                 ]);
 
-            $qr = $this->generadorQr($certificacion->uuid);
+            $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         }elseif(auth()->user()->oficina->oficina == 101){
 
@@ -134,7 +134,7 @@ class NotificacionValorCatastralController extends Controller
                                                         'creado_por' => auth()->id()
                                                     ]);
 
-            $qr = $this->generadorQr($certificacion->uuid);
+            $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         }else{
 
@@ -153,7 +153,7 @@ class NotificacionValorCatastralController extends Controller
                                                         'creado_por' => auth()->id()
                                                     ]);
 
-            $qr = $this->generadorQr($certificacion->uuid);
+            $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         }
 
@@ -234,7 +234,7 @@ class NotificacionValorCatastralController extends Controller
                                                     'creado_por' => auth()->id()
                                                 ]);
 
-            $qr = $this->generadorQr($certificacion->uuid);
+            $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         }else{
 
@@ -274,7 +274,7 @@ class NotificacionValorCatastralController extends Controller
                                                         'creado_por' => auth()->id()
                                                     ]);
 
-            $qr = $this->generadorQr($certificacion->uuid);
+            $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         }
 
@@ -371,7 +371,7 @@ class NotificacionValorCatastralController extends Controller
                                                     'creado_por' => auth()->id()
                                                 ]);
 
-            $qr = $this->generadorQr($certificacion->uuid);
+            $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         }elseif(auth()->user()->oficina->oficina == 101){
 
@@ -411,7 +411,7 @@ class NotificacionValorCatastralController extends Controller
                                                         'creado_por' => auth()->id()
                                                     ]);
 
-            $qr = $this->generadorQr($certificacion->uuid);
+            $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         }else{
 
@@ -432,7 +432,7 @@ class NotificacionValorCatastralController extends Controller
                                                         'creado_por' => auth()->id()
                                                     ]);
 
-            $qr = $this->generadorQr($certificacion->uuid);
+            $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         }
 
@@ -463,7 +463,7 @@ class NotificacionValorCatastralController extends Controller
 
         $object = json_decode($certificacion->cadena_original);
 
-        $qr = $this->generadorQr($certificacion->uuid);
+        $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         $pdf = Pdf::loadView('certificaciones.notificacion_valor_catastral', [
             'datos_control' => $object->datos_control,

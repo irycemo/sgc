@@ -193,7 +193,7 @@
 
         @include('avaluos.ubicacion_inmueble')
 
-        @include('avaluos.colindancias')
+        {{-- @include('avaluos.colindancias') --}}
 
         @include('avaluos.descripcion_inmueble')
 
@@ -201,9 +201,9 @@
 
         @include('avaluos.propietarios')
 
-        @include('avaluos.bloques')
+        {{-- @include('avaluos.bloques') --}}
 
-        <p class="separador">Imágenes</p>
+        {{-- <p class="separador">Imágenes</p>
 
         <div class="informacion">
 
@@ -292,7 +292,7 @@
 
             </table>
 
-        </div>
+        </div> --}}
 
         @if($predio->avaluo->observaciones)
 
@@ -307,6 +307,32 @@
             </div>
 
         @endif
+
+        <table style="margin-top: 10px">
+
+            <tbody>
+                <tr>
+                    <td style="padding-right: 40px;">
+
+                        <img class="qr" src="{{ $qr }}" alt="QR">
+                    </td>
+                    <td style="padding-right: 40px;">
+
+                        <p><strong>Impreso el: </strong> {{ now() }}</p>
+
+                        <p><strong>Impreso por: </strong> {{ auth()->user()->name }}</p>
+
+                        @if(isset($certificacion))
+
+                            <p><strong>Certificación: </strong>{{ $certificacion->tipo->label() }} {{ $certificacion->año }}-{{ $certificacion->folio }}</p>
+
+                        @endif
+
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
 
     </main>
 

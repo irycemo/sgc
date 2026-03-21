@@ -12,10 +12,10 @@ use Endroid\QrCode\Builder\Builder;
 
 trait GeneradorQRTrait{
 
-    public function generadorQr($certificacion)
+    public function generadorQr($ruta, $certificacion)
     {
 
-        $rute = route('verificacion', $certificacion);
+        $rute = route($ruta, $certificacion);
 
         $builder = new Builder(
             writer: new PngWriter(),

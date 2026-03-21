@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Constantes\Constantes;
+use App\Http\Controllers\Valuacion\AvaluoImpresionController;
 use App\Models\Avaluo;
 use App\Models\Certificacion;
 use App\Models\File;
@@ -118,35 +119,21 @@ class Avaluos extends Component
 
     public function imprimirAvaluo(Avaluo $avaluo){
 
-        $this->modelo_editar = $avaluo;
+       try {
 
-        $predio = $this->modelo_editar->predioAvaluo;
+            $pdf = (new AvaluoImpresionController())->generarAvaluo($avaluo);
 
-        $predio->load('propietarios.persona');
+            return response()->streamDownload(
+                fn () => print($pdf->output()),
+                'avaluo.pdf'
+            );
 
-        $certificacion = Certificacion::where('tramite_id', $this->modelo_editar->tramite_inspeccion)->first();
+       } catch (\Throwable $th) {
 
-        $pdf = Pdf::loadView('avaluos.avaluo', [
-            'predio' => $predio,
-            'certificacion' => $certificacion
-        ]);
+            Log::error("Error al imprimir avaluo en administracion por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
-        $pdf->render();
-
-        $dom_pdf = $pdf->getDomPDF();
-
-        $canvas = $dom_pdf->get_canvas();
-
-        $canvas->page_text(480, 745, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
-
-        $canvas->page_text(35, 745, "Avalúo: " . $predio->avaluo->año . "-" . $predio->avaluo->folio . "-" . $predio->avaluo->usuario , null, 10, array(1, 1, 1));
-
-        $pdf = $dom_pdf->output();
-
-        return response()->streamDownload(
-            fn () => print($pdf),
-            'avaluo.pdf'
-        );
+       }
 
     }
 

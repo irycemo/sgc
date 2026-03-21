@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\File;
-use App\Models\User;
 use App\Models\Bloque;
-use App\Models\Tramite;
+use App\Models\File;
 use App\Models\PredioAvaluo;
-use App\Traits\ModelosTrait;
 use App\Models\PredioIgnorado;
+use App\Models\Tramite;
+use App\Models\User;
 use App\Models\VariacionCatastral;
+use App\Traits\ModelosTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class Avaluo extends Model implements Auditable
@@ -25,6 +26,67 @@ class Avaluo extends Model implements Auditable
     protected $casts = [
         'notificado_en' => 'date'
     ];
+
+    public static function boot() {
+
+        parent::boot();
+
+        static::creating(function($model){
+
+            foreach ($model->attributes as $key => $value) {
+
+                if(is_null($value)) continue;
+
+                if(is_string($value)){
+
+                    if($value === ''){
+
+                        $model->{$key} = null;
+
+                    }else{
+
+                        $model->{$key} = trim($value);
+
+                    }
+
+                }
+            }
+
+            $model->uuid = (string)Str::uuid();
+
+        });
+
+        static::updating(function($model){
+
+            foreach ($model->attributes as $key => $value) {
+
+                if(is_null($value)) continue;
+
+                if(is_string($value)){
+
+                    if($value === ''){
+
+                        $model->{$key} = null;
+
+                    }else{
+
+                        $model->{$key} = trim($value);
+
+                    }
+
+                }
+
+            }
+
+            if(! $model->uuid){
+
+                $model->uuid = (string)Str::uuid();
+
+            }
+
+        });
+
+    }
 
     public function getEstadoColorAttribute()
     {
@@ -139,6 +201,16 @@ class Avaluo extends Model implements Auditable
         return $poligonoImagen
             ? $poligonoImagen->getLinkFotoAvaluo()
             : Storage::disk('public')->url('img/ico.png');
+
+    }
+
+    public function poligonoDwg(){
+
+        $poligonoDwg = $this->imagenes()->where('descripcion', 'poligonoDwg')->first();
+
+        return $poligonoDwg
+            ? $poligonoDwg->getLinkFotoAvaluo()
+            : null;
 
     }
 

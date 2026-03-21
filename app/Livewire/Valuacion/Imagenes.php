@@ -180,6 +180,47 @@ class Imagenes extends Component
 
     }
 
+    public function borrarArchivo($archivo){
+
+        try {
+
+            $archivo = $this->predio->avaluo->imagenes()->where('descripcion', $archivo)->first();
+
+            if(! $archivo){
+
+                $this->dispatch('mostrarMensaje', ['warning', "No se encontro el archivo."]);
+
+                return;
+
+            }
+
+            if(app()->isProduction()){
+
+                if (Storage::disk('s3')->exists(config('services.ses.ruta_avaluos_fotos') . $archivo->url)) {
+
+                    Storage::disk('s3')->delete(config('services.ses.ruta_avaluos_fotos') . $archivo->url);
+
+                }
+
+            }else{
+
+                if (Storage::disk('avaluos')->exists($archivo->url)) {
+
+                    Storage::disk('avaluos')->delete($archivo->url);
+
+                }
+
+            }
+
+            $archivo->delete();
+
+        } catch (\Throwable $th) {
+            Log::error("Error al borrar archivo de avaluo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+        }
+
+    }
+
     public function mount(){
 
         if($this->avaluo_id){

@@ -93,7 +93,7 @@ class CedulaActualizcacionController extends Controller
                                                         'creado_por' => $usuario->id
                                                     ]);
 
-            $qr = $this->generadorQr($certificacion->uuid);
+            $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         /* }else{
 
@@ -149,7 +149,7 @@ class CedulaActualizcacionController extends Controller
 
         $object = json_decode($certificacion->cadena_original);
 
-        $qr = $this->generadorQr($certificacion->uuid);
+        $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         $pdf = Pdf::loadView('certificaciones.cedula_actualizacion', [
             'datos_control' => $object->datos_control,

@@ -176,9 +176,13 @@
 
                 </a>
 
-                <a href="" title="Cartografía" target="_blank">
-                    <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="Cartografía">
-                </a>
+                @auth
+
+                    <a href="" title="Cartografía" target="_blank">
+                        <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="Cartografía">
+                    </a>
+
+                @endauth
 
             </div>
 
