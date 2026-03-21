@@ -1,32 +1,12 @@
 <div class="flex justify-center gap-3 mb-3 col-span-2 rounded-lg p-3">
 
-    @if($sub_tipos)
-
-        <x-input-group for="sub_tipo" label="Tipo de {{ $tipo_actor }}" :error="$errors->first('sub_tipo')" class="w-full">
-
-            <x-input-select id="sub_tipo" wire:model="sub_tipo" class="w-full">
-
-                <option value="">Seleccione una opción</option>
-
-                @foreach ($sub_tipos as $tipo)
-
-                    <option value="{{ $tipo }}">{{ $tipo }}</option>
-
-                @endforeach
-
-            </x-input-select>
-
-        </x-input-group>
-
-    @endif
-
     <x-input-group for="tipo_persona" label="Tipo de persona" :error="$errors->first('tipo_persona')" class="w-full">
 
-        <x-input-select id="tipo_persona" wire:model.live="tipo_persona" class="w-full" :disabled="$editar && $persona->getKey()">
+        <x-input-select id="tipo_persona" wire:model.live="tipo_persona" class="w-full">
 
             <option value="">Seleccione una opción</option>
             <option value="MORAL">MORAL</option>
-            <option value="FISICA">FISICA</option>
+            <option value="FÍSICA">FISICA</option>
 
         </x-input-select>
 
@@ -36,23 +16,23 @@
 
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-3 col-span-2 rounded-lg p-3">
 
-    @if($tipo_persona == 'FISICA')
+    @if(in_array($tipo_persona, ['FISICA', 'FÍSICA']))
 
         <x-input-group for="nombre" label="Nombre(s)" :error="$errors->first('nombre')" class="w-full">
 
-            <x-input-text id="nombre" wire:model="nombre" :readonly="$editar && $persona->nombre" />
+            <x-input-text id="nombre" wire:model="nombre" />
 
         </x-input-group>
 
         <x-input-group for="ap_paterno" label="Apellido paterno" :error="$errors->first('ap_paterno')" class="w-full">
 
-            <x-input-text id="ap_paterno" wire:model="ap_paterno" :readonly="$editar && $persona->ap_paterno" />
+            <x-input-text id="ap_paterno" wire:model="ap_paterno" />
 
         </x-input-group>
 
         <x-input-group for="ap_materno" label="Apellido materno" :error="$errors->first('ap_materno')" class="w-full">
 
-            <x-input-text id="ap_materno" wire:model="ap_materno" :readonly="$editar && $persona->ap_materno" />
+            <x-input-text id="ap_materno" wire:model="ap_materno" />
 
         </x-input-group>
 
@@ -88,7 +68,7 @@
 
         <x-input-group for="razon_social" label="Razon social" :error="$errors->first('razon_social')" class="w-full">
 
-            <x-input-text id="razon_social" wire:model="razon_social" :readonly="$editar && $persona->razon_social" />
+            <x-input-text id="razon_social" wire:model="razon_social" />
 
         </x-input-group>
 

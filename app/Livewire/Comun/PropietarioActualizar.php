@@ -178,7 +178,7 @@ class PropietarioActualizar extends Component
 
     }
 
-    public function mount(){
+    public function cargarCampos(){
 
         if(isset($this->propietario)){
 
@@ -218,8 +218,15 @@ class PropietarioActualizar extends Component
 
     }
 
+    public function mount(){
+
+        $this->cargarCampos();
+
+    }
+
     public function render()
     {
         return view('livewire.comun.propietario-actualizar');
     }
+
 }

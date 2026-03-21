@@ -62,7 +62,7 @@ trait ActoresTrait{
             'tipo_persona' => 'required',
             'multiple_nombre' => 'nullable',
             'nombre' => [
-                Rule::requiredIf($this->tipo_persona === 'FISICA')
+                Rule::requiredIf(in_array($this->tipo_persona, ['FISICA', 'FÍSICA']))
             ],
             'ap_paterno' => 'nullable',
             'ap_materno' => 'nullable',
@@ -83,21 +83,15 @@ trait ActoresTrait{
 
     public function updatedTipoPersona(){
 
-        if($this->tipo_persona == 'FISICA'){
+        if(in_array($this->tipo_persona, ['FISICA', 'FÍSICA'])){
 
-            $this->reset('razon_social');
+            $this->razon_social = $this->propietario->persona->razon_social;
 
         }elseif($this->tipo_persona == 'MORAL'){
 
-            $this->reset([
-                'nombre',
-                'ap_paterno',
-                'ap_materno',
-                'curp',
-                'fecha_nacimiento',
-                'estado_civil',
-                'multiple_nombre'
-            ]);
+            $this->nombre = $this->propietario->persona->nombre;
+            $this->ap_paterno = $this->propietario->persona->ap_paterno;
+            $this->ap_materno = $this->propietario->persona->ap_materno;
 
         }
 
@@ -167,6 +161,8 @@ trait ActoresTrait{
 
             $this->editar = true;
 
+            $this->tipo_persona = $this->propietario->persona->tipo;
+
         }else{
 
             if(!$this->modelo){
@@ -180,6 +176,8 @@ trait ActoresTrait{
             $this->crear = true;
 
         }
+
+        $this->tipo_persona = $this->propietario->persona->tipo;
 
         $this->modal = true;
 
