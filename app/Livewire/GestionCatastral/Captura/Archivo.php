@@ -51,6 +51,8 @@ class Archivo extends Component
 
             $this->predio->refresh();
 
+            $this->dispatch('refresh');
+
             $this->dispatch('removeFiles');
 
             $this->reset(['descripcion', 'documento']);

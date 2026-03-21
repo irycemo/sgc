@@ -37,8 +37,6 @@
 
     @include('admin.comun.propietarios')
 
-    <x-h4>Imágenes</x-h4>
-
     @include('admin.comun.imagenes_avaluo')
 
 </div>

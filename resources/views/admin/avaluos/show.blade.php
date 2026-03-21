@@ -10,17 +10,11 @@
 
     <x-header>Avaluo</x-header>
 
-    <x-h4>Datos generales</x-h4>
-
     @include('admin.comun.datos_generales_avaluo')
-
-    <x-h4>Datos generales del predio</x-h4>
 
     @include('admin.comun.datos_generales_predio')
 
     @include('admin.comun.ubicacion')
-
-    <x-h4>Caracteristicas</x-h4>
 
     @include('admin.comun.colindancias')
 
@@ -32,11 +26,11 @@
 
     @include('admin.comun.construcciones_comun')
 
+    @include('admin.comun.caracteristicas_avaluo')
+
     @include('admin.comun.propietarios')
 
-    <x-h4>Imágenes</x-h4>
-
-    @include('admin.comun.imagenes')
+    @include('admin.comun.imagenes_avaluo')
 
     @include('admin.comun.auditoria')
 

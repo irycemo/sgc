@@ -1,3 +1,5 @@
+<x-h4>Imágenes</x-h4>
+
 <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-sm">
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

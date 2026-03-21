@@ -4,8 +4,11 @@ namespace App\Livewire\Comun\Consultas;
 
 use App\Models\File;
 use App\Models\Predio;
-use Livewire\Component;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class ArchivoConsulta extends Component
 {
@@ -15,10 +18,49 @@ class ArchivoConsulta extends Component
     public $archivos = [];
     public $fotos;
     public $archivos_anteriores;
+    public $flag_borrar = true;
 
     public function placeholder()
     {
         return view('livewire.comun.consultas.archivo-consulta-placeholder');
+    }
+
+    #[On('refresh')]
+    public function refresh(){
+
+        $this->predio->refresh();
+
+    }
+
+    public function borrarArchivo(File $archivo){
+
+        try {
+
+            if(app()->isProduction()){
+
+                if (Storage::disk('s3')->exists(config('services.ses.ruta_predios') . $archivo->url)) {
+
+                    Storage::disk('s3')->delete(config('services.ses.ruta_predios') . $archivo->url);
+
+                }
+
+            }else{
+
+                if (Storage::disk('predios_archivo')->exists($archivo->url)) {
+
+                    Storage::disk('predios_archivo')->delete($archivo->url);
+
+                }
+
+            }
+
+            $archivo->delete();
+
+        } catch (\Throwable $th) {
+            Log::error("Error al borrar archivo en captura al padron por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+        }
+
     }
 
     public function mount(){
@@ -72,6 +114,8 @@ class ArchivoConsulta extends Component
             }
 
         }
+
+        $this->flag_borrar = url()->previous() == route('captura_padron');
 
     }
 
