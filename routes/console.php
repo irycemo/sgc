@@ -553,29 +553,29 @@ Artisan::command('migrar-historico', function(){
             /* if(!isset($line[0]) || !isset($line[1]) || !isset($line[2]) || !isset($line[3])) continue; */
 
             $data[] = [
-                'localidad' => $line[0] ?? null,
-                'oficina' => $line[1] ?? null,
-                'tipo_predio' => $line[2] ?? null,
-                'numero_registro' => $line[3] ?? null,
-                'fecha_actualizacion' => $line[4] ?? null,
-                'fecha_escritura' => $line[12] ?? null,
-                'fecha_movimiento' => $line[24] ?? null,
-                'empleado' => $line[27] ?? null,
-                'movimiento' => $line[28] ?? null,
-                'adquiriente' => $line[6] ?? null,
-                'transmitente' => $line[7] ?? null,
-                'numero_registro_inicial' => $line[8] ?? null,
-                'numero_registro_final' => $line[9] ?? null,
-                'valor_catastral' => $line[10] ?? null,
-                'numero_documento' => $line[11] ?? null,
-                'numero_fojas' => $line[13] ?? null,
-                'numero_tomo' => $line[14] ?? null,
-                'capital_mayor_fojas' => $line[15] ?? null,
-                'capital_mayor_tomo' => $line[16] ?? null,
-                'numero_comprobante' => $line[18] ?? null,
-                'superficie_notaria' => $line[20] ?? null,
-                'superficie_terreno' => $line[21] ?? null,
-                'superficie_construccion' => $line[22] ?? null,
+                'localidad' => $line[0],
+                'oficina' => $line[1],
+                'tipo_predio' => $line[2],
+                'numero_registro' => $line[3],
+                'fecha_actualizacion' => $line[4],
+                'fecha_escritura' => $line[12],
+                'fecha_movimiento' => $line[24],
+                'empleado' => $line[27],
+                'movimiento' => $line[28],
+                'adquiriente' => $line[6],
+                'transmitente' => $line[7],
+                'numero_registro_inicial' => $line[8],
+                'numero_registro_final' => $line[9],
+                'valor_catastral' => $line[10],
+                'numero_documento' => $line[11],
+                'numero_fojas' => $line[13],
+                'numero_tomo' => $line[14],
+                'capital_mayor_fojas' => $line[15],
+                'capital_mayor_tomo' => $line[16],
+                'numero_comprobante' => $line[18],
+                'superficie_notaria' => $line[20],
+                'superficie_terreno' => $line[21],
+                'superficie_construccion' => $line[22],
                 'ubicacion' => $line[23] ?? null,
                 'observaciones' => $line[27] ?? null,
                 'created_at' => now(),
@@ -742,18 +742,58 @@ Artisan::command('migrar-historico', function(){
 
 });
 
-Artisan::command('concluir-tramites', function(){
+Artisan::command('migrar-bloqueados', function(){
 
-    $certifados_old = OldCertificado::whereIn('atra', [2025, 2026])->get();
+    Schema::disableForeignKeyConstraints();
+    DB::table('historicos')->truncate();
 
-    foreach($certifados_old as $certificado){
+    $this->info('Incia migración del historico el: ' . now());
 
-        $tramite = Tramite::where('año', $certificado->atra)->where('folio', $certificado->foli)->where('usuario', $certificado->usua)->first();
+    $now = now()->format('Y-m-d H:i:s');
 
-        $tramite?->update(['estado' => 'concluido']);
+    $handle = fopen(storage_path('app/public/bloqueados.csv'), 'r');
+
+
+    try {
+
+        $counter = 0;
+
+        while (($line = fgetcsv($handle, 0, '|')) !== false) {
+
+            $predio = Predio::where('localidad', $line[0])
+                                ->where('oficina', $line[1])
+                                ->where('tipo_predio', $line[2])
+                                ->where('numero_registro', $line[3])
+                                ->first();
+
+            if($predio){
+
+                $predio->bloqueos()->create([
+                    'estado'=> 'activo',
+                    'observaciones_bloqueo' => $line[4],
+                ]);
+
+                $predio->update(['status' => 'bloqueado']);
+
+
+                $counter++;
+
+                $this->info("Insertados: $counter");
+
+                gc_collect_cycles();
+
+            }else{
+
+                $this->info("Predio no encontrado:" . $line[0] . '-' . $line[1] . '-' . $line[2] . '-' .$line[3]);
+            }
+
+        }
+
+    }finally {
+
+        fclose($handle);
 
     }
 
 });
-
 
