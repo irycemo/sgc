@@ -11,6 +11,7 @@ use App\Models\Oficina;
 use App\Models\PredioIgnorado;
 use App\Models\Tramite;
 use App\Models\User;
+use App\Services\Tramites\TramiteService;
 use App\Traits\ComponentesTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -93,55 +94,63 @@ class PrediosIgnorados extends Component
 
     public function buscarTramite(){
 
-        $this->tramite = Tramite::with('predios')
-                                    ->where('año', $this->taño)
-                                    ->where('folio', $this->tfolio)
-                                    ->where('usuario', $this->tusuario)
-                                    ->first();
+        try {
 
-        if(!$this->tramite){
+            $this->tramite = Tramite::with('predios')
+                                        ->where('año', $this->taño)
+                                        ->where('folio', $this->tfolio)
+                                        ->where('usuario', $this->tusuario)
+                                        ->first();
 
-            $this->dispatch('mostrarMensaje', ['error', "El trámite no existe."]);
+            if(!$this->tramite){
 
-            return true;
+                $this->dispatch('mostrarMensaje', ['error', "El trámite no existe."]);
+
+                return true;
+
+            }
+
+            $predioIgnorado = PredioIgnorado::where('tramite_id', $this->tramite->id)->first();
+
+            if($predioIgnorado){
+
+                $this->dispatch('mostrarMensaje', ['error', "El trámite ya esta usado por un predio ignorado."]);
+
+                return true;
+
+            }
+
+            if($this->tramite->servicio->clave_ingreso !== 'DM27'){
+
+                $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a un predio ignorado."]);
+
+                return true;
+
+            }
+
+            if($this->tramite->estado != 'pagado'){
+
+                (new TramiteService($this->tramite))->procesarPago();
+
+            }
+
+            if($this->tramite->estado === 'concluido'){
+
+                $this->dispatch('mostrarMensaje', ['error', "El trámite esta concluido."]);
+
+                return true;
+
+            }
+
+            return false;
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', "El trámite no esta pagado."]);
+
+            $this->reset('tramite');
 
         }
-
-        $predioIgnorado = PredioIgnorado::where('tramite_id', $this->tramite->id)->first();
-
-        if($predioIgnorado){
-
-            $this->dispatch('mostrarMensaje', ['error', "El trámite ya esta usado por un predio ignorado."]);
-
-            return true;
-
-        }
-
-        if($this->tramite->servicio->clave_ingreso !== 'DM27'){
-
-            $this->dispatch('mostrarMensaje', ['error', "El trámite no corresponde a un predio ignorado."]);
-
-            return true;
-
-        }
-
-        if($this->tramite->estado != 'pagado'){
-
-            $this->dispatch('mostrarMensaje', ['error', "El trámite no esta pagado."]);
-
-            return true;
-
-        }
-
-        if($this->tramite->estado === 'concluido'){
-
-            $this->dispatch('mostrarMensaje', ['error', "El trámite esta concluido."]);
-
-            return true;
-
-        }
-
-        return false;
 
     }
 

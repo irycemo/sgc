@@ -2,17 +2,19 @@
 
 namespace App\Livewire\Certificaciones\CertificadoNegativo;
 
-use App\Models\Predio;
-use App\Models\Persona;
-use App\Models\Tramite;
-use Livewire\Component;
-use App\Models\Propietario;
 use App\Constantes\Constantes;
-use Illuminate\Validation\Rule;
+use App\Exceptions\GeneralException;
+use App\Http\Controllers\Certificaciones\CertificadoNegativoController;
+use App\Models\Persona;
+use App\Models\Predio;
+use App\Models\Propietario;
+use App\Models\Tramite;
+use App\Services\Tramites\TramiteService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Certificaciones\CertificadoNegativoController;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\Rule;
+use Livewire\Component;
 
 class CertificadoNegativo extends Component
 {
@@ -104,15 +106,18 @@ class CertificadoNegativo extends Component
 
             if($this->tramite->estado != 'pagado' && $this->tramite->estado != 'autorizado'){
 
-                $this->dispatch('mostrarMensaje', ['warning', "El trámite no esta pagado."]);
-
-                $this->reset('tramite');
-
-                return;
+                (new TramiteService($this->tramite))->procesarPago();
 
             }
 
             $this->tramiteFlag = true;
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', "El trámite no esta pagado."]);
+
+            $this->reset('tramite');
+
         } catch (ModelNotFoundException $th) {
 
             $this->dispatch('mostrarMensaje', ['warning', "El trámite no existe."]);

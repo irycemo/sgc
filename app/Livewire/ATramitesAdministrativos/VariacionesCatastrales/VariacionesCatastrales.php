@@ -2,33 +2,34 @@
 
 namespace App\Livewire\ATramitesAdministrativos\VariacionesCatastrales;
 
-use App\Models\File;
-use App\Models\User;
-use App\Models\Avaluo;
-use App\Models\Predio;
-use App\Models\Oficina;
-use App\Models\Terreno;
-use App\Models\Tramite;
-use Livewire\Component;
-use App\Models\Colindancia;
-use App\Models\Propietario;
-use Illuminate\Support\Str;
-use App\Models\Construccion;
-use App\Models\PredioAvaluo;
-use Livewire\WithPagination;
-use App\Models\TerrenosComun;
-use Livewire\WithFileUploads;
 use App\Constantes\Constantes;
-use Illuminate\Validation\Rule;
-use App\Traits\ComponentesTrait;
-use Livewire\Attributes\Computed;
-use App\Models\VariacionCatastral;
-use Illuminate\Support\Facades\DB;
-use App\Models\ConstruccionesComun;
-use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
 use App\Models\Audit;
+use App\Models\Avaluo;
+use App\Models\Colindancia;
+use App\Models\Construccion;
+use App\Models\ConstruccionesComun;
+use App\Models\File;
+use App\Models\Oficina;
+use App\Models\Predio;
+use App\Models\PredioAvaluo;
+use App\Models\Propietario;
+use App\Models\Terreno;
+use App\Models\TerrenosComun;
+use App\Models\Tramite;
+use App\Models\User;
+use App\Models\VariacionCatastral;
+use App\Services\Tramites\TramiteService;
+use App\Traits\ComponentesTrait;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 
 class VariacionesCatastrales extends Component
@@ -102,55 +103,63 @@ class VariacionesCatastrales extends Component
 
     public function buscarTramite(){
 
-        $this->tramite = Tramite::with('predios')
-                                    ->where('año', $this->taño)
-                                    ->where('folio', $this->tfolio)
-                                    ->where('usuario', $this->tusuario)
-                                    ->first();
+        try {
 
-        if(!$this->tramite){
+            $this->tramite = Tramite::with('predios')
+                                        ->where('año', $this->taño)
+                                        ->where('folio', $this->tfolio)
+                                        ->where('usuario', $this->tusuario)
+                                        ->first();
 
-            $this->dispatch('mostrarMensaje', ['warning', "El trámite no existe."]);
+            if(!$this->tramite){
 
-            return true;
+                $this->dispatch('mostrarMensaje', ['warning', "El trámite no existe."]);
 
-        }
+                return true;
 
-        $variacion = VariacionCatastral::where('tramite_id', $this->tramite->id)->first();
+            }
 
-        if($variacion){
+            $variacion = VariacionCatastral::where('tramite_id', $this->tramite->id)->first();
 
-            $this->dispatch('mostrarMensaje', ['warning', "El trámite ya esta usado por una variación catastral."]);
+            if($variacion){
 
-            return true;
+                $this->dispatch('mostrarMensaje', ['warning', "El trámite ya esta usado por una variación catastral."]);
 
-        }
+                return true;
 
-        if(!in_array($this->tramite->servicio->clave_ingreso, ['DM27'])){
+            }
 
-            $this->dispatch('mostrarMensaje', ['warning', "El trámite no corresponde a una variación catastral."]);
+            if(!in_array($this->tramite->servicio->clave_ingreso, ['DM27'])){
 
-            return true;
+                $this->dispatch('mostrarMensaje', ['warning', "El trámite no corresponde a una variación catastral."]);
 
-        }
+                return true;
 
-        if($this->tramite->estado != 'pagado'){
+            }
+
+            if($this->tramite->estado != 'pagado'){
+
+                (new TramiteService($this->tramite))->procesarPago();
+
+            }
+
+            if($this->tramite->estado === 'concluido'){
+
+                $this->dispatch('mostrarMensaje', ['warning', "El trámite esta concluido."]);
+
+                return true;
+
+            }
+
+            return false;
+
+        } catch (GeneralException $ex) {
 
             $this->dispatch('mostrarMensaje', ['warning', "El trámite no esta pagado."]);
 
-            return true;
+            $this->reset('tramite');
 
         }
-
-        if($this->tramite->estado === 'concluido'){
-
-            $this->dispatch('mostrarMensaje', ['warning', "El trámite esta concluido."]);
-
-            return true;
-
-        }
-
-        return false;
 
     }
 

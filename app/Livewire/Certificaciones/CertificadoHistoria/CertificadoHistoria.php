@@ -2,16 +2,18 @@
 
 namespace App\Livewire\Certificaciones\CertificadoHistoria;
 
+use App\Constantes\Constantes;
+use App\Exceptions\GeneralException;
+use App\Http\Controllers\Certificaciones\CertificadoHistoriaController;
+use App\Models\Movimiento;
 use App\Models\Predio;
 use App\Models\Tramite;
-use Livewire\Component;
-use App\Models\Movimiento;
-use App\Constantes\Constantes;
+use App\Services\Tramites\TramiteService;
 use App\Traits\ComponentesTrait;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Http\Controllers\Certificaciones\CertificadoHistoriaController;
+use Livewire\Component;
 
 class CertificadoHistoria extends Component
 {
@@ -185,11 +187,7 @@ class CertificadoHistoria extends Component
 
             if($this->tramite->estado != 'pagado' && $this->tramite->estado != 'autorizado'){
 
-                $this->dispatch('mostrarMensaje', ['warning', "El trámite no esta pagado."]);
-
-                $this->reset('tramite');
-
-                return;
+                (new TramiteService($this->tramite))->procesarPago();
 
             }
 
@@ -219,6 +217,12 @@ class CertificadoHistoria extends Component
 
             $this->reset(['folio', 'usuario']);
 
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', "El trámite no esta pagado."]);
+
+            $this->reset('tramite');
 
         } catch (ModelNotFoundException $th) {
 

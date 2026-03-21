@@ -2,14 +2,16 @@
 
 namespace App\Livewire\Certificaciones\CedulaActualizacion;
 
+use App\Constantes\Constantes;
+use App\Exceptions\GeneralException;
+use App\Http\Controllers\Certificaciones\CedulaActualizcacionController;
 use App\Models\Oficina;
 use App\Models\Tramite;
-use Livewire\Component;
-use App\Constantes\Constantes;
-use App\Http\Controllers\Certificaciones\CedulaActualizcacionController;
+use App\Services\Tramites\TramiteService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Livewire\Component;
 
 class CedulaActualizacion extends Component
 {
@@ -70,11 +72,7 @@ class CedulaActualizacion extends Component
 
             if($this->tramite->estado != 'pagado'){
 
-                $this->dispatch('mostrarMensaje', ['warning', "El trámite no esta pagado."]);
-
-                $this->reset('tramite');
-
-                return;
+                (new TramiteService($this->tramite))->procesarPago();
 
             }
 
@@ -94,6 +92,12 @@ class CedulaActualizacion extends Component
 
             $this->reset(['folio', 'usuario']);
 
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', "El trámite no esta pagado."]);
+
+            $this->reset('tramite');
 
         } catch (ModelNotFoundException $th) {
 
