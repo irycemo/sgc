@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Api\V1\Tramites;
 
-use Carbon\Carbon;
-use App\Models\Tramite;
-use Illuminate\Http\Request;
-use App\Models\Certificacion;
-use App\Models\PredioTramite;
-use Illuminate\Support\Facades\DB;
+use App\Exceptions\GeneralException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ConsultarTramiteRefrendoRequest;
-use App\Http\Requests\TramiteRequest;
-use Illuminate\Support\Facades\Cache;
-use App\Http\Resources\TramiteResource;
 use App\Http\Requests\TramiteListaRequest;
+use App\Http\Requests\TramiteRequest;
+use App\Http\Resources\TramiteResource;
+use App\Models\Certificacion;
+use App\Models\PredioTramite;
+use App\Models\Tramite;
+use App\Services\Tramites\TramiteService;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class ConsultarTramitesController extends Controller
 {
@@ -165,9 +167,17 @@ class ConsultarTramitesController extends Controller
 
             if($tramite->estado != 'pagado'){
 
-                return response()->json([
-                    'error' => "El trámite no esta pagado.",
-                ], 401);
+                try {
+
+                    (new TramiteService($tramite))->procesarPago();
+
+                } catch (GeneralException $ex) {
+
+                    return response()->json([
+                        'error' => "El trámite no esta pagado.",
+                    ], 401);
+
+                }
 
             }
 
