@@ -490,6 +490,8 @@ class Captura extends Component
 
             });
 
+            $this->dispatch('cargarPredioPadron', $this->predio->id);
+
             $this->dispatch('mostrarMensaje', ['success', "El predio se actualizó correctamente."]);
 
         } catch (GeneralException $ex) {
