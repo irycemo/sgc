@@ -305,6 +305,12 @@ trait ComunTrait
 
         }
 
+        if(in_array($this->servicio['nombre'], ['Complemento'])){
+
+            $this->flags['adiciona'] = true;
+
+        }
+
     }
 
     public function crear(){

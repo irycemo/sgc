@@ -4,7 +4,9 @@ use App\Jobs\GenerarCertificacionMigracionJob;
 use App\Jobs\MigrarPredioJob;
 use App\Models\OldCertificado;
 use App\Models\OldTraslado;
+use App\Models\Persona;
 use App\Models\Predio;
+use App\Models\Propietario;
 use App\Models\Tramite;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -796,6 +798,26 @@ Artisan::command('migrar-bloqueados', function(){
         fclose($handle);
 
     }
+
+});
+
+Artisan::command('conciliar-personas', function(){
+
+    Persona::chunk(200, function ($personas) {
+
+        foreach($personas as $persona){
+
+            $personas_repetidas = Persona::where('nombre', $persona->nombre)
+                                            ->where('ap_paterno', $persona->ap_paterno)
+                                            ->where('ap_materno', $persona->ap_materno)
+                                            ->where('razon_social', $persona->razon_social)
+                                            ->get();
+
+            $propietarios = Propietario::whereIn('persona_id', $personas_repetidas->pluck('id'))->get();
+
+        }
+
+    });
 
 });
 

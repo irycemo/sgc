@@ -2,8 +2,12 @@
 
 namespace App\Livewire\Tramites\Ventanilla;
 
+use App\Exceptions\GeneralException;
 use App\Models\Tramite;
+use App\Services\Tramites\TramiteService;
 use App\Traits\Tramties\Ventanilla\ComunTrait;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
@@ -23,7 +27,7 @@ class Complemento extends Component
             'modelo_editar.tipo_servicio' => 'required',
             'modelo_editar.cantidad' => 'required|numeric',
             'modelo_editar.ligado_a' => 'required',
-            'modelo_editar.observaciones' => Rule::requiredIf($this->modelo_editar->tipo_tramite === "exento"),
+            'modelo_editar.observaciones' => 'required',
             'modelo_editar.numero_oficio' => Rule::requiredIf(
                                                                 $this->modelo_editar->solicitante == 'Oficialia de partes' ||
                                                                 $this->modelo_editar->solicitante == 'Escrituración social'
@@ -57,6 +61,49 @@ class Complemento extends Component
 
         $this->modelo_editar->ligado_a = $this->tramiteAdicionado->id;
 
+        $this->modelo_editar->solicitante = $this->tramiteAdicionado->solicitante;
+
+        $this->modelo_editar->nombre_solicitante = $this->tramiteAdicionado->nombre_solicitante;
+
+    }
+
+    public function crear(){
+
+        $this->validate();
+
+        try {
+
+            DB::transaction(function () {
+
+                $tramite = (new TramiteService($this->modelo_editar))->crear($this->predios);
+
+                $this->js('window.open(\' '. route('tramites.orden', $tramite) . '\', \'_blank\');');
+
+                $this->resetearTodo();
+
+                $this->dispatch('reset');
+
+                $this->dispatch('mostrarMensaje', ['success', "El trámite se creó con éxito."]);
+
+            });
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+            $this->cargaInicial($this->servicio);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al crear trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', $th->getMessage()]);
+
+            $this->cargaInicial($this->servicio);
+
+        }
+
+
     }
 
     public function mount(){
@@ -64,8 +111,6 @@ class Complemento extends Component
         $this->cargaInicial($this->servicio);
 
         $this->tramite_adiciona_año = now()->format('Y');
-
-        $this->flags['adiciona'] = true;
 
     }
 
