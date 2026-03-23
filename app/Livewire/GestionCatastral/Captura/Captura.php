@@ -372,11 +372,16 @@ class Captura extends Component
 
         if($this->predio->isDirty('documento_entrada') || $this->predio->isDirty('documento_numero')){
 
-            $predio = Predio::where('documento_entrada', $this->predio->documento_entrada)
-                                ->where('documento_numero', $this->predio->documento_numero)
-                                ->first();
+            if(in_array($this->predio->documento_entrada, ['TÍTULO DE PROPIEDAD PARCELARIO', 'TÍTULO DE PROPIEDAD SOLAR URBANO'])){
 
-            if($predio) throw new GeneralException("El título de propiedad ya esta registrado.");
+                $predio = Predio::where('documento_entrada', $this->predio->documento_entrada)
+                                    ->where('documento_numero', $this->predio->documento_numero)
+                                    ->first();
+
+                if($predio) throw new GeneralException("El título de propiedad ya esta registrado.");
+
+
+            }
 
         }
 
