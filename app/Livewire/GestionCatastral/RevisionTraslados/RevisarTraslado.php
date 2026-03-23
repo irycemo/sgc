@@ -35,6 +35,10 @@ class RevisarTraslado extends Component
 
     public $transmitentes = [];
 
+    protected $validationAttributes  = [
+        'rechazo' => 'artículo'
+    ];
+
     public function seleccionarMotivo($key){
 
         $this->rechazo['key'] = $key;
@@ -56,7 +60,7 @@ class RevisarTraslado extends Component
 
     public function rechazarTraslado(){
 
-        $this->validate(['observaciones' => 'required']);
+        $this->validate(['observaciones' => 'required', 'rechazo' => 'required']);
 
         try {
 

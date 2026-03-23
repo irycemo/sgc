@@ -265,6 +265,12 @@
 
             </x-input-group>
 
+            @error('rechazo')
+
+                <div class="text-red-500 text-sm mt-1"> {{ $message }} </div>
+
+            @enderror
+
         </x-slot>
 
         <x-slot name="footer">
