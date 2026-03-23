@@ -181,7 +181,7 @@ class ConsultarTramitesController extends Controller
 
             }
 
-            if($tramite->servicio->clave_ingreso != 'D922'){
+            if($tramite->servicio->clave_ingreso != 'D921'){
 
                 return response()->json([
                     'error' => "El trámite ingresado no corresponde a refrendo.",
