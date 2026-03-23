@@ -47,6 +47,16 @@
 
         </div>
 
+        @if(isset($predio))
+
+            <div class="space-y-2 mb-5 bg-white rounded-lg p-2 text-right shadow-xl">
+
+                <span class="bg-blue-400 text-white text-sm rounded-full px-2 py-1">Predio: {{ $predio->cuentaPredial() }}</span>
+
+            </div>
+
+        @endif
+
         <div x-cloak class="tab-panel" :class="{ 'active': activeTab === 0 }" x-show.transition.in.opacity.duration.800="activeTab === 0"  wire:key="tab-0">
 
             <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl">
