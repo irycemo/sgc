@@ -69,7 +69,7 @@
 
                         @endforeach
 
-                        <x-table.row wire:key="row-{{ $propietario->id }}">
+                        <x-table.row wire:key="row-porcentajes">
                                 <x-table.cell> PORCENTAJES TOTALES </x-table.cell>
                                 <x-table.cell>{{ $predio->propietarios->sum('porcentaje_propiedad') }}%</x-table.cell>
                                 <x-table.cell>{{ $predio->propietarios->sum('porcentaje_nuda') }}%</x-table.cell>
