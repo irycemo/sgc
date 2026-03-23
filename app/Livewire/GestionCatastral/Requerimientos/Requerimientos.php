@@ -145,7 +145,8 @@ class Requerimientos extends Component
                                 ->where('requerimientoable_type', 'App\Models\Oficina')
                                 ->whereNull('requerimiento_id')
                                 ->where('estado', '!=', 'finalizado')
-                                ->count();
+                                ->orderBy($this->sort, $this->direction)
+                                ->paginate($this->pagination);
 
 
         }
