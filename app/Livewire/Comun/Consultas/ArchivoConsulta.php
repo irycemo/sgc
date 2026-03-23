@@ -14,7 +14,7 @@ class ArchivoConsulta extends Component
 {
 
     public $predio_id;
-    public Predio $predio;
+    public $predio;
     public $archivos = [];
     public $fotos;
     public $archivos_anteriores;
@@ -28,7 +28,8 @@ class ArchivoConsulta extends Component
     #[On('refresh')]
     public function refresh(){
 
-        $this->predio->refresh();
+        if($this->predio)
+            $this->predio->refresh();
 
     }
 
