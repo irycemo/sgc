@@ -553,6 +553,10 @@ class Valuacion extends Component
                 'indiviso_construccion' => $construccionComun->indiviso_construccion,
                 'valor_clasificacion_construccion' => $construccionComun->valor_clasificacion_construccion,
                 'valor_construccion_comun' => $construccionComun->valor_construccion_comun,
+                'tipo' => $construccion->tipo,
+                'uso' => $construccion->uso,
+                'estado' => $construccion->estado,
+                'calidad' => $construccion->calidad,
                 'creado_por' => auth()->id()
             ]);
 
