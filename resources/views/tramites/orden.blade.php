@@ -15,11 +15,15 @@
 <style>
 
     body{
-        font-size: 15px;
+        font-family: sans-serif;
+        font-weight: normal;
+        line-height: 1.5;
+        text-transform: uppercase;
+        font-size: 9px;
     }
 
     h1{
-        font-size: 15;
+        font-size: 13;
         font:bold;
         margin: 0;
     }
@@ -38,6 +42,8 @@
         width: 100%;
         table-layout: auto;
         margin: 5 0 5 0;
+        border-top: 1px solid rgb(201, 201, 201);
+        border-bottom: 1px solid rgb(201, 201, 201);
     }
 
     .th_table{
@@ -65,7 +71,7 @@
     .footer{
         margin-top: 10px;
         width: 100%;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: bold;
         text-align: center;
 
@@ -85,14 +91,14 @@
     }
 
     .titulo{
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
         margin: 0;
         text-align: center;
     }
 
     .leyenda{
-        font-size: 11px;
+        font-size: 9px;
     }
 
     .punteada{

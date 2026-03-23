@@ -4,56 +4,69 @@
 
         <x-header>Trámites en línea</x-header>
 
-        <div class="flex gap-3 overflow-auto p-1">
+        <div class="flex justify-between">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
+            <div class="flex gap-3 overflow-auto p-1">
 
-                @foreach ($años as $año)
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
 
-                    <option value="{{ $año }}">{{ $año }}</option>
+                    @foreach ($años as $año)
 
-                @endforeach
+                        <option value="{{ $año }}">{{ $año }}</option>
 
-            </select>
+                    @endforeach
 
-            <input type="number" wire:model.live.debounce.500mse="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+                </select>
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
+                <input type="number" wire:model.live.debounce.500mse="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
 
-                <option value="" selected>Estado</option>
-                <option value="pagado" selected>Pagado</option>
-                <option value="concluido" selected>Concluido</option>
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
 
-            </select>
+                    <option value="" selected>Estado</option>
+                    <option value="pagado" selected>Pagado</option>
+                    <option value="concluido" selected>Concluido</option>
 
-            <select class="bg-white rounded-full text-sm w-60" wire:model.live="filters.mes">
+                </select>
 
-                <option value="" selected>Mes</option>
-                <option value="1" selected>Enero</option>
-                <option value="2" selected>Febrero</option>
-                <option value="3" selected>Marzo</option>
-                <option value="4" selected>Abril</option>
-                <option value="5" selected>Mayo</option>
-                <option value="6" selected>Junio</option>
-                <option value="7" selected>Julio</option>
-                <option value="8" selected>Agosto</option>
-                <option value="9" selected>Septiembre</option>
-                <option value="10" selected>Octubre</option>
-                <option value="11" selected>Noviembre</option>
-                <option value="12" selected>Diciembre</option>
+                <select class="bg-white rounded-full text-sm w-60" wire:model.live="filters.mes">
 
-            </select>
+                    <option value="" selected>Mes</option>
+                    <option value="1" selected>Enero</option>
+                    <option value="2" selected>Febrero</option>
+                    <option value="3" selected>Marzo</option>
+                    <option value="4" selected>Abril</option>
+                    <option value="5" selected>Mayo</option>
+                    <option value="6" selected>Junio</option>
+                    <option value="7" selected>Julio</option>
+                    <option value="8" selected>Agosto</option>
+                    <option value="9" selected>Septiembre</option>
+                    <option value="10" selected>Octubre</option>
+                    <option value="11" selected>Noviembre</option>
+                    <option value="12" selected>Diciembre</option>
 
-            <input type="text" wire:model.live.debounce.500ms="filters.search" placeholder="Solicitante" class="bg-white rounded-full text-sm">
+                </select>
 
-            <select class="bg-white rounded-full text-sm w-fit" wire:model.live="pagination">
+                <input type="text" wire:model.live.debounce.500ms="filters.search" placeholder="Solicitante" class="bg-white rounded-full text-sm">
 
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
+                <select class="bg-white rounded-full text-sm w-fit" wire:model.live="pagination">
 
-            </select>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+
+                </select>
+
+            </div>
+
+            <button wire:click="$set('modalCarga', '!modalCarga')" wire:loading.attr="disabled" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 text-sm py-2 px-4 text-white rounded-full hidden md:block items-center justify-center focus:outline-gray-400 focus:outline-offset-2">
+
+                <img wire:loading wire:target="modalCarga" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                Imprimir carga de trabajo
+
+            </button>
+
+            <button wire:click="$set('modalCarga', '!modalCarga')" class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 float-right text-sm py-2 px-4 text-white rounded-full focus:outline-none md:hidden">+</button>
 
         </div>
 
@@ -262,6 +275,90 @@
                     wire:click="$toggle('modal')"
                     wire:loading.attr="disabled"
                     wire:target="$toggle('modal')">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
+
+    <x-dialog-modal wire:model.live="modalCarga" maxWidth="sm">
+
+        <x-slot name="title">
+            Carga de trabajo
+        </x-slot>
+
+        <x-slot name="content">
+
+            <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5">
+
+                <div class="flex-auto ">
+
+                    <div>
+
+                        <Label>Fecha inicial</Label>
+                    </div>
+
+                    <div>
+
+                        <input type="date" class="bg-white rounded text-sm w-full" wire:model="fecha_inicio">
+
+                    </div>
+
+                    <div>
+
+                        @error('fecha_inicio') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                    </div>
+
+                </div>
+
+                <div class="flex-auto ">
+
+                    <div>
+
+                        <Label>Fecha final</Label>
+                    </div>
+
+                    <div>
+
+                        <input type="date" class="bg-white rounded text-sm w-full" wire:model="fecha_final">
+
+                    </div>
+
+                    <div>
+
+                        @error('fecha_final') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex gap-3">
+
+                <x-button-blue
+                    wire:click="imprimirCarga"
+                    wire:loading.attr="disabled"
+                    wire:target="imprimirCarga">
+
+                    <img wire:loading wire:target="imprimirCarga" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    <span>Imprimir</span>
+                </x-button-blue>
+
+
+                <x-button-red
+                    wire:click="$toggle('modalCarga')"
+                    wire:loading.attr="disabled"
+                    wire:target="$toggle('modalCarga')">
                     Cerrar
                 </x-button-red>
 

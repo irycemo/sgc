@@ -2,12 +2,13 @@
 
 namespace App\Livewire\Tramites\TramitesLinea;
 
+use App\Constantes\Constantes;
 use App\Models\Tramite;
+use App\Traits\ComponentesTrait;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Constantes\Constantes;
-use App\Traits\ComponentesTrait;
-use Livewire\Attributes\Computed;
 
 class TramitesLinea extends Component
 {
@@ -28,6 +29,10 @@ class TramitesLinea extends Component
 
     public $servicios;
 
+    public $modalCarga = false;
+    public $fecha_inicio;
+    public $fecha_final;
+
     public Tramite $modelo_editar;
 
     public function updatedFilters() { $this->resetPage(); }
@@ -43,6 +48,36 @@ class TramitesLinea extends Component
 
         if($this->modelo_editar->isNot($modelo))
             $this->modelo_editar = $modelo;
+
+    }
+
+    public function imprimirCarga(){
+
+        $this->validate([
+            'fecha_final' => 'required',
+            'fecha_inicio' => 'required',
+        ]);
+
+        $fecha_final = $this->fecha_final . ' 23:59:59';
+        $fecha_inicio = $this->fecha_inicio . ' 00:00:00';
+
+        $carga = Tramite::with('predios')
+                            ->where('usuario', 11)
+                            ->whereBetween('created_at', [$fecha_inicio, $fecha_final])
+                            ->get();
+
+        $pdf = Pdf::loadView('tramites.cargaTrabajo', compact(
+            'fecha_inicio',
+            'fecha_final',
+            'carga',
+        ))->output();
+
+        $this->modalCarga = false;
+
+        return response()->streamDownload(
+            fn () => print($pdf),
+            'carga_de_trabajo.pdf'
+        );
 
     }
 
@@ -90,4 +125,5 @@ class TramitesLinea extends Component
     {
         return view('livewire.tramites.tramites-linea.tramites-linea')->extends('layouts.admin');
     }
+
 }
