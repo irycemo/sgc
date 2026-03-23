@@ -67,6 +67,14 @@ class ArchivoConsulta extends Component
 
         $this->predio = Predio::find($this->predio_id);
 
+        if(!$this->predio){
+
+            $this->dispatch('mostrarMensaje', ['warning', "Debe cargar primero el predio."]);
+
+            return;
+
+        }
+
         $this->archivos_anteriores = File::where('fileable_id', $this->predio->id)
                                         ->where('fileable_type', 'App\Models\Predio')
                                         ->where(function($q){

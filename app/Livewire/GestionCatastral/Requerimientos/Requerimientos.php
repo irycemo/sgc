@@ -157,6 +157,12 @@ class Requerimientos extends Component
 
         $this->oficina = request()->query('oficina');
 
+        if(! $this->oficina){
+
+            $this->oficina = auth()->user()->oficina_id;
+
+        }
+
         $this->oficinas = Oficina::select('id', 'nombre')->orderBy('nombre')->get();
 
         $this->crearModeloVacio();
