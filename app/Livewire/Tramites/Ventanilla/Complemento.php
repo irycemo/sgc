@@ -26,7 +26,7 @@ class Complemento extends Component
             'modelo_editar.monto' => 'required',
             'modelo_editar.tipo_servicio' => 'required',
             'modelo_editar.cantidad' => 'required|numeric',
-            'modelo_editar.ligado_a' => 'required',
+            'modelo_editar.ligado_a' => 'required_if:adicionaTramite,true',
             'modelo_editar.observaciones' => 'required',
             'modelo_editar.numero_oficio' => Rule::requiredIf(
                                                                 $this->modelo_editar->solicitante == 'Oficialia de partes' ||

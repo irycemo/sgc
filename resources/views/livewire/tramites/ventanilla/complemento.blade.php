@@ -11,11 +11,19 @@
 
                     @include('livewire.tramites.ventanilla.comun.adiciona')
 
-                    <div class="flex justify-around space-x-3 bg-white p-4 rounded-lg mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
+                    @if(!$adicionaTramite)
 
-                        {{ $tramiteAdicionado?->servicio->nombre }}
+                        @include('livewire.tramites.ventanilla.comun.solicitante')
 
-                    </div>
+                    @else
+
+                        <div class="flex justify-around space-x-3 bg-white p-4 rounded-lg mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
+
+                            {{ $tramiteAdicionado?->servicio->nombre }}
+
+                        </div>
+
+                    @endif
 
                     @include('livewire.tramites.ventanilla.comun.monto')
 
