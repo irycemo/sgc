@@ -10,7 +10,7 @@
 
         <div>
 
-            <input type="number" min="1" class="bg-white rounded text-sm w-full" wire:model.blur="modelo_editar.monto">
+            <input type="number" min="1" class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.monto">
 
         </div>
 

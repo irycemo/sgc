@@ -85,15 +85,21 @@ trait ActoresTrait{
 
         if(in_array($this->tipo_persona, ['FISICA', 'FÍSICA'])){
 
-            dd("entra");
+            if($this->propietario->getKey()){
 
-            $this->razon_social = $this->propietario->persona->razon_social;
+                $this->razon_social = $this->propietario->persona->razon_social;
+
+            }
 
         }elseif($this->tipo_persona == 'MORAL'){
 
-            $this->nombre = $this->propietario->persona->nombre;
-            $this->ap_paterno = $this->propietario->persona->ap_paterno;
-            $this->ap_materno = $this->propietario->persona->ap_materno;
+            if($this->propietario->getKey()){
+
+                $this->nombre = $this->propietario->persona->nombre;
+                $this->ap_paterno = $this->propietario->persona->ap_paterno;
+                $this->ap_materno = $this->propietario->persona->ap_materno;
+
+            }
 
         }
 

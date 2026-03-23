@@ -21,6 +21,16 @@
 
                     </div>
 
+                    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 text-right shadow-xl">
+
+                        <x-input-group for="porcentaje" label="Aplicar porcentaje de 20%" :error="$errors->first('porcentaje')" class="flex gap-3 items-center mr-auto">
+
+                            <x-checkbox wire:model.live="porcentaje"/>
+
+                        </x-input-group>
+
+                    </div>
+
                     @include('livewire.tramites.ventanilla.comun.avaluo_para')
 
                     @include('livewire.tramites.ventanilla.comun.observaciones')

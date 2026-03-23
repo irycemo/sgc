@@ -13,6 +13,7 @@ class InspeccionOcular extends Component
     use ComunTrait;
 
     public $lista_avaluo_para;
+    public $porcentaje = true;
 
     protected function rules(){
 
@@ -35,20 +36,34 @@ class InspeccionOcular extends Component
 
     }
 
+    public function updatedPorcentaje(){
+
+        $this->updatedModeloEditarCantidad();
+
+    }
+
     public function updatedModeloEditarCantidad()
     {
 
-        if($this->modelo_editar->cantidad > 1){
+        if($this->porcentaje){
 
-            $cantidad_20 = $this->modelo_editar->cantidad - 1;
+            if($this->modelo_editar->cantidad > 1){
 
-            $consto_20 = $this->servicio['ordinario'] * 0.2 * $cantidad_20;
+                $cantidad_20 = $this->modelo_editar->cantidad - 1;
 
-            $this->modelo_editar->monto = $this->servicio['ordinario'] + $consto_20;
+                $consto_20 = $this->servicio['ordinario'] * 0.2 * $cantidad_20;
+
+                $this->modelo_editar->monto = $this->servicio['ordinario'] + $consto_20;
+
+            }else{
+
+                $this->modelo_editar->monto = $this->servicio['ordinario'];
+
+            }
 
         }else{
 
-            $this->modelo_editar->monto = $this->servicio['ordinario'];
+            $this->modelo_editar->monto = $this->servicio['ordinario'] * $this->modelo_editar->cantidad;
 
         }
 

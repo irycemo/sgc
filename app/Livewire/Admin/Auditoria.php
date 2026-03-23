@@ -36,6 +36,7 @@ class Auditoria extends Component
         'Efirma' => 'App\Models\Efirma',
         'Movimiento' => 'App\Models\Movimiento',
         'Oficina' => 'App\Models\Oficina',
+        'Persona' => 'App\Models\Persona',
         'Predio' => 'App\Models\Predio',
         'PredioAvaluo' => 'App\Models\PredioAvaluo',
         'Pregunta' => 'App\Models\Pregunta',
