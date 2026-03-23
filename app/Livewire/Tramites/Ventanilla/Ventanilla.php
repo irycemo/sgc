@@ -44,7 +44,8 @@ class Ventanilla extends Component
         'Expedición de duplicados de documentos catastrales' => false,
         'Levantamientos topográficos' => false,
         'Variaciones Catastrales' => false,
-        'Cedulas' => false
+        'Cedulas' => false,
+        'Complemento' => false
     ];
 
     #[On('reset')]
@@ -118,6 +119,7 @@ class Ventanilla extends Component
                             'Determinación de la ubicación física de predios'=> 'Completo',
                             'Expedición de planos catastrales'  => 'Simple',
                             'Levantamiento Topográfico con curvas de nivel' => 'Completo',
+                            'Complemento' => 'Complemento',
                             default => 'No encontrada',
 
                         };

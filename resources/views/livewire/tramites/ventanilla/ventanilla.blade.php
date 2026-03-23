@@ -181,6 +181,12 @@
 
         @endif
 
+        @if($flags['Complemento'])
+
+            @livewire('tramites.ventanilla.complemento', ['servicio' => $servicio, 'tramite' => $tramite, 'años' => $años, 'solicitantes' => $solicitantes, 'dependencias' => $dependencias, 'notarias' => $notarias])
+
+        @endif
+
     </div>
 
 </div>

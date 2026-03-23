@@ -179,8 +179,6 @@ trait ActoresTrait{
 
         }
 
-        $this->tipo_persona = $this->propietario->persona->tipo;
-
         $this->modal = true;
 
         $this->dispatch('cargarSeleccion');
