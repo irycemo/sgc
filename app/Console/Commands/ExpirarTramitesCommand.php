@@ -38,8 +38,6 @@ class ExpirarTramitesCommand extends Command
 
                 $tramite->update(['estado' => 'expirado']);
 
-                $tramite->audits()->latest()->first()->update(['tags' => 'Expirado mediante tarea programada.']);
-
             }
 
         } catch (\Throwable $th) {

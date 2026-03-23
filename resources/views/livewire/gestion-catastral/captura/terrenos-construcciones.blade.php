@@ -22,7 +22,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.superficie">
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.superficie">
 
                             </div>
 
@@ -80,7 +80,7 @@
 
                             <div>
 
-                                <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.valor_unitario" @if($predio && $predio->tipo_predio == 2) readonly @endif>
+                                <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.valor_unitario" @if($predio && $predio->tipo_predio == 2) readonly @endif>
 
                             </div>
 
@@ -151,7 +151,7 @@
 
                             <div>
 
-                                <input type="text" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.referencia">
+                                <input type="text" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.referencia">
 
                             </div>
 
@@ -173,7 +173,7 @@
 
                             <div>
 
-                                <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.valor_unitario" readonly>
+                                <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.valor_unitario" readonly>
 
                             </div>
 
@@ -195,7 +195,7 @@
 
                             <div>
 
-                                <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.niveles">
+                                <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.niveles">
 
                             </div>
 
@@ -217,7 +217,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.superficie">
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.superficie">
 
                             </div>
 
@@ -239,7 +239,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construcciones.{{ $index }}.valor_construccion" readonly>
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.valor_construccion" readonly>
 
                             </div>
 
@@ -296,7 +296,7 @@
 
                                 <div>
 
-                                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenosComun.{{ $index }}.area_terreno_comun">
+                                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.area_terreno_comun">
 
                                 </div>
 
@@ -318,7 +318,7 @@
 
                                 <div>
 
-                                    <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.blur="terrenosComun.{{ $index }}.indiviso_terreno">
+                                    <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.indiviso_terreno">
 
                                 </div>
 
@@ -340,7 +340,7 @@
 
                                 <div>
 
-                                    <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenosComun.{{ $index }}.valor_unitario">
+                                    <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.valor_unitario">
 
                                 </div>
 
@@ -362,7 +362,7 @@
 
                                 <div>
 
-                                    <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.blur="terrenosComun.{{ $index }}.superficie_proporcional" readonly>
+                                    <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.superficie_proporcional" readonly>
 
                                 </div>
 
@@ -384,7 +384,7 @@
 
                                 <div>
 
-                                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenosComun.{{ $index }}.valor_terreno_comun" readonly>
+                                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.valor_terreno_comun" readonly>
 
                                 </div>
 
@@ -427,97 +427,144 @@
 
                     @foreach ($construccionesComun as $index => $item)
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-3 items-end mb-2 bg-gray-50 p-4 rounded-lg" wire:key="construccionComun-"{{ $index }}>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-3 items-end mb-2 bg-gray-50 p-4 rounded-lg" wire:key="construccionComun-"{{ $index }}>
 
-                            <div class="flex-auto lg:col-span-1">
+                        <div class="flex-auto lg:col-span-1">
 
-                                <div>
+                            <div>
 
-                                    <label class="text-sm" >Área común de construcción</label>
-
-                                </div>
-
-                                <div>
-
-                                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construccionesComun.{{ $index }}.area_comun_construccion">
-
-                                </div>
-
-                                <div>
-
-                                    @error('construccionesComun.' .  $index . '.area_comun_construccion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                                </div>
+                                <label class="text-sm" >Clasificación de construccion</label>
 
                             </div>
 
-                            <div class="flex-auto lg:col-span-1">
+                            <div>
 
-                                <div>
+                                <select class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.valores">
 
-                                    <label class="text-sm" >Indiviso de construcción</label>
+                                    <option value="" selected>Seleccione una opción</option>
 
-                                </div>
+                                    @foreach ($valores_construccion as $item)
 
-                                <div>
+                                        <option value="{{ $item }}" selected>{{ $item->tipo }}{{ $item->uso }}{{ $item->estado }}{{ $item->calidad }} - ${{ number_format($item->valor, 2) }}</option>
 
-                                    <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.blur="construccionesComun.{{ $index }}.indiviso_construccion">
+                                    @endforeach
 
-                                </div>
-
-                                <div>
-
-                                    @error('construccionesComun.' . $index . '.indiviso_construccion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                                </div>
+                                </select>
 
                             </div>
 
-                            <div class="flex-auto lg:col-span-1">
+                            <div>
 
-                                <div>
-
-                                    <label class="text-sm" >Superficie proporcional</label>
-
-                                </div>
-
-                                <div>
-
-                                    <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.blur="construccionesComun.{{ $index }}.superficie_proporcional" readonly>
-
-                                </div>
-
-                                <div>
-
-                                    @error('construccionesComun.' . $index . '.superficie_proporcional') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                                </div>
-
-                            </div>
-
-                            <div class="flex-auto lg:col-span-1">
-
-                                <div>
-
-                                    <label class="text-sm" >Valor de construcción común</label>
-
-                                </div>
-
-                                <div>
-
-                                    <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="construccionesComun.{{ $index }}.valor_construccion_comun" readonly>
-
-                                </div>
-
-                                <div>
-
-                                    @error('construccionesComun.' . $index . '.valor_construccion_comun') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
-
-                                </div>
+                                @error('construccionesComun.{{ $index }}.valores') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                             </div>
 
                         </div>
+
+                        <div class="flex-auto lg:col-span-1">
+
+                            <div>
+
+                                <label class="text-sm" >Área común de construcción</label>
+
+                            </div>
+
+                            <div>
+
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.area_comun_construccion">
+
+                            </div>
+
+                            <div>
+
+                                @error('construccionesComun.' .  $index . '.area_comun_construccion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                        <div class="flex-auto lg:col-span-1">
+
+                            <div>
+
+                                <label class="text-sm" >Indiviso de construcción</label>
+
+                            </div>
+
+                            <div>
+
+                                <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.indiviso_construccion">
+
+                            </div>
+
+                            <div>
+
+                                @error('construccionesComun.' . $index . '.indiviso_construccion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                        <div class="flex-auto lg:col-span-1">
+
+                            <div>
+
+                                <label class="text-sm" >Superficie proporcional</label>
+
+                            </div>
+
+                            <div>
+
+                                <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.superficie_proporcional" readonly>
+
+                            </div>
+
+                            <div>
+
+                                @error('construccionesComun.' . $index . '.superficie_proporcional') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                        <div class="flex-auto lg:col-span-1">
+
+                            <div>
+
+                                <label class="text-sm" >Valor de construcción común</label>
+
+                            </div>
+
+                            <div>
+
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.valor_construccion_comun" readonly>
+
+                            </div>
+
+                            <div>
+
+                                @error('construccionesComun.' . $index . '.valor_construccion_comun') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                            </div>
+
+                        </div>
+
+                        <div class="flex-auto lg:col-span-1 my-auto">
+
+                            <x-button-red
+                                wire:click="borrarConstruccionComun({{ $index }})"
+                                wire:loading.attr="disabled"
+                                wire:target="borrarConstruccionComun({{ $index }})">
+
+                                <img wire:loading wire:target="borrarConstruccionComun({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                                Borrar
+
+                            </x-button-red>
+
+                        </div>
+
+                    </div>
 
                     @endforeach
 

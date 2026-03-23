@@ -85,6 +85,8 @@ trait ActoresTrait{
 
         if(in_array($this->tipo_persona, ['FISICA', 'FÍSICA'])){
 
+            dd("entra");
+
             $this->razon_social = $this->propietario->persona->razon_social;
 
         }elseif($this->tipo_persona == 'MORAL'){

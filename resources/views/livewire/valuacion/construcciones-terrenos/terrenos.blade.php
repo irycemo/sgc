@@ -18,7 +18,7 @@
 
                     <div>
 
-                        <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.superficie">
+                        <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.superficie">
 
                     </div>
 
@@ -76,7 +76,7 @@
 
                     <div>
 
-                        <input type="number" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.valor_unitario" @if($predio && $predio->tipo_predio == 2) readonly @endif>
+                        <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.valor_unitario" @if($predio && $predio->tipo_predio == 2) readonly @endif>
 
                     </div>
 
@@ -100,7 +100,7 @@
 
                         <div>
 
-                            <input type="number" min="0" class="bg-white rounded text-xs w-full" wire:model.blur="terrenos.{{ $index }}.demerito">
+                            <input type="number" min="0" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.demerito">
 
                         </div>
 
