@@ -255,7 +255,7 @@
 
                             @else
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model="predio.declarante">
+                                <input  class="bg-white rounded text-xs w-full" wire:model="predio.declarante">
 
                             @endif
 

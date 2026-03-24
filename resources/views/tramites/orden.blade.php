@@ -15,11 +15,7 @@
 <style>
 
     body{
-        font-family: sans-serif;
-        font-weight: normal;
-        line-height: 1.5;
-        text-transform: uppercase;
-        font-size: 9px;
+        font-size: 13px;
     }
 
     h1{
@@ -42,8 +38,6 @@
         width: 100%;
         table-layout: auto;
         margin: 5 0 5 0;
-        border-top: 1px solid rgb(201, 201, 201);
-        border-bottom: 1px solid rgb(201, 201, 201);
     }
 
     .th_table{
