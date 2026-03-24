@@ -62,7 +62,7 @@ class AsignacionTrasladosService{
 
             }else{
 
-                return $users->sortByDesc('traslados_count')->first()->id;
+                return $users->min('traslados_count')->first()->id;
 
             }
 
