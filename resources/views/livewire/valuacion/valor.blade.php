@@ -94,7 +94,7 @@
 
                                 <tr>
                                     <td class="text-xs lg:text-sm text-right">Total</td>
-                                    <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format(($predio->valor_catastral, 2) }}"></td>
+                                    <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_catastral, 2) }}"></td>
                                 </tr>
 
                             @else
