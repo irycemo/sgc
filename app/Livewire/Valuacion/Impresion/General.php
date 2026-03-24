@@ -38,36 +38,38 @@ class General extends Component
 
             $this->validaciones();
 
-            $pdf = null;
+            $pdf = retry(5, function() {
 
-            DB::transaction(function () use (&$pdf){
+                return DB::transaction(function (){
 
-                foreach ($this->avaluos as $avaluo) {
+                    foreach ($this->avaluos as $avaluo) {
 
-                    $avaluo->update([
-                        'tramite_inspeccion' => $this->tramite_inspeccion?->id,
-                        'tramite_desglose' => $this->tramite_desglose?->id,
-                        'actualizado_por' => auth()->id(),
-                        'estado' => 'impreso'
-                    ]);
+                        $avaluo->update([
+                            'tramite_inspeccion' => $this->tramite_inspeccion?->id,
+                            'tramite_desglose' => $this->tramite_desglose?->id,
+                            'actualizado_por' => auth()->id(),
+                            'estado' => 'impreso'
+                        ]);
 
-                    if($this->tramite_inspeccion->avaluo_para === AvaluoPara::CAMBIO_REGIMEN){
+                        if($this->tramite_inspeccion->avaluo_para === AvaluoPara::CAMBIO_REGIMEN){
 
-                        $this->tramite_inspeccion->predios()->attach($this->avaluos->first()->predio);
+                            $this->tramite_inspeccion->predios()->attach($this->avaluos->first()->predio);
+
+                        }
+
+                        $avaluo->predioAvaluo->update(['status' => 'impreso']);
+
+                        $avaluo->audits()->latest()->first()->update(['tags' => 'Imprimió avalúo', 'tramite_id' => $this->tramite_inspeccion?->id]);
 
                     }
 
-                    $avaluo->predioAvaluo->update(['status' => 'impreso']);
+                    if(!auth()->user()->hasRole('Convenio municipal')) $this->actualizarTramites();
 
-                    $avaluo->audits()->latest()->first()->update(['tags' => 'Imprimió avalúo', 'tramite_id' => $this->tramite_inspeccion?->id]);
+                    $avaluo_ids = $this->avaluos->pluck('id');
 
-                }
+                    return (new NotificacionValorCatastralController())->general($avaluo_ids, $this->tramite_inspeccion);
 
-                if(!auth()->user()->hasRole('Convenio municipal')) $this->actualizarTramites();
-
-                $avaluo_ids = $this->avaluos->pluck('id');
-
-                $pdf = (new NotificacionValorCatastralController())->general($avaluo_ids, $this->tramite_inspeccion);
+                });
 
             });
 

@@ -41,8 +41,6 @@ class ConsultarPropietariosController extends Controller
 
         $predio = $tramite->predios()->wherePivot('predio_id', $validated['predio'])->wherePivot('estado', 'I')->first();
 
-        info($validated['predio']);
-
         if(!$predio){
 
             return response()->json([

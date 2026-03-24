@@ -21,22 +21,26 @@ class AcreditarPagoController extends Controller
 
         try {
 
-            DB::transaction(function () use($validated){
+            retry(5, function() use ($validated){
 
-                $tramite = Tramite::where('linea_de_captura', $validated['linea_captura'])->first();
+                DB::transaction(function () use($validated){
 
-                if(!$tramite) throw new GeneralException('El trámite no existe');
+                    $tramite = Tramite::where('linea_de_captura', $validated['linea_captura'])->first();
 
-                $tramite->update([
-                    'estado' => 'pagado',
-                    'fecha_pago' => now()->toDateString(),
-                ]);
+                    if(!$tramite) throw new GeneralException('El trámite no existe');
 
-                if(in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM32', 'D774'])){
+                    $tramite->update([
+                        'estado' => 'pagado',
+                        'fecha_pago' => now()->toDateString(),
+                    ]);
 
-                    $this->generarCertificadosElectronicos($tramite);
+                    if(in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM32', 'D774'])){
 
-                }
+                        $this->generarCertificadosElectronicos($tramite);
+
+                    }
+
+                });
 
                 return response()->json([
                     'result' => 'success',

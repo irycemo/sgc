@@ -360,19 +360,21 @@ class CertificadoHistoria extends Component
 
         }
 
-        $pdf = null;
+        $pdf = retry(3, function() {
 
-        DB::transaction(function () use(&$pdf){
+           return DB::transaction(function (){
 
-            $this->tramite->update(['estado' => 'concluido']);
+                $this->tramite->update(['estado' => 'concluido']);
 
-            $this->tramite->ligadoA?->update(['estado' => 'concluido']);
+                $this->tramite->ligadoA?->update(['estado' => 'concluido']);
 
-            $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
+                $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
 
-            $this->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
+                $this->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
 
-            $pdf = (new CertificadoHistoriaController())->certificado($this->tramite, $this->tramite->ligadoA, $this->predio, $this->historia);
+                return (new CertificadoHistoriaController())->certificado($this->tramite, $this->tramite->ligadoA, $this->predio, $this->historia);
+
+            });
 
         });
 

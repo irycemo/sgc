@@ -112,30 +112,32 @@ class CambioRegimen extends Component
 
             $this->buscarPredios();
 
-            $pdf = null;
+            $pdf = retry(5, function() {
 
-            DB::transaction(function () use (&$pdf){
+                return DB::transaction(function () {
 
-                $this->avaluo->update([
-                    'tramite_inspeccion' => $this->tramite_inspeccion?->id,
-                    'tramite_desglose' => $this->tramite_desglose?->id,
-                    'actualizado_por' => auth()->id(),
-                    'estado' => 'impreso'
-                ]);
+                    $this->avaluo->update([
+                        'tramite_inspeccion' => $this->tramite_inspeccion?->id,
+                        'tramite_desglose' => $this->tramite_desglose?->id,
+                        'actualizado_por' => auth()->id(),
+                        'estado' => 'impreso'
+                    ]);
 
-                $this->avaluo->predioAvaluo->update(['status' => 'impreso']);
+                    $this->avaluo->predioAvaluo->update(['status' => 'impreso']);
 
-                $this->avaluo->audits()->latest()->first()->update(['tags' => 'Imprimió avalúo', 'tramite_id' => $this->tramite_inspeccion?->id]);
+                    $this->avaluo->audits()->latest()->first()->update(['tags' => 'Imprimió avalúo', 'tramite_id' => $this->tramite_inspeccion?->id]);
 
-                if(!auth()->user()->hasRole('Convenio municipal')) $this->actualizarTramites();
+                    if(!auth()->user()->hasRole('Convenio municipal')) $this->actualizarTramites();
 
-                $this->tramite_inspeccion->predios()->attach($this->predio_padre->id);
+                    $this->tramite_inspeccion->predios()->attach($this->predio_padre->id);
 
-                $pdf = (new NotificacionValorCatastralController())->desglose([$this->avaluo->id], $this->tramite_inspeccion, $this->tramite_desglose, $this->predio_padre->id);
+                    return (new NotificacionValorCatastralController())->desglose([$this->avaluo->id], $this->tramite_inspeccion, $this->tramite_desglose, $this->predio_padre->id);
+
+                });
+
+                $this->resetarTodo();
 
             });
-
-            $this->resetarTodo();
 
             return response()->streamDownload(
                 fn () => print($pdf->output()),
@@ -155,7 +157,6 @@ class CambioRegimen extends Component
         }
 
     }
-
 
     public function mount(){
 

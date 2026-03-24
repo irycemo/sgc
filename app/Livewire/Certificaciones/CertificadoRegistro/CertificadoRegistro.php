@@ -170,29 +170,31 @@ class CertificadoRegistro extends Component
 
         try {
 
-            $pdf = null;
+            $pdf = retry(3, function() {
 
-            DB::transaction(function () use(&$pdf){
+                return DB::transaction(function (){
 
-                $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
+                    $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
 
-                $usados = $this->tramite->predios()->wherePivot('estado', 'I')->count();
+                    $usados = $this->tramite->predios()->wherePivot('estado', 'I')->count();
 
-                $this->tramite->update(['usados' => $usados]);
+                    $this->tramite->update(['usados' => $usados]);
 
-                $this->tramite->audits()->latest()->first()->update(['tags' => 'Generó certificado del predio ' . $this->predio->cuentaPredial()]);
+                    $this->tramite->audits()->latest()->first()->update(['tags' => 'Generó certificado del predio ' . $this->predio->cuentaPredial()]);
 
-                if($this->tramite->cantidad === $usados){
+                    if($this->tramite->cantidad === $usados){
 
-                    $this->tramite->update(['estado' => 'concluido']);
+                        $this->tramite->update(['estado' => 'concluido']);
 
-                    $this->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
+                        $this->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
 
-                }
+                    }
 
-                $pdf = (new CertificadoRegistroController())->certificado($this->tramite, $this->predio, $this->tipo_certificado, auth()->user());
+                    return (new CertificadoRegistroController())->certificado($this->tramite, $this->predio, $this->tipo_certificado, auth()->user());
 
-            }, 3);
+                });
+
+            });
 
             $cuenta_predial = $this->predio->cuentaPredial();
 

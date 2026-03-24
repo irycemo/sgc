@@ -811,9 +811,22 @@ Artisan::command('conciliar-personas', function(){
                                             ->where('ap_paterno', $persona->ap_paterno)
                                             ->where('ap_materno', $persona->ap_materno)
                                             ->where('razon_social', $persona->razon_social)
+                                            ->where('id', '!=', $persona->id)
                                             ->get();
 
-            $propietarios = Propietario::whereIn('persona_id', $personas_repetidas->pluck('id'))->get();
+            if($personas_repetidas->count()){
+
+                $propietarios = Propietario::whereIn('persona_id', $personas_repetidas->pluck('id'))->get();
+
+                foreach ($propietarios as $propietario) {
+
+                    $propietario->update(['persona_id' => $persona->id]);
+
+                }
+
+                Persona::whereIn('id', $personas_repetidas->pluck('id'))->delete();
+
+            }
 
         }
 

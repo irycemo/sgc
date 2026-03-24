@@ -106,7 +106,10 @@
 
         <div class="bg-white p-4 rounded-lg mb-5 shadow-lg text-sm my-3">
 
-            @if(in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM35', 'D927', 'D926', 'D925', 'D924', 'DM31']))
+            @if(
+                    in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM35', 'D927', 'D926', 'D925', 'D924', 'DM31']) ||
+                    in_array($tramite->servicio->nombre, ['Certificado catastral ordinario con colindancias', 'Certificado catastral urgente con colindancias'])
+                )
 
                 <div class="overflow-auto">
 

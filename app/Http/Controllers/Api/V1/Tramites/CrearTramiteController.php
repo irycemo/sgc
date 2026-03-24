@@ -32,15 +32,17 @@ class CrearTramiteController extends Controller
         $tramite->cantidad = $validated['cantidad'];
         $tramite->usuario_tramites_linea_id = $validated['usuario_tramites_linea_id'];
 
-        $nuevo_tramite = null;
-
         try {
 
-            DB::transaction(function () use($tramite, $validated, &$nuevo_tramite){
+            $nuevo_tramite = retry(5, function() use ($tramite, $validated){
 
-                $nuevo_tramite = (new TramiteService($tramite))->crear($validated['predios']);
+                return DB::transaction(function () use($tramite, $validated){
 
-            }, 10);
+                    return (new TramiteService($tramite))->crear($validated['predios']);
+
+                }, 10);
+
+            });
 
             return (new TramiteResource($nuevo_tramite))->response()->setStatusCode(200);
 
@@ -99,11 +101,15 @@ class CrearTramiteController extends Controller
 
         try {
 
-            $nuevo_tramite = DB::transaction(function () use($tramite){
+            $nuevo_tramite = retry(3, function() use ($tramite){
 
-                return (new TramiteService($tramite))->crear();
+                return DB::transaction(function () use($tramite){
 
-            }, 5);
+                    return (new TramiteService($tramite))->crear();
+
+                });
+
+            });
 
             $pdf = (new OrdenPagoService())->generarOrdenPago($nuevo_tramite);
 

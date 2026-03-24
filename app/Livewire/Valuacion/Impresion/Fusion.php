@@ -45,29 +45,31 @@ class Fusion extends Component
 
             $this->buscarPrediosFusionantes();
 
-            $pdf = null;
+            $pdf = retry(5, function() {
 
-            DB::transaction(function () use (&$pdf){
+                return DB::transaction(function (){
 
-                foreach ($this->avaluos as $avaluo) {
+                    foreach ($this->avaluos as $avaluo) {
 
-                    $avaluo->update([
-                        'tramite_inspeccion' => $this->tramite_inspeccion?->id,
-                        'actualizado_por' => auth()->id(),
-                        'estado' => 'impreso'
-                    ]);
+                        $avaluo->update([
+                            'tramite_inspeccion' => $this->tramite_inspeccion?->id,
+                            'actualizado_por' => auth()->id(),
+                            'estado' => 'impreso'
+                        ]);
 
-                    $avaluo->predioAvaluo->update(['status' => 'impreso']);
+                        $avaluo->predioAvaluo->update(['status' => 'impreso']);
 
-                    $avaluo->audits()->latest()->first()->update(['tags' => 'Imprimió avalúo', 'tramite_id' => $this->tramite_inspeccion?->id]);
+                        $avaluo->audits()->latest()->first()->update(['tags' => 'Imprimió avalúo', 'tramite_id' => $this->tramite_inspeccion?->id]);
 
-                }
+                    }
 
-                if(!auth()->user()->hasRole('Convenio municipal')) $this->actualizarTramites();
+                    if(!auth()->user()->hasRole('Convenio municipal')) $this->actualizarTramites();
 
-                $avaluo_ids = $this->avaluos->pluck('id');
+                    $avaluo_ids = $this->avaluos->pluck('id');
 
-                $pdf = (new NotificacionValorCatastralController())->fusion($avaluo_ids, $this->tramite_inspeccion, $this->predios_fusionantes->pluck('id'));
+                    return (new NotificacionValorCatastralController())->fusion($avaluo_ids, $this->tramite_inspeccion, $this->predios_fusionantes->pluck('id'));
+
+                });
 
             });
 

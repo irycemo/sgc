@@ -20,7 +20,7 @@ class ExpirarTramitesCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Tarea programada para expirar tramites nuevos registrados con mas de 10 dias';
+    protected $description = 'Tarea programada para expirar tramites nuevos registrados con mas de 15 dias';
 
     /**
      * Execute the console command.
@@ -28,9 +28,9 @@ class ExpirarTramitesCommand extends Command
     public function handle()
     {
 
-        $hace10Dias = now()->subDays(10);
+        $hace15Dias = now()->subDays(15);
 
-        $tramites = Tramite::where('estado', 'nuevo')->where('created_at', '>=', $hace10Dias)->get();
+        $tramites = Tramite::where('estado', 'nuevo')->where('created_at', '<=', $hace15Dias)->get();
 
         try {
 

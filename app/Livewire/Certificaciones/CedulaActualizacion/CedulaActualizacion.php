@@ -122,28 +122,31 @@ class CedulaActualizacion extends Component
 
         }
 
-        DB::transaction(function () use(&$pdf){
+        $pdf = retry(3, function() {
 
-            $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
+            return DB::transaction(function (){
 
-            $usados = $this->tramite->predios()->wherePivot('estado', 'I')->count();
+                $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
 
-            $this->tramite->update(['usados' => $usados]);
+                $usados = $this->tramite->predios()->wherePivot('estado', 'I')->count();
 
-            $this->tramite->audits()->latest()->first()->update(['tags' => 'Generó cédula de actualización del predio ' . $this->predio->cuentaPredial()]);
+                $this->tramite->update(['usados' => $usados]);
 
-            if($this->tramite->cantidad === $usados){
+                $this->tramite->audits()->latest()->first()->update(['tags' => 'Generó cédula de actualización del predio ' . $this->predio->cuentaPredial()]);
 
-                $this->tramite->update(['estado' => 'concluido']);
+                if($this->tramite->cantidad === $usados){
 
-                $this->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
+                    $this->tramite->update(['estado' => 'concluido']);
 
-            }
+                    $this->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
 
-            $pdf = (new CedulaActualizcacionController())->cedula($this->tramite, $this->predio, auth()->user());
+                }
+
+                return (new CedulaActualizcacionController())->cedula($this->tramite, $this->predio, auth()->user());
+
+            });
 
         });
-
 
         $cuenta_predial = $this->predio->cuentaPredial();
 
