@@ -522,6 +522,7 @@ class Constantes{
     ];
 
     const DOCUMENTO_ENTRADA = [
+        'AVALÚO',
         'CONTRATO DE COMPRAVENTA',
         'ESCRITURACIÓN SOCIAL',
         'ESCRITURA PÚBLICA',
