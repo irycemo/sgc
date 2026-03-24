@@ -52,7 +52,7 @@ class RevisarPagoCommand extends Command
 
             }
 
-        } catch (GeneralException $ex) {
+            Log::error("Tarea programada para checar pago de tramites finalizada con éxito.");
 
         } catch (\Throwable $th) {
 

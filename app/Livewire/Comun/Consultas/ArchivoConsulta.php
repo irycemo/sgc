@@ -105,7 +105,6 @@ class ArchivoConsulta extends Component
 
                 }else{
 
-
                     $this->archivos = json_decode($response, true);
 
                     if(!isset($this->archivos['avaluos'])){

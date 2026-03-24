@@ -163,8 +163,6 @@ class ConsultarTramitesController extends Controller
 
         if($tramite){
 
-            info($tramite);
-
             if($tramite->estado != 'pagado'){
 
                 try {

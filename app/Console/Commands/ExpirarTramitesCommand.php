@@ -30,7 +30,7 @@ class ExpirarTramitesCommand extends Command
 
         $hace10Dias = now()->subDays(10);
 
-        $tramites = Tramite::where('created_at', '>=', $hace10Dias)->get();
+        $tramites = Tramite::where('estado', 'nuevo')->where('created_at', '>=', $hace10Dias)->get();
 
         try {
 
@@ -39,6 +39,8 @@ class ExpirarTramitesCommand extends Command
                 $tramite->update(['estado' => 'expirado']);
 
             }
+
+            Log::error("Tarea programada para expirar trámites finalizada con éxito.");
 
         } catch (\Throwable $th) {
 

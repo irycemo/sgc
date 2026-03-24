@@ -18,7 +18,7 @@
 
     <div class="mt-4 text-right">
 
-        @if ($tramite->estado == 'nuevo' || $tramite->estado == 'rechazado')
+        @if (in_array($tramite->estado, ['nuevo', 'rechazado', 'expirado']))
 
             <button
                 wire:click="editarTramite"
