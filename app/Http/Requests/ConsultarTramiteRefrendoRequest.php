@@ -24,7 +24,9 @@ class ConsultarTramiteRefrendoRequest extends FormRequest
         return [
             'año' => 'required',
             'folio' => 'required',
-            'usuario' => 'required'
+            'usuario' => 'required',
+            'solicitante' => 'required',
+            'clave' => 'required'
         ];
     }
 }

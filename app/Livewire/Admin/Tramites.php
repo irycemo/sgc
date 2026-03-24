@@ -293,21 +293,6 @@ class Tramites extends Component
 
     public function reimprimir(Tramite $tramite){
 
-        /* $tramite->load('predios.propietarios.persona', 'servicio');
-
-        $generatorPNG = new BarcodeGeneratorPNG();
-
-        $pdf = Pdf::loadView('tramites.orden', [
-            'tramite' => $tramite,
-            'generatorPNG' => $generatorPNG
-        ])
-        ->setPaper('letter', 'portrait');
-
-        return response()->streamDownload(
-            fn () => print($pdf->output()),
-            'tramite.pdf'
-        );
- */
         $this->js('window.open(\' '. route('tramites.orden', $tramite) . '\', \'_blank\');');
 
     }

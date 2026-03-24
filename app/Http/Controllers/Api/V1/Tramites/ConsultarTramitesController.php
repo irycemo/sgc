@@ -159,6 +159,8 @@ class ConsultarTramitesController extends Controller
         $tramite = Tramite::where('año', $validated['año'])
                                 ->where('folio', $validated['folio'])
                                 ->where('usuario', $validated['usuario'])
+                                ->where('solicitante', 'Perito externo')
+                                ->where('nombre_solicitante', $validated['solicitante'] . ' Clave: ' . $validated['clave'])
                                 ->first();
 
         if($tramite){
