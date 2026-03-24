@@ -15,11 +15,11 @@
 <style>
 
     body{
-        font-size: 13px;
+        font-size: 18px;
     }
 
     h1{
-        font-size: 13;
+        font-size: 18px;
         font:bold;
         margin: 0;
     }
@@ -55,7 +55,7 @@
     }
 
     img{
-        width: 180px;
+        width: 280px;
     }
 
     .text_center{
@@ -65,7 +65,7 @@
     .footer{
         margin-top: 10px;
         width: 100%;
-        font-size: 12px;
+        font-size: 18px;
         font-weight: bold;
         text-align: center;
 
@@ -85,14 +85,14 @@
     }
 
     .titulo{
-        font-size: 14px;
+        font-size: 18px;
         font-weight: bold;
         margin: 0;
         text-align: center;
     }
 
     .leyenda{
-        font-size: 9px;
+        font-size: 13px;
     }
 
     .punteada{
@@ -122,13 +122,13 @@
 
                     <th width="80%" style="vertical-align: middle">
                         <div >
-                            <p style="font-size: 12px; text-align: center">GOBIERNO DEL ESTADO DE MICHOACÁN DE OCAMPO</p>
-                            <p style="font-size: 12px; text-align: center">DIRECCIÓN DE CATASTRO</p>
+                            <p style="font-size: 18px; text-align: center">GOBIERNO DEL ESTADO DE MICHOACÁN DE OCAMPO</p>
+                            <p style="font-size: 18px; text-align: center">DIRECCIÓN DE CATASTRO</p>
                         </div>
                     </th>
 
                     <th width="10%" >
-                        <p style="font-size: 10px; text-align: right;"><nobr>{{ now()->format('d-m-Y H:i:s') }}</nobr></p>
+                        <p style="font-size: 16px; text-align: right;"><nobr>{{ now()->format('d-m-Y H:i:s') }}</nobr></p>
                     </th>
 
                 </tr>
@@ -203,7 +203,7 @@
 
         </table>
 
-        <p style="font-size: 10px; text-align: center">Convenio OXXO: 50001. | Convenio BANCOMER: 664685 | Convenio BANCOMER: 100318647 | Convenio SANTANDER: 6361 | Convenio TELECOMM: 10 | Convenio BANAMEX: 4162 | Convenio BAJIO: 2717</p>
+        <p style="font-size: 15px; text-align: center">Convenio OXXO: 50001. | Convenio BANCOMER: 664685 | Convenio BANCOMER: 100318647 | Convenio SANTANDER: 6361 | Convenio TELECOMM: 10 | Convenio BANAMEX: 4162 | Convenio BAJIO: 2717</p>
 
         <div class="footer">
 

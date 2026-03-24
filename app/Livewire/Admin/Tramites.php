@@ -10,12 +10,15 @@ use App\Models\Predio;
 use App\Models\Servicio;
 use App\Models\Tramite;
 use App\Models\Traslado;
+use App\Services\Tramites\OrdenPagoService;
 use App\Traits\ComponentesTrait;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class Tramites extends Component
 {
@@ -290,6 +293,21 @@ class Tramites extends Component
 
     public function reimprimir(Tramite $tramite){
 
+        /* $tramite->load('predios.propietarios.persona', 'servicio');
+
+        $generatorPNG = new BarcodeGeneratorPNG();
+
+        $pdf = Pdf::loadView('tramites.orden', [
+            'tramite' => $tramite,
+            'generatorPNG' => $generatorPNG
+        ])
+        ->setPaper('letter', 'portrait');
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            'tramite.pdf'
+        );
+ */
         $this->js('window.open(\' '. route('tramites.orden', $tramite) . '\', \'_blank\');');
 
     }

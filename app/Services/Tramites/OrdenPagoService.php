@@ -18,6 +18,8 @@ class OrdenPagoService{
 
         $pdf = Pdf::loadView('tramites.orden', compact('tramite', 'generatorPNG'));
 
+        $pdf->render();
+
         return $pdf;
 
     }
