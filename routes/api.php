@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Avaluos\ConsultarAvaluos;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\SAP\AcreditarPagoController;
 use App\Http\Controllers\Api\V1\Tramites\CrearTramiteController;
@@ -77,5 +78,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('consultar_tramite_refrendo', [ConsultarTramitesController::class, 'consultarTramiteRefrendo']);
 
     Route::post('crear_tramite_refrendo', [CrearTramiteController::class, 'crearTramiteRefrendo']);
+
+    Route::get('consultar_avaluo', [ConsultarAvaluos::class, 'consultarAvaluo']);
+
+    Route::get('consultar_avaluos', [ConsultarAvaluos::class, 'consultarAvaluos']);
 
 });

@@ -808,7 +808,7 @@
 
                                 </a>
 
-                                <a href="" title="Cartografía" target="_blank">
+                                <a href="{{ config('services.consulta_archivos_anterior.cartografia_url') . $this->predio->municipio . '&sect=' . $this->predio->sector . '&mzna=' . $this->predio->manzana }}" title="Cartografía" target="_blank">
                                     <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="Cartografía">
                                 </a>
 
