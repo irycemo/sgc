@@ -40,7 +40,7 @@ class ExpirarTramitesCommand extends Command
 
             }
 
-            Log::error("Tarea programada para expirar trámites finalizada con éxito.");
+            Log::info("Tarea programada para expirar trámites finalizada con éxito.");
 
         } catch (\Throwable $th) {
 

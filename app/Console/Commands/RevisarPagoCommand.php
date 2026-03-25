@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Exceptions\GeneralException;
 use App\Models\Tramite;
 use App\Services\Tramites\TramiteService;
 use Illuminate\Console\Command;
@@ -52,7 +51,7 @@ class RevisarPagoCommand extends Command
 
             }
 
-            Log::error("Tarea programada para checar pago de tramites finalizada con éxito.");
+            Log::info("Tarea programada para checar pago de tramites finalizada con éxito.");
 
         } catch (\Throwable $th) {
 
