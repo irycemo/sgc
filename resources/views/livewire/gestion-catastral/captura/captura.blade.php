@@ -279,7 +279,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model="predio.documento_numero">
+                            <input  class="bg-white rounded text-xs w-full" wire:model="predio.documento_numero">
 
                         </div>
 

@@ -81,7 +81,7 @@ class TramiteService{
     public function calcularFechaEntrega()
     {
 
-        if(in_array($this->tramite->servicio->clave_ingreso, ['DM35', 'DM32'])){
+        if(in_array($this->tramite->servicio->clave_ingreso, ['D774', 'DM32'])){
 
             $actual = now();
 
