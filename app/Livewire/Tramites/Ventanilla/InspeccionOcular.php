@@ -45,6 +45,14 @@ class InspeccionOcular extends Component
     public function updatedModeloEditarCantidad()
     {
 
+        if($this->modelo_editar->tipo_tramite === 'exento'){
+
+            $this->modelo_editar->monto =0;
+
+            return;
+
+        }
+
         if($this->porcentaje){
 
             if($this->modelo_editar->cantidad > 1){

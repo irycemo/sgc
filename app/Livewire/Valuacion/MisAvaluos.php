@@ -253,7 +253,7 @@ class MisAvaluos extends Component
 
        } catch (\Throwable $th) {
 
-            Log::error("Error al imprimir avaluo en administracion por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al imprimir avaluo en mis avaluos por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
        }

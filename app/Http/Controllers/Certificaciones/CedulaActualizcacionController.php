@@ -56,9 +56,13 @@ class CedulaActualizcacionController extends Controller
 
         $ultimo_movimiento = (object)[];
 
-        $ultimo_movimiento->nombre = $predio->movimientos->first()->nombre;
-        $ultimo_movimiento->fecha = $predio->movimientos->first()->fecha;
-        $ultimo_movimiento->descripcion = $predio->movimientos->first()->descripcion;
+        if($predio->movimientos->first()){
+
+            $ultimo_movimiento->nombre = $predio->movimientos->first()->nombre;
+            $ultimo_movimiento->fecha = $predio->movimientos->first()->fecha;
+            $ultimo_movimiento->descripcion = $predio->movimientos->first()->descripcion;
+
+        }
 
         $object->ultimo_movimiento = $ultimo_movimiento;
 
