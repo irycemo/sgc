@@ -114,7 +114,7 @@
 
                         <x-table.cell title="Ordinario">
 
-                            ${{ number_format($servicio->ordinario, 2) }}
+                            ${{ number_format(round($servicio->ordinario), 2) }}
 
                         </x-table.cell>
 

@@ -21,7 +21,8 @@ class ServicioResource extends JsonResource
             'clave_ingreso' => $this->clave_ingreso,
             'ordinario' => $this->ordinario,
             'urgente' => $this->urgente,
-            'extra_urgente' => $this->extra_urgente
+            'extra_urgente' => $this->extra_urgente,
+            'umas' => $this->umas,
         ];
 
     }

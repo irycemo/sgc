@@ -97,7 +97,7 @@ class Servicios extends Component
 
             $this->modelo_editar->ordinario = $uma->diario * $this->modelo_editar->umas;
 
-            $this->modelo_editar->ordinario = ceil($this->modelo_editar->ordinario);
+            $this->modelo_editar->ordinario = $this->modelo_editar->ordinario;
 
             $this->modelo_editar->urgente = floor($this->modelo_editar->ordinario * 2);
 
