@@ -110,7 +110,7 @@ class IngresarTrasladoController extends Controller
                                         [
                                             'año_aviso' => $validated['año_aviso'],
                                             'folio_aviso' => $validated['folio_aviso'],
-                                            'usuario_usuario' => $validated['usuario_usuario'],
+                                            'usuario_aviso' => $validated['usuario_aviso'],
                                             'estado' => 'cerrado',
                                             'tipo' => 'aclaratorio',
                                             'predio_id' => $validated['predio_id'],
