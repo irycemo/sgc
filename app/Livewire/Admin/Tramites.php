@@ -11,6 +11,7 @@ use App\Models\Servicio;
 use App\Models\Tramite;
 use App\Models\Traslado;
 use App\Services\Tramites\OrdenPagoService;
+use App\Services\Tramites\TramiteService;
 use App\Traits\ComponentesTrait;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
@@ -320,6 +321,79 @@ class Tramites extends Component
 
     }
 
+    public function borrar(){
+
+        try{
+
+            $tramite = Tramite::find($this->selected_id);
+
+            if($tramite->estado != 'nuevo'){
+
+                $this->dispatch('mostrarMensaje', ['error', "El trámite no se puede eliminar."]);
+
+                return;
+
+            }
+
+            if($tramite->fecha_pago){
+
+                $this->dispatch('mostrarMensaje', ['error', "El trámite tiene un pago registrado no puede ser borrado."]);
+
+                return;
+
+            }
+
+            if($tramite->predios()->count()){
+
+                $tramite->predios()->detach();
+
+            }
+
+            $tramite->delete();
+
+            $this->modalBorrar = false;
+
+            $this->dispatch('mostrarMensaje', ['success', "El trámite se eliminó con éxito."]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al borrar trámite por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+
+        }
+
+    }
+
+    public function validarPago(){
+
+        try {
+
+            DB::transaction(function () {
+
+                (new TramiteService($this->modelo_editar))->procesarPago();
+
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Validó pago']);
+
+                $this->dispatch('mostrarMensaje', ['success', "El trámite se validó con éxito."]);
+
+                $this->resetearTodo($borrado = true);
+
+            });
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al validar el trámite: " . $this->modelo_editar->año . '-' . $this->modelo_editar->numero_control . '-' . $this->modelo_editar->usuario . " por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', 'Hubo un error.']);
+            $this->resetearTodo();
+        }
+
+    }
+
     #[Computed]
     public function tramites(){
 
@@ -380,4 +454,5 @@ class Tramites extends Component
     {
         return view('livewire.admin.tramites')->extends('layouts.admin');
     }
+
 }

@@ -236,4 +236,5 @@ class Servicios extends Component
     {
         return view('livewire.admin.servicios')->extends('layouts.admin');
     }
+
 }

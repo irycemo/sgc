@@ -235,6 +235,22 @@
 
                                     @endcan
 
+                                    @if($tramite->estado == 'nuevo')
+
+                                        @can('Borrar trámite')
+
+                                            <button
+                                                wire:click="abrirModalBorrar({{$tramite->id}})"
+                                                wire:loading.attr="disabled"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                role="menuitem">
+                                                Eliminar
+                                            </button>
+
+                                        @endcan
+
+                                    @endif
+
                                 </div>
 
                             </div>
@@ -536,6 +552,20 @@
         <x-slot name="footer">
 
             <div class="flex gap-3">
+
+                @if(!$modelo_editar->fecha_pago)
+
+                    <x-button-gray
+                        wire:click="validarPago"
+                        wire:loading.attr="disabled"
+                        wire:target="validarPago">
+
+                        <img wire:loading wire:target="validarPago" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                        <span>Validar pago</span>
+                    </x-button-gray>
+
+                @endif
 
                 <x-button-blue
                     wire:click="actualizar"

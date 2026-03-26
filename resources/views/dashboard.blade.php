@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @if(auth()->user()->hasRole(['Administrador', 'Jefe de departamento']))
+    @if(auth()->user()->hasRole(['Administrador', 'Jefe de departamento', 'Director']))
 
         <div class="mb-10">
 

@@ -33,6 +33,8 @@ class TramiteService{
 
         $this->procesarLineaCaptura();
 
+        $this->tramite->monto = round($this->tramite->monto);
+
         $this->tramite->save();
 
         if($this->tramite->solicitante == 'Oficialia de partes'){

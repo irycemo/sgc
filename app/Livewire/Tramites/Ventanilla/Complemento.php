@@ -75,6 +75,12 @@ class Complemento extends Component
 
             DB::transaction(function () {
 
+                if(in_array($this->tramiteAdicionado->servicio->clave_ingreso, ['DM32', 'DM31'])){
+
+                    $this->tramiteAdicionado->update(['fecha_entrega' => now()->subDay()]);
+
+                }
+
                 $tramite = (new TramiteService($this->modelo_editar))->crear($this->predios);
 
                 $this->js('window.open(\' '. route('tramites.orden', $tramite) . '\', \'_blank\');');
