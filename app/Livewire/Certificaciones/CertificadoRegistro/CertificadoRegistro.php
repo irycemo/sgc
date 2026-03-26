@@ -188,7 +188,7 @@ class CertificadoRegistro extends Component
 
                         $this->tramite->update(['estado' => 'concluido']);
 
-                        $this->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
+                        $this->tramite->audits()->latest()->first()?->update(['tags' => 'Finalizó trámite']);
 
                     }
 
