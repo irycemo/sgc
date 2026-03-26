@@ -221,13 +221,25 @@
 
                 </div>
 
-                @if($predio->superficie_construccion)
+                @if($predio->superficie_total_construccion)
 
                     <div class="rounded-lg bg-gray-100 py-1 px-2">
 
                         <strong>Superficie total de construcción</strong>
 
                         <p>{{ $predio->superficie_total_construccion }}</p>
+
+                    </div>
+
+                @endif
+
+                @if($predio->superficie_construccion)
+
+                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                        <strong>Superficie común de construcción</strong>
+
+                        <p>{{ $predio->area_comun_construccion }}</p>
 
                     </div>
 

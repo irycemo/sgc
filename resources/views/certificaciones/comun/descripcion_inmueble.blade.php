@@ -4,7 +4,7 @@
 
     <strong>Superficie total de terreno:</strong>  {{ $predio->superficie_total_terreno }} Metros cuadrados
 
-    @if ($predio->superficie_construccion)
+    @if ($predio->superficie_total_construccion)
 
         <strong>Superficie total de construcción:</strong> {{ $predio->superficie_total_construccion }} Metros cuadrados
 
