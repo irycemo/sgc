@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\V1\Traslados;
 
-
 use App\Models\Predio;
 use App\Models\Oficina;
 use App\Models\Traslado;
