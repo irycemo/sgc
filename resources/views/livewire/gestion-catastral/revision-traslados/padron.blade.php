@@ -276,6 +276,14 @@
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
 
+                    <strong>Superficie Notarial</strong>
+
+                    <p>{{ $traslado->predio->superficie_notarial }}</p>
+
+                </div>
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+
                     <strong>Superficie total de terreno</strong>
 
                     <p>{{ $traslado->predio->superficie_total_terreno }}</p>
