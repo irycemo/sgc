@@ -217,9 +217,9 @@ trait ImpresionTrait
 
         }
 
-        if($this->predio_padre->superficie_total_terreno <= $superficie_terreno){
+        if($this->predio_padre->superficie_notarial <= $superficie_terreno){
 
-            throw new GeneralException('La suma de la superfice de terreno de los avalúos es mayor a la superficie del predio padre.');
+            throw new GeneralException('La suma de la superfice de terreno de los avalúos es mayor a la superficie notarial del predio padre.');
 
         }
 
