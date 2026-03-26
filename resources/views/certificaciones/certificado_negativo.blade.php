@@ -195,7 +195,7 @@
 
             <p style="margin: 10px 0 10px 0;">A SOLICITUD DE <strong style="text-transform: uppercase;">{{ $datos_control->solicitante }}</strong> EXPIDO EL PRESENTE CERTIFICADO EN LA CIUDAD DE <strong style="text-transform: uppercase;"> {{ $datos_control->oficina }}</strong>, MICHOACÁN.</p>
 
-            <div>
+            <div class="no-break">
 
                 <table style="margin-top: 20px">
 
