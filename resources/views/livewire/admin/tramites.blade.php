@@ -96,7 +96,7 @@
                 <x-table.heading sortable wire:click="sortBy('monto')" :direction="$sort === 'monto' ? $direction : null" >Monto</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('fecha_entrega')" :direction="$sort === 'fecha_entrega' ? $direction : null" >Fecha de entrega</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('fecha_pago')" :direction="$sort === 'fecha_pago' ? $direction : null" >Fecha de pago</x-table.heading>
-                <x-table.heading sortable wire:click="sortBy('tipo_servicio')" :direction="$sort === 'tipo_servicio' ? $direction : null" >Tipo de servicio</x-table.heading>
+                {{-- <x-table.heading sortable wire:click="sortBy('tipo_servicio')" :direction="$sort === 'tipo_servicio' ? $direction : null" >Tipo de servicio</x-table.heading> --}}
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('updated_at')" :direction="$sort === 'updated_at' ? $direction : null">Actualizado</x-table.heading>
                 <x-table.heading >Acciones</x-table.heading>
@@ -175,11 +175,11 @@
 
                         </x-table.cell>
 
-                        <x-table.cell title="Tipo de servicio">
+                        {{-- <x-table.cell title="Tipo de servicio">
 
                             {{ $tramite->tipo_servicio }}
 
-                        </x-table.cell>
+                        </x-table.cell> --}}
 
                         <x-table.cell title="Registrado">
 
@@ -640,11 +640,11 @@
 
                         @endif
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        {{-- <div class="rounded-lg bg-gray-100 py-1 px-2">
 
                             <p><strong>Tipo de servicio:</strong> {{ Str::ucfirst($modelo_editar->tipo_servicio) }}</p>
 
-                        </div>
+                        </div> --}}
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 

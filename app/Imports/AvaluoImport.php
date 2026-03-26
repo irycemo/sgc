@@ -54,7 +54,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             'oficina' => 'required|numeric|min:1',
             'estado' => 'required',
             'rfc' => [
-                'required',
+                'nullable',
                 'regex:/^([A-ZÑ&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/',
             ],
             'curp' => [
