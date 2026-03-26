@@ -51,7 +51,7 @@
 
             <x-slot name="head">
 
-                <x-table.heading sortable wire:click="sortBy('name')" :direction="$sort === 'name' ? $direction : null" >Estado</x-table.heading>
+                <x-table.heading sortable wire:click="sortBy('estado')" :direction="$sort === 'estado' ? $direction : null" >Estado</x-table.heading>
                 <x-table.heading >Cuenta predial</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('entidad_nombre')" :direction="$sort === 'entidad_nombre' ? $direction : null" >Entidad</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('asignado_a')" :direction="$sort === 'area' ? $direction : null" >Asignado A</x-table.heading>
