@@ -22,7 +22,7 @@
 
     </div>
 
-    <div class="flex gap-3 text-sm mb-5">
+    <div class="flex gap-3 text-sm mb-5 overflow-auto">
 
         <div class="rounded-lg bg-gray-100 py-1 px-2">
 

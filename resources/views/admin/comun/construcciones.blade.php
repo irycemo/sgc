@@ -8,6 +8,7 @@
 
             <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
+                <th style="px-2">Clasificación</th>
                 <th class="px-2">Referencia</th>
                 <th class="px-2">Clasificación de construcción</th>
                 <th class="px-2">Niveles</th>
@@ -24,6 +25,11 @@
             @foreach ($predio->construcciones as $construccion)
 
                 <tr class="text-gray-500 text-sm leading-relaxed">
+                    <td style="px-2 w-full whitespace-nowrap">
+                        @if(isset($construccion->valor_unitario))
+                            {{ $construccion->tipo }}{{ $construccion->uso }}{{ $construccion->estado }}{{ $construccion->calidad }} - {{ $construccion->valor_unitario }}
+                        @endif
+                    </td>
                     <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->referencia }}</td>
                     <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->tipo }}-{{ $construccion->uso }}-{{ $construccion->calidad }}-{{ $construccion->estado }}</td>
                     <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->niveles }}</td>

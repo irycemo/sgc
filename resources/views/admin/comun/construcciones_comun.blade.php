@@ -8,6 +8,7 @@
 
             <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
+                <th style="px-2">Clasificación</th>
                 <th class="px-2">Área común de construcción</th>
                 <th class="px-2">Indiviso de construcción</th>
                 <th class="px-2">Superficie proporcional</th>
@@ -23,6 +24,13 @@
             @foreach ($predio->construccionesComun as $construccion)
 
                 <tr class="text-gray-500 text-sm leading-relaxed">
+                    <td style="px-2 w-full whitespace-nowrap">
+                        @if(isset($construccionComun->valor_unitario))
+
+                            {{ $construccionComun->tipo }}{{ $construccionComun->uso }}{{ $construccionComun->estado }}{{ $construccionComun->calidad }} - {{ $construccionComun->valor_unitario }}
+
+                        @endif
+                    </td>
                     <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->area_comun_construccion }}</td>
                     <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->indiviso_construccion }}</td>
                     <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->superficie_proporcional }}</td>
