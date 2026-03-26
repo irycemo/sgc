@@ -31,7 +31,10 @@ class ListaAvisos extends Component
         'localidad' => '',
         'oficina' => '',
         'tipo' => '',
-        'registro' => ''
+        'registro' => '',
+        'año_aviso' => '',
+        'folio_aviso' => '',
+        'usuario_aviso' => '',
     ];
 
     protected function rules(){
@@ -75,7 +78,7 @@ class ListaAvisos extends Component
 
         if(auth()->user()->hasRole(['Administrador', 'Jefe de departamento'])){
 
-            return Traslado::select('id','estado', 'predio_id', 'entidad_nombre', 'asignado_a', 'actualizado_por', 'created_at', 'updated_at')
+            return Traslado::select('id','estado', 'año_aviso', 'folio_aviso', 'usuario_aviso', 'predio_id', 'entidad_nombre', 'asignado_a', 'actualizado_por', 'created_at', 'updated_at')
                                 ->with('actualizadoPor:id,name', 'asignadoA:id,name', 'predio:id,localidad,oficina,tipo_predio,numero_registro')
                                 ->withCount(['rechazos'])
                                 ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $this->estado))
@@ -104,6 +107,21 @@ class ListaAvisos extends Component
                                         $q->where('numero_registro', $registro);
                                     });
                                 })
+                                ->when($this->filters['año_aviso'], function($q, $año_aviso){
+                                    $q->WhereHas('predio', function($q) use($año_aviso){
+                                        $q->where('año_aviso', $año_aviso);
+                                    });
+                                })
+                                ->when($this->filters['folio_aviso'], function($q, $folio_aviso){
+                                    $q->WhereHas('predio', function($q) use($folio_aviso){
+                                        $q->where('folio_aviso', $folio_aviso);
+                                    });
+                                })
+                                ->when($this->filters['usuario_aviso'], function($q, $usuario_aviso){
+                                    $q->WhereHas('predio', function($q) use($usuario_aviso){
+                                        $q->where('usuario_aviso', $usuario_aviso);
+                                    });
+                                })
                                 ->where('entidad_nombre', 'LIKE', '%' . $this->search . '%')
                                 ->orderBy($this->sort, $this->direction)
                                 ->paginate($this->pagination);
@@ -111,7 +129,7 @@ class ListaAvisos extends Component
 
         }else{
 
-            return Traslado::select('id','estado', 'predio_id', 'entidad_nombre', 'asignado_a', 'actualizado_por', 'created_at', 'updated_at')
+            return Traslado::select('id','estado','año_aviso', 'folio_aviso', 'usuario_aviso', 'predio_id', 'entidad_nombre', 'asignado_a', 'actualizado_por', 'created_at', 'updated_at')
                                 ->with('actualizadoPor:id,name', 'asignadoA:id,name', 'predio:id,localidad,oficina,tipo_predio,numero_registro')
                                 ->withCount(['rechazos'])
                                 ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $this->estado))
@@ -135,6 +153,21 @@ class ListaAvisos extends Component
                                 ->when($this->filters['registro'], function($q, $registro){
                                     $q->WhereHas('predio', function($q) use($registro){
                                         $q->where('numero_registro', $registro);
+                                    });
+                                })
+                                ->when($this->filters['año_aviso'], function($q, $año_aviso){
+                                    $q->WhereHas('predio', function($q) use($año_aviso){
+                                        $q->where('año_aviso', $año_aviso);
+                                    });
+                                })
+                                ->when($this->filters['folio_aviso'], function($q, $folio_aviso){
+                                    $q->WhereHas('predio', function($q) use($folio_aviso){
+                                        $q->where('folio_aviso', $folio_aviso);
+                                    });
+                                })
+                                ->when($this->filters['usuario_aviso'], function($q, $usuario_aviso){
+                                    $q->WhereHas('predio', function($q) use($usuario_aviso){
+                                        $q->where('usuario_aviso', $usuario_aviso);
                                     });
                                 })
                                 ->orderBy($this->sort, $this->direction)
