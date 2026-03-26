@@ -29,6 +29,9 @@ class IngresarRevisionAvisoRequest extends FormRequest
             'aviso_stl' => 'required',
             'entidad_stl' => 'required',
             'entidad_nombre' => 'required',
+            'año_aviso' => 'required',
+            'folio_aviso' => 'required',
+            'usuario_usuario' => 'required',
         ];
     }
 }
