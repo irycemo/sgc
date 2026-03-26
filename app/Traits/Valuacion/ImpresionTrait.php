@@ -217,7 +217,7 @@ trait ImpresionTrait
 
         }
 
-        if(! $this->predio_padre->superficie_notarial){
+        if(! $this->predio_padre->superficie_notarial || $this->predio_padre->superficie_notarial == 0){
 
             if($this->predio_padre->superficie_total_terreno <= $superficie_terreno){
 
