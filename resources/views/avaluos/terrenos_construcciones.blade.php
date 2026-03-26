@@ -158,7 +158,6 @@
                 <th style="padding-right: 10px;">Superficie</th>
                 <th style="padding-right: 10px;">superficie proporcional</th>
                 <th style="padding-right: 10px;">Indiviso</th>
-                <th style="padding-right: 10px;">Valor de clasificación</th>
                 <th style="padding-right: 10px;">Valor construcción</th>
             </tr>
 
@@ -170,7 +169,7 @@
 
                 <tr>
                     <td style="padding-right: 40px;">
-                        @if(isset($construccionComun->valor_unitario))
+                        @if($construccionComun->valor_clasificacion_construccion)
 
                             <p style="margin:0;">{{ $construccionComun->tipo }}{{ $construccionComun->uso }}{{ $construccionComun->estado }}{{ $construccionComun->calidad }} - {{ $construccionComun->valor_unitario }}</p>
 
@@ -184,9 +183,6 @@
                     </td>
                     <td style="padding-right: 40px;">
                         <p style="margin:0;">{{ $construccionComun->indiviso_construccion }}</p>
-                    </td>
-                    <td style="padding-right: 40px;">
-                        <p style="margin:0;">{{ $construccionComun->valor_clasificacion_construccion }}</p>
                     </td>
                     <td style="padding-right: 40px;">
                         <p style="margin:0;">${{ number_format($construccionComun->valor_construccion_comun, 2) }}</p>
