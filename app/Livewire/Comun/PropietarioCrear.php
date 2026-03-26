@@ -251,6 +251,10 @@ class PropietarioCrear extends Component
                         'creado_por' => auth()->id()
                     ]);
 
+                    $this->modelo->touch();
+
+                    $this->modelo->audits()->latest()->first()?->update(['tags' => 'Agregó propietario']);
+
                 });
 
             }

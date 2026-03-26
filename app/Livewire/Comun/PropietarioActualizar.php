@@ -156,6 +156,10 @@ class PropietarioActualizar extends Component
                     'actualizado_por' => auth()->id()
                 ]);
 
+                $this->propietario->predio->touch();
+
+                $this->propietario->predio->audits()->latest()->first()?->update(['tags' => 'Actualizó propietario']);
+
             });
 
             $this->dispatch('mostrarMensaje', ['success', "La persona se actualizó con éxito."]);
