@@ -32,6 +32,8 @@ class VerificacionController extends Controller
 
     public function avaluo(Avaluo $avaluo){
 
+        $avaluo->predioAvaluo->load('propietarios.persona');
+
         return view('verificacion.avaluo', [
             'avaluo' => $avaluo,
             'predio' => $avaluo->predioAvaluo
