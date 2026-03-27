@@ -200,63 +200,69 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-3 col-span-2 rounded-lg p-3">
 
-                @if($tipo_persona == 'FISICA')
+                <x-input-group for="modelo_editar.tipo" label="Tipo de persona" :error="$errors->first('modelo_editar.tipo')" class="w-full">
 
-                    <x-input-group for="modelo_editar.nombre" label="Nombre(s)" :error="$errors->first('modelo_editar.nombre')" class="w-full">
+                    <x-input-select id="modelo_editar.tipo" wire:model.live="modelo_editar.tipo" class="w-full">
 
-                        <x-input-text id="modelo_editar.nombre" wire:model="modelo_editar.nombre"  />
+                        <option value="">Seleccione una opción</option>
+                        <option value="MORAL">MORAL</option>
+                        <option value="FÍSICA">FISICA</option>
 
-                    </x-input-group>
+                    </x-input-select>
 
-                    <x-input-group for="modelo_editar.ap_paterno" label="Apellido paterno" :error="$errors->first('modelo_editar.ap_paterno')" class="w-full">
+                </x-input-group>
 
-                        <x-input-text id="modelo_editar.ap_paterno" wire:model="modelo_editar.ap_paterno"  />
+                <x-input-group for="modelo_editar.nombre" label="Nombre(s)" :error="$errors->first('modelo_editar.nombre')" class="w-full">
 
-                    </x-input-group>
+                    <x-input-text id="modelo_editar.nombre" wire:model="modelo_editar.nombre"  />
 
-                    <x-input-group for="modelo_editar.ap_materno" label="Apellido materno" :error="$errors->first('modelo_editar.ap_materno')" class="w-full">
+                </x-input-group>
 
-                        <x-input-text id="modelo_editar.ap_materno" wire:model="modelo_editar.ap_materno"  />
+                <x-input-group for="modelo_editar.ap_paterno" label="Apellido paterno" :error="$errors->first('modelo_editar.ap_paterno')" class="w-full">
 
-                    </x-input-group>
+                    <x-input-text id="modelo_editar.ap_paterno" wire:model="modelo_editar.ap_paterno"  />
 
-                    <div class=" col-span-3 rounded-lg">
+                </x-input-group>
 
-                        <x-input-group for="modelo_editar.multiple_nombre" label="Nombre multiple (Opcional)" :error="$errors->first('modelo_editar.multiple_nombre')" class="sm:col-span-2 lg:col-span-3">
+                <x-input-group for="modelo_editar.ap_materno" label="Apellido materno" :error="$errors->first('modelo_editar.ap_materno')" class="w-full">
 
-                            <textarea rows="3" class="w-full bg-white rounded text-sm" wire:model="modelo_editar.multiple_nombre"></textarea>
+                    <x-input-text id="modelo_editar.ap_materno" wire:model="modelo_editar.ap_materno"  />
 
-                        </x-input-group>
+                </x-input-group>
 
-                    </div>
+                <x-input-group for="modelo_editar.razon_social" label="Razon social" :error="$errors->first('modelo_editar.razon_social')" class="w-full">
 
-                    <x-input-group for="modelo_editar.curp" label="CURP" :error="$errors->first('modelo_editar.curp')" class="w-full">
+                    <x-input-text id="modelo_editar.razon_social" wire:model="modelo_editar.razon_social"  />
 
-                        <x-input-text id="modelo_editar.curp" wire:model="modelo_editar.curp"  />
+                </x-input-group>
 
-                    </x-input-group>
+                <div class=" col-span-3 rounded-lg">
 
-                    <x-input-group for="modelo_editar.fecha_nacimiento" label="Fecha de nacimiento" :error="$errors->first('modelo_editar.fecha_nacimiento')" class="w-full">
+                    <x-input-group for="modelo_editar.multiple_nombre" label="Nombre multiple (Opcional)" :error="$errors->first('modelo_editar.multiple_nombre')" class="sm:col-span-2 lg:col-span-3">
 
-                        <x-input-text type="date" id="modelo_editar.fecha_nacimiento" wire:model="modelo_editar.fecha_nacimiento" />
-
-                    </x-input-group>
-
-                    <x-input-group for="modelo_editar.estado_civil" label="Estado civil" :error="$errors->first('modelo_editar.estado_civil')" class="w-full">
-
-                        <x-input-text id="modelo_editar.estado_civil" wire:model="modelo_editar.estado_civil" />
+                        <textarea rows="3" class="w-full bg-white rounded text-sm" wire:model="modelo_editar.multiple_nombre"></textarea>
 
                     </x-input-group>
 
-                @elseif($tipo_persona == 'MORAL')
+                </div>
 
-                    <x-input-group for="modelo_editar.razon_social" label="Razon social" :error="$errors->first('modelo_editar.razon_social')" class="w-full">
+                <x-input-group for="modelo_editar.curp" label="CURP" :error="$errors->first('modelo_editar.curp')" class="w-full">
 
-                        <x-input-text id="modelo_editar.razon_social" wire:model="modelo_editar.razon_social"  />
+                    <x-input-text id="modelo_editar.curp" wire:model="modelo_editar.curp"  />
 
-                    </x-input-group>
+                </x-input-group>
 
-                @endif
+                <x-input-group for="modelo_editar.fecha_nacimiento" label="Fecha de nacimiento" :error="$errors->first('modelo_editar.fecha_nacimiento')" class="w-full">
+
+                    <x-input-text type="date" id="modelo_editar.fecha_nacimiento" wire:model="modelo_editar.fecha_nacimiento" />
+
+                </x-input-group>
+
+                <x-input-group for="modelo_editar.estado_civil" label="Estado civil" :error="$errors->first('modelo_editar.estado_civil')" class="w-full">
+
+                    <x-input-text id="modelo_editar.estado_civil" wire:model="modelo_editar.estado_civil" />
+
+                </x-input-group>
 
                 <x-input-group for="modelo_editar.rfc" label="RFC" :error="$errors->first('modelo_editar.rfc')" class="w-full">
 

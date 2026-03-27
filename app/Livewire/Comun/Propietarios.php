@@ -57,6 +57,10 @@ class Propietarios extends Component
 
             $this->dispatch('mostrarMensaje', ['success', "La información se eliminó con éxito."]);
 
+            $this->predio->touch();
+
+            $this->predio->audits()->latest()->first()?->update(['tags' => 'Borro propietario']);
+
             $this->predio->refresh();
 
             $this->predio->load('propietarios.persona');

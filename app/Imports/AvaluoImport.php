@@ -111,6 +111,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             'uso_2' =>  ['nullable', Rule::in(Constantes::USO_PREDIO)],
             'uso_3' =>  ['nullable', Rule::in(Constantes::USO_PREDIO)],
             'ubicacion_manzana' => ['required', Rule::in(Constantes::UBICACION_PREDIO)],
+            'predio_existe_en_padron' => ['required', Rule::in(['SI', 'NO'])],
         ];
     }
 
@@ -179,11 +180,19 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                     $key = $key + 3;
 
-                    $this->revisarAsignacionCuentaPredia($row, $key);
+                    if($row['predio_existe_en_padron']){
 
-                    $this->validarDisponibilidad($row, $key);
+                        $this->revisarPredio($row, $key);
 
-                    $this->validarSector($row, $key);
+                    }else{
+
+                        $this->revisarAsignacionCuentaPredia($row, $key);
+
+                        $this->validarDisponibilidad($row, $key);
+
+                        $this->validarSector($row, $key);
+
+                    }
 
                     $coordenadas = $this->procesarCoordenadas($row['latitud'], $row['longitud'], $key);
 
@@ -276,7 +285,9 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                     if($row['ubicacion_manzana'] == 'ESQUINA'){
 
-                        $valorCatastral *= (1 + 15 / 100);
+                        $valor_esquina = $sumValorTerrenos * (0.10);
+
+                        $valorCatastral = $valorCatastral + $valor_esquina;
 
                     }
 
@@ -288,9 +299,9 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                     $avaluo = $this->crearAvaluo($row, $predio->id);
 
-                    $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo con folio: ' . $avaluo->año . '-' . $avaluo->folio]);
-
                     $predio->audits()->latest()->first()->update(['tags' => 'Se genera predio apartir de avalúo: ' . $avaluo->año . '-' . $avaluo->folio]);
+
+                    $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo con folio: ' . $avaluo->año . '-' . $avaluo->folio]);
 
                     $this->avaluos[] = $avaluo->load('predioAvaluo.propietarios.persona');
 
@@ -312,6 +323,32 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
         }
 
+
+    }
+
+    public function revisarPredio($row, $key):void
+    {
+
+        $predioCompleto = Predio::where('estado', $row['estado'])
+                                    ->where('region_catastral', $row['region'])
+                                    ->where('municipio', $row['municipio'])
+                                    ->where('zona_catastral', $row['zona'])
+                                    ->where('localidad', $row['localidad'])
+                                    ->where('sector', $row['sector'])
+                                    ->where('manzana', $row['manzana'])
+                                    ->where('predio', $row['predio'])
+                                    ->where('edificio', $row['edificio'])
+                                    ->where('departamento', $row['departamento'])
+                                    ->where('oficina', $row['oficina'])
+                                    ->where('tipo_predio', $row['tipo'])
+                                    ->where('numero_registro', $row['registro'])
+                                    ->first();
+
+        if(! $predioCompleto){
+
+            throw new GeneralException("El predio no existe en el padrón, verifique. " . 'Línea: ' . $key);
+
+        }
 
     }
 
@@ -837,19 +874,29 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
     public function procesarPropietario($predioId, $row, $linea):void
     {
 
-        $persona = Persona::where('rfc', $row['rfc'])->first();
+        $persona = null;
+
+        if(isset($row['rfc'])){
+
+            $persona = Persona::where('rfc', $row['rfc'])->first();
+
+        }
 
         if($persona){
 
             if($row['tipo_persona'] == 'FÍSICA'){
 
-                $v = Validator::make($persona->toArray(), [
-                    'curp' => 'unique:personas,curp,' . $persona->id,
-                ]);
+                if(isset($row['curp'])){
 
-                if ($v->fails()){
+                    $v = Validator::make($persona->toArray(), [
+                        'curp' => 'unique:personas,curp,' . $persona->id,
+                    ]);
 
-                    throw new GeneralException($v->errors()->first(). ' en la línea: '. $linea);
+                    if ($v->fails()){
+
+                        throw new GeneralException($v->errors()->first(). ' en la línea: '. $linea);
+                    }
+
                 }
 
             }
@@ -872,31 +919,44 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
         }else{
 
-            $v = Validator::make(
-                [
+            $persona = Persona::where('curp', $row['curp'])->first();
+
+            if($persona){
+
+                $persona->update([
+                    'ap_paterno' => $row['ap_paterno'],
+                    'ap_materno' => $row['ap_materno'],
+                    'nombre' => $row['nombre'],
+                    'razon_social' => $row['razon_social'],
+                    'tipo' => $row['tipo_persona'],
                     'rfc' => $row['rfc'],
                     'curp' => $row['curp'],
-                ],
-                [
-                    'rfc' => 'unique:personas,rfc',
-                    'curp' => 'unique:personas,curp',
-                ]
-            );
+                ]);
 
-            if ($v->fails()){
+            }else{
 
-                throw new GeneralException($v->errors()->first(). ' en la línea: '. $linea);
+                $persona = Persona::where('nombre', $row['nombre'])
+                                    ->where('nombre', $row['nombre'])
+                                    ->where('nombre', $row['nombre'])
+                                    ->where('nombre', $row['nombre'])
+                                    ->first();
+
+                if(!$persona){
+
+                    $persona = Persona::create([
+                        'ap_paterno' => $row['ap_paterno'],
+                        'ap_materno' => $row['ap_materno'],
+                        'nombre' => $row['nombre'],
+                        'razon_social' => $row['razon_social'],
+                        'tipo' => $row['tipo_persona'],
+                        'rfc' => $row['rfc'],
+                        'curp' => $row['curp'],
+                    ]);
+
+                }
+
+
             }
-
-            $persona = Persona::create([
-                'ap_paterno' => $row['ap_paterno'],
-                'ap_materno' => $row['ap_materno'],
-                'nombre' => $row['nombre'],
-                'razon_social' => $row['razon_social'],
-                'tipo' => $row['tipo_persona'],
-                'rfc' => $row['rfc'],
-                'curp' => $row['curp'],
-            ]);
 
             Propietario::create([
                 'propietarioable_id' => $predioId,

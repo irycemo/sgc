@@ -173,7 +173,7 @@
 
                             <div>
 
-                                <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.valor_unitario" readonly>
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.valor_unitario">
 
                             </div>
 
@@ -195,7 +195,7 @@
 
                             <div>
 
-                                <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.niveles">
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.niveles">
 
                             </div>
 
@@ -537,7 +537,7 @@
 
                             <div>
 
-                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.valor_construccion_comun" readonly>
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.valor_construccion_comun">
 
                             </div>
 
