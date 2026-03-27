@@ -182,7 +182,7 @@ class CertificadoRegistro extends Component
 
                     $this->tramite->update(['usados' => $usados]);
 
-                    $this->tramite->audits()->latest()->first()->update(['tags' => 'Generó certificado del predio ' . $this->predio->cuentaPredial()]);
+                    $this->tramite->audits()->latest()->first()?->update(['tags' => 'Generó certificado del predio ' . $this->predio->cuentaPredial()]);
 
                     if($this->tramite->cantidad === $usados){
 

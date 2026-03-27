@@ -2,7 +2,7 @@
 
     @include('livewire.comun.avaluo-folio')
 
-    <div class="">
+    <div class="" wire:loading.class.delay.longest="opacity-50">
 
         <div class="mb-3 bg-white rounded-lg p-3 shadow-lg">
 
