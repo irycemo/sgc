@@ -13,9 +13,11 @@
                 <th class="px-2">Porcentaje de propiedad</th>
                 <th class="px-2">Porcentaje de nuda</th>
                 <th class="px-2">Porcentaje de usufructo</th>
-                @if(auth()->user()->hasRole('Administrador'))
-                    <th class="px-2"></th>
-                @endif
+                @auth
+                    @if(auth()->user()->hasRole('Administrador'))
+                        <th class="px-2"></th>
+                    @endif
+                @endauth
 
             </tr>
 
@@ -31,11 +33,15 @@
                     <td class=" px-2 w-full ">{{ $propietario->porcentaje_propiedad }}%</td>
                     <td class=" px-2 w-full ">{{ $propietario->porcentaje_nuda }}%</td>
                     <td class=" px-2 w-full ">{{ $propietario->porcentaje_usufructo }}%</td>
-                    @if(auth()->user()->hasRole('Administrador'))
-                        <td class=" px-2 w-full ">
-                            <x-link-green href="{{ route('auditoria') }}">Auditar</x-link-green>
-                        </td>
-                    @endif
+                    @auth
+
+                        @if(auth()->user()->hasRole('Administrador'))
+                            <td class=" px-2 w-full ">
+                                <x-link-green href="{{ route('auditoria') }}">Auditar</x-link-green>
+                            </td>
+                        @endif
+
+                    @endauth
                 </tr>
 
             @endforeach
