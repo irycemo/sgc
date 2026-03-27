@@ -254,7 +254,7 @@ class PropietarioCrear extends Component
 
                     $this->modelo->touch();
 
-                    $this->modelo->audits()->latest()->first()?->update(['tags' => 'Agregó propietario']);
+                    $this->modelo->audits()->latest()->first()?->update(['tags' => 'Agregó propietario persona_id:' . $persona->id]);
 
                 });
 

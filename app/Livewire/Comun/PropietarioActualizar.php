@@ -158,7 +158,7 @@ class PropietarioActualizar extends Component
 
                 $this->propietario->predio->touch();
 
-                $this->propietario->predio->audits()->latest()->first()?->update(['tags' => 'Actualizó propietario']);
+                $this->propietario->predio->audits()->latest()->first()?->update(['tags' => 'Actualizó propietario persona_id:' . $this->persona->id]);
 
             });
 

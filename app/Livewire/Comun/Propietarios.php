@@ -53,13 +53,15 @@ class Propietarios extends Component
 
         try {
 
+            $persona_id = $propietario->persona_id;
+
             $propietario->delete();
 
             $this->dispatch('mostrarMensaje', ['success', "La información se eliminó con éxito."]);
 
             $this->predio->touch();
 
-            $this->predio->audits()->latest()->first()?->update(['tags' => 'Borro propietario']);
+            $this->predio->audits()->latest()->first()?->update(['tags' => 'Borro propietario  persona_id:' . $persona_id]);
 
             $this->predio->refresh();
 
