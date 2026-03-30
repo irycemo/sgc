@@ -448,25 +448,8 @@ class Notificacion extends Component
 
             foreach($this->avaluo->predioAvaluo->propietarios as $propietario){
 
-                $persona = Persona::firstOrCreate(
-                    [
-                        'ap_paterno' => $propietario->persona->ap_paterno,
-                        'ap_materno' => $propietario->persona->ap_materno,
-                        'nombre' => $propietario->persona->nombre,
-                        'razon_social' => $propietario->persona->razon_social,
-                        'tipo' => $propietario->persona->tipo,
-                    ],
-                    [
-                        'ap_paterno' => $propietario->persona->ap_paterno,
-                        'ap_materno' => $propietario->persona->ap_materno,
-                        'nombre' => $propietario->persona->nombre,
-                        'razon_social' => $propietario->persona->razon_social,
-                        'tipo' => $propietario->persona->tipo,
-                    ]
-                );
-
                 $predio->propietarios()->create([
-                    'persona_id' => $persona->id,
+                    'persona_id' => $propietario->id,
                     'tipo' => $propietario->tipo,
                     'porcentaje_propiedad' => $propietario->porcentaje_propiedad,
                     'porcentaje_nuda' => $propietario->porcentaje_nuda,
