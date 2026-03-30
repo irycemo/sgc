@@ -453,12 +453,14 @@ class Notificacion extends Component
                         'ap_paterno' => $propietario->persona->ap_paterno,
                         'ap_materno' => $propietario->persona->ap_materno,
                         'nombre' => $propietario->persona->nombre,
+                        'razon_social' => $propietario->persona->razon_social,
                         'tipo' => $propietario->persona->tipo,
                     ],
                     [
                         'ap_paterno' => $propietario->persona->ap_paterno,
                         'ap_materno' => $propietario->persona->ap_materno,
                         'nombre' => $propietario->persona->nombre,
+                        'razon_social' => $propietario->persona->razon_social,
                         'tipo' => $propietario->persona->tipo,
                     ]
                 );
