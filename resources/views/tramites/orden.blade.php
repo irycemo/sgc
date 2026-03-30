@@ -157,7 +157,11 @@
                         </p>
                         <p>Solicitante: {{ $tramite->nombre_solicitante }}</p>
                         <p>Orden de pago: {{ $tramite->orden_de_pago }}</p>
-                        <p>Total a pagar: ${{ number_format($tramite->monto, 2) }}</p>
+                        @if($tramite->tipo_tramite !== 'exento')
+
+                            <p>Total a pagar: ${{ number_format($tramite->monto, 2) }}</p>
+
+                        @endif
                         @if($tramite->cantidad) Cantidad: {{ $tramite->cantidad}}@endif
                         @if($tramite->observaciones)
                             <p>Observaciones:{{ $tramite->observaciones }}</p>
