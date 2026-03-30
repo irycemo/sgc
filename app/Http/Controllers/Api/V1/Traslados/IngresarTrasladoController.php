@@ -23,7 +23,15 @@ class IngresarTrasladoController extends Controller
 
         $certificacion = Certificacion::find($validated['certificacion_id']);
 
-        $oficina_cabecera_id = $certificacion->oficina->cabeceraMunicipal->id;
+        if($certificacion->oficina->cabeceraMunicipal){
+
+            $oficina_cabecera_id = $certificacion->oficina->cabeceraMunicipal->id;
+
+        }else{
+
+            $oficina_cabecera_id = $certificacion->oficina->id;
+
+        }
 
         try {
 
