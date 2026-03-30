@@ -2,16 +2,13 @@
 
 namespace App\Livewire\Valuacion;
 
-use App\Models\File;
 use App\Models\Avaluo;
 use App\Models\Predio;
-use App\Models\Persona;
 use App\Models\Terreno;
 use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\Colindancia;
 use App\Models\Propietario;
-use Illuminate\Support\Str;
 use App\Models\Construccion;
 use Livewire\WithPagination;
 use App\Models\TerrenosComun;
@@ -23,7 +20,6 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ConstruccionesComun;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Notificacion extends Component
@@ -569,7 +565,7 @@ class Notificacion extends Component
             'actualizado_por' => auth()->id(),
             'notificado_por' => auth()->id(),
             'notificado_en' => $this->fecha_notificacion,
-            'estado' => 'notificado'
+            'estado' => 'notificado',
         ]);
 
         $this->avaluo->predioAvaluo->update(['status' => 'notificado']);

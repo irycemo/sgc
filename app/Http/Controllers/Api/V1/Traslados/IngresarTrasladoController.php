@@ -23,11 +23,13 @@ class IngresarTrasladoController extends Controller
 
         $certificacion = Certificacion::find($validated['certificacion_id']);
 
+        $oficina_cabecera_id = $certificacion->oficina->cabeceraMunicipal->id;
+
         try {
 
             $traslado = null;
 
-            DB::transaction(function () use ($validated, $certificacion, &$traslado){
+            DB::transaction(function () use ($validated, $certificacion, &$traslado, $oficina_cabecera_id){
 
                 $traslado = Traslado::firstOrCreate(
                                         [
@@ -53,7 +55,7 @@ class IngresarTrasladoController extends Controller
                                             'aviso_stl' => $validated['aviso_stl'],
                                             'entidad_stl' => $validated['entidad_stl'],
                                             'entidad_nombre' => $validated['entidad_nombre'],
-                                            'asignado_a' => (new AsignacionTrasladosService())->obtenerUsuariosTraslado($certificacion->oficina_id, $validated['predio_id'])
+                                            'asignado_a' => (new AsignacionTrasladosService())->obtenerUsuariosTraslado($oficina_cabecera_id, $validated['predio_id'])
                                         ]
                                     );
 
