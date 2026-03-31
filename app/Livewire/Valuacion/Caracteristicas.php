@@ -335,6 +335,8 @@ class Caracteristicas extends Component
                 $this->avaluo->actualizado_por = auth()->id();
                 $this->avaluo->save();
 
+                $this->avaluo->refresh();
+
                 $this->predio->save();
 
                 $this->guardarBloques($this->avaluo);

@@ -186,6 +186,8 @@ class PropietarioCrear extends Component
 
         try {
 
+            $this->modelo->refresh();
+
             $this->validaciones();
 
             $persona = $this->buscarPersona($this->rfc, $this->curp, $this->tipo_persona, $this->nombre, $this->ap_materno, $this->ap_paterno, $this->razon_social);
@@ -254,7 +256,7 @@ class PropietarioCrear extends Component
 
                     $this->modelo->touch();
 
-                    $this->modelo->audits()->latest()->first()?->update(['tags' => 'Agregó propietario persona_id:' . $persona->id]);
+                    $this->modelo->audits()->latest()->first()?->update(['tags' => 'Agregó propietario persona_id: ' . $persona->id]);
 
                 });
 

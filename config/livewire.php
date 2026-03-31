@@ -157,4 +157,10 @@ return [
     */
 
     'pagination_theme' => 'tailwind',
+
+    'make_command' => [
+        'type' => 'class',  // Options: 'sfc', 'mfc', or 'class'
+        'emoji' => true,   // Whether to use ⚡ emoji prefix
+    ],
+
 ];

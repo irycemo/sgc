@@ -32,7 +32,7 @@
 
     @include('admin.comun.imagenes_avaluo')
 
-    @include('admin.comun.auditoria')
+    @include('admin.comun.auditoria_avaluo')
 
 @endsection
 
