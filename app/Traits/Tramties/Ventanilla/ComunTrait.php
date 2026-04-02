@@ -222,7 +222,7 @@ trait ComunTrait
 
             if($this->servicio['urgente'] == 0){
 
-                $this->dispatch('mostrarMensaje', ['error', "No hay servicio urgente para el servicio seleccionado."]);
+                $this->dispatch('mostrarMensaje', ['warning', "No hay servicio urgente para el servicio seleccionado."]);
 
                 $this->modelo_editar->tipo_servicio = 'ordinario';
 
@@ -234,7 +234,7 @@ trait ComunTrait
 
             if($this->servicio['extra_urgente'] == 0){
 
-                $this->dispatch('mostrarMensaje', ['error', "No hay servicio extra urgente para el servicio seleccionado."]);
+                $this->dispatch('mostrarMensaje', ['warning', "No hay servicio extra urgente para el servicio seleccionado."]);
 
                 $this->modelo_editar->tipo_servicio = 'ordinario';
 
@@ -251,10 +251,13 @@ trait ComunTrait
 
     public function updatedModeloEditarCantidad(){
 
-        if($this->modelo_editar->cantidad == '')
+        if($this->modelo_editar->cantidad == ''){
+
             $this->modelo_editar->cantidad = 1;
 
-        $this->updatedModeloEditarTipoServicio();
+        }
+
+        $this->updatedModeloEditarTipoTramite();
 
     }
 

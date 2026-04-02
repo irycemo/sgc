@@ -37,7 +37,7 @@
 
                         @if(auth()->user()->hasRole('Administrador'))
                             <td class=" px-2 w-full ">
-                                <x-link-green href="{{ route('auditoria') }}">Auditar</x-link-green>
+                                <x-link-green class="w-min" href="{{ route('auditoria') . '?modelo=Persona&modelo_id=' . $propietario->persona_id }}">Auditar</x-link-green>
                             </td>
                         @endif
 

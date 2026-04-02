@@ -48,6 +48,51 @@ class TerrenosConstrucciones extends Component
         'construccionesComun.*.valor_clasificacion_construccion' => 'valor de clasificación',
     ];
 
+    public function updatedConstrucciones($value, $index){
+
+        $i = explode('.', $index);
+
+        if(isset($this->construcciones[$i[0]]['valor_unitario']) && isset($this->construcciones[$i[0]]['superficie'])){
+
+            $this->construcciones[$i[0]]['valor_construccion'] = (float)$this->construcciones[$i[0]]['valor_unitario'] * (float)$this->construcciones[$i[0]]['superficie'];
+
+        }
+
+    }
+
+    public function updatedConstruccionesComun($value, $index){
+
+        $i = explode('.', $index);
+
+        if(isset($this->construccionesComun[$i[0]]['indiviso_construccion'])){
+
+            if(!is_numeric($this->construccionesComun[$i[0]]['indiviso_construccion']) || $this->construccionesComun[$i[0]]['indiviso_construccion'] > 100 || $this->construccionesComun[$i[0]]['indiviso_construccion'] < 0){
+
+                $this->construccionesComun[$i[0]]['indiviso_construccion'] = 0;
+
+                return;
+
+            }
+
+            $this->construccionesComun[$i[0]]['indiviso_construccion'] = round($this->construccionesComun[$i[0]]['indiviso_construccion'], 4);
+
+        }
+
+        if(isset($this->construccionesComun[$i[0]]['area_comun_construccion']) &&
+            isset($this->construccionesComun[$i[0]]['indiviso_construccion']) &&
+            isset($this->construccionesComun[$i[0]]['valor_clasificacion_construccion']))
+        {
+
+            $this->construccionesComun[$i[0]]['superficie_proporcional'] = ((float)$this->construccionesComun[$i[0]]['area_comun_construccion'] * (float)$this->construccionesComun[$i[0]]['indiviso_construccion']) / 100;
+
+            $this->construccionesComun[$i[0]]['valor_construccion_comun'] = ((float)$this->construccionesComun[$i[0]]['area_comun_construccion'] *
+                                                                                    (float)$this->construccionesComun[$i[0]]['indiviso_construccion'] *
+                                                                                    (float)$this->construccionesComun[$i[0]]['valor_clasificacion_construccion']) / 100 ;
+
+        }
+
+    }
+
     #[On('cargarPredioPadron')]
     public function cargarPredio($id){
 
@@ -81,4 +126,5 @@ class TerrenosConstrucciones extends Component
     {
         return view('livewire.gestion-catastral.captura.terrenos-construcciones');
     }
+
 }

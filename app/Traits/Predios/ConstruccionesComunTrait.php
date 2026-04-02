@@ -130,6 +130,10 @@ trait ConstruccionesComunTrait
             'construccionesComun.*.indiviso_construccion' => 'required|numeric|gt:0|max:100',
             'construccionesComun.*.valor_clasificacion_construccion' => 'required',
             'construccionesComun.*.superficie_proporcional' => 'required|numeric|gt:0',
+            'construccionesComun.*.tipo' => 'required',
+            'construccionesComun.*.uso' => 'required',
+            'construccionesComun.*.estado' => 'required',
+            'construccionesComun.*.calidad' => 'required',
         ]);
 
         try {

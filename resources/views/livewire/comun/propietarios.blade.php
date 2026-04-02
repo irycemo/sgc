@@ -1,5 +1,13 @@
 <div class="">
 
+    <div class="bg-blue-400 w-full p-2 rounded-lg mb-5 flex gap-5 items-center justify-center" wire:loading.flex>
+
+        <img class="h-4" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+        <span class="text-white">Cargando..</span>
+
+    </div>
+
     @include('livewire.comun.avaluo-folio')
 
     <div class="" wire:loading.class.delay.longest="opacity-50">

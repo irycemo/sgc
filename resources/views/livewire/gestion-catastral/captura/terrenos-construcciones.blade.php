@@ -1,4 +1,12 @@
-<div>
+<div wire:loading.class.delay.longest="opacity-50">
+
+    <div class="bg-blue-400 w-full p-2 rounded-lg mb-5 flex gap-5 items-center justify-center" wire:loading.flex>
+
+        <img class="h-4" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+        <span class="text-white">Cargando..</span>
+
+    </div>
 
     <div class="space-y-5 mb-5">
 
@@ -139,9 +147,10 @@
 
                 @foreach ($construcciones as $index => $construccion)
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-3 mb-2 bg-gray-50 p-4 rounded-lg items-start" wire:key="construccion-"{{ $index }}>
+                    <div class="w-full flex justify-start gap-3 mb-2 bg-gray-50 p-4 rounded-lg items-start" wire:key="construccion-"{{ $index }}>
 
-                        <div class="flex-auto lg:col-span-1">
+
+                        <div class="flex-auto">
 
                             <div>
 
@@ -157,13 +166,35 @@
 
                             <div>
 
-                                @error('construcciones.' . $index . '.referencia') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                                @error('construcciones.' .  $index . '.referencia') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                             </div>
 
                         </div>
 
-                        <div class="flex-auto lg:col-span-2">
+                        <div class="flex-auto">
+
+                            <div>
+
+                                <label class="text-sm" >Clasificación</label>
+
+                            </div>
+
+                            <div class="flex gap-1">
+
+                                <input type="number" class="bg-white rounded text-xs w-20 @error('construcciones.' . $index . '.uso') border-red-500 @enderror" wire:model.lazy="construcciones.{{ $index }}.uso">
+
+                                <input type="number" class="bg-white rounded text-xs w-20 @error('construcciones.' . $index . '.tipo') border-red-500 @enderror" wire:model.lazy="construcciones.{{ $index }}.tipo">
+
+                                <input type="number" class="bg-white rounded text-xs w-20 @error('construcciones.' . $index . '.estado') border-red-500 @enderror" wire:model.lazy="construcciones.{{ $index }}.estado">
+
+                                <input type="number" class="bg-white rounded text-xs w-20 @error('construcciones.' . $index . '.calidad') border-red-500 @enderror" wire:model.lazy="construcciones.{{ $index }}.calidad">
+
+                            </div>
+
+                        </div>
+
+                        <div class="flex-auto">
 
                             <div>
 
@@ -185,7 +216,7 @@
 
                         </div>
 
-                        <div class="flex-auto lg:col-span-1">
+                        <div class="flex-auto">
 
                             <div>
 
@@ -207,7 +238,7 @@
 
                         </div>
 
-                        <div class="flex-auto lg:col-span-1">
+                        <div class="flex-auto">
 
                             <div>
 
@@ -229,7 +260,7 @@
 
                         </div>
 
-                        <div class="flex-auto lg:col-span-1">
+                        <div class="flex-auto">
 
                             <div>
 
@@ -427,35 +458,47 @@
 
                     @foreach ($construccionesComun as $index => $item)
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-3 items-end mb-2 bg-gray-50 p-4 rounded-lg" wire:key="construccionComun-"{{ $index }}>
+                    <div class="w-full flex justify-start gap-3 mb-2 bg-gray-50 p-4 rounded-lg items-start" wire:key="construccion-"{{ $index }}>
 
-                        <div class="flex-auto lg:col-span-1">
+                        <div class="flex-auto">
 
                             <div>
 
-                                <label class="text-sm" >Clasificación de construccion</label>
+                                <label class="text-sm" >Clasificación</label>
+
+                            </div>
+
+                            <div class="flex gap-1">
+
+                                <input type="number" class="bg-white rounded text-xs w-20 @error('construccionesComun.' . $index . '.uso') border-red-500 @enderror" wire:model.lazy="construccionesComun.{{ $index }}.uso">
+
+                                <input type="number" class="bg-white rounded text-xs w-20 @error('construccionesComun.' . $index . '.tipo') border-red-500 @enderror" wire:model.lazy="construccionesComun.{{ $index }}.tipo">
+
+                                <input type="number" class="bg-white rounded text-xs w-20 @error('construccionesComun.' . $index . '.estado') border-red-500 @enderror" wire:model.lazy="construccionesComun.{{ $index }}.estado">
+
+                                <input type="number" class="bg-white rounded text-xs w-20 @error('construccionesComun.' . $index . '.calidad') border-red-500 @enderror" wire:model.lazy="construccionesComun.{{ $index }}.calidad">
+
+                            </div>
+
+                        </div>
+
+                        <div class="flex-auto">
+
+                            <div>
+
+                                <label class="text-sm" >Valor unitario</label>
 
                             </div>
 
                             <div>
 
-                                <select class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.valores">
-
-                                    <option value="" selected>Seleccione una opción</option>
-
-                                    @foreach ($valores_construccion as $item)
-
-                                        <option value="{{ $item }}" selected>{{ $item->tipo }}{{ $item->uso }}{{ $item->estado }}{{ $item->calidad }} - ${{ number_format($item->valor, 2) }}</option>
-
-                                    @endforeach
-
-                                </select>
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.valor_clasificacion_construccion">
 
                             </div>
 
                             <div>
 
-                                @error('construccionesComun.{{ $index }}.valores') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+                                @error('construccionesComun.' . $index . '.valor_clasificacion_construccion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                             </div>
 

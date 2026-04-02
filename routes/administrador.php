@@ -22,6 +22,7 @@ use App\Livewire\Admin\ValoresUnitariosRusticos;
 use App\Livewire\Admin\ValoresUnitariosConstruccion;
 use App\Http\Controllers\Admin\Avaluos\AvaluosController;
 use App\Http\Controllers\Admin\Predios\PrediosController;
+use App\Livewire\Admin\ConciliarPersona;
 use App\Livewire\Admin\OldBD\Certificados;
 use App\Livewire\Admin\OldBD\Traslados;
 
@@ -42,6 +43,8 @@ Route::group([], function(){
     Route::get('servicios', Servicios::class)->middleware('permission:Lista de servicios')->name('servicios');
 
     Route::get('personas', Personas::class)->middleware('permission:Lista de personas')->name('personas');
+
+    Route::get('conciliar_personas', ConciliarPersona::class)->middleware('permission:Lista de personas')->name('conciliar_personas');
 
     Route::get('categorias_servicios', Categorias::class)->middleware('permission:Lista de categorías')->name('categorias_servicios');
 

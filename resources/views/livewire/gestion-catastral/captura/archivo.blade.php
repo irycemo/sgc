@@ -1,5 +1,13 @@
 <div>
 
+    <div class="bg-blue-400 w-full p-2 rounded-lg mb-5 flex gap-5 items-center justify-center" wire:loading.flex>
+
+        <img class="h-4" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+        <span class="text-white">Cargando..</span>
+
+    </div>
+
     <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
 
         <div class="w-full md:w-1/2 lg:w-1/4 mx-auto items-center text-center">
