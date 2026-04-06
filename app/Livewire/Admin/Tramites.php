@@ -400,31 +400,31 @@ class Tramites extends Component
         return  Tramite::query()
                         ->select('id', 'año', 'folio', 'usuario', 'estado', 'servicio_id', 'cantidad', 'monto', 'fecha_entrega', 'fecha_pago', 'tipo_tramite', 'tipo_servicio', 'nombre_solicitante', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
                         ->with('servicio:id,nombre', 'creadoPor:id,name', 'actualizadoPor:id,name')
-                        ->when($this->filters['search'], fn($q, $search) => $q->where('nombre_solicitante', 'LIKE', '%' . $search . '%'))
-                        ->when($this->filters['año'], fn($q, $año) => $q->where('año', $año))
-                        ->when($this->filters['folio'], fn($q, $folio) => $q->where('folio', $folio))
-                        ->when($this->filters['usuario'], fn($q, $usuario) => $q->where('usuario', $usuario))
-                        ->when($this->filters['estado'], fn($q) => $q->where('estado', $this->filters['estado']))
-                        ->when($this->filters['tipoTramite'], fn($q, $tipoTramite) => $q->where('tipo_tramite', $tipoTramite))
-                        ->when($this->filters['servicio'], fn($q, $servicio) => $q->where('servicio_id', $servicio))
-                        ->when($this->filters['localidad'], function($q, $localidad){
-                            $q->whereHas('predios', function($q) use($localidad){
-                                $q->where('localidad', $localidad);
+                        ->when(! empty($this->filters['search']), fn($q) => $q->where('nombre_solicitante', 'LIKE', '%' . $this->filters['search'] . '%'))
+                        ->when(! empty($this->filters['año']), fn($q) => $q->where('año', $this->filters['año']))
+                        ->when(! empty($this->filters['folio']), fn($q) => $q->where('folio', $this->filters['folio']))
+                        ->when(! empty($this->filters['usuario']), fn($q) => $q->where('usuario', $this->filters['usuario']))
+                        ->when(! empty($this->filters['estado']), fn($q) => $q->where('estado', $this->filters['estado']))
+                        ->when(! empty($this->filters['tipoTramite']), fn($q, $tipoTramite) => $q->where('tipo_tramite', $tipoTramite))
+                        ->when(! empty($this->filters['servicio']), fn($q, $servicio) => $q->where('servicio_id', $servicio))
+                        ->when(! empty($this->filters['localidad']), function($q){
+                            $q->whereHas('predios', function($q){
+                                $q->where('localidad', $this->filters['localidad']);
                             });
                         })
-                        ->when($this->filters['p_oficina'], function($q, $oficina){
-                            $q->whereHas('predios', function($q) use($oficina){
-                                $q->where('oficina', $oficina);
+                        ->when(! empty($this->filters['p_oficina']), function($q){
+                            $q->whereHas('predios', function($q){
+                                $q->where('oficina', $this->filters['p_oficina']);
                             });
                         })
-                        ->when($this->filters['t_predio'], function($q, $t_predio){
-                            $q->whereHas('predios', function($q) use($t_predio){
-                                $q->where('tipo_predio', $t_predio);
+                        ->when(! empty($this->filters['t_predio']), function($q){
+                            $q->whereHas('predios', function($q){
+                                $q->where('tipo_predio', $this->filters['t_predio']);
                             });
                         })
-                        ->when($this->filters['registro'], function($q, $registro){
-                            $q->whereHas('predios', function($q) use($registro){
-                                $q->where('numero_registro', $registro);
+                        ->when(! empty($this->filters['registro']), function($q){
+                            $q->whereHas('predios', function($q){
+                                $q->where('numero_registro', $this->filters['registro']);
                             });
                         })
                         ->orderBy($this->sort, $this->direction)

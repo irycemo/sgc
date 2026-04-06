@@ -139,44 +139,44 @@ class Certificaciones extends Component
                                     'oficina:id,nombre',
                                     'predio:id,localidad,oficina,tipo_predio,numero_registro'
                                 )
-                                ->when(! empty($this->filters['año']), fn($q, $año) => $q->where('año', $año))
-                                ->when(! empty($this->filters['folio']), fn($q, $folio) => $q->where('folio', $folio))
-                                ->when(! empty($this->filters['estado']), fn($q, $estado) => $q->where('estado', $estado))
-                                ->when(! empty($this->filters['documento']), fn($q, $documento) => $q->where('tipo', $documento))
-                                ->when(! empty($this->filters['oficina']), fn($q, $oficina) => $q->where('oficina_id', $oficina))
-                                ->when(! empty($this->filters['tAño']), function($q, $tAño){
-                                    $q->WhereHas('tramite', function($q) use($tAño){
-                                        $q->where('año', $tAño);
+                                ->when(! empty($this->filters['año']), fn($q) => $q->where('año', $this->filters['año']))
+                                ->when(! empty($this->filters['folio']), fn($q) => $q->where('folio', $this->filters['folio']))
+                                ->when(! empty($this->filters['estado']), fn($q) => $q->where('estado', $this->filters['estado']))
+                                ->when(! empty($this->filters['documento']), fn($q) => $q->where('tipo', $this->filters['documento']))
+                                ->when(! empty($this->filters['oficina']), fn($q) => $q->where('oficina_id', $this->filters['oficina']))
+                                ->when(! empty($this->filters['tAño']), function($q){
+                                    $q->WhereHas('tramite', function($q){
+                                        $q->where('año', $this->filters['tAño']);
                                     });
                                 })
-                                ->when(! empty($this->filters['tFolio']), function($q, $tFolio){
-                                    $q->WhereHas('tramite', function($q) use($tFolio){
-                                        $q->where('folio', $tFolio);
+                                ->when(! empty($this->filters['tFolio']), function($q){
+                                    $q->WhereHas('tramite', function($q){
+                                        $q->where('folio', $this->filters['tAño']);
                                     });
                                 })
-                                ->when(! empty($this->filters['tUsuario']), function($q, $tUsuario){
-                                    $q->WhereHas('tramite', function($q) use($tUsuario){
-                                        $q->where('usuario', $tUsuario);
+                                ->when(! empty($this->filters['tUsuario']), function($q){
+                                    $q->WhereHas('tramite', function($q){
+                                        $q->where('usuario', $this->filters['tUsuario']);
                                     });
                                 })
-                                ->when(! empty($this->filters['localidad']), function($q, $localidad){
-                                    $q->WhereHas('predio', function($q) use($localidad){
-                                        $q->where('localidad', $localidad);
+                                ->when(! empty($this->filters['localidad']), function($q){
+                                    $q->WhereHas('predio', function($q){
+                                        $q->where('localidad', $this->filters['localidad']);
                                     });
                                 })
-                                ->when(! empty($this->filters['p_oficina']), function($q, $oficina){
-                                    $q->WhereHas('predio', function($q) use($oficina){
-                                        $q->where('oficina', $oficina);
+                                ->when(! empty($this->filters['p_oficina']), function($q){
+                                    $q->WhereHas('predio', function($q){
+                                        $q->where('oficina', $this->filters['p_oficina']);
                                     });
                                 })
-                                ->when(! empty($this->filters['t_predio']), function($q, $t_predio){
-                                    $q->WhereHas('predio', function($q) use($t_predio){
-                                        $q->where('tipo_predio', $t_predio);
+                                ->when(! empty($this->filters['t_predio']), function($q){
+                                    $q->WhereHas('predio', function($q){
+                                        $q->where('tipo_predio', $this->filters['t_predio']);
                                     });
                                 })
-                                ->when(! empty($this->filters['registro']), function($q, $registro){
-                                    $q->WhereHas('predio', function($q) use($registro){
-                                        $q->where('numero_registro', $registro);
+                                ->when(! empty($this->filters['registro']), function($q){
+                                    $q->WhereHas('predio', function($q){
+                                        $q->where('numero_registro', $this->filters['registro']);
                                     });
                                 })
                                 ->orderBy($this->sort, $this->direction)
