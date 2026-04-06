@@ -408,22 +408,22 @@ class Tramites extends Component
                         ->when($this->filters['tipoTramite'], fn($q, $tipoTramite) => $q->where('tipo_tramite', $tipoTramite))
                         ->when($this->filters['servicio'], fn($q, $servicio) => $q->where('servicio_id', $servicio))
                         ->when($this->filters['localidad'], function($q, $localidad){
-                            $q->WhereHas('predios', function($q) use($localidad){
+                            $q->whereHas('predios', function($q) use($localidad){
                                 $q->where('localidad', $localidad);
                             });
                         })
                         ->when($this->filters['p_oficina'], function($q, $oficina){
-                            $q->WhereHas('predios', function($q) use($oficina){
+                            $q->whereHas('predios', function($q) use($oficina){
                                 $q->where('oficina', $oficina);
                             });
                         })
                         ->when($this->filters['t_predio'], function($q, $t_predio){
-                            $q->WhereHas('predios', function($q) use($t_predio){
+                            $q->whereHas('predios', function($q) use($t_predio){
                                 $q->where('tipo_predio', $t_predio);
                             });
                         })
                         ->when($this->filters['registro'], function($q, $registro){
-                            $q->WhereHas('predios', function($q) use($registro){
+                            $q->whereHas('predios', function($q) use($registro){
                                 $q->where('numero_registro', $registro);
                             });
                         })
