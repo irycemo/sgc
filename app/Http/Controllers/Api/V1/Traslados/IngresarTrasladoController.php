@@ -79,7 +79,7 @@ class IngresarTrasladoController extends Controller
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al ingresar información de aviso aclaratorio desde Sistema Trámites en Lína." . $th);
+            Log::error("Error al ingresar información de revisión de aviso desde Sistema Trámites en Lína." . $th);
 
             return response()->json([
                 'error' => 'Hubo un error al ingresar la información.',
