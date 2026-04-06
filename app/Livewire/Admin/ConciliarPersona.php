@@ -115,7 +115,7 @@ class ConciliarPersona extends Component
 
             $personas_ids = $this->personas->pluck('id');
 
-            $propietarios = Propietario::whereIn('persona_id', $personas_ids)->orderBy('rfc', 'desc')->orderBy('curp', 'desc')->get();
+            $propietarios = Propietario::whereIn('persona_id', $personas_ids)->get();
 
             DB::transaction(function () use ($personas_ids, $propietarios){
 
