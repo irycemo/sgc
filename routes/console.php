@@ -834,3 +834,25 @@ Artisan::command('conciliar-personas', function(){
 
 });
 
+Artisan::command('corregir-condominio', function(){
+
+    $predios = Predio::with('terrenos', 'terrenosComun')->where('edificio', '>', 0)->get();
+
+    foreach ($predios as $predio) {
+
+        DB::transaction(function () use($predio){
+
+            $superficie_total_terreno = $predio->terrenos->sum('superficie');
+
+            $superficie_privativa = $superficie_total_terreno - $predio->terrenosComun->sum('superficie_proporcional');
+
+            $predio->update(['superficie_total_terreno' => $superficie_total_terreno]);
+
+            $predio->terrenos->first()->update(['superficie' => $superficie_privativa]);
+
+        });
+
+    }
+
+});
+
