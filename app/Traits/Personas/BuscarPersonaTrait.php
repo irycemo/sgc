@@ -12,29 +12,22 @@ trait BuscarPersonaTrait
 
         $persona = null;
 
-        if($rfc){
+        if(isset($rfc)){
 
             $persona = Persona::where('rfc', $rfc)->first();
 
-        }elseif($curp){
+        }elseif(isset($curp)){
 
             $persona = Persona::where('curp', $curp)->first();
 
         }else{
 
-            if(in_array($tipo_persona, ['FISICA', 'FÍSICA'])){
-
-                $persona = Persona::query()
+            $persona = Persona::query()
                             ->where('nombre', trim($nombre))
                             ->where('ap_paterno', trim($ap_paterno))
                             ->where('ap_materno', trim($ap_materno))
+                            ->where('razon_social', trim($razon_social))
                             ->first();
-
-            }else{
-
-                $persona = Persona::where('razon_social', $razon_social)->first();
-
-            }
 
         }
 

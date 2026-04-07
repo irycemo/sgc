@@ -40,6 +40,9 @@ class ListaAvisos extends Component
     protected function rules(){
         return [];
     }
+
+    public function updatedFilters() { $this->resetPage(); }
+
     public function crearModeloVacio(){
         $this->modelo_editar =  Traslado::make();
     }

@@ -28,6 +28,16 @@ class Traslados extends Component
     public $oficinas;
     public $oficina;
 
+    public $filters = [
+        'localidad' => '',
+        'oficina' => '',
+        'tipo' => '',
+        'registro' => '',
+        'año_aviso' => '',
+        'folio_aviso' => '',
+        'usuario_aviso' => '',
+    ];
+
     protected function rules(){
         return [
             'modelo_editar.asignado_a' => 'required'
@@ -37,6 +47,8 @@ class Traslados extends Component
     protected $validationAttributes  = [
         'modelo_editar.asignado_a' => 'fiscal'
     ];
+
+    public function updatedFilters() { $this->resetPage(); }
 
     public function crearModeloVacio(){
         $this->modelo_editar =  Traslado::make();
@@ -99,13 +111,53 @@ class Traslados extends Component
 
         if(auth()->user()->hasRole(['Administrador', 'Jefe de departamento'])){
 
-            return Traslado::select('id','estado', 'predio_id', 'entidad_nombre', 'asignado_a', 'actualizado_por', 'created_at', 'updated_at')
+            return Traslado::select('id','estado', 'año_aviso', 'folio_aviso', 'usuario_aviso', 'predio_id', 'entidad_nombre', 'asignado_a', 'actualizado_por', 'created_at', 'updated_at')
                                 ->with('actualizadoPor:id,name', 'asignadoA:id,name', 'predio:id,localidad,oficina,tipo_predio,numero_registro')
                                 ->withCount(['rechazos'])
                                 ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $this->estado))
                                 ->when($this->oficina, function($q) {
                                     $q->whereHas('predio', function($q) {
                                         $q->select('id','oficina')->where('oficina', $this->oficina);
+                                    });
+                                })
+                                ->when($this->oficina, function($q) {
+                                    $q->whereHas('predio', function($q) {
+                                        $q->where('oficina', $this->oficina);
+                                    });
+                                })
+                                ->when($this->filters['localidad'], function($q, $localidad){
+                                    $q->WhereHas('predio', function($q) use($localidad){
+                                        $q->where('localidad', $localidad);
+                                    });
+                                })
+                                ->when($this->filters['oficina'], function($q, $oficina){
+                                    $q->WhereHas('predio', function($q) use($oficina){
+                                        $q->where('oficina', $oficina);
+                                    });
+                                })
+                                ->when($this->filters['tipo'], function($q, $t_predio){
+                                    $q->WhereHas('predio', function($q) use($t_predio){
+                                        $q->where('tipo_predio', $t_predio);
+                                    });
+                                })
+                                ->when($this->filters['registro'], function($q, $registro){
+                                    $q->WhereHas('predio', function($q) use($registro){
+                                        $q->where('numero_registro', $registro);
+                                    });
+                                })
+                                ->when($this->filters['año_aviso'], function($q, $año_aviso){
+                                    $q->WhereHas('predio', function($q) use($año_aviso){
+                                        $q->where('año_aviso', $año_aviso);
+                                    });
+                                })
+                                ->when($this->filters['folio_aviso'], function($q, $folio_aviso){
+                                    $q->WhereHas('predio', function($q) use($folio_aviso){
+                                        $q->where('folio_aviso', $folio_aviso);
+                                    });
+                                })
+                                ->when($this->filters['usuario_aviso'], function($q, $usuario_aviso){
+                                    $q->WhereHas('predio', function($q) use($usuario_aviso){
+                                        $q->where('usuario_aviso', $usuario_aviso);
                                     });
                                 })
                                 ->where('entidad_nombre', 'LIKE', '%' . $this->search . '%')
@@ -115,12 +167,52 @@ class Traslados extends Component
 
         }else{
 
-            return Traslado::select('id','estado', 'predio_id', 'entidad_nombre', 'asignado_a', 'actualizado_por', 'created_at', 'updated_at')
+            return Traslado::select('id','estado', 'año_aviso', 'folio_aviso', 'usuario_aviso', 'predio_id', 'entidad_nombre', 'asignado_a', 'actualizado_por', 'created_at', 'updated_at')
                                 ->with('actualizadoPor:id,name', 'asignadoA:id,name', 'predio:id,localidad,oficina,tipo_predio,numero_registro')
                                 ->withCount(['rechazos'])
                                 ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $this->estado))
                                 ->where('entidad_nombre', 'LIKE', '%' . $this->search . '%')
                                 ->where('asignado_a', auth()->id())
+                                ->when($this->oficina, function($q) {
+                                    $q->whereHas('predio', function($q) {
+                                        $q->where('oficina', $this->oficina);
+                                    });
+                                })
+                                ->when($this->filters['localidad'], function($q, $localidad){
+                                    $q->WhereHas('predio', function($q) use($localidad){
+                                        $q->where('localidad', $localidad);
+                                    });
+                                })
+                                ->when($this->filters['oficina'], function($q, $oficina){
+                                    $q->WhereHas('predio', function($q) use($oficina){
+                                        $q->where('oficina', $oficina);
+                                    });
+                                })
+                                ->when($this->filters['tipo'], function($q, $t_predio){
+                                    $q->WhereHas('predio', function($q) use($t_predio){
+                                        $q->where('tipo_predio', $t_predio);
+                                    });
+                                })
+                                ->when($this->filters['registro'], function($q, $registro){
+                                    $q->WhereHas('predio', function($q) use($registro){
+                                        $q->where('numero_registro', $registro);
+                                    });
+                                })
+                                ->when($this->filters['año_aviso'], function($q, $año_aviso){
+                                    $q->WhereHas('predio', function($q) use($año_aviso){
+                                        $q->where('año_aviso', $año_aviso);
+                                    });
+                                })
+                                ->when($this->filters['folio_aviso'], function($q, $folio_aviso){
+                                    $q->WhereHas('predio', function($q) use($folio_aviso){
+                                        $q->where('folio_aviso', $folio_aviso);
+                                    });
+                                })
+                                ->when($this->filters['usuario_aviso'], function($q, $usuario_aviso){
+                                    $q->WhereHas('predio', function($q) use($usuario_aviso){
+                                        $q->where('usuario_aviso', $usuario_aviso);
+                                    });
+                                })
                                 ->orderBy($this->sort, $this->direction)
                                 ->paginate($this->pagination);
 
@@ -143,4 +235,5 @@ class Traslados extends Component
     {
         return view('livewire.gestion-catastral.revision-traslados.traslados')->extends('layouts.admin');
     }
+
 }
