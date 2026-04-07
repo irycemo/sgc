@@ -8997,27 +8997,27 @@ Artisan::command('corregir-condominio', function(){
     408646,
     416342])->get();
 
-    foreach ($predios as $predio) {
+    DB::transaction(function () use($predios){
 
-        if($predio->terrenos->count() == 0) continue;
+        foreach ($predios as $predio) {
 
-        if($predio->terrenosComun->count() == 0) continue;
+            if($predio->terrenos->count() == 0) continue;
 
-        DB::transaction(function () use($predio){
+            if($predio->terrenosComun->count() == 0) continue;
 
-            $superficie_total_terreno = $predio->terrenos->sum('superficie');
+                $superficie_total_terreno = $predio->terrenos->sum('superficie');
 
-            $superficie_privativa = $superficie_total_terreno - $predio->terrenosComun->sum('superficie_proporcional');
+                $superficie_privativa = $superficie_total_terreno - $predio->terrenosComun->sum('superficie_proporcional');
 
-            $predio->update(['superficie_total_terreno' => $superficie_total_terreno]);
+                $predio->update(['superficie_total_terreno' => $superficie_total_terreno]);
 
-            $predio->terrenos->first()->update(['superficie' => $superficie_privativa]);
+                $predio->terrenos->first()->update(['superficie' => $superficie_privativa]);
 
-            $this->info('Actualizado: ' . $predio->cuentaPredial());
+                $this->info('Actualizado: ' . $predio->cuentaPredial());
 
-        });
+        }
 
-    }
+    });
 
 });
 
