@@ -371,7 +371,7 @@
 
                                 <div>
 
-                                    <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.valor_unitario">
+                                    <input  type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.valor_unitario">
 
                                 </div>
 

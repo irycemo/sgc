@@ -77,7 +77,7 @@
 
             </div>
 
-            @if($tramite->estado == 'pagado' && in_array($this->tramite->servicio->clave_ingreso, ['DM31', 'DM34', 'DM32', 'DM35', 'D774']))
+            @if($tramite->estado == 'pagado' && in_array($this->tramite->servicio->clave_ingreso, ['DM31', 'DM34', 'DM32', 'DM35', 'D774', 'D727', 'D726']))
 
                 @can('Autorizar tramite')
 
@@ -107,7 +107,7 @@
         <div class="bg-white p-4 rounded-lg mb-5 shadow-lg text-sm my-3">
 
             @if(
-                    in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM35', 'D927', 'D926', 'D925', 'D924', 'DM31']) ||
+                    in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM35', 'D927', 'D926', 'D925', 'D924', 'DM31','D727', 'D726']) ||
                     in_array($tramite->servicio->nombre, ['Certificado catastral ordinario con colindancias', 'Certificado catastral urgente con colindancias'])
                 )
 
@@ -194,8 +194,6 @@
                     </table>
 
                 </div>
-
-
 
             @endif
 
