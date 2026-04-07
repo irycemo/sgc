@@ -47,7 +47,7 @@ class AsignarCuentaPredial extends Component
             'tipo' => 'required|numeric|min:1|max:2',
             'titulo' => Rule::requiredIf($this->tipo_titulo != null),
             'tipo_titulo' => 'nullable',
-            'oficio' => 'nullable',
+            'oficio' => Rule::requiredIf(in_array($this->origen, ['DESGLOSE', 'PREDIO IGNORADO', 'SUBDIVISIONES'])),
             'origen' => 'required',
             'predio_origen' => 'nullable',
             'cantidad' => 'required',
