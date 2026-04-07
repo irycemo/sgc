@@ -163,4 +163,8 @@ return [
         'emoji' => true,   // Whether to use ⚡ emoji prefix
     ],
 
+    'payload' => [
+        'max_components' => 100, // Increase or decrease as needed
+    ],
+
 ];
