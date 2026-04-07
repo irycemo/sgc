@@ -195,42 +195,7 @@
 
                 </div>
 
-            @else
 
-                <div class="flex justify-center gap-3 mb-3">
-
-                    <x-input-group for="cantidad" label="Cantidad">
-
-                        <x-input-text id="cantidad" value="{{ $tramite->cantidad }}" readonly/>
-
-                    </x-input-group>
-
-                    <x-input-group for="usados" label="Usados">
-
-                        <x-input-text id="usados" value="{{ $tramite->usados }}" readonly/>
-
-                    </x-input-group>
-
-                    <x-input-group for="cantidad" label="Cantidad a reactivar" :error="$errors->first('cantidad')">
-
-                        <x-input-text id="cantidad" wire:model="cantidad" />
-
-                    </x-input-group>
-
-                </div>
-
-                <button
-                    wire:click="reactivarCantidad"
-                    wire:loading.attr="disabled"
-                    wire:target="reactivarCantidad"
-                    type="button"
-                    class="bg-blue-400 mx-auto hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
-
-                    <img wire:loading wire:target="reactivarCantidad" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
-
-                    Reactivar
-
-                </button>
 
             @endif
 
