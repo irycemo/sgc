@@ -287,14 +287,14 @@ class RevisarTraslado extends Component
                 'uso_2' => $this->avaluo['predio']['uso_2']  ?? null,
                 'uso_3' => $this->avaluo['predio']['uso_3']  ?? null,
                 'superficie_terreno' => $this->avaluo['predio']['superficie_terreno']  ?? null,
-                'superficie_notarial' => $this->avaluo['predio']['superficie_notarial']  ?? null,
+                'superficie_notarial' => $this->aviso['predio']['superficie_notarial']  ?? null,
                 'superficie_construccion' => $this->avaluo['predio']['superficie_construccion']  ?? null,
                 'area_comun_terreno' => $this->avaluo['predio']['area_comun_terreno']  ?? null,
                 'area_comun_construccion' => $this->avaluo['predio']['area_comun_construccion']  ?? null,
                 'valor_total_terreno' => $this->avaluo['predio']['valor_total_terreno']  ?? null,
                 'valor_total_construccion' => $this->avaluo['predio']['valor_total_construccion']  ?? null,
-                'superficie_total_terreno' => $this->avaluo['predio']['superficie_total_terreno']  ?? null,
-                'superficie_total_construccion' => $this->avaluo['predio']['superficie_total_construccion']  ?? null,
+                'superficie_total_terreno' => $this->aviso['predio']['superficie_total_terreno']  ?? null,
+                'superficie_total_construccion' => $this->aviso['predio']['superficie_total_construccion']  ?? null,
                 'valor_catastral' => $this->aviso['predio']['valor_catastral']  ?? null,
             ]);
 
