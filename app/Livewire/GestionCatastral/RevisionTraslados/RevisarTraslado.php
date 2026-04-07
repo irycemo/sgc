@@ -356,6 +356,10 @@ class RevisarTraslado extends Component
                     'valor_clasificacion_construccion' => $construccionComun['valor_clasificacion_construccion'],
                     'valor_construccion_comun' => $construccionComun['valor_construccion_comun'],
                     'superficie_proporcional' => $construccionComun['superficie_proporcional'],
+                    'tipo' => $construccionComun['tipo'],
+                    'uso' => $construccionComun['uso'],
+                    'estado' => $construccionComun['estado'],
+                    'calidad' => $construccionComun['calidad'],
                 ]);
 
             }
