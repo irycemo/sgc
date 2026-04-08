@@ -149,7 +149,6 @@
 
                     <div class="w-full flex justify-start gap-3 mb-2 bg-gray-50 p-4 rounded-lg items-start" wire:key="construccion-"{{ $index }}>
 
-
                         <div class="flex-auto">
 
                             <div>
@@ -279,6 +278,21 @@
                                 @error('construcciones.' . $index . '.valor_construccion') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                             </div>
+
+                        </div>
+
+                        <div class="flex-auto lg:col-span-1 my-auto">
+
+                            <x-button-red
+                                wire:click="borrarConstruccion({{ $index }})"
+                                wire:loading.attr="disabled"
+                                wire:target="borrarConstruccion({{ $index }})">
+
+                                <img wire:loading wire:target="borrarConstruccion({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                                Borrar
+
+                            </x-button-red>
 
                         </div>
 
@@ -435,6 +449,21 @@
                                     @error('terrenosComun.' . $index . '.valor_terreno_comun') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                                 </div>
+
+                            </div>
+
+                            <div class="flex-auto lg:col-span-1 my-auto">
+
+                                <x-button-red
+                                    wire:click="borrarTerrenoComun({{ $index }})"
+                                    wire:loading.attr="disabled"
+                                    wire:target="borrarTerrenoComun({{ $index }})">
+
+                                    <img wire:loading wire:target="borrarTerrenoComun({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                                    Borrar
+
+                                </x-button-red>
 
                             </div>
 
