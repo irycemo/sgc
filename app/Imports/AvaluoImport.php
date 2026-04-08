@@ -936,9 +936,9 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             }else{
 
                 $persona = Persona::where('nombre', $row['nombre'])
-                                    ->where('nombre', $row['nombre'])
-                                    ->where('nombre', $row['nombre'])
-                                    ->where('nombre', $row['nombre'])
+                                    ->where('ap_paterno', $row['ap_paterno'])
+                                    ->where('ap_materno', $row['ap_materno'])
+                                    ->where('razon_social', $row['razon_social'])
                                     ->first();
 
                 if(!$persona){
