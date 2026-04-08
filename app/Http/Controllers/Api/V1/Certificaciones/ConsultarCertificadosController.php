@@ -16,8 +16,7 @@ class ConsultarCertificadosController extends Controller
 
         $certificaciones = Certificacion::with('tramite:id,año,folio,usuario', 'predio:id,localidad,oficina,tipo_predio,numero_registro', 'requerimientos.creadoPor')
                                 ->whereHas('tramite', function($q) use ($validated){
-                                    $q->where('usuario', 11)
-                                        ->where('usuario_tramites_linea_id', $validated['entidad']);
+                                    $q->where('usuario_tramites_linea_id', $validated['entidad']);
                                 })
                                 ->when(isset($validated['año']), function($q) use ($validated){
                                     $q->whereHas('tramite', function($q) use ($validated){

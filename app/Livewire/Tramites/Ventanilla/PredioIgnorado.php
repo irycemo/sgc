@@ -34,6 +34,7 @@ class PredioIgnorado extends Component
             'modelo_editar.monto' => 'required',
             'modelo_editar.tipo_servicio' => 'required',
             'modelo_editar.cantidad' => 'required|numeric',
+            'modelo_editar.usuario_tramites_linea_id' => 'nullable',
             'modelo_editar.predio_avaluo' => Rule::requiredIf($this->servicio['nombre'] == 'Inscripción o registro de predios ignorados'),
             'modelo_editar.adiciona' => 'required_if:adicionaTramite,true',
             'modelo_editar.observaciones' => Rule::requiredIf($this->modelo_editar->tipo_tramite === "exento"),

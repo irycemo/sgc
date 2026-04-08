@@ -27,6 +27,7 @@ class InspeccionOcular extends Component
             'modelo_editar.cantidad' => 'required|numeric',
             'modelo_editar.adiciona' => 'required_if:adicionaTramite,true',
             'modelo_editar.avaluo_para' => 'required',
+            'modelo_editar.usuario_tramites_linea_id' => 'nullable',
             'modelo_editar.observaciones' => Rule::requiredIf($this->modelo_editar->tipo_tramite === "exento"),
             'modelo_editar.numero_oficio' => Rule::requiredIf(
                                                                 $this->modelo_editar->solicitante == 'Oficialia de partes' ||

@@ -28,6 +28,7 @@ class Certificaciones extends Component
             'modelo_editar.monto' => 'required',
             'modelo_editar.tipo_servicio' => 'required',
             'modelo_editar.cantidad' => 'required|numeric',
+            'modelo_editar.usuario_tramites_linea_id' => 'nullable',
             'modelo_editar.ligado_a' => ['nullable', Rule::requiredIf(in_array($this->servicio['clave_ingreso'], ['D924', 'D925', 'D926', 'D927']))],
             'modelo_editar.observaciones' => Rule::requiredIf($this->modelo_editar->tipo_tramite === "exento"),
             'modelo_editar.numero_oficio' => Rule::requiredIf(

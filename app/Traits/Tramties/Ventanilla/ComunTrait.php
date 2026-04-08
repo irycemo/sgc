@@ -98,6 +98,7 @@ trait ComunTrait
             $this->modelo_editar->numero_notaria = null;
             $this->modelo_editar->nombre_notario = null;
             $this->modelo_editar->nombre_solicitante = null;
+            $this->modelo_editar->usuario_tramites_linea_id = null;
 
             return;
 
@@ -108,6 +109,7 @@ trait ComunTrait
         $this->modelo_editar->numero_notaria = $notaria->numero;
         $this->modelo_editar->nombre_notario = $notaria->notario;
         $this->modelo_editar->nombre_solicitante = $notaria->numero . ' ' .$notaria->notario;
+        $this->modelo_editar->usuario_tramites_linea_id = $notaria->entidad_id;
 
     }
 

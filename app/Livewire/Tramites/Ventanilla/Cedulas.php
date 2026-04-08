@@ -26,6 +26,7 @@ class Cedulas extends Component
             'modelo_editar.nombre_solicitante' => 'required',
             'modelo_editar.monto' => 'required',
             'modelo_editar.tipo_servicio' => 'required',
+            'modelo_editar.usuario_tramites_linea_id' => 'nullable',
             'modelo_editar.cantidad' => 'required|numeric',
             'modelo_editar.observaciones' => Rule::requiredIf($this->modelo_editar->tipo_tramite === "exento"),
             'modelo_editar.numero_oficio' => Rule::requiredIf(

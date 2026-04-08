@@ -28,6 +28,7 @@ class Complemento extends Component
             'modelo_editar.cantidad' => 'required|numeric',
             'modelo_editar.ligado_a' => 'required_if:adicionaTramite,true',
             'modelo_editar.observaciones' => 'required',
+            'modelo_editar.usuario_tramites_linea_id' => 'nullable',
             'modelo_editar.numero_oficio' => Rule::requiredIf(
                                                                 $this->modelo_editar->solicitante == 'Oficialia de partes' ||
                                                                 $this->modelo_editar->solicitante == 'Escrituración social'

@@ -10,16 +10,13 @@ use App\Models\Predio;
 use App\Models\Servicio;
 use App\Models\Tramite;
 use App\Models\Traslado;
-use App\Services\Tramites\OrdenPagoService;
 use App\Services\Tramites\TramiteService;
 use App\Traits\ComponentesTrait;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class Tramites extends Component
 {
@@ -35,10 +32,13 @@ class Tramites extends Component
     public $registro;
     public $modalVer = false;
     public $modalObservaciones = false;
+    public $modalAcreditar = false;
     public $años;
     public $predio_id;
     public $observaciones;
     public $lista_avaluo_para;
+    public $referencia_pago;
+    public $fecha_pago;
 
     public $tramties_con_predio = ['DM31', 'DM34', 'DM32', 'DM35', 'DM30'];
 
@@ -97,6 +97,22 @@ class Tramites extends Component
 
         if($this->modelo_editar->isNot($modelo))
             $this->modelo_editar = $modelo;
+
+    }
+
+    public function abrirModalAcreditar(Tramite $modelo){
+
+        $this->resetearTodo();
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
+        $this->validarPago();
+
+        $modelo->refresh();
+
+        if(!$modelo->fecha_pago)
+            $this->modalAcreditar = true;
 
     }
 
@@ -394,6 +410,47 @@ class Tramites extends Component
 
     }
 
+    public function acreditarPago(){
+
+        $this->validate(
+        [
+            'referencia_pago' => 'required|numeric',
+            'fecha_pago' => 'required|date|before:tomorrow'
+        ],
+        [],
+        [
+            'referencia_pago' => 'referencia de pago',
+            'fecha_pago' => 'fecha de pago',
+        ]);
+
+        try {
+
+            $this->modelo_editar->update([
+                'estado' => 'pagado',
+                'documento_de_pago' => $this->referencia_pago,
+                'fecha_pago' => $this->fecha_pago,
+                'actualizado_por' => auth()->id()
+            ]);
+
+            $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Acreditó pago manualmente']);
+
+            $this->dispatch('mostrarMensaje', ['success', "El trámite acreditó con éxito. Guardar la documentación que acredita el pago."]);
+
+            $this->resetearTodo();
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al acreditar trámite  por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+
+        }
+
+    }
+
     #[Computed]
     public function tramites(){
 
@@ -410,7 +467,7 @@ class Tramites extends Component
         }
 
         return  Tramite::query()
-                        ->select('id', 'año', 'folio', 'usuario', 'estado', 'servicio_id', 'cantidad', 'monto', 'fecha_entrega', 'fecha_pago', 'tipo_tramite', 'tipo_servicio', 'nombre_solicitante', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+                        ->select('id', 'año', 'folio', 'usuario', 'estado', 'documento_de_pago', 'servicio_id', 'cantidad', 'monto', 'fecha_entrega', 'fecha_pago', 'tipo_tramite', 'tipo_servicio', 'nombre_solicitante', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
                         ->with('servicio:id,nombre', 'creadoPor:id,name', 'actualizadoPor:id,name')
                         ->when(! empty($this->filters['search']), fn($q) => $q->where('nombre_solicitante', 'LIKE', '%' . $this->filters['search'] . '%'))
                         ->when(! empty($this->filters['año']), fn($q) => $q->where('año', $this->filters['año']))
@@ -433,7 +490,7 @@ class Tramites extends Component
 
         $this->crearModeloVacio();
 
-        array_push($this->fields, 'predios', 'predio', 'localidad', 'oficina', 'tipo', 'registro', 'modalVer');
+        array_push($this->fields, 'predios', 'predio', 'localidad', 'oficina', 'tipo', 'registro', 'modalVer', 'modalAcreditar', 'referencia_pago', 'fecha_pago');
 
         $this->servicios = Servicio::select('id', 'nombre')->where('estado', 'activo')->orderBy('nombre')->get();
 
