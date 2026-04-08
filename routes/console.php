@@ -2,6 +2,7 @@
 
 use App\Jobs\GenerarCertificacionMigracionJob;
 use App\Jobs\MigrarPredioJob;
+use App\Models\Certificacion;
 use App\Models\OldCertificado;
 use App\Models\OldTraslado;
 use App\Models\Persona;
@@ -796,6 +797,27 @@ Artisan::command('migrar-bloqueados', function(){
     }finally {
 
         fclose($handle);
+
+    }
+
+});
+
+Artisan::command('certificados', function(){
+
+    $certificados = Certificacion::whereHas('predio', function($q){
+                                        $q->where('edificio', '>', 0);
+                                    })
+                                    ->where('created_at', '>', '2025-08-04')
+                                    ->count();
+
+    foreach($certificados as $certificado){
+
+        $certificado->update([
+            'estado' => 'cancelado',
+            'observaciones' => 'Cancelado por error en superficie',
+        ]);
+
+
 
     }
 

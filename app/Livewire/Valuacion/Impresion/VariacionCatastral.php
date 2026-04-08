@@ -65,7 +65,7 @@ class VariacionCatastral extends Component
 
             if($this->tramite_inspeccion->estado != 'pagado') throw new GeneralException('El trámite de variación catastral no esta pagado o ha sido concluido.');
 
-            if($this->tramite_inspeccion->servicio->clave_ingreso != 'DM27') throw new GeneralException('El trámite no corresponde a una variación catastral');
+            if(in_array($this->tramite_inspeccion->servicio->clave_ingreso, ['DM27', 'D774'])) throw new GeneralException('El trámite no corresponde a una variación catastral');
 
         }
 
