@@ -54,7 +54,7 @@
 
                                 <div>
 
-                                    <select class="bg-white rounded text-xs w-full" wire:model.live="terrenos.{{ $index }}.valor_unitario" readonly>
+                                    <select class="bg-white rounded text-xs w-full" wire:model.live="terrenos.{{ $index }}.valor_unitario">
 
                                         <option value="" selected>Seleccione una opción</option>
 
@@ -88,7 +88,7 @@
 
                             <div>
 
-                                <input readonly type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.valor_unitario" @if($predio && $predio->tipo_predio == 2) readonly @endif>
+                                <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.valor_unitario">
 
                             </div>
 
@@ -288,6 +288,17 @@
 
             </div>
 
+            <x-button-blue
+                wire:click="agregarConstruccion"
+                wire:loading.attr="disabled"
+                wire:target="agregarConstruccion">
+
+                <img wire:loading wire:target="agregarConstruccion" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                Agregar nuevo
+
+            </x-button-blue>
+
             <div class="flex justify-end">
 
                 <x-button-green
@@ -432,6 +443,17 @@
                     @endforeach
 
                 </div>
+
+                <x-button-blue
+                    wire:click="agregarTerrenoComun"
+                    wire:loading.attr="disabled"
+                    wire:target="agregarTerrenoComun">
+
+                    <img wire:loading wire:target="agregarTerrenoComun" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Agregar nuevo
+
+                </x-button-blue>
 
                 <div class="flex justify-end">
 
@@ -612,6 +634,17 @@
                     @endforeach
 
                 </div>
+
+                <x-button-blue
+                    wire:click="agregarConstruccionComun"
+                    wire:loading.attr="disabled"
+                    wire:target="agregarConstruccionComun">
+
+                    <img wire:loading wire:target="agregarConstruccionComun" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Agregar nuevo
+
+                </x-button-blue>
 
                 <div class="flex justify-end">
 
