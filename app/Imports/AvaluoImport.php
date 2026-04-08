@@ -180,7 +180,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                     $key = $key + 3;
 
-                    if($row['predio_existe_en_padron']){
+                    if($row['predio_existe_en_padron'] == 'SI'){
 
                         $this->revisarPredio($row, $key);
 
