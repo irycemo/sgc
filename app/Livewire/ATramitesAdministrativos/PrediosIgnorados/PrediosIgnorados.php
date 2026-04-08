@@ -429,7 +429,7 @@ class PrediosIgnorados extends Component
 
                 if(app()->isProduction()){
 
-                    $file  = $this->file->store(config('services.ses.ruta_predios'), 's3');
+                    $file  = $this->file->store('sgc/predios_archivo', 's3');
 
                 }else{
 
@@ -697,4 +697,5 @@ class PrediosIgnorados extends Component
     {
         return view('livewire.a-tramites-administrativos.predios-ignorados.predios-ignorados')->extends('layouts.admin');
     }
+
 }

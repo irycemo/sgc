@@ -614,7 +614,7 @@ class VariacionesCatastrales extends Component
 
                 if(app()->isProduction()){
 
-                    $file  = $this->file->store(config('services.ses.ruta_predios'), 's3');
+                    $file  = $this->file->store('sgc/predios_archivo', 's3');
 
                 }else{
 
