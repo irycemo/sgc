@@ -120,7 +120,7 @@ class CambioLocalidad extends Component
 
             $this->validarDisponibilidadPadron();
 
-            $this->validarSector($this->predio_nuevo->localidad, $this->predio_nuevo->oficina, $this->predio_nuevo->municipio, $this->predio->sector);
+            $this->validarSectorNoBinding($this->localidad, $this->oficina, $this->predio_nuevo->municipio, $this->predio_nuevo->sector);
 
             DB::transaction(function () {
 
