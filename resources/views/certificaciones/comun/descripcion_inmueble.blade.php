@@ -2,28 +2,28 @@
 
 <p class="parrafo">
 
-    <strong>Superficie total de terreno:</strong>  {{ $predio->superficie_total_terreno }} Metros cuadrados
+    <strong>Superficie total de terreno:</strong>  {{ $predio->superficie_total_terreno }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif
 
     @if ($predio->superficie_total_construccion)
 
-        <strong>Superficie total de construcción:</strong> {{ $predio->superficie_total_construccion }} Metros cuadrados
+        <strong>Superficie total de construcción:</strong> {{ $predio->superficie_total_construccion }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif
 
     @endif
 
     @if ($predio->superficie_judicial)
-        <strong>superficie judicial:</strong>  {{ $predio->superficie_judicial }};
+        <strong>superficie judicial:</strong>  {{ $predio->superficie_judicial }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif;
     @endif
 
     @if ($predio->superficie_notarial)
-        <strong>superficie notarial:</strong> {{ $predio->superficie_notarial }};
+        <strong>superficie notarial:</strong> {{ $predio->superficie_notarial }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif;
     @endif
 
     @if ($predio->area_comun_terreno)
-        <strong>área de terreno común:</strong> {{ $predio->area_comun_terreno }} Metros cuadrados;
+        <strong>área de terreno común:</strong> {{ $predio->area_comun_terreno }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif;
     @endif
 
     @if ($predio->area_comun_construccion)
-        <strong>área de construcción común:</strong> {{ $predio->area_comun_construccion }} Metros cuadrados;
+        <strong>área de construcción común:</strong> {{ $predio->area_comun_construccion }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif;
     @endif
 
     @if ($predio->valor_terreno_comun)

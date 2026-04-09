@@ -138,7 +138,7 @@
 
                                 <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-20" title="Estado" value="16" readonly>
 
-                                <input title="Región catastral" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral" readonly>
+                                <input title="Región catastral" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
                                 <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio" readonly>
 
@@ -548,7 +548,7 @@
 
                             <strong>Superficie notarial</strong>
 
-                            <p>{{ number_format($this->predio->superficie_notarial, 2) }}</p>
+                            <p>{{ $this->predio->superficie_notarial_formateada }}</p>
 
                         </div>
 
@@ -556,7 +556,7 @@
 
                             <strong>Superficie judicial</strong>
 
-                            <p>{{ number_format($this->predio->superficie_judicial, 2) }}</p>
+                            <p>{{ $this->predio->superficie_judicial_formateada }}</p>
 
                         </div>
 
@@ -564,7 +564,7 @@
 
                             <strong>Superficie total de terreno</strong>
 
-                            <p>{{ number_format($this->predio->superficie_total_terreno, 2) }}</p>
+                            <p>{{ $this->predio->superficie_total_terreno_formateada }}</p>
 
                         </div>
 
@@ -580,7 +580,7 @@
 
                             <strong>Superficie total de construcción</strong>
 
-                            <p>{{ number_format($this->predio->superficie_total_construccion, 2) }}</p>
+                            <p>{{ $this->predio->superficie_total_construccion_formateada }}</p>
 
                         </div>
 

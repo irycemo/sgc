@@ -123,10 +123,11 @@ trait PredioTrait
 
         $object->cuenta_predial = $predio->cuentaPredial();
         $object->clave_catastral = $predio->claveCatastral();
+        $object->tipo_predio = $predio->tipo_predio;
         $object->id = $predio->id;
         $object->status = $predio->status;
         $object->curt = $predio->curt;
-        $object->superficie_construccion = $predio->superficie_construccion;
+        $object->superficie_construccion = $predio->superficie_construccion_formateada;
         $object->area_comun_terreno = $predio->area_comun_terreno;
         $object->area_comun_construccion = $predio->area_comun_construccion;
         $object->valor_terreno_comun = $predio->valor_terreno_comun;
@@ -168,11 +169,11 @@ trait PredioTrait
         $object->construcciones = $construcciones;
         $object->construccionesComun = $construccionesComun;
         $object->ubicacion_en_manzana  = $predio->ubicacion_en_manzana;
-        $object->superficie_terreno = $predio->superficie_terreno;
-        $object->superficie_notarial = $predio->superficie_notarial;
-        $object->superficie_judicial = $predio->superficie_judicial;
-        $object->superficie_total_construccion = $predio->superficie_total_construccion;
-        $object->superficie_total_terreno = $predio->superficie_total_terreno;
+        $object->superficie_terreno = $predio->superficie_terreno_formateada;
+        $object->superficie_judicial = $predio->superficie_judicial_formateada;
+        $object->superficie_notarial = $predio->superficie_notarial_formateada;
+        $object->superficie_total_construccion = $predio->superficie_total_construccion_formateada;
+        $object->superficie_total_terreno = $predio->superficie_total_terreno_formateada;
 
         return $object;
 

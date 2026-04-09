@@ -195,7 +195,7 @@
 
                         <strong>Superficie notarial</strong>
 
-                        <p>{{ $predio->superficie_notarial }}</p>
+                        <p>{{ $predio->superficie_notarial_formateada }}</p>
 
                     </div>
 
@@ -207,7 +207,7 @@
 
                         <strong>Superficie judicial</strong>
 
-                        <p>{{ $predio->superficie_judicial }}</p>
+                        <p>{{ $predio->superficie_judicial_formateada }}</p>
 
                     </div>
 
@@ -217,7 +217,7 @@
 
                     <strong>Superficie total de terreno</strong>
 
-                    <p>{{ $predio->superficie_total_terreno }}</p>
+                    <p>{{ $predio->superficie_total_terreno_formateada }}</p>
 
                 </div>
 
@@ -227,7 +227,7 @@
 
                         <strong>Superficie total de construcción</strong>
 
-                        <p>{{ $predio->superficie_total_construccion }}</p>
+                        <p>{{ $predio->superficie_total_construccion_formateada }}</p>
 
                     </div>
 

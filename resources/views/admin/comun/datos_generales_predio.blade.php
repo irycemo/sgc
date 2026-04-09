@@ -40,7 +40,7 @@
 
             <strong>Superficie notarial</strong>
 
-            <p>{{ number_format($predio->superficie_notarial, 2) }}</p>
+            <p>{{ $predio->superficie_notarial_formateada }}</p>
 
         </div>
 
@@ -48,7 +48,7 @@
 
             <strong>Superficie judicial</strong>
 
-            <p>{{ number_format($predio->superficie_judicial, 2) }}</p>
+            <p>{{ $predio->superficie_judicial_formateada }}</p>
 
         </div>
 
@@ -56,7 +56,7 @@
 
             <strong>Superficie de terreno</strong>
 
-            <p>{{ number_format($predio->superficie_terreno, 2) }}</p>
+            <p>{{ $predio->superficie_terreno_formateada }}</p>
 
         </div>
 
@@ -64,7 +64,15 @@
 
             <strong>Superficie total de construcción</strong>
 
-            <p>{{ number_format($predio->superficie_total_construccion, 2) }}</p>
+            <p>{{ $predio->superficie_total_construccion_formateada }}</p>
+
+        </div>
+
+        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+            <strong>Superficie total de terreno</strong>
+
+            <p>{{ $predio->superficie_total_terreno_formateada }}</p>
 
         </div>
 
