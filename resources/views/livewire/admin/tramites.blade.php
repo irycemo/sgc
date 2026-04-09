@@ -251,7 +251,7 @@
 
                                     @endif
 
-                                    @if(!$tramite->documento_de_pago && in_array($tramite->estado, ['nuevo', 'expirado'])
+                                    @if(!$tramite->documento_de_pago && in_array($tramite->estado, ['nuevo', 'expirado']))
 
                                         <button
                                             wire:click="abrirModalAcreditar({{$tramite->id}})"
