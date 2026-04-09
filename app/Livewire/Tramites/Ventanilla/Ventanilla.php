@@ -194,4 +194,5 @@ class Ventanilla extends Component
     {
         return view('livewire.tramites.ventanilla.ventanilla')->extends('layouts.admin');
     }
+
 }

@@ -16,6 +16,23 @@
 
     @endif
 
+    @if ($tramite->predios->count())
+
+        <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+
+            <strong>Predios:</strong>
+
+            @foreach ($tramite->predios as $predio)
+
+                {{ $predio->cuentaPredial() }},
+
+            @endforeach
+
+
+        </div>
+
+    @endif
+
     <div class="mt-4 text-right">
 
         @if (in_array($tramite->estado, ['nuevo', 'rechazado', 'expirado']))
