@@ -569,6 +569,10 @@ class VariacionesCatastrales extends Component
                 'indiviso_construccion' => $construccionComun->indiviso_construccion,
                 'valor_clasificacion_construccion' => $construccionComun->valor_clasificacion_construccion,
                 'valor_construccion_comun' => $construccionComun->valor_construccion_comun,
+                'tipo' => $construccionComun->tipo,
+                'uso' => $construccionComun->uso,
+                'estado' => $construccionComun->estado,
+                'calidad' => $construccionComun->calidad,
                 'creado_por' => auth()->id()
             ]);
 

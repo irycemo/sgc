@@ -224,16 +224,16 @@ class ConsultaPadron extends Component
 
         $propietarios = Propietario::whereHas('persona', function($q){
                                                 $q->when($this->nombre != '' && $this->nombre != null, function($q){
-                                                    $q->where('nombre', $this->nombre);
+                                                    $q->where('nombre', 'like', '%' . $this->nombre . '%');
                                                 })
                                                 ->when($this->ap_paterno != '' && $this->ap_paterno != null, function($q){
-                                                    $q->where('ap_paterno', $this->ap_paterno);
+                                                    $q->where('ap_paterno', 'like', '%' . $this->ap_paterno. '%');
                                                 })
                                                 ->when($this->ap_materno != '' && $this->ap_materno != null, function($q){
-                                                    $q->where('ap_materno', $this->ap_materno);
+                                                    $q->where('ap_materno', 'like', '%' .  $this->ap_materno . '%');
                                                 })
                                                 ->when($this->razon_social != '' && $this->razon_social != null, function($q){
-                                                    $q->where('razon_social', $this->razon_social);
+                                                    $q->where('razon_social', 'like', '%' . $this->razon_social . '%');
                                                 })
                                                 ->when($this->rfc != '' && $this->rfc != null, function($q){
                                                     $q->where('rfc', $this->rfc);
