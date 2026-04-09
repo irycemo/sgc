@@ -365,9 +365,9 @@
 
                         <div class="flex-auto ">
 
-                            <div>
+                            <div class="mt-5">
 
-                                <Label class="text-base">Cuentas prediales involucradas</Label>
+                                <Label class="block text-sm font-medium leading-6 text-gray-900">Cuentas prediales involucradas</Label>
 
                                 <div class="flex-row lg:flex lg:space-x-2 items-start justify-between ">
 
