@@ -147,6 +147,8 @@ class ConsultaPadron extends Component
 
     public function buscarCuentaPredial(){
 
+        $this->resetPage();
+
         $this->validate([
             'numero_registro' => 'required|numeric|min:1',
             'tipo_predio' => 'required|numeric|min:1|max:2',
@@ -192,6 +194,8 @@ class ConsultaPadron extends Component
 
     public function buscarClaveCatastral(){
 
+        $this->resetPage();
+
         $this->validate([
             'region_catastral' => 'required|numeric|min:1',
             'municipio' => 'required|numeric|min:1',
@@ -208,6 +212,8 @@ class ConsultaPadron extends Component
     }
 
     public function buscarPorPropietario(){
+
+        $this->resetPage();
 
         $this->validate([
             'nombre' => 'nullable',
@@ -251,6 +257,8 @@ class ConsultaPadron extends Component
 
     public function buscarPorUbicacion(){
 
+        $this->resetPage();
+
         $this->reset('flag');
 
         Cache::forget('consulta-predios-' . $this->page_number . $this->getId());
@@ -258,6 +266,8 @@ class ConsultaPadron extends Component
     }
 
     public function buscarPorDocumento(){
+
+        $this->resetPage();
 
         $this->validate(['documento_entrada' => 'nullable', 'documento_numero' => 'required']);
 
