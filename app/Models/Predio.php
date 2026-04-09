@@ -119,6 +119,8 @@ class Predio extends Model implements Auditable
 
         $propietario = Propietario::where('propietarioable_type', 'App\Models\Predio')->where('propietarioable_id', $this->id)->first();
 
+        if(! $propietario) return '';
+
         return $propietario->persona->nombre . ' ' . $propietario->persona->ap_paterno . ' ' . $propietario->persona->ap_materno . ' ' . $propietario->persona->razon_social;
 
     }
