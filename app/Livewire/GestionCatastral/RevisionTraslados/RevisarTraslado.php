@@ -149,7 +149,11 @@ class RevisarTraslado extends Component
 
                 $this->procesarTramtie();
 
-                $this->anexarArchivoAlPredio();
+                if(isset($this->aviso['archivo'])){
+
+                    $this->anexarArchivoAlPredio();
+
+                }
 
                 (new SistemaTramitesLineaService())->operarAviso($this->traslado->aviso_stl);
 
