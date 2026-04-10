@@ -325,6 +325,16 @@ class Valuacion extends Component
 
     }
 
+    public function validarPrediorustico(){
+
+        if($this->predio->numero_registro != $this->predio->predio){
+
+            throw new GeneralException('El número de registro es diferente del número de predio.');
+
+        }
+
+    }
+
     public function crearAvaluo(){
 
         $this->validate();
@@ -343,6 +353,8 @@ class Valuacion extends Component
             }
 
             $this->validarSector();
+
+            if($this->predio->tipo_predio == 2) $this->validarPrediorustico();
 
             DB::transaction(function () {
 

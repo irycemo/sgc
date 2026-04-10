@@ -67,7 +67,7 @@ class AvaluoPredioIgnorado extends Component
             'predio.localidad' => 'required|numeric|min:1|same:predio.zona_catastral',
             'predio.sector' => 'required|numeric|min:1',
             'predio.zona_catastral' => 'required|numeric|min:1',
-            'predio.manzana' => 'required|numeric|min:1',
+            'predio.manzana' => 'required|numeric|min:0',
             'predio.predio' => 'required|numeric|min:1',
             'predio.edificio' => 'required|numeric|min:0',
             'predio.departamento' => 'required|numeric|min:0',
@@ -265,11 +265,23 @@ class AvaluoPredioIgnorado extends Component
 
     }
 
+    public function validarPrediorustico(){
+
+        if($this->predio->numero_registro != $this->predio->predio){
+
+            throw new GeneralException('El número de registro es diferente del número de predio.');
+
+        }
+
+    }
+
     public function crear(){
 
         $this->validate();
 
         try {
+
+            if($this->predio->tipo_predio == 2) $this->validarPrediorustico();
 
             $this->validacionesCrear();
 
