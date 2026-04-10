@@ -122,6 +122,14 @@ class CedulaActualizacion extends Component
 
         }
 
+        if(!$this->predio->movimientos->count()){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El predio no tiene movimientos para mostrar en la cédula."]);
+
+            return;
+
+        }
+
         $pdf = retry(3, function() {
 
             return DB::transaction(function (){
