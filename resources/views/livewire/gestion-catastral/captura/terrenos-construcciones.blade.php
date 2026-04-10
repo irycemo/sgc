@@ -116,6 +116,21 @@
 
                         </div>
 
+                        <div class="flex-auto lg:col-span-1 my-auto">
+
+                            <x-button-red
+                                wire:click="borrarTerreno({{ $index }})"
+                                wire:loading.attr="disabled"
+                                wire:target="borrarTerreno({{ $index }})">
+
+                                <img wire:loading wire:target="borrarTerreno({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                                Borrar
+
+                            </x-button-red>
+
+                        </div>
+
                     </div>
 
                 @endforeach
