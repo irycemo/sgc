@@ -204,12 +204,12 @@ class NotificacionValorCatastralController extends Controller
 
             if(!$avaluo_predio_padre){
 
-                throw new GeneralException('El predio padre no tiene un avalúo valido.');
+                throw new GeneralException('El predio origen no tiene un avalúo valido.');
 
             }
 
             $datos_control->predio_padre = $avaluo_predio_padre->predioAvaluo->cuentaPredial();
-            $datos_control->predio_padre_superficie = $avaluo_predio_padre->predioAvaluo->superficie_total_terreno;
+            $datos_control->predio_padre_superficie = $avaluo_predio_padre->predioAvaluo->superficie_total_terreno_formateada;
             $datos_control->predio_padre_unidad = $avaluo_predio_padre->predioAvaluo->tipo_predio == 1 ? 'metros cuadrados' : 'hectáreas';
 
         }
