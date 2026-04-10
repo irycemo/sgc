@@ -812,12 +812,13 @@ Artisan::command('certificados', function(){
 
     foreach($certificados as $certificado){
 
-        $certificado->update([
-            'estado' => 'cancelado',
-            'observaciones' => 'Cancelado por error en superficie',
-        ]);
+        $predio = $certificado->predio;
 
+        $superficie_terreno = $predio->terrenos->first()->superficie;
 
+        $superficie_proporcional = $predio->terrenosComun->sum('superficie_proporcional');
+
+        /* if($predio->superficie_total_terreno) */
 
     }
 
