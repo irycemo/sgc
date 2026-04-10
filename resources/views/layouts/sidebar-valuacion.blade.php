@@ -30,7 +30,7 @@
         class="flex flex-col w-full justify-between transition ease-in-out duration-500  rounded-xl text-sm"
         x-show="!openValuacion">
 
-        @can('Avaluo de predio ignorado')
+        {{-- @can('Avaluo de predio ignorado')
 
             <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
@@ -42,7 +42,7 @@
 
             </div>
 
-        @endcan
+        @endcan --}}
 
         @can('Valuación y desglose')
 
