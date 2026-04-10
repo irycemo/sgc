@@ -149,11 +149,7 @@ class RevisarTraslado extends Component
 
                 $this->procesarTramtie();
 
-                if(isset($this->aviso['archivo'])){
-
-                    $this->anexarArchivoAlPredio();
-
-                }
+                $this->anexarArchivoAlPredio();
 
                 (new SistemaTramitesLineaService())->operarAviso($this->traslado->aviso_stl);
 
@@ -220,7 +216,11 @@ class RevisarTraslado extends Component
 
     public function anexarArchivoAlPredio(){
 
+        if(! str_contains('.pdf', $this->aviso['archivo'])) return;
+
         $pdfContent = file_get_contents($this->aviso['archivo']);
+
+        if(! $pdfContent) return;
 
         $nombre_temp = Str::random(40) . '.pdf';
 
