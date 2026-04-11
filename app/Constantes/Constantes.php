@@ -613,6 +613,7 @@ class Constantes{
         'ALTA POR CAMBIO DE REGIMEN' => 'ALTA',
         'ALTA POR ESCRITURACIÓN SOCIAL' => 'ALTA',
         'ALTA POR INSUS' => 'ALTA',
+        'ALTA POR DECRETO' => 'ALTA',
         'ALTA POR DESGLOSE' => 'ALTA',
         'ALTA POR PREDIO IGNORADO' => 'ALTA',
         'ALTA POR OMISIÓN' => 'ALTA',
