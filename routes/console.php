@@ -5,9 +5,7 @@ use App\Jobs\MigrarPredioJob;
 use App\Models\Certificacion;
 use App\Models\OldCertificado;
 use App\Models\OldTraslado;
-use App\Models\Persona;
 use App\Models\Predio;
-use App\Models\Propietario;
 use App\Models\Tramite;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -804,6 +802,23 @@ Artisan::command('migrar-bloqueados', function(){
 
 Artisan::command('certificados', function(){
 
+    $predios = DB::connection('sqlsrv')->table('tcpro008')
+                            ->join('ctpro003', function($q){
+                                $q->on('tcpro008.mpio_008', 'ctpro003.mpio_003')
+                                    ->on('tcpro008.zcat_008', 'ctpro003.zcat_003')
+                                    ->on('tcpro008.locl_008', 'ctpro003.locl_003')
+                                    ->on('tcpro008.sect_008', 'ctpro003.sect_003')
+                                    ->on('tcpro008.mzna_008', 'ctpro003.mzna_003')
+                                    ->on('tcpro008.pred_008', 'ctpro003.pred_003')
+                                    ->on('tcpro008.edif_008', 'ctpro003.edif_003')
+                                    ->on('tcpro008.dpto_008', 'ctpro003.dpto_003')
+                                    ->where('tcpro008.mpio_008', 53)
+                                    ->where('tcpro008.nreg_008', '>', 0);
+                            })
+                            ->count();
+
+                            dd($predios);
+
     $certificados = Certificacion::whereHas('predio', function($q){
                                         $q->where('edificio', '>', 0);
                                     })
@@ -824,25 +839,18 @@ Artisan::command('certificados', function(){
 
         $suma = $superficie_terreno + $superficie_proporcional;
 
-        if($superficie_terreno < 0){
+        if($predio->superficie_total_terreno < 0){
 
-            /* if($superficie_terreno < 0){
+            if($superficie_terreno < 0){
 
-                $predio->terrenos->first()->delete();
+                /* $predio->terrenos->first()->delete(); */
 
-            } */
+            }
 
             $this->info($predio->cuentaPredial() . ' Superficie total de terreno: ' . $predio->superficie_total_terreno . ' - Superficie de terreno: ' . $superficie_terreno . ' - Superficie proporcional: ' . $superficie_proporcional . ' - Suma: ' . $suma);
             $count ++;
         }
 
-        /* if($predio->superficie_total_terreno - $suma > 0.5){
-
-            $this->info($predio->cuentaPredial() . ' Superficie total de terreno: ' . $predio->superficie_total_terreno . ' - Superficie de terreno: ' . $superficie_terreno . ' - Superficie proporcional: ' . $superficie_proporcional . ' - Suma: ' . $suma);
-
-            $count ++;
-        }
- */
     }
 
     $this->info($count);

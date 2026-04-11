@@ -737,7 +737,8 @@ class Constantes{
         'SUBDIVISIÓN',
         'ACTUALIZACIÓN',
         'SENTENCIA',
-        'POR DECRETO'
+        'POR DECRETO',
+        'POR EXPROPIACIÓN'
     ];
 
     const ESTADOS_VARIACION_CATASTRAL = [
