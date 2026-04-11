@@ -807,20 +807,45 @@ Artisan::command('certificados', function(){
     $certificados = Certificacion::whereHas('predio', function($q){
                                         $q->where('edificio', '>', 0);
                                     })
-                                    ->where('created_at', '>', '2025-08-04')
+                                    ->where('created_at', '<', '2026-04-07')
                                     ->count();
 
-    foreach($certificados as $certificado){
+    $predios = Predio::with('terrenos', 'terrenosComun')->where('edificio', '>', 0)->get();
 
-        $predio = $certificado->predio;
+    $count = 0;
 
-        $superficie_terreno = $predio->terrenos->first()->superficie;
+    foreach($predios as $predio){
+
+        /* $predio = $certificado->predio; */
+
+        $superficie_terreno = $predio->terrenos->first()?->superficie;
 
         $superficie_proporcional = $predio->terrenosComun->sum('superficie_proporcional');
 
-        /* if($predio->superficie_total_terreno) */
+        $suma = $superficie_terreno + $superficie_proporcional;
 
+        if($superficie_terreno < 0){
+
+            /* if($superficie_terreno < 0){
+
+                $predio->terrenos->first()->delete();
+
+            } */
+
+            $this->info($predio->cuentaPredial() . ' Superficie total de terreno: ' . $predio->superficie_total_terreno . ' - Superficie de terreno: ' . $superficie_terreno . ' - Superficie proporcional: ' . $superficie_proporcional . ' - Suma: ' . $suma);
+            $count ++;
+        }
+
+        /* if($predio->superficie_total_terreno - $suma > 0.5){
+
+            $this->info($predio->cuentaPredial() . ' Superficie total de terreno: ' . $predio->superficie_total_terreno . ' - Superficie de terreno: ' . $superficie_terreno . ' - Superficie proporcional: ' . $superficie_proporcional . ' - Suma: ' . $suma);
+
+            $count ++;
+        }
+ */
     }
+
+    $this->info($count);
 
 });
 
