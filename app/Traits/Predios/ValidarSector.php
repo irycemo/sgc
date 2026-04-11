@@ -10,6 +10,12 @@ trait ValidarSector
 
     public function validarSector(){
 
+        if(! in_array(auth()->user()->clave, [1, 15])){
+
+            return;
+
+        }
+
         $oficina = Oficina::where('localidad', $this->predio->localidad)
                             ->where('municipio', $this->predio->municipio)
                             ->where('oficina', $this->predio->oficina)
