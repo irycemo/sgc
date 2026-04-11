@@ -50,7 +50,7 @@ class TramiteService{
 
             foreach($predios as $predio){
 
-                if(! in_array(auth()->user()->clave, [1, 15])){
+                if(! in_array(auth()->user()->clave, [1, 15, 16, 8])){
 
                     if(isset($predio['sector'])){
 
