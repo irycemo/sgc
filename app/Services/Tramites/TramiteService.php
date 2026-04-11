@@ -50,21 +50,25 @@ class TramiteService{
 
             foreach($predios as $predio){
 
-                if(isset($predio['sector'])){
+                if(! in_array(auth()->user()->clave, [1, 15])){
 
-                    if(in_array($predio['sector'], [88, 99])) {
+                    if(isset($predio['sector'])){
 
-                        throw new GeneralException("El predio se encuentra en sector 88 0 99 es necesario conciliarlo, comuníquese al departamento de cartografía.");
+                        if(in_array($predio['sector'], [88, 99])) {
 
-                    }
+                            throw new GeneralException("El predio se encuentra en sector 88 0 99 es necesario conciliarlo, comuníquese al departamento de cartografía.");
 
-                }elseif(isset($predio['id'])){
+                        }
 
-                    $predio = Predio::find($predio['id']);
+                    }elseif(isset($predio['id'])){
 
-                    if(in_array($predio->sector, [88, 99])) {
+                        $predio = Predio::find($predio['id']);
 
-                        throw new GeneralException("El predio se encuentra en sector 88 0 99 es necesario conciliarlo.");
+                        if(in_array($predio->sector, [88, 99])) {
+
+                            throw new GeneralException("El predio se encuentra en sector 88 0 99 es necesario conciliarlo.");
+
+                        }
 
                     }
 
