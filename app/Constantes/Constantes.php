@@ -531,6 +531,7 @@ class Constantes{
         'RESOLUCIÓN',
         'TÍTULO DE PROPIEDAD PARCELARIO',
         'TÍTULO DE PROPIEDAD SOLAR URBANO',
+        'DECRETO'
     ];
 
     const ESTADOS = [
