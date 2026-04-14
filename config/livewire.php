@@ -164,7 +164,7 @@ return [
     ],
 
     'payload' => [
-        'max_components' => 100, // Increase or decrease as needed
+        'max_components' => 500, // Increase or decrease as needed
     ],
 
 ];
