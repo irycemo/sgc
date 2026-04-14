@@ -38,8 +38,8 @@ class Oficinas extends Component
             'modelo_editar.cabecera' => 'nullable',
             'modelo_editar.sectores' => 'nullable',
             'modelo_editar.tipo' => 'required',
-            'sectorInicial' => 'nullable|numeric|min:1|max:102|lte:sectorFinal',
-            'sectorFinal' => 'nullable|numeric|min:1|max:102|gte:sectorInicial'
+            'sectorInicial' => 'nullable|numeric|min:1|max:999|lte:sectorFinal',
+            'sectorFinal' => 'nullable|numeric|min:1|max:999|gte:sectorInicial'
          ];
     }
 
