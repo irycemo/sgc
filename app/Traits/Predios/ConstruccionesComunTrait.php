@@ -195,7 +195,7 @@ trait ConstruccionesComunTrait
 
                 $this->dispatch('mostrarMensaje', ['success', "La información de condominio se guardó con éxito"]);
 
-                $this->dispatch('recargarPredio');
+                /* $this->dispatch('recargarPredio'); */
 
             });
 

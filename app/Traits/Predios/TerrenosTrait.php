@@ -148,7 +148,7 @@ trait TerrenosTrait
 
                 $this->dispatch('mostrarMensaje', ['success', "Los terrenos se guardaron con éxito"]);
 
-                $this->dispatch('recargarPredio');
+                /* $this->dispatch('recargarPredio'); */
 
             });
 
