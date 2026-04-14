@@ -111,8 +111,6 @@ class MigrarPredioJob implements ShouldQueue
 
                     $this->colindacnias($p->id, $predio->col1_003, $predio->col2_003, $predio->col3_003, $predio->col4_003);
 
-                    $this->terrenos($p->id, $predio->stot_008, $predio->valt_003, $predio->vter_003);
-
                     $this->construcciones($p->id, $predio->mpio_008, $predio->zcat_008, $predio->locl_008, $predio->sect_008, $predio->mzna_008, $predio->pred_008, $predio->edif_008, $predio->dpto_008);
 
                     $this->personas($predio, $p->id);
@@ -121,12 +119,28 @@ class MigrarPredioJob implements ShouldQueue
 
                     if ($predio->edif_008 > 0 && $predio->dpto_008 > 0){
 
+                        $ctcdm004 = ctcdm004::where('mpio_004', $p->mpio_008)
+                                ->where('zcat_004', $p->zcat_008)
+                                ->where('locl_004', $p->locl_008)
+                                ->where('sect_004', $p->sect_008)
+                                ->where('mzna_004', $p->mzna_008)
+                                ->where('pred_004', $p->pred_008)
+                                ->where('edif_004', $p->edif_008)
+                                ->where('dpto_004', $p->dpto_008)
+                                ->first();
+
+                        $this->terrenos($p->id, $ctcdm004->ster_004, $ctcdm004->valt_004, $ctcdm004->vter_004);
+
                         $this->condominio($predio,$p->id);
 
                         $p->superficie_total_terreno = $p->terrenos->sum('superficie') + $p->terrenosComun->sum('superficie_proporcional');
                         $p->superficie_total_construccion = $p->construcciones->sum('superficie') + $p->construccionesComun->sum('superficie_proporcional');
 
                         $p->save();
+
+                    }else{
+
+                        $this->terrenos($p->id, $predio->stot_008, $predio->valt_003, $predio->vter_003);
 
                     }
 
@@ -211,7 +225,7 @@ class MigrarPredioJob implements ShouldQueue
                                 ->where('edif_008', 0)
                                 ->where('dpto_008', 0)
                                 ->where('nreg_008', 0)
-                                ->first();
+                                ->first();/*
 
         if(!$predio_padre){
 
@@ -225,7 +239,7 @@ class MigrarPredioJob implements ShouldQueue
                                         ->where('dpto_003', 0)
                                         ->where('nreg_003', 0)
                                         ->first();
-        }
+        } */
 
         $ctcdm004 = ctcdm004::where('mpio_004', $predioss->mpio_008)
                                 ->where('zcat_004', $predioss->zcat_008)
@@ -242,8 +256,8 @@ class MigrarPredioJob implements ShouldQueue
 
             if(!isset($predio_padre->stot_008)){
 
-                $superficie_total = $predio_padre->ster_003 ?? 0;
-
+               /*  $superficie_total = $predio_padre->ster_003 ?? 0;
+ */
             }else{
 
                 $superficie_total = $predio_padre->stot_008 ?? 0;
@@ -251,7 +265,7 @@ class MigrarPredioJob implements ShouldQueue
 
             if(!isset($predio_padre->scon_008)){
 
-                $area_comun_construccion = $predio_padre->scon_003 ?? 0;
+               /*  $area_comun_construccion = $predio_padre->scon_003 ?? 0; */
 
             }else{
 
