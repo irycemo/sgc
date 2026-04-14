@@ -18,7 +18,7 @@
         <strong>superficie notarial:</strong> {{ $predio->superficie_notarial }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif;
     @endif
 
-   {{--  @if ($predio->area_comun_terreno)
+    @if ($predio->area_comun_terreno)
         <strong>área de terreno común:</strong> {{ $predio->area_comun_terreno }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif;
     @endif
 
@@ -32,7 +32,7 @@
 
     @if ($predio->valor_construccion_comun)
         <strong>valor de construcción común:</strong> {{ number_format($predio->valor_construccion_comun, 2) }}
-    @endif --}}
+    @endif
 
     @if ($predio->valor_total_terreno)
         <strong>valor total de terreno:</strong> {{ number_format($predio->valor_total_terreno, 2) }}
