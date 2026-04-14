@@ -56,6 +56,26 @@ class CuentasAsignadas extends Component
         $this->modal = true;
     }
 
+    public function eliminarCuenta(CuentaAsignada $modelo){
+
+
+        $cuenta_superior = CuentaAsignada::where('localidad', $modelo->localidad)
+                                            ->where('oficina', $modelo->oficina)
+                                            ->where('tipo_predio', $modelo->tipo_predio)
+                                            ->where('numero_registro', '>', $modelo->numero_registro)
+                                            ->first();
+
+        if($cuenta_superior){
+
+            $this->dispatch('mostrarMensaje', ['warning', "Hay al menos una cuenta mayor asignada, no es posible borrar el regsitro."]);
+
+            return;
+        }
+
+        $modelo->delete();
+
+    }
+
     public function reasignar(){
 
         try {
