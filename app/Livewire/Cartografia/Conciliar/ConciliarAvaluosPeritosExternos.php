@@ -100,15 +100,6 @@ class ConciliarAvaluosPeritosExternos extends Component
 
             DB::transaction(function () {
 
-                (new SistemaPeritosExternosService())->conciliarPredio([
-                    'id' => $this->avaluo_seleccionado['id'],
-                    'sector' => $this->sector,
-                    'manzana' => $this->manzana,
-                    'predio' => $this->predio,
-                    'edificio' => $this->edificio,
-                    'departamento' => $this->departamento,
-                ]);
-
                 $predio = Predio::where('region_catastral', $this->avaluo_seleccionado['region_catastral'])
                                     ->where('municipio', $this->avaluo_seleccionado['municipio'])
                                     ->where('zona_catastral', $this->avaluo_seleccionado['zona_catastral'])
@@ -134,6 +125,15 @@ class ConciliarAvaluosPeritosExternos extends Component
                 $this->validarSectorNoBinding($this->avaluo_seleccionado['localidad'], $this->avaluo_seleccionado['oficina'], $this->avaluo_seleccionado['municipio'], $this->sector);
 
                 $predio->update([
+                    'sector' => $this->sector,
+                    'manzana' => $this->manzana,
+                    'predio' => $this->predio,
+                    'edificio' => $this->edificio,
+                    'departamento' => $this->departamento,
+                ]);
+
+                (new SistemaPeritosExternosService())->conciliarPredio([
+                    'id' => $this->avaluo_seleccionado['id'],
                     'sector' => $this->sector,
                     'manzana' => $this->manzana,
                     'predio' => $this->predio,
