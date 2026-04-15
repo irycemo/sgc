@@ -1060,7 +1060,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
     public function crearAvaluo($row, $predioId):Avaluo
     {
 
-        return Avaluo::create([
+        $avaluo =  Avaluo::create([
             'predio_avaluo' => $predioId,
             'año' => now()->format('Y'),
             'folio' => (Avaluo::where('año', now()->format('Y'))->where('usuario', auth()->user()->clave)->max('folio') ?? 0) + 1,
@@ -1077,7 +1077,37 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             'asignado_a' => auth()->id(),
             'creado_por' => auth()->id(),
             'oficina_id' => auth()->user()->oficina_id,
+            'observaciones' => $row['observaciones']
         ]);
+
+        if($row['tipo_construccion_dominante'] != 'SIN CONSTRUCCIÓN'){
+
+            $avaluo->bloques()->create([
+                'uso' => $row['uso_1'],
+                'cimentacion' => $row['cimentacion'],
+                'estructura' => $row['estructura'],
+                'muros' => $row['muros'],
+                'entrepiso' => $row['entrepiso'],
+                'techo' => $row['techo'],
+                'plafones' => $row['plafones'],
+                'vidrieria' => $row['vidrieria'],
+                'lambrines' => $row['lambrines'],
+                'pisos' => $row['pisos'],
+                'herreria' => $row['herreria'],
+                'pintura' => $row['pintura'],
+                'carpinteria' => $row['carpinteria'],
+                'recubrimiento_especial' => $row['recubrimiento_especial'],
+                'aplanados' => $row['aplanados'],
+                'hidraulica' => $row['hidraulica'],
+                'sanitaria' => $row['sanitaria'],
+                'electrica' => $row['electrica'],
+                'gas' => $row['gas'],
+                'especiales' => $row['especiales'],
+            ]);
+
+        }
+
+        return $avaluo;
 
     }
 

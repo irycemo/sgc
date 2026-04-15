@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Valuacion;
 
+use App\Constantes\Constantes;
 use App\Models\Avaluo;
 use App\Models\Bloque;
-use Livewire\Component;
 use App\Models\PredioAvaluo;
-use App\Constantes\Constantes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
+use Livewire\Component;
 
 class Caracteristicas extends Component
 {
@@ -56,7 +57,7 @@ class Caracteristicas extends Component
             'avaluo.energia_electrica' => 'nullable',
             'avaluo.alumbrado_publico' => 'nullable',
             'avaluo.banqueta' => 'nullable',
-            'bloques' => 'array|required',
+            'bloques' => ['array', Rule::requiredIf($this->avaluo->construccion_dominante !== 'SIN CONSTRUCCIÓN')],
             'bloques.*.cimentacion' => 'required',
             'bloques.*.estructura' => 'required',
             'bloques.*.muros' => 'required',
