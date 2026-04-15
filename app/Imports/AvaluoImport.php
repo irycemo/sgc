@@ -182,9 +182,11 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                     if($row['predio_existe_en_padron'] == 'SI'){
 
-                        $this->revisarPredio($row, $key);
+                        $predio_origen_id = $this->revisarPredio($row, $key);
 
                     }else{
+
+                        $predio_origen_id = null;
 
                         $this->revisarAsignacionCuentaPredia($row, $key);
 
@@ -297,7 +299,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                     $this->procesarrelaciones($predio->id, $colindancias, $terrenos, $construcciones, $terrenosComun, $construccionesComun);
 
-                    $avaluo = $this->crearAvaluo($row, $predio->id);
+                    $avaluo = $this->crearAvaluo($row, $predio->id, $predio_origen_id);
 
                     $predio->audits()->latest()->first()->update(['tags' => 'Se genera predio apartir de avalúo: ' . $avaluo->año . '-' . $avaluo->folio]);
 
@@ -326,7 +328,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
     }
 
-    public function revisarPredio($row, $key):void
+    public function revisarPredio($row, $key):int
     {
 
         $predioCompleto = Predio::where('estado', $row['estado'])
@@ -349,6 +351,8 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             throw new GeneralException("El predio no existe en el padrón, verifique. " . 'Línea: ' . $key);
 
         }
+
+        return $predioCompleto->id;
 
     }
 
@@ -1057,11 +1061,12 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
     }
 
-    public function crearAvaluo($row, $predioId):Avaluo
+    public function crearAvaluo($row, $predioId, $predio_origen_id):Avaluo
     {
 
         $avaluo =  Avaluo::create([
             'predio_avaluo' => $predioId,
+            'predio' => $predio_origen_id,
             'año' => now()->format('Y'),
             'folio' => (Avaluo::where('año', now()->format('Y'))->where('usuario', auth()->user()->clave)->max('folio') ?? 0) + 1,
             'usuario' => auth()->user()->clave,
