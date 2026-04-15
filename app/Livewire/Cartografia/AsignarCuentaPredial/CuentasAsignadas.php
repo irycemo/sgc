@@ -80,7 +80,7 @@ class CuentasAsignadas extends Component
 
         try {
 
-            $this->modelo_editar->update(['asignado_a' => $this->valuador]);
+            $this->modelo_editar->update(['asignado_a' => $this->valuador, 'actualizado_por' => auth()->id()]);
 
             $this->reset(['valuador', 'modal']);
 
