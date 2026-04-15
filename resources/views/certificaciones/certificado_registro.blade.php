@@ -186,7 +186,7 @@
 
         @include('certificaciones.comun.ubicacion_inmueble')
 
-        @if($datos_control->tipo_certificado == 'COLINDANCIAS' && count($predio->colindancias))
+        @if(isset($datos_control->tipo_certificado) && $datos_control->tipo_certificado == 'COLINDANCIAS' && count($predio->colindancias))
 
             @include('certificaciones.comun.colindancias')
 

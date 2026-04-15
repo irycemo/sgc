@@ -202,7 +202,7 @@
 
                 <strong>Valuador asignado</strong>
 
-                <p>{{ $cuentasAsignadas[0]['valuadorAsignado'] }}</p>
+                <p>{{ $cuentasAsignadas[0]['valuadorAsignado'] ?? 'N/A' }}</p>
 
             </div>
 
