@@ -244,7 +244,7 @@
 
                                 <x-table.cell title="Folio de pago">
 
-                                    {{ $tramite->folio_pago }}
+                                    {{ $tramite->documento_de_pago }}
 
                                 </x-table.cell>
 

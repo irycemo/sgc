@@ -84,7 +84,7 @@ class CuentasAsignadas extends Component
 
             $this->reset(['valuador', 'modal']);
 
-            $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Reasigno valuador']);
+            $this->modelo_editar->audits()->latest()->first()?->update(['tags' => 'Reasigno valuador']);
 
             $this->dispatch('mostrarMensaje', ['success', "Se reasigno la cuenta con éxito."]);
 

@@ -74,8 +74,6 @@ class ReporteCertificaciones extends Component
 
         $this->años = Constantes::AÑOS;
 
-        $this->año = now()->format('y');
-
         $this->documentos = Constantes::CERTIFICACIONES;
 
         $this->oficinas = Oficina::select('id', 'nombre')->orderBy('nombre')->get();

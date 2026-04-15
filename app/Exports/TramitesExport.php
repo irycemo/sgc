@@ -35,7 +35,11 @@ class TramitesExport implements FromCollection,  WithProperties, WithDrawings, S
     */
     public function collection()
     {
-        return Tramite::with('servicio', 'creadoPor')
+        return Tramite::with(
+                                'servicio:id,nombre',
+                                'creadoPor:id,name,oficina_id',
+                                'creadoPor.oficina:id,nombre'
+                            )
                             ->when (isset($this->estado) && $this->estado != "", function($q){
                                 $q->where('estado', $this->estado);
                             })
@@ -113,7 +117,7 @@ class TramitesExport implements FromCollection,  WithProperties, WithDrawings, S
             $tramite->monto,
             $tramite->fecha_pago,
             $tramite->linea_de_captura,
-            $tramite->folio_pago,
+            $tramite->documento_de_pago,
             $tramite->created_at,
             $tramite->creadoPor?->name,
             $tramite->creadoPor?->oficina->nombre,
