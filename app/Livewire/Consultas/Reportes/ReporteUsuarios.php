@@ -3,6 +3,9 @@
 namespace App\Livewire\Consultas\Reportes;
 
 use App\Exports\UsersExport;
+use App\Models\Oficina;
+use App\Models\Permission;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Computed;
@@ -37,11 +40,11 @@ class ReporteUsuarios extends Component
 
         try {
 
-            return Excel::download(new UsersExport($this->estado, $this->oficina, $this->año, $this->documento, $this->fecha1, $this->fecha2), 'Reporte_de_certificaciones_' . now()->format('d-m-Y') . '.xlsx');
+            return Excel::download(new UsersExport($this->estado, $this->oficina, $this->rol, $this->permiso, $this->fecha1, $this->fecha2), 'Reporte_de_usuarios_' . now()->format('d-m-Y') . '.xlsx');
 
         } catch (\Throwable $th) {
 
-            Log::error("Error generar archivo de reporte de certificaciones por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error generar archivo de reporte de usuarios por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
 
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
@@ -50,7 +53,7 @@ class ReporteUsuarios extends Component
     }
 
     #[Computed]
-    public function certificaciones(){
+    public function usuarios(){
 
         return User::with('oficina:id,nombre')
                     ->when (isset($this->estado) && $this->estado != "", function($q){
@@ -59,6 +62,16 @@ class ReporteUsuarios extends Component
                     ->when(isset($this->oficina) && $this->oficina != "", function($q){
                         return $q->where('oficina_id', $this->oficina);
                     })
+                    ->when(isset($this->rol) && $this->rol != "", function($q){
+                        $q->whereHas('roles', function($q){
+                            $q->where('name', $this->rol);
+                        });
+                    })
+                    ->when(isset($this->permiso) && $this->permiso != "", function($q){
+                        $q->whereHas('permissions', function($q){
+                            $q->where('name', $this->permiso);
+                        });
+                    })
                     ->whereBetween('created_at', [$this->fecha1 . ' 00:00:00', $this->fecha2 . ' 23:59:59'])
                     ->paginate($this->pagination);
 
@@ -66,11 +79,11 @@ class ReporteUsuarios extends Component
 
     public function mount(){
 
-        $this->años = Constantes::AÑOS;
-
-        $this->documentos = Constantes::CERTIFICACIONES;
-
         $this->oficinas = Oficina::select('id', 'nombre')->orderBy('nombre')->get();
+
+        $this->roles = Role::orderBy('name')->get();
+
+        $this->permisos = Permission::orderBy('name')->get();
 
     }
 
