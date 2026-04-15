@@ -25,6 +25,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('consulta_cuenta_predial', [ConsultarPredioController::class, 'consultarCuentaPredial']);
 
+    Route::post('consulta_cuenta_predial_tramite', [ConsultarPredioController::class, 'consultarPredioTramite']);
+
     Route::post('consultar_propietarios', [ConsultarPropietariosController::class, 'consultarPropietariosCertificado']);
 
     Route::post('consultar_propietarios_predio_id', [ConsultarPropietariosController::class, 'consultarPropietariosPredioId']);

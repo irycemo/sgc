@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api\V1\Predios;
 
-use App\Models\Predio;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PredioConsultaRequest;
 use App\Http\Resources\PredioPropietarioColindanciaResource;
+use App\Http\Resources\PredioPropietariosResource;
+use App\Models\Predio;
 
 class ConsultarPredioController extends Controller
 {
@@ -76,7 +77,7 @@ class ConsultarPredioController extends Controller
 
     }
 
-    public function consultarCuentaPredialRpp(PredioConsultaRequest $request)
+    public function consultarPredioTramite(PredioConsultaRequest $request)
     {
 
         $validated = $request->validated();
@@ -103,7 +104,15 @@ class ConsultarPredioController extends Controller
 
         }
 
-        return (new PredioCompletoResource($predio))->response()->setStatusCode(200);
+        if(in_array($predio->sector, [88, 99])){
+
+            return response()->json([
+                'error' => "El predio " . $predio->cuentaPredial() . " se encuentra en sector 88 0 99 es necesario conciliarlo, comuníquese al departamento de cartografía.",
+            ], 401);
+
+        }
+
+        return (new PredioPropietariosResource($predio))->response()->setStatusCode(200);
 
     }
 
