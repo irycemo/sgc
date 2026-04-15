@@ -2,19 +2,20 @@
 
 namespace App\Livewire\GestionCatastral\RevisionTraslados;
 
-use App\Models\Persona;
-use Livewire\Component;
-use App\Models\Traslado;
-use Illuminate\Support\Str;
 use App\Constantes\Constantes;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
-use Illuminate\Support\Facades\Storage;
-use App\Traits\Personas\BuscarPersonaTrait;
+use App\Models\Persona;
+use App\Models\Traslado;
 use App\Services\Predio\ArchivoPredioService;
-use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
 use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
+use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
+use App\Traits\Personas\BuscarPersonaTrait;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Livewire\Component;
 
 class RevisarTraslado extends Component
 {
@@ -216,19 +217,23 @@ class RevisarTraslado extends Component
 
     public function anexarArchivoAlPredio(){
 
-        if(! str_contains('.pdf', $this->aviso['archivo'])) return;
+        $response = Http::get($this->aviso['archivo']);
 
-        $pdfContent = file_get_contents($this->aviso['archivo']);
+        if ($response->successful()) {
 
-        if(! $pdfContent) return;
+            $pdfContent = file_get_contents($this->aviso['archivo']);
 
-        $nombre_temp = Str::random(40) . '.pdf';
+            if(! $pdfContent) return;
 
-        Storage::put('livewire-tmp/'. $nombre_temp, $pdfContent);
+            $nombre_temp = Str::random(40) . '.pdf';
 
-        $descripcion = 'aviso_' . $this->traslado->tipo . '_' . $this->aviso['año'] . '_' . $this->aviso['folio'] . '_' . $this->aviso['usuario'];
+            Storage::put('livewire-tmp/'. $nombre_temp, $pdfContent);
 
-        (new ArchivoPredioService($this->traslado->predio, null, $descripcion))->guardarConUrl('livewire-tmp/'. $nombre_temp);
+            $descripcion = 'aviso_' . $this->traslado->tipo . '_' . $this->aviso['año'] . '_' . $this->aviso['folio'] . '_' . $this->aviso['usuario'];
+
+            (new ArchivoPredioService($this->traslado->predio, null, $descripcion))->guardarConUrl('livewire-tmp/'. $nombre_temp);
+
+        }
 
     }
 

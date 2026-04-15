@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CrearTramiteRefrendoRequest;
 use App\Http\Requests\CrearTramiteRequest;
 use App\Http\Resources\TramiteResource;
+use App\Models\Predio;
 use App\Models\Servicio;
 use App\Models\Tramite;
 use App\Services\Tramites\OrdenPagoService;
@@ -38,9 +39,11 @@ class CrearTramiteController extends Controller
 
                 return DB::transaction(function () use($tramite, $validated){
 
+                    $this->validarSectorDePredios($validated['predios']);
+
                     return (new TramiteService($tramite))->crear($validated['predios']);
 
-                }, 10);
+                });
 
             });
 
@@ -53,6 +56,8 @@ class CrearTramiteController extends Controller
             ], 500);
 
         }catch (\Throwable $th) {
+
+            throw $th;
 
             Log::error("Error al crear trámite por el Sistema de trámites en línea" . $th);
 
@@ -128,6 +133,34 @@ class CrearTramiteController extends Controller
             return response()->json([
                 'error' => "No se pudo crear el trámite.",
             ], 500);
+
+        }
+
+    }
+
+    public function validarSectorDePredios($predios){
+
+        foreach($predios as $predio){
+
+            if(isset($predio['sector'])){
+
+                if(in_array($predio['sector'], [88, 99])) {
+
+                    throw new GeneralException("El predio " . $predio['localidad'] . "-" . $predio['oficina'] . "-" . $predio['tipo_predio'] . "-" . $predio['numero_registro'] . " se encuentra en sector 88 0 99 es necesario conciliarlo, comuníquese al departamento de cartografía.");
+
+                }
+
+            }elseif(isset($predio['id'])){
+
+                $predio = Predio::find($predio['id']);
+
+                if(in_array($predio->sector, [88, 99])) {
+
+                    throw new GeneralException("El predio " . $predio['localidad'] . "-" . $predio['oficina'] . "-" . $predio['tipo_predio'] . "-" . $predio['numero_registro'] . " se encuentra en sector 88 0 99 es necesario conciliarlo.");
+
+                }
+
+            }
 
         }
 

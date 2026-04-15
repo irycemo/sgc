@@ -56,7 +56,7 @@ class TramiteService{
 
                         if(in_array($predio['sector'], [88, 99])) {
 
-                            throw new GeneralException("El predio se encuentra en sector 88 0 99 es necesario conciliarlo, comuníquese al departamento de cartografía.");
+                            throw new GeneralException("El predio " . $predio['localidad'] . "-" . $predio['oficina'] . "-" . $predio['tipo_predio'] . "-" . $predio['numero_registro'] . " se encuentra en sector 88 0 99 es necesario conciliarlo, comuníquese al departamento de cartografía.");
 
                         }
 
@@ -66,7 +66,7 @@ class TramiteService{
 
                         if(in_array($predio->sector, [88, 99])) {
 
-                            throw new GeneralException("El predio se encuentra en sector 88 0 99 es necesario conciliarlo.");
+                            throw new GeneralException("El predio " . $predio['localidad'] . "-" . $predio['oficina'] . "-" . $predio['tipo_predio'] . "-" . $predio['numero_registro'] . " se encuentra en sector 88 0 99 es necesario conciliarlo.");
 
                         }
 
