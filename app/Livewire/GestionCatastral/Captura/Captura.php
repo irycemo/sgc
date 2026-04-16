@@ -46,6 +46,7 @@ class Captura extends Component
     public $modalBaja = false;
     public $label = 'Número de documento';
     public $observaciones;
+    public $ubicaciones_manzana;
 
     public Predio $predio;
 
@@ -76,6 +77,7 @@ class Captura extends Component
             'predio.codigo_postal' => 'required|numeric',
             'predio.lote_fraccionador' => 'nullable',
             'predio.manzana_fraccionador' => 'nullable',
+            'predio.ubicacion_en_manzana' => 'nullable',
             'predio.etapa_fraccionador' => 'nullable',
             'predio.nombre_predio'  => 'nullable',
             'predio.nombre_edificio' => 'nullable',
@@ -529,6 +531,8 @@ class Captura extends Component
         $this->documentos = Constantes::DOCUMENTO_ENTRADA;
 
         $this->notarias = Notaria::all();
+
+        $this->ubicaciones_manzana = Constantes::UBICACION_PREDIO;
 
         $this->crearModeloVacio();
 
