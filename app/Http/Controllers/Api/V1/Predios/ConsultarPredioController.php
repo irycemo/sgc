@@ -82,7 +82,8 @@ class ConsultarPredioController extends Controller
 
         $validated = $request->validated();
 
-        $predio = Predio::where('localidad', $validated['localidad'])
+        $predio = Predio::with('colindancias','propietarios.persona')
+                            ->where('localidad', $validated['localidad'])
                             ->where('oficina', $validated['oficina'])
                             ->where('tipo_predio', $validated['tipo_predio'])
                             ->where('numero_registro', $validated['numero_registro'])
