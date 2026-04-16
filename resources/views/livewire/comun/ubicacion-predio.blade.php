@@ -120,7 +120,7 @@
 
         </x-input-group>
 
-        <x-input-group for="predio.ubicacion_en_manzana" label="Ubicación en manzana" :error="$errors->first('predio.ubicacion_en_manzana')" class="w-full">
+        {{-- <x-input-group for="predio.ubicacion_en_manzana" label="Ubicación en manzana" :error="$errors->first('predio.ubicacion_en_manzana')" class="w-full">
 
             <x-input-select id="predio.ubicacion_en_manzana" wire:model="predio.ubicacion_en_manzana" class="w-full">
 
@@ -134,7 +134,7 @@
 
             </x-input-select>
 
-        </x-input-group>
+        </x-input-group> --}}
 
         <x-input-group for="predio.nombre_predio" label="Predio Rústico Denominado ó Antecedente" :error="$errors->first('predio.nombre_predio')" class="col-span-1 md:col-span-3 lg:col-span-4 xl:col-span-6">
 
