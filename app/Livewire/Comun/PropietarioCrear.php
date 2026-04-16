@@ -192,7 +192,7 @@ class PropietarioCrear extends Component
 
             $persona = $this->buscarPersona($this->rfc, $this->curp, $this->tipo_persona, $this->nombre, $this->ap_materno, $this->ap_paterno, $this->razon_social);
 
-            if($this->persona->getKey() && $persona){
+            if($this->persona->getKey()){
 
                 foreach($this->modelo->propietarios as $actor){
 
@@ -200,8 +200,31 @@ class PropietarioCrear extends Component
 
                 }
 
+                $this->persona->update([
+                    'tipo' => $this->tipo_persona,
+                    'nombre' => $this->nombre,
+                    'multiple_nombre' => $this->multiple_nombre,
+                    'ap_paterno' => $this->ap_paterno,
+                    'ap_materno' => $this->ap_materno,
+                    'curp' => $this->curp,
+                    'rfc' => $this->rfc,
+                    'razon_social' => $this->razon_social,
+                    'fecha_nacimiento' => $this->fecha_nacimiento,
+                    'nacionalidad' => $this->nacionalidad,
+                    'estado_civil' => $this->estado_civil,
+                    'calle' => $this->calle,
+                    'numero_exterior' => $this->numero_exterior,
+                    'numero_interior' => $this->numero_interior,
+                    'colonia' => $this->colonia,
+                    'cp' => $this->cp,
+                    'entidad' => $this->entidad,
+                    'ciudad' => $this->ciudad,
+                    'municipio' => $this->municipio,
+                    'actualizado_por' => auth()->id()
+                ]);
+
                 $actor = $this->modelo->propietarios()->create([
-                    'persona_id' => $persona->id,
+                    'persona_id' => $this->persona->id,
                     'tipo' => 'propietario',
                     'porcentaje_propiedad' => $this->porcentaje_propiedad,
                     'porcentaje_nuda' => $this->porcentaje_nuda,
