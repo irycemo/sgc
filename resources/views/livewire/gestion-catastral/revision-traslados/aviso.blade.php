@@ -467,12 +467,16 @@
 
                 </div>
 
-                <x-link-blue
-                    href="{{ $aviso['archivo'] }}"
-                    target="_blank"
-                    >
-                    Ver archivo
-                </x-link-blue>
+                @if(isset($aviso['archivo']))
+
+                    <x-link-blue
+                        href="{{ $aviso['archivo'] }}"
+                        target="_blank"
+                        >
+                        Ver archivo
+                    </x-link-blue>
+
+                @endif
 
             </div>
 

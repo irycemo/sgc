@@ -18,7 +18,7 @@ class File extends Model
 
         if(app()->isProduction()){
 
-            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_predios') . $this->url, now()->addMinutes(10));
+            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_predios') . $this->url, now()->addMinutes(60));
 
         }else{
 
@@ -32,7 +32,7 @@ class File extends Model
 
         if(app()->isProduction()){
 
-            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_predios_fotos') . $this->url, now()->addMinutes(10));
+            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_predios_fotos') . $this->url, now()->addMinutes(60));
 
         }else{
 
@@ -46,7 +46,7 @@ class File extends Model
 
         if(app()->isProduction()){
 
-            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_avaluos_fotos') . $this->url, now()->addMinutes(10));
+            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_avaluos_fotos') . $this->url, now()->addMinutes(60));
 
         }else{
 
@@ -60,7 +60,7 @@ class File extends Model
 
         if(app()->isProduction()){
 
-            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_predios') . $this->url, now()->addMinutes(10));
+            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_predios') . $this->url, now()->addMinutes(60));
 
         }else{
 
@@ -74,7 +74,7 @@ class File extends Model
 
         if(app()->isProduction()){
 
-            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_predios') . $this->url, now()->addMinutes(10));
+            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_predios') . $this->url, now()->addMinutes(60));
 
         }else{
 
