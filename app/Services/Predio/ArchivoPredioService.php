@@ -103,105 +103,121 @@ class ArchivoPredioService{
 
         if(!isset($archivos['status'])) {
 
-            foreach ($archivos['archivos'] as $key => $archivo) {
+            if(isset($archivos['archivos'])){
 
-                $pdfContent = file_get_contents($archivo['url']);
+                foreach ($archivos['archivos'] as $key => $archivo) {
 
-                $nombre_temp = Str::random(40) . '.pdf';
+                    $pdfContent = file_get_contents($archivo['url']);
 
-                if(app()->isProduction()){
+                    $nombre_temp = Str::random(40) . '.pdf';
 
-                    Storage::disk('s3')->put(config('services.ses.ruta_predios') . $nombre_temp, $pdfContent);
+                    if(app()->isProduction()){
 
-                }else{
+                        Storage::disk('s3')->put(config('services.ses.ruta_predios') . $nombre_temp, $pdfContent);
 
-                    Storage::put('predios_archivo/' . $nombre_temp, $pdfContent);
+                    }else{
+
+                        Storage::put('predios_archivo/' . $nombre_temp, $pdfContent);
+
+                    }
+
+                    File::create([
+                        'fileable_id' => $this->predio->id,
+                        'fileable_type' => 'App\Models\Predio',
+                        'descripcion' => 'archivo_anterior_' . $key,
+                        'url' => $nombre_temp
+                    ]);
 
                 }
-
-                File::create([
-                    'fileable_id' => $this->predio->id,
-                    'fileable_type' => 'App\Models\Predio',
-                    'descripcion' => 'archivo_anterior_' . $key,
-                    'url' => $nombre_temp
-                ]);
 
             }
 
-            foreach ($archivos['traslados'] as $key => $archivo) {
+            if(isset($archivos['traslados'])){
 
-                $pdfContent = file_get_contents($archivo['url']);
+                foreach ($archivos['traslados'] as $key => $archivo) {
 
-                $nombre_temp = Str::random(40) . '.pdf';
+                    $pdfContent = file_get_contents($archivo['url']);
 
-                if(app()->isProduction()){
+                    $nombre_temp = Str::random(40) . '.pdf';
 
-                    Storage::disk('s3')->put(config('services.ses.ruta_predios') . $nombre_temp, $pdfContent);
+                    if(app()->isProduction()){
 
-                }else{
+                        Storage::disk('s3')->put(config('services.ses.ruta_predios') . $nombre_temp, $pdfContent);
 
-                    Storage::put('predios_archivo/' . $nombre_temp, $pdfContent);
+                    }else{
+
+                        Storage::put('predios_archivo/' . $nombre_temp, $pdfContent);
+
+                    }
+
+                    File::create([
+                        'fileable_id' => $this->predio->id,
+                        'fileable_type' => 'App\Models\Predio',
+                        'descripcion' => 'traslado_anterior_' . $key,
+                        'url' => $nombre_temp
+                    ]);
 
                 }
-
-                File::create([
-                    'fileable_id' => $this->predio->id,
-                    'fileable_type' => 'App\Models\Predio',
-                    'descripcion' => 'traslado_anterior_' . $key,
-                    'url' => $nombre_temp
-                ]);
 
             }
 
-            foreach ($archivos['avaluos'] as $key => $archivo) {
+            if(isset($archivos['avaluos'])){
 
-                $pdfContent = file_get_contents($archivo['url']);
+                foreach ($archivos['avaluos'] as $key => $archivo) {
 
-                $nombre_temp = Str::random(40) . '.pdf';
+                    $pdfContent = file_get_contents($archivo['url']);
 
-                if(app()->isProduction()){
+                    $nombre_temp = Str::random(40) . '.pdf';
 
-                    Storage::disk('s3')->put(config('services.ses.ruta_predios') . $nombre_temp, $pdfContent);
+                    if(app()->isProduction()){
 
-                }else{
+                        Storage::disk('s3')->put(config('services.ses.ruta_predios') . $nombre_temp, $pdfContent);
 
-                    Storage::put('predios_archivo/' . $nombre_temp, $pdfContent);
+                    }else{
+
+                        Storage::put('predios_archivo/' . $nombre_temp, $pdfContent);
+
+                    }
+
+                    File::create([
+                        'fileable_id' => $this->predio->id,
+                        'fileable_type' => 'App\Models\Predio',
+                        'descripcion' => 'avaluo_anterior_' . $key,
+                        'url' => $nombre_temp
+                    ]);
 
                 }
-
-                File::create([
-                    'fileable_id' => $this->predio->id,
-                    'fileable_type' => 'App\Models\Predio',
-                    'descripcion' => 'avaluo_anterior_' . $key,
-                    'url' => $nombre_temp
-                ]);
 
             }
 
-            foreach ($archivos['fotos'] as $key => $archivo) {
+            if(isset($archivos['fotos'])){
 
-                $pdfContent = file_get_contents($archivo['url']);
+                foreach ($archivos['fotos'] as $key => $archivo) {
 
-                $extension = pathinfo(parse_url($archivo['url'], PHP_URL_PATH), PATHINFO_EXTENSION);
+                    $pdfContent = file_get_contents($archivo['url']);
 
-                $nombre_temp = Str::random(40) . '.' . $extension;
+                    $extension = pathinfo(parse_url($archivo['url'], PHP_URL_PATH), PATHINFO_EXTENSION);
 
-                if(app()->isProduction()){
+                    $nombre_temp = Str::random(40) . '.' . $extension;
 
-                    Storage::disk('s3')->put(config('services.ses.ruta_predios_fotos') . $nombre_temp, $pdfContent);
+                    if(app()->isProduction()){
 
-                }else{
+                        Storage::disk('s3')->put(config('services.ses.ruta_predios_fotos') . $nombre_temp, $pdfContent);
 
-                    Storage::put('predios_fotos/' . $nombre_temp, $pdfContent);
+                    }else{
+
+                        Storage::put('predios_fotos/' . $nombre_temp, $pdfContent);
+
+                    }
+
+                    File::create([
+                        'fileable_id' => $this->predio->id,
+                        'fileable_type' => 'App\Models\Predio',
+                        'descripcion' => 'foto_anterior_' . $key,
+                        'url' => $nombre_temp
+                    ]);
 
                 }
-
-                File::create([
-                    'fileable_id' => $this->predio->id,
-                    'fileable_type' => 'App\Models\Predio',
-                    'descripcion' => 'foto_anterior_' . $key,
-                    'url' => $nombre_temp
-                ]);
 
             }
 

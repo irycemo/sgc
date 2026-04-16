@@ -217,6 +217,12 @@ class RevisarTraslado extends Component
 
     public function anexarArchivoAlPredio(){
 
+        if(! $this->aviso['archivo']){
+
+            return;
+
+        }
+
         $response = Http::get($this->aviso['archivo']);
 
         if ($response->successful()) {

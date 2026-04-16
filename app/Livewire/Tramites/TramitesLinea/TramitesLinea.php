@@ -117,7 +117,7 @@ class TramitesLinea extends Component
 
         $this->sort = 'fecha_pago';
 
-        $this->direction = 'desc';
+        $this->direction = 'asc';
 
     }
 
