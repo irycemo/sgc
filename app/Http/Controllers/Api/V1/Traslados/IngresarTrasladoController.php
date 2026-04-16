@@ -41,13 +41,7 @@ class IngresarTrasladoController extends Controller
 
                 $traslado = Traslado::firstOrCreate(
                                         [
-                                            'predio_id' => $validated['predio_id'],
-                                            'tramite_aviso' => $validated['tramite_aviso'],
-                                            'certificacion_id' => $validated['certificacion_id'],
-                                            'avaluo_spe' => $validated['avaluo_spe'],
                                             'aviso_stl' => $validated['aviso_stl'],
-                                            'entidad_stl' => $validated['entidad_stl'],
-                                            'entidad_nombre' => $validated['entidad_nombre'],
                                         ],
                                         [
                                             'año_aviso' => $validated['año_aviso'],
