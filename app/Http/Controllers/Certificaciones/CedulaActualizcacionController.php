@@ -11,6 +11,7 @@ use App\Traits\Certificaciones\CrearImagenTrait;
 use App\Traits\Certificaciones\GeneradorQRTrait;
 use App\Traits\Certificaciones\PredioTrait;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use PhpCfdi\Credentials\Credential;
 
