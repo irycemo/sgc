@@ -187,6 +187,22 @@
 
                 @endif
 
+                <x-input-group for="predio.ubicacion_en_manzana" label="Ubicación en manzana" :error="$errors->first('predio.ubicacion_en_manzana')" class="w-full">
+
+                    <x-input-select id="predio.ubicacion_en_manzana" wire:model="predio.ubicacion_en_manzana" class="w-full">
+
+                        <option value="">Seleccione una opción</option>
+
+                        @foreach ($ubicaciones_manzana as $item_ubicacion_manzana)
+
+                            <option value="{{ $item_ubicacion_manzana }}" selected>{{ $item_ubicacion_manzana }}</option>
+
+                        @endforeach
+
+                    </x-input-select>
+
+                </x-input-group>
+
             </div>
 
             @include('livewire.comun.coordenadas')
