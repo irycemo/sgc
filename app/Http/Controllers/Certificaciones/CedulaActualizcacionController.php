@@ -59,7 +59,7 @@ class CedulaActualizcacionController extends Controller
         if($predio->movimientos->first()){
 
             $ultimo_movimiento->nombre = $predio->movimientos->first()->nombre;
-            $ultimo_movimiento->fecha = $predio->movimientos->first()->fecha;
+            $ultimo_movimiento->fecha = Carbon::parse($predio->movimientos->first()->fecha)->format('d/m/y');
             $ultimo_movimiento->descripcion = $predio->movimientos->first()->descripcion;
 
         }

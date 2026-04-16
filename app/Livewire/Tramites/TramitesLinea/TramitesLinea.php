@@ -115,9 +115,9 @@ class TramitesLinea extends Component
 
         $this->filters['año'] = now()->format('Y');
 
-        $this->sort = 'tipo_servicio';
+        $this->sort = 'fecha_pago';
 
-        $this->direction = 'asc';
+        $this->direction = 'desc';
 
     }
 
