@@ -40,7 +40,7 @@ class Tramites extends Component
     public $referencia_pago;
     public $fecha_pago;
 
-    public $tramties_con_predio = ['DM31', 'DM34', 'DM32', 'DM35', 'DM30', 'D774', 'D729', 'D728'];
+    public $tramties_con_predio = ['DM31', 'DM34', 'DM32', 'DM35', 'DM30', 'D774', 'D729', 'D728'. 'DÑ34', 'DÑ33'];
 
     public $filters = [
         'search' => '',
