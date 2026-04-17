@@ -1042,6 +1042,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                     'construcciones_comunsable_id' => $predioId,
                     'construcciones_comunsable_type' => 'App\Models\PredioAvaluo',
                     'area_comun_construccion' => $construccion['area_comun_construccion'],
+                    'superficie_proporcional' => $construccion['superficie_proporcional'],
                     'indiviso_construccion' => $construccion['indiviso_construccion'],
                     'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
                     'valor_construccion_comun' => $construccion['valor_construccion_comun'],
