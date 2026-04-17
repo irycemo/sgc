@@ -66,6 +66,8 @@
 
             <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
 
+            <input type="number" wire:model.live.debounce.1000mse="filters.linea_captura" placeholder="Línea de captura" class="bg-white rounded-full text-sm w-52">
+
             <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                 <option value="10">10</option>

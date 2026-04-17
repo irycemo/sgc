@@ -54,7 +54,8 @@ class Tramites extends Component
         'p_oficina' => '',
         't_predio' => '',
         'registro' => '',
-        'estado' => ''
+        'estado' => '',
+        'linea_captura' => ''
     ];
 
     public $servicios;
@@ -429,6 +430,7 @@ class Tramites extends Component
                 'estado' => 'pagado',
                 'documento_de_pago' => $this->referencia_pago,
                 'fecha_pago' => $this->fecha_pago,
+                'fecha_entrega' => $this->calcularFechaEntrega,
                 'actualizado_por' => auth()->id()
             ]);
 
@@ -446,6 +448,55 @@ class Tramites extends Component
 
             Log::error("Error al acreditar trámite  por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+
+        }
+
+    }
+
+    public function calcularFechaEntrega()
+    {
+
+        if(in_array($this->modelo_editar->servicio->clave_ingreso, ['D774', 'DM32'])){
+
+            $actual = now();
+
+            return $actual->toDateString();
+
+        }elseif($this->modelo_editar->servicio->nombre == 'Certificado de historia catastral'){
+
+            $actual = $this->modelo_editar->fecha_pago;
+
+            for ($i=0; $i < 9; $i++) {
+
+                $actual->addDays(1);
+
+                while($actual->isWeekend()){
+
+                    $actual->addDay();
+
+                }
+
+            }
+
+            return $actual->toDateString();
+
+        }elseif($this->modelo_editar->tipo_servicio == 'ordinario'){
+
+            $actual = $this->modelo_editar->fecha_pago;
+
+            for ($i=0; $i < 2; $i++) {
+
+                $actual->addDays(1);
+
+                while($actual->isWeekend()){
+
+                    $actual->addDay();
+
+                }
+
+            }
+
+            return $actual->toDateString();
 
         }
 
@@ -476,6 +527,7 @@ class Tramites extends Component
                         ->when(! empty($this->filters['estado']), fn($q) => $q->where('estado', $this->filters['estado']))
                         ->when(! empty($this->filters['tipoTramite']), fn($q, $tipoTramite) => $q->where('tipo_tramite', $tipoTramite))
                         ->when(! empty($this->filters['servicio']), fn($q, $servicio) => $q->where('servicio_id', $servicio))
+                        ->when(! empty($this->filters['linea_captura']) && strlen($this->filters['linea_captura']) == 20, fn($q, $servicio) =>  $q->where('linea_de_captura', $this->filters['linea_captura']))
                         ->when($predio, function($q) use ($predio){
                             $q->whereHas('predios', function($q) use ($predio){
                                 $q->where('predio_id', $predio->id);
