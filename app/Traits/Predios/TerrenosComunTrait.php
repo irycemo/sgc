@@ -135,7 +135,7 @@ trait TerrenosComunTrait
 
                 $this->predio->area_comun_terreno = $sum2;
                 $this->predio->valor_terreno_comun = $sum;
-                $this->predio->superficie_total_terreno =  $sum2 + $this->predio->terrenos->sum('superficie_proporcional');
+                $this->predio->superficie_total_terreno =  $sum2 + $this->predio->terrenos->sum('superficie');
 
                 $this->predio->valor_total_terreno = $sum + $this->predio->terrenos->sum('valor_terreno');
 
