@@ -805,6 +805,10 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                 'superficie_proporcional' => ($campos[0] * $campos[1]) / 100,
                 'valor_clasificacion_construccion' => $valorUnitario,
                 'valor_construccion_comun' => $valorConstruccion,
+                'uso' => $campos[3],
+                'tipo' => $campos[2],
+                'calidad' => $campos[4],
+                'estado' => $campos[5],
             ];
 
         }
