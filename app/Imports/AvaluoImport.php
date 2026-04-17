@@ -987,8 +987,8 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                 'terrenoable_type' => 'App\Models\PredioAvaluo',
                 'superficie' => $terreno['superficie'],
                 'valor_unitario' => $terreno['valor_unitario'],
-                'demerito' => $terreno['demerito'],
-                'valor_demeritado' => $terreno['valor_demeritado'],
+                /* 'demerito' => $terreno['demerito'],
+                'valor_demeritado' => $terreno['valor_demeritado'], */
                 'valor_terreno' => $terreno['valor_terreno'],
             ]);
 
@@ -1045,6 +1045,10 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                     'indiviso_construccion' => $construccion['indiviso_construccion'],
                     'valor_clasificacion_construccion' => $construccion['valor_clasificacion_construccion'],
                     'valor_construccion_comun' => $construccion['valor_construccion_comun'],
+                    'uso' => $construccion['uso'],
+                    'tipo' => $construccion['tipo'],
+                    'calidad' => $construccion['calidad'],
+                    'estado' => $construccion['estado'],
                 ]);
 
             }
@@ -1096,7 +1100,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
                 'cimentacion' => $row['cimentacion'],
                 'estructura' => $row['estructura'],
                 'muros' => $row['muros'],
-                'entrepiso' => $row['entrepiso'],
+                'entrepiso' => $row['entrepisos'],
                 'techo' => $row['techo'],
                 'plafones' => $row['plafones'],
                 'vidrieria' => $row['vidrieria'],
