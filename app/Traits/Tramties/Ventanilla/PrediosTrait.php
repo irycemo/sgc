@@ -57,6 +57,16 @@ trait PrediosTrait
 
         }
 
+        if(! $this->predio->propietarios->count()){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El predio no tiene propietarios."]);
+
+            $this->predio = null;
+
+            return;
+
+        }
+
     }
 
     public function agregarPredio(){
