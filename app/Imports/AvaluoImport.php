@@ -638,8 +638,8 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
             $terrenosArreglo [] = [
                 'superficie' => $campos[0],
                 'valor_unitario' => $valorUnitario,
-                'demerito' => $campos[2],
-                'valor_demeritado' => $valorDemeritado,
+                /* 'demerito' => $campos[2],
+                'valor_demeritado' => $valorDemeritado, */
                 'valor_terreno' => $valorTerreno
             ];
 
