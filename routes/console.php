@@ -6,6 +6,8 @@ use App\Models\Certificacion;
 use App\Models\OldCertificado;
 use App\Models\OldTraslado;
 use App\Models\Predio;
+use App\Models\SQLSVR\ctcdm004;
+use App\Models\SQLSVR\tcpro008;
 use App\Models\Tramite;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -802,36 +804,11 @@ Artisan::command('migrar-bloqueados', function(){
 
 Artisan::command('certificados', function(){
 
-    $predios = DB::connection('sqlsrv')->table('tcpro008')
-                            ->join('ctpro003', function($q){
-                                $q->on('tcpro008.mpio_008', 'ctpro003.mpio_003')
-                                    ->on('tcpro008.zcat_008', 'ctpro003.zcat_003')
-                                    ->on('tcpro008.locl_008', 'ctpro003.locl_003')
-                                    ->on('tcpro008.sect_008', 'ctpro003.sect_003')
-                                    ->on('tcpro008.mzna_008', 'ctpro003.mzna_003')
-                                    ->on('tcpro008.pred_008', 'ctpro003.pred_003')
-                                    ->on('tcpro008.edif_008', 'ctpro003.edif_003')
-                                    ->on('tcpro008.dpto_008', 'ctpro003.dpto_003')
-                                    ->where('tcpro008.mpio_008', 53)
-                                    ->where('tcpro008.nreg_008', '>', 0);
-                            })
-                            ->count();
-
-                            dd($predios);
-
-    $certificados = Certificacion::whereHas('predio', function($q){
-                                        $q->where('edificio', '>', 0);
-                                    })
-                                    ->where('created_at', '<', '2026-04-07')
-                                    ->count();
-
     $predios = Predio::with('terrenos', 'terrenosComun')->where('edificio', '>', 0)->get();
 
     $count = 0;
 
     foreach($predios as $predio){
-
-        /* $predio = $certificado->predio; */
 
         $superficie_terreno = $predio->terrenos->first()?->superficie;
 
@@ -839,21 +816,133 @@ Artisan::command('certificados', function(){
 
         $suma = $superficie_terreno + $superficie_proporcional;
 
-        if($predio->superficie_total_terreno < 0){
+        if($superficie_terreno < 0){
 
-            if($superficie_terreno < 0){
+            $ctcdm004 = ctcdm004::where('mpio_004', $predio->municipio)
+                                ->where('zcat_004', $predio->zona_catastral)
+                                ->where('locl_004', $predio->localidad)
+                                ->where('sect_004', $predio->sector)
+                                ->where('mzna_004', $predio->manzana)
+                                ->where('pred_004', $predio->predio)
+                                ->where('edif_004', $predio->edificio)
+                                ->where('dpto_004', $predio->departamento)
+                                ->first();
 
-                /* $predio->terrenos->first()->delete(); */
+            $tcpro008 = tcpro008::where('mpio_008', $predio->municipio)
+                                ->where('zcat_008', $predio->zona_catastral)
+                                ->where('locl_008', $predio->localidad)
+                                ->where('sect_008', $predio->sector)
+                                ->where('mzna_008', $predio->manzana)
+                                ->where('pred_008', $predio->predio)
+                                ->where('edif_008', $predio->edificio)
+                                ->where('dpto_008', $predio->departamento)
+                                ->where('ofna_008', $predio->oficina)
+                                ->where('tpre_008', $predio->tipo_predio)
+                                ->where('nreg_008', $predio->numero_registro)
+                                ->first();
+
+            $this->info('id: ' . $predio->id . ' ' . $predio->cuentaPredial() . ' Superficie total de terreno: ' . $predio->superficie_total_terreno . ' - Superficie de terreno: ' . $predio->terrenos->first()->superficie . ' - Superficie proporcional: ' . $superficie_proporcional . ' - Suma: ' . $suma);
+
+            if($ctcdm004 && $ctcdm004->ster_004 != null){
+
+                if($ctcdm004->ster_004 == 0){
+
+                    $predio->terrenos()->delete();
+
+                }else{
+
+                    $predio->terrenos->first()->update(['superficie' => $ctcdm004->ster_004]);
+
+                }
+
+                if($ctcdm004->scon_004 == 0){
+
+                    $predio->construcciones()->delete();
+
+                }
 
             }
 
-            $this->info($predio->cuentaPredial() . ' Superficie total de terreno: ' . $predio->superficie_total_terreno . ' - Superficie de terreno: ' . $superficie_terreno . ' - Superficie proporcional: ' . $superficie_proporcional . ' - Suma: ' . $suma);
+            if($tcpro008){
+
+                $predio->update(['superficie_total_terreno' => $tcpro008->stot_008]);
+
+            }
+
+            $this->info('id: ' . $predio->id . ' ' . $predio->cuentaPredial() . ' Superficie total de terreno: ' . $predio->superficie_total_terreno . ' - Superficie de terreno: ' . $predio->terrenos->first()?->superficie . ' - Superficie proporcional: ' . $superficie_proporcional . ' - Suma: ' . $suma);
             $count ++;
+        }
+
+        $this->info($count);
+
+    }
+
+});
+
+Artisan::command('edificios', function(){
+
+    $predios = Predio::with('terrenos', 'terrenosComun')->where('edificio', '>', 0)->get();
+
+    $count = 0;
+
+    foreach($predios as $predio){
+
+        $ctcdm004 = ctcdm004::where('mpio_004', $predio->municipio)
+                            ->where('zcat_004', $predio->zona_catastral)
+                            ->where('locl_004', $predio->localidad)
+                            ->where('sect_004', $predio->sector)
+                            ->where('mzna_004', $predio->manzana)
+                            ->where('pred_004', $predio->predio)
+                            ->where('edif_004', $predio->edificio)
+                            ->where('dpto_004', $predio->departamento)
+                            ->first();
+
+
+        $predio->update([
+            'nombre_edificio' => $ctcdm004->noed_008 ? trim($ctcdm004->noed_008) : null,
+            'clave_edificio' => $ctcdm004->cled_008 ? trim($ctcdm004->cled_008) : null,
+            'departamento_edificio' => $ctcdm004->ndpt_008 ? trim($ctcdm004->ndpt_008) : null
+        ]);
+
+        $count ++;
+
+    }
+
+    $this->info($count);
+
+
+});
+
+Artisan::command('superficies', function(){
+
+    $predios = Predio::with('terrenos', 'terrenosComun')->where('edificio', '>', 0)->get();
+
+    $count = 0;
+
+    foreach($predios as $predio){
+
+        $superficie_terreno = $predio->terrenos->sum('superficie');
+
+        if($superficie_terreno == 0) continue;
+
+        $superficie_proporcional = $predio->terrenosComun->sum('superficie_proporcional');
+
+        $suma = $superficie_proporcional + $superficie_terreno;
+
+        $diferencia = abs($predio->superficie_total_terreno - $suma);
+
+        if($diferencia > 1){
+
+            $this->info('id: ' . $predio->id . ' ' . $predio->cuentaPredial() . ' Superficie total de terreno: ' . $predio->superficie_total_terreno . ' - Superficie de terreno: ' . $superficie_terreno . ' - Superficie proporcional: ' . $superficie_proporcional . ' - Suma: ' . $suma . ' - Dieferencia: ' . $diferencia);
+
+            $count ++;
+
         }
 
     }
 
     $this->info($count);
+
 
 });
 

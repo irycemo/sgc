@@ -7,6 +7,7 @@ use App\Livewire\Cartografia\Conciliar\ConciliarManzanas;
 use App\Livewire\Cartografia\AsignarCoordenadas\AsignarCoordenadas;
 use App\Livewire\Cartografia\AsignarCuentaPredial\AsignarCuentaPredial;
 use App\Livewire\Cartografia\AsignarCuentaPredial\CuentasAsignadas;
+use App\Livewire\Cartografia\AsignarManzana\AsignarManzana;
 use App\Livewire\Cartografia\CambioLocalidad\CambioLocalidad;
 use App\Livewire\Cartografia\Conciliar\ConciliarAvaluosPeritosExternos;
 use App\Livewire\Cartografia\ValidarCartografia\ValidarCartografia;
@@ -14,6 +15,8 @@ use App\Livewire\Cartografia\ValidarCartografia\ValidarCartografia;
 Route::group([], function(){
 
     Route::get('asignacion_cuenta', AsignarCuentaPredial::class)->middleware('permission:Asignación de cuentas')->name('asignacion_cuenta');
+
+    Route::get('asignacion_manzana', AsignarManzana::class)->middleware('permission:Asignación de cuentas')->name('asignacion_manzana');
 
     Route::get('asignacion_clave_catastral', AsignarClaveCatastral::class)->middleware('permission:Asignación de claves')->name('asignacion_clave_catastral');
 
