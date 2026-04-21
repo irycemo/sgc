@@ -430,7 +430,7 @@ class Tramites extends Component
                 'estado' => 'pagado',
                 'documento_de_pago' => $this->referencia_pago,
                 'fecha_pago' => $this->fecha_pago,
-                'fecha_entrega' => $this->calcularFechaEntrega,
+                'fecha_entrega' => $this->calcularFechaEntrega(),
                 'actualizado_por' => auth()->id()
             ]);
 
