@@ -66,6 +66,7 @@ class Tramites extends Component
         return [
             'modelo_editar.nombre_solicitante' => 'required|string',
             'modelo_editar.observaciones' => 'nullable',
+            'modelo_editar.fecha_pago' => 'nullable',
             'predios' => 'nullable'
          ];
     }
