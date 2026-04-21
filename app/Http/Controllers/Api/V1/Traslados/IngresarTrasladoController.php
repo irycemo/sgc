@@ -132,6 +132,7 @@ class IngresarTrasladoController extends Controller
                 $traslado->update([
                     'estado' => 'cerrado',
                     'tramite_aviso' => $validated['tramite_aviso'],
+                    'predio_id' => $validated['predio_id'],
                 ]);
 
             });
