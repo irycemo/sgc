@@ -61,7 +61,12 @@ class IngresarTrasladoController extends Controller
                                         ]
                                     );
 
-                $traslado->update(['estado' => 'cerrado']);
+                $traslado->update([
+                    'estado' => 'cerrado',
+                    'avaluo_spe' => $validated['avaluo_spe'],
+                    'tramite_aviso' => $validated['tramite_aviso'],
+                    'certificacion_id' => $validated['certificacion_id'],
+                ]);
 
             });
 
@@ -123,7 +128,10 @@ class IngresarTrasladoController extends Controller
                                         ]
                                     );
 
-                $traslado->update(['estado' => 'cerrado']);
+                $traslado->update([
+                    'estado' => 'cerrado',
+                    'tramite_aviso' => $validated['tramite_aviso'],
+                ]);
 
             });
 
