@@ -710,7 +710,7 @@ class RevisarTraslado extends Component
 
         } catch (GeneralException $ex) {
 
-            Log::error("Error al consultar sistemas externos en revisión de aviso " . $this->aviso->año_aviso . '-' . $this->aviso->folio_aviso . '-' . $this->aviso->usuario_aviso . '-' . " por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al consultar sistemas externos en revisión de aviso " . $this->traslado->año_aviso . '-' . $this->traslado->folio_aviso . '-' . $this->traslado->usuario_aviso . '-' . " por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $ex);
 
             abort(403, message:$ex->getMessage());
 
