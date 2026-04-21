@@ -140,6 +140,7 @@ class TramiteService{
 
             $this->tramite->estado = 'pagado';
             $this->tramite->fecha_vencimiento = now()->toDateString();
+            $this->tramite->fecha_entrega = now()->toDateString();
 
             return;
 
