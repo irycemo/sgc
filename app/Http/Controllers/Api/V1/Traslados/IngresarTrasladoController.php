@@ -66,6 +66,7 @@ class IngresarTrasladoController extends Controller
                     'avaluo_spe' => $validated['avaluo_spe'],
                     'tramite_aviso' => $validated['tramite_aviso'],
                     'certificacion_id' => $validated['certificacion_id'],
+                    'predio_id' => $validated['predio_id'],
                 ]);
 
             });
