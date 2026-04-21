@@ -27,6 +27,7 @@ class CertificacionListaResource extends JsonResource
             'observaciones' => $this->observaciones,
             'tramite_año' => $this->tramite->año,
             'tramite_folio' => $this->tramite->folio,
+            'tramite_usuario' => $this->tramite->usuario,
             'localidad' => $this->predio->localidad,
             'oficina' => $this->predio->oficina,
             'tipo_predio' => $this->predio->tipo_predio,
