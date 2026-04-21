@@ -466,7 +466,7 @@ class Tramites extends Component
 
         }elseif($this->modelo_editar->servicio->nombre == 'Certificado de historia catastral'){
 
-            $actual = $this->modelo_editar->fecha_pago;
+            $actual = Carbon::parse($this->fecha_pago);
 
             for ($i=0; $i < 9; $i++) {
 
@@ -484,7 +484,7 @@ class Tramites extends Component
 
         }elseif($this->modelo_editar->tipo_servicio == 'ordinario'){
 
-            $actual = Carbon::parse($this->modelo_editar->fecha_pago);
+            $actual = Carbon::parse($this->fecha_pago);
 
             for ($i=0; $i < 2; $i++) {
 

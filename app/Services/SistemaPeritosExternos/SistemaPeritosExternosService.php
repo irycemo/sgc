@@ -23,7 +23,7 @@ class SistemaPeritosExternosService{
 
         if($response->status() !== 200){
 
-            Log::error("Error al consultar avalúo. " . $response);
+            Log::error("Error al consultar avalúo con id: " . $avaluo_spe . ' ' . $response);
 
             $data = json_decode($response, true);
 
