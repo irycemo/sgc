@@ -12,6 +12,7 @@ use App\Models\Tramite;
 use App\Models\Traslado;
 use App\Services\Tramites\TramiteService;
 use App\Traits\ComponentesTrait;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Computed;
@@ -483,7 +484,7 @@ class Tramites extends Component
 
         }elseif($this->modelo_editar->tipo_servicio == 'ordinario'){
 
-            $actual = $this->modelo_editar->fecha_pago;
+            $actual = Carbon::parse($this->modelo_editar->fecha_pago);
 
             for ($i=0; $i < 2; $i++) {
 
