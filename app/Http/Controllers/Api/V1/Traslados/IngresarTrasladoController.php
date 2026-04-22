@@ -103,6 +103,16 @@ class IngresarTrasladoController extends Controller
 
         $oficina = Oficina::where('oficina', $predio->oficina)->where('localidad', $predio->localidad)->first();
 
+        if($oficina->cabeceraMunicipal){
+
+            $oficina_cabecera_id = $oficina->cabeceraMunicipal->id;
+
+        }else{
+
+            $oficina_cabecera_id = $oficina->id;
+
+        }
+
         try {
 
             $traslado = null;
@@ -125,7 +135,7 @@ class IngresarTrasladoController extends Controller
                                             'entidad_stl' => $validated['entidad_stl'],
                                             'oficina_id' => $oficina->id,
                                             'entidad_nombre' => $validated['entidad_nombre'],
-                                            'asignado_a' => (new AsignacionTrasladosService())->obtenerUsuariosTraslado($oficina->id, $validated['predio_id'])
+                                            'asignado_a' => (new AsignacionTrasladosService())->obtenerUsuariosTraslado($oficina_cabecera_id, $validated['predio_id'])
                                         ]
                                     );
 
