@@ -170,7 +170,7 @@ class RevisarTraslado extends Component
 
             $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
-            (new SistemaTramitesLineaService())->revertirAviso($this->traslado->aviso_stl);
+            (new SistemaTramitesLineaService())->revertirAviso($this->traslado->aviso_stl, null);
 
             if($this->traslado->tipo == 'revision'){
 
@@ -180,7 +180,7 @@ class RevisarTraslado extends Component
 
         } catch (\Throwable $th) {
 
-            (new SistemaTramitesLineaService())->revertirAviso($this->traslado->aviso_stl);
+            (new SistemaTramitesLineaService())->revertirAviso($this->traslado->aviso_stl, null);
 
             if($this->traslado->tipo == 'revision'){
 
@@ -561,6 +561,12 @@ class RevisarTraslado extends Component
 
             $sumaPN = $pn_adquirientes + $pn;
 
+            if($sumaPN > 100){
+
+                throw new GeneralException("La suma de los porcentajes no puede ser mayor a 100.");
+
+            }
+
             if(round($sumaPN, 2) > round($pn_transmitentes + $pp_transmitentes,2)){
 
                 throw new GeneralException("La suma de los porcentajes de propiedad debe ser " . $pp_transmitentes . '%.');
@@ -569,6 +575,12 @@ class RevisarTraslado extends Component
 
             $sumaPU = $pu_adquirientes + $pu;
 
+            if($sumaPU > 100){
+
+                throw new GeneralException("La suma de los porcentajes no puede ser mayor a 100.");
+
+            }
+
             if(round($sumaPU, 2) != round($pu_transmitentes + $pp_transmitentes, 2)){
 
                 throw new GeneralException("La suma de los porcentajes de usufructo debe ser " . $pu_transmitentes + $pp_transmitentes . '%.');
@@ -576,6 +588,12 @@ class RevisarTraslado extends Component
             }
 
         }else{
+
+            if($sumaPP > 100){
+
+                throw new GeneralException("La suma de los porcentajes no puede ser mayor a 100.");
+
+            }
 
             if($sumaPP == 100){
 
