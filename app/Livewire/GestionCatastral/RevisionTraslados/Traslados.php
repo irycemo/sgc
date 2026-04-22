@@ -2,14 +2,16 @@
 
 namespace App\Livewire\GestionCatastral\RevisionTraslados;
 
-use App\Models\User;
 use App\Models\Oficina;
-use Livewire\Component;
 use App\Models\Traslado;
-use Livewire\WithPagination;
+use App\Models\User;
+use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
 use App\Traits\ComponentesTrait;
-use Livewire\Attributes\Computed;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class Traslados extends Component
 {
@@ -22,11 +24,14 @@ class Traslados extends Component
     public $estado = '';
     public $modalReasignar = false;
     public $modalRechazos = false;
+    public $modal_revertir = false;
 
     public $fiscales = [];
     public $fiscal;
     public $oficinas;
     public $oficina;
+
+    public $observaciones;
 
     public $filters = [
         'localidad' => '',
@@ -84,6 +89,14 @@ class Traslados extends Component
 
     }
 
+    public function abrirModalRevertir(Traslado $traslado){
+
+        $this->modelo_editar = $traslado;
+
+        $this->modal_revertir = true;
+
+    }
+
     public function reasignarFiscal(){
 
         $this->validate();
@@ -101,6 +114,36 @@ class Traslados extends Component
 
         } catch (\Throwable $th) {
             Log::error("Error al reasignar fiscal por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+        }
+
+    }
+
+    public function revertirOperado(){
+
+        $this->validate(['observaciones' => 'required']);
+
+        try {
+
+            DB::transaction(function () {
+
+                $this->modelo_editar->update([
+                    'estado' => 'autorizado',
+                    'actualizado_por' => auth()->id()
+                ]);
+
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Revistiro operación de aviso']);
+
+                (new SistemaTramitesLineaService())->revertirAviso($this->modelo_editar->aviso_stl, $this->observaciones);
+
+            });
+
+            $this->modal_revertir = false;
+
+            $this->dispatch('mostrarMensaje', ['success', "Se revirtio a esto autorizado con éxito."]);
+
+        } catch (\Throwable $th) {
+            Log::error("Error al revertir a autorizado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
         }
 

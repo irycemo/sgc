@@ -187,7 +187,7 @@ class SistemaTramitesLineaService{
 
     }
 
-    public function revertirAviso(int $aviso_stl):array
+    public function revertirAviso(int $aviso_stl, string | null $observaciones):array
     {
 
         $response = Http::withToken(config('services.sistema_tramites_en_linea.token'))
@@ -197,6 +197,7 @@ class SistemaTramitesLineaService{
                                 config('services.sistema_tramites_en_linea.revertir_aviso'),
                                 [
                                     'id' => $aviso_stl,
+                                    'observaciones' => $observaciones,
                                 ]
                             );
 
