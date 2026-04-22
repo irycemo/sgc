@@ -59,6 +59,27 @@ class ListaAvisos extends Component
 
     }
 
+    public function reasignarFiscalAleatoriamente(Traslado $traslado){
+
+        try {
+
+            $id = $this->fiscales->shuffle()->first()->id;
+
+            $traslado->asignado_a = $id;
+            $traslado->actualizado_por = auth()->id();
+            $traslado->save();
+
+            $traslado->audits()->latest()->first()->update(['tags' => 'Reasignó aviso']);
+
+            $this->dispatch('mostrarMensaje', ['success', "Se reasigno el fiscal con éxito."]);
+
+        } catch (\Throwable $th) {
+            Log::error("Error al reasignar fiscal por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+        }
+
+    }
+
     public function reasignarFiscal(Traslado $traslado){
 
         try {
