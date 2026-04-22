@@ -117,7 +117,7 @@ class IngresarTrasladoController extends Controller
 
             $traslado = null;
 
-            DB::transaction(function () use ($validated, $oficina, &$traslado){
+            DB::transaction(function () use ($validated, $oficina, &$traslado, $oficina_cabecera_id){
 
                 $traslado = Traslado::firstOrCreate(
                                         [
