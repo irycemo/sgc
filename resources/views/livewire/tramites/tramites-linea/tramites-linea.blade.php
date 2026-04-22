@@ -24,7 +24,6 @@
 
                     <option value="" selected>Estado</option>
                     <option value="pagado" selected>Pagado</option>
-                    <option value="concluido" selected>Concluido</option>
 
                 </select>
 
