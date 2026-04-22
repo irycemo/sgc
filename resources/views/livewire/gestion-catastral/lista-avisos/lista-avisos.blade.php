@@ -26,6 +26,18 @@
 
                 </x-input-select>
 
+                <x-input-select class="bg-white rounded-full text-sm w-min" wire:model.live="filters.usuario_asignado">
+
+                    <option value="">Seleccione una opción</option>
+
+                    @foreach ($fiscales as $fiscal)
+
+                        <option value="{{ $fiscal->id }}">{{ $fiscal->name }}</option>
+
+                    @endforeach
+
+                </x-input-select>
+
                 <input type="number" wire:model.live.debounce.500ms="filters.año_aviso" placeholder="Año Aviso" class="bg-white rounded-full text-sm w-24">
 
                 <input type="number" wire:model.live.debounce.500ms="filters.folio_aviso" placeholder="Folio Aviso" class="bg-white rounded-full text-sm w-24">

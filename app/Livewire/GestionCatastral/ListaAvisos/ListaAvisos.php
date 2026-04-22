@@ -3,12 +3,13 @@
 namespace App\Livewire\GestionCatastral\ListaAvisos;
 
 use App\Models\Oficina;
-use Livewire\Component;
 use App\Models\Traslado;
-use Livewire\WithPagination;
+use App\Models\User;
 use App\Traits\ComponentesTrait;
-use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class ListaAvisos extends Component
 {
@@ -35,6 +36,7 @@ class ListaAvisos extends Component
         'año_aviso' => '',
         'folio_aviso' => '',
         'usuario_aviso' => '',
+        'usuario_asignado' => '',
     ];
 
     protected function rules(){
@@ -85,6 +87,7 @@ class ListaAvisos extends Component
                                 ->with('actualizadoPor:id,name', 'asignadoA:id,name', 'predio:id,localidad,oficina,tipo_predio,numero_registro')
                                 ->withCount(['rechazos'])
                                 ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $this->estado))
+                                ->when($this->filters['usuario_asignado'] && $this->filters['usuario_asignado'] != '', fn($q) => $q->where('asignado_a', $this->filters['usuario_asignado']))
                                 ->when($this->oficina, function($q) {
                                     $q->whereHas('predio', function($q) {
                                         $q->where('oficina', $this->oficina);
@@ -136,6 +139,7 @@ class ListaAvisos extends Component
                                 ->with('actualizadoPor:id,name', 'asignadoA:id,name', 'predio:id,localidad,oficina,tipo_predio,numero_registro')
                                 ->withCount(['rechazos'])
                                 ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $this->estado))
+                                ->when($this->filters['usuario_asignado'] && $this->filters['usuario_asignado'] != '', fn($q) => $q->where('asignado_a', $this->filters['usuario_asignado']))
                                 ->where('entidad_nombre', 'LIKE', '%' . $this->search . '%')
                                 /* ->where('oficina_id', auth()->user()->oficina_id) */
                                 ->when($this->filters['localidad'], function($q, $localidad){
@@ -188,6 +192,12 @@ class ListaAvisos extends Component
         $this->crearModeloVacio();
 
         $this->oficinas = Oficina::select('id', 'nombre', 'oficina')->where('cabecera', null)->orderBy('oficina')->get();
+
+        $this->fiscales = User::whereHas('roles', function($q){
+                                    $q->where('name', 'Fiscal');
+                                })
+                                ->orderBy('name')
+                                ->get();
 
     }
 

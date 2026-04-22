@@ -2,13 +2,14 @@
 
 namespace App\Traits\Valuacion;
 
-use App\Models\Avaluo;
-use App\Models\Predio;
-use App\Models\Oficina;
-use App\Models\Tramite;
-use Livewire\Attributes\On;
 use App\Enums\Tramites\AvaluoPara;
 use App\Exceptions\GeneralException;
+use App\Models\Avaluo;
+use App\Models\Oficina;
+use App\Models\Predio;
+use App\Models\Tramite;
+use App\Services\Tramites\TramiteService;
+use Livewire\Attributes\On;
 
 trait ImpresionTrait
 {
@@ -145,6 +146,12 @@ trait ImpresionTrait
                                             ->where('usuario', $this->inspeccion_usuario)
                                             ->first();
 
+        if($this->tramite_inspeccion->estado != 'pagado'){
+
+            (new TramiteService($this->tramite_inspeccion))->procesarPago();
+
+        }
+
         if(!$this->tramite_inspeccion) throw new GeneralException('El trámite de inspección ocular no existe.');
 
         if(!$this->tramite_inspeccion->avaluo_para) throw new GeneralException('El trámite ingresado para inspección ocular no corresponde a una inspección ocular.');
@@ -164,6 +171,12 @@ trait ImpresionTrait
             if(!$this->tramite_desglose) throw new GeneralException('El trámite de desglose no existe.');
 
             if($this->tramite_desglose->servicio->categoria->nombre != 'Desglose de predios y valuación') throw new GeneralException('El trámite ingresado para desglose no corresponde a un desglose.');
+
+            if($this->tramite_desglose->estado != 'pagado'){
+
+                (new TramiteService($this->tramite_desglose))->procesarPago();
+
+            }
 
             if($this->tramite_desglose->estado != 'pagado') throw new GeneralException('El trámite de desglose no esta pagado o ha sido concluido.');
 
