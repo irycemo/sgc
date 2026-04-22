@@ -25,6 +25,7 @@ class Traslados extends Component
     public $modalReasignar = false;
     public $modalRechazos = false;
     public $modal_revertir = false;
+    public $flag_operado = false;
 
     public $fiscales = [];
     public $fiscal;
@@ -89,9 +90,21 @@ class Traslados extends Component
 
     }
 
-    public function abrirModalRevertir(Traslado $traslado){
+    public function abrirModalRevertir(Traslado $traslado, $estado){
+
+        if($estado === 'operado'){
+
+            $this->flag_operado = true;
+
+        }else{
+
+            $this->flag_operado = false;
+
+        }
 
         $this->modelo_editar = $traslado;
+
+        $this->modelo_editar->load('rechazos.creadoPor');
 
         $this->modal_revertir = true;
 
@@ -144,6 +157,36 @@ class Traslados extends Component
 
         } catch (\Throwable $th) {
             Log::error("Error al revertir a autorizado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+        }
+
+    }
+
+    public function revertirRechazo(){
+
+        $this->validate(['observaciones' => 'required']);
+
+        try {
+
+            DB::transaction(function () {
+
+                $this->modelo_editar->update([
+                    'estado' => 'cerrado',
+                    'actualizado_por' => auth()->id()
+                ]);
+
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Revirtió rechazo de aviso']);
+
+                (new SistemaTramitesLineaService())->revertirRechazo($this->modelo_editar->aviso_stl, $this->observaciones);
+
+            });
+
+            $this->modal_revertir = false;
+
+            $this->dispatch('mostrarMensaje', ['success', "Se revirtio a esto cerrado con éxito."]);
+
+        } catch (\Throwable $th) {
+            Log::error("Error al revertir a cerrado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
         }
 

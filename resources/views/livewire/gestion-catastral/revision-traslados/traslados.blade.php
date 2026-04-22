@@ -187,11 +187,24 @@
 
                                         <button
                                             wire:confirm="¿Esta seguro que desea enviar el aviso a estado de autorizado?"
-                                            wire:click="abrirModalRevertir({{ $traslado->id }})"
+                                            wire:click="abrirModalRevertir({{ $traslado->id }}, 'operado')"
                                             wire:loading.attr="disabled"
                                             class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                             role="menuitem">
                                             Revertir operación
+                                        </button>
+
+                                    @endif
+
+                                    @if($traslado->estado === 'rechazado')
+
+                                        <button
+                                            wire:confirm="¿Esta seguro que desea enviar el aviso a estado de cerrado?"
+                                            wire:click="abrirModalRevertir({{ $traslado->id }}, 'rechazo')"
+                                            wire:loading.attr="disabled"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Revertir rechazo
                                         </button>
 
                                     @endif
@@ -369,12 +382,25 @@
 
             <div class="flex gap-3">
 
-                <x-button-blue
-                    wire:click="revertirOperado"
-                    wire:loading.attr="disabled"
-                    wire:target="revertirOperado">
-                    Revertir
-                </x-button-blue>
+                @if($flag_operado)
+
+                    <x-button-blue
+                        wire:click="revertirOperado"
+                        wire:loading.attr="disabled"
+                        wire:target="revertirOperado">
+                        Revertir operación
+                    </x-button-blue>
+
+                @else
+
+                    <x-button-blue
+                        wire:click="revertirRechazo"
+                        wire:loading.attr="disabled"
+                        wire:target="revertirRechazo">
+                        Revertir rechazo
+                    </x-button-blue>
+
+                @endif
 
                 <x-button-red
                     wire:click="$toggle('modal_revertir')"
