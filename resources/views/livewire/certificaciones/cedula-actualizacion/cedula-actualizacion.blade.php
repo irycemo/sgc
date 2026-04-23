@@ -177,73 +177,37 @@
 
             <div class="flex flex-col lg:flex-row gap-3 justify-center w-full mx-auto lg:w-1/2">
 
-                @if($predio->superficie_notarial)
-
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                        <strong>Superficie notarial</strong>
-
-                        <p>{{ $predio->superficie_notarial }}</p>
-
-                    </div>
-
-                @endif
-
-                @if($predio->superficie_judicial)
-
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                        <strong>Superficie judicial</strong>
-
-                        <p>{{ $predio->superficie_judicial }}</p>
-
-                    </div>
-
-                @endif
-
                 <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                    <strong>Superficie de terreno</strong>
+                    <strong>Superficie notarial</strong>
 
-                    <p>{{ $predio->superficie_terreno }}</p>
+                    <p>{{ $predio->superficie_notarial_formateada }}</p>
 
                 </div>
 
-                @if($predio->superficie_construccion)
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    <strong>Superficie judicial</strong>
 
-                        <strong>Superficie de construcción</strong>
+                    <p>{{ $predio->superficie_judicial_formateada }}</p>
 
-                        <p>{{ $predio->superficie_construccion }}</p>
+                </div>
 
-                    </div>
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                @endif
+                    <strong>Superficie total de terreno</strong>
 
-                @if($predio->area_comun_terreno)
+                    <p>{{ $predio->superficie_total_terreno_formateada }}</p>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+                </div>
 
-                        <strong>Superficie común de terreno</strong>
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                        <p>{{ $predio->area_comun_terreno }}</p>
+                    <strong>Superficie total de construcción</strong>
 
-                    </div>
+                    <p>{{ $predio->superficie_total_construccion_formateada }}</p>
 
-                @endif
-
-                @if($predio->area_comun_construccion)
-
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                        <strong>Superficie común de construcción</strong>
-
-                        <p>{{ $predio->area_comun_construccion }}</p>
-
-                    </div>
-
-                @endif
+                </div>
 
                 <div class="rounded-lg bg-gray-100 py-1 px-2">
 
