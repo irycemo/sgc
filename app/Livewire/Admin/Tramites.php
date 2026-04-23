@@ -527,9 +527,9 @@ class Tramites extends Component
                         ->when(! empty($this->filters['folio']), fn($q) => $q->where('folio', $this->filters['folio']))
                         ->when(! empty($this->filters['usuario']), fn($q) => $q->where('usuario', $this->filters['usuario']))
                         ->when(! empty($this->filters['estado']), fn($q) => $q->where('estado', $this->filters['estado']))
-                        ->when(! empty($this->filters['tipoTramite']), fn($q, $tipoTramite) => $q->where('tipo_tramite', $tipoTramite))
-                        ->when(! empty($this->filters['servicio']), fn($q, $servicio) => $q->where('servicio_id', $servicio))
-                        ->when(! empty($this->filters['linea_captura']) && strlen($this->filters['linea_captura']) == 20, fn($q, $servicio) =>  $q->where('linea_de_captura', $this->filters['linea_captura']))
+                        ->when(! empty($this->filters['tipoTramite']), fn($q) => $q->where('tipo_tramite', $this->filters['tipoTramite']))
+                        ->when(! empty($this->filters['servicio']), fn($q) => $q->where('servicio_id', $this->filters['servicio']))
+                        ->when(! empty($this->filters['linea_captura']) && strlen($this->filters['linea_captura']) == 20, fn($q) =>  $q->where('linea_de_captura', $this->filters['linea_captura']))
                         ->when($predio, function($q) use ($predio){
                             $q->whereHas('predios', function($q) use ($predio){
                                 $q->where('predio_id', $predio->id);
