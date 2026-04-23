@@ -368,6 +368,7 @@ class ConsultaPadron extends Component
                                 'terrenos',
                                 'construcciones',
                                 'colindancias',
+                                'movimientos.creadoPor'
                             )
                             ->whereKey($this->selected_id)
                             ->first();
@@ -381,6 +382,7 @@ class ConsultaPadron extends Component
                                         'terrenos',
                                         'construcciones',
                                         'colindancias',
+                                        'movimientos.creadoPor'
                                     )
                                     ->where('numero_registro', $this->numero_registro)
                                     ->where('tipo_predio', $this->tipo_predio)

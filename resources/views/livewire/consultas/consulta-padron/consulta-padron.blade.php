@@ -1079,6 +1079,7 @@
                                 <th class="px-2">Movimiento</th>
                                 <th class="px-2">Fecha</th>
                                 <th class="px-2">Descripción</th>
+                                <th class="px-2">Registrado por</th>
 
                             </tr>
 
@@ -1092,6 +1093,7 @@
                                     <td class=" px-2 w-full ">{{ $movimiento->nombre }}</td>
                                     <td class=" px-2 w-full ">{{ $movimiento->fecha->format('d-m-Y') }}</td>
                                     <td class=" px-2 w-full ">{{ $movimiento->descripcion }}</td>
+                                    <td class=" px-2 w-full ">{{ $movimiento->creadoPor->name }}</td>
                                 </tr>
 
                             @endforeach
