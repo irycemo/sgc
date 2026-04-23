@@ -18,7 +18,7 @@ class Movimiento extends Model implements Auditable
     protected function casts(): array
     {
         return [
-            'fecha' => 'date:d-m-Y'
+            'fecha' => 'date'
         ];
     }
 
