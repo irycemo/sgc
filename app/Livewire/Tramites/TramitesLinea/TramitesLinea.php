@@ -3,6 +3,7 @@
 namespace App\Livewire\Tramites\TramitesLinea;
 
 use App\Constantes\Constantes;
+use App\Models\PredioTramite;
 use App\Models\Tramite;
 use App\Traits\ComponentesTrait;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -107,6 +108,15 @@ class TramitesLinea extends Component
     }
 
     public function mount(){
+
+        $certificados = PredioTramite::select('estado', DB::raw('count(*) as total'))
+                            ->when(auth()->user()->hasRole('Oficina rentistica'), function($q){
+                                $q->whereHas('tramite', function($q){
+                                    $q->where('oficina_id', auth()->user()->oficina_id);
+                                });
+                            })
+                            ->where('estado', 'A')
+                            ->get();
 
         $this->crearModeloVacio();
 

@@ -353,6 +353,11 @@ class Traslados extends Component
 
         $this->oficinas = Oficina::select('id', 'nombre', 'oficina')->where('cabecera', null)->orderBy('oficina')->get();
 
+        $this->sort = 'created_at';
+
+        $this->direction = 'asc';
+
+
     }
 
     public function render()
