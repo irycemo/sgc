@@ -1093,7 +1093,7 @@
                                     <td class=" px-2 w-full ">{{ $movimiento->nombre }}</td>
                                     <td class=" px-2 w-full ">{{ $movimiento->fecha->format('d-m-Y H:i:s') }}</td>
                                     <td class=" px-2 w-full ">{{ $movimiento->descripcion }}</td>
-                                    <td class=" px-2 w-full ">{{ $movimiento->creadoPor->name }}</td>
+                                    <td class=" px-2 w-full ">{{ $movimiento->actualizado_nombre ?? $movimiento->creadoPor?->name }}</td>
                                 </tr>
 
                             @endforeach
