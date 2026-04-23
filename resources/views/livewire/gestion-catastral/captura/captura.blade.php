@@ -203,6 +203,46 @@
 
                 </x-input-group>
 
+                <x-input-group for="predio.regimen" label="Regimen" :error="$errors->first('predio.regimen')" class="w-full">
+
+                    <x-input-select id="predio.regimen" wire:model="predio.regimen" class="w-full">
+
+                        <option value="">Seleccione una opción</option>
+
+                        @foreach ($regimenes as $regimenes_item)
+
+                            <option value="{{ $regimenes_item }}" selected>{{ $regimenes_item }}</option>
+
+                        @endforeach
+
+                    </x-input-select>
+
+                </x-input-group>
+
+                <x-input-group for="predio.tomo" label="Tomo" :error="$errors->first('predio.tomo')" class="w-full">
+
+                    <x-input-text  id="predio.tomo" wire:model="predio.tomo"/>
+
+                </x-input-group>
+
+                <x-input-group for="predio.registro" label="Registro" :error="$errors->first('predio.registro')" class="w-full">
+
+                    <x-input-text  id="predio.registro" wire:model="predio.registro"/>
+
+                </x-input-group>
+
+                <x-input-group for="predio.distrito" label="Distrito" :error="$errors->first('predio.distrito')" class="w-full">
+
+                    <x-input-text type="number" id="predio.distrito" wire:model="predio.distrito"/>
+
+                </x-input-group>
+
+                <x-input-group for="predio.libro" label="Libro" :error="$errors->first('predio.libro')" class="w-full">
+
+                    <x-input-text  id="predio.libro" wire:model="predio.libro"/>
+
+                </x-input-group>
+
             </div>
 
             @include('livewire.comun.coordenadas')
@@ -211,7 +251,7 @@
 
                 <h4 class="text-lg mb-5 text-center">Documento de entrada</h4>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-3 items-start">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5  gap-3 items-start">
 
                     <div class="flex-auto">
 
@@ -319,6 +359,27 @@
                         <div>
 
                             @error('predio.fecha_efectos') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex-auto ">
+
+                        <div>
+
+                            <Label class="text-sm">Fecha de otorgamiento</Label>
+                        </div>
+
+                        <div>
+
+                            <input type="date" class="bg-white rounded text-xs w-full" wire:model="predio.fecha_otorgamiento">
+
+                        </div>
+
+                        <div>
+
+                            @error('predio.fecha_otorgamiento') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
 
                         </div>
 

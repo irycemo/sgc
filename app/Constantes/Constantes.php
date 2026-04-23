@@ -37,6 +37,18 @@ class Constantes{
         'Personas'
     ];
 
+    const REGIMENES = [
+        'PROPIEDAD PRIVADA',
+        'POSESION',
+        'FEDERAL',
+        'ESTATAL',
+        'MUNICIPAL',
+        'NUDA-PROPIEDAD',
+        'CONDOMINIO',
+        'FIDEICOMISO',
+        'PRIVADA Y CONDOMINIO'
+    ];
+
     const AREAS_ADSCRIPCION = [
         'Dirección de Catastro',
         'Dirección General del Instituto Registral y Catastral',

@@ -31,6 +31,7 @@ class Captura extends Component
 
     public $tipos_asentamientos;
     public $nombres_asentamientos = [];
+    public $regimenes;
     public $tipos_vialidades;
     public $tipo_asentamiento;
     public $tipoVialidades;
@@ -88,6 +89,11 @@ class Captura extends Component
             'predio.zutm' => 'nullable',
             'predio.lat' => 'nullable|string',
             'predio.lon' => 'nullable|string',
+            'predio.tomo' => 'nullable',
+            'predio.registro' => 'nullable',
+            'predio.distrito' => 'nullable',
+            'predio.libro' => 'nullable',
+            'predio.regimen' => ['nullable', Rule::in(Constantes::REGIMENES)],
             'predio.superficie_judicial' => 'nullable|numeric',
             'predio.superficie_notarial' => 'nullable|numeric',
             'predio.valor_catastral' => 'required|numeric',
@@ -97,6 +103,7 @@ class Captura extends Component
             'predio.declarante' => Rule::requiredIf(!$this->actualizacion),
             'predio.documento_numero' => Rule::requiredIf(!$this->actualizacion),
             'predio.fecha_efectos' => Rule::requiredIf(!$this->actualizacion),
+            'predio.fecha_otorgamiento' => 'nullable',
             'accion' => 'required',
             'predio.observaciones' => 'nullable',
             'observaciones' => 'required',
@@ -529,6 +536,8 @@ class Captura extends Component
         $this->tipoAsentamientos = Constantes::TIPO_ASENTAMIENTO;
 
         $this->documentos = Constantes::DOCUMENTO_ENTRADA;
+
+        $this->regimenes = Constantes::REGIMENES;
 
         $this->notarias = Notaria::all();
 
