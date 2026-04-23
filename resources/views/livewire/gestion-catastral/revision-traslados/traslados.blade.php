@@ -209,6 +209,19 @@
 
                                     @endif
 
+                                    @if($traslado->estado === 'autorizado')
+
+                                        <button
+                                            wire:confirm="¿Esta seguro que desea enviar el aviso a estado de cerrado?"
+                                            wire:click="abrirModalRevertir({{ $traslado->id }}, 'autorizado')"
+                                            wire:loading.attr="disabled"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Revertir autorizado
+                                        </button>
+
+                                    @endif
+
                                 </div>
 
                             </div>
@@ -391,13 +404,22 @@
                         Revertir operación
                     </x-button-blue>
 
-                @else
+                @elseif($flag_rechazado)
 
                     <x-button-blue
                         wire:click="revertirRechazo"
                         wire:loading.attr="disabled"
                         wire:target="revertirRechazo">
                         Revertir rechazo
+                    </x-button-blue>
+
+                @elseif($flag_autorizado)
+
+                    <x-button-blue
+                        wire:click="revertirAutorizado"
+                        wire:loading.attr="disabled"
+                        wire:target="revertirAutorizado">
+                        Revertir autorizado
                     </x-button-blue>
 
                 @endif

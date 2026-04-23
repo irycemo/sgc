@@ -56,6 +56,7 @@ return [
         'operar_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_OPERAR_AVISO'),
         'revertir_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_REVERTIR_AVISO'),
         'revertir_rechazo' => env('SISTEMA_TRAMITES_EN_LINEA_REVERTIR_RECHAZO'),
+        'revertir_autorizado' => env('SISTEMA_TRAMITES_EN_LINEA_REVERTIR_AUTORIZADO'),
         'generar_aviso_pdf' => env('SISTEMA_TRAMITES_EN_LINEA_GENERAR_AVISO_PDF'),
     ],
 

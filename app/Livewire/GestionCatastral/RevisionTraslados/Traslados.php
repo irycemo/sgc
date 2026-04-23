@@ -26,6 +26,8 @@ class Traslados extends Component
     public $modalRechazos = false;
     public $modal_revertir = false;
     public $flag_operado = false;
+    public $flag_rechazado = false;
+    public $flag_autorizado = false;
 
     public $fiscales = [];
     public $fiscal;
@@ -92,13 +94,19 @@ class Traslados extends Component
 
     public function abrirModalRevertir(Traslado $traslado, $estado){
 
+        $this->reset(['flag_operado', 'flag_autorizado', 'flag_rechazado']);
+
         if($estado === 'operado'){
 
             $this->flag_operado = true;
 
-        }else{
+        }elseif($estado === 'rechazo'){
 
-            $this->flag_operado = false;
+            $this->flag_rechazado = true;
+
+        }elseif($estado === 'autorizado'){
+
+            $this->flag_autorizado = true;
 
         }
 
@@ -186,7 +194,37 @@ class Traslados extends Component
             $this->dispatch('mostrarMensaje', ['success', "Se revirtio a esto cerrado con éxito."]);
 
         } catch (\Throwable $th) {
-            Log::error("Error al revertir a cerrado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al revertir rechazo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+        }
+
+    }
+
+    public function revertirAutorizado(){
+
+        $this->validate(['observaciones' => 'required']);
+
+        try {
+
+            DB::transaction(function () {
+
+                $this->modelo_editar->update([
+                    'estado' => 'cerrado',
+                    'actualizado_por' => auth()->id()
+                ]);
+
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Revirtió autorización de aviso']);
+
+                (new SistemaTramitesLineaService())->revertirAutorizado($this->modelo_editar->aviso_stl, $this->observaciones);
+
+            });
+
+            $this->modal_revertir = false;
+
+            $this->dispatch('mostrarMensaje', ['success', "Se revirtio a esto cerrado con éxito."]);
+
+        } catch (\Throwable $th) {
+            Log::error("Error al revertir autorizado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
         }
 

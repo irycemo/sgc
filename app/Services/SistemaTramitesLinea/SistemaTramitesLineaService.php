@@ -259,6 +259,42 @@ class SistemaTramitesLineaService{
 
     }
 
+    public function revertirAutorizado(int $aviso_stl, string | null $observaciones):array
+    {
+
+        $response = Http::withToken(config('services.sistema_tramites_en_linea.token'))
+                            ->accept('application/json')
+                            ->asForm()
+                            ->post(
+                                config('services.sistema_tramites_en_linea.revertir_autorizado'),
+                                [
+                                    'id' => $aviso_stl,
+                                    'observaciones' => $observaciones,
+                                ]
+                            );
+
+        if($response->status() !== 200){
+
+            Log::error("Error al revertir autorizado. " . $response);
+
+            $data = json_decode($response, true);
+
+            if(isset($data['error'])){
+
+                throw new GeneralException($data['error']);
+
+            }
+
+            throw new GeneralException("Error al revertir autorizado.");
+
+        }else{
+
+            return json_decode($response, true);
+
+        }
+
+    }
+
     public function generarAvisoPdf(int $aviso_id):array
     {
 
