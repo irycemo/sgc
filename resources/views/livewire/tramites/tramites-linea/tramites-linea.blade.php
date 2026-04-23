@@ -2,7 +2,7 @@
 
     <div class="mb-2 lg:mb-5">
 
-        <x-header>Trámites en línea</x-header>
+        <x-header>Trámites en línea  <span class="text-sm">Certificados pendientes: {{ $certificados_pendientes }}</span></x-header>
 
         <div class="flex justify-between">
 

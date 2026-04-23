@@ -9,6 +9,8 @@ use App\Models\Predio;
 use App\Models\SQLSVR\ctcdm004;
 use App\Models\SQLSVR\tcpro008;
 use App\Models\Tramite;
+use App\Models\Traslado;
+use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schedule;
@@ -937,6 +939,33 @@ Artisan::command('superficies', function(){
 
             $count ++;
 
+        }
+
+    }
+
+    $this->info($count);
+
+
+});
+
+Artisan::command('avisos', function(){
+
+    $avisos = Traslado::all();
+
+    $count = 0;
+
+    foreach($avisos as $aviso){
+
+        /* if(! $aviso->avaluo_spe && in_array($aviso->estado, ['cerrado', 'autorizado']) && $aviso->tipo != 'aclaratorio') $this->info($aviso->id . ' / ' . $aviso->año_aviso. '-' . $aviso->folio_aviso. '-' . $aviso->usuario_aviso); */
+
+        try {
+
+            $avaluo = (new SistemaPeritosExternosService())->consultarAvaluo($aviso->avaluo_spe);
+
+        } catch (\Throwable $th) {
+            $this->info("Error: " . $aviso->avaluo_spe);
+            $this->info($th->getMessage());
+            $count ++;
         }
 
     }

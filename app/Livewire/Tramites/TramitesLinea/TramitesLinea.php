@@ -7,6 +7,7 @@ use App\Models\PredioTramite;
 use App\Models\Tramite;
 use App\Traits\ComponentesTrait;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -33,6 +34,7 @@ class TramitesLinea extends Component
     public $modalCarga = false;
     public $fecha_inicio;
     public $fecha_final;
+    public $certificados_pendientes;
 
     public Tramite $modelo_editar;
 
@@ -109,14 +111,14 @@ class TramitesLinea extends Component
 
     public function mount(){
 
-        $certificados = PredioTramite::select('estado', DB::raw('count(*) as total'))
+        $this->certificados_pendientes = PredioTramite::select('estado', DB::raw('count(*) as total'))
                             ->when(auth()->user()->hasRole('Oficina rentistica'), function($q){
                                 $q->whereHas('tramite', function($q){
                                     $q->where('oficina_id', auth()->user()->oficina_id);
                                 });
                             })
                             ->where('estado', 'A')
-                            ->get();
+                            ->count();
 
         $this->crearModeloVacio();
 
