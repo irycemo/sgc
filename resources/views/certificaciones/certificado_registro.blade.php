@@ -194,7 +194,7 @@
 
         @include('certificaciones.comun.descripcion_inmueble')
 
-        @include('certificaciones.comun.terrenos_construcciones')
+        {{-- @include('certificaciones.comun.terrenos_construcciones') --}}
 
         @include('certificaciones.comun.propietarios')
 
