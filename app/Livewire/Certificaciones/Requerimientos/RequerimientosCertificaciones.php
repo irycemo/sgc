@@ -149,6 +149,10 @@ class RequerimientosCertificaciones extends Component
 
         $this->filters['tAño'] = now()->format('Y');
 
+        $this->sort = 'created_at';
+
+        $this->direction = 'asc';
+
     }
 
     public function render()

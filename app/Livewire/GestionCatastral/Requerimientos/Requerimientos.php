@@ -167,6 +167,10 @@ class Requerimientos extends Component
 
         $this->crearModeloVacio();
 
+        $this->sort = 'created_at';
+
+        $this->direction = 'asc';
+
     }
 
     public function render()

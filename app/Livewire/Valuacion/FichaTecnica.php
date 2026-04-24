@@ -22,6 +22,7 @@ class FichaTecnica extends Component
     public $vientos;
     public $valoresConstruccion;
     public $valoresRusticos;
+    public $errores;
 
     public function procesar(){
 
@@ -29,7 +30,7 @@ class FichaTecnica extends Component
             'documento' => 'required'
         ]);
 
-        $import = new AvaluoImport($this->valoresConstruccion, $this->valoresRusticos);
+        $import = new FichaTecnicaSimple($this->valoresConstruccion, $this->valoresRusticos);
 
         try {
 
@@ -41,19 +42,9 @@ class FichaTecnica extends Component
 
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
 
-            $failures = $e->failures();
+            $this->errores = $e->failures();
 
-            foreach ($failures as $failure) {
-                $failure->row(); // row that went wrong
-                $failure->attribute(); // either heading key (if using heading row concern) or column index
-                $failure->errors(); // Actual error messages from Laravel validator
-                $failure->values(); // The values of the row that has failed.
-
-                $this->dispatch('mostrarMensaje', ['warning', "Error en la fila: " . $failure->row() . ", campo: " . $failure->attribute() ." ". $failure->errors()[0] ]);
-
-                break;
-
-            }
+            $this->dispatch('mostrarMensaje', ['warning', "La ficha contiene errores"]);
 
         }catch (GeneralException $ex) {
 

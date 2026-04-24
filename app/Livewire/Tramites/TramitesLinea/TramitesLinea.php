@@ -103,8 +103,8 @@ class TramitesLinea extends Component
                 ->when($this->filters['folio'], fn($q, $folio) => $q->where('folio', $folio))
                 ->when($this->filters['estado'], fn($q, $estado) => $q->where('estado', $estado))
                 ->when($this->filters['mes'], fn($q, $mes) => $q->whereMonth('created_at', $mes))
-                ->orderBy('servicio_id', 'desc')
                 ->orderBy($this->sort, $this->direction)
+                ->orderBy('servicio_id', 'desc')
                 ->paginate($this->pagination);
 
     }

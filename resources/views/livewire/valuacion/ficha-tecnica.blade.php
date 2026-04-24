@@ -55,6 +55,16 @@
 
     </div>
 
+    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl text-red-500">
+
+        @foreach($errores as $error)
+
+            {{$error}}
+
+        @endforeach
+        
+    </div>
+
     @if ($data != null)
 
         <div class="mb-6 shadow-xl">
