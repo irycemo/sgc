@@ -114,12 +114,12 @@
 
         <tbody>
 
-            @foreach ($predio->construcciones as $construccion)
+            @foreach ($predio->construcciones->sortBy('referencia') as $construccion)
 
                 <tr>
                     <td style="padding-right: 40px;">
                         @if(isset($construccion->valor_unitario))
-                            <p style="margin:0;">{{ $construccion->tipo }}{{ $construccion->uso }}{{ $construccion->estado }}{{ $construccion->calidad }} - {{ $construccion->valor_unitario }}</p>
+                            <p style="margin:0;">{{ $construccion->tipo }}{{ $construccion->uso }}{{ $construccion->estado }}{{ $construccion->calidad }}</p>
 
                         @endif
                     </td>

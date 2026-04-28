@@ -30,7 +30,7 @@ class CertificadoRegistro extends Component
 
     public $cadena;
 
-    public $impresionDirector = false;
+    public $impresionObservaciones = false;
 
     public $tipo_certificado;
 
@@ -196,7 +196,7 @@ class CertificadoRegistro extends Component
 
                     }
 
-                    return (new CertificadoRegistroController())->certificado($this->tramite, $this->predio, $this->tipo_certificado, auth()->user());
+                    return (new CertificadoRegistroController())->certificado($this->tramite, $this->predio, $this->tipo_certificado, auth()->user(), $this->impresionObservaciones);
 
                 });
 
@@ -204,7 +204,7 @@ class CertificadoRegistro extends Component
 
             $cuenta_predial = $this->predio->cuentaPredial();
 
-            $this->reset('predio');
+            $this->reset(['predio', 'impresionObservaciones']);
 
             $this->tramite->load('predios');
 

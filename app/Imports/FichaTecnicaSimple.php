@@ -5,18 +5,26 @@ namespace App\Imports;
 use App\Constantes\Constantes;
 use App\Exceptions\GeneralException;
 use App\Models\Avaluo;
+use App\Models\Construccion;
+use App\Models\ConstruccionesComun;
 use App\Models\CuentaAsignada;
 use App\Models\Oficina;
 use App\Models\Predio;
 use App\Models\PredioAvaluo;
+use App\Models\Terreno;
+use App\Models\TerrenosComun;
 use App\Services\Coordenadas\Coordenadas;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class FichaTecnicaSimple implements ToCollection
+class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation, WithMultipleSheets, SkipsEmptyRows
 {
 
     public $avaluos = [];
@@ -40,9 +48,9 @@ class FichaTecnicaSimple implements ToCollection
             'predio' => 'required|numeric|min:1',
             'edificio' => [ 'required', 'numeric'],
             'departamento' => [ 'required', 'numeric'],
-            'tipo' => 'required|numeric|min:1|max:2',
+            'tipo_predio' => 'required|numeric|min:1|max:2',
             'oficina' => 'required|numeric|min:1',
-            'estado' => 'required',
+            'estado_clave' => 'required',
             'tipo_asentamiento' => ['required', Rule::in(Constantes::TIPO_ASENTAMIENTO)],
             'nombre_asentamiento' => 'required',
             'tipo_vialidad' => ['required', Rule::in(Constantes::TIPO_VIALIDADES)],
@@ -52,16 +60,36 @@ class FichaTecnicaSimple implements ToCollection
             'longitud' => 'nullable',
             'clasificacion_zona' => ['required', Rule::in(Constantes::CLASIFICACION_ZONA)],
             'tipo_construccion_dominante' => ['required', Rule::in(Constantes::CONSTRUCCION_DOMINANTE)],
-            'superficie_terreno' => 'nullable',
-            'valor_unitario_terreno' => 'nullable',
-            'construcciones' => 'nullable',
-            'terrenos_comun' => 'nullable',
-            'construcciones_comun' => 'nullable',
+            'superficie_terreno' => 'nullable|numeric',
+            'valor_unitario_terreno' => 'nullable|numeric',
+            'superficie_comun' => 'nullable|numeric',
+            'indiviso_terreno' => 'nullable|numeric',
+            'valor_unitario' => 'nullable|numeric',
+            'referencia' => 'nullable',
+            'tipo_construccion' => 'nullable|numeric',
+            'uso_construccion' => 'nullable|numeric',
+            'estado_construccion' => 'nullable|numeric',
+            'calidad_construccion' => 'nullable|numeric',
+            'agua_potable' => ['required', Rule::in(['SI', 'NO'])],
+            'drenaje' => ['required', Rule::in(['SI', 'NO'])],
+            'pavimento' => ['required', Rule::in(['SI', 'NO'])],
+            'energia_electrica' => ['required', Rule::in(['SI', 'NO'])],
+            'alumbrado_publico' => ['required', Rule::in(['SI', 'NO'])],
+            'banqueta' => ['required', Rule::in(['SI', 'NO'])],
+            'niveles' => 'nullable|numeric',
+            'superficie_construccion' => 'nullable|numeric',
+            'superficie_construccion_comun' => 'nullable|numeric',
+            'indiviso_construccion' => 'nullable|numeric',
+            'tipo' => 'nullable|numeric',
+            'uso' => 'nullable|numeric',
+            'estado' => 'nullable|numeric',
+            'calidad' => 'nullable|numeric',
             'uso_1' =>  ['required', Rule::in(Constantes::USO_PREDIO)],
             'uso_2' =>  ['nullable', Rule::in(Constantes::USO_PREDIO)],
             'uso_3' =>  ['nullable', Rule::in(Constantes::USO_PREDIO)],
-            'ubicacion_manzana' => ['required', Rule::in(Constantes::UBICACION_PREDIO)],
+            'ubicacion_en_manzana' => ['required', Rule::in(Constantes::UBICACION_PREDIO)],
             'predio_existe_en_padron' => ['required', Rule::in(['SI', 'NO'])],
+            'domicilio_para_notificacion' => 'nullable'
         ];
     }
 
@@ -71,7 +99,11 @@ class FichaTecnicaSimple implements ToCollection
 
             $rows = $validator->getData(); // Todas las filas
 
+            $count_predio_origen = 0;
+
             foreach ($rows as $index => $row) {
+
+                if($row['predio_existe_en_padron'] == 'SI') $count_predio_origen ++;
 
                 $edificio = $row['edificio'] ?? null;
 
@@ -89,33 +121,19 @@ class FichaTecnicaSimple implements ToCollection
 
                 }
 
-                if(isset($row['terrenos_comun'])){
+            }
 
-                    $terrenos_comun[] = explode(':', $row['terrenos_comun']);
+            if($count_predio_origen === 0){
 
-                }
+                throw new GeneralException("Es necesario un predio origen.");
 
             }
 
-            if(isset($row['terrenos_comun'])){
+            if($count_predio_origen > 1){
 
-                $aux = $terrenos_comun[0][0];
-
-                foreach($terrenos_comun as $terreno){
-
-                    if($terreno[0] === '') continue;
-
-                    if($terreno[0] != $aux){
-
-                        throw new GeneralException('Las áreas de los terrenos en común deben ser iguales.');
-
-                    }
-
-                }
+                throw new GeneralException("Solo puede haber un predio origen.");
 
             }
-
-            //VAlidacion de predio origen
 
         });
 
@@ -158,11 +176,11 @@ class FichaTecnicaSimple implements ToCollection
                     /* TERRENO */
                     if(isset($row['superficie_terreno']) && isset($row['valor_unitario_terreno'])){
 
-                        if($row['tipo'] == 1){
+                        if($row['tipo_predio'] == 1){
 
                             $valor_terreno = (float)$row['superficie_terreno'] * (float)$row['valor_unitario_terreno'];
 
-                        }elseif($row['tipo'] == 2){
+                        }elseif($row['tipo_predio'] == 2){
 
                             $valor_terreno = (float)$row['superficie_terreno'] * (float)$row['valor_unitario_terreno'] / 10000;
 
@@ -181,15 +199,15 @@ class FichaTecnicaSimple implements ToCollection
                     }
 
                     /* TERRENO COMUN */
-                    if(isset($row['superficie_comun']) && isset($row['indiviso']) && isset($row['valor_unitario'])){
+                    if(isset($row['superficie_comun']) && isset($row['indiviso_terreno']) && isset($row['valor_unitario'])){
 
-                        $superficie_proporcional = (float)$row['superficie_comun'] * (float)$row['indiviso'] / 100;
+                        $superficie_proporcional = (float)$row['superficie_comun'] * (float)$row['indiviso_terreno'] / 100;
 
-                        if($row['tipo'] == 1){
+                        if($row['tipo_predio'] == 1){
 
                             $valor_terreno_comun = $superficie_proporcional * (float)$row['valor_unitario'];
 
-                        }elseif($row['tipo'] == 2){
+                        }elseif($row['tipo_predio'] == 2){
 
                             $valor_terreno_comun = $superficie_proporcional * (float)$row['valor_unitario'] / 10000;
 
@@ -197,7 +215,7 @@ class FichaTecnicaSimple implements ToCollection
 
                         $terrenoComun = [
                             'superficie_comun' => $row['superficie_comun'],
-                            'indiviso' => $row['indiviso'],
+                            'indiviso_terreno' => $row['indiviso_terreno'],
                             'valor_unitario' => $row['valor_unitario'],
                             'superficie_proporcional' => $superficie_proporcional,
                             'valor_terreno_comun' => $valor_terreno_comun
@@ -210,11 +228,11 @@ class FichaTecnicaSimple implements ToCollection
                     }
 
                     /* CONSTRUCCION */
-                    if(isset($row['referencia']) && isset($row['tipo']) && isset($row['uso']) && isset($row['estado']) && isset($row['calidad']) && isset($row['niveles']) && isset($row['superficie'])){
+                    if(isset($row['referencia']) && isset($row['tipo']) && isset($row['uso']) && isset($row['estado']) && isset($row['calidad']) && isset($row['niveles']) && isset($row['superficie_construccion'])){
 
                         $valorUnitario = $this->valoresConstruccion->where('tipo', $row['tipo'])->where('uso', $row['uso'])->where('calidad', $row['calidad'])->where('estado', $row['estado'])->first()->valor;
 
-                        $valor_construccion = $valorUnitario * (float)$row['superficie'];
+                        $valor_construccion = $valorUnitario * (float)$row['superficie_construccion'];
 
                         $construccion = [
                             'referencia' => $row['referencia'],
@@ -223,7 +241,7 @@ class FichaTecnicaSimple implements ToCollection
                             'calidad' => $row['calidad'],
                             'estado' => $row['estado'],
                             'niveles' => $row['niveles'],
-                            'superficie' => $row['superficie'],
+                            'superficie_construccion' => $row['superficie_construccion'],
                             'valor_unitario' => $valorUnitario,
                             'valor_construccion' => $valor_construccion,
                         ];
@@ -235,9 +253,9 @@ class FichaTecnicaSimple implements ToCollection
                     }
 
                     /* CONSTRUCCION COMUN */
-                    if(isset($row['referencia']) && isset($row['tipo']) && isset($row['uso']) && isset($row['estado']) && isset($row['calidad']) && isset($row['niveles']) && isset($row['superficie_comun']) && isset($row['indiviso_construccion'])){
+                    if(isset($row['referencia']) && isset($row['tipo']) && isset($row['uso']) && isset($row['estado']) && isset($row['calidad']) && isset($row['niveles']) && isset($row['superficie_construccion_comun']) && isset($row['indiviso_construccion'])){
 
-                        $superficie_proporcional_construccion = (float)$row['superficie_comun'] * (float)$row['indiviso_construccion'];
+                        $superficie_proporcional_construccion = (float)$row['superficie_construccion_comun'] * (float)$row['indiviso_construccion'];
 
                         $valorUnitario = $this->valoresConstruccion->where('tipo', $row['tipo'])->where('uso', $row['uso'])->where('calidad', $row['calidad'])->where('estado', $row['estado'])->first()->valor;
 
@@ -250,7 +268,8 @@ class FichaTecnicaSimple implements ToCollection
                             'calidad' => $row['calidad'],
                             'estado' => $row['estado'],
                             'niveles' => $row['niveles'],
-                            'superficie_comun' => $row['superficie_comun'],
+                            'indiviso_construccion' => $row['indiviso_construccion'],
+                            'superficie_construccion_comun' => $row['superficie_construccion_comun'],
                             'valor_unitario' => $valorUnitario,
                             'superficie_proporcional' => $superficie_proporcional_construccion,
                             'valor_construccion' => $valor_construccion,
@@ -272,9 +291,9 @@ class FichaTecnicaSimple implements ToCollection
 
                     $superficie_total_construccion = 0;
 
-                    if(isset($construccion['superficie'])){
+                    if(isset($construccion['superficie_construccion'])){
 
-                        $superficie_total_construccion = $construccion['superficie'];
+                        $superficie_total_construccion = $construccion['superficie_construccion'];
 
                     }
 
@@ -286,7 +305,7 @@ class FichaTecnicaSimple implements ToCollection
 
                         }
 
-                        if(isset($construccionComun['superficie_comun'])){
+                        if(isset($construccionComun['superficie_proporcional'])){
 
                             $superficie_total_construccion = $superficie_total_construccion + $construccionComun['superficie_proporcional'];
 
@@ -299,7 +318,7 @@ class FichaTecnicaSimple implements ToCollection
                                             + $construccion['valor_construccion']
                                             + $construccionComun['valor_construccion'];
 
-                    if($row['ubicacion_manzana'] == 'ESQUINA'){
+                    if($row['ubicacion_en_manzana'] == 'ESQUINA'){
 
                         $valor_esquina = $terreno['superficie'] * (0.10);
 
@@ -309,13 +328,15 @@ class FichaTecnicaSimple implements ToCollection
 
                     $predio = $this->crearPredio($row, $coordenadas, $terreno, $terrenoComun, $construccion, $construccionComun, $superficie_total_terreno, $superficie_total_construccion, $valorCatastral);
 
-                    $this->procesarPropietarios($predio->id);
+                    $this->procesarPropietariosColindancias($predio->id);
+
+                    $this->procesarRelaciones($terreno, $terrenoComun, $construccion, $construccionComun, $predio->id);
 
                     $avaluo = $this->crearAvaluo($row, $predio->id);
 
-                    $predio->audits()->latest()->first()->update(['tags' => 'Se genera predio apartir de avalúo: ' . $avaluo->año . '-' . $avaluo->folio]);
+                    $predio->audits()->latest()->first()->update(['tags' => 'Se genera predio mediante ficha tecnica simple apartir de avalúo: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario]);
 
-                    $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo con folio: ' . $avaluo->año . '-' . $avaluo->folio]);
+                    $avaluo->audits()->latest()->first()->update(['tags' => 'Generó avalúo mediante ficha tecnica simple con folio: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario]);
 
                     $this->avaluos[] = $avaluo->load('predioAvaluo.propietarios.persona');
 
@@ -342,7 +363,7 @@ class FichaTecnicaSimple implements ToCollection
     public function revisarPredio($row, $key):int
     {
 
-        $predioCompleto = Predio::where('estado', $row['estado'])
+        $predioCompleto = Predio::where('estado', $row['estado_clave'])
                                     ->where('region_catastral', $row['region'])
                                     ->where('municipio', $row['municipio'])
                                     ->where('zona_catastral', $row['zona'])
@@ -353,7 +374,7 @@ class FichaTecnicaSimple implements ToCollection
                                     ->where('edificio', $row['edificio'])
                                     ->where('departamento', $row['departamento'])
                                     ->where('oficina', $row['oficina'])
-                                    ->where('tipo_predio', $row['tipo'])
+                                    ->where('tipo_predio', $row['tipo_predio'])
                                     ->where('numero_registro', $row['registro'])
                                     ->first();
 
@@ -372,7 +393,7 @@ class FichaTecnicaSimple implements ToCollection
 
         $cuentaAsignada = CuentaAsignada::where('localidad', $row['localidad'])
                                         ->where('oficina', $row['oficina'])
-                                        ->where('tipo_predio', $row['tipo'])
+                                        ->where('tipo_predio', $row['tipo_predio'])
                                         ->where('numero_registro', $row['registro'])
                                         ->where('asignado_a', auth()->id())
                                         ->first();
@@ -384,7 +405,7 @@ class FichaTecnicaSimple implements ToCollection
     public function validarDisponibilidad($row, $key):void
     {
 
-        $predioCompleto = Predio::where('estado', $row['estado'])
+        $predioCompleto = Predio::where('estado', $row['estado_clave'])
                                     ->where('region_catastral', $row['region'])
                                     ->where('municipio', $row['municipio'])
                                     ->where('zona_catastral', $row['zona'])
@@ -395,7 +416,7 @@ class FichaTecnicaSimple implements ToCollection
                                     ->where('edificio', $row['edificio'])
                                     ->where('departamento', $row['departamento'])
                                     ->where('oficina', $row['oficina'])
-                                    ->where('tipo_predio', $row['tipo'])
+                                    ->where('tipo_predio', $row['tipo_predio'])
                                     ->where('numero_registro', $row['registro'])
                                     ->first();
 
@@ -407,7 +428,7 @@ class FichaTecnicaSimple implements ToCollection
 
             $cuentaPredial = Predio::where('localidad', $row['localidad'])
                                         ->where('oficina', $row['oficina'])
-                                        ->where('tipo_predio', $row['tipo'])
+                                        ->where('tipo_predio', $row['tipo_predio'])
                                         ->where('numero_registro', $row['registro'])
                                         ->first();
 
@@ -417,7 +438,7 @@ class FichaTecnicaSimple implements ToCollection
 
             }
 
-            $claveCatastral = Predio::where('estado', $row['estado'])
+            $claveCatastral = Predio::where('estado', $row['estado_clave'])
                                         ->where('region_catastral', $row['region'])
                                         ->where('municipio', $row['municipio'])
                                         ->where('zona_catastral', $row['zona'])
@@ -437,7 +458,7 @@ class FichaTecnicaSimple implements ToCollection
 
         }
 
-        $predioCompletoAvaluo = PredioAvaluo::where('estado', $row['estado'])
+        $predioCompletoAvaluo = PredioAvaluo::where('estado', $row['estado_clave'])
                                                 ->where('region_catastral', $row['region'])
                                                 ->where('municipio', $row['municipio'])
                                                 ->where('zona_catastral', $row['zona'])
@@ -447,9 +468,8 @@ class FichaTecnicaSimple implements ToCollection
                                                 ->where('edificio', $row['edificio'])
                                                 ->where('departamento', $row['departamento'])
                                                 ->where('oficina', $row['oficina'])
-                                                ->where('tipo_predio', $row['tipo'])
+                                                ->where('tipo_predio', $row['tipo_predio'])
                                                 ->where('oficina', $row['oficina'])
-                                                ->where('tipo_predio', $row['tipo'])
                                                 ->where('numero_registro', $row['registro'])
                                                 ->first();
 
@@ -461,7 +481,7 @@ class FichaTecnicaSimple implements ToCollection
 
             $cuentaPredialAvaluo = PredioAvaluo::where('localidad', $row['localidad'])
                                                 ->where('oficina', $row['oficina'])
-                                                ->where('tipo_predio', $row['tipo'])
+                                                ->where('tipo_predio', $row['tipo_predio'])
                                                 ->where('numero_registro', $row['registro'])
                                                 ->first();
 
@@ -472,7 +492,7 @@ class FichaTecnicaSimple implements ToCollection
             }
 
             $claveCatastralAvaluo = PredioAvaluo::where('status', 'activo')
-                                                    ->where('estado', $row['estado'])
+                                                    ->where('estado', $row['estado_clave'])
                                                     ->where('region_catastral', $row['region'])
                                                     ->where('municipio', $row['municipio'])
                                                     ->where('zona_catastral', $row['zona'])
@@ -563,9 +583,13 @@ class FichaTecnicaSimple implements ToCollection
     public function crearPredio($row, $coordenadas, $terreno, $terrenoComun, $construccion, $construccionComun, $superficie_total_terreno, $superficie_total_construccion, $valorCatastral): PredioAvaluo
     {
 
+        $valor_total_terreno = ($terreno['valor_terreno'] ?? 0) + ($terrenoComun['valor_terreno_comun'] ?? 0);
+
+        $valor_total_construccion = ($construccion['valor_construccion'] ?? 0) + ($construccionComun['valor_construccion'] ?? 0);
+
         return PredioAvaluo::create([
             'status' => 'activo',
-            'estado' => $row['estado'],
+            'estado' => $row['estado_clave'],
             'region_catastral' => $row['region'],
             'municipio' => $row['municipio'],
             'zona_catastral' => $row['zona'],
@@ -576,7 +600,7 @@ class FichaTecnicaSimple implements ToCollection
             'edificio' => $row['edificio'],
             'departamento' => $row['departamento'],
             'oficina' => $row['oficina'],
-            'tipo_predio' => $row['tipo'],
+            'tipo_predio' => $row['tipo_predio'],
             'numero_registro' => $row['registro'],
             'tipo_vialidad' => $row['tipo_vialidad'],
             'tipo_asentamiento' => $row['tipo_asentamiento'],
@@ -601,18 +625,19 @@ class FichaTecnicaSimple implements ToCollection
             'uso_1' => $row['uso_1'],
             'uso_2' => $row['uso_2'],
             'uso_3' => $row['uso_3'],
-            'ubicacion_en_manzana' => $row['ubicacion_manzana'],
+            'ubicacion_en_manzana' => $row['ubicacion_en_manzana'],
             'lon'=> $row['longitud'],
             'lat'=> $row['latitud'],
             'observaciones' => $row['observaciones'],
             'superficie_terreno' => $terreno['superficie'] ?? null,
-            'valor_total_terreno' => $terreno['valor_terreno'] ?? null,
-            'superficie_construccion' => $construccion['superficie'] ?? null,
+            'valor_total_terreno' => $valor_total_terreno,
+            'valor_total_construccion' => $valor_total_construccion,
+            'superficie_construccion' => $construccion['superficie_construccion'] ?? null,
             'area_comun_terreno' => $terrenoComun['superficie'] ?? null,
             'valor_terreno_comun' => $terrenoComun['valor_terreno_comun'] ?? null,
-            'area_comun_construccion' => $construccionComun['superficie'] ?? null,
+            'area_comun_construccion' => $construccionComun['superficie_construccion_comun'] ?? null,
             'valor_construccion_comun' => $construccionComun['valor_construccion'] ?? null,
-
+            'domicilio_notificacion' => $row['domicilio_para_notificacion'],
             'superficie_total_terreno' => $superficie_total_terreno,
             'superficie_total_construccion' => $superficie_total_construccion,
             'valor_catastral' => $valorCatastral,
@@ -621,7 +646,8 @@ class FichaTecnicaSimple implements ToCollection
 
     }
 
-    public function procesarPropietarios($predio_nuevo){
+    public function procesarPropietariosColindancias($predio_nuevo):void
+    {
 
         $predio_origen = Predio::find($this->predio_origen_id);
 
@@ -635,6 +661,17 @@ class FichaTecnicaSimple implements ToCollection
             $propietario_nuevo->propietarioable_type = 'App\Models\PredioAvaluo';
 
             $propietario_nuevo->save();
+
+        }
+
+        foreach ($predio_origen->colindancias as $colindancia) {
+
+            $colindancia_nueva = $colindancia->replicate();
+
+            $colindancia_nueva->colindanciaable_id = $predio_nuevo->id;
+            $colindancia_nueva->colindanciaable_type = 'App\Models\PredioAvaluo';
+
+            $colindancia_nueva->save();
 
         }
 
@@ -655,11 +692,100 @@ class FichaTecnicaSimple implements ToCollection
             'asignado_a' => auth()->id(),
             'creado_por' => auth()->id(),
             'oficina_id' => auth()->user()->oficina_id,
+            'agua' => $row['agua_potable'] == 'SI' ? 1 : 0,
+            'drenaje' => $row['drenaje']  == 'SI' ? 1 : 0,
+            'pavimento' => $row['pavimento']  == 'SI' ? 1 : 0,
+            'energia_electrica' => $row['energia_electrica']  == 'SI' ? 1 : 0,
+            'alumbrado_publico' => $row['alumbrado_publico']  == 'SI' ? 1 : 0,
+            'banqueta' => $row['banqueta']  == 'SI' ? 1 : 0,
             'observaciones' => $row['observaciones']
         ]);
 
         return $avaluo;
 
+    }
+
+    public function procesarRelaciones($terreno, $terrenoComun, $construccion, $construccionComun, $predioId):void
+    {
+
+        if(! empty($terreno)){
+
+            Terreno::create([
+                'terrenoable_id' => $predioId,
+                'terrenoable_type' => 'App\Models\PredioAvaluo',
+                'superficie' => $terreno['superficie'],
+                'valor_unitario' => $terreno['valor_unitario'],
+                'valor_terreno' => $terreno['valor_terreno'],
+                'creado_por' => auth()->id()
+            ]);
+
+        }
+
+        if(! empty($terrenoComun)){
+
+            TerrenosComun::create([
+                'terrenos_comunsable_id' => $predioId,
+                'terrenos_comunsable_type' => 'App\Models\PredioAvaluo',
+                'area_terreno_comun' => $terrenoComun['superficie_comun'],
+                'indiviso_terreno' => $terrenoComun['indiviso_terreno'],
+                'valor_unitario' => $terrenoComun['valor_unitario'],
+                'superficie_proporcional' => $terrenoComun['superficie_proporcional'],
+                'valor_terreno_comun' => $terrenoComun['valor_terreno_comun'],
+                'creado_por' => auth()->id()
+            ]);
+
+        }
+
+        if(! empty($construccion)){
+
+            Construccion::create([
+                'construccionable_id' => $predioId,
+                'construccionable_type' => 'App\Models\PredioAvaluo',
+                'referencia' => $construccion['referencia'],
+                'tipo' => $construccion['tipo'],
+                'uso' => $construccion['uso'],
+                'estado' => $construccion['estado'],
+                'calidad' => $construccion['calidad'],
+                'niveles' => $construccion['niveles'],
+                'superficie' => $construccion['superficie_construccion'],
+                'valor_unitario' => $construccion['valor_unitario'],
+                'valor_construccion' => $construccion['valor_construccion'],
+                'creado_por' => auth()->id()
+            ]);
+
+        }
+
+        if(! empty($construccionComun)){
+
+            ConstruccionesComun::create([
+                'construcciones_comunsable_id' => $predioId,
+                'construcciones_comunsable_type' => 'App\Models\PredioAvaluo',
+                'indiviso_construccion' => $construccionComun['indiviso_construccion'],
+                'area_comun_construccion' => $construccionComun['superficie_construccion_comun'],
+                'superficie_proporcional' => $construccionComun['superficie_proporcional'],
+                'valor_clasificacion_construccion' => $construccionComun['valor_unitario'],
+                'valor_construccion_comun' => $construccionComun['valor_construccion'],
+                'calidad' => $construccionComun['calidad'],
+                'estado' => $construccionComun['estado'],
+                'uso' => $construccionComun['uso'],
+                'tipo' => $construccionComun['tipo'],
+                'creado_por' => auth()->id()
+            ]);
+
+        }
+
+    }
+
+    public function headingRow(): int
+    {
+        return 2;
+    }
+
+    public function sheets(): array
+    {
+        return [
+            0 => $this,
+        ];
     }
 
 }

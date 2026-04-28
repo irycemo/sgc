@@ -86,6 +86,10 @@
         <strong>OBSERVACIONES:</strong> {{ $predio->observaciones }}.
     @endif
 
+    @if ($predio->domicilio_notificacion)
+        <strong>Domicilio para notificaciones:</strong> {{ $predio->domicilio_notificacion }}.
+    @endif
+
 </p>
 
 @if($predio->xutm || $predio->lat)

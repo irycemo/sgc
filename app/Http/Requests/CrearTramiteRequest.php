@@ -29,7 +29,8 @@ class CrearTramiteRequest extends FormRequest
             'monto' => 'required',
             'cantidad' => 'required',
             'usuario_tramites_linea_id' => 'required',
-            'predios' => 'required|array'
+            'predios' => 'required|array',
+            'oficina' => 'required'
         ];
     }
 }

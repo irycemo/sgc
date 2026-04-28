@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api\V1\SAP;
 
 use App\Exceptions\GeneralException;
+use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
+use App\Http\Controllers\Controller;
 use App\Models\Tramite;
+use App\Models\Traslado;
+use App\Services\Tramites\TramiteService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
-use App\Models\Traslado;
 
 class AcreditarPagoController extends Controller
 {
@@ -29,10 +30,7 @@ class AcreditarPagoController extends Controller
 
                     if(!$tramite) throw new GeneralException('El trámite no existe');
 
-                    $tramite->update([
-                        'estado' => 'pagado',
-                        'fecha_pago' => now()->toDateString(),
-                    ]);
+                    (new TramiteService($tramite))->procesarPago();
 
                     if(in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM32', 'D774'])){
 

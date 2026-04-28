@@ -84,6 +84,46 @@
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
+                <strong>Superficie de terreno</strong>
+
+                <p>{{ $predio->superficie_terreno_formateada }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Superficie de construccion</strong>
+
+                <p>{{ $predio->superficie_construccion_formateada }}</p>
+
+            </div>
+
+            @if($predio->terrenosComun->count())
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Superficie proporcional de terreno</strong>
+
+                    <p>{{ $predio->terrenosComun->sum('superficie_proporcional') }}</p>
+
+                </div>
+
+            @endif
+
+            @if($predio->construccionesComun->count())
+
+                <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                    <strong>Superficie proporcional de construcción</strong>
+
+                    <p>{{ $predio->construccionesComun->sum('superficie_proporcional') }}</p>
+
+                </div>
+
+            @endif
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
                 <strong>Superficie total de terreno</strong>
 
                 <p>{{ $predio->superficie_total_terreno_formateada }}</p>
@@ -92,17 +132,17 @@
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                <strong>Valor total de terreno</strong>
+                <strong>Superficie total de construcción</strong>
 
-                <p>{{ $predio->valor_total_terreno }}</p>
+                <p>{{ $predio->superficie_total_construccion_formateada }}</p>
 
             </div>
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                <strong>Superficie total de construcción</strong>
+                <strong>Valor total de terreno</strong>
 
-                <p>{{ $predio->superficie_total_construccion_formateada }}</p>
+                <p>{{ $predio->valor_total_terreno }}</p>
 
             </div>
 

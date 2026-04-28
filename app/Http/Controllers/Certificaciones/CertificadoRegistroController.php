@@ -37,7 +37,7 @@ class CertificadoRegistroController extends Controller
 
     }
 
-    public function certificado($tramite, $predio, $tipo, $usuario){
+    public function certificado($tramite, $predio, $tipo, $usuario, $observaciones){
 
         $oficina = Oficina::where('oficina', $predio->oficina)->where('localidad', $predio->localidad)->first();
 
@@ -46,6 +46,7 @@ class CertificadoRegistroController extends Controller
         $datos_control->tramite = $tramite->año . '-' . $tramite->folio . '-' . $tramite->usuario;
         $datos_control->solicitante = $tramite->nombre_solicitante;
         $datos_control->tipo_certificado = $tipo;
+        $datos_control->observaciones = $observaciones;
         $datos_control->director = $this->director->name;
         $datos_control->titular_cargo = 'Director de catastro';
         $datos_control->impreso_por = $usuario->name;

@@ -62,6 +62,38 @@
 
         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
+            <strong>Superficie de construccion</strong>
+
+            <p>{{ $predio->superficie_construccion_formateada }}</p>
+
+        </div>
+
+        @if($predio->terrenosComun->count())
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Superficie proporcional de terreno</strong>
+
+                <p>{{ $predio->terrenosComun->sum('superficie_proporcional') }}</p>
+
+            </div>
+
+        @endif
+
+        @if($predio->construccionesComun->count())
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Superficie proporcional de construcción</strong>
+
+                <p>{{ $predio->construccionesComun->sum('superficie_proporcional') }}</p>
+
+            </div>
+
+        @endif
+
+        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
             <strong>Superficie total de construcción</strong>
 
             <p>{{ $predio->superficie_total_construccion_formateada }}</p>

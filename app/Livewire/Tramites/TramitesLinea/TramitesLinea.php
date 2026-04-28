@@ -65,6 +65,9 @@ class TramitesLinea extends Component
         $fecha_inicio = $this->fecha_inicio . ' 00:00:00';
 
         $carga = Tramite::with('predios')
+                            ->whereHas('servicio', function ($q){
+                                $q->whereIn('clave_ingreso', ['DM34', 'DM32', 'DM35', 'DM31']);
+                            })
                             ->where('usuario', 11)
                             ->whereBetween('created_at', [$fecha_inicio, $fecha_final])
                             ->get();
@@ -103,8 +106,8 @@ class TramitesLinea extends Component
                 ->when($this->filters['folio'], fn($q, $folio) => $q->where('folio', $folio))
                 ->when($this->filters['estado'], fn($q, $estado) => $q->where('estado', $estado))
                 ->when($this->filters['mes'], fn($q, $mes) => $q->whereMonth('created_at', $mes))
-                ->orderBy($this->sort, $this->direction)
                 ->orderBy('servicio_id', 'desc')
+                ->orderBy($this->sort, $this->direction)
                 ->paginate($this->pagination);
 
     }
@@ -112,12 +115,10 @@ class TramitesLinea extends Component
     public function mount(){
 
         $this->certificados_pendientes = PredioTramite::select('estado', DB::raw('count(*) as total'))
-                                                        ->when(auth()->user()->hasRole('Oficina rentistica'), function($q){
-                                                            $q->whereHas('tramite', function($q){
-                                                                $q->where('oficina_id', auth()->user()->oficina_id)
-                                                                    ->where('estado', 'pagado');
-                                                            });
-                                                        })
+                                                        /* ->whereHas('tramite', function($q){
+                                                            $q->where('oficina_id', auth()->user()->oficina_id)
+                                                                ->where('estado', 'pagado');
+                                                        }) */
                                                         ->where('created_at', '>' , now()->startOfMonth()->toDateString())
                                                         ->where('estado', 'A')
                                                         ->count();

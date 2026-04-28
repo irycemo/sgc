@@ -15,6 +15,58 @@
 
 </p>
 
+@if(isset($predio->terrenosComun) || isset($predio->terrenosComun))
+
+    <p>
+
+        @if(isset($predio->terrenosComun))
+
+            <strong>Superficie privativa de terreno:</strong>  {{ collect($predio->terrenos)->sum('superficie') }}  Metros cuadrados;
+
+        @else
+
+            <strong>Superficie privativa de terreno:</strong>
+
+        @endif
+
+        @if(isset($predio->terrenosComun))
+
+            <strong>Superficie proporcional de terreno:</strong>  {{ collect($predio->terrenosComun)->sum('superficie_proporcional') }}  Metros cuadrados;
+
+        @else
+
+            <strong>Superficie proporcional de terreno:</strong>
+
+        @endif
+
+    </p>
+
+    <p>
+
+        @if(isset($predio->terrenosComun))
+
+            <strong>Superficie privativa de construccion:</strong>  {{ collect($predio->construcciones)->sum('superficie') }}  Metros cuadrados;
+
+        @else
+
+            <strong>Superficie proporcional de construccion:</strong>
+
+        @endif
+
+        @if(isset($predio->terrenosComun))
+
+            <strong>Superficie proporcional de construccion:</strong>  {{ collect($predio->construccionesComun)->sum('superficie_proporcional') }}  Metros cuadrados;
+
+        @else
+
+            <strong>Superficie proporcional de construccion:</strong>
+
+        @endif
+
+    </p>
+
+@endif
+
 <p class="parrafo">
     <strong>Valor catastral: </strong>${{ number_format($predio->valor_catastral, 2) }}
 </p>

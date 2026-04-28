@@ -84,6 +84,7 @@ class Valuacion extends Component
             'predio.zutm' => 'nullable',
             'predio.lat' => 'required',
             'predio.lon' => 'required',
+            'predio.domicilio_notificacion' => 'nullable'
          ];
     }
 

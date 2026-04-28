@@ -126,6 +126,12 @@
 
         </x-input-group>
 
+        <x-input-group for="predio.domicilio_notificacion" label="Domicilio para recibir notificaciones" :error="$errors->first('predio.domicilio_notificacion')" class="col-span-1 md:col-span-3 lg:col-span-4 xl:col-span-6">
+
+            <x-input-text id="predio.domicilio_notificacion" wire:model="predio.domicilio_notificacion" />
+
+        </x-input-group>
+
     </div>
 
 </div>

@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('predios', function (Blueprint $table) {
-            $table->text('domicilio_notificacion')->nullable()->after('declarante');
+        Schema::table('predio_avaluos', function (Blueprint $table) {
+            $table->text('domicilio_notificacion')->nullable()->after('observaciones');
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('predios', function (Blueprint $table) {
+        Schema::table('predio_avaluos', function (Blueprint $table) {
             //
         });
     }

@@ -21,7 +21,7 @@ trait BuscarPersonaTrait
             $persona = Persona::where('curp', $curp)->first();
 
         }else{
-
+dd($ap_materno);
             $persona = Persona::query()
                             ->when($nombre, function($q)use ($nombre){
                                 $q->where('nombre', trim($nombre));

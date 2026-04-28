@@ -57,12 +57,8 @@
 
     <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl text-red-500">
 
-        @foreach($errores as $error)
+        {!! $errores !!}
 
-            {{$error}}
-
-        @endforeach
-        
     </div>
 
     @if ($data != null)
@@ -113,7 +109,7 @@
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Folio</span>
 
-                                {{ $avaluo->año }}-{{ $avaluo->folio }}
+                                {{ $avaluo->año }}-{{ $avaluo->folio }}-{{ $avaluo->usuario }}
 
                             </td>
 
@@ -155,7 +151,7 @@
 
     @else
 
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl overflow-auto">
+        {{-- <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl overflow-auto">
 
             <div class="space-y-2">
 
@@ -285,9 +281,7 @@
 
             </div>
 
-        </div>
-
-    </div>
+        </div> --}}
 
     @endif
 

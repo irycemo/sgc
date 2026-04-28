@@ -582,32 +582,38 @@ class ArchivoPredioService{
 
         foreach ($urls as $key => $value) {
 
-            $image_contents = file_get_contents($value);
+            $response = Http::get($value);
 
-            $extension = pathinfo(parse_url($value, PHP_URL_PATH), PATHINFO_EXTENSION);
+            if ($response->successful()) {
 
-            $nombre_temp = Str::random(40) . '.' . $extension;
+                $image_contents = file_get_contents($value);
 
-            if(app()->isProduction()){
+                $extension = pathinfo(parse_url($value, PHP_URL_PATH), PATHINFO_EXTENSION);
 
-                Storage::disk('s3')->put(config('services.ses.ruta_predios_fotos') . $nombre_temp, $image_contents);
+                $nombre_temp = Str::random(40) . '.' . $extension;
 
-            }else{
+                if(app()->isProduction()){
 
-                Storage::put('predios_fotos/'. $nombre_temp, $image_contents);
+                    Storage::disk('s3')->put(config('services.ses.ruta_predios_fotos') . $nombre_temp, $image_contents);
+
+                }else{
+
+                    Storage::put('predios_fotos/'. $nombre_temp, $image_contents);
+
+                }
+
+                File::create([
+                    'fileable_type' => 'App\Models\Predio',
+                    'fileable_id' => $this->predio->id,
+                    'url' => $nombre_temp,
+                    'descripcion' => $key
+                ]);
+
+                $nombre_temp = null;
+
+                $extension = null;
 
             }
-
-            File::create([
-                'fileable_type' => 'App\Models\Predio',
-                'fileable_id' => $this->predio->id,
-                'url' => $nombre_temp,
-                'descripcion' => $key
-            ]);
-
-            $nombre_temp = null;
-
-            $extension = null;
 
         }
 

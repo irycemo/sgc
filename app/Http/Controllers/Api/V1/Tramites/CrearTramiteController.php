@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CrearTramiteRefrendoRequest;
 use App\Http\Requests\CrearTramiteRequest;
 use App\Http\Resources\TramiteResource;
+use App\Models\Oficina;
 use App\Models\Predio;
 use App\Models\Servicio;
 use App\Models\Tramite;
@@ -22,6 +23,8 @@ class CrearTramiteController extends Controller
 
         $validated = $request->validated();
 
+        $oficina = Oficina::whereNull('cabecera')->where('oficina', $validated['oficina'])->first();
+
         $tramite = Tramite::make();
 
         $tramite->tipo_tramite = 'normal';
@@ -31,6 +34,7 @@ class CrearTramiteController extends Controller
         $tramite->nombre_solicitante = $validated['nombre_solicitante'];
         $tramite->monto = $validated['monto'];
         $tramite->cantidad = $validated['cantidad'];
+        $tramite->oficina_id = $oficina->id;
         $tramite->usuario_tramites_linea_id = $validated['usuario_tramites_linea_id'];
 
         try {

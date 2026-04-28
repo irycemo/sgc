@@ -180,7 +180,7 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                     $key = $key + 3;
 
-                    if($row['predio_existe_en_padron'] == 'SI'){
+                    if($row[$key]['predio_existe_en_padron'] == 'SI'){
 
                         $predio_origen_id = $this->revisarPredio($row, $key);
 
@@ -196,9 +196,9 @@ class AvaluoImport implements ToCollection, WithHeadingRow, WithValidation, With
 
                     }
 
-                    $coordenadas = $this->procesarCoordenadas($row['latitud'], $row['longitud'], $key);
+                    $coordenadas = $this->procesarCoordenadas($row[$key]['latitud'], $row[$key]['longitud'], $key);
 
-                    $colindancias = $this->procesarColindacias($row['colindancias'], $key);
+                    $colindancias = $this->procesarColindacias($row[$key]['colindancias'], $key);
 
                     /* $terrenos = $this->procesarTerrenos($row['terrenos'], $row['tipo'], $key); */
 

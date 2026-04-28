@@ -2,15 +2,15 @@
 
 namespace App\Livewire\Valuacion;
 
-use Livewire\Component;
-use App\Imports\AvaluoImport;
-use Livewire\WithFileUploads;
 use App\Constantes\Constantes;
-use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Models\ValoresUnitariosRusticos;
+use App\Imports\FichaTecnicaSimple;
 use App\Models\ValoresUnitariosConstruccion;
+use App\Models\ValoresUnitariosRusticos;
+use Illuminate\Support\Facades\Log;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FichaTecnica extends Component
 {
@@ -25,6 +25,8 @@ class FichaTecnica extends Component
     public $errores;
 
     public function procesar(){
+
+        $this->reset('errores');
 
         $this->validate([
             'documento' => 'required'
@@ -42,7 +44,17 @@ class FichaTecnica extends Component
 
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
 
-            $this->errores = $e->failures();
+            $this->errores = '';
+
+            foreach ($e->failures() as $failure) {
+                $failure->row(); // row that went wrong
+                $failure->attribute(); // either heading key (if using heading row concern) or column index
+                $failure->errors(); // Actual error messages from Laravel validator
+                $failure->values(); // The values of the row that has failed.
+
+                $this->errores .= "Error en la fila: " . $failure->row() . ". Campo: " . $failure->attribute() . ". " . $failure->errors()[0] . '<br>';
+
+            }
 
             $this->dispatch('mostrarMensaje', ['warning', "La ficha contiene errores"]);
 
@@ -83,4 +95,5 @@ class FichaTecnica extends Component
     {
         return view('livewire.valuacion.ficha-tecnica')->extends('layouts.admin');
     }
+
 }

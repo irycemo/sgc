@@ -27,7 +27,7 @@
                 <tr class="text-gray-500 text-sm leading-relaxed">
                     <td style="px-2 w-full whitespace-nowrap">
                         @if(isset($construccion->valor_unitario))
-                            {{ $construccion->tipo }}{{ $construccion->uso }}{{ $construccion->estado }}{{ $construccion->calidad }} - {{ $construccion->valor_unitario }}
+                            {{ $construccion->tipo }}{{ $construccion->uso }}{{ $construccion->estado }}{{ $construccion->calidad }}
                         @endif
                     </td>
                     <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->referencia }}</td>

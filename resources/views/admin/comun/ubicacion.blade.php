@@ -188,6 +188,14 @@
 
         </div>
 
+        <div class="rounded-lg bg-gray-100 py-1 px-2 col-span-1 sm:col-span-2 lg:col-span-5">
+
+            <strong>Domicilio para notificaciones</strong>
+
+            <p>{{ $predio->domicilio_notificacion }}</p>
+
+        </div>
+
     </div>
 
 </div>

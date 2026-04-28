@@ -6,11 +6,13 @@ use App\Models\Certificacion;
 use App\Models\OldCertificado;
 use App\Models\OldTraslado;
 use App\Models\Predio;
+use App\Models\PredioTramite;
 use App\Models\SQLSVR\ctcdm004;
 use App\Models\SQLSVR\tcpro008;
 use App\Models\Tramite;
 use App\Models\Traslado;
 use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
+use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schedule;
@@ -972,6 +974,80 @@ Artisan::command('avisos', function(){
 
     $this->info($count);
 
+});
+
+Artisan::command('tramites', function(){
+
+    $count = 0;
+
+    $tramites = Tramite::with('predios')->where('usuario', 11)->get();
+
+    foreach($tramites as $tramite){
+
+        try {
+
+            $certificados_pendientes = $tramite->predios()->where('predio_tramite.estado', 'A')->get();
+
+            if($certificados_pendientes->count() === 0){
+
+                if($tramite->estado == 'pagado'){
+
+                    $this->info($tramite->año . '-' . $tramite->folio . '-' . $tramite->usuario . ' Estado: ' . $tramite->estado);
+
+                    foreach($tramite->predios as $predio){
+
+                        $this->info($predio->cuentaPredial() . ' Pivot: ' . $predio->pivot->estado);
+
+                    }
+
+                    $tramite->update(['estado' => 'concluido']);
+
+                    $count ++;
+
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            $this->info($th->getMessage());
+
+        }
+
+    }
+
+    $this->info($count);
+
+});
+
+Artisan::command('traslados', function(){
+
+    $count = 0;
+
+    $traslados = Traslado::with('predio.movimientos')->where('estado', 'operado')->where('tipo', 'revision')->get();
+
+    foreach($traslados as $traslado){
+
+        try {
+
+            $avaluo = (new SistemaPeritosExternosService())->consultarAvaluo($traslado->avaluo_spe);
+
+            $traslado->predio->update([
+                'superficie_terreno' => $avaluo['superficie_terreno'],
+                'superficie_construccion' => $avaluo['superficie_construccion'],
+                'valor_total_terreno' => $avaluo['valor_total_terreno'],
+                'valor_total_construccion' => $avaluo['valor_total_construccion'],
+            ]);
+
+            $count ++;
+
+        } catch (\Throwable $th) {
+            $this->info($th->getMessage());
+
+        }
+
+    }
+
+    $this->info($count);
 
 });
 

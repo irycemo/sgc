@@ -35,6 +35,8 @@ class ConsultaCertificacion extends Component
 
     public function buscarTramite(){
 
+        $this->reset(['tramite', 'predio']);
+
         $this->validate([
             'año' => 'required',
             'folio' => 'required',
@@ -57,6 +59,8 @@ class ConsultaCertificacion extends Component
     }
 
     public function buscarCuentaPredial(){
+
+        $this->reset(['tramite', 'predio']);
 
         $this->validate([
             'localidad' => 'required',

@@ -82,7 +82,8 @@
                 <x-table.heading sortable wire:click="sortBy('usuario')" :direction="$sort === 'usuario' ? $direction : null" >Usuario</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('estado')" :direction="$sort === 'estado' ? $direction : null" >Estado</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('tipo_tramite')" :direction="$sort === 'tipo_tramite' ? $direction : null" >Tipo de trámite</x-table.heading>
-                <x-table.heading sortable wire:click="sortBy('servicio_id')" :direction="$sort === 'servicio_id' ? $direction : null" >Servicio</x-table.heading>
+                <x-table.heading >Tipo de servicio</x-table.heading>
+                <x-table.heading >Servicio</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('solicitante')" :direction="$sort === 'solicitante' ? $direction : null" >Solicitante</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('cantidad')" :direction="$sort === 'cantidad' ? $direction : null" >Cantidad</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('monto')" :direction="$sort === 'monto' ? $direction : null" >Monto</x-table.heading>
@@ -126,6 +127,12 @@
                         <x-table.cell title="Tipo de trámite">
 
                             {{ $tramite->tipo_tramite }}
+
+                        </x-table.cell>
+
+                        <x-table.cell title="Tipo de servicio">
+
+                            {{ in_array($tramite->servicio->clave_ingreso, ['D774', 'DM32']) ? 'Urgente' : 'Ordinario' }}
 
                         </x-table.cell>
 
@@ -252,17 +259,21 @@
             Predios asociados
         </x-slot>
 
-        <x-slot name="content">
+        <x-slot name="content" >
 
-            @foreach ($modelo_editar->predios as $predio)
+            <div class="space-y-2">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                @foreach ($modelo_editar->predios as $predio)
 
-                    <p> {{ $predio->cuentaPredial() }}</p>
+                    <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                </div>
+                        <p>{{ $predio->cuentaPredial() }}</p>
 
-            @endforeach
+                    </div>
+
+                @endforeach
+
+            </div>
 
         </x-slot>
 

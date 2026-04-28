@@ -341,6 +341,7 @@ class Notificacion extends Component
             'lat' => $this->avaluo->predioAvaluo->lat,
             'fecha_efectos' => $this->fecha_notificacion,
             'observaciones' => $this->avaluo->predioAvaluo->observaciones,
+            'domicilio_notificacion' => $this->avaluo->predioAvaluo->domicilio_notificacion,
             'origen' => 'Alta mediante avalúo'
         ]);
 
@@ -415,6 +416,7 @@ class Notificacion extends Component
             'lat' => $this->avaluo->predioAvaluo->lat,
             'fecha_efectos' => $this->fecha_notificacion,
             'observaciones' => $this->avaluo->predioAvaluo->observaciones,
+            'domicilio_notificacion' => $this->avaluo->predioAvaluo->domicilio_notificacion,
             'actualizado_por' => auth()->user()->id
         ]);
 

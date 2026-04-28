@@ -78,7 +78,8 @@ trait ComunTrait
         $this->modelo_editar = Tramite::make([
                                 'cantidad' => 1,
                                 'tipo_servicio' => 'ordinario',
-                                'tipo_tramite' => 'normal'
+                                'tipo_tramite' => 'normal',
+                                'oficina_id' => auth()->id()
                             ]);
     }
 

@@ -317,13 +317,13 @@
 
             <div>
 
-                {{-- <div class="flex space-x-4 items-center">
+                <div class="flex space-x-4 items-center text-sm">
 
-                    <x-checkbox wire:model="impresionDirector"></x-checkbox>
+                    <x-checkbox wire:model="impresionObservaciones"></x-checkbox>
 
-                    <Label>Imprimir certificado con firma del director de catastro</Label>
+                    <Label>Imprimir certificado con observaciones</Label>
 
-                </div> --}}
+                </div>
 
             </div>
 
