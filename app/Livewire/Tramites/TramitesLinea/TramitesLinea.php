@@ -68,7 +68,9 @@ class TramitesLinea extends Component
                             ->whereHas('servicio', function ($q){
                                 $q->whereIn('clave_ingreso', ['DM34', 'DM32', 'DM35', 'DM31']);
                             })
+                            ->where('estado', 'pagado')
                             ->where('usuario', 11)
+                            ->where('oficina_id', auth()->user()->oficina_id)
                             ->whereBetween('created_at', [$fecha_inicio, $fecha_final])
                             ->get();
 

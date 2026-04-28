@@ -49,7 +49,7 @@
 
                                 <tr>
 
-                                    <td>{{ $item->año }}-{{ $item->folio }}-{{ $item->usuario }}</td>
+                                    <td style="width: 100px;">{{ $item->año }}-{{ $item->folio }}-{{ $item->usuario }}</td>
                                     <td>
                                         @if($item->predios->count())
 
