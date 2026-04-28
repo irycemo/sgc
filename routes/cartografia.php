@@ -28,7 +28,7 @@ Route::group([], function(){
 
     Route::get('asignar_coordenadas', AsignarCoordenadas::class)->middleware('permission:Asignar coordenadas')->name('asignar_coordenadas');
 
-    Route::get('cuentas_asignadas', CuentasAsignadas::class)->middleware('permission:Lista de predios asignados')->name('cuentas_asignadas');
+    Route::get('cuentas_asignadas', CuentasAsignadas::class)->middleware('permission:Asignación de cuentas')->name('cuentas_asignadas');
 
     Route::get('validar_cartografia', ValidarCartografia::class)->middleware('permission:Validar cartografia')->name('validar_cartografia');
 
