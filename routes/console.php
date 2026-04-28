@@ -1010,6 +1010,7 @@ Artisan::command('tramites', function(){
             }
 
         } catch (\Throwable $th) {
+
             $this->info($th->getMessage());
 
         }

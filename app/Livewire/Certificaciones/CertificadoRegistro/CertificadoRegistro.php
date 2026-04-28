@@ -180,21 +180,21 @@ class CertificadoRegistro extends Component
 
                 return DB::transaction(function (){
 
-                    $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
+                    $certificados_pendientes = $this->tramite->predios()->where('predio_tramite.estado', 'A')->get();
 
-                    $usados = $this->tramite->predios()->wherePivot('estado', 'I')->count();
-
-                    $this->tramite->update(['usados' => $usados]);
-
-                    $this->tramite->audits()->latest()->first()?->update(['tags' => 'Generó certificado del predio ' . $this->predio->cuentaPredial()]);
-
-                    if($this->tramite->cantidad === $usados){
+                    if($certificados_pendientes->count() === 0){
 
                         $this->tramite->update(['estado' => 'concluido']);
 
                         $this->tramite->audits()->latest()->first()?->update(['tags' => 'Finalizó trámite']);
 
                     }
+
+                    $usados = $this->tramite->predios()->wherePivot('estado', 'I')->count();
+
+                    $this->tramite->update(['usados' => $usados]);
+
+                    $this->tramite->audits()->latest()->first()?->update(['tags' => 'Generó certificado del predio ' . $this->predio->cuentaPredial()]);
 
                     return (new CertificadoRegistroController())->certificado($this->tramite, $this->predio, $this->tipo_certificado, auth()->user(), $this->impresionObservaciones);
 
