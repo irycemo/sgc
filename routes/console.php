@@ -13,6 +13,7 @@ use App\Models\Tramite;
 use App\Models\Traslado;
 use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
 use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schedule;
@@ -1039,6 +1040,49 @@ Artisan::command('traslados', function(){
             ]);
 
             $count ++;
+
+        } catch (\Throwable $th) {
+            $this->info($th->getMessage());
+
+        }
+
+    }
+
+    $this->info($count);
+
+});
+
+Artisan::command('fecha_pago', function(){
+
+    $count = 0;
+
+    $tramites = Tramite::with('servicio')->whereNull('fecha_entrega')->where('usuario', 11)->get();
+
+    foreach($tramites as $tramite){
+
+        try {
+
+            $actual = Carbon::parse($tramite->fecha_pago);
+
+            if(! in_array($tramite->servicio->clave_ingreso, ['D774', 'DM32'])){
+
+                for ($i=0; $i < 2; $i++) {
+
+                    $actual->addDays(1);
+
+                    while($actual->isWeekend()){
+
+                        $actual->addDay();
+
+                    }
+
+                }
+
+            }
+
+           $tramite->update(['fecha_entrega' => $actual->toDateString()]);
+
+           $count ++;
 
         } catch (\Throwable $th) {
             $this->info($th->getMessage());
