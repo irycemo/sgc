@@ -30,7 +30,7 @@ class AsignarManzana extends Component
         ]);
 
         $predios = Predio::where('municipio', $this->municipio)
-                            ->where('zona', $this->zona)
+                            ->where('zona_catastral', $this->zona)
                             ->where('localidad', $this->localidad)
                             ->where('sector', $this->sector)
                             ->get();

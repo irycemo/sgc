@@ -35,33 +35,29 @@
 
     </div>
 
-    <div class="space-y-2 mb-5  text-center">
+    <div class="flex gap-4 justify-center text-sm">
 
-        <div class="flex gap-4 ">
+        <div class="bg-white rounded-lg p-2 shadow-lg max-h-80 overflow-auto">
 
-            <div>
+            <span>Manzanas ocupadas</span>
 
-                <span>Manzanas ocupadas</span>
+            @foreach ($manzanas_ocupadas as $ocupada)
 
-                @foreach ($manzanas_ocupadas as $ocupada)
+                <p>{{ $municipio }}-{{ $zona }}-{{ $localidad }}-{{ $sector }}-{{ $ocupada }}</p>
 
-                    {{ $municipio }}-{{ $zona }}-{{ $localidad }}-{{ $sector }}-{{ $ocupada }}
+            @endforeach
 
-                @endforeach
+        </div>
 
-            </div>
+        <div class="bg-white rounded-lg p-2 shadow-lg max-h-80 overflow-auto">
 
-            <div>
+            <span>Manzanas disponibles</span>
 
-                <span>Manzanas disponibles</span>
+            @foreach ($manzanas_disponibles as $ocupada)
 
-                @foreach ($manzanas_disponibles as $ocupada)
+                <p>{{ $municipio }}-{{ $zona }}-{{ $localidad }}-{{ $sector }}-{{ $ocupada }}</p>
 
-                    {{ $municipio }}-{{ $zona }}-{{ $localidad }}-{{ $sector }}-{{ $ocupada }}
-
-                @endforeach
-
-            </div>
+            @endforeach
 
         </div>
 
