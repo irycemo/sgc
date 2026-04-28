@@ -198,13 +198,17 @@
 
         @include('certificaciones.comun.propietarios')
 
-        <p class="separador">Observaciones</p>
+        @if($datos_control->observaciones)
 
-        <div class="informacion">
+            <p class="separador">Observaciones</p>
 
-            <p class="parrafo">{{ $predio->observaciones }}</p>
+            <div class="informacion">
 
-        </div>
+                <p class="parrafo">{{ $predio->observaciones }}</p>
+
+            </div>
+
+        @endif
 
         <p class="separador">Datos de control</p>
 
