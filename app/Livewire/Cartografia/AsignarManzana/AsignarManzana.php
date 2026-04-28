@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Cartografia\AsignarManzana;
 
+use App\Models\Predio;
 use Livewire\Component;
 
 class AsignarManzana extends Component
@@ -16,7 +17,37 @@ class AsignarManzana extends Component
     public $lon;
     public $valuadores;
 
+    public $manzanas_disponibles = [];
+    public $manzanas_ocupadas = [];
+
     public function buscarManzanas(){
+
+        $this->validate([
+            'municipio' => 'required|numeric',
+            'zona' => 'required|numeric',
+            'localidad' => 'required|numeric',
+            'sector' => 'required|numeric',
+        ]);
+
+        $predios = Predio::where('municipio', $this->municipio)
+                            ->where('zona', $this->zona)
+                            ->where('localidad', $this->localidad)
+                            ->where('sector', $this->sector)
+                            ->get();
+
+        for ($i=1; $i < 99; $i++) {
+
+            if($predios->where('manzana', $i)->first()){
+
+                array_push($this->manzanas_ocupadas, $i);
+
+            }else{
+
+                array_push($this->manzanas_disponibles, $i);
+
+            }
+
+        }
 
 
     }

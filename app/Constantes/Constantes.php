@@ -272,6 +272,7 @@ class Constantes{
         'LAMINA GALVANIZADA',
         'LAMINA DE ASBESTO-CEMENTO',
         'LAMINA DE CARTON-ASBESTO-CEMENTO',
+        'LOZA DE CONCRETO'
     ];
 
     const PLAFONES = [
