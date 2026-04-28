@@ -115,10 +115,10 @@ class TramitesLinea extends Component
     public function mount(){
 
         $this->certificados_pendientes = PredioTramite::select('estado', DB::raw('count(*) as total'))
-                                                        /* ->whereHas('tramite', function($q){
+                                                        ->whereHas('tramite', function($q){
                                                             $q->where('oficina_id', auth()->user()->oficina_id)
                                                                 ->where('estado', 'pagado');
-                                                        }) */
+                                                        })
                                                         ->where('created_at', '>' , now()->startOfMonth()->toDateString())
                                                         ->where('estado', 'A')
                                                         ->count();
