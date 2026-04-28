@@ -238,7 +238,7 @@ class Tramites extends Component
 
                     if($traslado){
 
-                        throw new GeneralException('El certificado esta ligado a un aviso no es posible reactivarlo.');
+                        throw new GeneralException('El certificado esta ligado al aviso ' . $traslado->año_aviso . '-' .  $traslado->folio_aviso . '-' . $traslado->usuario_aviso . ' no es posible reactivarlo.');
 
                     }
 

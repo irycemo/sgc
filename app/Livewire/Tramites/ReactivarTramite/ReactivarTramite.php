@@ -94,11 +94,11 @@ class ReactivarTramite extends Component
 
                 if($certificacion){
 
-                    $traslado = Traslado::where('certificacion_id', $certificacion->id)->where('estado', 'operado')->first();
+                    $traslado = Traslado::where(['certificacion_id' => $certificacion->id])->first();
 
                     if($traslado){
 
-                        throw new GeneralException('El certificado esta ligado a un aviso no es posible reactivarlo.');
+                        throw new GeneralException('El certificado esta ligado al aviso ' . $traslado->año_aviso . '-' .  $traslado->folio_aviso . '-' . $traslado->usuario_aviso . ' no es posible reactivarlo.');
 
                     }
 
