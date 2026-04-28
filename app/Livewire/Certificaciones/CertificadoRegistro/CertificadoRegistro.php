@@ -182,6 +182,8 @@ class CertificadoRegistro extends Component
 
                     $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
 
+                    $this->tramite->refresh();
+
                     $certificados_pendientes = $this->tramite->predios()->where('predio_tramite.estado', 'A')->get();
 
                     if($certificados_pendientes->count() === 0){
