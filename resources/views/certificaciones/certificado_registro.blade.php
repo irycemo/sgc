@@ -198,7 +198,7 @@
 
         @include('certificaciones.comun.propietarios')
 
-        @if($datos_control->observaciones)
+        @if(isset($datos_control->observaciones) && $datos_control->observaciones)
 
             <p class="separador">Observaciones</p>
 
