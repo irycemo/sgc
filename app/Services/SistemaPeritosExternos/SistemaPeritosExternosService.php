@@ -114,6 +114,41 @@ class SistemaPeritosExternosService{
 
     }
 
+    public function reactivarAvaluo(int $avaluo_id):string
+    {
+
+        $response = Http::withToken(config('services.peritos_externos.token'))
+                            ->accept('application/json')
+                            ->asForm()
+                            ->post(
+                                config('services.peritos_externos.reactivar_avaluo'),
+                                [
+                                    'id' => $avaluo_id,
+                                ]
+                            );
+
+        if($response->status() !== 200){
+
+            Log::error("Error al reactivar avalúo. " . $response);
+
+            $data = json_decode($response, true);
+
+            if(isset($data['error'])){
+
+                throw new GeneralException($data['error']);
+
+            }
+
+            throw new GeneralException("Error al reactivar avalúo.");
+
+        }else{
+
+            return json_decode($response, true)['data'];
+
+        }
+
+    }
+
     public function generarAvaluoPdf(int $aviso_id):array
     {
 

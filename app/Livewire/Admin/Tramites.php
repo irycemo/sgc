@@ -10,6 +10,8 @@ use App\Models\Predio;
 use App\Models\Servicio;
 use App\Models\Tramite;
 use App\Models\Traslado;
+use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
+use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
 use App\Services\Tramites\TramiteService;
 use App\Traits\ComponentesTrait;
 use Carbon\Carbon;
@@ -238,7 +240,17 @@ class Tramites extends Component
 
                     if($traslado){
 
-                        throw new GeneralException('El certificado esta ligado al aviso ' . $traslado->año_aviso . '-' .  $traslado->folio_aviso . '-' . $traslado->usuario_aviso . ' no es posible reactivarlo.');
+                        if($traslado->estado == 'operado'){
+
+                            throw new GeneralException('El certificado esta ligado al aviso operado: ' . $traslado->año_aviso . '-' .  $traslado->folio_aviso . '-' . $traslado->usuario_aviso . ' no es posible reactivarlo.');
+
+                        }
+
+                        $traslado->update(['estado' => 'nuevo', 'certificacion_id' => null]);
+
+                        (new SistemaPeritosExternosService())->reactivarAvaluo($traslado->avaluo_spe);
+
+                        (new SistemaTramitesLineaService())->reactivarAviso($traslado->aviso_stl);
 
                     }
 

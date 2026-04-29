@@ -447,7 +447,7 @@ class Notificacion extends Component
             foreach($this->avaluo->predioAvaluo->propietarios as $propietario){
 
                 $predio->propietarios()->create([
-                    'persona_id' => $propietario->id,
+                    'persona_id' => $propietario->persona_id,
                     'tipo' => $propietario->tipo,
                     'porcentaje_propiedad' => $propietario->porcentaje_propiedad,
                     'porcentaje_nuda' => $propietario->porcentaje_nuda,

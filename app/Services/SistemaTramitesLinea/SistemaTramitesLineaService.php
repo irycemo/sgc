@@ -295,6 +295,41 @@ class SistemaTramitesLineaService{
 
     }
 
+    public function reactivarAviso(int $avaluo_id):string
+    {
+
+        $response = Http::withToken(config('services.peritos_externos.token'))
+                            ->accept('application/json')
+                            ->asForm()
+                            ->post(
+                                config('services.peritos_externos.reactivar_avaluo'),
+                                [
+                                    'id' => $avaluo_id,
+                                ]
+                            );
+
+        if($response->status() !== 200){
+
+            Log::error("Error al reactivar aviso. " . $response);
+
+            $data = json_decode($response, true);
+
+            if(isset($data['error'])){
+
+                throw new GeneralException($data['error']);
+
+            }
+
+            throw new GeneralException("Error al reactivar aviso.");
+
+        }else{
+
+            return json_decode($response, true)['data'];
+
+        }
+
+    }
+
     public function generarAvisoPdf(int $aviso_id):array
     {
 
