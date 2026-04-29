@@ -577,6 +577,36 @@ class Valuacion extends Component
 
     }
 
+    public function borrarImagenesLocalizacion(Avaluo $avaluo){
+
+        $imagenes_localizacion = $avaluo->imagenes()->whereIn('descripcion', ['macrolocalizacion', 'microlocalizacion'])->get();
+
+        foreach($imagenes_localizacion as $imagen){
+
+            if(app()->isProduction()){
+
+                if (Storage::disk('s3')->exists(config('services.ses.ruta_avaluos_fotos') . $imagen->url)) {
+
+                    Storage::disk('s3')->delete(config('services.ses.ruta_avaluos_fotos') . $imagen->url);
+
+                }
+
+            }else{
+
+                if (Storage::disk('avaluos')->exists($imagen->url)) {
+
+                    Storage::disk('avaluos')->delete($imagen->url);
+
+                }
+
+            }
+
+            $imagen->delete();
+
+        }
+
+    }
+
     public function actualizarAvaluo(){
 
         if($this->predio->avaluo->estado != 'nuevo'){
@@ -593,14 +623,22 @@ class Valuacion extends Component
 
             DB::transaction(function () {
 
-                $this->predio->save();
-
                 $avaluo = Avaluo::where('predio_avaluo', $this->predio->id)->first();
 
                 $avaluo->update([
                     'actualizado_por' => auth()->user()->id,
                     'estado' => 'nuevo'
                 ]);
+
+                if($this->predio->isDirty('lat') || $this->predio->isDirty('lon')){
+
+                    $this->borrarImagenesLocalizacion($avaluo);
+
+                    $this->generarImagenesLocalizacion();
+
+                }
+
+                $this->predio->save();
 
                 $avaluo->audits()->latest()->first()->update(['tags' => 'Actualizó datos de identificación del inmueble']);
 

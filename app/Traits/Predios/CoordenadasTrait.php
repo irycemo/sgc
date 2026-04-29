@@ -8,7 +8,7 @@ use App\Services\Coordenadas\Coordenadas;
 trait CoordenadasTrait
 {
 
-    public function updatedPredioXutm(){
+    /* public function updatedPredioXutm(){
         $this->convertirCoordenadas();
     }
 
@@ -26,7 +26,7 @@ trait CoordenadasTrait
 
     public function updatedPredioLon(){
         $this->convertirCoordenadas();
-    }
+    } */
 
     public function convertirCoordenadas(){
 
