@@ -49,7 +49,7 @@ trait ConstruccionesTrait
 
         if(isset($this->construcciones[$i[0]]['valor_unitario']) && isset($this->construcciones[$i[0]]['superficie'])){
 
-            $this->construcciones[$i[0]]['valor_construccion'] = (float)$this->construcciones[$i[0]]['valor_unitario'] * (float)$this->construcciones[$i[0]]['superficie'];
+            $this->construcciones[$i[0]]['valor_construccion'] = round((float)$this->construcciones[$i[0]]['valor_unitario'] * (float)$this->construcciones[$i[0]]['superficie'], 4);
 
         }
 

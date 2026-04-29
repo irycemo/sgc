@@ -31,20 +31,19 @@ trait TerrenosTrait
 
             if($this->predio->tipo_predio == 2){
 
-                $this->terrenos[$i[0]]['valor_terreno'] = (float)$this->terrenos[$i[0]]['superficie'] * (float)$this->terrenos[$i[0]]['valor_demeritado'] / 10000;
+                $this->terrenos[$i[0]]['valor_terreno'] = round((float)$this->terrenos[$i[0]]['superficie'] * (float)$this->terrenos[$i[0]]['valor_demeritado'] / 10000, 4);
 
             }else{
 
-                $this->terrenos[$i[0]]['valor_terreno'] = (float)$this->terrenos[$i[0]]['superficie'] * (float)$this->terrenos[$i[0]]['valor_demeritado'];
+                $this->terrenos[$i[0]]['valor_terreno'] = round((float)$this->terrenos[$i[0]]['superficie'] * (float)$this->terrenos[$i[0]]['valor_demeritado'], 4);
             }
-
 
         }elseif(isset($this->terrenos[$i[0]]['superficie']) && isset($this->terrenos[$i[0]]['valor_unitario'])){
 
-            $this->terrenos[$i[0]]['valor_terreno'] = (float)$this->terrenos[$i[0]]['superficie'] * (float)$this->terrenos[$i[0]]['valor_unitario'];
+            $this->terrenos[$i[0]]['valor_terreno'] = round((float)$this->terrenos[$i[0]]['superficie'] * (float)$this->terrenos[$i[0]]['valor_unitario'], 4);
 
             if($this->predio->tipo_predio == 2)
-                $this->terrenos[$i[0]]['valor_terreno'] = $this->terrenos[$i[0]]['valor_terreno'] / 10000;
+                $this->terrenos[$i[0]]['valor_terreno'] = round($this->terrenos[$i[0]]['valor_terreno'] / 10000 , 4);
 
         }
 
@@ -178,7 +177,7 @@ trait TerrenosTrait
 
         $this->porcentajeDemerito = null;
 
-        if(isset($this->predio->avaluo)){
+/*         if(isset($this->predio->avaluo)){
 
             if(!$this->predio->avaluo->agua)
                 $this->porcentajeDemerito = 5;
@@ -199,7 +198,7 @@ trait TerrenosTrait
 
             }
 
-        }
+        } */
 
         if(count($this->terrenos) == 0) $this->agregarTerreno();
 

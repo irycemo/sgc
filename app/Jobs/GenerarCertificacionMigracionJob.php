@@ -29,14 +29,7 @@ class GenerarCertificacionMigracionJob implements ShouldQueue
 
         foreach($this->tramite->predios as $predio){
 
-            match($this->tramite->servicio_id){
-                3   => (new CertificadoRegistroController())->certificado($this->tramite, $predio, 'CERTIFICADO DE REGISTRO CATASTRAL', $user),
-                293 => (new CertificadoRegistroController())->certificado($this->tramite, $predio, 'CERTIFICADO DE REGISTRO CATASTRAL', $user),
-                297 => (new CertificadoRegistroController())->certificado($this->tramite, $predio, 'CERTIFICADO DE REGISTRO CATASTRAL', $user),
-                296 => (new CertificadoRegistroController())->certificado($this->tramite, $predio, 'CERTIFICADO DE REGISTRO CATASTRAL', $user),
-                64  => (new CedulaActualizcacionController())->cedula($this->tramite, $predio, $user),
-                65  => (new CedulaActualizcacionController())->cedula($this->tramite, $predio, $user),
-            };
+            (new CertificadoRegistroController())->certificado($this->tramite, $predio, 'CERTIFICADO DE REGISTRO CATASTRAL', $user, false);
 
             $this->tramite->predios()->updateExistingPivot($predio->id, ['estado' => 'I']);
 

@@ -44,7 +44,7 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
             'localidad' => 'required|numeric|min:1',
             'sector' => 'required|numeric|min:1',
             'zona' => 'required|numeric|min:1',
-            'manzana' => 'required|numeric|min:1',
+            'manzana' => 'required|numeric',
             'predio' => 'required|numeric|min:1',
             'edificio' => [ 'required', 'numeric'],
             'departamento' => [ 'required', 'numeric'],
@@ -60,16 +60,16 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
             'longitud' => 'nullable',
             'clasificacion_zona' => ['required', Rule::in(Constantes::CLASIFICACION_ZONA)],
             'tipo_construccion_dominante' => ['required', Rule::in(Constantes::CONSTRUCCION_DOMINANTE)],
-            'superficie_terreno' => 'nullable|numeric',
-            'valor_unitario_terreno' => 'nullable|numeric',
-            'superficie_comun' => 'nullable|numeric',
-            'indiviso_terreno' => 'nullable|numeric',
-            'valor_unitario' => 'nullable|numeric',
+            'superficie_terreno' => 'nullable|numeric|gt:0',
+            'valor_unitario_terreno' => 'nullable|numeric|gt:0',
+            'superficie_comun' => 'nullable|numeric|gt:0',
+            'indiviso_terreno' => 'nullable|numeric|gt:0',
+            'valor_unitario' => 'nullable|numeric|gt:0',
             'referencia' => 'nullable',
-            'tipo_construccion' => 'nullable|numeric',
-            'uso_construccion' => 'nullable|numeric',
-            'estado_construccion' => 'nullable|numeric',
-            'calidad_construccion' => 'nullable|numeric',
+            'tipo_construccion' => 'nullable|numeric|in:1,2,3',
+            'uso_construccion' => 'nullable|numeric|in:1,2,3',
+            'estado_construccion' => 'nullable|numeric|in:1,2,3',
+            'calidad_construccion' => 'nullable|numeric|in:1,2,3',
             'agua_potable' => ['required', Rule::in(['SI', 'NO'])],
             'drenaje' => ['required', Rule::in(['SI', 'NO'])],
             'pavimento' => ['required', Rule::in(['SI', 'NO'])],
@@ -77,13 +77,13 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
             'alumbrado_publico' => ['required', Rule::in(['SI', 'NO'])],
             'banqueta' => ['required', Rule::in(['SI', 'NO'])],
             'niveles' => 'nullable|numeric',
-            'superficie_construccion' => 'nullable|numeric',
-            'superficie_construccion_comun' => 'nullable|numeric',
-            'indiviso_construccion' => 'nullable|numeric',
-            'tipo' => 'nullable|numeric',
-            'uso' => 'nullable|numeric',
-            'estado' => 'nullable|numeric',
-            'calidad' => 'nullable|numeric',
+            'superficie_construccion' => 'nullable|numeric|gt:0',
+            'superficie_construccion_comun' => 'nullable|numeric|gt:0',
+            'indiviso_construccion' => 'nullable|numeric|gt:0',
+            'tipo' => 'nullable|numeric|in:1,2,3',
+            'uso' => 'nullable|numeric|in:1,2,3',
+            'estado' => 'nullable|numeric|in:1,2,3',
+            'calidad' => 'nullable|numeric|in:1,2,3',
             'uso_1' =>  ['required', Rule::in(Constantes::USO_PREDIO)],
             'uso_2' =>  ['nullable', Rule::in(Constantes::USO_PREDIO)],
             'uso_3' =>  ['nullable', Rule::in(Constantes::USO_PREDIO)],
@@ -155,13 +155,17 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
                         $this->predio_origen_id = $this->revisarPredio($row, $key);
 
+                        $this->validarDisponibilidadAvaluos($row, $key);
+
                     }else{
 
                         $this->revisarAsignacionCuentaPredia($row, $key);
 
                         // Revisar manzana asignada
 
-                        $this->validarDisponibilidad($row, $key);
+                        $this->validarDisponibilidadPadron($row, $key);
+
+                        $this->validarDisponibilidadAvaluos($row, $key);
 
                         $this->validarSector($row, $key);
 
@@ -178,11 +182,11 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
                         if($row['tipo_predio'] == 1){
 
-                            $valor_terreno = (float)$row['superficie_terreno'] * (float)$row['valor_unitario_terreno'];
+                            $valor_terreno = round((float)$row['superficie_terreno'] * (float)$row['valor_unitario_terreno'], 4);
 
                         }elseif($row['tipo_predio'] == 2){
 
-                            $valor_terreno = (float)$row['superficie_terreno'] * (float)$row['valor_unitario_terreno'] / 10000;
+                            $valor_terreno = round((float)$row['superficie_terreno'] * (float)$row['valor_unitario_terreno'] / 10000, 4);
 
                         }
 
@@ -201,15 +205,17 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
                     /* TERRENO COMUN */
                     if(isset($row['superficie_comun']) && isset($row['indiviso_terreno']) && isset($row['valor_unitario'])){
 
-                        $superficie_proporcional = (float)$row['superficie_comun'] * (float)$row['indiviso_terreno'] / 100;
+                        $superficie_proporcional = round((float)$row['superficie_comun'] * round((float)$row['indiviso_terreno'], 4) / 100, 4);
+
+
 
                         if($row['tipo_predio'] == 1){
 
-                            $valor_terreno_comun = $superficie_proporcional * (float)$row['valor_unitario'];
+                            $valor_terreno_comun = round($superficie_proporcional * (float)$row['valor_unitario'], 4);
 
                         }elseif($row['tipo_predio'] == 2){
 
-                            $valor_terreno_comun = $superficie_proporcional * (float)$row['valor_unitario'] / 10000;
+                            $valor_terreno_comun = round($superficie_proporcional * (float)$row['valor_unitario'] / 10000, 4);
 
                         }
 
@@ -228,18 +234,18 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
                     }
 
                     /* CONSTRUCCION */
-                    if(isset($row['referencia']) && isset($row['tipo']) && isset($row['uso']) && isset($row['estado']) && isset($row['calidad']) && isset($row['niveles']) && isset($row['superficie_construccion'])){
+                    if(isset($row['referencia']) && isset($row['tipo_construccion']) && isset($row['uso_construccion']) && isset($row['estado_construccion']) && isset($row['calidad_construccion']) && isset($row['niveles']) && isset($row['superficie_construccion'])){
 
-                        $valorUnitario = $this->valoresConstruccion->where('tipo', $row['tipo'])->where('uso', $row['uso'])->where('calidad', $row['calidad'])->where('estado', $row['estado'])->first()->valor;
+                        $valorUnitario = $this->valoresConstruccion->where('tipo', $row['tipo_construccion'])->where('uso', $row['uso_construccion'])->where('calidad', $row['calidad_construccion'])->where('estado', $row['estado_construccion'])->first()->valor;
 
-                        $valor_construccion = $valorUnitario * (float)$row['superficie_construccion'];
+                        $valor_construccion = round($valorUnitario * (float)$row['superficie_construccion'], 4);
 
                         $construccion = [
                             'referencia' => $row['referencia'],
-                            'tipo' => $row['tipo'],
-                            'uso' => $row['uso'],
-                            'calidad' => $row['calidad'],
-                            'estado' => $row['estado'],
+                            'tipo' => $row['tipo_construccion'],
+                            'uso' => $row['uso_construccion'],
+                            'calidad' => $row['calidad_construccion'],
+                            'estado' => $row['estado_construccion'],
                             'niveles' => $row['niveles'],
                             'superficie_construccion' => $row['superficie_construccion'],
                             'valor_unitario' => $valorUnitario,
@@ -255,11 +261,11 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
                     /* CONSTRUCCION COMUN */
                     if(isset($row['referencia']) && isset($row['tipo']) && isset($row['uso']) && isset($row['estado']) && isset($row['calidad']) && isset($row['niveles']) && isset($row['superficie_construccion_comun']) && isset($row['indiviso_construccion'])){
 
-                        $superficie_proporcional_construccion = (float)$row['superficie_construccion_comun'] * (float)$row['indiviso_construccion'];
+                        $superficie_proporcional_construccion = (float)$row['superficie_construccion_comun'] * (float)$row['indiviso_construccion'] / 100;
 
                         $valorUnitario = $this->valoresConstruccion->where('tipo', $row['tipo'])->where('uso', $row['uso'])->where('calidad', $row['calidad'])->where('estado', $row['estado'])->first()->valor;
 
-                        $valor_construccion = $valorUnitario * $superficie_proporcional_construccion;
+                        $valor_construccion_comun = round($valorUnitario * $superficie_proporcional_construccion, 4);
 
                         $construccionComun = [
                             'referencia' => $row['referencia'],
@@ -272,7 +278,7 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
                             'superficie_construccion_comun' => $row['superficie_construccion_comun'],
                             'valor_unitario' => $valorUnitario,
                             'superficie_proporcional' => $superficie_proporcional_construccion,
-                            'valor_construccion' => $valor_construccion,
+                            'valor_construccion' => $valor_construccion_comun,
                         ];
 
                     }else{
@@ -313,10 +319,16 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
                     }
 
-                    $valorCatastral = $terreno['valor_terreno']
-                                            + $terrenoComun['valor_terreno_comun']
-                                            + $construccion['valor_construccion']
-                                            + $construccionComun['valor_construccion'];
+                    $valorCatastral = ($terreno['valor_terreno'] ?? 0)
+                                            + ($terrenoComun['valor_terreno_comun'] ?? 0)
+                                            + ($construccion['valor_construccion'] ?? 0)
+                                            + ($construccionComun['valor_construccion'] ?? 0);
+
+                    if($valorCatastral == 0){
+
+                        throw new GeneralException('El valor catastral no puede ser 0 en la fila. ' . $key);
+
+                    }
 
                     if($row['ubicacion_en_manzana'] == 'ESQUINA'){
 
@@ -402,7 +414,7 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
     }
 
-    public function validarDisponibilidad($row, $key):void
+    public function validarDisponibilidadPadron($row, $key):void
     {
 
         $predioCompleto = Predio::where('estado', $row['estado_clave'])
@@ -458,7 +470,13 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
         }
 
-        $predioCompletoAvaluo = PredioAvaluo::where('estado', $row['estado_clave'])
+    }
+
+    public function validarDisponibilidadAvaluos($row, $key):void
+    {
+
+        $predioCompletoAvaluo = PredioAvaluo::where('status', 'activo')
+                                                ->where('estado', $row['estado_clave'])
                                                 ->where('region_catastral', $row['region'])
                                                 ->where('municipio', $row['municipio'])
                                                 ->where('zona_catastral', $row['zona'])
@@ -475,11 +493,12 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
         if($predioCompletoAvaluo){
 
-            throw new GeneralException("El predio ya existe en avaluos, verifique. " . 'Línea: ' . $key);
+            throw new GeneralException("Ya existe en un avaluo del predio " . $predioCompletoAvaluo->cuentaPredial() . ", verifique. " . 'Línea: ' . $key);
 
         }else{
 
-            $cuentaPredialAvaluo = PredioAvaluo::where('localidad', $row['localidad'])
+            $cuentaPredialAvaluo = PredioAvaluo::where('status', 'activo')
+                                                ->where('localidad', $row['localidad'])
                                                 ->where('oficina', $row['oficina'])
                                                 ->where('tipo_predio', $row['tipo_predio'])
                                                 ->where('numero_registro', $row['registro'])
@@ -487,11 +506,12 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
             if($cuentaPredialAvaluo){
 
-                throw new GeneralException("La cuenta predial ya existe en avaluos con otra clave catastral, verifique. " . 'Línea: ' . $key);
+                throw new GeneralException("Ya existe en un avaluo del predio " . $cuentaPredialAvaluo->cuentaPredial() . ", verifique. " . 'Línea: ' . $key);
 
             }
 
             $claveCatastralAvaluo = PredioAvaluo::where('status', 'activo')
+                                                    ->where('status', 'activo')
                                                     ->where('estado', $row['estado_clave'])
                                                     ->where('region_catastral', $row['region'])
                                                     ->where('municipio', $row['municipio'])
@@ -506,7 +526,7 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
             if($claveCatastralAvaluo){
 
-                throw new GeneralException("La clave catastral ya existe en avaluos con otra cuenta predial, verifique. " . 'Línea: ' . $key);
+                throw new GeneralException("Ya existe en un avaluo del predio " . $claveCatastralAvaluo->cuentaPredial() . ", verifique. " . 'Línea: ' . $key);
 
             }
 

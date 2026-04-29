@@ -151,7 +151,7 @@ class Certificaciones extends Component
                                 })
                                 ->when(! empty($this->filters['tFolio']), function($q){
                                     $q->WhereHas('tramite', function($q){
-                                        $q->where('folio', $this->filters['tAño']);
+                                        $q->where('folio', $this->filters['tFolio']);
                                     });
                                 })
                                 ->when(! empty($this->filters['tUsuario']), function($q){

@@ -40,7 +40,7 @@ trait CrearImagenTrait
 
         Storage::disk('certificaciones')->put($nombreFinal, $pdf->output());
 
-        $pdfImagen = new \Spatie\PdfToImage\Pdf('certificaciones/' . $nombreFinal);
+        $pdfImagen = new \Spatie\PdfToImage\Pdf('/var/www/html/sgc/storage/app/certificaciones/' . $nombreFinal);
 
         $all = new Imagick();
 
@@ -48,13 +48,13 @@ trait CrearImagenTrait
 
             $nombre_img = $nombre . '_' . $i . '.jpg';
 
-            $pdfImagen->selectPage($i)->save('certificaciones/'. $nombre_img);
+            $pdfImagen->selectPage($i)->save('/var/www/html/sgc/storage/app/certificaciones/'. $nombre_img);
 
             $im = new Imagick(Storage::disk('certificaciones')->path($nombre_img));
 
             $all->addImage($im);
 
-            unlink('certificaciones/' . $nombre_img);
+            unlink('/var/www/html/sgc/storage/app/certificaciones/' . $nombre_img);
 
         }
 
@@ -68,7 +68,7 @@ trait CrearImagenTrait
 
         }else{
 
-            file_put_contents("certificaciones/" . $nombre . '.jpg', $combined);
+            file_put_contents("/var/www/html/sgc/storage/app/certificaciones/" . $nombre . '.jpg', $combined);
 
         }
 
@@ -79,7 +79,7 @@ trait CrearImagenTrait
             'url' => $nombre . '.jpg'
         ]);
 
-        unlink('certificaciones/' . $nombreFinal);
+        unlink('/var/www/html/sgc/storage/app/certificaciones/' . $nombreFinal);
 
     }
 

@@ -406,9 +406,10 @@ class MisAvaluos extends Component
     public function render()
     {
 
-        /* $this->idsEnPagina = $avaluos->map(fn ($avaluo) => (string)$avaluo->id)->toArray(); */
+        $this->idsEnPagina = $this->avaluos->map(fn ($avaluo) => (string)$avaluo->id)->toArray();
 
         return view('livewire.valuacion.mis-avaluos')->extends('layouts.admin');
 
     }
+
 }

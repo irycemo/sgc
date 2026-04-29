@@ -199,4 +199,5 @@ class Valor extends Component
     {
         return view('livewire.valuacion.valor');
     }
+
 }

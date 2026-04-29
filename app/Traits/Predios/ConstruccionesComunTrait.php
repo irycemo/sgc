@@ -70,9 +70,7 @@ trait ConstruccionesComunTrait
 
             $this->construccionesComun[$i[0]]['superficie_proporcional'] = ((float)$this->construccionesComun[$i[0]]['area_comun_construccion'] * (float)$this->construccionesComun[$i[0]]['indiviso_construccion']) / 100;
 
-            $this->construccionesComun[$i[0]]['valor_construccion_comun'] = ((float)$this->construccionesComun[$i[0]]['area_comun_construccion'] *
-                                                                                    (float)$this->construccionesComun[$i[0]]['indiviso_construccion'] *
-                                                                                    (float)$this->construccionesComun[$i[0]]['valor_clasificacion_construccion']) / 100 ;
+            $this->construccionesComun[$i[0]]['valor_construccion_comun'] = round($this->construccionesComun[$i[0]]['superficie_proporcional'] *  (float)$this->construccionesComun[$i[0]]['valor_clasificacion_construccion'], 4);
 
         }
 

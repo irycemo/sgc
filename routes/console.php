@@ -2,22 +2,20 @@
 
 use App\Jobs\GenerarCertificacionMigracionJob;
 use App\Jobs\MigrarPredioJob;
-use App\Models\Certificacion;
 use App\Models\OldCertificado;
 use App\Models\OldTraslado;
 use App\Models\Predio;
-use App\Models\PredioTramite;
 use App\Models\SQLSVR\ctcdm004;
 use App\Models\SQLSVR\tcpro008;
 use App\Models\Tramite;
 use App\Models\Traslado;
 use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
-use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schedule;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 
 Schedule::command('backup:clean')->daily()->at('01:00');
 Schedule::command('backup:run')->daily()->at('01:30');
@@ -514,28 +512,37 @@ Artisan::command('migrar-tramites', function(){
 
 Artisan::command('generar-certificados', function(){
 
-    Schema::disableForeignKeyConstraints();
-    DB::table('certificacions')->truncate();
+    $count = 0;
 
-    $tramites = Tramite::whereIn('servicio_id', [3, 293, 297, 296, 64, 65])->get();
+    $filename = 'certificados-' . now()->timestamp . '.csv';
 
-    $this->info('Incia migración de trámites el: ' . now());
+    $handle = fopen('php://temp', 'r+');
 
-    $progressbar = $this->output->createProgressBar(count($tramites));
+    fputcsv($handle, ['ID', 'Tramite']);
 
-    $progressbar->start();
+    $tramites = Tramite::whereHas('servicio', function ($q){
+                            $q->whereIn('clave_ingreso', ['DM34', 'DM32', 'DM35', 'DM31']);
+                        })
+                        ->whereIn('estado', ['pagado', 'autorizado'])
+                        ->get();
 
     foreach ($tramites as $tramite) {
 
         GenerarCertificacionMigracionJob::dispatch($tramite);
 
-        $progressbar->advance();
+        fputcsv($handle, [$tramite->id, $tramite->año . '-' . $tramite->folio . '-' . $tramite->usuario]);
+
+        $count ++;
 
     }
 
-    $progressbar->finish();
+    rewind($handle);
 
-    $this->info('Finaliza: ' . now());
+    Storage::disk('s3')->put($filename, $handle);
+
+    fclose($handle);
+
+    $this->info($count);
 
 });
 

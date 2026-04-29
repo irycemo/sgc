@@ -34,11 +34,9 @@ trait TerrenosComunTrait
             isset($this->terrenosComun[$i[0]]['valor_unitario']))
         {
 
-            $this->terrenosComun[$i[0]]['superficie_proporcional'] = ((float)$this->terrenosComun[$i[0]]['area_terreno_comun'] * (float)$this->terrenosComun[$i[0]]['indiviso_terreno']) / 100;
+            $this->terrenosComun[$i[0]]['superficie_proporcional'] = round(((float)$this->terrenosComun[$i[0]]['area_terreno_comun'] * (float)$this->terrenosComun[$i[0]]['indiviso_terreno']) / 100, 4);
 
-            $this->terrenosComun[$i[0]]['valor_terreno_comun'] = ((float)$this->terrenosComun[$i[0]]['area_terreno_comun'] *
-                                                                                    (float)$this->terrenosComun[$i[0]]['indiviso_terreno'] *
-                                                                                    (float)$this->terrenosComun[$i[0]]['valor_unitario']) / 100 ;
+            $this->terrenosComun[$i[0]]['valor_terreno_comun'] = round($this->terrenosComun[$i[0]]['superficie_proporcional'] * (float)$this->terrenosComun[$i[0]]['valor_unitario'], 4);
 
         }
 
