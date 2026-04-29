@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Schedule;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
-Schedule::command('backup:clean')->daily()->at('01:00');
+/* Schedule::command('backup:clean')->daily()->at('01:00');
 Schedule::command('backup:run')->daily()->at('01:30');
 Schedule::command('expirar-tramites')->daily()->at('02:00');
-Schedule::command('revisar-pago')->daily()->at('23:30');
+Schedule::command('revisar-pago')->daily()->at('23:30'); */
 
 Schedule::command('cache:recaudacion')->dailyAt('23:10');
 
