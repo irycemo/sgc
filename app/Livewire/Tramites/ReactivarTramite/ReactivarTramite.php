@@ -2,15 +2,17 @@
 
 namespace App\Livewire\Tramites\ReactivarTramite;
 
-use App\Models\Tramite;
-use Livewire\Component;
-use App\Models\Traslado;
-use App\Models\Certificacion;
 use App\Constantes\Constantes;
+use App\Exceptions\GeneralException;
+use App\Models\Certificacion;
+use App\Models\Tramite;
+use App\Models\Traslado;
+use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
+use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Exceptions\GeneralException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Livewire\Component;
 
 class ReactivarTramite extends Component
 {
@@ -98,7 +100,17 @@ class ReactivarTramite extends Component
 
                     if($traslado){
 
-                        throw new GeneralException('El certificado esta ligado al aviso ' . $traslado->año_aviso . '-' .  $traslado->folio_aviso . '-' . $traslado->usuario_aviso . ' no es posible reactivarlo.');
+                        if($traslado->estado == 'operado'){
+
+                            throw new GeneralException('El certificado esta ligado al aviso operado: ' . $traslado->año_aviso . '-' .  $traslado->folio_aviso . '-' . $traslado->usuario_aviso . ' no es posible reactivarlo.');
+
+                        }
+
+                        $traslado->update(['estado' => 'nuevo', 'certificacion_id' => null]);
+
+                        if($traslado->avaluo_spe) (new SistemaPeritosExternosService())->reactivarAvaluo($traslado->avaluo_spe);
+
+                        (new SistemaTramitesLineaService())->reactivarAviso($traslado->aviso_stl);
 
                     }
 

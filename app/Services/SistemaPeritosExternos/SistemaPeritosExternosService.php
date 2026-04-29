@@ -117,11 +117,11 @@ class SistemaPeritosExternosService{
     public function reactivarAvaluo(int $avaluo_id):string
     {
 
-        $response = Http::withToken(config('services.peritos_externos.token'))
+        $response = Http::withToken(config('services.sistema_peritos_externos.token'))
                             ->accept('application/json')
                             ->asForm()
                             ->post(
-                                config('services.peritos_externos.reactivar_avaluo'),
+                                config('services.sistema_peritos_externos.reactivar_avaluo'),
                                 [
                                     'id' => $avaluo_id,
                                 ]

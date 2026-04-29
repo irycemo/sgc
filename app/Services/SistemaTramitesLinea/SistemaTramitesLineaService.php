@@ -298,11 +298,11 @@ class SistemaTramitesLineaService{
     public function reactivarAviso(int $avaluo_id):string
     {
 
-        $response = Http::withToken(config('services.peritos_externos.token'))
+        $response = Http::withToken(config('services.sistema_tramites_en_linea.token'))
                             ->accept('application/json')
                             ->asForm()
                             ->post(
-                                config('services.peritos_externos.reactivar_avaluo'),
+                                config('services.sistema_tramites_en_linea.reactivar_aviso'),
                                 [
                                     'id' => $avaluo_id,
                                 ]

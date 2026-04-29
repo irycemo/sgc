@@ -248,7 +248,7 @@ class Tramites extends Component
 
                         $traslado->update(['estado' => 'nuevo', 'certificacion_id' => null]);
 
-                        (new SistemaPeritosExternosService())->reactivarAvaluo($traslado->avaluo_spe);
+                        if($traslado->avaluo_spe) (new SistemaPeritosExternosService())->reactivarAvaluo($traslado->avaluo_spe);
 
                         (new SistemaTramitesLineaService())->reactivarAviso($traslado->aviso_stl);
 
@@ -286,7 +286,7 @@ class Tramites extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al actualizar permisos usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al reactivar certificado en administración usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
         }
