@@ -5,6 +5,7 @@ namespace App\Traits\Valuacion;
 use App\Enums\Tramites\AvaluoPara;
 use App\Exceptions\GeneralException;
 use App\Models\Avaluo;
+use App\Models\Certificacion;
 use App\Models\Oficina;
 use App\Models\Predio;
 use App\Models\Tramite;
@@ -191,6 +192,16 @@ trait ImpresionTrait
         if($this->registro_final == $this->registro_inicio) $this->numero_avaluos = 1;
 
         if($this->numero_avaluos < 0) throw new GeneralException('El registro inicial no puede ser mayor al registro final.');
+
+        $certificacion = Certificacion::where('estado', 'activo')
+                                        ->where('tramite_id', $this->tramite_inspeccion->id)
+                                        ->first();
+
+        if($certificacion){
+
+            throw new GeneralException('Ya existe una notificación de valor catastral vinculada al trámite de inspección ocular.');
+
+        }
 
     }
 

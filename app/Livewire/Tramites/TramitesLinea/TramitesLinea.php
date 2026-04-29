@@ -121,6 +121,7 @@ class TramitesLinea extends Component
                                                             $q->where('oficina_id', auth()->user()->oficina_id)
                                                                 ->where('estado', 'pagado');
                                                         })
+                                                        ->where('usuario', 11)
                                                         ->where('created_at', '>' , now()->startOfMonth()->toDateString())
                                                         ->where('estado', 'A')
                                                         ->count();
