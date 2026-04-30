@@ -7,7 +7,6 @@ use App\Models\Avaluo;
 use App\Models\Predio;
 use App\Models\PredioAvaluo;
 use App\Models\PredioIgnorado;
-use App\Models\VariacionCatastral;
 use App\Traits\ComponentesTrait;
 use App\Traits\Predios\ValidarSector;
 use Illuminate\Support\Facades\DB;

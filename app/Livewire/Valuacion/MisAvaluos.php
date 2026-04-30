@@ -8,9 +8,14 @@ use App\Http\Controllers\Valuacion\AvaluoImpresionController;
 use App\Models\Avaluo;
 use App\Models\Certificacion;
 use App\Models\File;
+use App\Models\Persona;
 use App\Models\PredioIgnorado;
 use App\Models\VariacionCatastral;
 use App\Traits\ComponentesTrait;
+use App\Traits\Predios\ValidarCuentaAsignada;
+use App\Traits\Predios\ValidarDisponibilidad;
+use App\Traits\Predios\ValidarManzanaAsignada;
+use App\Traits\Predios\ValidarSector;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -24,6 +29,10 @@ class MisAvaluos extends Component
 
     use WithPagination;
     use ComponentesTrait;
+    use ValidarCuentaAsignada;
+    use ValidarManzanaAsignada;
+    use ValidarSector;
+    use ValidarDisponibilidad;
 
     public $seleccionados = [];
     public $idsEnPagina = [];
@@ -32,6 +41,7 @@ class MisAvaluos extends Component
     public $modal = false;
     public $modalCorregir = false;
     public $modalVerArchivos = false;
+    public $modalClonar = false;
     public $años;
     public $modelo_administrativo;
 
@@ -68,6 +78,18 @@ class MisAvaluos extends Component
 
     public function crearModeloVacio(){
         return Avaluo::make();
+    }
+
+    public function abrirModalClonar(Avaluo $modelo){
+
+        $this->resetearTodo();
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
+        $this->editar = true;
+        $this->modalClonar = true;
+
     }
 
     public function abrirModalCorreccion(Avaluo $modelo){
@@ -378,9 +400,17 @@ class MisAvaluos extends Component
     public function clonar(){
 
         $this->validate([
-            'localidad' => 'required',
-            'oficina' => 'required',
-            'tipo_predio' => 'required',
+            'region_catastral' => 'required|numeric',
+            'municipio' => 'required|numeric',
+            'localidad' => 'required|numeric',
+            'sector' => 'required|numeric',
+            'zona_catastral' => 'required|numeric',
+            'manzana' => 'required|numeric',
+            'predio' => 'required|numeric',
+            'edificio' => 'required|numeric',
+            'departamento' => 'required|numeric',
+            'oficina' => 'required|numeric',
+            'tipo_predio' => 'required|numeric',
             'numero_registro' => 'required',
         ]);
 
@@ -390,22 +420,15 @@ class MisAvaluos extends Component
 
                 $predio_id = $this->clonarPredio();
 
-                $nuevo_avaluo = $this->avaluo->replicate();
+                $nuevo_avaluo = $this->modelo_editar->replicate();
 
                 $nuevo_avaluo->folio = (Avaluo::where('año', now()->format('Y'))->where('usuario', auth()->user()->clave)->max('folio') ?? 0) + 1;
                 $nuevo_avaluo->predio_avaluo = $predio_id;
+                $nuevo_avaluo->predio = null;
                 $nuevo_avaluo->estado = 'nuevo';
                 $nuevo_avaluo->save();
 
-                foreach($this->avaluo->predio->colindancias as $colindancia){
-
-                    $nueva_colindancia = $colindancia->replicate();
-                    $nueva_colindancia->predio_id = $predio_id;
-                    $nueva_colindancia->save();
-
-                }
-
-                foreach($this->avaluo->bloques as $bloque){
+                foreach($this->modelo_editar->bloques as $bloque){
 
                     $nuevo_bloque = $bloque->replicate();
                     $nuevo_bloque->avaluo_id = $nuevo_avaluo->id;
@@ -413,7 +436,7 @@ class MisAvaluos extends Component
 
                 }
 
-                foreach($this->avaluo->imagenes as $imagen){
+                foreach($this->modelo_editar->imagenes as $imagen){
 
                     if(app()->isProduction()){
 
@@ -467,72 +490,76 @@ class MisAvaluos extends Component
 
     public function clonarPredio(){
 
-        //Revisar disponibilidad
+        $this->validarSectorNoBinding($this->localidad, $this->oficina, $this->municipio, $this->sector);
+
+        $this->validarCuentaAsignadaNoBindings($this->localidad, $this->oficina, $this->tipo_predio, $this->numero_registro, auth()->id());
+
+        $this->validarManzanaAsignadaNoBindings($this->municipio, $this->zona_catastral, $this->localidad, $this->sector, $this->manzana, auth()->id());
+
+        $this->validarDisponibilidadPredioAvaluo($this->region_catastral, $this->municipio, $this->zona_catastral, $this->localidad, $this->sector, $this->manzana, $this->predio, $this->edificio, $this->departamento, $this->oficina, $this->tipo_predio, $this->numero_registro);
+
+        $predio = $this->modelo_editar->predioAvaluo->replicate();
+
+        $predio->region_catastral = $this->region_catastral;
+        $predio->municipio = $this->municipio;
+        $predio->zona_catastral = $this->zona_catastral;
+        $predio->localidad = $this->localidad;
+        $predio->sector = $this->sector;
+        $predio->manzana = $this->manzana;
+        $predio->predio = $this->predio;
+        $predio->edificio = $this->edificio;
+        $predio->departamento = $this->departamento;
+        $predio->oficina = $this->oficina;
+        $predio->tipo_predio = $this->tipo_predio;
+        $predio->numero_registro = $this->numero_registro;
+        $predio->status = 'activo';
 
         $predio->save();
 
-        foreach($data['data']['propietarios'] as $propietario){
+        foreach($this->modelo_editar->predioAvaluo->colindancias as $colindancia){
 
-            $persona = $this->buscarPersona(
-                $propietario['persona']['rfc'],
-                $propietario['persona']['curp'],
-                $propietario['persona']['tipo'],
-                $propietario['persona']['nombre'],
-                $propietario['persona']['ap_materno'],
-                $propietario['persona']['ap_paterno'],
-                $propietario['persona']['razon_social']
-            );
+            $nueva_colindancia = $colindancia->replicate();
 
-            if(!$persona){
+            $nueva_colindancia->colindanciaable_id = $predio->id;
 
-                $persona = Persona::create([
-                    'tipo' => $propietario['persona']['tipo'],
-                    'nombre' => $propietario['persona']['nombre'],
-                    'multiple_nombre' => $propietario['persona']['multiple_nombre'],
-                    'ap_paterno' => $propietario['persona']['ap_paterno'],
-                    'ap_materno' => $propietario['persona']['ap_materno'],
-                    'curp' => $propietario['persona']['curp'],
-                    'rfc' => $propietario['persona']['rfc'],
-                    'razon_social' => $propietario['persona']['razon_social'],
-                    'fecha_nacimiento' => $propietario['persona']['fecha_nacimiento'],
-                    'nacionalidad' => $propietario['persona']['nacionalidad'],
-                    'estado_civil' => $propietario['persona']['estado_civil'],
-                    'calle' => $propietario['persona']['calle'],
-                    'numero_exterior' => $propietario['persona']['numero_exterior'],
-                    'numero_interior' => $propietario['persona']['numero_interior'],
-                    'colonia' => $propietario['persona']['colonia'],
-                    'entidad' => $propietario['persona']['entidad'],
-                    'municipio' => $propietario['persona']['municipio'],
-                    'ciudad' => $propietario['persona']['ciudad'],
-                    'cp' => $propietario['persona']['cp']
-                ]);
+            $nueva_colindancia->colindanciaable_type = 'App\Models\PredioAvaluo';
 
-            }
-
-            $predio->propietarios()->create([
-                'persona_id' => $persona->id,
-                'porcentaje_propiedad' => $propietario['porcentaje_propiedad'],
-                'porcentaje_nuda' => $propietario['porcentaje_nuda'],
-                'porcentaje_usufructo' => $propietario['porcentaje_usufructo'],
-            ]);
+            $nueva_colindancia->save();
 
         }
 
-        foreach($this->avaluo->predio->terrenos as $terreno){
+        foreach($this->modelo_editar->predioAvaluo->propietarios as $propietario){
+
+            $propietario_nuevo = $propietario->replicate();
+
+            $propietario_nuevo->propietarioable_id = $predio->id;
+
+            $propietario_nuevo->propietarioable_type = 'App\Models\PredioAvaluo';
+
+            $propietario_nuevo->save();
+
+        }
+
+
+        foreach($this->modelo_editar->predioAvaluo->terrenos as $terreno){
 
             $terreno_nuevo = $terreno->replicate();
 
-            $terreno_nuevo->predio_id = $predio->id;
+            $terreno_nuevo->terrenoable_id = $predio->id;
+
+            $terreno_nuevo->terrenoable_type = 'App\Models\PredioAvaluo';
 
             $terreno_nuevo->save();
 
         }
 
-        foreach($this->avaluo->predio->construcciones as $construccion){
+        foreach($this->modelo_editar->predioAvaluo->construcciones as $construccion){
 
             $construccion_nueva = $construccion->replicate();
 
-            $construccion_nueva->predio_id = $predio->id;
+            $construccion_nueva->construccionable_id = $predio->id;
+
+            $construccion_nueva->construccionable_type = 'App\Models\PredioAvaluo';
 
             $construccion_nueva->save();
 
@@ -540,21 +567,25 @@ class MisAvaluos extends Component
 
         if($predio->edifici0 > 0){
 
-            foreach($this->avaluo->predio->construccionesComun as $construccioneComun){
+            foreach($this->modelo_editar->predioAvaluo->construccionesComun as $construccioneComun){
 
                 $construccion_comun_nueva = $construccioneComun->replicate();
 
-                $construccion_comun_nueva->predio_id = $predio->id;
+                $construccion_comun_nueva->construcciones_comunsable_id = $predio->id;
+
+                $construccion_comun_nueva->construcciones_comunsable_type = 'App\Models\PredioAvaluo';
 
                 $construccion_comun_nueva->save();
 
             }
 
-            foreach($this->avaluo->predio->terrenosComun as $terrenoComun){
+            foreach($this->modelo_editar->predioAvaluo->terrenosComun as $terrenoComun){
 
                 $terreno_comun_nuevo = $terrenoComun->replicate();
 
-                $terreno_comun_nuevo->predio_id = $predio->id;
+                $terreno_comun_nuevo->terrenos_comunsable_id = $predio->id;
+
+                $terreno_comun_nuevo->terrenos_comunsable_type = 'App\Models\PredioAvaluo';
 
                 $terreno_comun_nuevo->save();
 

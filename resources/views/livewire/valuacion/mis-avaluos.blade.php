@@ -287,6 +287,14 @@
 
                                     @endif
 
+                                    <button
+                                        wire:click="abrirModalClonar({{ $avaluo->id }})"
+                                        wire:loading.attr="disabled"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        role="menuitem">
+                                        Clonar
+                                    </button>
+
                                 </div>
 
                             </div>
@@ -473,6 +481,92 @@
                     wire:loading.attr="disabled"
                     wire:target="$toggle('modalVerArchivos')"
                     type="button">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
+
+    <x-dialog-modal wire:model.live="modalClonar" maxWidth="md">
+
+        <x-slot name="title">
+
+            Ingresar nuevo predio
+
+        </x-slot>
+
+        <x-slot name="content">
+
+            <div class="">
+
+                <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
+
+                    <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-24" title="Estado" value="16" readonly>
+
+                    <input title="Región" placeholder="Región" type="number" class="bg-white rounded text-xs w-24  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral">
+
+                    <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-24 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio">
+
+                    <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-24 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model="zona_catastral">
+
+                </div>
+
+                <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
+
+
+                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-24 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
+
+                    <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-24 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
+
+                    <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-24 @error('manzana') border-1 border-red-500 @enderror" wire:model="manzana">
+
+                    <input title="Predio" placeholder="Predio" type="number" class="bg-white rounded text-xs w-24 @error('predio') border-1 border-red-500 @enderror" wire:model.blur="predio">
+
+                </div>
+
+                <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
+
+                    <input title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-24 @error('edificio') border-1 border-red-500 @enderror" wire:model="edificio">
+
+                    <input title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-24 @error('departamento') border-1 border-red-500 @enderror" wire:model="departamento">
+
+                </div>
+
+                <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
+
+                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-24 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina">
+
+                    <input title="Tipo de predio" placeholder="Tipo predio" type="number" class="bg-white rounded text-xs w-24 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
+
+                    <input title="Número de registro" placeholder="Número de registro" type="number" class="bg-white rounded text-xs @error('numero_registro') border-1 border-red-500 @enderror" wire:model="numero_registro">
+
+                </div>
+
+            </div>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex items-center gap-3">
+
+                <x-button-blue
+                    wire:click="clonar"
+                    wire:loading.attr="disabled"
+                    wire:target="clonar">
+
+                    <img wire:loading wire:target="clonar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Clonar
+                </x-button-blue>
+
+                <x-button-red
+                    wire:click="$toggle('modalClonar')"
+                    wire:loading.attr="disabled"
+                    wire:target="$toggle('modalClonar')">
                     Cerrar
                 </x-button-red>
 

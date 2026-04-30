@@ -2,9 +2,10 @@
 
 namespace App\Traits\Predios;
 
+use App\Exceptions\GeneralException;
+use App\Models\Avaluo;
 use App\Models\Predio;
 use App\Models\PredioAvaluo;
-use App\Exceptions\GeneralException;
 
 trait ValidarDisponibilidad
 {
@@ -263,6 +264,37 @@ trait ValidarDisponibilidad
 
                 throw new GeneralException("La clave catastral ya existe en el padrón con otra cuenta predial, verifique.");
 
+            }
+
+        }
+
+    }
+
+    public function validarDisponibilidadPredioAvaluo(int $region_catastral, int $municipio, int $zona_catastral, int $localidad, int $sector, int $manzana, int $predio, int $edificio, int $departamento, int $oficina, int $tipo_predio, int $numero_registro){
+
+        $predioCompletoAvaluo = PredioAvaluo::where('status', 'activo')
+                                    ->where('estado', 16)
+                                    ->where('region_catastral', $region_catastral)
+                                    ->where('municipio', $municipio)
+                                    ->where('zona_catastral', $zona_catastral)
+                                    ->where('localidad', $localidad)
+                                    ->where('sector', $sector)
+                                    ->where('manzana', $manzana)
+                                    ->where('predio', $predio)
+                                    ->where('edificio', $edificio)
+                                    ->where('departamento', $departamento)
+                                    ->where('oficina', $oficina)
+                                    ->where('tipo_predio', $tipo_predio)
+                                    ->where('numero_registro', $numero_registro)
+                                    ->first();
+
+        if($predioCompletoAvaluo){
+
+            $avaluo = Avaluo::where('predio_avaluo', $predioCompletoAvaluo->id)->where('estado', 'nuevo')->first();
+
+            if($avaluo){
+
+                throw new GeneralException("Ya existe en un avaluo del predio " . $predioCompletoAvaluo->cuentaPredial());
             }
 
         }
