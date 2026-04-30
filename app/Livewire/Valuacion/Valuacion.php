@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Traits\Predios\CoordenadasTrait;
 use App\Traits\Predios\ValidarCuentaAsignada;
 use App\Traits\Predios\ValidarDisponibilidad;
+use App\Traits\Predios\ValidarManzanaAsignada;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Valuacion extends Component
@@ -33,6 +34,7 @@ class Valuacion extends Component
     use ValidarSector;
     use ValidarDisponibilidad;
     use ValidarCuentaAsignada;
+    use ValidarManzanaAsignada;
 
     public $avaluo_id;
 
@@ -344,6 +346,8 @@ class Valuacion extends Component
 
             if(!$this->predio->copia) {
 
+                $this->validarManzanaAsignada();
+
                 $cuenta_asignada = $this->validarCuentaAsignada();
 
                 $this->predio->documento_entrada = $cuenta_asignada->tipo_titulo;
@@ -390,7 +394,7 @@ class Valuacion extends Component
 
         } catch(GeneralException $e){
 
-            $this->dispatch('mostrarMensaje', ['error', $e->getMessage()]);
+            $this->dispatch('mostrarMensaje', ['warning', $e->getMessage()]);
 
         } catch (\Throwable $th) {
 

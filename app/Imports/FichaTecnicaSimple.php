@@ -8,6 +8,7 @@ use App\Models\Avaluo;
 use App\Models\Construccion;
 use App\Models\ConstruccionesComun;
 use App\Models\CuentaAsignada;
+use App\Models\ManzanaAsignada;
 use App\Models\Oficina;
 use App\Models\Predio;
 use App\Models\PredioAvaluo;
@@ -159,7 +160,9 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
                     }else{
 
-                        $this->revisarAsignacionCuentaPredia($row, $key);
+                        $this->revisarAsignacionCuentaPredial($row, $key);
+
+                        $this->revisarAsignacionManzana($row, $key);
 
                         // Revisar manzana asignada
 
@@ -400,7 +403,7 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
     }
 
-    public function revisarAsignacionCuentaPredia($row, $key):void
+    public function revisarAsignacionCuentaPredial($row, $key):void
     {
 
         $cuentaAsignada = CuentaAsignada::where('localidad', $row['localidad'])
@@ -411,6 +414,21 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
                                         ->first();
 
         if(!$cuentaAsignada) throw new GeneralException("No tienes asignada la cuenta: " . $row['localidad'] . '-' . $row['oficina'] . '-' . $row['tipo'] . '-' . $row['registro']);
+
+    }
+
+    public function revisarAsignacionManzana($row, $key):void
+    {
+
+        $cuentaAsignada = ManzanaAsignada::where('municipio', $row['municipio'])
+                                        ->where('zona', $row['zona'])
+                                        ->where('localidad', $row['localidad'])
+                                        ->where('sector', $row['sector'])
+                                        ->where('manzana', $row['manzana'])
+                                        ->where('asignado_a', auth()->id())
+                                        ->first();
+
+        if(!$cuentaAsignada) throw new GeneralException("No tienes asignada la manzana: " . $row['municipio'] . '-' . $row['zona'] . '-' . $row['localidad'] . '-' . $row['sector'] . '-' . $row['manzana']);
 
     }
 

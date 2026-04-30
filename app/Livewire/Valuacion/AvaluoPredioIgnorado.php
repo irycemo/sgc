@@ -16,6 +16,7 @@ use App\Traits\Predios\UbicacionTrait;
 use App\Traits\Predios\CoordenadasTrait;
 use App\Traits\Predios\ValidarCuentaAsignada;
 use App\Traits\Predios\ValidarDisponibilidad;
+use App\Traits\Predios\ValidarManzanaAsignada;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AvaluoPredioIgnorado extends Component
@@ -25,6 +26,7 @@ class AvaluoPredioIgnorado extends Component
     use CoordenadasTrait;
     use ValidarDisponibilidad;
     use ValidarCuentaAsignada;
+    use ValidarManzanaAsignada;
     use ValidarSector;
 
     public $avaluo_id;
