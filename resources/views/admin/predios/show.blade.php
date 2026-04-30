@@ -256,7 +256,7 @@
 
     @include('admin.comun.auditoria')
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
         <div>
 
@@ -276,6 +276,11 @@
 
         </div>
 
+        <div>
+
+            <livewire:comun.consultas.avaluos-consulta lazy :predio_id="$predio->id" />
+
+        </div>
 
     </div>
 

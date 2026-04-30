@@ -61,8 +61,6 @@ class CrearTramiteController extends Controller
 
         }catch (\Throwable $th) {
 
-            throw $th;
-
             Log::error("Error al crear trámite por el Sistema de trámites en línea" . $th);
 
             return response()->json([

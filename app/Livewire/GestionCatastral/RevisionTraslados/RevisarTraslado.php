@@ -499,7 +499,7 @@ class RevisarTraslado extends Component
         $this->traslado->predio->movimientos()->create([
             'nombre' => $this->aviso['acto'],
             'fecha' => now()->toDateString(),
-            'descripcion' => 'Se actualiza predio mediante aviso: ' . $this->aviso['año'] . '-' . $this->aviso['folio'] . '-' . $this->aviso['usuario'],
+            'descripcion' => 'Se actualiza predio mediante aviso: ' . $this->aviso['año'] . '-' . $this->aviso['folio'] . '-' . $this->aviso['usuario'] . '. ' . $this->aviso['observaciones'],
             'creado_por' => auth()->id()
         ]);
 

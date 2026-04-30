@@ -194,4 +194,10 @@ class TramiteService{
 
     }
 
+    public function obtenerComprobantePago(){
+
+        return (new SapService($this->tramite))->validarLineaDeCaptura();
+
+    }
+
 }

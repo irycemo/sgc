@@ -16,7 +16,7 @@
 
         <x-slot name="content">
 
-            @include('livewire.comun.modal-content-form')
+            @include('livewire.comun.modal-content-form-actualizar')
 
         </x-slot>
 

@@ -9,7 +9,6 @@ use App\Models\Certificacion;
 use App\Constantes\Constantes;
 use App\Enums\Certificaciones\CertificacionesEnum;
 use App\Http\Controllers\Certificaciones\CedulaActualizcacionController;
-use App\Http\Controllers\Certificaciones\CertificacionesController;
 use App\Http\Controllers\Certificaciones\CertificadoHistoriaController;
 use App\Http\Controllers\Certificaciones\CertificadoNegativoController;
 use App\Http\Controllers\Certificaciones\CertificadoRegistroController;

@@ -87,9 +87,4 @@ class Certificacion extends Model implements Auditable
         return $this->morphOne(File::class, 'fileable')->where('descripcion', 'certificacion');
     }
 
-    protected $auditEvents = [
-        'updated',
-        'deleted',
-    ];
-
 }

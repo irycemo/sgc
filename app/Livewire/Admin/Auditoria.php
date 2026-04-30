@@ -28,7 +28,7 @@ class Auditoria extends Component
     public $newValues;
     public $modelos = [
         'User' => 'App\Models\User',
-        'Avalúo' => 'App\Models\Avaluo',
+        'Avaluo' => 'App\Models\Avaluo',
         'Certificacion' => 'App\Models\Certificacion',
         'Rol' => 'App\Models\Rol',
         'Permiso' => 'App\Models\Permiso',

@@ -56,11 +56,11 @@
                                     <div class="flex items-center gap-3">
 
                                         @if($this->editar_propietarios)
-                                            <div>
+                                            {{-- <div>
 
                                                 <livewire:comun.propietario-actualizar :propietario="$propietario" :predio="$predio" wire:key="button-propietario-{{ $propietario->id }}" />
 
-                                            </div>
+                                            </div> --}}
 
                                             <x-button-red
                                                 wire:click="borrarActor({{ $propietario->id }})"

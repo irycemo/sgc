@@ -265,6 +265,29 @@
 
                                     @endif
 
+                                    @if(auth()->user()->hasRole('Administrador'))
+
+                                        <a
+                                            href="{{ route('auditoria') . '?modelo=Tramite&modelo_id=' . $tramite->id }}"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Auditar
+                                        </a>
+
+                                    @endif
+
+                                    @if($tramite->documento_de_pago || in_array($tramite->estado , ['pagado', 'concluido']))
+
+                                        <button
+                                            wire:click="imprimirComprobantePago({{$tramite->id}})"
+                                            wire:loading.attr="disabled"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Imprimir comprobante de pago SAP
+                                        </button>
+
+                                    @endif
+
                                 </div>
 
                             </div>

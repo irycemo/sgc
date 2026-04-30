@@ -303,4 +303,5 @@ class Avaluos extends Component
     {
         return view('livewire.admin.avaluos')->extends('layouts.admin');
     }
+
 }

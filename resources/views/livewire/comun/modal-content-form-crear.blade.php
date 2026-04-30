@@ -2,7 +2,7 @@
 
     <x-input-group for="tipo_persona" label="Tipo de persona" :error="$errors->first('tipo_persona')" class="w-full">
 
-        <x-input-select id="tipo_persona" wire:model.live="tipo_persona" class="w-full">
+        <x-input-select id="tipo_persona" wire:model.live="tipo_persona" class="w-full" :disabled="$persona->id">
 
             <option value="">Seleccione una opción</option>
             <option value="MORAL">MORAL</option>
@@ -20,19 +20,19 @@
 
         <x-input-group for="nombre" label="Nombre(s)" :error="$errors->first('nombre')" class="w-full">
 
-            <x-input-text id="nombre" wire:model="nombre" />
+            <x-input-text id="nombre" wire:model="nombre" :readonly="$persona->id"/>
 
         </x-input-group>
 
         <x-input-group for="ap_paterno" label="Apellido paterno" :error="$errors->first('ap_paterno')" class="w-full">
 
-            <x-input-text id="ap_paterno" wire:model="ap_paterno" />
+            <x-input-text id="ap_paterno" wire:model="ap_paterno" :readonly="$persona->id"/>
 
         </x-input-group>
 
         <x-input-group for="ap_materno" label="Apellido materno" :error="$errors->first('ap_materno')" class="w-full">
 
-            <x-input-text id="ap_materno" wire:model="ap_materno" />
+            <x-input-text id="ap_materno" wire:model="ap_materno" :readonly="$persona->id"/>
 
         </x-input-group>
 
@@ -66,9 +66,9 @@
 
     @elseif($tipo_persona == 'MORAL')
 
-        <x-input-group for="razon_social" label="Razon social" :error="$errors->first('razon_social')" class="w-full">
+        <x-input-group for="razon_social" label="Razon social" :error="$errors->first('razon_social')" class="w-full sm:col-span-2 lg:col-span-3">
 
-            <x-input-text id="razon_social" wire:model="razon_social" />
+            <x-input-text id="razon_social" wire:model="razon_social" :readonly="$persona->id"/>
 
         </x-input-group>
 

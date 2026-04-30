@@ -516,6 +516,38 @@ class Tramites extends Component
 
     }
 
+    public function imprimirComprobantePago(){
+
+        try {
+
+            $data = (new TramiteService($this->modelo_editar))->obtenerComprobantePago();
+
+            if(! isset($data['BASE64'])){
+
+                throw new GeneralException('No hay documento disponible');
+
+            }
+
+            $pdf = base64_decode($data['BASE64']);
+
+            return response()->streamDownload(
+                fn () => print($pdf),
+                'aviso.pdf'
+            );
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al generar comprobante de pago por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+
+        }
+
+    }
+
     #[Computed]
     public function tramites(){
 
