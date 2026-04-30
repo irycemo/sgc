@@ -11,7 +11,7 @@ trait ValidarManzanaAsignada
     public function validarManzanaAsignada(){
 
         $cuenta = ManzanaAsignada::where('municipio', $this->predio->municipio)
-                                    ->where('zona', $this->predio->zona)
+                                    ->where('zona', $this->predio->zona_catastral)
                                     ->where('localidad', $this->predio->localidad)
                                     ->where('sector', $this->predio->sector)
                                     ->where('manzana', $this->predio->manzana)

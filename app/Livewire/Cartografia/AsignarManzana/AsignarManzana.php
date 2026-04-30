@@ -110,7 +110,8 @@ class AsignarManzana extends Component
 
         $this->validate([
             'manzanas_seleccionadas' => 'required|array|min:1',
-            'valuador' => 'required'
+            'valuador' => 'required',
+            'observaciones' => 'required'
         ]);
 
         try {

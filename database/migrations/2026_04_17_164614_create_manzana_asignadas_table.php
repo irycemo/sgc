@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('lon')->nullable();
             $table->string('lat')->nullable();
             $table->foreignId('asignado_a')->nullable()->references('id')->on('users');
-            $table->text('observaciones');
+            $table->text('observaciones')->nullable();
             $table->foreignId('creado_por')->nullable()->references('id')->on('users');
             $table->foreignId('actualizado_por')->nullable()->references('id')->on('users');
             $table->timestamps();

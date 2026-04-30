@@ -213,15 +213,33 @@ class MisAvaluos extends Component
 
                     $avaluo->bloques()->delete();
 
-                    $avaluo->delete();
-
-                    $predio->delete();
-
                     $files = File::where('fileable_id', $avaluo->id)->where('fileable_type', 'App\Models\Avaluo')->get();
 
                     foreach ($files as $file) {
-                        Storage::disk('avaluos')->delete($file->url);
+
+                        if(app()->isProduction()){
+
+                            if (Storage::disk('s3')->exists(config('services.ses.ruta_avaluos_fotos') . $file->url)) {
+
+                                Storage::disk('s3')->delete(config('services.ses.ruta_avaluos_fotos') . $file->url);
+
+                            }
+
+                        }else{
+
+                            if (Storage::disk('avaluos')->exists($file->url)) {
+
+                                Storage::disk('avaluos')->delete($file->url);
+
+                            }
+
+                        }
+
                     }
+
+                    $avaluo->delete();
+
+                    $predio->delete();
 
                 });
 

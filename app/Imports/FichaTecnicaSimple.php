@@ -8,6 +8,7 @@ use App\Models\Avaluo;
 use App\Models\Construccion;
 use App\Models\ConstruccionesComun;
 use App\Models\CuentaAsignada;
+use App\Models\File;
 use App\Models\ManzanaAsignada;
 use App\Models\Oficina;
 use App\Models\Predio;
@@ -18,6 +19,7 @@ use App\Services\Coordenadas\Coordenadas;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -428,7 +430,7 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
                                         ->where('asignado_a', auth()->id())
                                         ->first();
 
-        if(!$cuentaAsignada) throw new GeneralException("No tienes asignada la manzana: " . $row['municipio'] . '-' . $row['zona'] . '-' . $row['localidad'] . '-' . $row['sector'] . '-' . $row['manzana']);
+        if(!$cuentaAsignada) throw new GeneralException("No tienes asignada la manzana: " . $row['municipio'] . '-' . $row['zona'] . '-' . $row['localidad'] . '-' . $row['sector'] . '-' . $row['manzana'] . '. Linea ' . $key);
 
     }
 
@@ -511,7 +513,17 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
         if($predioCompletoAvaluo){
 
-            throw new GeneralException("Ya existe en un avaluo del predio " . $predioCompletoAvaluo->cuentaPredial() . ", verifique. " . 'Línea: ' . $key);
+            $avaluo = Avaluo::where('predio_avaluo', $predioCompletoAvaluo->id)->first();
+
+            if($avaluo){
+
+                $this->borrarAvaluo($avaluo);
+
+            }else{
+
+                throw new GeneralException("Ya existe en un avaluo del predio " . $predioCompletoAvaluo->cuentaPredial() . ", verifique. " . 'Línea: ' . $key);
+
+            }
 
         }else{
 
@@ -811,6 +823,54 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
             ]);
 
         }
+
+    }
+
+    public function borrarAvaluo(Avaluo $avaluo){
+
+        $predio = $avaluo->predioAvaluo;
+
+        $predio->propietarios()->delete();
+
+        $predio->colindancias()->delete();
+
+        $predio->terrenosComun()->delete();
+
+        $predio->construccionesComun()->delete();
+
+        $predio->construcciones()->delete();
+
+        $predio->terrenos()->delete();
+
+        $avaluo->bloques()->delete();
+
+        $files = File::where('fileable_id', $avaluo->id)->where('fileable_type', 'App\Models\Avaluo')->get();
+
+        foreach ($files as $file) {
+
+            if(app()->isProduction()){
+
+                if (Storage::disk('s3')->exists(config('services.ses.ruta_avaluos_fotos') . $file->url)) {
+
+                    Storage::disk('s3')->delete(config('services.ses.ruta_avaluos_fotos') . $file->url);
+
+                }
+
+            }else{
+
+                if (Storage::disk('avaluos')->exists($file->url)) {
+
+                    Storage::disk('avaluos')->delete($file->url);
+
+                }
+
+            }
+
+        }
+
+        $avaluo->delete();
+
+        $predio->delete();
 
     }
 
