@@ -147,7 +147,7 @@ trait ImpresionTrait
                                             ->where('usuario', $this->inspeccion_usuario)
                                             ->first();
 
-        if($this->tramite_inspeccion->estado != 'pagado'){
+        if($this->tramite_inspeccion->estado === 'nuevo'){
 
             (new TramiteService($this->tramite_inspeccion))->procesarPago();
 
@@ -173,7 +173,7 @@ trait ImpresionTrait
 
             if($this->tramite_desglose->servicio->categoria->nombre != 'Desglose de predios y valuación') throw new GeneralException('El trámite ingresado para desglose no corresponde a un desglose.');
 
-            if($this->tramite_desglose->estado != 'pagado'){
+            if($this->tramite_desglose->estado === 'nuevo'){
 
                 (new TramiteService($this->tramite_desglose))->procesarPago();
 

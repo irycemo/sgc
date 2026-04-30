@@ -15,6 +15,7 @@ class VariacionesCatastrales extends Component
     use PrediosTrait;
 
     public $umas;
+    public $porcentaje;
 
     protected function rules(){
 
@@ -40,19 +41,25 @@ class VariacionesCatastrales extends Component
 
     public function agregarPredio(){
 
-        if($this->editar && count($this->predios) >= $this->modelo_editar->cantidad){
+        if(count($this->predios)){
 
-            $this->dispatch('mostrarMensaje', ['warning', "Solo es posible agregar " . $this->modelo_editar->cantidad . " predios."]);
+            $this->dispatch('mostrarMensaje', ['warning', "Solo es posible agregar 1 predio."]);
 
             return;
 
         }
 
-        $colection = collect($this->predios);
+        if($this->porcentaje){
 
-        $suma_valor_catastral = $colection->sum('valor_catastral') + $this->predio->valor_catastral;
+            $monto =  $this->predio->valor_catastral * $this->porcentaje / 100;
 
-        if($suma_valor_catastral > $this->umas){
+        }else{
+
+            $monto =  $this->predio->valor_catastral;
+
+        }
+
+        if($monto > $this->umas){
 
             $this->dispatch('mostrarMensaje', ['warning', "El valor catastral excede las 5000 umas."]);
 
@@ -60,21 +67,19 @@ class VariacionesCatastrales extends Component
 
         }
 
-        if($colection->contains('id', $this->predio->id)){
+        $this->modelo_editar->cantidad = 1;
 
-            $this->dispatch('mostrarMensaje', ['warning', "La cuenta predial ya esta agregada."]);
+        $this->modelo_editar->monto = $monto;
 
-        }else{
+        if($this->porcentaje){
 
-            array_push($this->predios, $this->predio->toArray());
+            $this->modelo_editar->observaciones = 'Calificación de variación catastral del predio: ' . $this->predio->cuentaPredial() . ' conciderando el porcentaje: ' . $this->porcentaje  . '% del valor catastral: $' . number_format($this->predio->valor_catastral, 2);
 
         }
 
-        $this->predio = null;
-
-        $this->modelo_editar->cantidad = 1;
-
         $this->updatedModeloEditarTipoServicio();
+
+        $this->predio = null;
 
     }
 

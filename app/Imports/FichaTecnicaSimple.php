@@ -513,7 +513,7 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
         if($predioCompletoAvaluo){
 
-            $avaluo = Avaluo::where('predio_avaluo', $predioCompletoAvaluo->id)->first();
+            $avaluo = Avaluo::where('predio_avaluo', $predioCompletoAvaluo->id)->where('estado', 'nuevo')->first();
 
             if($avaluo){
 

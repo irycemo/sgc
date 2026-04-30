@@ -19,6 +19,8 @@
 
                         @include('livewire.tramites.ventanilla.comun.numero_oficio')
 
+                        @include('livewire.tramites.ventanilla.comun.porcentaje')
+
                     </div>
 
                     @include('livewire.tramites.ventanilla.comun.predios')

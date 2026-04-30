@@ -35,6 +35,19 @@ class MisAvaluos extends Component
     public $años;
     public $modelo_administrativo;
 
+    public $region_catastral;
+    public $municipio;
+    public $localidad;
+    public $sector;
+    public $zona_catastral;
+    public $manzana;
+    public $predio;
+    public $edificio;
+    public $departamento;
+    public $oficina;
+    public $tipo_predio;
+    public $numero_registro;
+
     public Avaluo $modelo_editar;
 
     public $filters = [
@@ -359,6 +372,197 @@ class MisAvaluos extends Component
             throw new GeneralException('El proceso de variación catastral ha sido conlcuido, no es posible enviar a corrección.');
 
         }
+
+    }
+
+    public function clonar(){
+
+        $this->validate([
+            'localidad' => 'required',
+            'oficina' => 'required',
+            'tipo_predio' => 'required',
+            'numero_registro' => 'required',
+        ]);
+
+        try {
+
+            DB::transaction(function () {
+
+                $predio_id = $this->clonarPredio();
+
+                $nuevo_avaluo = $this->avaluo->replicate();
+
+                $nuevo_avaluo->folio = (Avaluo::where('año', now()->format('Y'))->where('usuario', auth()->user()->clave)->max('folio') ?? 0) + 1;
+                $nuevo_avaluo->predio_avaluo = $predio_id;
+                $nuevo_avaluo->estado = 'nuevo';
+                $nuevo_avaluo->save();
+
+                foreach($this->avaluo->predio->colindancias as $colindancia){
+
+                    $nueva_colindancia = $colindancia->replicate();
+                    $nueva_colindancia->predio_id = $predio_id;
+                    $nueva_colindancia->save();
+
+                }
+
+                foreach($this->avaluo->bloques as $bloque){
+
+                    $nuevo_bloque = $bloque->replicate();
+                    $nuevo_bloque->avaluo_id = $nuevo_avaluo->id;
+                    $nuevo_bloque->save();
+
+                }
+
+                foreach($this->avaluo->imagenes as $imagen){
+
+                    if(app()->isProduction()){
+
+                        $nombre = '2' . $imagen->url;
+
+                        if (Storage::disk('s3')->exists(config('services.ses.ruta_avaluos_fotos') . $imagen->url)){
+
+                            Storage::disk('s3')->copy(config('services.ses.ruta_avaluos_fotos') . $imagen->url, config('services.ses.ruta_avaluos_fotos') .  $nombre);
+
+                        }else{
+
+                            return;
+
+                        }
+
+                    }else{
+
+                        $nombre = '2' . $imagen->url;
+
+                        Storage::disk('avaluos')->copy($imagen->url, $nombre);
+
+                    }
+
+                    $nueva_imagen = $imagen->replicate();
+                    $nueva_imagen->url = $nombre;
+                    $nueva_imagen->fileable_id = $nuevo_avaluo->id;
+                    $nueva_imagen->save();
+
+                }
+
+            });
+
+            $this->dispatch('mostrarMensaje', ['success', 'El avalúo se clono con éxito']);
+
+            $this->reset(['localidad', 'oficina', 'tipo_predio', 'numero_registro', 'modalClonar']);
+
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al clonar avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
+    public function clonarPredio(){
+
+        //Revisar disponibilidad
+
+        $predio->save();
+
+        foreach($data['data']['propietarios'] as $propietario){
+
+            $persona = $this->buscarPersona(
+                $propietario['persona']['rfc'],
+                $propietario['persona']['curp'],
+                $propietario['persona']['tipo'],
+                $propietario['persona']['nombre'],
+                $propietario['persona']['ap_materno'],
+                $propietario['persona']['ap_paterno'],
+                $propietario['persona']['razon_social']
+            );
+
+            if(!$persona){
+
+                $persona = Persona::create([
+                    'tipo' => $propietario['persona']['tipo'],
+                    'nombre' => $propietario['persona']['nombre'],
+                    'multiple_nombre' => $propietario['persona']['multiple_nombre'],
+                    'ap_paterno' => $propietario['persona']['ap_paterno'],
+                    'ap_materno' => $propietario['persona']['ap_materno'],
+                    'curp' => $propietario['persona']['curp'],
+                    'rfc' => $propietario['persona']['rfc'],
+                    'razon_social' => $propietario['persona']['razon_social'],
+                    'fecha_nacimiento' => $propietario['persona']['fecha_nacimiento'],
+                    'nacionalidad' => $propietario['persona']['nacionalidad'],
+                    'estado_civil' => $propietario['persona']['estado_civil'],
+                    'calle' => $propietario['persona']['calle'],
+                    'numero_exterior' => $propietario['persona']['numero_exterior'],
+                    'numero_interior' => $propietario['persona']['numero_interior'],
+                    'colonia' => $propietario['persona']['colonia'],
+                    'entidad' => $propietario['persona']['entidad'],
+                    'municipio' => $propietario['persona']['municipio'],
+                    'ciudad' => $propietario['persona']['ciudad'],
+                    'cp' => $propietario['persona']['cp']
+                ]);
+
+            }
+
+            $predio->propietarios()->create([
+                'persona_id' => $persona->id,
+                'porcentaje_propiedad' => $propietario['porcentaje_propiedad'],
+                'porcentaje_nuda' => $propietario['porcentaje_nuda'],
+                'porcentaje_usufructo' => $propietario['porcentaje_usufructo'],
+            ]);
+
+        }
+
+        foreach($this->avaluo->predio->terrenos as $terreno){
+
+            $terreno_nuevo = $terreno->replicate();
+
+            $terreno_nuevo->predio_id = $predio->id;
+
+            $terreno_nuevo->save();
+
+        }
+
+        foreach($this->avaluo->predio->construcciones as $construccion){
+
+            $construccion_nueva = $construccion->replicate();
+
+            $construccion_nueva->predio_id = $predio->id;
+
+            $construccion_nueva->save();
+
+        }
+
+        if($predio->edifici0 > 0){
+
+            foreach($this->avaluo->predio->construccionesComun as $construccioneComun){
+
+                $construccion_comun_nueva = $construccioneComun->replicate();
+
+                $construccion_comun_nueva->predio_id = $predio->id;
+
+                $construccion_comun_nueva->save();
+
+            }
+
+            foreach($this->avaluo->predio->terrenosComun as $terrenoComun){
+
+                $terreno_comun_nuevo = $terrenoComun->replicate();
+
+                $terreno_comun_nuevo->predio_id = $predio->id;
+
+                $terreno_comun_nuevo->save();
+
+            }
+
+        }
+
+        return $predio->id;
 
     }
 

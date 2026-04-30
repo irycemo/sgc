@@ -52,7 +52,8 @@ trait ComunTrait
         'numero_oficio' => false,
         'dependencias' => false,
         'notarias' => false,
-        'avaluo_para' => true
+        'avaluo_para' => true,
+        'porcentaje' => false,
     ];
 
     public function getListeners()
@@ -312,6 +313,12 @@ trait ComunTrait
         if(in_array($this->servicio['clave_ingreso'], ['D726', 'D728'])){
 
             $this->tipo = 2;
+
+        }
+
+        if(in_array($this->servicio['clave_ingreso'], ['DM27'])){
+
+            $this->flags['porcentaje'] = true;
 
         }
 

@@ -56,8 +56,6 @@ class SapService{
 
             throw new GeneralException("Error de comunicación con SAP.");
 
-            return;
-
         }
 
         $data = json_decode($response, true);
