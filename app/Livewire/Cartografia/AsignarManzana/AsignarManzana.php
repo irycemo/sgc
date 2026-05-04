@@ -58,7 +58,7 @@ class AsignarManzana extends Component
                             ->where('sector', $this->sector)
                             ->get();
 
-        for ($i=1; $i <= 99; $i++) {
+        for ($i=1; $i <= 999; $i++) {
 
             if($predios->where('manzana', $i)->first()){
 
