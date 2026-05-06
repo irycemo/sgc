@@ -126,13 +126,13 @@ class Fusion extends Component
 
             }
 
-            if(!$predio->superficie_notarial){
+            if(!$predio->superficie_total_terreno){
 
-                throw new GeneralException('El predio ' . $predio->cuentaPredial() . ' no tiene superficie notarial, debe ser capturada.');
+                throw new GeneralException('El predio ' . $predio->cuentaPredial() . ' no tiene superficie total de terreno, debe ser capturada.');
 
             }else{
 
-                $superficie_total = $superficie_total + $predio->superficie_notarial;
+                $superficie_total = $superficie_total + $predio->superficie_total_terreno;
 
             }
 
@@ -140,7 +140,7 @@ class Fusion extends Component
 
         }
 
-        if($this->avaluos->first()->predioAvaluo->superficie_notarial > $superficie_total){
+        if($this->avaluos->first()->predioAvaluo->superficie_total_terreno > $superficie_total){
 
             throw new GeneralException('La superficie de terreno del avalúo no puede ser mayor a la suma de las superficies de los predios (' . $superficie_total .').');
 
