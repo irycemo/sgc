@@ -124,6 +124,7 @@ trait PredioTrait
         $object->cuenta_predial = $predio->cuentaPredial();
         $object->clave_catastral = $predio->claveCatastral();
         $object->tipo_predio = $predio->tipo_predio;
+        $object->edificio = $predio->edificio;
         $object->id = $predio->id;
         $object->status = $predio->status;
         $object->curt = $predio->curt;

@@ -194,7 +194,11 @@
 
         @include('certificaciones.comun.descripcion_inmueble')
 
-        {{-- @include('certificaciones.comun.terrenos_construcciones') --}}
+        @if(isset($predio->edificio) && $predio->edificio > 0)
+
+            @include('certificaciones.comun.terrenos_construcciones')
+
+        @endif
 
         @include('certificaciones.comun.propietarios')
 
