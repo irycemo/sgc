@@ -77,6 +77,8 @@ class VariacionesCatastrales extends Component
 
         }
 
+        array_push($this->predios, $this->predio->toArray());
+
         $this->updatedModeloEditarTipoServicio();
 
         $this->predio = null;
