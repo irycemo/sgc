@@ -6,6 +6,7 @@ use App\Models\Oficina;
 use Livewire\Component;
 use App\Models\Certificacion;
 use App\Constantes\Constantes;
+use App\Enums\Certificaciones\CertificacionesEnum;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
@@ -57,7 +58,7 @@ class ReporteCertificaciones extends Component
                                     $q->where('año', $this->año);
                                 })
                                 ->when (isset($this->documento) && $this->documento != "", function($q){
-                                    $q->where('documento', $this->documento);
+                                    $q->where('tipo', $this->documento);
                                 })
                                 ->when (isset($this->estado) && $this->estado != "", function($q){
                                     $q->where('estado', $this->estado);
@@ -74,7 +75,7 @@ class ReporteCertificaciones extends Component
 
         $this->años = Constantes::AÑOS;
 
-        $this->documentos = Constantes::CERTIFICACIONES;
+        $this->documentos = CertificacionesEnum::cases();
 
         $this->oficinas = Oficina::select('id', 'nombre')->orderBy('nombre')->get();
 

@@ -34,6 +34,22 @@
 
         </x-input-group>
 
+        <x-input-group for="documento" label="Tipo" :error="$errors->first('documento')" class="w-full">
+
+            <x-input-select id="documento" wire:model.live="documento">
+
+                <option value="">Seleccione una opción</option>
+
+                @foreach ($documentos as $documento)
+
+                    <option value="{{ $documento->value }}">{{ $documento->label() }}</option>
+
+                @endforeach
+
+            </x-input-select>
+
+        </x-input-group>
+
         <x-input-group for="estado" label="Estado" :error="$errors->first('estado')" class="w-full">
 
             <x-input-select id="estado" wire:model.live="estado">
