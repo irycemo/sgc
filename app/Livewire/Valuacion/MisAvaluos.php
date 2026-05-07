@@ -345,9 +345,18 @@ class MisAvaluos extends Component
 
             $avaluos = Avaluo::where('tramite_inspeccion', $tramite->id)
                                 ->where('estado', '!=', 'nuevo')
-                                ->get();
+                                ->count();
 
-            if(! $avaluos->count()) throw new GeneralException(("No hay avalúos asociados a el trámite ingresado."));
+            if($avaluos == 0) throw new GeneralException(("No hay avalúos asociados a el trámite ingresado."));
+
+            $folder_name = $tramite->año . '-' . $tramite->año . '-' . $tramite->año . '/' . now()->format('Y-m-d_H-i-s');
+
+           /*  Bus::chain([
+                new JobOne,
+                new JobTwo,
+            ])->then(function () {
+                // This runs only if both jobs succeed
+            })->dispatch(); */
 
        } catch (GeneralException $ex) {
 

@@ -422,7 +422,15 @@ class VariacionesCatastrales extends Component
                 $predio_avaluo->origen,
                 $predio_avaluo->indexado_en,
                 $predio_avaluo->actualizado_nombre,
-                $predio_avaluo->creado_por
+                $predio_avaluo->creado_por,
+                $predio_avaluo->fecha_otorgamiento,
+                $predio_avaluo->folio_ultimo_movimiento,
+                $predio_avaluo->fecha_ultimo_avaluo,
+                $predio_avaluo->distrito,
+                $predio_avaluo->libro,
+                $predio_avaluo->registro,
+                $predio_avaluo->tomo,
+                $predio_avaluo->regimen,
             );
 
         $predio_avaluo->save();
