@@ -230,6 +230,12 @@ class Traslados extends Component
 
     }
 
+    public function revisarRedireccionar(){
+
+        /*  */
+
+    }
+
     #[Computed]
     public function traslados(){
 

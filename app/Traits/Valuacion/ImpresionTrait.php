@@ -147,15 +147,15 @@ trait ImpresionTrait
                                             ->where('usuario', $this->inspeccion_usuario)
                                             ->first();
 
+        if(!$this->tramite_inspeccion) throw new GeneralException('El trámite de inspección ocular no existe.');
+
+        if(!$this->tramite_inspeccion->avaluo_para) throw new GeneralException('El trámite ingresado para inspección ocular no corresponde a una inspección ocular.');
+
         if($this->tramite_inspeccion->estado === 'nuevo'){
 
             (new TramiteService($this->tramite_inspeccion))->procesarPago();
 
         }
-
-        if(!$this->tramite_inspeccion) throw new GeneralException('El trámite de inspección ocular no existe.');
-
-        if(!$this->tramite_inspeccion->avaluo_para) throw new GeneralException('El trámite ingresado para inspección ocular no corresponde a una inspección ocular.');
 
         if($this->tramite_inspeccion->estado != 'pagado') throw new GeneralException('El trámite de inspección ocular no esta pagado o ha sido concluido.');
 
