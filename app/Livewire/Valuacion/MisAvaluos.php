@@ -10,6 +10,7 @@ use App\Models\Certificacion;
 use App\Models\File;
 use App\Models\Persona;
 use App\Models\PredioIgnorado;
+use App\Models\Tramite;
 use App\Models\VariacionCatastral;
 use App\Traits\ComponentesTrait;
 use App\Traits\Predios\ValidarCuentaAsignada;
@@ -20,6 +21,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -39,6 +41,7 @@ class MisAvaluos extends Component
     public $paginaSeleccionada = false;
     public $todosSelecionados = false;
     public $modal = false;
+    public $modal_imprimir = false;
     public $modalCorregir = false;
     public $modalVerArchivos = false;
     public $modalClonar = false;
@@ -57,6 +60,10 @@ class MisAvaluos extends Component
     public $oficina;
     public $tipo_predio;
     public $numero_registro;
+
+    public $año;
+    public $folio;
+    public $usuario;
 
     public Avaluo $modelo_editar;
 
@@ -297,12 +304,54 @@ class MisAvaluos extends Component
 
         try {
 
+            if(! $avaluo->uuid){
+
+                $avaluo->update(['uuid' => (string)Str::uuid()]);
+
+            }
+
             $pdf = (new AvaluoImpresionController())->generarAvaluo($avaluo);
 
             return response()->streamDownload(
                 fn () => print($pdf->output()),
                 'avaluo.pdf'
             );
+
+       } catch (\Throwable $th) {
+
+            Log::error("Error al imprimir avaluo en mis avaluos por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+
+       }
+
+    }
+
+    public function imprimirAvaluos(){
+
+        $this->validate([
+            'año' => 'required',
+            'folio' => 'required',
+            'usuario' => 'required',
+        ]);
+
+        try {
+
+            $tramite = Tramite::where('año', $this->año)
+                                    ->where('folio', $this->folio)
+                                    ->where('usuario', $this->usuario)
+                                    ->first();
+
+            if(! $tramite) throw new GeneralException("El trámite no existe");
+
+            $avaluos = Avaluo::where('tramite_inspeccion', $tramite->id)
+                                ->where('estado', '!=', 'nuevo')
+                                ->get();
+
+            if(! $avaluos->count()) throw new GeneralException(("No hay avalúos asociados a el trámite ingresado."));
+
+       } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
        } catch (\Throwable $th) {
 

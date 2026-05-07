@@ -376,6 +376,71 @@
 
     </x-confirmation-modal>
 
+    <x-confirmation-modal wire:model.live="modal_imprimir" maxWidth="sm">
+
+        <x-slot name="title">
+            Imprimir avalúos
+        </x-slot>
+
+        <x-slot name="content">
+
+            <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5 items-start">
+
+                <div class="flex-auto text-center mb-3">
+
+                    <div >
+
+                        <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite</Label>
+
+                    </div>
+
+                    <div class="inline-flex">
+
+                        <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
+                            @foreach ($años as $año)
+
+                                <option value="{{ $año }}">{{ $año }}</option>
+
+                            @endforeach
+                        </select>
+
+                        <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
+
+                        <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <x-secondary-button
+                wire:click="$toggle('modal_imprimir')"
+                wire:loading.attr="disabled"
+            >
+                No
+            </x-secondary-button>
+
+            <x-danger-button
+                class="ml-2"
+                wire:click="imprimirAvaluos"
+                wire:loading.attr="disabled"
+                wire:target="imprimirAvaluos"
+            >
+
+                <img wire:loading wire:target="imprimirAvaluos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                Imprimir avalúos
+            </x-danger-button>
+
+        </x-slot>
+
+    </x-confirmation-modal>
+
     <x-confirmation-modal wire:model.live="modalCorregir" maxWidth="sm">
 
         <x-slot name="title">
