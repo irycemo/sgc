@@ -11,6 +11,8 @@ trait ValidarManzanaAsignada
     public function validarManzanaAsignada():void
     {
 
+        if($this->predio->manzana === 0) return;
+
         $cuenta = ManzanaAsignada::where('municipio', $this->predio->municipio)
                                     ->where('zona', $this->predio->zona_catastral)
                                     ->where('localidad', $this->predio->localidad)
@@ -25,6 +27,8 @@ trait ValidarManzanaAsignada
 
     public function validarManzanaAsignadaNoBindings(int $municipio, int $zona_catastral, int $localidad, int $sector, int $manzana, int $user_id):void
     {
+
+        if($manzana === 0) return;
 
         $cuenta = ManzanaAsignada::where('municipio', $municipio)
                                     ->where('zona', $zona_catastral)

@@ -422,6 +422,8 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
     public function revisarAsignacionManzana($row, $key):void
     {
 
+        if($row['manzana'] == 0) return;
+
         $cuentaAsignada = ManzanaAsignada::where('municipio', $row['municipio'])
                                         ->where('zona', $row['zona'])
                                         ->where('localidad', $row['localidad'])

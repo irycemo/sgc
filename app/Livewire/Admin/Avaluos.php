@@ -5,17 +5,15 @@ namespace App\Livewire\Admin;
 use App\Constantes\Constantes;
 use App\Http\Controllers\Valuacion\AvaluoImpresionController;
 use App\Models\Avaluo;
-use App\Models\Certificacion;
 use App\Models\File;
-use App\Models\PredioAvaluo;
 use App\Models\PredioIgnorado;
 use App\Models\User;
 use App\Models\VariacionCatastral;
 use App\Traits\ComponentesTrait;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -120,6 +118,12 @@ class Avaluos extends Component
     public function imprimirAvaluo(Avaluo $avaluo){
 
        try {
+
+            if(! $avaluo->uuid){
+
+                $avaluo->update(['uuid' => (string)Str::uuid()]);
+
+            }
 
             $pdf = (new AvaluoImpresionController())->generarAvaluo($avaluo);
 
