@@ -2,6 +2,7 @@
 
 namespace App\Livewire\GestionCatastral\RevisionTraslados;
 
+use App\Exceptions\GeneralException;
 use App\Models\Oficina;
 use App\Models\Traslado;
 use App\Models\User;
@@ -146,6 +147,8 @@ class Traslados extends Component
 
         try {
 
+            $this->revisarPredioActivo();
+
             DB::transaction(function () {
 
                 $this->modelo_editar->update([
@@ -175,6 +178,8 @@ class Traslados extends Component
         $this->validate(['observaciones' => 'required']);
 
         try {
+
+            $this->revisarPredioActivo();
 
             DB::transaction(function () {
 
@@ -206,6 +211,8 @@ class Traslados extends Component
 
         try {
 
+            $this->revisarPredioActivo();
+
             DB::transaction(function () {
 
                 $this->modelo_editar->update([
@@ -233,6 +240,16 @@ class Traslados extends Component
     public function revisarRedireccionar(){
 
         /*  */
+
+    }
+
+    public function revisarPredioActivo(){
+
+        if($this->modelo_editar->predio->status != 'activo'){
+
+            throw new GeneralException('El predio no esta activo.');
+
+        }
 
     }
 

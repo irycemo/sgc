@@ -744,6 +744,14 @@ class RevisarTraslado extends Component
 
     public function render()
     {
+
+        if($this->traslado->predio->status != 'activo'){
+
+            abort(403, 'El predio no esta activo.');
+
+        }
+
         return view('livewire.gestion-catastral.revision-traslados.revisar-traslado')->extends('layouts.admin');
     }
+
 }

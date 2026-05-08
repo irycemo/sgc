@@ -40,7 +40,7 @@
 
     <div class="p-4 flex-auto bg-white rounded-lg mb-3 shadow-md space-y-3">
 
-        <h4 class="text-lg mb-5 text-center">Cuentas prediales desglosadas</h4>
+        <h4 class="text-lg mb-5 text-center">Cuentas prediales a fusionar</h4>
 
         <div class="flex flex-wrap justify-center items-center gap-2">
 
