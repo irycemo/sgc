@@ -168,7 +168,7 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
                         $this->revisarAsignacionCuentaPredial($row, $key);
 
-                        $this->revisarAsignacionManzana($row, $key);
+                        /* $this->revisarAsignacionManzana($row, $key); */
 
                         // Revisar manzana asignada
 

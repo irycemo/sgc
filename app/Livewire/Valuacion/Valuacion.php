@@ -346,7 +346,7 @@ class Valuacion extends Component
 
             if(!$this->predio->copia) {
 
-                $this->validarManzanaAsignada();
+                /* $this->validarManzanaAsignada(); */
 
                 $cuenta_asignada = $this->validarCuentaAsignada();
 
