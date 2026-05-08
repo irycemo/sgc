@@ -38,7 +38,7 @@ class CertificacionesExport implements FromCollection,  WithProperties, WithDraw
                                     $q->where('año', $this->año);
                                 })
                                 ->when (isset($this->documento) && $this->documento != "", function($q){
-                                    $q->where('documento', $this->documento);
+                                    $q->where('tipo', $this->documento);
                                 })
                                 ->when (isset($this->estado) && $this->estado != "", function($q){
                                     $q->where('estado', $this->estado);
