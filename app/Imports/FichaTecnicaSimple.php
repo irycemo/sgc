@@ -104,9 +104,13 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
             $count_predio_origen = 0;
 
+            $count_predios_nuevos = 0;
+
             foreach ($rows as $index => $row) {
 
                 if($row['predio_existe_en_padron'] == 'SI') $count_predio_origen ++;
+
+                if($row['predio_existe_en_padron'] == 'NO') $count_predios_nuevos ++;
 
                 $edificio = $row['edificio'] ?? null;
 
@@ -132,9 +136,9 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
             }
 
-            if($count_predio_origen > 1){
+            if($count_predio_origen > 1 && $count_predios_nuevos > 0){
 
-                throw new GeneralException("Solo puede haber un predio origen.");
+                throw new GeneralException("Solo puede haber un predio origen si hay predios que no existen en el padron.");
 
             }
 

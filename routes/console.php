@@ -1103,3 +1103,16 @@ Artisan::command('fecha_pago', function(){
 
 });
 
+Artisan::command('tramites', function(){
+
+    $count = 0;
+
+    $tramites = Tramite::whereIn('servicio_id', [3, 293])
+                            ->whereBetween('created_at', [])
+                            ->get()
+
+
+    $this->info($count);
+
+});
+
