@@ -34,9 +34,9 @@
 
         </x-input-group>
 
-        <x-input-group for="documento" label="Tipo" :error="$errors->first('documento')" class="w-full">
+        <x-input-group for="tipo" label="Tipo" :error="$errors->first('tipo')" class="w-full">
 
-            <x-input-select id="documento" wire:model.live="documento">
+            <x-input-select id="tipo" wire:model.live="tipo">
 
                 <option value="">Seleccione una opción</option>
                 <option value="revision">Revisión</option>
