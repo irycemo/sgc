@@ -26,7 +26,7 @@
                     <tr class="text-gray-500 text-sm leading-relaxed">
                         <td class=" px-2 w-full capitalize">{{ $avaluo->año }}-{{ $avaluo->folio }}-{{ $avaluo->usuario }}</td>
                         <td class=" px-2 w-full capitalize">{{ $avaluo->estado }}</td>
-                        <td class=" px-2 w-full capitalize">{{ $avaluo->notificador->name ?? '/' }} {{ $avaluo->notificado_en->format('d/m/Y') }}</td>
+                        <td class=" px-2 w-full capitalize">{{ $avaluo->notificador->name ?? '/' }} {{ $avaluo->notificado_en?->format('d/m/Y') }}</td>
                         <td class="px-2 w-full">
                             <span
                                 class="text-blue-300 cursor-pointer"

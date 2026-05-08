@@ -3,13 +3,17 @@
 namespace App\Livewire\Admin;
 
 use App\Constantes\Constantes;
+use App\Exceptions\GeneralException;
 use App\Http\Controllers\Valuacion\AvaluoImpresionController;
+use App\Jobs\Valuacion\GenerarAvaluoJob;
 use App\Models\Avaluo;
 use App\Models\File;
 use App\Models\PredioIgnorado;
+use App\Models\Tramite;
 use App\Models\User;
 use App\Models\VariacionCatastral;
 use App\Traits\ComponentesTrait;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -17,6 +21,7 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
+use ZipArchive;
 
 class Avaluos extends Component
 {
@@ -37,8 +42,17 @@ class Avaluos extends Component
 
     public $modalReasignar = false;
     public $modalVerArchivos = false;
+    public $modal_imprimir = false;
 
     public $modelo_administrativo;
+
+    public $año;
+    public $folio;
+    public $usuario;
+    public $batch_id;
+    public $concluido = false;
+    public $generando = false;
+    public $nombres = [];
 
     public $filters = [
         'año' => '',
@@ -138,6 +152,147 @@ class Avaluos extends Component
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
        }
+
+    }
+
+    public function imprimirAvaluos(){
+
+        $this->validate([
+            'año' => 'required',
+            'folio' => 'required',
+            'usuario' => 'required',
+        ]);
+
+        try {
+
+            $tramite = Tramite::where('año', $this->año)
+                                    ->where('folio', $this->folio)
+                                    ->where('usuario', $this->usuario)
+                                    ->first();
+
+            if(! $tramite) throw new GeneralException("El trámite no existe");
+
+            $avaluos = Avaluo::where('tramite_inspeccion', $tramite->id)
+                                ->where('estado', '!=', 'nuevo')
+                                ->get();
+
+            if(! $avaluos->count()) throw new GeneralException(("No hay avalúos asociados a el trámite ingresado."));
+
+            $jobs = [];
+
+            foreach($avaluos as $avaluo){
+
+                $nombre = $avaluo->id . '.' . now()->format('d-m-Y_H:i:s');
+
+                array_push($this->nombres, $nombre);
+
+                $jobs[] = new GenerarAvaluoJob($avaluo->id, $nombre);
+
+            }
+
+            $bus = Bus::batch($jobs)->dispatch();
+
+            $this->batch_id = $bus->id;
+
+            $this->generando = true;
+
+       } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+       } catch (\Throwable $th) {
+
+            Log::error("Error al imprimir avaluo en mis avaluos por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+
+       }
+
+    }
+
+    public function getBatchProperty()
+    {
+
+        if (!$this->batch_id) {
+
+            return null;
+
+        }
+
+        return Bus::findBatch($this->batch_id);
+
+    }
+
+    public function updateProgress(){
+
+        $this->concluido = $this->batch->finished();
+
+        if ($this->concluido) {
+
+            $this->generando = false;
+
+        }
+
+    }
+
+    public function descargarAvaluos(){
+
+        try {
+
+            $disk = Storage::disk('local');
+
+            $zipFileName  = 'archivos_' . now()->timestamp . '.zip';
+
+            $relativeZipPath = 'livewire-tmp/' . $zipFileName;
+
+            $absoluteZipPath = $disk->path($relativeZipPath);
+
+            $zip = new ZipArchive();
+
+            if (
+                $zip->open(
+                    $absoluteZipPath,
+                    ZipArchive::CREATE | ZipArchive::OVERWRITE
+                ) !== true
+            ) {
+                throw new \Exception('No fue posible crear el ZIP');
+            }
+
+            foreach ($this->nombres as $archivo) {
+
+                // Ejemplo:
+                // livewire-tmp/archivo.pdf
+
+                $relativePath = 'livewire-tmp/' . $archivo;
+
+                if (! $disk->exists($relativePath)) {
+                    continue;
+                }
+
+                $absolutePath = $disk->path($relativePath);
+
+                /*
+                |--------------------------------------------------------------------------
+                | Nombre dentro del ZIP
+                |--------------------------------------------------------------------------
+                */
+
+                $zip->addFile(
+                    $absolutePath,
+                    basename($archivo)
+                );
+            }
+
+            $zip->close();
+
+            return response()->download(
+                $absoluteZipPath,
+                'documentos.zip'
+            )->deleteFileAfterSend(false);
+
+        } catch (\Throwable $th) {
+            Log::error("Error al imprimir avaluo en administracion por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+        }
 
     }
 
@@ -296,6 +451,8 @@ class Avaluos extends Component
         $this->años = Constantes::AÑOS;
 
         $this->filters['año'] = now()->format('Y');
+
+        $this->año = now()->format('Y');
 
         $this->filters['estado'] = request()->query('estado');
 

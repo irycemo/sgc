@@ -14,7 +14,7 @@ enum AvaluoPara: int
     case ACTUALIZACION = 7;
     case FUSION = 8;
     case CAMBIO_REGIMEN = 9;
-    /* case ACTUALIZACION_RESTO = 10; */
+    /* CAMBIO DE MUNICIPIO */
 
     public function label(): string
     {
@@ -28,7 +28,6 @@ enum AvaluoPara: int
             AvaluoPara::DESGLOSE_SUBDIVISIONES => 'Avalúos de desglose de subdivisiones',/* T-Inspección T-Desglose*/
             AvaluoPara::PREDIO_IGNORADO => 'Avalúo para predio ignorado',/* T-Inspección T-Desglose*/
             AvaluoPara::ACTUALIZACION => 'Avalúo de actualización',/* T-Inspección */
-            /* AvaluoPara::ACTUALIZACION_RESTO => 'Avalúo de actualización (resto)', *//* T-Inspección */
             AvaluoPara::FUSION => 'Avalúo de fusión',/* T-Inspección */
             AvaluoPara::CAMBIO_REGIMEN => 'Avalúo de cambio de régimen'/* T-Inspección T-Desglose*/
 

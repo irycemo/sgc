@@ -5,10 +5,10 @@ namespace App\Livewire\Valuacion;
 use App\Constantes\Constantes;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Valuacion\AvaluoImpresionController;
+use App\Jobs\Valuacion\GenerarAvaluoJob;
 use App\Models\Avaluo;
 use App\Models\Certificacion;
 use App\Models\File;
-use App\Models\Persona;
 use App\Models\PredioIgnorado;
 use App\Models\Tramite;
 use App\Models\VariacionCatastral;
@@ -18,6 +18,7 @@ use App\Traits\Predios\ValidarDisponibilidad;
 use App\Traits\Predios\ValidarManzanaAsignada;
 use App\Traits\Predios\ValidarSector;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -64,6 +65,10 @@ class MisAvaluos extends Component
     public $año;
     public $folio;
     public $usuario;
+    public $batch_id;
+    public $concluido = false;
+    public $generando = false;
+    public $nombres = [];
 
     public Avaluo $modelo_editar;
 
@@ -345,18 +350,27 @@ class MisAvaluos extends Component
 
             $avaluos = Avaluo::where('tramite_inspeccion', $tramite->id)
                                 ->where('estado', '!=', 'nuevo')
-                                ->count();
+                                ->get();
 
-            if($avaluos == 0) throw new GeneralException(("No hay avalúos asociados a el trámite ingresado."));
+            if(! $avaluos->count()) throw new GeneralException(("No hay avalúos asociados a el trámite ingresado."));
 
-            $folder_name = $tramite->año . '-' . $tramite->año . '-' . $tramite->año . '/' . now()->format('Y-m-d_H-i-s');
+            $jobs = [];
 
-           /*  Bus::chain([
-                new JobOne,
-                new JobTwo,
-            ])->then(function () {
-                // This runs only if both jobs succeed
-            })->dispatch(); */
+            foreach($avaluos as $avaluo){
+
+                $nombre = $avaluo->id . '.' . now()->format('d-m-Y H:i:s');
+
+                array_push($this->nombres, $nombre);
+
+                $jobs[] = new GenerarAvaluoJob($avaluo->id, $nombre);
+
+            }
+
+            $bus = Bus::batch($jobs)->dispatch();
+
+            $this->batch_id = $bus->id;
+
+            $this->generando = true;
 
        } catch (GeneralException $ex) {
 
@@ -368,6 +382,31 @@ class MisAvaluos extends Component
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
        }
+
+    }
+
+    public function getBatchProperty()
+    {
+
+        if (!$this->batch_id) {
+
+            return null;
+
+        }
+
+        return Bus::findBatch($this->batch_id);
+
+    }
+
+    public function updateProgress(){
+
+        $this->concluido = $this->batch->finished();
+
+        if ($this->concluido) {
+
+            $this->generando = false;
+
+        }
 
     }
 

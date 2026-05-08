@@ -289,6 +289,14 @@
                                             Imprimir
                                         </button>
 
+                                        <button
+                                            wire:click="$toggle('modal_imprimir')"
+                                            wire:loading.attr="disabled"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Imprimir por trámite
+                                        </button>
+
                                     @endif
 
                                     @if($avaluo->estado != 'notificado')
@@ -536,6 +544,103 @@
                 </x-button-red>
 
             </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
+
+    <x-dialog-modal wire:model.live="modal_imprimir" maxWidth="sm">
+
+        <x-slot name="title">
+            Imprimir avalúos
+        </x-slot>
+
+        <x-slot name="content">
+
+            <div class="flex-auto text-center mb-3">
+
+                <div >
+
+                    <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite</Label>
+
+                </div>
+
+                <div class="inline-flex">
+
+                    <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
+                        @foreach ($años as $año)
+
+                            <option value="{{ $año }}">{{ $año }}</option>
+
+                        @endforeach
+                    </select>
+
+                    <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
+
+                    <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
+
+                </div>
+
+            </div>
+
+            @if($generando)
+
+                <div wire:poll.1500ms="updateProgress" class="w-full max-w-xl mx-auto bg-white rounded-lg p-2 mb-5">
+
+                    <div class="mb-2 flex justify-between text-sm">
+                        <span>Progreso</span>
+                        <span>{{ $this->batch->progress() }}%</span>
+                    </div>
+
+                    <div class="w-full bg-gray-200 rounded-full h-4">
+                        <div
+                            class="h-4 rounded-full transition-all duration-500 bg-green-500"
+                            style="width: {{ $this->batch->progress() }}%">
+                        </div>
+                    </div>
+
+                    <div class="mt-3 text-sm text-gray-600">
+                        Procesados: {{ $this->batch->processedJobs() }} / {{ $this->batch->totalJobs }}
+                    </div>
+
+                </div>
+
+            @endif
+
+            @if($concluido)
+
+                <x-button-blue
+                    wire:click="descargarAvaluos"
+                    class="mx-auto">
+
+                    Descargar avalúos
+
+                </x-button-blue>
+
+            @endif
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <x-secondary-button
+                wire:click="$toggle('modal_imprimir')"
+                wire:loading.attr="disabled"
+            >
+                No
+            </x-secondary-button>
+
+            <x-button
+                class="ml-2"
+                wire:click="imprimirAvaluos"
+                wire:loading.attr="disabled"
+                wire:target="imprimirAvaluos"
+            >
+
+                <img wire:loading wire:target="imprimirAvaluos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                Imprimir avalúos
+            </x-button>
 
         </x-slot>
 

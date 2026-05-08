@@ -412,6 +412,30 @@
 
                 </div>
 
+                @if($generando)
+
+                    <div wire:poll.1500ms="updateProgress" class="w-full max-w-xl mx-auto bg-white rounded-lg p-2 mb-5">
+
+                        <div class="mb-2 flex justify-between text-sm">
+                            <span>Progreso</span>
+                            <span>{{ $batch->progress() }}%</span>
+                        </div>
+
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div
+                                class="h-4 rounded-full transition-all duration-500 bg-green-500"
+                                style="width: {{ $batch->progress() }}%">
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-sm text-gray-600">
+                            Procesados: {{ $batch->processedJobs() }} / {{ $batch->totalJobs }}
+                        </div>
+
+                    </div>
+
+                @endif
+
             </div>
 
         </x-slot>
