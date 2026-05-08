@@ -48,4 +48,8 @@ class Traslado extends Model implements Auditable
         return $this->hasMany(Rechazo::class);
     }
 
+    public function oficina(){
+        return $this->belongsTo(Oficina::class);
+    }
+
 }

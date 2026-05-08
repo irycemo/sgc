@@ -9,6 +9,7 @@ class Reportes extends Component
 
     public $area;
 
+    public $verAvisos;
     public $verTramites;
     public $verUsuarios;
     public $verCertificaciones;
@@ -30,6 +31,7 @@ class Reportes extends Component
 
         if($this->area == 'tramites'){
 
+            $this->verAvisos = false;
             $this->verTramites = true;
             $this->verUsuarios = false;
             $this->verCertificaciones = false;
@@ -37,6 +39,7 @@ class Reportes extends Component
 
         }elseif($this->area == 'usuarios'){
 
+            $this->verAvisos = false;
             $this->verTramites = false;
             $this->verUsuarios = true;
             $this->verCertificaciones = false;
@@ -44,6 +47,7 @@ class Reportes extends Component
 
         }elseif($this->area == 'certificaciones'){
 
+            $this->verAvisos = false;
             $this->verTramites = false;
             $this->verUsuarios = false;
             $this->verCertificaciones = true;
@@ -51,10 +55,19 @@ class Reportes extends Component
 
         }elseif($this->area == 'escrituracion_social'){
 
+            $this->verAvisos = false;
             $this->verTramites = false;
             $this->verUsuarios = false;
             $this->verCertificaciones = false;
             $this->verEscrituracionSocial = true;
+
+        }elseif($this->area == 'avisos'){
+
+            $this->verAvisos = true;
+            $this->verTramites = false;
+            $this->verUsuarios = false;
+            $this->verCertificaciones = false;
+            $this->verEscrituracionSocial = false;
 
         }
 

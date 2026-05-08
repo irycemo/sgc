@@ -694,6 +694,48 @@ class MisAvaluos extends Component
 
     }
 
+    public function actualizarPropietarios(Avaluo $avaluo){
+
+        try {
+
+            if($avaluo->predio){
+
+                $avaluo->predioAvaluo->propietarios()->delete();
+
+                foreach ($avaluo->predioPadron->propietarios as $propietario) {
+
+                    $nuevo_propietario = $propietario->replicate();
+
+                    $nuevo_propietario->propietarioable_id = $avaluo->predio_avaluo;
+                    $nuevo_propietario->propietarioable_type = 'App\Models\PredioAvaluo';
+
+                    $nuevo_propietario->save();
+
+                }
+
+                $this->dispatch('mostrarMensaje', ['success', 'Los propietarios se actualizarón con éxito.']);
+
+            }else{
+
+                throw new GeneralException('El avalúo no tiene relacionado un predio origen.');
+
+            }
+
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al actualizar propietarios en avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
     public function mount(){
 
         $this->modelo_editar = $this->crearModeloVacio();
@@ -707,7 +749,7 @@ class MisAvaluos extends Component
     #[Computed]
     public function avaluos(){
 
-        return Avaluo::select('id', 'año', 'folio', 'usuario', 'estado', 'asignado_a', 'tramite_inspeccion', 'variacion_catastral_id', 'predio_ignorado_id', 'predio_avaluo', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
+        return Avaluo::select('id', 'año', 'folio', 'usuario', 'predio', 'estado', 'asignado_a', 'tramite_inspeccion', 'variacion_catastral_id', 'predio_ignorado_id', 'predio_avaluo', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
                         ->with(
                             'creadoPor:id,name',
                             'actualizadoPor:id,name',

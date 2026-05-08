@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Bloque;
 use App\Models\File;
+use App\Models\Predio;
 use App\Models\PredioAvaluo;
 use App\Models\PredioIgnorado;
 use App\Models\Tramite;
@@ -100,6 +101,10 @@ class Avaluo extends Model implements Auditable
 
     public function predioAvaluo(){
         return $this->belongsTo(PredioAvaluo::class, 'predio_avaluo');
+    }
+
+    public function predioPadron(){
+        return $this->belongsTo(Predio::class, 'predio');
     }
 
     public function asignadoA(){

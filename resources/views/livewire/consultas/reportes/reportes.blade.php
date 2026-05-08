@@ -12,6 +12,7 @@
                 <option value="tramites">Trámites</option>
                 <option value="usuarios">Usuarios</option>
                 <option value="certificaciones">Certificaciones</option>
+                <option value="avisos">Avisos</option>
                 <option value="escrituracion_social">Escrituración social</option>
 
             </x-input-select>
@@ -41,6 +42,12 @@
     @if ($verEscrituracionSocial)
 
         @livewire('consultas.reportes.reporte-escrituracion-social')
+
+    @endif
+
+    @if ($verAvisos)
+
+        @livewire('consultas.reportes.reporte-avisos')
 
     @endif
 
