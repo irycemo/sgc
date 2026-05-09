@@ -26,6 +26,8 @@ class ConciliarAvaluosPeritosExternos extends Component
     public $folio;
     public $usuario;
     public $modalConciliar = false;
+    public $modal_requerimiento = false;
+    public $modal_ver_requerimientos = false;
     public $avaluo_seleccionado;
 
     public $region_catastral;
@@ -37,6 +39,8 @@ class ConciliarAvaluosPeritosExternos extends Component
     public $predio;
     public $edificio;
     public $departamento;
+
+    public $observaciones;
 
     public function updatedFolio(){
 
@@ -91,6 +95,42 @@ class ConciliarAvaluosPeritosExternos extends Component
         $this->predio = $this->avaluo_seleccionado['predio'];
         $this->edificio = $this->avaluo_seleccionado['edificio'];
         $this->departamento = $this->avaluo_seleccionado['departamento'];
+
+    }
+
+    public function abrirModalRequerimiento($avaluo){
+
+        $this->modal_requerimiento = true;
+
+        $this->avaluo_seleccionado =  $avaluo;
+
+    }
+
+    public function abrirModalVerRequerimientos($avaluo){
+
+        $this->modal_ver_requerimientos = true;
+
+        $this->avaluo_seleccionado =  $avaluo;
+
+    }
+
+    public function hacerRequerimiento(){
+
+        try {
+
+            (new SistemaPeritosExternosService())->hacerRequerimiento($this->avaluo_seleccionado['id'], auth()->user()->name, $this->observaciones);
+
+            $this->reset(['modal_requerimiento', 'observaciones']);
+
+            $this->dispatch('mostrarMensaje', ['success', "Se registro el requerimiento con éxito."]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al hacer requerimiento en avalúo externo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', 'Hubo un error.']);
+
+        }
 
     }
 
@@ -199,4 +239,5 @@ class ConciliarAvaluosPeritosExternos extends Component
         return view('livewire.cartografia.conciliar.conciliar-avaluos-peritos-externos', compact('avaluos'))->extends('layouts.admin');
 
     }
+
 }

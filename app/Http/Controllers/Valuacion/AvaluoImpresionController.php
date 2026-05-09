@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Valuacion;
 use App\Http\Controllers\Controller;
 use App\Models\Avaluo;
 use App\Models\Certificacion;
+use App\Models\User;
 use App\Traits\Certificaciones\GeneradorQRTrait;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -13,7 +14,7 @@ class AvaluoImpresionController extends Controller
 
     use GeneradorQRTrait;
 
-    public function generarAvaluo(Avaluo $avaluo){
+    public function generarAvaluo(Avaluo $avaluo, User $user){
 
         $predio = $avaluo->predioAvaluo;
 
@@ -26,6 +27,7 @@ class AvaluoImpresionController extends Controller
         $pdf = Pdf::loadView('avaluos.avaluo', [
             'predio' => $predio,
             'certificacion' => $certificacion,
+            'impreso_por' => $user->name,
             'qr' => $qr
         ]);
 

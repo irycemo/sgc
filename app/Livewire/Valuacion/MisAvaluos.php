@@ -17,8 +17,8 @@ use App\Traits\Predios\ValidarCuentaAsignada;
 use App\Traits\Predios\ValidarDisponibilidad;
 use App\Traits\Predios\ValidarManzanaAsignada;
 use App\Traits\Predios\ValidarSector;
+use App\Traits\Valuacion\ImprimirAvaluosTramiteTrait;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -36,6 +36,7 @@ class MisAvaluos extends Component
     use ValidarManzanaAsignada;
     use ValidarSector;
     use ValidarDisponibilidad;
+    use ImprimirAvaluosTramiteTrait;
 
     public $seleccionados = [];
     public $idsEnPagina = [];
@@ -61,14 +62,6 @@ class MisAvaluos extends Component
     public $oficina;
     public $tipo_predio;
     public $numero_registro;
-
-    public $año;
-    public $folio;
-    public $usuario;
-    public $batch_id;
-    public $concluido = false;
-    public $generando = false;
-    public $nombres = [];
 
     public Avaluo $modelo_editar;
 
@@ -315,7 +308,7 @@ class MisAvaluos extends Component
 
             }
 
-            $pdf = (new AvaluoImpresionController())->generarAvaluo($avaluo);
+            $pdf = (new AvaluoImpresionController())->generarAvaluo($avaluo, auth()->user());
 
             return response()->streamDownload(
                 fn () => print($pdf->output()),
@@ -328,85 +321,6 @@ class MisAvaluos extends Component
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
        }
-
-    }
-
-    public function imprimirAvaluos(){
-
-        $this->validate([
-            'año' => 'required',
-            'folio' => 'required',
-            'usuario' => 'required',
-        ]);
-
-        try {
-
-            $tramite = Tramite::where('año', $this->año)
-                                    ->where('folio', $this->folio)
-                                    ->where('usuario', $this->usuario)
-                                    ->first();
-
-            if(! $tramite) throw new GeneralException("El trámite no existe");
-
-            $avaluos = Avaluo::where('tramite_inspeccion', $tramite->id)
-                                ->where('estado', '!=', 'nuevo')
-                                ->get();
-
-            if(! $avaluos->count()) throw new GeneralException(("No hay avalúos asociados a el trámite ingresado."));
-
-            $jobs = [];
-
-            foreach($avaluos as $avaluo){
-
-                $nombre = $avaluo->id . '.' . now()->format('d-m-Y H:i:s');
-
-                array_push($this->nombres, $nombre);
-
-                $jobs[] = new GenerarAvaluoJob($avaluo->id, $nombre);
-
-            }
-
-            $bus = Bus::batch($jobs)->dispatch();
-
-            $this->batch_id = $bus->id;
-
-            $this->generando = true;
-
-       } catch (GeneralException $ex) {
-
-            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
-
-       } catch (\Throwable $th) {
-
-            Log::error("Error al imprimir avaluo en mis avaluos por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
-            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
-
-       }
-
-    }
-
-    public function getBatchProperty()
-    {
-
-        if (!$this->batch_id) {
-
-            return null;
-
-        }
-
-        return Bus::findBatch($this->batch_id);
-
-    }
-
-    public function updateProgress(){
-
-        $this->concluido = $this->batch->finished();
-
-        if ($this->concluido) {
-
-            $this->generando = false;
-
-        }
 
     }
 

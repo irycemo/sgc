@@ -37,7 +37,7 @@ class TramiteService{
 
         $this->tramite->save();
 
-        if($this->tramite->solicitante == 'Oficialia de partes'){
+        if($this->tramite->solicitante == 'Oficialia de partes' || $this->tramite->nombre_solicitante === 'Secretaría de Desarrollo Urbano y Movilidad'){
 
             $this->tramite->update([
                 'estado' => 'pagado',

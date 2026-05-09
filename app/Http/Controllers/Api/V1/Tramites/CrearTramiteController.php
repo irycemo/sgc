@@ -13,11 +13,14 @@ use App\Models\Servicio;
 use App\Models\Tramite;
 use App\Services\Tramites\OrdenPagoService;
 use App\Services\Tramites\TramiteService;
+use App\Traits\Api\Certificados\GenerarCertificadosAutomaticosTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class CrearTramiteController extends Controller
 {
+
+    use GenerarCertificadosAutomaticosTrait;
 
     public function crearTramite(CrearTramiteRequest $request){
 
@@ -37,6 +40,13 @@ class CrearTramiteController extends Controller
         $tramite->oficina_id = $oficina->id;
         $tramite->usuario_tramites_linea_id = $validated['usuario_tramites_linea_id'];
 
+        if($validated['nombre_solicitante'] === 'Secretaría de Desarrollo Urbano y Movilidad'){
+
+            $tramite->tipo_tramite = 'exento';
+            $tramite->monto = 0;
+
+        }
+
         try {
 
             $nuevo_tramite = retry(5, function() use ($tramite, $validated){
@@ -50,6 +60,12 @@ class CrearTramiteController extends Controller
                 });
 
             });
+
+            if($validated['nombre_solicitante'] === 'Secretaría de Desarrollo Urbano y Movilidad' && in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM31'])){
+
+                $this->generarCertificadosElectronicos($tramite);
+
+            }
 
             return (new TramiteResource($nuevo_tramite))->response()->setStatusCode(200);
 

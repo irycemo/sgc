@@ -4,7 +4,7 @@
 
         <x-header>Mis avalúos</x-header>
 
-        <div class="flex gap-3 overflow-auto p-1">
+        <div class="flex gap-3 overflow-auto p-1 items-center">
 
             <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
 
@@ -68,6 +68,21 @@
 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 mr-2">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+
+                </button>
+
+            </div>
+
+            <div>
+
+                <button
+                    wire:click="$toggle('modal_imprimir')"
+                    wire:loading.attr="disabled"
+                    class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 float-right text-sm py-2 px-4 text-white rounded-full focus:outline-none focus:outline-gray-400 focus:outline-offset-2">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
                     </svg>
 
                 </button>
@@ -388,7 +403,7 @@
 
     </x-confirmation-modal>
 
-    <x-confirmation-modal wire:model.live="modal_imprimir" maxWidth="sm">
+    <x-dialog-modal wire:model.live="modal_imprimir" maxWidth="sm">
 
         <x-slot name="title">
             Imprimir avalúos
@@ -396,59 +411,67 @@
 
         <x-slot name="content">
 
-            <div class="flex flex-col md:flex-row justify-between md:space-x-3 mb-5 items-start">
+            <div class="flex-auto text-center mb-3">
 
-                <div class="flex-auto text-center mb-3">
+                <div >
 
-                    <div >
+                    <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite</Label>
 
-                        <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite</Label>
+                </div>
 
+                <div class="inline-flex">
+
+                    <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
+                        @foreach ($años as $año)
+
+                            <option value="{{ $año }}">{{ $año }}</option>
+
+                        @endforeach
+                    </select>
+
+                    <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
+
+                    <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
+
+                </div>
+
+            </div>
+
+            @if($generando)
+
+                <div wire:poll.1500ms="updateProgress" class="w-full max-w-xl mx-auto bg-white rounded-lg p-2 mb-5">
+
+                    <div class="mb-2 flex justify-between text-sm">
+                        <span>Progreso</span>
+                        <span>{{ $this->batch->progress() }}%</span>
                     </div>
 
-                    <div class="inline-flex">
+                    <div class="w-full bg-gray-200 rounded-full h-4">
+                        <div
+                            class="h-4 rounded-full transition-all duration-500 bg-green-500"
+                            style="width: {{ $this->batch->progress() }}%">
+                        </div>
+                    </div>
 
-                        <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
-                            @foreach ($años as $año)
-
-                                <option value="{{ $año }}">{{ $año }}</option>
-
-                            @endforeach
-                        </select>
-
-                        <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
-
-                        <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
-
+                    <div class="mt-3 text-sm text-gray-600">
+                        Procesados: {{ $this->batch->processedJobs() }} / {{ $this->batch->totalJobs }}
                     </div>
 
                 </div>
 
-                @if($generando)
+            @endif
 
-                    <div wire:poll.1500ms="updateProgress" class="w-full max-w-xl mx-auto bg-white rounded-lg p-2 mb-5">
+            @if($concluido)
 
-                        <div class="mb-2 flex justify-between text-sm">
-                            <span>Progreso</span>
-                            <span>{{ $batch->progress() }}%</span>
-                        </div>
+                <x-button-blue
+                    wire:click="descargarAvaluos"
+                    class="mx-auto">
 
-                        <div class="w-full bg-gray-200 rounded-full h-4">
-                            <div
-                                class="h-4 rounded-full transition-all duration-500 bg-green-500"
-                                style="width: {{ $batch->progress() }}%">
-                            </div>
-                        </div>
+                    Descargar avalúos
 
-                        <div class="mt-3 text-sm text-gray-600">
-                            Procesados: {{ $batch->processedJobs() }} / {{ $batch->totalJobs }}
-                        </div>
+                </x-button-blue>
 
-                    </div>
-
-                @endif
-
-            </div>
+            @endif
 
         </x-slot>
 
@@ -461,7 +484,7 @@
                 No
             </x-secondary-button>
 
-            <x-danger-button
+            <x-button
                 class="ml-2"
                 wire:click="imprimirAvaluos"
                 wire:loading.attr="disabled"
@@ -471,11 +494,11 @@
                 <img wire:loading wire:target="imprimirAvaluos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                 Imprimir avalúos
-            </x-danger-button>
+            </x-button>
 
         </x-slot>
 
-    </x-confirmation-modal>
+    </x-dialog-modal>
 
     <x-confirmation-modal wire:model.live="modalCorregir" maxWidth="sm">
 

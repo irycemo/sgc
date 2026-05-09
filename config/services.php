@@ -72,6 +72,7 @@ return [
         'validar_cartografia' => env('SISTEMA_PERITOS_EXTERNOS_VALIDAR_CARTOGRAFIA'),
         'consultar_avaluos_conciliar' => env('SISTEMA_PERITOS_EXTERNOS_CONSULTAR_AVALUOS_CONCILIAR'),
         'conciliar_predio' => env('SISTEMA_PERITOS_EXTERNOS_CONCILIAR_PREDIO'),
+        'hacer_requerimiento' => env('SISTEMA_PERITOS_EXTERNOS_HACER_REQUERIMIENTO'),
     ],
 
     'consulta_archivos_anterior' => [

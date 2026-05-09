@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api\V1\SAP;
 
 use App\Exceptions\GeneralException;
-use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
 use App\Http\Controllers\Controller;
 use App\Models\Tramite;
-use App\Models\Traslado;
 use App\Services\Tramites\TramiteService;
+use App\Traits\Api\Certificados\GenerarCertificadosAutomaticosTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -15,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 class AcreditarPagoController extends Controller
 {
 
+    use GenerarCertificadosAutomaticosTrait;
 
     public function acreditarPago(Request $request){
 
@@ -32,7 +32,7 @@ class AcreditarPagoController extends Controller
 
                     (new TramiteService($tramite))->procesarPago();
 
-                    if(in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM32', 'D774'])){
+                    if(in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM31'])){
 
                         $this->generarCertificadosElectronicos($tramite);
 
@@ -59,36 +59,6 @@ class AcreditarPagoController extends Controller
             return response()->json([
                 'result' => 'error',
             ], 500);
-
-        }
-
-     }
-
-     public function generarCertificadosElectronicos($tramite){
-
-        foreach ($tramite->predios as $predio) {
-
-            $traslado = Traslado::where('estado', 'operado')->where('predio_id', $predio->id)->first();
-
-            if($traslado){
-
-                $tipo_certificado = mb_strtoupper($tramite->servicio->nombre, 'utf-8');
-
-                (new CertificadoRegistroController())->certificado($tramite, $predio, $tipo_certificado, auth()->user());
-
-                $tramite->predios()->updateExistingPivot($predio->id, ['estado' => 'I']);
-
-                $usados = $tramite->predios()->wherePivot('estado', 'I')->count();
-
-                $tramite->update(['usados' => $usados]);
-
-                if($tramite->cantidad === $usados){
-
-                    $tramite->update(['estado' => 'concluido']);
-
-                }
-
-            }
 
         }
 

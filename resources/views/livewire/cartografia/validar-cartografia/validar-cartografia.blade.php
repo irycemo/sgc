@@ -111,6 +111,26 @@
                                         Validar cartografía
                                     </button>
 
+                                    <button
+                                        wire:click="abrirModalRequerimiento({{ json_encode($avaluo) }})"
+                                        wire:loading.attr="disabled"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        role="menuitem">
+                                        Hacer requerimiento
+                                    </button>
+
+                                    @if (count($avaluo['requerimientos']))
+
+                                        <button
+                                            wire:click="abrirModalVerRequerimientos({{ json_encode($avaluo) }})"
+                                            wire:loading.attr="disabled"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Ver requerimientos
+                                        </button>
+
+                                    @endif
+
                                 </div>
 
                             </div>
@@ -227,5 +247,111 @@
         </x-slot>
 
     </x-confirmation-modal>
+
+    <x-dialog-modal wire:model="modal_requerimiento" maxWidth="sm">
+
+        <x-slot name="title">
+            Hacer Requerimiento
+        </x-slot>
+
+        <x-slot name="content">
+
+            <x-input-group for="observaciones" label="Observación" :error="$errors->first('observaciones')">
+
+                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico sobre la corrección que solicitas"></textarea>
+
+            </x-input-group>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex gap-3">
+
+                <x-button-blue
+                    wire:click="hacerRequerimiento"
+                    wire:loading.attr="disabled"
+                    wire:target="hacerRequerimiento">
+                    Solicitar corrección
+                </x-button-blue>
+
+                <x-button-red
+                    wire:click="$toggle('modal_requerimiento')"
+                    wire:loading.attr="disabled"
+                    wire:target="$toggle('modal_requerimiento')">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
+
+    <x-dialog-modal wire:model="modal_ver_requerimientos" maxWidth="sm">
+
+        <x-slot name="title">
+
+            Requerimientos
+
+        </x-slot>
+
+        <x-slot name="content">
+
+            @if(isset($avaluo_seleccionado) && count($avaluo_seleccionado['requerimientos']))
+
+                @forelse ($avaluo_seleccionado['requerimientos'] as $requerimiento)
+
+                    <div class="bg-gray-100 rounded-lg p-2 mb-2">
+
+                        <div>
+                            {{ $requerimiento['descripcion'] }}
+                        </div>
+
+                        <div class="text-xs text-right">
+
+                            <div>
+
+                                <p>{{ $requerimiento['usuario_sgc'] }}</p>
+
+                                <p>{{ $requerimiento['created_at'] }}</p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                @empty
+
+                    <div class="bg-gray-100 rounded-lg p-4 text-center">
+
+                        <p>No hay requerimientos</p>
+
+                    </div>
+
+                @endforelse
+
+            @endif
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex gap-3">
+
+                <x-button-red
+                    wire:click="$toggle('modal_ver_requerimientos')"
+                    wire:loading.attr="disabled"
+                    wire:target="$toggle('modal_ver_requerimientos')"
+                    type="button">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
 
 </div>

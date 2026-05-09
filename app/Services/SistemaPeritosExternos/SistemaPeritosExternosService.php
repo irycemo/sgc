@@ -337,4 +337,41 @@ class SistemaPeritosExternosService{
 
     }
 
+    public function hacerRequerimiento(int $avaluo_id, string $usuario_sgc, string $observaciones):array
+    {
+
+        $response = Http::withToken(config('services.sistema_peritos_externos.token'))
+                            ->accept('application/json')
+                            ->asForm()
+                            ->post(
+                                config('services.sistema_peritos_externos.hacer_requerimiento'),
+                                [
+                                    'avaluo_id' => $avaluo_id,
+                                    'usuario_sgc' => $usuario_sgc,
+                                    'descripcion' => $observaciones,
+                                ]
+                            );
+
+        if($response->status() !== 200){
+
+            Log::error("Error al hacer requerimiento en avaluo externo. " . $response);
+
+            $data = json_decode($response, true);
+
+            if(isset($data['error'])){
+
+                throw new GeneralException($data['error']);
+
+            }
+
+            throw new GeneralException("Error al hacer requerimiento en avaluo externo.");
+
+        }else{
+
+            return json_decode($response, true);
+
+        }
+
+    }
+
 }

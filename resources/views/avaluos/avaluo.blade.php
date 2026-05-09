@@ -326,7 +326,7 @@
 
                         <p><strong>Impreso el: </strong> {{ now() }}</p>
 
-                        <p><strong>Impreso por: </strong> {{ auth()->user()->name }}</p>
+                        <p><strong>Impreso por: </strong> {{ $impreso_por }}</p>
 
                         @if(isset($certificacion))
 

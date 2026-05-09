@@ -4,6 +4,7 @@ namespace App\Jobs\Valuacion;
 
 use App\Http\Controllers\Valuacion\AvaluoImpresionController;
 use App\Models\Avaluo;
+use App\Models\User;
 use Illuminate\Bus\Batchable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
@@ -18,24 +19,22 @@ class GenerarAvaluoJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(int $avaluo_id, string $nombre)
-    {
-
-        $avaluo = Avaluo::find($avaluo_id);
-
-        $pdf = (new AvaluoImpresionController())->generarAvaluo($avaluo);
-
-        $content = $pdf->output();
-
-        Storage::put('livewire-tmp/' . $nombre . '.pdf', $content);
-
-    }
+    public function __construct(public int $avaluo_id, public string $nombre, public User $user)
+    {}
 
     /**
      * Execute the job.
      */
     public function handle(): void
     {
-        //
+
+        $avaluo = Avaluo::find($this->avaluo_id);
+
+        $pdf = (new AvaluoImpresionController())->generarAvaluo($avaluo, $this->user);
+
+        $content = $pdf->output();
+
+        Storage::put('livewire-tmp/' . $this->nombre . '.pdf', $content);
+
     }
 }

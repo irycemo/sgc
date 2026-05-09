@@ -22,6 +22,10 @@ class ValidarCartografia extends Component
     public $usuario;
     public $modalValidar = false;
     public $avaluo_seleccionado;
+    public $modal_requerimiento = false;
+    public $modal_ver_requerimientos = false;
+
+    public $observaciones;
 
     public function updatedFolio(){
 
@@ -44,6 +48,42 @@ class ValidarCartografia extends Component
         $this->modalValidar = true;
 
         $this->avaluo_seleccionado =  $avaluo;
+
+    }
+
+    public function abrirModalRequerimiento($avaluo){
+
+        $this->modal_requerimiento = true;
+
+        $this->avaluo_seleccionado =  $avaluo;
+
+    }
+
+    public function abrirModalVerRequerimientos($avaluo){
+
+        $this->modal_ver_requerimientos = true;
+
+        $this->avaluo_seleccionado =  $avaluo;
+
+    }
+
+    public function hacerRequerimiento(){
+
+        try {
+
+            (new SistemaPeritosExternosService())->hacerRequerimiento($this->avaluo_seleccionado['id'], auth()->user()->name, $this->observaciones);
+
+            $this->reset(['modal_requerimiento', 'observaciones']);
+
+            $this->dispatch('mostrarMensaje', ['success', "Se registro el requerimiento con éxito."]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al hacer requerimiento en avalúo externo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', 'Hubo un error.']);
+
+        }
 
     }
 
