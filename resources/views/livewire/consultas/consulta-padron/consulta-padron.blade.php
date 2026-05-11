@@ -604,7 +604,7 @@
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                            <p><strong>Último avalúo:</strong>{{ $this->predio->ultimoAvaluo->first() ? $this->predio->ultimoAvaluo->first()->año_aviso . '-' . $this->predio->ultimoAvaluo->first()->folio_aviso . '-' . $this->predio->ultimoAvaluo->first()->usuario_aviso : 'N/A' }}</p>
+                            <p><strong>Último avalúo:</strong>{{ $this->predio->ultimoAvaluo->first() ? $this->predio->ultimoAvaluo->first()->año . '-' . $this->predio->ultimoAvaluo->first()->folio . '-' . $this->predio->ultimoAvaluo->first()->usuario : 'N/A' }}</p>
 
                         </div>
 
