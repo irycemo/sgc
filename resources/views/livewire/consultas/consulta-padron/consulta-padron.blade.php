@@ -586,7 +586,7 @@
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                            <p><strong>Funcionario responsable del último movimiento:</strong>{{ $this->predio->movimientos->last()?->creadoPor->name ? $this->predio->movimientos->last()?->creadoPor->name : $this->predio->actualizado_nombre }}</p>
+                            <p><strong>Funcionario responsable del último movimiento:</strong>{{ $this->predio->movimientos->last()?->creadoPor?->name ? $this->predio->movimientos->last()?->creadoPor?->name : $this->predio->actualizado_nombre }}</p>
 
                         </div>
 
