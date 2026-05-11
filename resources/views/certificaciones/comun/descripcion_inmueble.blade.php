@@ -15,7 +15,7 @@
 
 </p>
 
-@if(isset($predio->terrenosComun) || isset($predio->terrenosComun))
+@if(isset($predio->terrenosComun) && count($predio->terrenosComun) || isset($predio->construccionesComun) && count($predio->construccionesComun))
 
     <p>
 
