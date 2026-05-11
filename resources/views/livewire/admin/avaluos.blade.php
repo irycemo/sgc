@@ -618,7 +618,11 @@
 
                 <x-button-blue
                     wire:click="descargarAvaluos"
+                    wire:loading.attr="disabled"
+                    wire:target="descargarAvaluos"
                     class="mx-auto">
+
+                    <img wire:loading wire:target="imprimirAvaluos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Descargar avalúos
 

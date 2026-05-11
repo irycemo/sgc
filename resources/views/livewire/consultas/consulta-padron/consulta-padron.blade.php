@@ -482,6 +482,124 @@
 
             <div wire:loading.class.delaylongest="opacity-50">
 
+                <x-h4>Resumen</x-h4>
+
+                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600">
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Cuenta predial:</strong>{{ $this->predio->cuentaPredial() }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Clave catastral:</strong>{{ $this->predio->claveCatastral() }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Propietario(s):</strong>{{ $this->predio->propietarios->first()->persona->nombreCompleto() }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Tipo de vialidad:</strong>{{ $this->predio->tipo_vialidad }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Nombre de vialidad:</strong>{{ $this->predio->nombre_vialidad }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Tipo de asentamiento:</strong>{{ $this->predio->tipo_asentamiento }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Nombre de asentamiento:</strong>{{ $this->predio->nombre_asentamiento }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Numeros exterior:</strong>{{ $this->predio->numero_exterior . ', ' . $this->predio->numero_exterior_2 }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Numeros adicional:</strong>{{ $this->predio->numero_adicional . ', ' . $this->predio->numero_adicional_2 }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Numero interior:</strong>{{ $this->predio->numero_interior}}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Lote:</strong>{{ $this->predio->lote_fraccionador}}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Manzana:</strong>{{ $this->predio->manzana_fraccionador}}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Zona o etapa:</strong>{{ $this->predio->etapa_fraccionador}}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Superficie total de terreno:</strong>{{ $this->predio->superficie_total_terreno}}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Superficie total de construcción:</strong>{{ $this->predio->superficie_total_construccion}}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Superficie notarial:</strong>{{ $this->predio->superficie_notarial }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Funcionario responsable del último movimiento:</strong>{{ $this->predio->actualizadoPor ? $this->predio->actualizadoPor->name : $this->predio->actualizado_nombre }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Último Movimiento:</strong>{{ $this->predio->movimientos->first()->nombre }}</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
                 <x-h4>Datos generales</x-h4>
 
                 <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600">
