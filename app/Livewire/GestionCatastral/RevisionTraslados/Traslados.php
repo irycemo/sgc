@@ -147,8 +147,6 @@ class Traslados extends Component
 
         try {
 
-            $this->revisarPredioActivo();
-
             DB::transaction(function () {
 
                 $this->modelo_editar->update([
