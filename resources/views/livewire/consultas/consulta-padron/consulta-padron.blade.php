@@ -596,7 +596,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        {{-- <div class="rounded-lg bg-gray-100 py-1 px-2">
 
                             <p><strong>Último aviso:</strong>{{ $this->predio->ultimoTraslado->first() ? $this->predio->ultimoTraslado->first()->año_aviso . '-' . $this->predio->ultimoTraslado->first()->folio_aviso . '-' . $this->predio->ultimoTraslado->first()->usuario_aviso : 'N/A' }}</p>
 
@@ -606,7 +606,7 @@
 
                             <p><strong>Último avalúo:</strong>{{ $this->predio->ultimoAvaluo->first() ? $this->predio->ultimoAvaluo->first()->año_aviso . '-' . $this->predio->ultimoAvaluo->first()->folio_aviso . '-' . $this->predio->ultimoAvaluo->first()->usuario_aviso : 'N/A' }}</p>
 
-                        </div>
+                        </div> --}}
 
                         <div class="col-span-1 sm:col-span-2 lg:col-span-5 rounded-lg bg-gray-100 py-1 px-2">
 
