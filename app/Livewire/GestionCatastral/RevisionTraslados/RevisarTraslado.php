@@ -710,8 +710,6 @@ class RevisarTraslado extends Component
 
                 $this->avaluo = (new SistemaPeritosExternosService())->consultarAvaluo($this->traslado->avaluo_spe);
 
-                info($this->avaluo);
-
             }
 
             foreach ($this->aviso['predio']['transmitentes'] as $transmitente) {

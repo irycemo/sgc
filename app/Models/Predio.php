@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\File;
+use App\Models\Avaluo;
 use App\Models\Bloqueo;
-use App\Models\Terreno;
-use App\Models\Movimiento;
 use App\Models\Colindancia;
-use App\Models\Propietario;
 use App\Models\Construccion;
-use App\Traits\ModelosTrait;
-use App\Models\TerrenosComun;
 use App\Models\ConstruccionesComun;
+use App\Models\File;
+use App\Models\Movimiento;
+use App\Models\Propietario;
+use App\Models\Terreno;
+use App\Models\TerrenosComun;
+use App\Models\Traslado;
+use App\Traits\ModelosTrait;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 
@@ -58,6 +60,22 @@ class Predio extends Model implements Auditable
 
     public function movimientos(){
         return $this->hasMany(Movimiento::class)->orderBy('fecha', 'desc');
+    }
+
+    public function traslados(){
+        return $this->hasMany(Traslado::class);
+    }
+
+    public function ultimoTraslado(){
+        return $this->hasMany(Traslado::class)->latest();
+    }
+
+    public function avaluos(){
+        return $this->hasMany(Avaluo::class, 'predio');
+    }
+
+    public function ultimoavAluo(){
+        return $this->hasMany(Avaluo::class, 'predio')->latest();
     }
 
     public function bloqueos(){
