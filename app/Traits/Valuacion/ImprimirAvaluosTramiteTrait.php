@@ -9,6 +9,7 @@ use App\Models\Tramite;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 use ZipArchive;
 
 trait ImprimirAvaluosTramiteTrait
@@ -111,6 +112,8 @@ trait ImprimirAvaluosTramiteTrait
 
         try {
 
+            $oMerger = PDFMerger::init();
+
             $disk = Storage::disk('local');
 
             $zipFileName  = 'archivos_' . now()->timestamp . '.zip';
@@ -140,12 +143,29 @@ trait ImprimirAvaluosTramiteTrait
                     continue;
                 }
 
+                $oMerger->addPDF(Storage::path($relativePath), 'all');
+
                 $absolutePath = $disk->path($relativePath);
+
                 $zip->addFile(
                     $absolutePath,
                     basename($archivo . '.pdf')
                 );
+
             }
+
+            $oMerger->merge();
+
+            Storage::put('livewire-tmp/completo.pdf', $oMerger->output());
+
+            $relativePath = 'livewire-tmp/completo.pdf';
+
+            $absolutePath = $disk->path($relativePath);
+
+            $zip->addFile(
+                $absolutePath,
+                basename('completo.pdf')
+            );
 
             $zip->close();
 

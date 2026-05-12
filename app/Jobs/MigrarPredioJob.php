@@ -225,9 +225,9 @@ class MigrarPredioJob implements ShouldQueue
                                 ->where('edif_008', 0)
                                 ->where('dpto_008', 0)
                                 ->where('nreg_008', 0)
-                                ->first();/*
+                                ->first();
 
-        if(!$predio_padre){
+        /* if(!$predio_padre){
 
             $predio_padre = ctpro003::where('mpio_003', $predioss->mpio_008)
                                         ->where('zcat_003', $predioss->zcat_008)
