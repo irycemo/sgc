@@ -37,7 +37,7 @@
         font-weight: normal;
         line-height: 1.5;
         text-transform: uppercase;
-        font-size: 9px;
+        font-size: 10px;
     }
 
     .center{
@@ -75,7 +75,7 @@
 
     .tabla{
         width: 100%;
-        font-size: 10px;
+        font-size: 11px;
         margin-bottom: 30px;;
         margin-left: auto;
         margin-right: auto;
@@ -88,7 +88,7 @@
         right: 0cm;
         background: #5E1D45;
         color: white;
-        font-size: 12px;
+        font-size: 13px;
         text-align: right;
         padding-right: 10px;
         text-transform: lowercase;
@@ -132,7 +132,7 @@
 
     .titulo{
         text-align: center;
-        font-size: 13px;
+        font-size: 14px;
         font-weight: bold;
         margin: 0;
     }
@@ -226,13 +226,13 @@
 
                     @if(isset($datos_control->director))
 
-                        <p><img style="width:100px; height:auto; align-self: center;" src="{{ public_path('efirmas/' . $datos_control->imagen_director) }}" alt="Firma"></p>
-                        <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $datos_control->director }}</p>
+                        <p><img style="width:180px; height:auto; align-self: center;" src="{{ public_path('efirmas/' . $datos_control->imagen_director) }}" alt="Firma"></p>
+                        <p style="border-bottom: gray solid 1px; text-align: center;">{{ $datos_control->director }}</p>
                         <p style="text-align: center;">{{ $datos_control->titular_cargo }}</p>
 
                     @else
 
-                        <p style="text-transform: uppercase; border-bottom: gray solid 1px; text-align: center; display: inline">{{ $datos_control->titular }}</p>
+                        <p style="border-bottom: gray solid 1px; text-align: center; display: inline;">{{ $datos_control->titular }}</p>
                         <p style="text-align: center;" >{{ $datos_control->titular_cargo }}</p>
 
                     @endif
@@ -280,7 +280,7 @@
 
             </table>
 
-            <p style="font-size: 7px; text-align: justify">
+            <p style="font-size: 8px; text-align: justify">
                 EL PRESENTE CERTIFICADO ES SOLO PARA FINES ADMINISTRATIVOS PARA CUALQUIER OTRO DEBE SER VALIDADO POR LA OFICINA CORRESPONDIENTE
                 SE EXPIDE EL PRESENTE CONFORME A LOS DATOS CONTENIDOS EN EL SISTEMA DE GESTIÓN CATASTRAL
                 A PETICIÓN DEL INTERESADO, SIN REPOSICIÓN POR FALTA DE ACTUALIZACIÓN.
