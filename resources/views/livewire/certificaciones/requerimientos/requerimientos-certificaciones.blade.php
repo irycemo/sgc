@@ -18,15 +18,21 @@
 
                 </select>
 
-                <input type="number" wire:model.live.debounce.500ms="filters.tFolio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="C. Folio" class="bg-white rounded-full text-sm w-24">
 
                 <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
 
                 <input type="number" wire:model.live.debounce.500ms="filters.p_oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.t_predio" placeholder="T. Predio" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.t_predio" placeholder="Tipo" class="bg-white rounded-full text-sm w-24">
 
                 <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+
+                <input type="number" wire:model.live.debounce.500ms="filters.t_año" placeholder="T. año" class="bg-white rounded-full text-sm w-24">
+
+                <input type="number" wire:model.live.debounce.500ms="filters.t_folio" placeholder="T. folio" class="bg-white rounded-full text-sm w-24">
+
+                <input type="number" wire:model.live.debounce.500ms="filters.t_usuario" placeholder="T. usuario" class="bg-white rounded-full text-sm w-24">
 
                 <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 

@@ -25,12 +25,13 @@ class RequerimientosCertificaciones extends Component
     public $filters = [
         'año' => '',
         'folio' => '',
-        'tAño' => '',
-        'tFolio' => '',
         'localidad' => '',
         'p_oficina' => '',
         't_predio' => '',
         'registro' => '',
+        't_año' => '',
+        't_folio' => '',
+        't_usuario' => '',
     ];
 
     protected function rules(){
@@ -111,10 +112,8 @@ class RequerimientosCertificaciones extends Component
                                 ->when(!auth()->user()->hasRole('Administrador'), function($q){
                                     $q->where('oficina_id', auth()->user()->oficina_id);
                                 })
-                                ->when($this->filters['tFolio'], function($q, $tFolio){
-                                    $q->WhereHas('tramite', function($q) use($tFolio){
-                                        $q->where('folio', $tFolio);
-                                    });
+                                ->when($this->filters['folio'], function($q, $folio){
+                                    $q->where('folio', $folio);
                                 })
                                 ->when($this->filters['localidad'], function($q, $localidad){
                                     $q->WhereHas('predio', function($q) use($localidad){
@@ -134,6 +133,21 @@ class RequerimientosCertificaciones extends Component
                                 ->when($this->filters['registro'], function($q, $registro){
                                     $q->WhereHas('predio', function($q) use($registro){
                                         $q->where('numero_registro', $registro);
+                                    });
+                                })
+                                ->when($this->filters['t_año'], function($q, $año){
+                                    $q->WhereHas('tramite', function($q) use($año){
+                                        $q->where('año', $año);
+                                    });
+                                })
+                                ->when($this->filters['t_folio'], function($q, $folio){
+                                    $q->WhereHas('tramite', function($q) use($folio){
+                                        $q->where('folio', $folio);
+                                    });
+                                })
+                                ->when($this->filters['t_usuario'], function($q, $t_usuario){
+                                    $q->WhereHas('tramite', function($q) use($t_usuario){
+                                        $q->where('usuario', $t_usuario);
                                     });
                                 })
                                 ->orderBy($this->sort, $this->direction)
