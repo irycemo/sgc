@@ -430,6 +430,26 @@ class RevisarTraslado extends Component
                         'porcentaje_usufructo' => (float)$adquiriente['porcentaje_usufructo'] + $propietario_existente->porcentaje_usufructo,
                     ]);
 
+                    $persona = $this->buscarPersona($adquiriente['persona']['rfc'], $adquiriente['persona']['curp'], $adquiriente['persona']['tipo'], $adquiriente['persona']['nombre'], $adquiriente['persona']['ap_materno'], $adquiriente['persona']['ap_paterno'], $adquiriente['persona']['razon_social']);
+
+                    if($persona){
+
+                        $persona->update([
+                            'fecha_nacimiento' => $adquiriente['persona']['fecha_nacimiento'],
+                            'nacionalidad' => $adquiriente['persona']['nacionalidad'],
+                            'estado_civil' => $adquiriente['persona']['estado_civil'],
+                            'calle' => $adquiriente['persona']['calle'],
+                            'numero_exterior' => $adquiriente['persona']['numero_exterior'],
+                            'numero_interior' => $adquiriente['persona']['numero_interior'],
+                            'colonia' => $adquiriente['persona']['colonia'],
+                            'cp' => $adquiriente['persona']['cp'],
+                            'entidad' => $adquiriente['persona']['entidad'],
+                            'municipio' => $adquiriente['persona']['municipio'],
+                            'ciudad' => $adquiriente['persona']['ciudad'],
+                        ]);
+
+                    }
+
                 }else{
 
                     $persona = $this->buscarPersona($adquiriente['persona']['rfc'], $adquiriente['persona']['curp'], $adquiriente['persona']['tipo'], $adquiriente['persona']['nombre'], $adquiriente['persona']['ap_materno'], $adquiriente['persona']['ap_paterno'], $adquiriente['persona']['razon_social']);
