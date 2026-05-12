@@ -48,6 +48,7 @@ class ConsultarCertificadosController extends Controller
                                         $q->where('numero_registro', $validated['numero_registro']);
                                     });
                                 })
+                                ->where('tipo', 5)
                                 ->when(isset($validated['estado']), fn($q) => $q->where('estado', $validated['estado']))
                                 ->orderBy('id', 'desc')
                                 ->paginate($validated['pagination'], ['*'], 'page', $validated['pagina']);
