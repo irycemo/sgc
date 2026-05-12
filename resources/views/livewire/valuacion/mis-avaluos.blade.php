@@ -469,7 +469,7 @@
                     wire:target="descargarAvaluos"
                     class="mx-auto">
 
-                    <img wire:loading wire:target="imprimirAvaluos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    <img wire:loading wire:target="descargarAvaluos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Descargar avalúos
 
