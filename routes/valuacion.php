@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Livewire\Valuacion\MisAvaluos;
-use App\Livewire\Valuacion\FichaTecnica;
-use App\Livewire\Valuacion\Notificacion;
-use App\Http\Controllers\Valuacion\Valuacion;
-use App\Livewire\Valuacion\Impresion\Impresion;
 use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
+use App\Http\Controllers\Valuacion\Valuacion;
+use App\Livewire\Valuacion\FichaTecnicaJob;
+use App\Livewire\Valuacion\Impresion\Impresion;
+use App\Livewire\Valuacion\MisAvaluos;
+use App\Livewire\Valuacion\Notificacion;
+use Illuminate\Support\Facades\Route;
 
 Route::group([], function(){
 
@@ -14,7 +14,9 @@ Route::group([], function(){
 
     Route::get('valuacion/{avaluo?}', Valuacion::class)->middleware('permission:Valuación y desglose')->name('valuacion_y_desglose');
 
-    Route::get('ficha_tecnica', FichaTecnica::class)->middleware('permission:Ficha técnica')->name('ficha_tecnica');
+    Route::get('ficha_tecnica', FichaTecnicaJob::class)->middleware('permission:Ficha técnica')->name('ficha_tecnica');
+
+    Route::get('ficha_tecnica_jobs', FichaTecnicaJob::class)->middleware('permission:Ficha técnica jobs')->name('ficha_tecnica_jobs');
 
     Route::get('impresion_avaluos', Impresion::class)->middleware(['permission:Impresión de avaluos', 'director.activo', 'jefevaluacion.activo'])->name('impresion_avaluos');
 
