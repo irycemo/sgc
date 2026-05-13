@@ -154,7 +154,7 @@ class Traslados extends Component
                     'actualizado_por' => auth()->id()
                 ]);
 
-                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Revistiro operación de aviso']);
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Revirtiro operación de aviso']);
 
                 (new SistemaTramitesLineaService())->revertirAviso($this->modelo_editar->aviso_stl, $this->observaciones);
 

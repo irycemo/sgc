@@ -148,7 +148,7 @@ class MisAvaluos extends Component
 
                 $tramiteDesglose = $this->modelo_editar->tramiteDesglose;
 
-                $notificacionDeValorCatastral = Certificacion::where('tramite_id', $tramiteInspeccion->id)->first();
+                $notificacionDeValorCatastral = Certificacion::where('tramite_id', $tramiteInspeccion->id)->where('estado', 'activo')->first();
 
                 $notificacionDeValorCatastral->update([
                     'estado' => 'cancelado',
