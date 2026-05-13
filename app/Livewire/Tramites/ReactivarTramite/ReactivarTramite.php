@@ -92,35 +92,39 @@ class ReactivarTramite extends Component
             DB::transaction(function (){
 
 
-                $certificacion = Certificacion::where('tramite_id', $this->tramite->id)->where('predio_id', $this->selected_id)->where('estado', 'activo')->first();
+                $certificaciones = Certificacion::where('tramite_id', $this->tramite->id)->where('predio_id', $this->selected_id)->where('estado', 'activo')->get();
 
-                if($certificacion){
+                if($certificaciones->count()){
 
-                    $traslado = Traslado::where(['certificacion_id' => $certificacion->id])->first();
+                    foreach($certificaciones as $certificacion){
 
-                    if($traslado){
+                        $traslado = Traslado::where(['certificacion_id' => $certificacion->id])->first();
 
-                        if($traslado->estado == 'operado'){
+                        if($traslado){
 
-                            throw new GeneralException('El certificado esta ligado al aviso operado: ' . $traslado->año_aviso . '-' .  $traslado->folio_aviso . '-' . $traslado->usuario_aviso . ' no es posible reactivarlo.');
+                            if($traslado->estado == 'operado'){
+
+                                throw new GeneralException('El certificado esta ligado al aviso operado: ' . $traslado->año_aviso . '-' .  $traslado->folio_aviso . '-' . $traslado->usuario_aviso . ' no es posible reactivarlo.');
+
+                            }
+
+                            $traslado->update(['estado' => 'nuevo', 'certificacion_id' => null]);
+
+                            if($traslado->avaluo_spe) (new SistemaPeritosExternosService())->reactivarAvaluo($traslado->avaluo_spe);
+
+                            (new SistemaTramitesLineaService())->reactivarAviso($traslado->aviso_stl);
 
                         }
 
-                        $traslado->update(['estado' => 'nuevo', 'certificacion_id' => null]);
+                        $certificacion->update([
+                            'estado' => 'cancelado',
+                            'observaciones' => $this->observaciones,
+                            'actualizado_por' => auth()->id()
+                        ]);
 
-                        if($traslado->avaluo_spe) (new SistemaPeritosExternosService())->reactivarAvaluo($traslado->avaluo_spe);
-
-                        (new SistemaTramitesLineaService())->reactivarAviso($traslado->aviso_stl);
+                        $certificacion->audits()->latest()->first()->update(['tags' => 'Canceló certificado']);
 
                     }
-
-                    $certificacion->update([
-                        'estado' => 'cancelado',
-                        'observaciones' => $this->observaciones,
-                        'actualizado_por' => auth()->id()
-                    ]);
-
-                    $certificacion->audits()->latest()->first()->update(['tags' => 'Canceló certificado']);
 
                 }else{
 
