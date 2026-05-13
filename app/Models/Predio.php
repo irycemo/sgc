@@ -75,7 +75,7 @@ class Predio extends Model implements Auditable
     }
 
     public function ultimoavAluo(){
-        return $this->hasMany(Avaluo::class, 'predio')->latest();
+        return $this->hasMany(Avaluo::class, 'predio')->where('estado', 'notificado')->latest();
     }
 
     public function bloqueos(){
