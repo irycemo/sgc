@@ -389,8 +389,8 @@ trait ImpresionTrait
         if($avaluo->predioAvaluo->propietarios->count() == 0)
             throw new GeneralException('El avalúo: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' del predio: ' . $avaluo->predioAvaluo->cuentaPredial() . ' no tiene propietarios.');
 
-        if($avaluo->predioAvaluo->colindancias->count() == 0)
-            throw new GeneralException('El avalúo: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' del predio: ' . $avaluo->predioAvaluo->cuentaPredial() . ' no tiene colindancias.');
+        /* if($avaluo->predioAvaluo->colindancias->count() == 0)
+            throw new GeneralException('El avalúo: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' del predio: ' . $avaluo->predioAvaluo->cuentaPredial() . ' no tiene colindancias.'); */
 
         if(!$avaluo->clasificacion_zona)
             throw new GeneralException('El avalúo: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' del predio: ' . $avaluo->predioAvaluo->cuentaPredial() . ' no tiene caracteristicas.');
