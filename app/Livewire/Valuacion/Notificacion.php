@@ -215,10 +215,20 @@ class Notificacion extends Component
 
             $predio_rustico = Predio::find($this->tramite->predios->first()->id);
 
+            /*  */
+
             $predio_rustico->update([
                 'status' => 'baja',
                 'actualizado_por' => auth()->id(),
             ]);
+
+            foreach ($predio_rustico->propietarios as $propietario) {
+
+                $propietario_nuevo = $propietario->replicate();
+                $propietario_nuevo->propietarioable_id = $this->predio->id;
+                $propietario_nuevo->save();
+
+            }
 
             $predio_rustico->movimientos()->create([
                 'nombre' => $this->tramite->avaluo_para->label(),
