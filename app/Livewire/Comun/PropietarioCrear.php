@@ -196,7 +196,7 @@ class PropietarioCrear extends Component
 
                 foreach($this->modelo->propietarios as $actor){
 
-                    if($actor->persona_id == $persona->id) throw new GeneralException('La persona ya es un actor.');
+                    if($actor->persona_id == $this->persona->id) throw new GeneralException('La persona ya es un actor.');
 
                 }
 

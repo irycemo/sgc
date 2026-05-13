@@ -23,11 +23,11 @@
     @endif
 
     @if ($predio->municipio)
-        <strong>MUNICIPIO:</strong> {{ $predio->municipio }};
+        <strong>MUNICIPIO:</strong> {{ $datos_control->municipio ?? $predio->municipio }};
     @endif
 
     @if ($predio->localidad)
-        <strong>LOCALIDAD:</strong> {{ $predio->localidad }};
+        <strong>LOCALIDAD:</strong> {{ $datos_control->oficina ?? $predio->localidad }};
     @endif
 
     @if ($predio->tipo_vialidad)

@@ -78,6 +78,8 @@ class CertificadoRegistroController extends Controller
 
             $datos_control->oficina = $oficina->nombre;
 
+            $datos_control->municipio = $oficina->cabeceraMunicipal ? $oficina->cabeceraMunicipal->nombre : $oficina->nombre;
+
             $object->datos_control = $datos_control;
 
             $certificacion = Certificacion::create([
