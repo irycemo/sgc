@@ -69,7 +69,7 @@ class PredioApiResource extends JsonResource
             'terrenos' => TerrenoResource::collection($this->terrenos),
             'terrenos_comun' => TerrenoComunResource::collection($this->terrenosComun),
             'construcciones' => ConstruccionResource::collection($this->construcciones),
-            'construcciones' => ConstruccionComunResource::collection($this->construccionesComun),
+            'construcciones_comun' => ConstruccionComunResource::collection($this->construccionesComun),
         ];
     }
 }

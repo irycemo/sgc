@@ -74,7 +74,7 @@ class NotificacionValorCatastralController extends Controller
 
         $object = (object)[];
 
-        $avaluos = Avaluo::whereKey($avaluos)->get();
+        $avaluos = Avaluo::with('predioAvaluo')->whereKey($avaluos)->get();
 
         $object->avaluos = $this->avaluos($avaluos);
 

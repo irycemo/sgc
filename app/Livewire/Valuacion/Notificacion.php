@@ -230,6 +230,10 @@ class Notificacion extends Component
 
             }
 
+            $this->predio->update([
+                'superficie_notarial' => $predio_fusionante->superficie_notarial,
+            ]);
+
             $predio_rustico->movimientos()->create([
                 'nombre' => $this->tramite->avaluo_para->label(),
                 'fecha' => $this->fecha_notificacion,

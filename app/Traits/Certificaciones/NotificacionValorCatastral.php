@@ -2,8 +2,6 @@
 
 namespace App\Traits\Certificaciones;
 
-use App\Models\Avaluo;
-
 trait NotificacionValorCatastral{
 
     public function avaluos($avaluos){

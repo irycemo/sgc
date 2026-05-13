@@ -21,6 +21,14 @@ class ConsultarAvaluos extends Controller
                             ->where('estado', 'notificado')
                             ->first();
 
+        if(! $avaluo){
+
+            return response()->json([
+                'error' => 'No se encontró el avalúo.',
+            ], 404);
+
+        }
+
         return (new AvaluoResource($avaluo))->response()->setStatusCode(200);
 
     }
@@ -36,7 +44,9 @@ class ConsultarAvaluos extends Controller
                                  'predioAvaluo.terrenos',
                                  'predioAvaluo.terrenosComun',
                                  'predioAvaluo.construcciones',
-                                 'predioAvaluo.construccionesComun'
+                                 'predioAvaluo.construccionesComun',
+                                 'notificador:id,name',
+                                 'creadoPor:id,name',
                                 )
                                 ->where('estado', 'notificado')
                                 ->whereHas('predioAvaluo', function($q) use ($validated){
@@ -46,6 +56,14 @@ class ConsultarAvaluos extends Controller
                                     ->whereBetween('numero_registro', [$validated['numero_registro_inicial'], $validated['numero_registro_final']]);
                                 })
                                 ->get();
+
+        if(! $avaluos->count()){
+
+            return response()->json([
+                'error' => 'No se encontraron avalúos.',
+            ], 404);
+
+        }
 
         return AvaluoResource::collection($avaluos)->response()->setStatusCode(200);
 
