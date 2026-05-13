@@ -26,6 +26,7 @@ class ReporteAvisos extends Component
     public $documentos;
     public $documento;
     public $tipo;
+    public $tipo_predio;
 
     #[Computed]
     public function avisos(){
@@ -45,6 +46,11 @@ class ReporteAvisos extends Component
                                 })
                                 ->when(isset($this->oficina) && $this->oficina != "", function($q){
                                     return $q->where('oficina_id', $this->oficina);
+                                })
+                                ->when(isset($this->tipo_predio) && $this->tipo_predio != "", function($q){
+                                    return $q->whereHas('predio', function ($q){
+                                        $q->where('tipo_predio', $this->tipo_predio);
+                                    });
                                 })
                                 ->whereBetween('created_at', [$this->fecha1 . ' 00:00:00', $this->fecha2 . ' 23:59:59'])
                                 ->paginate($this->pagination);

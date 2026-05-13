@@ -60,6 +60,18 @@
 
         </x-input-group>
 
+        <x-input-group for="tipo_predio" label="Tipo de predio" :error="$errors->first('tipo_predio')" class="w-full">
+
+            <x-input-select id="tipo_predio" wire:model.live="tipo_predio">
+
+                <option value="">Seleccione una opción</option>
+                <option value="1">Urbano</option>
+                <option value="2">Rustico</option>
+
+            </x-input-select>
+
+        </x-input-group>
+
         <x-input-group for="oficina" label="Oficina" :error="$errors->first('oficina')" class="w-full">
 
             <x-input-select id="oficina" wire:model.live="oficina">
