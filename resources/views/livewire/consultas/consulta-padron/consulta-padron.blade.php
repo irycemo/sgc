@@ -502,7 +502,7 @@
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                            <p><strong>Propietario(s):</strong>{{ $this->predio->propietarios->first()->persona->nombreCompleto() }}</p>
+                            <p><strong>Propietario(s):</strong>{{ $this->predio->propietarios->first()?->persona->nombreCompleto() }}</p>
 
                         </div>
 

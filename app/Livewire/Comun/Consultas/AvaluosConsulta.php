@@ -19,7 +19,7 @@ class AvaluosConsulta extends Component
 
         try {
 
-            $pdf = (new AvaluoImpresionController())->generarAvaluo($avaluo);
+            $pdf = (new AvaluoImpresionController())->generarAvaluo($avaluo, auth()->user());
 
             return response()->streamDownload(
                 fn () => print($pdf->output()),
@@ -39,7 +39,7 @@ class AvaluosConsulta extends Component
 
         $this->predio = Predio::find($this->predio_id);
 
-        $this->avaluos = Avaluo::where('predio', $this->predio_id)->get();
+        $this->avaluos = Avaluo::with('notificador')->where('predio', $this->predio_id)->get();
 
     }
 
