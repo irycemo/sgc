@@ -18,7 +18,11 @@ class InactivarTrasladoController extends Controller
 
         try {
 
-            $traslado->update(['estado' => 'nuevo']);
+            $traslado->update([
+                'estado' => 'nuevo',
+                'avaluo_spe' => null,
+                'actualizado_por' => auth()->id()
+            ]);
 
         } catch (\Throwable $th) {
 
