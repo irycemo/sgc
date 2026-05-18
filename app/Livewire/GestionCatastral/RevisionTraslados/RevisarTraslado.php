@@ -10,6 +10,7 @@ use App\Services\Predio\ArchivoPredioService;
 use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
 use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
 use App\Traits\Personas\BuscarPersonaTrait;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -285,7 +286,6 @@ class RevisarTraslado extends Component
                 'numero_interior' => $this->aviso['predio']['numero_interior']  ?? null,
                 'numero_adicional' => $this->aviso['predio']['numero_adicional']  ?? null,
                 'numero_adicional_2' => $this->aviso['predio']['numero_adicional_2']  ?? null,
-                'numero_interior' => $this->aviso['predio']['numero_interior']  ?? null,
                 'lote_fraccionador' => $this->aviso['predio']['lote_fraccionador']  ?? null,
                 'manzana_fraccionador' => $this->aviso['predio']['manzana_fraccionador']  ?? null,
                 'etapa_fraccionador' => $this->aviso['predio']['etapa_fraccionador']  ?? null,
@@ -302,7 +302,7 @@ class RevisarTraslado extends Component
                 'uso_2' => $this->avaluo['uso_2']  ?? null,
                 'uso_3' => $this->avaluo['uso_3']  ?? null,
                 'superficie_terreno' => $this->avaluo['superficie_terreno']  ?? null,
-                'superficie_notarial' => $this->aviso['superficie_notarial']  ?? null,
+                'superficie_notarial' => $this->avaluo['superficie_notarial']  ?? null,
                 'superficie_construccion' => $this->avaluo['superficie_construccion']  ?? null,
                 'area_comun_terreno' => $this->avaluo['area_comun_terreno']  ?? null,
                 'area_comun_construccion' => $this->avaluo['area_comun_construccion']  ?? null,
@@ -311,6 +311,7 @@ class RevisarTraslado extends Component
                 'superficie_total_terreno' => $this->aviso['predio']['superficie_total_terreno']  ?? null,
                 'superficie_total_construccion' => $this->aviso['predio']['superficie_total_construccion']  ?? null,
                 'valor_catastral' => $this->aviso['predio']['valor_catastral']  ?? null,
+                'observaciones' => $this->descripcion()
             ]);
 
             $this->traslado->predio->audits()->latest()->first()->update(['tags' => 'Actualizó mediante revision de aviso', 'tramite_id' => $this->traslado->tramite_aviso]);
@@ -430,25 +431,19 @@ class RevisarTraslado extends Component
                         'porcentaje_usufructo' => (float)$adquiriente['porcentaje_usufructo'] + $propietario_existente->porcentaje_usufructo,
                     ]);
 
-                    $persona = $this->buscarPersona($adquiriente['persona']['rfc'], $adquiriente['persona']['curp'], $adquiriente['persona']['tipo'], $adquiriente['persona']['nombre'], $adquiriente['persona']['ap_materno'], $adquiriente['persona']['ap_paterno'], $adquiriente['persona']['razon_social']);
-
-                    if($persona){
-
-                        $persona->update([
-                            'fecha_nacimiento' => $adquiriente['persona']['fecha_nacimiento'],
-                            'nacionalidad' => $adquiriente['persona']['nacionalidad'],
-                            'estado_civil' => $adquiriente['persona']['estado_civil'],
-                            'calle' => $adquiriente['persona']['calle'],
-                            'numero_exterior' => $adquiriente['persona']['numero_exterior'],
-                            'numero_interior' => $adquiriente['persona']['numero_interior'],
-                            'colonia' => $adquiriente['persona']['colonia'],
-                            'cp' => $adquiriente['persona']['cp'],
-                            'entidad' => $adquiriente['persona']['entidad'],
-                            'municipio' => $adquiriente['persona']['municipio'],
-                            'ciudad' => $adquiriente['persona']['ciudad'],
-                        ]);
-
-                    }
+                    $propietario_existente->persona->update([
+                        'fecha_nacimiento' => $adquiriente['persona']['fecha_nacimiento'],
+                        'nacionalidad' => $adquiriente['persona']['nacionalidad'],
+                        'estado_civil' => $adquiriente['persona']['estado_civil'],
+                        'calle' => $adquiriente['persona']['calle'],
+                        'numero_exterior' => $adquiriente['persona']['numero_exterior'],
+                        'numero_interior' => $adquiriente['persona']['numero_interior'],
+                        'colonia' => $adquiriente['persona']['colonia'],
+                        'cp' => $adquiriente['persona']['cp'],
+                        'entidad' => $adquiriente['persona']['entidad'],
+                        'municipio' => $adquiriente['persona']['municipio'],
+                        'ciudad' => $adquiriente['persona']['ciudad'],
+                    ]);
 
                 }else{
 
@@ -506,7 +501,6 @@ class RevisarTraslado extends Component
                 'numero_interior' => $this->aviso['predio']['numero_interior']  ?? null,
                 'numero_adicional' => $this->aviso['predio']['numero_adicional']  ?? null,
                 'numero_adicional_2' => $this->aviso['predio']['numero_adicional_2']  ?? null,
-                'numero_interior' => $this->aviso['predio']['numero_interior']  ?? null,
                 'lote_fraccionador' => $this->aviso['predio']['lote_fraccionador']  ?? null,
                 'manzana_fraccionador' => $this->aviso['predio']['manzana_fraccionador']  ?? null,
                 'etapa_fraccionador' => $this->aviso['predio']['etapa_fraccionador']  ?? null,
@@ -519,10 +513,11 @@ class RevisarTraslado extends Component
                 'zutm' => $this->aviso['predio']['zutm']  ?? null,
                 'lon' => $this->aviso['predio']['lon']  ?? null,
                 'lat' => $this->aviso['predio']['lat']  ?? null,
-                'uso_1' => $this->avaluo['uso_1']  ?? null,
-                'uso_2' => $this->avaluo['uso_2']  ?? null,
-                'uso_3' => $this->avaluo['uso_3']  ?? null,
+                'uso_1' => $this->aviso['predio']['uso_1']  ?? null,
+                'uso_2' => $this->aviso['predio']['uso_2']  ?? null,
+                'uso_3' => $this->aviso['predio']['uso_3']  ?? null,
                 'superficie_terreno' => $this->aviso['predio']['superficie_terreno']  ?? null,
+                'superficie_notarial' => $this->aviso['predio']['superficie_notarial']  ?? null,
                 'superficie_construccion' => $this->aviso['predio']['superficie_construccion']  ?? null,
                 'area_comun_terreno' => $this->aviso['predio']['area_comun_terreno']  ?? null,
                 'area_comun_construccion' => $this->aviso['predio']['area_comun_construccion']  ?? null,
@@ -531,6 +526,7 @@ class RevisarTraslado extends Component
                 'superficie_total_terreno' => $this->aviso['predio']['superficie_total_terreno']  ?? null,
                 'superficie_total_construccion' => $this->aviso['predio']['superficie_total_construccion']  ?? null,
                 'valor_catastral' => $this->aviso['predio']['valor_catastral']  ?? null,
+                'observaciones' => $this->descripcion()
             ]);
 
             $this->traslado->predio->audits()->latest()->first()->update(['tags' => 'Actualizó mediante aviso aclaratorio', 'tramite_id' => $this->traslado->tramite_aviso]);
@@ -540,9 +536,54 @@ class RevisarTraslado extends Component
         $this->traslado->predio->movimientos()->create([
             'nombre' => $this->aviso['acto'],
             'fecha' => now()->toDateString(),
-            'descripcion' => 'Se actualiza predio mediante aviso: ' . $this->aviso['año'] . '-' . $this->aviso['folio'] . '-' . $this->aviso['usuario'] . '. ' . $this->aviso['observaciones'],
+            'descripcion' => $this->descripcion(),
             'creado_por' => auth()->id()
         ]);
+
+    }
+
+    public function descripcion(){
+
+        $transmitentes = null;
+
+        if(count($this->transmitentes)){
+
+            $transmitentes = ". TRANSMITIENDO: ";
+
+            foreach($this->transmitentes as $transmitente){
+
+                $transmitentes .=  $transmitente['nombre'] . " " . $transmitente['ap_paterno'] . " " . $transmitente['ap_materno'] . " " . $transmitente['razon_social'] . " ";
+
+            }
+
+        }
+
+        $adquirientes = null;
+
+        if(isset($this->aviso['predio']['adquirientes']) && count($this->aviso['predio']['adquirientes'])){
+
+            $adquirientes = ". ADQUIRIENDO: ";
+
+            foreach($this->aviso['predio']['adquirientes'] as $adquiriente){
+
+                $adquirientes .=  $adquiriente['persona']['nombre'] . " " . $adquiriente['persona']['ap_paterno'] . " " . $adquiriente['persona']['ap_materno'] . " " . $adquiriente['persona']['razon_social'] . " PORCENTAJE DE PROPIEDAD: " . $adquiriente['porcentaje_propiedad'] . "% PORCENTAJE DE NUDA: " . $adquiriente['porcentaje_nuda'] . "% PORCENTAJE DE USUFRUCTO: " . $adquiriente['porcentaje_usufructo'] . "% ";
+
+            }
+
+        }
+
+        $descripcion =
+        "CON FECHA " . Carbon::now()->locale('es')->translatedFormat('l d \d\e F \d\e\l Y') .
+        ". ANTE LA FE DEL(A) " . $this->aviso['titular'] .
+        ". SE REGISTRA " . $this->aviso['acto'] .
+        ". CON EL COMPROBANTE " . $this->aviso['año'] . '-' . $this->aviso['folio'] . '-' . $this->aviso['usuario'] .
+        ". CON " . $this->aviso['tipo_escritura'] . " NUMERO: " . $this->aviso['numero_escritura'] . " VOLUMEN: " . $this->aviso['volumen_escritura'] .
+        $transmitentes . $adquirientes .
+        ". EL PREDIO UBICADO EN: " . $this->aviso['predio']['nombre_asentamiento'] . " EN LA VIALIDAD: " .  $this->aviso['predio']['nombre_vialidad'] . " NUMERO: " . $this->aviso['predio']['numero_exterior'] . " " . $this->aviso['predio']['numero_exterior_2'] . " " . $this->aviso['predio']['numero_interior'] . " " . $this->aviso['predio']['numero_interior'] . " " . $this->aviso['predio']['numero_adicional'] . " " . $this->aviso['predio']['numero_adicional_2'] . " C.P. " .  $this->aviso['predio']['codigo_postal'] .
+        ". CON SUPERFICIE DE: " .  $this->aviso['predio']['superficie_total_terreno'] . ", CONSTRUCCION DE: " . $this->aviso['predio']['superficie_total_construccion'] . " Y VALOR CATASTRAL DE: $ " . number_format($this->aviso['predio']['valor_catastral'], 2) . ". " .
+        $this->aviso['observaciones'];
+
+        return strtoupper($descripcion);
 
     }
 

@@ -4,13 +4,14 @@
 
     <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-500 overflow-x-auto" wire:loading.class.delaylongest="opacity-50">
 
-        <table class="w-full">
+        <table class="w-full table table-fixed">
 
             <thead class="border-b border-gray-300 ">
 
                 <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
 
                     <th class="px-2">Tipo</th>
+                    <th class="px-2">Folio</th>
                     <th class="px-2">Estado</th>
                     <th class="px-2">Entidad</th>
                     <th class="px-2">Ver traslado</th>
@@ -26,6 +27,7 @@
 
                     <tr class="text-gray-500 text-sm leading-relaxed">
                         <td class=" px-2 w-full capitalize">{{ $traslado->tipo }}</td>
+                        <td class=" px-2 w-full ">{{ $traslado->año_aviso }}-{{ $traslado->folio_aviso }}-{{ $traslado->usuario_aviso }}</td>
                         <td class=" px-2 w-full ">
                             <span class="bg-{{ $traslado->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($traslado->estado) }}</span>
                         </td>

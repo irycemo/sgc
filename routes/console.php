@@ -2,6 +2,7 @@
 
 use App\Jobs\GenerarCertificacionMigracionJob;
 use App\Jobs\MigrarPredioJob;
+use App\Models\Movimiento;
 use App\Models\OldCertificado;
 use App\Models\OldTraslado;
 use App\Models\Predio;
@@ -10,6 +11,7 @@ use App\Models\SQLSVR\tcpro008;
 use App\Models\Tramite;
 use App\Models\Traslado;
 use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
+use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -17,8 +19,8 @@ use Illuminate\Support\Facades\Schedule;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
-Schedule::command('backup:clean')->daily()->at('01:00');
-Schedule::command('backup:run')->daily()->at('01:30');
+/* Schedule::command('backup:clean')->daily()->at('01:00');
+Schedule::command('backup:run')->daily()->at('01:30'); */
 Schedule::command('expirar-tramites')->daily()->at('02:00');
 Schedule::command('revisar-pago')->daily()->at('23:30');
 
@@ -1116,3 +1118,109 @@ Artisan::command('tramites', function(){
 
 });
 
+Artisan::command('observaciones', function(){
+
+    $count = 0;
+
+    $traslados = Traslado::with('predio.movimientos')->where('estado', 'operado')->get();
+
+    $progressbar = $this->output->createProgressBar($traslados->count());
+
+    $progressbar->start();
+
+    foreach($traslados as $traslado){
+
+        try {
+
+            $aviso = (new SistemaTramitesLineaService())->consultarAviso2($traslado->aviso_stl);
+
+            $observaciones = 'Se actualiza predio mediante aviso: ' . $aviso['año'] . '-' . $aviso['folio'] . '-' . $aviso['usuario'];
+
+            $movimiento = Movimiento::where('descripcion', 'like', '%' . $observaciones . '%')->first();
+
+            if(!$movimiento){
+
+                $this->info("Aviso: " . $traslado->año_aviso . '-' . $traslado->folio_aviso . '-' . $traslado->usuario_aviso . ' ID: ' . $traslado->aviso_stl);
+
+                $this->info($observaciones);
+
+            }else{
+
+                $transmitentes = null;
+
+                if(isset($aviso['predio']['transmitentes']) && count($aviso['predio']['transmitentes'])){
+
+                    $transmitentes = ". TRANSMITIENDO: ";
+
+                    foreach($aviso['predio']['transmitentes'] as $transmitente){
+
+                        $transmitentes .=  $transmitente['persona']['nombre'] . " " . $transmitente['persona']['ap_paterno'] . " " . $transmitente['persona']['ap_materno'] . " " . $transmitente['persona']['razon_social'] . " ";
+
+                    }
+
+                }
+
+                $adquirientes = null;
+
+                if(isset($aviso['predio']['adquirientes']) && count($aviso['predio']['adquirientes'])){
+
+                    $adquirientes = ". ADQUIRIENDO: ";
+
+                    foreach($aviso['predio']['adquirientes'] as $adquiriente){
+
+                        $adquirientes .=  $adquiriente['persona']['nombre'] . " " . $adquiriente['persona']['ap_paterno'] . " " . $adquiriente['persona']['ap_materno'] . " " . $adquiriente['persona']['razon_social'] . " PORCENTAJE DE PROPIEDAD: " . $adquiriente['porcentaje_propiedad'] . "% PORCENTAJE DE NUDA: " . $adquiriente['porcentaje_nuda'] . "% PORCENTAJE DE USUFRUCTO: " . $adquiriente['porcentaje_usufructo'] . "% ";
+
+                    }
+
+                }
+
+                $descripcion =
+                    "CON FECHA " . Carbon::now()->locale('es')->translatedFormat('l d \d\e F \d\e\l Y') .
+                    ". ANTE LA FE DEL(A) " . $aviso['titular'] .
+                    ". SE REGISTRA " . $aviso['acto'] .
+                    ". CON EL COMPROBANTE " . $aviso['año'] . '-' . $aviso['folio'] . '-' . $aviso['usuario'] .
+                    ". CON " . $aviso['tipo_escritura'] . " NUMERO: " . $aviso['numero_escritura'] . " VOLUMEN: " . $aviso['volumen_escritura'] .
+                    $transmitentes . $adquirientes .
+                    ". EL PREDIO UBICADO EN: " . $aviso['predio']['nombre_asentamiento'] . " EN LA VIALIDAD: " .  $aviso['predio']['nombre_vialidad'] . " NUMERO: " . $aviso['predio']['numero_exterior'] . " " . $aviso['predio']['numero_exterior_2'] . " " . $aviso['predio']['numero_interior'] . " " . $aviso['predio']['numero_interior'] . " " . $aviso['predio']['numero_adicional'] . " " . $aviso['predio']['numero_adicional_2'] . " C.P. " .  $aviso['predio']['codigo_postal'] .
+                    ". CON SUPERFICIE DE: " .  $aviso['predio']['superficie_total_terreno'] . ", CONSTRUCCION DE: " . $aviso['predio']['superficie_total_construccion'] . " Y VALOR CATASTRAL DE: $ " . number_format($aviso['predio']['valor_catastral'], 2) . ". " .
+                    $aviso['observaciones'];
+
+                $movimiento->update([
+                    'descripcion' => $descripcion
+                ]);
+
+                $ultimo_movimiento_en_predio = $traslado->predio->movimientos()->first();
+
+                if($ultimo_movimiento_en_predio->id == $movimiento->id){
+
+                    $traslado->predio->update([
+                        'observaciones' => $descripcion,
+                        'superficie_notarial' => $aviso['predio']['superficie_notarial']
+                    ]);
+
+                    $this->info($traslado->predio->cuentaPredial());
+
+                }else{
+
+                    $traslado->predio->update(['superficie_notarial' => $aviso['predio']['superficie_notarial']]);
+
+                }
+
+            }
+
+            $progressbar->advance();
+
+            $count ++;
+
+        } catch (\Throwable $th) {
+            $this->info($th);
+
+        }
+
+    }
+
+    $progressbar->finish();
+
+    $this->info($count);
+
+});

@@ -50,6 +50,7 @@ return [
     'sistema_tramites_en_linea' => [
         'token' => env('SISTEMA_TRAMITES_EN_LINEA_TOKEN'),
         'consultar_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_CONSULTAR_AVISO'),
+        'consultar_aviso_2' => env('SISTEMA_TRAMITES_EN_LINEA_CONSULTAR_AVISO_2'),
         'consultar_aviso_con_folio' => env('SISTEMA_TRAMITES_EN_LINEA_CONSULTAR_AVISO_CON_FOLIO'),
         'rechazar_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_RECHAZAR_AVISO'),
         'autorizar_aviso' => env('SISTEMA_TRAMITES_EN_LINEA_AUTORIZAR_AVISO'),

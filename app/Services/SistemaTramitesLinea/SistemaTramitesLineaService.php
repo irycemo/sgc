@@ -43,6 +43,41 @@ class SistemaTramitesLineaService{
 
     }
 
+    public function consultarAviso2(int $aviso_stl):array
+    {
+
+        $response = Http::withToken(config('services.sistema_tramites_en_linea.token'))
+                            ->accept('application/json')
+                            ->asForm()
+                            ->post(
+                                config('services.sistema_tramites_en_linea.consultar_aviso_2'),
+                                [
+                                    'id' => $aviso_stl,
+                                ]
+                            );
+
+        if($response->status() !== 200){
+
+            Log::error("Error al consultar aviso. " . $response);
+
+            $data = json_decode($response, true);
+
+            if(isset($data['error'])){
+
+                throw new GeneralException($data['error']);
+
+            }
+
+            throw new GeneralException("Error al consultar aviso.");
+
+        }else{
+
+            return json_decode($response, true)['data'];
+
+        }
+
+    }
+
     public function consultarAvisoConFolio(int $año, int $folio, int $usuario):array
     {
 

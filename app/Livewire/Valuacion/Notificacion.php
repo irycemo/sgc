@@ -195,15 +195,18 @@ class Notificacion extends Component
 
                 if($predio->id === $predio_fusionante->id) continue;
 
+                $observaciones = 'Se fusiona el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . ' resultando el predio ' . $predio->cuentaPredial() . '. ' . $this->avaluo->observaciones;
+
                 $predio_fusionante->update([
                     'status' => 'fusionado',
                     'actualizado_por' => auth()->id(),
+                    'observaciones' => $observaciones,
                 ]);
 
                 $predio_fusionante->movimientos()->create([
                     'nombre' => $this->tramite->avaluo_para->label(),
                     'fecha' => $this->fecha_notificacion,
-                    'descripcion' => 'Se fusiona el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . ' resultando el predio ' . $predio->cuentaPredial(). '.',
+                    'descripcion' => $observaciones,
                     'creado_por' => auth()->id()
                 ]);
 
@@ -215,11 +218,12 @@ class Notificacion extends Component
 
             $predio_rustico = Predio::find($this->tramite->predios->first()->id);
 
-            /*  */
+            $observaciones = 'Se da de baja el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . ' por cambio de regimen. Da origen al predio ' . $this->predio->cuentaPredial() . '. ' . $this->avaluo->observaciones;
 
             $predio_rustico->update([
                 'status' => 'baja',
                 'actualizado_por' => auth()->id(),
+                'observaciones' => $observaciones,
             ]);
 
             foreach ($predio_rustico->propietarios as $propietario) {
@@ -237,7 +241,7 @@ class Notificacion extends Component
             $predio_rustico->movimientos()->create([
                 'nombre' => $this->tramite->avaluo_para->label(),
                 'fecha' => $this->fecha_notificacion,
-                'descripcion' => 'Se da de baja el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . ' por cambio de regimen. Da origen al predio ' . $this->predio->cuentaPredial(),
+                'descripcion' => $observaciones,
                 'creado_por' => auth()->id()
             ]);
 
@@ -299,6 +303,8 @@ class Notificacion extends Component
 
     public function creaPredio(){
 
+        $observaciones = 'Se da de alta predio en el padrón catastral mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '. ' . $this->avaluo->observaciones;
+
         $predio = Predio::create([
             'status' => 'activo',
             'estado' => $this->avaluo->predioAvaluo->estado,
@@ -354,7 +360,7 @@ class Notificacion extends Component
             'lon' => $this->avaluo->predioAvaluo->lon,
             'lat' => $this->avaluo->predioAvaluo->lat,
             'fecha_efectos' => $this->fecha_notificacion,
-            'observaciones' => $this->avaluo->predioAvaluo->observaciones,
+            'observaciones' => $observaciones,
             'domicilio_notificacion' => $this->avaluo->predioAvaluo->domicilio_notificacion,
             'origen' => 'Alta mediante avalúo'
         ]);
@@ -362,7 +368,7 @@ class Notificacion extends Component
         $predio->movimientos()->create([
             'nombre' => 'Alta mediante ' . $this->tramite->avaluo_para->label(),
             'fecha' => $this->fecha_notificacion,
-            'descripcion' => 'Se da de alta predio en el padrón catastral mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '.',
+            'descripcion' => $observaciones,
             'creado_por' => auth()->id()
         ]);
 
@@ -375,6 +381,8 @@ class Notificacion extends Component
     }
 
     public function actualizaPredio($predio){
+
+        $observaciones = 'Se actualiza el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '. ' . $this->avaluo->observaciones;
 
         $predio->update([
             'status' => 'activo',
@@ -429,7 +437,7 @@ class Notificacion extends Component
             'lon' => $this->avaluo->predioAvaluo->lon,
             'lat' => $this->avaluo->predioAvaluo->lat,
             'fecha_efectos' => $this->fecha_notificacion,
-            'observaciones' => $this->avaluo->predioAvaluo->observaciones,
+            'observaciones' =>  $observaciones,
             'domicilio_notificacion' => $this->avaluo->predioAvaluo->domicilio_notificacion,
             'actualizado_por' => auth()->user()->id
         ]);
@@ -437,7 +445,7 @@ class Notificacion extends Component
         $predio->movimientos()->create([
             'nombre' => 'Actualización mediante ' . $this->tramite->avaluo_para->label(),
             'fecha' => $this->fecha_notificacion,
-            'descripcion' => 'Se actualiza el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '.',
+            'descripcion' =>  $observaciones,
             'creado_por' => auth()->id()
         ]);
 

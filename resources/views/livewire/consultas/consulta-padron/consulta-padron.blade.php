@@ -586,13 +586,19 @@
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                            <p><strong>Funcionario responsable del último movimiento:</strong>{{ $this->predio->movimientos->last()?->creadoPor?->name ? $this->predio->movimientos->last()?->creadoPor?->name : $this->predio->actualizado_nombre }}</p>
+                            <p><strong>Valor catastral:</strong>${{ number_format($this->predio->valor_catastral, 2) }}</p>
 
                         </div>
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
-                            <p><strong>Último Movimiento:</strong>{{ $this->predio->movimientos->last()?->nombre }}</p>
+                            <p><strong>Funcionario responsable del último movimiento:</strong>{{ $this->predio->movimientos->first()?->creadoPor?->name ? $this->predio->movimientos->first()?->creadoPor?->name : $this->predio->actualizado_nombre }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Último Movimiento:</strong>{{ $this->predio->movimientos->first()?->nombre }}</p>
 
                         </div>
 
@@ -1212,7 +1218,7 @@
 
                 <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
-                    <table class="table-auto lg:table-fixed w-full">
+                    <table class="table-auto w-full">
 
                         <thead class="border-b border-gray-300 ">
 
@@ -1232,10 +1238,10 @@
                             @foreach ($this->predio->movimientos as $movimiento)
 
                                 <tr class="text-gray-500 text-sm leading-relaxed">
-                                    <td class=" px-2 w-full ">{{ $movimiento->nombre }}</td>
-                                    <td class=" px-2 w-full ">{{ $movimiento->fecha->format('d-m-Y') }}</td>
+                                    <td class=" px-2 w-1/6">{{ $movimiento->nombre }}</td>
+                                    <td class=" px-2 whitespace-nowrap">{{ $movimiento->fecha->format('d-m-Y') }}</td>
                                     <td class=" px-2 w-full ">{{ $movimiento->descripcion }}</td>
-                                    <td class=" px-2 w-full ">{{ $movimiento->actualizado_nombre ?? $movimiento->creadoPor?->name }}</td>
+                                    <td class=" px-2 whitespace-nowrap">{{ $movimiento->actualizado_nombre ?? $movimiento->creadoPor?->name }}</td>
                                 </tr>
 
                             @endforeach
