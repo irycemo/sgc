@@ -77,7 +77,19 @@ class Personas extends Component
         if($this->modelo_editar->isNot($modelo))
             $this->modelo_editar = $modelo;
 
-        $this->tipo_persona = $this->modelo_editar->tipo;
+        if(in_array($this->modelo_editar->tipo, ['FISICA', 'FÍSICA'])){
+
+            $this->modelo_editar->tipo = 'FÍSICA';
+
+            $this->tipo_persona = 'FÍSICA';
+
+        }else{
+
+            $this->modelo_editar->tipo = 'MORAL';
+
+            $this->tipo_persona = 'MORAL';
+
+        }
 
     }
 
@@ -102,6 +114,26 @@ class Personas extends Component
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 
+        }
+
+    }
+
+    public function guardar(){
+
+        $this->validate();
+
+        try {
+
+            $this->modelo_editar->save();
+
+            $this->resetearTodo();
+
+            $this->dispatch('mostrarMensaje', ['success', "La persona se creó con éxito."]);
+
+        } catch (\Throwable $th) {
+            Log::error("Error al crear persona por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+            $this->resetearTodo();
         }
 
     }
