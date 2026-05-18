@@ -16,6 +16,14 @@ class InactivarTrasladoController extends Controller
 
         $traslado = Traslado::find($validated['id']);
 
+        if(! $traslado){
+
+            return response()->json([
+                'error' => 'No se encontro el traslado.',
+            ], 204);
+
+        }
+
         try {
 
             $traslado->update([
