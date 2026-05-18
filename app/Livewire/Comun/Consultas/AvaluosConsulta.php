@@ -6,6 +6,7 @@ use App\Http\Controllers\Valuacion\AvaluoImpresionController;
 use App\Models\Avaluo;
 use App\Models\Predio;
 use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class AvaluosConsulta extends Component
@@ -32,6 +33,15 @@ class AvaluosConsulta extends Component
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
        }
+
+    }
+
+    #[On('actualizarPredio')]
+    public function actualizarPredio($id){
+
+        $this->predio = Predio::find($id);
+
+        $this->avaluos = Avaluo::with('notificador')->where('predio', $this->predio_id)->get();
 
     }
 

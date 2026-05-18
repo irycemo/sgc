@@ -33,6 +33,15 @@ class ArchivoConsulta extends Component
 
     }
 
+    #[On('actualizarPredio')]
+    public function actualizarPredio($id){
+
+        $this->predio = Predio::find($id);
+
+        $this->cargarArchivosAnteriores();
+
+    }
+
     public function borrarArchivo(File $archivo){
 
         try {
@@ -64,17 +73,7 @@ class ArchivoConsulta extends Component
 
     }
 
-    public function mount(){
-
-        $this->predio = Predio::find($this->predio_id);
-
-        if(!$this->predio){
-
-            $this->dispatch('mostrarMensaje', ['warning', "Debe cargar primero el predio."]);
-
-            return;
-
-        }
+    public function cargarArchivosAnteriores(){
 
         $this->archivos_anteriores = File::where('fileable_id', $this->predio->id)
                                         ->where('fileable_type', 'App\Models\Predio')
@@ -91,17 +90,17 @@ class ArchivoConsulta extends Component
             try {
 
                 $response = Http::accept('application/json')
-                                    ->get(
-                                        config('services.consulta_archivos_anterior.archivos_url') .
-                                        $this->predio->localidad .
-                                        '&ofna=' . $this->predio->oficina .
-                                        '&tpre=' . $this->predio->tipo_predio .
-                                        '&nreg=' . $this->predio->numero_registro
-                                    );
+                    ->get(
+                        config('services.consulta_archivos_anterior.archivos_url') .
+                        $this->predio->localidad .
+                        '&ofna=' . $this->predio->oficina .
+                        '&tpre=' . $this->predio->tipo_predio .
+                        '&nreg=' . $this->predio->numero_registro
+                    );
 
                 if($response->status() !== 200){
 
-                    $this->archivos = [];
+
 
                 }else{
 
@@ -122,6 +121,22 @@ class ArchivoConsulta extends Component
             }
 
         }
+
+    }
+
+    public function mount(){
+
+        $this->predio = Predio::find($this->predio_id);
+
+        if(!$this->predio){
+
+            $this->dispatch('mostrarMensaje', ['warning', "Debe cargar primero el predio."]);
+
+            return;
+
+        }
+
+        $this->cargarArchivosAnteriores();
 
         $this->flag_borrar = url()->previous() == route('captura_padron');
 

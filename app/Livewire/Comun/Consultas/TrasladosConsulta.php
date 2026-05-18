@@ -2,12 +2,13 @@
 
 namespace App\Livewire\Comun\Consultas;
 
-use Livewire\Component;
-use App\Models\Traslado;
-use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
+use App\Models\Traslado;
 use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
 use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
+use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class TrasladosConsulta extends Component
 {
@@ -68,6 +69,13 @@ class TrasladosConsulta extends Component
             $this->dispatch('mostrarMensaje', ['error', 'Hubo un error.']);
 
         }
+
+    }
+
+    #[On('actualizarPredio')]
+    public function actualizarPredio($id){
+
+        $this->traslados = Traslado::where('predio_id', $id)->get();
 
     }
 

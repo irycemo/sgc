@@ -2,15 +2,16 @@
 
 namespace App\Livewire\Comun\Consultas;
 
-use Livewire\Component;
-use App\Models\Certificacion;
-use Illuminate\Support\Facades\Log;
 use App\Enums\Certificaciones\CertificacionesEnum;
+use App\Http\Controllers\Certificaciones\CedulaActualizcacionController;
 use App\Http\Controllers\Certificaciones\CertificacionesController;
 use App\Http\Controllers\Certificaciones\CertificadoHistoriaController;
 use App\Http\Controllers\Certificaciones\CertificadoNegativoController;
 use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
-use App\Http\Controllers\Certificaciones\CedulaActualizcacionController;
+use App\Models\Certificacion;
+use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\On;
+use Livewire\Component;
 
 class CertificacionesConsulta extends Component
 {
@@ -55,6 +56,15 @@ class CertificacionesConsulta extends Component
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
         }
+
+    }
+
+    #[On('actualizarPredio')]
+    public function actualizarPredio($id){
+
+        $this->certificaciones = Certificacion::where('predio_id', $id)
+                                                    ->where('estado', 'activo')
+                                                    ->get();
 
     }
 

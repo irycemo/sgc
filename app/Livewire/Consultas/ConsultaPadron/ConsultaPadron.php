@@ -190,6 +190,8 @@ class ConsultaPadron extends Component
 
         }
 
+        $this->dispatch('actualizarPredio', id: $this->predio->id);
+
     }
 
     public function buscarClaveCatastral(){
@@ -284,6 +286,8 @@ class ConsultaPadron extends Component
         $this->selected_id = $predio;
 
         $this->flag = true;
+
+        $this->dispatch('actualizarPredio', id: $predio);
 
     }
 
