@@ -458,14 +458,20 @@
 
     </div>
 
-    <x-confirmation-modal wire:model="modalIndexar" maxWidth="sm">
+    <x-dialog-modal wire:model="modalIndexar" maxWidth="sm">
 
         <x-slot name="title">
             Indexar valor catastral
         </x-slot>
 
         <x-slot name="content">
-            ¿Esta seguro que desea indexar el valor catastral?
+
+            <x-input-group for="valor_catastral_indexar" label="Valor catastral a indexar" :error="$errors->first('valor_catastral_indexar')" class="w-full">
+
+                <x-input-text id="valor_catastral_indexar" wire:model="valor_catastral_indexar" />
+
+            </x-input-group>
+
         </x-slot>
 
         <x-slot name="footer">
@@ -488,7 +494,7 @@
 
         </x-slot>
 
-    </x-confirmation-modal>
+    </x-dialog-modal>
 
     <x-dialog-modal wire:model="modalBaja" maxWidth="sm">
 

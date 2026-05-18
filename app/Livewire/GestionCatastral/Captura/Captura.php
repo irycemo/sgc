@@ -48,6 +48,7 @@ class Captura extends Component
     public $label = 'Número de documento';
     public $observaciones;
     public $ubicaciones_manzana;
+    public $valor_catastral_indexar;
 
     public Predio $predio;
 
@@ -280,19 +281,9 @@ class Captura extends Component
 
     public function indexar(){
 
-        if(intval(Carbon::parse($this->predio->indexado_en)->format('Y')) == intval(now()->format('Y'))){
-
-            $this->modalIndexar = false;
-
-            $this->dispatch('mostrarMensaje', ['warning', "El valor catastral del predio ya ha sido indexado al año actual."]);
-
-            return;
-
-        }
-
         $factores = FactorIncremento::orderBy('año')->get();
 
-        $valor = $this->predio->valor_catastral;
+        $valor = $this->valor_catastral_indexar;
 
         $año = Carbon::parse($this->predio->fecha_efectos)->format('Y');
 
@@ -311,7 +302,7 @@ class Captura extends Component
 
             DB::transaction(function () use($valor){
 
-                $this->predio->valor_catastral = $valor;
+                $this->predio->valor_catastral = ceil($valor);
 
                 $this->predio->indexado_en = now();
 
