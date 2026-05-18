@@ -2,15 +2,17 @@
 
 namespace App\Livewire\Valuacion\Impresion;
 
-use Livewire\Component;
 use App\Constantes\Constantes;
-use Illuminate\Validation\Rule;
 use App\Enums\Tramites\AvaluoPara;
+use App\Exceptions\GeneralException;
+use App\Http\Controllers\Certificaciones\NotificacionValorCatastralController;
+use App\Jobs\Certificaciones\GenerarImagenVerificacionJob;
+use App\Models\Certificacion;
+use App\Traits\Valuacion\ImpresionTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Exceptions\GeneralException;
-use App\Traits\Valuacion\ImpresionTrait;
-use App\Http\Controllers\Certificaciones\NotificacionValorCatastralController;
+use Illuminate\Validation\Rule;
+use Livewire\Component;
 
 class Desglose extends Component
 {
@@ -86,6 +88,10 @@ class Desglose extends Component
                 });
 
             });
+
+            $certificacion = Certificacion::where('tramite_id', $this->tramite_inspeccion->id)->where('estado', 'activo')->first();
+
+            GenerarImagenVerificacionJob::dispatch($certificacion->id);
 
             $this->resetarTodo();
 

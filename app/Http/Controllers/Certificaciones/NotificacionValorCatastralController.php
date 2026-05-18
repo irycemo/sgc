@@ -157,7 +157,7 @@ class NotificacionValorCatastralController extends Controller
 
         }
 
-        $this->crearImagenConMarcaDeAgua($object, $qr, $certificacion);
+        /* $this->crearImagenConMarcaDeAgua($object, $qr, $certificacion); */
 
         $pdf = Pdf::loadView('certificaciones.notificacion_valor_catastral', [
             'datos_control' => $object->datos_control,
@@ -301,7 +301,7 @@ class NotificacionValorCatastralController extends Controller
 
         } */
 
-        $this->crearImagenConMarcaDeAgua($object, $qr, $certificacion);
+        /* $this->crearImagenConMarcaDeAgua($object, $qr, $certificacion); */
 
         $pdf = Pdf::loadView('certificaciones.notificacion_valor_catastral', [
             'datos_control' => $object->datos_control,
