@@ -235,7 +235,7 @@ class Notificacion extends Component
             }
 
             $this->predio->update([
-                'superficie_notarial' => $predio_fusionante->superficie_notarial,
+                'superficie_notarial' => $predio_rustico->superficie_notarial,
             ]);
 
             $predio_rustico->movimientos()->create([
