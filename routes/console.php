@@ -6,6 +6,7 @@ use App\Models\Movimiento;
 use App\Models\OldCertificado;
 use App\Models\OldTraslado;
 use App\Models\Predio;
+use App\Models\Servicio;
 use App\Models\SQLSVR\ctcdm004;
 use App\Models\SQLSVR\tcpro008;
 use App\Models\Tramite;
@@ -1207,6 +1208,76 @@ Artisan::command('observaciones', function(){
                 }
 
             }
+
+            $progressbar->advance();
+
+            $count ++;
+
+        } catch (\Throwable $th) {
+            $this->info($th);
+
+        }
+
+    }
+
+    $progressbar->finish();
+
+    $this->info($count);
+
+});
+
+Artisan::command('servicios', function(){
+
+    $count = 0;
+
+    $servicios = Servicio::whereHas('categoria', function($q){
+                                $q->whereIn('nombre', ['Levantamientos topográficos', 'Levantamiento Topográfico con curvas de nivel']);
+                            })
+                            ->get();
+
+    $progressbar = $this->output->createProgressBar($servicios->count());
+
+    $progressbar->start();
+
+    foreach($servicios as $servicio){
+
+        try {
+
+            $nombre = $servicio->nombre;
+
+            if(str_contains($nombre, 'GRUPO 1')){
+
+                $nombre = str_replace(' GRUPO 1', '', $nombre);
+
+                $nombre = str_replace('Para predios rústicos', 'Para predios rústicos GRUPO 1', $nombre);
+
+            }
+
+            if(str_contains($nombre, 'GRUPO 2')){
+
+                $nombre = str_replace(' GRUPO 2', '', $nombre);
+
+                $nombre = str_replace('Para predios rústicos', 'Para predios rústicos GRUPO 2', $nombre);
+
+            }
+
+            if(str_contains($nombre, 'GRUPO 3')){
+
+                $nombre = str_replace(' GRUPO 3', '', $nombre);
+
+                $nombre = str_replace('Para predios rústicos', 'Para predios rústicos GRUPO 3', $nombre);
+
+            }
+
+            if(str_contains($nombre, 'GRUPO 4')){
+
+                $nombre = str_replace(' GRUPO 4', '', $nombre);
+
+                $nombre = str_replace('Para predios rústicos', 'Para predios rústicos GRUPO 4', $nombre);
+
+            }
+
+            $servicio->update(['nombre' => $nombre]);
 
             $progressbar->advance();
 
