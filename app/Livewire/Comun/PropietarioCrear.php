@@ -194,11 +194,11 @@ class PropietarioCrear extends Component
 
             if($this->persona->getKey()){
 
-                foreach($this->modelo->propietarios as $actor){
+                /* foreach($this->modelo->propietarios as $actor){
 
                     if($actor->persona_id == $this->persona->id) throw new GeneralException('La persona ya es un actor.');
 
-                }
+                } */
 
                 $this->persona->update([
                     'tipo' => $this->tipo_persona,
@@ -234,11 +234,11 @@ class PropietarioCrear extends Component
 
             }elseif($persona){
 
-                foreach($this->modelo->propietarios() as $actor){
+                /* foreach($this->modelo->propietarios() as $actor){
 
                     if($actor->persona_id == $persona->id) throw new GeneralException('La persona ya es un actor.');
 
-                }
+                } */
 
                 throw new GeneralException('Ya existe un persona registrada con la información ingresada.');
 

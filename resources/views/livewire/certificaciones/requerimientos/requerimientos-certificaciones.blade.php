@@ -60,6 +60,7 @@
                 <x-table.heading sortable wire:click="sortBy('folio')" :direction="$sort === 'folio' ? $direction : null" >Folio</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('predio_id')" :direction="$sort === 'predio_id' ? $direction : null" >Cuenta predial</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('tramite_id')" :direction="$sort === 'tramite_id' ? $direction : null" >Trámite</x-table.heading>
+                <x-table.heading >Solicitante</x-table.heading>
                 <x-table.heading >Registro</x-table.heading>
                 <x-table.heading >Acciones</x-table.heading>
 
@@ -98,6 +99,12 @@
                         <x-table.cell  title="Trámite">
 
                             {{ $certificacion->tramite?->año }}-{{ $certificacion->tramite?->folio }}-{{ $certificacion->tramite?->usuario }}
+
+                        </x-table.cell>
+
+                        <x-table.cell  title="Solicitante">
+
+                            {{ $certificacion->tramite->nombre_solicitante }}
 
                         </x-table.cell>
 
