@@ -259,7 +259,7 @@ class Traslados extends Component
             return Traslado::select('id','estado', 'año_aviso', 'folio_aviso', 'usuario_aviso', 'predio_id', 'entidad_nombre', 'asignado_a', 'actualizado_por', 'created_at', 'updated_at')
                                 ->with('actualizadoPor:id,name', 'asignadoA:id,name', 'predio:id,localidad,oficina,tipo_predio,numero_registro')
                                 ->withCount(['rechazos'])
-                                ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $this->estado))
+                                ->when($this->estado && $this->estado != '', fn($q) => $q->where('estado', $this->estado))
                                 ->when($this->oficina, function($q) {
                                     $q->whereHas('predio', function($q) {
                                         $q->select('id','oficina')->where('oficina', $this->oficina);
