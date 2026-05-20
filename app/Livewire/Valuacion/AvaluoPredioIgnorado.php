@@ -381,7 +381,7 @@ class AvaluoPredioIgnorado extends Component
 
         }
 
-        $this->validarDisponibilidadPadron();
+        $this->validarDisponibilidadPadronNoBindings($this->predio->region_catastral, $this->predio->municipio, $this->predio->zona_catastral, $this->predio->localidad, $this->predio->sector, $this->predio->manzana, $this->predio->predio, $this->predio->edificio, $this->predio->departamento, $this->predio->oficina, $this->tipo, $this->numero_registro);
 
         $this->validarCuentaAsignadaNoBindings($this->localidad, $this->oficina, $this->tipo, $this->numero_registro, auth()->id());
 
@@ -391,10 +391,14 @@ class AvaluoPredioIgnorado extends Component
 
         $this->validate([
             'numero_registro' => 'required',
+            'tipo' => 'required|numeric|min:1|max:2'
         ]);
 
         try {
 
+            $this->predio->localidad = $this->localidad;
+            $this->predio->oficina = $this->oficina;
+            $this->predio->tipo_predio = $this->tipo;
             $this->predio->numero_registro = $this->numero_registro;
 
             $this->validacionesAsignar();
@@ -411,11 +415,9 @@ class AvaluoPredioIgnorado extends Component
 
             });
 
-            $this->dispatch('mostrarMensaje', ['success', "La cuenta predial se asignó correctamente."]);
-
             $this->modalAsignarCuenta = false;
 
-            $this->predio = PredioAvaluo::make();
+            $this->dispatch('mostrarMensaje', ['success', "La cuenta predial se asignó correctamente."]);
 
         } catch (GeneralException $ex) {
 
@@ -459,3 +461,4 @@ class AvaluoPredioIgnorado extends Component
         return view('livewire.valuacion.avaluo-predio-ignorado')->extends('layouts.admin');
     }
 }
+

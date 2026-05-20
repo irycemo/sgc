@@ -270,6 +270,63 @@ trait ValidarDisponibilidad
 
     }
 
+    public function validarDisponibilidadPadronNoBindings(int $region_catastral, int $municipio, int $zona_catastral, int $localidad, int $sector, int $manzana, int $predio, int $edificio, int $departamento, int $oficina, int $tipo_predio, int $numero_registro){
+
+        $predioCompleto = Predio::where('estado', 16)
+                                    ->where('region_catastral', $region_catastral)
+                                    ->where('municipio', $municipio)
+                                    ->where('zona_catastral', $zona_catastral)
+                                    ->where('localidad', $localidad)
+                                    ->where('sector', $sector)
+                                    ->where('manzana', $manzana)
+                                    ->where('predio', $predio)
+                                    ->where('edificio', $edificio)
+                                    ->where('departamento', $departamento)
+                                    ->where('oficina', $oficina)
+                                    ->where('tipo_predio', $tipo_predio)
+                                    ->where('numero_registro', $numero_registro)
+                                    ->first();
+
+        if($predioCompleto){
+
+            throw new GeneralException("El predio ya existe en el padrón, verifique.");
+
+        }else{
+
+            $cuentaPredial = Predio::where('localidad', $localidad)
+                                        ->where('oficina', $oficina)
+                                        ->where('tipo_predio', $tipo_predio)
+                                        ->where('numero_registro', $numero_registro)
+                                        ->first();
+
+            if($cuentaPredial){
+
+                throw new GeneralException("La cuenta predial ya existe en el padrón con otra clave catastral, verifique.");
+
+            }
+
+            $claveCatastral = Predio::where('estado', 16)
+                                        ->where('region_catastral', $region_catastral)
+                                        ->where('municipio', $municipio)
+                                        ->where('zona_catastral', $zona_catastral)
+                                        ->where('localidad', $localidad)
+                                        ->where('sector', $sector)
+                                        ->where('manzana', $manzana)
+                                        ->where('predio', $predio)
+                                        ->where('edificio', $edificio)
+                                        ->where('departamento', $departamento)
+                                        ->first();
+
+            if($claveCatastral){
+
+                throw new GeneralException("La clave catastral ya existe en el padrón con otra cuenta predial, verifique.");
+
+            }
+
+        }
+
+    }
+
     public function validarDisponibilidadPredioAvaluo(int $region_catastral, int $municipio, int $zona_catastral, int $localidad, int $sector, int $manzana, int $predio, int $edificio, int $departamento, int $oficina, int $tipo_predio, int $numero_registro){
 
         $predioCompletoAvaluo = PredioAvaluo::where('status', 'activo')
