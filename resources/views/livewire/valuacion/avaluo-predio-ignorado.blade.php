@@ -290,19 +290,39 @@
 
                     </x-input-group>
 
-                    <x-input-group for="tipo" label="Tipo" :error="$errors->first('tipo')" class="w-10">
+                    <x-input-group for="tipo" label="Tipo" class="w-10">
 
                         <x-input-text type="number" id="tipo" wire:model="tipo" max="2" min="1"/>
 
                     </x-input-group>
 
-                    <x-input-group for="numero_registro" label="Número de Registro" :error="$errors->first('numero_registro')" >
+                    <x-input-group for="numero_registro" label="Número de Registro" >
 
                         <x-input-text type="number" id="numero_registro" wire:model="numero_registro" min="1"/>
 
                     </x-input-group>
 
                 </div>
+
+                @if(count($errors) > 0)
+
+                    <div class="mb-5 flex gap-2 flex-wrap ">
+
+                        <ul class="flex gap-2 felx flex-wrap list-disc ml-5">
+
+                            @foreach ($errors->all() as $error)
+
+                                <li class="text-red-500 text-xs md:text-sm ml-5">
+                                    {{ $error }}
+                                </li>
+
+                            @endforeach
+
+                        </ul>
+
+                    </div>
+
+                @endif
 
             </div>
 
