@@ -102,6 +102,7 @@ class Constantes{
         'EJE VIAL',
         'PASAJE',
         'PEATONAL',
+        'PERIFERICO',
         'PERIFÉRICO',
         'PLAZA',
         'PORTAL',

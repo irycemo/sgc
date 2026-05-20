@@ -52,7 +52,8 @@ class AsignarManzana extends Component
             'sector' => 'required|numeric',
         ]);
 
-        $predios = Predio::where('municipio', $this->municipio)
+        $predios = Predio::forceIndex("manzanas_asignacion")
+                            ->where('municipio', $this->municipio)
                             ->where('zona_catastral', $this->zona)
                             ->where('localidad', $this->localidad)
                             ->where('sector', $this->sector)
