@@ -18,7 +18,7 @@
 
                 @endforeach
 
-                @foreach ($certificados as $certificado)
+                {{-- @foreach ($certificados as $certificado)
 
                     @if($certificado['estado'] == 'A')
 
@@ -28,7 +28,7 @@
 
                     @endif
 
-                @endforeach
+                @endforeach --}}
 
             </div>
 

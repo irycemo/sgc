@@ -548,6 +548,31 @@ class Tramites extends Component
 
     }
 
+    public function desvincularTramite(){
+
+        try {
+
+            DB::transaction(function () {
+
+                $this->modelo_editar->ligadoA->update(['ligado_a' => null]);
+
+                $this->modelo_editar->update(['ligado_a' => null]);
+
+            });
+
+            $this->modelo_editar->refresh();
+
+            $this->dispatch('mostrarMensaje', ['success', 'Los trámites se desvincularón con éxito.']);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al desvincular trámites por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th->getMessage());
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+
+        }
+
+    }
+
     #[Computed]
     public function tramites(){
 

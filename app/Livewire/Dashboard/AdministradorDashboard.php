@@ -32,7 +32,16 @@ class AdministradorDashboard extends Component
                                         })
                                         ->groupBy('estado')
                                         ->where('created_at', '>' , now()->startOfMonth()->toDateString())
-                                        ->get();
+                                        ->get()
+                                        ->map(function($certificado){
+                                            if($certificado->estado == 'activo'){
+                                                $estado = 'Generados';
+                                            }else{
+                                                $estado = 'Cancelados';
+                                            }
+                                            $certificado->estado = $estado;
+                                            return $certificado;
+                                        });
 
         foreach ($certificaciones as $certificacion) {
 
