@@ -290,6 +290,12 @@
 
                     @endforeach
 
+                    @if(auth()->user()->hasRole(['Administrador']))
+
+                        <option value="28">IDANIA YANIS GARNICA AMBRIZ</option>
+
+                    @endif
+
                 </x-input-select>
 
             </x-input-group>
