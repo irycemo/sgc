@@ -36,7 +36,7 @@ trait CoordenadasTrait
 
             if(!$ll['success']){
 
-                $this->dispatch('mostrarMensaje', ['error', $ll['msg']]);
+                $this->dispatch('mostrarMensaje', ['warning', $ll['msg']]);
 
                 return;
 
@@ -54,7 +54,7 @@ trait CoordenadasTrait
 
             if(!$ll['success']){
 
-                $this->dispatch('mostrarMensaje', ['error', $ll['msg']]);
+                $this->dispatch('mostrarMensaje', ['warning', $ll['msg']]);
 
                 return;
 
@@ -62,7 +62,7 @@ trait CoordenadasTrait
 
                 if((float)$ll['attr']['zone'] < 13 || (float)$ll['attr']['zone'] > 14){
 
-                    $this->dispatch('mostrarMensaje', ['error', "Las coordenadas no corresponden a una zona válida."]);
+                    $this->dispatch('mostrarMensaje', ['warning', "Las coordenadas no corresponden a una zona válida."]);
 
                     $this->predio->lat = null;
                     $this->predio->lon = null;

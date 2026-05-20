@@ -370,12 +370,12 @@
 
                     <x-slot name="head">
 
-                        <x-table.heading >Cuenta predial</x-table.heading>
+                        <x-table.heading sortable wire:click="sortBy('numero_registro')" :direction="$sort === 'numero_registro' ? $direction : null">Cuenta predial</x-table.heading>
                         <x-table.heading >Clave catastral</x-table.heading>
                         <x-table.heading >Propietario</x-table.heading>
                         <x-table.heading >Asentamiento</x-table.heading>
-                        <x-table.heading >Vialidad</x-table.heading>
-                        <x-table.heading ># Exterior / # Interior</x-table.heading>
+                        <x-table.heading sortable wire:click="sortBy('nombre_vialidad')" :direction="$sort === 'nombre_vialidad' ? $direction : null">Vialidad</x-table.heading>
+                        <x-table.heading sortable wire:click="sortBy('numero_exterior')" :direction="$sort === 'numero_exterior' ? $direction : null"># Exterior / # Interior</x-table.heading>
                         <x-table.heading ></x-table.heading>
 
                     </x-slot>

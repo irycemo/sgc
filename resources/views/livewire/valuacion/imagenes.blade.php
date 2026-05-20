@@ -57,7 +57,7 @@
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="fachada" wire:model.live="fachada">
+                <input type="file" class="sr-only" id="fachada" wire:model.live="fachada" accept="image/*">
 
                 <div>
 
@@ -117,7 +117,7 @@
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="foto2" wire:model.live="foto2">
+                <input type="file" class="sr-only" id="foto2" wire:model.live="foto2" accept="image/*">
 
                 <div>
 
@@ -178,7 +178,7 @@
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="foto3" wire:model.live="foto3">
+                <input type="file" class="sr-only" id="foto3" wire:model.live="foto3" accept="image/*">
 
                 <div>
 
@@ -239,7 +239,7 @@
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="foto4" wire:model.live="foto4">
+                <input type="file" class="sr-only" id="foto4" wire:model.live="foto4" accept="image/*">
 
                 <div>
 
@@ -300,7 +300,7 @@
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="macrolocalizacion" wire:model.live="macrolocalizacion">
+                <input type="file" class="sr-only" id="macrolocalizacion" wire:model.live="macrolocalizacion" accept="image/*">
 
                 <div>
 
@@ -361,7 +361,7 @@
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="microlocalizacion" wire:model.live="microlocalizacion">
+                <input type="file" class="sr-only" id="microlocalizacion" wire:model.live="microlocalizacion" accept="image/*">
 
                 <div>
 
@@ -422,7 +422,7 @@
                     Subir archivo
                 </label>
 
-                <input type="file" class="sr-only" id="poligonoImagen" wire:model.live="poligonoImagen">
+                <input type="file" class="sr-only" id="poligonoImagen" wire:model.live="poligonoImagen" accept="image/*">
 
                 <div>
 

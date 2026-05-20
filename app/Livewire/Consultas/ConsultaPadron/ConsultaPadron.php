@@ -54,6 +54,8 @@ class ConsultaPadron extends Component
     public $documento_numero;
 
     public $page_number = 0;
+    public $sort = 'numero_exterior';
+    public $direction = 'asc';
 
     protected function rules(){
         return [
@@ -143,6 +145,21 @@ class ConsultaPadron extends Component
 
         $this->region_catastral = $oficina->region;
 
+    }
+
+    public function sortBy($sort):void
+    {
+
+        if($this->sort == $sort){
+            if($this->direction == 'desc'){
+                $this->direction = 'asc';
+            }else{
+                $this->direction = 'desc';
+            }
+        }else{
+            $this->sort = $sort;
+            $this->direction = 'asc';
+        }
     }
 
     public function buscarCuentaPredial(){
@@ -302,7 +319,12 @@ class ConsultaPadron extends Component
                             ->where('tipo_predio', $this->tipo_predio)
                             ->where('localidad', $this->localidad)
                             ->where('oficina', $this->oficina)
-                            ->orderByRaw('CAST(numero_exterior AS UNSIGNED) ASC')
+                            ->when($this->sort === 'numero_exterior', function($q){
+                                $q->orderByRaw('CAST(numero_exterior AS UNSIGNED) ' . $this->direction);
+                            })
+                            ->when($this->sort !== 'numero_exterior', function($q){
+                                $q->orderBy($this->sort, $this->direction);
+                            })
                             ->paginate(20);
 
         }elseif($this->radio == 'clave'){
@@ -315,7 +337,6 @@ class ConsultaPadron extends Component
                     ->where('sector', $this->sector)
                     ->where('manzana', $this->manzana)
                     ->where('oficina', $this->oficina)
-                    ->orderByRaw('CAST(numero_exterior AS UNSIGNED) ASC')
                     ->paginate(20);
 
         }elseif($this->radio == 'propietario'){
