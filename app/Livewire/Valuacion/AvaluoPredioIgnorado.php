@@ -383,7 +383,7 @@ class AvaluoPredioIgnorado extends Component
 
         $this->validarDisponibilidadPadron();
 
-        $this->validarCuentaAsignadaNoBindings($this->localidad, $this->oficina, $this->tipo, $this->numero_registro, auth()-id());
+        $this->validarCuentaAsignadaNoBindings($this->localidad, $this->oficina, $this->tipo, $this->numero_registro, auth()->id());
 
     }
 
