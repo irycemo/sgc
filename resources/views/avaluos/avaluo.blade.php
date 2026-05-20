@@ -324,7 +324,7 @@
                     </td>
                     <td style="padding-right: 40px;">
 
-                        <p><strong>Impreso el: </strong> {{ now() }}</p>
+                        <p><strong>Impreso el: </strong> {{ now()->format('d-m-Y H:i:s') }}</p>
 
                         <p><strong>Impreso por: </strong> {{ $impreso_por }}</p>
 
