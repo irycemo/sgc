@@ -296,63 +296,64 @@ class ConsultaPadron extends Component
 
         $key = 'consulta-predios-' . $this->page_number . $this->getId();
 
-        /* return Cache::remember($key, 300, function(){ */
+        if($this->radio == 'clave' && $this->diez){
 
-            if($this->radio == 'clave' && $this->diez){
+            return Predio::whereBetween('numero_registro', [$this->numero_registro - 10 , $this->numero_registro + 10 ])
+                            ->where('tipo_predio', $this->tipo_predio)
+                            ->where('localidad', $this->localidad)
+                            ->where('oficina', $this->oficina)
+                            ->orderByRaw('CAST(numero_exterior AS UNSIGNED) ASC')
+                            ->paginate(20);
 
-                return Predio::whereBetween('numero_registro', [$this->numero_registro - 10 , $this->numero_registro + 10 ])
-                                ->where('tipo_predio', $this->tipo_predio)
-                                ->where('localidad', $this->localidad)
-                                ->where('oficina', $this->oficina)
-                                ->paginate(20);
+        }elseif($this->radio == 'clave'){
 
-            }elseif($this->radio == 'clave'){
+            return Predio::where('estado', 16)
+                    ->where('region_catastral', $this->region_catastral)
+                    ->where('municipio', $this->municipio)
+                    ->where('zona_catastral', $this->zona_catastral)
+                    ->where('localidad', $this->localidad)
+                    ->where('sector', $this->sector)
+                    ->where('manzana', $this->manzana)
+                    ->where('oficina', $this->oficina)
+                    ->orderByRaw('CAST(numero_exterior AS UNSIGNED) ASC')
+                    ->paginate(20);
 
-                return Predio::where('estado', 16)
-                        ->where('region_catastral', $this->region_catastral)
-                        ->where('municipio', $this->municipio)
-                        ->where('zona_catastral', $this->zona_catastral)
-                        ->where('localidad', $this->localidad)
-                        ->where('sector', $this->sector)
-                        ->where('manzana', $this->manzana)
-                        ->where('oficina', $this->oficina)
-                        ->paginate(20);
+        }elseif($this->radio == 'propietario'){
 
-            }elseif($this->radio == 'propietario'){
+            return Predio::whereIn('id', $this->propietariosIds)
+                            ->where('oficina', $this->oficina)
+                            ->orderBy('oficina')
+                            ->orderByRaw('CAST(numero_exterior AS UNSIGNED) ASC')
+                            ->paginate(20);
 
-                return Predio::whereIn('id', $this->propietariosIds)
-                                ->where('oficina', $this->oficina)
-                                ->orderBy('oficina')
-                                ->paginate(20);
+        }elseif($this->radio == 'ubicacion'){
 
-            }elseif($this->radio == 'ubicacion'){
+            return Predio::when(!empty($this->nombre_vialidad), function($q){
+                                $q->where('nombre_vialidad', 'like', '%' . $this->nombre_vialidad . '%');
+                            })
+                            ->when(!empty($this->nombre_asentamiento), function($q){
+                                $q->where('nombre_asentamiento', 'like', '%' . $this->nombre_asentamiento . '%');
+                            })
+                            ->when(!empty($this->nombre_predio), function($q){
+                                $q->where('nombre_predio', 'like', '%' . $this->nombre_predio . '%');
+                            })
+                            ->where('oficina', $this->oficina)
+                            ->orderByRaw('CAST(numero_exterior AS UNSIGNED) ASC')
+                            ->paginate(20);
 
-                return Predio::when(!empty($this->nombre_vialidad), function($q){
-                                    $q->where('nombre_vialidad', 'like', '%' . $this->nombre_vialidad . '%');
-                                })
-                                ->when(!empty($this->nombre_asentamiento), function($q){
-                                    $q->where('nombre_asentamiento', 'like', '%' . $this->nombre_asentamiento . '%');
-                                })
-                                ->when(!empty($this->nombre_predio), function($q){
-                                    $q->where('nombre_predio', 'like', '%' . $this->nombre_predio . '%');
-                                })
-                                ->where('oficina', $this->oficina)
-                                ->paginate(20);
+        }elseif($this->radio == 'documento'){
 
-            }elseif($this->radio == 'documento'){
+            return Predio::when(!empty($this->documento_entrada), function($q){
+                                $q->where('documento_entrada', $this->documento_entrada);
+                            })
+                            ->when(!empty($this->documento_numero), function($q){
+                                $q->where('documento_numero', $this->documento_numero);
+                            })
+                            ->where('oficina', $this->oficina)
+                            ->orderByRaw('CAST(numero_exterior AS UNSIGNED) ASC')
+                            ->paginate(20);
 
-                return Predio::when(!empty($this->documento_entrada), function($q){
-                                    $q->where('documento_entrada', $this->documento_entrada);
-                                })
-                                ->when(!empty($this->documento_numero), function($q){
-                                    $q->where('documento_numero', $this->documento_numero);
-                                })
-                                ->where('oficina', $this->oficina)
-                                ->paginate(20);
-
-            }
-
-        /* }); */
+        }
 
     }
 

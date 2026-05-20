@@ -328,6 +328,8 @@
 
                         <p><strong>Impreso por: </strong> {{ $impreso_por }}</p>
 
+                        <p><strong>Fecha de registro: </strong> {{ $predio->avaluo->created_at }}</p>
+
                         @if(isset($certificacion))
 
                             <p><strong>Certificación: </strong>{{ $certificacion->tipo->label() }} {{ $certificacion->año }}-{{ $certificacion->folio }}</p>

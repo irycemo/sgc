@@ -39,7 +39,10 @@ class CertificadoRegistroController extends Controller
 
     public function certificado($tramite, $predio, $tipo, $usuario, $observaciones){
 
-        $oficina = Oficina::where('oficina', $predio->oficina)->where('localidad', $predio->localidad)->first();
+        $oficina = Oficina::where('localidad', $predio->localidad)
+                            ->where('municipio', $predio->municipio)
+                            ->where('oficina', $predio->oficina)
+                            ->first();
 
         $datos_control = (object)[];
 

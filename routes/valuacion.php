@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Valuacion\AvaluoImpresionController;
 use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
 use App\Http\Controllers\Valuacion\Valuacion;
 use App\Livewire\Valuacion\FichaTecnicaJob;
@@ -25,5 +26,7 @@ Route::group([], function(){
     Route::get('notificacion_avaluos', Notificacion::class)->middleware('permission:Notificación de avaluos')->name('notificacion_avaluos');
 
     Route::get('mis_avaluos', MisAvaluos::class)->middleware('permission:Ver mis avaluos')->name('mis_avaluos');
+
+    Route::get('descargar_avaluos_pdf/{name}', [AvaluoImpresionController::class, 'descargarAvaluosPdf'])->middleware('permission:Valuación y desglose')->name('descargar_avaluos_pdf');
 
 });

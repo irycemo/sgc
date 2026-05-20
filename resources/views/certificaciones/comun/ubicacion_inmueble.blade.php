@@ -90,9 +90,9 @@
         <strong>Predio Rústico Denominado ó Antecedente:</strong> {{ $predio->nombre_predio }};
     @endif
 
-    @if ($predio->observaciones)
+    {{-- @if ($predio->observaciones)
         <strong>OBSERVACIONES:</strong> {{ $predio->observaciones }}.
-    @endif
+    @endif --}}
 
 </p>
 

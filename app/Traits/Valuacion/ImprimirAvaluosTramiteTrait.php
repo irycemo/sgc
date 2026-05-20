@@ -4,13 +4,13 @@ namespace App\Traits\Valuacion;
 
 use App\Exceptions\GeneralException;
 use App\Jobs\Valuacion\GenerarAvaluoJob;
+use App\Jobs\Valuacion\MergePdfsJob;
 use App\Models\Avaluo;
 use App\Models\Tramite;
+use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
-use ZipArchive;
 
 trait ImprimirAvaluosTramiteTrait
 {
@@ -23,6 +23,7 @@ trait ImprimirAvaluosTramiteTrait
     public $generando = false;
     public $nombres = [];
     public $modal_imprimir = false;
+    public $merged_name;
 
     public function imprimirAvaluos(){
 
@@ -62,7 +63,15 @@ trait ImprimirAvaluosTramiteTrait
 
             if (!empty($jobs)) {
 
-                $bus = Bus::batch($jobs)->dispatch();
+                $this->merged_name = $this->año . '-' . $this->folio . '-' . $this->usuario . '_' . now()->timestamp . '.pdf';
+
+                $bus = Bus::batch($jobs)
+                            ->then(function (Batch $batch){
+
+                                MergePdfsJob::dispatch($batch->id, $this->nombres, $this->merged_name);
+
+                            })
+                            ->dispatch();
 
                 $this->batch_id = $bus->id;
 
@@ -110,74 +119,7 @@ trait ImprimirAvaluosTramiteTrait
 
     public function descargarAvaluos(){
 
-        try {
-
-            $oMerger = PDFMerger::init();
-
-            $disk = Storage::disk('local');
-
-            $zipFileName  = 'archivos_' . now()->timestamp . '.zip';
-
-            $relativeZipPath = 'livewire-tmp/' . $zipFileName;
-
-            $absoluteZipPath = $disk->path($relativeZipPath);
-
-            $zip = new ZipArchive();
-
-            $result = $zip->open(
-                $absoluteZipPath,
-                ZipArchive::CREATE | ZipArchive::OVERWRITE
-            );
-
-            if ($result !== true) {
-                throw new \Exception(
-                    'No fue posible crear el ZIP. Código: ' . $result
-                );
-            }
-
-            foreach ($this->nombres as $archivo) {
-
-                $relativePath = 'livewire-tmp/' . $archivo . '.pdf';
-
-                if (! $disk->exists($relativePath)) {
-                    continue;
-                }
-
-                $oMerger->addPDF(Storage::path($relativePath), 'all');
-
-                $absolutePath = $disk->path($relativePath);
-
-                $zip->addFile(
-                    $absolutePath,
-                    basename($archivo . '.pdf')
-                );
-
-            }
-
-            $oMerger->merge();
-
-            Storage::put('livewire-tmp/completo.pdf', $oMerger->output());
-
-            $relativePath = 'livewire-tmp/completo.pdf';
-
-            $absolutePath = $disk->path($relativePath);
-
-            $zip->addFile(
-                $absolutePath,
-                basename('completo.pdf')
-            );
-
-            $zip->close();
-
-            return response()->download(
-                $absoluteZipPath,
-                'avaluos.zip'
-            )->deleteFileAfterSend(false);
-
-        } catch (\Throwable $th) {
-            Log::error("Error al imprimir avaluo en administracion por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
-            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
-        }
+        $this->js('window.open(\' '. route('descargar_avaluos_pdf', $this->merged_name) . '\', \'_blank\');');
 
     }
 

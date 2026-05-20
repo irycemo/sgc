@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Traits\Certificaciones\CrearImagenTrait;
 use App\Traits\Certificaciones\GeneradorQRTrait;
 use App\Enums\Certificaciones\CertificacionesEnum;
+use App\Models\Oficina;
 use App\Traits\Certificaciones\PredioTrait;
 
 class CertificadoHistoriaController extends Controller
@@ -50,6 +51,11 @@ class CertificadoHistoriaController extends Controller
 
         }
 
+        $oficina = Oficina::where('localidad', $predio->localidad)
+                            ->where('municipio', $predio->municipio)
+                            ->where('oficina', $predio->oficina)
+                            ->first();
+
         $datos_control->tramite_historia = $tramite_historia->año . '-' . $tramite_historia->folio . '-' . $tramite_historia->usuario;
         $datos_control->solicitante = $tramite_historia->nombre_solicitante;
         $datos_control->historia = $historia;
@@ -76,9 +82,9 @@ class CertificadoHistoriaController extends Controller
 
             $datos_control->imagen_director = $this->director->efirma->imagen;
 
-            $datos_control->oficina = auth()->user()->oficina->nombre;
+            $datos_control->oficina = $oficina->nombre;
 
-            $datos_control->municipio = auth()->user()->oficina->cabeceraMunicipal ? auth()->user()->oficina->cabeceraMunicipal->nombre : auth()->user()->oficina->nombre;
+            $datos_control->municipio = $oficina->cabeceraMunicipal ? $oficina->cabeceraMunicipal->nombre : $oficina->nombre;
 
             $object->datos_control = $datos_control;
 

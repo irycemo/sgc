@@ -8,6 +8,7 @@ use App\Models\Certificacion;
 use App\Models\User;
 use App\Traits\Certificaciones\GeneradorQRTrait;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 
 class AvaluoImpresionController extends Controller
 {
@@ -42,6 +43,30 @@ class AvaluoImpresionController extends Controller
         $canvas->page_text(35, 745, "Avalúo: " . $predio->avaluo->año . "-" . $predio->avaluo->folio . "-" . $predio->avaluo->usuario , null, 10, array(1, 1, 1));
 
         return $pdf;
+
+    }
+
+    public function descargarAvaluosPdf(string $name){
+
+        $relativePath = 'livewire-tmp/' . $name;
+
+        $absolutePath = Storage::disk('local')->path($relativePath);
+
+        return response()->streamDownload(function () use ($absolutePath) {
+
+            $stream = fopen($absolutePath, 'rb');
+
+            while (!feof($stream)) {
+                echo fread($stream, 1024 * 1024); // lee 1MB a la vez
+                flush(); // libera memoria en cada chunk
+            }
+
+            fclose($stream);
+
+        }, $name, [
+            'Content-Type'   => 'application/pdf',
+            'Content-Length' => filesize($absolutePath),
+        ]);
 
     }
 

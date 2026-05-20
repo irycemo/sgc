@@ -32,7 +32,6 @@ class RevisarPagoCommand extends Command
 
         $tramites = Tramite::with('servicio')
                                 ->where('estado', 'nuevo')
-                                ->where('usuario', 11)
                                 ->get();
 
         try {
