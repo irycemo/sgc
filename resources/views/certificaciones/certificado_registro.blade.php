@@ -143,6 +143,8 @@
 
     <header>
 
+            <p style="text-align: right; font-size: 9px; font-weight: bold;">Certificado de registro {{ $predio->cuenta_predial }}</p>
+
             <img class="encabezado" src="{{ public_path('storage/img/encabezado.png') }}" alt="encabezado">
 
     </header>
