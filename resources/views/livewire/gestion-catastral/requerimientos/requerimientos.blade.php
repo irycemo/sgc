@@ -20,6 +20,16 @@
 
                 </select>
 
+                <select class="bg-white rounded-full text-sm w-60" wire:model.live="filters.estado">
+
+                    <option value="" selected>Estado</option>
+                    <option value="nuevo" selected>Nuevo</option>
+                    <option value="atendido" selected>Atendido</option>
+                    <option value="respuesta" selected>Respuesta</option>
+                    <option value="finalizado" selected>Finalizado</option>
+
+                </select>
+
             @endif
 
             <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">

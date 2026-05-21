@@ -134,6 +134,9 @@ class Requerimientos extends Component
                                 ->where('requerimientoable_type', 'App\Models\Oficina')
                                 ->whereNull('requerimiento_id')
                                 ->where('descripcion', 'like', '%' . $this->search . '%')
+                                ->when(! empty($this->filters['estado']), function($q){
+                                    $q->where('estado', $this->filters['estado']);
+                                })
                                 ->orderBy($this->sort, $this->direction)
                                 ->paginate($this->pagination);
 
