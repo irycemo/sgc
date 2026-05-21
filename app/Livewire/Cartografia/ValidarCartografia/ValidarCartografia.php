@@ -69,6 +69,8 @@ class ValidarCartografia extends Component
 
     public function hacerRequerimiento(){
 
+        $this->validate(['observaciones' => 'required']);
+
         try {
 
             (new SistemaPeritosExternosService())->hacerRequerimiento($this->avaluo_seleccionado['id'], auth()->user()->name, $this->observaciones);
