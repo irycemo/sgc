@@ -404,11 +404,6 @@ class RevisarTraslado extends Component
                                                                                         })
                                                                                         ->first();
 
-                    if($propietario){
-                        info($propietario);
-                    }
-
-
                     $aux->update([
                         'porcentaje_propiedad' => (float)$propietario['porcentaje_propiedad'],
                         'porcentaje_nuda' => (float)$propietario['porcentaje_nuda'],
