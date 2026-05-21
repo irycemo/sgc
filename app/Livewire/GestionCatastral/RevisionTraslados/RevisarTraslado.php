@@ -700,6 +700,8 @@ class RevisarTraslado extends Component
 
             }else{
 
+                info($pn, $pp, $pn_adquirientes + $pp_adquirientes, $pn_transmitentes + $pp_transmitentes);
+
                 if($pn + $pp + $pn_adquirientes + $pp_adquirientes > ($pn_transmitentes + $pp_transmitentes) ){
 
                     throw new GeneralException("La suma de los porcentajes de nuda no es correcta.");
