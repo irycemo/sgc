@@ -700,7 +700,7 @@ class RevisarTraslado extends Component
 
             }else{
 
-                info($pn, $pp, $pn_adquirientes + $pp_adquirientes, $pn_transmitentes + $pp_transmitentes);
+                info($pn); info($pp); info($pn_adquirientes + $pp_adquirientes); info($pn_transmitentes + $pp_transmitentes);
 
                 if($pn + $pp + $pn_adquirientes + $pp_adquirientes > ($pn_transmitentes + $pp_transmitentes) ){
 
