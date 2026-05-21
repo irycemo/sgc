@@ -700,15 +700,21 @@ class RevisarTraslado extends Component
 
             }else{
 
-                info($pn); info($pp); info($pn_adquirientes + $pp_adquirientes); info($pn_transmitentes + $pp_transmitentes);
+                $a = round($pn + $pp + $pn_adquirientes + $pp_adquirientes, 2);
 
-                if($pn + $pp + $pn_adquirientes + $pp_adquirientes > ($pn_transmitentes + $pp_transmitentes) ){
+                $b =  round($pn_transmitentes + $pp_transmitentes, 2);
+
+                if($a > $b){
 
                     throw new GeneralException("La suma de los porcentajes de nuda no es correcta.");
 
                 }
 
-                if($pu + $pp + $pu_adquirientes + $pp_adquirientes > ($pu_transmitentes + $pp_transmitentes)){
+                $a = round($pu + $pp + $pu_adquirientes + $pp_adquirientes, 2);
+
+                $b =  round($pu_transmitentes + $pp_transmitentes, 2);
+
+                if($a > $b){
 
                     throw new GeneralException("La suma de los porcentajes de usufructo no es correcta.");
 
