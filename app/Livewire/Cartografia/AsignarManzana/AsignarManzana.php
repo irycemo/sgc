@@ -53,6 +53,7 @@ class AsignarManzana extends Component
         ]);
 
         $predios = Predio::forceIndex("manzanas_asignacion")
+                            ->select('id', 'manzana')
                             ->where('municipio', $this->municipio)
                             ->where('zona_catastral', $this->zona)
                             ->where('localidad', $this->localidad)

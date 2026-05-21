@@ -143,7 +143,7 @@ trait TerrenosComunTrait
 
                 $this->dispatch('mostrarMensaje', ['success', "La información de terrenos en común se guardó con éxito"]);
 
-                /* $this->dispatch('recargarPredio'); */
+                $this->dispatch('recargarPredio');
 
             });
 
