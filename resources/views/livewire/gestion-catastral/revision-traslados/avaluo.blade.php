@@ -323,12 +323,20 @@
     <x-button-blue
         wire:click="imprimirAvaluo({{ $traslado->id }})"
         wire:loading.attr="disabled"
-        wire:target="imprimirAvaluo({{ $traslado->id }})">
+        wire:target="imprimirAvaluo({{ $traslado->id }})" class="mb-5">
 
         <img wire:loading wire:target="imprimirAvaluo({{ $traslado->id }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
         Ver avalúo
 
     </x-button-blue>
+
+    @if(isset($avaluo['anexo']))
+
+        <x-link-blue class="w-fit" href="{{ $avaluo['anexo'] }}" target="_blank">
+            Anexo
+        </x-link-blue>
+
+    @endif
 
 </div>
