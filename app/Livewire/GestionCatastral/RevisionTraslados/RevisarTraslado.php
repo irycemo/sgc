@@ -395,6 +395,7 @@ class RevisarTraslado extends Component
 
                 }else{
 
+
                      $aux = $this->traslado->predio->propietarios()->whereHas('persona', function($q) use($propietario){
                                                                                         $q->where('nombre', $propietario['nombre'])
                                                                                             ->where('ap_paterno', $propietario['ap_paterno'])
@@ -402,6 +403,11 @@ class RevisarTraslado extends Component
                                                                                             ->where('razon_social', $propietario['razon_social']);
                                                                                         })
                                                                                         ->first();
+
+                    if($propietario){
+                        info($propietario);
+                    }
+
 
                     $aux->update([
                         'porcentaje_propiedad' => (float)$propietario['porcentaje_propiedad'],
