@@ -205,9 +205,9 @@ class ConsultaPadron extends Component
 
             $this->flag = true;
 
-        }
+            $this->dispatch('actualizarPredio', id: $this->predio->id);
 
-        $this->dispatch('actualizarPredio', id: $this->predio->id);
+        }
 
     }
 
