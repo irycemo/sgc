@@ -5,12 +5,10 @@ namespace App\Livewire\Valuacion;
 use App\Constantes\Constantes;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Valuacion\AvaluoImpresionController;
-use App\Jobs\Valuacion\GenerarAvaluoJob;
 use App\Models\Avaluo;
 use App\Models\Certificacion;
 use App\Models\File;
 use App\Models\PredioIgnorado;
-use App\Models\Tramite;
 use App\Models\VariacionCatastral;
 use App\Traits\ComponentesTrait;
 use App\Traits\Predios\ValidarCuentaAsignada;
@@ -505,7 +503,7 @@ class MisAvaluos extends Component
 
         $this->validarCuentaAsignadaNoBindings($this->localidad, $this->oficina, $this->tipo_predio, $this->numero_registro, auth()->id());
 
-        $this->validarManzanaAsignadaNoBindings($this->municipio, $this->zona_catastral, $this->localidad, $this->sector, $this->manzana, auth()->id());
+        /* $this->validarManzanaAsignadaNoBindings($this->municipio, $this->zona_catastral, $this->localidad, $this->sector, $this->manzana, auth()->id()); */
 
         $this->validarDisponibilidadPredioAvaluo($this->region_catastral, $this->municipio, $this->zona_catastral, $this->localidad, $this->sector, $this->manzana, $this->predio, $this->edificio, $this->departamento, $this->oficina, $this->tipo_predio, $this->numero_registro);
 
