@@ -21,7 +21,7 @@ trait ValidarManzanaAsignada
                                     ->where('manzana', $this->predio->manzana)
                                     ->count();
 
-        if($manzana_en_padron) return;
+        if($manzana_en_padron > 0) return;
 
         $cuenta = ManzanaAsignada::where('municipio', $this->predio->municipio)
                                     ->where('zona', $this->predio->zona_catastral)
