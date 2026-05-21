@@ -74,6 +74,18 @@
 
                 <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
 
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.avaluo_para">
+
+                    <option value="" selected>Avalúo para</option>
+
+                    @foreach ($lista_avaluo_para as $opcion)
+
+                        <option value="{{ $opcion->value }}">{{ $opcion->label() }}</option>
+
+                    @endforeach
+
+                </select>
+
                 <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>

@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Constantes\Constantes;
+use App\Enums\Tramites\AvaluoPara;
 use App\Http\Controllers\Valuacion\AvaluoImpresionController;
 use App\Models\Avaluo;
 use App\Models\File;
@@ -41,6 +42,7 @@ class Avaluos extends Component
     public $modalVerArchivos = false;
 
     public $modelo_administrativo;
+    public $lista_avaluo_para;
 
     public $filters = [
         'año' => '',
@@ -55,6 +57,7 @@ class Avaluos extends Component
         'tAño' => '',
         'tFolio' => '',
         'tUsuario' => '',
+        'avaluo_para' => ''
     ];
 
     public function updatedFilters() { $this->resetPage(); }
@@ -240,46 +243,51 @@ class Avaluos extends Component
                             ->when($this->filters['folio'] != '', function($q) {
                                 $q->where('folio', (int)$this->filters['folio']);
                             })
-                            ->when($this->filters['usuario'] != '', function($q, $usuario) {
+                            ->when($this->filters['usuario'] != '', function($q) {
                                 $q->where('usuario', (int)$this->filters['usuario']);
                             })
-                            ->when($this->filters['valuador'] != '', function($q, $valuador) {
+                            ->when($this->filters['valuador'] != '', function($q) {
                                 $q->where('asignado_a', (int)$this->filters['valuador']);
                             })
-                            ->when($this->filters['estado'] != '', function($q, $estado) {
+                            ->when($this->filters['estado'] != '', function($q) {
                                 $q->where('estado', $this->filters['estado']);
                             })
-                            ->when($this->filters['tAño'] != '', function($q, $localidad) {
+                            ->when($this->filters['tAño'] != '', function($q) {
                                 $q->whereHas('tramiteInspeccion', function($q){
                                     $q->where('año', (int)$this->filters['tAño']);
                                 });
                             })
-                            ->when($this->filters['tFolio'] != '', function($q, $localidad) {
+                            ->when($this->filters['tFolio'] != '', function($q) {
                                 $q->whereHas('tramiteInspeccion', function($q){
                                     $q->where('folio', (int)$this->filters['tFolio']);
                                 });
                             })
-                            ->when($this->filters['tUsuario'] != '', function($q, $localidad) {
+                            ->when($this->filters['tUsuario'] != '', function($q) {
                                 $q->whereHas('tramiteInspeccion', function($q){
                                     $q->where('usuario', (int)$this->filters['tUsuario']);
                                 });
                             })
-                            ->when($this->filters['localidad'] != '', function($q, $localidad) {
+                            ->when($this->filters['avaluo_para'] != '', function($q) {
+                                $q->whereHas('tramiteInspeccion', function($q){
+                                    $q->where('avaluo_para', (int)$this->filters['avaluo_para']);
+                                });
+                            })
+                            ->when($this->filters['localidad'] != '', function($q) {
                                 $q->whereHas('predioAvaluo', function($q){
                                     $q->where('localidad', (int)$this->filters['localidad']);
                                 });
                             })
-                            ->when($this->filters['oficina'] != '', function($q, $oficina) {
+                            ->when($this->filters['oficina'] != '', function($q) {
                                 $q->whereHas('predioAvaluo', function($q){
                                     $q->where('oficina', (int)$this->filters['oficina']);
                                 });
                             })
-                            ->when($this->filters['tipo'] != '', function($q, $tipo) {
+                            ->when($this->filters['tipo'] != '', function($q) {
                                 $q->whereHas('predioAvaluo', function($q){
                                     $q->where('tipo_predio', (int)$this->filters['tipo']);
                                 });
                             })
-                            ->when($this->filters['registro'] != '', function($q, $registro) {
+                            ->when($this->filters['registro'] != '', function($q) {
                                 $q->whereHas('predioAvaluo', function($q){
                                     $q->where('numero_registro', (int)$this->filters['registro']);
                                 });
@@ -302,6 +310,8 @@ class Avaluos extends Component
         $this->año = now()->format('Y');
 
         $this->filters['estado'] = request()->query('estado');
+
+        $this->lista_avaluo_para = AvaluoPara::cases();
 
         $this->crearModeloVacio();
 
