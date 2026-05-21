@@ -8,6 +8,7 @@ use App\Exceptions\GeneralException;
 use App\Http\Controllers\Certificaciones\NotificacionValorCatastralController;
 use App\Jobs\Certificaciones\GenerarImagenVerificacionJob;
 use App\Models\Certificacion;
+use App\Models\Predio;
 use App\Traits\Valuacion\ImpresionTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -56,6 +57,20 @@ class General extends Component
                         if($this->tramite_inspeccion->avaluo_para === AvaluoPara::CAMBIO_REGIMEN){
 
                             $this->tramite_inspeccion->predios()->attach($this->avaluos->first()->predio);
+
+                        }elseif($this->tramite_inspeccion->avaluo_para === AvaluoPara::ACTUALIZACION){
+
+                            $predio_padron = Predio::where('localidad', $avaluo->predioAvaluo->localidad)
+                                                        ->where('oficina', $avaluo->predioAvaluo->oficina)
+                                                        ->where('tipo_predio', $avaluo->predioAvaluo->tipo_predio)
+                                                        ->where('numero_registro', $avaluo->predioAvaluo->numero_registro)
+                                                        ->first();
+
+                            if(! $predio_padron){
+
+                                throw new GeneralException('El predio del avalúo: '. $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' no esxiste en el padrón. El predio debe existir en el padrón para tramies de avalúo de actualización.');
+
+                            }
 
                         }
 
