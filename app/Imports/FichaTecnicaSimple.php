@@ -168,7 +168,7 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
 
                         $this->revisarAsignacionCuentaPredial($row, $key);
 
-                        /* $this->revisarAsignacionManzana($row, $key); */
+                        $this->revisarAsignacionManzana($row, $key);
 
                         // Revisar manzana asignada
 
@@ -427,6 +427,15 @@ class FichaTecnicaSimple implements ToCollection, WithHeadingRow, WithValidation
     {
 
         if($row['manzana'] == 0) return;
+
+        $manzana_en_padron = Predio::where('municipio', $row['municipio'])
+                                    ->where('zona_catastral', $row['zona_catastral'])
+                                    ->where('localidad', $row['localidad'])
+                                    ->where('sector', $row['sector'])
+                                    ->where('manzana', $row['manzana'])
+                                    ->count();
+
+        if($manzana_en_padron > 0) return;
 
         $cuentaAsignada = ManzanaAsignada::where('municipio', $row['municipio'])
                                         ->where('zona', $row['zona'])
