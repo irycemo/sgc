@@ -37,7 +37,7 @@ class TramiteResource extends JsonResource
             'nombre_solicitante' => $this->nombre_solicitante,
             'solicitante' => $this->solicitante,
             'created_at' => $this->created_at,
-            'predios' => PredioCuentaPredialResource::collection($this->predios)
+            'predios' => PredioCuentaPredialResource::collection($this->predios),
         ];
 
     }

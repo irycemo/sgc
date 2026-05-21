@@ -21,6 +21,8 @@ class PredioCuentaPredialResource extends JsonResource
             'oficina' => $this->oficina,
             'tipo_predio' => $this->tipo_predio,
             'numero_registro' => $this->numero_registro,
+            'propietario' => $this->primerPropietario(),
+            'ubicacion' => $this->nombre_asentamiento . ' ' . $this->nombre_vialidad . ' ' . $this->numero_exterior
         ];
 
     }

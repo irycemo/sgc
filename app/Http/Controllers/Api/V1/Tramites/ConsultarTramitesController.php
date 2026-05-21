@@ -50,7 +50,10 @@ class ConsultarTramitesController extends Controller
 
         $validated = $request->validated();
 
-        $tramites = Tramite::with('servicio', 'predios')
+        $tramites = Tramite::with(
+                                    'servicio:id,nombre',
+                                    'predios:id,localidad,oficina,tipo_predio,numero_registro,nombre_asentamiento,nombre_vialidad,numero_exterior'
+                                )
                                 ->where('usuario', 11)
                                 ->where('usuario_tramites_linea_id', $validated['entidad'])
                                 ->when(isset($validated['año']), fn($q) => $q->where('año', $validated['año']))
