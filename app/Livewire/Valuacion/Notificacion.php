@@ -262,7 +262,7 @@ class Notificacion extends Component
 
             DB::transaction(function (){
 
-                $avaluos = Avaluo::with('predioAvaluo')
+                $avaluos = Avaluo::with('predioAvaluo', 'predioPadron')
                                     ->whereIn('estado', ['impreso', 'concluido'])
                                     ->whereNull('notificado_en')
                                     ->whereNull('notificado_por')
@@ -457,14 +457,8 @@ class Notificacion extends Component
 
     public function procesarRelaciones($predio){
 
-        if(!$this->avaluo->predio){
-
-            /* Propietarios */
-            foreach($predio->propietarios as $propietario){
-
-                Propietario::destroy($propietario->id);
-
-            }
+        /* Propietarios */
+        if(! $this->avaluo->predio){
 
             foreach($this->avaluo->predioAvaluo->propietarios as $propietario){
 
@@ -475,6 +469,24 @@ class Notificacion extends Component
                     'porcentaje_nuda' => $propietario->porcentaje_nuda,
                     'porcentaje_usufructo' => $propietario->porcentaje_usufructo,
                 ]);
+
+            }
+
+        }else{
+
+            if(! $predio->propietarios->count()){
+
+                foreach($this->avaluo->predioAvaluo->propietarios as $propietario){
+
+                    $predio->propietarios()->create([
+                        'persona_id' => $propietario->persona_id,
+                        'tipo' => $propietario->tipo,
+                        'porcentaje_propiedad' => $propietario->porcentaje_propiedad,
+                        'porcentaje_nuda' => $propietario->porcentaje_nuda,
+                        'porcentaje_usufructo' => $propietario->porcentaje_usufructo,
+                    ]);
+
+                }
 
             }
 
@@ -604,7 +616,7 @@ class Notificacion extends Component
     public function avaluos(){
 
         if($this->tramite)
-            return Avaluo::with('predioAvaluo')
+            return Avaluo::with('predioAvaluo', 'predioPadron')
                             ->whereIn('estado', ['impreso', 'concluido'])
                             ->whereNull('notificado_en')
                             ->whereNull('notificado_por')
