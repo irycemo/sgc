@@ -2,6 +2,7 @@
 
 use App\Jobs\GenerarCertificacionMigracionJob;
 use App\Jobs\MigrarPredioJob;
+use App\Models\Avaluo;
 use App\Models\Movimiento;
 use App\Models\OldCertificado;
 use App\Models\OldTraslado;
@@ -1278,6 +1279,63 @@ Artisan::command('servicios', function(){
             }
 
             $servicio->update(['nombre' => $nombre]);
+
+            $progressbar->advance();
+
+            $count ++;
+
+        } catch (\Throwable $th) {
+            $this->info($th);
+
+        }
+
+    }
+
+    $progressbar->finish();
+
+    $this->info($count);
+
+});
+
+Artisan::command('desgloses', function(){
+
+    $count = 0;
+
+    $avaluos = Avaluo::with('predioAvaluo.propietarios')
+                        ->where('estado', 'notificado')
+                        ->whereHas('tramiteInspeccion', function($q){
+                            $q->whereIn('avaluo_para', [3,4,5]);
+                        })
+                        ->get();
+
+    $progressbar = $this->output->createProgressBar($avaluos->count());
+
+    $progressbar->start();
+
+    foreach($avaluos as $avaluo){
+
+        try {
+
+            $predio = Predio::find($avaluo->predio);
+
+            if(! $predio->propietarios->count()){
+
+                foreach($avaluo->predioAvaluo->propietarios as $propietario){
+
+                    $predio->propietarios()->create([
+                        'persona_id' => $propietario->persona_id,
+                        'tipo' => $propietario->tipo,
+                        'porcentaje_propiedad' => $propietario->porcentaje_propiedad,
+                        'porcentaje_nuda' => $propietario->porcentaje_nuda,
+                        'porcentaje_usufructo' => $propietario->porcentaje_usufructo,
+                    ]);
+
+                }
+
+                $this->info($predio->cuentaPredial());
+
+            }
+
 
             $progressbar->advance();
 
