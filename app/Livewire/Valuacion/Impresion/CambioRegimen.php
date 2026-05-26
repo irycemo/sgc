@@ -135,8 +135,6 @@ class CambioRegimen extends Component
 
                 });
 
-                $this->resetarTodo();
-
             });
 
             return response()->streamDownload(

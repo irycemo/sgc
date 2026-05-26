@@ -18,6 +18,7 @@ use App\Services\Coordenadas\Coordenadas;
 use Illuminate\Bus\Batchable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -55,6 +56,16 @@ class CrearAvaluoJob implements ShouldQueue
                 if(isset($this->row['latitud']) && isset($this->row['longitud'])){
 
                     $coordenadas = $this->procesarCoordenadas($this->row['latitud'], $this->row['longitud']);
+
+                }else{
+
+                    $coordenadas = [
+                        'lat' => null,
+                        'lon' => null,
+                        'yutm' => null,
+                        'xutm' => null,
+                        'zutm' => null
+                    ];
 
                 }
 
@@ -232,6 +243,17 @@ class CrearAvaluoJob implements ShouldQueue
                     'info' => 'Avalúo: ' . $avaluo->año . '-' . $avaluo->folio . '-' . $avaluo->usuario . ' Cuenta Predial: ' . $predio->cuentaPredial()
                 ]);
 
+                $procesados = Import::where('batch_id', $this->batch_id)
+                                        ->where('status', 'processed')
+                                        ->count();
+
+                $total = Import::where('batch_id', $this->batch_id)->count();
+
+                Cache::put("import:{$this->batch_id}", [
+                    'estado'    => 'procesando',
+                    'total'     => $total,
+                    'procesados' => $procesados,
+                ], now()->addMinutes(10));
 
             });
 
@@ -454,13 +476,25 @@ class CrearAvaluoJob implements ShouldQueue
 
         if(!$ll['success']){
 
-            return [];
+            return [
+                'lat' => null,
+                'lon' => null,
+                'yutm' => null,
+                'xutm' => null,
+                'zutm' => null
+            ];
 
         }else{
 
             if((float)$ll['attr']['zone'] < 13 || (float)$ll['attr']['zone'] > 14){
 
-                return [];
+                return [
+                    'lat' => null,
+                    'lon' => null,
+                    'yutm' => null,
+                    'xutm' => null,
+                    'zutm' => null
+                ];
 
             }
 

@@ -13,7 +13,7 @@ class InspeccionOcular extends Component
     use ComunTrait;
 
     public $lista_avaluo_para;
-    public $porcentaje = true;
+    public $porcentaje = false;
 
     protected function rules(){
 
@@ -60,9 +60,11 @@ class InspeccionOcular extends Component
 
                 $cantidad_20 = $this->modelo_editar->cantidad - 1;
 
-                $consto_20 = $this->servicio['ordinario'] * 0.2 * $cantidad_20;
+                $costo_20 = $this->servicio['ordinario'] * 0.2 * $cantidad_20;
 
-                $this->modelo_editar->monto = $this->servicio['ordinario'] + $consto_20;
+                $this->modelo_editar->monto = $this->servicio['ordinario'] + $costo_20;
+
+                $this->modelo_editar->observaciones = 'TRÁMITE CALIFICADO CON DESCUENTO DEL 20%';
 
             }else{
 

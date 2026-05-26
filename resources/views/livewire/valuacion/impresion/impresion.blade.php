@@ -38,7 +38,7 @@
 
         @livewire('valuacion.impresion.fusion', ['avaluo_para' => $avaluo_para])
 
-    @elseif(in_array($avaluo_para, [9]))
+    @elseif(in_array($avaluo_para, [9, 10]))
 
         @livewire('valuacion.impresion.cambio-regimen', ['avaluo_para' => $avaluo_para])
 

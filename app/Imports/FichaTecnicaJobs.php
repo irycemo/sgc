@@ -11,7 +11,6 @@ use App\Models\ManzanaAsignada;
 use App\Models\Oficina;
 use App\Models\Predio;
 use App\Models\PredioAvaluo;
-use App\Services\Coordenadas\Coordenadas;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\OnEachRow;
@@ -29,7 +28,7 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
 
     public $errores = [];
 
-    public function __construct(public string $batchId){}
+    public function __construct(public string $batchId, public $userId){}
 
     public function rules(): array
     {
@@ -177,6 +176,8 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
 
             $this->errores[] = "El predio no existe en el padrón, verifique. " . 'Línea: ' . $row->getIndex();
 
+            return 0;
+
         }
 
         return $predioCompleto->id;
@@ -190,7 +191,7 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
                                         ->where('oficina', $row['oficina'])
                                         ->where('tipo_predio', $row['tipo_predio'])
                                         ->where('numero_registro', $row['registro'])
-                                        ->where('asignado_a', auth()->id())
+                                        ->where('asignado_a', $this->userId)
                                         ->first();
 
         if(!$cuentaAsignada){
@@ -211,7 +212,7 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
                                         ->where('localidad', $row['localidad'])
                                         ->where('sector', $row['sector'])
                                         ->where('manzana', $row['manzana'])
-                                        ->where('asignado_a', auth()->id())
+                                        ->where('asignado_a', $this->userId)
                                         ->first();
 
         if(!$cuentaAsignada){
@@ -401,7 +402,7 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
 
     public function chunkSize(): int
     {
-        return 10;
+        return 100;
     }
 
     public function hasErrors(): bool

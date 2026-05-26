@@ -2,16 +2,12 @@
 
 namespace App\Livewire\Valuacion;
 
-use App\Exceptions\GeneralException;
-use App\Imports\FichaTecnicaJobs;
-use App\Jobs\Valuacion\CrearAvaluoChain;
+use App\Jobs\Valuacion\FichaTecnicaJobsImportJob;
 use App\Models\Import;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Maatwebsite\Excel\Facades\Excel;
 
 class FichaTecnicaJob extends Component
 {
@@ -19,26 +15,20 @@ class FichaTecnicaJob extends Component
     use WithFileUploads;
 
     public $documento;
-    public $errores = [];
-
     public $batchId;
-    public $concluido = false;
-    public $generando = false;
-    public $procesando = false;
-    public $total;
-    public $processed;
-    public $progress;
-    public $folios_generados;
-    public $job_errors;
+    public $estado = 'idle'; // idle | validando | procesando | completado | error
+    public $errores = [];
+    public $total = 0;
+    public $procesados = 0;
+    public $fallidos = 0;
     public $avaluos_generados = [];
 
-    protected function rules(){
-        return [
-            'documento' => 'nullable|max:100000',
-        ];
+    protected function rules() {
+        return ['documento' => 'required|file|mimes:xlsx,xls|max:100000'];
     }
 
-    public function procesar(){
+    public function procesar()
+    {
 
         $this->reset('errores');
 
@@ -46,130 +36,51 @@ class FichaTecnicaJob extends Component
 
         $this->batchId = (string) Str::uuid();
 
-        try {
+        $this->estado = 'validando';
 
-            $import = new FichaTecnicaJobs($this->batchId);
+        $path = $this->documento->getRealPath();
 
-            Excel::import($import, $this->documento);
-
-            $this->documento = null;
-
-            $imports = Import::where('batch_id', $this->batchId)->get();
-
-            if($imports->count('predios_existente') === 0){
-
-                throw new GeneralException("Es necesario un predio origen.");
-
-            }
-
-            if($imports->sum('predios_existente') > 1 && $imports->sum('predios_nuevos') > 0){
-
-                throw new GeneralException("Solo puede haber un predio origen si hay predios que no existen en el padron.");
-
-            }
-
-            $errores = $imports->where('errores', '!=', null);
-
-            if($errores->count()){
-
-                foreach($errores as $error){
-
-                    $decoded_errors = json_decode($error->errores);
-
-                    foreach($decoded_errors as $decoded){
-
-                        $this->errores [] = $decoded;
-
-                    }
-
-
-                }
-
-                $this->eliminarImportRecords($this->batchId);
-
-                return;
-
-            }
-
-            CrearAvaluoChain::dispatch($this->batchId, auth()->id());
-
-            $this->procesando = true;
-
-            $this->estadisticas();
-
-        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
-
-            $failures = $e->failures();
-
-            foreach ($failures as $failure) {
-                $failure->row(); // row that went wrong
-                $failure->attribute(); // either heading key (if using heading row concern) or column index
-                $failure->errors(); // Actual error messages from Laravel validator
-                $failure->values(); // The values of the row that has failed.
-
-                $this->errores [] = "Error en la fila: " . $failure->row() . ". Campo: " . $failure->attribute() . ". " . $failure->errors()[0];
-
-            }
-
-            $this->eliminarImportRecords($this->batchId);
-
-        } catch (GeneralException $ex) {
-
-            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
-
-            $this->eliminarImportRecords($this->batchId);
-
-        } catch (\Throwable $th) {
-
-            Log::error("Error al importar ficha técnica por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
-            $this->dispatch('mostrarMensaje', ['error', "Hubo un error"]);
-
-            $this->eliminarImportRecords($this->batchId);
-
-        }
+        FichaTecnicaJobsImportJob::dispatch($this->batchId, $path, auth()->id());
 
     }
 
-    public function estadisticas(){
+    public function polling()
+    {
 
-        if($this->procesando){
+        if ($this->estado === 'idle' || $this->estado === 'completado') return;
 
-            $query = DB::table('imports')
-                ->where('batch_id', $this->batchId);
+        // Leer estado guardado por el job en cache
+        $cache = Cache::get("import:{$this->batchId}");
 
-            $this->total = (clone $query)->count();
+        if (!$cache) return;
 
-            $this->processed = (clone $query)
-                ->where('status', 'processed')
-                ->count();
+        $this->estado       = $cache['estado'];
+        $this->errores      = $cache['errores'] ?? [];
+        $this->total        = $cache['total'] ?? 0;
+        $this->procesados   = $cache['procesados'] ?? 0;
+        $this->fallidos     = $cache['fallidos'] ?? 0;
 
-            $this->job_errors = (clone $query)
-                ->where('status', 'error')
-                ->count();
+        if($this->total === $this->procesados){
 
-            $this->progress = $this->total > 0
-                ? intval(($this->processed / $this->total) * 100)
-                : 0;
+            Cache::forget("import:{$this->batchId}");
 
-            if($this->processed === $this->total){
+            $this->avaluos_generados = Import::where('batch_id', $this->batchId)->pluck('info');
 
-                $this->procesando = false;
+            Import::where('batch_id', $this->batchId)->delete();
 
-                $this->avaluos_generados = Import::where('batch_id', $this->batchId)->pluck('info');
+            $this->dispatch('mostrarMensaje', ['success', 'Los avalúos se generaron con éxito.']);
 
-                $this->eliminarImportRecords($this->batchId);
-
-                $this->dispatch('mostrarMensaje', ['success', 'Los avalúos se generaron con éxito.']);
-
-            }
+            $this->estado === 'idle';
 
         }
 
-    }
+        if($this->estado === 'error'){
 
-    public function eliminarImportRecords($batchId){
+            $this->estado === 'idle';
 
-        Import::where('batch_id', $this->batchId)->delete();
+            Import::where('batch_id', $this->batch_id)->delete();
+
+        }
 
     }
 

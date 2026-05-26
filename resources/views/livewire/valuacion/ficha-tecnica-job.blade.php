@@ -1,10 +1,10 @@
 <div class="">
 
-    <x-header>Ficha Técnica jobs</x-header>
+    <x-header>Ficha Técnica</x-header>
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
+    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl" >
 
-        @if(! $procesando)
+        @if($estado === 'idle')
 
             <div class="md:w-1/2 lg:w-1/4 mx-auto items-center text-center">
 
@@ -55,33 +55,57 @@
 
             </div>
 
-        @else
+        @endif
 
-            <div wire:poll.1500ms="estadisticas" class="w-full max-w-xl mx-auto bg-white rounded-lg p-2 mb-5">
+        @if(in_array($estado, ['validando', 'procesando']))
 
-                <div class="mb-2 flex justify-between text-sm">
-                    <span>Progreso</span>
-                    <span>{{ $progress }}%</span>
-                </div>
+            <div wire:poll.1500ms="polling">
 
-                <div class="w-full bg-gray-200 rounded-full h-4">
-                    <div
-                        class="h-4 rounded-full transition-all duration-500 bg-green-500"
-                        style="width: {{ $progress }}%">
+                @if($estado === 'validando')
+
+                    <p>Validando archivo...</p>
+
+                @elseif($estado === 'procesando')
+
+                    <div class="w-full max-w-xl mx-auto bg-white rounded-lg p-2 mb-5">
+
+                        <div class="mb-2 flex justify-between text-sm">
+                            <span>Progreso</span>
+                            <span>{{ number_format(($procesados/$total)*100, 2) }}%</span>
+                        </div>
+
+                        <div class="w-full bg-gray-200 rounded-full h-4">
+                            <div
+                                class="h-4 rounded-full transition-all duration-500 bg-green-500"
+                                style="width: {{ $total > 0 ? ($procesados/$total)*100 : 0 }}%">
+                            </div>
+                        </div>
+
+                        <div class="mt-3 text-sm text-gray-600">
+                            Procesados: {{ $procesados   }} / {{ $total }}
+                        </div>
+
                     </div>
-                </div>
 
-                <div class="mt-3 text-sm text-gray-600">
-                    Procesados: {{ $processed }} / {{ $total }}
-                </div>
+                @endif
 
             </div>
 
         @endif
 
+        @if($estado === 'completado')
+
+            <p>✅ {{ $procesados }} avalúos generados correctamente.</p>
+
+            @if($fallidos > 0)
+                <p>⚠️ {{ $fallidos }} filas con error.</p>
+            @endif
+
+        @endif
+
     </div>
 
-    @if(count($errores) > 0)
+    @if(count($errores))
 
         <div class="mb-5 bg-white rounded-lg p-2 shadow-lg flex gap-2 flex-wrap ">
 

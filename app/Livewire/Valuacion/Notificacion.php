@@ -8,7 +8,6 @@ use App\Models\Terreno;
 use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\Colindancia;
-use App\Models\Propietario;
 use App\Models\Construccion;
 use Livewire\WithPagination;
 use App\Models\TerrenosComun;

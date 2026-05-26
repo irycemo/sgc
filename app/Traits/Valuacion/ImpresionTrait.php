@@ -162,7 +162,7 @@ trait ImpresionTrait
         if($this->tramite_inspeccion->avaluo_para->value != $this->avaluo_para) throw new GeneralException('El trámite de inspección ocular no corresponde a un avalúo para ' . $this->lista_avaluo_para[$this->avaluo_para - 1]->label());
 
         /* Desgloses */
-        if(in_array($this->avaluo_para, [3, 4, 5, 9])){
+        if(in_array($this->avaluo_para, [3, 4, 5, 9, 10])){
 
             $this->tramite_desglose = Tramite::where('año', $this->desglose_año)
                                             ->where('folio', $this->desglose_folio)
@@ -193,7 +193,7 @@ trait ImpresionTrait
 
         if($this->numero_avaluos < 0) throw new GeneralException('El registro inicial no puede ser mayor al registro final.');
 
-        $certificacion = Certificacion::where('estado', 'activo')
+        /* $certificacion = Certificacion::where('estado', 'activo')
                                         ->where('tramite_id', $this->tramite_inspeccion->id)
                                         ->first();
 
@@ -201,7 +201,7 @@ trait ImpresionTrait
 
             throw new GeneralException('Ya existe una notificación de valor catastral vinculada al trámite de inspección ocular.');
 
-        }
+        } */
 
     }
 
@@ -422,14 +422,18 @@ trait ImpresionTrait
 
         }
 
-        $this->tramite_inspeccion->update([
-            'usados' => $this->numero_avaluos + $this->tramite_inspeccion->usados,
-            'ligado_a' => $this->tramite_desglose?->id
-        ]);
+        if(! in_array($this->avaluo_para, [10])){
 
-        if($this->tramite_inspeccion->usados >= $this->tramite_inspeccion->cantidad){
+            $this->tramite_inspeccion->update([
+                'usados' => $this->numero_avaluos + $this->tramite_inspeccion->usados,
+                'ligado_a' => $this->tramite_desglose?->id
+            ]);
 
-            $this->tramite_inspeccion->update(['estado' => 'concluido']);
+            if($this->tramite_inspeccion->usados >= $this->tramite_inspeccion->cantidad){
+
+                $this->tramite_inspeccion->update(['estado' => 'concluido']);
+
+            }
 
         }
 
