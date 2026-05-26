@@ -4,6 +4,7 @@ namespace App\Traits\Valuacion;
 
 use App\Enums\Tramites\AvaluoPara;
 use App\Exceptions\GeneralException;
+use App\Livewire\Valuacion\Impresion\General;
 use App\Models\Avaluo;
 use App\Models\Certificacion;
 use App\Models\Oficina;
@@ -159,7 +160,11 @@ trait ImpresionTrait
 
         if($this->tramite_inspeccion->estado != 'pagado') throw new GeneralException('El trámite de inspección ocular no esta pagado o ha sido concluido.');
 
-        if($this->tramite_inspeccion->avaluo_para->value != $this->avaluo_para) throw new GeneralException('El trámite de inspección ocular no corresponde a un avalúo para ' . $this->lista_avaluo_para[$this->avaluo_para - 1]->label());
+        if($this->avaluo_para == 10){
+
+            if($this->tramite_inspeccion->avaluo_para->value != $this->avaluo_para) throw new GeneralException('El trámite de inspección ocular no corresponde a un avalúo para ' . $this->lista_avaluo_para[$this->avaluo_para - 1]->label());
+
+        }
 
         /* Desgloses */
         if(in_array($this->avaluo_para, [3, 4, 5, 9, 10])){
@@ -265,13 +270,17 @@ trait ImpresionTrait
 
         }
 
-        if($this->tramite_inspeccion->predios()->count()){
+        if($this->tramite_inspeccion->avaluo_para->value !== 10){
 
-            $predio = $this->tramite_inspeccion->predios()->first();
+            if($this->tramite_inspeccion->predios()->count()){
 
-            if($this->predio_padre->id != $predio->id){
+                $predio = $this->tramite_inspeccion->predios()->first();
 
-                throw new GeneralException('El trámite de inspección tiene asociado un predio origen diferente.');
+                if($this->predio_padre->id != $predio->id){
+
+                    throw new GeneralException('El trámite de inspección tiene asociado un predio origen diferente.');
+
+                }
 
             }
 
@@ -292,7 +301,7 @@ trait ImpresionTrait
                                 ->where('estado', '!=', 'notificado')
                                 ->get();
 
-            if(in_array($this->avaluo_para, [3, 4, 5, 9])){
+            if(in_array($this->avaluo_para, [3, 4, 5, 9, 10])){
 
                 $this->predio_padre = Predio::where('localidad', $this->localidad)
                                         ->where('oficina', $this->oficina)
@@ -303,6 +312,12 @@ trait ImpresionTrait
                 $this->validarPredioPadre();
 
                 $avaluo_predio_padre = Avaluo::with('predioAvaluo')->where('estado', '!=', 'notificado')->where('predio', $this->predio_padre->id)->get();
+
+                if(! $avaluo_predio_padre->count()){
+
+                    throw new GeneralException("No se encontró avalúo para el predio origen.");
+
+                }
 
                 $this->avaluos = $this->avaluos->merge($avaluo_predio_padre);
 
