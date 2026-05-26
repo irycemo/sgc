@@ -137,6 +137,8 @@ class CambioRegimen extends Component
 
             });
 
+            $this->resetarTodo();
+
             return response()->streamDownload(
                 fn () => print($pdf->output()),
                 'notificacion_de_valor_catastral.pdf'

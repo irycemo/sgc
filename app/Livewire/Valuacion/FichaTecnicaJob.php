@@ -78,7 +78,7 @@ class FichaTecnicaJob extends Component
 
             $this->estado === 'idle';
 
-            Import::where('batch_id', $this->batch_id)->delete();
+            Import::where('batch_id', $this->batchId)->delete();
 
         }
 

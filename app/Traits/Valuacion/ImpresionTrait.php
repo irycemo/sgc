@@ -183,6 +183,12 @@ trait ImpresionTrait
 
             if($this->tramite_inspeccion->ligado_a && ($this->tramite_inspeccion->ligado_a != $this->tramite_desglose->id)) throw new GeneralException('El trámite de inspección ocular esta ligado a otro trámite.');
 
+            if($this->avaluo_para == 10 && $this->tramite_desglose->cantidad > 1){
+
+                throw new GeneralException('El trámite de desglose tiene una cantidad mayor a 1.');
+
+            }
+
         }
 
         if($this->tramite_inspeccion->ligado_a && !$this->tramite_desglose) throw new GeneralException('El trámite de inspección ocular esta ligado a otro trámite.');

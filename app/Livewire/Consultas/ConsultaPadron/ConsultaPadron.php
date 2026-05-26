@@ -139,11 +139,17 @@ class ConsultaPadron extends Component
 
             $this->oficina = auth()->user()->oficina->oficina;
 
+            $this->municipio = auth()->user()->oficina->municipio;
+
+            $this->region_catastral = auth()->user()->oficina->region;
+
+        }else{
+
+            $this->municipio = $oficina->municipio;
+
+            $this->region_catastral = $oficina->region;
+
         }
-
-        $this->municipio = $oficina->municipio;
-
-        $this->region_catastral = $oficina->region;
 
     }
 

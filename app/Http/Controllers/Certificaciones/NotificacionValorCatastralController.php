@@ -198,7 +198,7 @@ class NotificacionValorCatastralController extends Controller
 
         $avaluos = Avaluo::with('predioAvaluo')->whereKey($avaluos)->get();
 
-        if($tramite_inspeccion->avaluo_para != AvaluoPara::CAMBIO_REGIMEN){
+        if(! in_array($tramite_inspeccion->avaluo_para, [AvaluoPara::CAMBIO_REGIMEN, AvaluoPara::DESGLOSE_Y_CAMBIO_DE_REGIMEN])){
 
             $avaluo_predio_padre = $avaluos->where('predio', $predio_padre_id)->first();
 
