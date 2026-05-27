@@ -160,11 +160,7 @@ trait ImpresionTrait
 
         if($this->tramite_inspeccion->estado != 'pagado') throw new GeneralException('El trámite de inspección ocular no esta pagado o ha sido concluido.');
 
-        if($this->avaluo_para == 10){
-
-            if($this->tramite_inspeccion->avaluo_para->value != $this->avaluo_para) throw new GeneralException('El trámite de inspección ocular no corresponde a un avalúo para ' . $this->lista_avaluo_para[$this->avaluo_para - 1]->label());
-
-        }
+        if($this->tramite_inspeccion->avaluo_para->value != $this->avaluo_para) throw new GeneralException('El trámite de inspección ocular no corresponde a un avalúo para ' . $this->lista_avaluo_para[$this->avaluo_para - 1]->label());
 
         /* Desgloses */
         if(in_array($this->avaluo_para, [3, 4, 5, 9, 10])){
@@ -443,18 +439,14 @@ trait ImpresionTrait
 
         }
 
-        if(! in_array($this->avaluo_para, [10])){
+        $this->tramite_inspeccion->update([
+            'usados' => $this->numero_avaluos + $this->tramite_inspeccion->usados,
+            'ligado_a' => $this->tramite_desglose?->id
+        ]);
 
-            $this->tramite_inspeccion->update([
-                'usados' => $this->numero_avaluos + $this->tramite_inspeccion->usados,
-                'ligado_a' => $this->tramite_desglose?->id
-            ]);
+        if($this->tramite_inspeccion->usados >= $this->tramite_inspeccion->cantidad){
 
-            if($this->tramite_inspeccion->usados >= $this->tramite_inspeccion->cantidad){
-
-                $this->tramite_inspeccion->update(['estado' => 'concluido']);
-
-            }
+            $this->tramite_inspeccion->update(['estado' => 'concluido']);
 
         }
 
