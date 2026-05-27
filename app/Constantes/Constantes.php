@@ -644,6 +644,7 @@ class Constantes{
         'BAJA POR CAMBIO DE REGIMEN' => 'BAJA',
         'BAJA POR CANCELACIÓN DE SUBDIVISION' => 'BAJA',
         'BAJA POR DESGLOSE' => 'BAJA',
+        'BAJA POR DUPLICIDAD' => 'BAJA',
         'BAJA POR FUSION' => 'BAJA',
         'BAJA POR ORDEN JUDICIAL' => 'BAJA',
         'AD PERPETUAM' => 'ACTUALIZACION',
