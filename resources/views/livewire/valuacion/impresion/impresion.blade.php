@@ -38,13 +38,17 @@
 
         @livewire('valuacion.impresion.fusion', ['avaluo_para' => $avaluo_para])
 
-    @elseif(in_array($avaluo_para, [9, 10]))
+    @elseif(in_array($avaluo_para, [9]))
 
         @livewire('valuacion.impresion.cambio-regimen', ['avaluo_para' => $avaluo_para])
 
     @elseif(in_array($avaluo_para, [6]))
 
         @livewire('valuacion.impresion.predio-ignorado', ['avaluo_para' => $avaluo_para])
+
+    @elseif(in_array($avaluo_para, [10]))
+
+        @livewire('valuacion.impresion.desglose-cambio-regimen', ['avaluo_para' => $avaluo_para])
 
     @endif
 

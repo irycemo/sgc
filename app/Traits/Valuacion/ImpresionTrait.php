@@ -248,7 +248,7 @@ trait ImpresionTrait
 
         }
 
-        if(! $this->predio_padre->superficie_total_terreno || $this->predio_padre->superficie_total_terreno == 0){
+        /* if(! $this->predio_padre->superficie_total_terreno || $this->predio_padre->superficie_total_terreno == 0){
 
             if($this->predio_padre->superficie_total_terreno < $superficie_terreno){
 
@@ -264,7 +264,7 @@ trait ImpresionTrait
 
             }
 
-        }
+        } */
 
         if($this->tramite_inspeccion->avaluo_para->value !== 10){
 
