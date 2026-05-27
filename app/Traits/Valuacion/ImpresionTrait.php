@@ -4,11 +4,10 @@ namespace App\Traits\Valuacion;
 
 use App\Enums\Tramites\AvaluoPara;
 use App\Exceptions\GeneralException;
-use App\Livewire\Valuacion\Impresion\General;
 use App\Models\Avaluo;
-use App\Models\Certificacion;
 use App\Models\Oficina;
 use App\Models\Predio;
+use App\Models\PredioAvaluo;
 use App\Models\Tramite;
 use App\Services\Tramites\TramiteService;
 use Livewire\Attributes\On;
@@ -184,12 +183,6 @@ trait ImpresionTrait
 
             if($this->tramite_inspeccion->ligado_a && ($this->tramite_inspeccion->ligado_a != $this->tramite_desglose->id)) throw new GeneralException('El trámite de inspección ocular esta ligado a otro trámite.');
 
-            if($this->avaluo_para == 10 && $this->tramite_desglose->cantidad > 1){
-
-                throw new GeneralException('El trámite de desglose tiene una cantidad mayor a 1.');
-
-            }
-
         }
 
         if($this->tramite_inspeccion->ligado_a && !$this->tramite_desglose) throw new GeneralException('El trámite de inspección ocular esta ligado a otro trámite.');
@@ -266,21 +259,18 @@ trait ImpresionTrait
 
         } */
 
-        if($this->tramite_inspeccion->avaluo_para->value !== 10){
+        /* if($this->tramite_inspeccion->predios()->count()){
 
-            if($this->tramite_inspeccion->predios()->count()){
+            $predio = $this->tramite_inspeccion->predios()->first();
 
-                $predio = $this->tramite_inspeccion->predios()->first();
+            if($this->predio_padre->id != $predio->id){
 
-                if($this->predio_padre->id != $predio->id){
-
-                    throw new GeneralException('El trámite de inspección tiene asociado un predio origen diferente.');
-
-                }
+                throw new GeneralException('El trámite de inspección tiene asociado un predio origen diferente.');
 
             }
 
-        }
+        } */
+
 
     }
 
@@ -307,7 +297,14 @@ trait ImpresionTrait
 
                 $this->validarPredioPadre();
 
-                $avaluo_predio_padre = Avaluo::with('predioAvaluo')->where('estado', '!=', 'notificado')->where('predio', $this->predio_padre->id)->get();
+                $predio_avaluo_padre = PredioAvaluo::where('localidad',$this->predio_padre->localidad)
+                                                ->where('oficina',$this->predio_padre->oficina)
+                                                ->where('tipo_predio',$this->predio_padre->tipo_predio)
+                                                ->where('numero_registro',$this->predio_padre->numero_registro)
+                                                ->where('status', '!=', 'notificado')
+                                                ->first();
+
+                $avaluo_predio_padre = Avaluo::with('predioAvaluo')->where('estado', '!=', 'notificado')->where('predio_avaluo', $predio_avaluo_padre->id)->get();
 
                 if(! $avaluo_predio_padre->count()){
 
@@ -350,7 +347,7 @@ trait ImpresionTrait
 
             if(!auth()->user()->hasRole(['Convenio municipal'])){
 
-                if(in_array($this->avaluo_para, [3, 4, 5])){
+                if(in_array($this->avaluo_para, [3, 4, 5, 10])){
 
                     $this->numero_avaluos --;
 
@@ -429,15 +426,27 @@ trait ImpresionTrait
 
         if($this->tramite_desglose){
 
-            $this->tramite_desglose->update([
-                'usados' => $this->numero_avaluos + $this->tramite_desglose->usados,
-                'ligado_a' => $this->tramite_inspeccion->id
-            ]);
-
-            if($this->tramite_desglose->cantidad == $this->tramite_desglose->usados)
-                $this->tramite_desglose->update(['estado' => 'concluido']);
+            $this->actualizarTramiteDesglose();
 
         }
+
+        $this->actualizarTramiteInspeccion();
+
+    }
+
+    public function actualizarTramiteDesglose(){
+
+        $this->tramite_desglose->update([
+            'usados' => $this->numero_avaluos + $this->tramite_desglose->usados,
+            'ligado_a' => $this->tramite_inspeccion->id
+        ]);
+
+        if($this->tramite_desglose->cantidad == $this->tramite_desglose->usados)
+            $this->tramite_desglose->update(['estado' => 'concluido']);
+
+    }
+
+    public function actualizarTramiteInspeccion(){
 
         $this->tramite_inspeccion->update([
             'usados' => $this->numero_avaluos + $this->tramite_inspeccion->usados,

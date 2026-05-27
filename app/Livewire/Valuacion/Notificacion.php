@@ -213,9 +213,17 @@ class Notificacion extends Component
 
         }
 
-        if($this->tramite->avaluo_para === AvaluoPara::CAMBIO_REGIMEN){
+        if(in_array($this->tramite->avaluo_para, [AvaluoPara::CAMBIO_REGIMEN, AvaluoPara::CAMBIO_DE_REGIMEN_Y_DESGLOSE])){
 
-            $predio_rustico = Predio::find($this->tramite->predios->first()->id);
+            $predio_rustico = $this->tramite->predios()->where('tipo_predio', 2)->first();
+
+            if(! $predio_rustico){
+
+                throw new GeneralException('No se encontro el predio rustico para el cambio de régimen.');
+
+            }
+
+            if($predio_rustico->estado == 'baja') return;
 
             $observaciones = 'Se da de baja el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . ' por cambio de regimen. Da origen al predio ' . $this->predio->cuentaPredial() . '. ' . $this->avaluo->observaciones;
 
@@ -224,14 +232,6 @@ class Notificacion extends Component
                 'actualizado_por' => auth()->id(),
                 'observaciones' => $observaciones,
             ]);
-
-            foreach ($predio_rustico->propietarios as $propietario) {
-
-                $propietario_nuevo = $propietario->replicate();
-                $propietario_nuevo->propietarioable_id = $this->predio->id;
-                $propietario_nuevo->save();
-
-            }
 
             $this->predio->update([
                 'superficie_notarial' => $predio_rustico->superficie_notarial,

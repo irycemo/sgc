@@ -6,9 +6,9 @@
 
             <li>
 
-                <input type="radio" id="clave" name="hosting" value="clave" class="hidden peer" wire:model.live="radio" >
+                <input type="radio" id="regimen" name="hosting" value="regimen" class="hidden peer" wire:model.live="radio" >
 
-                <label for="clave" class="inline-flex items-center justify-between w-full p-1 px-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                <label for="regimen" class="inline-flex items-center justify-between w-full p-1 px-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
 
                     <div class="block">
 
@@ -26,9 +26,9 @@
 
             <li>
 
-                <input type="radio" id="propietario" name="hosting" value="propietario" class="hidden peer" wire:model.live="radio">
+                <input type="radio" id="desglose" name="hosting" value="desglose" class="hidden peer" wire:model.live="radio">
 
-                <label for="propietario" class="inline-flex items-center justify-between w-full p-1 px-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                <label for="desglose" class="inline-flex items-center justify-between w-full p-1 px-3 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
 
                     <div class="block">
 
@@ -112,25 +112,29 @@
 
     @endif
 
-    <div class="p-4 flex-auto bg-white rounded-lg mb-3 shadow-md space-y-3">
+    @if($radio)
 
-        <h4 class="text-lg mb-5 text-center">Predio origen</h4>
+        <div class="p-4 flex-auto bg-white rounded-lg mb-3 shadow-md space-y-3">
 
-        <div class="flex flex-wrap space-x-1 justify-center items-center">
+            <h4 class="text-lg mb-5 text-center">Predio origen</h4>
 
-            <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
+            <div class="flex flex-wrap space-x-1 justify-center items-center">
 
-            <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.blur="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-            <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo_padre') border-1 border-red-500 @enderror" wire:model="tipo_padre">
+                <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.blur="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-            <input title="Número de registro" placeholder="# de Registro" type="number" class="bg-white rounded text-xs mt-2 sm:mt-0 @error('registro_padre') border-1 border-red-500 @enderror" wire:model.live="registro_padre">
+                <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo_padre') border-1 border-red-500 @enderror" wire:model="tipo_padre">
+
+                <input title="Número de registro" placeholder="# de Registro" type="number" class="bg-white rounded text-xs mt-2 sm:mt-0 @error('registro_padre') border-1 border-red-500 @enderror" wire:model.live="registro_padre">
+
+            </div>
 
         </div>
 
-    </div>
+    @endif
 
-    @if($radio)
+    @if($radio == 'desglose')
 
         <div class="p-4 flex-auto bg-white rounded-lg mb-3 shadow-md space-y-3">
 
@@ -210,7 +214,7 @@
 
     @endif
 
-    @if($radio)
+    @if($radio == 'regimen')
 
         <div class="p-4 flex-auto bg-white rounded-lg mb-3 shadow-md space-y-3">
 
@@ -218,11 +222,11 @@
 
             <div class="flex flex-wrap space-x-1 justify-center items-center">
 
-                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad_origen') border-1 border-red-500 @enderror" wire:model.blur="localidad_origen">
+                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-                <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina_origen') border-1 border-red-500 @enderror" wire:model.blur="oficina_origen" readonly>
+                <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.blur="oficina" readonly>
 
-                <input readonly title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo_nuevo') border-1 border-red-500 @enderror" wire:model="tipo_nuevo">
+                <input readonly title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16" value="1">
 
                 <input title="Registro inicial" placeholder="Registro" type="number" class="bg-white rounded text-xs mt-2 sm:mt-0 @error('registro_nuevo') border-1 border-red-500 @enderror" wire:model.live="registro_nuevo">
 
@@ -233,19 +237,40 @@
 
     @include('livewire.comun.errores')
 
-    <div class="bg-white rounded-lg p-3 flex justify-end shadow-md">
+    @if($radio == 'desglose')
 
-        <x-button-green
-            wire:click="imprimir"
-            wire:loading.attr="disabled"
-            wire:target="imprimir">
+        <div class="bg-white rounded-lg p-3 flex justify-end shadow-md">
 
-            <img wire:loading wire:target="imprimir" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+            <x-button-green
+                wire:click="imprimirDesglose"
+                wire:loading.attr="disabled"
+                wire:target="imprimirDesglose">
 
-            Imprimir
+                <img wire:loading wire:target="imprimirDesglose" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-        </x-button-green>
+                Imprimir
 
-    </div>
+            </x-button-green>
+
+        </div>
+
+    @else
+
+        <div class="bg-white rounded-lg p-3 flex justify-end shadow-md">
+
+            <x-button-green
+                wire:click="imprimirCambioRegimen"
+                wire:loading.attr="disabled"
+                wire:target="imprimirCambioRegimen">
+
+                <img wire:loading wire:target="imprimirCambioRegimen" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                Imprimir
+
+            </x-button-green>
+
+        </div>
+
+    @endif
 
 </div>
