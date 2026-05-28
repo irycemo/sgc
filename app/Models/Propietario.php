@@ -29,4 +29,10 @@ class Propietario extends Model implements Auditable
         return $this->belongsTo(Predio::class, 'propietarioable_id');
     }
 
+    public function nombreCompleto(){
+
+        return trim($this->persona->nombre . ' ' . $this->persona->ap_paterno . ' ' . $this->persona->ap_materno . ' ' . $this->persona->razon_social);
+
+    }
+
 }

@@ -190,11 +190,13 @@ class Notificacion extends Component
 
             if(!$predio) throw new GeneralException('No se encontro el predio a fusionar.');
 
+            $propietarios_agregados = null;
+
             foreach ($this->tramite->predios as $predio_fusionante) {
 
                 if($predio->id === $predio_fusionante->id) continue;
 
-                $observaciones = 'Se fusiona el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . ' resultando el predio ' . $predio->cuentaPredial() . '. ' . $this->avaluo->observaciones;
+                $observaciones = 'SE FUSIONA EL PREDIO MEDIANTE ' . $this->tramite->avaluo_para->label() . ' CON FOLIO '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . ' RESULTANDO EL PREDIO ' . $predio->cuentaPredial() . '. ' . $this->avaluo->observaciones;
 
                 $predio_fusionante->update([
                     'status' => 'fusionado',
@@ -209,7 +211,21 @@ class Notificacion extends Component
                     'creado_por' => auth()->id()
                 ]);
 
+                $predio_fusionante->load('propietarios.persona');
+
+                foreach ($predio_fusionante->propietarios as $propietario) {
+
+                    $propietarios_agregados = $propietarios_agregados . ' ' . $propietario->nombreCompleto() . ' PORCENTAJE DE PROPIEDAD: ' . $propietario->porcentaje_propiedad . ' % ' . ' PORCENTAJE DE NUDA: ' . $propietario->porcentaje_nuda . ' % ' . ' PORCENTAJE DE USUFRUCTO: ' . $propietario->porcentaje_usufructo . ' % ';
+
+                }
+
             }
+
+            $observaciones_predio_fusionado = $predio->observaciones . ' COMO RESULTADO DE LA FUSIÓN SE AGREGAN LOS PROPIETARIOS: ' . $propietarios_agregados;
+
+            $predio->update(['observaciones' => $observaciones_predio_fusionado]);
+
+            $predio->movimientos()->latest()->first()->update(['descripcion' => $observaciones_predio_fusionado]);
 
         }
 
@@ -225,7 +241,7 @@ class Notificacion extends Component
 
             if($predio_rustico->estado == 'baja') return;
 
-            $observaciones = 'Se da de baja el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . ' por cambio de regimen. Da origen al predio ' . $this->predio->cuentaPredial() . '. ' . $this->avaluo->observaciones;
+            $observaciones = 'SE DA DE BAJA EL PREDIO MEDIANTE ' . $this->tramite->avaluo_para->label() . ' CON FOLIO '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . ' POR CAMBIO DE REGIMEN. DA ORIGEN AL PREDIO ' . $this->predio->cuentaPredial() . '. ' . $this->avaluo->observaciones;
 
             $predio_rustico->update([
                 'status' => 'baja',
@@ -302,7 +318,7 @@ class Notificacion extends Component
 
     public function creaPredio(){
 
-        $observaciones = 'Se da de alta predio en el padrón catastral mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '. ' . $this->avaluo->observaciones;
+        $observaciones = 'SE DA DE ALTA EL PREDIO EN EL PADRÓN CATASTRAL MEDIANTE ' . $this->tramite->avaluo_para->label() . ' CON FOLIO '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '. ' . $this->avaluo->observaciones;
 
         $predio = Predio::create([
             'status' => 'activo',
@@ -381,7 +397,7 @@ class Notificacion extends Component
 
     public function actualizaPredio($predio){
 
-        $observaciones = 'Se actualiza el predio mediante ' . $this->tramite->avaluo_para->label() . ' con folio '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '. ' . $this->avaluo->observaciones;
+        $observaciones = 'SE ACTUALIZA EL PREDIO MEDIANTE ' . $this->tramite->avaluo_para->label() . ' CON FOLIO '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '. ' . $this->avaluo->observaciones;
 
         $predio->update([
             'status' => 'activo',
