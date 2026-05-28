@@ -23,6 +23,14 @@ class IngresarTrasladoController extends Controller
 
         $certificacion = Certificacion::find($validated['certificacion_id']);
 
+        if($certificacion->predio->status != 'activo'){
+
+            return response()->json([
+                'error' => 'El predio no esta activo.',
+            ], 404);
+
+        }
+
         if($certificacion->oficina->cabeceraMunicipal){
 
             $oficina_cabecera_id = $certificacion->oficina->cabeceraMunicipal->id;
@@ -101,6 +109,14 @@ class IngresarTrasladoController extends Controller
         $validated = $request->validated();
 
         $predio = Predio::find($validated['predio_id']);
+
+        if($predio->status != 'activo'){
+
+            return response()->json([
+                'error' => 'El predio no esta activo.',
+            ], 404);
+
+        }
 
         $oficina = Oficina::where('oficina', $predio->oficina)->where('localidad', $predio->localidad)->first();
 
