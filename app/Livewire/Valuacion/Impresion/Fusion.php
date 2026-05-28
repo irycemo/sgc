@@ -121,11 +121,11 @@ class Fusion extends Component
 
         }
 
-        if(count($this->predios_fusionantes) != $this->tramite_inspeccion->cantidad){
+/*         if(count($this->predios_fusionantes) != $this->tramite_inspeccion->cantidad){
 
             throw new GeneralException('La cantidad de predios a fusionar no coincide con la cantidad que ampara el trámite (' . $this->tramite_inspeccion->cantidad .  ').' );
 
-        }
+        } */
 
         $superficie_total = 0;
 
