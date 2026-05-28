@@ -63,7 +63,14 @@ class Fusion extends Component
 
                     }
 
-                    if(!auth()->user()->hasRole('Convenio municipal')) $this->actualizarTramites();
+                    if(!auth()->user()->hasRole('Convenio municipal')) {
+
+                        $this->tramite_inspeccion->update([
+                            'estado' => 'concluido',
+                            'usados' => count($this->predios_fusionantes)
+                        ]);
+
+                    }
 
                     $avaluo_ids = $this->avaluos->pluck('id');
 
@@ -111,6 +118,12 @@ class Fusion extends Component
                                     ->get();
 
             $this->predios_fusionantes = $this->predios_fusionantes->merge($predios_extra);
+
+        }
+
+        if(count($this->predios_fusionantes) != $this->tramite_inspeccion->cantidad){
+
+            throw new GeneralException('La cantidad de predios a fusionar no coincide con la cantidad que ampara el trámite (' . $this->tramite_inspeccion->cantidad .  ').' );
 
         }
 

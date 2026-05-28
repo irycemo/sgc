@@ -225,7 +225,12 @@ class Notificacion extends Component
 
             $predio->update(['observaciones' => $observaciones_predio_fusionado]);
 
-            $predio->movimientos()->latest()->first()->update(['descripcion' => $observaciones_predio_fusionado]);
+            $predio->movimientos()->create([
+                'nombre' => 'Actualización mediante ' . $this->tramite->avaluo_para->label(),
+                'fecha' => $this->fecha_notificacion,
+                'descripcion' =>  $observaciones_predio_fusionado,
+                'creado_por' => auth()->id()
+            ]);
 
         }
 
@@ -457,12 +462,16 @@ class Notificacion extends Component
             'actualizado_por' => auth()->user()->id
         ]);
 
-        $predio->movimientos()->create([
-            'nombre' => 'Actualización mediante ' . $this->tramite->avaluo_para->label(),
-            'fecha' => $this->fecha_notificacion,
-            'descripcion' =>  $observaciones,
-            'creado_por' => auth()->id()
-        ]);
+        if(! $this->tramite->avaluo_para === AvaluoPara::FUSION){
+
+            $predio->movimientos()->create([
+                'nombre' => 'Actualización mediante ' . $this->tramite->avaluo_para->label(),
+                'fecha' => $this->fecha_notificacion,
+                'descripcion' =>  $observaciones,
+                'creado_por' => auth()->id()
+            ]);
+
+        }
 
         $predio->audits()->latest()->first()->update(['tags' => 'Actualización mediante  ' . $this->tramite->avaluo_para->label() . ': ' . $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . '.']);
 
