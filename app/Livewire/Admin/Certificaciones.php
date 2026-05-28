@@ -30,6 +30,8 @@ class Certificaciones extends Component
 
     public $imagen;
 
+    public $abrir_modal_aviso = false;
+
     public $filters = [
         'año' => '',
         'folio' => '',
@@ -57,6 +59,17 @@ class Certificaciones extends Component
 
         $this->resetearTodo();
         $this->modal = true;
+        $this->editar = true;
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
+    }
+
+    public function abrirModalAviso(Certificacion $modelo){
+
+        $this->resetearTodo();
+        $this->abrir_modal_aviso = true;
         $this->editar = true;
 
         if($this->modelo_editar->isNot($modelo))

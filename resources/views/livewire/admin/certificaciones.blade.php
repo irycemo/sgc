@@ -228,6 +228,14 @@
 
                                     @endif
 
+                                    <button
+                                        wire:click="abrirModalAviso('{{ $certificacion->uuid }}')"
+                                        wire:loading.attr="disabled"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        role="menuitem">
+                                        Ver aviso
+                                    </button>
+
                                 </div>
 
                             </div>
@@ -341,5 +349,53 @@
         </x-slot>
 
     </x-confirmation-modal>
+
+    <x-dialog-modal wire:model="abrir_modal_aviso" maxWidth="sm">
+
+        <x-slot name="title">
+
+            Aviso(s)
+
+        </x-slot>
+
+        <x-slot name="content">
+
+            @if($modelo_editar->getKey())
+
+                <div class="space-y-2">
+
+                    @foreach ($modelo_editar->predio->traslados as $traslado)
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p>{{ $traslado->año_aviso }}-{{ $traslado->folio_aviso }}-{{ $traslado->usuario_aviso }}  ({{ $traslado->estado }})</p>
+
+                        </div>
+
+                    @endforeach
+
+                </div>
+
+            @endif
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex gap-3">
+
+                <x-button-red
+                    wire:click="$toggle('abrir_modal_aviso')"
+                    wire:loading.attr="disabled"
+                    wire:target="$toggle('abrir_modal_aviso')"
+                    type="button">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
 
 </div>

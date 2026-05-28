@@ -817,6 +817,24 @@
 
                     @endif
 
+                    @if($modelo_editar->traslados()->count() > 0)
+
+                        <div class="flex justify-center mt-3">
+                            <span class="col-span-1 lg:col-span-2">Avisos</span>
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 grid  p-2">
+
+                            @foreach ($modelo_editar->traslados as $traslado)
+
+                                    <span class="">{{ $traslado->año_aviso }}-{{ $traslado->folio_aviso }}-{{ $traslado->usuario_aviso }}  ({{ $traslado->estado }})</span>
+
+                            @endforeach
+
+                        </div>
+
+                    @endif
+
                     @if ($modelo_editar->observaciones)
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">

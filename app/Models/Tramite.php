@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use App\Models\Avaluo;
-use App\Models\Servicio;
-use App\Models\PredioAvaluo;
-use App\Traits\ModelosTrait;
 use App\Enums\Tramites\AvaluoPara;
+use App\Models\Avaluo;
+use App\Models\PredioAvaluo;
+use App\Models\Servicio;
+use App\Models\Traslado;
+use App\Traits\ModelosTrait;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 
@@ -61,6 +62,10 @@ class Tramite extends Model implements Auditable
 
     public function avaluos(){
         return $this->hasMany(Avaluo::class, 'tramite_id');
+    }
+
+    public function traslados(){
+        return $this->hasMany(Traslado::class, 'tramite_aviso');
     }
 
     public function numeroControl(){
