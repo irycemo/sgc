@@ -510,7 +510,7 @@
 
         <div x-cloak class="tab-panel" :class="{ 'active': activeTab === 4 }" x-show.transition.in.opacity.duration.800="activeTab === 4"  wire:key="tab-4">
 
-            @livewire('gestion-catastral.captura.terrenos-construcciones')
+            @livewire('gestion-catastral.captura.terrenos-construcciones', ['predio' => $predio])
 
         </div>
 

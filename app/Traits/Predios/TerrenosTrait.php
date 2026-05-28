@@ -177,29 +177,6 @@ trait TerrenosTrait
 
         $this->porcentajeDemerito = null;
 
-/*         if(isset($this->predio->avaluo)){
-
-            if(!$this->predio->avaluo->agua)
-                $this->porcentajeDemerito = 5;
-            if(!$this->predio->avaluo->drenaje)
-                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
-            if(!$this->predio->avaluo->pavimento)
-                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
-            if(!$this->predio->avaluo->energia_electrica)
-                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
-            if(!$this->predio->avaluo->alumbrado_publico)
-                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
-            if(!$this->predio->avaluo->banqueta)
-                $this->porcentajeDemerito = $this->porcentajeDemerito + 5;
-
-            foreach ($this->terrenos as $terreno) {
-
-                $terreno['demerito'] = $this->porcentajeDemerito;
-
-            }
-
-        } */
-
         if(count($this->terrenos) == 0) $this->agregarTerreno();
 
     }
