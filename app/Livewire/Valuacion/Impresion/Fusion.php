@@ -153,11 +153,11 @@ class Fusion extends Component
 
         }
 
-        if($this->avaluos->first()->predioAvaluo->superficie_total_terreno > $superficie_total){
+        /* if($this->avaluos->first()->predioAvaluo->superficie_total_terreno > $superficie_total){
 
             throw new GeneralException('La superficie de terreno del avalúo no puede ser mayor a la suma de las superficies de los predios (' . $superficie_total .').');
 
-        }
+        } */
 
         if($this->predios_fusionantes->count() <= 1){
 
