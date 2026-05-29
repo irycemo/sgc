@@ -110,15 +110,11 @@ class SapService{
 
             throw new GeneralException("Error de comunicación con SAP.");
 
-            return;
-
         }
 
         if($response->status() != 200){
 
             throw new GeneralException("Error de comunicación con SAP.");
-
-            return;
 
         }
 
@@ -130,8 +126,6 @@ class SapService{
 
             throw new GeneralException($data['ES_MSJ']['V1_MENS'] ." en SAP.");
 
-            return;
-
         }
 
         if(isset($data['ERROR'])){
@@ -139,8 +133,6 @@ class SapService{
             Log::error($data['ERROR'] . ' SAP');
 
             throw new GeneralException("Error de comunicación con SAP.");
-
-            return;
 
         }
 

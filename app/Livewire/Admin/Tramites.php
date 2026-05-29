@@ -516,11 +516,13 @@ class Tramites extends Component
 
     }
 
-    public function imprimirComprobantePago(){
+    public function imprimirComprobantePago(Tramite $tramtie){
 
         try {
 
-            $data = (new TramiteService($this->modelo_editar))->obtenerComprobantePago();
+            $pdf = null;
+
+            $data = (new TramiteService($tramtie))->obtenerComprobantePago();
 
             if(! isset($data['BASE64'])){
 
