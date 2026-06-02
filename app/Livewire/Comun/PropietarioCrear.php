@@ -62,9 +62,9 @@ class PropietarioCrear extends Component
 
         $pu = $pu + (float)$this->porcentaje_usufructo + $pp;
 
-        info($pn);
+        $pn = (float)number_format($pn, 4);
 
-        info($pu);
+        $pu = (float)number_format($pu, 4);
 
         if($pn > 100 || $pu > 100) throw new GeneralException("La suma de los porcentajes no puede exceder el 100%.");
 
