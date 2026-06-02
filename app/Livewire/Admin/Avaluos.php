@@ -320,7 +320,7 @@ class Avaluos extends Component
     public function render()
     {
 
-        $this->idsEnPagina = $this->avaluos->map(fn ($avaluo) => (string)$avaluo->id)->toArray();
+        $this->idsEnPagina = $this->predios->map(fn ($avaluo) => (string)$avaluo->id)->toArray();
 
         return view('livewire.admin.avaluos')->extends('layouts.admin');
     }
