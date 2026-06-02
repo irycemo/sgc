@@ -677,12 +677,6 @@
 
                         @endif
 
-                        {{-- <div class="rounded-lg bg-gray-100 py-1 px-2">
-
-                            <p><strong>Tipo de servicio:</strong> {{ Str::ucfirst($modelo_editar->tipo_servicio) }}</p>
-
-                        </div> --}}
-
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
                             <p><strong>Solicitante:</strong>{{ $modelo_editar->solicitante }}</p>
@@ -768,6 +762,18 @@
                             </div>
 
                         @endif
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Tipo de trámite:</strong> {{ Str::ucfirst($modelo_editar->tipo_tramite) }}</p>
+
+                        </div>
+
+                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                            <p><strong>Monto:</strong> ${{ number_format($modelo_editar->monto, 2) }}</p>
+
+                        </div>
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 

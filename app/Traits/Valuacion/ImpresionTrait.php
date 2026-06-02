@@ -353,7 +353,7 @@ trait ImpresionTrait
 
                     if(($this->numero_avaluos + $this->tramite_desglose->usados) > $this->tramite_desglose->cantidad){
 
-                        throw new GeneralException('La cantidad de avalúos que avala el trámite de desglose ocular no es suficiente.');
+                        throw new GeneralException('La cantidad de avalúos que avala el trámite de desglose no es suficiente.');
 
                     }
 
