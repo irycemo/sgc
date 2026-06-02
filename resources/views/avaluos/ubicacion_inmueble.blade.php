@@ -74,6 +74,10 @@
         <strong>Domicilio para notificaciones:</strong> {{ $predio->domicilio_notificacion }}.
     @endif
 
+    @if ($predio->uso_1)
+        <strong>Uso del predio:</strong> {{ $predio->uso_1 }}.
+    @endif
+
 </p>
 
 @if($predio->lote_fraccionador)
