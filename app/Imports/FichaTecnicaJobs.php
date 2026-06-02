@@ -302,9 +302,9 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
 
         if($predioCompletoAvaluo){
 
-            $avaluo = Avaluo::where('predio_avaluo', $predioCompletoAvaluo->id)->where('estado', 'nuevo')->first();
+            $avaluo = Avaluo::where('predio_avaluo', $predioCompletoAvaluo->id)->first();
 
-            if($avaluo){
+            if($avaluo->estado === 'nuevo'){
 
                 $this->borrarAvaluo($avaluo);
 
