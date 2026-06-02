@@ -308,7 +308,7 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
 
                 $this->borrarAvaluo($avaluo);
 
-            }else{
+            }elseif($avaluo->estado === 'impreso'){
 
                 $this->errores[] = "Ya existe en un avaluo del predio " . $predioCompletoAvaluo->cuentaPredial() . ", verifique. " . 'Línea: ' . $row->getIndex();
 

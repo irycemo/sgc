@@ -62,18 +62,6 @@
         <strong>número adicional 2:</strong> {{ $predio->numero_adicional_2 }};
     @endif
 
-    @if ($predio->lote_fraccionador)
-        <strong>lote del fraccionador:</strong> {{ $predio->lote_fraccionador }};
-    @endif
-
-    @if ($predio->manzana_fraccionador)
-        <strong>manzana del fraccionador:</strong> {{ $predio->manzana_fraccionador }};
-    @endif
-
-    @if ($predio->etapa_fraccionador)
-        <strong>etapa del fraccionador:</strong> {{ $predio->etapa_fraccionador }};
-    @endif
-
     @if ($predio->ubicacion_en_manzana)
         <strong>ubicación en manzana:</strong> {{ $predio->ubicacion_en_manzana }};
     @endif
@@ -82,15 +70,31 @@
         <strong>Predio Rústico Denominado ó Antecedente:</strong> {{ $predio->nombre_predio }};
     @endif
 
-    @if ($predio->observaciones)
-        <strong>OBSERVACIONES:</strong> {{ $predio->observaciones }}.
-    @endif
-
     @if ($predio->domicilio_notificacion)
         <strong>Domicilio para notificaciones:</strong> {{ $predio->domicilio_notificacion }}.
     @endif
 
 </p>
+
+@if($predio->lote_fraccionador)
+
+    <p class="parrafo">
+
+        @if ($predio->lote_fraccionador)
+            <strong>lote del fraccionador:</strong> {{ $predio->lote_fraccionador }};
+        @endif
+
+        @if ($predio->manzana_fraccionador)
+            <strong>manzana del fraccionador:</strong> {{ $predio->manzana_fraccionador }};
+        @endif
+
+        @if ($predio->etapa_fraccionador)
+            <strong>etapa del fraccionador:</strong> {{ $predio->etapa_fraccionador }};
+        @endif
+
+    </p>
+
+@endif
 
 @if($predio->xutm || $predio->lat)
 
