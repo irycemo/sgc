@@ -196,6 +196,18 @@
 
         </div>
 
+        @if(isset($predio->uso_1))
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2 col-span-1 sm:col-span-2 lg:col-span-5">
+
+                <strong>Uso del predio</strong>
+
+                <p>{{ $predio->uso_1 }}</p>
+
+            </div>
+
+        @endif
+
     </div>
 
 </div>
