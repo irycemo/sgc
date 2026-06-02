@@ -351,6 +351,12 @@ trait ImpresionTrait
 
                     $this->numero_avaluos --;
 
+                    info($this->numero_avaluos);
+
+                    info($this->tramite_desglose->usados);
+
+                    info($this->tramite_desglose->cantidad);
+
                     if(($this->numero_avaluos + $this->tramite_desglose->usados) > $this->tramite_desglose->cantidad){
 
                         throw new GeneralException('La cantidad de avalúos que avala el trámite de desglose no es suficiente.');
