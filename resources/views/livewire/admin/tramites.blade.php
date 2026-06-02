@@ -364,7 +364,7 @@
 
                 </div>
 
-                @if(in_array($modelo_editar->servicio?->clave_ingreso, ['D945', 'D944', 'D943', 'D942', 'D774']))
+                @if(in_array($modelo_editar->servicio?->clave_ingreso, ['D945', 'D944', 'D943', 'D942', 'D774', 'D727', 'D726']))
 
                     <x-input-group for="modelo_editar.avaluo_para" label="Avalúo para" :error="$errors->first('modelo_editar.avaluo_para')" class="w-full">
 
