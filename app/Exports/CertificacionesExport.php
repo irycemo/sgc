@@ -24,6 +24,7 @@ class CertificacionesExport implements FromCollection,  WithProperties, WithDraw
         public $oficina,
         public $año,
         public $documento,
+        public $tipo_servicio,
         public $fecha1,
         public $fecha2
     ){}
@@ -33,7 +34,7 @@ class CertificacionesExport implements FromCollection,  WithProperties, WithDraw
     */
     public function collection()
     {
-        return Certificacion::with('oficina:id,nombre', 'creadoPor:id,name', 'tramite:id,año,folio,usuario')
+        return Certificacion::with('oficina:id,nombre', 'creadoPor:id,name', 'tramite:id,año,folio,usuario,servicio_id')
                                 ->when (isset($this->año) && $this->año != "", function($q){
                                     $q->where('año', $this->año);
                                 })
@@ -46,8 +47,13 @@ class CertificacionesExport implements FromCollection,  WithProperties, WithDraw
                                 ->when(isset($this->oficina) && $this->oficina != "", function($q){
                                     return $q->where('oficina_id', $this->oficina);
                                 })
+                                ->when(isset($this->tipo_servicio) && $this->tipo_servicio != "", function($q){
+                                    return $q->whereHas('tramite', function ($q){
+                                        $q->where('servicio_id', $this->tipo_servicio);
+                                    });
+                                })
                                 ->whereBetween('created_at', [$this->fecha1 . ' 00:00:00', $this->fecha2 . ' 23:59:59'])
-                            ->get();
+                                ->get();
     }
 
     public function drawings()
@@ -73,6 +79,7 @@ class CertificacionesExport implements FromCollection,  WithProperties, WithDraw
             'Estado',
             'Oficina',
             'Trámite',
+            'Tipo de servicio',
             'Registrado en',
             'Registrado por',
         ];
@@ -87,6 +94,7 @@ class CertificacionesExport implements FromCollection,  WithProperties, WithDraw
             $certificacion->estado,
             $certificacion->oficina->nombre,
             $certificacion->tramite?->año . '-' . $certificacion->tramite?->folio . '-' . $certificacion->tramite?->usuario,
+            $certificacion->tramite->servicio_id == 293 ? 'Urgente' : 'Ordinario',
             $certificacion->created_at,
             $certificacion->creadoPor?->name,
         ];

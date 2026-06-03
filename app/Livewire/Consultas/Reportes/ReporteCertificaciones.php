@@ -29,16 +29,22 @@ class ReporteCertificaciones extends Component
     public $año;
     public $documentos;
     public $documento;
+    public $tipo_servicio;
+
+    public function updatedDocumento(){
+
+        if($this->documento != 5) $this->reset('tipo_servicio');
+
+    }
 
     public function descargarExcel(){
 
         $this->fecha1 = $this->fecha1 . ' 00:00:00';
         $this->fecha2 = $this->fecha2 . ' 23:59:59';
 
-
         try {
 
-            return Excel::download(new CertificacionesExport($this->estado, $this->oficina, $this->año, $this->documento, $this->fecha1, $this->fecha2), 'Reporte_de_certificaciones_' . now()->format('d-m-Y') . '.xlsx');
+            return Excel::download(new CertificacionesExport($this->estado, $this->oficina, $this->año, $this->documento, $this->tipo_servicio, $this->fecha1, $this->fecha2), 'Reporte_de_certificaciones_' . now()->format('d-m-Y') . '.xlsx');
 
         } catch (\Throwable $th) {
 
@@ -53,7 +59,7 @@ class ReporteCertificaciones extends Component
     #[Computed]
     public function certificaciones(){
 
-        return Certificacion::with('oficina:id,nombre', 'tramite:id,año,folio,usuario')
+        return Certificacion::with('oficina:id,nombre', 'tramite:id,año,folio,usuario,servicio_id')
                                 ->when (isset($this->año) && $this->año != "", function($q){
                                     $q->where('año', $this->año);
                                 })
@@ -65,6 +71,11 @@ class ReporteCertificaciones extends Component
                                 })
                                 ->when(isset($this->oficina) && $this->oficina != "", function($q){
                                     return $q->where('oficina_id', $this->oficina);
+                                })
+                                ->when(isset($this->tipo_servicio) && $this->tipo_servicio != "", function($q){
+                                    return $q->whereHas('tramite', function ($q){
+                                        $q->where('servicio_id', $this->tipo_servicio);
+                                    });
                                 })
                                 ->whereBetween('created_at', [$this->fecha1 . ' 00:00:00', $this->fecha2 . ' 23:59:59'])
                                 ->paginate($this->pagination);

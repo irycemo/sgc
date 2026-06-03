@@ -40,9 +40,9 @@
 
                 <option value="">Seleccione una opción</option>
 
-                @foreach ($documentos as $documento)
+                @foreach ($documentos as $documento_item)
 
-                    <option value="{{ $documento->value }}">{{ $documento->label() }}</option>
+                    <option value="{{ $documento_item->value }}">{{ $documento_item->label() }}</option>
 
                 @endforeach
 
@@ -77,6 +77,22 @@
             </x-input-select>
 
         </x-input-group>
+
+        @if($documento == 5)
+
+            <x-input-group for="tipo_servicio" label="Tipo de servicio" :error="$errors->first('tipo_servicio')" class="w-full">
+
+                <x-input-select id="tipo_servicio" wire:model.live="tipo_servicio">
+
+                    <option value="">Seleccione una opción</option>
+                    <option value="3">Ordinario</option>
+                    <option value="293">Urgente</option>
+
+                </x-input-select>
+
+            </x-input-group>
+
+        @endif
 
     </div>
 
@@ -114,6 +130,7 @@
                         <x-table.heading>Estado</x-table.heading>
                         <x-table.heading>Oficina</x-table.heading>
                         <x-table.heading>Trámite</x-table.heading>
+                        <x-table.heading>Tipo de servicio</x-table.heading>
                         <x-table.heading>Registro</x-table.heading>
 
                     </x-slot>
@@ -165,6 +182,12 @@
                                 <x-table.cell title="Trámite">
 
                                     {{ $certificacion->tramite->año }}-{{ $certificacion->tramite->folio }}-{{ $certificacion->tramite->usuario }}
+
+                                </x-table.cell>
+
+                                <x-table.cell title="Tipo de servicio">
+
+                                    {{ $certificacion->tramite->servicio_id == 293 ? 'Urgente' : 'Ordinario' }}
 
                                 </x-table.cell>
 
