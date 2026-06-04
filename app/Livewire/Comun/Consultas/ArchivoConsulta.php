@@ -87,40 +87,74 @@ class ArchivoConsulta extends Component
 
         if(!$this->archivos_anteriores){
 
-            try {
+            $municipio = 'morelia';
 
-                $response = Http::accept('application/json')
-                    ->get(
-                        config('services.consulta_archivos_anterior.archivos_url') .
-                        $this->predio->localidad .
-                        '&ofna=' . $this->predio->oficina .
-                        '&tpre=' . $this->predio->tipo_predio .
-                        '&nreg=' . $this->predio->numero_registro
-                    );
+            $localidad = $this->predio->localidad;
 
-                if($response->status() !== 200){
+            $numero_registro = str_pad($this->predio->numero_registro, 6, '0', STR_PAD_LEFT);
 
+            $cuenta_predial = $this->predio->localidad . '-' . $this->predio->oficina . '-' . $this->predio->tipo_predio . '-' . $numero_registro;
 
+            $ruta_avaluos = '223/wwwroot/sgc/digi/' . $municipio . '/' . $localidad . '/a';
 
-                }else{
+            $ruta_archivos = '223/wwwroot/sgc/digi/' . $municipio . '/' . $localidad . '/arch';
 
-                    $this->archivos = json_decode($response, true);
+            $ruta_fotos = '223/wwwroot/sgc/digi/' . $municipio . '/' . $localidad . '/fotos';
 
-                    if(!isset($this->archivos['avaluos'])){
+            $ruta_traslados = '223/wwwroot/sgc/digi/' . $municipio . '/' . $localidad . '/td';
 
-                        $this->archivos = [];
+            $avaluos = $this->getFileUrls($ruta_avaluos, $cuenta_predial);
 
-                    }
+            $archivos = $this->getFileUrls($ruta_archivos, $cuenta_predial);
 
-                }
+            $fotos = $this->getFileUrls($ruta_fotos, $cuenta_predial);
 
-            } catch (\Throwable $th) {
+            $traslados = $this->getFileUrls($ruta_traslados, $cuenta_predial);
 
-                $this->archivos = [];
+            $this->archivos = [
+                'avaluos' => $avaluos,
+                'archivos' => $archivos,
+                'fotos' => $fotos,
+                'traslados' => $traslados,
+            ];
+
+        }
+
+    }
+
+    public function getFileUrls(string $folder, string $prefix): array
+    {
+
+        $disk = Storage::disk('s3_documental');
+
+        $client = $disk->getClient(); // S3Client de AWS SDK
+
+        $bucket = config('filesystems.disks.s3_documental.bucket');
+
+        // S3 filtra por prefijo directamente en el servidor
+        $fullPrefix = ltrim("{$folder}/{$prefix}", '/');
+
+        $urls = [];
+
+        $params = [
+            'Bucket' => $bucket,
+            'Prefix' => $fullPrefix,
+        ];
+
+        // Paginación automática: maneja internamente los 1000 resultados por página
+        $paginator = $client->getPaginator('ListObjectsV2', $params);
+
+        foreach ($paginator as $page) {
+
+            foreach ($page['Contents'] ?? [] as $object) {
+
+                $urls[] = $disk->temporaryUrl($object['Key'], now()->addMinutes(60));
 
             }
 
         }
+
+        return $urls;
 
     }
 
@@ -146,4 +180,5 @@ class ArchivoConsulta extends Component
     {
         return view('livewire.comun.consultas.archivo-consulta');
     }
+
 }
