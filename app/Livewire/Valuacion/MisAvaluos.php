@@ -156,7 +156,7 @@ class MisAvaluos extends Component
 
                 $notificacionDeValorCatastral->audits()->latest()->first()->update(['tags' => 'Canceló para corrección de avalúo']);
 
-                $avaluos = Avaluo::where('tramite_inspeccion', $tramiteInspeccion->id)->where('estado', '!=', 'notificado')->get();
+                $avaluos = Avaluo::with('predioAvaluo:id')->where('tramite_inspeccion', $tramiteInspeccion->id)->where('estado', '!=', 'notificado')->get();
 
                 foreach ($avaluos as $avaluo) {
 
@@ -172,6 +172,8 @@ class MisAvaluos extends Component
                         'actualizado_por' => auth()->id(),
                         'estado' => 'nuevo'
                     ]);
+
+                    $avaluo->predioAvaluo->update(['status' => 'activo']);
 
                     $avaluo->audits()->latest()->first()->update(['tags' => 'Reactivó para corrección']);
 
