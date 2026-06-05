@@ -53,7 +53,7 @@ class ArchivoPredioService{
 
             }
 
-            $archivos_anteriores = File::where('fileable_id', $this->predio->id)
+            /* $archivos_anteriores = File::where('fileable_id', $this->predio->id)
                                         ->where('fileable_type', 'App\Models\Predio')
                                         ->where(function($q){
                                             $q->where('descripcion', 'LIKE' , '%archivo_anterior%')
@@ -67,7 +67,7 @@ class ArchivoPredioService{
 
                 $this->cargarArchivosAntiguos();
 
-            }
+            } */
 
             $url = Str::replace('sgc/predios_archivo/', '' , $archivo_nuevo);
 
