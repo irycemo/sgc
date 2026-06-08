@@ -24,7 +24,6 @@
 
                     <option value="" selected>Estado</option>
                     <option value="nuevo" selected>Nuevo</option>
-                    <option value="atendido" selected>Atendido</option>
                     <option value="respuesta" selected>Respuesta</option>
                     <option value="finalizado" selected>Finalizado</option>
 

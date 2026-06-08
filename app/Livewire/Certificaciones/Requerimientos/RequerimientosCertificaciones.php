@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Certificacion;
 use App\Constantes\Constantes;
+use App\Models\Notaria;
 use App\Traits\ComponentesTrait;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +22,7 @@ class RequerimientosCertificaciones extends Component
 
     public $observacion;
     public $años;
+    public $notarias;
 
     public $filters = [
         'año' => '',
@@ -32,6 +34,7 @@ class RequerimientosCertificaciones extends Component
         't_año' => '',
         't_folio' => '',
         't_usuario' => '',
+        'solicitante' => ''
     ];
 
     protected function rules(){
@@ -150,6 +153,11 @@ class RequerimientosCertificaciones extends Component
                                         $q->where('usuario', $t_usuario);
                                     });
                                 })
+                                ->when($this->filters['solicitante'], function($q, $solicitante){
+                                    $q->WhereHas('tramite', function($q) use($solicitante){
+                                        $q->where('usuario_tramites_linea_id', $solicitante);
+                                    });
+                                })
                                 ->orderBy($this->sort, $this->direction)
                                 ->paginate($this->pagination);
 
@@ -166,6 +174,8 @@ class RequerimientosCertificaciones extends Component
         $this->sort = 'created_at';
 
         $this->direction = 'asc';
+
+        $this->notarias = Notaria::orderBy('numero')->get();
 
     }
 

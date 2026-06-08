@@ -65,7 +65,7 @@ class Requerimientos extends Component
                     'requerimientoable_type' => 'App\Models\Oficina',
                     'descripcion' => $this->observacion,
                     'creado_por' => auth()->id(),
-                    'estado' => $string ?? 'respuesta',
+                    'estado' => 'respuesta',
                     'requerimiento_id' => $this->modelo_editar->id
                 ]);
 
@@ -73,11 +73,13 @@ class Requerimientos extends Component
 
                     if($requerimiento->estado == 'nuevo'){
 
-                        $requerimiento->update(['estado' => 'atendido']);
+                        $requerimiento->update(['estado' => 'respuesta']);
 
                     }
 
                 }
+
+                $this->modelo_editar->update(['estado' => 'respuesta']);
 
             });
 

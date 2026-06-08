@@ -34,6 +34,18 @@
 
                 <input type="number" wire:model.live.debounce.500ms="filters.t_usuario" placeholder="T. usuario" class="bg-white rounded-full text-sm w-24">
 
+                <select class="bg-white rounded-full text-sm" wire:model.live="filters.solicitante">
+
+                    <option value="">Seleccione una entidad</option>
+
+                    @foreach ($notarias as $notaria)
+
+                        <option value="{{ $notaria->entidad_id }}">{{ $notaria->numero }} {{ $notaria->notario }}</option>
+
+                    @endforeach
+
+                </select>
+
                 <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>

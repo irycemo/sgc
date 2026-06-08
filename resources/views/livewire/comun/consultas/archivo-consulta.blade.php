@@ -85,7 +85,7 @@
 
                                 </a>
 
-                                @if($flag_borrar)
+                                @can('Borrar archivo')
 
                                     <x-button-red
                                     wire:confirm="¿Esta seguro que quiere borrar el archivo?"
@@ -99,7 +99,7 @@
 
                                     </x-button-red>
 
-                                @endif
+                                @endcan
 
                             </td>
                         </tr>
