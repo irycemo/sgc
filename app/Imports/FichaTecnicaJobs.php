@@ -84,8 +84,22 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
             'uso_3' =>  ['nullable', Rule::in(Constantes::USO_PREDIO)],
             'ubicacion_en_manzana' => ['required', Rule::in(Constantes::UBICACION_PREDIO)],
             'predio_existe_en_padron' => ['required', Rule::in(['SI', 'NO'])],
+            'predio_origen' => ['required', Rule::in(['SI', 'NO'])],
             'domicilio_para_notificacion' => 'nullable'
         ];
+    }
+
+    public function prepareForValidation($data, $index):array
+    {
+
+        if(!isset($data['localidad']) && !isset($data['oficina']) && !isset($data['tipo_predio']) && !isset($data['registro'])){
+
+            return [];
+
+        }
+
+        return $data;
+
     }
 
     public function onRow(Row $row)
@@ -93,7 +107,7 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
 
         $this->errores = [];
 
-        $count_predio_origen = 0;
+        $count_predios_existentes = 0;
 
         $count_predios_nuevos = 0;
 
@@ -101,11 +115,9 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
 
         if($row['predio_existe_en_padron'] == 'SI'){
 
-            $predio_origen = $this->revisarPredio($row);
-
             $this->validarDisponibilidadAvaluos($row);
 
-            $count_predio_origen ++;
+            $count_predios_existentes ++;
 
         }
 
@@ -120,6 +132,12 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
             $this->validarSector($row);
 
             $count_predios_nuevos ++;
+
+        }
+
+        if($row['predio_origen'] == 'SI'){
+
+            $predio_origen = $this->revisarPredio($row);
 
         }
 
@@ -147,7 +165,7 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
             'data'       => json_encode($data),
             'errores'    => $this->errores ? json_encode($this->errores) : null,
             'status'     => $this->errores ? 'error' : 'pending',
-            'predios_existente' => $count_predio_origen,
+            'predios_existente' => $count_predios_existentes,
             'predios_nuevos' => $count_predios_nuevos,
             'predio_origen' => $predio_origen
         ]);

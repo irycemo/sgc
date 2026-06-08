@@ -132,15 +132,23 @@ class FichaTecnicaJobsImportJob implements ShouldQueue
     private function validarReglasCruzadas($imports): ?string
     {
 
-        if ($imports->sum('predios_existente') === 0) {
+        $predio_origen = $imports->whereNotNull('predio_origen')->count();
 
-            return "Es necesario un predio origen.";
+        if ($predio_origen > 1) {
+
+            return "Solo puede haber un predio origen.";
 
         }
 
-        if ($imports->sum('predios_existente') > 1 && $imports->sum('predios_nuevos') > 0) {
+        if ($predio_origen === 1 && $imports->sum('predios_nuevos') == 0) {
 
-            return "Solo puede haber un predio origen si hay predios nuevos en el padrón.";
+            return "Debe haber al menos un predio nuevo si hay un predio origen.";
+
+        }
+
+        if ($imports->sum('predios_nuevos') > 0 && $predio_origen != 1) {
+
+            return "Debe haber un predio origen si hay predios nuevos.";
 
         }
 
