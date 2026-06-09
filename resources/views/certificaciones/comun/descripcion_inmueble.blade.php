@@ -1,72 +1,117 @@
 <p class="separador">Superficies y valor catastral</p>
 
-<p class="parrafo">
+<table style="width: 100%">
+    <tbody  >
+        <tr style="text-align: left;">
+            <td style="width: 50%;">
 
-    <strong>Superficie total de terreno:</strong>  {{ $predio->superficie_total_terreno ?? 0 }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif;
+                superficie notarial: <strong>{{ $predio->superficie_notarial ?? 0 }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif</strong>
 
-    <strong>Superficie total de construcción:</strong> {{ $predio->superficie_total_construccion ?? 0 }} Metros cuadrados
-</p>
+            </td>
+            <td style="width: 50%;">
 
-<p class="parrafo">
+                superficie judicial: <strong>{{ $predio->superficie_judicial ?? 0 }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif</strong>
 
-    <strong>superficie notarial:</strong> {{ $predio->superficie_notarial ?? 0 }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif
+            </td>
+        </tr>
+    </tbody>
 
-    <strong>superficie judicial:</strong>  {{ $predio->superficie_judicial ?? 0 }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif;
+</table>
 
-</p>
+<table style="width: 100%">
+
+    <tbody>
+        <tr style="text-align: left;">
+            <td style="width: 50%;">
+
+                Superficie total de terreno: <strong>{{ $predio->superficie_total_terreno ?? 0 }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif</strong>
+
+            </td>
+            <td style="width: 50%;">
+
+                Superficie total de construcción: <strong>{{ $predio->superficie_total_construccion ?? 0 }} Metros cuadrados</strong>
+
+            </td>
+        </tr>
+    </tbody>
+
+</table>
 
 @if(isset($predio->terrenosComun) && count($predio->terrenosComun) || isset($predio->construccionesComun) && count($predio->construccionesComun))
 
-    <p>
+    <table style="width: 100%">
 
-        @if(isset($predio->terrenosComun))
+        <tbody>
+            <tr style="text-align: left;">
+                <td style="width: 50%;">
 
-            <strong>Superficie privativa de terreno:</strong>  {{ collect($predio->terrenos)->sum('superficie') }}  Metros cuadrados;
+                    @if(isset($predio->terrenosComun))
 
-        @else
+                        Superficie privativa de terreno: <strong>{{ collect($predio->terrenos)->sum('superficie') }}  Metros cuadrados</strong>
 
-            <strong>Superficie privativa de terreno:</strong>
+                    @else
 
-        @endif
+                        Superficie privativa de terreno: <strong>0  Metros cuadrados</strong>
 
-        @if(isset($predio->terrenosComun))
+                    @endif
 
-            <strong>Superficie proporcional de terreno:</strong>  {{ collect($predio->terrenosComun)->sum('superficie_proporcional') }}  Metros cuadrados;
+                </td>
+                <td style="width: 50%;">
 
-        @else
+                    @if(isset($predio->terrenosComun))
 
-            <strong>Superficie proporcional de terreno:</strong>
+                        Superficie privativa de construccion: <strong>{{ collect($predio->construcciones)->sum('superficie') }}  Metros cuadrados</strong>
 
-        @endif
+                    @else
 
-    </p>
+                        Superficie proporcional de construccion: <strong>0  Metros cuadrados</strong>
 
-    <p>
 
-        @if(isset($predio->terrenosComun))
+                    @endif
 
-            <strong>Superficie privativa de construccion:</strong>  {{ collect($predio->construcciones)->sum('superficie') }}  Metros cuadrados;
+                </td>
+            </tr>
+        </tbody>
 
-        @else
+    </table>
 
-            <strong>Superficie proporcional de construccion:</strong>
+    <table style="width: 100%">
 
-        @endif
+        <tbody>
+            <tr style="text-align: left;">
+                <td style="width: 50%;">
 
-        @if(isset($predio->terrenosComun))
+                    @if(isset($predio->terrenosComun))
 
-            <strong>Superficie proporcional de construccion:</strong>  {{ collect($predio->construccionesComun)->sum('superficie_proporcional') }}  Metros cuadrados;
+                        Superficie proporcional de terreno: <strong>{{ collect($predio->terrenosComun)->sum('superficie_proporcional') }}  Metros cuadrados</p>
 
-        @else
+                    @else
 
-            <strong>Superficie proporcional de construccion:</strong>
+                        Superficie proporcional de terreno: <strong>0  Metros cuadrados</strong>
 
-        @endif
+                    @endif
 
-    </p>
+                </td>
+                <td style="width: 50%;">
+
+                    @if(isset($predio->terrenosComun))
+
+                        Superficie proporcional de construccion: <strong>{{ collect($predio->construccionesComun)->sum('superficie_proporcional') }}  Metros cuadrados</strong>
+
+                    @else
+
+                        Superficie proporcional de construccion: <strong>0  Metros cuadrados</strong>
+
+                    @endif
+
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
 
 @endif
 
 <p class="parrafo">
-    <strong>Valor catastral: </strong>${{ number_format($predio->valor_catastral, 2) }}
+    Valor catastral: <strong>${{ number_format($predio->valor_catastral, 2) }}</strong>
 </p>

@@ -143,9 +143,13 @@
 
     <header>
 
-            <p style="text-align: right; font-size: 9px; font-weight: bold;">notificación de valor catastral</p>
+        <div style="text-align: right; margin: 0px">
 
-            <img class="encabezado" src="{{ public_path('storage/img/encabezado.png') }}" alt="encabezado">
+            <span style="font-size: 11px; font-weight: bold; background-color: #5E1D45; border-radius: 50%; color:white; padding: 3px 6px 3px 6px; margin: 0px; width:80ch">notificación de valor catastral</span>
+
+        </div>
+
+        <img class="encabezado" src="{{ public_path('storage/img/encabezado.png') }}" alt="encabezado">
 
     </header>
 
@@ -395,23 +399,21 @@
 
                             @if (isset($datos_control->tramite_inspeccion))
 
-                                <p><strong>Trámite de inspección ocular: </strong> {{ $datos_control->tramite_inspeccion }}</p>
+                                <p>Trámite de inspección ocular: <strong>{{ $datos_control->tramite_inspeccion }}</strong></p>
 
                             @endif
 
                             @if (isset($datos_control->tramite_desglose))
 
-                                <p><strong>Trámite de desglose: </strong> {{ $datos_control->tramite_desglose }}</p>
+                                <p>Trámite de desglose: <strong>{{ $datos_control->tramite_desglose }}</strong></p>
 
                             @endif
 
-                            <p><strong>Impreso el: </strong> {{ $datos_control->impreso_en }}</p>
-
-                            <p><strong>Impreso por: </strong> {{ $datos_control->impreso_por }}</p>
+                            <p>Impreso el: <strong>{{ $datos_control->impreso_en }}</strong></p>
 
                             @if(isset($certificacion))
 
-                                <p><strong>Certificación: </strong>{{ $certificacion->tipo->label() }} {{ $certificacion->año }}-{{ $certificacion->folio }}</p>
+                                <p>Certificación: <strong>{{ $certificacion->tipo->label() }} {{ $certificacion->año }}-{{ $certificacion->folio }}</strong></p>
 
                             @endif
 

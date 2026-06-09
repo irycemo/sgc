@@ -143,9 +143,12 @@
 
     <header>
 
-            <p style="text-align: right; font-size: 9px; font-weight: bold;">Certificado negativo</p>
+        <div style="text-align: right; margin: 0px">
 
-            <img class="encabezado" src="{{ public_path('storage/img/encabezado.png') }}" alt="encabezado">
+            <span style="font-size: 11px; font-weight: bold; background-color: #5E1D45; border-radius: 50%; color:white; padding: 3px 6px 3px 6px; margin: 0px; width:80ch">Certificado negativo</span>
+
+        </div>
+<img class="encabezado" src="{{ public_path('storage/img/encabezado.png') }}" alt="encabezado">
 
     </header>
 
@@ -238,15 +241,13 @@
                         </td>
                         <td style="padding-right: 40px;">
 
-                            <p><strong>Trámite:</strong> {{ $datos_control->tramite }}</p>
+                            <p>Trámite: <strong>{{ $datos_control->tramite }}</strong></p>
 
-                            <p><strong>Impreso el:</strong> {{ $datos_control->impreso_en }}</p>
-
-                            <p><strong>Impreso por:</strong> {{ $datos_control->impreso_por }}</p>
+                            <p>Impreso el: <strong>{{ $datos_control->impreso_en }}</strong></p>
 
                             @if(isset($certificacion))
 
-                                <p><strong>Certificación:</strong>{{ $certificacion->tipo->label() }} {{ $certificacion->año }}-{{ $certificacion->folio }}</p>
+                                <p>Certificación: <strong>{{ $certificacion->tipo->label() }} {{ $certificacion->año }}-{{ $certificacion->folio }}</strong></p>
 
                             @endif
 

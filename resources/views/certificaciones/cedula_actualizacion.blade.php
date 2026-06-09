@@ -26,7 +26,7 @@
 
 
     body{
-        margin-top: 120px;
+        margin-top: 140px;
         margin-bottom: 40px;
         counter-reset: page;
         height: 100%;
@@ -128,6 +128,7 @@
         border-color: gray;
         letter-spacing: 5px;
         margin: 0 0 5px 0;
+        font-weight: bold;
     }
 
     .titulo{
@@ -143,9 +144,18 @@
 
     <header>
 
-            <p style="text-align: right; font-size: 9px; font-weight: bold;">cédula de actualización {{ $predio->cuenta_predial }}</p>
+        <div style="text-align: right; margin: 0px">
 
-            <img class="encabezado" src="{{ public_path('storage/img/encabezado.png') }}" alt="encabezado">
+            <span style="font-size: 11px; font-weight: bold; background-color: #5E1D45; border-radius: 50%; color:white; padding: 3px 6px 3px 6px; margin: 0px; width:80ch">cédula de actualización</span>
+        </div>
+
+        <div style="text-align: right; margin: 0px">
+
+            <span style="font-size: 11px; font-weight: bold; background-color: #5E1D45; border-radius: 50%; color:white; padding: 3px 6px 3px 6px; margin: 0px; width:80ch">Cuenta predial {{ $predio->cuenta_predial }}</span>
+
+        </div>
+
+        <img class="encabezado" src="{{ public_path('storage/img/encabezado.png') }}" alt="encabezado">
 
     </header>
 
@@ -196,7 +206,7 @@
 
         <p class="separador">Último movimiento</p>
 
-        <p><strong>Fecha: </strong> {{ $ultimo_movimiento->fecha }}; <strong>Movimiento: </strong> {{ $ultimo_movimiento->nombre }}</p>
+        <p>Fecha: <strong>{{ $ultimo_movimiento->fecha }}</strong> Movimiento: <strong>{{ $ultimo_movimiento->nombre }}</strong></p>
 
         <p>{{ $ultimo_movimiento->descripcion }}</p>
 
@@ -247,15 +257,13 @@
                         </td>
                         <td style="padding-right: 40px;">
 
-                            <p><strong>Trámite:</strong> {{ $datos_control->tramite }}</p>
+                            <p>Trámite: <strong>{{ $datos_control->tramite }}</strong></p>
 
-                            <p><strong>Impreso el:</strong> {{ $datos_control->impreso_en }}</p>
-
-                            <p><strong>Impreso por:</strong> {{ $datos_control->impreso_por }}</p>
+                            <p>Impreso el: <strong>{{ $datos_control->impreso_en }}</strong></p>
 
                             @if(isset($certificacion))
 
-                                <p><strong>Certificación:</strong> {{ $certificacion->tipo->label() }} {{ $certificacion->año }}-{{ $certificacion->folio }}</p>
+                                <p>Certificación: <strong>{{ $certificacion->tipo->label() }} {{ $certificacion->año }}-{{ $certificacion->folio }}</strong></p>
 
                             @endif
 

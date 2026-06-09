@@ -7,7 +7,9 @@
         <thead>
 
             <tr>
-                <th style="padding-right: 10px;">Nombre / Razón social</th>
+                <th style="padding-right: 10px; text-align: left;">Nombre / Razon social</th>
+                <th style="padding-right: 10px; text-align: left;">Apellido paterno</th>
+                <th style="padding-right: 10px; text-align: left;">Apellido materno</th>
                 <th style="padding-right: 10px;">% de propiedad</th>
                 <th style="padding-right: 10px;">% de nuda</th>
                 <th style="padding-right: 10px;">% de usufructo</th>
@@ -19,9 +21,18 @@
 
             @foreach ($predio->propietarios as $propietario)
 
-                <tr>
-                    <td style="padding-right: 40px;">
-                        <p style="margin:0">{{ $propietario->nombre }} {{ $propietario->ap_paterno }} {{ $propietario->ap_materno }} {{ $propietario->razon_social }}</p>
+                <tr style="font-size: 11px">
+                    <td style="padding-right: 40px; text-align: left;">
+                        <p style="margin:0">{{ $propietario->nombre }}{{ $propietario->razon_social }}</p>
+                        @if($propietario->multiple_nombre)
+                            <p style="margin:0">({{ $propietario->multiple_nombre }})</p>
+                        @endif
+                    </td>
+                    <td style="padding-right: 40px; text-align: left;">
+                        <p style="margin:0">{{ $propietario->ap_paterno }}</p>
+                    </td>
+                    <td style="padding-right: 40px; text-align: left;">
+                        <p style="margin:0">{{ $propietario->ap_materno }}</p>
                         @if($propietario->multiple_nombre)
                             <p style="margin:0">({{ $propietario->multiple_nombre }})</p>
                         @endif

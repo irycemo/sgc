@@ -26,7 +26,7 @@
 
 
     body{
-        margin-top: 120px;
+        margin-top: 140px;
         margin-bottom: 40px;
         counter-reset: page;
         height: 100%;
@@ -128,6 +128,7 @@
         border-color: gray;
         letter-spacing: 5px;
         margin: 0 0 5px 0;
+        font-weight: bold;
     }
 
     .titulo{
@@ -143,7 +144,16 @@
 
     <header>
 
-            <p style="text-align: right; font-size: 9px; font-weight: bold;">Certificado de historia {{ $predio->cuenta_predial }}</p>
+            <div style="text-align: right; margin: 0px">
+
+                <span style="font-size: 11px; font-weight: bold; background-color: #5E1D45; border-radius: 50%; color:white; padding: 3px 6px 3px 6px; margin: 0px; width:80ch">Certificado de historia</span>
+            </div>
+
+            <div style="text-align: right; margin: 0px">
+
+                <span style="font-size: 11px; font-weight: bold; background-color: #5E1D45; border-radius: 50%; color:white; padding: 3px 6px 3px 6px; margin: 0px; width:80ch">Cuenta predial {{ $predio->cuenta_predial }}</span>
+
+            </div>
 
             <img class="encabezado" src="{{ public_path('storage/img/encabezado.png') }}" alt="encabezado">
 
@@ -253,17 +263,15 @@
                         </td>
                         <td style="padding-right: 40px;">
 
-                            <p><strong>Trámite de anticipo:</strong> {{ $datos_control->tramite_anticipo }}</p>
+                            <p>Trámite de anticipo: <strong>{{ $datos_control->tramite_anticipo }}</strong></p>
 
-                            <p><strong>Trámite de historia:</strong> {{ $datos_control->tramite_historia }}</p>
+                            <p>Trámite de historia: <strong>{{ $datos_control->tramite_historia }}</strong></p>
 
-                            <p><strong>Impreso el:</strong> {{ $datos_control->impreso_en }}</p>
-
-                            <p><strong>Impreso por:</strong> {{ $datos_control->impreso_por }}</p>
+                            <p>Impreso el: <strong>{{ $datos_control->impreso_en }}</strong></p>
 
                             @if(isset($certificacion))
 
-                                <p><strong>Certificación:</strong> {{ $certificacion->tipo->label() }} {{ $certificacion->año }}-{{ $certificacion->folio }}</p>
+                                <p>Certificación: <strong>{{ $certificacion->tipo->label() }} {{ $certificacion->año }}-{{ $certificacion->folio }}</strong></p>
 
                             @endif
 
