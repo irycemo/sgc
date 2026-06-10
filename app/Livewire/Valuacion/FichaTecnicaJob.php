@@ -86,7 +86,7 @@ class FichaTecnicaJob extends Component
 
     public function descargarFicha(){
 
-        return response()->download(storage_path('app/public/ficha_tecnica.xlsx'));
+        return response()->download(storage_path('app/public/ficha_tecnica_08-06-2026.xlsx'));
 
     }
 
