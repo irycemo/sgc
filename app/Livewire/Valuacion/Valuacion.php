@@ -359,7 +359,7 @@ class Valuacion extends Component
 
             $this->validarSector();
 
-            if($this->predio->tipo_predio == 2) $this->validarPrediorustico();
+            if($this->predio->tipo_predio == 2 && $this->predio->manzana == 0) $this->validarPrediorustico();
 
             DB::transaction(function () {
 

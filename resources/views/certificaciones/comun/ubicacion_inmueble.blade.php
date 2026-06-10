@@ -106,31 +106,34 @@
     @endif
 
     @if ($predio->localidad)
-        LOCALIDAD: <strong>{{ $datos_control->oficina ?? $predio->localidad }};</strong>
+        LOCALIDAD: <strong>{{ $datos_control->oficina ?? $predio->localidad }}</strong>
     @endif
 
 </p>
 
 @if($predio->xutm || $predio->lat)
 
-    <p class="parrafo">Coordenadas geográficas:</p>
+    Coordenadas geográficas:
 
-    @if($predio->xutm)
+    <table style="width: 100%;">
 
-        <p class="parrafo">
+        <tbody>
+            <tr>
+                <td style="text-align: left;">
 
-            UTM:
-            X: <strong>{{ $predio->xutm }}</strong>, Y: <strong>{{ $predio->yutm }}</strong>, Z: <strong>{{ $predio->zutm }}</strong>
+                    UTM
+                    X: <strong>{{ $predio->xutm }}</strong>, Y: <strong>{{ $predio->yutm }}</strong>, Z: <strong>{{ $predio->zutm }}</strong>
 
-            @if($predio->xutm)
+                </td>
+                <td style="">
 
-                 | GEO:
-                LAT: <strong>{{ $predio->lat }}</strong>, LON: <strong>{{ $predio->lon }}</strong>
+                    GEO
+                    LAT: <strong>{{ $predio->lat }}</strong>, LON: <strong>{{ $predio->lon }}</strong>
 
-            @endif
+                </td>
+            </tr>
+        </tbody>
 
-        </p>
-
-    @endif
+    </table>
 
 @endif
