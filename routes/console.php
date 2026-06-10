@@ -57,7 +57,7 @@ Artisan::command('migrar', function(){
                                     ->on('tcpro008.pred_008', 'ctpro003.pred_003')
                                     ->on('tcpro008.edif_008', 'ctpro003.edif_003')
                                     ->on('tcpro008.dpto_008', 'ctpro003.dpto_003')
-                                    ->where('tcpro008.mpio_008', 53)
+                                    ->where('tcpro008.mpio_008', 1801)
                                     ->where('tcpro008.nreg_008', '>', 0);
                             })
                             ->get();
@@ -77,14 +77,6 @@ Artisan::command('migrar', function(){
         $progressbar->advance();
 
     }
-
-    /* foreach($predios as $predio){
-
-        (new Migracion($referencias))->run($predio);
-
-        $progressbar->advance();
-
-    } */
 
     $progressbar->finish();
 

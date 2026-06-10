@@ -21,7 +21,7 @@
 
             @foreach ($predio->propietarios as $propietario)
 
-                <tr style="font-size: 11px">
+                <tr     >
                     <td style="padding-right: 40px; text-align: left;">
                         <p style="margin:0">{{ $propietario->nombre }}{{ $propietario->razon_social }}</p>
                         @if($propietario->multiple_nombre)
@@ -33,9 +33,6 @@
                     </td>
                     <td style="padding-right: 40px; text-align: left;">
                         <p style="margin:0">{{ $propietario->ap_materno }}</p>
-                        @if($propietario->multiple_nombre)
-                            <p style="margin:0">({{ $propietario->multiple_nombre }})</p>
-                        @endif
                     </td>
                     <td style="padding-right: 40px;">
                         <p style="margin:0">

@@ -26,7 +26,7 @@
 
 
     body{
-        margin-top: 120px;
+        margin-top: 140px;
         margin-bottom: 40px;
         counter-reset: page;
         height: 100%;
@@ -149,9 +149,18 @@
 
     <header>
 
-            <p style="text-align: right; font-size: 9px; font-weight: bold;">avalúo {{ $predio->cuentaPredial() }}</p>
+        <div style="text-align: right; margin: 0px">
 
-            <img class="encabezado" src="{{ public_path('storage/img/encabezado.png') }}" alt="encabezado">
+            <span style="font-size: 11px; font-weight: bold; background-color: #5E1D45; border-radius: 50%; color:white; padding: 3px 6px 3px 6px; margin: 0px; width:80ch">avalúo</span>
+        </div>
+
+        <div style="text-align: right; margin: 0px">
+
+            <span style="font-size: 11px; font-weight: bold; background-color: #5E1D45; border-radius: 50%; color:white; padding: 3px 6px 3px 6px; margin: 0px; width:80ch">Cuenta predial {{ $predio->cuentaPredial() }}</span>
+
+        </div>
+
+        <img class="encabezado" src="{{ public_path('storage/img/encabezado.png') }}" alt="encabezado">
 
     </header>
 
@@ -173,25 +182,36 @@
 
         </div>
 
-        <div style="text-align: right">
+        <table style="margin-top: 10px; font-size: 12px; width: 100%;">
 
-            <strong>Folio:</strong> {{ $predio->avaluo->año }}-{{ $predio->avaluo->folio }}-{{ $predio->avaluo->usuario }}
+            <tbody>
+                <tr>
+                    <td style="padding-right: 40px; text-align: left;">
 
-        </div>
+                        Cuenta predial: <strong>{{ $predio->cuentaPredial() }}</strong>
+
+                    </td>
+                    <td style="padding-right: 40px;">
+
+                        Clave catastral: <strong>{{ $predio->claveCatastral() }}</strong>
+
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
 
         <p class="parrafo">
 
-            <strong>Cuenta predial:</strong> {{ $predio->cuentaPredial() }}
-
-            <strong>Clave catastral:</strong> {{ $predio->claveCatastral() }}
-
-            @if($certificacion)
-
-                <strong>Certificacion:</strong> {{ $certificacion->tipo->label() }}-{{ $certificacion->año }}-{{ $certificacion->folio }}
-
-            @endif
+            Folio de avalúo: <strong>{{ $predio->avaluo->año }}-{{ $predio->avaluo->folio }}-{{ $predio->avaluo->usuario }}</strong>
 
         </p>
+
+        @if($certificacion)
+
+            <p class="parrafo">Certificacion: <strong>{{ $certificacion->tipo->label() }}-{{ $certificacion->año }}-{{ $certificacion->folio }}</strong></p>
+
+        @endif
 
         @include('avaluos.ubicacion_inmueble')
 
@@ -326,15 +346,15 @@
                     </td>
                     <td style="padding-right: 40px;">
 
-                        <p><strong>Impreso el: </strong> {{ now()->format('d-m-Y H:i:s') }}</p>
+                        <p>Impreso el: <strong>{{ now()->format('d-m-Y H:i:s') }}</strong></p>
 
-                        <p><strong>Impreso por: </strong> {{ $impreso_por }}</p>
+                        {{-- <p>Impreso por: <strong>{{ $impreso_por }}</strong></p> --}}
 
-                        <p><strong>Fecha de registro: </strong> {{ $predio->avaluo->created_at }}</p>
+                        <p>Fecha de registro: <strong>{{ $predio->avaluo->created_at }}</strong></p>
 
                         @if(isset($certificacion))
 
-                            <p><strong>Certificación: </strong>{{ $certificacion->tipo->label() }} {{ $certificacion->año }}-{{ $certificacion->folio }}</p>
+                            <p>Certificación: <strong>{{ $certificacion->tipo->label() }} {{ $certificacion->año }}-{{ $certificacion->folio }}</strong></p>
 
                         @endif
 

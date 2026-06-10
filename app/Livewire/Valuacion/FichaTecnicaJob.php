@@ -68,7 +68,11 @@ class FichaTecnicaJob extends Component
 
             Import::where('batch_id', $this->batchId)->delete();
 
-            $this->dispatch('mostrarMensaje', ['success', 'Los avalúos se generaron con éxito.']);
+            if(count($this->errores) == 0){
+
+                $this->dispatch('mostrarMensaje', ['success', 'Los avalúos se generaron con éxito.']);
+
+            }
 
             $this->estado === 'idle';
 

@@ -14,7 +14,6 @@ use App\Models\TerrenosComun;
 use App\Models\PredioRepetido;
 use App\Models\SQLSVR\ctcdm004;
 use App\Models\SQLSVR\ctcop005;
-use App\Models\SQLSVR\ctpro003;
 use App\Models\SQLSVR\ctref007;
 use App\Models\SQLSVR\tcpro008;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +31,7 @@ class MigrarPredioJob implements ShouldQueue
 
     public function __construct(public $predios){
 
-        $this->referencias = collect(ctref007::whereIn('tipo_007', ["TV", "AH", "UP", "UB", "TE", "ED", "TP", "OM"])->get()->toArray());
+        $this->referencias = collect(ctref007::whereIn('tipo_007', ["TV", "AH", "UP", "UB", "TE", "ED", "TP", "OM", "RP"])->get()->toArray());
     }
 
     /**
@@ -75,9 +74,9 @@ class MigrarPredioJob implements ShouldQueue
                         'manzana_fraccionador' => trim($predio->manz_008),
                         'etapa_fraccionador' => trim($predio->zona_008),
                         'nombre_predio' => NULL,
-                        'nombre_edificio' => trim($predio->nedi_008),
+                        'nombre_edificio' => NULL,
                         'clave_edificio' => NULL,
-                        'departamento_edificio' => trim($predio->ndpt_008),
+                        'departamento_edificio' => NULL,
                         'uso_1' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usop_003)->first() ? $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usop_003)->first()['desc_007'] : null,
                         'uso_2' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usp2_003)->first() ? $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usp2_003)->first()['desc_007'] : null,
                         'uso_3' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usp3_003)->first() ? $this->referencias->where('tipo_007', "UP")->where('cvea_007', $predio->usp3_003)->first()['desc_007'] : null,
@@ -101,15 +100,22 @@ class MigrarPredioJob implements ShouldQueue
                         'lon' => ($predio->long_003 == NULL) ? 0 : ($predio->long_003 > -103.7 && $predio->long_003 <= -100.06  ? $predio->long_003 : 0),
                         'lat' => ($predio->lati_003 == NULL) ? 0 : ($predio->lati_003 > 17.9 && $predio->lati_003 <= 20.5  ? $predio->lati_003 : 0),
                         'fecha_efectos' => $predio->fecn_008,
+                        'fecha_otorgamiento' => NULL,
                         'documento_entrada' => $this->referencias->where('tipo_007', "TE")->where('cven_007', $predio->tesc_008)->first() ? $this->referencias->where('tipo_007', "TE")->where('cven_007', $predio->tesc_008)->first()['desc_007'] : null,
                         'documento_numero' => trim($predio->titp_008),
                         'declarante' => 'Notaria ' . trim($predio->cnot_003),
                         'observaciones' => trim($predio->obse_008),
-                        'origen' => 0,
+                        'origen' => $this->referencias->where('tipo_007', "OM")->where('cvea_007', $predio->cmto_008)->first() ? $this->referencias->where('tipo_007', "MO")->where('cvea_007', $predio->cmto_008)->first()['desc_007'] : null,
+                        'regimen' => $this->referencias->where('tipo_007', "RP")->where('cvea_007', $predio->rpro_008)->first() ? $this->referencias->where('tipo_007', "RP")->where('cvea_007', $predio->rpro_008)->first()['desc_007'] : null,
+                        'tomo' => $predio->tomo_003,
+                        'registro' => $predio->regi_003,
+                        'libro' => $predio->libr_003,
+                        'distrito' => $predio->dtop_003,
+                        'domicilio_notificacion' => $predio->noca_008 . ' ' . $predio->exte_008 . ' ' . $predio->adic_008 . ' ' . $predio->inte_008 . ' ' . $predio->nedi_008 . ' ' . $predio->ndpt_008 . ' ' . $predio->noco_008 . ' ' . $predio->nopo_008 . ' ' . $predio->nomu_008 . ' ' . $this->referencias->where('tipo_007', "ED")->where('cvea_007', $predio->cest_008)->first() ? $this->referencias->where('tipo_007', "ED")->where('cvea_007', $predio->cest_008)->first()['desc_007'] : null .  ' ' . $predio->copd_008 . ' ' .  ' ' . $predio->copd_008 . ' ',
                         'actualizado_nombre' => trim($predio->nome_008)
                     ]);
 
-                    $this->colindacnias($p->id, $predio->col1_003, $predio->col2_003, $predio->col3_003, $predio->col4_003);
+                    $this->colindancias($p->id, $predio->col1_003, $predio->col2_003, $predio->col3_003, $predio->col4_003);
 
                     $this->construcciones($p->id, $predio->mpio_008, $predio->zcat_008, $predio->locl_008, $predio->sect_008, $predio->mzna_008, $predio->pred_008, $predio->edif_008, $predio->dpto_008);
 
@@ -131,12 +137,7 @@ class MigrarPredioJob implements ShouldQueue
 
                         $this->terrenos($p->id, $ctcdm004->ster_004, $ctcdm004->valt_004, $ctcdm004->vter_004);
 
-                        $this->condominio($predio,$p->id);
-
-                        $p->superficie_total_terreno = $p->terrenos->sum('superficie') + $p->terrenosComun->sum('superficie_proporcional');
-                        $p->superficie_total_construccion = $p->construcciones->sum('superficie') + $p->construccionesComun->sum('superficie_proporcional');
-
-                        $p->save();
+                        $this->condominio($predio, $p->id);
 
                     }else{
 
@@ -154,6 +155,8 @@ class MigrarPredioJob implements ShouldQueue
 
                 if($errorCode == 1062){
 
+                    /* order by fecn_008 */
+
                     $predioRepetido = PredioRepetido::where('estado', $predio->esta_008)
                                     ->where('region_catastral', $predio->rcat_008)
                                     ->where('municipio', $predio->mpio_008)
@@ -169,23 +172,31 @@ class MigrarPredioJob implements ShouldQueue
                                     ->where('numero_registro', $predio->nreg_008)
                                     ->first();
 
-                    PredioRepetido::create([
-                        'estado' => $predio->esta_008,
-                        'region_catastral' => $predio->rcat_008,
-                        'municipio' => $predio->mpio_008,
-                        'zona_catastral' => $predio->zcat_008,
-                        'localidad' => $predio->locl_008,
-                        'sector' => $predio->sect_008,
-                        'manzana' => $predio->mzna_008,
-                        'predio' => $predio->pred_008,
-                        'edificio' => $predio->edif_008,
-                        'departamento' => $predio->dpto_008,
-                        'oficina' => $predio->ofna_008,
-                        'tipo_predio' => $predio->tpre_008,
-                        'numero_registro' => $predio->nreg_008,
-                        'error' => $e,
-                        'count' => $predioRepetido ? $predioRepetido->count + 1 : 1
-                    ]);
+                    if(! $predioRepetido){
+
+                        PredioRepetido::create([
+                            'estado' => $predio->esta_008,
+                            'region_catastral' => $predio->rcat_008,
+                            'municipio' => $predio->mpio_008,
+                            'zona_catastral' => $predio->zcat_008,
+                            'localidad' => $predio->locl_008,
+                            'sector' => $predio->sect_008,
+                            'manzana' => $predio->mzna_008,
+                            'predio' => $predio->pred_008,
+                            'edificio' => $predio->edif_008,
+                            'departamento' => $predio->dpto_008,
+                            'oficina' => $predio->ofna_008,
+                            'tipo_predio' => $predio->tpre_008,
+                            'numero_registro' => $predio->nreg_008,
+                            'error' => $e,
+                            'count' => 1
+                        ]);
+
+                    }else{
+
+                        $predioRepetido->update(['count' => $predioRepetido->count + 1]);
+
+                    }
 
                 }
 
@@ -213,7 +224,7 @@ class MigrarPredioJob implements ShouldQueue
         Log::error($exception);
     }
 
-    public function condominio($predioss,$idnvo)
+    public function condominio($predioss, $idnvo)
     {
 
         $predio_padre = tcpro008::where('mpio_008', $predioss->mpio_008)
@@ -226,20 +237,6 @@ class MigrarPredioJob implements ShouldQueue
                                 ->where('dpto_008', 0)
                                 ->where('nreg_008', 0)
                                 ->first();
-
-        /* if(!$predio_padre){
-
-            $predio_padre = ctpro003::where('mpio_003', $predioss->mpio_008)
-                                        ->where('zcat_003', $predioss->zcat_008)
-                                        ->where('locl_003', $predioss->locl_008)
-                                        ->where('sect_003', $predioss->sect_008)
-                                        ->where('mzna_003', $predioss->mzna_008)
-                                        ->where('pred_003', $predioss->pred_008)
-                                        ->where('edif_003', 0)
-                                        ->where('dpto_003', 0)
-                                        ->where('nreg_003', 0)
-                                        ->first();
-        } */
 
         $ctcdm004 = ctcdm004::where('mpio_004', $predioss->mpio_008)
                                 ->where('zcat_004', $predioss->zcat_008)
@@ -254,23 +251,9 @@ class MigrarPredioJob implements ShouldQueue
         if($predio_padre){
 
 
-            if(!isset($predio_padre->stot_008)){
+            $superficie_total = $predio_padre->stot_008 ?? 0;
 
-               /*  $superficie_total = $predio_padre->ster_003 ?? 0;
- */
-            }else{
-
-                $superficie_total = $predio_padre->stot_008 ?? 0;
-            }
-
-            if(!isset($predio_padre->scon_008)){
-
-               /*  $area_comun_construccion = $predio_padre->scon_003 ?? 0; */
-
-            }else{
-
-                $area_comun_construccion = $predio_padre->scon_008 ?? 0;
-            }
+            $area_comun_construccion = $predio_padre->scon_008 ?? 0;
 
         }
 
@@ -303,93 +286,106 @@ class MigrarPredioJob implements ShouldQueue
 
     }
 
-    public function personas($predioss,$idnvo)
+    public function personas($predio, $idnvo)
     {
 
-        $nombre = str_replace(['Y SOC', 'Y SOCIOS', 'Y SOC.'. 'Y SOCS.', 'Y SOCS', 'Y SOCIOS.', 'SOC', 'SOC.'], '', $predioss->nomb_008);
+        $nombre = str_replace(['Y SOC', 'Y SOCIOS', 'Y SOC.'. 'Y SOCS.', 'Y SOCS', 'Y SOCIOS.', 'SOC', 'SOC.'], '', $predio->nomb_008);
 
-        $persona = Persona::firstOrCreate(
-            [
-                'nombre' => trim($predioss->nomb_008),
-                'ap_paterno' => trim($predioss->apat_008),
-                'ap_materno' => trim($predioss->amat_008),
-            ],
-            [
-                'tipo' => ($predioss->tper_008 == 1) ? 'FÍSICA' : ($predioss->tper_008 == 2 ? 'MORAL' : '0'),
-                'nombre' => ($predioss->tper_008 == 2) ? null : trim($nombre),
-                'ap_paterno' => ($predioss->tper_008 == 2) ? null : trim($predioss->apat_008),
-                'ap_materno' => ($predioss->tper_008 == 2) ? null : trim($predioss->amat_008),
-                'curp' => NULL,
-                'rfc' => NULL,
-                'razon_social' => ($predioss->tper_008 == 2) ? " " . trim($predioss->apat_008) . " " . trim($predioss->amat_008) . " " . trim($predioss->nomb_008) : null,
-                'fecha_nacimiento' => NULL,
-                'nacionalidad' => NULL,
-                'estado_civil' => NULL,
-                'calle' => trim($predioss->noca_008),
-                'numero_exterior' => trim($predioss->exte_008),
-                'numero_interior' => trim($predioss->inte_008),
-                'colonia' => trim($predioss->noco_008),
-                'cp' => $predioss->copd_008,
-                'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $predioss->cest_008)->first() ? $this->referencias->where('tipo_007', "ED")->where('cven_007', $predioss->cest_008)->first()['desc_007'] : null,
-                'municipio' => trim($predioss->nomu_008),
-                'ciudad' => trim($predioss->nopo_008)
-            ]
-        );
+        if($predio->tper_008 == 2){
 
-        $tipo = $this->referencias->where('tipo_007', "TP")->where('cven_007', $predioss->tper_008)->first();
+            $persona = Persona::where('razon_social', trim($predio->apat_008) . " " . trim($predio->amat_008) . " " . trim($predio->nomb_008))->first();
+
+        }else{
+
+            $persona = Persona::where('nombre', trim($predio->nomb_008))
+                                ->where('ap_paterno', trim($predio->apat_008))
+                                ->where('ap_materno', trim($predio->amat_008))
+                                ->where('calle', trim($predio->noca_008))
+                                ->first();
+        }
+
+        if(! $persona){
+
+            $persona = Persona::create([
+                    'tipo' => ($predio->tper_008 == 1) ? 'FÍSICA' : ($predio->tper_008 == 2 ? 'MORAL' : '0'),
+                    'nombre' => ($predio->tper_008 == 2) ? null : trim($nombre),
+                    'ap_paterno' => ($predio->tper_008 == 2) ? null : trim($predio->apat_008),
+                    'ap_materno' => ($predio->tper_008 == 2) ? null : trim($predio->amat_008),
+                    'curp' => NULL,
+                    'rfc' => NULL,
+                    'razon_social' => ($predio->tper_008 == 2) ? " " . trim($predio->apat_008) . " " . trim($predio->amat_008) . " " . trim($predio->nomb_008) : null,
+                    'fecha_nacimiento' => NULL,
+                    'nacionalidad' => NULL,
+                    'estado_civil' => NULL,
+                    'calle' => trim($predio->noca_008),
+                    'numero_exterior' => trim($predio->exte_008),
+                    'numero_interior' => trim($predio->inte_008),
+                    'colonia' => trim($predio->noco_008),
+                    'cp' => $predio->copd_008,
+                    'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $predio->cest_008)->first() ? $this->referencias->where('tipo_007', "ED")->where('cven_007', $predio->cest_008)->first()['desc_007'] : null,
+                    'municipio' => trim($predio->nomu_008),
+                    'ciudad' => trim($predio->nopo_008)
+                ]);
+
+        }
+
+        $tipo = $this->referencias->where('tipo_007', "TP")->where('cven_007', $predio->tper_008)->first();
 
         Propietario::create([
             'propietarioable_id' => $idnvo,
             'propietarioable_type' => 'App\Models\Predio',
             'persona_id' => $persona->id,
             'tipo' => isset($tipo) ? $tipo['desc_007'] : '0',
-            'porcentaje_propiedad' => ($predioss->tper_008 == 1 || $predioss->tper_008 == 2 || $predioss->tper_008 >= 5) ? $predioss->ppro_008 : 0,
-            'porcentaje_nuda' => ($predioss->tper_008 == 3) ? $predioss->ppro_008 : 0,
-            'porcentaje_usufructo' => ($predioss->tper_008 == 4) ? $predioss->ppro_008 : 0,
+            'porcentaje_propiedad' => ($predio->tper_008 == 1 || $predio->tper_008 == 2 || $predio->tper_008 >= 5) ? $predio->ppro_008 : 0,
+            'porcentaje_nuda' => ($predio->tper_008 == 3) ? $predio->ppro_008 : 0,
+            'porcentaje_usufructo' => ($predio->tper_008 == 4) ? $predio->ppro_008 : 0,
         ]);
 
         //Verificar si en tccop005 hay más proppietatios
-        $ctcop005 = ctcop005::where('mpio_005', $predioss->mpio_008)
-                                ->where('zcat_005', $predioss->zcat_008)
-                                ->where('locl_005', $predioss->locl_008)
-                                ->where('sect_005', $predioss->sect_008)
-                                ->where('mzna_005', $predioss->mzna_008)
-                                ->where('pred_005', $predioss->pred_008)
-                                ->where('edif_005', $predioss->edif_008)
-                                ->where('dpto_005', $predioss->dpto_008)
+        $ctcop005 = ctcop005::where('mpio_005', $predio->mpio_008)
+                                ->where('zcat_005', $predio->zcat_008)
+                                ->where('locl_005', $predio->locl_008)
+                                ->where('sect_005', $predio->sect_008)
+                                ->where('mzna_005', $predio->mzna_008)
+                                ->where('pred_005', $predio->pred_008)
+                                ->where('edif_005', $predio->edif_008)
+                                ->where('dpto_005', $predio->dpto_008)
                                 ->get();
 
         foreach($ctcop005 as $propietario){
 
-            $nombre = str_replace(['Y SOC', 'Y SOCIOS', 'Y SOC.'. 'Y SOCS.', 'Y SOCS', 'Y SOCIOS.'], '', $propietario->nomb_005);
+            $nombre = str_replace(['Y SOC', 'Y SOCIOS', 'Y SOC.'. 'Y SOCS.', 'Y SOCS', 'Y SOCIOS.', 'SOC', 'SOC.'], '', $propietario->nomb_005);
 
-            $persona = Persona::firstOrCreate(
-                [
-                    'nombre' => trim($propietario->nomb_005),
-                    'ap_paterno' => trim($propietario->apat_005),
-                    'ap_materno' => trim($propietario->amat_005)
-                ],
-                [
-                    'tipo' => ($propietario->tper_005 == 1) ? 'FÍSICA' : ($propietario->tper_005 == 2 ? 'MORAL' : '0'),
-                    'nombre' => ($propietario->tper_005 == 2) ? null : trim($nombre),
-                    'ap_paterno' => ($propietario->tper_005 == 2) ? null : trim($propietario->apat_005),
-                    'ap_materno' => ($propietario->tper_005 == 2) ? null : trim($propietario->amat_005),
-                    'curp' => NULL,
-                    'rfc' => NULL,
-                    'razon_social' => ($propietario->tper_005 == 2) ? trim($propietario->nomb_005) . " " . trim($propietario->apat_005) . " " . trim($propietario->amat_005) : null,
-                    'fecha_nacimiento' => NULL,
-                    'nacionalidad' => NULL,
-                    'estado_civil' => NULL,
-                    'calle' => trim($propietario->noca_005),
-                    'numero_exterior' => trim($propietario->next_005),
-                    'numero_interior' => trim($propietario->nint_005),
-                    'colonia' => trim($propietario->noco_005),
-                    'cp' => $propietario->codp_005,
-                    'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $propietario->cest_005)->first() ? $this->referencias->where('tipo_007', "ED")->where('cven_007', $propietario->cest_005)->first()['desc_007'] : null,
-                    'municipio' => trim($propietario->nomu_005),
-                    'ciudad' => trim($propietario->nopo_005),
-                ]
-            );
+            $persona = Persona::where('nombre', trim($predio->nomb_005))
+                            ->where('ap_paterno', trim($predio->apat_005))
+                            ->where('ap_materno', trim($predio->amat_005))
+                            ->where('calle', trim($predio->noca_005))
+                            ->first();
+
+            if(!$persona){
+
+                $persona = Persona::create([
+                        'tipo' => ($propietario->tper_005 == 1) ? 'FÍSICA' : ($propietario->tper_005 == 2 ? 'MORAL' : '0'),
+                        'nombre' => ($propietario->tper_005 == 2) ? null : trim($nombre),
+                        'ap_paterno' => ($propietario->tper_005 == 2) ? null : trim($propietario->apat_005),
+                        'ap_materno' => ($propietario->tper_005 == 2) ? null : trim($propietario->amat_005),
+                        'curp' => NULL,
+                        'rfc' => NULL,
+                        'razon_social' => ($propietario->tper_005 == 2) ? trim($propietario->apat_005) . " " . trim($propietario->amat_005) . " " . trim($propietario->nomb_005) : null,
+                        'fecha_nacimiento' => NULL,
+                        'nacionalidad' => NULL,
+                        'estado_civil' => NULL,
+                        'calle' => trim($propietario->noca_005),
+                        'numero_exterior' => trim($propietario->next_005),
+                        'numero_interior' => trim($propietario->nint_005),
+                        'colonia' => trim($propietario->noco_005),
+                        'cp' => $propietario->codp_005,
+                        'entidad' => $this->referencias->where('tipo_007', "ED")->where('cven_007', $propietario->cest_005)->first() ? $this->referencias->where('tipo_007', "ED")->where('cven_007', $propietario->cest_005)->first()['desc_007'] : null,
+                        'municipio' => trim($propietario->nomu_005),
+                        'ciudad' => trim($propietario->nopo_005),
+                    ]);
+
+            }
 
             $tipo = $this->referencias->where('tipo_007', "TP")->where('cven_007', $propietario->tper_005)->first();
 
@@ -452,7 +448,7 @@ class MigrarPredioJob implements ShouldQueue
                 'calidad' => $constss->cali_006,
                 'niveles' => $constss->nive_006,
                 'superficie' => $constss->scon_006,
-                'valor_unitario' => 0, //Verificar
+                'valor_unitario' => $constss->scon_006 != 0 ? ($constss->valc_006 / $constss->scon_006) : 0,
                 'valor_construccion' => $constss->valc_006,
             ]);
 
@@ -461,7 +457,7 @@ class MigrarPredioJob implements ShouldQueue
         $contruccionesSS = null;
     }
 
-    public function colindacnias($idnvo, $col1, $col2, $col3, $col4)
+    public function colindancias($idnvo, $col1, $col2, $col3, $col4)
     {
         if (trim($col1) != "")
         {
@@ -529,7 +525,7 @@ class MigrarPredioJob implements ShouldQueue
                 'predio_id' => $idnvo,
                 'nombre' => $this->referencias->where('cven_007', $movimiento->cmto_021)->where('tipo_007', 'OM')->first()['desc_007'],
                 'fecha' => $movimiento->femo_021,
-                'descripcion' => $movimiento->obse_021,
+                'descripcion' => $movimiento->obse_021, /// Concatenar todos los campos
                 'actualizado_nombre' => trim($movimiento->nome_021),
             ]);
 
