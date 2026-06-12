@@ -3,6 +3,7 @@
 use App\Jobs\GenerarCertificacionMigracionJob;
 use App\Jobs\MigrarPredioJob;
 use App\Models\Avaluo;
+use App\Models\Cartografia;
 use App\Models\Movimiento;
 use App\Models\OldCertificado;
 use App\Models\OldTraslado;
@@ -62,9 +63,7 @@ Artisan::command('migrar', function(){
                             })
                             ->get();
 
-    $this->info('Incian ' . $predios->count() . ' predios en chunks de 100 predios en: ' . now());
-
-    $predios = $predios->chunk(100);
+    $this->info('Incian ' . $predios->count() . ' predios en: ' . now());
 
     $progressbar = $this->output->createProgressBar(count($predios));
 
@@ -72,7 +71,7 @@ Artisan::command('migrar', function(){
 
     foreach ($predios as $predio) {
 
-        MigrarPredioJob::dispatch($predio);
+        MigrarPredioJob::dispatch($predio->toArray());
 
         $progressbar->advance();
 
@@ -1343,5 +1342,64 @@ Artisan::command('desgloses', function(){
     $progressbar->finish();
 
     $this->info($count);
+
+});
+
+Artisan::command('cartografia', function(){
+
+    $disk = Storage::disk('s3');
+
+    $client = $disk->getClient();
+
+    $bucket = config('filesystems.disks.s3.bucket');
+
+    $progressbar = $this->output->createProgressBar(99);
+
+    $progressbar->start();
+
+    for ($i=1; $i <= 99; $i++) {
+
+        $sector = str_pad($i, 2, '0', STR_PAD_LEFT);
+
+        $ruta = 'sgc/cartografia/101/Sec' . $sector;
+
+        $prefix = $sector . '-';
+
+        $fullPrefix = ltrim("{$ruta}/{$prefix}", '/');
+
+        $urls = [];
+
+        $params = [
+            'Bucket' => $bucket,
+            'Prefix' => $fullPrefix,
+        ];
+
+        $paginator = $client->getPaginator('ListObjectsV2', $params);
+
+        foreach ($paginator as $page) {
+
+            foreach ($page['Contents'] ?? [] as $object) {
+
+                $urls[] = $object['Key'];
+
+            }
+
+        }
+
+        foreach($urls as $url){
+
+            Cartografia::create([
+                'oficina_id' => 53,
+                'sector' => $sector,
+                'url' => $url,
+            ]);
+
+        }
+
+        $progressbar->advance();
+
+    }
+
+    $progressbar->finish();
 
 });

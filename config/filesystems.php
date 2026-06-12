@@ -137,6 +137,14 @@ return [
             'throw' => false,
         ],
 
+        'cartografia' => [
+            'driver' => 'local',
+            'root' => storage_path('app/cartografia'),
+            'url' => env('APP_URL').'/cartografia',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3_backups' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -173,6 +181,7 @@ return [
         public_path('preguntas') => storage_path('app/preguntas'),
         public_path('predios_archivo') => storage_path('app/predios_archivo'),
         public_path('predios_fotos') => storage_path('app/predios_fotos'),
+        public_path('cartografia') => storage_path('app/cartografia'),
     ],
 
 ];

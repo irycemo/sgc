@@ -9,6 +9,7 @@ use App\Livewire\Cartografia\AsignarCuentaPredial\AsignarCuentaPredial;
 use App\Livewire\Cartografia\AsignarCuentaPredial\CuentasAsignadas;
 use App\Livewire\Cartografia\AsignarManzana\AsignarManzana;
 use App\Livewire\Cartografia\CambioLocalidad\CambioLocalidad;
+use App\Livewire\Cartografia\CartografiaArchivo\CartografiaArchivo;
 use App\Livewire\Cartografia\Conciliar\ConciliarAvaluosPeritosExternos;
 use App\Livewire\Cartografia\ValidarCartografia\ValidarCartografia;
 
@@ -33,5 +34,7 @@ Route::group([], function(){
     Route::get('validar_cartografia', ValidarCartografia::class)->middleware('permission:Validar cartografia')->name('validar_cartografia');
 
     Route::get('cambio_localidad', CambioLocalidad::class)->middleware('permission:Cambio de localidad')->name('cambio_localidad');
+
+    Route::get('cartografia_archivo', CartografiaArchivo::class)->middleware('permission:Cartografia archivo')->name('cartografia_archivo');
 
 });

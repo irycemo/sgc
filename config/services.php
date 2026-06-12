@@ -27,6 +27,7 @@ return [
         'ruta_predios_fotos' => 'sgc/predios_fotos/',
         'ruta_certificaciones' => 'sgc/certificaciones/',
         'ruta_avaluos_fotos' => 'sgc/avaluos_fotos/',
+        'ruta_cartografia' => 'sgc/cartografia/',
     ],
 
     'resend' => [
