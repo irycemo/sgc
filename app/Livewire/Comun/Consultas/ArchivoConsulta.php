@@ -75,50 +75,36 @@ class ArchivoConsulta extends Component
 
     public function cargarArchivosAnteriores(){
 
-        $this->archivos_anteriores = File::where('fileable_id', $this->predio->id)
-                                        ->where('fileable_type', 'App\Models\Predio')
-                                        ->where(function($q){
-                                            $q->where('descripcion', 'LIKE' , '%archivo_anterior%')
-                                                ->orWhere('descripcion', 'LIKE' , '%traslado_anterior%')
-                                                ->orWhere('descripcion', 'LIKE' , '%avaluo_anterior%')
-                                                ->orWhere('descripcion', 'LIKE' , '%foto_anterior%');
-                                        })
-                                        ->first();
+        $municipio = 'morelia';
 
-        if(!$this->archivos_anteriores){
+        $localidad = $this->predio->localidad;
 
-            $municipio = 'morelia';
+        $numero_registro = str_pad($this->predio->numero_registro, 6, '0', STR_PAD_LEFT);
 
-            $localidad = $this->predio->localidad;
+        $cuenta_predial = $this->predio->localidad . '-' . $this->predio->oficina . '-' . $this->predio->tipo_predio . '-' . $numero_registro;
 
-            $numero_registro = str_pad($this->predio->numero_registro, 6, '0', STR_PAD_LEFT);
+        $ruta_avaluos = '223/wwwroot/sgc/digi/' . $municipio . '/' . $localidad . '/a';
 
-            $cuenta_predial = $this->predio->localidad . '-' . $this->predio->oficina . '-' . $this->predio->tipo_predio . '-' . $numero_registro;
+        $ruta_archivos = '223/wwwroot/sgc/digi/' . $municipio . '/' . $localidad . '/arch';
 
-            $ruta_avaluos = '223/wwwroot/sgc/digi/' . $municipio . '/' . $localidad . '/a';
+        $ruta_fotos = '223/wwwroot/sgc/digi/' . $municipio . '/' . $localidad . '/fotos';
 
-            $ruta_archivos = '223/wwwroot/sgc/digi/' . $municipio . '/' . $localidad . '/arch';
+        $ruta_traslados = '223/wwwroot/sgc/digi/' . $municipio . '/' . $localidad . '/td';
 
-            $ruta_fotos = '223/wwwroot/sgc/digi/' . $municipio . '/' . $localidad . '/fotos';
+        $avaluos = $this->getFileUrls($ruta_avaluos, $cuenta_predial);
 
-            $ruta_traslados = '223/wwwroot/sgc/digi/' . $municipio . '/' . $localidad . '/td';
+        $archivos = $this->getFileUrls($ruta_archivos, $cuenta_predial);
 
-            $avaluos = $this->getFileUrls($ruta_avaluos, $cuenta_predial);
+        $fotos = $this->getFileUrls($ruta_fotos, $cuenta_predial);
 
-            $archivos = $this->getFileUrls($ruta_archivos, $cuenta_predial);
+        $traslados = $this->getFileUrls($ruta_traslados, $cuenta_predial);
 
-            $fotos = $this->getFileUrls($ruta_fotos, $cuenta_predial);
-
-            $traslados = $this->getFileUrls($ruta_traslados, $cuenta_predial);
-
-            $this->archivos = [
-                'avaluos' => $avaluos,
-                'archivos' => $archivos,
-                'fotos' => $fotos,
-                'traslados' => $traslados,
-            ];
-
-        }
+        $this->archivos = [
+            'avaluos' => $avaluos,
+            'archivos' => $archivos,
+            'fotos' => $fotos,
+            'traslados' => $traslados,
+        ];
 
     }
 
