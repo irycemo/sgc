@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Oficina;
 use App\Traits\ModelosTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Cartografia extends Model
 {
@@ -15,6 +16,20 @@ class Cartografia extends Model
 
     public function oficina(){
         return $this->belongsTo(Oficina::class);
+    }
+
+    public function getLink(){
+
+        if(app()->isProduction()){
+
+            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_cartografia') . $this->url, now()->addMinutes(60));
+
+        }else{
+
+            return Storage::disk('cartografia')->url($this->url);
+
+        }
+
     }
 
 }

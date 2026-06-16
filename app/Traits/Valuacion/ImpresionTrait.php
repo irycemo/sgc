@@ -361,9 +361,13 @@ trait ImpresionTrait
 
                 if($this->avaluo_para !== AvaluoPara::FUSION->value){
 
-                    if(($this->numero_avaluos + $this->tramite_inspeccion->usados) > $this->tramite_inspeccion->cantidad){
+                    if(! in_array($this->avaluo_para, [3, 4, 5, 10])){
 
-                        throw new GeneralException('La cantidad de avalúos que avala el trámite de inspección ocular no es suficiente.');
+                        if(($this->numero_avaluos + $this->tramite_inspeccion->usados) > $this->tramite_inspeccion->cantidad){
+
+                            throw new GeneralException('La cantidad de avalúos que avala el trámite de inspección ocular no es suficiente.');
+
+                        }
 
                     }
 

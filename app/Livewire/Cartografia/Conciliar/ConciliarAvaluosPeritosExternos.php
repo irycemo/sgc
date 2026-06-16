@@ -42,6 +42,8 @@ class ConciliarAvaluosPeritosExternos extends Component
 
     public $observaciones;
 
+    public $predio_id;
+
     public function updatedFolio(){
 
         if($this->folio == '') $this->folio = null;
@@ -95,6 +97,13 @@ class ConciliarAvaluosPeritosExternos extends Component
         $this->predio = $this->avaluo_seleccionado['predio'];
         $this->edificio = $this->avaluo_seleccionado['edificio'];
         $this->departamento = $this->avaluo_seleccionado['departamento'];
+
+        $this->predio_id = Predio::where('localidad', $avaluo['localidad'])
+                                    ->where('oficina',$avaluo['oficina'])
+                                    ->where('tipo_predio',$avaluo['tipo_predio'])
+                                    ->where('numero_registro',$avaluo['numero_registro'])
+                                    ->first()
+                                    ->id;
 
     }
 

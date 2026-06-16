@@ -278,6 +278,8 @@
 
                     </a>
 
+                    <livewire:comun.consultas.cartografia-consulta lazy :predio_id="$this->predio_id" />
+
                 </div>
 
                 <div class="flex gap-2 w-full">

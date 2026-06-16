@@ -947,18 +947,16 @@
                             <div class="flex items-center gap-2">
 
                                 <a href="{{ 'http://mapa.catastro.michoacan.gob.mx:8080/index.html?pzoom=20&plat=' . $this->predio->lat . '&plon=' . $this->predio->lon }}" title="SIG" target="_blank">
-                                    <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="SIG">
+                                    <img class="h-10 cursor-pointer" src="{{ asset('storage/img/SIG.png') }}" alt="SIG">
                                 </a>
 
                                 <a href="{{ 'https://www.google.com/maps/?q=' . $this->predio->lat . ',' . $this->predio->lon . '&z=5&t=k' }}" title="Google" target="_blank">
 
-                                    <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="Google">
+                                    <img class="h-10 cursor-pointer" src="{{ asset('storage/img/GOOGLE.png') }}" alt="Google">
 
                                 </a>
 
-                                <a href="{{ config('services.consulta_archivos_anterior.cartografia_url') . $this->predio->municipio . '&sect=' . $this->predio->sector . '&mzna=' . $this->predio->manzana }}" title="Cartografía" target="_blank">
-                                    <img class="h-6 cursor-pointer" src="{{ asset('storage/img/ico.png') }}" alt="Cartografía">
-                                </a>
+                                <livewire:comun.consultas.cartografia-consulta lazy :predio_id="$this->predio->id" />
 
                             </div>
 
