@@ -14,6 +14,7 @@ class Reportes extends Component
     public $verUsuarios;
     public $verCertificaciones;
     public $verEscrituracionSocial;
+    public $verRecaudacion;
 
     protected function rules(){
         return [
@@ -36,6 +37,7 @@ class Reportes extends Component
             $this->verUsuarios = false;
             $this->verCertificaciones = false;
             $this->verEscrituracionSocial = false;
+            $this->verRecaudacion = false;
 
         }elseif($this->area == 'usuarios'){
 
@@ -44,6 +46,7 @@ class Reportes extends Component
             $this->verUsuarios = true;
             $this->verCertificaciones = false;
             $this->verEscrituracionSocial = false;
+            $this->verRecaudacion = false;
 
         }elseif($this->area == 'certificaciones'){
 
@@ -52,6 +55,7 @@ class Reportes extends Component
             $this->verUsuarios = false;
             $this->verCertificaciones = true;
             $this->verEscrituracionSocial = false;
+            $this->verRecaudacion = false;
 
         }elseif($this->area == 'escrituracion_social'){
 
@@ -60,6 +64,7 @@ class Reportes extends Component
             $this->verUsuarios = false;
             $this->verCertificaciones = false;
             $this->verEscrituracionSocial = true;
+            $this->verRecaudacion = false;
 
         }elseif($this->area == 'avisos'){
 
@@ -68,6 +73,16 @@ class Reportes extends Component
             $this->verUsuarios = false;
             $this->verCertificaciones = false;
             $this->verEscrituracionSocial = false;
+            $this->verRecaudacion = false;
+
+        }elseif($this->area == 'recaudacion'){
+
+            $this->verAvisos = false;
+            $this->verTramites = false;
+            $this->verUsuarios = false;
+            $this->verCertificaciones = false;
+            $this->verEscrituracionSocial = false;
+            $this->verRecaudacion = true;
 
         }
 

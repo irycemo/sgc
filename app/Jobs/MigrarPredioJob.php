@@ -303,7 +303,7 @@ class MigrarPredioJob implements ShouldQueue
 
         if($predio['tper_008'] == 2){
 
-            $persona = Persona::where('razon_social', trim($predio['apat_008']) . " " . trim($predio['amat_008']) . " " . trim($predio['nomb_008']))->first();
+            $persona = Persona::where('razon_social', trim($predio['nomb_008']) . " " . trim($predio['apat_008']) . " " . trim($predio['amat_008']))->first();
 
         }else{
 
@@ -323,7 +323,7 @@ class MigrarPredioJob implements ShouldQueue
                     'ap_materno' => ($predio['tper_008'] == 2) ? null : trim($predio['amat_008']),
                     'curp' => NULL,
                     'rfc' => NULL,
-                    'razon_social' => ($predio['tper_008'] == 2) ? " " . trim($predio['apat_008']) . " " . trim($predio['amat_008']) . " " . trim($predio['nomb_008']) : null,
+                    'razon_social' => ($predio['tper_008'] == 2) ? " " . trim($predio['nomb_008']) . " " . trim($predio['apat_008']) . " " . trim($predio['amat_008']) : null,
                     'fecha_nacimiento' => NULL,
                     'nacionalidad' => NULL,
                     'estado_civil' => NULL,
@@ -368,7 +368,7 @@ class MigrarPredioJob implements ShouldQueue
 
             if($propietario->tper_005 == 2){
 
-                $persona = Persona::where('razon_social', trim($propietario->apat_005) . " " . trim($propietario->amat_005) . " " . trim($propietario->nomb_005))->first();
+                $persona = Persona::where('razon_social', trim($propietario->nomb_005) . " " . trim($propietario->apat_005) . " " . trim($propietario->amat_005))->first();
 
             }else{
 
@@ -388,7 +388,7 @@ class MigrarPredioJob implements ShouldQueue
                         'ap_materno' => ($propietario->tper_005 == 2) ? null : trim($propietario->amat_005),
                         'curp' => NULL,
                         'rfc' => NULL,
-                        'razon_social' => ($propietario->tper_005 == 2) ? trim($propietario->apat_005) . " " . trim($propietario->amat_005) . " " . trim($propietario->nomb_005) : null,
+                        'razon_social' => ($propietario->tper_005 == 2) ? trim($propietario->nomb_005) . " " . trim($propietario->apat_005) . " " . trim($propietario->amat_005) : null,
                         'fecha_nacimiento' => NULL,
                         'nacionalidad' => NULL,
                         'estado_civil' => NULL,

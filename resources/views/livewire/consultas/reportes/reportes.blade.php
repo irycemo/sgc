@@ -14,6 +14,7 @@
                 <option value="certificaciones">Certificaciones</option>
                 <option value="avisos">Avisos</option>
                 <option value="escrituracion_social">Escrituración social</option>
+                <option value="recaudacion">Recaudación</option>
 
             </x-input-select>
 
@@ -48,6 +49,12 @@
     @if ($verAvisos)
 
         @livewire('consultas.reportes.reporte-avisos')
+
+    @endif
+
+    @if ($verRecaudacion)
+
+        @livewire('consultas.reportes.reporte-recaudacion')
 
     @endif
 
