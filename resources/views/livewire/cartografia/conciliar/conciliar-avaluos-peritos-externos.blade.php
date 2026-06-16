@@ -240,7 +240,7 @@
 
         <x-slot name="title">
 
-            Conciliar
+            Conciliar: @if($avaluo_seleccionado){{ $avaluo_seleccionado['cuenta_predial'] }}@endif
 
         </x-slot>
 
@@ -248,7 +248,7 @@
 
             @if($avaluo_seleccionado)
 
-                <div class="flex gap-2 w-full">
+                <div class="flex gap-2 w-full items-center">
 
                     <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
 
@@ -263,6 +263,45 @@
                         <strong>Longitud:</strong>
 
                         <p>{{ $avaluo_seleccionado['lon'] }}</p>
+
+                    </div>
+
+                    <a target="_blank" href="{{ 'https://www.google.com/maps/?q=' . $avaluo_seleccionado['lat'] . ',' . $avaluo_seleccionado['lon'] . '&z=5&t=k' }}">
+
+                        <img class="h-12" src="{{ asset('storage/img/GOOGLE.png') }}" alt="">
+
+                    </a>
+
+                    <a target="_blank" href="{{ 'http://mapa.catastro.michoacan.gob.mx:8080/index.html?pzoom=20&plat=' . $avaluo_seleccionado['lat'] . '&plon=' . $avaluo_seleccionado['lon'] }}">
+
+                        <img class="h-12" src="{{ asset('storage/img/SIG.png') }}" alt="">
+
+                    </a>
+
+                </div>
+
+                <div class="flex gap-2 w-full">
+                    <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+
+                        <strong>XUTM:</strong>
+
+                        <p>{{ $avaluo_seleccionado['xutm'] }}</p>
+
+                    </div>
+
+                    <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+
+                        <strong>YUTM:</strong>
+
+                        <p>{{ $avaluo_seleccionado['yutm'] }}</p>
+
+                    </div>
+
+                    <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+
+                        <strong>ZUTM:</strong>
+
+                        <p>{{ $avaluo_seleccionado['zutm'] }}</p>
 
                     </div>
 
@@ -336,7 +375,7 @@
 
     </x-dialog-modal>
 
-    <x-dialog-modal wire:model="modal_requerimiento" maxWidth="sm">
+    <x-dialog-modal wire:model="modal_requerimiento" maxWidth="md">
 
         <x-slot name="title">
             Hacer Requerimiento
@@ -345,6 +384,24 @@
         <x-slot name="content">
 
             <x-input-group for="observaciones" label="Observación" :error="$errors->first('observaciones')">
+
+                <x-input-select id="observaciones" wire:model="observaciones" class="w-full mb-5">
+
+                    <option value="">Seleccione una opción</option>
+                    <option value="CAMBIO DE LOCALIDAD. NUEVA CUENTA XXXXXXXX">
+                        CAMBIO DE LOCALIDAD. NUEVA CUENTA XXXXXXXX
+                    </option>
+                    <option value="PRESENTAR ESCRITURA CERTIFICADA DEL DPTO. DE CARTOGRAFÍA PARA REALIZAR EL CAMBIO DE LOCALIDAD A XXXXXXX">
+                        PRESENTAR ESCRITURA CERTIFICADA DEL DPTO. DE CARTOGRAFÍA PARA REALIZAR EL CAMBIO DE LOCALIDAD A XXXXXXX
+                    </option>
+                    <option value="RECTIFICAR COORDENADAS ATERRIZAN AL CENTRO DE LA CALLE">
+                        RECTIFICAR COORDENADAS ATERRIZAN AL CENTRO DE LA CALLE
+                    </option>
+                    <option value="COORDENADAS FUERA DE RANGO">
+                        COORDENADAS FUERA DE RANGO
+                    </option>
+
+                </x-input-select>
 
                 <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico sobre la corrección que solicitas"></textarea>
 
