@@ -28,8 +28,6 @@ class Historico extends Component
 
     public function buscarCuentaPredial(){
 
-        $this->oficina = auth()->user()->oficina->oficina;
-
         $this->validate();
 
         $this->movimientos = Model::where('localidad', $this->localidad)
@@ -38,6 +36,12 @@ class Historico extends Component
                                         ->where('numero_registro', $this->numero_registro)
                                         ->orderBy('consecutivo_movimiento', 'desc')
                                         ->get();
+
+    }
+
+    public function mount(){
+
+        $this->oficina = auth()->user()->oficina->oficina;
 
     }
 
