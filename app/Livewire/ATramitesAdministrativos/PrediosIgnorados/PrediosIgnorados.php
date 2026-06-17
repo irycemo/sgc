@@ -610,6 +610,8 @@ class PrediosIgnorados extends Component
 
         $this->crearModeloVacio();
 
+        $this->modelo_editar->oficina_id = auth()->user()->oficina_id;
+
         $this->estados = [
             'nuevo',
             'requerimineto',
@@ -633,7 +635,7 @@ class PrediosIgnorados extends Component
     #[Computed]
     public function prediosIgnorados(){
 
-        if(auth()->user()->hasRole('Oficina rentistica')){
+        if(auth()->user()->area == 'Oficina rentistica'){
 
             $prediosIgnorados = PredioIgnorado::select('id', 'año', 'folio', 'estado', 'tramite_id', 'promovente', 'archivo', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
                                             ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')

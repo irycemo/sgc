@@ -54,25 +54,21 @@
 
             </x-input-group>
 
-            @if(!auth()->user()->hasRole('Oficina rentistica'))
+            <x-input-group for="modelo_editar.oficina_id" label="Municipio" :error="$errors->first('modelo_editar.oficina_id')" class="w-full">
 
-                <x-input-group for="modelo_editar.oficina_id" label="Municipio" :error="$errors->first('modelo_editar.oficina_id')" class="w-full">
+                <x-input-select id="modelo_editar.oficina_id" wire:model="modelo_editar.oficina_id" class="w-full" :disabled="auth()->user()->area == 'Oficina rentistica'">
 
-                    <x-input-select id="modelo_editar.oficina_id" wire:model="modelo_editar.oficina_id" class="w-full">
+                    <option value="">Seleccione una opción</option>
 
-                        <option value="">Seleccione una opción</option>
+                    @foreach ($oficinas as $oficina)
 
-                        @foreach ($oficinas as $oficina)
+                        <option value="{{ $oficina->id }}">{{ $oficina->nombre }}</option>
 
-                            <option value="{{ $oficina->id }}">{{ $oficina->nombre }}</option>
+                    @endforeach
 
-                        @endforeach
+                </x-input-select>
 
-                    </x-input-select>
-
-                </x-input-group>
-
-            @endif
+            </x-input-group>
 
         </div>
 

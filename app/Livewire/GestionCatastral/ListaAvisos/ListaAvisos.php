@@ -198,6 +198,7 @@ class ListaAvisos extends Component
                                         $q->where('usuario_aviso', $usuario_aviso);
                                     });
                                 })
+                                ->where('oficina_id', auth()->user()->oficina_id)
                                 ->orderBy($this->sort, $this->direction)
                                 ->paginate($this->pagination);
 

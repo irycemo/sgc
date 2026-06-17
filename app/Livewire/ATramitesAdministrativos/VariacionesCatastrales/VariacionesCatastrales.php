@@ -832,6 +832,8 @@ class VariacionesCatastrales extends Component
 
         $this->crearModeloVacio();
 
+        $this->modelo_editar->oficina_id = auth()->user()->oficina_id;
+
         $this->estados = Constantes::ESTADOS_VARIACION_CATASTRAL;
 
         $this->filters['estado'] = request()->query('estado');
@@ -865,7 +867,7 @@ class VariacionesCatastrales extends Component
     #[Computed]
     public function variaciones(){
 
-        if(auth()->user()->hasRole('Oficina rentistica')){
+        if(auth()->user()->area == 'Oficina rentistica'){
 
             $variaciones = VariacionCatastral::select('id', 'año', 'folio', 'estado', 'tramite_id', 'promovente', 'finado', 'archivo', 'oficina_id', 'valuador', 'creado_por', 'actualizado_por','created_at', 'updated_at')
                                             ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
