@@ -38,7 +38,7 @@
 
                 <input type="number" wire:model="localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24 @error('localidad') border-red-500 @enderror">
 
-                <input type="number" wire:model="oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-20 @error('oficina') border-red-500 @enderror">
+                <input type="number" wire:model="oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-20 @error('oficina') border-red-500 @enderror" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
                 <input type="number" wire:model="t_predio" placeholder="Tipo" class="bg-white rounded-full text-sm w-16 @error('t_predio') border-red-500 @enderror">
 

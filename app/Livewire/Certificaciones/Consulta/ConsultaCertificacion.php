@@ -152,6 +152,8 @@ class ConsultaCertificacion extends Component
 
         $this->año = now()->format('Y');
 
+        $this->oficina = auth()->user()->oficina->oficina;
+
     }
 
     public function render()
