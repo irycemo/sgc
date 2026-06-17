@@ -867,7 +867,7 @@ class VariacionesCatastrales extends Component
     #[Computed]
     public function variaciones(){
 
-        if(auth()->user()->area == 'Oficina rentistica'){
+        if(auth()->user()->area == 'Oficina de rentas'){
 
             $variaciones = VariacionCatastral::select('id', 'año', 'folio', 'estado', 'tramite_id', 'promovente', 'finado', 'archivo', 'oficina_id', 'valuador', 'creado_por', 'actualizado_por','created_at', 'updated_at')
                                             ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')

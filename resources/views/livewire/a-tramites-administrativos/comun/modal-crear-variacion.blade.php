@@ -56,7 +56,7 @@
 
             <x-input-group for="modelo_editar.oficina_id" label="Municipio" :error="$errors->first('modelo_editar.oficina_id')" class="w-full">
 
-                <x-input-select id="modelo_editar.oficina_id" wire:model="modelo_editar.oficina_id" class="w-full" :disabled="auth()->user()->area == 'Oficina rentistica'">
+                <x-input-select id="modelo_editar.oficina_id" wire:model="modelo_editar.oficina_id" class="w-full" :disabled="auth()->user()->area == 'Oficina de rentas'">
 
                     <option value="">Seleccione una opción</option>
 

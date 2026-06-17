@@ -635,7 +635,7 @@ class PrediosIgnorados extends Component
     #[Computed]
     public function prediosIgnorados(){
 
-        if(auth()->user()->area == 'Oficina rentistica'){
+        if(auth()->user()->area == 'Oficina de rentas'){
 
             $prediosIgnorados = PredioIgnorado::select('id', 'año', 'folio', 'estado', 'tramite_id', 'promovente', 'archivo', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
                                             ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
