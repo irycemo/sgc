@@ -90,7 +90,7 @@
 
                             <x-table.cell title="Cartografía">
 
-                                <a href="{{ $cartografia->url }}" target="_blank" class="text-blue-500 underline hover:cursor-pointer">
+                                <a href="{{ $cartografia->getLink() }}" target="_blank" class="text-blue-500 underline hover:cursor-pointer">
 
                                     {{ str_replace("sgc/cartografia/", "", $cartografia->url) }}
 
