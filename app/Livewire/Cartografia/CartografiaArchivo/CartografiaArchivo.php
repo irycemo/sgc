@@ -75,7 +75,7 @@ class CartografiaArchivo extends Component
 
                 $ruta = config('services.ses.ruta_cartografia') . $this->oficina . '/cartografia';
 
-                $url = str_pad($this->sector, 2, '0', STR_PAD_LEFT) . '-' . str_pad($this->modelo_editar->manzana, 3, '0', STR_PAD_LEFT) . '.pdf';
+                $url = $this->oficina . '/cartografia/' . str_pad($this->sector, 2, '0', STR_PAD_LEFT) . '-' . str_pad($this->modelo_editar->manzana, 3, '0', STR_PAD_LEFT) . '.pdf';
 
                 if(app()->isProduction()){
 
