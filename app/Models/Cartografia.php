@@ -22,7 +22,7 @@ class Cartografia extends Model
 
         if(app()->isProduction()){
 
-            return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_cartografia') . $this->url, now()->addMinutes(60));
+            return Storage::disk('s3')->temporaryUrl($this->url, now()->addMinutes(60));
 
         }else{
 

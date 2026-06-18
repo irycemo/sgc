@@ -13,6 +13,7 @@ use App\Models\SQLSVR\ctcdm004;
 use App\Models\SQLSVR\tcpro008;
 use App\Models\Tramite;
 use App\Models\Traslado;
+use App\Models\User;
 use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
 use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
 use Carbon\Carbon;
@@ -1405,5 +1406,19 @@ Artisan::command('cartografia', function(){
     }
 
     $progressbar->finish();
+
+});
+
+Artisan::command('usuarios', function(){
+
+    $usuarios = User::all();
+
+    foreach ($usuarios as $usuario) {
+
+        if($usuario->hasRole('Administrador')) continue;
+
+        $usuario->update(['estado' => 'inactivo']);
+
+    }
 
 });
