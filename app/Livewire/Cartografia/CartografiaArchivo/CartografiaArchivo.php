@@ -75,15 +75,15 @@ class CartografiaArchivo extends Component
 
                 $ruta = config('services.ses.ruta_cartografia') . $this->oficina . '/cartografia';
 
-                $nombre = str_pad($this->sector, 2, '0', STR_PAD_LEFT) . '-' . str_pad($this->modelo_editar->manzana, 3, '0', STR_PAD_LEFT);
+                $url = str_pad($this->sector, 2, '0', STR_PAD_LEFT) . '-' . str_pad($this->modelo_editar->manzana, 3, '0', STR_PAD_LEFT) . '.pdf';
 
                 if(app()->isProduction()){
 
-                    $url = $this->documento->storeAs($ruta, $nombre, 's3');
+                    $this->documento->storeAs($ruta, $url, 's3');
 
                 }else{
 
-                    $url = $this->documento->storeAs('/', $nombre, 'cartografia');
+                    $this->documento->storeAs('/', $url, 'cartografia');
 
                 }
 
@@ -105,6 +105,9 @@ class CartografiaArchivo extends Component
 
                 }
 
+            }else{
+
+                $url = $this->modelo_editar->url;
             }
 
             $this->modelo_editar->update([
