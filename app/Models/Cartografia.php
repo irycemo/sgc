@@ -20,15 +20,7 @@ class Cartografia extends Model
 
     public function getLink(){
 
-        if(app()->isProduction()){
-
-            return Storage::disk('s3')->temporaryUrl($this->url, now()->addMinutes(60));
-
-        }else{
-
-            return Storage::disk('cartografia')->url($this->url);
-
-        }
+        return Storage::disk('s3')->temporaryUrl($this->url, now()->addMinutes(60));
 
     }
 
