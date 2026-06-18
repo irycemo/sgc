@@ -139,7 +139,7 @@ class Fusion extends Component
 
             }
 
-            if(!$predio->superficie_total_terreno){
+            /* if(!$predio->superficie_total_terreno){
 
                 throw new GeneralException('El predio ' . $predio->cuentaPredial() . ' no tiene superficie total de terreno, debe ser capturada.');
 
@@ -147,7 +147,7 @@ class Fusion extends Component
 
                 $superficie_total = $superficie_total + $predio->superficie_total_terreno;
 
-            }
+            } */
 
             $this->tramite_inspeccion->predios()->attach($predio->id);
 
