@@ -20,7 +20,7 @@ class Cartografia extends Model
 
     public function getLink(){
 
-        if($this->url->manzana){
+        if($this->manzana){
 
             return Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_cartografia') . $this->url, now()->addMinutes(60));
 
