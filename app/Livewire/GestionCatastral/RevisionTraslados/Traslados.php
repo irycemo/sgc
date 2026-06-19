@@ -150,7 +150,7 @@ class Traslados extends Component
             DB::transaction(function () {
 
                 $this->modelo_editar->update([
-                    'estado' => 'autorizado',
+                    'estado' => 'nuevo',
                     'actualizado_por' => auth()->id()
                 ]);
 
@@ -162,10 +162,10 @@ class Traslados extends Component
 
             $this->modal_revertir = false;
 
-            $this->dispatch('mostrarMensaje', ['success', "Se revirtio a esto autorizado con éxito."]);
+            $this->dispatch('mostrarMensaje', ['success', "Se revirtio a esto nuevo con éxito."]);
 
         } catch (\Throwable $th) {
-            Log::error("Error al revertir a autorizado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error("Error al revertir a operado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
         }
 
@@ -182,7 +182,7 @@ class Traslados extends Component
             DB::transaction(function () {
 
                 $this->modelo_editar->update([
-                    'estado' => 'cerrado',
+                    'estado' => 'nuevo',
                     'actualizado_por' => auth()->id()
                 ]);
 
@@ -194,7 +194,7 @@ class Traslados extends Component
 
             $this->modal_revertir = false;
 
-            $this->dispatch('mostrarMensaje', ['success', "Se revirtio a esto cerrado con éxito."]);
+            $this->dispatch('mostrarMensaje', ['success', "Se revirtio a esto nuevo con éxito."]);
 
         } catch (\Throwable $th) {
             Log::error("Error al revertir rechazo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
@@ -214,7 +214,7 @@ class Traslados extends Component
             DB::transaction(function () {
 
                 $this->modelo_editar->update([
-                    'estado' => 'cerrado',
+                    'estado' => 'nuevo',
                     'actualizado_por' => auth()->id()
                 ]);
 
@@ -226,18 +226,12 @@ class Traslados extends Component
 
             $this->modal_revertir = false;
 
-            $this->dispatch('mostrarMensaje', ['success', "Se revirtio a esto cerrado con éxito."]);
+            $this->dispatch('mostrarMensaje', ['success', "Se revirtio a esto nuevo con éxito."]);
 
         } catch (\Throwable $th) {
             Log::error("Error al revertir autorizado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
         }
-
-    }
-
-    public function revisarRedireccionar(){
-
-        /*  */
 
     }
 
