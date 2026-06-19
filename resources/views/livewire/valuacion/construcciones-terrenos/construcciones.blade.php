@@ -130,16 +130,20 @@
 
                     <div class="flex-auto lg:col-span-1 my-auto">
 
-                        <x-button-red
-                            wire:click="borrarConstruccion({{ $index }})"
-                            wire:loading.attr="disabled"
-                            wire:target="borrarConstruccion({{ $index }})">
+                        @if($predio?->avaluo?->estado === 'nuevo')
 
-                            <img wire:loading wire:target="borrarConstruccion({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                            <x-button-red
+                                wire:click="borrarConstruccion({{ $index }})"
+                                wire:loading.attr="disabled"
+                                wire:target="borrarConstruccion({{ $index }})">
 
-                            Borrar
+                                <img wire:loading wire:target="borrarConstruccion({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                        </x-button-red>
+                                Borrar
+
+                            </x-button-red>
+
+                        @endif
 
                     </div>
 

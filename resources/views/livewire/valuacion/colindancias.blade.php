@@ -140,7 +140,7 @@
 
         @if(isset($predio->avaluo))
 
-            @if($predio?->avaluo?->estado === 'nuevo')
+            @if(in_array($predio?->avaluo?->estado, ['nuevo', 'impreso']))
 
                 <x-button-green
                     wire:click="guardar"

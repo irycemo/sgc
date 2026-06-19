@@ -231,7 +231,7 @@
                                             Editar
                                         </a>
 
-                                    @elseif($avaluo->estado == 'nuevo')
+                                    @elseif(in_array($avaluo->estado, ['nuevo', 'impreso']))
 
                                         <a
                                             href="{{ route('avaluo_predio_ignorado', $avaluo) }}"

@@ -2,7 +2,7 @@
 
     <div class="mb-2 lg:mb-5">
 
-        <x-header>Revisión de traslados</x-header>
+        <x-header>Revisión de avisos</x-header>
 
         <div class="flex gap-3 overflow-auto p-1">
 

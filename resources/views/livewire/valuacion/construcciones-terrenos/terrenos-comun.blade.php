@@ -120,16 +120,20 @@
 
                 <div class="flex-auto lg:col-span-1 my-auto">
 
-                    <x-button-red
-                        wire:click="borrarTerrenoComun({{ $index }})"
-                        wire:loading.attr="disabled"
-                        wire:target="borrarTerrenoComun({{ $index }})">
+                    @if($predio?->avaluo?->estado === 'nuevo')
 
-                        <img wire:loading wire:target="borrarTerrenoComun({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                        <x-button-red
+                            wire:click="borrarTerrenoComun({{ $index }})"
+                            wire:loading.attr="disabled"
+                            wire:target="borrarTerrenoComun({{ $index }})">
 
-                        Borrar
+                            <img wire:loading wire:target="borrarTerrenoComun({{ $index }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                    </x-button-red>
+                            Borrar
+
+                        </x-button-red>
+
+                    @endif
 
                 </div>
 

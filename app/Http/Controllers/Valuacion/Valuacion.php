@@ -13,7 +13,7 @@ class Valuacion extends Controller
 
         if($avaluo->getKey()){
 
-            if(!auth()->user()->hasRole('Administrador')){
+            if(! auth()->user()->hasRole('Administrador')){
 
                 if($avaluo->asignado_a !== auth()->id()) abort(403, 'No tienes asginado este avalúo.');
 

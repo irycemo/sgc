@@ -102,7 +102,7 @@ class ListaAvisos extends Component
     #[Computed]
     public function traslados(){
 
-        if(auth()->user()->hasRole(['Administrador', 'Jefe de departamento'])){
+        if(auth()->user()->oficina->oficina === 101){
 
             return Traslado::select('id','estado', 'año_aviso', 'folio_aviso', 'usuario_aviso', 'predio_id', 'entidad_nombre', 'asignado_a', 'actualizado_por', 'created_at', 'updated_at')
                                 ->with('actualizadoPor:id,name', 'asignadoA:id,name', 'predio:id,localidad,oficina,tipo_predio,numero_registro')
@@ -149,6 +149,11 @@ class ListaAvisos extends Component
                                         $q->where('usuario_aviso', $usuario_aviso);
                                     });
                                 })
+                                ->when(! auth()->user()->hasRole(['Administrador', 'Jefe de departamento']), function($q){
+                                    $q->WhereHas('oficina', function($q){
+                                        $q->where('oficina', 101);
+                                    });
+                                })
                                 ->where('entidad_nombre', 'LIKE', '%' . $this->search . '%')
                                 ->orderBy($this->sort, $this->direction)
                                 ->paginate($this->pagination);
@@ -162,7 +167,6 @@ class ListaAvisos extends Component
                                 ->when($this->estado && $this->estado != '', fn($q, $estado) => $q->where('estado', $this->estado))
                                 ->when($this->filters['usuario_asignado'] && $this->filters['usuario_asignado'] != '', fn($q) => $q->where('asignado_a', $this->filters['usuario_asignado']))
                                 ->where('entidad_nombre', 'LIKE', '%' . $this->search . '%')
-                                /* ->where('oficina_id', auth()->user()->oficina_id) */
                                 ->when($this->filters['localidad'], function($q, $localidad){
                                     $q->WhereHas('predio', function($q) use($localidad){
                                         $q->where('localidad', $localidad);
@@ -198,7 +202,7 @@ class ListaAvisos extends Component
                                         $q->where('usuario_aviso', $usuario_aviso);
                                     });
                                 })
-                                /* ->where('oficina_id', auth()->user()->oficina_id) */
+                                ->where('oficina_id', auth()->user()->oficina_id)
                                 ->orderBy($this->sort, $this->direction)
                                 ->paginate($this->pagination);
 
