@@ -207,7 +207,7 @@
 
         </p>
 
-        @if($certificacion)
+        @if(isset($certificacion))
 
             <p class="parrafo">Certificacion: <strong>{{ $certificacion->tipo->label() }}-{{ $certificacion->año }}-{{ $certificacion->folio }}</strong></p>
 
@@ -223,7 +223,7 @@
 
         @include('avaluos.propietarios')
 
-        @if($certificacion->tramite->avaluo_para->value === 8)
+        @if(isset($certificacion) && $certificacion?->tramite->avaluo_para->value === 8)
 
             <p class="parrafo">En avalúos de fusión, se debe verificar la relación de propietarios en observaciones, ya que los predios pueden tener titulares distintos. Esto garantiza la correcta identificación de derechos y evita inconsistencias legales.</p>
 
@@ -340,10 +340,14 @@
 
             <tbody>
                 <tr>
-                    <td style="padding-right: 40px;">
+                    @if(isset($certificacion))
 
-                        <img class="qr" src="{{ $qr }}" alt="QR">
-                    </td>
+                        <td style="padding-right: 40px;">
+
+                            <img class="qr" src="{{ $qr }}" alt="QR">
+                        </td>
+
+                    @endif
                     <td style="padding-right: 40px;">
 
                         <p>Impreso el: <strong>{{ now()->format('d-m-Y H:i:s') }}</strong></p>
