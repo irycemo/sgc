@@ -115,6 +115,8 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
 
         if($row['predio_existe_en_padron'] == 'SI'){
 
+            $this->revisarPredio($row);
+
             $this->validarDisponibilidadAvaluos($row);
 
             $count_predios_existentes ++;

@@ -109,7 +109,7 @@ class MigrarPredioJob implements ShouldQueue
                     'registro' => $this->predio['regi_003'],
                     'libro' => $this->predio['libr_003'],
                     'distrito' => null,
-                    'domicilio_notificacion' => $this->predio['noca_008'] . ' ' . $this->predio['exte_008'] . ' ' . $this->predio['adic_008'] . ' ' . $this->predio['inte_008'] . ' ' . $this->predio['nedi_008'] . ' ' . $this->predio['ndpt_008'] . ' ' . $this->predio['noco_008'] . ' ' . $this->predio['nopo_008'] . ' ' . $this->predio['nomu_008'] . ' ' . $this->predio['copd_008'] . ' ' .  ' ' . $this->predio['copd_008'],
+                    'domicilio_notificacion' => $this->predio['noca_008'] . ' ' . $this->predio['exte_008'] . ' ' . $this->predio['adic_008'] . ' ' . $this->predio['inte_008'] . ' ' . $this->predio['nedi_008'] . ' ' . $this->predio['ndpt_008'] . ' ' . $this->predio['noco_008'] . ' ' . $this->predio['nopo_008'] . ' ' . $this->predio['nomu_008'] . ' ' . $this->predio['copd_008'],
                     'actualizado_nombre' => trim($this->predio['nome_008'])
                 ]);
 

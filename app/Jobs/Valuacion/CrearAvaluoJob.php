@@ -340,7 +340,18 @@ class CrearAvaluoJob implements ShouldQueue
     public function procesarPropietariosColindancias($predio_nuevo):void
     {
 
-        $predio_origen_id = Import::where('batch_id', $this->batch_id)->whereNotNull('predio_origen')->first()->predio_origen;
+        $predio_origen_id = Import::where('batch_id', $this->batch_id)->where('predio_origen', 'SI')->first();
+
+        if(! $predio_origen_id){
+
+            $predio_origen_id = Predio::where('localidad', $this->row['localidad'])
+                                        ->where('oficina', $this->row['oficina'])
+                                        ->where('tipo_predio', $this->row['tipo_predio'])
+                                        ->where('numero_registro', $this->row['registro'])
+                                        ->first()
+                                        ->id;
+
+        }
 
         $predio_origen = Predio::find($predio_origen_id);
 
