@@ -1,24 +1,6 @@
 <p class="separador">Superficies y valor catastral</p>
 
 <table style="width: 100%">
-    <tbody  >
-        <tr style="text-align: left;">
-            <td style="width: 50%;">
-
-                superficie notarial: <strong>{{ $predio->superficie_notarial ?? 0 }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif</strong>
-
-            </td>
-            <td style="width: 50%;">
-
-                superficie judicial: <strong>{{ $predio->superficie_judicial ?? 0 }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif</strong>
-
-            </td>
-        </tr>
-    </tbody>
-
-</table>
-
-<table style="width: 100%">
 
     <tbody>
         <tr style="text-align: left;">
