@@ -78,6 +78,8 @@ class IngresarTrasladoController extends Controller
                     'actualizado_por' => auth()->id()
                 ]);
 
+                $traslado->audits()->latest()->first()->update(['tags' => 'Cerró aviso']);
+
             });
 
         } catch (GeneralException $ex) {
@@ -162,6 +164,8 @@ class IngresarTrasladoController extends Controller
                     'predio_id' => $validated['predio_id'],
                     'actualizado_por' => auth()->id()
                 ]);
+
+                $traslado->audits()->latest()->first()->update(['tags' => 'Cerró aviso']);
 
             });
 

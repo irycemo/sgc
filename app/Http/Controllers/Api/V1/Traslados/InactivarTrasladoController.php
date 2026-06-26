@@ -32,6 +32,8 @@ class InactivarTrasladoController extends Controller
                 'actualizado_por' => auth()->id()
             ]);
 
+            $traslado->audits()->latest()->first()->update(['tags' => 'Reactivó aviso']);
+
         } catch (\Throwable $th) {
 
             Log::error("Error al ingresar información de aviso desde Sistema Trámites en Lína." . $th);

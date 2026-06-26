@@ -7,6 +7,7 @@ use App\Models\Tramite;
 use App\Models\Certificacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ConsultarTramiteAvisoRequest;
+use App\Models\Traslado;
 
 class ConsultarCertificadoAvisoController extends Controller
 {
@@ -60,11 +61,17 @@ class ConsultarCertificadoAvisoController extends Controller
 
         }
 
-        if(Carbon::parse($certificacion->created_at) < now()->subMonths(3)){
+        $traslado = Traslado::where('certificacion_id', $certificacion->id)->where('predio_id', $predio->id)->first();
 
-            return response()->json([
-                'error' => "El certificado tiene mas de 3 meses desde su elaboración.",
-            ], 401);
+        if(!$traslado){
+
+            if(Carbon::parse($certificacion->created_at) < now()->subMonths(3)){
+
+                return response()->json([
+                    'error' => "El certificado tiene mas de 3 meses desde su elaboración.",
+                ], 401);
+
+            }
 
         }
 
