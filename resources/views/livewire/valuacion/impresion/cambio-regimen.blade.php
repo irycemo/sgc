@@ -74,7 +74,7 @@
 
             <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina_origen') border-1 border-red-500 @enderror" wire:model.blur="oficina_origen" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-            <input readonly title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo_origen') border-1 border-red-500 @enderror" wire:model="tipo_origen">
+            <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo_origen') border-1 border-red-500 @enderror" wire:model.lazy="tipo_origen">
 
             <input title="Número de registro" placeholder="# de Registro" type="number" class="bg-white rounded text-xs mt-2 sm:mt-0 @error('registro_origen') border-1 border-red-500 @enderror" wire:model.live="registro_origen">
 

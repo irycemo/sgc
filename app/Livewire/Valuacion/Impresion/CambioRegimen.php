@@ -22,14 +22,30 @@ class CambioRegimen extends Component
 
     public $localidad_origen;
     public $oficina_origen;
-    public $tipo_origen = 2;
+    public $tipo_origen;
     public $registro_origen;
     public $predio_origen;
 
-    public $tipo_nuevo = 1;
+    public $tipo_nuevo;
     public $registro_nuevo;
     public $predio_padre;
     public $avaluo;
+
+    public function updatedTipoOrigen(){
+
+        if($this->tipo_origen == 1){
+
+            $this->tipo_nuevo = 2;
+
+        }
+
+        if($this->tipo_origen == 2){
+
+            $this->tipo_nuevo = 1;
+
+        }
+
+    }
 
     protected function rules(){
         return [
