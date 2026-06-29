@@ -34,6 +34,8 @@ class RevisarTraslado extends Component
     public $modalRechazar = false;
     public $modalAutorizar = false;
     public $modalOperar = false;
+    public $respuesta_operacion_aviso;
+    public $respuesta_operacion_avaluo;
 
     public $transmitentes = [];
 
@@ -153,11 +155,11 @@ class RevisarTraslado extends Component
 
                 $this->anexarArchivoAlPredio();
 
-                (new SistemaTramitesLineaService())->operarAviso($this->traslado->aviso_stl);
+                $this->respuesta_operacion_aviso = (new SistemaTramitesLineaService())->operarAviso($this->traslado->aviso_stl);
 
                 if($this->traslado->tipo == 'revision'){
 
-                    (new SistemaPeritosExternosService())->operarAvaluo($this->traslado->avaluo_spe, $this->traslado->entidad_nombre);
+                    $this->respuesta_operacion_avaluo = (new SistemaPeritosExternosService())->operarAvaluo($this->traslado->avaluo_spe, $this->traslado->entidad_nombre);
 
                     $this->anexarFotosAlPredio();
 
@@ -171,21 +173,37 @@ class RevisarTraslado extends Component
 
             $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
-            (new SistemaTramitesLineaService())->revertirAviso($this->traslado->aviso_stl, null);
+            if(isset($this->respuesta_operacion_aviso['data']) && $this->respuesta_operacion_aviso['data'] == 'El aviso se operó con éxito.'){
+
+                (new SistemaTramitesLineaService())->corregirOperacion($this->traslado->aviso_stl);
+
+            }
 
             if($this->traslado->tipo == 'revision'){
 
-                (new SistemaPeritosExternosService())->revertirAvaluo($this->traslado->avaluo_spe);
+                if(isset($this->respuesta_operacion_avaluo['data']) &&  $this->respuesta_operacion_avaluo['data'] == 'Operación exitosa.'){
+
+                    (new SistemaPeritosExternosService())->revertirAvaluo($this->traslado->avaluo_spe);
+
+                }
 
             }
 
         } catch (\Throwable $th) {
 
-            (new SistemaTramitesLineaService())->revertirAviso($this->traslado->aviso_stl, null);
+            if(isset($this->respuesta_operacion_aviso['data']) && $this->respuesta_operacion_aviso['data'] == 'El aviso se operó con éxito.'){
+
+                (new SistemaTramitesLineaService())->corregirOperacion($this->traslado->aviso_stl);
+
+            }
 
             if($this->traslado->tipo == 'revision'){
 
-                (new SistemaPeritosExternosService())->revertirAvaluo($this->traslado->avaluo_spe);
+                if(isset($this->respuesta_operacion_avaluo['data']) &&  $this->respuesta_operacion_avaluo['data'] == 'Operación exitosa.'){
+
+                    (new SistemaPeritosExternosService())->revertirAvaluo($this->traslado->avaluo_spe);
+
+                }
 
             }
 

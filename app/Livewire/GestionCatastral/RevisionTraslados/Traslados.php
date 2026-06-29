@@ -209,7 +209,7 @@ class Traslados extends Component
 
         try {
 
-            /* $this->revisarPredioActivo(); */
+            $this->revisarPredioActivo();
 
             DB::transaction(function () {
 
