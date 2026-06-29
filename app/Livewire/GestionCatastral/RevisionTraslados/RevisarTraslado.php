@@ -167,7 +167,7 @@ class RevisarTraslado extends Component
 
             });
 
-            return redirect()->route('revision_traslados');
+            return redirect()->route('revision_traslados')->with('status', 'La operación se realizó con éxito, revise el predio para comprobar que la información se actualizó correctamente.');
 
         } catch (GeneralException $ex) {
 
@@ -444,11 +444,23 @@ class RevisarTraslado extends Component
 
                 if($propietario_existente){
 
-                    $propietario_existente->update([
-                        'porcentaje_propiedad' => (float)$adquiriente['porcentaje_propiedad'] + $propietario_existente->porcentaje_propiedad,
-                        'porcentaje_nuda' => (float)$adquiriente['porcentaje_nuda'] + $propietario_existente->porcentaje_nuda,
-                        'porcentaje_usufructo' => (float)$adquiriente['porcentaje_usufructo'] + $propietario_existente->porcentaje_usufructo,
-                    ]);
+                    if($this->aviso['acto'] == 'CONSOLIDACIÓN DEL USUFRUCTO'){
+
+                        $propietario_existente->update([
+                            'porcentaje_propiedad' => (float)$adquiriente['porcentaje_propiedad'],
+                            'porcentaje_nuda' => 0,
+                            'porcentaje_usufructo' => 0,
+                        ]);
+
+                    }else{
+
+                        $propietario_existente->update([
+                            'porcentaje_propiedad' => (float)$adquiriente['porcentaje_propiedad'] + $propietario_existente->porcentaje_propiedad,
+                            'porcentaje_nuda' => (float)$adquiriente['porcentaje_nuda'] + $propietario_existente->porcentaje_nuda,
+                            'porcentaje_usufructo' => (float)$adquiriente['porcentaje_usufructo'] + $propietario_existente->porcentaje_usufructo,
+                        ]);
+
+                    }
 
                     $propietario_existente->persona->update([
                         'fecha_nacimiento' => $adquiriente['persona']['fecha_nacimiento'],
