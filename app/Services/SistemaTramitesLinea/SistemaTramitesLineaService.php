@@ -400,6 +400,41 @@ class SistemaTramitesLineaService{
 
     }
 
+    public function corregirAutorizacion(int $aviso_id):string
+    {
+
+        $response = Http::withToken(config('services.sistema_tramites_en_linea.token'))
+                            ->accept('application/json')
+                            ->asForm()
+                            ->post(
+                                config('services.sistema_tramites_en_linea.corregir_autorizacion'),
+                                [
+                                    'id' => $aviso_id,
+                                ]
+                            );
+
+        if($response->status() !== 200){
+
+            Log::error("Error al corregir autorización de aviso. " . $response);
+
+            $data = json_decode($response, true);
+
+            if(isset($data['error'])){
+
+                throw new GeneralException($data['error']);
+
+            }
+
+            throw new GeneralException("Error al corregir autorización de aviso.");
+
+        }else{
+
+            return json_decode($response, true)['data'];
+
+        }
+
+    }
+
     public function generarAvisoPdf(int $aviso_id):array
     {
 

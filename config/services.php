@@ -61,6 +61,7 @@ return [
         'revertir_rechazo' => env('SISTEMA_TRAMITES_EN_LINEA_REVERTIR_RECHAZO'),
         'revertir_autorizado' => env('SISTEMA_TRAMITES_EN_LINEA_REVERTIR_AUTORIZADO'),
         'corregir_operacion' => env('SISTEMA_TRAMITES_EN_LINEA_CORREGIR_OPERACION'),
+        'corregir_autorizacion' => env('SISTEMA_TRAMITES_EN_LINEA_CORREGIR_AUTORIZACION'),
         'generar_aviso_pdf' => env('SISTEMA_TRAMITES_EN_LINEA_GENERAR_AVISO_PDF'),
     ],
 

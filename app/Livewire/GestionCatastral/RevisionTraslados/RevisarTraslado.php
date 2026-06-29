@@ -34,6 +34,7 @@ class RevisarTraslado extends Component
     public $modalRechazar = false;
     public $modalAutorizar = false;
     public $modalOperar = false;
+    public $respuesta_autorizacion_aviso;
     public $respuesta_operacion_aviso;
     public $respuesta_operacion_avaluo;
 
@@ -106,7 +107,7 @@ class RevisarTraslado extends Component
 
         try {
 
-            (new SistemaTramitesLineaService())->autorizarAviso($this->traslado->aviso_stl, $this->observaciones);
+            $this->respuesta_autorizacion_aviso = (new SistemaTramitesLineaService())->autorizarAviso($this->traslado->aviso_stl, $this->observaciones);
 
             $this->traslado->update([
                 'valor_isai' => $this->aviso['valor_isai'],
@@ -122,11 +123,23 @@ class RevisarTraslado extends Component
 
             $this->dispatch('mostrarMensaje', ['error', $ex->getMessage()]);
 
+            if(isset($this->respuesta_autorizacion_aviso['data']) && $this->respuesta_autorizacion_aviso['data'] == 'El aviso se autorizó con éxito.'){
+
+                (new SistemaTramitesLineaService())->corregirAutorizacion($this->traslado->aviso_stl);
+
+            }
+
         } catch (\Throwable $th) {
 
             Log::error("Error al autorizar aviso en Sistema de Trámties en línea por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
 
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+            if(isset($this->respuesta_autorizacion_aviso['data']) && $this->respuesta_autorizacion_aviso['data'] == 'El aviso se autorizó con éxito.'){
+
+                (new SistemaTramitesLineaService())->corregirAutorizacion($this->traslado->aviso_stl);
+
+            }
         }
 
     }
