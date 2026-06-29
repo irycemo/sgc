@@ -117,7 +117,7 @@ class RevisarTraslado extends Component
 
             $this->traslado->audits()->latest()->first()->update(['tags' => 'Autorizó traslado']);
 
-            return redirect()->route('revision_traslados');
+            return redirect()->route('revision_traslados')->with('status', 'La autorización se realizó con éxito.');
 
         } catch (GeneralException $ex) {
 
