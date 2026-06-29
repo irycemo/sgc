@@ -236,29 +236,29 @@ class Notificacion extends Component
 
         if(in_array($this->tramite->avaluo_para, [AvaluoPara::CAMBIO_REGIMEN, AvaluoPara::CAMBIO_DE_REGIMEN_Y_DESGLOSE])){
 
-            $predio_rustico = $this->tramite->predios()->where('tipo_predio', 2)->first();
+            $predio_origen = $this->tramite->predios()->first();
 
-            if(! $predio_rustico){
+            if(! $predio_origen){
 
-                throw new GeneralException('No se encontro el predio rustico para el cambio de régimen.');
+                throw new GeneralException('No se encontro el predio origen para el cambio de régimen.');
 
             }
 
-            if($predio_rustico->estado == 'baja') return;
+            if($predio_origen->estado == 'baja') return;
 
             $observaciones = 'SE DA DE BAJA EL PREDIO MEDIANTE ' . $this->tramite->avaluo_para->label() . ' CON FOLIO '. $this->avaluo->año . '-' . $this->avaluo->folio . '-' . $this->avaluo->usuario . ' POR CAMBIO DE REGIMEN. DA ORIGEN AL PREDIO ' . $this->predio->cuentaPredial() . '. ' . $this->avaluo->observaciones;
 
-            $predio_rustico->update([
+            $predio_origen->update([
                 'status' => 'baja',
                 'actualizado_por' => auth()->id(),
                 'observaciones' => $observaciones,
             ]);
 
             $this->predio->update([
-                'superficie_notarial' => $predio_rustico->superficie_notarial,
+                'superficie_notarial' => $predio_origen->superficie_notarial,
             ]);
 
-            $predio_rustico->movimientos()->create([
+            $predio_origen->movimientos()->create([
                 'nombre' => $this->tramite->avaluo_para->label(),
                 'fecha' => $this->fecha_notificacion,
                 'descripcion' => $observaciones,
