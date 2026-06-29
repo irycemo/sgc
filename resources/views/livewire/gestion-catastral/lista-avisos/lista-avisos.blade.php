@@ -81,6 +81,7 @@
                 <x-table.heading sortable wire:click="sortBy('name')" :direction="$sort === 'name' ? $direction : null" >Estado</x-table.heading>
                 <x-table.heading >Cuenta predial</x-table.heading>
                 <x-table.heading >Folio aviso</x-table.heading>
+                <x-table.heading >Acto</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('entidad_nombre')" :direction="$sort === 'entidad_nombre' ? $direction : null" >Entidad</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('asignado_a')" :direction="$sort === 'area' ? $direction : null" >Asignado A</x-table.heading>
                 <x-table.heading sortable wire:click="sortBy('created_at')" :direction="$sort === 'created_at' ? $direction : null">Registro</x-table.heading>
@@ -110,6 +111,12 @@
                         <x-table.cell title="Cuenta predial">
 
                             {{ $traslado->año_aviso }}-{{ $traslado->folio_aviso }}-{{ $traslado->usuario_aviso }}
+
+                        </x-table.cell>
+
+                        <x-table.cell title="Acto">
+
+                            {{ $traslado->acto }}
 
                         </x-table.cell>
 

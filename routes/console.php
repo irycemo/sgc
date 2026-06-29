@@ -1422,3 +1422,33 @@ Artisan::command('usuarios', function(){
     }
 
 });
+
+Artisan::command('actos_aviso', function(){
+
+    $count = 0;
+
+    $traslados = Traslado::all();
+
+    foreach($traslados as $traslado){
+
+        try {
+
+            $aviso = (new SistemaTramitesLineaService())->consultarAviso2($traslado->aviso_stl);
+
+            $traslado->update([
+                'estado' => $aviso['estado'],
+                'acto' => $aviso['acto']
+            ]);
+
+            $count ++;
+
+        } catch (\Throwable $th) {
+            $this->info($th->getMessage());
+
+        }
+
+    }
+
+    $this->info($count);
+
+});
