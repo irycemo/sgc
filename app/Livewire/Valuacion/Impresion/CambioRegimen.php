@@ -93,7 +93,7 @@ class CambioRegimen extends Component
 
         $this->predio_padre = Predio::where('localidad', $this->localidad_origen)
                                         ->where('oficina', $this->oficina_origen)
-                                        ->where('tipo_predio', 2)
+                                        ->where('tipo_predio', $this->tipo_origen)
                                         ->where('numero_registro', $this->registro_origen)
                                         ->first();
 
@@ -102,7 +102,7 @@ class CambioRegimen extends Component
         $this->avaluo = Avaluo::withWhereHas('predioAvaluo', function($q){
                                     $q->where('localidad', $this->localidad_origen)
                                         ->where('oficina', $this->oficina_origen)
-                                        ->where('tipo_predio', 1)
+                                        ->where('tipo_predio', $this->tipo_nuevo)
                                         ->where('numero_registro', $this->registro_nuevo);
                                 })
                                 ->where('estado', '!=', 'notificado')
