@@ -44,7 +44,7 @@ class ConsultarTramiteAvisoController extends Controller
         if(!$predio){
 
             return response()->json([
-                'error' => "El predio no esta asociado con el trámite.",
+                'error' => "El predio no esta asociado con el trámite del aviso.",
             ], 404);
 
         }
@@ -93,7 +93,7 @@ class ConsultarTramiteAvisoController extends Controller
             if(!$predio){
 
                 return response()->json([
-                    'error' => "El predio no esta asociado con el trámite.",
+                    'error' => "El predio no esta asociado con el trámite del aviso.",
                 ], 404);
 
             }
