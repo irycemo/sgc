@@ -60,6 +60,19 @@ class ConsultarTramitesController extends Controller
                                 ->when(isset($validated['folio']), fn($q) => $q->where('folio', $validated['folio']))
                                 ->when(isset($validated['estado']), fn($q) => $q->where('estado', $validated['estado']))
                                 ->when(isset($validated['tipo_servicio']), fn($q) => $q->where('tipo_servicio', $validated['tipo_servicio']))
+                                ->when(
+                                        isset($validated['localidad']) &&
+                                        isset($validated['oficina']) &&
+                                        isset($validated['t_predio']) &&
+                                        isset($validated['registro']),
+                                function($q) use($validated){
+                                    $q->whereHas('predios', function($q) use($validated){
+                                        $q->where('localidad', $validated['localidad'])
+                                            ->where('oficina', $validated['oficina'])
+                                            ->where('tipo_predio', $validated['t_predio'])
+                                            ->where('numero_registro', $validated['registro']);
+                                    });
+                                })
                                 ->orderBy('id', 'desc')
                                 ->paginate($validated['pagination'], ['*'], 'page', $validated['pagina']);
 

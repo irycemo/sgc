@@ -28,6 +28,10 @@ class TramiteListaRequest extends FormRequest
             'folio' => 'nullable',
             'tipo_servicio' => 'nullable',
             'servicio' => 'nullable',
+            'localidad' => 'nullable',
+            'oficina' => 'nullable',
+            't_predio' => 'nullable',
+            'registro' => 'nullable',
             'pagina' => 'required',
             'pagination' => 'required'
         ];
