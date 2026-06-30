@@ -156,6 +156,12 @@ class Traslados extends Component
 
                 $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Revirtiro operación de aviso']);
 
+                if($this->modelo_editar->tramite->estado == 'concluido'){
+
+                    $this->modelo_editar->tramite->update(['estado' => 'pagado']);
+
+                }
+
                 (new SistemaTramitesLineaService())->revertirAviso($this->modelo_editar->aviso_stl, $this->observaciones);
 
             });
