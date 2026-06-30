@@ -65,9 +65,9 @@ class ConsultarCertificadoAvisoController extends Controller
 
         if(!$traslado){
 
-            $fecha_creado = Carbon::parse($certificacion->created_at)->endOfDay();
+            $fecha_creado_fin_del_dia = Carbon::parse($certificacion->created_at)->endOfDay();
 
-            if($fecha_creado < now()->subMonths(3)){
+            if(Carbon::parse($fecha_creado_fin_del_dia) < now()->subMonths(3)){
 
                 return response()->json([
                     'error' => "El certificado tiene mas de 3 meses desde su elaboración.",
