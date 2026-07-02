@@ -90,7 +90,7 @@
 
                             @else
 
-                                <span class="bg-green-400 py-1 px-2 rounded-full text-white text-xs">Requerido</span>
+                                <span class="bg-green-400 py-1 px-2 rounded-full text-white text-xs">Nuevo</span>
 
                             @endif
 
