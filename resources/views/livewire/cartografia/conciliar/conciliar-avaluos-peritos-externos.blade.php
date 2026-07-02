@@ -20,6 +20,14 @@
 
             <input type="number" wire:model.live.debounce.500mse="usuario" placeholder="Usuario" class="bg-white rounded-full text-sm w-24">
 
+            <input type="number" wire:model="localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+
+            <input type="number" wire:model="oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+
+            <input type="number" wire:model="t_predio" placeholder="T. Predio" class="bg-white rounded-full text-sm w-24">
+
+            <input type="number" wire:model.live.debounce.500ms="registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+
             <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                 <option value="10">10</option>
@@ -42,6 +50,7 @@
                 <x-table.heading>Año</x-table.heading>
                 <x-table.heading>Folio</x-table.heading>
                 <x-table.heading>Usuario</x-table.heading>
+                <x-table.heading>Estado</x-table.heading>
                 <x-table.heading>Perito externo</x-table.heading>
                 <x-table.heading>Cuenta predial</x-table.heading>
                 <x-table.heading>Clave catastral</x-table.heading>
@@ -55,57 +64,57 @@
 
                     <x-table.row wire:loading.class.delaylongest="opacity-50" wire:key="row-{{ $avaluo['id'] }}">
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Año</span>
+                        <x-table.cell title="Año">
 
                             {{ $avaluo['año'] }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Folio</span>
+                        <x-table.cell title="Folio">
 
                             {{ $avaluo['folio'] }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Usuario</span>
+                        <x-table.cell title="Usuario">
 
                             {{ $avaluo['usuario'] }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
+                        <x-table.cell title="Estado">
 
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Valuador</span>
+                            @if(count($avaluo['requerimientos']) > 0)
+
+                                <span class="bg-blue-400 py-1 px-2 rounded-full text-white text-xs">Atendido</span>
+
+                            @else
+
+                                <span class="bg-green-400 py-1 px-2 rounded-full text-white text-xs">Requerido</span>
+
+                            @endif
+
+                        </x-table.cell>
+
+                        <x-table.cell title="Valuador">
 
                             <p class="mt-2">{{ $avaluo['valuador'] }}</p>
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Cuenta predial</span>
+                        <x-table.cell title="Cuenta predial">
 
                             {{ $avaluo['cuenta_predial'] }}
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Clave catastral</span>
+                        <x-table.cell title="Clave catastral">
 
                             <p class="mt-2">{{ $avaluo['clave_catastral'] }}</p>
 
                         </x-table.cell>
 
-                        <x-table.cell>
-
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 text-[10px] text-white font-bold uppercase rounded-br-xl">Acciones</span>
+                        <x-table.cell title="Acciones">
 
                             <div class="ml-3 relative" x-data="{ open_drop_down:false }">
 
@@ -265,6 +274,10 @@
                         <p>{{ $avaluo_seleccionado['lon'] }}</p>
 
                     </div>
+
+                </div>
+
+                <div class="flex gap-2 w-full items-center">
 
                     <a target="_blank" href="{{ 'https://www.google.com/maps/?q=' . $avaluo_seleccionado['lat'] . ',' . $avaluo_seleccionado['lon'] . '&z=5&t=k' }}">
 

@@ -258,7 +258,7 @@ class SistemaPeritosExternosService{
 
     }
 
-    public function consultarAvaluosConciliar(int | null $año, int | null $folio, int | null $usuario, int $pagina_actual, int $pagination):array
+    public function consultarAvaluosConciliar(int | null $año, int | null $folio, int | null $usuario, int | null $localidad, int | null $oficina, int | null $t_predio, int | null $registro, int $pagina_actual, int $pagination):array
     {
 
         $response = Http::withToken(config('services.sistema_peritos_externos.token'))
@@ -270,6 +270,10 @@ class SistemaPeritosExternosService{
                                     'año' => $año,
                                     'folio' => $folio,
                                     'usuario' => $usuario,
+                                    'localidad' => $localidad,
+                                    'oficina' => $oficina,
+                                    't_predio' => $t_predio,
+                                    'registro' => $registro,
                                     'pagina' => $pagina_actual,
                                     'pagination' => $pagination,
                                 ]

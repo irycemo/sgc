@@ -39,20 +39,17 @@ class ConciliarAvaluosPeritosExternos extends Component
     public $predio;
     public $edificio;
     public $departamento;
+    public $oficina;
+    public $t_predio;
+    public $registro;
 
     public $observaciones;
 
     public $predio_id;
 
-    public function updatedFolio(){
+    public function updated($field, $value){
 
-        if($this->folio == '') $this->folio = null;
-
-    }
-
-    public function updatedUsuario(){
-
-        if($this->usuario == '') $this->usuario = null;
+        if($value == '') $this->{$field} = null;
 
     }
 
@@ -227,7 +224,17 @@ class ConciliarAvaluosPeritosExternos extends Component
 
         try {
 
-            $data = (new SistemaPeritosExternosService())->consultarAvaluosConciliar($this->año, $this->folio, $this->usuario, $this->paginaActual, $this->pagination);
+            $data = (new SistemaPeritosExternosService())->consultarAvaluosConciliar(
+                                                                                        $this->año,
+                                                                                        $this->folio,
+                                                                                        $this->usuario,
+                                                                                        $this->localidad,
+                                                                                        $this->oficina,
+                                                                                        $this->t_predio,
+                                                                                        $this->registro,
+                                                                                        $this->paginaActual,
+                                                                                        $this->pagination
+                                                                                    );
 
             $this->paginaActual = Arr::get($data, 'meta.current_page');
             $this->paginaAnterior = Arr::get($data, 'links.prev');
