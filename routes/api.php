@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\V1\Tramites\ConsultarCertificadoAvisoController;
 use App\Http\Controllers\Api\V1\Certificaciones\ConsultarCertificadosController;
 use App\Http\Controllers\Api\V1\Certificaciones\GenerarCertificadoPdfController;
 use App\Http\Controllers\Api\V1\Oficinas\OficinasController;
+use App\Http\Controllers\Api\V1\Traslados\EliminarTraslado;
 
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -52,6 +53,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('ingresar_revision_aviso', [IngresarTrasladoController::class, 'ingresarRevisionAviso']);
 
     Route::post('inactivar_traslado', [InactivarTrasladoController::class, 'inactivarTraslado']);
+
+    Route::post('eliminar_traslado', [EliminarTraslado::class, 'eliminarTraslado']);
 
     Route::post('crear_tramite', [CrearTramiteController::class, 'crearTramite']);
 

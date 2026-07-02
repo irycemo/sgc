@@ -307,7 +307,7 @@
 
                     <img wire:loading wire:target="reasignar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                    Resaiganr
+                    Reasiganr
                 </x-button-blue>
 
                 <x-button-red
