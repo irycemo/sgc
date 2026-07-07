@@ -150,7 +150,7 @@ class Traslados extends Component
             DB::transaction(function () {
 
                 $this->modelo_editar->update([
-                    'estado' => 'nuevo',
+                    'estado' => 'autorizado',
                     'actualizado_por' => auth()->id()
                 ]);
 
@@ -188,7 +188,7 @@ class Traslados extends Component
             DB::transaction(function () {
 
                 $this->modelo_editar->update([
-                    'estado' => 'nuevo',
+                    'estado' => 'cerrado',
                     'actualizado_por' => auth()->id()
                 ]);
 
@@ -220,7 +220,7 @@ class Traslados extends Component
             DB::transaction(function () {
 
                 $this->modelo_editar->update([
-                    'estado' => 'nuevo',
+                    'estado' => 'cerrado',
                     'actualizado_por' => auth()->id()
                 ]);
 
