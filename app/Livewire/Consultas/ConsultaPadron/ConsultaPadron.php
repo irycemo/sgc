@@ -355,7 +355,8 @@ class ConsultaPadron extends Component
 
         }elseif($this->radio == 'ubicacion'){
 
-            return Predio::when(!empty($this->nombre_vialidad), function($q){
+            return Predio::where('oficina', $this->oficina)
+                            ->when(!empty($this->nombre_vialidad), function($q){
                                 $q->where('nombre_vialidad', 'like', '%' . $this->nombre_vialidad . '%');
                             })
                             ->when(!empty($this->nombre_asentamiento), function($q){
@@ -364,7 +365,6 @@ class ConsultaPadron extends Component
                             ->when(!empty($this->nombre_predio), function($q){
                                 $q->where('nombre_predio', 'like', '%' . $this->nombre_predio . '%');
                             })
-                            ->where('oficina', $this->oficina)
                             ->orderByRaw('CAST(numero_exterior AS UNSIGNED) ASC')
                             ->paginate(20);
 
