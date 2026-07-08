@@ -26,6 +26,7 @@ class TramiteListaRequest extends FormRequest
             'año' => 'nullable|numeric',
             'estado' => 'nullable',
             'folio' => 'nullable',
+            'usuario' => 'nullable',
             'tipo_servicio' => 'nullable',
             'servicio' => 'nullable',
             'localidad' => 'nullable',

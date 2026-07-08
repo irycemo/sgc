@@ -54,10 +54,10 @@ class ConsultarTramitesController extends Controller
                                     'servicio:id,nombre',
                                     'predios:id,localidad,oficina,tipo_predio,numero_registro,nombre_asentamiento,nombre_vialidad,numero_exterior'
                                 )
-                                ->where('usuario', 11)
                                 ->where('usuario_tramites_linea_id', $validated['entidad'])
                                 ->when(isset($validated['año']), fn($q) => $q->where('año', $validated['año']))
                                 ->when(isset($validated['folio']), fn($q) => $q->where('folio', $validated['folio']))
+                                ->when(isset($validated['usuario']), fn($q) => $q->where('usuario', $validated['usuario']))
                                 ->when(isset($validated['estado']), fn($q) => $q->where('estado', $validated['estado']))
                                 ->when(isset($validated['tipo_servicio']), fn($q) => $q->where('tipo_servicio', $validated['tipo_servicio']))
                                 ->when(
