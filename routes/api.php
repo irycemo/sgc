@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\V1\Tramites\ConsultarCertificadoAvisoController;
 use App\Http\Controllers\Api\V1\Certificaciones\ConsultarCertificadosController;
 use App\Http\Controllers\Api\V1\Certificaciones\GenerarCertificadoPdfController;
 use App\Http\Controllers\Api\V1\Oficinas\OficinasController;
+use App\Http\Controllers\Api\V1\Predios\ActualizarEsHabitacionalController;
 use App\Http\Controllers\Api\V1\Traslados\EliminarTraslado;
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -87,5 +88,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('consultar_avaluo', [ConsultarAvaluos::class, 'consultarAvaluo']);
 
     Route::get('consultar_avaluos', [ConsultarAvaluos::class, 'consultarAvaluos']);
+
+    Route::post('actualizar_es_habitacional', [ActualizarEsHabitacionalController::class, 'actualizarEsHabitacional']);
 
 });

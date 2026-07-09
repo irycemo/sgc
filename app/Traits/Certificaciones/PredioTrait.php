@@ -126,6 +126,7 @@ trait PredioTrait
         $object->tipo_predio = $predio->tipo_predio;
         $object->edificio = $predio->edificio;
         $object->id = $predio->id;
+        $object->es_habitacional = $predio->es_habitacional;
         $object->status = $predio->status;
         $object->curt = $predio->curt;
         $object->superficie_construccion = $predio->superficie_construccion_formateada;

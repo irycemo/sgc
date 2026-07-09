@@ -112,6 +112,29 @@
 
 @endif
 
-<p class="parrafo">
-    Valor catastral: <strong>${{ number_format($predio->valor_catastral, 2) }}</strong>
-</p>
+<table style="width: 100%">
+
+    <tbody>
+        <tr style="text-align: left;">
+            <td style="width: 50%;">
+
+                <p class="parrafo">
+                    Valor catastral: <strong>${{ number_format($predio->valor_catastral, 2) }}</strong>
+                </p>
+
+            </td>
+            <td style="width: 50%;">
+
+                @if(isset($predio->es_habitacional) && $predio->es_habitacional)
+
+                    <p class="parrafo">
+                        El predio es habitacional: <strong>{{ $predio->es_habitacional ? 'Si' : 'No' }}</strong>
+                    </p>
+
+                @endif
+
+            </td>
+        </tr>
+    </tbody>
+
+</table>

@@ -17,6 +17,7 @@ class PredioPropietariosResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'es_habitacional' => $this->es_habitacional,
             'estado' => $this->estado,
             'region_catastral' => $this->region_catastral,
             'municipio' => $this->municipio,

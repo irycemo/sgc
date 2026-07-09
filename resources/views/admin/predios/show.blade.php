@@ -44,6 +44,14 @@
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
+                <strong>Es habitacional</strong>
+
+                <p>{{ $predio->es_habitacional ? 'Si' : 'No' }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
                 <strong>Declarante</strong>
 
                 <p>{{ $predio->declarante }}</p>
