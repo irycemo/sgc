@@ -15,6 +15,7 @@ enum AvaluoPara: int
     case FUSION = 8;
     case CAMBIO_REGIMEN = 9;
     case CAMBIO_DE_REGIMEN_Y_DESGLOSE = 10;
+    case CAMBIO_DE_MUNICIPIO = 11;
     /* CAMBIO DE MUNICIPIO */
 
     public function label(): string
@@ -32,7 +33,7 @@ enum AvaluoPara: int
             AvaluoPara::FUSION => 'Avalúo de fusión',/* T-Inspección */
             AvaluoPara::CAMBIO_REGIMEN => 'Avalúo de cambio de régimen',/* T-Inspección T-Desglose*/
             AvaluoPara::CAMBIO_DE_REGIMEN_Y_DESGLOSE => 'Avalúo de cambio de régimen y desglose',/* T-Inspección T-Desglose*/
-
+            AvaluoPara::CAMBIO_DE_MUNICIPIO => 'Avalúo de cambio de municipio',/* T-Inspección T-Desglose*/
         };
 
     }

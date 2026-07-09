@@ -44,7 +44,7 @@ class ConsultarPropietariosController extends Controller
         if(!$predio){
 
             return response()->json([
-                'error' => "El trámite no tiene un certificado activo del predio.",
+                'error' => "El trámite de certificado no esta relacionado con el predio del aviso.",
             ], 404);
 
         }

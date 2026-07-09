@@ -50,6 +50,10 @@
 
         @livewire('valuacion.impresion.desglose-cambio-regimen', ['avaluo_para' => $avaluo_para])
 
+    @elseif(in_array($avaluo_para, [11]))
+
+        @livewire('valuacion.impresion.cambio-municipio', ['avaluo_para' => $avaluo_para])
+
     @endif
 
 </div>

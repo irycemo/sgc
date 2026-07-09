@@ -1427,7 +1427,7 @@ Artisan::command('actos_aviso', function(){
 
     $count = 0;
 
-    $traslados = Traslado::all();
+    $traslados = Traslado::whereNUll('acto')->get();
 
     foreach($traslados as $traslado){
 
