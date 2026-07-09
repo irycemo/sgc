@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Tramites;
 
 use App\Exceptions\GeneralException;
+use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CrearTramiteRefrendoRequest;
 use App\Http\Requests\CrearTramiteRequest;
@@ -13,14 +14,11 @@ use App\Models\Servicio;
 use App\Models\Tramite;
 use App\Services\Tramites\OrdenPagoService;
 use App\Services\Tramites\TramiteService;
-use App\Traits\Api\Certificados\GenerarCertificadosAutomaticosTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class CrearTramiteController extends Controller
 {
-
-    use GenerarCertificadosAutomaticosTrait;
 
     public function crearTramite(CrearTramiteRequest $request){
 
@@ -61,9 +59,9 @@ class CrearTramiteController extends Controller
 
             });
 
-            if($validated['nombre_solicitante'] === 'Secretaría de Desarrollo Urbano y Movilidad' && in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM31'])){
+            if($validated['nombre_solicitante'] === 'Secretaría de Desarrollo Urbano y Movilidad' && in_array($nuevo_tramite->servicio->clave_ingreso, ['DM32', 'DM31'])){
 
-                $this->generarCertificadosElectronicos($tramite);
+                $this->generarCertificadosElectronicos($nuevo_tramite);
 
             }
 
@@ -177,6 +175,32 @@ class CrearTramiteController extends Controller
                     throw new GeneralException("El predio " . $predio['localidad'] . "-" . $predio['oficina'] . "-" . $predio['tipo_predio'] . "-" . $predio['numero_registro'] . " se encuentra en sector 88 0 99 es necesario conciliarlo.");
 
                 }
+
+            }
+
+        }
+
+    }
+
+    private function generarCertificadosElectronicos($tramite){
+
+        foreach ($tramite->predios as $predio) {
+
+            $tipo_certificado = mb_strtoupper($tramite->servicio->nombre, 'utf-8');
+
+            (new CertificadoRegistroController())->certificado($tramite, $predio, $tipo_certificado, auth()->user(), null);
+
+            $tramite->predios()->updateExistingPivot($predio->id, ['estado' => 'I']);
+
+            $usados = $tramite->predios()->wherePivot('estado', 'I')->count();
+
+            $tramite->update(['usados' => $usados]);
+
+            $tramite->refresh();
+
+            if($tramite->cantidad === $usados){
+
+                $tramite->update(['estado' => 'concluido']);
 
             }
 

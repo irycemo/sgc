@@ -128,7 +128,7 @@
                 @if(isset($predio->es_habitacional) && $predio->es_habitacional)
 
                     <p class="parrafo">
-                        El predio es habitacional: <strong>{{ $predio->es_habitacional ? 'Si' : 'No' }}</strong>
+                        Tipo de uso: <strong>{{ $predio->es_habitacional ? 'habitacional' : 'otro' }}</strong>
                     </p>
 
                 @endif

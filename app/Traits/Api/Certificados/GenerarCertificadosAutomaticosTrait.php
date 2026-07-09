@@ -26,6 +26,8 @@ trait GenerarCertificadosAutomaticosTrait
 
                 $tramite->update(['usados' => $usados]);
 
+                $tramite->refresh();
+
                 if($tramite->cantidad === $usados){
 
                     $tramite->update(['estado' => 'concluido']);

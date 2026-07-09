@@ -4,12 +4,16 @@ namespace App\Console\Commands;
 
 use App\Models\Tramite;
 use App\Services\Tramites\TramiteService;
+use App\Traits\Api\Certificados\GenerarCertificadosAutomaticosTrait;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class RevisarPagoCommand extends Command
 {
+
+    use GenerarCertificadosAutomaticosTrait;
+
     /**
      * The name and signature of the console command.
      *
@@ -43,6 +47,12 @@ class RevisarPagoCommand extends Command
                 if(isset($data['FEC_PAGO'])){
 
                     (new TramiteService($tramite))->procesarPago();
+
+                    if(in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM31'])){
+
+                        $this->generarCertificadosElectronicos($tramite);
+
+                    }
 
                     info('Tramite validado mediante tarea programada: ' . $tramite->año . '-' . $tramite->folio . '-' . $tramite->usuario);
 
