@@ -411,7 +411,7 @@ class Captura extends Component
 
         try {
 
-            $this->validarSector();
+            /* $this->validarSector(); */
 
             $this->validarTitulo();
 
