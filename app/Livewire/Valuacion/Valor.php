@@ -136,7 +136,7 @@ class Valor extends Component
 
             $this->predio->valor_catastral = $this->revisarValorMinimo($this->predio->valor_catastral);
 
-            $es_habitacional = false;
+            /* $es_habitacional = false;
 
             if($this->predio->construcciones->count()){
 
@@ -154,7 +154,7 @@ class Valor extends Component
 
             }
 
-            $this->predio->es_habitacional = $es_habitacional;
+            $this->predio->es_habitacional = $es_habitacional; */
 
             $this->predio->save();
 
