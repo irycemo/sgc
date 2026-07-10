@@ -411,7 +411,7 @@ class Captura extends Component
 
         try {
 
-            /* $this->validarSector(); */
+            $this->validarSector();
 
             $this->validarTitulo();
 
@@ -444,7 +444,7 @@ class Captura extends Component
 
         } catch (GeneralException $ex) {
 
-            $this->dispatch('mostrarMensaje', ['error', $ex->getMessage()]);
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
         } catch (\Throwable $th) {
 
