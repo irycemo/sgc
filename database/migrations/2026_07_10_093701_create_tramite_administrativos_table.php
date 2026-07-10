@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedInteger('folio');
             $table->string('estado');
             $table->string('promovente')->nulalble();
-            $table->string('finado')->nulalble();
+            $table->string('finado')->nullable();
             $table->string('archivo')->nullable();
             $table->foreignId('tramite_id')->constrained();
             $table->foreignId('oficina_id')->constrained();

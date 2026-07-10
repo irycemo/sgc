@@ -43,6 +43,11 @@ class TramtiesTransicion extends Component
     public $file;
     public $estado;
 
+    public $localidad;
+    public $oficina;
+    public $tipo_predio;
+    public $numero_registro;
+
     public $modalHacerRequerimiento = false;
     public $modalVerRequerimiento = false;
     public $modalAsignarValuador = false;
@@ -84,6 +89,10 @@ class TramtiesTransicion extends Component
             'modelo_editar.oficina_id' => Rule::requiredIf(!auth()->user()->hasRole('Oficina rentistica')),
             'modelo_editar.valuador' => 'nullable',
             'modelo_editar.estado' => 'nullable',
+            'modelo_editar.localidad' => 'required',
+            'modelo_editar.oficina' => 'required',
+            'modelo_editar.tipo_predio' => 'required',
+            'modelo_editar.numero_registro' => 'required',
         ];
 
     }
@@ -192,6 +201,49 @@ class TramtiesTransicion extends Component
         } catch (\Throwable $th) {
 
             Log::error("Error al crear predio ignorado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+            $this->resetearTodo();
+
+        }
+
+    }
+
+    public function abrirAsignarValuador(TramiteAdministrativo $modelo){
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
+        $this->valuadores = User::where('valuador', true)
+                                    ->where('estado', 'activo')
+                                    ->where('oficina_id', $this->modelo_editar->oficina_id)
+                                    ->orderBy('name')
+                                    ->get();
+
+
+        $this->modalAsignarValuador = true;
+
+    }
+
+    public function asignar(){
+
+        $this->validate(['modelo_editar.valuador' => 'required']);
+
+        try {
+
+            $this->modelo_editar->estado = 'valuación';
+            $this->modelo_editar->actualizado_por = auth()->id();
+            $this->modelo_editar->save();
+
+            $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Asignó valuador']);
+
+            $this->resetearTodo($borrado = true);
+
+            $this->dispatch('mostrarMensaje', ['success', "Se asignó el valuador con éxito."]);
+
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al asignar valuador en predio ignorado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
             $this->resetearTodo();
 
@@ -439,8 +491,8 @@ class TramtiesTransicion extends Component
 
         if(auth()->user()->area == 'Oficina de rentas'){
 
-            $prediosIgnorados = TramiteAdministrativo::select('id', 'año', 'folio', 'estado', 'tramite_id', 'promovente', 'archivo', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
-                                            ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
+            $prediosIgnorados = TramiteAdministrativo::select('id', 'año', 'folio', 'estado', 'tramite_id', 'promovente', 'archivo', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at', 'localidad', 'oficina', 'tipo_predio', 'numero_registro', 'finado')
+                                            ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'tramite:id,año,folio,usuario', 'oficinaRentistica:id,nombre')
                                             ->withCount('archivos')
                                             ->where(function($q){
                                                 $q->where('promovente', 'LIKE', '%' . $this->search . '%')
@@ -459,8 +511,8 @@ class TramtiesTransicion extends Component
 
         }elseif(auth()->user()->hasRole('Valuador')){
 
-            $prediosIgnorados = TramiteAdministrativo::select('id', 'año', 'folio', 'estado', 'tramite_id', 'promovente', 'archivo', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
-                                            ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
+            $prediosIgnorados = TramiteAdministrativo::select('id', 'año', 'folio', 'estado', 'tramite_id', 'promovente', 'archivo', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at', 'localidad', 'oficina', 'tipo_predio', 'numero_registro', 'finado')
+                                            ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'tramite:id,año,folio,usuario', 'oficinaRentistica:id,nombre')
                                             ->withCount('archivos')
                                             ->where(function($q){
                                                 $q->where('promovente', 'LIKE', '%' . $this->search . '%')
@@ -478,8 +530,8 @@ class TramtiesTransicion extends Component
 
         }elseif(auth()->user()->can('Variaciones catastrales')){
 
-            $prediosIgnorados = TramiteAdministrativo::select('id', 'año', 'folio', 'estado', 'tramite_id', 'promovente', 'archivo', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
-                                                ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'tramite:id,año,folio,usuario', 'oficina:id,nombre')
+            $prediosIgnorados = TramiteAdministrativo::select('id', 'año', 'folio', 'estado', 'tramite_id', 'promovente', 'archivo', 'oficina_id', 'creado_por', 'actualizado_por', 'created_at', 'updated_at', 'localidad', 'oficina', 'tipo_predio', 'numero_registro', 'finado')
+                                                ->with('creadoPor:id,name', 'actualizadoPor:id,name', 'tramite:id,año,folio,usuario', 'oficinaRentistica:id,nombre')
                                                 ->withCount('archivos')
                                                 ->where(function($q){
                                                     $q->where('promovente', 'LIKE', '%' . $this->search . '%')

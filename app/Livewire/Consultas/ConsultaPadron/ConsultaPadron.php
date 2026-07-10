@@ -241,9 +241,9 @@ class ConsultaPadron extends Component
         $this->resetPage();
 
         $this->validate([
-            'nombre' => 'nullable',
-            'ap_paterno' => 'nullable',
-            'ap_materno' => 'nullable',
+            'nombre' => 'nullable|min:3',
+            'ap_paterno' => 'nullable|min:3',
+            'ap_materno' => 'nullable|min:3',
             'razon_social' => Rule::requiredIf($this->nombre == null && $this->ap_materno == null && $this->ap_paterno == null && $this->rfc == null && $this->curp == null),
             'rfc' => Rule::requiredIf($this->nombre == null && $this->ap_materno == null && $this->ap_paterno == null && $this->razon_social == null && $this->curp == null),
             'curp' => Rule::requiredIf($this->nombre == null && $this->ap_materno == null && $this->ap_paterno == null && $this->rfc == null && $this->razon_social == null),
@@ -282,7 +282,19 @@ class ConsultaPadron extends Component
 
     public function buscarPorUbicacion(){
 
+        if(! $this->nombre_vialidad && ! $this->nombre_asentamiento && ! $this->nombre_predio){
+
+            return;
+
+        }
+
         $this->resetPage();
+
+        $this->validate([
+            'nombre_vialidad' => 'nullable|min:3',
+            'nombre_asentamiento' => 'nullable|min:3',
+            'nombre_predio' => 'nullable|min:3',
+        ]);
 
         $this->reset('flag');
 
@@ -355,6 +367,12 @@ class ConsultaPadron extends Component
 
         }elseif($this->radio == 'ubicacion'){
 
+            if(! $this->nombre_vialidad && ! $this->nombre_asentamiento && ! $this->nombre_predio){
+
+                return Predio::where('id', 0)->paginate(20);
+
+            }
+
             return Predio::where('oficina', $this->oficina)
                             ->when(!empty($this->nombre_vialidad), function($q){
                                 $q->where('nombre_vialidad', 'like', '%' . $this->nombre_vialidad . '%');
@@ -370,13 +388,19 @@ class ConsultaPadron extends Component
 
         }elseif($this->radio == 'documento'){
 
-            return Predio::when(!empty($this->documento_entrada), function($q){
+            if(! $this->documento_entrada && ! $this->documento_numero){
+
+                return Predio::where('id', 0)->paginate(20);
+
+            }
+
+            return Predio::where('oficina', $this->oficina)
+                            ->when(!empty($this->documento_entrada), function($q){
                                 $q->where('documento_entrada', $this->documento_entrada);
                             })
                             ->when(!empty($this->documento_numero), function($q){
                                 $q->where('documento_numero', $this->documento_numero);
                             })
-                            ->where('oficina', $this->oficina)
                             ->orderByRaw('CAST(numero_exterior AS UNSIGNED) ASC')
                             ->paginate(20);
 

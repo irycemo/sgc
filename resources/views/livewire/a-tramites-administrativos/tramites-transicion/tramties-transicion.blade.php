@@ -126,7 +126,7 @@
 
                         <x-table.cell title="Municipio">
 
-                            {{ $tramiteAdministrativo->oficina->nombre }}
+                            {{ $tramiteAdministrativo->oficinaRentistica->nombre }}
 
                         </x-table.cell>
 
@@ -279,7 +279,7 @@
                                                 wire:loading.attr="disabled"
                                                 class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                                 role="menuitem">
-                                                Eliminar predio ignorado
+                                                Eliminar trámite administrativo
                                             </button>
 
                                         @endcan
@@ -332,8 +332,6 @@
 
     </div>
 
-    @include('livewire.a-tramites-administrativos.comun.modal-crear-predio')
-
     @include('livewire.a-tramites-administrativos.comun.modal-eliminar')
 
     @include('livewire.a-tramites-administrativos.comun.modal-hacer-requerimiento')
@@ -349,5 +347,149 @@
     @include('livewire.a-tramites-administrativos.comun.modal-ver-archivos')
 
     @include('livewire.a-tramites-administrativos.comun.modal-auditar')
+
+    <x-dialog-modal wire:model="modal">
+
+        <x-slot name="title">
+
+            Nuevo trámite administrativo
+
+        </x-slot>
+
+        <x-slot name="content">
+
+            <div class="flex-auto text-center mb-3">
+
+                <div >
+
+                    <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite</Label>
+
+                </div>
+
+                <div class="inline-flex">
+
+                    <select class="bg-white rounded-l text-sm border border-r-transparent focus:ring-0 @error('taño') border-red-500 @enderror" wire:model="taño">
+
+                        @foreach ($años as $año)
+
+                            <option value="{{ $año }}">{{ $año }}</option>
+
+                        @endforeach
+
+                    </select>
+
+                    <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('tfolio') border-red-500 @enderror" wire:model="tfolio">
+
+                    <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('tusuario') border-red-500 @enderror" wire:model="tusuario">
+
+                </div>
+
+            </div>
+
+            <div class="flex flex-col lg:space-x-2 mb-2 space-y-2 lg:space-y-0 items-center justify-center" >
+
+                <div class="text-left">
+
+                    <Label class="text-base tracking-widest rounded-xl border-gray-500">Cuenta predial</Label>
+
+                </div>
+
+                <div class="space-y-1">
+
+                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('modelo_editar.localidad') border-1 border-red-500 @enderror" wire:model.lazy="modelo_editar.localidad">
+
+                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('modelo_editar.oficina') border-1 border-red-500 @enderror" wire:model.lazy="modelo_editar.oficina">
+
+                    <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-20 @error('modelo_editar.tipo_predio') border-1 border-red-500 @enderror" wire:model="modelo_editar.tipo_predio">
+
+                    <input title="Número de registro" placeholder="Registro" type="number" class="bg-white rounded text-xs w-20 @error('modelo_editar.numero_registro') border-1 border-red-500 @enderror" wire:model.lazy="modelo_editar.numero_registro">
+
+                </div>
+
+            </div>
+
+            <div class="space-y-3">
+
+                <x-input-group for="modelo_editar.tipo" label="Tipo" :error="$errors->first('modelo_editar.tipo')" class="w-full">
+
+                    <x-input-select id="modelo_editar.tipo" wire:model.live="modelo_editar.tipo" class="w-full" :disabled="auth()->user()->area == 'Oficina de rentas'">
+
+                        <option value="">Seleccione una opción</option>
+                        <option value="ignorado">Predio ignorado</option>
+                        <option value="variacion">Variación catastral</option>
+
+                    </x-input-select>
+
+                </x-input-group>
+
+                <x-input-group for="modelo_editar.promovente" label="Promovente" :error="$errors->first('modelo_editar.promovente')" class="w-full">
+
+                    <x-input-text id="modelo_editar.promovente" wire:model="modelo_editar.promovente" />
+
+                </x-input-group>
+
+                @if($modelo_editar->tipo === 'variacion')
+
+                    <x-input-group for="modelo_editar.finado" label="Finado" :error="$errors->first('modelo_editar.finado')" class="w-full">
+
+                        <x-input-text id="modelo_editar.finado" wire:model="modelo_editar.finado" />
+
+                    </x-input-group>
+
+                @endif
+
+                <x-input-group for="modelo_editar.oficina_id" label="Municipio" :error="$errors->first('modelo_editar.oficina_id')" class="w-full">
+
+                    <x-input-select id="modelo_editar.oficina_id" wire:model="modelo_editar.oficina_id" class="w-full" :disabled="auth()->user()->area == 'Oficina de rentas'">
+
+                        <option value="">Seleccione una opción</option>
+
+                        @foreach ($oficinas as $oficina)
+
+                            <option value="{{ $oficina->id }}">{{ $oficina->nombre }}</option>
+
+                        @endforeach
+
+                    </x-input-select>
+
+                </x-input-group>
+
+            </div>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex gap-3">
+
+                <x-button-blue
+                    wire:click="guardar"
+                    wire:loading.attr="disabled"
+                    wire:target="guardar">
+
+                    <div wire:loading.flex class="flex items-center" wire:target="guardar">
+                        <svg class="animate-spin h-4 w-4 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </div>
+
+                    Guardar
+                </x-button-blue>
+
+                <x-button-red
+                    wire:click="resetearTodo"
+                    wire:loading.attr="disabled"
+                    wire:target="resetearTodo"
+                    type="button">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
+
 
 </div>

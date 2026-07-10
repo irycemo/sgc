@@ -40,8 +40,8 @@ class TramiteAdministrativo extends Model implements Auditable
         return $this->belongsTo(User::class, 'valuador');
     }
 
-    public function oficina(){
-        return $this->belongsTo(Oficina::class);
+    public function oficinaRentistica(){
+        return $this->belongsTo(Oficina::class, 'oficina_id');
     }
 
     public function tramite(){
