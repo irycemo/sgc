@@ -185,7 +185,7 @@ trait ImpresionTrait
 
         }
 
-        if($this->tramite_inspeccion->ligado_a && !$this->tramite_desglose) throw new GeneralException('El trámite de inspección ocular esta ligado a otro trámite.');
+        if($this->tramite_inspeccion->ligado_a && !$this->tramite_desglose) throw new GeneralException('El trámite de inspección ocular esta ligado a un trámite de desglose.');
 
         $this->numero_avaluos = $this->registro_final - $this->registro_inicio + 1 + count($this->predios_cuentas);
 

@@ -431,6 +431,7 @@ class VariacionesCatastrales extends Component
                 $predio_avaluo->registro,
                 $predio_avaluo->tomo,
                 $predio_avaluo->regimen,
+                $predio_avaluo->es_habitacional,
             );
 
         $predio_avaluo->save();
