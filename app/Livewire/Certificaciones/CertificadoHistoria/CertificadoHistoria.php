@@ -268,7 +268,7 @@ class CertificadoHistoria extends Component
 
         $this->validate([
             'nombre' => 'required',
-            'fecha' => 'required',
+            'fecha' => 'required|date|before:today',
             'descripcion' => 'required'
         ]);
 
