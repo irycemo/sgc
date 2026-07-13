@@ -174,7 +174,7 @@ class Notificacion extends Component
 
             }
 
-            foreach ($this->avaluo->variacionCatastral->archivo as $archivo) {
+            foreach ($this->avaluo->variacionCatastral->archivos as $archivo) {
 
                 $archivo->update([
                     'fileable_id' => $this->predio->id,
