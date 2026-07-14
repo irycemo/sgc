@@ -136,7 +136,7 @@ class SapService{
 
         }
 
-        if(! isset($array['FEC_PAGO'])){
+        if(! isset($data['FEC_PAGO'])){
 
             Log::error($data['ERROR'] . ' SAP');
 
@@ -144,7 +144,7 @@ class SapService{
 
         }
 
-        if(! isset($array['DOC_PAGO'])){
+        if(! isset($data['DOC_PAGO'])){
 
             Log::error($data['ERROR'] . ' SAP');
 
