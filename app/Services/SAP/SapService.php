@@ -138,7 +138,7 @@ class SapService{
 
         if(! isset($data['FEC_PAGO'])){
 
-            Log::error($data['ERROR'] . ' SAP');
+            Log::error("Error de comunicación con SAP.");
 
             throw new GeneralException("Error de comunicación con SAP.");
 
@@ -146,7 +146,7 @@ class SapService{
 
         if(! isset($data['DOC_PAGO'])){
 
-            Log::error($data['ERROR'] . ' SAP');
+            Log::error("Error de comunicación con SAP.");
 
             throw new GeneralException("Error de comunicación con SAP.");
 
