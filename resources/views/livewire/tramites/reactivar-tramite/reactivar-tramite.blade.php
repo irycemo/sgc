@@ -1,6 +1,6 @@
 <div>
 
-    <x-header>Reactivación de trámties</x-header>
+    <x-header>Reactivación de trámites</x-header>
 
     <div class="bg-white p-4 rounded-lg mb-5 shadow-lg">
 
@@ -233,7 +233,7 @@
                 wire:loading.attr="disabled"
                 wire:target="reactivarPredio"
             >
-                Rectivar
+                Reactivar
             </x-danger-button>
 
         </x-slot>

@@ -136,6 +136,22 @@ class SapService{
 
         }
 
+        if(! isset($array['FEC_PAGO'])){
+
+            Log::error($data['ERROR'] . ' SAP');
+
+            throw new GeneralException("Error de comunicación con SAP.");
+
+        }
+
+        if(! isset($array['DOC_PAGO'])){
+
+            Log::error($data['ERROR'] . ' SAP');
+
+            throw new GeneralException("Error de comunicación con SAP.");
+
+        }
+
         return $data;
 
     }

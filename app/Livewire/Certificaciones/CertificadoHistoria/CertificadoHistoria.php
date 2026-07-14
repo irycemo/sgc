@@ -212,7 +212,7 @@ class CertificadoHistoria extends Component
 
             foreach ($movimientos as $movimiento) {
 
-                $this->historia = $this->historia . ' ' . '<strong>Movmiento:</strong> ' . $movimiento->nombre . ' ' . '<br>' . '<strong>Fecha:</strong> ' . $movimiento->fecha->format('d-m-Y') . '<br>' . $movimiento->descripcion . '<br><br>';
+                $this->historia = $this->historia . ' ' . '<strong>Movimiento:</strong> ' . $movimiento->nombre . ' ' . '<br>' . '<strong>Fecha:</strong> ' . $movimiento->fecha->format('d-m-Y') . '<br>' . $movimiento->descripcion . '<br><br>';
             }
 
             $this->reset(['folio', 'usuario']);
