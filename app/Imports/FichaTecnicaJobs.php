@@ -85,7 +85,7 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
             'ubicacion_en_manzana' => ['required', Rule::in(Constantes::UBICACION_PREDIO)],
             'predio_existe_en_padron' => ['required', Rule::in(['SI', 'NO'])],
             'predio_origen' => ['required', Rule::in(['SI', 'NO'])],
-            'domicilio_para_notificacion' => 'nullable'
+            'domicilio_para_notificacion' => 'nullable',
         ];
     }
 
@@ -95,6 +95,12 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
         if(!isset($data['localidad']) && !isset($data['oficina']) && !isset($data['tipo_predio']) && !isset($data['registro'])){
 
             return [];
+
+        }
+
+        if($data['predio_existe_en_padron'] == 'SI'){
+
+            $data['predio_id'] = $this->revisarPredio($data);
 
         }
 
