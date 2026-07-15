@@ -76,7 +76,7 @@ class General extends Component
 
                         $avaluo->predioAvaluo->update(['status' => 'impreso']);
 
-                        $avaluo->audits()->latest()->first()->update(['tags' => 'Imprimió avalúo', 'tramite_id' => $this->tramite_inspeccion?->id]);
+                        $avaluo->audits()->latest()->first()?->update(['tags' => 'Imprimió avalúo', 'tramite_id' => $this->tramite_inspeccion?->id]);
 
                     }
 

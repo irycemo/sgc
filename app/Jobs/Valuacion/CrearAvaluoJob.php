@@ -279,9 +279,24 @@ class CrearAvaluoJob implements ShouldQueue
 
         $valor_total_construccion = ($construccion['valor_construccion'] ?? 0) + ($construccionComun['valor_construccion'] ?? 0);
 
+        $es_habitacional = false;
+
+        if(isset($construccion['uso'])){
+
+            $es_habitacional = $construccion['uso'] == 1 ? true : false;
+
+        }
+
+        if(isset($construccionComun['uso'])){
+
+            $es_habitacional = $construccionComun['uso'] == 1 ? true : false;
+
+        }
+
         return PredioAvaluo::create([
             'status' => 'activo',
             'estado' => $this->row['estado_clave'],
+            'es_habitacional' => $es_habitacional,
             'region_catastral' => $this->row['region'],
             'municipio' => $this->row['municipio'],
             'zona_catastral' => $this->row['zona'],

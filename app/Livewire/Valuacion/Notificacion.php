@@ -361,6 +361,7 @@ class Notificacion extends Component
         $predio = Predio::create([
             'status' => 'activo',
             'estado' => $this->avaluo->predioAvaluo->estado,
+            'es_habitacional' => $this->avaluo->predioAvaluo->es_habitacional,
             'region_catastral' => $this->avaluo->predioAvaluo->region_catastral,
             'municipio' => $this->avaluo->predioAvaluo->municipio,
             'zona_catastral' => $this->avaluo->predioAvaluo->zona_catastral,
@@ -440,6 +441,7 @@ class Notificacion extends Component
         $predio->update([
             'status' => 'activo',
             'estado' => $this->avaluo->predioAvaluo->estado,
+            'es_habitacional' => $this->avaluo->predioAvaluo->es_habitacional,
             'region_catastral' => $this->avaluo->predioAvaluo->region_catastral,
             'municipio' => $this->avaluo->predioAvaluo->municipio,
             'zona_catastral' => $this->avaluo->predioAvaluo->zona_catastral,
