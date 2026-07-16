@@ -213,6 +213,12 @@ class Tramites extends Component
 
             $this->modelo_editar->predios()->attach($this->predio->id);
 
+            if($this->modelo_editar->ligadoA){
+
+                $this->modelo_editar->ligadoA->predios()->attach($this->predio->id);
+
+            }
+
             $this->modelo_editar->load('predios');
 
             $this->reset(['predio', 'localidad', 'oficina', 'tipo', 'registro']);
@@ -268,6 +274,14 @@ class Tramites extends Component
 
                 if($this->modelo_editar->estado === 'concluido') $this->modelo_editar->update(['estado' => 'pagado']);
 
+                if($this->modelo_editar->ligadoA){
+
+                    $this->modelo_editar->ligadoA->update(['estado' => 'pagado']);
+
+                    $this->modelo_editar->ligadoA->predios()->updateExistingPivot($this->predio_id, ['estado' => 'A']);
+
+                }
+
                 $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Reactivó cuenta predial']);
 
                 $this->modelo_editar->load('predios');
@@ -300,6 +314,12 @@ class Tramites extends Component
             DB::transaction(function () use ($id){
 
                 $this->modelo_editar->predios()->detach($id);
+
+                if($this->modelo_editar->ligadoA){
+
+                    $this->modelo_editar->ligadoA->predios()->detach($id);
+
+                }
 
                 if($this->modelo_editar->audits()->count()){
 
