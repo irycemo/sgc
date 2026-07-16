@@ -7,7 +7,6 @@ use App\Models\PredioTramite;
 use App\Models\Tramite;
 use App\Traits\ComponentesTrait;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -35,6 +34,7 @@ class TramitesLinea extends Component
     public $fecha_inicio;
     public $fecha_final;
     public $certificados_pendientes;
+    public $urgentes = false;
 
     public Tramite $modelo_editar;
 
@@ -68,6 +68,42 @@ class TramitesLinea extends Component
                             ->whereHas('servicio', function ($q){
                                 $q->whereIn('clave_ingreso', ['DM34', 'DM32', 'DM35', 'DM31']);
                             })
+                            ->where('estado', 'pagado')
+                            ->where('usuario', 11)
+                            ->where('oficina_id', auth()->user()->oficina_id)
+                            ->whereBetween('created_at', [$fecha_inicio, $fecha_final])
+                            ->get();
+
+        $pdf = Pdf::loadView('tramites.cargaTrabajo', compact(
+            'fecha_inicio',
+            'fecha_final',
+            'carga',
+        ))->output();
+
+        $this->modalCarga = false;
+
+        return response()->streamDownload(
+            fn () => print($pdf),
+            'carga_de_trabajo.pdf'
+        );
+
+    }
+
+    public function imprimirCargaUrgente(){
+
+        $this->validate([
+            'fecha_final' => 'required',
+            'fecha_inicio' => 'required',
+        ]);
+
+        $fecha_final = $this->fecha_final . ' 23:59:59';
+        $fecha_inicio = $this->fecha_inicio . ' 00:00:00';
+
+        $carga = Tramite::with('predios')
+                            ->whereHas('servicio', function ($q){
+                                $q->whereIn('clave_ingreso', ['DM34', 'DM32', 'DM35', 'DM31']);
+                            })
+                            ->where('servicio_id', 293)
                             ->where('estado', 'pagado')
                             ->where('usuario', 11)
                             ->where('oficina_id', auth()->user()->oficina_id)

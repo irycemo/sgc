@@ -33,6 +33,9 @@
 
                             <tr>
                                 <th>
+                                    Solicitante
+                                 </th>
+                                <th>
                                    Trámite
                                 </th>
                                 <th>
@@ -49,6 +52,7 @@
 
                                 <tr>
 
+                                    <td style="width: 300px;">{{ $item->solicitante }} {{ $item->nombre_solicitante }}</td>
                                     <td style="width: 100px;">{{ $item->año }}-{{ $item->folio }}-{{ $item->usuario }}</td>
                                     <td>
                                         @if($item->predios->count())

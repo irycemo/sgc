@@ -348,21 +348,43 @@
 
             </div>
 
+            <x-input-group for="urgentes" label="Urgentes" :error="$errors->first('urgentes')" class="flex gap-3 items-center">
+
+                <x-checkbox wire:model.live="urgentes" id="urgentes"/>
+
+            </x-input-group>
+
         </x-slot>
 
         <x-slot name="footer">
 
             <div class="flex gap-3">
 
-                <x-button-blue
-                    wire:click="imprimirCarga"
-                    wire:loading.attr="disabled"
-                    wire:target="imprimirCarga">
+                @if($urgentes)
 
-                    <img wire:loading wire:target="imprimirCarga" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    <x-button-blue
+                        wire:click="imprimirCargaUrgente"
+                        wire:loading.attr="disabled"
+                        wire:target="imprimirCargaUrgente">
 
-                    <span>Imprimir</span>
-                </x-button-blue>
+                        <img wire:loading wire:target="imprimirCargaUrgente" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                        <span>Imprimir urgentes</span>
+                    </x-button-blue>
+
+                @else
+
+                    <x-button-blue
+                        wire:click="imprimirCarga"
+                        wire:loading.attr="disabled"
+                        wire:target="imprimirCarga">
+
+                        <img wire:loading wire:target="imprimirCarga" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                        <span>Imprimir</span>
+                    </x-button-blue>
+
+                @endif
 
 
                 <x-button-red
