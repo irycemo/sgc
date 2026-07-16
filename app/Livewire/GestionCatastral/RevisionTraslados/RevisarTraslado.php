@@ -457,7 +457,7 @@ class RevisarTraslado extends Component
 
                 if($propietario_existente){
 
-                    if(in_array($this->aviso['acto'], ['CONSOLIDACIÓN DEL USUFRUCTO', 'EXTINCIÓN DE USUFRUCTO VITALICIO'])){
+                    if(in_array($this->aviso['acto'], ['CONSOLIDACIÓN DEL USUFRUCTO', 'EXTINCIÓN DE USUFRUCTO VITALICIO', 'RENUNCIA DEL USUFRUCTO VITALICIO'])){
 
                         $propietario_existente->update([
                             'porcentaje_propiedad' => (float)$adquiriente['porcentaje_propiedad'],
