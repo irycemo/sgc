@@ -380,9 +380,13 @@ class CertificadoHistoria extends Component
 
         });
 
+        $cuenta_predial = $this->predio->cuentaPredial();
+
+        $this->reset(['predio']);
+
         return response()->streamDownload(
             fn () => print($pdf->output()),
-            $this->predio->cuentaPredial() . '-certificado_de_historia.pdf'
+            $cuenta_predial . '-certificado_de_historia.pdf'
         );
 
     }
