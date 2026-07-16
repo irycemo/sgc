@@ -100,7 +100,27 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
 
         if($data['predio_existe_en_padron'] == 'SI'){
 
-            $data['predio_id'] = $this->revisarPredio($data);
+            $predio = Predio::where('estado', $data['estado_clave'])
+                                    ->where('region_catastral', $data['region'])
+                                    ->where('municipio', $data['municipio'])
+                                    ->where('zona_catastral', $data['zona'])
+                                    ->where('localidad', $data['localidad'])
+                                    ->where('sector', $data['sector'])
+                                    ->where('manzana', $data['manzana'])
+                                    ->where('predio', $data['predio'])
+                                    ->where('edificio', $data['edificio'])
+                                    ->where('departamento', $data['departamento'])
+                                    ->where('oficina', $data['oficina'])
+                                    ->where('tipo_predio', $data['tipo_predio'])
+                                    ->where('numero_registro', $data['registro'])
+                                    ->first();
+
+            if($predio){
+
+                $data['predio_id'] = $this->revisarPredio($data);
+
+            }
+
 
         }
 
