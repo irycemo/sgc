@@ -382,6 +382,8 @@ trait ImpresionTrait
                                     })
                                     ->get();
 
+            if(! $this->avaluos->count()) throw new GeneralException('No se encontro el avalúo.');
+
             if(! $this->avaluos->first()->predio_ignorado_id) throw new GeneralException('El avalúo no esta relacionado con un proceso de predio ignorado.');
 
             $this->avaluo_predio_ignorado = $this->avaluos->first();
