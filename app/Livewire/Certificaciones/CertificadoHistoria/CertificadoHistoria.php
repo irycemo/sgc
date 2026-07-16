@@ -370,6 +370,8 @@ class CertificadoHistoria extends Component
 
                 $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
 
+                $this->tramite->ligadoA?->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
+
                 $this->tramite->audits()->latest()->first()->update(['tags' => 'Finalizó trámite']);
 
                 return (new CertificadoHistoriaController())->certificado($this->tramite, $this->tramite->ligadoA, $this->predio, $this->historia);
