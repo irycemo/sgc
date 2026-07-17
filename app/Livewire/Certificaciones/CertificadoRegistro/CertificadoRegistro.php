@@ -244,4 +244,5 @@ class CertificadoRegistro extends Component
     {
         return view('livewire.certificaciones.certificado-registro.certificado-registro')->extends('layouts.admin');
     }
+
 }

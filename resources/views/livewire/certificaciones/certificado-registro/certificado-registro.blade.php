@@ -263,6 +263,13 @@
 
                         @endforeach
 
+                        <tr wire:key="row-porcentajes">
+                            <td > <span class="font-semibold text-gray-600 text-sm bg-gray-200 px-3 rounded-lg">PORCENTAJES TOTALES</span> </td>
+                            <td><span class="font-semibold text-gray-600 text-sm bg-gray-200 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_propiedad') }}%</span></td>
+                            <td><span class="font-semibold text-gray-600 text-sm bg-gray-200 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_nuda') }}%</span></td>
+                            <td><span class="font-semibold text-gray-600 text-sm bg-gray-200 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_usufructo') }}%</span></td>
+                        </tr>
+
                     </tbody>
 
                 </table>
