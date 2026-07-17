@@ -632,7 +632,7 @@ class Constantes{
         'ALTA POR DESGLOSE' => 'ALTA',
         'ALTA POR PREDIO IGNORADO' => 'ALTA',
         'ALTA POR OMISIÓN' => 'ALTA',
-        'ALTA POR OMISIÓN E INCAPTACIÓN' => 'ALTA',
+        'ALTA POR OMISIÓN DE CAPTACIÓN' => 'ALTA',
         'ALTA POR REESTRUCTURACION DE CUENTA' => 'ALTA',
         'ALTA POR SEDUM' => 'ALTA',
         'ALTA REGISTRO AGRARIO NACIONAL' => 'ALTA',

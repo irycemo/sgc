@@ -62,6 +62,10 @@ class Predio extends Model implements Auditable
         return $this->hasMany(Movimiento::class)->orderBy('fecha', 'desc')->orderBy('created_at', 'desc');
     }
 
+    public function ultimoMovimiento(){
+        return $this->hasMany(Movimiento::class)->orderBy('fecha', 'desc')->orderBy('created_at', 'desc')->latest();
+    }
+
     public function traslados(){
         return $this->hasMany(Traslado::class);
     }
