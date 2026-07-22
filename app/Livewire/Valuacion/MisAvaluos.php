@@ -503,7 +503,7 @@ class MisAvaluos extends Component
 
         $this->validarSectorNoBinding($this->localidad, $this->oficina, $this->municipio, $this->sector);
 
-        $this->validarCuentaAsignadaNoBindings($this->localidad, $this->oficina, $this->tipo_predio, $this->numero_registro, auth()->id());
+        /* $this->validarCuentaAsignadaNoBindings($this->localidad, $this->oficina, $this->tipo_predio, $this->numero_registro, auth()->id()); */
 
         $this->validarManzanaAsignadaNoBindings($this->municipio, $this->zona_catastral, $this->localidad, $this->sector, $this->manzana, auth()->id());
 

@@ -195,6 +195,76 @@
 
                 </div>
 
+            @else
+
+                <div class="overflow-auto">
+
+                    <table class="w-full lg:w-1/2 rounded-lg mx-auto">
+
+                        <thead class="text-left bg-gray-100">
+
+                            <tr>
+
+                                <th class="px-2">Estado</th>
+                                <th class="px-2">Localidad</th>
+                                <th class="px-2">Oficina</th>
+                                <th class="px-2">Tipo de predio</th>
+                                <th class="px-2">Número de registro</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach ($tramite->avaluos as $avaluo)
+
+                                <tr class="border-b py-1">
+
+                                    <td class="p-2">
+                                        {{ $avaluo->estado }}
+                                    </td>
+                                    <td class="px-2">
+                                        {{ $avaluo->predioPadron->localidad }}
+                                    </td>
+                                    <td class="px-2">
+                                        <p>{{ $avaluo->predioPadron->oficina }}</p>
+                                    </td>
+                                    <td class="px-2">
+                                        <p>{{ $avaluo->predioPadron->tipo_predio }}</p>
+                                    </td>
+                                    <td class="px-2">
+                                        <p>{{ $avaluo->predioPadron->numero_registro }}</p>
+                                    </td>
+
+                                </tr>
+
+                            @endforeach
+
+                            <tr>
+                                <td colspan="6">Total: {{ $tramite->avaluos()->count() }}</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <button
+                        wire:click="reactivarTramitesAvaluos"
+                        wire:loading.attr="disabled"
+                        wire:target="reactivarTramitesAvaluos"
+                        wire:confirm="¿Esta seguro que desea reactivar los trámites de avalúo?"
+                        type="button"
+                        class="bg-blue-400 mx-auto hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+
+                        <img wire:loading wire:target="reactivarTramitesAvaluos" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                        Reactivar impresión de avalúos
+
+                    </button>
+
+                </div>
+
             @endif
 
         </div>

@@ -61,7 +61,7 @@ class Tramite extends Model implements Auditable
     }
 
     public function avaluos(){
-        return $this->hasMany(Avaluo::class, 'tramite_id');
+        return $this->hasMany(Avaluo::class, 'tramite_inspeccion');
     }
 
     public function traslados(){

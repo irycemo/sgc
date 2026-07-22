@@ -3,6 +3,7 @@
 namespace App\Livewire\Tramites\ReactivarTramite;
 
 use App\Constantes\Constantes;
+use App\Enums\Tramites\AvaluoPara;
 use App\Exceptions\GeneralException;
 use App\Models\Certificacion;
 use App\Models\Tramite;
@@ -57,8 +58,13 @@ class ReactivarTramite extends Component
 
             }
 
-            $this->reset(['folio', 'usuario']);
+            if($this->tramite->avaluos->count()){
 
+                $this->tramite->load(['avaluos.predioPadron']);
+
+            }
+
+            $this->reset(['folio', 'usuario']);
 
         } catch (ModelNotFoundException $th) {
 
@@ -234,6 +240,97 @@ class ReactivarTramite extends Component
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 
         }
+
+    }
+
+    public function reactivarTramitesAvaluos(){
+
+        try {
+
+            $this->validarDiasHabiles();
+
+            DB::transaction(function (){
+
+                $this->tramite->update([
+                    'estado' => 'pagado',
+                    'usados' => 0,
+                    'ligado_a' => null,
+                    'avaluo_para' => AvaluoPara::ACTUALIZACION
+                ]);
+
+                if($this->tramite->ligadoA){
+
+                    if(in_array($this->tramite->avaluo_para, [AvaluoPara::DESGLOSE_FRACCIONAMIENTOS, AvaluoPara::DESGLOSE_OTRO, AvaluoPara::DESGLOSE_SUBDIVISIONES, AvaluoPara::CAMBIO_DE_REGIMEN_Y_DESGLOSE])){
+
+                        $cantidad = $this->tramite->cantidad + 1;
+
+                    }else{
+
+                        $cantidad = $this->tramite->cantidad;
+
+                    }
+
+                    $this->tramite->ligadoA->update([
+                        'cantidad' => $cantidad,
+                        'estado' => 'pagado',
+                        'usados' => 0,
+                        'ligado_a' => null
+                    ]);
+
+                }
+
+            });
+
+            $this->reset('selected_id', 'modal', 'observaciones', 'tramite');
+
+            $this->dispatch('mostrarMensaje', ['success', "Los trámites de reactivaron con éxito."]);
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al reactivar trámites de avalúos por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
+    public function validarDiasHabiles(){
+
+        if(! auth()->user()->hasRole('Administrador')){
+
+            $avaluo = $this->tramite->avaluos()->first();
+
+            $diez_dias_despues = $this->agregarDiasHabiles($avaluo->notificado_en);
+
+            if(now() > $diez_dias_despues){
+
+                throw new GeneralException("Ya pasaron 10 dias desde la notificación.");
+
+            }
+
+        }
+
+    }
+
+    public function agregarDiasHabiles($date){
+
+        for ($i=0; $i < 9; $i++) {
+
+            $date->addDays(1);
+
+            while($date->isWeekend()){
+
+                $date->addDay();
+
+            }
+
+        }
+
+        return $date;
 
     }
 
