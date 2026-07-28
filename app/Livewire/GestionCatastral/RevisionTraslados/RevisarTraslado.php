@@ -333,7 +333,7 @@ class RevisarTraslado extends Component
                 'uso_2' => $this->avaluo['uso_2']  ?? null,
                 'uso_3' => $this->avaluo['uso_3']  ?? null,
                 'superficie_terreno' => $this->avaluo['superficie_terreno']  ?? null,
-                'superficie_notarial' => $this->avaluo['superficie_notarial']  ?? null,
+                'superficie_notarial' => $this->aviso['predio']['superficie_notarial']  ?? null,
                 'superficie_construccion' => $this->avaluo['superficie_construccion']  ?? null,
                 'area_comun_terreno' => $this->avaluo['area_comun_terreno']  ?? null,
                 'area_comun_construccion' => $this->avaluo['area_comun_construccion']  ?? null,
