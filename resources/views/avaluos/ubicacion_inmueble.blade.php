@@ -97,16 +97,28 @@
             </td>
             <td style="text-align: left;">
 
-                @if ($predio->uso_1)
-                    Uso 1: <strong>{{ $predio->uso_1 }}</strong>
-                @endif
+                @if($predio->avaluo->bloques->count())
 
-                @if ($predio->uso_2)
-                    Uso 2: <strong>{{ $predio->uso_2 }}</strong>
-                @endif
+                    @foreach ($predio->avaluo->bloques as $bloque)
 
-                @if ($predio->uso_3)
-                    Uso 3: <strong>{{ $predio->uso_3 }}</strong>
+                        Uso {{ $loop->iteration }}: <strong>{{ $bloque->uso }}</strong>
+
+                    @endforeach
+
+                @else
+
+                    @if ($predio->uso_1)
+                        Uso 1: <strong>{{ $predio->uso_1 }}</strong>
+                    @endif
+
+                    @if ($predio->uso_2)
+                        Uso 2: <strong>{{ $predio->uso_2 }}</strong>
+                    @endif
+
+                    @if ($predio->uso_3)
+                        Uso 3: <strong>{{ $predio->uso_3 }}</strong>
+                    @endif
+
                 @endif
 
             </td>
