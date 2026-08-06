@@ -35,6 +35,7 @@ class TramitesLinea extends Component
     public $fecha_final;
     public $certificados_pendientes;
     public $urgentes = false;
+    public $predios = false;
 
     public Tramite $modelo_editar;
 
@@ -111,6 +112,54 @@ class TramitesLinea extends Component
                             ->get();
 
         $pdf = Pdf::loadView('tramites.cargaTrabajo', compact(
+            'fecha_inicio',
+            'fecha_final',
+            'carga',
+        ))->output();
+
+        $this->modalCarga = false;
+
+        return response()->streamDownload(
+            fn () => print($pdf),
+            'carga_de_trabajo.pdf'
+        );
+
+    }
+
+    public function imprimirPredios(){
+
+        $this->validate([
+            'fecha_final' => 'required',
+            'fecha_inicio' => 'required',
+        ]);
+
+        $fecha_final = $this->fecha_final . ' 23:59:59';
+        $fecha_inicio = $this->fecha_inicio . ' 00:00:00';
+
+        $carga = Tramite::with('predios')
+                            ->whereHas('servicio', function ($q){
+                                $q->whereIn('clave_ingreso', ['DM34', 'DM32', 'DM35', 'DM31']);
+                            })
+                            ->where('estado', 'pagado')
+                            ->where('usuario', 11)
+                            ->where('oficina_id', auth()->user()->oficina_id)
+                            ->whereBetween('created_at', [$fecha_inicio, $fecha_final])
+                            ->get()
+                            ->map(function($tramite){
+
+                                $array = [];
+
+                                foreach($tramite->predios as $predio){
+                                    $array[] = $predio->cuentaPredial();
+                                }
+
+                                return $array;
+
+                            })
+                            ->flatten()
+                            ->toArray();
+
+        $pdf = Pdf::loadView('tramites.cargaTrabajoPredios', compact(
             'fecha_inicio',
             'fecha_final',
             'carga',

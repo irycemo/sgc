@@ -354,6 +354,12 @@
 
             </x-input-group>
 
+            <x-input-group for="predios" label="Predios" :error="$errors->first('predios')" class="flex gap-3 items-center">
+
+                <x-checkbox wire:model.live="predios" id="predios"/>
+
+            </x-input-group>
+
         </x-slot>
 
         <x-slot name="footer">
@@ -370,6 +376,18 @@
                         <img wire:loading wire:target="imprimirCargaUrgente" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                         <span>Imprimir urgentes</span>
+                    </x-button-blue>
+
+                @elseif($predios)
+
+                    <x-button-blue
+                        wire:click="imprimirPredios"
+                        wire:loading.attr="disabled"
+                        wire:target="imprimirPredios">
+
+                        <img wire:loading wire:target="imprimirPredios" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                        <span>Imprimir predios</span>
                     </x-button-blue>
 
                 @else

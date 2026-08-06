@@ -80,17 +80,40 @@
 
 </p>
 
-<p class="parrafo">
+<table style="width: 100%;">
 
-    @if ($predio->municipio)
-        MUNICIPIO: <strong>{{ $datos_control->municipio ?? $predio->municipio }}</strong>
-    @endif
+    <tbody>
+        <tr>
+            <td style="text-align: left;">
 
-    @if ($predio->localidad)
-        LOCALIDAD: <strong>{{ $datos_control->oficina ?? $predio->localidad }}</strong>
-    @endif
+                @if ($predio->municipio)
+                    MUNICIPIO: <strong>{{ $datos_control->municipio ?? $predio->municipio }}</strong>
+                @endif
 
-</p>
+                @if ($predio->localidad)
+                    LOCALIDAD: <strong>{{ $datos_control->oficina ?? $predio->localidad }}</strong>
+                @endif
+
+            </td>
+            <td style="text-align: left;">
+
+                @if ($predio->uso_1)
+                    Uso 1: <strong>{{ $predio->uso_1 }}</strong>
+                @endif
+
+                @if ($predio->uso_2)
+                    Uso 2: <strong>{{ $predio->uso_2 }}</strong>
+                @endif
+
+                @if ($predio->uso_3)
+                    Uso 3: <strong>{{ $predio->uso_3 }}</strong>
+                @endif
+
+            </td>
+        </tr>
+    </tbody>
+
+</table>
 
 @if($predio->xutm || $predio->lat)
 
