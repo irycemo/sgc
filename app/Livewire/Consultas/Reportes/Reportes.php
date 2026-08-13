@@ -17,6 +17,7 @@ class Reportes extends Component
         'EscrituracionSocial' => false,
         'Recaudacion' => false,
         'Sat' => false,
+        'Inegi' => false,
     ];
 
     protected function rules(){

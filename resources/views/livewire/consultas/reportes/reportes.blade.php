@@ -16,6 +16,7 @@
                 <option value="EscrituracionSocial">Escrituración social</option>
                 <option value="Recaudacion">Recaudación</option>
                 <option value="Sat">SAT</option>
+                <option value="Inegi">Inegi</option>
 
             </x-input-select>
 
@@ -62,6 +63,12 @@
     @if ($flags['Sat'])
 
         @livewire('consultas.reportes.reporte-sat')
+
+    @endif
+
+    @if ($flags['Inegi'])
+
+        @livewire('consultas.reportes.reporte-inegi')
 
     @endif
 
