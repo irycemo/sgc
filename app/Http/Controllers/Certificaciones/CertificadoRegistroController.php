@@ -52,7 +52,7 @@ class CertificadoRegistroController extends Controller
         $datos_control->observaciones = $observaciones;
         $datos_control->director = $this->director->name;
         $datos_control->titular_cargo = 'Director de catastro';
-        $datos_control->impreso_por = $usuario->name;
+        $datos_control->impreso_por = $usuario?->name;
         $datos_control->impreso_en = now()->format('d/m/Y H:i:s');
 
         if(in_array($tramite->servicio->nombre, ['Certificado catastral ordinario con colindancias', 'Certificado catastral urgente con colindancias'])){
@@ -95,7 +95,7 @@ class CertificadoRegistroController extends Controller
                                                         'predio_id' => $predio->id,
                                                         'oficina_id' => $oficina->id,
                                                         'tramite_id' => $tramite->id,
-                                                        'creado_por' => $usuario->id
+                                                        'creado_por' => $usuario?->id
                                                     ]);
 
             $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);

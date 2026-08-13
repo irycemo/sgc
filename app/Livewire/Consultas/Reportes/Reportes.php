@@ -9,12 +9,15 @@ class Reportes extends Component
 
     public $area;
 
-    public $verAvisos;
-    public $verTramites;
-    public $verUsuarios;
-    public $verCertificaciones;
-    public $verEscrituracionSocial;
-    public $verRecaudacion;
+    public $flags = [
+        'Avisos' => false,
+        'Tramites' => false,
+        'Usuarios' => false,
+        'Certificaciones' => false,
+        'EscrituracionSocial' => false,
+        'Recaudacion' => false,
+        'Sat' => false,
+    ];
 
     protected function rules(){
         return [
@@ -30,61 +33,9 @@ class Reportes extends Component
 
     public function updatedArea(){
 
-        if($this->area == 'tramites'){
+        $this->reset('flags');
 
-            $this->verAvisos = false;
-            $this->verTramites = true;
-            $this->verUsuarios = false;
-            $this->verCertificaciones = false;
-            $this->verEscrituracionSocial = false;
-            $this->verRecaudacion = false;
-
-        }elseif($this->area == 'usuarios'){
-
-            $this->verAvisos = false;
-            $this->verTramites = false;
-            $this->verUsuarios = true;
-            $this->verCertificaciones = false;
-            $this->verEscrituracionSocial = false;
-            $this->verRecaudacion = false;
-
-        }elseif($this->area == 'certificaciones'){
-
-            $this->verAvisos = false;
-            $this->verTramites = false;
-            $this->verUsuarios = false;
-            $this->verCertificaciones = true;
-            $this->verEscrituracionSocial = false;
-            $this->verRecaudacion = false;
-
-        }elseif($this->area == 'escrituracion_social'){
-
-            $this->verAvisos = false;
-            $this->verTramites = false;
-            $this->verUsuarios = false;
-            $this->verCertificaciones = false;
-            $this->verEscrituracionSocial = true;
-            $this->verRecaudacion = false;
-
-        }elseif($this->area == 'avisos'){
-
-            $this->verAvisos = true;
-            $this->verTramites = false;
-            $this->verUsuarios = false;
-            $this->verCertificaciones = false;
-            $this->verEscrituracionSocial = false;
-            $this->verRecaudacion = false;
-
-        }elseif($this->area == 'recaudacion'){
-
-            $this->verAvisos = false;
-            $this->verTramites = false;
-            $this->verUsuarios = false;
-            $this->verCertificaciones = false;
-            $this->verEscrituracionSocial = false;
-            $this->verRecaudacion = true;
-
-        }
+        $this->flags[$this->area] = true;
 
     }
 

@@ -9,12 +9,13 @@
             <x-input-select id="area" wire:model.live="area">
 
                 <option selected value="">Selecciona una área</option>
-                <option value="tramites">Trámites</option>
-                <option value="usuarios">Usuarios</option>
-                <option value="certificaciones">Certificaciones</option>
-                <option value="avisos">Avisos</option>
-                <option value="escrituracion_social">Escrituración social</option>
-                <option value="recaudacion">Recaudación</option>
+                <option value="Tramites">Trámites</option>
+                <option value="Usuarios">Usuarios</option>
+                <option value="Certificaciones">Certificaciones</option>
+                <option value="Avisos">Avisos</option>
+                <option value="EscrituracionSocial">Escrituración social</option>
+                <option value="Recaudacion">Recaudación</option>
+                <option value="Sat">SAT</option>
 
             </x-input-select>
 
@@ -22,39 +23,45 @@
 
     </div>
 
-    @if ($verTramites)
+    @if ($flags['Tramites'])
 
         @livewire('consultas.reportes.reporte-tramites')
 
     @endif
 
-    @if ($verUsuarios)
+    @if ($flags['Usuarios'])
 
         @livewire('consultas.reportes.reporte-usuarios')
 
     @endif
 
-    @if ($verCertificaciones)
+    @if ($flags['Certificaciones'])
 
         @livewire('consultas.reportes.reporte-certificaciones')
 
     @endif
 
-    @if ($verEscrituracionSocial)
+    @if ($flags['EscrituracionSocial'])
 
         @livewire('consultas.reportes.reporte-escrituracion-social')
 
     @endif
 
-    @if ($verAvisos)
+    @if ($flags['Avisos'])
 
         @livewire('consultas.reportes.reporte-avisos')
 
     @endif
 
-    @if ($verRecaudacion)
+    @if ($flags['Recaudacion'])
 
         @livewire('consultas.reportes.reporte-recaudacion')
+
+    @endif
+
+    @if ($flags['Sat'])
+
+        @livewire('consultas.reportes.reporte-sat')
 
     @endif
 

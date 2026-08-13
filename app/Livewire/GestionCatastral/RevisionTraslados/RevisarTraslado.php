@@ -435,6 +435,12 @@ class RevisarTraslado extends Component
                                                                                         })
                                                                                         ->first();
 
+                    if(! $aux){
+
+                        throw new GeneralException('No se encontro al propietario: ' . $propietario['nombre'] . ' ' . $propietario['ap_paterno'] . ' ' . $propietario['ap_materno']. ' '. $propietario['razon_social']);
+
+                    }
+
                     $aux->update([
                         'porcentaje_propiedad' => (float)$propietario['porcentaje_propiedad'],
                         'porcentaje_nuda' => (float)$propietario['porcentaje_nuda'],

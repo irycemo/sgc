@@ -192,6 +192,16 @@ class TramiteService{
 
         $this->tramite->save();
 
+        if($this->tramite->servicio->nombre === 'Complemento'){
+
+            if(in_array($this->tramite->ligadoA->servicio->clave_ingreso, ['DM32', 'DM31'])){
+
+                    $this->tramite->ligadoA->update(['fecha_entrega' => now()->subDay()]);
+
+                }
+
+        }
+
     }
 
     public function obtenerComprobantePago(){

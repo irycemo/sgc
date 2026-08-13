@@ -357,7 +357,18 @@ class Tramites extends Component
                 'estado' => 'pagado',
                 'fecha_pago'  => now()->toDateString(),
                 'orden_de_pago'  => '300082157991',
+                'fecha_entrega' => $this->calcularFechaEntrega()
             ]);
+
+            if($this->modelo_editar->servicio->nombre === 'Complemento'){
+
+                if(in_array($this->modelo_editar->ligadoA->servicio->clave_ingreso, ['DM32', 'DM31'])){
+
+                    $this->modelo_editar->ligadoA->update(['fecha_entrega' => now()->subDay()]);
+
+                }
+
+            }
 
             $this->dispatch('mostrarMensaje', ['success', "El pago se simuló con éxito."]);
 

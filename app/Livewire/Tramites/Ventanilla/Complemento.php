@@ -60,11 +60,29 @@ class Complemento extends Component
 
         }
 
+        if($this->tramiteAdicionado->estado != 'pagado'){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El trámite no esta pagado."]);
+
+            $this->modelo_editar->ligado_a = null;
+
+            $this->reset(['tramiteAdicionado']);
+
+            return;
+
+        }
+
         $this->modelo_editar->ligado_a = $this->tramiteAdicionado->id;
 
         $this->modelo_editar->solicitante = $this->tramiteAdicionado->solicitante;
 
         $this->modelo_editar->nombre_solicitante = $this->tramiteAdicionado->nombre_solicitante;
+
+        if(in_array($this->tramiteAdicionado?->servicio->clave_ingreso, ['DM31'])){
+
+            $this->modelo_editar->monto = $this->tramiteAdicionado->monto;
+
+        }
 
     }
 
@@ -75,12 +93,6 @@ class Complemento extends Component
         try {
 
             DB::transaction(function () {
-
-                if(in_array($this->tramiteAdicionado?->servicio->clave_ingreso, ['DM32', 'DM31'])){
-
-                    $this->tramiteAdicionado->update(['fecha_entrega' => now()->subDay()]);
-
-                }
 
                 $tramite = (new TramiteService($this->modelo_editar))->crear($this->predios);
 
@@ -121,9 +133,9 @@ class Complemento extends Component
 
     }
 
-
     public function render()
     {
         return view('livewire.tramites.ventanilla.complemento');
     }
+
 }

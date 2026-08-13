@@ -19,13 +19,25 @@
 
                         <div class="flex justify-around space-x-3 bg-white p-4 rounded-lg mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
 
-                            {{ $tramiteAdicionado?->servicio->nombre }}
+                            Tramite original: {{ $tramiteAdicionado?->servicio->nombre }}
 
                         </div>
 
                     @endif
 
-                    @include('livewire.tramites.ventanilla.comun.monto')
+                    @if(in_array($tramiteAdicionado?->servicio->clave_ingreso, ['DM31']))
+
+                        <div class="flex justify-around space-x-3 bg-white p-4 rounded-lg mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
+
+                            Tramite complemento: urgente
+
+                        </div>
+
+                    @else
+
+                        @include('livewire.tramites.ventanilla.comun.monto')
+
+                    @endif
 
                     @include('livewire.tramites.ventanilla.comun.observaciones')
 
