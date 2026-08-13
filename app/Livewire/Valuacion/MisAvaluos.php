@@ -435,7 +435,12 @@ class MisAvaluos extends Component
 
                 $nuevo_avaluo->folio = (Avaluo::where('año', now()->format('Y'))->where('usuario', auth()->user()->clave)->max('folio') ?? 0) + 1;
                 $nuevo_avaluo->predio_avaluo = $predio_id;
-                $nuevo_avaluo->predio = null;
+                $nuevo_avaluo->tramite_inspeccion = null;
+                $nuevo_avaluo->tramite_desglose = null;
+                $nuevo_avaluo->actualizado_por = null;
+                $nuevo_avaluo->notificado_por = null;
+                $nuevo_avaluo->notificado_en = null;
+                $nuevo_avaluo->creado_por = auth()->id();
                 $nuevo_avaluo->estado = 'nuevo';
                 $nuevo_avaluo->save();
 
