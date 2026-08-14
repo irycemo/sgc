@@ -403,7 +403,7 @@ class CrearAvaluoJob implements ShouldQueue
 
         $avaluo = Avaluo::create([
             'predio_avaluo' => $predioId,
-            'predio' => $this->row['predio_id'],
+            'predio' => $this->row['predio_id'] ?? null,
             'año' => now()->format('Y'),
             'folio' => (Avaluo::where('año', now()->format('Y'))->where('usuario', $this->user->clave)->max('folio') ?? 0) + 1,
             'usuario' => $this->user->clave,

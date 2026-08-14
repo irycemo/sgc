@@ -121,7 +121,6 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
 
             }
 
-
         }
 
         return $data;
