@@ -223,7 +223,7 @@
 
         @include('avaluos.propietarios')
 
-        @if(isset($certificacion) && $certificacion?->tramite->avaluo_para->value === 8)
+        @if(isset($certificacion) && $certificacion?->tramite->avaluo_para?->value === 8)
 
             <p class="parrafo">En avalúos de fusión, se debe verificar la relación de propietarios en observaciones, ya que los predios pueden tener titulares distintos. Esto garantiza la correcta identificación de derechos y evita inconsistencias legales.</p>
 
