@@ -4,7 +4,7 @@
 
     <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-500 overflow-auto" wire:loading.class.delaylongest="opacity-50">
 
-        <table class="w-full table table-auto">
+        <table class="w-full table table-auto mb-5">
 
             <thead class="border-b border-gray-300 ">
 
@@ -102,6 +102,23 @@
             </tbody>
 
         </table>
+
+        {{-- @if(!$this->flag_borrar && auth()->user()->oficina->oficina === 101)
+
+            <button
+                wire:click="solicitarArchivo"
+                wire:loading.attr="disabled"
+                wire:target="solicitarArchivo"
+                type="button"
+                class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+
+                <img wire:loading wire:target="solicitarArchivo" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                Hacer solicitud de archivo
+
+            </button>
+
+        @endif --}}
 
     </div>
 

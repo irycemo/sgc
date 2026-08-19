@@ -2,9 +2,10 @@
 
 namespace App\Livewire\Comun\Consultas;
 
+use App\Exceptions\GeneralException;
 use App\Models\File;
 use App\Models\Predio;
-use Illuminate\Support\Facades\Http;
+use App\Services\SistemaArchivo\SistemaArchivoService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
@@ -141,6 +142,34 @@ class ArchivoConsulta extends Component
         }
 
         return $urls;
+
+    }
+
+    public function solicitarArchivo(){
+
+        try {
+
+            $archivo = $this->predio->archivos()->where('descripcion', 'archivo')->first();
+
+            if($archivo){
+
+                throw new GeneralException('Ya esta digitalizado archivo');
+
+            }
+
+            (new SistemaArchivoService())->crearSolicitud($this->predio->localidad, $this->predio->oficina, $this->predio->tipo_predio, $this->predio->numero_registro, auth()->user()->name);
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al solicitar archivo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
 
     }
 

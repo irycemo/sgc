@@ -162,7 +162,7 @@ class Traslados extends Component
 
                 }
 
-                (new SistemaTramitesLineaService())->revertirAviso($this->modelo_editar->aviso_stl, $this->observaciones);
+                (new SistemaTramitesLineaService())->corregirOperacion($this->modelo_editar->aviso_stl);
 
             });
 
@@ -226,7 +226,7 @@ class Traslados extends Component
 
                 $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Revirtió autorización de aviso']);
 
-                (new SistemaTramitesLineaService())->revertirAutorizado($this->modelo_editar->aviso_stl, $this->observaciones);
+                (new SistemaTramitesLineaService())->corregirAutorizacion($this->modelo_editar->aviso_stl);
 
             });
 

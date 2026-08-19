@@ -79,6 +79,11 @@ return [
         'hacer_requerimiento' => env('SISTEMA_PERITOS_EXTERNOS_HACER_REQUERIMIENTO'),
     ],
 
+    'sistema_archivo' => [
+        'token' => env('SISTEMA_ARCHIVO_TOKEN'),
+        'crear_solicitud' => env('SISTEMA_ARCHIVO_CREAR_SOLICITUD'),
+    ],
+
     'consulta_archivos_anterior' => [
         'archivos_url' => env('CONSULTA_ARCHIVOS_ANTERIOR_URL'),
         'cartografia_url' => env('CONSULTA_CARTOGRAFIA_ANTERIOR_URL'),

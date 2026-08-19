@@ -15,7 +15,6 @@ use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Auth\Events\Registered;
 
 class Usuarios extends Component
 {
