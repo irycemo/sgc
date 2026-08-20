@@ -167,17 +167,26 @@
                                     @if(auth()->user()->hasRole(['Fiscal']))
 
                                         <button
-                                            wire:click="reasignarFiscal({{ $traslado->id }})"
+                                            wire:click="asignarmeAviso({{ $traslado->id }})"
                                             wire:loading.attr="disabled"
                                             class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                             role="menuitem">
-                                            Reasignar fiscal
+                                            Asignarme el aviso
                                         </button>
 
                                     @elseif(auth()->user()->hasRole(['Administrador', 'Jefe de departamento']))
 
                                         <button
-                                            wire:click="reasignarFiscal({{ $traslado->id }})"
+                                            wire:click="asignarmeAviso({{ $traslado->id }})"
+                                            wire:loading.attr="disabled"
+                                            wire:confirm="¿Esta seguro que desea reasignarse el aviso?"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            role="menuitem">
+                                            Asignarme el aviso
+                                        </button>
+
+                                        <button
+                                            wire:click="abrirModalReasignarFiscal({{ $traslado->id }})"
                                             wire:loading.attr="disabled"
                                             class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
                                             role="menuitem">
@@ -294,6 +303,60 @@
                     wire:click="$toggle('modalRechazos')"
                     wire:loading.attr="disabled"
                     wire:target="$toggle('modalRechazos')"
+                    type="button">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
+
+    <x-dialog-modal wire:model="modalFiscales" maxWidth="sm">
+
+        <x-slot name="title">
+
+            Reasignar aviso
+
+        </x-slot>
+
+        <x-slot name="content">
+
+            <x-input-group for="fiscal_seleccionado" label="Fiscal" :error="$errors->first('fiscal_seleccionado')" class="w-full">
+
+                <x-input-select id="fiscal_seleccionado" wire:model="fiscal_seleccionado" class="w-full">
+
+                    <option value="">Seleccione una opción</option>
+
+                    @foreach ($fiscales as $fiscal_item)
+
+                            <option value="{{ $fiscal_item->id }}">{{ $fiscal_item->name }}</option>
+
+                    @endforeach
+
+                </x-input-select>
+
+            </x-input-group>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex gap-3">
+
+                <x-button-blue
+                    wire:click="reasignarFiscal"
+                    wire:loading.attr="disabled"
+                    wire:target="reasignarFiscal"
+                    type="button">
+                    Reasignar fiscal
+                </x-button-blue>
+
+                <x-button-red
+                    wire:click="$toggle('modalFiscales')"
+                    wire:loading.attr="disabled"
+                    wire:target="$toggle('modalFiscales')"
                     type="button">
                     Cerrar
                 </x-button-red>

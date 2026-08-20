@@ -22,9 +22,11 @@ class ListaAvisos extends Component
     public $estado = '';
     public $modalReasignar = false;
     public $modalRechazos = false;
+    public $modalFiscales = false;
 
     public $fiscales = [];
     public $fiscal;
+    public $fiscal_seleccionado;
     public $oficinas;
     public $oficina;
 
@@ -59,6 +61,14 @@ class ListaAvisos extends Component
 
     }
 
+    public function abrirModalReasignarFiscal(Traslado $traslado){
+
+        $this->modelo_editar = $traslado;
+
+        $this->modalFiscales = true;
+
+    }
+
     public function reasignarFiscalAleatoriamente(Traslado $traslado){
 
         try {
@@ -80,7 +90,7 @@ class ListaAvisos extends Component
 
     }
 
-    public function reasignarFiscal(Traslado $traslado){
+    public function asignarmeAviso(Traslado $traslado){
 
         try {
 
@@ -91,6 +101,27 @@ class ListaAvisos extends Component
             $traslado->audits()->latest()->first()->update(['tags' => 'Reasignó aviso']);
 
             $this->dispatch('mostrarMensaje', ['success', "Se reasigno el fiscal con éxito."]);
+
+        } catch (\Throwable $th) {
+            Log::error("Error al reasignar fiscal por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+        }
+
+    }
+
+    public function reasignarFiscal(){
+
+        try {
+
+            $this->modelo_editar->asignado_a = $this->fiscal_seleccionado;
+            $this->modelo_editar->actualizado_por = auth()->id();
+            $this->modelo_editar->save();
+
+            $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Reasignó aviso']);
+
+            $this->dispatch('mostrarMensaje', ['success', "Se reasigno el fiscal con éxito."]);
+
+            $this->modalFiscales = false;
 
         } catch (\Throwable $th) {
             Log::error("Error al reasignar fiscal por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
