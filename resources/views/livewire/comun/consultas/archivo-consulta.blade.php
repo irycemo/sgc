@@ -103,7 +103,7 @@
 
         </table>
 
-        {{-- @if(!$this->flag_borrar && auth()->user()->oficina->oficina === 101)
+        @if(!$this->flag_borrar && auth()->user()->oficina->oficina === 101)
 
             <button
                 wire:click="solicitarArchivo"
@@ -118,7 +118,7 @@
 
             </button>
 
-        @endif --}}
+        @endif
 
     </div>
 

@@ -157,7 +157,9 @@ class ArchivoConsulta extends Component
 
             }
 
-            (new SistemaArchivoService())->crearSolicitud($this->predio->localidad, $this->predio->oficina, $this->predio->tipo_predio, $this->predio->numero_registro, auth()->user()->name);
+            $data = (new SistemaArchivoService())->crearSolicitud($this->predio->localidad, $this->predio->oficina, $this->predio->tipo_predio, $this->predio->numero_registro, auth()->user()->name);
+
+            $this->dispatch('mostrarMensaje', ['success', $data['data']]);
 
         } catch (GeneralException $ex) {
 

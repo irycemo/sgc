@@ -279,6 +279,27 @@ class ReactivarTramite extends Component
 
                 }
 
+                if($this->tramite->ligadoPor){
+
+                    if(in_array($this->tramite->avaluo_para, [AvaluoPara::DESGLOSE_FRACCIONAMIENTOS, AvaluoPara::DESGLOSE_OTRO, AvaluoPara::DESGLOSE_SUBDIVISIONES, AvaluoPara::CAMBIO_DE_REGIMEN_Y_DESGLOSE])){
+
+                        $cantidad = $this->tramite->cantidad + 1;
+
+                    }else{
+
+                        $cantidad = $this->tramite->cantidad;
+
+                    }
+
+                    $this->tramite->ligadoPor->update([
+                        'cantidad' => $cantidad,
+                        'estado' => 'pagado',
+                        'usados' => 0,
+                        'ligado_a' => null
+                    ]);
+
+                }
+
             });
 
             $this->reset('selected_id', 'modal', 'observaciones', 'tramite');

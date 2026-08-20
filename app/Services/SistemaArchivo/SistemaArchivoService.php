@@ -40,7 +40,7 @@ class SistemaArchivoService{
 
         }else{
 
-            return json_decode($response, true)['data'];
+            return json_decode($response, true);
 
         }
 
