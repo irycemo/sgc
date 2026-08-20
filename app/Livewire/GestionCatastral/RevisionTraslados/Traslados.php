@@ -7,6 +7,7 @@ use App\Models\Oficina;
 use App\Models\Traslado;
 use App\Models\User;
 use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
+use App\Traits\Avisos\RevertirOperacionTrait;
 use App\Traits\ComponentesTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -19,6 +20,7 @@ class Traslados extends Component
 
     use ComponentesTrait;
     use WithPagination;
+    use RevertirOperacionTrait;
 
     public Traslado $modelo_editar;
 
@@ -159,6 +161,12 @@ class Traslados extends Component
                 if($this->modelo_editar->tramite->estado == 'concluido'){
 
                     $this->modelo_editar->tramite->update(['estado' => 'pagado']);
+
+                }
+
+                if($this->modelo_editar->tipo === 'revision'){
+
+                    $this->revertirOperacion($this->modelo_editar->predio, $this->modelo_editar->certificacion);
 
                 }
 

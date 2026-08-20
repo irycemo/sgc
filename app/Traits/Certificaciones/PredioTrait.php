@@ -58,6 +58,11 @@ trait PredioTrait
             $item->superficie = $construccion->superficie;
             $item->valor_unitario = $construccion->valor_unitario;
             $item->valor_construccion = $construccion->valor_construccion;
+            $item->tipo = $construccion->tipo;
+            $item->uso = $construccion->uso;
+            $item->estado = $construccion->estado;
+            $item->calidad = $construccion->calidad;
+            $item->niveles = $construccion->niveles;
 
             $construcciones->push($item);
 
@@ -76,6 +81,10 @@ trait PredioTrait
             $item->indiviso_construccion = $construccionComun->indiviso_construccion;
             $item->valor_clasificacion_construccion = $construccionComun->valor_clasificacion_construccion;
             $item->valor_construccion_comun = $construccionComun->valor_construccion_comun;
+            $item->calidad = $construccionComun->calidad;
+            $item->estado = $construccionComun->estado;
+            $item->uso = $construccionComun->uso;
+            $item->tipo = $construccionComun->tipo;
 
             $construccionesComun->push($item);
 
@@ -105,6 +114,7 @@ trait PredioTrait
 
             $item = (object)[];
 
+            $item->id = $propietario->persona->id;
             $item->tipo = $propietario->persona->tipo;
             $item->nombre = $propietario->persona->nombre;
             $item->ap_paterno = $propietario->persona->ap_paterno;
@@ -129,7 +139,6 @@ trait PredioTrait
         $object->es_habitacional = $predio->es_habitacional;
         $object->status = $predio->status;
         $object->curt = $predio->curt;
-        $object->superficie_construccion = $predio->superficie_construccion_formateada;
         $object->area_comun_terreno = $predio->area_comun_terreno;
         $object->area_comun_construccion = $predio->area_comun_construccion;
         $object->valor_terreno_comun = $predio->valor_terreno_comun;
@@ -172,9 +181,10 @@ trait PredioTrait
         $object->construccionesComun = $construccionesComun;
         $object->ubicacion_en_manzana  = $predio->ubicacion_en_manzana;
         $object->superficie_terreno = $predio->superficie_terreno_formateada;
+        $object->superficie_construccion = $predio->superficie_construccion;
         $object->superficie_judicial = $predio->superficie_judicial_formateada;
         $object->superficie_notarial = $predio->superficie_notarial_formateada;
-        $object->superficie_total_construccion = $predio->superficie_total_construccion_formateada;
+        $object->superficie_total_construccion = $predio->superficie_total_construccion;
         $object->superficie_total_terreno = $predio->superficie_total_terreno_formateada;
 
         return $object;

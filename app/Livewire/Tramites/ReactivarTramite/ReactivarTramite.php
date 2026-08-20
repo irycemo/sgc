@@ -60,6 +60,20 @@ class ReactivarTramite extends Component
 
             if($this->tramite->avaluos->count()){
 
+                foreach ($this->tramite->avaluos as $avaluo) {
+
+                    if($avaluo->estado != 'notificado'){
+
+                        $this->dispatch('mostrarMensaje', ['warning', "Los avaluos relacionados al trámite no estan notificados, la reactivación de los trámties es para avaluos ya notificados."]);
+
+                        $this->reset('tramite');
+
+                        return;
+
+                    }
+
+                }
+
                 $this->tramite->load(['avaluos.predioPadron']);
 
             }
