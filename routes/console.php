@@ -76,7 +76,9 @@ Artisan::command('migrar', function(){
 
     foreach ($predios as $predio) {
 
-        MigrarPredioJob::dispatch($predio->toArray());
+        $predio = (array) $predio;
+
+        MigrarPredioJob::dispatch($predio);
 
         $progressbar->advance();
 

@@ -4,7 +4,7 @@
 
     <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-500 overflow-auto" wire:loading.class.delaylongest="opacity-50">
 
-        <table class="w-full table table-auto mb-5">
+        <table class="w-full table table-fixed mb-5">
 
             <thead class="border-b border-gray-300 ">
 
@@ -25,7 +25,8 @@
                     @foreach ($item as $link)
 
                         <tr class="text-gray-500 text-sm leading-relaxed">
-                            <td class=" px-2 w-full capitalize">{{ $key }}</td>
+                            <td class="px-2 w-full capitalize">{{ $key }}</td>
+                            <td class="px-2 w-full capitalize"></td>
                             <td class="px-2 w-full">
                                 <a href="{{ $link }}" class="text-blue-300 cursor-pointer" target="_blank">
 
@@ -45,8 +46,8 @@
                 @foreach ($this->predio->archivos() as $archivo)
 
                     <tr class="text-gray-500 text-sm leading-relaxed">
-                        <td class=" px-2  capitalize">{{ Str::ucfirst($archivo->descripcion) }}</td>
-                        <td class=" px-2  capitalize">{{ $archivo->created_at }}</td>
+                        <td class="px-2 capitalize">{{ Str::ucfirst($archivo->descripcion) }}</td>
+                        <td class="px-2 capitalize">{{ $archivo->created_at }}</td>
                         <td class="px-2 flex gap-4">
 
                             <a href="{{ $archivo->getLinkArchivo() }}" class="text-blue-300 cursor-pointer" target="_blank">
@@ -83,8 +84,8 @@
                 @foreach ($this->predio->fotos() as $foto)
 
                     <tr class="text-gray-500 text-sm leading-relaxed">
-                        <td class=" px-2  capitalize">{{ $foto->descripcion }}</td>
-                        <td class=" px-2  capitalize">{{ $foto->created_at }}</td>
+                        <td class="px-2 capitalize">{{ $foto->descripcion }}</td>
+                        <td class="px-2 capitalize">{{ $foto->created_at }}</td>
                         <td class="px-2">
                             <a href="{{ $foto->getLinkFoto() }}" class="text-blue-300 cursor-pointer" target="_blank">
 

@@ -46,7 +46,7 @@ class MigrarPredioJob implements ShouldQueue
 
                 $p = Predio::create([
                     'estado' => $this->predio['esta_008'],
-                    'region_catastral' => $this->predio['rcat_008'],
+                    'region_catastral' => 18,
                     'municipio' => $this->predio['mpio_008'],
                     'zona_catastral' => $this->predio['zcat_008'],
                     'localidad' => $this->predio['locl_008'],
