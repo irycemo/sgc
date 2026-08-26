@@ -699,7 +699,7 @@ class RevisarTraslado extends Component
 
             }
 
-            if(round($sumaPN, 2) > round($pn_transmitentes + $pp_transmitentes,2)){
+            if($sumaPN != 0 && round($sumaPN, 2) > round($pn_transmitentes + $pp_transmitentes,2)){
 
                 throw new GeneralException("La suma de los porcentajes de propiedad debe ser " . $pp_transmitentes . '%.');
 
@@ -713,7 +713,7 @@ class RevisarTraslado extends Component
 
             }
 
-            if(round($sumaPU, 2) != round($pu_transmitentes + $pp_transmitentes, 2)){
+            if($sumaPU != 0 && round($sumaPU, 2) != round($pu_transmitentes + $pp_transmitentes, 2)){
 
                 throw new GeneralException("La suma de los porcentajes de usufructo debe ser " . $pu_transmitentes + $pp_transmitentes . '%.');
 

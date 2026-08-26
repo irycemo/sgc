@@ -74,6 +74,7 @@ class Traslados extends Component
         $this->fiscales = User::whereHas('oficina', function($q) {
                                     $q->where('oficina', $this->modelo_editar->predio->oficina);
                                 })
+                                ->where('estado', 'activo')
                                 ->when($this->modelo_editar->predio->oficina == 101, function($q){
                                     $q->whereHas('roles', function($q){
                                         $q->where('name', 'Fiscal');
@@ -177,6 +178,10 @@ class Traslados extends Component
             $this->modal_revertir = false;
 
             $this->dispatch('mostrarMensaje', ['success', "Se revirtio a esto nuevo con éxito."]);
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
         } catch (\Throwable $th) {
             Log::error("Error al revertir a operado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
