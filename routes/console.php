@@ -924,7 +924,7 @@ Artisan::command('migrar-avaluos', function(){
                 Construccion::craete([
                     'construccionable_id' => $old_avaluo->id,
                     'construccionable_type' => 'App\Models\OldAvaluo',
-                    'referencia' => $construccion->recon_020,
+                    'referencia' => $construccion->rcon_020,
                     'tipo' => $construccion->tipo_020,
                     'uso' => $construccion->usoc_020,
                     'estado' => $construccion->grac_020,
