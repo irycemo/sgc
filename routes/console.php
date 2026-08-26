@@ -4,13 +4,19 @@ use App\Jobs\GenerarCertificacionMigracionJob;
 use App\Jobs\MigrarPredioJob;
 use App\Models\Avaluo;
 use App\Models\Cartografia;
+use App\Models\Construccion;
+use App\Models\ConstruccionesComun;
 use App\Models\Movimiento;
+use App\Models\OldAvaluo;
 use App\Models\OldCertificado;
 use App\Models\OldTraslado;
 use App\Models\Predio;
 use App\Models\Servicio;
 use App\Models\SQLSVR\ctcdm004;
+use App\Models\SQLSVR\ctref007;
 use App\Models\SQLSVR\tcpro008;
+use App\Models\Terreno;
+use App\Models\TerrenosComun;
 use App\Models\Tramite;
 use App\Models\Traslado;
 use App\Models\User;
@@ -35,7 +41,7 @@ if(app()->isProduction()){
 Schedule::command('cache:recaudacion')->dailyAt('23:10');
 
 Artisan::command('migrar', function(){
-
+/*
     Schema::disableForeignKeyConstraints();
     DB::table('colindancias')->truncate();
     DB::table('propietarios')->truncate();
@@ -49,7 +55,7 @@ Artisan::command('migrar', function(){
     DB::table('predio_repetidos')->truncate();
     DB::table('jobs')->truncate();
     DB::table('failed_jobs')->truncate();
-    Schema::enableForeignKeyConstraints();
+    Schema::enableForeignKeyConstraints(); */
 
     /* $referencias = ctref007::whereIn('tipo_007', ["TV", "AH", "UP", "UB", "TE", "ED", "TP", "OM"])->get(); */
 
@@ -315,18 +321,10 @@ Artisan::command('migrar-traslados', function(){
 
 Artisan::command('migrar-tramites', function(){
 
-    Schema::disableForeignKeyConstraints();
-    DB::table('tramites')->truncate();
-
     $tramites = DB::connection('sqlsrv')->table('ctatr013')
-                    ->join('ctrec024', function($q){
-                        $q->on('ctatr013.atra_013', 'ctrec024.atra_024')
-                            ->on('ctatr013.foli_013', 'ctrec024.foli_024')
-                            ->on('ctatr013.usua_013', 'ctrec024.usu_024');
-                    })
-                    ->where('atra_013', 2026)
-                    ->where('ofna_013', 101)
-                    ->get();
+                                        ->where('atra_013', 2026)
+                                        ->whereIn('ofna_013', [1801, 1802, 1803, 1804, 1805, 1806])
+                                        ->get();
 
     $this->info('Incia migración de trámites el: ' . now());
 
@@ -481,7 +479,7 @@ Artisan::command('migrar-tramites', function(){
         }
 
         $tramite = Tramite::create([
-            'estado' => 'pagado',
+            'estado' => 'nuevo',
             'tipo_tramite' => trim($tramite->iden_013) == 'E' ? 'exento' : 'normal',
             'tipo_servicio' => 'ordinario',
             'año' => trim($tramite->atra_013),
@@ -813,6 +811,182 @@ Artisan::command('migrar-bloqueados', function(){
         fclose($handle);
 
     }
+
+});
+
+Artisan::command('migrar-avaluos', function(){
+
+    $avaluos = DB::connection('sqlsrv')->table('ctava019')
+                            ->whereIn('ofna_019', [1801, 1802, 1803, 1804, 1805, 1806])
+                            ->get();
+
+    $this->info('Incian ' . $avaluos->count() . ' avalúos en: ' . now());
+
+    $progressbar = $this->output->createProgressBar(count($avaluos));
+
+    $progressbar->start();
+
+    $referencias = collect(ctref007::whereIn('tipo_007', ["UP", "UB"])->get()->toArray());
+
+    foreach ($avaluos as $avaluo) {
+
+        $avaluo = (array) $avaluo;
+
+        $old_avaluo = OldAvaluo::create([
+            'año' => $avaluo['ania_019'],
+            'folio' => $avaluo['cona_019'],
+            'usuario' => $avaluo['cvev_019'],
+            'estado' => $avaluo['esta_019'],
+            'region_catastral' => $avaluo['rcat_019'],
+            'municipio' => $avaluo['mpio_019'],
+            'zona_catastral' => $avaluo['zcat_019'],
+            'localidad' => $avaluo['locl_019'],
+            'sector' => $avaluo['sect_019'],
+            'manzana' => $avaluo['mzna_019'],
+            'predio' => $avaluo['pred_019'],
+            'edificio' => $avaluo['edif_019'],
+            'departamento' => $avaluo['dpto_019'],
+            'oficina' => $avaluo['ofna_019'],
+            'tipo_predio' => $avaluo['tpre_019'],
+            'numero_registro' => $avaluo['nreg_019'],
+            'uso_1' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usop_019'],)->first() ? $this->referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usop_019'],)->first()['desc_007'] : null,
+            'uso_2' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usp2_019'],)->first() ? $this->referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usp2_019'],)->first()['desc_007'] : null,
+            'uso_3' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usp3_019'],)->first() ? $this->referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usp3_019'],)->first()['desc_007'] : null,
+            'ubicacion_en_manzana' => $this->referencias->where('tipo_007', "UB")->where('cvea_007', $avaluo['ubic_019'],)->first() ? $this->referencias->where('tipo_007', "UB")->where('cvea_007', $avaluo['ubic_019'],)->first()['desc_007'] : null,
+            'superficie_total_terreno' => $avaluo[''],
+            'observaciones' => $avaluo['obs1_019'] . $avaluo['obs2_019'] . $avaluo['obs3_019'],
+        ]);
+
+        Terreno::create([
+            'terrenoable_id' => $old_avaluo->id,
+            'terrenoable_type' => 'App\Models\OldAvaluo',
+            'superficie' => $avaluo['ster_019'],
+            'valor_unitario' => $avaluo['valt_019'],
+            'valor_terreno' => $avaluo['vter_019']
+        ]);
+
+        if($avaluo['vte2_019'] > 0){
+
+            Terreno::create([
+                'terrenoable_id' => $old_avaluo->id,
+                'terrenoable_type' => 'App\Models\OldAvaluo',
+                'superficie' => $avaluo['ste2_019'],
+                'valor_unitario' => $avaluo['val2_019'],
+                'valor_terreno' => $avaluo['vte2_019']
+            ]);
+
+        }
+
+        if($avaluo['dpto_019'] > 0){
+
+            $avaluo_padre = DB::connection('sqlsrv')->table('ctcnt020')
+                            ->where('estado', $avaluo['esta_019'])
+                            ->where('region_catastral', $avaluo['rcat_019'])
+                            ->where('municipio', $avaluo['mpio_019'])
+                            ->where('zona_catastral', $avaluo['zcat_019'])
+                            ->where('localidad', $avaluo['locl_019'])
+                            ->where('sector', $avaluo['sect_019'])
+                            ->where('manzana', $avaluo['mzna_019'])
+                            ->where('predio', $avaluo['pred_019'])
+                            ->where('edificio', 0)
+                            ->where('departamento', 0)
+                            ->first();
+
+            if($avaluo_padre){
+
+                TerrenosComun::create([
+                    'terrenos_comunsable_id' => $old_avaluo->id,
+                    'terrenos_comunsable_type' => 'App\Models\OldAvaluo',
+                    'area_terreno_comun' => $avaluo_padre->stot_019,
+                    'indiviso_terreno' => $avaluo_padre->ipre_019,
+                    'valor_unitario' => $avaluo_padre->valt_019,
+                    'superficie_proporcional' => $avaluo_padre->prot_019,
+                    'valor_terreno_comun' => $avaluo_padre->prot_019 * $avaluo_padre->valt_01
+                ]);
+
+            }
+
+        }
+
+        $construcciones = DB::connection('sqlsrv')->table('ctcnt020')
+                            ->where('estado', $avaluo['esta_019'])
+                            ->where('region_catastral', $avaluo['rcat_019'])
+                            ->where('municipio', $avaluo['mpio_019'])
+                            ->where('zona_catastral', $avaluo['zcat_019'])
+                            ->where('localidad', $avaluo['locl_019'])
+                            ->where('sector', $avaluo['sect_019'])
+                            ->where('manzana', $avaluo['mzna_019'])
+                            ->where('predio', $avaluo['pred_019'])
+                            ->where('edificio', $avaluo['edif_019'])
+                            ->where('departamento', $avaluo['dpto_019'])
+                            ->get();
+
+        if($construcciones->count()){
+
+            foreach ($construcciones as $construccion) {
+
+                Construccion::craete([
+                    'construccionable_id' => $old_avaluo->id,
+                    'construccionable_type' => 'App\Models\OldAvaluo',
+                    'referencia' => $construccion->recon_020,
+                    'tipo' => $construccion->tipo_020,
+                    'uso' => $construccion->usoc_020,
+                    'estado' => $construccion->grac_020,
+                    'calidad' => $construccion->cali_020,
+                    'niveles' => $construccion->nive_020,
+                    'superficie' => $construccion->scon_020,
+                    'valor_unitario' => $construccion->valc_020,
+                    'valor_construccion' => $construccion,
+                ]);
+
+            }
+
+        }
+
+
+        if($avaluo['dpto_019'] > 0){
+
+            $construcciones_padre = DB::connection('sqlsrv')->table('ctcnt020')
+                            ->where('estado', $avaluo['esta_019'])
+                            ->where('region_catastral', $avaluo['rcat_019'])
+                            ->where('municipio', $avaluo['mpio_019'])
+                            ->where('zona_catastral', $avaluo['zcat_019'])
+                            ->where('localidad', $avaluo['locl_019'])
+                            ->where('sector', $avaluo['sect_019'])
+                            ->where('manzana', $avaluo['mzna_019'])
+                            ->where('predio', $avaluo['pred_019'])
+                            ->where('edificio', 0)
+                            ->where('departamento', 0)
+                            ->get();
+
+
+            foreach ($construcciones_padre as $construccion_padre) {
+
+                ConstruccionesComun::create([
+                    'construcciones_comunsable_id' => $old_avaluo->id,
+                    'construcciones_comunsable_type' => 'App\Models\OldAvaluo',
+                    'area_comun_construccion' => $construccion_padre->scon_020,
+                    'superficie_proporcional' => $avaluo['proc_019'],
+                    'indiviso_construccion' => $avaluo['icon_019'],
+                    'valor_clasificacion_construccion' => $construccion_padre->valc_020,
+                    'valor_construccion_comun' => $avaluo['proc_019'] * $construccion_padre->valc_020,
+                    'calidad' => $construccion_padre->cali_020,
+                    'estado' => $construccion_padre->grac_020,
+                    'uso' => $construccion_padre->usoc_020,
+                    'tipo' => $construccion_padre->tipo_02
+                ]);
+
+            }
+
+        }
+
+        $progressbar->advance();
+
+    }
+
+    $progressbar->finish();
+
+    $this->info('Finaliza: ' . now());
 
 });
 
@@ -1454,3 +1628,4 @@ Artisan::command('actos_aviso', function(){
     $this->info($count);
 
 });
+
