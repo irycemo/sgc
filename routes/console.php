@@ -932,7 +932,7 @@ Artisan::command('migrar-avaluos', function(){
                     'niveles' => $construccion->nive_020,
                     'superficie' => $construccion->scon_020,
                     'valor_unitario' => $construccion->valc_020,
-                    'valor_construccion' => $construccion,
+                    'valor_construccion' => $construccion->valc_020 * $construccion->scon_020,
                 ]);
 
             }
