@@ -943,8 +943,6 @@ Artisan::command('migrar-avaluos', function(){
         if($avaluo['dpto_019'] > 0){
 
             $construcciones_padre = DB::connection('sqlsrv')->table('ctcnt020')
-                            ->where('estado', $avaluo['esta_019'])
-                            ->where('region_catastral', $avaluo['rcat_019'])
                             ->where('municipio', $avaluo['mpio_019'])
                             ->where('zona_catastral', $avaluo['zcat_019'])
                             ->where('localidad', $avaluo['locl_019'])
