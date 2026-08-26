@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('old_avaluos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('año');
-            $table->unsignedInteger('folio');
-            $table->unsignedInteger('usuario');
+            $table->unsignedInteger('año')->nullable();
+            $table->unsignedInteger('folio')->nullable();
+            $table->unsignedInteger('usuario')->nullable();
             $table->unsignedInteger('estado');
             $table->unsignedInteger('region_catastral');
             $table->unsignedInteger('municipio');
@@ -29,12 +29,12 @@ return new class extends Migration
             $table->unsignedInteger('oficina');
             $table->unsignedInteger('tipo_predio');
             $table->unsignedInteger('numero_registro');
-            $table->string('uso_1');
-            $table->string('uso_2');
-            $table->string('uso_3');
-            $table->string('ubicacion_en_manzana');
+            $table->string('uso_1')->nullable();
+            $table->string('uso_2')->nullable();
+            $table->string('uso_3')->nullable();
+            $table->string('ubicacion_en_manzana')->nullable();
             $table->decimal('superficie_total_terreno', 15,4)->nullable();
-            $table->text('observaciones');
+            $table->text('observaciones')->nullable();
             $table->timestamps();
         });
     }

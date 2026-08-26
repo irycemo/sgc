@@ -849,11 +849,11 @@ Artisan::command('migrar-avaluos', function(){
             'oficina' => $avaluo['ofna_019'],
             'tipo_predio' => $avaluo['tpre_019'],
             'numero_registro' => $avaluo['nreg_019'],
-            'uso_1' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usop_019'],)->first() ? $this->referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usop_019'],)->first()['desc_007'] : null,
-            'uso_2' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usp2_019'],)->first() ? $this->referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usp2_019'],)->first()['desc_007'] : null,
-            'uso_3' => $this->referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usp3_019'],)->first() ? $this->referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usp3_019'],)->first()['desc_007'] : null,
-            'ubicacion_en_manzana' => $this->referencias->where('tipo_007', "UB")->where('cvea_007', $avaluo['ubic_019'],)->first() ? $this->referencias->where('tipo_007', "UB")->where('cvea_007', $avaluo['ubic_019'],)->first()['desc_007'] : null,
-            'superficie_total_terreno' => $avaluo[''],
+            'uso_1' => $referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usop_019'],)->first() ? $referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usop_019'],)->first()['desc_007'] : null,
+            'uso_2' => $referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usp2_019'],)->first() ? $referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usp2_019'],)->first()['desc_007'] : null,
+            'uso_3' => $referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usp3_019'],)->first() ? $referencias->where('tipo_007', "UP")->where('cvea_007', $avaluo['usp3_019'],)->first()['desc_007'] : null,
+            'ubicacion_en_manzana' => $referencias->where('tipo_007', "UB")->where('cvea_007', $avaluo['ubic_019'],)->first() ? $referencias->where('tipo_007', "UB")->where('cvea_007', $avaluo['ubic_019'],)->first()['desc_007'] : null,
+            'superficie_total_terreno' => $avaluo['stot_019'],
             'observaciones' => $avaluo['obs1_019'] . $avaluo['obs2_019'] . $avaluo['obs3_019'],
         ]);
 
