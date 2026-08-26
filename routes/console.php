@@ -943,14 +943,14 @@ Artisan::command('migrar-avaluos', function(){
         if($avaluo['dpto_019'] > 0){
 
             $construcciones_padre = DB::connection('sqlsrv')->table('ctcnt020')
-                            ->where('municipio', $avaluo['mpio_019'])
-                            ->where('zona_catastral', $avaluo['zcat_019'])
-                            ->where('localidad', $avaluo['locl_019'])
-                            ->where('sector', $avaluo['sect_019'])
-                            ->where('manzana', $avaluo['mzna_019'])
-                            ->where('predio', $avaluo['pred_019'])
-                            ->where('edificio', 0)
-                            ->where('departamento', 0)
+                            ->where('mpio_020', $avaluo['mpio_019'])
+                            ->where('zcat_020', $avaluo['zcat_019'])
+                            ->where('locl_020', $avaluo['locl_019'])
+                            ->where('sect_020', $avaluo['sect_019'])
+                            ->where('mzna_020', $avaluo['mzna_019'])
+                            ->where('pred_020', $avaluo['pred_019'])
+                            ->where('edif_020', 0)
+                            ->where('dpto_020', 0)
                             ->get();
 
 
