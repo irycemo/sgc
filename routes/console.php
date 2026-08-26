@@ -880,8 +880,6 @@ Artisan::command('migrar-avaluos', function(){
         if($avaluo['dpto_019'] > 0){
 
             $avaluo_padre = DB::connection('sqlsrv')->table('ctcnt020')
-                            ->where('esta_020', $avaluo['esta_019'])
-                            ->where('rcat_020', $avaluo['rcat_019'])
                             ->where('mpio_020', $avaluo['mpio_019'])
                             ->where('zcat_020', $avaluo['zcat_019'])
                             ->where('locl_020', $avaluo['locl_019'])
@@ -909,8 +907,6 @@ Artisan::command('migrar-avaluos', function(){
         }
 
         $construcciones = DB::connection('sqlsrv')->table('ctcnt020')
-                            ->where('esta_020', $avaluo['esta_019'])
-                            ->where('rcat_020', $avaluo['rcat_019'])
                             ->where('mpio_020', $avaluo['mpio_019'])
                             ->where('zcat_020', $avaluo['zcat_019'])
                             ->where('locl_020', $avaluo['locl_019'])
