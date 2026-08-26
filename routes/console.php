@@ -880,16 +880,16 @@ Artisan::command('migrar-avaluos', function(){
         if($avaluo['dpto_019'] > 0){
 
             $avaluo_padre = DB::connection('sqlsrv')->table('ctcnt020')
-                            ->where('estado', $avaluo['esta_019'])
-                            ->where('region_catastral', $avaluo['rcat_019'])
-                            ->where('municipio', $avaluo['mpio_019'])
-                            ->where('zona_catastral', $avaluo['zcat_019'])
-                            ->where('localidad', $avaluo['locl_019'])
-                            ->where('sector', $avaluo['sect_019'])
-                            ->where('manzana', $avaluo['mzna_019'])
-                            ->where('predio', $avaluo['pred_019'])
-                            ->where('edificio', 0)
-                            ->where('departamento', 0)
+                            ->where('esta_020', $avaluo['esta_019'])
+                            ->where('rcat_020', $avaluo['rcat_019'])
+                            ->where('mpio_020', $avaluo['mpio_019'])
+                            ->where('zcat_020', $avaluo['zcat_019'])
+                            ->where('locl_020', $avaluo['locl_019'])
+                            ->where('sect_020', $avaluo['sect_019'])
+                            ->where('mzna_020', $avaluo['mzna_019'])
+                            ->where('pred_020', $avaluo['pred_019'])
+                            ->where('edif_020', 0)
+                            ->where('dpto_020', 0)
                             ->first();
 
             if($avaluo_padre){
@@ -909,16 +909,16 @@ Artisan::command('migrar-avaluos', function(){
         }
 
         $construcciones = DB::connection('sqlsrv')->table('ctcnt020')
-                            ->where('estado', $avaluo['esta_019'])
-                            ->where('region_catastral', $avaluo['rcat_019'])
-                            ->where('municipio', $avaluo['mpio_019'])
-                            ->where('zona_catastral', $avaluo['zcat_019'])
-                            ->where('localidad', $avaluo['locl_019'])
-                            ->where('sector', $avaluo['sect_019'])
-                            ->where('manzana', $avaluo['mzna_019'])
-                            ->where('predio', $avaluo['pred_019'])
-                            ->where('edificio', $avaluo['edif_019'])
-                            ->where('departamento', $avaluo['dpto_019'])
+                            ->where('esta_020', $avaluo['esta_019'])
+                            ->where('rcat_020', $avaluo['rcat_019'])
+                            ->where('mpio_020', $avaluo['mpio_019'])
+                            ->where('zcat_020', $avaluo['zcat_019'])
+                            ->where('locl_020', $avaluo['locl_019'])
+                            ->where('sect_020', $avaluo['sect_019'])
+                            ->where('mzna_020', $avaluo['mzna_019'])
+                            ->where('pred_020', $avaluo['pred_019'])
+                            ->where('edif_020', $avaluo['edif_019'])
+                            ->where('dpto_020', $avaluo['dpto_019'])
                             ->get();
 
         if($construcciones->count()){
