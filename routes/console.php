@@ -921,7 +921,7 @@ Artisan::command('migrar-avaluos', function(){
 
             foreach ($construcciones as $construccion) {
 
-                Construccion::crea|te([
+                Construccion::create([
                     'construccionable_id' => $old_avaluo->id,
                     'construccionable_type' => 'App\Models\OldAvaluo',
                     'referencia' => $construccion->rcon_020,
