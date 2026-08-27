@@ -187,7 +187,7 @@ Artisan::command('migrar-certificados', function(){
     DB::table('old_certificados')->truncate();
 
     $certificados = DB::connection('sqlsrv')->table('certificaciones')
-                            ->whereIn('ofna', 101)
+                            ->whereIn('ofna', [1801, 1802, 1803, 1804, 1805, 1806])
                             ->get();
 
     $this->info('Incia migración de certificados el: ' . now());
@@ -203,18 +203,17 @@ Artisan::command('migrar-certificados', function(){
             'ofna' => $certificado->ofna,
             'tpre' => $certificado->tpre,
             'nreg' => $certificado->nreg,
-            'tipo' => trim($certificado->anit),
-            'stat' => trim($certificado->cont),
-            'tipo_cer' => $certificado->cnot,
-            'ciudad' => trim($certificado->stat),
-            'imprimio' => trim($certificado->act1),
-            'actualizo' => trim($certificado->nven),
+            'tipo' => trim($certificado->tipo),
+            'stat' => trim($certificado->stat),
+            'tipo_cer' => $certificado->tipo_cer,
+            'ciudad' => trim($certificado->ciudad),
+            'imprimio' => trim($certificado->imprimio),
+            'actualizo' => trim($certificado->actualizo),
             'fecha' => $certificado->fecha,
-            'acer' => $certificado->ffir,
-            'atra' => $certificado->nomp,
-            'foli' => $certificado->ster,
-            'usua' => $certificado->scon,
-            'observaciones' => $certificado->obse,
+            'acer' => $certificado->acer,
+            'atra' => $certificado->atra,
+            'foli' => $certificado->foli,
+            'usua' => $certificado->usua,
         ]);
 
         $progressbar->advance();
@@ -235,7 +234,7 @@ Artisan::command('migrar-traslados', function(){
 
     $traslados = DB::connection('sqlsrv')->table('cttra108')
                             ->whereIn('stat_108', ['OPERADO', 'AUTORIZADO', 'RECHAZADO'])
-                            ->where('mpio_108', 53)
+                            ->whereIn('ofna_108', [1801, 1802, 1803, 1804, 1805, 1806])
                             ->get();
 
     $this->info('Incia migración de traslados el: ' . now());
@@ -487,8 +486,6 @@ Artisan::command('migrar-tramites', function(){
             'usuario' => trim($tramite->usua_013),
             'solicitante' => 'usuario',
             'nombre_solicitante' => trim($tramite->nomb_013),
-            'fecha_pago' => trim($tramite->fech_024),
-            'folio_pago' => trim($tramite->frec_024),
             'orden_de_pago' => trim($tramite->orde_013),
             'linea_de_captura' => trim($tramite->line_013),
             'monto' => trim($tramite->tot1_013),
@@ -879,15 +876,15 @@ Artisan::command('migrar-avaluos', function(){
 
         if($avaluo['dpto_019'] > 0){
 
-            $avaluo_padre = DB::connection('sqlsrv')->table('ctcnt020')
-                            ->where('mpio_020', $avaluo['mpio_019'])
-                            ->where('zcat_020', $avaluo['zcat_019'])
-                            ->where('locl_020', $avaluo['locl_019'])
-                            ->where('sect_020', $avaluo['sect_019'])
-                            ->where('mzna_020', $avaluo['mzna_019'])
-                            ->where('pred_020', $avaluo['pred_019'])
-                            ->where('edif_020', 0)
-                            ->where('dpto_020', 0)
+            $avaluo_padre = DB::connection('sqlsrv')->table('ctava019')
+                            ->where('mpio_019', $avaluo['mpio_019'])
+                            ->where('zcat_019', $avaluo['zcat_019'])
+                            ->where('locl_019', $avaluo['locl_019'])
+                            ->where('sect_019', $avaluo['sect_019'])
+                            ->where('mzna_019', $avaluo['mzna_019'])
+                            ->where('pred_019', $avaluo['pred_019'])
+                            ->where('edif_019', 0)
+                            ->where('dpto_019', 0)
                             ->first();
 
             if($avaluo_padre){
@@ -899,7 +896,7 @@ Artisan::command('migrar-avaluos', function(){
                     'indiviso_terreno' => $avaluo_padre->ipre_019,
                     'valor_unitario' => $avaluo_padre->valt_019,
                     'superficie_proporcional' => $avaluo_padre->prot_019,
-                    'valor_terreno_comun' => $avaluo_padre->prot_019 * $avaluo_padre->valt_01
+                    'valor_terreno_comun' => $avaluo_padre->prot_019 * $avaluo_padre->valt_019
                 ]);
 
             }
@@ -953,7 +950,6 @@ Artisan::command('migrar-avaluos', function(){
                             ->where('dpto_020', 0)
                             ->get();
 
-
             foreach ($construcciones_padre as $construccion_padre) {
 
                 ConstruccionesComun::create([
@@ -967,7 +963,7 @@ Artisan::command('migrar-avaluos', function(){
                     'calidad' => $construccion_padre->cali_020,
                     'estado' => $construccion_padre->grac_020,
                     'uso' => $construccion_padre->usoc_020,
-                    'tipo' => $construccion_padre->tipo_02
+                    'tipo' => $construccion_padre->tipo_020
                 ]);
 
             }
