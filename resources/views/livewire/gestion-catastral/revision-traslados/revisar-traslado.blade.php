@@ -187,25 +187,44 @@
 
         <x-slot name="footer">
 
-            <div class="flex gap-3">
+            <div class="flex justify-between items-center w-full">
 
-                <x-button-blue
-                    wire:click="operarTraslado"
-                    wire:loading.attr="disabled"
-                    wire:target="operarTraslado">
+                <div class="">
 
-                    <img wire:loading wire:target="operarTraslado" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+                    <x-button-gray
+                        wire:click="operarTraslado(0)"
+                        wire:loading.attr="disabled"
+                        wire:target="operarTraslado(0)"
+                        wire:confirm="¿Esta seguro que desea operar sin porcesar porcentajes? Deberá procesarlos manualmente en el área de Captura al padrón.">
 
-                    Operar
-                </x-button-blue>
+                        <img wire:loading wire:target="operarTraslado(0)" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
-                <x-button-red
-                    wire:click="$toggle('modalOperar')"
-                    wire:loading.attr="disabled"
-                    wire:target="$toggle('modalOperar')"
-                    type="button">
-                    Cerrar
-                </x-button-red>
+                        Operar sin procesar porcentajes
+                    </x-button-gray>
+
+                </div>
+
+                <div class="flex gap-3">
+
+                    <x-button-blue
+                        wire:click="operarTraslado"
+                        wire:loading.attr="disabled"
+                        wire:target="operarTraslado">
+
+                        <img wire:loading wire:target="operarTraslado" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                        Operar
+                    </x-button-blue>
+
+                    <x-button-red
+                        wire:click="$toggle('modalOperar')"
+                        wire:loading.attr="disabled"
+                        wire:target="$toggle('modalOperar')"
+                        type="button">
+                        Cerrar
+                    </x-button-red>
+
+                </div>
 
             </div>
 

@@ -144,25 +144,33 @@ class RevisarTraslado extends Component
 
     }
 
-    public function operarTraslado(){
+    public function operarTraslado($procesar_propietarios = true){
 
         try {
 
             /* $this->revisarPagoIsai(); */
 
-            if($this->traslado->tipo == 'revision'){
+            if($this->traslado->tipo == 'revision' && $procesar_propietarios){
 
                 $this->revisarProcentajes();
 
             }
 
-            DB::transaction(function () {
+            DB::transaction(function () use ($procesar_propietarios){
 
-                $this->actualizarPredio();
+                $this->actualizarPredio($procesar_propietarios);
 
                 $this->traslado->update(['estado' => 'operado', 'actualizado_por' => auth()->id()]);
 
-                $this->traslado->audits()->latest()->first()->update(['tags' => 'Operó traslado']);
+                if($procesar_propietarios){
+
+                    $this->traslado->audits()->latest()->first()->update(['tags' => 'Operó traslado']);
+
+                }else{
+
+                    $this->traslado->audits()->latest()->first()->update(['tags' => 'Operó traslado sin procesar propietarios']);
+
+                }
 
                 $this->procesarTramtie();
 
@@ -290,7 +298,7 @@ class RevisarTraslado extends Component
 
     }
 
-    public function actualizarPredio(){
+    public function actualizarPredio($procesar_propietarios){
 
         $this->traslado->predio->colindancias()->delete();
 
@@ -411,104 +419,79 @@ class RevisarTraslado extends Component
 
             }
 
-            foreach($this->transmitentes as $propietario){
+            if($procesar_propietarios){
 
-                if($propietario['porcentaje_propiedad'] == 0 && $propietario['porcentaje_nuda'] == 0 && $propietario['porcentaje_usufructo'] == 0){
+                foreach($this->transmitentes as $propietario){
 
-                    $this->traslado->predio->propietarios()->whereHas('persona', function($q) use($propietario){
-                                                            $q->where('nombre', $propietario['nombre'])
-                                                                ->where('ap_paterno', $propietario['ap_paterno'])
-                                                                ->where('ap_materno', $propietario['ap_materno'])
-                                                                ->where('razon_social', $propietario['razon_social']);
-                                                            })
-                                                            ->delete();
+                    if($propietario['porcentaje_propiedad'] == 0 && $propietario['porcentaje_nuda'] == 0 && $propietario['porcentaje_usufructo'] == 0){
 
+                        $this->traslado->predio->propietarios()->whereHas('persona', function($q) use($propietario){
+                                                                $q->where('nombre', $propietario['nombre'])
+                                                                    ->where('ap_paterno', $propietario['ap_paterno'])
+                                                                    ->where('ap_materno', $propietario['ap_materno'])
+                                                                    ->where('razon_social', $propietario['razon_social']);
+                                                                })
+                                                                ->delete();
 
-                }else{
-
-
-                     $aux = $this->traslado->predio->propietarios()->whereHas('persona', function($q) use($propietario){
-                                                                                        $q->where('nombre', $propietario['nombre'])
-                                                                                            ->where('ap_paterno', $propietario['ap_paterno'])
-                                                                                            ->where('ap_materno', $propietario['ap_materno'])
-                                                                                            ->where('razon_social', $propietario['razon_social']);
-                                                                                        })
-                                                                                        ->first();
-
-                    if(! $aux){
-
-                        throw new GeneralException('No se encontro al propietario: ' . $propietario['nombre'] . ' ' . $propietario['ap_paterno'] . ' ' . $propietario['ap_materno']. ' '. $propietario['razon_social']);
-
-                    }
-
-                    $aux->update([
-                        'porcentaje_propiedad' => (float)$propietario['porcentaje_propiedad'],
-                        'porcentaje_nuda' => (float)$propietario['porcentaje_nuda'],
-                        'porcentaje_usufructo' => (float)$propietario['porcentaje_usufructo'],
-                    ]);
-
-                }
-
-            }
-
-            foreach($this->aviso['predio']['adquirientes'] as $adquiriente){
-
-                $propietario_existente = $this->traslado->predio->propietarios()->whereHas('persona', function($q) use($adquiriente){
-                                                                                    $q->where('nombre', $adquiriente['persona']['nombre'])
-                                                                                        ->where('ap_paterno', $adquiriente['persona']['ap_paterno'])
-                                                                                        ->where('ap_materno', $adquiriente['persona']['ap_materno'])
-                                                                                        ->where('razon_social', $adquiriente['persona']['razon_social']);
-                                                                                    })
-                                                                                    ->first();
-
-                if($propietario_existente){
-
-                    if(in_array($this->aviso['acto'], ['CONSOLIDACIÓN DEL USUFRUCTO', 'EXTINCIÓN DE USUFRUCTO VITALICIO', 'RENUNCIA DEL USUFRUCTO VITALICIO'])){
-
-                        $propietario_existente->update([
-                            'porcentaje_propiedad' => (float)$adquiriente['porcentaje_propiedad'],
-                            'porcentaje_nuda' => 0,
-                            'porcentaje_usufructo' => 0,
-                        ]);
 
                     }else{
 
-                        $propietario_existente->update([
-                            'porcentaje_propiedad' => (float)$adquiriente['porcentaje_propiedad'] + $propietario_existente->porcentaje_propiedad,
-                            'porcentaje_nuda' => (float)$adquiriente['porcentaje_nuda'] + $propietario_existente->porcentaje_nuda,
-                            'porcentaje_usufructo' => (float)$adquiriente['porcentaje_usufructo'] + $propietario_existente->porcentaje_usufructo,
+
+                        $aux = $this->traslado->predio->propietarios()->whereHas('persona', function($q) use($propietario){
+                                                                                            $q->where('nombre', $propietario['nombre'])
+                                                                                                ->where('ap_paterno', $propietario['ap_paterno'])
+                                                                                                ->where('ap_materno', $propietario['ap_materno'])
+                                                                                                ->where('razon_social', $propietario['razon_social']);
+                                                                                            })
+                                                                                            ->first();
+
+                        if(! $aux){
+
+                            throw new GeneralException('No se encontro al propietario: ' . $propietario['nombre'] . ' ' . $propietario['ap_paterno'] . ' ' . $propietario['ap_materno']. ' '. $propietario['razon_social']);
+
+                        }
+
+                        $aux->update([
+                            'porcentaje_propiedad' => (float)$propietario['porcentaje_propiedad'],
+                            'porcentaje_nuda' => (float)$propietario['porcentaje_nuda'],
+                            'porcentaje_usufructo' => (float)$propietario['porcentaje_usufructo'],
                         ]);
 
                     }
 
-                    $propietario_existente->persona->update([
-                        'fecha_nacimiento' => $adquiriente['persona']['fecha_nacimiento'],
-                        'nacionalidad' => $adquiriente['persona']['nacionalidad'],
-                        'estado_civil' => $adquiriente['persona']['estado_civil'],
-                        'calle' => $adquiriente['persona']['calle'],
-                        'numero_exterior' => $adquiriente['persona']['numero_exterior'],
-                        'numero_interior' => $adquiriente['persona']['numero_interior'],
-                        'colonia' => $adquiriente['persona']['colonia'],
-                        'cp' => $adquiriente['persona']['cp'],
-                        'entidad' => $adquiriente['persona']['entidad'],
-                        'municipio' => $adquiriente['persona']['municipio'],
-                        'ciudad' => $adquiriente['persona']['ciudad'],
-                    ]);
+                }
 
-                }else{
+                foreach($this->aviso['predio']['adquirientes'] as $adquiriente){
 
-                    $persona = $this->buscarPersona($adquiriente['persona']['rfc'], $adquiriente['persona']['curp'], $adquiriente['persona']['tipo'], $adquiriente['persona']['nombre'], $adquiriente['persona']['ap_materno'], $adquiriente['persona']['ap_paterno'], $adquiriente['persona']['razon_social']);
+                    $propietario_existente = $this->traslado->predio->propietarios()->whereHas('persona', function($q) use($adquiriente){
+                                                                                        $q->where('nombre', $adquiriente['persona']['nombre'])
+                                                                                            ->where('ap_paterno', $adquiriente['persona']['ap_paterno'])
+                                                                                            ->where('ap_materno', $adquiriente['persona']['ap_materno'])
+                                                                                            ->where('razon_social', $adquiriente['persona']['razon_social']);
+                                                                                        })
+                                                                                        ->first();
 
-                    if(!$persona){
+                    if($propietario_existente){
 
-                        $persona = Persona::create([
-                            'tipo' =>  $adquiriente['persona']['tipo'],
-                            'nombre' => $adquiriente['persona']['nombre'] ?? null,
-                            'ap_paterno' => $adquiriente['persona']['ap_paterno'] ?? null,
-                            'ap_materno' => $adquiriente['persona']['ap_materno'] ?? null,
-                            'razon_social' => $adquiriente['persona']['razon_social'] ?? null,
-                            'rfc' => $adquiriente['persona']['rfc'],
-                            'curp' => $adquiriente['persona']['curp'],
+                        if(in_array($this->aviso['acto'], ['CONSOLIDACIÓN DEL USUFRUCTO', 'EXTINCIÓN DE USUFRUCTO VITALICIO', 'RENUNCIA DEL USUFRUCTO VITALICIO'])){
+
+                            $propietario_existente->update([
+                                'porcentaje_propiedad' => (float)$adquiriente['porcentaje_propiedad'],
+                                'porcentaje_nuda' => 0,
+                                'porcentaje_usufructo' => 0,
+                            ]);
+
+                        }else{
+
+                            $propietario_existente->update([
+                                'porcentaje_propiedad' => (float)$adquiriente['porcentaje_propiedad'] + $propietario_existente->porcentaje_propiedad,
+                                'porcentaje_nuda' => (float)$adquiriente['porcentaje_nuda'] + $propietario_existente->porcentaje_nuda,
+                                'porcentaje_usufructo' => (float)$adquiriente['porcentaje_usufructo'] + $propietario_existente->porcentaje_usufructo,
+                            ]);
+
+                        }
+
+                        $propietario_existente->persona->update([
                             'fecha_nacimiento' => $adquiriente['persona']['fecha_nacimiento'],
                             'nacionalidad' => $adquiriente['persona']['nacionalidad'],
                             'estado_civil' => $adquiriente['persona']['estado_civil'],
@@ -522,17 +505,46 @@ class RevisarTraslado extends Component
                             'ciudad' => $adquiriente['persona']['ciudad'],
                         ]);
 
+                    }else{
+
+                        $persona = $this->buscarPersona($adquiriente['persona']['rfc'], $adquiriente['persona']['curp'], $adquiriente['persona']['tipo'], $adquiriente['persona']['nombre'], $adquiriente['persona']['ap_materno'], $adquiriente['persona']['ap_paterno'], $adquiriente['persona']['razon_social']);
+
+                        if(!$persona){
+
+                            $persona = Persona::create([
+                                'tipo' =>  $adquiriente['persona']['tipo'],
+                                'nombre' => $adquiriente['persona']['nombre'] ?? null,
+                                'ap_paterno' => $adquiriente['persona']['ap_paterno'] ?? null,
+                                'ap_materno' => $adquiriente['persona']['ap_materno'] ?? null,
+                                'razon_social' => $adquiriente['persona']['razon_social'] ?? null,
+                                'rfc' => $adquiriente['persona']['rfc'],
+                                'curp' => $adquiriente['persona']['curp'],
+                                'fecha_nacimiento' => $adquiriente['persona']['fecha_nacimiento'],
+                                'nacionalidad' => $adquiriente['persona']['nacionalidad'],
+                                'estado_civil' => $adquiriente['persona']['estado_civil'],
+                                'calle' => $adquiriente['persona']['calle'],
+                                'numero_exterior' => $adquiriente['persona']['numero_exterior'],
+                                'numero_interior' => $adquiriente['persona']['numero_interior'],
+                                'colonia' => $adquiriente['persona']['colonia'],
+                                'cp' => $adquiriente['persona']['cp'],
+                                'entidad' => $adquiriente['persona']['entidad'],
+                                'municipio' => $adquiriente['persona']['municipio'],
+                                'ciudad' => $adquiriente['persona']['ciudad'],
+                            ]);
+
+                        }
+
+                        $this->traslado->predio->propietarios()->create([
+                            'persona_id' => $persona->id,
+                            'tipo' => 'PROPIETARIO',
+                            'porcentaje_propiedad' => $adquiriente['porcentaje_propiedad'],
+                            'porcentaje_nuda' => $adquiriente['porcentaje_nuda'],
+                            'porcentaje_usufructo' => $adquiriente['porcentaje_usufructo'],
+                            'creado_por' => auth()->id()
+                        ]);
+
+
                     }
-
-                    $this->traslado->predio->propietarios()->create([
-                        'persona_id' => $persona->id,
-                        'tipo' => 'PROPIETARIO',
-                        'porcentaje_propiedad' => $adquiriente['porcentaje_propiedad'],
-                        'porcentaje_nuda' => $adquiriente['porcentaje_nuda'],
-                        'porcentaje_usufructo' => $adquiriente['porcentaje_usufructo'],
-                        'creado_por' => auth()->id()
-                    ]);
-
 
                 }
 
