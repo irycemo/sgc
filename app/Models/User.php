@@ -42,7 +42,7 @@ class User extends Authenticatable implements Auditable
         'email',
         'password',
         'oficina_id',
-        'status',
+        'estado',
         'area',
         'creado_por',
         'actualizado_por',

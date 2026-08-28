@@ -7,8 +7,18 @@ use App\Exceptions\GeneralException;
 use App\Http\Controllers\Valuacion\AvaluoImpresionController;
 use App\Models\Avaluo;
 use App\Models\Certificacion;
+use App\Models\Colindancia;
+use App\Models\Construccion;
+use App\Models\ConstruccionesComun;
+use App\Models\CuentaAsignada;
 use App\Models\File;
+use App\Models\OldAvaluo;
+use App\Models\Predio;
+use App\Models\PredioAvaluo;
 use App\Models\PredioIgnorado;
+use App\Models\Propietario;
+use App\Models\Terreno;
+use App\Models\TerrenosComun;
 use App\Models\VariacionCatastral;
 use App\Traits\ComponentesTrait;
 use App\Traits\Predios\ValidarCuentaAsignada;
@@ -45,6 +55,7 @@ class MisAvaluos extends Component
     public $modalCorregir = false;
     public $modalVerArchivos = false;
     public $modalClonar = false;
+    public $modalMigrarAvaluo = false;
     public $años;
     public $modelo_administrativo;
 
@@ -648,6 +659,219 @@ class MisAvaluos extends Component
         } catch (\Throwable $th) {
 
             Log::error("Error al actualizar propietarios en avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+
+        }
+
+    }
+
+    public function migrarAvaluo(){
+
+        $this->validate([
+            'localidad' => 'required|numeric',
+            'oficina' => 'required|numeric',
+            'tipo_predio' => 'required|numeric',
+            'numero_registro' => 'required|numeric',
+        ]);
+
+        try {
+
+            $avaluo_old = OldAvaluo::where('localidad', $this->localidad)
+                                        ->where('oficina', $this->oficina)
+                                        ->where('tipo_predio', $this->tipo_predio)
+                                        ->where('numero_registro', $this->numero_registro)
+                                        ->first();
+
+            if(! $avaluo_old){
+
+                throw new GeneralException('No hay avalúos para migrar con el predio ingresado.');
+
+            }
+
+            DB::transaction(function () use($avaluo_old){
+
+                $cuenta_asignada = CuentaAsignada::where('localidad', $this->localidad)
+                                        ->where('oficina', $this->oficina)
+                                        ->where('tipo_predio', $this->tipo_predio)
+                                        ->where('numero_registro', $this->numero_registro)
+                                        ->first();
+
+                if(! $cuenta_asignada){
+
+                    CuentaAsignada::create([
+                        'localidad' =>  $this->localidad,
+                        'oficina' =>  $this->oficina,
+                        'tipo_predio' =>  $this->tipo_predio,
+                        'numero_registro' =>  $this->numero_registro,
+                        'observaciones' => 'Cuenta asignada mediante proceso de migración de avalúo.',
+                        'asignado_a' => auth()->id(),
+                        'creado_por' => auth()->user()->id
+                    ]);
+
+                }else{
+
+                    $cuenta_asignada->update(['asignado_a' => auth()->id()]);
+
+                }
+
+                $this->validarDisponibilidadPadronNoBindings($avaluo_old->region_catastral, $avaluo_old->municipio, $avaluo_old->zona_catastral, $avaluo_old->localidad, $avaluo_old->sector, $avaluos_old->manzana, $avaluos_old->predio, $avaluos_old->edificio, $avaluo_old->departamento, $avaluo_old->oficina, $avaluo_old->tipo_predio, $avaluo_old->numero_registro);
+
+                $this->validarSectorNoBinding($avaluo_old->localidad, $avaluo_old->oficina, $avaluo_old->municipio, $avaluo_old->sector);
+
+                $avaluo = Avaluo::make();
+
+                $avaluo->año = now()->format('Y');
+                $avaluo->usuario = auth()->user()->clave;
+                $avaluo->folio = (Avaluo::where('año', now()->format('Y'))->where('usuario', auth()->user()->clave)->max('folio') ?? 0) + 1;
+                $avaluo->estado = 'nuevo';
+                $avaluo->asignado_a = auth()->id();
+                $avaluo->creado_por = auth()->id();
+                $avaluo->oficina_id = auth()->user()->oficina_id;
+                $avaluo->observaciones = $avaluo_old->observaciones;
+
+                $predio_avaluo = PredioAvaluo::make();
+                $predio_avaluo->tipo_vialidad = $avaluo_old->tipo_vialidad;
+                $predio_avaluo->tipo_asentamiento = $avaluo_old->tipo_asentamiento;
+                $predio_avaluo->nombre_vialidad = $avaluo_old->nombre_vialidad;
+                $predio_avaluo->numero_exterior = $avaluo_old->numero_exterior;
+                $predio_avaluo->numero_exterior_2 = $avaluo_old->numero_exterior_2;
+                $predio_avaluo->numero_adicional = $avaluo_old->numero_adicional;
+                $predio_avaluo->numero_adicional_2 = $avaluo_old->numero_adicional_2;
+                $predio_avaluo->numero_interior = $avaluo_old->numero_interior;
+                $predio_avaluo->nombre_asentamiento = $avaluo_old->nombre_asentamiento;
+                $predio_avaluo->codigo_postal = $avaluo_old->codigo_postal;
+                $predio_avaluo->lote_fraccionador = $avaluo_old->lote_fraccionador;
+                $predio_avaluo->manzana_fraccionador = $avaluo_old->manzana_fraccionador;
+                $predio_avaluo->etapa_fraccionador = $avaluo_old->etapa_fraccionador;
+                $predio_avaluo->nombre_edificio = $avaluo_old->nombre_edificio;
+                $predio_avaluo->clave_edificio = $avaluo_old->clave_edificio;
+                $predio_avaluo->departamento_edificio = $avaluo_old->departamento_edificio;
+                $predio_avaluo->ubicacion_en_manzana = $avaluo_old->ubicacion_en_manzana;
+                $predio_avaluo->domicilio_notificacion = $avaluo_old->domicilio_notificacion;
+                $predio_avaluo->save();
+
+                $avaluo->predio_avaluo = $predio_avaluo->id;
+
+                $predio = Predio::where('localidad', $this->localidad)
+                                        ->where('oficina', $this->oficina)
+                                        ->where('tipo_predio', $this->tipo_predio)
+                                        ->where('numero_registro', $this->numero_registro)
+                                        ->first();
+
+                if($predio){
+
+                    $avaluo->predio = $predio->id;
+
+                    foreach($predio->propietarios as $propietario){
+
+                        Propietario::create([
+                            'propietarioable_id' => $predio_avaluo->id,
+                            'propietarioable_type' => 'App\Models\PredioAvaluo',
+                            'persona_id' => $propietario->persona_id,
+                            'porcentaje_propiedad' => $propietario->porcentaje_propiedad,
+                            'porcentaje_nuda' => $propietario->porcentaje_nuda,
+                            'porcentaje_usufructo' => $propietario->porcentaje_usufructo,
+                            'tipo' => 'PROPIETARIO',
+                            'creado_por' => auth()->id()
+                        ]);
+
+                        foreach($predio->colindancias as $colindancia){
+
+                            Colindancia::create([
+                                'colindanciaable_id' => $predio_avaluo->id,
+                                'colindanciaable_type' => 'App\Models\PredioAvaluo',
+                                'viento' => $colindancia->viento,
+                                'longitud' => $colindancia->longitud,
+                                'descripcion' => $colindancia->descripcion,
+                                'creado_por' => auth()->id()
+                            ]);
+
+                        }
+
+                    }
+
+                }
+
+                $avaluo->save();
+
+                foreach($avaluo_old->terrenos as $terreno){
+
+                    Terreno::create([
+                        'terrenoable_id' => $predio_avaluo->id,
+                        'terrenoable_type' => 'App\Models\PredioAvaluo',
+                        'superficie' => $terreno->superficie,
+                        'demerito' => $terreno->demerito,
+                        'valor_demeritado' => $terreno->valor_demeritado,
+                        'valor_unitario' => $terreno->valor_unitario,
+                        'valor_terreno' => $terreno->valor_terreno,
+                        'creado_por' => auth()->id()
+                    ]);
+
+                }
+
+                foreach($avaluo_old->terrenosComun as $terrenoComun){
+
+                    TerrenosComun::create([
+                        'terrenos_comunsable_id' => $predio_avaluo->id,
+                        'terrenos_comunsable_type' => 'App\Models\PredioAvaluo',
+                        'area_terreno_comun' => $terrenoComun->area_terreno_comun,
+                        'indiviso_terreno' => $terrenoComun->indiviso_terreno,
+                        'valor_unitario' => $terrenoComun->valor_unitario,
+                        'superficie_proporcional' => $terrenoComun->superficie_proporcional,
+                        'valor_terreno_comun' => $terrenoComun->valor_terreno_comun,
+                        'creado_por' => auth()->id()
+                    ]);
+
+                }
+
+                foreach($avaluo_old->construcciones as $construccion){
+
+                    Construccion::create([
+                        'construccionable_id' => $predio_avaluo->id,
+                        'construccionable_type' => 'App\Models\PredioAvaluo',
+                        'referencia' => $construccion->referencia,
+                        'tipo' => $construccion->tipo,
+                        'uso' => $construccion->uso,
+                        'estado' => $construccion->estado,
+                        'calidad' => $construccion->calidad,
+                        'niveles' => $construccion->niveles,
+                        'superficie' => $construccion->superficie,
+                        'valor_unitario' => $construccion->valor_unitario,
+                        'valor_construccion' => $construccion->valor_construccion,
+                        'creado_por' => auth()->id()
+                    ]);
+
+                }
+
+                foreach($avaluo_old->construccionesComun as $construccionComun){
+
+                    ConstruccionesComun::create([
+                        'construcciones_comunsable_id' => $predio_avaluo->id,
+                        'construcciones_comunsable_type' => 'App\Models\PredioAvaluo',
+                        'area_comun_construccion' => $construccionComun->area_comun_construccion,
+                        'superficie_proporcional' => $construccionComun->superficie_proporcional,
+                        'indiviso_construccion' => $construccionComun->indiviso_construccion,
+                        'valor_clasificacion_construccion' => $construccionComun->valor_clasificacion_construccion,
+                        'valor_construccion_comun' => $construccionComun->valor_construccion_comun,
+                        'tipo' => $construccionComun->tipo,
+                        'uso' => $construccionComun->uso,
+                        'estado' => $construccionComun->estado,
+                        'calidad' => $construccionComun->calidad,
+                        'creado_por' => auth()->id()
+                    ]);
+
+                }
+
+            });
+
+        } catch (GeneralException $ex) {
+
+            $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
+
+        } catch (\Throwable $th) {
+
+            Log::error("Error al migrar avalúo por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
 
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 

@@ -823,7 +823,7 @@ Artisan::command('migrar-avaluos', function(){
 
     $progressbar->start();
 
-    $referencias = collect(ctref007::whereIn('tipo_007', ["UP", "UB"])->get()->toArray());
+    $referencias = collect(ctref007::whereIn('tipo_007', ["UP", "UB", "TV", "AH"])->get()->toArray());
 
     foreach ($avaluos as $avaluo) {
 
@@ -852,6 +852,23 @@ Artisan::command('migrar-avaluos', function(){
             'ubicacion_en_manzana' => $referencias->where('tipo_007', "UB")->where('cvea_007', $avaluo['ubic_019'],)->first() ? $referencias->where('tipo_007', "UB")->where('cvea_007', $avaluo['ubic_019'],)->first()['desc_007'] : null,
             'superficie_total_terreno' => $avaluo['stot_019'],
             'observaciones' => $avaluo['obs1_019'] . $avaluo['obs2_019'] . $avaluo['obs3_019'],
+            'tipo_vialidad' => $referencias->where('tipo_007', "TV")->where('cvea_007', $avaluo['tvia019'],)->first() ? $referencias->where('tipo_007', "TV")->where('cvea_007', $avaluo['tvia019'],)->first()['desc_007'] : null,
+            'tipo_asentamiento' => $referencias->where('tipo_007', "AH")->where('cvea_007', $avaluo['tase_019'],)->first() ? $referencias->where('tipo_007', "AH")->where('cvea_007', $avaluo['tase_019'],)->first()['desc_007'] : null,
+            'nombre_vialidad' => $avaluo['call_019'],
+            'numero_exterior' => $avaluo['next_019'],
+            'numero_exterior_2' => $avaluo['nex2_019'],
+            'numero_adicional' => $avaluo['nadi_019'],
+            'numero_adicional_2' => $avaluo['nad2_019'],
+            'numero_interior' => $avaluo['nint_019'],
+            'nombre_asentamiento' => $avaluo['colo_019'],
+            'codigo_postal' => $avaluo['codp_019'],
+            'lote_fraccionador' => $avaluo['lote_019'],
+            'manzana_fraccionador' => $avaluo['manz_019'],
+            'etapa_fraccionador' => $avaluo['zona_019'],
+            'nombre_edificio' => $avaluo['nedi_019'],
+            'clave_edificio' => $avaluo['cled_019'],
+            'departamento_edificio' => $avaluo['ndpt_019'],
+            'domicilio_notificacion' => $avaluo['nopo_019'] . ' ' . $avaluo['nomu_019'] . ' ' . $avaluo['cest_019']. ' ' .  $avaluo['codp_019'],
         ]);
 
         Terreno::create([

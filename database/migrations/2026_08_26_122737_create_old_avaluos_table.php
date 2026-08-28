@@ -32,10 +32,32 @@ return new class extends Migration
             $table->string('uso_1')->nullable();
             $table->string('uso_2')->nullable();
             $table->string('uso_3')->nullable();
+            $table->string('uso_1')->nullable();
+            $table->string('tipo_vialidad')->nullable();
+            $table->string('tipo_asentamiento')->nullable();
+            $table->string('nombre_vialidad')->nullable();
+            $table->string('numero_exterior')->nullable();
+            $table->string('numero_exterior_2')->nullable();
+            $table->string('numero_adicional')->nullable();
+            $table->string('numero_adicional_2')->nullable();
+            $table->string('numero_interior')->nullable();
+            $table->string('nombre_asentamiento')->nullable();
+            $table->string('codigo_postal')->nullable();
+            $table->string('lote_fraccionador')->nullable();
+            $table->string('manzana_fraccionador')->nullable();
+            $table->string('etapa_fraccionador')->nullable();
+            $table->text('nombre_predio')->nullable();
+            $table->string('nombre_edificio')->nullable();
+            $table->string('clave_edificio')->nullable();
+            $table->string('departamento_edificio')->nullable();
             $table->string('ubicacion_en_manzana')->nullable();
-            $table->decimal('superficie_total_terreno', 15,4)->nullable();
+            $table->text('domicilio_notificacion')->nullable();
             $table->text('observaciones')->nullable();
             $table->timestamps();
+
+            $table->index(['localidad', 'oficina', 'tipo_predio', 'numero_registro'], 'cuenta_predial');
+
+            $table->index(['año', 'folio'], 'folio');
         });
     }
 
