@@ -34,7 +34,7 @@
 
             <input @if($predio->avaluo?->folio || $predio->copia) readonly @endif placeholder="Estado" type="number" class="bg-white rounded text-xs w-20" title="Estado" value="16" readonly>
 
-            <input @if($predio->avaluo?->folio || $predio->copia) readonly @endif title="Región" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('predio.region_catastral') border-1 border-red-500 @enderror" wire:model="predio.region_catastral">
+            <input @if($predio->avaluo?->folio || $predio->copia) readonly @endif title="Región" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('predio.region_catastral') border-1 border-red-500 @enderror" wire:model="predio.region_catastral" readonly>
 
             <input @if($predio->avaluo?->folio || $predio->copia) readonly @endif title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('predio.municipio') border-1 border-red-500 @enderror" wire:model="predio.municipio" readonly>
 

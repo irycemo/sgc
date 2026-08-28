@@ -715,9 +715,9 @@ class MisAvaluos extends Component
 
                 }
 
-                $this->validarDisponibilidadPadronNoBindings($avaluo_old->region_catastral, $avaluo_old->municipio, $avaluo_old->zona_catastral, $avaluo_old->localidad, $avaluo_old->sector, $avaluos_old->manzana, $avaluos_old->predio, $avaluos_old->edificio, $avaluo_old->departamento, $avaluo_old->oficina, $avaluo_old->tipo_predio, $avaluo_old->numero_registro);
+                $this->validarDisponibilidadPredioAvaluo($avaluo_old->region_catastral, $avaluo_old->municipio, $avaluo_old->zona_catastral, $avaluo_old->localidad, $avaluo_old->sector, $avaluo_old->manzana, $avaluo_old->predio, $avaluo_old->edificio, $avaluo_old->departamento, $avaluo_old->oficina, $avaluo_old->tipo_predio, $avaluo_old->numero_registro);
 
-                $this->validarSectorNoBinding($avaluo_old->localidad, $avaluo_old->oficina, $avaluo_old->municipio, $avaluo_old->sector);
+                /* $this->validarSectorNoBinding($avaluo_old->localidad, $avaluo_old->oficina, $avaluo_old->municipio, $avaluo_old->sector); */
 
                 $avaluo = Avaluo::make();
 
@@ -749,6 +749,20 @@ class MisAvaluos extends Component
                 $predio_avaluo->departamento_edificio = $avaluo_old->departamento_edificio;
                 $predio_avaluo->ubicacion_en_manzana = $avaluo_old->ubicacion_en_manzana;
                 $predio_avaluo->domicilio_notificacion = $avaluo_old->domicilio_notificacion;
+                $predio_avaluo->estado = 'activo';
+                $predio_avaluo->estado = $avaluo_old->estado;
+                $predio_avaluo->region_catastral = $avaluo_old->region_catastral;
+                $predio_avaluo->municipio = $avaluo_old->municipio;
+                $predio_avaluo->zona_catastral = $avaluo_old->zona_catastral;
+                $predio_avaluo->localidad = $avaluo_old->localidad;
+                $predio_avaluo->sector = $avaluo_old->sector;
+                $predio_avaluo->manzana = $avaluo_old->manzana;
+                $predio_avaluo->predio = $avaluo_old->predio;
+                $predio_avaluo->edificio = $avaluo_old->edificio;
+                $predio_avaluo->departamento = $avaluo_old->departamento;
+                $predio_avaluo->oficina = $avaluo_old->oficina;
+                $predio_avaluo->tipo_predio = $avaluo_old->tipo_predio;
+                $predio_avaluo->numero_registro = $avaluo_old->numero_registro;
                 $predio_avaluo->save();
 
                 $avaluo->predio_avaluo = $predio_avaluo->id;
@@ -865,6 +879,10 @@ class MisAvaluos extends Component
 
             });
 
+            $this->dispatch('mostrarMensaje', ['success', 'El avalúo de migro con éxito']);
+
+            $this->modalMigrarAvaluo = false;
+
         } catch (GeneralException $ex) {
 
             $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
@@ -886,6 +904,8 @@ class MisAvaluos extends Component
         $this->años = Constantes::AÑOS;
 
         $this->filters['año'] = now()->format('Y');
+
+        $this->oficina = auth()->user()->oficina->oficina;
 
     }
 

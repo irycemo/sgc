@@ -89,6 +89,20 @@
 
             </div>
 
+            @if(auth()->user()->oficina->oficina != 101)
+
+                <button
+                    title="Migrar avalúo"
+                    wire:click="$toggle('modalMigrarAvaluo')"
+                    wire:loading.attr="disabled"
+                    class="bg-gray-500 hover:shadow-lg hover:bg-gray-700 float-right text-sm py-1 px-4 text-white rounded-full focus:outline-none focus:outline-gray-400 focus:outline-offset-2">
+
+                    Migrar
+
+                </button>
+
+            @endif
+
         </div>
 
     </div>
@@ -689,6 +703,63 @@
                     <img wire:loading wire:target="clonar" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
                     Clonar
+                </x-button-blue>
+
+                <x-button-red
+                    wire:click="$toggle('modalClonar')"
+                    wire:loading.attr="disabled"
+                    wire:target="$toggle('modalClonar')">
+                    Cerrar
+                </x-button-red>
+
+            </div>
+
+        </x-slot>
+
+    </x-dialog-modal>
+
+    <x-dialog-modal wire:model.live="modalMigrarAvaluo" maxWidth="md">
+
+        <x-slot name="title">
+
+            Migrar avalúo
+
+        </x-slot>
+
+        <x-slot name="content">
+
+            <div class="">
+
+                <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
+
+                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
+
+                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina">
+
+                    <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-20 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
+
+                    <input title="Número de registro" placeholder="Número de registro" type="number" class="bg-white rounded text-xs @error('numero_registro') border-1 border-red-500 @enderror" wire:model="numero_registro">
+
+                </div>
+
+                {{ $errors }}
+
+            </div>
+
+        </x-slot>
+
+        <x-slot name="footer">
+
+            <div class="flex items-center gap-3">
+
+                <x-button-blue
+                    wire:click="migrarAvaluo"
+                    wire:loading.attr="disabled"
+                    wire:target="migrarAvaluo">
+
+                    <img wire:loading wire:target="migrarAvaluo" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Migrar
                 </x-button-blue>
 
                 <x-button-red

@@ -57,6 +57,7 @@ class AsignarManzana extends Component
                             ->where('zona_catastral', $this->zona)
                             ->where('localidad', $this->localidad)
                             ->where('sector', $this->sector)
+                            ->where('oficina', auth()->user()->oficina->oficina)
                             ->groupBy('manzana')
                             ->orderBy('manzana')
                             ->get();
@@ -158,10 +159,20 @@ class AsignarManzana extends Component
 
     public function mount(){
 
-        $this->valuadores = User::where('estado', 'activo')
-                                    ->where('valuador', true)
+        if(auth()->user()->hasRole('Administrador')){
+
+            $this->valuadores = User::where('estado', 'activo')
+                                        ->where('valuador', 1)
+                                        ->orderBy('name')
+                                        ->get();
+        }else{
+
+            $this->valuadores = User::where('estado', 'activo')
+                                    ->where('oficina_id', auth()->user()->oficina_id)
+                                    ->where('valuador', 1)
                                     ->orderBy('name')
                                     ->get();
+        }
 
         $this->predio = Predio::make();
 
