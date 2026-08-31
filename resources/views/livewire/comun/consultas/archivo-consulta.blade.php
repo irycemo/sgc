@@ -40,7 +40,7 @@
                                 @can('Borrar archivo')
 
                                     <x-button-red
-                                    {{-- wire:confirm="¿Esta seguro que quiere borrar el archivo?" --}}
+                                    wire:confirm="¿Esta seguro que quiere borrar el archivo?"
                                     wire:click="borrarArchivoAnterior('{{ $item['ruta'] }}')"
                                     wire:loading.attr="disabled"
                                     wire:target="borrarArchivoAnterior('{{ $item['ruta'] }}')">
