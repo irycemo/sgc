@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api\V1\Tramites;
 
 use App\Exceptions\GeneralException;
-use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CrearTramiteRefrendoRequest;
 use App\Http\Requests\CrearTramiteRequest;
 use App\Http\Resources\TramiteResource;
+use App\Jobs\GenerarCertificacionMigracionJob;
 use App\Models\Oficina;
 use App\Models\Predio;
 use App\Models\Servicio;
@@ -188,7 +188,7 @@ class CrearTramiteController extends Controller
 
             $tipo_certificado = mb_strtoupper($tramite->servicio->nombre, 'utf-8');
 
-            (new CertificadoRegistroController())->certificado($tramite, $predio, $tipo_certificado, auth()->user(), null);
+            GenerarCertificacionMigracionJob::dispatch($tramite, $predio, $tipo_certificado, auth()->user(), null)->afterCommit();
 
             $tramite->predios()->updateExistingPivot($predio->id, ['estado' => 'I']);
 
