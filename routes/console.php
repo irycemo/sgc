@@ -1548,7 +1548,7 @@ Artisan::command('cartografia', function(){
 
         $sector = str_pad($i, 2, '0', STR_PAD_LEFT);
 
-        $ruta = 'sgc/cartografia/101/Sec' . $sector;
+        $ruta = 'sgc/cartografia/1801/Sec' . $sector;
 
         $prefix = $sector . '-';
 
@@ -1576,7 +1576,7 @@ Artisan::command('cartografia', function(){
         foreach($urls as $url){
 
             Cartografia::create([
-                'oficina_id' => 53,
+                'oficina_id' => 69,
                 'sector' => $sector,
                 'url' => $url,
             ]);

@@ -19,6 +19,8 @@ class CartografiaConsulta extends Component
 
         $this->cartografia = Cartografia::where('sector', $this->predio->sector)->where('manzana', $this->predio->manzana)->get();
 
+        dd($this->cartografia);
+
         if(! $this->cartografia->count()){
 
             $nombre = str_pad($this->predio->sector, 2, '0', STR_PAD_LEFT) . '-' . str_pad($this->predio->manzana, 3, '0', STR_PAD_LEFT);
