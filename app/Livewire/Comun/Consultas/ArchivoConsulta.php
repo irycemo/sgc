@@ -74,6 +74,35 @@ class ArchivoConsulta extends Component
 
     }
 
+    public function borrarArchivoAnterior(string $ruta){
+
+        try {
+
+            if(app()->isProduction()){
+
+                if (Storage::disk('s3_documental')->exists($ruta)) {
+
+                    Storage::disk('s3_documental')->delete($ruta);
+
+                }
+
+            }else{
+
+                if (Storage::disk('predios_archivo')->exists($ruta)) {
+
+                    Storage::disk('predios_archivo')->delete($ruta);
+
+                }
+
+            }
+
+        } catch (\Throwable $th) {
+            Log::error("Error al borrar archivo en captura al padron por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
+        }
+
+    }
+
     public function cargarArchivosAnteriores(){
 
         $municipio = 'morelia';
@@ -123,6 +152,8 @@ class ArchivoConsulta extends Component
 
         $urls = [];
 
+        $rutas = [];
+
         $params = [
             'Bucket' => $bucket,
             'Prefix' => $fullPrefix,
@@ -135,7 +166,9 @@ class ArchivoConsulta extends Component
 
             foreach ($page['Contents'] ?? [] as $object) {
 
-                $urls[] = $disk->temporaryUrl($object['Key'], now()->addMinutes(60));
+                $urls['url'] = $disk->temporaryUrl($object['Key'], now()->addMinutes(60));
+
+                $urls['ruta'] = $object['Key'];
 
             }
 
