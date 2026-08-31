@@ -59,7 +59,8 @@ class VerOficina extends Component
                 'autoridad_municipal' => $this->autoridad_municipal,
                 'valuador_municipal' => $this->valuador_municipal,
                 'ubicacion' => $this->ubicacion,
-                'actualizado_por' => auth()->user()->id
+                'actualizado_por' => auth()->user()->id,
+                'sectores' => $this->sectores
             ]);
 
             $this->editar = false;
@@ -109,26 +110,6 @@ class VerOficina extends Component
             $this->usuarios = User::where('estado', 'activo')->where('oficina_id', $this->oficina->id)->get();
         else
             $this->usuarios = User::where('estado', 'activo')->where('oficina_id', $this->oficina->id)->where('area', auth()->user()->area)->get();
-
-        /* $this->total_predios = Predio::count();
-
-        $this->predios = Predio::where('oficina', $this->oficina->oficina)->where('localidad', $this->oficina->localidad)->count();
-
-        $this->predios_urbanos =  Predio::where('tipo_predio', 1)->where('oficina', $this->oficina->oficina)->where('localidad', $this->oficina->localidad)->count();
-
-        $this->valor_urbanos =  Predio::where('tipo_predio', 1)->where('oficina', $this->oficina->oficina)->where('localidad', $this->oficina->localidad)->sum('valor_catastral');
-
-        $this->predios_rusticos =  Predio::where('tipo_predio', 2)->where('oficina', $this->oficina->oficina)->where('localidad', $this->oficina->localidad)->count();
-
-        $this->valor_rusticos =  Predio::where('tipo_predio', 2)->where('oficina', $this->oficina->oficina)->where('localidad', $this->oficina->localidad)->sum('valor_catastral');
-
-        $this->predios_88 =  Predio::where('sector', 88)->where('oficina', $this->oficina->oficina)->where('localidad', $this->oficina->localidad)->count();
-
-        $this->predios_99 =  Predio::where('sector', 99)->where('oficina', $this->oficina->oficina)->where('localidad', $this->oficina->localidad)->count();
-
-        */
-
-
 
     }
 
