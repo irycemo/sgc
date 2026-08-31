@@ -105,7 +105,7 @@ class ArchivoConsulta extends Component
 
     public function cargarArchivosAnteriores(){
 
-        $municipio = 'morelia';
+        $municipio = $this->mapearOficina($this->predio->oficina);
 
         $localidad = $this->predio->localidad;
 
@@ -205,6 +205,20 @@ class ArchivoConsulta extends Component
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 
         }
+
+    }
+
+    public function mapearOficina($oficina){
+
+        return match($oficina){
+            101 => 'morelia',
+            1801 => 'la_piedad',
+            1802 => 'churintzio',
+            1803 => 'numaran',
+            1804 => 'penjamillo',
+            1805 => 'tlazazalca',
+            1806 => 'zinaparo'
+        };
 
     }
 
