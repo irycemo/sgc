@@ -13,7 +13,7 @@ class GenerarCertificadoRegistroJob implements ShouldQueue
 {
     use Queueable;
 
-    public function __construct(public Tramite $tramite, public Predio $predio, public User $user, public string $observaciones)
+    public function __construct(public Tramite $tramite, public Predio $predio, public User $user, public string|null $observaciones)
     {}
 
     public function handle(): void

@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CrearTramiteRefrendoRequest;
 use App\Http\Requests\CrearTramiteRequest;
 use App\Http\Resources\TramiteResource;
-use App\Jobs\GenerarCertificacionMigracionJob;
+use App\Jobs\Certificaciones\GenerarCertificadoRegistroJob;
 use App\Models\Oficina;
 use App\Models\Predio;
 use App\Models\Servicio;
@@ -186,9 +186,7 @@ class CrearTramiteController extends Controller
 
         foreach ($tramite->predios as $predio) {
 
-            $tipo_certificado = mb_strtoupper($tramite->servicio->nombre, 'utf-8');
-
-            GenerarCertificacionMigracionJob::dispatch($tramite, $predio, $tipo_certificado, auth()->user(), null)->afterCommit();
+            GenerarCertificadoRegistroJob::dispatch($tramite, $predio, auth()->user(), null);
 
             $tramite->predios()->updateExistingPivot($predio->id, ['estado' => 'I']);
 
