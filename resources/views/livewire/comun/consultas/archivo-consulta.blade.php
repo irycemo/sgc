@@ -104,7 +104,7 @@
 
         </table>
 
-        @if(auth()->user()->oficina->oficina === 101)
+        @if(auth()->user()->oficina->oficina === 101 && $predio->oficina === 101)
 
             <button
                 wire:click="solicitarArchivo"

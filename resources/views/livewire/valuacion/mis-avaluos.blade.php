@@ -89,7 +89,7 @@
 
             </div>
 
-            @if(auth()->user()->oficina->oficina != 101)
+            @if(auth()->user()->oficina->oficina != 101 || auth()->user()->hasRole('Administrador'))
 
                 <button
                     title="Migrar avalúo"
@@ -741,8 +741,6 @@
                     <input title="Número de registro" placeholder="Número de registro" type="number" class="bg-white rounded text-xs @error('numero_registro') border-1 border-red-500 @enderror" wire:model="numero_registro">
 
                 </div>
-
-                {{ $errors }}
 
             </div>
 
