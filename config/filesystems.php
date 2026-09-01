@@ -137,6 +137,14 @@ return [
             'throw' => false,
         ],
 
+        'videos' => [
+            'driver' => 'local',
+            'root' => storage_path('app/videos'),
+            'url' => env('APP_URL').'/videos',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         'cartografia' => [
             'driver' => 'local',
             'root' => storage_path('app/cartografia'),
@@ -181,6 +189,7 @@ return [
         public_path('preguntas') => storage_path('app/preguntas'),
         public_path('predios_archivo') => storage_path('app/predios_archivo'),
         public_path('predios_fotos') => storage_path('app/predios_fotos'),
+        public_path('videos') => storage_path('app/predios_fotos'),
         public_path('cartografia') => storage_path('app/cartografia'),
     ],
 

@@ -84,4 +84,18 @@ class File extends Model
 
     }
 
+    public function getLinkVideo(){
+
+        if(app()->isProduction()){
+
+            return Storage::disk('s3')->temporaryUrl($this->url, now()->addMinutes(60));
+
+        }else{
+
+            return Storage::disk('videos')->url($this->url);
+
+        }
+
+    }
+
 }

@@ -824,4 +824,13 @@ class Constantes{
         'OTRO'
     ];
 
+    const CATEGORIAS = [
+        'Trámites',
+        'Valuación',
+        'Cartografía',
+        'Certificacados',
+        'Gestión Catastral',
+        'Anotaciones y Trámites Administrativos',
+    ];
+
 }

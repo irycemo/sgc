@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Consultas\Preguntas;
 
-use Livewire\Component;
+use App\Constantes\Constantes;
+use App\Models\File;
 use App\Models\Pregunta;
-use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class NuevaPregunta extends Component
 {
@@ -18,6 +20,9 @@ class NuevaPregunta extends Component
     public $titulo;
     public $contenido;
     public $images = [];
+    public $categorias;
+    public $categoria;
+    public $video;
 
     protected function rules(){
         return [
@@ -70,11 +75,25 @@ class NuevaPregunta extends Component
 
         try {
 
-            Pregunta::create([
+            $pregunta = Pregunta::create([
                 'titulo' => $this->titulo,
                 'contenido' => $this->contenido,
+                'categoria' => $this->categoria,
                 'creado_por' => auth()->id()
             ]);
+
+            if($this->video){
+
+                $video = $this->video->store('sgc/videos', 's3');
+
+                File::create([
+                    'fileable_id' => $pregunta->id,
+                    'fileable_type' => Pregunta::class,
+                    'descripcion' => 'video',
+                    'url' => $video
+                ]);
+
+            }
 
             return redirect()->route('preguntas_frecuentes');
 
@@ -94,7 +113,30 @@ class NuevaPregunta extends Component
 
         try {
 
-            $this->pregunta->update(['titulo' => $this->titulo, 'contenido' => $this->contenido]);
+            $this->pregunta->update([
+                'titulo' => $this->titulo,
+                'contenido' => $this->contenido,
+                'categoria' => $this->categoria
+            ]);
+
+            if($this->video){
+
+                if($this->pregunta->video){
+
+                    $this->pregunta->video->delete();
+
+                }
+
+                $video = $this->video->store('sgc/videos', 's3');
+
+                File::create([
+                    'fileable_id' => $this->pregunta->id,
+                    'fileable_type' => Pregunta::class,
+                    'descripcion' => 'video',
+                    'url' => $video
+                ]);
+
+            }
 
             return redirect()->route('preguntas_frecuentes');
 
@@ -119,10 +161,13 @@ class NuevaPregunta extends Component
 
         }
 
+        $this->categorias = Constantes::CATEGORIAS;
+
     }
 
     public function render()
     {
         return view('livewire.consultas.preguntas.nueva-pregunta')->extends('layouts.admin');
     }
+
 }

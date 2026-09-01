@@ -2,14 +2,15 @@
 
 namespace App\Livewire\Consultas\Preguntas;
 
-use Livewire\Component;
+use App\Constantes\Constantes;
 use App\Models\Pregunta;
-use Livewire\WithPagination;
 use App\Models\PreguntaLeida;
 use App\Traits\ComponentesTrait;
-use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\Computed;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class Preguntas extends Component
 {
@@ -20,10 +21,22 @@ class Preguntas extends Component
     public Pregunta $modelo_editar;
 
     public $pregunta;
+    public $categorias;
+    public $categoria = '';
 
     public $modalUsuarios = false;
 
     public $usuarios = [];
+
+    public function setCategoria($categoria){
+
+        $this->resetPage();
+
+        $this->reset(['search']);
+
+        $this->categoria = $categoria;
+
+    }
 
     public function crearModeloVacio(){
         $this->modelo_editar =  Pregunta::make();
@@ -95,8 +108,13 @@ class Preguntas extends Component
     #[Computed]
     public function preguntas(){
 
-        return Pregunta::where('titulo', 'LIKE',  '%' . $this->search . '%')
-                        ->orWhere('contenido', 'LIKE',  '%' . $this->search . '%')
+        return Pregunta::when(! empty($this->categoria), function ($q) {
+                            $q->where('categoria', $this->categoria);
+                        })
+                        ->where(function($q){
+                            $q->where('titulo', 'LIKE',  '%' . $this->search . '%')
+                              ->orWhere('contenido', 'LIKE',  '%' . $this->search . '%');
+                        })
                         ->orderBy('id', 'desc')
                         ->simplePaginate(10);
 
@@ -108,10 +126,13 @@ class Preguntas extends Component
 
         $this->search = request()->query('search');
 
+        $this->categorias = Constantes::CATEGORIAS;
+
     }
 
     public function render()
     {
         return view('livewire.consultas.preguntas.preguntas')->extends('layouts.admin');
     }
+
 }

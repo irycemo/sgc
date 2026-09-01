@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\File;
 use App\Models\User;
 use App\Traits\ModelosTrait;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Pregunta extends Model
 {
@@ -17,6 +18,17 @@ class Pregunta extends Model
 
     public function usuarios(){
         return $this->belongsToMany(User::class);
+    }
+
+    public function video(){
+        return $this->morphOne(File::class, 'fileable');
+    }
+
+    public function videoUrl(){
+
+        return $this->video
+            ? $this->video->getLinkVideo()
+            : null;
     }
 
 }
