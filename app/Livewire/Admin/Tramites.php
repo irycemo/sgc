@@ -6,6 +6,7 @@ use App\Constantes\Constantes;
 use App\Enums\Tramites\AvaluoPara;
 use App\Exceptions\GeneralException;
 use App\Models\Certificacion;
+use App\Models\Oficina;
 use App\Models\Predio;
 use App\Models\Servicio;
 use App\Models\Tramite;
@@ -42,6 +43,7 @@ class Tramites extends Component
     public $lista_avaluo_para;
     public $referencia_pago;
     public $fecha_pago;
+    public $oficinas;
 
     public $tramties_con_predio = ['DM31', 'DM34', 'DM32', 'DM35', 'DM30', 'D774', 'D729', 'D728', 'DÑ34', 'DÑ33', 'D727', 'D726'];
 
@@ -58,7 +60,8 @@ class Tramites extends Component
         't_predio' => '',
         'registro' => '',
         'estado' => '',
-        'linea_captura' => ''
+        'linea_captura' => '',
+        'oficina_id' => ''
     ];
 
     public $servicios;
@@ -631,6 +634,7 @@ class Tramites extends Component
                         ->when(! empty($this->filters['estado']), fn($q) => $q->where('estado', $this->filters['estado']))
                         ->when(! empty($this->filters['tipoTramite']), fn($q) => $q->where('tipo_tramite', $this->filters['tipoTramite']))
                         ->when(! empty($this->filters['servicio']), fn($q) => $q->where('servicio_id', $this->filters['servicio']))
+                        ->when(! empty($this->filters['oficina']), fn($q) => $q->where('oficina_id', $this->filters['oficina_id']))
                         ->when(! empty($this->filters['linea_captura']) && strlen($this->filters['linea_captura']) == 20, fn($q) =>  $q->where('linea_de_captura', $this->filters['linea_captura']))
                         ->when($predio, function($q) use ($predio){
                             $q->whereHas('predios', function($q) use ($predio){
@@ -657,6 +661,8 @@ class Tramites extends Component
         $this->oficina = auth()->user()->oficina->oficina;
 
         $this->lista_avaluo_para = AvaluoPara::cases();
+
+        $this->oficinas = Oficina::select('id', 'nombre')->orderBy('nombre')->get();
 
     }
 

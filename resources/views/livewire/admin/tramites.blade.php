@@ -6,6 +6,17 @@
 
         <div class="flex gap-3 overflow-auto p-1">
 
+            <select class="bg-white rounded-full  text-sm" wire:model.live="filters.oficina">
+
+                <option value="" selected>Oficina</option>
+                < @foreach ($oficinas as $oficina_item)
+
+                    <option value="{{ $oficina_item->id }}">{{ $oficina_item->nombre }}</option>
+
+                @endforeach
+
+            </select>
+
             <div class="flex gap-2 flex-nowrap">
 
                 <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
@@ -31,16 +42,6 @@
                 <option value="pagado">Pagado</option>
                 <option value="concluido">Concluido</option>
                 <option value="expirado">Expirado</option>
-
-            </select>
-
-            <select class="bg-white rounded-full  text-sm" wire:model.live="filters.tipoTramite">
-
-                <option value="" selected>Tipo de trámtie</option>
-                <option value="parcial">Parcial</option>
-                <option value="exento">Exento</option>
-                <option value="complemento">Complemento</option>
-                <option value="normal">Normal</option>
 
             </select>
 
