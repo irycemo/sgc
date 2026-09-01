@@ -86,7 +86,7 @@
 
                             @if(count($avaluo['requerimientos']) > 0)
 
-                                <span class="bg-blue-400 py-1 px-2 rounded-full text-white text-xs">Atendido</span>
+                                <span class="bg-gray-400 py-1 px-2 rounded-full text-white text-xs">Requerido</span>
 
                             @else
 
@@ -358,6 +358,12 @@
                     <input title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-24 @error('departamento') border-1 border-red-500 @enderror" wire:model="departamento">
 
                 </div>
+
+            </div>
+
+            <div class="overflow-auto">
+
+                <livewire:comun.consultas.archivo-consulta lazy :predio_id="$this->predio_id" key="{{ $this->predio_id }}" />
 
             </div>
 

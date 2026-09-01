@@ -45,6 +45,7 @@ class ConciliarAvaluosPeritosExternos extends Component
 
     public $observaciones;
 
+    public $predio_padron;
     public $predio_id;
 
     public function updated($field, $value){
@@ -81,8 +82,6 @@ class ConciliarAvaluosPeritosExternos extends Component
 
     public function abrirModalConciliar($avaluo){
 
-        $this->modalConciliar = true;
-
         $this->avaluo_seleccionado =  $avaluo;
 
         $this->region_catastral = $this->avaluo_seleccionado['region_catastral'];
@@ -95,12 +94,15 @@ class ConciliarAvaluosPeritosExternos extends Component
         $this->edificio = $this->avaluo_seleccionado['edificio'];
         $this->departamento = $this->avaluo_seleccionado['departamento'];
 
-        $this->predio_id = Predio::where('localidad', $avaluo['localidad'])
+        $this->predio_padron = Predio::where('localidad', $avaluo['localidad'])
                                     ->where('oficina',$avaluo['oficina'])
                                     ->where('tipo_predio',$avaluo['tipo_predio'])
                                     ->where('numero_registro',$avaluo['numero_registro'])
-                                    ->first()
-                                    ->id;
+                                    ->first();
+
+        $this->predio_id = $this->predio_padron->id;
+
+        $this->modalConciliar = true;
 
     }
 
