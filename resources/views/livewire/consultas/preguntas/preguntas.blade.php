@@ -30,7 +30,7 @@
 
             <div class="w-full grid grid-cols-12 gap-4">
 
-                <div class="col-span-1 lg:col-span-4 border border-gray-300 rounded-lg p-4 text-center">
+                <div class="col-span-12 lg:col-span-4 border border-gray-300 rounded-lg p-4 text-center">
 
                     <span class="font-bold text-gray-600">Categorías</span>
 
@@ -60,7 +60,7 @@
 
                 </div>
 
-                <div class="col-span-1 lg:col-span-8">
+                <div class="col-span-12 lg:col-span-8">
 
                     <ul class="w-full space-y-3">
 
