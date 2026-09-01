@@ -825,6 +825,7 @@ class Constantes{
     ];
 
     const CATEGORIAS = [
+        'Consulta',
         'Trámites',
         'Valuación',
         'Cartografía',
