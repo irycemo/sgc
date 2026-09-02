@@ -1635,3 +1635,49 @@ Artisan::command('actos_aviso', function(){
 
 });
 
+Artisan::command('tramite-oficinas', function(){
+
+    $count = 0;
+
+    $tramites = Tramite::with('predios', 'creadoPor:id,oficina_id')->whereNuLL('oficina_id')->get();
+
+    $progressbar = $this->output->createProgressBar($tramites->count());
+
+    $progressbar->start();
+
+    $oficina_id = [
+        1801 => 69,
+        1802 => 28,
+        1803 => 60,
+        1804 => 67,
+        1805 => 94,
+        1806 => 109,
+        101 => 53
+    ];
+
+    foreach($tramites as $tramite){
+
+        $predio = $tramite->predios()->first();
+
+        if($predio){
+
+            $tramite->update(['oficina_id' => $oficina_id[$predio->oficina]]);
+
+        }elseif($tramite->creado_por){
+
+            $tramite->update(['oficina_id' => $tramite->creadoPor->oficina_id]);
+
+        }
+
+        $progressbar->advance();
+
+        $count ++;
+
+    }
+
+    $this->info($count);
+
+    $progressbar->finish();
+
+});
+

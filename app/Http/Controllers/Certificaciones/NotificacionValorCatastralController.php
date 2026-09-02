@@ -73,12 +73,6 @@ class NotificacionValorCatastralController extends Controller
 
         $avaluos = Avaluo::with('predioAvaluo', 'predioPadron')->whereKey($avaluos)->get();
 
-        if($avaluos->first()->predioPadron->oficina === 101 || $tramite_inspeccion->oficina->oficina === 101){
-
-            $datos_control->jefe_departamento = $this->jefe_departamento_valuacion->name;
-
-        }
-
         $object->avaluos = $this->avaluos($avaluos);
 
         if(auth()->user()->hasRole(['Convenio municipal'])){
@@ -90,6 +84,8 @@ class NotificacionValorCatastralController extends Controller
             $certificacion = $this->certificacionConvenioMunicipal($datos_control, $object);
 
         }elseif(auth()->user()->oficina->oficina == 101 || $tramite_inspeccion->oficina->oficina === 101){
+
+            $datos_control->jefe_departamento = $this->jefe_departamento_valuacion->name;
 
             $datos_control->titular = $tramite_inspeccion->oficina->titular;
 
@@ -243,12 +239,6 @@ class NotificacionValorCatastralController extends Controller
 
         $object->avaluos = $this->avaluos($avaluos);
 
-        if($avaluos->first()->predioPadron->oficina === 101 || $tramite_inspeccion->oficina->oficina === 101){
-
-            $datos_control->jefe_departamento = $this->jefe_departamento_valuacion->name;
-
-        }
-
         if(auth()->user()->hasRole(['Convenio municipal'])){
 
             $datos_control->autoridad_municipal = auth()->user()->oficina->autoridad_municipal;
@@ -258,6 +248,8 @@ class NotificacionValorCatastralController extends Controller
             $certificacion = $this->certificacionConvenioMunicipal($datos_control, $object);
 
         }elseif(auth()->user()->oficina->oficina == 101 || $tramite_inspeccion->oficina->oficina === 101){
+
+            $datos_control->jefe_departamento = $this->jefe_departamento_valuacion->name;
 
             $datos_control->titular = $tramite_inspeccion->oficina->titular;
 
@@ -336,12 +328,6 @@ class NotificacionValorCatastralController extends Controller
 
         $object->avaluos = $this->avaluos($avaluos);
 
-        if($avaluos->first()->predioPadron->oficina === 101 || $tramite_inspeccion->oficina->oficina === 101){
-
-            $datos_control->jefe_departamento = $this->jefe_departamento_valuacion->name;
-
-        }
-
         $object->avaluos = $this->avaluos($avaluos);
 
         if(auth()->user()->hasRole(['Convenio municipal'])){
@@ -353,6 +339,8 @@ class NotificacionValorCatastralController extends Controller
             $certificacion = $this->certificacionConvenioMunicipal($datos_control, $object);
 
         }elseif(auth()->user()->oficina->oficina == 101 || $tramite_inspeccion->oficina->oficina === 101){
+
+            $datos_control->jefe_departamento = $this->jefe_departamento_valuacion->name;
 
             $datos_control->titular = $tramite_inspeccion->oficina->titular;
 
