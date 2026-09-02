@@ -164,7 +164,7 @@ class PrediosIgnorados extends Component
 
             DB::transaction(function () {
 
-                if(auth()->user()->hasRole('Oficina rentistica')){
+                if(auth()->user()->hasRole('Oficina de rentas')){
 
                     $this->modelo_editar->estado = 'revisión';
                     $this->modelo_editar->oficina_id = auth()->user()->oficina_id;
