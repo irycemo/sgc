@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\Tramites\AvaluoPara;
 use App\Models\Avaluo;
+use App\Models\Oficina;
 use App\Models\PredioAvaluo;
 use App\Models\Servicio;
 use App\Models\Traslado;
@@ -70,6 +71,10 @@ class Tramite extends Model implements Auditable
 
     public function traslados(){
         return $this->hasMany(Traslado::class, 'tramite_aviso');
+    }
+
+    public function oficina(){
+        return $this->belongsTo(Oficina::class);
     }
 
     public function numeroControl(){

@@ -363,16 +363,20 @@
 
                                     </td>
 
-                                    <td style="padding-right: 80px;">
+                                    @if(isset($datos_control->jefe_departamento))
 
-                                        <div style="text-align: center">
+                                        <td style="padding-right: 80px;">
 
-                                            <p class="borde" style="margin:0;">{{ $datos_control->jefe_departamento }}</p>
-                                            <p style="margin:0;">JEFE DE DEPARTAMENTO DE VALUACIÓN</p>
+                                            <div style="text-align: center">
 
-                                        </div>
+                                                <p class="borde" style="margin:0;">{{ $datos_control->jefe_departamento }}</p>
+                                                <p style="margin:0;">JEFE DE DEPARTAMENTO DE VALUACIÓN</p>
 
-                                    </td>
+                                            </div>
+
+                                        </td>
+
+                                    @endif
 
                                 </tr>
 
@@ -381,6 +385,27 @@
                         </table>
 
                     </div>
+
+                @elseif(in_array($datos_control->titular_cargo, ['ADMINISTRADOR', 'RECEPTOR(A) DE RENTAS']))
+
+                    <table style="margin-top: 40px">
+
+                            <tbody>
+                                <tr>
+                                    <td style="">
+
+                                        <div style="text-align: center">
+
+                                            <p class="borde">{{ $datos_control->titular }}</p>
+                                            <p style="margin:0;">{{ $datos_control->titular_cargo }}</p>
+
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
 
                 @endif
 

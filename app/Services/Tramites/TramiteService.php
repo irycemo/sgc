@@ -30,6 +30,7 @@ class TramiteService{
         $this->tramite->usuario = auth()->user()->clave;
         $this->tramite->creado_por = auth()->id();
         $this->tramite->folio = (Tramite::where('año', $this->tramite->año)->where('usuario', auth()->user()->clave)->max('folio') ?? 0) + 1;
+        $this->tramite->oficina_id = auth()->user()->oficina_id;
 
         $this->procesarLineaCaptura();
 

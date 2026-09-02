@@ -172,16 +172,16 @@ class Conciliar extends Component
     public function validarDisponibilidad(){
 
         $predio = Predio::where('estado', 16)
-                                    ->where('region_catastral', $this->region_catastral)
-                                    ->where('municipio', $this->municipio)
-                                    ->where('zona_catastral', $this->zona_catastral)
-                                    ->where('localidad', $this->localidad)
-                                    ->where('sector', $this->sector)
-                                    ->where('manzana', $this->manzana)
-                                    ->where('predio', $this->predio_cc)
-                                    ->where('edificio', $this->edificio)
-                                    ->where('departamento', $this->departamento)
-                                    ->first();
+                            ->where('region_catastral', $this->region_catastral)
+                            ->where('municipio', $this->municipio)
+                            ->where('zona_catastral', $this->zona_catastral)
+                            ->where('localidad', $this->localidad)
+                            ->where('sector', $this->sector)
+                            ->where('manzana', $this->manzana)
+                            ->where('predio', $this->predio_cc)
+                            ->where('edificio', $this->edificio)
+                            ->where('departamento', $this->departamento)
+                            ->first();
 
         if($predio){
 
