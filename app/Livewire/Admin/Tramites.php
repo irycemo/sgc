@@ -634,7 +634,7 @@ class Tramites extends Component
                         ->when(! empty($this->filters['estado']), fn($q) => $q->where('estado', $this->filters['estado']))
                         ->when(! empty($this->filters['tipoTramite']), fn($q) => $q->where('tipo_tramite', $this->filters['tipoTramite']))
                         ->when(! empty($this->filters['servicio']), fn($q) => $q->where('servicio_id', $this->filters['servicio']))
-                        ->when(! empty($this->filters['oficina']), fn($q) => $q->where('oficina_id', $this->filters['oficina_id']))
+                        ->when(! empty($this->filters['oficina_id']), fn($q) => $q->where('oficina_id', $this->filters['oficina_id']))
                         ->when(! empty($this->filters['linea_captura']) && strlen($this->filters['linea_captura']) == 20, fn($q) =>  $q->where('linea_de_captura', $this->filters['linea_captura']))
                         ->when($predio, function($q) use ($predio){
                             $q->whereHas('predios', function($q) use ($predio){
