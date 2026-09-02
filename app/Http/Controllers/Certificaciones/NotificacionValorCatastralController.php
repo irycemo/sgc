@@ -71,7 +71,7 @@ class NotificacionValorCatastralController extends Controller
 
         $object = (object)[];
 
-        $avaluos = Avaluo::with('predioAvaluo')->whereKey($avaluos)->get();
+        $avaluos = Avaluo::with('predioAvaluo', 'predioPadron')->whereKey($avaluos)->get();
 
         if($avaluos->first()->predioPadron->oficina === 101 || $tramite_inspeccion->oficina->oficina === 101){
 
@@ -221,7 +221,7 @@ class NotificacionValorCatastralController extends Controller
         $datos_control->valuador = auth()->user()->name;
         $datos_control->titular = auth()->user()->oficina->titular;
 
-        $avaluos = Avaluo::with('predioAvaluo')->whereKey($avaluos)->get();
+        $avaluos = Avaluo::with('predioAvaluo', 'predioPadron')->whereKey($avaluos)->get();
 
         if(! in_array($tramite_inspeccion->avaluo_para, [AvaluoPara::CAMBIO_REGIMEN, AvaluoPara::CAMBIO_DE_REGIMEN_Y_DESGLOSE])){
 
@@ -320,7 +320,7 @@ class NotificacionValorCatastralController extends Controller
         $datos_control->valuador = auth()->user()->name;
         $datos_control->titular = auth()->user()->oficina->titular;
 
-        $avaluos = Avaluo::with('predioAvaluo')->whereKey($avaluos)->get();
+        $avaluos = Avaluo::with('predioAvaluo', 'predioPadron')->whereKey($avaluos)->get();
 
         $predios_fusionantes = Predio::whereKey($predios_fusionantes)->get();
 
