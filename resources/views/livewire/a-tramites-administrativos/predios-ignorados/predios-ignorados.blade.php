@@ -112,7 +112,7 @@
 
                         <x-table.cell title="Estado">
 
-                            <span class="bg-{{ $predio->estado_color }} py-1 px-2 rounded-full text-white text-xs">{{ ucfirst($predio->estado) }}</span>
+                            <span class="bg-{{ $predio->estado_color }} py-1 px-2 rounded-full text-white text-xs whitespace-nowrap">{{ ucfirst($predio->estado) }}</span>
 
                         </x-table.cell>
 

@@ -650,7 +650,6 @@ class PrediosIgnorados extends Component
                                             ->when($this->filters['tfolio'], fn($q, $tfolio) => $q->whereHas('tramite', function($q) use($tfolio){ $q->where('folio', $tfolio); }))
                                             ->when($this->filters['tusuario'], fn($q, $tusuario) => $q->whereHas('tramite', function($q) use($tusuario){ $q->where('usuario', $tusuario); }))
                                             ->where('oficina_id', auth()->user()->oficina_id)
-                                            ->whereIn('estado', ['requerimineto', 'revisión'])
                                             ->orderBy($this->sort, $this->direction)
                                             ->paginate($this->pagination);
 
