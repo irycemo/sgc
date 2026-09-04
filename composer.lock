@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3725d3e279fae9ad2e73f889c40b581f",
+    "content-hash": "51e3810674f4784e80cba27b47070b77",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -4538,6 +4538,50 @@
                 "source": "https://github.com/orangehill/iseed/tree/v3.1.1"
             },
             "time": "2025-03-04T07:56:48+00:00"
+        },
+        {
+            "name": "org_heigl/ghostscript",
+            "version": "2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/heiglandreas/Org_Heigl_Ghostscript.git",
+                "reference": "36a1b3b3e473c44cc8ad81f339cf8c2d9abb1963"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/heiglandreas/Org_Heigl_Ghostscript/zipball/36a1b3b3e473c44cc8ad81f339cf8c2d9abb1963",
+                "reference": "36a1b3b3e473c44cc8ad81f339cf8c2d9abb1963",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4||^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Org_Heigl\\Ghostscript\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Heigl",
+                    "email": "andreas@heigl.org"
+                }
+            ],
+            "description": "A PHP-Wrapper around the Ghostscript-CLI",
+            "support": {
+                "issues": "https://github.com/heiglandreas/Org_Heigl_Ghostscript/issues",
+                "source": "https://github.com/heiglandreas/Org_Heigl_Ghostscript/tree/2.4.0"
+            },
+            "time": "2024-08-01T15:51:21+00:00"
         },
         {
             "name": "owen-it/laravel-auditing",
@@ -12136,5 +12180,5 @@
         "php": "^8.2"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }

@@ -640,6 +640,7 @@ class Notificacion extends Component
 
             $predio->construccionesComun()->create([
                 'area_comun_construccion' => $construccionComun['area_comun_construccion'],
+                'superficie_proporcional' => $construccionComun['superficie_proporcional'],
                 'indiviso_construccion' => $construccionComun['indiviso_construccion'],
                 'valor_clasificacion_construccion' => $construccionComun['valor_clasificacion_construccion'],
                 'valor_construccion_comun' => $construccionComun['valor_construccion_comun'],
