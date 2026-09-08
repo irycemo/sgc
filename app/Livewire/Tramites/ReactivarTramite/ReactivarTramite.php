@@ -130,7 +130,7 @@ class ReactivarTramite extends Component
 
                             $traslado->update(['estado' => 'nuevo', 'certificacion_id' => null]);
 
-                            if($traslado->avaluo_spe) (new SistemaPeritosExternosService())->reactivarAvaluo($traslado->avaluo_spe);
+                            //if($traslado->avaluo_spe) (new SistemaPeritosExternosService())->reactivarAvaluo($traslado->avaluo_spe);
 
                             (new SistemaTramitesLineaService())->reactivarAviso($traslado->aviso_stl);
 

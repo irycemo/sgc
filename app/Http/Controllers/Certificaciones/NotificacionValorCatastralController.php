@@ -269,7 +269,7 @@ class NotificacionValorCatastralController extends Controller
 
         }
 
-        if($avaluos->first()->predioPadron->oficina === 101){
+        if($avaluos->first()->predioAvaluo->oficina === 101){
 
             $datos_control->jefe_departamento = $this->jefe_departamento_valuacion->name;
 
