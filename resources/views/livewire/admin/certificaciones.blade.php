@@ -364,7 +364,7 @@
 
                 <div class="space-y-2">
 
-                    @foreach ($modelo_editar->predio->traslados as $traslado)
+                    @foreach ($modelo_editar->predio?->traslados as $traslado)
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
