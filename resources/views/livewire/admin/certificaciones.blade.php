@@ -360,11 +360,11 @@
 
         <x-slot name="content">
 
-            @if($modelo_editar->getKey())
+            @if($modelo_editar->getKey() && $modelo_editar->predio)
 
                 <div class="space-y-2">
 
-                    @foreach ($modelo_editar->predio?->traslados as $traslado)
+                    @foreach ($modelo_editar->predio->traslados as $traslado)
 
                         <div class="rounded-lg bg-gray-100 py-1 px-2">
 
