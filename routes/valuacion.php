@@ -3,6 +3,8 @@
 use App\Http\Controllers\Valuacion\AvaluoImpresionController;
 use App\Http\Controllers\Valuacion\AvaluoPredioIgnoradoController;
 use App\Http\Controllers\Valuacion\Valuacion;
+use App\Livewire\Valuacion\ConvenioMunicipal\Impresion as ConvenioMunicipalImpresion;
+use App\Livewire\Valuacion\ConvenioMunicipal\Notificacion as ConvenioMunicipalNotificacion;
 use App\Livewire\Valuacion\FichaTecnicaJob;
 use App\Livewire\Valuacion\Impresion\Impresion;
 use App\Livewire\Valuacion\MisAvaluos;
@@ -28,5 +30,9 @@ Route::group([], function(){
     Route::get('mis_avaluos', MisAvaluos::class)->middleware('permission:Ver mis avaluos')->name('mis_avaluos');
 
     Route::get('descargar_avaluos_pdf/{name}', [AvaluoImpresionController::class, 'descargarAvaluosPdf'])->middleware('permission:Valuación y desglose')->name('descargar_avaluos_pdf');
+
+    Route::get('impresion_convenio', ConvenioMunicipalImpresion::class)->middleware(['permission:Valuación convenio municipal', 'director.activo'])->name('impresion_convenio');
+
+    Route::get('notificacion_convenio', ConvenioMunicipalNotificacion::class)->middleware(['permission:Valuación convenio municipal', 'director.activo'])->name('notificacion_convenio');
 
 });
