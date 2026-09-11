@@ -89,7 +89,7 @@
 
             </div>
 
-            @if(auth()->user()->oficina->oficina != 101 || auth()->user()->hasRole('Administrador'))
+            @if(auth()->user()->oficina->oficina != 101 || auth()->user()->hasRole(['Administrador', 'Jefe de departamento']))
 
                 <button
                     title="Migrar avalúo"

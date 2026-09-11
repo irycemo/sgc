@@ -158,11 +158,11 @@ class Notificacion extends Component
         $this->procesarRelaciones($predio);
 
         $predio->movimientos()->create([
-                'nombre' => 'Actualización mediante avalúo dea ctualización',
-                'fecha' => $this->fecha_notificacion,
-                'descripcion' =>  $observaciones,
-                'creado_por' => auth()->id()
-            ]);
+                                        'nombre' => 'Actualización mediante avalúo de actualización',
+                                        'fecha' => $this->fecha_notificacion,
+                                        'descripcion' =>  $observaciones,
+                                        'creado_por' => auth()->id()
+                                    ]);
 
     }
 

@@ -134,7 +134,7 @@
 
                 <a href="{{ route('impresion_convenio') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
-                    Impresión
+                    Impresión convenio
 
                 </a>
 
@@ -144,7 +144,7 @@
 
                 <a href="{{ route('notificacion_convenio') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
-                    Notifiación
+                    Notificación convenio
 
                 </a>
 
