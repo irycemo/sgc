@@ -61,6 +61,37 @@
 
             <div>
 
+                <Label>Oficinas</Label>
+            </div>
+
+            <div>
+
+                <select class="rounded text-sm w-full" wire:model.live="oficina">
+
+                    <option value="" selected>Seleccione una opción</option>
+
+                    @foreach ($oficinas as $oficina_item)
+
+                        <option value="{{ $oficina_item->id }}" >{{$oficina_item->nombre}}</option>
+
+                    @endforeach
+
+                </select>
+
+            </div>
+
+            <div>
+
+                @error('oficina') <span class="error text-sm text-red-500">{{ $message }}</span> @enderror
+
+            </div>
+
+        </div>
+
+        <div class="flex-auto ">
+
+            <div>
+
                 <Label>Categorías</Label>
             </div>
 

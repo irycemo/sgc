@@ -3,6 +3,7 @@
 namespace App\Livewire\Consultas\Reportes;
 
 use App\Models\CategoriaServicio;
+use App\Models\Oficina;
 use App\Models\Servicio;
 use App\Models\Tramite;
 use Livewire\Component;
@@ -17,6 +18,8 @@ class ReporteRecaudacion extends Component
     public $fecha1;
     public $fecha2;
     public $tipo_tramite;
+    public $oficinas;
+    public $oficina;
 
     public $tramites = [];
 
@@ -57,6 +60,9 @@ class ReporteRecaudacion extends Component
                             ->when(isset($this->tipo_tramite) && $this->tipo_tramite != "", function($q){
                                 return $q->where('tipo_tramite', $this->tipo_tramite);
                             })
+                            ->when(isset($this->oficina) && $this->oficina != "", function($q){
+                                return $q->where('oficina_id', $this->oficina);
+                            })
                             ->whereBetween('fecha_pago', [$this->fecha1, $this->fecha2])
                             ->get();
 
@@ -85,8 +91,11 @@ class ReporteRecaudacion extends Component
 
     public function mount(){
 
-        $this->servicios = Servicio::where('estado', 'activo')
+        $this->servicios = Servicio::select('id', 'estado', 'nombre')
+                                        ->where('estado', 'activo')
                                         ->orderBy('nombre')->get();
+
+        $this->oficinas = Oficina::select('id', 'nombre', 'oficina')->orderBy('nombre')->get();
 
         $this->categorias = CategoriaServicio::orderBy('nombre')->get();
 
