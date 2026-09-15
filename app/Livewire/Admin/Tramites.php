@@ -245,6 +245,18 @@ class Tramites extends Component
 
                 if($certificacion){
 
+                    if(! auth()->user()->can('Reactivar certificados vencidos')){
+
+                        $fecha_creacion_certificado = Carbon::parse($certificacion->created_at);
+
+                        if(! now()->between($fecha_creacion_certificado, $fecha_creacion_certificado->addMonth())){
+
+                            throw new GeneralException('El certificado esta fuera del primer mes permitido para corrección.');
+
+                        }
+
+                    }
+
                     $traslado = Traslado::where(['certificacion_id' => $certificacion->id])->first();
 
                     if($traslado){
