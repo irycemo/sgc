@@ -10,6 +10,7 @@ use App\Models\Tramite;
 use App\Models\Traslado;
 use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
 use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -111,12 +112,23 @@ class ReactivarTramite extends Component
 
             DB::transaction(function (){
 
-
                 $certificaciones = Certificacion::where('tramite_id', $this->tramite->id)->where('predio_id', $this->selected_id)->where('estado', 'activo')->get();
 
                 if($certificaciones->count()){
 
                     foreach($certificaciones as $certificacion){
+
+                        if(! auth()->user()->can('Reactivar certificados vencidos')){
+
+                            $fecha_creacion_certificado = Carbon::parse($certificacion->created_at);
+
+                            if(! now()->between($fecha_creacion_certificado, $fecha_creacion_certificado->addMonth())){
+
+                                throw new GeneralException('El certificado esta fuera del primer mes permitido para corrección.');
+
+                            }
+
+                        }
 
                         $traslado = Traslado::where(['certificacion_id' => $certificacion->id])->first();
 
