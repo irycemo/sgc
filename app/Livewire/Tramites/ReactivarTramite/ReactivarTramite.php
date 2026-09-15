@@ -122,7 +122,9 @@ class ReactivarTramite extends Component
 
                             $fecha_creacion_certificado = Carbon::parse($certificacion->created_at);
 
-                            if(! now()->between($fecha_creacion_certificado, $fecha_creacion_certificado->addMonth())){
+                            $fecha_creacion_certificado_mes_agregado = $fecha_creacion_certificado->copy()->addMonth();
+
+                            if(! now()->between($fecha_creacion_certificado, $fecha_creacion_certificado_mes_agregado)){
 
                                 throw new GeneralException('El certificado esta fuera del primer mes permitido para corrección.');
 

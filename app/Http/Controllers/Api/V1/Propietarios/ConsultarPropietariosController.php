@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Propietarios;
 
 use App\Models\Predio;
+use Carbon\Carbon;
 use App\Models\Tramite;
 use Illuminate\Http\Request;
 use App\Models\Certificacion;
@@ -67,10 +68,27 @@ class ConsultarPropietariosController extends Controller
 
         }
 
+        $fecha_creacion_certificado = Carbon::parse($certificacion->created_at);
+
+        $fecha_mas_mes = $fecha_creacion_certificado->copy()->addMonth();
+
+        if(now()->between($fecha_creacion_certificado, $fecha_mas_mes)){
+
+            $dentro_del_primer_mes = true;
+
+        }else{
+
+            $dentro_del_primer_mes = false;
+
+        }
+
         $data = json_decode($certificacion->cadena_original, true);
 
         return response()->json([
-            'data' => $data['predio']['propietarios'],
+            'data' => [
+                'propietarios' => $data['predio']['propietarios'],
+                'dentro_del_primer_mes' => $dentro_del_primer_mes
+            ],
         ], 200);
 
     }
