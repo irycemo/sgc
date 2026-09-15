@@ -117,6 +117,12 @@ class Fusion extends Component
                                     ->whereIn('numero_registro', collect($this->predios_cuentas)->pluck('numero_registro'))
                                     ->get();
 
+            if($predios_extra->count() === 0){
+
+                throw new GeneralException('Noa hay avaluos nuevos para alguno de los predios ingresados.');
+
+            }
+
             $this->predios_fusionantes = $this->predios_fusionantes->merge($predios_extra);
 
         }

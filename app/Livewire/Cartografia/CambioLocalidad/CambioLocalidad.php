@@ -91,6 +91,7 @@ class CambioLocalidad extends Component
                                     ->where('oficina', $this->oficina)
                                     ->where('tipo_predio', $this->tipo_predio)
                                     ->where('numero_registro', $this->numero_registro)
+                                    ->where('status', 'activo')
                                     ->firstOrFail();
 
             if($this->predio->status == 'bloqueado'){
