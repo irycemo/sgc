@@ -484,15 +484,23 @@
 
     </div>
 
-    <x-button-blue
-        wire:click="imprimirAviso({{ $traslado->id }})"
-        wire:loading.attr="disabled"
-        wire:target="imprimirAviso({{ $traslado->id }})">
+    @if(isset($aviso['caratula']))
 
-        <img wire:loading wire:target="imprimirAviso({{ $traslado->id }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+        <x-link-blue href="{{ $aviso['caratula'] }}" class="w-fit" target="_blank">Ver aviso</x-link-blue>
 
-        Ver traslado
+    @else
 
-    </x-button-blue>
+        <x-button-blue
+            wire:click="imprimirAviso({{ $traslado->id }})"
+            wire:loading.attr="disabled"
+            wire:target="imprimirAviso({{ $traslado->id }})">
+
+            <img wire:loading wire:target="imprimirAviso({{ $traslado->id }})" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+            Ver traslado
+
+        </x-button-blue>
+
+    @endif
 
 </div>
