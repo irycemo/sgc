@@ -8,7 +8,6 @@ use App\Exceptions\GeneralException;
 use App\Models\Certificacion;
 use App\Models\Tramite;
 use App\Models\Traslado;
-use App\Services\SistemaPeritosExternos\SistemaPeritosExternosService;
 use App\Services\SistemaTramitesLinea\SistemaTramitesLineaService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

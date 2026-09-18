@@ -97,7 +97,7 @@ class CrearAvaluoJob implements ShouldQueue
                 /* TERRENO COMUN */
                 if(isset($this->row['superficie_comun']) && isset($this->row['indiviso_terreno']) && isset($this->row['valor_unitario'])){
 
-                    $superficie_proporcional = round((float)$this->row['superficie_comun'] * round((float)$this->row['indiviso_terreno'], 4) / 100, 4);
+                    $superficie_proporcional = round((float)$this->row['superficie_comun'] * (float)$this->row['indiviso_terreno'] / 100, 4);
 
 
 

@@ -32,7 +32,7 @@ class SapService{
 
         try {
 
-            $response = Http::withBasicAuth($this->soapUserApi, $this->soapPasswordApi)->post($url, [
+            $response = Http::withToken(config('services.sap.SAP_TOKEN'))->post($url, [
                 "MT_ServGralLC_PI_Sender" => [
                     "ES_GEN_DATA" => [
                         "TP_PROCESAMIENTO" => "2",
@@ -102,6 +102,42 @@ class SapService{
 
         try {
 
+            $response = Http::withToken(config('services.sap.SAP_TOKEN'))->post($url, [ 'lcaptura' => $this->tramite->linea_de_captura]);
+
+        } catch (\Throwable $th) {
+
+            Log::error($th);
+
+            throw new GeneralException("Error de comunicación con SAP.");
+
+        }
+
+        if($response->status() != 200){
+
+            throw new GeneralException("Error de comunicación con SAP.");
+
+        }
+
+        $data = json_decode($response, true);
+
+        if(! isset($data['fechaPago'])){
+
+            Log::error($data);
+
+            throw new GeneralException("El trámite no esta pagado.");
+
+        }
+
+        return $data;
+
+    }
+
+    public function validarLineaDeCapturaAnterior(){
+
+        $url = config('services.sap.SAP_VALIDAR_LINEA_DE_CAPTURA_URL_ANTERIOR');
+
+        try {
+
             $response = Http::withBasicAuth($this->soapUserApi, $this->soapPasswordApi)->get($url .'/' . $this->tramite->linea_de_captura);
 
         } catch (\Throwable $th) {
@@ -155,5 +191,6 @@ class SapService{
         return $data;
 
     }
+
 
 }
