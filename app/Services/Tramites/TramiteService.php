@@ -171,7 +171,7 @@ class TramiteService{
     public function procesarPago():void
     {
 
-        $array = (new SapService($this->tramite))->validarLineaDeCaptura();
+        $array = (new SapService($this->tramite))->validarLineaDeCapturaAnterior();
 
         $fecha = $this->convertirFecha($array['FEC_PAGO']);
 

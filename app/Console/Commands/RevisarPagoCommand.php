@@ -72,7 +72,7 @@ class RevisarPagoCommand extends Command
 
     public function validarLineaDeCaptura($linea_captura){
 
-        $url = config('services.sap.SAP_VALIDAR_LINEA_DE_CAPTURA_URL');
+        $url = config('services.sap.SAP_VALIDAR_LINEA_DE_CAPTURA_URL_ANTERIOR');
 
         $response = Http::withBasicAuth(config('services.sap.SAP_USUARIO_API'), config('services.sap.SAP_CONTRASENA_API'))->get($url .'/' . $linea_captura);
 
