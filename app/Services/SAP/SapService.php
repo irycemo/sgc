@@ -105,7 +105,9 @@ class SapService{
 
         try {
 
-            $response = Http::withToken(config('services.sap.SAP_TOKEN'))->post($url, [ 'lcaptura' => $this->tramite->linea_de_captura]);
+            $token = Cache::get('sap_token');
+
+            $response = Http::withToken($token)->post($url, [ 'lcaptura' => $this->tramite->linea_de_captura]);
 
         } catch (\Throwable $th) {
 

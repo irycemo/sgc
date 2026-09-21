@@ -568,9 +568,9 @@ class Tramites extends Component
 
         try {
 
-            $pdf = null;
-
             $data = (new TramiteService($tramtie))->obtenerComprobantePago();
+
+            dd($data);
 
             $this->js('window.open(\' '. $data[0]['formato'] . '\', \'_blank\');');
 
