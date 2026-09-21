@@ -159,19 +159,21 @@ class AsignarManzana extends Component
 
     public function mount(){
 
-        if(auth()->user()->hasRole('Administrador')){
+        if(auth()->user()->hasRole('Oficina de rentas')){
+
+            $this->valuadores = User::where('estado', 'activo')
+                                        ->where('oficina_id', auth()->user()->oficina_id)
+                                        ->where('valuador', 1)
+                                        ->orderBy('name')
+                                        ->get();
+
+        }else{
 
             $this->valuadores = User::where('estado', 'activo')
                                         ->where('valuador', 1)
                                         ->orderBy('name')
                                         ->get();
-        }else{
 
-            $this->valuadores = User::where('estado', 'activo')
-                                    ->where('oficina_id', auth()->user()->oficina_id)
-                                    ->where('valuador', 1)
-                                    ->orderBy('name')
-                                    ->get();
         }
 
         $this->predio = Predio::make();

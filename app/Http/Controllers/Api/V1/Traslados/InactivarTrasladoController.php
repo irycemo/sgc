@@ -28,11 +28,16 @@ class InactivarTrasladoController extends Controller
 
             $traslado->update([
                 'estado' => 'nuevo',
-                'avaluo_spe' => null,
                 'actualizado_por' => auth()->id()
             ]);
 
             $traslado->audits()->latest()->first()->update(['tags' => 'Reactivó aviso']);
+
+            return response()->json([
+                'data' => [
+                    'traslado_id' => $traslado->id
+                ]
+            ], 200);
 
         } catch (\Throwable $th) {
 
@@ -43,12 +48,6 @@ class InactivarTrasladoController extends Controller
             ], 500);
 
         }
-
-        return response()->json([
-            'data' => [
-                'traslado_id' => $traslado->id
-            ]
-        ], 200);
 
     }
 
