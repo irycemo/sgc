@@ -572,18 +572,7 @@ class Tramites extends Component
 
             $data = (new TramiteService($tramtie))->obtenerComprobantePago();
 
-            if(! isset($data['BASE64'])){
-
-                throw new GeneralException('No hay documento disponible');
-
-            }
-
-            $pdf = base64_decode($data['BASE64']);
-
-            return response()->streamDownload(
-                fn () => print($pdf),
-                'aviso.pdf'
-            );
+            $this->js('window.open(\' '. $data[0]['formato'] . '\', \'_blank\');');
 
         } catch (GeneralException $ex) {
 

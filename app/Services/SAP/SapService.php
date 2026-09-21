@@ -120,7 +120,7 @@ class SapService{
 
         $data = json_decode($response, true);
 
-        if(! isset($data['fechaPago'])){
+        if(! isset($data[0]['fechaPago'])){
 
             Log::error($data);
 
