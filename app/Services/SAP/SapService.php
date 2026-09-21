@@ -3,6 +3,7 @@
 namespace App\Services\SAP;
 
 use App\Models\Tramite;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use App\Exceptions\GeneralException;
 use Illuminate\Support\Facades\Http;
@@ -32,7 +33,9 @@ class SapService{
 
         try {
 
-            $response = Http::withToken(config('services.sap.SAP_TOKEN'))->post($url, [
+            $token = Cache::get('sap_token');
+
+            $response = Http::withToken($token)->post($url, [
                 "MT_ServGralLC_PI_Sender" => [
                     "ES_GEN_DATA" => [
                         "TP_PROCESAMIENTO" => "2",
@@ -191,6 +194,5 @@ class SapService{
         return $data;
 
     }
-
 
 }

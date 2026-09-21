@@ -35,6 +35,7 @@ if(app()->isProduction()){
     Schedule::command('backup:run')->daily()->at('01:30');
     Schedule::command('revisar-pago')->daily()->at('23:30');
     Schedule::command('expirar-tramites')->daily()->at('00:10');
+    Schedule::command('generar-token-sap')->hourly();
 
 }
 
