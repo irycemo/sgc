@@ -35,7 +35,7 @@
 
     <div class="mt-4 text-right">
 
-        @if (in_array($tramite->estado, ['nuevo', 'rechazado', 'expirado']))
+        {{-- @if (in_array($tramite->estado, ['nuevo', 'rechazado', 'expirado']))
 
             <button
                 wire:click="editarTramite"
@@ -47,7 +47,7 @@
                 Editar
             </button>
 
-        @endif
+        @endif --}}
 
         @if (!$tramite->fecha_pago)
 

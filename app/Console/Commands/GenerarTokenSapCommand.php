@@ -50,14 +50,25 @@ class GenerarTokenSapCommand extends Command
 
     public function generarToken(){
 
-            $response = Http::post(config('services.sap.SAP_GENERAR_TOKEN_URL'), [
-                                    "email" => config('services.sap.SAP_TOKEN_USUARIO'),
-                                    "password" => config('services.sap.SAP_TOKEN_CONTRASEÑA')
-                                ]);
+        $response = Http::post(config('services.sap.SAP_GENERAR_TOKEN_URL'), [
+                                "email" => config('services.sap.SAP_TOKEN_USUARIO'),
+                                "password" => config('services.sap.SAP_TOKEN_CONTRASEÑA')
+                            ]);
+
+        if($response->status() === 200){
 
             $data = json_decode($response, true);
 
             return $data['token'];
+
+        }else{
+
+        dd($response);
+
+            throw new GeneralException("Error de comunicación con SAP." . $response);
+
+        }
+
 
     }
 
