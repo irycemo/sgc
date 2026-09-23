@@ -159,6 +159,8 @@ trait ImpresionTrait
 
         if($this->tramite_inspeccion->estado != 'pagado') throw new GeneralException('El trámite de inspección ocular no esta pagado o ha sido concluido.');
 
+        if(! $this->tramite_inspeccion->avaluo_para) throw new GeneralException("Es necesario actualizar el campo de 'avalúo para' en el trámite de inspección.");
+
         if($this->tramite_inspeccion->avaluo_para->value != $this->avaluo_para) throw new GeneralException('El trámite de inspección ocular no corresponde a un avalúo para ' . $this->lista_avaluo_para[$this->avaluo_para - 1]->label());
 
         /* Desgloses */
