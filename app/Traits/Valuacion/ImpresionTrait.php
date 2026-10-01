@@ -320,18 +320,30 @@ trait ImpresionTrait
 
             if(count($this->predios_cuentas)){
 
-                $avaluos_extra = Avaluo::withWhereHas('predioAvaluo', function($q){
-                                        $q->where('localidad', $this->localidad)
-                                            ->where('oficina', $this->oficina)
-                                            ->where('tipo_predio', $this->tipo)
-                                            ->whereIn('numero_registro', collect($this->predios_cuentas)->pluck('numero_registro'))
-                                            ->whereHas('avaluo', function($q){
-                                                $q->where('estado', '!=', 'notificado');
-                                            });
-                                    })
-                                    ->get();
+                foreach ($this->predios_cuentas as $predio) {
 
-                $this->avaluos = $this->avaluos->merge($avaluos_extra);
+                    $avaluo_extra = Avaluo::withWhereHas('predioAvaluo', function($q) use($predio){
+                                            $q->where('localidad', $this->localidad)
+                                                ->where('oficina', $this->oficina)
+                                                ->where('tipo_predio', $predio['tipo_predio'])
+                                                ->where('numero_registro', $predio['numero_registro'])
+                                                ->whereHas('avaluo', function($q){
+                                                    $q->where('estado', '!=', 'notificado');
+                                                });
+                                        })
+                                        ->first();
+
+                    if($avaluo_extra){
+
+                        $this->avaluos = $this->avaluos->push($avaluo_extra);
+
+                    }else{
+
+                        throw new GeneralException('No se encontro avalúo para : ' . $predio['localidad'] . '-' . $predio['oficina'] . '-' .$predio['tipo_predio'] . '-' . $predio['numero_registro']);
+
+                    }
+
+                }
 
             }
 
