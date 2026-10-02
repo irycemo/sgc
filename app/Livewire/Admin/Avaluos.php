@@ -204,9 +204,9 @@ class Avaluos extends Component
 
                     }
 
-                    $avaluo->delete();
-
                     $predio->delete();
+
+                    $avaluo->delete();
 
                 }
 
