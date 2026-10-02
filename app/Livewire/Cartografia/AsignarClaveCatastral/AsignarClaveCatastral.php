@@ -177,6 +177,7 @@ class AsignarClaveCatastral extends Component
                                             ->where('predio', $this->predio)
                                             ->where('edificio', $this->edificio)
                                             ->where('departamento', $this->departamento)
+                                            ->where('status', 'activo')
                                             ->first();
 
             if($predio_avaluo){
