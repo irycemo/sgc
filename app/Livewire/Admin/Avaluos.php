@@ -178,6 +178,8 @@ class Avaluos extends Component
 
                     $predio->terrenos()->delete();
 
+                    $predio->tramite?->update(['predio_avaluo' => null]);
+
                     $avaluo->bloques()->delete();
 
                     $files = File::where('fileable_id', $avaluo->id)->where('fileable_type', 'App\Models\Avaluo')->get();

@@ -49,6 +49,10 @@ class PredioAvaluo extends Model implements Auditable
         return $this->hasOne(Avaluo::class, 'predio_avaluo');
     }
 
+    public function tramite(){
+        return $this->belongsTo(Tramite::class, 'predio_avaluo');
+    }
+
     public function cuentaPredial(){
 
         return $this->localidad . '-' . $this->oficina . '-' . $this->tipo_predio . '-' . $this->numero_registro;
