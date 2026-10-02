@@ -48,6 +48,8 @@ class AcreditarPagoController extends Controller
 
         } catch (GeneralException $ex) {
 
+            Log::error("Error al validar linea de captura desde pago en línea" . $ex);
+
             return response()->json([
                 'result' => 'error',
             ], 500);
