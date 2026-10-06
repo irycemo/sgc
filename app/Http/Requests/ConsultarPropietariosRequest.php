@@ -25,7 +25,8 @@ class ConsultarPropietariosRequest extends FormRequest
             'año' => 'required',
             'folio' => 'required',
             'usuario' => 'required',
-            'predio' => 'required'
+            'predio' => 'required',
+            'primer_cierre' => 'nullable'
         ];
     }
 }

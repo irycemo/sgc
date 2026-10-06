@@ -82,6 +82,16 @@ class ConsultarPropietariosController extends Controller
 
         }
 
+        if(isset($validated['primer_cierre'])){
+
+            if(Carbon::parse($validated['primer_cierre'])->isBefore($fecha_mas_mes)){
+
+                $dentro_del_primer_mes = true;
+
+            }
+
+        }
+
         $data = json_decode($certificacion->cadena_original, true);
 
         return response()->json([
