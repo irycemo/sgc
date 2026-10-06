@@ -318,7 +318,7 @@ trait ImpresionTrait
 
             }
 
-            if(count($this->predios_cuentas)){
+            if(count($this->predios_cuentas) && $this->avaluo_para !== AvaluoPara::FUSION->value){
 
                 foreach ($this->predios_cuentas as $predio) {
 
