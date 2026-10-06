@@ -593,7 +593,11 @@ class Tramites extends Component
 
                 $this->modelo_editar->ligadoA->update(['ligado_a' => null]);
 
+                $this->modelo_editar->ligadoA->audits()->latest()->first()->update(['tags' => 'Desvinculó trámite']);
+
                 $this->modelo_editar->update(['ligado_a' => null]);
+
+                $this->modelo_editar->audits()->latest()->first()->update(['tags' => 'Desvinculó trámite']);
 
             });
 
