@@ -157,6 +157,8 @@ class SapService{
 
         }
 
+        info($data);
+
         return $data[0];
 
     }
