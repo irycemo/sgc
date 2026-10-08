@@ -64,7 +64,7 @@ class InspeccionOcular extends Component
 
                 $this->modelo_editar->monto = $this->servicio['ordinario'] + $costo_20;
 
-                $this->modelo_editar->observaciones = 'TRÁMITE CALIFICADO CON DESCUENTO DEL 20%';
+                $this->modelo_editar->observaciones = 'TRÁMITE CON COBRO DEL 20% POR INSPECCIÓN, EN CANTIDADES MAYORES A 1';
 
             }else{
 
