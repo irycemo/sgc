@@ -1,6 +1,7 @@
 <?php
 
 use App\Jobs\GenerarCertificacionMigracionJob;
+use Illuminate\Support\Facades\Log;
 use App\Jobs\MigrarPredioJob;
 use App\Models\Avaluo;
 use App\Models\Cartografia;
@@ -1215,29 +1216,36 @@ Artisan::command('traslados', function(){
 
     $count = 0;
 
-    $traslados = Traslado::with('predio.movimientos')->where('estado', 'operado')->where('tipo', 'revision')->get();
+    $traslados = Traslado::where('estado', '!=', 'operado')->get();
+
+    $progressbar = $this->output->createProgressBar($traslados->count());
+
+    $progressbar->start();
 
     foreach($traslados as $traslado){
 
         try {
 
-            $avaluo = (new SistemaPeritosExternosService())->consultarAvaluo($traslado->avaluo_spe);
+            $aviso = (new SistemaTramitesLineaService())->consultarAviso2($traslado->aviso_stl);
 
-            $traslado->predio->update([
-                'superficie_terreno' => $avaluo['superficie_terreno'],
-                'superficie_construccion' => $avaluo['superficie_construccion'],
-                'valor_total_terreno' => $avaluo['valor_total_terreno'],
-                'valor_total_construccion' => $avaluo['valor_total_construccion'],
+            $traslado->update([
+                'estado' => $aviso['estado'],
+                'avaluo_spe' => $aviso['avaluo_spe']
             ]);
+
+            $progressbar->advance();
 
             $count ++;
 
         } catch (\Throwable $th) {
+            Log::error($th);
             $this->info($th->getMessage());
 
         }
 
     }
+
+    $progressbar->finish();
 
     $this->info($count);
 
