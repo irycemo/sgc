@@ -5,6 +5,7 @@ namespace App\Livewire\Admin;
 use App\Constantes\Constantes;
 use App\Enums\Tramites\AvaluoPara;
 use App\Exceptions\GeneralException;
+use App\Models\CategoriaServicio;
 use App\Models\Certificacion;
 use App\Models\Oficina;
 use App\Models\Predio;
@@ -677,6 +678,8 @@ class Tramites extends Component
         $this->lista_avaluo_para = AvaluoPara::cases();
 
         $this->oficinas = Oficina::select('id', 'nombre')->orderBy('nombre')->get();
+
+        $this->categorias = CategoriaServicio::orderBy('nombre')->get();
 
     }
 
