@@ -157,7 +157,7 @@ class SapService{
 
         }
 
-        return $data;
+        return $data[0];
 
     }
 

@@ -45,6 +45,18 @@
 
             </select>
 
+            <select class="bg-white rounded-full text-sm w-60" wire:model.live="filters.categoria">
+
+                <option value="" selected>Catgegoría</option>
+
+                @foreach ($categorias as $categoria)
+
+                    <option value="{{ $categoria->id }}" class="truncate">{{ $categoria->nombre }}</option>
+
+                @endforeach
+
+            </select>
+
             <select class="bg-white rounded-full text-sm w-60" wire:model.live="filters.servicio">
 
                 <option value="" selected>Servicio</option>

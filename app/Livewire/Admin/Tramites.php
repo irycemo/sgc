@@ -44,6 +44,9 @@ class Tramites extends Component
     public $referencia_pago;
     public $fecha_pago;
     public $oficinas;
+    public $categoria;
+    public $categorias;
+    public $documento_pago;
 
     public $tramties_con_predio = ['DM31', 'DM34', 'DM32', 'DM35', 'DM30', 'D774', 'D729', 'D728', 'DÑ34', 'DÑ33', 'D727', 'D726'];
 
@@ -59,9 +62,11 @@ class Tramites extends Component
         'p_oficina' => '',
         't_predio' => '',
         'registro' => '',
-        'estado' => '',
         'linea_captura' => '',
-        'oficina_id' => ''
+        'oficina_id' => '',
+        'categoria' => '',
+        'documento_pago'
+
     ];
 
     public $servicios;
@@ -641,6 +646,10 @@ class Tramites extends Component
                         ->when(! empty($this->filters['servicio']), fn($q) => $q->where('servicio_id', $this->filters['servicio']))
                         ->when(! empty($this->filters['oficina_id']), fn($q) => $q->where('oficina_id', $this->filters['oficina_id']))
                         ->when(! empty($this->filters['linea_captura']) && strlen($this->filters['linea_captura']) == 20, fn($q) =>  $q->where('linea_de_captura', $this->filters['linea_captura']))
+                        ->when(! empty($this->filters['documento_pago']) && strlen($this->filters['documento_pago']) == 20, fn($q) =>  $q->where('documento_de_pago', $this->filters['documento_pago']))
+                        /* ->when(! empty($this->filters['documento_pago']), function($q){
+                            $q->where()
+                        }) */
                         ->when($predio, function($q) use ($predio){
                             $q->whereHas('predios', function($q) use ($predio){
                                 $q->where('predio_id', $predio->id);
