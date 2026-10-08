@@ -33,6 +33,7 @@ class IngresarRevisionAvisoRequest extends FormRequest
             'folio_aviso' => 'required',
             'usuario_aviso' => 'required',
             'acto' => 'required',
+            'estado' => 'required',
         ];
     }
 }

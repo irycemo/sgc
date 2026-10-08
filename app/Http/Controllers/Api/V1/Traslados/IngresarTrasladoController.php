@@ -55,7 +55,7 @@ class IngresarTrasladoController extends Controller
                                             'año_aviso' => $validated['año_aviso'],
                                             'folio_aviso' => $validated['folio_aviso'],
                                             'usuario_aviso' => $validated['usuario_aviso'],
-                                            'estado' => 'cerrado',
+                                            'estado' => $validated['estado'],
                                             'tipo' => 'revision',
                                             'predio_id' => $validated['predio_id'],
                                             'tramite_aviso' => $validated['tramite_aviso'],
@@ -71,7 +71,7 @@ class IngresarTrasladoController extends Controller
                                     );
 
                 $traslado->update([
-                    'estado' => 'cerrado',
+                    'estado' => $validated['estado'],
                     'avaluo_spe' => $validated['avaluo_spe'],
                     'tramite_aviso' => $validated['tramite_aviso'],
                     'certificacion_id' => $validated['certificacion_id'],
@@ -147,7 +147,7 @@ class IngresarTrasladoController extends Controller
                                             'año_aviso' => $validated['año_aviso'],
                                             'folio_aviso' => $validated['folio_aviso'],
                                             'usuario_aviso' => $validated['usuario_aviso'],
-                                            'estado' => 'cerrado',
+                                            'estado' => $validated['estado'],
                                             'tipo' => 'aclaratorio',
                                             'acto' => $validated['acto'],
                                             'predio_id' => $validated['predio_id'],
@@ -161,7 +161,7 @@ class IngresarTrasladoController extends Controller
                                     );
 
                 $traslado->update([
-                    'estado' => 'cerrado',
+                    'estado' => $validated['estado'],
                     'tramite_aviso' => $validated['tramite_aviso'],
                     'predio_id' => $validated['predio_id'],
                     'actualizado_por' => auth()->id()
