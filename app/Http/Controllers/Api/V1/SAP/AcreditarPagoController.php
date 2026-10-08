@@ -48,7 +48,14 @@ class AcreditarPagoController extends Controller
 
         } catch (GeneralException $ex) {
 
-            Log::error("Error al validar linea de captura desde pago en línea" . $ex);
+            Log::warning(
+                "Error al validar linea de captura desde pago en línea",
+                [
+                    "error" => $ex->getMessage(),
+                    "linea de captura" => $validated['linea_captura'],
+                    "trace" => $ex
+                ]
+            );
 
             return response()->json([
                 'result' => 'error',
@@ -56,7 +63,14 @@ class AcreditarPagoController extends Controller
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al validar linea de captura desde pago en línea" . $th);
+            Log::error(
+                "Error al validar linea de captura desde pago en línea",
+                [
+                    "error" => $th->getMessage(),
+                    "linea de captura" => $validated['linea_captura'],
+                    "trace" => $th
+                ]
+            );
 
             return response()->json([
                 'result' => 'error',

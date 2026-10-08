@@ -46,14 +46,14 @@ trait RevertirOperacionTrait
             'zutm' => $cadena_original['zutm'],
             'lon' => $cadena_original['lon'],
             'lat' => $cadena_original['lat'],
-            'superficie_terreno' => $cadena_original['superficie_terreno'],
-            'superficie_notarial' => $cadena_original['superficie_notarial'],
+            'superficie_terreno' => $this->obtenerNumero($cadena_original['superficie_terreno']),
+            'superficie_notarial' => $this->obtenerNumero($cadena_original['superficie_notarial']),
             'superficie_construccion' => $cadena_original['superficie_construccion'],
             'area_comun_terreno' => $cadena_original['area_comun_terreno'],
             'area_comun_construccion' => $cadena_original['area_comun_construccion'],
             'valor_total_terreno' => $cadena_original['valor_total_terreno'],
             'valor_total_construccion' => $cadena_original['valor_total_construccion'],
-            'superficie_total_terreno' => $cadena_original['superficie_total_terreno'],
+            'superficie_total_terreno' => $this->obtenerNumero($cadena_original['superficie_total_terreno']),
             'superficie_total_construccion' => $cadena_original['superficie_total_construccion'],
             'valor_catastral' => $cadena_original['valor_catastral'],
             'observaciones' => $cadena_original['observaciones'],
@@ -236,6 +236,22 @@ trait RevertirOperacionTrait
             'calidad' => $construccionComun['calidad'] ?? 0,
         ]);
 
+    }
+
+    private function obtenerNumero($texto): float
+    {
+
+        $texto = (string) $texto;
+
+        $texto = trim($texto);
+
+        $texto = str_replace([',', '-'], '', $texto);
+
+        if (preg_match('/^\d+(?:\.\d+)?/', $texto, $coincidencias)) {
+            return (float) $coincidencias[0];
+        }
+
+        return 0.0;
     }
 
 }
