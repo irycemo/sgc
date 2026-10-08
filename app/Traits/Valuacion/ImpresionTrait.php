@@ -306,6 +306,8 @@ trait ImpresionTrait
                                                 ->where('status', '!=', 'notificado')
                                                 ->first();
 
+                if(! $predio_avaluo_padre) throw new GeneralException("No se encontro avalúo para el predio origen");
+
                 $avaluo_predio_padre = Avaluo::with('predioAvaluo')->where('estado', '!=', 'notificado')->where('predio_avaluo', $predio_avaluo_padre->id)->get();
 
                 if(! $avaluo_predio_padre->count()){

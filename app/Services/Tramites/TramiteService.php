@@ -171,16 +171,12 @@ class TramiteService{
     public function procesarPago():void
     {
 
-        $array = (new SapService($this->tramite))->validarLineaDeCapturaAnterior();
-
-        $fecha = $this->convertirFecha($array['FEC_PAGO']);
-
-        $documento = $array['DOC_PAGO'];
+        $array = (new SapService($this->tramite))->validarLineaDeCaptura();
 
         $this->tramite->update([
             'estado' => 'pagado',
-            'fecha_pago' => $this->convertirFecha($fecha),
-            'documento_de_pago' => $documento,
+            'fecha_pago' => $array['fechaPago'],
+            'documento_de_pago' => $array['reciboSap'],
         ]);
 
         if($this->tramite->usuario == 11){
@@ -197,9 +193,9 @@ class TramiteService{
 
             if(in_array($this->tramite->ligadoA->servicio->clave_ingreso, ['DM32', 'DM31'])){
 
-                    $this->tramite->ligadoA->update(['fecha_entrega' => now()->subDay()]);
+                $this->tramite->ligadoA->update(['fecha_entrega' => now()->subDay()]);
 
-                }
+            }
 
         }
 

@@ -55,7 +55,13 @@ class SapService{
 
         } catch (\Throwable $th) {
 
-            Log::error($th);
+            Log::error(
+                "Error de comunicación con SAP.",
+                [
+                    'message' => $th->getMessage(),
+                    'trace' => $th
+                ]
+            );
 
             throw new GeneralException("Error de comunicación con SAP.");
 
@@ -65,7 +71,13 @@ class SapService{
 
         if($response->status() != 200){
 
-            Log::error($response);
+            Log::error(
+                "Error de comunicación con SAP.",
+                [
+                    'response status' => $response->status(),
+                    'response' => $response
+                ]
+            );
 
             throw new GeneralException("Error de comunicación con SAP.");
 
@@ -73,23 +85,17 @@ class SapService{
 
         if(isset($data['mensaje']) && $data['mensaje'] == 'Error al consumir servicio'){
 
-            Log::error($data['mensaje'] . ' EN SAP');
-
             throw new GeneralException("Error de comunicación con SAP.");
 
         }
 
         if(isset($data['ES_MSJ']['TpMens'])){
 
-            Log::error($data['ES_MSJ']['V1Mens'] . ' EN SAP');
-
             throw new GeneralException("Error de comunicación con SAP.");
 
         }
 
         if(isset($data['ERROR'])){
-
-            Log::error($data['ERROR'] . ' SAP');
 
             throw new GeneralException("Error de comunicación con SAP.");
 
@@ -111,13 +117,27 @@ class SapService{
 
         } catch (\Throwable $th) {
 
-            Log::error($th);
+            Log::error(
+                "Error de comunicación con SAP.",
+                [
+                    'message' => $th->getMessage(),
+                    'trace' => $th
+                ]
+            );
 
             throw new GeneralException("Error de comunicación con SAP.");
 
         }
 
         if($response->status() != 200){
+
+            Log::error(
+                "Error de comunicación con SAP.",
+                [
+                    'response status' => $response->status(),
+                    'response' => $response
+                ]
+            );
 
             throw new GeneralException("Error de comunicación con SAP.");
 
@@ -127,7 +147,11 @@ class SapService{
 
         if(! isset($data[0]['fechaPago'])){
 
-            Log::error($data);
+            throw new GeneralException("El trámite no esta pagado.");
+
+        }
+
+        if(! isset($data[0]['reciboSap'])){
 
             throw new GeneralException("El trámite no esta pagado.");
 

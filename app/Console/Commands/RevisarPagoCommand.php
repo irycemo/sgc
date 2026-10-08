@@ -42,8 +42,6 @@ class RevisarPagoCommand extends Command
 
             foreach($tramites as $tramite){
 
-                $data = $this->validarLineaDeCaptura($tramite->linea_de_captura);
-
                 if(isset($data['FEC_PAGO'])){
 
                     (new TramiteService($tramite))->procesarPago();
@@ -64,13 +62,19 @@ class RevisarPagoCommand extends Command
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al revisar pago de tramites en tarea programada. " . $th);
+            Log::error(
+                "Error al revisar pago de tramites en tarea programada.",
+                [
+                    'message' => $th->getMessage(),
+                    'trace' => $th
+                ]
+            );
 
         }
 
     }
 
-    public function validarLineaDeCaptura($linea_captura){
+    private function validarLineaDeCaptura($linea_captura){
 
         $url = config('services.sap.SAP_VALIDAR_LINEA_DE_CAPTURA_URL_ANTERIOR');
 
