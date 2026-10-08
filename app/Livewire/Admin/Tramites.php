@@ -649,7 +649,7 @@ class Tramites extends Component
                         ->when(! empty($this->filters['linea_captura']) && strlen($this->filters['linea_captura']) == 20, fn($q) =>  $q->where('linea_de_captura', $this->filters['linea_captura']))
                         ->when(! empty($this->filters['documento_pago']) && strlen($this->filters['documento_pago']) == 20, fn($q) =>  $q->where('documento_de_pago', $this->filters['documento_pago']))
                         ->when(! empty($this->filters['categoria']), function($q){
-                            $q->whereHas('servcio', function($q){
+                            $q->whereHas('servicio', function($q){
                                 $q->where('categoria_servicio_id', $this->filters['categoria']);
                             });
                         })
