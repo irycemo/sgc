@@ -71,7 +71,9 @@ class TramitesLinea extends Component
                             })
                             ->where('estado', 'pagado')
                             ->where('usuario', 11)
-                            ->where('oficina_id', auth()->user()->oficina_id)
+                            ->whereHas('predios', function($q){
+                                $q->where('oficina', auth()->user()->oficina->oficina);
+                            })
                             ->whereBetween('created_at', [$fecha_inicio, $fecha_final])
                             ->get();
 
@@ -107,7 +109,9 @@ class TramitesLinea extends Component
                             ->where('servicio_id', 293)
                             ->where('estado', 'pagado')
                             ->where('usuario', 11)
-                            ->where('oficina_id', auth()->user()->oficina_id)
+                            ->whereHas('predios', function($q){
+                                $q->where('oficina', auth()->user()->oficina->oficina);
+                            })
                             ->whereBetween('created_at', [$fecha_inicio, $fecha_final])
                             ->get();
 
@@ -142,7 +146,9 @@ class TramitesLinea extends Component
                             })
                             ->where('estado', 'pagado')
                             ->where('usuario', 11)
-                            ->where('oficina_id', auth()->user()->oficina_id)
+                            ->whereHas('predios', function($q){
+                                $q->where('oficina', auth()->user()->oficina->oficina);
+                            })
                             ->whereBetween('created_at', [$fecha_inicio, $fecha_final])
                             ->get()
                             ->map(function($tramite){
