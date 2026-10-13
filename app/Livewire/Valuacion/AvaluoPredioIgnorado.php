@@ -401,6 +401,13 @@ class AvaluoPredioIgnorado extends Component
             $this->predio->tipo_predio = $this->tipo;
             $this->predio->numero_registro = $this->numero_registro;
 
+            if($this->predio->tipo_predio === 2){
+
+                $this->predio->predio = $this->numero_registro;
+                $this->predio->manzana = 0;
+
+            }
+
             $this->validacionesAsignar();
 
             DB::transaction(function () {
