@@ -356,9 +356,9 @@ class RevisarTraslado extends Component
                 'fecha_efectos' => $this->aviso['fecha_firma'],
                 'fecha_otorgamiento' => $this->aviso['fecha_otorgamiento'],
                 'declarante' => $this->aviso['titular'],
-                'tomo' => $this->aviso['antecedentes']['tomo'],
-                'registro' => $this->aviso['antecedentes']['registro'],
-                'folio_real' => $this->aviso['antecedentes']['folio_real'],
+                'tomo' => $this->aviso['antecedentes']['tomo'] ?? null,
+                'registro' => $this->aviso['antecedentes']['registro'] ?? null,
+                'folio_real' => $this->aviso['antecedentes']['folio_real'] ?? null,
                 'libro' => 'Propiedad'
             ]);
 
@@ -602,9 +602,9 @@ class RevisarTraslado extends Component
                 'documento_numero' => $this->aviso['numero_escritura'],
                 'fecha_otorgamiento' => $this->aviso['fecha_otorgamiento'],
                 'declarante' => $this->aviso['titular'],
-                'tomo' => $this->aviso['antecedentes']['tomo'],
-                'registro' => $this->aviso['antecedentes']['registro'],
-                'folio_real' => $this->aviso['antecedentes']['folio_real'],
+                'tomo' => $this->aviso['antecedentes']['tomo'] ?? null,
+                'registro' => $this->aviso['antecedentes']['registro'] ?? null,
+                'folio_real' => $this->aviso['antecedentes']['folio_real'] ?? null,
                 'libro' => 'Propiedad'
             ]);
 
