@@ -1228,14 +1228,20 @@ Artisan::command('traslados', function(){
 
             $aviso = (new SistemaTramitesLineaService())->consultarAviso2($traslado->aviso_stl);
 
+            if($traslado->acto != $aviso['acto']){
+
+                $traslado->update(['acto' => $aviso['acto']]);
+
+            }
+
             $traslado->predio->update([
                 'documento_entrada' => $aviso['tipo_escritura'],
                 'documento_numero' => $aviso['numero_escritura'],
                 'fecha_otorgamiento' => $aviso['fecha_otorgamiento'],
                 'declarante' => $aviso['titular'],
-                'tomo' => $aviso['antecedentes']['tomo'],
-                'registro' => $aviso['antecedentes']['registro'],
-                'folio_real' => $aviso['antecedentes']['folio_real'],
+                'tomo' => $aviso['antecedentes']['tomo'] ?? null,
+                'registro' => $aviso['antecedentes']['registro'] ?? null,
+                'folio_real' => $aviso['antecedentes']['folio_real'] ?? null,
                 'libro' => 'Propiedad'
             ]);
 

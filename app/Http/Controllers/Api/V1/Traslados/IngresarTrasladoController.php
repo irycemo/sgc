@@ -71,6 +71,7 @@ class IngresarTrasladoController extends Controller
                                     );
 
                 $traslado->update([
+                    'acto' => $validated['acto'],
                     'estado' => $validated['estado'],
                     'avaluo_spe' => $validated['avaluo_spe'],
                     'tramite_aviso' => $validated['tramite_aviso'],
@@ -161,6 +162,7 @@ class IngresarTrasladoController extends Controller
                                     );
 
                 $traslado->update([
+                    'acto' => $validated['acto'],
                     'estado' => $validated['estado'],
                     'tramite_aviso' => $validated['tramite_aviso'],
                     'predio_id' => $validated['predio_id'],
