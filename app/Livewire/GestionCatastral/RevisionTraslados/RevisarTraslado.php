@@ -350,7 +350,16 @@ class RevisarTraslado extends Component
                 'superficie_total_terreno' => $this->aviso['predio']['superficie_total_terreno']  ?? null,
                 'superficie_total_construccion' => $this->aviso['predio']['superficie_total_construccion']  ?? null,
                 'valor_catastral' => $this->aviso['predio']['valor_catastral']  ?? null,
-                'observaciones' => $this->descripcion()
+                'observaciones' => $this->descripcion(),
+                'documento_entrada' => $this->aviso['tipo_escritura'],
+                'documento_numero' => $this->aviso['numero_escritura'],
+                'fecha_efectos' => $this->aviso['fecha_firma'],
+                'fecha_otorgamiento' => $this->aviso['fecha_otorgamiento'],
+                'declarante' => $this->aviso['titular'],
+                'tomo' => $this->aviso['antecedentes']['tomo'],
+                'registro' => $this->aviso['antecedentes']['registro'],
+                'folio_real' => $this->aviso['antecedentes']['folio_real'],
+                'libro' => 'Propiedad'
             ]);
 
             $this->traslado->predio->audits()->latest()->first()->update(['tags' => 'Actualizó mediante revision de aviso', 'tramite_id' => $this->traslado->tramite_aviso]);
@@ -588,7 +597,15 @@ class RevisarTraslado extends Component
                 'superficie_total_terreno' => $this->aviso['predio']['superficie_total_terreno']  ?? null,
                 'superficie_total_construccion' => $this->aviso['predio']['superficie_total_construccion']  ?? null,
                 'valor_catastral' => $this->aviso['predio']['valor_catastral']  ?? null,
-                'observaciones' => $this->descripcion()
+                'observaciones' => $this->descripcion(),
+                'documento_entrada' => $this->aviso['tipo_escritura'],
+                'documento_numero' => $this->aviso['numero_escritura'],
+                'fecha_otorgamiento' => $this->aviso['fecha_otorgamiento'],
+                'declarante' => $this->aviso['titular'],
+                'tomo' => $this->aviso['antecedentes']['tomo'],
+                'registro' => $this->aviso['antecedentes']['registro'],
+                'folio_real' => $this->aviso['antecedentes']['folio_real'],
+                'libro' => 'Propiedad'
             ]);
 
             $this->traslado->predio->audits()->latest()->first()->update(['tags' => 'Actualizó mediante aviso aclaratorio', 'tramite_id' => $this->traslado->tramite_aviso]);

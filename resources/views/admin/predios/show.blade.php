@@ -44,6 +44,22 @@
 
             <div class="rounded-lg bg-gray-100 py-1 px-2">
 
+                <strong>Tomo</strong>
+
+                <p>{{ $predio->tomo }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Registro</strong>
+
+                <p>{{ $predio->registro }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
                 <strong>Es habitacional</strong>
 
                 <p>{{ $predio->es_habitacional ? 'Si' : 'No' }}</p>
@@ -71,6 +87,14 @@
                 <strong>Fecha de efectos</strong>
 
                 <p>{{ $predio->fecha_efectos }}</p>
+
+            </div>
+
+            <div class="rounded-lg bg-gray-100 py-1 px-2">
+
+                <strong>Fecha de otorgamiento</strong>
+
+                <p>{{ $predio->fecha_otorgamiento }}</p>
 
             </div>
 

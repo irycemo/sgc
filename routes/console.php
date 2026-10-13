@@ -1216,7 +1216,7 @@ Artisan::command('traslados', function(){
 
     $count = 0;
 
-    $traslados = Traslado::where('estado', '!=', 'operado')->get();
+    $traslados = Traslado::with('predio')->where('estado', 'operado')->get();
 
     $progressbar = $this->output->createProgressBar($traslados->count());
 
@@ -1228,9 +1228,15 @@ Artisan::command('traslados', function(){
 
             $aviso = (new SistemaTramitesLineaService())->consultarAviso2($traslado->aviso_stl);
 
-            $traslado->update([
-                'estado' => $aviso['estado'],
-                'avaluo_spe' => $aviso['avaluo_spe']
+            $traslado->predio->update([
+                'documento_entrada' => $aviso['tipo_escritura'],
+                'documento_numero' => $aviso['numero_escritura'],
+                'fecha_otorgamiento' => $aviso['fecha_otorgamiento'],
+                'declarante' => $aviso['titular'],
+                'tomo' => $aviso['antecedentes']['tomo'],
+                'registro' => $aviso['antecedentes']['registro'],
+                'folio_real' => $aviso['antecedentes']['folio_real'],
+                'libro' => 'Propiedad'
             ]);
 
             $progressbar->advance();

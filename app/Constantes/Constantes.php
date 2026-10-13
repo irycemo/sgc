@@ -626,6 +626,7 @@ class Constantes{
         'ALTA POR AUTORIZACIÓN DE SUBDIVISIÓN' => 'ALTA',
         'ALTA POR CAMBIO DE OFICINA' => 'ALTA',
         'ALTA POR CAMBIO DE REGIMEN' => 'ALTA',
+        'ALTA POR CORETT' => 'ALTA',
         'ALTA POR ESCRITURACIÓN SOCIAL' => 'ALTA',
         'ALTA POR INSUS' => 'ALTA',
         'ALTA POR DECRETO' => 'ALTA',
