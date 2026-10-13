@@ -576,7 +576,7 @@ class Tramites extends Component
 
             $data = (new TramiteService($tramtie))->obtenerComprobantePago();
 
-            $this->js('window.open(\' '. $data[0]['formato'] . '\', \'_blank\');');
+            $this->js('window.open(\' '. $data['formato'] . '\', \'_blank\');');
 
         } catch (GeneralException $ex) {
 
