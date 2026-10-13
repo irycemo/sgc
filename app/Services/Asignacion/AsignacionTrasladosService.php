@@ -31,6 +31,9 @@ class AsignacionTrasladosService{
             $user =  User::inRandomOrder()
                             ->where('estado', 'activo')
                             ->where('oficina_id', $oficina_id)
+                            ->whereHas('roles', function($q){
+                                $q->where('name', 'Oficina de rentas');
+                            })
                             ->first();
 
             if(!$user){
