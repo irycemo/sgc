@@ -65,66 +65,38 @@ class CertificadoRegistroController extends Controller
 
         $object->predio = $this->predio($predio);
 
-        /* if(auth()->user()->oficina->oficina == 101){ */
+        $fielDirector = Credential::openFiles(
+                                                Storage::disk('efirmas')->path($this->director->efirma->cer),
+                                                Storage::disk('efirmas')->path($this->director->efirma->key),
+                                                $this->director->efirma->contraseña
+                                            );
 
-            $fielDirector = Credential::openFiles(
-                                                    Storage::disk('efirmas')->path($this->director->efirma->cer),
-                                                    Storage::disk('efirmas')->path($this->director->efirma->key),
-                                                    $this->director->efirma->contraseña
-                                                );
+        $firmaDirector = $fielDirector->sign(json_encode($object));
 
-            $firmaDirector = $fielDirector->sign(json_encode($object));
+        $datos_control->firma_director = base64_encode($firmaDirector);
 
-            $datos_control->firma_director = base64_encode($firmaDirector);
+        $datos_control->imagen_director = $this->director->efirma->imagen;
 
-            $datos_control->imagen_director = $this->director->efirma->imagen;
+        $datos_control->oficina = $oficina->nombre;
 
-            $datos_control->oficina = $oficina->nombre;
+        $datos_control->municipio = $oficina->cabeceraMunicipal ? $oficina->cabeceraMunicipal->nombre : $oficina->nombre;
 
-            $datos_control->municipio = $oficina->cabeceraMunicipal ? $oficina->cabeceraMunicipal->nombre : $oficina->nombre;
+        $object->datos_control = $datos_control;
 
-            $object->datos_control = $datos_control;
+        $certificacion = Certificacion::create([
+                                                    'año' => now()->format('Y'),
+                                                    'tipo' => CertificacionesEnum::CERTIFICADO_REGISTRO,
+                                                    'folio' => (Certificacion::where('año', now()->format('Y'))->where('tipo', CertificacionesEnum::CERTIFICADO_REGISTRO)->max('folio') ?? 0) + 1,
+                                                    'cadena_original' => json_encode($object),
+                                                    'cadena_encriptada' => base64_encode($firmaDirector),
+                                                    'estado' => 'activo',
+                                                    'predio_id' => $predio->id,
+                                                    'oficina_id' => $oficina->id,
+                                                    'tramite_id' => $tramite->id,
+                                                    'creado_por' => $usuario?->id
+                                                ]);
 
-            $certificacion = Certificacion::create([
-                                                        'año' => now()->format('Y'),
-                                                        'tipo' => CertificacionesEnum::CERTIFICADO_REGISTRO,
-                                                        'folio' => (Certificacion::where('año', now()->format('Y'))->where('tipo', CertificacionesEnum::CERTIFICADO_REGISTRO)->max('folio') ?? 0) + 1,
-                                                        'cadena_original' => json_encode($object),
-                                                        'cadena_encriptada' => base64_encode($firmaDirector),
-                                                        'estado' => 'activo',
-                                                        'predio_id' => $predio->id,
-                                                        'oficina_id' => $oficina->id,
-                                                        'tramite_id' => $tramite->id,
-                                                        'creado_por' => $usuario?->id
-                                                    ]);
-
-            $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
-
-        /* }else{
-
-            $datos_control->titular = auth()->user()->oficina->titular;
-
-            $datos_control->titular_cargo = auth()->user()->oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR(A) DE RENTAS';
-
-            $object->datos_control = $datos_control;
-
-            $datos_control->oficina = auth()->user()->oficina->nombre;
-
-            $certificacion = Certificacion::create([
-                                                        'año' => now()->format('Y'),
-                                                        'tipo' => CertificacionesEnum::CERTIFICADO_REGISTRO,
-                                                        'folio' => (Certificacion::where('año', now()->format('Y'))->where('tipo', CertificacionesEnum::CERTIFICADO_REGISTRO)->max('folio') ?? 0) + 1,
-                                                        'cadena_original' => json_encode($object),
-                                                        'estado' => 'activo',
-                                                        'predio_id' => $predio->id,
-                                                        'oficina_id' => auth()->user()->oficina_id,
-                                                        'tramite_id' => $tramite->id,
-                                                        'creado_por' => auth()->id()
-                                                    ]);
-
-            $qr = $this->generadorQr($certificacion->uuid);
-
-        } */
+        $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
         $this->crearImagenConMarcaDeAgua($object, $qr, $certificacion);
 
