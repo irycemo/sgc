@@ -141,19 +141,19 @@ class ReactivarTramite extends Component
 
                             }
 
+                            $traslado->dynamicAuditTags = ['Envio traslado a nuevo al reactivar certificado'];
                             $traslado->update(['estado' => 'nuevo', 'certificacion_id' => null]);
 
                             (new SistemaTramitesLineaService())->reactivarAviso($traslado->aviso_stl);
 
                         }
 
+                        $certificacion->dynamicAuditTags = ['Canceló certificado'];
                         $certificacion->update([
                             'estado' => 'cancelado',
                             'observaciones' => $this->observaciones,
                             'actualizado_por' => auth()->id()
                         ]);
-
-                        $certificacion->audits()->latest()->first()->update(['tags' => 'Canceló certificado']);
 
                     }
 
@@ -167,9 +167,12 @@ class ReactivarTramite extends Component
 
                 $this->tramite->predios()->updateExistingPivot($this->selected_id, ['estado' => 'A']);
 
-                if($this->tramite->estado === 'concluido') $this->tramite->update(['estado' => 'pagado']);
+                if($this->tramite->estado === 'concluido'){
 
-                $this->tramite->audits()->latest()->first()->update(['tags' => 'Reactivó cuenta predial']);
+                    $this->tramite->dynamicAuditTags = ['Reactivó cuenta predial'];
+                    $this->tramite->update(['estado' => 'pagado']);
+
+                }
 
                 $this->tramite->load('predios');
 
@@ -185,7 +188,15 @@ class ReactivarTramite extends Component
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al actualizar permisos usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
+            Log::error(
+                "Error al reactivar certificado.",
+                [
+                    'message' => $th->getMessage(),
+                    'usuario' => auth()->user()->name,
+                    'trace' => $th
+                ]
+            );
+
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
         }
@@ -218,13 +229,16 @@ class ReactivarTramite extends Component
 
             DB::transaction(function (){
 
-                if($this->tramite->estado === 'concluido') $this->tramite->update(['estado' => 'pagado']);
+                if($this->tramite->estado === 'concluido'){
 
+                    $this->tramite->update(['estado' => 'pagado']);
+
+                }
+
+                $this->tramite->dynamicAuditTags = ['Reactivo cantidad disponible'];
                 $this->tramite->update(['usados' => $this->tramite->usados - $this->cantidad]);
 
                 $this->dispatch('mostrarMensaje', ['success', "Se reactivó la cantidad con éxito."]);
-
-                $this->tramite->audits()->latest()->first()->update(['tags' => 'Reactivo cantidad disponible']);
 
                 $this->reset(['cantidad']);
 
@@ -248,11 +262,10 @@ class ReactivarTramite extends Component
 
             DB::transaction(function (){
 
+                $this->tramite->dynamicAuditTags = ['Autorizo entrega anticipada'];
                 $this->tramite->update(['estado' => 'autorizado']);
 
                 $this->dispatch('mostrarMensaje', ['success', "Se autorizó el trámite con éxito."]);
-
-                $this->tramite->audits()->latest()->first()->update(['tags' => 'Autorizo entrega anticipada']);
 
             });
 

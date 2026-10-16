@@ -28,6 +28,21 @@ class Tramite extends Model implements Auditable
         'avaluo_para' => AvaluoPara::class,
     ];
 
+    public array $dynamicAuditTags = [];
+
+    public function generateTags(): array
+    {
+
+        if ($this->getAuditEvent() === 'updated' && !empty($this->dynamicAuditTags)) {
+
+            return $this->dynamicAuditTags;
+
+        }
+
+        return [];
+
+    }
+
     public function getEstadoColorAttribute()
     {
         return [
