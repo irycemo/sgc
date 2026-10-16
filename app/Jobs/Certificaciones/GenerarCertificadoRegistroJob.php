@@ -120,18 +120,33 @@ class GenerarCertificadoRegistroJob implements ShouldQueue
             ]
         );
 
-        File::create([
-                'fileable_type' => Certificacion::class,
-                'fileable_id' => $certificacion->id,
-                'url' => $filename,
-                'descripcion' => 'pdf',
-            ]);
+        $this->procesarRelacionFile($certificacion, $filename);
 
         $this->actualizarEstado([
             'status' => 'listo',
             's3_path' => $clave,
             'filename' => $filename,
         ]);
+
+    }
+
+    private function procesarRelacionFile(Certificacion $certificacion, string $file_name):void
+    {
+
+        if($certificacion->pdf){
+
+            Storage::disk('s3')->delete(config('services.ses.ruta_pdfs_certificaciones') . $certificacion->pdf->url);
+
+            $certificacion->pdf->delete();
+
+        }
+
+        File::create([
+                'fileable_type' => Certificacion::class,
+                'fileable_id' => $certificacion->id,
+                'url' => $file_name,
+                'descripcion' => 'pdf',
+            ]);
 
     }
 
