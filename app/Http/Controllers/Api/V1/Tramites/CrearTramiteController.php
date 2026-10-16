@@ -188,20 +188,6 @@ class CrearTramiteController extends Controller
 
             GenerarCertificadoRegistroJob::dispatch($tramite, $predio, auth()->user(), null);
 
-            $tramite->predios()->updateExistingPivot($predio->id, ['estado' => 'I']);
-
-            $usados = $tramite->predios()->wherePivot('estado', 'I')->count();
-
-            $tramite->update(['usados' => $usados]);
-
-            $tramite->refresh();
-
-            if($tramite->cantidad === $usados){
-
-                $tramite->update(['estado' => 'concluido']);
-
-            }
-
         }
 
     }
