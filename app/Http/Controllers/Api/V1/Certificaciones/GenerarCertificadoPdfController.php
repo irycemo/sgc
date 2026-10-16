@@ -8,9 +8,12 @@ use App\Models\Certificacion;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
+use App\Traits\Certificaciones\GuardarEnS3Trait;
 
 class GenerarCertificadoPdfController extends Controller
 {
+
+    use GuardarEnS3Trait;
 
     public function generarPdf(Request $request){
 
@@ -31,6 +34,12 @@ class GenerarCertificadoPdfController extends Controller
             }
 
             $pdf = (new CertificadoRegistroController())->reimprimirCertificado($certificacion);
+
+            if(! $certificacion->pdf){
+
+                $this->guardarEnS3($certificacion, $pdf);
+
+            }
 
             return response()->json([
                 'data' => [

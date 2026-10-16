@@ -14,6 +14,7 @@ use App\Http\Controllers\Certificaciones\CertificadoHistoriaController;
 use App\Http\Controllers\Certificaciones\CertificadoNegativoController;
 use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
 use App\Http\Controllers\Certificaciones\NotificacionValorCatastralController;
+use App\Traits\Certificaciones\GuardarEnS3Trait;
 use App\Traits\ComponentesTrait;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Log;
@@ -23,6 +24,7 @@ class Certificaciones extends Component
 
     use WithPagination;
     use ComponentesTrait;
+    use GuardarEnS3Trait;
 
     public $años;
     public $año;
@@ -130,6 +132,12 @@ class Certificaciones extends Component
             }elseif($modelo->tipo == CertificacionesEnum::CERTIFICADO_REGISTRO){
 
                 $pdf = (new CertificadoRegistroController())->reimprimirCertificado($modelo);
+
+                if(! $modelo->pdf){
+
+                    $this->guardarEnS3($modelo, $pdf);
+
+                }
 
             }
 

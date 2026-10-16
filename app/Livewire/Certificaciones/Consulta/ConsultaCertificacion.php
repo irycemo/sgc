@@ -16,9 +16,12 @@ use App\Http\Controllers\Certificaciones\CertificadoNegativoController;
 use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
 use App\Http\Controllers\Certificaciones\CedulaActualizcacionController;
 use App\Http\Controllers\Certificaciones\NotificacionValorCatastralController;
+use App\Traits\Certificaciones\GuardarEnS3Trait;
 
 class ConsultaCertificacion extends Component
 {
+
+    use GuardarEnS3Trait;
 
     public $año;
     public $folio;
@@ -123,6 +126,12 @@ class ConsultaCertificacion extends Component
             }elseif($modelo->tipo == CertificacionesEnum::CERTIFICADO_REGISTRO){
 
                 $pdf = (new CertificadoRegistroController())->reimprimirCertificado($modelo);
+
+                if(! $modelo->pdf){
+
+                    $this->guardarEnS3($modelo, $pdf);
+
+                }
 
             }
 

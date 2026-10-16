@@ -148,12 +148,6 @@ class CertificadoRegistroController extends Controller
 
         $canvas->page_text(35, 745, $certificacion->tipo->label() . '-' . $certificacion->año .'-' . $certificacion->folio, null, 9, array(1, 1, 1));
 
-        if(! $certificacion->pdf){
-
-            $this->guardarEnS3($certificacion, $pdf);
-
-        }
-
         return $pdf;
 
     }
