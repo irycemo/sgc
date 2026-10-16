@@ -174,6 +174,8 @@ class CertificadoRegistro extends Component
 
             $this->estado = 'generando';
 
+            $this->reset('predio');
+
             $this->dispatch('mostrarMensaje', ['warning', "Ya existe un proceso activo para generar este certificado."]);
 
             return;
@@ -238,6 +240,8 @@ class CertificadoRegistro extends Component
         }
 
         if($actual['status'] === 'listo'){
+
+            $this->tramite->refresh();
 
             $this->estado = 'listo';
 
