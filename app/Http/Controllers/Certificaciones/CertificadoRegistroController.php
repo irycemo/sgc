@@ -39,7 +39,8 @@ class CertificadoRegistroController extends Controller
 
     }
 
-    public function certificado($tramite, $predio, $tipo, $usuario, $observaciones){
+    public function certificado($tramite, $predio, $tipo, $usuario, $observaciones)
+    {
 
         $oficina = Oficina::where('localidad', $predio->localidad)
                             ->where('municipio', $predio->municipio)
@@ -96,7 +97,7 @@ class CertificadoRegistroController extends Controller
                                                     'oficina_id' => $oficina->id,
                                                     'tramite_id' => $tramite->id,
                                                     'creado_por' => $usuario?->id
-                                                ]);
+        ]);
 
         $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
 
@@ -123,7 +124,8 @@ class CertificadoRegistroController extends Controller
 
     }
 
-    public function reimprimirCertificado(Certificacion $certificacion){
+    public function reimprimirCertificado(Certificacion $certificacion)
+    {
 
         $object = json_decode($certificacion->cadena_original);
 
@@ -155,7 +157,5 @@ class CertificadoRegistroController extends Controller
         return $pdf;
 
     }
-
-
 
 }

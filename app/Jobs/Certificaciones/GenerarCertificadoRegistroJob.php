@@ -53,6 +53,7 @@ class GenerarCertificadoRegistroJob implements ShouldQueue
             $previa = Certificacion::where('tipo', CertificacionesEnum::CERTIFICADO_REGISTRO)
                                         ->where('tramite_id', $this->tramite->id)
                                         ->where('predio_id', $this->predio->id)
+                                        ->where('estado', 'activo')
                                         ->lockForUpdate()
                                         ->first();
 
