@@ -9,6 +9,7 @@ use App\Models\Oficina;
 use App\Models\User;
 use App\Traits\Certificaciones\CrearImagenTrait;
 use App\Traits\Certificaciones\GeneradorQRTrait;
+use App\Traits\Certificaciones\GuardarEnS3Trait;
 use App\Traits\Certificaciones\PredioTrait;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
@@ -20,6 +21,7 @@ class CertificadoRegistroController extends Controller
     use GeneradorQRTrait;
     use CrearImagenTrait;
     use PredioTrait;
+    use GuardarEnS3Trait;
 
     public $formatter;
     public $director;
@@ -144,8 +146,16 @@ class CertificadoRegistroController extends Controller
 
         $canvas->page_text(35, 745, $certificacion->tipo->label() . '-' . $certificacion->año .'-' . $certificacion->folio, null, 9, array(1, 1, 1));
 
+        if(! $certificacion->pdf){
+
+            $this->guardarEnS3($certificacion, $pdf);
+
+        }
+
         return $pdf;
 
     }
+
+
 
 }

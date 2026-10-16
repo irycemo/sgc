@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Certificaciones;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Certificacion;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -18,6 +19,16 @@ class GenerarCertificadoPdfController extends Controller
         $certificacion = Certificacion::find($validated['id']);
 
         try {
+
+            if($certificacion->pdf){
+
+                return response()->json([
+                    'data' => [
+                        'pdf' => Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_pdfs_certificaciones') . $certificacion->pdf->url, now()->addMinutes(10))
+                    ]
+                ], 200);
+
+            }
 
             $pdf = (new CertificadoRegistroController())->reimprimirCertificado($certificacion);
 

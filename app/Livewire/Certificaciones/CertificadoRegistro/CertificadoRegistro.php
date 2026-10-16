@@ -3,13 +3,13 @@
 namespace App\Livewire\Certificaciones\CertificadoRegistro;
 
 use App\Constantes\Constantes;
+use Illuminate\Support\Facades\Storage;
+use App\Jobs\Certificaciones\GenerarCertificadoRegistroJob;
 use App\Exceptions\GeneralException;
-use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
 use App\Models\Tramite;
 use App\Services\Tramites\TramiteService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
@@ -28,13 +28,17 @@ class CertificadoRegistro extends Component
     public $tramite;
     public $predio;
 
-    public $cadena;
-
     public $impresionObservaciones = false;
 
-    public $tipo_certificado;
+    // Estado de la generación asíncrona
+    public ?string $estado = null;        // 'generando' | 'listo' | 'error'
+    public ?string $claveProceso = null;  // clave de cache compartida con el job
+    public ?string $urlDescarga = null;   // URL firmada de S3 (30 min)
+    public ?string $mensajeError = null;
 
     public function buscarTramite(){
+
+        $this->reset(['tramite', 'predio', 'estado', 'claveProceso', 'urlDescarga', 'mensajeError']);
 
         $this->validate([
             'año' => 'required',
@@ -44,21 +48,15 @@ class CertificadoRegistro extends Component
 
         try {
 
-            $this->reset('predio');
-
             $this->tramite = Tramite::with('predios')
                                         ->where('año', $this->año)
                                         ->where('folio', $this->folio)
                                         ->where('usuario', $this->usuario)
                                         ->firstOrFail();
 
-            if(
-                !in_array($this->tramite->servicio->clave_ingreso, ['DM32', 'DM31', 'D774'])
-            ){
+            if(! in_array($this->tramite->servicio->clave_ingreso, ['DM32', 'DM31', 'D774'])){
 
-                $this->dispatch('mostrarMensaje', ['warning', "El trámite no corresponde a un certificado de registro."]);
-
-                $this->reset('tramite');
+                $this->rechazar("El trámite no corresponde a un certificado de registro.");
 
                 return;
 
@@ -66,9 +64,7 @@ class CertificadoRegistro extends Component
 
             if($this->tramite->estado === 'concluido'){
 
-                $this->dispatch('mostrarMensaje', ['warning', "El trámite esta concluido."]);
-
-                $this->reset('tramite');
+                $this->rechazar("El trámite está concluido.");
 
                 return;
 
@@ -84,9 +80,7 @@ class CertificadoRegistro extends Component
 
                 if($this->tramite->estado !== 'autorizado' && $this->tramite->fecha_entrega >= now()){
 
-                    $this->dispatch('mostrarMensaje', ['warning', "La fecha de entrega del trámite es: " . $this->tramite->fecha_entrega->format('d-m-Y')]);
-
-                    $this->reset('tramite');
+                    $this->rechazar("La fecha de entrega del trámite es: " . $this->tramite->fecha_entrega->format('d-m-Y'));
 
                     return;
 
@@ -94,30 +88,14 @@ class CertificadoRegistro extends Component
 
             }
 
-            /* $this->tipo_certificado = mb_strtoupper($this->tramite->servicio->nombre, 'utf-8'); */
+            $activos = $this->tramite->predios->filter(fn($predio) => $predio->pivot->estado === 'A');
 
-            $this->tipo_certificado = 'CERTIFICADO DE REGISTRO CATASTRAL';
+            if($activos->count() === 1){
 
-            if($this->tramite->predios()->count() === 1){
-
-                $this->predio = $this->tramite->predios()->first();
-
-                if($this->predio->status == 'bloqueado'){
-
-                    $this->dispatch('mostrarMensaje', ['warning', "El predio se encuentra bloqueado."]);
-                    $this->predio = null;
-                    return;
-
-                }
-
-                $this->oficina = $this->predio->oficina;
-
-                $this->predio->load('propietarios.persona', 'colindancias');
-
+                $this->seleccionarPredio($activos->first()->id);
             }
 
             $this->reset(['folio', 'usuario']);
-
 
         } catch (GeneralException $ex) {
 
@@ -140,95 +118,170 @@ class CertificadoRegistro extends Component
 
     public function seleccionarPredio($id){
 
-        $this->predio = $this->tramite->predios()->wherePivot('predio_id', $id)->wherePivot('estado', 'A')->first();
+        if(! $this->tramite){
 
-        if($this->predio){
-
-            if($this->predio->status == 'bloqueado'){
-
-                $this->dispatch('mostrarMensaje', ['warning', "El predio se encuentra bloqueado."]);
-                $this->predio = null;
-                return;
-
-            }
-
-            $this->oficina = $this->predio->oficina;
-
-            $this->predio->load('propietarios.persona', 'colindancias');
-
+            return;
         }
+
+        $predio = $this->tramite->predios()->wherePivot('predio_id', $id)->wherePivot('estado', 'A')->first();
+
+        if(! $predio){
+
+            return;
+        }
+
+        if($predio->status == 'bloqueado'){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El predio se encuentra bloqueado."]);
+
+            $this->predio = null;
+
+            return;
+        }
+
+        $this->predio = $predio;
+
+        $this->predio->load('propietarios.persona', 'colindancias');
+
+        $this->reset(['estado', 'claveProceso', 'urlDescarga', 'mensajeError']);
 
     }
 
     public function generarCertificado(){
 
+        if(! $this->tramite || ! $this->predio){
+
+            $this->dispatch('mostrarMensaje', ['warning', "Busque el trámite y seleccione un predio."]);
+
+            return;
+        }
+
         if(! in_array(auth()->user()->clave, [1, 15, 16, 8])){
 
-            if($this->predio->sector === 88 || $this->predio->sector === 99){
+            if(in_array($this->predio->sector, [88, 99])){
 
                 $this->dispatch('mostrarMensaje', ['warning', "El predio se encuentra en sector 88 o 99 es necesario conciliarlo."]);
 
                 return;
-
             }
+        }
+
+        $this->claveProceso = 'certificado_registro_' . $this->tramite->id . '_' . $this->predio->id;
+
+        $actual = Cache::get($this->claveProceso);
+
+        if($actual && $actual['status'] === 'procesando'){
+
+            $this->estado = 'generando';
+
+            $this->dispatch('mostrarMensaje', ['warning', "Ya existe un proceso activo para generar este certificado."]);
+
+            return;
 
         }
 
+        $this->estado = 'generando';
+        $this->urlDescarga = null;
+        $this->mensajeError = null;
+
+        Cache::put($this->claveProceso, ['status' => 'procesando'], now()->addMinutes(30));
+
         try {
 
-            $pdf = retry(3, function() {
-
-                return DB::transaction(function (){
-
-                    $this->tramite->predios()->updateExistingPivot($this->predio->id, ['estado' => 'I']);
-
-                    $this->tramite->refresh();
-
-                    $certificados_pendientes = $this->tramite->predios()->where('predio_tramite.estado', 'A')->get();
-
-                    if($certificados_pendientes->count() === 0){
-
-                        $this->tramite->update(['estado' => 'concluido']);
-
-                        $this->tramite->audits()->latest()->first()?->update(['tags' => 'Finalizó trámite']);
-
-                    }
-
-                    $usados = $this->tramite->predios()->wherePivot('estado', 'I')->count();
-
-                    $this->tramite->update(['usados' => $usados]);
-
-                    $this->tramite->audits()->latest()->first()?->update(['tags' => 'Generó certificado del predio ' . $this->predio->cuentaPredial()]);
-
-                    return (new CertificadoRegistroController())->certificado($this->tramite, $this->predio, $this->tipo_certificado, auth()->user(), $this->impresionObservaciones);
-
-                });
-
-            });
-
-            $cuenta_predial = $this->predio->cuentaPredial();
-
-            $this->reset(['predio', 'impresionObservaciones']);
-
-            $this->tramite->load('predios');
-
-            if($this->tramite->usuario == 11){
-
-                Cache::forget('estadisticas_tramites_en_linea_' . $this->tramite->usuario_tramites_linea_id);
-
-            }
-
-            return response()->streamDownload(
-                fn () => print($pdf->output()),
-                $cuenta_predial . '-certificado_de_registro.pdf'
+            GenerarCertificadoRegistroJob::dispatch(
+                $this->tramite,
+                $this->predio,
+                auth()->user(),
+                $this->impresionObservaciones,
+                $this->claveProceso
             );
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al generar certificado por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
-            $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+            Log::error(
+                "Error al generar certificado",
+                [
+                    'message' => $th->getMessage(),
+                    'user' => auth()->user()->name,
+                    'trace' => $th
+                ]
+            );
+
+            Cache::forget($this->claveProceso);
+
+            $this->estado = 'error';
+
+            $this->mensajeError = 'No fue posible iniciar el proceso. Intenta de nuevo.';
+
+            return;
 
         }
+
+        $this->reset(['predio', 'impresionObservaciones']);
+
+    }
+
+    public function consultarEstado(){
+
+        if($this->estado !== 'generando' || ! $this->claveProceso){
+
+            return;
+        }
+
+        $actual = Cache::get($this->claveProceso);
+
+        if(! $actual){
+
+            // Todavía en proceso (o el worker aún no publicó el estado).
+            return;
+
+        }
+
+        if($actual['status'] === 'listo'){
+
+            $this->estado = 'listo';
+
+            $this->urlDescarga = Storage::disk('s3')->temporaryUrl(
+                $actual['s3_path'],
+                now()->addMinutes(30),
+                [
+                    'ResponseContentType' => 'application/pdf',
+                    'ResponseContentDisposition' => 'attachment; filename="' . $actual['filename'] . '"',
+                ]
+            );
+
+            return;
+
+        }
+
+        if($actual['status'] === 'error'){
+
+            $this->estado = 'error';
+
+            $this->mensajeError = $actual['mensaje'] ?? 'No fue posible generar el certificado.';
+
+        }
+
+    }
+
+    public function nuevoCertificado(){
+
+        $this->reset([
+            'tramite', 'predio', 'folio', 'usuario',
+            'impresionObservaciones', 'estado', 'claveProceso',
+            'urlDescarga', 'mensajeError',
+        ]);
+
+        $this->año = now()->format('Y');
+
+    }
+
+    private function rechazar(string $mensaje): void
+    {
+
+        $this->dispatch('mostrarMensaje', ['warning', $mensaje]);
+
+        $this->reset('tramite');
 
     }
 

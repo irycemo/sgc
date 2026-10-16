@@ -36,6 +36,7 @@
                 wire:click="buscarTramite"
                 wire:loading.attr="disabled"
                 wire:target="buscarTramite"
+                :disabled="{{ $estado === 'generando' }}"
                 type="button"
                 class="bg-blue-400 mx-auto hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
 
@@ -87,7 +88,10 @@
 
                         <div
                             wire:click="seleccionarPredio({{ $item->id }})"
-                            class="rounded-lg bg-gray-100 py-1 px-2 hover:cursor-pointer hover:bg-gray-200">
+                            @class([
+                                'rounded-lg bg-gray-100 py-1 px-2 hover:cursor-pointer hover:bg-gray-200',
+                                'ring-2 ring-blue-400 bg-blue-50' => $predio && $predio->id === $item->id,
+                            ])>
 
                             <p>{{ $item->cuentaPredial() }}</p>
 
@@ -320,30 +324,93 @@
 
         </div>
 
-        <div class="flex flex-col lg:flex-row gap-3 mb-5 bg-white rounded-lg p-2 shadow-lg justify-center lg:justify-between items-center">
+         @if($estado !== 'generando')
 
-            <div>
+            <div class="flex flex-col lg:flex-row gap-3 mb-5 bg-white rounded-lg p-2 shadow-lg justify-center lg:justify-between items-center">
 
-                <div class="flex space-x-4 items-center text-sm">
+                <div>
 
-                    <x-checkbox wire:model="impresionObservaciones"></x-checkbox>
+                    <div class="flex space-x-4 items-center text-sm">
 
-                    <Label>Imprimir certificado con observaciones</Label>
+                        <x-checkbox wire:model="impresionObservaciones"></x-checkbox>
+
+                        <Label>Imprimir certificado con observaciones</Label>
+
+                    </div>
 
                 </div>
 
+                <button
+                    wire:click="generarCertificado"
+                    wire:loading.attr="disabled"
+                    :disabled="{{ $estado === 'generando' }}"
+                    class="bg-green-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-xs hover:bg-green-700 focus:outline-none flex items-center justify-center focus:outline-green-400 focus:outline-offset-2"
+                    >
+
+                    <img wire:loading wire:target="generarCertificado" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Generar certificado
+
+                </button>
+
             </div>
 
-            <x-button-green
-                wire:click="generarCertificado"
-                wire:loading.attr="disabled"
-                wire:target="generarCertificado">
+        @endif
 
-                <img wire:loading wire:target="generarCertificado" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+    @endif
 
-                Generar certificado
+    @if($estado === 'generando')
 
-            </x-button-green>
+        {{-- wire:poll se activa solo mientras este bloque existe; al pasar a
+             "listo"/"error" el bloque desaparece y el polling se detiene. --}}
+        <div
+            wire:poll.2s="consultarEstado"
+            class="bg-white p-6 rounded-lg mb-5 shadow-lg text-sm flex flex-col items-center gap-3 text-gray-600">
+
+            <img class="h-4" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+            <p class="font-semibold text-base">Generando certificado…</p>
+
+        </div>
+
+    @endif
+
+    @if($estado === 'listo' && $urlDescarga)
+
+        <div class="bg-white p-6 rounded-lg mb-5 shadow-lg text-sm flex flex-col items-center gap-3 text-gray-700">
+
+            <p class="font-semibold text-base text-green-700">El certificado está listo.</p>
+
+            <a
+                href="{{ $urlDescarga }}"
+                target="_blank"
+                rel="noopener"
+                class="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-2 rounded">
+
+                Descargar certificado (PDF)
+
+            </a>
+
+        </div>
+
+    @endif
+
+    @if($estado === 'error')
+
+        <div class="bg-white p-6 rounded-lg mb-5 shadow-lg text-sm flex flex-col items-center gap-3">
+
+            <p class="font-semibold text-base text-red-700">
+                {{ $mensajeError ?? 'No fue posible generar el certificado.' }}
+            </p>
+
+            <button
+                wire:click="nuevoCertificado"
+                type="button"
+                class="bg-blue-400 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded text-xs">
+
+                Intentar de nuevo
+
+            </button>
 
         </div>
 

@@ -87,4 +87,8 @@ class Certificacion extends Model implements Auditable
         return $this->morphOne(File::class, 'fileable')->where('descripcion', 'certificacion');
     }
 
+    public function pdf(){
+        return $this->morphOne(File::class, 'fileable')->where('descripcion', 'pdf');
+    }
+
 }

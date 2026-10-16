@@ -29,6 +29,7 @@ return [
         'ruta_avaluos_fotos' => 'sgc/avaluos_fotos/',
         'ruta_videos' => 'sgc/videos/',
         'ruta_cartografia' => 'sgc/cartografia/',
+        'ruta_pdfs_certificaciones' => 'sgc/pdfs/certificaciones/',
     ],
 
     'resend' => [

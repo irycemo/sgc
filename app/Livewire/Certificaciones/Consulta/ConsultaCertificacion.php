@@ -3,6 +3,7 @@
 namespace App\Livewire\Certificaciones\Consulta;
 
 use App\Models\Predio;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Tramite;
 use Livewire\Component;
 use App\Models\Certificacion;
@@ -96,6 +97,12 @@ class ConsultaCertificacion extends Component
     public function reimprimir(Certificacion $modelo){
 
         try {
+
+            if($modelo->pdf){
+
+                return redirect(Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_pdfs_certificaciones') . $modelo->pdf->url, now()->addMinutes(10)));
+
+            }
 
             if($modelo->tipo == CertificacionesEnum::NOTIFICACION_VALOR_CATASTRAL){
 
