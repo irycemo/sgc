@@ -151,6 +151,14 @@ class VariacionesCatastrales extends Component
 
             }
 
+            if(! $this->tramite->predios->count()){
+
+                $this->dispatch('mostrarMensaje', ['warning', "El trámite no tiene predios asociados."]);
+
+                return true;
+
+            }
+
             return false;
 
         } catch (GeneralException $ex) {

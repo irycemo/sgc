@@ -21,6 +21,14 @@ class GenerarCertificadoPdfController extends Controller
 
         $certificacion = Certificacion::find($validated['id']);
 
+        if(! $certificacion){
+
+            return response()->json([
+                'error' => 'El certificado no existe.',
+            ], 404);
+
+        }
+
         try {
 
             if($certificacion->pdf){
@@ -49,7 +57,14 @@ class GenerarCertificadoPdfController extends Controller
 
         } catch (\Throwable $th) {
 
-            Log::error("Error al generar pdf desde Sistema Trámites en Lína." . $th);
+            Log::error(
+                "Error al generar pdf desde Sistema Trámites en Línea.",
+                [
+                    'message' => $th->getMessage(),
+                    'certificacion_id' => $request->get('id'),
+                    'trace' => $th
+                ]
+            );
 
             return response()->json([
                 'error' => 'Hubo un error al generar el pdf.',

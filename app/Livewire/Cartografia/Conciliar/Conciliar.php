@@ -237,6 +237,18 @@ class Conciliar extends Component
             'predio.zutm' => 'nullable',
             'predio.lat' => 'required',
             'predio.lon' => 'required',
+            'predio.region_catastral' => 'required',
+            'predio.municipio' => 'required',
+            'predio.zona_catastral' => 'required',
+            'predio.localidad' => 'required',
+            'predio.sector' => 'required',
+            'predio.manzana' => 'required',
+            'predio.predio' => 'required',
+            'predio.edificio' => 'required',
+            'predio.departamento' => 'required',
+            'predio.oficina' => 'required',
+            'predio.tipo_predio' => 'required',
+            'predio.numero_registro' => 'required',
         ]);
 
         if($this->validarDisponibilidad()) return;
@@ -290,8 +302,10 @@ class Conciliar extends Component
         $this->predio->oficina = auth()->user()->oficina->oficina;
 
     }
+
     public function render()
     {
         return view('livewire.cartografia.conciliar.conciliar')->extends('layouts.admin');
     }
+
 }

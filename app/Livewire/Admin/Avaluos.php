@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin;
 
 use App\Constantes\Constantes;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Enums\Tramites\AvaluoPara;
 use App\Http\Controllers\Valuacion\AvaluoImpresionController;
 use App\Models\Avaluo;
@@ -225,6 +226,74 @@ class Avaluos extends Component
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
 
         }
+
+    }
+
+    public function imprimirAvaluoPredioIgnorado(Avaluo $avaluo){
+
+        if(!$avaluo->predioAvaluo->lat){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El avalúo no tiene coordenadas geográficas."]);
+
+            return;
+
+        }
+
+        if(!$avaluo->predioAvaluo->colindancias->count()){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El avalúo no tiene colindancias."]);
+
+            return;
+
+        }
+
+        if(!$avaluo->predioAvaluo->propietarios->count()){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El avalúo no tiene propietarios."]);
+
+            return;
+
+        }
+
+        if(!$avaluo->clasificacion_zona){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El avalúo no tiene caracteristicas."]);
+
+            return;
+
+        }
+
+        if(!$avaluo->predioAvaluo->valor_catastral){
+
+            $this->dispatch('mostrarMensaje', ['warning', "El avalúo no tiene valor catastral."]);
+
+            return;
+
+        }
+
+
+        $predio = $avaluo->predioAvaluo;
+
+        $predio->load('propietarios.persona');
+
+        $pdf = Pdf::loadView('avaluos.avaluo', compact('predio'));
+
+        $pdf->render();
+
+        $dom_pdf = $pdf->getDomPDF();
+
+        $canvas = $dom_pdf->get_canvas();
+
+        $canvas->page_text(480, 745, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+
+        $canvas->page_text(35, 745, "Avalúo: " . $avaluo->año . "-" . $avaluo->folio . "-" . $avaluo->usuario , null, 9, array(1, 1, 1));
+
+        $pdf = $dom_pdf->output();
+
+        return response()->streamDownload(
+            fn () => print($pdf),
+            'avaluo.pdf'
+        );
 
     }
 
