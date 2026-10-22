@@ -3,6 +3,7 @@
 namespace App\Traits\Api\Certificados;
 
 use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
+use App\Jobs\Certificaciones\GenerarCertificadoRegistroJob;
 use App\Models\Traslado;
 
 trait GenerarCertificadosAutomaticosTrait
@@ -16,23 +17,13 @@ trait GenerarCertificadosAutomaticosTrait
 
             if($traslado){
 
-                $tipo_certificado = mb_strtoupper($tramite->servicio->nombre, 'utf-8');
-
-                (new CertificadoRegistroController())->certificado($tramite, $predio, $tipo_certificado, auth()->user(), null);
-
-                $tramite->predios()->updateExistingPivot($predio->id, ['estado' => 'I']);
-
-                $usados = $tramite->predios()->wherePivot('estado', 'I')->count();
-
-                $tramite->update(['usados' => $usados]);
-
-                $tramite->refresh();
-
-                if($tramite->cantidad === $usados){
-
-                    $tramite->update(['estado' => 'concluido']);
-
-                }
+                GenerarCertificadoRegistroJob::dispatch(
+                    $tramite,
+                    $predio,
+                    auth()->user(),
+                    null,
+                    null
+                );
 
             }
 
