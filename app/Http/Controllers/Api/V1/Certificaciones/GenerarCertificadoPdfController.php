@@ -49,6 +49,8 @@ class GenerarCertificadoPdfController extends Controller
 
             }
 
+            $certificacion->refresh();
+
             return response()->json([
                 'data' => [
                     'pdf' => Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_pdfs_certificaciones') . $certificacion->pdf->url, now()->addMinutes(10))
