@@ -39,7 +39,7 @@ class CertificadoRegistroController extends Controller
 
     }
 
-    public function certificado($tramite, $predio, $tipo, $usuario, $observaciones)
+    public function certificado($tramite, $predio, $tipo, $folio, $usuario, $observaciones)
     {
 
         $oficina = Oficina::where('localidad', $predio->localidad)
@@ -89,7 +89,7 @@ class CertificadoRegistroController extends Controller
         $certificacion = Certificacion::create([
                                                     'año' => now()->format('Y'),
                                                     'tipo' => CertificacionesEnum::CERTIFICADO_REGISTRO,
-                                                    'folio' => (Certificacion::where('año', now()->format('Y'))->where('tipo', CertificacionesEnum::CERTIFICADO_REGISTRO)->max('folio') ?? 0) + 1,
+                                                    'folio' => $folio,
                                                     'cadena_original' => json_encode($object),
                                                     'cadena_encriptada' => base64_encode($firmaDirector),
                                                     'estado' => 'activo',

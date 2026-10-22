@@ -900,9 +900,11 @@ class RevisarTraslado extends Component
             Log::error(
                 "Error al consultar sistemas externos en revisión de aviso.",
                 [
-                    'usuario' => auth()->user()->name,
-                    'traslado' => $this->traslado,
                     'message' => $ex->getMessage(),
+                    'usuario' => auth()->user()->name,
+                    'traslado_id' => $this->traslado->id,
+                    'traslado_folio' => $this->traslado->folio(),
+                    'traslado_estado' => $this->traslado->estado,
                     'trace' => $ex
                 ]
             );
@@ -914,9 +916,11 @@ class RevisarTraslado extends Component
             Log::error(
                 "Error al consultar sistemas externos en revisión de aviso.",
                 [
-                    'usuario' => auth()->user()->name,
-                    'traslado' => $this->traslado,
                     'message' => $th->getMessage(),
+                    'usuario' => auth()->user()->name,
+                    'traslado_id' => $this->traslado->id,
+                    'traslado_folio' => $this->traslado->folio(),
+                    'traslado_estado' => $this->traslado->estado,
                     'trace' => $th
                 ]
             );

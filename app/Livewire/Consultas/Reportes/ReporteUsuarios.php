@@ -40,7 +40,7 @@ class ReporteUsuarios extends Component
 
         try {
 
-            return Excel::download(new UsersExport($this->estado, $this->oficina, $this->rol, $this->permiso, $this->fecha1, $this->fecha2), 'Reporte_de_usuarios_' . now()->format('d-m-Y') . '.xlsx');
+            return Excel::download(new UsersExport($this->estado, $this->oficina, $this->rol, $this->permiso), 'Reporte_de_usuarios_' . now()->format('d-m-Y') . '.xlsx');
 
         } catch (\Throwable $th) {
 
@@ -72,7 +72,6 @@ class ReporteUsuarios extends Component
                             $q->where('name', $this->permiso);
                         });
                     })
-                    ->whereBetween('created_at', [$this->fecha1 . ' 00:00:00', $this->fecha2 . ' 23:59:59'])
                     ->paginate($this->pagination);
 
     }

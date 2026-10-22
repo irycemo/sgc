@@ -28,9 +28,7 @@ class GenerarCertificadoRegistroJob implements ShouldQueue
     use SerializesModels;
 
     public int $tries = 3;
-
     public int $backoff = 30;
-
     public int $timeout = 600;
 
     public function __construct(
@@ -54,7 +52,6 @@ class GenerarCertificadoRegistroJob implements ShouldQueue
                                         ->where('tramite_id', $this->tramite->id)
                                         ->where('predio_id', $this->predio->id)
                                         ->where('estado', 'activo')
-                                        ->lockForUpdate()
                                         ->first();
 
             if ($previa) {
@@ -62,6 +59,14 @@ class GenerarCertificadoRegistroJob implements ShouldQueue
                 return $controller->reimprimirCertificado($previa);
 
             }
+
+            $folio = (Certificacion::where('año', now()->format('Y'))->where('tipo', CertificacionesEnum::CERTIFICADO_REGISTRO)->max('folio') ?? 0) + 1;
+
+            Certificacion::where('tipo', CertificacionesEnum::CERTIFICADO_REGISTRO)
+                            ->where('año', now()->format('Y'))
+                            ->where('folio', $folio)
+                            ->lockForUpdate()
+                            ->first();
 
             if ($this->tramite->estado !== 'concluido') {
 
@@ -89,6 +94,7 @@ class GenerarCertificadoRegistroJob implements ShouldQueue
                 $this->tramite,
                 $this->predio,
                 'CERTIFICADO DE REGISTRO CATASTRAL',
+                $folio,
                 $this->user,
                 $this->observaciones
             );

@@ -67,4 +67,10 @@ class Traslado extends Model implements Auditable
         return $this->belongsTo(Oficina::class);
     }
 
+    public function folio(){
+
+        return $this->año_aviso . '-' . $this->folio_aviso . '-' . $this->usuario_aviso;
+
+    }
+
 }

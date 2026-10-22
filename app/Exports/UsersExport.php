@@ -22,9 +22,7 @@ class UsersExport implements FromCollection,  WithProperties, WithDrawings, Shou
         public $estado,
         public $oficina,
         public $rol,
-        public $permiso,
-        public $fecha1,
-        public $fecha2,
+        public $permiso
     ){}
 
     /**
@@ -49,7 +47,6 @@ class UsersExport implements FromCollection,  WithProperties, WithDrawings, Shou
                                 $q->where('name', $this->permiso);
                             });
                         })
-                        ->whereBetween('created_at', [$this->fecha1 . ' 00:00:00', $this->fecha2 . ' 23:59:59'])
                         ->get();
     }
 

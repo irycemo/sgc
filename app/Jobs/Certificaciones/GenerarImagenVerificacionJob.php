@@ -18,6 +18,9 @@ class GenerarImagenVerificacionJob implements ShouldQueue
     public $certificacion;
     public $qr;
     public $object;
+    public int $tries = 3;
+    public int $backoff = 30;
+    public int $timeout = 600;
 
     public function __construct(public int $certificacion_id)
     {}

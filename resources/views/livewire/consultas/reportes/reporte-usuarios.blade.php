@@ -1,21 +1,5 @@
 <div>
 
-    <div class="md:flex md:flex-row flex-col justify-center md:space-x-4 items-end bg-white rounded-xl mb-5 p-4 shadow-xl">
-
-        <x-input-group for="fecha1" label="Fecha inicial" :error="$errors->first('fecha1')">
-
-            <x-input-text type="date" id="fecha1" wire:model.live="fecha1" />
-
-        </x-input-group>
-
-        <x-input-group for="fecha2" label="Fecha final" :error="$errors->first('fecha2')">
-
-            <x-input-text type="date" id="fecha2" wire:model.live="fecha2" />
-
-        </x-input-group>
-
-    </div>
-
     <div class="md:flex flex-col md:flex-row justify-between md:space-x-3 items-center bg-white rounded-xl mb-5 p-4 shadow-xl">
 
         <x-input-group for="rol" label="Rol" :error="$errors->first('rol')" class="w-full">
