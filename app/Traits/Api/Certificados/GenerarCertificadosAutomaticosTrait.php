@@ -2,7 +2,6 @@
 
 namespace App\Traits\Api\Certificados;
 
-use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
 use App\Jobs\Certificaciones\GenerarCertificadoRegistroJob;
 use App\Models\Traslado;
 

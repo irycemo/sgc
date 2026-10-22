@@ -97,11 +97,17 @@ class Usuarios extends Component
 
             DB::transaction(function () {
 
-                $this->modelo_editar->syncPermissions([]);
+                foreach($this->modelo_editar->getAllPermissions() as $permission){
 
-                foreach ($this->listaDePermisos as $permiso)
+                    $this->modelo_editar->revokePermissionTo($permission->name);
+
+                }
+
+                foreach ($this->listaDePermisos as $permiso){
+
                     $this->modelo_editar->givePermissionTo(Permission::find($permiso)->name);
 
+                }
 
                 $this->resetearTodo();
 

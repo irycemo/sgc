@@ -68,8 +68,13 @@ class ReporteUsuarios extends Component
                         });
                     })
                     ->when(isset($this->permiso) && $this->permiso != "", function($q){
-                        $q->whereHas('permissions', function($q){
-                            $q->where('name', $this->permiso);
+                        $q->where(function($q){
+                            $q->whereHas('permissions', function($q){
+                                    $q->where('name', $this->permiso);
+                                })
+                                ->orWhereHas('roles.permissions', function ($q){
+                                    $q->where('name', $this->permiso);
+                                });
                         });
                     })
                     ->paginate($this->pagination);
