@@ -81,6 +81,8 @@
 
             <input type="number" wire:model.live.debounce.1000mse="filters.linea_captura" placeholder="Línea de captura" class="bg-white rounded-full text-sm w-52">
 
+            <input type="number" wire:model.live.debounce.1000mse="filters.orden_de_pago" placeholder="Orden de pago" class="bg-white rounded-full text-sm w-52">
+
             <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
 
                 <option value="10">10</option>

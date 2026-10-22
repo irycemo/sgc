@@ -66,7 +66,7 @@ class Tramites extends Component
         'linea_captura' => '',
         'oficina_id' => '',
         'categoria' => '',
-        'documento_pago'
+        'orden_de_pago'
 
     ];
 
@@ -647,7 +647,7 @@ class Tramites extends Component
                         ->when(! empty($this->filters['servicio']), fn($q) => $q->where('servicio_id', $this->filters['servicio']))
                         ->when(! empty($this->filters['oficina_id']), fn($q) => $q->where('oficina_id', $this->filters['oficina_id']))
                         ->when(! empty($this->filters['linea_captura']) && strlen($this->filters['linea_captura']) == 20, fn($q) =>  $q->where('linea_de_captura', $this->filters['linea_captura']))
-                        ->when(! empty($this->filters['documento_pago']) && strlen($this->filters['documento_pago']) == 20, fn($q) =>  $q->where('documento_de_pago', $this->filters['documento_pago']))
+                        ->when(! empty($this->filters['orden_de_pago']) && strlen($this->filters['orden_de_pago']) == 12, fn($q) =>  $q->where('orden_de_pago', $this->filters['orden_de_pago']))
                         ->when(! empty($this->filters['categoria']), function($q){
                             $q->whereHas('servicio', function($q){
                                 $q->where('categoria_servicio_id', $this->filters['categoria']);
