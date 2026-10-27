@@ -203,11 +203,6 @@ class ListaAvisos extends Component
                                         $q->where('localidad', $localidad);
                                     });
                                 })
-                                ->when($this->filters['oficina'], function($q, $oficina){
-                                    $q->WhereHas('predio', function($q) use($oficina){
-                                        $q->where('oficina', $oficina);
-                                    });
-                                })
                                 ->when($this->filters['tipo'], function($q, $t_predio){
                                     $q->WhereHas('predio', function($q) use($t_predio){
                                         $q->where('tipo_predio', $t_predio);

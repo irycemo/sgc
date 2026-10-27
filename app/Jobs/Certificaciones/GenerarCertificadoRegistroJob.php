@@ -46,7 +46,14 @@ class GenerarCertificadoRegistroJob implements ShouldQueue
 
         $controller = new CertificadoRegistroController();
 
-        $pdf = DB::transaction(function () use ($controller) {
+        $año = now()->format('Y');
+
+        $pdf = DB::transaction(function () use ($controller, $año) {
+
+            Certificacion::where('tipo', CertificacionesEnum::CERTIFICADO_REGISTRO)
+                            ->where('año', $año)
+                            ->lockForUpdate()
+                            ->first();
 
             $previa = Certificacion::where('tipo', CertificacionesEnum::CERTIFICADO_REGISTRO)
                                         ->where('tramite_id', $this->tramite->id)
@@ -140,20 +147,30 @@ class GenerarCertificadoRegistroJob implements ShouldQueue
     private function procesarRelacionFile(Certificacion $certificacion, string $file_name):void
     {
 
-        if($certificacion->pdf){
+        DB::transaction(function () use($certificacion, $file_name){
 
-            Storage::disk('s3')->delete(config('services.ses.ruta_pdfs_certificaciones') . $certificacion->pdf->url);
+            $certificacion = Certificacion::whereKey($certificacion->id)->lockForUpdate()->first();
 
-            $certificacion->pdf->delete();
+            File::where('fileable_type', Certificacion::class)
+                    ->where('fileable_id', $certificacion->id)
+                    ->where('descripcion', 'pdf')
+                    ->get()
+                    ->each(function(File $anterior){
 
-        }
+                        Storage::disk('s3')->delete(config('services.ses.ruta_pdfs_certificaciones'). $anterior->url);
 
-        File::create([
+                        $anterior->delete();
+
+                    });
+
+            File::create([
                 'fileable_type' => Certificacion::class,
                 'fileable_id' => $certificacion->id,
                 'url' => $file_name,
                 'descripcion' => 'pdf',
             ]);
+
+        });
 
     }
 
