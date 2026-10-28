@@ -1216,7 +1216,7 @@ Artisan::command('traslados', function(){
 
     $count = 0;
 
-    $traslados = Traslado::with('predio')->where('estado', 'operado')->get();
+    $traslados = Traslado::with('predio')->get();
 
     $progressbar = $this->output->createProgressBar($traslados->count());
 
@@ -1228,22 +1228,20 @@ Artisan::command('traslados', function(){
 
             $aviso = (new SistemaTramitesLineaService())->consultarAviso2($traslado->aviso_stl);
 
-            if($traslado->acto != $aviso['acto']){
+            if(! isset($aviso)){
 
-                $traslado->update(['acto' => $aviso['acto']]);
+                $this->info("Aviso: " . $traslado->aviso_stl . ' no existe. Traslado: ' . $traslado->id);
 
             }
 
-            $traslado->predio->update([
-                'documento_entrada' => $aviso['tipo_escritura'],
-                'documento_numero' => $aviso['numero_escritura'],
-                'fecha_otorgamiento' => $aviso['fecha_otorgamiento'],
-                'declarante' => $aviso['titular'],
-                'tomo' => $aviso['antecedentes']['tomo'] ?? null,
-                'registro' => $aviso['antecedentes']['registro'] ?? null,
-                'folio_real' => $aviso['antecedentes']['folio_real'] ?? null,
-                'libro' => 'Propiedad'
-            ]);
+            if($traslado->acto != $aviso['acto'] || $traslado->estado != $aviso['estado']){
+
+                $traslado->update([
+                    'acto' => $aviso['acto'],
+                    'estado' => $aviso['estado']
+                ]);
+
+            }
 
             $progressbar->advance();
 

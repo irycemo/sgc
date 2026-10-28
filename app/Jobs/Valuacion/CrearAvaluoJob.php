@@ -3,7 +3,6 @@
 namespace App\Jobs\Valuacion;
 
 use App\Exceptions\GeneralException;
-use App\Livewire\Admin\ValoresUnitariosRusticos;
 use App\Models\Avaluo;
 use App\Models\Construccion;
 use App\Models\ConstruccionesComun;
