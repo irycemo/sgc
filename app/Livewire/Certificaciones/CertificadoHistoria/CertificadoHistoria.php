@@ -352,11 +352,15 @@ class CertificadoHistoria extends Component
 
     public function generarCertificado(){
 
-        if($this->predio->sector === 88 || $this->predio->sector === 99){
+        if(! in_array(auth()->user()->clave, [1, 15, 16, 8])){
 
-            $this->dispatch('mostrarMensaje', ['warning', "El predio se encuentra en sector 88 o 99 es necesario conciliarlo, acuda al departamento de cartografía."]);
+            if($this->predio->sector === 88 || $this->predio->sector === 99){
 
-            return;
+                $this->dispatch('mostrarMensaje', ['warning', "El predio se encuentra en sector 88 o 99 es necesario conciliarlo, acuda al departamento de cartografía."]);
+
+                return;
+
+            }
 
         }
 
