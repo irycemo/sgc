@@ -376,22 +376,40 @@ class Tramites extends Component
 
         try {
 
-            $this->modelo_editar->update([
-                'estado' => 'pagado',
-                'fecha_pago'  => now()->toDateString(),
-                'orden_de_pago'  => '300082157991',
-                'fecha_entrega' => $this->calcularFechaEntrega()
-            ]);
+            DB::transaction(function () {
 
-            if($this->modelo_editar->servicio->nombre === 'Complemento'){
+                $this->modelo_editar->update([
+                    'estado' => 'pagado',
+                    'fecha_pago'  => now()->toDateString(),
+                    'orden_de_pago'  => '300082157991',
+                    'fecha_entrega' => $this->calcularFechaEntrega()
+                ]);
 
-                if(in_array($this->modelo_editar->ligadoA->servicio->clave_ingreso, ['DM32', 'DM31'])){
+                if($this->modelo_editar->servicio->nombre === 'Complemento'){
 
-                    $this->modelo_editar->ligadoA->update(['fecha_entrega' => now()->subDay()]);
+                    if(in_array($this->modelo_editar->ligadoA->servicio->clave_ingreso, ['DM32', 'DM31'])){
+
+                        $this->modelo_editar->ligadoA->update(['fecha_entrega' => now()->subDay()]);
+
+                    }elseif(in_array($this->modelo_editar->ligadoA->servicio->categoria->nombre, ['Inspecciones Oculares', 'Desglose de predios y valuación'])){
+
+                        $this->modelo_editar->ligadoA->update(['cantidad' => $this->modelo_editar->cantidad + $this->modelo_editar->ligadoA->cantidad]);
+
+                    }elseif(in_array($this->modelo_editar->ligadoA->servicio->clave_ingreso, ['D924', 'D925', 'D926'])){
+
+                        $this->modelo_editar->ligadoA->update([
+                            'estado' => 'pagado',
+                            'fecha_pago'  => now()->toDateString(),
+                            'documento_de_pago' => '300082157991',
+                            'linea_de_captura' => $this->modelo_editar->linea_de_captura,
+                            'orden_de_pago' => $this->modelo_editar->orden_de_pago,
+                        ]);
+
+                    }
 
                 }
 
-            }
+            });
 
             $this->dispatch('mostrarMensaje', ['success', "El pago se simuló con éxito."]);
 

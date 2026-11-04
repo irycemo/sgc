@@ -1,6 +1,6 @@
 @if ($flags['cantidad'])
 
-    <div class="flex-auto bg-white p-4 rounded-lg mb-3 shadow-md " wire:loading.class.delay.longest="opacity-50">
+    <div class="flex-auto bg-white p-4 rounded-lg mb-3 shadow-md " wire:loading.class.delay.longest="opacity-50" wire:key="cantidad">
 
         <div class="mb-2">
 

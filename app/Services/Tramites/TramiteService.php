@@ -195,6 +195,20 @@ class TramiteService{
 
                 $this->tramite->ligadoA->update(['fecha_entrega' => now()->subDay()]);
 
+            }elseif(in_array($this->tramite->ligadoA->servicio->categoria->nombre, ['Inspecciones Oculares', 'Desglose de predios y valuación'])){
+
+                $this->tramite->ligadoA->update(['cantidad' => $this->tramite->cantidad + $this->tramite->ligadoA->cantidad]);
+
+            }elseif(in_array($this->tramite->ligadoA->servicio->clave_ingreso, ['D924', 'D925', 'D926'])){
+
+                $this->tramite->ligadoA->update([
+                    'estado' => 'pagado',
+                    'fecha_pago' => $array['fechaPago'],
+                    'documento_de_pago' => $array['reciboSap'],
+                    'linea_de_captura' => $this->tramite->linea_de_captura,
+                    'orden_de_pago' => $this->tramite->orden_de_pago,
+                ]);
+
             }
 
         }

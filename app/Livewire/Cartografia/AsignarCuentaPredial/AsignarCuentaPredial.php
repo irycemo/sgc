@@ -221,7 +221,7 @@ class AsignarCuentaPredial extends Component
 
     public function mount(){
 
-        if(auth()->user()->hasRole('Administrador')){
+        if(auth()->user()->oficina->nombre == 'MORELIA'){
 
             $this->valuadores = User::where('estado', 'activo')
                                         ->where('valuador', 1)
