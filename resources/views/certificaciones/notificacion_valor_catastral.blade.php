@@ -274,7 +274,7 @@
 
         <div>
 
-            <p style="margin-top: 10px">EN LA CIUDAD DE __________________________________________________________  A LAS ________________ DEL MES _____________ DEL AÑO _____________.</p>
+            <p style="margin-top: 10px">EN LA CIUDAD DE _______________________________________  A LAS __________DEL DIA ______ DEL MES _____________ DEL AÑO _____________.</p>
 
             <div>
 

@@ -344,7 +344,7 @@ class Valuacion extends Component
 
         try {
 
-            if(!$this->predio->copia) {
+            if(! $this->predio->copia) {
 
                 $this->validarManzanaAsignada();
 
@@ -353,9 +353,39 @@ class Valuacion extends Component
                 $this->predio->documento_entrada = $cuenta_asignada->tipo_titulo;
                 $this->predio->documento_numero = $cuenta_asignada->titulo_propiedad;
 
-                $this->validarDisponibilidad();
+                $predio_padron = Predio::where('estado', $this->predio->estado)
+                                    ->where('region_catastral', $this->predio->region_catastral)
+                                    ->where('municipio', $this->predio->municipio)
+                                    ->where('zona_catastral', $this->predio->zona_catastral)
+                                    ->where('localidad', $this->predio->localidad)
+                                    ->where('sector', $this->predio->sector)
+                                    ->where('manzana', $this->predio->manzana)
+                                    ->where('predio', $this->predio->predio)
+                                    ->where('edificio', $this->predio->edificio)
+                                    ->where('departamento', $this->predio->departamento)
+                                    ->first();
+
+                if(! $predio_padron){
+
+                    $predio_padron = Predio::where('oficina', $this->predio->oficina)
+                                    ->where('tipo_predio', $this->predio->tipo_predio)
+                                    ->where('numero_registro', $this->predio->numero_registro)
+                                    ->first();
+
+                    if(! $predio_padron){
+
+                        $this->validarDisponibilidad();
+
+                    }
+
+                }
+
+            }else{
+
+                $this->validarDisponibilidadPredioAvaluo($this->predio->region_catastral, $this->predio->municipio, $this->predio->zona_catastral, $this->predio->localidad, $this->predio->sector, $this->predio->manzana, $this->predio->predio, $this->predio->edificio, $this->predio->departamento, $this->predio->oficina, $this->predio->tipo_predio, $this->predio->numero_registro);
 
             }
+
 
             $this->validarSector();
 

@@ -78,8 +78,6 @@ trait ValidarDisponibilidad
                                                 ->where('departamento', $this->predio->departamento)
                                                 ->where('oficina', $this->predio->oficina)
                                                 ->where('tipo_predio', $this->predio->tipo_predio)
-                                                ->where('oficina', $this->predio->oficina)
-                                                ->where('tipo_predio', $this->predio->tipo_predio)
                                                 ->where('numero_registro', $this->predio->numero_registro)
                                                 ->first();
 
