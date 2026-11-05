@@ -36,7 +36,7 @@
 
             <input @if($predio->avaluo?->folio || $predio->copia) readonly @endif title="Región" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('predio.region_catastral') border-1 border-red-500 @enderror" wire:model="predio.region_catastral" readonly>
 
-            <input @if($predio->avaluo?->folio || $predio->copia) readonly @endif title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('predio.municipio') border-1 border-red-500 @enderror" wire:model="predio.municipio" readonly>
+            <input @if($predio->avaluo?->folio || $predio->copia) @endif title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('predio.municipio') border-1 border-red-500 @enderror" wire:model="predio.municipio" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
             <input @if($predio->avaluo?->folio || $predio->copia) readonly @endif title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('predio.zona_catastral') border-1 border-red-500 @enderror" wire:model="predio.zona_catastral">
 
