@@ -22,14 +22,9 @@ class TrasladosConsulta extends Component
 
             $data = (new SistemaTramitesLineaService())->generarAvisoPdf($traslado->aviso_stl);
 
-            $pdf = base64_decode($data['data']['pdf']);
+            $pdf = $data['data']['pdf'];
 
-            /* $this->js('window.open(\' '. $pdf . '\', \'_blank\');'); */
-
-            return response()->streamDownload(
-                fn () => print($pdf),
-                'aviso.pdf'
-            );
+            $this->js('window.open(\' '. $pdf . '\', \'_blank\');');
 
         } catch (GeneralException $ex) {
 
@@ -51,12 +46,9 @@ class TrasladosConsulta extends Component
 
             $data = (new SistemaPeritosExternosService())->generarAvaluoPdf($traslado->avaluo_spe);
 
-            $pdf = base64_decode($data['data']['pdf']);
+            $pdf = $data['data']['pdf'];
 
-            return response()->streamDownload(
-                fn () => print($pdf),
-                'avaluo.pdf'
-            );
+            $this->js('window.open(\' '. $pdf . '\', \'_blank\');');
 
         } catch (GeneralException $ex) {
 
