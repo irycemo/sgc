@@ -621,6 +621,7 @@ class Constantes{
     ];
 
     const MOVIMIENTOS = [
+        'APLICACIÓN DE BIENES HEREDITARIOS' => 'ACTULAIZACION',
         'ALTA MEDIANTE AVALÚO' => 'ALTA',
         'ALTA POR AVALÚO' => 'ALTA',
         'ALTA POR AUTORIZACIÓN DE SUBDIVISIÓN' => 'ALTA',
