@@ -90,7 +90,7 @@
 
             <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad_origen') border-1 border-red-500 @enderror" wire:model.blur="localidad_origen">
 
-            <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina_origen') border-1 border-red-500 @enderror" wire:model.blur="oficina_origen" readonly>
+            <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina_origen') border-1 border-red-500 @enderror" wire:model.blur="oficina_origen" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
             <input readonly title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo_nuevo') border-1 border-red-500 @enderror" wire:model="tipo_nuevo">
 
