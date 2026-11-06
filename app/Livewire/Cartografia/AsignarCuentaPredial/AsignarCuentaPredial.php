@@ -207,14 +207,6 @@ class AsignarCuentaPredial extends Component
 
     public function updatedOficina(){
 
-        $this->valuadores = User::where('estado', 'activo')
-                                        ->where('valuador', 1)
-                                        ->whereHas('oficina', function($q){
-                                            $q->where('oficina', $this->oficina);
-                                        })
-                                        ->orderBy('name')
-                                        ->get();
-
         $this->reset('valuador');
 
     }

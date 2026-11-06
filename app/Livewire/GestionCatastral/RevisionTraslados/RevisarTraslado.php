@@ -107,15 +107,19 @@ class RevisarTraslado extends Component
 
         try {
 
-            $this->respuesta_autorizacion_aviso = (new SistemaTramitesLineaService())->autorizarAviso($this->traslado->aviso_stl, $this->observaciones);
+            DB::transaction(function (){
 
-            $this->traslado->update([
-                'valor_isai' => $this->aviso['valor_isai'],
-                'estado' => 'autorizado',
-                'actualizado_por' => auth()->id()
-            ]);
+                $this->traslado->update([
+                    'valor_isai' => $this->aviso['valor_isai'],
+                    'estado' => 'autorizado',
+                    'actualizado_por' => auth()->id()
+                ]);
 
-            $this->traslado->audits()->latest()->first()->update(['tags' => 'Autorizó traslado']);
+                $this->traslado->audits()->latest()->first()->update(['tags' => 'Autorizó traslado']);
+
+                (new SistemaTramitesLineaService())->autorizarAviso($this->traslado->aviso_stl, $this->observaciones);
+
+            });
 
             return redirect()->route('revision_traslados')->with('status', 'La autorización se realizó con éxito.');
 
@@ -123,23 +127,12 @@ class RevisarTraslado extends Component
 
             $this->dispatch('mostrarMensaje', ['error', $ex->getMessage()]);
 
-            if(isset($this->respuesta_autorizacion_aviso['data']) && $this->respuesta_autorizacion_aviso['data'] == 'El aviso se autorizó con éxito.'){
-
-                (new SistemaTramitesLineaService())->corregirAutorizacion($this->traslado->aviso_stl);
-
-            }
-
         } catch (\Throwable $th) {
 
             Log::error("Error al autorizar aviso en Sistema de Trámties en línea por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
 
             $this->dispatch('mostrarMensaje', ['error', "Hubo un error."]);
 
-            if(isset($this->respuesta_autorizacion_aviso['data']) && $this->respuesta_autorizacion_aviso['data'] == 'El aviso se autorizó con éxito.'){
-
-                (new SistemaTramitesLineaService())->corregirAutorizacion($this->traslado->aviso_stl);
-
-            }
         }
 
     }
