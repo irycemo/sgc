@@ -896,7 +896,7 @@ class RevisarTraslado extends Component
                     'message' => $ex->getMessage(),
                     'usuario' => auth()->user()->name,
                     'traslado_id' => $this->traslado->id,
-                    'traslado_folio' => $this->traslado->folio(),
+                    'traslado_folio' => $this->traslado->folioAviso(),
                     'traslado_estado' => $this->traslado->estado,
                     'trace' => $ex
                 ]
@@ -912,7 +912,7 @@ class RevisarTraslado extends Component
                     'message' => $th->getMessage(),
                     'usuario' => auth()->user()->name,
                     'traslado_id' => $this->traslado->id,
-                    'traslado_folio' => $this->traslado->folio(),
+                    'traslado_folio' => $this->traslado->folioAviso(),
                     'traslado_estado' => $this->traslado->estado,
                     'trace' => $th
                 ]
