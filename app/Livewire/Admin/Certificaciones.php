@@ -109,7 +109,15 @@ class Certificaciones extends Component
 
             if($modelo->pdf){
 
-                return redirect(Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_pdfs_certificaciones') . $modelo->pdf->url, now()->addMinutes(10)));
+                if(app()->isProduction()){
+
+                    return redirect(Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_pdfs_certificaciones') . $modelo->pdf->url, now()->addMinutes(10)));
+
+                }else{
+
+                    return redirect(Storage::disk('certificaciones')->url($modelo->pdf->url));
+
+                }
 
             }
 

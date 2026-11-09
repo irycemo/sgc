@@ -121,7 +121,7 @@ class GenerarCertificadoRegistroJob implements ShouldQueue
                                             ->latest('id')
                                             ->first();
 
-        $filename = $this->predio->cuentaPredial() . '-' . now()->format('Ymd_His') . '.pdf';
+        $filename = $this->predio->cuentaPredial() . '_' . now()->format('Ymd_His') . '.pdf';
 
         $clave = config('services.ses.ruta_pdfs_certificaciones') . $filename;
 
@@ -197,9 +197,12 @@ class GenerarCertificadoRegistroJob implements ShouldQueue
             [
                 'message' => $exception->getMessage(),
                 'tramite_id' => $this->tramite->id,
+                'tramite' => $this->tramite->folioTramite(),
                 'predio_id' => $this->predio->id,
+                'predio' => $this->predio->cuentaPredial(),
                 'usuario_id' => $this->user->id,
-                'trace' =>  $exception
+                'usuario' => $this->user->name,
+                'trace' =>  $exception->getTraceAsString()
             ]
         );
 

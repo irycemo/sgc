@@ -146,18 +146,79 @@
 
     @include('livewire.comun.errores')
 
-    <div class="bg-white rounded-lg p-3 flex justify-end shadow-md">
+    <div class="bg-white rounded-lg p-3 flex flex-col justify-center shadow-md">
 
-        <x-button-green
-            wire:click="imprimir"
-            wire:loading.attr="disabled"
-            wire:target="imprimir">
+        @if(! in_array($estadoProceso, ['generando', 'listo']))
 
-            <img wire:loading wire:target="imprimir" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+            <div class="flex justify-center w-full mb-5">
 
-            Imprimir
+                <x-button-green
+                    wire:click="imprimir"
+                    wire:loading.attr="disabled"
+                    wire:target="imprimir">
 
-        </x-button-green>
+                    <img wire:loading wire:target="imprimir" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                    Imprimir
+
+                </x-button-green>
+
+            </div>
+
+        @endif
+
+        @if($estadoProceso === 'generando')
+
+            {{-- wire:poll se activa solo mientras este bloque existe; al pasar a
+                "listo"/"error" el bloque desaparece y el polling se detiene. --}}
+            <div
+                wire:poll.5s="consultarEstado"
+                class="mb-5 text-sm flex flex-col items-center gap-3 text-gray-600">
+
+                <img class="h-4" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
+
+                <p class="font-semibold text-base">Generando notificación…</p>
+
+                <svg class="animate-spin h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+
+            </div>
+
+        @endif
+
+        @if($estadoProceso === 'listo' && $urlDescarga)
+
+            <div class="mb-5 text-sm flex flex-col items-center gap-3 text-gray-700">
+
+                <p class="font-semibold text-base text-green-700">La notificación está lista.</p>
+
+                <a
+                    href="{{ $urlDescarga }}"
+                    target="_blank"
+                    rel="noopener"
+                    class="bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-2 rounded">
+
+                    Descargar notificación… (PDF)
+
+                </a>
+
+            </div>
+
+        @endif
+
+        @if($estadoProceso === 'error')
+
+            <div class="mb-5 text-sm flex flex-col items-center gap-3">
+
+                <p class="font-semibold text-base text-red-700">
+                    {{ $mensajeError ?? 'No fue posible generar la notificación.' }}
+                </p>
+
+            </div>
+
+        @endif
 
     </div>
 

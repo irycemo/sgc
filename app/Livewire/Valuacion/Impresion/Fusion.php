@@ -74,7 +74,7 @@ class Fusion extends Component
 
                     $avaluo_ids = $this->avaluos->pluck('id');
 
-                    return (new NotificacionValorCatastralController())->fusion($avaluo_ids, $this->tramite_inspeccion, $this->predios_fusionantes->pluck('id'));
+                    return (new NotificacionValorCatastralController())->fusion($avaluo_ids, $this->tramite_inspeccion, $this->predios_fusionantes->pluck('id'), auth()->user());
 
                 });
 

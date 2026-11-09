@@ -196,7 +196,7 @@ class DesgloseCambioRegimen extends Component
 
                     $avaluo_ids = $this->avaluos->pluck('id');
 
-                    return (new NotificacionValorCatastralController())->desglose($avaluo_ids, $this->tramite_inspeccion, $this->tramite_desglose, $this->predio_padre->id);
+                    return (new NotificacionValorCatastralController())->desglose($avaluo_ids, $this->tramite_inspeccion, $this->tramite_desglose, $this->predio_padre->id, auth()->user());
 
                 });
 

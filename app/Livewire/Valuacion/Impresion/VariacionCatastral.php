@@ -110,7 +110,7 @@ class VariacionCatastral extends Component
 
                 $avaluo_ids = $this->avaluos->pluck('id');
 
-                $pdf = (new NotificacionValorCatastralController())->general($avaluo_ids, $this->tramite_inspeccion);
+                $pdf = (new NotificacionValorCatastralController())->general($avaluo_ids, $this->tramite_inspeccion, auth()->user());
 
             });
 

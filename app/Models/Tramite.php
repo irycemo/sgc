@@ -92,7 +92,7 @@ class Tramite extends Model implements Auditable
         return $this->belongsTo(Oficina::class);
     }
 
-    public function numeroControl(){
+    public function folioTramite(){
 
         return $this->año . '-' . $this->folio . '-' . $this->usuario;
 

@@ -147,7 +147,7 @@ class CambioRegimen extends Component
 
                     $this->tramite_inspeccion->predios()->attach($this->predio_padre->id);
 
-                    return (new NotificacionValorCatastralController())->desglose([$this->avaluo->id], $this->tramite_inspeccion, $this->tramite_desglose, $this->predio_padre->id);
+                    return (new NotificacionValorCatastralController())->desglose([$this->avaluo->id], $this->tramite_inspeccion, $this->tramite_desglose, $this->predio_padre->id, auth()->user());
 
                 });
 

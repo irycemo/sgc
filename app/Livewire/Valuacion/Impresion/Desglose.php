@@ -3,13 +3,12 @@
 namespace App\Livewire\Valuacion\Impresion;
 
 use App\Constantes\Constantes;
+use Illuminate\Support\Facades\Storage;
+use App\Jobs\Certificaciones\GenerarNotificacionDesgloseJob;
+use Illuminate\Support\Facades\Cache;
 use App\Enums\Tramites\AvaluoPara;
 use App\Exceptions\GeneralException;
-use App\Http\Controllers\Certificaciones\NotificacionValorCatastralController;
-use App\Jobs\Certificaciones\GenerarImagenVerificacionJob;
-use App\Models\Certificacion;
 use App\Traits\Valuacion\ImpresionTrait;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -24,6 +23,11 @@ class Desglose extends Component
     public $tipo_padre;
     public $registro_padre;
     public $predio_padre;
+
+    public ?string $estadoProceso = null;        // 'generando' | 'listo' | 'error'
+    public ?string $claveProceso = null;  // clave de cache compartida con el job
+    public ?string $urlDescarga = null;   // URL firmada de S3 (30 min)
+    public ?string $mensajeError = null;
 
     protected function rules(){
         return [
@@ -56,59 +60,124 @@ class Desglose extends Component
 
             $this->validaciones();
 
-            $pdf = retry(5, function() {
-
-                return DB::transaction(function () use (&$pdf){
-
-                    foreach ($this->avaluos as $avaluo) {
-
-                        $avaluo->update([
-                            'tramite_inspeccion' => $this->tramite_inspeccion?->id,
-                            'tramite_desglose' => $this->tramite_desglose?->id,
-                            'actualizado_por' => auth()->id(),
-                            'estado' => 'impreso'
-                        ]);
-
-                        $avaluo->predioAvaluo->update(['status' => 'impreso']);
-
-                        $avaluo->audits()->latest()->first()?->update(['tags' => 'Imprimió avalúo', 'tramite_id' => $this->tramite_inspeccion?->id]);
-
-                    }
-
-                    if(!auth()->user()->hasRole('Convenio municipal')) $this->actualizarTramites();
-
-                    $this->tramite_inspeccion->predios()->detach();
-
-                    $this->tramite_inspeccion->predios()->attach($this->predio_padre->id);
-
-                    $avaluo_ids = $this->avaluos->pluck('id');
-
-                    return (new NotificacionValorCatastralController())->desglose($avaluo_ids, $this->tramite_inspeccion, $this->tramite_desglose, $this->predio_padre->id);
-
-                });
-
-            });
-
-            $certificacion = Certificacion::where('tramite_id', $this->tramite_inspeccion->id)->where('estado', 'activo')->first();
-
-            GenerarImagenVerificacionJob::dispatch($certificacion->id);
-
-            $this->resetarTodo();
-
-            return response()->streamDownload(
-                fn () => print($pdf->output()),
-                'notificacion_de_valor_catastral.pdf'
-            );
-
 
         } catch (GeneralException $ex) {
 
             $this->dispatch('mostrarMensaje', ['warning', $ex->getMessage()]);
 
+            return;
+
         } catch (\Throwable $th) {
 
-            Log::error("Error al imprimir notificación de avalúo usuario por el usuario: (id: " . auth()->user()->id . ") " . auth()->user()->name . ". " . $th);
             $this->dispatch('mostrarMensaje', ['error', "Ha ocurrido un error."]);
+
+            return;
+
+        }
+
+        $this->claveProceso = 'notificacion_valor_catastral_' . $this->tramite_inspeccion->id;
+
+        $actual = Cache::get($this->claveProceso);
+
+        if($actual && $actual['status'] === 'procesando'){
+
+            $this->estadoProceso = 'generando';
+
+            $this->reset('predio');
+
+            $this->dispatch('mostrarMensaje', ['warning', "Ya existe un proceso activo para generar esta notificación."]);
+
+            return;
+
+        }
+
+        $this->estadoProceso = 'generando';
+        $this->urlDescarga = null;
+        $this->mensajeError = null;
+
+        Cache::put($this->claveProceso, ['status' => 'procesando'], now()->addMinutes(30));
+
+        try {
+
+            $avaluo_ids = $this->avaluos->pluck('id')->toArray();
+
+            GenerarNotificacionDesgloseJob::dispatch($avaluo_ids, $this->tramite_inspeccion, $this->tramite_desglose, $this->predio_padre, auth()->user(), $this->claveProceso);
+
+        } catch (\Throwable $th) {
+
+            Log::error(
+                "Error al generar certificado",
+                [
+                    'message' => $th->getMessage(),
+                    'user' => auth()->user()->name,
+                    'trace' => $th
+                ]
+            );
+
+            Cache::forget($this->claveProceso);
+
+            $this->estadoProceso = 'error';
+
+            $this->mensajeError = 'No fue posible iniciar el proceso. Intenta de nuevo.';
+
+            return;
+
+        }
+
+    }
+
+    public function consultarEstado(){
+
+        if($this->estadoProceso !== 'generando' || ! $this->claveProceso){
+
+            return;
+        }
+
+        $actual = Cache::get($this->claveProceso);
+
+        if(! $actual){
+
+            // Todavía en proceso (o el worker aún no publicó el estado).
+            return;
+
+        }
+
+        if($actual['status'] === 'listo'){
+
+            $this->estadoProceso = 'listo';
+
+            if(app()->isProduction()){
+
+
+                $this->urlDescarga = Storage::disk('s3')->temporaryUrl(
+                    $actual['s3_path'],
+                    now()->addMinutes(30),
+                    [
+                        'ResponseContentType' => 'application/pdf',
+                        'ResponseContentDisposition' => 'attachment; filename="' . $actual['filename'] . '"',
+                    ]
+                );
+
+            }else{
+
+                $this->urlDescarga = Storage::disk('certificaciones')->url(
+                    $actual['filename'],
+                    [
+                        'ResponseContentType' => 'application/pdf',
+                        'ResponseContentDisposition' => 'attachment; filename="' . $actual['filename'] . '"',
+                    ]
+                );
+            }
+
+            return;
+
+        }
+
+        if($actual['status'] === 'error'){
+
+            $this->estadoProceso = 'error';
+
+            $this->mensajeError = $actual['mensaje'] ?? 'No fue posible generar el certificado.';
 
         }
 

@@ -57,17 +57,17 @@ class NotificacionValorCatastralController extends Controller
 
     }
 
-    public function general($avaluos, $tramite_inspeccion){
+    public function general($avaluos, $tramite_inspeccion, $user){
 
         $datos_control = (object)[];
 
         $datos_control->tramite_inspeccion = $tramite_inspeccion?->año . '-' . $tramite_inspeccion?->folio . '-' . $tramite_inspeccion?->usuario;
-        $datos_control->impreso_por = auth()->user()->name;
+        $datos_control->impreso_por = $user->name;
         $datos_control->impreso_en = now()->format('d/m/Y H:i:s');
         $datos_control->numero_avaluos = count($avaluos);
         $datos_control->numero_avaluos_letra = $this->formatter->toWords($datos_control->numero_avaluos);
-        $datos_control->valuador = auth()->user()->name;
-        $datos_control->titular = auth()->user()->oficina->titular;
+        $datos_control->valuador = $user->name;
+        $datos_control->titular = $user->oficina->titular;
 
         $object = (object)[];
 
@@ -75,15 +75,15 @@ class NotificacionValorCatastralController extends Controller
 
         $object->avaluos = $this->avaluos($avaluos);
 
-        if(auth()->user()->hasRole(['Convenio municipal'])){
+        if($user->hasRole(['Convenio municipal'])){
 
-            $datos_control->autoridad_municipal = auth()->user()->oficina->autoridad_municipal;
+            $datos_control->autoridad_municipal = $user->oficina->autoridad_municipal;
 
             $object->datos_control = $datos_control;
 
-            $certificacion = $this->certificacionConvenioMunicipal($datos_control, $object);
+            $certificacion = $this->certificacionConvenioMunicipal($datos_control, $object, $user);
 
-        }elseif(auth()->user()->oficina->oficina == 101 || $tramite_inspeccion->oficina->oficina === 101){
+        }elseif($user->oficina->oficina == 101 || $tramite_inspeccion->oficina->oficina === 101){
 
             $datos_control->jefe_departamento = $this->jefe_departamento_valuacion->name;
 
@@ -93,15 +93,15 @@ class NotificacionValorCatastralController extends Controller
 
             $object->datos_control = $datos_control;
 
-            $certificacion = $this->certificacionOficinaCentral($datos_control, $object, $tramite_inspeccion);
+            $certificacion = $this->certificacionOficinaCentral($datos_control, $object, $tramite_inspeccion, $user);
 
         }else{
 
-            $datos_control->titular_cargo = auth()->user()->oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR(A) DE RENTAS';
+            $datos_control->titular_cargo = $user->oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR(A) DE RENTAS';
 
             $object->datos_control = $datos_control;
 
-            $certificacion = $this->certificacionInteriorEstado($datos_control, $object, $tramite_inspeccion);
+            $certificacion = $this->certificacionInteriorEstado($datos_control, $object, $tramite_inspeccion, $user);
 
         }
 
@@ -130,9 +130,9 @@ class NotificacionValorCatastralController extends Controller
 
     }
 
-    public function certificacionConvenioMunicipal($datos_control, $object){
+    public function certificacionConvenioMunicipal($datos_control, $object, $user){
 
-        $datos_control->autoridad_municipal = auth()->user()->oficina->autoridad_municipal;
+        $datos_control->autoridad_municipal = $user->oficina->autoridad_municipal;
 
         $object->datos_control = $datos_control;
 
@@ -142,13 +142,13 @@ class NotificacionValorCatastralController extends Controller
                                     'folio' => (Certificacion::where('año', now()->format('Y'))->where('tipo', CertificacionesEnum::NOTIFICACION_VALOR_CATASTRAL)->max('folio') ?? 0) + 1,
                                     'cadena_original' => json_encode($object),
                                     'estado' => 'activo',
-                                    'oficina_id' => auth()->user()->oficina_id,
-                                    'creado_por' => auth()->id()
+                                    'oficina_id' => $user->oficina_id,
+                                    'creado_por' => $user->id
                                 ]);
 
     }
 
-    public function certificacionOficinaCentral($datos_control, $object, $tramite_inspeccion){
+    public function certificacionOficinaCentral($datos_control, $object, $tramite_inspeccion, $user){
 
         $fielDirector = Credential::openFiles(
                                                 Storage::disk('efirmas')->path($this->director->efirma->cer),
@@ -181,14 +181,14 @@ class NotificacionValorCatastralController extends Controller
                                     'cadena_original' => json_encode($object),
                                     'cadena_encriptada' => base64_encode($firmaDirector),
                                     'estado' => 'activo',
-                                    'oficina_id' => auth()->user()->oficina_id,
+                                    'oficina_id' => $user->oficina_id,
                                     'tramite_id' => $tramite_inspeccion?->id,
-                                    'creado_por' => auth()->id()
+                                    'creado_por' => $user->id
                                     ]);
 
     }
 
-    public function certificacionInteriorEstado($datos_control, $object, $tramite_inspeccion){
+    public function certificacionInteriorEstado($datos_control, $object, $tramite_inspeccion, $user){
 
         return Certificacion::create([
                                     'año' => now()->format('Y'),
@@ -196,26 +196,26 @@ class NotificacionValorCatastralController extends Controller
                                     'folio' => (Certificacion::where('año', now()->format('Y'))->where('tipo', CertificacionesEnum::NOTIFICACION_VALOR_CATASTRAL)->max('folio') ?? 0) + 1,
                                     'cadena_original' => json_encode($object),
                                     'estado' => 'activo',
-                                    'oficina_id' => auth()->user()->oficina_id,
+                                    'oficina_id' => $user->oficina_id,
                                     'tramite_id' => $tramite_inspeccion?->id,
-                                    'creado_por' => auth()->id()
+                                    'creado_por' => $user->id
                                 ]);
 
     }
 
-    public function desglose($avaluos, $tramite_inspeccion, $tramite_desglose, $predio_padre_id){
+    public function desglose($avaluos, $tramite_inspeccion, $tramite_desglose, $predio_padre_id, $user){
 
         $datos_control = (object)[];
 
         $datos_control->tramite_inspeccion = $tramite_inspeccion?->año . '-' . $tramite_inspeccion?->folio . '-' . $tramite_inspeccion?->usuario;
         $datos_control->tramite_desglose = $tramite_desglose?->año . '-' . $tramite_desglose?->folio . '-' . $tramite_desglose?->usuario;
         $datos_control->titular_cargo = 'Director de catastro';
-        $datos_control->impreso_por = auth()->user()->name;
+        $datos_control->impreso_por = $user->name;
         $datos_control->impreso_en = now()->format('d/m/Y H:i:s');
         $datos_control->numero_avaluos = count($avaluos);
         $datos_control->numero_avaluos_letra = $this->formatter->toWords($datos_control->numero_avaluos);
-        $datos_control->valuador = auth()->user()->name;
-        $datos_control->titular = auth()->user()->oficina->titular;
+        $datos_control->valuador = $user->name;
+        $datos_control->titular = $user->oficina->titular;
 
         $avaluos = Avaluo::with('predioAvaluo', 'predioPadron')->whereKey($avaluos)->get();
 
@@ -239,15 +239,15 @@ class NotificacionValorCatastralController extends Controller
 
         $object->avaluos = $this->avaluos($avaluos);
 
-        if(auth()->user()->hasRole(['Convenio municipal'])){
+        if($user->hasRole(['Convenio municipal'])){
 
-            $datos_control->autoridad_municipal = auth()->user()->oficina->autoridad_municipal;
+            $datos_control->autoridad_municipal = $user->oficina->autoridad_municipal;
 
             $object->datos_control = $datos_control;
 
-            $certificacion = $this->certificacionConvenioMunicipal($datos_control, $object);
+            $certificacion = $this->certificacionConvenioMunicipal($datos_control, $object, $user);
 
-        }elseif(auth()->user()->oficina->oficina == 101 || $tramite_inspeccion->oficina->oficina === 101){
+        }elseif($user->oficina->oficina == 101 || $tramite_inspeccion->oficina->oficina === 101){
 
             $datos_control->jefe_departamento = $this->jefe_departamento_valuacion->name;
 
@@ -257,15 +257,15 @@ class NotificacionValorCatastralController extends Controller
 
             $object->datos_control = $datos_control;
 
-            $certificacion = $this->certificacionOficinaCentral($datos_control, $object, $tramite_inspeccion);
+            $certificacion = $this->certificacionOficinaCentral($datos_control, $object, $tramite_inspeccion, $user);
 
         }else{
 
-            $datos_control->titular_cargo = auth()->user()->oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR(A) DE RENTAS';
+            $datos_control->titular_cargo = $user->oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR(A) DE RENTAS';
 
             $object->datos_control = $datos_control;
 
-            $certificacion = $this->certificacionInteriorEstado($datos_control, $object, $tramite_inspeccion);
+            $certificacion = $this->certificacionInteriorEstado($datos_control, $object, $tramite_inspeccion, $user);
 
         }
 
@@ -300,17 +300,17 @@ class NotificacionValorCatastralController extends Controller
 
     }
 
-    public function fusion($avaluos, $tramite_inspeccion, $predios_fusionantes){
+    public function fusion($avaluos, $tramite_inspeccion, $predios_fusionantes, $user){
 
         $datos_control = (object)[];
 
         $datos_control->tramite_inspeccion = $tramite_inspeccion?->año . '-' . $tramite_inspeccion?->folio . '-' . $tramite_inspeccion?->usuario;
-        $datos_control->impreso_por = auth()->user()->name;
+        $datos_control->impreso_por = $user->name;
         $datos_control->impreso_en = now()->format('d/m/Y H:i:s');
         $datos_control->numero_avaluos = count($avaluos);
         $datos_control->numero_avaluos_letra = $this->formatter->toWords($datos_control->numero_avaluos);
-        $datos_control->valuador = auth()->user()->name;
-        $datos_control->titular = auth()->user()->oficina->titular;
+        $datos_control->valuador = $user->name;
+        $datos_control->titular = $user->oficina->titular;
 
         $avaluos = Avaluo::with('predioAvaluo', 'predioPadron')->whereKey($avaluos)->get();
 
@@ -330,15 +330,15 @@ class NotificacionValorCatastralController extends Controller
 
         $object->avaluos = $this->avaluos($avaluos);
 
-        if(auth()->user()->hasRole(['Convenio municipal'])){
+        if($user->hasRole(['Convenio municipal'])){
 
-            $datos_control->autoridad_municipal = auth()->user()->oficina->autoridad_municipal;
+            $datos_control->autoridad_municipal = $user->oficina->autoridad_municipal;
 
             $object->datos_control = $datos_control;
 
-            $certificacion = $this->certificacionConvenioMunicipal($datos_control, $object);
+            $certificacion = $this->certificacionConvenioMunicipal($datos_control, $object, $user);
 
-        }elseif(auth()->user()->oficina->oficina == 101 || $tramite_inspeccion->oficina->oficina === 101){
+        }elseif($user->oficina->oficina == 101 || $tramite_inspeccion->oficina->oficina === 101){
 
             $datos_control->jefe_departamento = $this->jefe_departamento_valuacion->name;
 
@@ -348,15 +348,15 @@ class NotificacionValorCatastralController extends Controller
 
             $object->datos_control = $datos_control;
 
-            $certificacion = $this->certificacionOficinaCentral($datos_control, $object, $tramite_inspeccion);
+            $certificacion = $this->certificacionOficinaCentral($datos_control, $object, $tramite_inspeccion, $user);
 
         }else{
 
-            $datos_control->titular_cargo = auth()->user()->oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR(A) DE RENTAS';
+            $datos_control->titular_cargo = $user->oficina->tipo == 'ADMINISTRACIÓN' ? 'ADMINISTRADOR' : 'RECEPTOR(A) DE RENTAS';
 
             $object->datos_control = $datos_control;
 
-            $certificacion = $this->certificacionInteriorEstado($datos_control, $object, $tramite_inspeccion);
+            $certificacion = $this->certificacionInteriorEstado($datos_control, $object, $tramite_inspeccion, $user);
 
         }
 

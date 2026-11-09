@@ -7,7 +7,6 @@ use App\Enums\Tramites\AvaluoPara;
 use App\Exceptions\GeneralException;
 use App\Http\Controllers\Certificaciones\NotificacionValorCatastralController;
 use App\Models\Avaluo;
-use App\Models\Predio;
 use App\Traits\Valuacion\ImpresionTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -127,7 +126,7 @@ class CambioMunicipio extends Component
 
                     /* $this->tramite_inspeccion->predios()->attach($this->predio_padre->id); */
 
-                    return (new NotificacionValorCatastralController())->general([$this->avaluo->id], $this->tramite_inspeccion);
+                    return (new NotificacionValorCatastralController())->general([$this->avaluo->id], $this->tramite_inspeccion, auth()->user());
 
                 });
 
