@@ -133,9 +133,13 @@
 
                 @endif
 
-                <p class="parrafo">
-                    Tipo de predio: <strong>{{ $predio->tipo_predio == 1 ? 'urbano' : 'rustico'}}</strong>
-                </p>
+                @if(isset($predio->tipo_predio))
+
+                    <p class="parrafo">
+                        Tipo de predio: <strong>{{ $predio->tipo_predio == 1 ? 'urbano' : 'rustico'}}</strong>
+                    </p>
+
+                @endif
 
             </td>
         </tr>

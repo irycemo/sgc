@@ -101,6 +101,12 @@ class SapService{
 
         }
 
+        if(! isset($data['ES_OPAG'])){
+
+            throw new GeneralException("Error de comunicación con SAP.");
+
+        }
+
         return $data;
 
     }
