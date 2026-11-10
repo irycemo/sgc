@@ -27,7 +27,7 @@
                     <td class=" px-2 w-full">{{ $audit->user?->name }}</td>
                     <td class=" px-2 w-full">{{ str_replace("App\Models\\", "", $audit->auditable_type) }}</td>
                     <td class=" px-2 w-full">{{ Str::ucfirst($audit->event) }}: {{ $audit->tags }}</td>
-                    <td class=" px-2 w-full">{{ $audit->tramite ? $audit->tramite->numeroControl() : 'N/A' }}</td>
+                    <td class=" px-2 w-full">{{ $audit->tramite ? $audit->tramite->folioTramite() : 'N/A' }}</td>
                     <td class=" px-2 w-full">{{ $audit->created_at }}</td>
                     <td class=" px-2 w-full">
                         <livewire:comun.audits.ver-audit :audit="$audit" />
