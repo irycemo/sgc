@@ -149,7 +149,7 @@ class Impresion extends Component
 
                     $avaluo_ids = $this->avaluos->pluck('id');
 
-                    return (new NotificacionValorCatastralController())->general($avaluo_ids, null);
+                    return (new NotificacionValorCatastralController())->general($avaluo_ids, null, auth()->user());
 
                 });
 

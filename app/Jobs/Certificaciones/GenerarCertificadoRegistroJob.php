@@ -125,14 +125,22 @@ class GenerarCertificadoRegistroJob implements ShouldQueue
 
         $clave = config('services.ses.ruta_pdfs_certificaciones') . $filename;
 
-        Storage::disk('s3')->put(
-            $clave,
-            $pdf->output(),
-            [
-                'ContentType' => 'application/pdf',
-                'ContentDisposition' => 'attachment; filename="' . $filename . '"',
-            ]
-        );
+        if(app()->isProduction()){
+
+            Storage::disk('s3')->put(
+                $clave,
+                $pdf->output(),
+                [
+                    'ContentType' => 'application/pdf',
+                    'ContentDisposition' => 'attachment; filename="' . $filename . '"',
+                ]
+            );
+
+        }else{
+
+            Storage::put('certificaciones/' . $filename, $pdf->output());
+
+        }
 
         $this->procesarRelacionFile($certificacion, $filename);
 
