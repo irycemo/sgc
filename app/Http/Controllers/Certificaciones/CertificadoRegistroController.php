@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Certificaciones;
 
 use App\Enums\Certificaciones\CertificacionesEnum;
+use App\Models\File;
 use App\Http\Controllers\Controller;
 use App\Models\Certificacion;
 use App\Models\Oficina;
@@ -127,6 +128,30 @@ class CertificadoRegistroController extends Controller
     public function reimprimirCertificado(Certificacion $certificacion)
     {
 
+        if($certificacion->pdf){
+
+            File::where('fileable_type', Certificacion::class)
+                        ->where('fileable_id', $certificacion->id)
+                        ->where('descripcion', 'pdf')
+                        ->get()
+                        ->each(function(File $anterior){
+
+                            if(app()->isProduction()){
+
+                                Storage::disk('s3')->delete(config('services.ses.ruta_pdfs_certificaciones'). $anterior->url);
+
+                            }else{
+
+                                Storage::disk('s3')->delete('certificaciones/'. $anterior->url);
+
+                            }
+
+                            $anterior->delete();
+
+                        });
+
+        }
+
         $object = json_decode($certificacion->cadena_original);
 
         $qr = $this->generadorQr('verificacion_certificacion', $certificacion->uuid);
@@ -147,6 +172,32 @@ class CertificadoRegistroController extends Controller
         $canvas->page_text(480, 745, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
 
         $canvas->page_text(35, 745, $certificacion->tipo->label() . '-' . $certificacion->año .'-' . $certificacion->folio, null, 9, array(1, 1, 1));
+
+        $filename = $certificacion->tipo . '-' . $certificacion->folio . '_' . now()->format('Ymd_His') . '.pdf';
+
+        if(app()->isProduction()){
+
+            Storage::disk('s3')->put(
+                config('services.ses.ruta_pdfs_certificaciones'),
+                $pdf->output(),
+                [
+                    'ContentType' => 'application/pdf',
+                    'ContentDisposition' => 'attachment; filename="' . $filename . '"',
+                ]
+            );
+
+        }else{
+
+            Storage::put('certificaciones/' . $filename, $pdf->output());
+
+        }
+
+        File::create([
+            'fileable_type' => Certificacion::class,
+            'fileable_id' => $certificacion->id,
+            'url' => $filename,
+            'descripcion' => 'pdf',
+        ]);
 
         return $pdf;
 

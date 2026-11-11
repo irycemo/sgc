@@ -111,11 +111,12 @@ class Certificaciones extends Component
 
                 if(app()->isProduction()){
 
-                    return redirect(Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_pdfs_certificaciones') . $modelo->pdf->url, now()->addMinutes(10)));
+                    $this->js('window.open(\' '. Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_pdfs_certificaciones') . $modelo->pdf->url, now()->addMinutes(10)) . '\', \'_blank\');');
+
 
                 }else{
 
-                    return redirect(Storage::disk('certificaciones')->url($modelo->pdf->url));
+                    $this->js('window.open(\' '. Storage::disk('certificaciones')->url($modelo->pdf->url) . '\', \'_blank\');');
 
                 }
 

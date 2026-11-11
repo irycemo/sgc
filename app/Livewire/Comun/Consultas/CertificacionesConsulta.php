@@ -4,12 +4,13 @@ namespace App\Livewire\Comun\Consultas;
 
 use App\Enums\Certificaciones\CertificacionesEnum;
 use App\Http\Controllers\Certificaciones\CedulaActualizcacionController;
-use App\Http\Controllers\Certificaciones\CertificacionesController;
 use App\Http\Controllers\Certificaciones\CertificadoHistoriaController;
 use App\Http\Controllers\Certificaciones\CertificadoNegativoController;
 use App\Http\Controllers\Certificaciones\CertificadoRegistroController;
+use App\Http\Controllers\Certificaciones\NotificacionValorCatastralController;
 use App\Models\Certificacion;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -21,11 +22,26 @@ class CertificacionesConsulta extends Component
 
     public function imprimirCertificacion(Certificacion $modelo){
 
+        if($modelo->pdf){
+
+            if(app()->isProduction()){
+
+                $this->js('window.open(\' '. Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_pdfs_certificaciones') . $modelo->pdf->url, now()->addMinutes(10)) . '\', \'_blank\');');
+
+
+            }else{
+
+                $this->js('window.open(\' '. Storage::disk('certificaciones')->url($modelo->pdf->url) . '\', \'_blank\');');
+
+            }
+
+        }
+
         try {
 
             if($modelo->tipo == CertificacionesEnum::NOTIFICACION_VALOR_CATASTRAL){
 
-                $pdf = (new CertificacionesController())->reimprimirNotifiacionValorCatastral($modelo);
+                $pdf = (new NotificacionValorCatastralController())->reimprimirNotifiacionValorCatastral($modelo);
 
             }elseif($modelo->tipo == CertificacionesEnum::CERTIFICADO_HISTORIA){
 
