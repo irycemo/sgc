@@ -439,7 +439,7 @@ class NotificacionValorCatastralController extends Controller
         if(app()->isProduction()){
 
             Storage::disk('s3')->put(
-                config('services.ses.ruta_pdfs_certificaciones'),
+                config('services.ses.ruta_pdfs_certificaciones') . $filename,
                 $pdf->output(),
                 [
                     'ContentType' => 'application/pdf',
