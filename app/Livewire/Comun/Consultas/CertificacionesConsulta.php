@@ -62,6 +62,8 @@ class CertificacionesConsulta extends Component
 
             }
 
+            $modelo->refresh();
+
             if(app()->isProduction()){
 
                 $this->js('window.open(\' '. Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_pdfs_certificaciones') . $modelo->pdf->url, now()->addMinutes(10)) . '\', \'_blank\');');
