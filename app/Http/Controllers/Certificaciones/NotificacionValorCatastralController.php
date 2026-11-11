@@ -434,7 +434,7 @@ class NotificacionValorCatastralController extends Controller
 
         $canvas->page_text(35, 745, $certificacion->tipo->label() . '-' . $certificacion->año .'-' . $certificacion->folio, null, 9, array(1, 1, 1));
 
-        $filename = $certificacion->tipo->label() . '-' . $certificacion->folio . '_' . now()->format('Ymd_His') . '.pdf';
+        $filename = 'certificado_registro-' . $certificacion->folio . '_' . now()->format('Ymd_His') . '.pdf';
 
         if(app()->isProduction()){
 
