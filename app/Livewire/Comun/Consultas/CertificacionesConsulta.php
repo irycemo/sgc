@@ -28,12 +28,13 @@ class CertificacionesConsulta extends Component
 
                 $this->js('window.open(\' '. Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_pdfs_certificaciones') . $modelo->pdf->url, now()->addMinutes(10)) . '\', \'_blank\');');
 
-
             }else{
 
                 $this->js('window.open(\' '. Storage::disk('certificaciones')->url($modelo->pdf->url) . '\', \'_blank\');');
 
             }
+
+            return;
 
         }
 
@@ -41,30 +42,35 @@ class CertificacionesConsulta extends Component
 
             if($modelo->tipo == CertificacionesEnum::NOTIFICACION_VALOR_CATASTRAL){
 
-                $pdf = (new NotificacionValorCatastralController())->reimprimirNotifiacionValorCatastral($modelo);
+                (new NotificacionValorCatastralController())->reimprimirNotifiacionValorCatastral($modelo);
 
             }elseif($modelo->tipo == CertificacionesEnum::CERTIFICADO_HISTORIA){
 
-                $pdf = (new CertificadoHistoriaController())->reimprimirCertificado($modelo);
+                (new CertificadoHistoriaController())->reimprimirCertificado($modelo);
 
             }elseif($modelo->tipo == CertificacionesEnum::CEDULA_CATASTRAL){
 
-                $pdf = (new CedulaActualizcacionController())->reimprimirCedula($modelo);
+                (new CedulaActualizcacionController())->reimprimirCedula($modelo);
 
             }elseif($modelo->tipo == CertificacionesEnum::CERTIFICADO_NEGATIVO){
 
-                $pdf = (new CertificadoNegativoController())->reimprimirCertificado($modelo);
+                (new CertificadoNegativoController())->reimprimirCertificado($modelo);
 
             }elseif($modelo->tipo == CertificacionesEnum::CERTIFICADO_REGISTRO){
 
-                $pdf = (new CertificadoRegistroController())->reimprimirCertificado($modelo);
+                (new CertificadoRegistroController())->reimprimirCertificado($modelo);
 
             }
 
-            return response()->streamDownload(
-                fn () => print($pdf->output()),
-                $modelo->tipo->label() . '-' . $modelo->año . '-' .$modelo->folio . '.pdf'
-            );
+            if(app()->isProduction()){
+
+                $this->js('window.open(\' '. Storage::disk('s3')->temporaryUrl(config('services.ses.ruta_pdfs_certificaciones') . $modelo->pdf->url, now()->addMinutes(10)) . '\', \'_blank\');');
+
+            }else{
+
+                $this->js('window.open(\' '. Storage::disk('certificaciones')->url($modelo->pdf->url) . '\', \'_blank\');');
+
+            }
 
         } catch (\Throwable $th) {
 
