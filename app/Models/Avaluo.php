@@ -234,4 +234,10 @@ class Avaluo extends Model implements Auditable
 
     }
 
+    public function folioAvaluo(){
+
+        return $this->año . '-' . $this->folio . '-' . $this->usuario;
+
+    }
+
 }

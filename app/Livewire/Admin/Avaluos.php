@@ -276,7 +276,7 @@ class Avaluos extends Component
 
         $predio->load('propietarios.persona');
 
-        $pdf = Pdf::loadView('avaluos.avaluo', compact('predio'));
+        $pdf = Pdf::loadView('avaluos.constancia_valor_catastral', compact('predio'));
 
         $pdf->render();
 
@@ -292,7 +292,7 @@ class Avaluos extends Component
 
         return response()->streamDownload(
             fn () => print($pdf),
-            'avaluo.pdf'
+            'constancia_valor_catastral.pdf'
         );
 
     }

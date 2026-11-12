@@ -6,7 +6,7 @@
         <tr style="text-align: left;">
             <td style="width: 50%;">
 
-                Superficie total de terreno: <strong>{{ $predio->superficie_total_terreno ?? 0 }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif</strong>
+                Superficie total de terreno: <strong>{{ $predio->superficie_total_terreno_formateada ?? 0 }} @if(isset($predio->tipo_predio) && $predio->tipo_predio == 2) Hectareas @else Metros cuadrados @endif</strong>
 
             </td>
             <td style="width: 50%;">
