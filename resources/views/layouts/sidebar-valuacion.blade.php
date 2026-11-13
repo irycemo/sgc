@@ -92,7 +92,7 @@
 
                 <a href="{{ route('impresion_avaluos') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
-                    Impresión
+                    Impresión de notificación
 
                 </a>
 

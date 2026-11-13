@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1\Requerimientos;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Models\Certificacion;
 use App\Models\Requerimiento;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -25,6 +27,18 @@ class CrearRequerimientoController extends Controller
         try {
 
             $requerimiento = null;
+
+            $certificado = Certificacion::find($validated['certificacion_id']);
+
+            $fecha_creacion_certificado = Carbon::parse($certificado->created_at);
+
+            $fecha_mas_mes = $fecha_creacion_certificado->copy()->addMonth();
+
+            if(! now()->between($fecha_creacion_certificado, $fecha_mas_mes)){
+
+                throw new GeneralException('Ya ha pasado un mes desde la elaboración del certificado, no es posible hacer requerimientos.');
+
+            }
 
             DB::transaction(function () use ($validated, &$requerimiento){
 
