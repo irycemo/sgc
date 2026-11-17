@@ -4,6 +4,7 @@ use App\Http\Controllers\Preguntas\PreguntasController;
 use App\Livewire\Consultas\ConsultaPadron\ConsultaPadron;
 use App\Livewire\Consultas\Historico\Historico;
 use App\Livewire\Consultas\Oficinas\VerOficina;
+use App\Livewire\Consultas\PlanosValores\PlanosValores;
 use App\Livewire\Consultas\Preguntas\NuevaPregunta;
 use App\Livewire\Consultas\Preguntas\Preguntas;
 use App\Livewire\Consultas\Reportes\Reportes;
@@ -20,6 +21,8 @@ Route::group([], function(){
     Route::get('historico', Historico::class)->middleware('permission:Consulta Padrón')->name('historico');
 
     Route::get('preguntas_frecuentes', Preguntas::class)->middleware('permission:Preguntas')->name('preguntas_frecuentes');
+
+    Route::get('planos_valores', PlanosValores::class)->middleware('permission:Preguntas')->name('planos_valores');
 
     Route::get('nueva_pregunta/{pregunta?}', NuevaPregunta::class)->middleware('permission:Preguntas')->name('nueva_pregunta');
 
