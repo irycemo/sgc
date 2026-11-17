@@ -73,8 +73,8 @@
                 </div>
 
                 {{-- Nombre de la app --}}
-                <p class="font-semibold text-2xl text-rojo hidden md:block">{{ env('APP_NAME') }}</p>
-                <p class="font-semibold text-2xl text-rojo md:hidden">SGC</p>
+                <p class="font-semibold text-2xl text-rojo dark:text-gray-200 hidden md:block">{{ env('APP_NAME') }}</p>
+                <p class="font-semibold text-2xl text-rojo dark:text-gray-200 md:hidden">SGC</p>
 
                 {{-- Controles + perfil --}}
                 <div class="ml-3">
@@ -95,44 +95,56 @@
 
                 <span class="w-px h-8 bg-gray-200 dark:bg-gray-600 shrink-0 mx-1 sm:mx-2" aria-hidden="true"></span>
 
-                @foreach($sgcAreas as $area)
+                <div class="flex flex-col justify-center items-center mx-auto">
 
-                    @can($area['can'])
+                    <p class="font-semibold text-xl text-rojo dark:text-gray-200 hidden md:block">{{ env('APP_NAME') }}</p>
 
-                        <div x-data="{ open_menu: false }" @click.outside="open_menu = false" class="relative shrink-0">
+                    <p class="font-semibold text-2xl text-rojo dark:text-gray-200 md:hidden">SGC</p>
 
-                            <button type="button" @click="open_menu = !open_menu"
-                                    class="flex items-center gap-1 px-2 sm:px-3 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-rojo">
+                    <div class="flex">
 
-                                {{ $area['label'] }}
+                        @foreach($sgcAreas as $area)
 
-                                <svg class="h-4 w-4 transition-transform" :class="open_menu ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
+                            @can($area['can'])
 
-                            </button>
+                                <div x-data="{ open_menu: false }" @click.outside="open_menu = false" class="relative shrink-0">
 
-                            <div x-cloak x-show="open_menu"
-                                 x-transition:enter="transition duration-150 ease-out"
-                                 x-transition:enter-start="opacity-0 -translate-y-1"
-                                 x-transition:enter-end="opacity-100 translate-y-0"
-                                 x-transition:leave="transition duration-100 ease-in"
-                                 x-transition:leave-end="opacity-0"
-                                 class="absolute left-0 mt-2 z-50 w-64 max-h-[70vh] overflow-y-auto rounded-lg shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black/5 dark:ring-white/10 py-2">
+                                    <button type="button" @click="open_menu = !open_menu"
+                                            class="flex items-center gap-1 px-2 sm:px-3 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-rojo">
 
-                                <div class="sgc-flatten">
+                                        {{ $area['label'] }}
 
-                                    @include($area['partial'])
+                                        <svg class="h-4 w-4 transition-transform" :class="open_menu ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                        </svg>
+
+                                    </button>
+
+                                    <div x-cloak x-show="open_menu"
+                                        x-transition:enter="transition duration-150 ease-out"
+                                        x-transition:enter-start="opacity-0 -translate-y-1"
+                                        x-transition:enter-end="opacity-100 translate-y-0"
+                                        x-transition:leave="transition duration-100 ease-in"
+                                        x-transition:leave-end="opacity-0"
+                                        class="absolute left-0 mt-2 z-50 w-64 max-h-[70vh] overflow-y-auto rounded-lg shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black/5 dark:ring-white/10 py-2">
+
+                                        <div class="sgc-flatten">
+
+                                            @include($area['partial'])
+
+                                        </div>
+
+                                    </div>
 
                                 </div>
 
-                            </div>
+                            @endcan
 
-                        </div>
+                        @endforeach
 
-                    @endcan
+                    </div>
 
-                @endforeach
+                </div>
 
                 {{-- Controles + perfil --}}
                 <div class="ml-auto shrink-0 pl-1">
@@ -164,15 +176,32 @@
                 try { localStorage.setItem(key, value); } catch (e) { /* sin persistencia */ }
             };
 
+            /* Breakpoint md de Tailwind (768px): por debajo, el layout se
+               fuerza a modo lateral. matchMedia reacciona a cualquier
+               cambio de tamaño que cruce el breakpoint. */
+            const mq_md = window.matchMedia('(min-width: 768px)');
+
             return {
                 mode: read('sgc-layout', 'sidebar'),
                 theme: read('sgc-theme', (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')),
+                narrow: !mq_md.matches,
 
-                init() { this.apply(); },
+                init() {
+                    this.apply();
+
+                    /* Cambio de tamaño de pantalla: por debajo de md se
+                       aplica modo lateral SIN sobreescribir la preferencia
+                       guardada ('sgc-layout'); al volver a pantalla ancha
+                       se restaura el modo elegido por el usuario. */
+                    const onResize = (e) => { this.narrow = !e.matches; this.apply(); };
+                    mq_md.addEventListener
+                        ? mq_md.addEventListener('change', onResize)
+                        : mq_md.addListener(onResize); /* WebKit antiguo */
+                },
 
                 apply() {
                     const root = document.documentElement;
-                    root.classList.toggle('sgc-mode-topbar', this.mode === 'topbar');
+                    root.classList.toggle('sgc-mode-topbar', this.mode === 'topbar' && !this.narrow);
                     root.classList.toggle('dark', this.theme === 'dark');
                 },
 
