@@ -34,7 +34,7 @@ class FichaTecnicaJobs implements OnEachRow, WithHeadingRow, WithValidation, Wit
     {
         return [
             'registro' => 'required|numeric|min:1',
-            'region' => 'required|numeric|min:1',
+            'region' => 'required|numeric|in:1',
             'municipio' => 'required|numeric|min:1',
             'localidad' => 'required|numeric|min:1',
             'sector' => 'required|numeric|min:1',
