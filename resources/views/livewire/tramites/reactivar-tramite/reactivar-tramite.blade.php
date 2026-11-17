@@ -2,19 +2,19 @@
 
     <x-header>Reactivación de trámites</x-header>
 
-    <div class="bg-white p-4 rounded-lg mb-5 shadow-lg">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg mb-5 shadow-lg">
 
         <div class="flex-auto text-center mb-3">
 
             <div >
 
-                <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite</Label>
+                <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Trámite</Label>
 
             </div>
 
             <div class="inline-flex">
 
-                <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
+                <select class="bg-white dark:bg-gray-800 rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
                     @foreach ($años as $año)
 
                         <option value="{{ $año }}">{{ $año }}</option>
@@ -22,9 +22,9 @@
                     @endforeach
                 </select>
 
-                <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
+                <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
 
-                <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
+                <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
 
             </div>
 
@@ -51,7 +51,7 @@
 
             <div class="flex flex-col lg:flex-row gap-3 justify-center text-sm mb-3">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Trámite</strong>
 
@@ -59,7 +59,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Servicio</strong>
 
@@ -67,7 +67,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Solicitante</strong>
 
@@ -104,7 +104,7 @@
 
     @if($tramite)
 
-        <div class="bg-white p-4 rounded-lg mb-5 shadow-lg text-sm my-3">
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg mb-5 shadow-lg text-sm my-3">
 
             @if(
                     in_array($tramite->servicio->clave_ingreso, ['DM32', 'DM35', 'D927', 'D926', 'D925', 'D924', 'DM31','D727', 'D726']) ||
@@ -115,7 +115,7 @@
 
                     <table class="w-full lg:w-1/2 rounded-lg mx-auto">
 
-                        <thead class="text-left bg-gray-100">
+                        <thead class="text-left bg-gray-100 dark:bg-gray-900">
 
                             <tr>
 
@@ -201,7 +201,7 @@
 
                     <table class="w-full lg:w-1/2 rounded-lg mx-auto">
 
-                        <thead class="text-left bg-gray-100">
+                        <thead class="text-left bg-gray-100 dark:bg-gray-900">
 
                             <tr>
 
@@ -282,7 +282,7 @@
 
             <x-input-group for="observaciones" label="" :error="$errors->first('observaciones')">
 
-                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico posible acerca del motivo por el cual se cancela el certificado"></textarea>
+                <textarea class="bg-white dark:bg-gray-800 rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico posible acerca del motivo por el cual se cancela el certificado"></textarea>
 
             </x-input-group>
 

@@ -8,7 +8,7 @@
 
     </div>
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
+    <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-xl">
 
         <div class="w-full md:w-1/2 lg:w-1/4 mx-auto items-center text-center">
 
@@ -47,7 +47,7 @@
 
     @if($predio)
 
-        <div class="mb-5 bg-white rounded-lg p-2 shadow-lg flex justify-end gap-4">
+        <div class="mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg flex justify-end gap-4">
 
             <x-button-green
                 wire:click="guardar"

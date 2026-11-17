@@ -2,19 +2,19 @@
 
     <x-header>Notificación de avaluos</x-header>
 
-    <div class="bg-white p-4 rounded-lg mb-5 shadow-lg">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg mb-5 shadow-lg">
 
         <div class="flex-auto text-center mb-3">
 
             <div >
 
-                <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite de inspección ocular</Label>
+                <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Trámite de inspección ocular</Label>
 
             </div>
 
             <div class="inline-flex">
 
-                <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
+                <select class="bg-white dark:bg-gray-800 rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
                     @foreach ($años as $año)
 
                         <option value="{{ $año }}">{{ $año }}</option>
@@ -22,9 +22,9 @@
                     @endforeach
                 </select>
 
-                <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
+                <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
 
-                <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
+                <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
 
             </div>
 
@@ -69,7 +69,7 @@
 
     @if($this->avaluos)
 
-        <div class="relative overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+        <div class="relative overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
             <x-table>
 
@@ -131,7 +131,7 @@
 
                         <tr>
                             <td colspan="6">
-                                <p class="text-center text-xl tracking-widest text-gray-500 bg-white py-5"> No hay resultados.</p>
+                                <p class="text-center text-xl tracking-widest text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 py-5"> No hay resultados.</p>
                             </td>
                         </tr>
 
@@ -175,7 +175,7 @@
 
                 <div>
 
-                    <input type="date" class="bg-white rounded text-sm w-full" wire:model.live="fecha_notificacion">
+                    <input type="date" class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model.live="fecha_notificacion">
 
                 </div>
 

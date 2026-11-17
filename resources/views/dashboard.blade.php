@@ -8,7 +8,7 @@
 
             <x-header>Gráfica de trámites</x-header>
 
-            <div class="bg-white rounded-lg p-2 shadow-lg">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg">
 
                 <canvas id="tramitesChart" style="width: 100%; height: 400px;"></canvas>
 
@@ -42,7 +42,7 @@
 
     <x-header class="mt-5">Nuevas preguntas frecuentes</x-header>
 
-    <div class="bg-white shadow-xl rounded-lg p-4 mt-5" wire:loading.class.delaylongest="opacity-50">
+    <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-4 mt-5" wire:loading.class.delaylongest="opacity-50">
 
         <div class="w-full lg:w-1/2 mx-auto ">
 
@@ -50,7 +50,7 @@
 
                 @foreach ($preguntas as $item)
 
-                    <li class="cursor-pointer hover:bg-gray-100 rounded-lg text-gray-700 border border-gray-300 flex justify-between">
+                    <li class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700 flex justify-between">
 
                         <a href="{{ route('preguntas_frecuentes') . '?search=' . $item->titulo }}" class="w-full h-full p-3 flex justify-between items-center">
 
@@ -62,9 +62,9 @@
 
                 @endforeach
 
-                <li class="cursor-pointer bg-gray-200 rounded-lg text-gray-700 border border-gray-400 flex justify-between ">
+                <li class="cursor-pointer bg-gray-200 dark:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 border border-gray-400 dark:border-gray-600 flex justify-between ">
 
-                    <a href="{{ route('preguntas_frecuentes') }}" class="w-full h-full p-1 flex justify-center items-center text-gray-700">
+                    <a href="{{ route('preguntas_frecuentes') }}" class="w-full h-full p-1 flex justify-center items-center text-gray-700 dark:text-gray-300">
 
                        Ver mas
 
@@ -158,6 +158,12 @@
                 datasets:dataArray
             }
 
+            const themeColors = () => document.documentElement.classList.contains('dark')
+                ? { ticks: '#a1a1aa', legend: '#e4e4e7' }   // zinc-400 / zinc-200 sobre fondo oscuro
+                : { ticks: '#52525b', legend: '#3f3f46' };  // zinc-600 / zinc-700 sobre fondo claro
+
+            const tc = themeColors();
+
             const config = {
                 type: 'line',
                 data: data,
@@ -165,8 +171,12 @@
                     locale:'es-MX',
                     responsive: true,
                     scales:{
+                        x:{
+                            ticks:{ color: tc.ticks }
+                        },
                         y:{
                             ticks:{
+                                    color: tc.ticks,
                                     display: window.screen.width > 500,
                                     callback:(value, index, values) => {
                                         return new Intl.NumberFormat('es-MX', {
@@ -182,6 +192,9 @@
                     plugins: {
                         legend: {
                             position: 'top',
+                            labels: {
+                                color: tc.legend
+                            }
                         },
                         title: {
                             display: false,
@@ -202,6 +215,17 @@
                 document.getElementById('tramitesChart'),
                 config
             );
+
+            /* Reajusta los colores de la gráfica al cambiar el tema en vivo */
+            const applyChartTheme = () => {
+                const c = themeColors();
+                if (myChart.options.scales.x) myChart.options.scales.x.ticks.color = c.ticks;
+                if (myChart.options.scales.y) myChart.options.scales.y.ticks.color = c.ticks;
+                if (myChart.options.plugins.legend.labels) myChart.options.plugins.legend.labels.color = c.legend;
+                myChart.update();
+            };
+            new MutationObserver(applyChartTheme)
+                .observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
         </script>
 

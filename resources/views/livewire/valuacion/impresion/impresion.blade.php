@@ -2,7 +2,7 @@
 
     <x-header>Impresión de notificación de valor catastral</x-header>
 
-    <div class="bg-white rounded-lg shadow-xl p-4 mb-5">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4 mb-5">
 
         <x-input-group for="avaluo_para" label="Avalúo para" :error="$errors->first('avaluo_para')" class="w-fit mx-auto">
 

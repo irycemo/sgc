@@ -4,7 +4,7 @@
 
     <x-h4>Datos generales</x-h4>
 
-    <div class="p-4 bg-white rounded-lg mb-5 text-sm">
+    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg mb-5 text-sm">
 
         @if($editar)
 
@@ -19,7 +19,7 @@
 
                     <div>
 
-                        <input type="text" class="bg-white rounded text-sm w-full" wire:model="titular">
+                        <input type="text" class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model="titular">
 
                     </div>
 
@@ -40,7 +40,7 @@
 
                     <div>
 
-                        <input type="email" class="bg-white rounded text-sm w-full" wire:model="email">
+                        <input type="email" class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model="email">
 
                     </div>
 
@@ -61,7 +61,7 @@
 
                     <div>
 
-                        <input type="text" class="bg-white rounded text-sm w-full" wire:model="telefonos">
+                        <input type="text" class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model="telefonos">
 
                     </div>
 
@@ -82,7 +82,7 @@
 
                     <div>
 
-                        <input type="text" class="bg-white rounded text-sm w-full" wire:model="autoridad_municipal">
+                        <input type="text" class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model="autoridad_municipal">
 
                     </div>
 
@@ -103,7 +103,7 @@
 
                     <div>
 
-                        <input type="text" class="bg-white rounded text-sm w-full" wire:model="valuador_municipal">
+                        <input type="text" class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model="valuador_municipal">
 
                     </div>
 
@@ -126,7 +126,7 @@
 
                 <div>
 
-                    <textarea rows="3" class="bg-white rounded text-sm w-full" wire:model="ubicacion"></textarea>
+                    <textarea rows="3" class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model="ubicacion"></textarea>
 
                 </div>
 
@@ -175,19 +175,19 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-2 mb-3">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <p><strong>Municipio:</strong> {{ $oficina->municipio }}</p>
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <p><strong>Número de oficina:</strong> {{ $oficina->oficina }}</p>
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <p><strong>Localidad:</strong> {{ $oficina->localidad }}</p>
 
@@ -195,7 +195,7 @@
 
                 @if($oficina->cabecera)
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                         <p><strong>Cabecera municipal:</strong> {{ $oficina->cabeceraMunicipal->nombre }}</p>
 
@@ -203,19 +203,19 @@
 
                 @endif
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <p><strong>Titular:</strong> {{ $oficina->titular }}</p>
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <p><strong>Autoridad municipal:</strong> {{ $oficina->autoridad_municipal }}</p>
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <p><strong>Valuador municipal:</strong> {{ $oficina->valuador_municipal }}</p>
 
@@ -223,7 +223,7 @@
 
                 @if($sectores)
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                         <p>
 
@@ -240,13 +240,13 @@
 
                 @endif
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <p><strong>Email:</strong> {{ $oficina->email }}</p>
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <p><strong>Teléfonos:</strong> {{ $oficina->telefonos }}</p>
 
@@ -254,7 +254,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <p><strong>Dirección:</strong> {{ $oficina->ubicacion }}</p>
 
@@ -266,13 +266,13 @@
 
     <x-h4>Usuarios</x-h4>
 
-    <div class="p-4 bg-white rounded-lg mb-5 overflow-auto">
+    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg mb-5 overflow-auto">
 
         <table class="w-full table">
 
-            <thead class="border-b border-gray-300 bg-gray-50">
+            <thead class="border-b border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
 
-                <tr class="text-xs font-medium text-gray-600 uppercase text-left traling-wider">
+                <tr class="text-xs font-medium text-gray-600 dark:text-gray-400 uppercase text-left traling-wider">
                     <th class="px-3 py-3">Clave</th>
                     <th class="px-3 py-3">Nombre</th>
                     <th class="px-3 py-3">Email</th>
@@ -281,11 +281,11 @@
 
             </thead>
 
-            <tbody class="divide-y divide-gray-200 flex-1 sm:flex-none ">
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700 flex-1 sm:flex-none ">
 
                 @foreach ($usuarios as $usuario)
 
-                    <tr class="text-sm font-medium text-gray-600 bg-white ">
+                    <tr class="text-sm font-medium text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-800 ">
 
                         <td class="p-2">{{ $usuario->clave }}</td>
                         <td class="p-2">{{ $usuario->name }}</td>
@@ -344,7 +344,7 @@
 
                                     @foreach ($area as $permission)
 
-                                        <label class="border border-gray-40000 text-gray-500 px-2 rounded-full py-1 text-xs flex items-center">
+                                        <label class="border border-gray-400 dark:border-gray-600 text-gray-500 dark:text-gray-400 px-2 rounded-full py-1 text-xs flex items-center">
 
                                             <p class="">{{ $permission['name'] }}</p>
 

@@ -12,9 +12,9 @@
 
     <div class="" wire:loading.class.delay.longest="opacity-50">
 
-        <div class="mb-3 bg-white rounded-lg p-3 shadow-lg">
+        <div class="mb-3 bg-white dark:bg-gray-800 rounded-lg p-3 shadow-lg">
 
-            <span class="flex items-center justify-center text-lg text-gray-700 mb-5">Propietarios</span>
+            <span class="flex items-center justify-center text-lg text-gray-700 dark:text-gray-300 mb-5">Propietarios</span>
 
             <div class="flex justify-end mb-2">
 
@@ -71,13 +71,13 @@
 
                                                 </div>
 
-                                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                                     <button
                                                         wire:click="borrarActor({{ $propietario->id }})"
                                                         wire:loading.attr="disabled"
                                                         wire:confirm="¿Esta seguro que desea borrar el propietario?"
-                                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                         role="menuitem">
                                                         Borrar
                                                     </button>
@@ -85,7 +85,7 @@
                                                     <button
                                                         wire:click="abrirModalPorcentajes({{ $propietario->id }})"
                                                         wire:loading.attr="disabled"
-                                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                         role="menuitem">
                                                         Actualizar porcentajes
                                                     </button>
@@ -104,10 +104,10 @@
                         @endforeach
 
                         <x-table.row wire:key="row-porcentajes">
-                                <x-table.cell> <span class="font-semibold text-gray-600 text-sm bg-gray-200 px-3 rounded-lg">PORCENTAJES TOTALES</span> </x-table.cell>
-                                <x-table.cell><span class="font-semibold text-gray-600 text-sm bg-gray-200 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_propiedad') }}%</span></x-table.cell>
-                                <x-table.cell><span class="font-semibold text-gray-600 text-sm bg-gray-200 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_nuda') }}%</span></x-table.cell>
-                                <x-table.cell><span class="font-semibold text-gray-600 text-sm bg-gray-200 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_usufructo') }}%</span></x-table.cell>
+                                <x-table.cell> <span class="font-semibold text-gray-600 dark:text-gray-400 text-sm bg-gray-200 dark:bg-gray-700 px-3 rounded-lg">PORCENTAJES TOTALES</span> </x-table.cell>
+                                <x-table.cell><span class="font-semibold text-gray-600 dark:text-gray-400 text-sm bg-gray-200 dark:bg-gray-700 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_propiedad') }}%</span></x-table.cell>
+                                <x-table.cell><span class="font-semibold text-gray-600 dark:text-gray-400 text-sm bg-gray-200 dark:bg-gray-700 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_nuda') }}%</span></x-table.cell>
+                                <x-table.cell><span class="font-semibold text-gray-600 dark:text-gray-400 text-sm bg-gray-200 dark:bg-gray-700 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_usufructo') }}%</span></x-table.cell>
                                 <x-table.cell>
                                 </x-table.cell>
                         </x-table.row>

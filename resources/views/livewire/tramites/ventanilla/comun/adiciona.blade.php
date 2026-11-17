@@ -1,6 +1,6 @@
 @if ($flags['adiciona'])
 
-    <div class="flex justify-around space-x-3 bg-white p-4 rounded-lg mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
+    <div class="flex justify-around space-x-3 bg-white dark:bg-gray-800 p-4 rounded-lg mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
 
         <div class="flex space-x-4 items-center">
 
@@ -14,7 +14,7 @@
 
             <div class="inline-flex">
 
-                <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="tramite_adiciona_año">
+                <select class="bg-white dark:bg-gray-800 rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="tramite_adiciona_año">
                     @foreach ($años as $año)
 
                         <option value="{{ $año }}">{{ $año }}</option>
@@ -22,9 +22,9 @@
                     @endforeach
                 </select>
 
-                <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('tramite_adiciona_folio') border-red-500 @enderror" wire:model="tramite_adiciona_folio">
+                <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 focus:ring-0 @error('tramite_adiciona_folio') border-red-500 @enderror" wire:model="tramite_adiciona_folio">
 
-                <input type="number" class="bg-white text-sm w-20 border-l-0 focus:ring-0 @error('tramite_adiciona_usuario') border-red-500 @enderror" wire:model="tramite_adiciona_usuario">
+                <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 border-l-0 focus:ring-0 @error('tramite_adiciona_usuario') border-red-500 @enderror" wire:model="tramite_adiciona_usuario">
 
                 <button
                     wire:click="buscarTramiteAdiciona"
@@ -56,9 +56,9 @@
 
     <div class="">
 
-        @error('modelo_editar.adiciona') <span class="error text-sm text-red-500 bg-white p-1 px-4 rounded-lg mb-3 shadow-md mt-1 w-full inline-flex">{{ $message }}</span> @enderror
+        @error('modelo_editar.adiciona') <span class="error text-sm text-red-500 bg-white dark:bg-gray-800 p-1 px-4 rounded-lg mb-3 shadow-md mt-1 w-full inline-flex">{{ $message }}</span> @enderror
 
-        @error('modelo_editar.ligado_a') <span class="error text-sm text-red-500 bg-white p-1 px-4 rounded-lg mb-3 shadow-md mt-1 w-full inline-flex">{{ $message }}</span> @enderror
+        @error('modelo_editar.ligado_a') <span class="error text-sm text-red-500 bg-white dark:bg-gray-800 p-1 px-4 rounded-lg mb-3 shadow-md mt-1 w-full inline-flex">{{ $message }}</span> @enderror
 
     </div>
 

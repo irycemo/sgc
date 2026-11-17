@@ -10,7 +10,7 @@
 
         <x-input-group for="requerimiento" label="Requerimineto" :error="$errors->first('requerimiento')" class="w-full">
 
-            <textarea class="bg-white rounded text-xs w-full " rows="8" wire:model="requerimiento"></textarea>
+            <textarea class="bg-white dark:bg-gray-800 rounded text-xs w-full " rows="8" wire:model="requerimiento"></textarea>
 
         </x-input-group>
 

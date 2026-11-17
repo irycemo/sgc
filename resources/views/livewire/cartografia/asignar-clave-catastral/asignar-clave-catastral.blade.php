@@ -8,9 +8,9 @@
 
             <div>
 
-                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+                <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -25,7 +25,7 @@
 
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -84,12 +84,12 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     <button
                                         wire:click="abrirModalAsignar({{ $predio->id }})"
                                         wire:loading.attr="disabled"
-                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                         role="menuitem">
                                         Asignar clave catastral
                                     </button>
@@ -97,7 +97,7 @@
                                     <button
                                         wire:click="abrirVerArchivos({{ $predio->id }})"
                                         wire:loading.attr="disabled"
-                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                         role="menuitem">
                                         Ver archivos
                                     </button>
@@ -105,7 +105,7 @@
                                     <button
                                         wire:click="abrirHacerRequerimiento({{ $predio->id }})"
                                         wire:loading.attr="disabled"
-                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                         role="menuitem">
                                         Hacer requerimiento
                                     </button>
@@ -124,7 +124,7 @@
 
                         <x-table.cell colspan="9">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -142,7 +142,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="9" class="bg-gray-50">
+                    <x-table.cell colspan="9" class="bg-gray-50 dark:bg-gray-800">
 
                         {{ $this->prediosIgnorados->links()}}
 
@@ -170,38 +170,38 @@
 
                 <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
 
-                    <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-24" title="Estado" value="16" readonly>
+                    <input placeholder="Estado" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24" title="Estado" value="16" readonly>
 
-                    <input title="Región" placeholder="Región" type="number" class="bg-white rounded text-xs w-24  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral">
+                    <input title="Región" placeholder="Región" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral">
 
-                    <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-24 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio" readonly>
+                    <input title="Municipio" placeholder="Municipio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio" readonly>
 
-                    <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-24 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model="zona_catastral">
-
-                </div>
-
-                <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
-
-
-                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-24 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
-
-                    <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-24 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
-
-                    <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-24 @error('manzana') border-1 border-red-500 @enderror" wire:model="manzana">
-
-                    <input title="Predio" placeholder="Predio" type="number" class="bg-white rounded text-xs w-24 @error('predio') border-1 border-red-500 @enderror" wire:model.blur="predio">
+                    <input title="Zona" placeholder="Zona" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model="zona_catastral">
 
                 </div>
 
                 <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
 
-                    <input title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-24 @error('edificio') border-1 border-red-500 @enderror" wire:model="edificio">
 
-                    <input title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-24 @error('departamento') border-1 border-red-500 @enderror" wire:model="departamento">
+                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-24 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina">
+                    <input title="Sector" placeholder="Sector" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
 
-                    <input title="Tipo de predio" placeholder="Tipo predio" type="number" class="bg-white rounded text-xs w-24 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
+                    <input title="Manzana" placeholder="Manzana" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('manzana') border-1 border-red-500 @enderror" wire:model="manzana">
+
+                    <input title="Predio" placeholder="Predio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('predio') border-1 border-red-500 @enderror" wire:model.blur="predio">
+
+                </div>
+
+                <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
+
+                    <input title="Edificio" placeholder="Edificio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('edificio') border-1 border-red-500 @enderror" wire:model="edificio">
+
+                    <input title="Departamento" placeholder="Departamento" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('departamento') border-1 border-red-500 @enderror" wire:model="departamento">
+
+                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina">
+
+                    <input title="Tipo de predio" placeholder="Tipo predio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
 
                 </div>
 

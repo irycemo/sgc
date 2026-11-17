@@ -208,6 +208,14 @@ class ConciliarPersona extends Component
 
     public function buscar(){
 
+        if(! $this->nombre || ! $this->ap_paterno || ! $this->ap_materno || ! $this->razon_social){
+
+            $this->dispatch('mostrarMensaje', ['warning', "Debe ingresar información."]);
+
+            return;
+
+        }
+
         $this->personas = Persona::with('creadoPor:id,name', 'actualizadoPor:id,name')
                                     ->when($this->nombre && $this->nombre != '', function($q){
                                         $q->where('nombre', 'like', '%' .$this->nombre . '%');

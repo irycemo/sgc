@@ -6,7 +6,7 @@
 
             <div
                 wire:poll.2s="consultarExportacion"
-                class="p-4 mb-5 bg-white shadow-lg rounded-lg text-gray-700 flex justify-center">
+                class="p-4 mb-5 bg-white dark:bg-gray-800 shadow-lg rounded-lg text-gray-700 dark:text-gray-300 flex justify-center">
 
                 @if($exportacion['status'] === 'procesando')
 
@@ -22,7 +22,7 @@
 
                                 </div>
 
-                                <div class="text-sm text-gray-500">
+                                <div class="text-sm text-gray-500 dark:text-gray-400">
 
                                     {{ number_format($exportacion['procesados']) }} predios procesados de {{ number_format($exportacion['total']) }}
 
@@ -32,7 +32,7 @@
 
                         </div>
 
-                        <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 overflow-hidden">
 
                             <div
                                 class="bg-blue-600 h-4 rounded-full transition-all duration-500"
@@ -72,7 +72,7 @@
                 $this->exportacion['status'] === 'fallido'
             )
 
-                <div class="p-4 mb-5 bg-white shadow-lg rounded-lg text-gray-700 flex justify-center">
+                <div class="p-4 mb-5 bg-white dark:bg-gray-800 shadow-lg rounded-lg text-gray-700 dark:text-gray-300 flex justify-center">
 
                     <button
                         wire:click="comenzarImportacion"
@@ -93,9 +93,9 @@
 
     </div>
 
-    <div class="p-4 mb-5 bg-white shadow-lg rounded-lg text-gray-700">
+    <div class="p-4 mb-5 bg-white dark:bg-gray-800 shadow-lg rounded-lg text-gray-700 dark:text-gray-300">
 
-        <span class="text-gray-800 font-semibold">Reportes generados anteriormente</span>
+        <span class="text-gray-800 dark:text-gray-200 font-semibold">Reportes generados anteriormente</span>
 
         <ul class="list-disc p-4 text-sm">
 

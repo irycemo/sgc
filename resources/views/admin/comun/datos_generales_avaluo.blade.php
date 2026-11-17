@@ -1,10 +1,10 @@
 <x-h4>Datos generales</x-h4>
 
-<div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-600">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-600 dark:text-gray-400">
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Folio</strong>
 
@@ -12,7 +12,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Estado</strong>
 
@@ -20,7 +20,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Asignado a</strong>
 
@@ -28,7 +28,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Trámtie de inspección ocular</strong>
 
@@ -36,7 +36,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Trámtie de desglose</strong>
 
@@ -44,7 +44,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Registro</strong>
 
@@ -53,7 +53,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Notificación</strong>
 
@@ -64,7 +64,7 @@
 
         @if($avaluo->predioIgnorado)
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Predio ignorado</strong>
 
@@ -76,7 +76,7 @@
 
         @if($avaluo->variacionCatastral)
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Variación catastral</strong>
 
@@ -86,7 +86,7 @@
 
         @endif
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2 col-span-1 sm:col-span-2 lg:col-span-4">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 col-span-1 sm:col-span-2 lg:col-span-4">
 
             <strong>Observaciones</strong>
 

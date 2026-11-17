@@ -2,7 +2,7 @@
 
     <x-header>Certificado de historia</x-header>
 
-    <div class="bg-white p-4 rounded-lg shadow-lg mb-5">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg mb-5">
 
         <ul class="grid w-full lg:w-1/2 mx-auto gap-6 md:grid-cols-2">
 
@@ -52,7 +52,7 @@
 
     @if($radio === 'movimiento')
 
-        <div class="bg-white p-4 rounded-lg shadow-lg mb-5">
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg mb-5">
 
             <div class="flex-auto ">
 
@@ -68,13 +68,13 @@
 
                         <div class="space-y-1">
 
-                            <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
+                            <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-                            <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                            <input title="Oficina" placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                            <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-20 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
+                            <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
 
-                            <input title="Número de registro" placeholder="Registro" type="number" class="bg-white rounded text-xs w-20 @error('numero_registro') border-1 border-red-500 @enderror" wire:model.blur="numero_registro">
+                            <input title="Número de registro" placeholder="Registro" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('numero_registro') border-1 border-red-500 @enderror" wire:model.blur="numero_registro">
 
                         </div>
 
@@ -90,25 +90,25 @@
 
                         <div class="space-y-1">
 
-                            <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-20" title="Estado" value="16" readonly>
+                            <input placeholder="Estado" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20" title="Estado" value="16" readonly>
 
-                            <input title="Región catastral" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral">
+                            <input title="Región catastral" placeholder="Región" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral">
 
-                            <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio">
+                            <input title="Municipio" placeholder="Municipio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio">
 
-                            <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model="zona_catastral">
+                            <input title="Zona" placeholder="Zona" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model="zona_catastral">
 
-                            <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
+                            <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-                            <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-20 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
+                            <input title="Sector" placeholder="Sector" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
 
-                            <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-20 @error('manzana') border-1 border-red-500 @enderror" wire:model="manzana">
+                            <input title="Manzana" placeholder="Manzana" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('manzana') border-1 border-red-500 @enderror" wire:model="manzana">
 
-                            <input title="Predio" placeholder="Predio" type="number" class="bg-white rounded text-xs w-20 @error('predio_clave') border-1 border-red-500 @enderror" wire:model.blur="predio_clave">
+                            <input title="Predio" placeholder="Predio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio_clave') border-1 border-red-500 @enderror" wire:model.blur="predio_clave">
 
-                            <input title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-20 @error('edificio') border-1 border-red-500 @enderror" wire:model="edificio">
+                            <input title="Edificio" placeholder="Edificio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('edificio') border-1 border-red-500 @enderror" wire:model="edificio">
 
-                            <input title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-20 @error('departamento') border-1 border-red-500 @enderror" wire:model="departamento">
+                            <input title="Departamento" placeholder="Departamento" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('departamento') border-1 border-red-500 @enderror" wire:model="departamento">
 
                         </div>
 
@@ -123,7 +123,7 @@
                         wire:loading.attr="disabled"
                         wire:target="buscarCuentaPredial"
                         type="button"
-                        class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+                        class="bg-blue-400 dark:bg-blue-600 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
 
                         <img wire:loading wire:target="buscarCuentaPredial" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
@@ -136,7 +136,7 @@
                         wire:loading.attr="disabled"
                         wire:target="buscarClaveCatastral"
                         type="button"
-                        class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+                        class="bg-blue-400 dark:bg-blue-600 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
 
                         <img wire:loading wire:target="buscarClaveCatastral" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
@@ -154,13 +154,13 @@
 
             @if($predio)
 
-                <div class="bg-white p-4 rounded-lg mb-5 text-center shadow-lg">
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg mb-5 text-center shadow-lg">
 
-                    <span class="text-lg text-gray-800">Movimimientos</span>
+                    <span class="text-lg text-gray-800 dark:text-gray-200">Movimimientos</span>
 
                     <div class="flex flex-col lg:flex-row gap-3 justify-center text-sm mt-5">
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 dark:text-gray-200 py-1 px-2">
 
                             <strong>Cuenta predial</strong>
 
@@ -168,7 +168,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 dark:text-gray-200 py-1 px-2">
 
                             <strong>Clave catastral</strong>
 
@@ -176,7 +176,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 dark:text-gray-200 py-1 px-2">
 
                             <strong>Propietario</strong>
 
@@ -203,13 +203,13 @@
 
                 @foreach ($predio->movimientos->reverse() as $movimiento)
 
-                    <div class="bg-white p-2 rounded-lg mb-3 shadow-lg space-y-2 text-sm">
+                    <div class="bg-white dark:bg-gray-800 p-2 rounded-lg mb-3 shadow-lg space-y-2 text-sm">
 
                         <div class="flex flex-col md:flex-row items-center justify-between gap-2">
 
                             <div class="flex flex-col md:flex-row items-center gap-3 order-2 md:order-1 w-full">
 
-                                <div class="rounded-lg bg-gray-100 py-1 px-2 w-full">
+                                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 dark:text-gray-200 py-1 px-2 w-full">
 
                                     <strong>Movimiento</strong>
 
@@ -217,7 +217,7 @@
 
                                 </div>
 
-                                <div class="rounded-lg bg-gray-100 py-1 px-2 w-full">
+                                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 dark:text-gray-200 py-1 px-2 w-full">
 
                                     <strong>Fecha</strong>
 
@@ -232,7 +232,7 @@
                                 <button
                                     wire:click="abrirModalEditar({{ $movimiento->id }})"
                                     wire:loading.attr="disabled"
-                                    class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+                                    class="bg-blue-400 dark:bg-blue-600 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-xs hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -243,7 +243,7 @@
                                 <button
                                     wire:click="abrirModalBorrar({{$movimiento->id}})"
                                     wire:loading.attr="disabled"
-                                    class="bg-red-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-xs hover:bg-red-700 focus:outline-none flex items-center justify-center focus:outline-red-400 focus:outline-offset-2">
+                                    class="bg-red-400 dark:bg-red-600 hover:shadow-lg text-white font-bold px-4 py-2 rounded-full text-xs hover:bg-red-700 dark:hover:bg-red-500 focus:outline-none flex items-center justify-center focus:outline-red-400 focus:outline-offset-2">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -255,7 +255,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2 w-full">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 dark:text-gray-200 py-1 px-2 w-full">
 
                             <strong>Descripción</strong>
 
@@ -273,7 +273,7 @@
 
     @elseif($radio === 'certificado')
 
-        <div class="bg-white p-4 rounded-lg mb-5 shadow-lg">
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg mb-5 shadow-lg">
 
             <div class="flex-auto text-center mb-3">
 
@@ -285,7 +285,7 @@
 
                 <div class="inline-flex">
 
-                    <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
+                    <select class="bg-white dark:bg-gray-800 rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
                         @foreach ($años as $año)
 
                             <option value="{{ $año }}">{{ $año }}</option>
@@ -293,9 +293,9 @@
                         @endforeach
                     </select>
 
-                    <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
+                    <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
 
-                    <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
+                    <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
 
                 </div>
 
@@ -308,7 +308,7 @@
                     wire:loading.attr="disabled"
                     wire:target="buscarTramite"
                     type="button"
-                    class="bg-blue-400 mx-auto hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+                    class="bg-blue-400 mx-auto hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
 
                     <img wire:loading wire:target="buscarTramite" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
@@ -322,7 +322,7 @@
 
                 <div class="flex flex-col lg:flex-row gap-3 justify-center text-sm mb-3">
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 dark:text-gray-200 py-1 px-2">
 
                         <strong>Trámite</strong>
 
@@ -330,7 +330,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 dark:text-gray-200 py-1 px-2">
 
                         <strong>Servicio</strong>
 
@@ -338,7 +338,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 dark:text-gray-200 py-1 px-2">
 
                         <strong>Solicitante</strong>
 
@@ -352,7 +352,7 @@
 
                     <div class="flex flex-col lg:flex-row gap-3 justify-center text-sm">
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 dark:text-gray-200 py-1 px-2">
 
                             <strong>Cuenta predial</strong>
 
@@ -360,7 +360,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 dark:text-gray-200 py-1 px-2">
 
                             <strong>Clave catastral</strong>
 
@@ -368,7 +368,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 dark:text-gray-200 py-1 px-2">
 
                             <strong>Propietario</strong>
 
@@ -386,15 +386,15 @@
 
         @if($predio && $tramite)
 
-            <div class="bg-white p-4 rounded-lg mb-5 shadow-lg">
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg mb-5 shadow-lg">
 
                 <div class="text-center mb-5">
 
-                    <span class="text-lg text-gray-800">Historia</span>
+                    <span class="text-lg text-gray-800 dark:text-gray-200">Historia</span>
 
                 </div>
 
-                <div class="w-full lg:w-1/2 mx-auto bg-gray-50 p-4 rounded-lg text-sm">
+                <div class="w-full lg:w-1/2 mx-auto bg-gray-50 dark:bg-gray-800 dark:text-gray-200 p-4 rounded-lg text-sm">
 
                     {!! $historia !!}
 
@@ -402,7 +402,7 @@
 
             </div>
 
-            <div class="flex flex-col lg:flex-row gap-3 mb-5 bg-white rounded-lg p-2 shadow-lg justify-center lg:justify-between items-center">
+            <div class="flex flex-col lg:flex-row gap-3 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg justify-center lg:justify-between items-center">
 
                 <div>
 
@@ -479,7 +479,7 @@
 
                     <x-input-group for="fecha" label="Descripción" :error="$errors->first('fecha')" class="w-full">
 
-                        <textarea rows="5" wire:model="descripcion" class="bg-white rounded text-xs w-full "></textarea>
+                        <textarea rows="5" wire:model="descripcion" class="bg-white dark:bg-gray-800 rounded text-xs w-full "></textarea>
 
                     </x-input-group>
 

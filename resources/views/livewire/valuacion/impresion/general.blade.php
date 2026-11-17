@@ -2,7 +2,7 @@
 
     @if(!auth()->user()->hasRole(['Convenio municipal']))
 
-        <div class="bg-white rounded-lg shadow-xl p-4 mb-5">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4 mb-5">
 
             <div class="flex justify-center mx-auto gap-33">
 
@@ -10,13 +10,13 @@
 
                     <div class="text-center">
 
-                        <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite de inspección ocular</Label>
+                        <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Trámite de inspección ocular</Label>
 
                     </div>
 
                     <div class="inline-flex justify-center">
 
-                        <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="inspeccion_año">
+                        <select class="bg-white dark:bg-gray-800 rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="inspeccion_año">
                             @foreach ($años as $año)
 
                                 <option value="{{ $año }}">{{ $año }}</option>
@@ -24,9 +24,9 @@
                             @endforeach
                         </select>
 
-                        <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('inspeccion_folio') border-red-500 @enderror" wire:model="inspeccion_folio">
+                        <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 focus:ring-0 @error('inspeccion_folio') border-red-500 @enderror" wire:model="inspeccion_folio">
 
-                        <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('inspeccion_usuario') border-red-500 @enderror" wire:model="inspeccion_usuario">
+                        <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('inspeccion_usuario') border-red-500 @enderror" wire:model="inspeccion_usuario">
 
                     </div>
 
@@ -38,13 +38,13 @@
 
                         <div >
 
-                            <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite de desglose</Label>
+                            <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Trámite de desglose</Label>
 
                         </div>
 
                         <div class="inline-flex">
 
-                            <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="desglose_año">
+                            <select class="bg-white dark:bg-gray-800 rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="desglose_año">
                                 @foreach ($años as $año)
 
                                     <option value="{{ $año }}">{{ $año }}</option>
@@ -52,9 +52,9 @@
                                 @endforeach
                             </select>
 
-                            <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('desglose_folio') border-red-500 @enderror" wire:model="desglose_folio">
+                            <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 focus:ring-0 @error('desglose_folio') border-red-500 @enderror" wire:model="desglose_folio">
 
-                            <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('desglose_usuario') border-red-500 @enderror" wire:model="desglose_usuario">
+                            <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('desglose_usuario') border-red-500 @enderror" wire:model="desglose_usuario">
 
                         </div>
 
@@ -68,25 +68,25 @@
 
     @endif
 
-    <div class="p-4 flex-auto bg-white rounded-lg mb-3 shadow-md space-y-3">
+    <div class="p-4 flex-auto bg-white dark:bg-gray-800 rounded-lg mb-3 shadow-md space-y-3">
 
         <h4 class="text-lg mb-5 text-center">Cuentas prediales</h4>
 
         <div class="flex flex-wrap justify-center items-center gap-2">
 
-            <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
+            <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-            <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.blur="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+            <input title="Oficina" placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.blur="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-            <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo') border-1 border-red-500 @enderror" wire:model="tipo">
+            <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-16 @error('tipo') border-1 border-red-500 @enderror" wire:model="tipo">
 
             <div class="sm:flex items-center gap-2">
 
-                <input title="Registro inicial" placeholder="Registro inicial" type="number" class="bg-white rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model.live="registro_inicio">
+                <input title="Registro inicial" placeholder="Registro inicial" type="number" class="bg-white dark:bg-gray-800 rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model.live="registro_inicio">
 
                 <p class="text-sm text-center mb-0">a</p>
 
-                <input title="Registro final" placeholder="Registro final" type="number" class="bg-white rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model="registro_final">
+                <input title="Registro final" placeholder="Registro final" type="number" class="bg-white dark:bg-gray-800 rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model="registro_final">
 
             </div>
 
@@ -98,13 +98,13 @@
 
                 <div class="flex flex-wrap justify-start items-center gap-2">
 
-                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('predios_cuentas.' . $index . '.localidad') border-1 border-red-500 @enderror" wire:model="localidad">
+                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predios_cuentas.' . $index . '.localidad') border-1 border-red-500 @enderror" wire:model="localidad">
 
-                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('predios_cuentas.' . $index . '.oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predios_cuentas.' . $index . '.oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                    <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('predios_cuentas.' . $index . '.tipo_predio') border-1 border-red-500 @enderror" wire:model="predios_cuentas.{{ $index }}.tipo_predio">
+                    <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-16 @error('predios_cuentas.' . $index . '.tipo_predio') border-1 border-red-500 @enderror" wire:model="predios_cuentas.{{ $index }}.tipo_predio">
 
-                    <input title="Registro" placeholder="Registro" type="number" class="bg-white rounded text-xs @error('predios_cuentas.' . $index . '.numero_registro') border-1 border-red-500 @enderror" wire:model="predios_cuentas.{{ $index }}.numero_registro">
+                    <input title="Registro" placeholder="Registro" type="number" class="bg-white dark:bg-gray-800 rounded text-xs @error('predios_cuentas.' . $index . '.numero_registro') border-1 border-red-500 @enderror" wire:model="predios_cuentas.{{ $index }}.numero_registro">
 
                     <div class="flex-auto my-auto">
 
@@ -146,7 +146,7 @@
 
     @include('livewire.comun.errores')
 
-    <div class="bg-white rounded-lg p-3 flex flex-col justify-center shadow-md">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-3 flex flex-col justify-center shadow-md">
 
         @if(! in_array($estadoProceso, ['generando', 'listo']))
 
@@ -173,7 +173,7 @@
                 "listo"/"error" el bloque desaparece y el polling se detiene. --}}
             <div
                 wire:poll.5s="consultarEstado"
-                class="mb-5 text-sm flex flex-col items-center gap-3 text-gray-600">
+                class="mb-5 text-sm flex flex-col items-center gap-3 text-gray-600 dark:text-gray-400">
 
                 <img class="h-4" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
@@ -190,7 +190,7 @@
 
         @if($estadoProceso === 'listo' && $urlDescarga)
 
-            <div class="mb-5 text-sm flex flex-col items-center gap-3 text-gray-700">
+            <div class="mb-5 text-sm flex flex-col items-center gap-3 text-gray-700 dark:text-gray-300">
 
                 <p class="font-semibold text-base text-green-700">La notificación está lista.</p>
 

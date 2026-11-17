@@ -9,29 +9,29 @@
 
             <div class="flex gap-1 p-1 justify-center">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.locl" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.locl" placeholder="Localidad" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.ofna" placeholder="Oficina" class="bg-white rounded-full text-sm w-20">
+                <input type="number" wire:model.live.debounce.500ms="filters.ofna" placeholder="Oficina" class="bg-white dark:bg-gray-800 rounded-full text-sm w-20">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.tpre" placeholder="Tipo" class="bg-white rounded-full text-sm w-16">
+                <input type="number" wire:model.live.debounce.500ms="filters.tpre" placeholder="Tipo" class="bg-white dark:bg-gray-800 rounded-full text-sm w-16">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.nreg" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.nreg" placeholder="# Registro" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
             </div>
 
             <div class="flex gap-1 p-1 justify-center">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.anit" placeholder="Año" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.anit" placeholder="Año" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.cont" placeholder="Cont" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.cont" placeholder="Cont" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.cnot" placeholder="Not" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.cnot" placeholder="Not" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
             </div>
 
             {{-- <div class="flex gap-1 p-1 justify-center">
 
-                <input wire:model.live.debounce.500ms="search" placeholder="Tipo / Empleado" class="bg-white rounded-full text-sm">
+                <input wire:model.live.debounce.500ms="search" placeholder="Tipo / Empleado" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
             </div> --}}
 
@@ -55,7 +55,7 @@
 
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -142,7 +142,7 @@
 
                         <x-table.cell colspan="9">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -160,7 +160,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="9" class="bg-gray-50">
+                    <x-table.cell colspan="9" class="bg-gray-50 dark:bg-gray-800">
 
 
 

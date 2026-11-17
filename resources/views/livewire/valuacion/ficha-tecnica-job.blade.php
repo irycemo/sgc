@@ -2,7 +2,7 @@
 
     <x-header>Ficha Técnica</x-header>
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl" >
+    <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-xl" >
 
         @if($estado === 'idle')
 
@@ -67,21 +67,21 @@
 
                 @elseif($estado === 'procesando')
 
-                    <div class="w-full max-w-xl mx-auto bg-white rounded-lg p-2 mb-5">
+                    <div class="w-full max-w-xl mx-auto bg-white dark:bg-gray-800 rounded-lg p-2 mb-5">
 
                         <div class="mb-2 flex justify-between text-sm">
                             <span>Progreso</span>
                             <span>{{ number_format(($procesados/$total)*100, 2) }}%</span>
                         </div>
 
-                        <div class="w-full bg-gray-200 rounded-full h-4">
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4">
                             <div
                                 class="h-4 rounded-full transition-all duration-500 bg-green-500"
                                 style="width: {{ $total > 0 ? ($procesados/$total)*100 : 0 }}%">
                             </div>
                         </div>
 
-                        <div class="mt-3 text-sm text-gray-600">
+                        <div class="mt-3 text-sm text-gray-600 dark:text-gray-400">
                             Procesados: {{ $procesados   }} / {{ $total }}
                         </div>
 
@@ -107,7 +107,7 @@
 
     @if(count($errores))
 
-        <div class="mb-5 bg-white rounded-lg p-2 shadow-lg flex gap-2 flex-wrap ">
+        <div class="mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg flex gap-2 flex-wrap ">
 
             <ul class="flex gap-2 felx flex-wrap list-disc ml-5">
 
@@ -127,7 +127,7 @@
 
     @if(count($avaluos_generados) > 0)
 
-        <div class="mb-5 bg-white rounded-lg p-2 shadow-lg flex gap-2 flex-wrap ">
+        <div class="mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg flex gap-2 flex-wrap ">
 
             <ul class="gap-2 felx flex-wrap list-disc ml-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 

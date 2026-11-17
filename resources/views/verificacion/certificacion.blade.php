@@ -13,7 +13,7 @@
 
             <div class="space-y-4">
 
-                <div class="scale-100 p-6 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex  transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
+                <div class="scale-100 p-6 bg-white dark:bg-gray-800 from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 flex  transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
 
                     <div class="flex flex-col lg:flex-row gap-3 lg:gap-8 items-center">
 
@@ -27,9 +27,9 @@
 
                         <div>
 
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900">Verificación de documento</h2>
+                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-gray-100">Verificación de documento</h2>
 
-                            <p class="mt-4 text-gray-500 text-sm leading-relaxed">
+                            <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 El Instituto Registral y Catastral verifica la siguiente información contenida en el documento: <strong>{{ $certificacion->tipo->label() }} - {{ $certificacion->año }} - {{ $certificacion->folio }}</strong>.
                             </p>
 
@@ -39,43 +39,43 @@
 
                 </div>
 
-                <div class="scale-100 p-6 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 text-center">
+                <div class="scale-100 p-6 bg-white dark:bg-gray-800 from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 text-center">
 
                     <strong class="uppercase text-red-800 ">{{ $certificacion->estado }}</strong>
 
                 </div>
 
-                <div class="scale-100 p-6 bg-white from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 text-center space-y-3">
+                <div class="scale-100 p-6 bg-white dark:bg-gray-800 from-gray-700/50 via-transparent rounded-lg shadow-2xl shadow-gray-500/20 text-center space-y-3">
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
-                        <p class="font-semibold text-gray-900">Trámite</p>
+                        <p class="font-semibold text-gray-900 dark:text-gray-100">Trámite</p>
 
-                        <p class="text-gray-500 text-sm leading-relaxed">{{ $certificacion->tramite->año }}-{{ $certificacion->tramite->folio }}-{{ $certificacion->tramite->usuario }}</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{{ $certificacion->tramite->año }}-{{ $certificacion->tramite->folio }}-{{ $certificacion->tramite->usuario }}</p>
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                         <strong>Cuenta predial</strong>
 
-                        <p class="text-gray-500 text-sm leading-relaxed">{{ $certificacion->predio->cuentaPredial() }}</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{{ $certificacion->predio->cuentaPredial() }}</p>
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                         <strong>Clave catastral</strong>
 
-                        <p class="text-gray-500 text-sm leading-relaxed">{{ $certificacion->predio->claveCatastral() }}</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{{ $certificacion->predio->claveCatastral() }}</p>
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 mt-3">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mt-3">
 
-                        <p class="font-semibold text-gray-900">Observaciones</p>
+                        <p class="font-semibold text-gray-900 dark:text-gray-100">Observaciones</p>
 
-                        <p class="text-gray-500 text-sm leading-relaxed break-words">{{ $certificacion->observaciones }}</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed break-words">{{ $certificacion->observaciones }}</p>
 
                     </div>
 

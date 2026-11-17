@@ -8,13 +8,13 @@
 
             <x-h4>Predios ignorados</x-h4>
 
-            <div class="grid grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-lg">
+            <div class="grid grid-cols-2 gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
 
                 @foreach ($predios_ignorados as $predio)
 
-                    <a href="{{ route('predios_ignorados') .'?estado=' . $predio['estado'] }}" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($predio['estado']) }}</a>
+                    <a href="{{ route('predios_ignorados') .'?estado=' . $predio['estado'] }}" class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">{{ ucfirst($predio['estado']) }}</a>
 
-                    <span class="text-right text-sm text-gray-600">{{ $predio['total'] }}</span>
+                    <span class="text-right text-sm text-gray-600 dark:text-gray-400">{{ $predio['total'] }}</span>
 
                 @endforeach
 
@@ -26,13 +26,13 @@
 
             <x-h4>Variaciones catastrales</x-h4>
 
-            <div class="grid grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-lg">
+            <div class="grid grid-cols-2 gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
 
                 @foreach ($variaciones_catastrales as $variacion)
 
-                    <a href="{{ route('variaciones_catastrales') .'?estado=' . $variacion['estado'] }}" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($variacion['estado']) }}</a>
+                    <a href="{{ route('variaciones_catastrales') .'?estado=' . $variacion['estado'] }}" class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">{{ ucfirst($variacion['estado']) }}</a>
 
-                    <span class="text-right text-sm text-gray-600">{{ $variacion['total'] }}</span>
+                    <span class="text-right text-sm text-gray-600 dark:text-gray-400">{{ $variacion['total'] }}</span>
 
                 @endforeach
 

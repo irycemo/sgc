@@ -2,7 +2,7 @@
 
     <x-header>Reportes</x-header>
 
-    <div class="p-4 mb-5 bg-white shadow-lg rounded-lg flex justify-center">
+    <div class="p-4 mb-5 bg-white dark:bg-gray-800 shadow-lg rounded-lg flex justify-center">
 
         <x-input-group for="area" label="Área" :error="$errors->first('area')" class="">
 

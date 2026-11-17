@@ -2,7 +2,7 @@
 
     @include('livewire.comun.avaluo-folio')
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2">
+    <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2">
 
         <h4 class="text-lg mb-5 text-center">Consultar predio</h4>
 
@@ -63,7 +63,7 @@
 
     @include('livewire.comun.errores')
 
-    <div class="bg-white rounded-lg p-3 flex justify-end">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-3 flex justify-end">
 
         @if(!$editar)
 
@@ -197,7 +197,7 @@
 
                                 <x-table.cell colspan="9">
 
-                                    <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                                    <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                         No hay resultados.
 
@@ -252,13 +252,13 @@
 
                         <div >
 
-                            <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite</Label>
+                            <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Trámite</Label>
 
                         </div>
 
                         <div class="inline-flex">
 
-                            <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
+                            <select class="bg-white dark:bg-gray-800 rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
                                 @foreach ($años as $año)
 
                                     <option value="{{ $año }}">{{ $año }}</option>
@@ -266,9 +266,9 @@
                                 @endforeach
                             </select>
 
-                            <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
+                            <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
 
-                            <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
+                            <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
 
                         </div>
 

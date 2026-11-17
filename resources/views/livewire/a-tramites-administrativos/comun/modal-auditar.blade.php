@@ -10,9 +10,9 @@
 
         <table class="table-auto lg:table-fixed w-full">
 
-            <thead class="border-b border-gray-300 ">
+            <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                     <th class="px-2">Usuario</th>
                     <th class="px-2">Acción</th>
@@ -22,11 +22,11 @@
 
             </thead>
 
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                 @foreach ($audits as $audit)
 
-                    <tr class="text-gray-500 text-sm leading-relaxed">
+                    <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                         <td class=" px-2 w-full ">{{ $audit->user->name }}</td>
                         <td class=" p-2 w-full ">{{ $audit->tags }}</td>
                         <td class=" p-2 w-full ">{{ $audit->created_at }}</td>

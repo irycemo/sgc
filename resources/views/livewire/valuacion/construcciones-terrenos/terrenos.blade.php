@@ -1,4 +1,4 @@
-<div class="bg-white shadow-xl rounded-lg p-4">
+<div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-4">
 
     <h4 class="text-lg mb-5 text-center">Terrenos</h4>
 
@@ -6,7 +6,7 @@
 
         @foreach ($terrenos as $index => $terreno)
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-12 gap-3 items-start mb-2 bg-gray-50 p-4 rounded-lg" wire:key="row-{{ $loop->index }}">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-12 gap-3 items-start mb-2 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg" wire:key="row-{{ $loop->index }}">
 
                 <div class="flex-auto lg:col-span-2">
 
@@ -18,7 +18,7 @@
 
                     <div>
 
-                        <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.superficie">
+                        <input type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.superficie">
 
                     </div>
 
@@ -42,7 +42,7 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-xs w-full" wire:model.live="terrenos.{{ $index }}.valor_unitario">
+                            <select class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.live="terrenos.{{ $index }}.valor_unitario">
 
                                 <option value="" selected>Seleccione una opción</option>
 
@@ -76,7 +76,7 @@
 
                     <div>
 
-                        <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.valor_unitario" @if($predio && $predio->tipo_predio == 2) readonly @endif>
+                        <input type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.valor_unitario" @if($predio && $predio->tipo_predio == 2) readonly @endif>
 
                     </div>
 
@@ -100,7 +100,7 @@
 
                         <div>
 
-                            <input type="number" min="0" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.demerito">
+                            <input type="number" min="0" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="terrenos.{{ $index }}.demerito">
 
                         </div>
 
@@ -122,7 +122,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model="terrenos.{{ $index }}.valor_demeritado" readonly>
+                            <input type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model="terrenos.{{ $index }}.valor_demeritado" readonly>
 
                         </div>
 
@@ -140,7 +140,7 @@
 
                     <div>
 
-                        <input type="number" class="bg-white rounded text-xs w-full" wire:model="terrenos.{{ $index }}.valor_terreno" readonly>
+                        <input type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model="terrenos.{{ $index }}.valor_terreno" readonly>
 
                     </div>
 

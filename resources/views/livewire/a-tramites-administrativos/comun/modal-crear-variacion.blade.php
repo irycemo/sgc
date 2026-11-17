@@ -16,13 +16,13 @@
 
             <div >
 
-                <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite</Label>
+                <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Trámite</Label>
 
             </div>
 
             <div class="inline-flex">
 
-                <select class="bg-white rounded-l text-sm border border-r-transparent focus:ring-0 @error('taño') border-red-500 @enderror" wire:model="taño">
+                <select class="bg-white dark:bg-gray-800 rounded-l text-sm border border-r-transparent focus:ring-0 @error('taño') border-red-500 @enderror" wire:model="taño">
 
                     @foreach ($años as $año)
 
@@ -32,9 +32,9 @@
 
                 </select>
 
-                <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('tfolio') border-red-500 @enderror" wire:model="tfolio">
+                <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 focus:ring-0 @error('tfolio') border-red-500 @enderror" wire:model="tfolio">
 
-                <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('tusuario') border-red-500 @enderror" wire:model="tusuario">
+                <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('tusuario') border-red-500 @enderror" wire:model="tusuario">
 
             </div>
 

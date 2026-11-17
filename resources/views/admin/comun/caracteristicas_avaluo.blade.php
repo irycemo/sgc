@@ -1,10 +1,10 @@
 <x-h4>Caracteristicas</x-h4>
 
-<div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600 dark:text-gray-400">
 
     <div class="flex gap-3 text-sm mb-5">
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Clasificación de la zona</strong>
 
@@ -12,7 +12,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Tipo de construcción dominante</strong>
 
@@ -24,37 +24,37 @@
 
     <div class="flex gap-3 text-sm mb-5 overflow-auto">
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <p><strong>Agua</strong> {{ $avaluo->agua ? 'Si' : 'No' }}</p>
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <p><strong>Drenaje</strong> {{ $avaluo->drenaje ? 'Si' : 'No' }}</p>
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <p><strong>Pavimento</strong> {{ $avaluo->pavimento ? 'Si' : 'No' }}</p>
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <p><strong>Energia eléctrica</strong> {{ $avaluo->energia_electrica ? 'Si' : 'No' }}</p>
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <p><strong>Alumbrado público</strong> {{ $avaluo->alumbrado_publico ? 'Si' : 'No' }}</p>
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <p><strong>Banqueta</strong> {{ $avaluo->banqueta ? 'Si' : 'No' }}</p>
 
@@ -64,7 +64,7 @@
 
     @foreach ($avaluo->bloques as $bloque)
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2 text-center mb-5">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 text-center mb-5">
 
             <strong>Bloque {{ $loop->iteration }}</strong>
 
@@ -72,7 +72,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm mb-5">
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2 col-span-1 sm:col-span-2 lg:col-span-5">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 col-span-1 sm:col-span-2 lg:col-span-5">
 
                 <strong>Uso</strong>
 
@@ -80,7 +80,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Cimentación</strong>
 
@@ -88,7 +88,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Estructura</strong>
 
@@ -96,7 +96,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Muros</strong>
 
@@ -104,7 +104,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Entrepisos</strong>
 
@@ -112,7 +112,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Techo</strong>
 
@@ -120,7 +120,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Plafones</strong>
 
@@ -128,7 +128,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Vidriería</strong>
 
@@ -136,7 +136,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Lambrines</strong>
 
@@ -144,7 +144,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Pisos</strong>
 
@@ -152,7 +152,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Herreria</strong>
 
@@ -160,7 +160,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Pintura</strong>
 
@@ -168,7 +168,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Carpinteria</strong>
 
@@ -176,7 +176,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Recubrimiento especial</strong>
 
@@ -184,7 +184,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Aplanados</strong>
 
@@ -192,7 +192,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Hidraulica</strong>
 
@@ -200,7 +200,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Sanitaria</strong>
 
@@ -208,7 +208,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Eléctrica</strong>
 
@@ -216,7 +216,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Gas</strong>
 
@@ -224,7 +224,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Especiales</strong>
 
@@ -232,7 +232,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2 col-span-1 sm:col-span-2 lg:col-span-5">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 col-span-1 sm:col-span-2 lg:col-span-5">
 
                 <strong>Observaciones</strong>
 

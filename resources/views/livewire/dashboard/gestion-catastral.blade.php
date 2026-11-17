@@ -8,13 +8,13 @@
 
             <x-h4>Certificaciones</x-h4>
 
-            <div class="grid grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-lg">
+            <div class="grid grid-cols-2 gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
 
                 @foreach ($certificaciones as $certificacion)
 
-                    <span class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($certificacion['estado']) }}</span>
+                    <span class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">{{ ucfirst($certificacion['estado']) }}</span>
 
-                    <span class="text-right text-sm text-gray-600">{{ $certificacion['total'] }}</span>
+                    <span class="text-right text-sm text-gray-600 dark:text-gray-400">{{ $certificacion['total'] }}</span>
 
                 @endforeach
 
@@ -22,9 +22,9 @@
 
                     @if($certificado['estado'] == 'A')
 
-                        <a href="{{ route('tramites_linea') }}" class="text-left text-sm text-gray-600 hover:underline ">Pendientes</a>
+                        <a href="{{ route('tramites_linea') }}" class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">Pendientes</a>
 
-                        <span class="text-right text-sm text-gray-600">{{ $certificado['total'] }}</span>
+                        <span class="text-right text-sm text-gray-600 dark:text-gray-400">{{ $certificado['total'] }}</span>
 
                     @endif
 
@@ -38,13 +38,13 @@
 
             <x-h4>Avisos</x-h4>
 
-            <div class="grid grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-lg">
+            <div class="grid grid-cols-2 gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
 
                 @foreach ($traslados as $aviso)
 
-                    <a href="{{ route('revision_traslados') .'?estado=' . $aviso['estado'] }}" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($aviso['estado']) }}</a>
+                    <a href="{{ route('revision_traslados') .'?estado=' . $aviso['estado'] }}" class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">{{ ucfirst($aviso['estado']) }}</a>
 
-                    <span class="text-right text-sm text-gray-600">{{ $aviso['total'] }}</span>
+                    <span class="text-right text-sm text-gray-600 dark:text-gray-400">{{ $aviso['total'] }}</span>
 
                 @endforeach
 

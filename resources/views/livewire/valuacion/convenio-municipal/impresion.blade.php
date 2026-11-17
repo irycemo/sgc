@@ -2,25 +2,25 @@
 
     <x-header>Impresión de notificación de valor catastral</x-header>
 
-    <div class="p-4 flex-auto bg-white rounded-lg mb-3 shadow-md space-y-3">
+    <div class="p-4 flex-auto bg-white dark:bg-gray-800 rounded-lg mb-3 shadow-md space-y-3">
 
         <h4 class="text-lg mb-5 text-center">Cuentas prediales</h4>
 
         <div class="flex flex-wrap justify-center items-center gap-2">
 
-            <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
+            <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-            <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.blur="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+            <input title="Oficina" placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.blur="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-            <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('tipo') border-1 border-red-500 @enderror" wire:model="tipo">
+            <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-16 @error('tipo') border-1 border-red-500 @enderror" wire:model="tipo">
 
             <div class="sm:flex items-center gap-2">
 
-                <input title="Registro inicial" placeholder="Registro inicial" type="number" class="bg-white rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model.live="registro_inicio">
+                <input title="Registro inicial" placeholder="Registro inicial" type="number" class="bg-white dark:bg-gray-800 rounded text-xs @error('registro_inicio') border-1 border-red-500 @enderror" wire:model.live="registro_inicio">
 
                 <p class="text-sm text-center mb-0">a</p>
 
-                <input title="Registro final" placeholder="Registro final" type="number" class="bg-white rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model="registro_final">
+                <input title="Registro final" placeholder="Registro final" type="number" class="bg-white dark:bg-gray-800 rounded text-xs @error('registro_final') border-1 border-red-500 @enderror" wire:model="registro_final">
 
             </div>
 
@@ -32,13 +32,13 @@
 
                 <div class="flex flex-wrap justify-start items-center gap-2">
 
-                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('predios_cuentas.' . $index . '.localidad') border-1 border-red-500 @enderror" wire:model="localidad">
+                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predios_cuentas.' . $index . '.localidad') border-1 border-red-500 @enderror" wire:model="localidad">
 
-                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('predios_cuentas.' . $index . '.oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predios_cuentas.' . $index . '.oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                    <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-16 @error('predios_cuentas.' . $index . '.tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo">
+                    <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-16 @error('predios_cuentas.' . $index . '.tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo">
 
-                    <input title="Registro" placeholder="Registro" type="number" class="bg-white rounded text-xs @error('predios_cuentas.' . $index . '.numero_registro') border-1 border-red-500 @enderror" wire:model="predios_cuentas.{{ $index }}.numero_registro">
+                    <input title="Registro" placeholder="Registro" type="number" class="bg-white dark:bg-gray-800 rounded text-xs @error('predios_cuentas.' . $index . '.numero_registro') border-1 border-red-500 @enderror" wire:model="predios_cuentas.{{ $index }}.numero_registro">
 
                     <div class="flex-auto my-auto">
 
@@ -80,7 +80,7 @@
 
     @include('livewire.comun.errores')
 
-    <div class="bg-white rounded-lg p-3 flex justify-end shadow-md">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-3 flex justify-end shadow-md">
 
         <x-button-green
             wire:click="imprimir"

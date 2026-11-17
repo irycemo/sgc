@@ -20,11 +20,11 @@
 
         </div>
 
-        <div class="bg-white rounded-lg p-3 flex justify-end  shadow-xl mb-5">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-3 flex justify-end  shadow-xl mb-5">
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 items-center justify-center  mx-auto">
 
-                <div class="bg-gray-100 p-4 rounded-xl  overflow-auto">
+                <div class="bg-gray-100 dark:bg-gray-900 p-4 rounded-xl  overflow-auto">
 
                     <h4 class="text-lg mb-5 text-center">Superficies</h4>
 
@@ -34,9 +34,9 @@
 
                             <tr>
                                 <th></th>
-                                <th class="text-sm font-light tracking-widest rounded-xl border-gray-500">Privativa</th>
-                                <th class="text-sm font-light tracking-widest rounded-xl border-gray-500">Proporcional</th>
-                                <th class="text-sm font-light tracking-widest rounded-xl border-gray-500">Total</th>
+                                <th class="text-sm font-light tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Privativa</th>
+                                <th class="text-sm font-light tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Proporcional</th>
+                                <th class="text-sm font-light tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Total</th>
                             </tr>
 
                         </thead>
@@ -45,16 +45,16 @@
 
                             <tr>
                                 <td class="text-right text-xs lg:text-sm whitespace-nowrap">Superficie de terreno</td>
-                                <td><input readonly class="bg-white rounded text-xs w-fit text-right" type="text" value="{{ $predio->superficie_terreno }}"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-fit text-right" type="text" value="{{ $predio->terrenosComun->sum('superficie_proporcional') }}"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-fit text-right" type="text" value="{{ $predio->superficie_terreno + $predio->terrenosComun->sum('superficie_proporcional') }}"></td>
+                                <td><input readonly class="bg-white dark:bg-gray-800 rounded text-xs w-fit text-right" type="text" value="{{ $predio->superficie_terreno }}"></td>
+                                <td><input readonly class="bg-white dark:bg-gray-800 rounded text-xs w-fit text-right" type="text" value="{{ $predio->terrenosComun->sum('superficie_proporcional') }}"></td>
+                                <td><input readonly class="bg-white dark:bg-gray-800 rounded text-xs w-fit text-right" type="text" value="{{ $predio->superficie_terreno + $predio->terrenosComun->sum('superficie_proporcional') }}"></td>
                             </tr>
 
                             <tr>
                                 <td class="text-right text-xs lg:text-sm whitespace-nowrap">Superficie de construcción</td>
-                                <td><input readonly class="bg-white rounded text-xs w-fit text-right" type="text" value="{{ $predio->superficie_construccion }}"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-fit text-right" type="text" value="{{ $predio->construccionesComun->sum('superficie_proporcional') }}"></td>
-                                <td><input readonly class="bg-white rounded text-xs w-fit text-right" type="text" value="{{ $predio->superficie_construccion  + $predio->construccionesComun->sum('superficie_proporcional') }}"></td>
+                                <td><input readonly class="bg-white dark:bg-gray-800 rounded text-xs w-fit text-right" type="text" value="{{ $predio->superficie_construccion }}"></td>
+                                <td><input readonly class="bg-white dark:bg-gray-800 rounded text-xs w-fit text-right" type="text" value="{{ $predio->construccionesComun->sum('superficie_proporcional') }}"></td>
+                                <td><input readonly class="bg-white dark:bg-gray-800 rounded text-xs w-fit text-right" type="text" value="{{ $predio->superficie_construccion  + $predio->construccionesComun->sum('superficie_proporcional') }}"></td>
                             </tr>
 
                         </tbody>
@@ -63,7 +63,7 @@
 
                 </div>
 
-                <div class="bg-gray-100 p-4 rounded-xl">
+                <div class="bg-gray-100 dark:bg-gray-900 p-4 rounded-xl">
 
                     <h4 class="text-lg mb-5 text-center">Valores</h4>
 
@@ -73,35 +73,35 @@
 
                             <tr>
                                 <td class="text-xs lg:text-sm text-right">Privativa + Proporcional Terrno</td>
-                                <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_terreno, 2) }}"></td>
+                                <td><input readonly class="bg-white dark:bg-gray-800 rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_terreno, 2) }}"></td>
                             </tr>
                             <tr>
                                 <td class="text-xs lg:text-sm text-right">Privativa + Proporcional Construcción</td>
-                                <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_construccion, 2) }}"></td>
+                                <td><input readonly class="bg-white dark:bg-gray-800 rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_construccion, 2) }}"></td>
                             </tr>
 
                             @if($this->predio->ubicacion_en_manzana == 'ESQUINA')
 
                                 <tr>
                                     <td class="text-xs lg:text-sm text-right">Sub Total</td>
-                                    <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_terreno + $predio->valor_total_construccion, 2) }}"></td>
+                                    <td><input readonly class="bg-white dark:bg-gray-800 rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_terreno + $predio->valor_total_construccion, 2) }}"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="text-xs lg:text-sm text-right">Ubicación en esquina</td>
-                                    <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_terreno * 0.10, 2) }}"></td>
+                                    <td><input readonly class="bg-white dark:bg-gray-800 rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_total_terreno * 0.10, 2) }}"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="text-xs lg:text-sm text-right">Total</td>
-                                    <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_catastral, 2) }}"></td>
+                                    <td><input readonly class="bg-white dark:bg-gray-800 rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_catastral, 2) }}"></td>
                                 </tr>
 
                             @else
 
                                 <tr>
                                     <td class="text-sm text-right">Total</td>
-                                    <td><input readonly class="bg-white rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_catastral, 2) }}"></td>
+                                    <td><input readonly class="bg-white dark:bg-gray-800 rounded text-xs w-full ml-4 text-right" type="text" value="${{ number_format($predio->valor_catastral, 2) }}"></td>
                                 </tr>
 
                             @endif
@@ -120,7 +120,7 @@
 
     @include('livewire.comun.errores')
 
-    <div class="bg-white rounded-lg p-3 flex justify-end mt-5  shadow-xl">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-3 flex justify-end mt-5  shadow-xl">
 
         @if($predio?->avaluo?->estado === 'nuevo')
 

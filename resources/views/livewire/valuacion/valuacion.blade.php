@@ -2,7 +2,7 @@
 
     @include('livewire.comun.avaluo-folio')
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
+    <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-xl">
 
         <h4 class="text-lg mb-5 text-center">Consultar predio</h4>
 
@@ -74,7 +74,7 @@
 
     @include('livewire.comun.errores')
 
-    <div class="bg-white rounded-lg p-3 flex justify-end  shadow-xl">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-3 flex justify-end  shadow-xl">
 
         @if(!$editar)
 

@@ -2,19 +2,19 @@
 
     <x-header>Certificado de registro</x-header>
 
-    <div class="bg-white p-4 rounded-lg mb-5 shadow-lg">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg mb-5 shadow-lg">
 
         <div class="flex-auto text-center mb-3">
 
             <div >
 
-                <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite</Label>
+                <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Trámite</Label>
 
             </div>
 
             <div class="inline-flex">
 
-                <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
+                <select class="bg-white dark:bg-gray-800 rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
                     @foreach ($años as $año)
 
                         <option value="{{ $año }}">{{ $año }}</option>
@@ -22,9 +22,9 @@
                     @endforeach
                 </select>
 
-                <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
+                <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
 
-                <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
+                <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
 
             </div>
 
@@ -52,7 +52,7 @@
 
             <div class="flex flex-col lg:flex-row gap-3 justify-center text-sm mb-3">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Trámite</strong>
 
@@ -60,7 +60,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Servicio</strong>
 
@@ -68,7 +68,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Solicitante</strong>
 
@@ -89,7 +89,7 @@
                         <div
                             wire:click="seleccionarPredio({{ $item->id }})"
                             @class([
-                                'rounded-lg bg-gray-100 py-1 px-2 hover:cursor-pointer hover:bg-gray-200',
+                                'rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 hover:cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700',
                                 'ring-2 ring-blue-400 bg-blue-50' => $predio && $predio->id === $item->id,
                             ])>
 
@@ -109,11 +109,11 @@
 
     @if($predio)
 
-        <div class="bg-white p-4 rounded-lg mb-5 shadow-lg text-sm">
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg mb-5 shadow-lg text-sm">
 
             <div class="flex flex-col lg:flex-row gap-3 justify-center w-full mx-auto lg:w-1/2">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Cuenta predial</strong>
 
@@ -121,7 +121,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Clave catastral</strong>
 
@@ -133,7 +133,7 @@
 
             <p class="text-center my-4">Ubicación del predio</p>
 
-            <div class="bg-gray-100 py-1 px-2 gap-3 justify-center w-full mx-auto lg:w-1/2">
+            <div class="bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-3 justify-center w-full mx-auto lg:w-1/2">
 
                 <p class="mb-2">
                     @if($predio->tipo_asentamiento)<strong>Tipo de asentamiento:</strong> {{ $predio->tipo_asentamiento }},@endif
@@ -193,7 +193,7 @@
 
             <div class="flex flex-col lg:flex-row gap-3 justify-center w-full mx-auto lg:w-1/2">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Superficie notarial</strong>
 
@@ -201,7 +201,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Superficie judicial</strong>
 
@@ -209,7 +209,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Superficie total de terreno</strong>
 
@@ -217,7 +217,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Superficie total de construcción</strong>
 
@@ -225,7 +225,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Valor catastral</strong>
 
@@ -241,9 +241,9 @@
 
                 <table class="w-full">
 
-                    <thead class="border-b border-gray-300 ">
+                    <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                        <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                        <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                             <th class="px-2">Nombre / Razón social</th>
                             <th class="px-2">% de propiedad</th>
@@ -254,11 +254,11 @@
 
                     </thead>
 
-                    <tbody class="divide-y divide-gray-200">
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                         @foreach ($predio->propietarios->sortBy('persona.nombre') as $propietario)
 
-                            <tr class="text-gray-500 text-sm leading-relaxed">
+                            <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 <td class=" px-2 w-full ">{{ $propietario->persona->nombre }} {{ $propietario->persona->ap_paterno }} {{ $propietario->persona->ap_materno }} {{ $propietario->persona->razon_social }}</td>
                                 <td class=" px-2 w-full ">{{ $propietario->porcentaje_propiedad }}%</td>
                                 <td class=" px-2 w-full ">{{ $propietario->porcentaje_nuda }}%</td>
@@ -268,10 +268,10 @@
                         @endforeach
 
                         <tr wire:key="row-porcentajes">
-                            <td > <span class="font-semibold text-gray-600 text-sm bg-gray-200 px-3 rounded-lg">PORCENTAJES TOTALES</span> </td>
-                            <td><span class="font-semibold text-gray-600 text-sm bg-gray-200 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_propiedad') }}%</span></td>
-                            <td><span class="font-semibold text-gray-600 text-sm bg-gray-200 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_nuda') }}%</span></td>
-                            <td><span class="font-semibold text-gray-600 text-sm bg-gray-200 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_usufructo') }}%</span></td>
+                            <td > <span class="font-semibold text-gray-600 dark:text-gray-400 text-sm bg-gray-200 dark:bg-gray-700 px-3 rounded-lg">PORCENTAJES TOTALES</span> </td>
+                            <td><span class="font-semibold text-gray-600 dark:text-gray-400 text-sm bg-gray-200 dark:bg-gray-700 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_propiedad') }}%</span></td>
+                            <td><span class="font-semibold text-gray-600 dark:text-gray-400 text-sm bg-gray-200 dark:bg-gray-700 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_nuda') }}%</span></td>
+                            <td><span class="font-semibold text-gray-600 dark:text-gray-400 text-sm bg-gray-200 dark:bg-gray-700 px-3 rounded-lg">{{ $predio->propietarios->sum('porcentaje_usufructo') }}%</span></td>
                         </tr>
 
                     </tbody>
@@ -290,7 +290,7 @@
 
                         <div class="flex gap-3 justify-center">
 
-                            <div class="rounded-lg bg-gray-100 py-1 px-2">
+                            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                                 <strong>Viento</strong>
 
@@ -298,7 +298,7 @@
 
                             </div>
 
-                            <div class="rounded-lg bg-gray-100 py-1 px-2">
+                            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                                 <strong>Longitud</strong>
 
@@ -306,7 +306,7 @@
 
                             </div>
 
-                            <div class="rounded-lg bg-gray-100 py-1 px-2">
+                            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                                 <strong>Descripción</strong>
 
@@ -326,7 +326,7 @@
 
          @if($estado !== 'generando')
 
-            <div class="flex flex-col lg:flex-row gap-3 mb-5 bg-white rounded-lg p-2 shadow-lg justify-center lg:justify-between items-center">
+            <div class="flex flex-col lg:flex-row gap-3 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg justify-center lg:justify-between items-center">
 
                 <div>
 
@@ -365,7 +365,7 @@
              "listo"/"error" el bloque desaparece y el polling se detiene. --}}
         <div
             wire:poll.2s="consultarEstado"
-            class="bg-white p-6 rounded-lg mb-5 shadow-lg text-sm flex flex-col items-center gap-3 text-gray-600">
+            class="bg-white dark:bg-gray-800 p-6 rounded-lg mb-5 shadow-lg text-sm flex flex-col items-center gap-3 text-gray-600 dark:text-gray-400">
 
             <img class="h-4" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
@@ -382,7 +382,7 @@
 
     @if($estado === 'listo' && $urlDescarga)
 
-        <div class="bg-white p-6 rounded-lg mb-5 shadow-lg text-sm flex flex-col items-center gap-3 text-gray-700">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg mb-5 shadow-lg text-sm flex flex-col items-center gap-3 text-gray-700 dark:text-gray-300">
 
             <p class="font-semibold text-base text-green-700">El certificado está listo.</p>
 
@@ -402,7 +402,7 @@
 
     @if($estado === 'error')
 
-        <div class="bg-white p-6 rounded-lg mb-5 shadow-lg text-sm flex flex-col items-center gap-3">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg mb-5 shadow-lg text-sm flex flex-col items-center gap-3">
 
             <p class="font-semibold text-base text-red-700">
                 {{ $mensajeError ?? 'No fue posible generar el certificado.' }}

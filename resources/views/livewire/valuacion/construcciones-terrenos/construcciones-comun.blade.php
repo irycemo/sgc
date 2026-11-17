@@ -1,4 +1,4 @@
-<div class="bg-white shadow-xl rounded-lg p-4">
+<div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-4">
 
     <h4 class="text-lg mb-5 text-center">Construcciones de área común</h4>
 
@@ -6,7 +6,7 @@
 
             @foreach ($construccionesComun as $index => $item)
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-3 items-end mb-2 bg-gray-50 p-4 rounded-lg" wire:key="construccionComun-"{{ $index }}>
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-3 items-end mb-2 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg" wire:key="construccionComun-"{{ $index }}>
 
                     <div class="flex-auto lg:col-span-1">
 
@@ -18,7 +18,7 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.valores">
+                            <select class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.valores">
 
                                 <option value="" selected>Seleccione una opción</option>
 
@@ -50,7 +50,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.area_comun_construccion">
+                            <input type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.area_comun_construccion">
 
                         </div>
 
@@ -72,7 +72,7 @@
 
                         <div>
 
-                            <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.indiviso_construccion">
+                            <input type="number" max="100" step=".0001" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.indiviso_construccion">
 
                         </div>
 
@@ -94,7 +94,7 @@
 
                         <div>
 
-                            <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.superficie_proporcional" readonly>
+                            <input type="number" max="100" step=".0001" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.superficie_proporcional" readonly>
 
                         </div>
 
@@ -116,7 +116,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.valor_construccion_comun" readonly>
+                            <input type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="construccionesComun.{{ $index }}.valor_construccion_comun" readonly>
 
                         </div>
 

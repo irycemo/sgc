@@ -2,7 +2,7 @@
 
     <x-header>Asignación de cuentas prediales</x-header>
 
-    <div class="p-4 bg-white rounded-lg mb-3 shadow-md">
+    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg mb-3 shadow-md">
 
         <div class="lg:w-1/2 mx-auto space-y-3">
 
@@ -10,11 +10,11 @@
 
                 <div class="mx-auto">
 
-                    <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model="localidad">
+                    <input placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model="localidad">
 
-                    <input placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.live="oficina" @if(auth()->user()->oficina->oficina != 101 && !auth()->user()->hasRole('Administrador')) readonly @endif>
+                    <input placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.live="oficina" @if(auth()->user()->oficina->oficina != 101 && !auth()->user()->hasRole('Administrador')) readonly @endif>
 
-                    <input placeholder="Tipo" type="number" max="2" min="1" class="bg-white rounded text-xs w-20 @error('tipo') border-1 border-red-500 @enderror" wire:model="tipo">
+                    <input placeholder="Tipo" type="number" max="2" min="1" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('tipo') border-1 border-red-500 @enderror" wire:model="tipo">
 
                 </div>
 
@@ -121,7 +121,7 @@
 
                 </x-input-select>
 
-                <textarea rows="5" wire:model="observaciones" class="bg-white rounded text-xs w-full mt-2 @error('observaciones') border-red-500 @enderror" placeholder="Se lo más específico posible acerca del motivo por el que se asignan las nuevas cuentas prediales"></textarea>
+                <textarea rows="5" wire:model="observaciones" class="bg-white dark:bg-gray-800 rounded text-xs w-full mt-2 @error('observaciones') border-red-500 @enderror" placeholder="Se lo más específico posible acerca del motivo por el que se asignan las nuevas cuentas prediales"></textarea>
 
             </x-input-group>
 
@@ -140,9 +140,9 @@
 
     @if($cuentasAsignadas)
 
-        <div class="overflow-x-auto rounded-lg shadow-xl p-4 flex gap-4 items-center justify-between bg-white">
+        <div class="overflow-x-auto rounded-lg shadow-xl p-4 flex gap-4 items-center justify-between bg-white dark:bg-gray-800">
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Cuentas asignadas</strong>
 
@@ -150,7 +150,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Cuentas preexistentes</strong>
 
@@ -158,7 +158,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Cuenta inicial</strong>
 
@@ -166,7 +166,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Cuenta final</strong>
 
@@ -174,7 +174,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Número de oficio</strong>
 
@@ -182,7 +182,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Tipo de título de propiedad</strong>
 
@@ -190,7 +190,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Número de título de propiedad</strong>
 
@@ -198,7 +198,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Valuador asignado</strong>
 

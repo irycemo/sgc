@@ -1,4 +1,4 @@
-<div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl flex gap-3 justify-center">
+<div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-xl flex gap-3 justify-center">
 
     <div>
 
@@ -42,7 +42,7 @@
 
         <x-input-group for="observaciones" label="Descripción del movimiento" :error="$errors->first('observaciones')">
 
-            <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico posible acerca del origen del movimiento"></textarea>
+            <textarea class="bg-white dark:bg-gray-800 rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico posible acerca del origen del movimiento"></textarea>
 
         </x-input-group>
 

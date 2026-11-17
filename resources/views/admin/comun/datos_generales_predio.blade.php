@@ -1,10 +1,10 @@
 <x-h4>Datos generales del predio</x-h4>
 
-<div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-600">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-600 dark:text-gray-400">
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Cuenta predial</strong>
 
@@ -12,7 +12,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Clave catastral</strong>
 
@@ -20,7 +20,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Fecha de notificación</strong>
 
@@ -28,7 +28,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Fecha de efectos</strong>
 
@@ -36,7 +36,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Superficie notarial</strong>
 
@@ -44,7 +44,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Superficie judicial</strong>
 
@@ -52,7 +52,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Superficie de terreno</strong>
 
@@ -60,7 +60,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Superficie de construccion</strong>
 
@@ -70,7 +70,7 @@
 
         @if($predio->terrenosComun->count())
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Superficie proporcional de terreno</strong>
 
@@ -82,7 +82,7 @@
 
         @if($predio->construccionesComun->count())
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Superficie proporcional de construcción</strong>
 
@@ -92,7 +92,7 @@
 
         @endif
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Superficie total de construcción</strong>
 
@@ -100,7 +100,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Superficie total de terreno</strong>
 
@@ -108,7 +108,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Valor total de terreno</strong>
 
@@ -116,7 +116,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Valor total de construcción</strong>
 
@@ -124,7 +124,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Valor catastral</strong>
 

@@ -1,10 +1,10 @@
 <x-h4>Ubicación del predio</x-h4>
 
-<div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600 dark:text-gray-400">
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Tipo de asentamiento</strong>
 
@@ -12,7 +12,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Nombre del asentamiento</strong>
 
@@ -20,7 +20,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Tipo de vialidad</strong>
 
@@ -28,7 +28,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Nombre de la vialidad</strong>
 
@@ -36,7 +36,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Número exterior</strong>
 
@@ -44,7 +44,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Número exterior 2</strong>
 
@@ -52,7 +52,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Número interior</strong>
 
@@ -60,7 +60,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Número adicional</strong>
 
@@ -68,7 +68,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Número adicional 2</strong>
 
@@ -76,7 +76,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Código postal</strong>
 
@@ -84,7 +84,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Lote del fraccionador</strong>
 
@@ -92,7 +92,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Manzana del fraccionador</strong>
 
@@ -100,7 +100,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Etapa o zona del fraccionador</strong>
 
@@ -108,7 +108,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Nombre del Edificio</strong>
 
@@ -116,7 +116,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Clave del edificio</strong>
 
@@ -124,7 +124,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Departamento</strong>
 
@@ -132,7 +132,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Predio Rústico Denominado ó Antecedente</strong>
 
@@ -140,7 +140,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Ubicación en manzana</strong>
 
@@ -148,7 +148,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Coordenadas geográficas UTM</strong>
 
@@ -158,7 +158,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Coordenadas geográficas GEO</strong>
 
@@ -186,7 +186,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2 col-span-1 sm:col-span-2 lg:col-span-5">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 col-span-1 sm:col-span-2 lg:col-span-5">
 
             <strong>Domicilio para notificaciones</strong>
 
@@ -196,7 +196,7 @@
 
         @if(isset($predio->uso_1))
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2 col-span-1 sm:col-span-2 lg:col-span-5">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 col-span-1 sm:col-span-2 lg:col-span-5">
 
                 <strong>Uso del predio</strong>
 

@@ -2,7 +2,7 @@
 
     <x-header>Historico de movimientos</x-header>
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg">
+    <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg">
 
         <div class="flex-auto ">
 
@@ -12,19 +12,19 @@
 
                     <div class="text-left">
 
-                        <Label class="text-base tracking-widest rounded-xl border-gray-500">Cuenta predial</Label>
+                        <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Cuenta predial</Label>
 
                     </div>
 
                     <div class="space-y-1">
 
-                        <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
+                        <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-                        <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                        <input title="Oficina" placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                        <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-20 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
+                        <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
 
-                        <input title="Número de registro" placeholder="Registro" type="number" class="bg-white rounded text-xs w-20 @error('numero_registro') border-1 border-red-500 @enderror" wire:model.blur="numero_registro">
+                        <input title="Número de registro" placeholder="Registro" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('numero_registro') border-1 border-red-500 @enderror" wire:model.blur="numero_registro">
 
                     </div>
 
@@ -59,9 +59,9 @@
 
             @foreach ($movimientos as $movimiento)
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-2 mb-5 bg-white rounded-lg p-2 shadow-lg w-full flex-1" wire:key="row-{{ $movimiento->id }}">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg w-full flex-1" wire:key="row-{{ $movimiento->id }}">
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Cuenta predial</strong>
 
@@ -69,7 +69,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Fecha de movimiento</strong>
 
@@ -77,7 +77,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Fecha de actualización</strong>
 
@@ -85,7 +85,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Fecha de escritura</strong>
 
@@ -93,7 +93,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Descripción del movimiento</strong>
 
@@ -101,7 +101,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Adquiriente</strong>
 
@@ -109,7 +109,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Transmitente</strong>
 
@@ -117,7 +117,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Valor catastral</strong>
 
@@ -125,7 +125,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Número de documento</strong>
 
@@ -133,7 +133,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Número de fojas</strong>
 
@@ -141,7 +141,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Número de tomo</strong>
 
@@ -149,7 +149,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Capital mayor de fojas</strong>
 
@@ -157,7 +157,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Capital mayor de tomo</strong>
 
@@ -165,7 +165,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Número de comprobante</strong>
 
@@ -173,7 +173,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Superficie notarial</strong>
 
@@ -181,7 +181,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Superficie de terreno</strong>
 
@@ -189,7 +189,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Superficie de construcción</strong>
 
@@ -197,7 +197,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2">
 
                         <strong>Registrado por</strong>
 
@@ -205,7 +205,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2 md:col-span-2 lg:col-span-5">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2 md:col-span-2 lg:col-span-5">
 
                         <strong>Ubicación</strong>
 
@@ -213,7 +213,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 gap-2 md:col-span-2 lg:col-span-5">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-2 md:col-span-2 lg:col-span-5">
 
                         <strong>Observaciones</strong>
 

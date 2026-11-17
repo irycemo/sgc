@@ -1,4 +1,4 @@
-<div class="bg-white shadow-xl rounded-lg p-4">
+<div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-4">
 
     <h4 class="text-lg mb-5 text-center">Construcciones</h4>
 
@@ -6,7 +6,7 @@
 
             @foreach ($construcciones as $index => $construccion)
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-3 mb-2 bg-gray-50 p-4 rounded-lg items-start" wire:key="construccion-"{{ $index }}>
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-3 mb-2 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg items-start" wire:key="construccion-"{{ $index }}>
 
                     <div class="flex-auto lg:col-span-1">
 
@@ -18,7 +18,7 @@
 
                         <div>
 
-                            <input type="text" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.referencia">
+                            <input type="text" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.referencia">
 
                         </div>
 
@@ -40,7 +40,7 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.valores">
+                            <select class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.valores">
 
                                 <option value="" selected>Seleccione una opción</option>
 
@@ -72,7 +72,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.niveles">
+                            <input type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.niveles">
 
                         </div>
 
@@ -94,7 +94,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.superficie">
+                            <input type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.superficie">
 
                         </div>
 
@@ -116,7 +116,7 @@
 
                         <div>
 
-                            <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.valor_construccion" readonly>
+                            <input type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="construcciones.{{ $index }}.valor_construccion" readonly>
 
                         </div>
 

@@ -1,6 +1,6 @@
 <div>
 
-    <div class="shadow-lg md:flex flex-col md:flex-row justify-between md:space-x-3 items-center bg-white rounded-xl mb-5 p-4 relative z-40 mb-5" wire:loading.class.delay.longest="opacity-50">
+    <div class="shadow-lg md:flex flex-col md:flex-row justify-between md:space-x-3 items-center bg-white dark:bg-gray-800 rounded-xl mb-5 p-4 relative z-40 mb-5" wire:loading.class.delay.longest="opacity-50">
 
         <div wire:loading.flex class="flex absolute top-1 right-1 items-center z-50">
             <svg class="animate-spin h-5 w-5 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -9,7 +9,7 @@
             </svg>
         </div>
 
-        <div class="md:flex md:flex-row flex-col md:space-x-4 items-end bg-white rounded-xl">
+        <div class="md:flex md:flex-row flex-col md:space-x-4 items-end bg-white dark:bg-gray-800 rounded-xl">
 
             <div>
 
@@ -21,7 +21,7 @@
 
                 <div>
 
-                    <input type="date" class="bg-white rounded text-sm " wire:model.live="fecha1">
+                    <input type="date" class="bg-white dark:bg-gray-800 rounded text-sm " wire:model.live="fecha1">
 
                 </div>
 
@@ -43,7 +43,7 @@
 
                 <div>
 
-                    <input type="date" class="bg-white rounded text-sm " wire:model.live="fecha2">
+                    <input type="date" class="bg-white dark:bg-gray-800 rounded text-sm " wire:model.live="fecha2">
 
                 </div>
 
@@ -179,17 +179,17 @@
 
     </div>
 
-    <div class="md:flex md:flex-row flex-col p-4 bg-white rounded-xl mb-5">
+    <div class="md:flex md:flex-row flex-col p-4 bg-white dark:bg-gray-800 rounded-xl mb-5">
 
         <span class="text-xl tracking-widest">Total ${{ number_format($total, 2) }}</span>
 
     </div>
 
-    <div class="shadow-lg bg-white rounded-xl mb-5 p-4">
+    <div class="shadow-lg bg-white dark:bg-gray-800 rounded-xl mb-5 p-4">
 
         <table class="table-fixed mx-auto w-1/2">
 
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                 @php
                     $total1 = 0;
@@ -198,7 +198,7 @@
 
                 @foreach ($tramites as $key => $item)
 
-                    <tr class="text-gray-500 text-sm leading-relaxed">
+                    <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                         <td class=" px-2 w-1/12"><p>{{ $item['cantidad'] }}</p></td>
                         <td class=" px-2 w-full whitespace-nowrap overflow-hidden text-ellipsis"><p>{{ $key }}</p></td>
                         <td class=" px-2 w-3/12 whitespace-nowrap text-right"><p>${{ number_format($item['monto'], 2) }}</p></td>
@@ -215,7 +215,7 @@
 
                 @php
 
-                    echo " <tr class='text-gray-500 text-sm leading-relaxed'>
+                    echo " <tr class='text-gray-500 dark:text-gray-400 text-sm leading-relaxed'>
                                 <td class='px-2 w-full font-bold'>" . $total2 . "</td>
                                 <td class='px-2 w-full whitespace-nowrap font-bold'>Total</td>
                                 <td class='px-2 w-full whitespace-nowrap font-bold text-right'><p>$"  . number_format($total1, 2) . "</p></td>

@@ -6,7 +6,7 @@
 
         <div class="flex gap-3 overflow-auto p-1">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.año">
 
                 <option value="" selected>Año</option>
 
@@ -18,9 +18,9 @@
 
             </select>
 
-            <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <select class="bg-white rounded-full text-sm capitalize" wire:model.live="filters.estado">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm capitalize" wire:model.live="filters.estado">
 
                 <option value="" selected>Estado</option>
 
@@ -32,7 +32,7 @@
 
             </select>
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="filters.taño">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.taño">
 
                 <option value="" selected>T. Año</option>
 
@@ -44,11 +44,11 @@
 
             </select>
 
-            <input type="number" wire:model.live.debounce.500ms="filters.tfolio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.tfolio" placeholder="T. Folio" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.tusuario" placeholder="T. Usuario" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.tusuario" placeholder="T. Usuario" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+            <input wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
             @can('Crear variación')
 
@@ -71,7 +71,7 @@
 
     </div>
 
-    <div class="rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -170,12 +170,12 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     <button
                                         wire:click="abrirVerRequerimiento({{ $variacion->id }})"
                                         wire:loading.attr="disabled"
-                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                         role="menuitem">
                                         Ver requerimientos
                                     </button>
@@ -185,7 +185,7 @@
                                         <button
                                             wire:click="abrirModalAuditoria({{ $variacion->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Auditar
                                         </button>
@@ -199,7 +199,7 @@
                                             <button
                                                 wire:click="asignarFolio({{ $variacion->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Asignar Folio
                                             </button>
@@ -215,7 +215,7 @@
                                             <button
                                                 wire:click="abrirHacerRequerimiento({{ $variacion->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Hacer requerimiento
                                             </button>
@@ -223,7 +223,7 @@
                                             <button
                                                 wire:click="abrirAsignarValuador({{ $variacion->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Asignar valuador
                                             </button>
@@ -233,7 +233,7 @@
                                         <button
                                             wire:click="abrirSubirArchivo({{ $variacion->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Subir archivo
                                         </button>
@@ -243,7 +243,7 @@
                                             <button
                                                 wire:click="abrirVerArchivos({{ $variacion->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Ver archivos
                                             </button>
@@ -255,7 +255,7 @@
                                             <button
                                                 wire:click="abrirCambiarEstado({{ $variacion->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Cambiar estado
                                             </button>
@@ -267,7 +267,7 @@
                                             <button
                                                 wire:click="abrirModalBorrar({{ $variacion->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Eliminar variación
                                             </button>
@@ -278,7 +278,7 @@
                                             wire:confirm="¿Esta seguro que desea rechazar la variacióin catastral?"
                                             wire:click="rechazar({{ $variacion->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Rechazar
                                         </button>
@@ -299,7 +299,7 @@
 
                         <x-table.cell colspan="10">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -317,7 +317,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="10" class="bg-gray-50">
+                    <x-table.cell colspan="10" class="bg-gray-50 dark:bg-gray-800">
 
                         {{ $this->variaciones->links()}}
 

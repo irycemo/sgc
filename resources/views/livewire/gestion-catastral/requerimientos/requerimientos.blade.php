@@ -8,7 +8,7 @@
 
             @if(auth()->user()->hasRole(['Administrador']))
 
-                <select class="bg-white rounded-full text-sm w-60" wire:model.live="oficina">
+                <select class="bg-white dark:bg-gray-800 rounded-full text-sm w-60" wire:model.live="oficina">
 
                     <option value="" selected>Oficina</option>
 
@@ -20,7 +20,7 @@
 
                 </select>
 
-                <select class="bg-white rounded-full text-sm w-60" wire:model.live="filters.estado">
+                <select class="bg-white dark:bg-gray-800 rounded-full text-sm w-60" wire:model.live="filters.estado">
 
                     <option value="" selected>Estado</option>
                     <option value="nuevo" selected>Nuevo</option>
@@ -31,9 +31,9 @@
 
             @endif
 
-            <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+            <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="pagination">
 
                 <option value="10">10</option>
                 <option value="25">25</option>
@@ -46,7 +46,7 @@
 
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -114,12 +114,12 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     <button
                                         wire:click="abrirModalRequerimiento('{{ $requerimiento->id }}')"
                                         wire:loading.attr="disabled"
-                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                         role="menuitem">
                                         Ver requermiento
                                     </button>
@@ -138,7 +138,7 @@
 
                         <x-table.cell colspan="10">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -156,7 +156,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="10" class="bg-gray-50">
+                    <x-table.cell colspan="10" class="bg-gray-50 dark:bg-gray-800">
 
                         {{ $this->requerimientos->links()}}
 
@@ -182,7 +182,7 @@
 
             @if($modelo_editar->getKey())
 
-                <div class="bg-gray-100 rounded-lg p-2 mb-2">
+                <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-2 mb-2">
 
                     <div>
                         {{ $modelo_editar->descripcion }}
@@ -226,7 +226,7 @@
 
                 @forelse ($modelo_editar->requerimientos as $requerimiento)
 
-                    <div class="bg-gray-100 rounded-lg p-2 mb-2">
+                    <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-2 mb-2">
 
                         <div>
                             {{ $requerimiento->descripcion }}
@@ -266,7 +266,7 @@
 
                 @empty
 
-                    <div class="bg-gray-100 rounded-lg p-4 text-center">
+                    <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 text-center">
 
                         <p>No hay requerimientos</p>
 
@@ -278,7 +278,7 @@
 
             <x-input-group for="observacion" label="Respuesta" :error="$errors->first('observacion')">
 
-                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observacion" placeholder="Se lo más especifico sobre la corrección que solicitas"></textarea>
+                <textarea class="bg-white dark:bg-gray-800 rounded text-xs w-full " rows="4" wire:model="observacion" placeholder="Se lo más especifico sobre la corrección que solicitas"></textarea>
 
             </x-input-group>
 

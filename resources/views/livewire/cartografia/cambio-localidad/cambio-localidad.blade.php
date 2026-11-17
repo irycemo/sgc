@@ -2,7 +2,7 @@
 
     <x-header>Cambio de localidad</x-header>
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg">
+    <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg">
 
         @if(!$predio->getKey())
             <div class="flex-auto ">
@@ -13,19 +13,19 @@
 
                         <div class="text-left">
 
-                            <Label class="text-base tracking-widest rounded-xl border-gray-500">Cuenta predial</Label>
+                            <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Cuenta predial</Label>
 
                         </div>
 
                         <div class="space-y-1">
 
-                            <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
+                            <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-                            <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                            <input title="Oficina" placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                            <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-20 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
+                            <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
 
-                            <input title="Número de registro" placeholder="Registro" type="number" class="bg-white rounded text-xs w-20 @error('numero_registro') border-1 border-red-500 @enderror" wire:model.blur="numero_registro">
+                            <input title="Número de registro" placeholder="Registro" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('numero_registro') border-1 border-red-500 @enderror" wire:model.blur="numero_registro">
 
                         </div>
 
@@ -60,19 +60,19 @@
 
                     <div class="text-left">
 
-                        <Label class="text-base tracking-widest rounded-xl border-gray-500">Cuenta predial</Label>
+                        <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Cuenta predial</Label>
 
                     </div>
 
                     <div class="space-y-1">
 
-                        <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('predio_nuevo.localidad') border-1 border-red-500 @enderror" wire:model.blur="predio_nuevo.localidad">
+                        <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio_nuevo.localidad') border-1 border-red-500 @enderror" wire:model.blur="predio_nuevo.localidad">
 
-                        <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('predio_nuevo.oficina') border-1 border-red-500 @enderror" wire:model="predio_nuevo.oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                        <input title="Oficina" placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio_nuevo.oficina') border-1 border-red-500 @enderror" wire:model="predio_nuevo.oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                        <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-20 @error('predio_nuevo.tipo_predio') border-1 border-red-500 @enderror" wire:model="predio_nuevo.tipo_predio">
+                        <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio_nuevo.tipo_predio') border-1 border-red-500 @enderror" wire:model="predio_nuevo.tipo_predio">
 
-                        <input title="Número de registro" placeholder="Registro" type="number" class="bg-white rounded text-xs w-20 @error('predio_nuevo.numero_registro') border-1 border-red-500 @enderror" wire:model.blur="predio_nuevo.numero_registro">
+                        <input title="Número de registro" placeholder="Registro" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio_nuevo.numero_registro') border-1 border-red-500 @enderror" wire:model.blur="predio_nuevo.numero_registro">
 
                     </div>
 
@@ -82,31 +82,31 @@
 
                     <div class="text-left">
 
-                        <Label class="text-base tracking-widest rounded-xl border-gray-500">Clave catastral </Label>
+                        <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Clave catastral </Label>
 
                     </div>
 
                     <div class="space-y-1">
 
-                        <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-20" title="Estado" value="16" readonly>
+                        <input placeholder="Estado" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20" title="Estado" value="16" readonly>
 
-                        <input title="Región" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('predio_nuevo.region_catastral') border-1 border-red-500 @enderror" wire:model="predio_nuevo.region_catastral">
+                        <input title="Región" placeholder="Región" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20  @error('predio_nuevo.region_catastral') border-1 border-red-500 @enderror" wire:model="predio_nuevo.region_catastral">
 
-                        <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('predio_nuevo.municipio') border-1 border-red-500 @enderror" wire:model="predio_nuevo.municipio" readonly>
+                        <input title="Municipio" placeholder="Municipio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio_nuevo.municipio') border-1 border-red-500 @enderror" wire:model="predio_nuevo.municipio" readonly>
 
-                        <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('predio_nuevo.zona_catastral') border-1 border-red-500 @enderror" wire:model="predio_nuevo.zona_catastral">
+                        <input title="Zona" placeholder="Zona" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio_nuevo.zona_catastral') border-1 border-red-500 @enderror" wire:model="predio_nuevo.zona_catastral">
 
-                        <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('predio_nuevo.localidad') border-1 border-red-500 @enderror" wire:model.blur="predio_nuevo.localidad">
+                        <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio_nuevo.localidad') border-1 border-red-500 @enderror" wire:model.blur="predio_nuevo.localidad">
 
-                        <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-20 @error('predio_nuevo.sector') border-1 border-red-500 @enderror" wire:model="predio_nuevo.sector">
+                        <input title="Sector" placeholder="Sector" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio_nuevo.sector') border-1 border-red-500 @enderror" wire:model="predio_nuevo.sector">
 
-                        <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-20 @error('predio_nuevo.manzana') border-1 border-red-500 @enderror" wire:model="predio_nuevo.manzana">
+                        <input title="Manzana" placeholder="Manzana" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio_nuevo.manzana') border-1 border-red-500 @enderror" wire:model="predio_nuevo.manzana">
 
-                        <input title="Predio" placeholder="Predio" type="number" class="bg-white rounded text-xs w-20 @error('predio_nuevo.predio') border-1 border-red-500 @enderror" wire:model.blur="predio_nuevo.predio">
+                        <input title="Predio" placeholder="Predio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio_nuevo.predio') border-1 border-red-500 @enderror" wire:model.blur="predio_nuevo.predio">
 
-                        <input title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-20 @error('predio_nuevo.edificio') border-1 border-red-500 @enderror" wire:model="predio_nuevo.edificio">
+                        <input title="Edificio" placeholder="Edificio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio_nuevo.edificio') border-1 border-red-500 @enderror" wire:model="predio_nuevo.edificio">
 
-                        <input title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-20 @error('predio_nuevo.departamento') border-1 border-red-500 @enderror" wire:model="predio_nuevo.departamento">
+                        <input title="Departamento" placeholder="Departamento" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio_nuevo.departamento') border-1 border-red-500 @enderror" wire:model="predio_nuevo.departamento">
 
                     </div>
 

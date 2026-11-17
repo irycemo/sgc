@@ -2,19 +2,19 @@
 
     <x-header>Cedula de actualización catastral</x-header>
 
-    <div class="bg-white p-4 rounded-lg mb-5 shadow-lg">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg mb-5 shadow-lg">
 
         <div class="flex-auto text-center mb-3">
 
             <div >
 
-                <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite</Label>
+                <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Trámite</Label>
 
             </div>
 
             <div class="inline-flex">
 
-                <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
+                <select class="bg-white dark:bg-gray-800 rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
                     @foreach ($años as $año)
 
                         <option value="{{ $año }}">{{ $año }}</option>
@@ -22,9 +22,9 @@
                     @endforeach
                 </select>
 
-                <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
+                <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
 
-                <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
+                <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
 
             </div>
 
@@ -51,7 +51,7 @@
 
             <div class="flex flex-col lg:flex-row gap-3 justify-center text-sm mb-3">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Trámite</strong>
 
@@ -59,7 +59,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Servicio</strong>
 
@@ -67,7 +67,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Solicitante</strong>
 
@@ -83,11 +83,11 @@
 
     @if($predio)
 
-        <div class="bg-white p-4 rounded-lg mb-5 shadow-lg text-sm">
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg mb-5 shadow-lg text-sm">
 
             <div class="flex flex-col lg:flex-row gap-3 justify-center w-full mx-auto lg:w-1/2">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Cuenta predial</strong>
 
@@ -95,7 +95,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Clave catastral</strong>
 
@@ -103,7 +103,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Propietario</strong>
 
@@ -117,7 +117,7 @@
 
             <p class="text-center my-4">Ubicación del predio</p>
 
-            <div class="bg-gray-100 py-1 px-2 gap-3 justify-center w-full mx-auto lg:w-1/2">
+            <div class="bg-gray-100 dark:bg-gray-900 py-1 px-2 gap-3 justify-center w-full mx-auto lg:w-1/2">
 
                 <p class="mb-2">
                     @if($predio->tipo_asentamiento)<strong>Tipo de asentamiento:</strong> {{ $predio->tipo_asentamiento }},@endif
@@ -177,7 +177,7 @@
 
             <div class="flex flex-col lg:flex-row gap-3 justify-center w-full mx-auto lg:w-1/2">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Superficie notarial</strong>
 
@@ -185,7 +185,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Superficie judicial</strong>
 
@@ -193,7 +193,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Superficie total de terreno</strong>
 
@@ -201,7 +201,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Superficie total de construcción</strong>
 
@@ -209,7 +209,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Valor catastral</strong>
 
@@ -221,7 +221,7 @@
 
         </div>
 
-        <div class="flex flex-col lg:flex-row gap-3 mb-5 bg-white rounded-lg p-2 shadow-lg justify-center lg:justify-between items-center">
+        <div class="flex flex-col lg:flex-row gap-3 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg justify-center lg:justify-between items-center">
 
             <div>
 

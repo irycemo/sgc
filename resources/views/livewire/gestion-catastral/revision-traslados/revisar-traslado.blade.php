@@ -20,7 +20,7 @@
 
     </div>
 
-    <div class="mb-5 bg-white rounded-lg p-2 shadow-lg flex justify-end gap-4">
+    <div class="mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg flex justify-end gap-4">
 
         @if($traslado->estado === 'autorizado')
 
@@ -76,7 +76,7 @@
 
             <x-input-group for="observaciones" label="Observaciones" :error="$errors->first('observaciones')" class="w-full">
 
-                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo mas especifico posible si la autorización esta condicionada."></textarea>
+                <textarea class="bg-white dark:bg-gray-800 rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo mas especifico posible si la autorización esta condicionada."></textarea>
 
             </x-input-group>
 
@@ -128,9 +128,9 @@
 
                 <table class="w-full">
 
-                    <thead class="border-b border-gray-300 ">
+                    <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                        <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                        <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                             <th class="px-2">Nombre / Razón social</th>
                             <th class="px-2">% Porpiedad</th>
@@ -141,20 +141,20 @@
 
                     </thead>
 
-                    <tbody class="divide-y divide-gray-200">
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                         @foreach ($transmitentes as $key => $transmitente)
 
-                            <tr class="text-gray-500 text-sm leading-relaxed">
+                            <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 <td class="p-1">(Tra.) {{ $transmitente['nombre'] ?? '' }} {{ $transmitente['ap_paterno'] ?? '' }} {{ $transmitente['ap_materno'] ?? '' }} {{ $transmitente['razon_social'] ?? '' }}</td>
                                 <td class="p-1">
-                                    <input wire:model.live="transmitentes.{{ $key }}.porcentaje_propiedad" type="number" class="bg-white text-sm w-full rounded-md p-2 border border-gray-500 outline-none ring-blue-600 focus:ring-1 focus:border-blue-600">
+                                    <input wire:model.live="transmitentes.{{ $key }}.porcentaje_propiedad" type="number" class="bg-white dark:bg-gray-800 text-sm w-full rounded-md p-2 border border-gray-500 dark:border-gray-600 outline-none ring-blue-600 focus:ring-1 focus:border-blue-600">
                                 </td>
                                 <td class="p-1">
-                                    <input wire:model.live="transmitentes.{{ $key }}.porcentaje_nuda" type="number" class="bg-white text-sm w-full rounded-md p-2 border border-gray-500 outline-none ring-blue-600 focus:ring-1 focus:border-blue-600">
+                                    <input wire:model.live="transmitentes.{{ $key }}.porcentaje_nuda" type="number" class="bg-white dark:bg-gray-800 text-sm w-full rounded-md p-2 border border-gray-500 dark:border-gray-600 outline-none ring-blue-600 focus:ring-1 focus:border-blue-600">
                                 </td>
                                 <td class="p-1">
-                                    <input wire:model.live="transmitentes.{{ $key }}.porcentaje_usufructo" type="number" class="bg-white text-sm w-full rounded-md p-2 border border-gray-500 outline-none ring-blue-600 focus:ring-1 focus:border-blue-600">
+                                    <input wire:model.live="transmitentes.{{ $key }}.porcentaje_usufructo" type="number" class="bg-white dark:bg-gray-800 text-sm w-full rounded-md p-2 border border-gray-500 dark:border-gray-600 outline-none ring-blue-600 focus:ring-1 focus:border-blue-600">
                                 </td>
                             </tr>
 
@@ -162,7 +162,7 @@
 
                         @foreach ($aviso['predio']['adquirientes'] as $adquiriente)
 
-                            <tr class="text-gray-500 text-sm leading-relaxed">
+                            <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 <td class=" px-2">(Adq.){{ $adquiriente['persona']['nombre'] ?? '' }} {{ $adquiriente['persona']['ap_paterno'] ?? '' }} {{ $adquiriente['persona']['ap_materno'] ?? '' }} {{ $adquiriente['persona']['razon_social'] ?? '' }}</td>
                                 <td class=" px-2">{{ $adquiriente['porcentaje_propiedad'] ?? '0' }}</td>
                                 <td class=" px-2">{{ $adquiriente['porcentaje_nuda'] ?? '0' }} </td>
@@ -251,7 +251,7 @@
                     <div
                         wire:click="seleccionarMotivo('{{ $key }}')"
                         wire:loading.attr="disabled"
-                        class="border rounded-lg text-sm mb-2 p-2 hover:bg-gray-100 cursor-pointer">
+                        class="border rounded-lg text-sm mb-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
 
                         <p class="font-semibold">{{ $key }}</p>
 
@@ -280,7 +280,7 @@
 
             <x-input-group for="observaciones" label="Observaciones" :error="$errors->first('observaciones')" class="w-full">
 
-                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo mas especifico posible acerca del motivo del rechazo."></textarea>
+                <textarea class="bg-white dark:bg-gray-800 rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo mas especifico posible acerca del motivo del rechazo."></textarea>
 
             </x-input-group>
 

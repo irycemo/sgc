@@ -8,9 +8,9 @@
 
             <div>
 
-                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+                <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -38,7 +38,7 @@
 
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -137,13 +137,13 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     @can('Ver oficina')
 
                                         {{-- <a
                                             href="{{ route('ver_oficina', $oficina) }}"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Ver
                                         </a> --}}
@@ -155,7 +155,7 @@
                                         <button
                                             wire:click="abrirModalEditar({{ $oficina->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Editar
                                         </button>
@@ -164,7 +164,7 @@
 
                                     <a
                                         href="{{ route('requerimientos') . '?oficina=' . $oficina->id }}"
-                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                         role="menuitem">
                                         Ver requerimientos
                                     </a>
@@ -183,7 +183,7 @@
 
                         <x-table.cell colspan="12">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -201,7 +201,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="12" class="bg-gray-50">
+                    <x-table.cell colspan="12" class="bg-gray-50 dark:bg-gray-800">
 
                         {{ $this->oficinas->links()}}
 
@@ -330,7 +330,7 @@
 
                 </div>
 
-                <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" wire:loading.delay.longer>
+                <div class="h-full w-full rounded-lg bg-gray-200 dark:bg-gray-700 bg-opacity-75 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" wire:loading.delay.longer>
 
                     <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
 
@@ -369,7 +369,7 @@
 
                 @endif
 
-                <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" wire:loading.delay.longer>
+                <div class="h-full w-full rounded-lg bg-gray-200 dark:bg-gray-700 bg-opacity-75 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" wire:loading.delay.longer>
 
                     <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
 

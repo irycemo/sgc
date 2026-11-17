@@ -8,7 +8,7 @@
 
             <div class="flex gap-3 overflow-auto p-1">
 
-                <select class="bg-white rounded-full text-sm w-32" wire:model.live="filters.documento">
+                <select class="bg-white dark:bg-gray-800 rounded-full text-sm w-32" wire:model.live="filters.documento">
 
                     <option value="" selected>Documento</option>
 
@@ -20,7 +20,7 @@
 
                 </select>
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
+                <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.año">
 
                     <option value="" selected>Año</option>
 
@@ -32,9 +32,9 @@
 
                 </select>
 
-                <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-16">
+                <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white dark:bg-gray-800 rounded-full text-sm w-16">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
+                <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.estado">
 
                     <option value="" selected>Estado</option>
                     <option value="activo">Activo</option>
@@ -43,7 +43,7 @@
 
                 </select>
 
-                <select class="bg-white rounded-full text-sm w-28" wire:model.live="filters.oficina">
+                <select class="bg-white dark:bg-gray-800 rounded-full text-sm w-28" wire:model.live="filters.oficina">
 
                     <option value="" selected>Oficina</option>
 
@@ -55,21 +55,21 @@
 
                 </select>
 
-                <input type="number" wire:model.live.debounce.500ms="filters.tAño" placeholder="T. año" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.tAño" placeholder="T. año" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.tFolio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.tFolio" placeholder="T. Folio" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.tUsuario" placeholder="T. Usuario" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.tUsuario" placeholder="T. Usuario" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.p_oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.p_oficina" placeholder="Oficina" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.t_predio" placeholder="T. Predio" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.t_predio" placeholder="T. Predio" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+                <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -84,7 +84,7 @@
 
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -195,12 +195,12 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     <button
                                         wire:click="reimprimir('{{ $certificacion->uuid }}')"
                                         wire:loading.attr="disabled"
-                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                         role="menuitem">
                                         Reimprimir
                                     </button>
@@ -210,7 +210,7 @@
                                         <button
                                             wire:click="abrirModalEditar('{{ $certificacion->uuid }}')"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Ver observación
                                         </button>
@@ -221,7 +221,7 @@
 
                                         <a
                                             href="{{ route('auditoria') . '?modelo=Certificacion&modelo_id=' . $certificacion->id }}"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Auditar
                                         </a>
@@ -231,7 +231,7 @@
                                     <button
                                         wire:click="abrirModalAviso('{{ $certificacion->uuid }}')"
                                         wire:loading.attr="disabled"
-                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                         role="menuitem">
                                         Ver aviso
                                     </button>
@@ -250,7 +250,7 @@
 
                         <x-table.cell colspan="10">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -268,7 +268,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="10" class="bg-gray-50">
+                    <x-table.cell colspan="10" class="bg-gray-50 dark:bg-gray-800">
 
                         {{ $this->certificaciones->links()}}
 
@@ -366,7 +366,7 @@
 
                     @foreach ($modelo_editar->predio->traslados as $traslado)
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p>{{ $traslado->año_aviso }}-{{ $traslado->folio_aviso }}-{{ $traslado->usuario_aviso }}  ({{ $traslado->estado }})</p>
 

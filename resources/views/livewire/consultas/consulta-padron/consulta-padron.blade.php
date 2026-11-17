@@ -2,7 +2,7 @@
 
     <x-header>Consulta del padrón catastral</x-header>
 
-    <div class="bg-white p-4 rounded-lg shadow-lg mb-10">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg mb-10">
 
         <ul class="grid w-full mx-auto gap-6 md:grid-cols-4">
 
@@ -94,7 +94,7 @@
 
         @if($radio === 'clave')
 
-            <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg" id="claves-div">
+            <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg" id="claves-div">
 
                 <div class="flex-auto " >
 
@@ -110,13 +110,13 @@
 
                             <div class="space-y-1">
 
-                                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
+                                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-                                <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.blur="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                                <input title="Oficina" placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model.blur="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                                <input title="Tipo de predio" placeholder="Tipo" type="number" min="1" max="2" class="bg-white rounded text-xs w-20 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
+                                <input title="Tipo de predio" placeholder="Tipo" type="number" min="1" max="2" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
 
-                                <input title="Número de registro" placeholder="Registro" type="number" class="bg-white rounded text-xs w-20 @error('numero_registro') border-1 border-red-500 @enderror" wire:model="numero_registro">
+                                <input title="Número de registro" placeholder="Registro" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('numero_registro') border-1 border-red-500 @enderror" wire:model="numero_registro">
 
                                 <div class="inline-flex items-center">
                                     <span class="text-xs mr-2">+/- 10</span><x-checkbox wire:model="diez"></x-checkbox>
@@ -136,19 +136,19 @@
 
                             <div class="space-y-1">
 
-                                <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-20" title="Estado" value="16" readonly>
+                                <input placeholder="Estado" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20" title="Estado" value="16" readonly>
 
-                                <input title="Región catastral" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                                <input title="Región catastral" placeholder="Región" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                                <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio" readonly>
+                                <input title="Municipio" placeholder="Municipio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio" readonly>
 
-                                <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model="zona_catastral">
+                                <input title="Zona" placeholder="Zona" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model="zona_catastral">
 
-                                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
+                                <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-                                <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-20 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
+                                <input title="Sector" placeholder="Sector" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
 
-                                <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-20 @error('manzana') border-1 border-red-500 @enderror" wire:model="manzana">
+                                <input title="Manzana" placeholder="Manzana" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('manzana') border-1 border-red-500 @enderror" wire:model="manzana">
 
                             </div>
 
@@ -163,7 +163,7 @@
                             wire:loading.attr="disabled"
                             wire:target="buscarCuentaPredial"
                             type="button"
-                            class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+                            class="bg-blue-400 dark:bg-blue-600 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
 
                             <img wire:loading wire:target="buscarCuentaPredial" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
@@ -176,7 +176,7 @@
                             wire:loading.attr="disabled"
                             wire:target="buscarClaveCatastral"
                             type="button"
-                            class="bg-blue-400 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+                            class="bg-blue-400 dark:bg-blue-600 hover:shadow-lg text-white font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
 
                             <img wire:loading wire:target="buscarClaveCatastral" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
@@ -192,7 +192,7 @@
 
         @elseif($radio === 'propietario')
 
-            <div class="mb-5 bg-white rounded-lg p-4 shadow-lg" id="propietarios-div">
+            <div class="mb-5 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg" id="propietarios-div">
 
                 <div class="flex flex-col lg:flex-row gap-3 mb-5">
 
@@ -239,7 +239,7 @@
                     wire:loading.attr="disabled"
                     wire:target="buscarPorPropietario"
                     type="button"
-                    class="bg-blue-400 hover:shadow-lg text-white mx-auto font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+                    class="bg-blue-400 dark:bg-blue-600 hover:shadow-lg text-white mx-auto font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
 
                     <img wire:loading wire:target="buscarPorPropietario" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
@@ -251,7 +251,7 @@
 
         @elseif($radio === 'ubicacion')
 
-            <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg" id="ubicacion-div">
+            <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg" id="ubicacion-div">
 
                 <div class="flex gap-4">
 
@@ -280,7 +280,7 @@
                     wire:loading.attr="disabled"
                     wire:target="buscarPorUbicacion"
                     type="button"
-                    class="bg-blue-400 hover:shadow-lg text-white mx-auto font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+                    class="bg-blue-400 dark:bg-blue-600 hover:shadow-lg text-white mx-auto font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
 
                     <img wire:loading wire:target="buscarPorUbicacion" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
@@ -292,7 +292,7 @@
 
         @elseif($radio === 'documento')
 
-            <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg" id="ubicacion-div">
+            <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg" id="ubicacion-div">
 
                 <div class="flex gap-4">
 
@@ -325,7 +325,7 @@
                     wire:loading.attr="disabled"
                     wire:target="buscarPorDocumento"
                     type="button"
-                    class="bg-blue-400 hover:shadow-lg text-white mx-auto font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
+                    class="bg-blue-400 dark:bg-blue-600 hover:shadow-lg text-white mx-auto font-bold px-4 py-2 rounded text-xs hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none flex items-center justify-center focus:outline-blue-400 focus:outline-offset-2">
 
                     <img wire:loading wire:target="buscarPorDocumento" class="mx-auto h-4 mr-1" src="{{ asset('storage/img/loading3.svg') }}" alt="Loading">
 
@@ -440,7 +440,7 @@
 
                                 <x-table.cell colspan="9">
 
-                                    <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                                    <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                         No hay resultados.
 
@@ -458,7 +458,7 @@
 
                         <x-table.row>
 
-                            <x-table.cell colspan="13" class="bg-gray-50">
+                            <x-table.cell colspan="13" class="bg-gray-50 dark:bg-gray-800">
 
                                 {{ $this->prediosLista->links() }}
 
@@ -484,143 +484,143 @@
 
                 <x-h4>Resumen</x-h4>
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600">
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600 dark:text-gray-400">
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Cuenta predial:</strong>{{ $this->predio->cuentaPredial() }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Clave catastral:</strong>{{ $this->predio->claveCatastral() }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Propietario(s):</strong>{{ $this->predio->propietarios->first()?->persona->nombreCompleto() }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Tipo de vialidad:</strong>{{ $this->predio->tipo_vialidad }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Nombre de vialidad:</strong>{{ $this->predio->nombre_vialidad }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Tipo de asentamiento:</strong>{{ $this->predio->tipo_asentamiento }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Nombre de asentamiento:</strong>{{ $this->predio->nombre_asentamiento }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Numeros exterior:</strong>{{ $this->predio->numero_exterior . ', ' . $this->predio->numero_exterior_2 }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Numeros adicional:</strong>{{ $this->predio->numero_adicional . ', ' . $this->predio->numero_adicional_2 }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Numero interior:</strong>{{ $this->predio->numero_interior}}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Lote:</strong>{{ $this->predio->lote_fraccionador}}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Manzana:</strong>{{ $this->predio->manzana_fraccionador}}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Zona o etapa:</strong>{{ $this->predio->etapa_fraccionador}}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Superficie total de terreno:</strong>{{ $this->predio->superficie_total_terreno}}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Superficie total de construcción:</strong>{{ $this->predio->superficie_total_construccion}}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Superficie notarial:</strong>{{ $this->predio->superficie_notarial }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Valor catastral:</strong>${{ number_format($this->predio->valor_catastral, 2) }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Funcionario responsable del último movimiento:</strong>{{ $this->predio->movimientos->first()?->creadoPor?->name ? $this->predio->movimientos->first()?->creadoPor?->name : $this->predio->actualizado_nombre }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Último Movimiento:</strong>{{ $this->predio->movimientos->first()?->nombre }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Último aviso:</strong>{{ $this->predio->ultimoTraslado->first() ? $this->predio->ultimoTraslado->first()->año_aviso . '-' . $this->predio->ultimoTraslado->first()->folio_aviso . '-' . $this->predio->ultimoTraslado->first()->usuario_aviso : 'N/A' }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Último avalúo:</strong>{{ $this->predio->ultimoAvaluo->first() ? $this->predio->ultimoAvaluo->first()->año . '-' . $this->predio->ultimoAvaluo->first()->folio . '-' . $this->predio->ultimoAvaluo->first()->usuario : 'N/A' }}</p>
 
                         </div>
 
-                        <div class="col-span-1 sm:col-span-2 lg:col-span-5 rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="col-span-1 sm:col-span-2 lg:col-span-5 rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Domicilio para recibir notificaciones:</strong> {{ $this->predio->domicilio_notificacion }}</p>
 
                         </div>
 
-                        <div class="col-span-1 sm:col-span-2 lg:col-span-5 rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="col-span-1 sm:col-span-2 lg:col-span-5 rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Observaciones:</strong> {{ $this->predio->observaciones }}</p>
 
@@ -632,11 +632,11 @@
 
                 <x-h4>Datos generales</x-h4>
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600">
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600 dark:text-gray-400">
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Cuenta predial</strong>
 
@@ -644,7 +644,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Clave catastral</strong>
 
@@ -652,7 +652,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Estado</strong>
 
@@ -660,7 +660,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Folio real</strong>
 
@@ -668,7 +668,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Declarante</strong>
 
@@ -676,7 +676,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>CURT</strong>
 
@@ -684,7 +684,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Fecha de efectos</strong>
 
@@ -692,7 +692,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Superficie notarial</strong>
 
@@ -700,7 +700,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Superficie judicial</strong>
 
@@ -708,7 +708,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Superficie total de terreno</strong>
 
@@ -716,7 +716,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Valor total de terreno</strong>
 
@@ -724,7 +724,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Superficie total de construcción</strong>
 
@@ -732,7 +732,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Valor total de construcción</strong>
 
@@ -740,7 +740,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Valor catastral</strong>
 
@@ -748,7 +748,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Uso del predio</strong>
 
@@ -758,7 +758,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Documento de entrada - Número de documento</strong>
 
@@ -766,7 +766,7 @@
 
                         </div>
 
-                        <div class="col-span-1 sm:col-span-2 lg:col-span-5 rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="col-span-1 sm:col-span-2 lg:col-span-5 rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Observaciones</strong>
 
@@ -780,11 +780,11 @@
 
                 <x-h4>Ubicación del predio</x-h4>
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600">
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600 dark:text-gray-400">
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Tipo de asentamiento</strong>
 
@@ -792,7 +792,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Nombre del asentamiento</strong>
 
@@ -800,7 +800,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Tipo de vialidad</strong>
 
@@ -808,7 +808,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Nombre de la vialidad</strong>
 
@@ -816,7 +816,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Número exterior</strong>
 
@@ -824,7 +824,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Número exterior 2</strong>
 
@@ -832,7 +832,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Número interior</strong>
 
@@ -840,7 +840,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Número adicional</strong>
 
@@ -848,7 +848,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Número adicional 2</strong>
 
@@ -856,7 +856,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Código postal</strong>
 
@@ -864,7 +864,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Lote del fraccionador</strong>
 
@@ -872,7 +872,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Manzana del fraccionador</strong>
 
@@ -880,7 +880,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Etapa o zona del fraccionador</strong>
 
@@ -888,7 +888,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Nombre del Edificio</strong>
 
@@ -896,7 +896,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Clave del edificio</strong>
 
@@ -904,7 +904,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Departamento</strong>
 
@@ -912,7 +912,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Predio Rústico Denominado ó Antecedente</strong>
 
@@ -920,7 +920,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Ubicación en manzana</strong>
 
@@ -928,7 +928,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Coordenadas UTM</strong>
 
@@ -938,7 +938,7 @@
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <strong>Coordenadas geográficas</strong>
 
@@ -968,13 +968,13 @@
 
                 <x-h4>Colindancias ({{ $this->predio->colindancias->count() }})</x-h4>
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
                     <table class="table-auto lg:table-fixed w-full">
 
-                        <thead class="border-b border-gray-300 ">
+                        <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                            <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                            <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                                 <th class="px-2">Viento</th>
                                 <th class="px-2">Longitud(mts.)</th>
@@ -984,11 +984,11 @@
 
                         </thead>
 
-                        <tbody class="divide-y divide-gray-200">
+                        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                             @foreach ($this->predio->colindancias as $colindancia)
 
-                                <tr class="text-gray-500 text-sm leading-relaxed">
+                                <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                     <td class=" px-2 w-full whitespace-nowrap">{{ $colindancia->viento }}</td>
                                     <td class=" px-2 w-full whitespace-nowrap">{{ $colindancia->longitud }}</td>
                                     <td class=" px-2 w-full">{{ $colindancia->descripcion }}</td>
@@ -1004,13 +1004,13 @@
 
                 <x-h4>Terrenos ({{ $this->predio->terrenos->count() }})</x-h4>
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
                     <table class="table-auto lg:table-fixed w-full">
 
-                        <thead class="border-b border-gray-300 ">
+                        <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                            <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                            <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                                 <th class="px-2">Superficie</th>
                                 <th class="px-2">Valor unitario</th>
@@ -1022,11 +1022,11 @@
 
                         </thead>
 
-                        <tbody class="divide-y divide-gray-200">
+                        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                             @foreach ($this->predio->terrenos as $terreno)
 
-                                <tr class="text-gray-500 text-sm leading-relaxed">
+                                <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                     <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->superficie }}</td>
                                     <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->valor_unitario }}</td>
                                     <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->demerito }}</td>
@@ -1044,13 +1044,13 @@
 
                 <x-h4>Construcciones ({{ $this->predio->construcciones->count() }})</x-h4>
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
                     <table class="table-auto lg:table-fixed w-full">
 
-                        <thead class="border-b border-gray-300 ">
+                        <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                            <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                            <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                                 <th class="px-2">Referencia</th>
                                 <th class="px-2">Clasificación de construcción</th>
@@ -1063,11 +1063,11 @@
 
                         </thead>
 
-                        <tbody class="divide-y divide-gray-200">
+                        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                             @foreach ($this->predio->construcciones as $construccion)
 
-                                <tr class="text-gray-500 text-sm leading-relaxed">
+                                <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                     <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->referencia }}</td>
                                     <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->tipo }}-{{ $construccion->uso }}-{{ $construccion->estado }}-{{ $construccion->calidad }}</td>
                                     <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->niveles }}</td>
@@ -1088,13 +1088,13 @@
 
                     <x-h4>Terrenos de área común ({{ $this->predio->terrenosComun->count() }})</x-h4>
 
-                    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
+                    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
                         <table class="table-auto lg:table-fixed w-full">
 
-                            <thead class="border-b border-gray-300 ">
+                            <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                                <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                                     <th class="px-2">Área común de terreno</th>
                                     <th class="px-2">Indiviso de terreno</th>
@@ -1106,11 +1106,11 @@
 
                             </thead>
 
-                            <tbody class="divide-y divide-gray-200">
+                            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                                 @foreach ($this->predio->terrenosComun as $terreno)
 
-                                    <tr class="text-gray-500 text-sm leading-relaxed">
+                                    <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                         <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->area_terreno_comun }}</td>
                                         <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->indiviso_terreno }}</td>
                                         <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->superficie_proporcional }}</td>
@@ -1132,13 +1132,13 @@
 
                     <x-h4>Construcciones de área común ({{ $this->predio->construccionesComun->count() }})</x-h4>
 
-                    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
+                    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
                         <table class="table-auto lg:table-fixed w-full">
 
-                            <thead class="border-b border-gray-300 ">
+                            <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                                <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                                     <th class="px-2">Área común de construcción</th>
                                     <th class="px-2">Indiviso de construcción</th>
@@ -1150,11 +1150,11 @@
 
                             </thead>
 
-                            <tbody class="divide-y divide-gray-200">
+                            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                                 @foreach ($this->predio->construccionesComun as $construccion)
 
-                                    <tr class="text-gray-500 text-sm leading-relaxed">
+                                    <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                         <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->area_comun_construccion }}</td>
                                         <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->indiviso_construccion }}</td>
                                         <td class=" px-2 w-full whitespace-nowrap">{{ $construccion->superficie_proporcional }}</td>
@@ -1174,13 +1174,13 @@
 
                 <x-h4>Propietarios ({{ $this->predio->propietarios->count() }})</x-h4>
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
                     <table class="table-auto lg:table-fixed w-full">
 
-                        <thead class="border-b border-gray-300 ">
+                        <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                            <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                            <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                                 <th class="px-2">Nombre / Razón social</th>
                                 <th class="px-2">Porcentaje de propiedad</th>
@@ -1192,11 +1192,11 @@
 
                         </thead>
 
-                        <tbody class="divide-y divide-gray-200">
+                        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                             @foreach ($this->predio->propietarios->sortBy('persona.nombre') as $propietario)
 
-                                <tr class="text-gray-500 text-sm leading-relaxed">
+                                <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                     <td class=" px-2 w-full ">{{ $propietario->persona->nombre }} {{ $propietario->persona->ap_paterno }} {{ $propietario->persona->ap_materno }} {{ $propietario->persona->razon_social }}</td>
                                     <td class=" px-2 w-full ">{{ $propietario->porcentaje_propiedad }}%</td>
                                     <td class=" px-2 w-full ">{{ $propietario->porcentaje_nuda }}%</td>
@@ -1214,13 +1214,13 @@
 
                 <x-h4>Movimientos ({{ $this->predio->movimientos->count() }})</x-h4>
 
-                <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
                     <table class="table-auto w-full">
 
-                        <thead class="border-b border-gray-300 ">
+                        <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                            <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                            <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                                 <th class="px-2">Movimiento</th>
                                 <th class="px-2">Fecha</th>
@@ -1231,11 +1231,11 @@
 
                         </thead>
 
-                        <tbody class="divide-y divide-gray-200">
+                        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                             @foreach ($this->predio->movimientos as $movimiento)
 
-                                <tr class="text-gray-500 text-sm leading-relaxed">
+                                <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                     <td class=" px-2 w-1/6">{{ $movimiento->nombre }}</td>
                                     <td class=" px-2 whitespace-nowrap">{{ $movimiento->fecha->format('d-m-Y') }}</td>
                                     <td class=" px-2 w-full ">{{ $movimiento->descripcion }}</td>

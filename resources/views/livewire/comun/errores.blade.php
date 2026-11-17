@@ -1,6 +1,6 @@
 @if(count($errors) > 0)
 
-    <div class="mb-5 bg-white rounded-lg p-2 shadow-lg flex gap-2 flex-wrap ">
+    <div class="mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg flex gap-2 flex-wrap ">
 
         <ul class="flex gap-2 felx flex-wrap list-disc ml-5">
 

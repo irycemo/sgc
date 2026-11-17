@@ -14,17 +14,17 @@
 
             <div class="flex-row lg:flex lg:space-x-3">
 
-                <div class="flex-auto bg-white p-3 rounded-lg mb-3 shadow-md">
+                <div class="flex-auto bg-white dark:bg-gray-800 p-3 rounded-lg mb-3 shadow-md">
 
                     <div class="mb-2">
 
-                        <Label class="text-lg tracking-widest rounded-xl border-gray-500">Categoría</Label>
+                        <Label class="text-lg tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Categoría</Label>
 
                     </div>
 
                     <div>
 
-                        <select class="bg-white rounded text-sm w-full" wire:model.live="categoria_seleccionada">
+                        <select class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model.live="categoria_seleccionada">
 
                             <option selected value="">Selecciona una opción</option>
 
@@ -42,19 +42,19 @@
 
                 @if($this->categoria != "")
 
-                    <div class="bg-white p-3 rounded-lg space-y-2 mb-3 shadow-md">
+                    <div class="bg-white dark:bg-gray-800 p-3 rounded-lg space-y-2 mb-3 shadow-md">
 
                         <div class="">
 
                             <div class="mb-2">
 
-                            <Label class="text-lg tracking-widest rounded-xl border-gray-500">Servicio</Label>
+                            <Label class="text-lg tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Servicio</Label>
 
                             </div>
 
                             <div>
 
-                                <select class="bg-white rounded text-sm w-full" wire:model.live="servicio_seleccionado">
+                                <select class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model.live="servicio_seleccionado">
 
                                     <option selected value="">Selecciona una opción</option>
 
@@ -80,17 +80,17 @@
 
         <div class="">
 
-            <div class="bg-white p-3 rounded-lg text-center shadow-md mb-3">
+            <div class="bg-white dark:bg-gray-800 p-3 rounded-lg text-center shadow-md mb-3">
 
                 <div class="mb-2">
 
-                    <Label class="text-lg tracking-widest rounded-xl border-gray-500">Buscar trámite</Label>
+                    <Label class="text-lg tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Buscar trámite</Label>
 
                 </div>
 
                 <div class="flex justify-center lg:w-1/2 mx-auto">
 
-                    <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="tramite_año">
+                    <select class="bg-white dark:bg-gray-800 rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="tramite_año">
                         @foreach ($años as $año)
 
                             <option value="{{ $año }}">{{ $año }}</option>
@@ -98,9 +98,9 @@
                         @endforeach
                     </select>
 
-                    <input type="number" placeholder="Folio" min="1" class="bg-white text-sm w-20 focus:ring-0 @error('tramite_folio') border-red-500 @enderror" wire:model="tramite_folio">
+                    <input type="number" placeholder="Folio" min="1" class="bg-white dark:bg-gray-800 text-sm w-20 focus:ring-0 @error('tramite_folio') border-red-500 @enderror" wire:model="tramite_folio">
 
-                    <input type="number" placeholder="Usuario" min="1" class="bg-white text-sm w-20 focus:ring-0 border-l-0 @error('tramite_usuario') border-red-500 @enderror" wire:model="tramite_usuario">
+                    <input type="number" placeholder="Usuario" min="1" class="bg-white dark:bg-gray-800 text-sm w-20 focus:ring-0 border-l-0 @error('tramite_usuario') border-red-500 @enderror" wire:model="tramite_usuario">
 
                     <button
                         wire:click="buscarTramite"

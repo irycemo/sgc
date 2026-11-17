@@ -8,11 +8,11 @@
 
     <x-header>Cartografía</x-header>
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg">
+    <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg">
 
         <div class="flex-col lg:flex lg:space-x-2 mb-2 space-y-4 items-center justify-center" >
 
-            <select class="bg-white rounded-full text-sm w-60" wire:model.live="oficina">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm w-60" wire:model.live="oficina">
 
                 <option value="" selected>Oficina</option>
 
@@ -24,7 +24,7 @@
 
             </select>
 
-            <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-20 @error('sector') border-1 border-red-500 @enderror" wire:model.blur="sector">
+            <input title="Sector" placeholder="Sector" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('sector') border-1 border-red-500 @enderror" wire:model.blur="sector">
 
             <div class="mb-2 flex-col sm:flex-row mx-auto mt-5 flex space-y-2 sm:space-y-0 sm:space-x-3 justify-center">
 
@@ -49,7 +49,7 @@
 
     @if(count($cartografia))
 
-        <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+        <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
             <x-table>
 
@@ -126,13 +126,13 @@
 
                                     </div>
 
-                                    <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                    <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                         <button
                                             wire:click="abrirModalEditar({{ $cartografia->id }})"
                                             wire:target="abrirModalEditar({{ $cartografia->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Editar
                                         </button>
@@ -144,7 +144,7 @@
                                                 wire:target="abrirModalBorrar({{ $cartografia->id }})"
                                                 wire:loading.attr="disabled"
                                                 wire:confirm="¿Estas seguro que quieres borrar la información? No será posible volver a recuperarla."
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Borrar
                                             </button>
@@ -171,7 +171,7 @@
 
     @else
 
-        <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+        <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
             No hay resultados.
 

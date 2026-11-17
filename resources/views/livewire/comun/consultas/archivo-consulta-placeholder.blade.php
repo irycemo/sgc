@@ -2,13 +2,13 @@
 
     <x-h4>Archivo</x-h4>
 
-    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-500" wire:loading.class.delaylongest="opacity-50">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-500 dark:text-gray-400" wire:loading.class.delaylongest="opacity-50">
 
         <table class="w-full overflow-x-auto table-fixed">
 
-            <thead class="border-b border-gray-300 ">
+            <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                     <th class="px-2">Tipo</th>
                     <th class="px-2">Ver archivo</th>
@@ -17,9 +17,9 @@
 
             </thead>
 
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
-                <tr class="text-gray-500 text-sm leading-relaxed">
+                <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                     <td class=" px-2 w-full capitalize"></td>
                     <td class="px-2 w-full">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

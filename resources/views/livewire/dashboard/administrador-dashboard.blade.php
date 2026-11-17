@@ -8,13 +8,13 @@
 
             <x-h4>Certificaciones</x-h4>
 
-            <div class="grid grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-lg">
+            <div class="grid grid-cols-2 gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
 
                 @foreach ($certificaciones as $certificacion)
 
-                    <span class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($certificacion['estado']) }}</span>
+                    <span class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">{{ ucfirst($certificacion['estado']) }}</span>
 
-                    <span class="text-right text-sm text-gray-600">{{ $certificacion['total'] }}</span>
+                    <span class="text-right text-sm text-gray-600 dark:text-gray-400">{{ $certificacion['total'] }}</span>
 
                 @endforeach
 
@@ -22,9 +22,9 @@
 
                     @if($certificado['estado'] == 'A')
 
-                        <a href="{{ route('tramites_linea') }}" class="text-left text-sm text-gray-600 hover:underline ">Pendientes</a>
+                        <a href="{{ route('tramites_linea') }}" class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">Pendientes</a>
 
-                        <span class="text-right text-sm text-gray-600">{{ $certificado['total'] }}</span>
+                        <span class="text-right text-sm text-gray-600 dark:text-gray-400">{{ $certificado['total'] }}</span>
 
                     @endif
 
@@ -38,13 +38,13 @@
 
             <x-h4>Avisos</x-h4>
 
-            <div class="grid grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-lg">
+            <div class="grid grid-cols-2 gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
 
                 @foreach ($traslados as $aviso)
 
-                    <a href="{{ route('revision_traslados') .'?estado=' . $aviso['estado'] }}" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($aviso['estado']) }}</a>
+                    <a href="{{ route('revision_traslados') .'?estado=' . $aviso['estado'] }}" class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">{{ ucfirst($aviso['estado']) }}</a>
 
-                    <span class="text-right text-sm text-gray-600">{{ $aviso['total'] }}</span>
+                    <span class="text-right text-sm text-gray-600 dark:text-gray-400">{{ $aviso['total'] }}</span>
 
                 @endforeach
 
@@ -56,13 +56,13 @@
 
             <x-h4>Avalúos</x-h4>
 
-            <div class="grid grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-lg">
+            <div class="grid grid-cols-2 gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
 
                 @foreach ($avaluos as $avaluo)
 
-                    <a href="{{ route('avaluos_lista') .'?estado=' . $avaluo['estado'] }}" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($avaluo['estado']) }}</a>
+                    <a href="{{ route('avaluos_lista') .'?estado=' . $avaluo['estado'] }}" class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">{{ ucfirst($avaluo['estado']) }}</a>
 
-                    <span class="text-right text-sm text-gray-600">{{ $avaluo['total'] }}</span>
+                    <span class="text-right text-sm text-gray-600 dark:text-gray-400">{{ $avaluo['total'] }}</span>
 
                 @endforeach
 
@@ -74,13 +74,13 @@
 
             <x-h4>Predios ignorados</x-h4>
 
-            <div class="grid grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-lg">
+            <div class="grid grid-cols-2 gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
 
                 @foreach ($predios_ignorados as $predio)
 
-                    <a href="{{ route('predios_ignorados') .'?estado=' . $predio['estado'] }}" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($predio['estado']) }}</a>
+                    <a href="{{ route('predios_ignorados') .'?estado=' . $predio['estado'] }}" class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">{{ ucfirst($predio['estado']) }}</a>
 
-                    <span class="text-right text-sm text-gray-600">{{ $predio['total'] }}</span>
+                    <span class="text-right text-sm text-gray-600 dark:text-gray-400">{{ $predio['total'] }}</span>
 
                 @endforeach
 
@@ -92,13 +92,13 @@
 
             <x-h4>Variaciones</x-h4>
 
-            <div class="grid grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-lg">
+            <div class="grid grid-cols-2 gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
 
                 @foreach ($variaciones_catastrales as $variacion)
 
-                    <a href="{{ route('variaciones_catastrales') .'?estado=' . $variacion['estado'] }}" class="text-left text-sm text-gray-600 hover:underline ">{{ ucfirst($variacion['estado']) }}</a>
+                    <a href="{{ route('variaciones_catastrales') .'?estado=' . $variacion['estado'] }}" class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">{{ ucfirst($variacion['estado']) }}</a>
 
-                    <span class="text-right text-sm text-gray-600">{{ $variacion['total'] }}</span>
+                    <span class="text-right text-sm text-gray-600 dark:text-gray-400">{{ $variacion['total'] }}</span>
 
                 @endforeach
 
@@ -110,15 +110,15 @@
 
             <x-h4>Requerimientos</x-h4>
 
-            <div class="grid grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-lg">
+            <div class="grid grid-cols-2 gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
 
-                <a href="{{ route('requerimientos_certificaciones') }}" class="text-left text-sm text-gray-600 hover:underline ">Certificados catastrales</a>
+                <a href="{{ route('requerimientos_certificaciones') }}" class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">Certificados catastrales</a>
 
-                <span class="text-right text-sm text-gray-600">{{ $requerimientos_certificados }}</span>
+                <span class="text-right text-sm text-gray-600 dark:text-gray-400">{{ $requerimientos_certificados }}</span>
 
-                <a href="{{ route('requerimientos') }}" class="text-left text-sm text-gray-600 hover:underline ">Generales</a>
+                <a href="{{ route('requerimientos') }}" class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">Generales</a>
 
-                <span class="text-right text-sm text-gray-600">{{ $requerimientos_oficina }}</span>
+                <span class="text-right text-sm text-gray-600 dark:text-gray-400">{{ $requerimientos_oficina }}</span>
 
             </div>
 

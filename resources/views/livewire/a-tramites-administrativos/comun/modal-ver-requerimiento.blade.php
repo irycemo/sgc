@@ -12,7 +12,7 @@
 
             @forelse ($modelo_editar->requerimientos as $requermiento)
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 my-3">
 
                     <div>
 

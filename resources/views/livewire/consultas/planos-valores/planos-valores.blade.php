@@ -2,7 +2,7 @@
 
     <x-header>Planos de valores</x-header>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 lg:w-1/2 mx-auto w-full">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600 lg:w-1/2 mx-auto w-full">
 
         <x-table class="mx-auto">
 
@@ -39,7 +39,7 @@
 
                         <x-table.cell colspan="9">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 

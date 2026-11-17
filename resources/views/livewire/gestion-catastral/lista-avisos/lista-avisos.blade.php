@@ -6,17 +6,17 @@
 
         <div class="flex gap-3 overflow-auto p-1">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.tipo" placeholder="T. Predio" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.tipo" placeholder="T. Predio" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
             <div class="flex gap-3">
 
-                <x-input-select class="bg-white rounded-full text-sm w-min" wire:model.live="estado">
+                <x-input-select class="bg-white dark:bg-gray-800 rounded-full text-sm w-min" wire:model.live="estado">
 
                     <option value="">Seleccione una opción</option>
                     <option value="nuevo">Nuevo</option>
@@ -27,7 +27,7 @@
 
                 </x-input-select>
 
-                <x-input-select class="bg-white rounded-full text-sm w-min" wire:model.live="filters.usuario_asignado">
+                <x-input-select class="bg-white dark:bg-gray-800 rounded-full text-sm w-min" wire:model.live="filters.usuario_asignado">
 
                     <option value="">Seleccione una opción</option>
 
@@ -39,15 +39,15 @@
 
                 </x-input-select>
 
-                <input type="number" wire:model.live.debounce.500ms="filters.año_aviso" placeholder="Año Aviso" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.año_aviso" placeholder="Año Aviso" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.folio_aviso" placeholder="Folio Aviso" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.folio_aviso" placeholder="Folio Aviso" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.usuario_aviso" placeholder="Usuario Aviso" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.usuario_aviso" placeholder="Usuario Aviso" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
-                <x-input-select class="bg-white rounded-full text-sm w-min" wire:model.live="oficina">
+                <x-input-select class="bg-white dark:bg-gray-800 rounded-full text-sm w-min" wire:model.live="oficina">
 
                     @foreach ($oficinas as $item)
 
@@ -57,7 +57,7 @@
 
                 </x-input-select>
 
-                <x-input-select class="bg-white rounded-full text-sm w-min" wire:model.live="pagination">
+                <x-input-select class="bg-white dark:bg-gray-800 rounded-full text-sm w-min" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -72,7 +72,7 @@
 
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -162,14 +162,14 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     @if(auth()->user()->hasRole(['Fiscal', 'Oficina de rentas']))
 
                                         <button
                                             wire:click="asignarmeAviso({{ $traslado->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Asignarme el aviso
                                         </button>
@@ -180,7 +180,7 @@
                                             wire:click="asignarmeAviso({{ $traslado->id }})"
                                             wire:loading.attr="disabled"
                                             wire:confirm="¿Esta seguro que desea reasignarse el aviso?"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Asignarme el aviso
                                         </button>
@@ -188,7 +188,7 @@
                                         <button
                                             wire:click="abrirModalReasignarFiscal({{ $traslado->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Reasignar fiscal
                                         </button>
@@ -197,7 +197,7 @@
                                             wire:click="reasignarFiscalAleatoriamente({{ $traslado->id }})"
                                             wire:loading.attr="disabled"
                                             wire:confirm="¿Esta seguro que desea reasignar aviso?"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Reasignar fiscal aleatoriamente
                                         </button>
@@ -209,7 +209,7 @@
                                         <button
                                             wire:click="abrirModalRechazos({{ $traslado->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Ver rechazos
                                         </button>
@@ -230,7 +230,7 @@
 
                         <x-table.cell colspan="9">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -248,7 +248,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="9" class="bg-gray-50">
+                    <x-table.cell colspan="9" class="bg-gray-50 dark:bg-gray-800">
 
                         {{ $this->traslados->links()}}
 
@@ -274,7 +274,7 @@
 
             @foreach ($modelo_editar->rechazos as $rechazo)
 
-                <div class="bg-gray-100 rounded-lg p-2 mb-2">
+                <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-2 mb-2">
 
                     <div>
                         <p class="text-xs mb-1">Reglamento de la ley de la Función Registral y Catastral del Estado de Michoacán de Ocampo</p>

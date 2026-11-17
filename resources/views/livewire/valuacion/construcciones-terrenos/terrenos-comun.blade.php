@@ -1,4 +1,4 @@
-<div class="bg-white shadow-xl rounded-lg p-4">
+<div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-4">
 
     <h4 class="text-lg mb-5 text-center">Terrenos de área común</h4>
 
@@ -6,7 +6,7 @@
 
         @foreach ($terrenosComun as $index => $item)
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-3 items-start mb-2 bg-gray-50 p-4 rounded-lg" wire:key="terrenoComun-"{{ $index }}>
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-6 gap-3 items-start mb-2 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg" wire:key="terrenoComun-"{{ $index }}>
 
                 <div class="flex-auto lg:col-span-1">
 
@@ -18,7 +18,7 @@
 
                     <div>
 
-                        <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.area_terreno_comun">
+                        <input type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.area_terreno_comun">
 
                     </div>
 
@@ -40,7 +40,7 @@
 
                     <div>
 
-                        <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.indiviso_terreno">
+                        <input type="number" max="100" step=".0001" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.indiviso_terreno">
 
                     </div>
 
@@ -62,7 +62,7 @@
 
                     <div>
 
-                        <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.valor_unitario">
+                        <input type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.valor_unitario">
 
                     </div>
 
@@ -84,7 +84,7 @@
 
                     <div>
 
-                        <input type="number" max="100" step=".0001" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.superficie_proporcional" readonly>
+                        <input type="number" max="100" step=".0001" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.superficie_proporcional" readonly>
 
                     </div>
 
@@ -106,7 +106,7 @@
 
                     <div>
 
-                        <input type="number" class="bg-white rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.valor_terreno_comun" readonly>
+                        <input type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.lazy="terrenosComun.{{ $index }}.valor_terreno_comun" readonly>
 
                     </div>
 

@@ -6,7 +6,7 @@
 
         <div class="flex gap-3 overflow-auto p-1">
 
-            <select class="bg-white rounded-full  text-sm" wire:model.live="filters.oficina">
+            <select class="bg-white dark:bg-gray-800 rounded-full  text-sm" wire:model.live="filters.oficina">
 
                 <option value="" selected>Oficina</option>
                 < @foreach ($oficinas as $oficina_item)
@@ -19,7 +19,7 @@
 
             <div class="flex gap-2 flex-nowrap">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
+                <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.año">
 
                     @foreach ($años as $año)
 
@@ -29,13 +29,13 @@
 
                 </select>
 
-                <input type="number" wire:model.live.debounce.500mse="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500mse="filters.folio" placeholder="Folio" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500mse="filters.usuario" placeholder="Usuario" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500mse="filters.usuario" placeholder="Usuario" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
             </div>
 
-            <select class="bg-white rounded-full  text-sm" wire:model.live="filters.estado">
+            <select class="bg-white dark:bg-gray-800 rounded-full  text-sm" wire:model.live="filters.estado">
 
                 <option value="" selected>Estado</option>
                 <option value="nuevo">Nuevo</option>
@@ -45,7 +45,7 @@
 
             </select>
 
-            <select class="bg-white rounded-full text-sm w-60" wire:model.live="filters.categoria">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm w-60" wire:model.live="filters.categoria">
 
                 <option value="" selected>Catgegoría</option>
 
@@ -57,7 +57,7 @@
 
             </select>
 
-            <select class="bg-white rounded-full text-sm w-60" wire:model.live="filters.servicio">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm w-60" wire:model.live="filters.servicio">
 
                 <option value="" selected>Servicio</option>
 
@@ -69,21 +69,21 @@
 
             </select>
 
-            <input type="text" wire:model.live.debounce.500ms="filters.search" placeholder="Solicitante" class="bg-white rounded-full text-sm">
+            <input type="text" wire:model.live.debounce.500ms="filters.search" placeholder="Solicitante" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.p_oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.p_oficina" placeholder="Oficina" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.t_predio" placeholder="T. Predio" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.t_predio" placeholder="T. Predio" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.1000mse="filters.linea_captura" placeholder="Línea de captura" class="bg-white rounded-full text-sm w-52">
+            <input type="number" wire:model.live.debounce.1000mse="filters.linea_captura" placeholder="Línea de captura" class="bg-white dark:bg-gray-800 rounded-full text-sm w-52">
 
-            <input type="number" wire:model.live.debounce.1000mse="filters.orden_de_pago" placeholder="Orden de pago" class="bg-white rounded-full text-sm w-52">
+            <input type="number" wire:model.live.debounce.1000mse="filters.orden_de_pago" placeholder="Orden de pago" class="bg-white dark:bg-gray-800 rounded-full text-sm w-52">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="pagination">
 
                 <option value="10">10</option>
                 <option value="25">25</option>
@@ -96,7 +96,7 @@
 
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -230,12 +230,12 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     <button
                                         wire:click="abrirModalVer({{ $tramite->id }})"
                                         wire:loading.attr="disabled"
-                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                         role="menuitem">
                                         Ver
                                     </button>
@@ -245,7 +245,7 @@
                                         <button
                                             wire:click="abrirModalEditar({{ $tramite->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Editar
                                         </button>
@@ -259,7 +259,7 @@
                                             <button
                                                 wire:click="abrirModalBorrar({{$tramite->id}})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Eliminar
                                             </button>
@@ -273,7 +273,7 @@
                                         <button
                                             wire:click="abrirModalAcreditar({{$tramite->id}})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Acreditar manualmente
                                         </button>
@@ -284,7 +284,7 @@
 
                                         <a
                                             href="{{ route('auditoria') . '?modelo=Tramite&modelo_id=' . $tramite->id }}"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Auditar
                                         </a>
@@ -296,7 +296,7 @@
                                         <button
                                             wire:click="imprimirComprobantePago({{$tramite->id}})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Imprimir comprobante de pago SAP
                                         </button>
@@ -317,7 +317,7 @@
 
                         <x-table.cell colspan="15">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -335,7 +335,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="15" class="bg-gray-50">
+                    <x-table.cell colspan="15" class="bg-gray-50 dark:bg-gray-800">
 
                         {{ $this->tramites->links(data: ['scrollTo' => '#tramties'])}}
 
@@ -407,31 +407,31 @@
 
                             <div class="mt-5">
 
-                                <Label class="block text-sm font-medium leading-6 text-gray-900">Cuentas prediales involucradas</Label>
+                                <Label class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">Cuentas prediales involucradas</Label>
 
                                 <div class="flex-row lg:flex lg:space-x-2 items-start justify-between ">
 
                                     <div>
 
-                                        <input placeholder="Localidad" type="number" class="bg-white rounded text-sm w-full @error('localidad') border-red-500 @enderror" wire:model="localidad">
+                                        <input placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-sm w-full @error('localidad') border-red-500 @enderror" wire:model="localidad">
 
                                     </div>
 
                                     <div>
 
-                                        <input placeholder="Oficina" type="number" class="bg-white rounded text-sm w-full @error('oficina') border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                                        <input placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-sm w-full @error('oficina') border-red-500 @enderror" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
                                     </div>
 
                                     <div>
 
-                                        <input placeholder="Tipo de predio" type="number" class="bg-white rounded text-sm w-full @error('tipo') border-red-500 @enderror" wire:model="tipo">
+                                        <input placeholder="Tipo de predio" type="number" class="bg-white dark:bg-gray-800 rounded text-sm w-full @error('tipo') border-red-500 @enderror" wire:model="tipo">
 
                                     </div>
 
                                     <div>
 
-                                        <input placeholder="Número de registro" type="number" class="bg-white rounded text-sm w-full @error('registro') border-red-500 @enderror" wire:model="registro">
+                                        <input placeholder="Número de registro" type="number" class="bg-white dark:bg-gray-800 rounded text-sm w-full @error('registro') border-red-500 @enderror" wire:model="registro">
 
                                     </div>
 
@@ -449,7 +449,7 @@
 
                                 @if($predio)
 
-                                    <div class="text-sm my-3 flex items-center justify-between bg-gray-100 rounded-lg p-3">
+                                    <div class="text-sm my-3 flex items-center justify-between bg-gray-100 dark:bg-gray-900 rounded-lg p-3">
 
                                         <div>
 
@@ -479,7 +479,7 @@
 
                                         <table class="w-full rounded-lg">
 
-                                            <thead class="text-left bg-gray-100">
+                                            <thead class="text-left bg-gray-100 dark:bg-gray-900">
 
                                                 <tr>
 
@@ -591,7 +591,7 @@
 
                     <x-input-group for="modelo_editar.observaciones" label="Observaciones" :error="$errors->first('modelo_editar.observaciones')" class="w-full">
 
-                        <textarea rows="5" wire:model.blur="modelo_editar.observaciones" class="bg-white rounded text-sm w-full" placeholder="Se lo mas especifico posible acerca de porque se genera el trámite."></textarea>
+                        <textarea rows="5" wire:model.blur="modelo_editar.observaciones" class="bg-white dark:bg-gray-800 rounded text-sm w-full" placeholder="Se lo mas especifico posible acerca de porque se genera el trámite."></textarea>
 
                     </x-input-group>
 
@@ -646,7 +646,7 @@
 
         <x-slot name="title">
 
-            <h1 class="text-lg tracking-widest rounded-xl border-gray-500 text-center mb-5">Trámite</h1>
+            <h1 class="text-lg tracking-widest rounded-xl border-gray-500 dark:border-gray-600 text-center mb-5">Trámite</h1>
 
         </x-slot>
 
@@ -658,25 +658,25 @@
 
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Folio:</strong> {{ $modelo_editar->año }}-{{ $modelo_editar->folio }}-{{ $modelo_editar->usuario }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Estado:</strong> {{ Str::ucfirst($modelo_editar->estado) }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Categoría:</strong> {{ $modelo_editar->servicio->categoria->nombre }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Servicio:</strong> {{ $modelo_editar->servicio->nombre }}</p>
 
@@ -684,7 +684,7 @@
 
                         @if($modelo_editar->avaluo_para)
 
-                            <div class="rounded-lg bg-gray-100 py-1 px-2">
+                            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                                 <p><strong>Avaluo para:</strong> {{ $modelo_editar->avaluo_para->label() }}</p>
 
@@ -692,7 +692,7 @@
 
                         @endif
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Solicitante:</strong>{{ $modelo_editar->solicitante }}</p>
 
@@ -700,7 +700,7 @@
 
                         @if ($modelo_editar->numero_oficio)
 
-                            <div class="rounded-lg bg-gray-100 py-1 px-2">
+                            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                                 <p><strong>Número de oficio:</strong> {{ $modelo_editar->numero_oficio }}</p>
 
@@ -710,7 +710,7 @@
 
                         @if ($modelo_editar->cantidad)
 
-                            <div class="rounded-lg bg-gray-100 py-1 px-2">
+                            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                                 <p><strong>Cantidad:</strong> {{ $modelo_editar->cantidad }}</p>
 
@@ -720,7 +720,7 @@
 
                         @if ($modelo_editar->usados)
 
-                            <div class="rounded-lg bg-gray-100 py-1 px-2">
+                            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                                 <p><strong>Usados:</strong> {{ $modelo_editar->usados }}</p>
 
@@ -730,7 +730,7 @@
 
                         @if ($modelo_editar->avaluo_para)
 
-                            <div class="rounded-lg bg-gray-100 py-1 px-2">
+                            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                                 <p><strong>Avalúo para:</strong> {{ $modelo_editar->avaluo_para->label() }}</p>
 
@@ -740,7 +740,7 @@
 
                         @if ($modelo_editar->fecha_entrega)
 
-                            <div class="rounded-lg bg-gray-100 py-1 px-2">
+                            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                                 <p><strong>Fecha de entrega:</strong> {{ $modelo_editar->fecha_entrega->format('d-m-Y') }}</p>
 
@@ -750,7 +750,7 @@
 
                         @if ($modelo_editar->fecha_pago)
 
-                            <div class="rounded-lg bg-gray-100 py-1 px-2">
+                            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                                 <p><strong>Fecha de pago:</strong> {{ $modelo_editar->fecha_pago }}</p>
 
@@ -760,7 +760,7 @@
 
                         @if ($modelo_editar->fecha_vencimiento)
 
-                            <div class="rounded-lg bg-gray-100 py-1 px-2">
+                            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                                 <p><strong>Fecha de vencimiento:</strong> {{ $modelo_editar->fecha_vencimiento }}</p>
 
@@ -770,7 +770,7 @@
 
                         @if ($modelo_editar->predioAvaluo)
 
-                            <div class="rounded-lg bg-gray-100 py-1 px-2">
+                            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                                 <p><strong>Fecha de vencimiento:</strong> {{ $modelo_editar->predioAvaluo->claveCatastral() }}</p>
 
@@ -778,25 +778,25 @@
 
                         @endif
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Tipo de trámite:</strong> {{ Str::ucfirst($modelo_editar->tipo_tramite) }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Monto:</strong> ${{ number_format($modelo_editar->monto, 2) }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Orden de pago:</strong> {{ $modelo_editar->orden_de_pago }}</p>
 
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Linea de captura:</strong> {{ $modelo_editar->linea_de_captura }}</p>
 
@@ -804,7 +804,7 @@
 
                         @if ($modelo_editar->documento_de_pago)
 
-                            <div class="rounded-lg bg-gray-100 py-1 px-2">
+                            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                                 <p><strong>Documento de pago:</strong> {{ $modelo_editar->documento_de_pago }}</p>
 
@@ -812,7 +812,7 @@
 
                         @endif
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                             <p><strong>Registrado por:</strong> {{ $modelo_editar->creadoPor?->name }} el {{ $modelo_editar->created_at }}</p>
 
@@ -826,7 +826,7 @@
                             <span class="col-span-1 lg:col-span-2">Cuentas prediales</span>
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 grid grid-cols-5 gap-2 list-disc p-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 grid grid-cols-5 gap-2 list-disc p-2">
 
                             @foreach ($modelo_editar->predios as $predio)
 
@@ -844,7 +844,7 @@
                             <span class="col-span-1 lg:col-span-2">Avisos</span>
                         </div>
 
-                        <div class="rounded-lg bg-gray-100 grid  p-2">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 grid  p-2">
 
                             @foreach ($modelo_editar->traslados as $traslado)
 
@@ -858,7 +858,7 @@
 
                     @if ($modelo_editar->observaciones)
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 my-3">
 
                             <strong>Observaciones:</strong>
 
@@ -870,7 +870,7 @@
 
                     @if($modelo_editar->ligadoA?->count())
 
-                        <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+                        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 my-3">
 
                             <strong>Adiciona a:</strong>
 
@@ -987,7 +987,7 @@
 
             <x-input-group for="observaciones" label="" :error="$errors->first('observaciones')">
 
-                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico posible acerca del motivo por el cual se cancela el certificado"></textarea>
+                <textarea class="bg-white dark:bg-gray-800 rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico posible acerca del motivo por el cual se cancela el certificado"></textarea>
 
             </x-input-group>
 
@@ -1024,7 +1024,7 @@
 
         <x-slot name="title">
 
-            <h1 class="text-lg tracking-widest rounded-xl border-gray-500 text-center mb-5">Acreditar pago</h1>
+            <h1 class="text-lg tracking-widest rounded-xl border-gray-500 dark:border-gray-600 text-center mb-5">Acreditar pago</h1>
 
         </x-slot>
 

@@ -6,7 +6,7 @@
 
         <div class="flex gap-3 overflow-auto p-1">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="usuario">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="usuario">
 
                 <option value="" selected>Seleccione un usuario</option>
 
@@ -18,7 +18,7 @@
 
             </select>
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="modelo">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="modelo">
 
                 <option value="" selected>Seleccione un área</option>
 
@@ -30,7 +30,7 @@
 
             </select>
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="evento">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="evento">
 
                 <option value="" selected>Seleccione una acción</option>
                 <option value="created" selected>Creación</option>
@@ -39,9 +39,9 @@
 
             </select>
 
-            <input type="number" class="bg-white rounded-full text-sm p-2 border border-gray-500" wire:model.live="modelo_id" placeholder="Modelo ID">
+            <input type="number" class="bg-white dark:bg-gray-800 rounded-full text-sm p-2 border border-gray-500 dark:border-gray-600" wire:model.live="modelo_id" placeholder="Modelo ID">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="pagination">
 
                 <option value="10">10</option>
                 <option value="25">25</option>
@@ -54,7 +54,7 @@
 
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -158,7 +158,7 @@
 
                         <x-table.cell colspan="9">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -176,7 +176,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="9" class="bg-gray-50">
+                    <x-table.cell colspan="9" class="bg-gray-50 dark:bg-gray-800">
 
                         {{ $this->audits->links()}}
 

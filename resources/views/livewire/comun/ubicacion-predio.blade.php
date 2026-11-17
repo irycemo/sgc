@@ -1,4 +1,4 @@
-<div class="space-y-2 mb-5 bg-white rounded-lg p-3 shadow-xl">
+<div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-3 shadow-xl">
 
     <h4 class="text-lg mb-5 text-center">Ubicación del predio</h4>
 

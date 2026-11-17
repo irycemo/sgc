@@ -69,6 +69,85 @@ html.dark .sgc-topnav [class*="text-gray-300"] {
     color: #a1a1aa; /* zinc-400 */
 }
 
+/* SweetAlert2 (v11, CSS inyectado por JS): popups y toasts pensados para
+   fondo claro; se adaptan a oscuro con los tonos zinc sin tocar la librería. */
+html.dark .swal2-popup {
+    background-color: #27272a; /* zinc-800 */
+    color: #a1a1aa;            /* zinc-400 */
+}
+html.dark .swal2-popup .swal2-title,
+html.dark .swal2-toast .swal2-title {
+    color: #e4e4e7; /* zinc-200 */
+}
+html.dark .swal2-popup .swal2-html-container,
+html.dark .swal2-toast .swal2-html-container {
+    color: #a1a1aa; /* zinc-400 */
+}
+html.dark .swal2-toast {
+    box-shadow: 0 0 0.625em rgb(0 0 0 / 0.4);
+}
+html.dark .swal2-timer-progress-bar {
+    background-color: #71717a; /* zinc-500 */
+}
+html.dark .swal2-close {
+    color: #a1a1aa; /* zinc-400 */
+}
+html.dark .swal2-close:hover,
+html.dark .swal2-close:focus {
+    color: #e4e4e7; /* zinc-200 */
+}
+html.dark .swal2-footer {
+    color: #71717a; /* zinc-500 */
+}
+html.dark .swal2-validation-message {
+    background-color: #18181b; /* zinc-900 */
+    color: #a1a1aa;            /* zinc-400 */
+}
+html.dark .swal2-input,
+html.dark .swal2-file,
+html.dark .swal2-textarea,
+html.dark .swal2-select {
+    background-color: #27272a; /* zinc-800 */
+    border-color: #3f3f46;     /* zinc-700 */
+    color: #e4e4e7;            /* zinc-200 */
+}
+
+/* CKEditor 5 (build clásico del CDN): su tema define los colores con
+   variables --ck-color-* en :root; se redefinen bajo html.dark con zinc. */
+html.dark {
+    --ck-color-base-background: #27272a;  /* zinc-800: fondo del editor */
+    --ck-color-base-foreground: #3f3f46;  /* zinc-700: barra de herramientas */
+    --ck-color-base-border: #52525b;      /* zinc-600 */
+    --ck-color-base-text: #e4e4e7;        /* zinc-200 */
+    --ck-color-list-background: #27272a;  /* zinc-800: paneles dropdown */
+    --ck-color-input-background: #27272a; /* zinc-800 */
+    --ck-color-input-text: #e4e4e7;       /* zinc-200 */
+    --ck-color-input-border: #52525b;     /* zinc-600 */
+}
+html.dark .ck-toolbar {
+    background-color: #3f3f46; /* zinc-700 */
+    border-color: #52525b;     /* zinc-600 */
+}
+html.dark .ck-editor__editable_inline {
+    background-color: #27272a; /* zinc-800 */
+    color: #e4e4e7;            /* zinc-200 */
+}
+
+/* FilePond (v4, sin tema oscuro oficial): overrides de sus colores clave. */
+html.dark .filepond--panel-root {
+    background-color: #27272a; /* zinc-800 */
+}
+html.dark .filepond--drop-label {
+    color: #a1a1aa; /* zinc-400 */
+}
+html.dark .filepond--label-action {
+    color: #e4e4e7;                 /* zinc-200 */
+    text-decoration-color: #71717a; /* zinc-500 */
+}
+html.dark .filepond--file-status {
+    color: #a1a1aa; /* zinc-400 */
+}
+
 /* Menu superior */
 #sgc-topnav {
     display: none;

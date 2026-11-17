@@ -2,7 +2,7 @@
 
     <x-header>Ficha Técnica</x-header>
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
+    <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-xl">
 
         <div class="md:w-1/2 lg:w-1/4 mx-auto items-center text-center">
 
@@ -55,7 +55,7 @@
 
     </div>
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl text-red-500">
+    <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-xl text-red-500">
 
         {!! $errores !!}
 
@@ -65,17 +65,17 @@
 
         <div class="mb-6 shadow-xl">
 
-            <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Avaluos creados</h1>
+            <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 dark:text-gray-400 rounded-xl border-b-2 border-gray-500 dark:border-gray-600 font-thin mb-6  bg-white dark:bg-gray-800">Avaluos creados</h1>
 
         </div>
 
-        <div class="relative overflow-x-auto rounded-lg border-t-2 border-t-gray-500 shadow-xl">
+        <div class="relative overflow-x-auto rounded-lg border-t-2 border-t-gray-500 dark:border-t-gray-600 shadow-xl">
 
             <table class="rounded-lg w-full">
 
-                <thead class="border-b border-gray-300 bg-gray-50">
+                <thead class="border-b border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
 
-                    <tr class="text-xs font-medium text-gray-500 uppercase text-left traling-wider">
+                    <tr class="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase text-left traling-wider">
 
                         <th class="px-3 py-3 hidden lg:table-cell">
 
@@ -99,13 +99,13 @@
 
                 </thead>
 
-                <tbody class="divide-y divide-gray-200 flex-1 sm:flex-none ">
+                <tbody class="divide-y divide-gray-200 dark:divide-gray-700 flex-1 sm:flex-none ">
 
                     @forelse($data as $avaluo)
 
-                        <tr class="text-sm font-medium text-gray-500 bg-white flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+                        <tr class="text-sm font-medium text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
 
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
+                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 dark:text-gray-200 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Folio</span>
 
@@ -113,7 +113,7 @@
 
                             </td>
 
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
+                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 dark:text-gray-200 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Cuenta predial</span>
 
@@ -121,7 +121,7 @@
 
                             </td>
 
-                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
+                            <td class="px-3 py-3 w-full lg:w-auto p-3 text-gray-800 dark:text-gray-200 text-center lg:text-left lg:border-0 border border-b block lg:table-cell relative lg:static">
 
                                 <span class="lg:hidden absolute top-0 left-0 bg-blue-300 px-2 py-1 text-xs text-white font-bold uppercase rounded-br-xl">Clave catastral</span>
 
@@ -141,7 +141,7 @@
 
             </table>
 
-            <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-0 left-0" wire:loading.delay.longer>
+            <div class="h-full w-full rounded-lg bg-gray-200 dark:bg-gray-700 bg-opacity-75 absolute top-0 left-0" wire:loading.delay.longer>
 
                 <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
 
@@ -151,7 +151,7 @@
 
     @else
 
-        {{-- <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl overflow-auto">
+        {{-- <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-xl overflow-auto">
 
             <div class="space-y-2">
 
@@ -179,7 +179,7 @@
 
         </div>
 
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl overflow-auto">
+        <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-xl overflow-auto">
 
             <div class="space-y-2">
 
@@ -211,7 +211,7 @@
 
         </div>
 
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl overflow-auto">
+        <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-xl overflow-auto">
 
             <div class="space-y-2">
 
@@ -239,7 +239,7 @@
 
         </div>
 
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl overflow-auto">
+        <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-xl overflow-auto">
 
             <div class="space-y-2">
 
@@ -255,7 +255,7 @@
 
         </div>
 
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl overflow-auto">
+        <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-xl overflow-auto">
 
             <div class="space-y-2">
 

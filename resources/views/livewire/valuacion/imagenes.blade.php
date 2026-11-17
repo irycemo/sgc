@@ -6,7 +6,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1 items-start  mx-auto">
 
-            <div class="bg-white rounded-lg p-1 px-4 flex flex-col text-center">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-1 px-4 flex flex-col text-center">
 
                 <p>Fachada</p>
 
@@ -67,7 +67,7 @@
 
             </div>
 
-            <div class="bg-white rounded-lg p-1 px-4 flex flex-col text-center">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-1 px-4 flex flex-col text-center">
 
                 <p>Fotografía 2</p>
 
@@ -127,7 +127,7 @@
 
             </div>
 
-            <div class="bg-white rounded-lg p-1 px-4 flex flex-col text-center">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-1 px-4 flex flex-col text-center">
 
                 <p>Fotografía 3</p>
 
@@ -188,7 +188,7 @@
 
             </div>
 
-            <div class="bg-white rounded-lg p-1 px-4 flex flex-col text-center">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-1 px-4 flex flex-col text-center">
 
                 <p>Fotografía 4</p>
 
@@ -249,7 +249,7 @@
 
             </div>
 
-            <div class="bg-white rounded-lg p-1 px-4 flex flex-col text-center">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-1 px-4 flex flex-col text-center">
 
                 <p>Macrolocalización</p>
 
@@ -310,7 +310,7 @@
 
             </div>
 
-            <div class="bg-white rounded-lg p-1 px-4 flex flex-col text-center">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-1 px-4 flex flex-col text-center">
 
                 <p>Microlocalización</p>
 
@@ -371,7 +371,7 @@
 
             </div>
 
-            <div class="bg-white rounded-lg p-1 px-4 flex flex-col text-center">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-1 px-4 flex flex-col text-center">
 
                 <p>Representación del poligono (Imagen)</p>
 
@@ -432,7 +432,7 @@
 
             </div>
 
-            <div class="bg-white rounded-lg p-1 px-4 flex flex-col text-center">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-1 px-4 flex flex-col text-center">
 
                 <p>Representación del poligono (DWG)</p>
 
@@ -461,7 +461,7 @@
 
     </div>
 
-    <div class="bg-white rounded-lg p-1 flex justify-end mb-5">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-1 flex justify-end mb-5">
 
         <div class=" mx-auto w-full lg:w-1/2">
 
@@ -473,7 +473,7 @@
 
             <div>
 
-                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="predio.avaluo.observaciones"></textarea>
+                <textarea class="bg-white dark:bg-gray-800 rounded text-xs w-full " rows="4" wire:model="predio.avaluo.observaciones"></textarea>
 
             </div>
 
@@ -489,7 +489,7 @@
 
     @include('livewire.comun.errores')
 
-    <div class="bg-white rounded-lg p-3 flex justify-end mt-5  shadow-xl">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-3 flex justify-end mt-5  shadow-xl">
 
         @if(in_array($predio?->avaluo?->estado, ['nuevo', 'impreso']))
 

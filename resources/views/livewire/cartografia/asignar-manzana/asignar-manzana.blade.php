@@ -2,17 +2,17 @@
 
     <x-header>Asignación de manzanas</x-header>
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-lg text-center">
+    <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg text-center">
 
         <div class="space-y-1 mb-5">
 
-            <input placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio">
+            <input placeholder="Municipio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio">
 
-            <input placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('zona') border-1 border-red-500 @enderror" wire:model="zona">
+            <input placeholder="Zona" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('zona') border-1 border-red-500 @enderror" wire:model="zona">
 
-            <input placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model="localidad">
+            <input placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model="localidad">
 
-            <input placeholder="Sector" type="number" class="bg-white rounded text-xs w-20 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
+            <input placeholder="Sector" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
 
         </div>
 
@@ -37,7 +37,7 @@
 
     <div class="flex gap-4 justify-center text-sm mb-5 overflow-x-auto max-h-80">
 
-        <div class="bg-white rounded-lg p-2 shadow-lg max-h-80 overflow-y-auto">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg max-h-80 overflow-y-auto">
 
             <span class="font-semibold whitespace-nowrap">Manzanas en padrón</span>
 
@@ -53,7 +53,7 @@
 
         </div>
 
-        <div class="bg-white rounded-lg p-2 shadow-lg max-h-80 overflow-y-auto">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg max-h-80 overflow-y-auto">
 
             <span class="font-semibold whitespace-nowrap">Manzanas restantes</span>
 
@@ -62,7 +62,7 @@
                 @foreach ($manzanas_disponibles as $disponible)
 
                     <li wire:click="agregarManzana({{ $disponible }})"
-                        class="cursor-pointer hover:bg-gray-300 rounded-lg px-2 whitespace-nowrap">
+                        class="cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-700 rounded-lg px-2 whitespace-nowrap">
                         {{ $municipio }}-{{ $zona }}-{{ $localidad }}-{{ $sector }}-{{ $disponible }}
                     </li>
 
@@ -74,7 +74,7 @@
 
         @if(count($manzanas_seleccionadas))
 
-            <div class="bg-white rounded-lg p-2 shadow-lg max-h-80 overflow-y-auto">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg max-h-80 overflow-y-auto">
 
                 <span class="font-semibold whitespace-nowrap">Manzanas seleccionadas</span>
 
@@ -83,7 +83,7 @@
                     @foreach ($manzanas_seleccionadas as $key => $seleccionada)
 
                         <li wire:click="quitarManzana({{ $key }})"
-                            class="cursor-pointer hover:bg-gray-300 rounded-lg px-2 whitespace-nowrap">
+                            class="cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-700 rounded-lg px-2 whitespace-nowrap">
                             {{ $municipio }}-{{ $zona }}-{{ $localidad }}-{{ $sector }}-{{ $seleccionada }}
                         </li>
 
@@ -101,7 +101,7 @@
 
         @include('livewire.comun.coordenadas')
 
-        <div class="bg-white rounded-lg p-2 shadow-lg max-h-80 overflow-auto">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-2 shadow-lg max-h-80 overflow-auto">
 
             <x-input-group for="valuador" label="Valuadores" :error="$errors->first('valuador')" class="w-fit mb-5 mx-auto">
 
@@ -121,7 +121,7 @@
 
             <x-input-group for="observaciones" label="Observaciones" :error="$errors->first('observaciones')" class="w-full lg:w-1/2 mb-5 mx-auto">
 
-                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones"></textarea>
+                <textarea class="bg-white dark:bg-gray-800 rounded text-xs w-full " rows="4" wire:model="observaciones"></textarea>
 
             </x-input-group>
 

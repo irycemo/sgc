@@ -10,9 +10,9 @@
 
     @include('livewire.comun.avaluo-folio')
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-5 col-span-2 bg-white rounded-lg p-4  shadow-xl">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-5 col-span-2 bg-white dark:bg-gray-800 rounded-lg p-4  shadow-xl">
 
-        <span class="flex items-center justify-center text-lg text-gray-700 md:col-span-3 col-span-1 sm:col-span-2">Colindancias</span>
+        <span class="flex items-center justify-center text-lg text-gray-700 dark:text-gray-300 md:col-span-3 col-span-1 sm:col-span-2">Colindancias</span>
 
         <div class="mb-5 divide-y md:col-span-3 col-span-1 sm:col-span-2">
 
@@ -30,7 +30,7 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-xs w-full" wire:model="medidas.{{ $index }}.viento">
+                            <select class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model="medidas.{{ $index }}.viento">
 
                                 <option value="" selected>Seleccione una opción</option>
 
@@ -62,7 +62,7 @@
 
                         <div>
 
-                            <input type="number" min="0" class="bg-white rounded text-xs w-full" wire:model="medidas.{{ $index }}.longitud">
+                            <input type="number" min="0" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model="medidas.{{ $index }}.longitud">
 
                         </div>
 
@@ -84,7 +84,7 @@
 
                         <div>
 
-                            <textarea rows="1" class="bg-white rounded text-xs w-full" wire:model="medidas.{{ $index }}.descripcion"></textarea>
+                            <textarea rows="1" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model="medidas.{{ $index }}.descripcion"></textarea>
 
                         </div>
 
@@ -136,7 +136,7 @@
 
     @include('livewire.comun.errores')
 
-    <div class="bg-white rounded-lg p-4 flex justify-end  shadow-xl">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 flex justify-end  shadow-xl">
 
         @if(isset($predio->avaluo))
 

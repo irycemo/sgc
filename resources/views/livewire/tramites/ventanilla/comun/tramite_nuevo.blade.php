@@ -1,28 +1,28 @@
-<div class="bg-white p-3 rounded-lg  shadow-md">
+<div class="bg-white dark:bg-gray-800 p-3 rounded-lg  shadow-md">
 
-    <h1 class="text-lg tracking-widest rounded-xl border-gray-500 text-center mb-5">Trámite Nuevo</h1>
+    <h1 class="text-lg tracking-widest rounded-xl border-gray-500 dark:border-gray-600 text-center mb-5">Trámite Nuevo</h1>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <p><strong>Categoría:</strong> {{ $servicio['categoria']['nombre'] }}</p>
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <p><strong>Servicio:</strong> {{ $servicio['nombre'] }}</p>
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <p><strong>Tipo de servicio:</strong> {{ Str::ucfirst($modelo_editar->tipo_servicio) }}</p>
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <p><strong>Solicitante:</strong>{{ $modelo_editar->solicitante }} / {{ $modelo_editar->nombre_solicitante }}</p>
 
@@ -30,7 +30,7 @@
 
         @if ($modelo_editar->numero_oficio)
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <p><strong>Número de oficio:</strong> {{ $modelo_editar->numero_oficio }}</p>
 
@@ -40,7 +40,7 @@
 
         @if ($modelo_editar->cantidad)
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <p><strong>Cantidad:</strong> {{ $modelo_editar->cantidad }}</p>
 
@@ -48,7 +48,7 @@
 
         @endif
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <p><strong>Monto:</strong> ${{ number_format($modelo_editar->monto, 2) }}</p>
 
@@ -58,7 +58,7 @@
 
     @if ($modelo_editar->observaciones)
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 my-3">
 
             <strong>Observaciones:</strong>
 

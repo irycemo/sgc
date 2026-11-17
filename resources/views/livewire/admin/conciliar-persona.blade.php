@@ -2,7 +2,7 @@
 
     <x-header>Conciliar personas</x-header>
 
-    <div class="bg-white p-4 rounded-lg mb-5 shadow-xl">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg mb-5 shadow-xl">
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-3 col-span-2 rounded-lg w-full lg:w-1/2 mx-auto">
 
@@ -52,7 +52,7 @@
 
     @if(count($personas))
 
-        <div class="bg-white p-4 rounded-lg mb-5 shadow-xl flex justify-between">
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg mb-5 shadow-xl flex justify-between">
 
             <span>Se encontraron:  {{ count($personas) }} personas</span>
 
@@ -72,7 +72,7 @@
 
     @endif
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -173,7 +173,7 @@
 
                         <x-table.cell colspan="9">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -254,7 +254,7 @@
 
                     <x-input-group for="multiple_nombre" label="Nombre multiple (Opcional)" :error="$errors->first('multiple_nombre')" class="sm:col-span-2 lg:col-span-3">
 
-                        <textarea rows="3" class="w-full bg-white rounded text-sm" wire:model="multiple_nombre"></textarea>
+                        <textarea rows="3" class="w-full bg-white dark:bg-gray-800 rounded text-sm" wire:model="multiple_nombre"></textarea>
 
                     </x-input-group>
 
@@ -290,7 +290,7 @@
 
                 </x-input-group>
 
-                <span class="flex items-center justify-center text-lg text-gray-700 md:col-span-3 col-span-1 sm:col-span-2">Domicilio</span>
+                <span class="flex items-center justify-center text-lg text-gray-700 dark:text-gray-300 md:col-span-3 col-span-1 sm:col-span-2">Domicilio</span>
 
                 <x-input-group for="cp" label="Código postal" :error="$errors->first('cp')" class="w-full">
 

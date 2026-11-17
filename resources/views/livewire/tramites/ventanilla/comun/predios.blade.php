@@ -1,12 +1,12 @@
 @if ($flags['predios'])
 
-    <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md" wire:loading.class.delay.longest="opacity-50">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg space-y-2 mb-3 shadow-md" wire:loading.class.delay.longest="opacity-50">
 
         <div class="flex-auto ">
 
             <div class="mb-2">
 
-                <Label class="text-lg tracking-widest rounded-xl border-gray-500">Cuentas prediales involucradas</Label>
+                <Label class="text-lg tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Cuentas prediales involucradas</Label>
 
             </div>
 
@@ -18,7 +18,7 @@
 
                         <div>
 
-                            <input placeholder="Localidad" type="number" class="bg-white rounded text-sm w-full" wire:model="localidad">
+                            <input placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model="localidad">
 
                             <div>
 
@@ -31,7 +31,7 @@
 
                         <div>
 
-                            <input placeholder="Oficina rentistica" type="number" class="bg-white rounded text-sm w-full" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                            <input placeholder="Oficina rentistica" type="number" class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
                             <div>
 
@@ -43,7 +43,7 @@
 
                         <div>
 
-                            <input placeholder="Tipo de predio" type="number" class="bg-white rounded text-sm w-full" wire:model="tipo" @if(in_array($servicio['clave_ingreso'], ['D914', 'D727' , 'D729', 'D728' ,'D726'])) readonly @endif>
+                            <input placeholder="Tipo de predio" type="number" class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model="tipo" @if(in_array($servicio['clave_ingreso'], ['D914', 'D727' , 'D729', 'D728' ,'D726'])) readonly @endif>
 
                             <div>
 
@@ -56,7 +56,7 @@
 
                         <div>
 
-                            <input placeholder="Número de registro" type="number" class="bg-white rounded text-sm w-full" wire:model="registro">
+                            <input placeholder="Número de registro" type="number" class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model="registro">
 
                             <div>
 
@@ -84,7 +84,7 @@
 
             @if($predio)
 
-                <div class="text-sm my-3 flex items-center justify-between bg-gray-100 rounded-lg p-3">
+                <div class="text-sm my-3 flex items-center justify-between bg-gray-100 dark:bg-gray-900 rounded-lg p-3">
 
                     <div>
 
@@ -114,7 +114,7 @@
 
                     <table class="w-full rounded-lg">
 
-                        <thead class="text-left bg-gray-100">
+                        <thead class="text-left bg-gray-100 dark:bg-gray-900">
 
                             <tr>
 

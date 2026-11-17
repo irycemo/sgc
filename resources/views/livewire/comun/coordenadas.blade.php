@@ -1,4 +1,4 @@
-<div class="space-y-2 mb-5 bg-white rounded-lg p-3 shadow-xl">
+<div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-3 shadow-xl">
 
     <h4 class="text-lg mb-5 text-center">Coordenadas geografícas</h4>
 
@@ -10,17 +10,17 @@
 
                 <div class="text-left">
 
-                    <Label class="text-base tracking-widest rounded-xl border-gray-500">UTM</Label>
+                    <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">UTM</Label>
 
                 </div>
 
                 <div class="space-y-1">
 
-                    <input placeholder="X" type="text" class="bg-white rounded text-xs w-40 @error('predio.xutm') border-red-500 @enderror" wire:model.lazy="predio.xutm">
+                    <input placeholder="X" type="text" class="bg-white dark:bg-gray-800 rounded text-xs w-40 @error('predio.xutm') border-red-500 @enderror" wire:model.lazy="predio.xutm">
 
-                    <input placeholder="Y" type="text" class="bg-white rounded text-xs w-40 @error('predio.yutm') border-red-500 @enderror" wire:model.lazy="predio.yutm">
+                    <input placeholder="Y" type="text" class="bg-white dark:bg-gray-800 rounded text-xs w-40 @error('predio.yutm') border-red-500 @enderror" wire:model.lazy="predio.yutm">
 
-                    <select class="bg-white rounded text-xs" wire:model.lazy="predio.zutm">
+                    <select class="bg-white dark:bg-gray-800 rounded text-xs" wire:model.lazy="predio.zutm">
 
                         <option value="" selected>Z</option>
                         <option value="13" selected>13</option>
@@ -28,7 +28,7 @@
 
                     </select>
 
-                    <input placeholder="Norte" type="text" class="bg-white rounded text-xs w-40" readonly>
+                    <input placeholder="Norte" type="text" class="bg-white dark:bg-gray-800 rounded text-xs w-40" readonly>
 
                 </div>
 
@@ -42,15 +42,15 @@
 
                 <div class="text-left">
 
-                    <Label class="text-base tracking-widest rounded-xl border-gray-500">GEO</Label>
+                    <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">GEO</Label>
 
                 </div>
 
                 <div class="space-y-1">
 
-                    <input placeholder="Lat" type="number" class="bg-white rounded text-xs w-40 @error('predio.lat') border-red-500 @enderror" wire:model.lazy="predio.lat">
+                    <input placeholder="Lat" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-40 @error('predio.lat') border-red-500 @enderror" wire:model.lazy="predio.lat">
 
-                    <input placeholder="Lon" type="number" class="bg-white rounded text-xs w-40 @error('predio.lon') border-red-500 @enderror" wire:model.lazy="predio.lon">
+                    <input placeholder="Lon" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-40 @error('predio.lon') border-red-500 @enderror" wire:model.lazy="predio.lon">
 
                 </div>
 

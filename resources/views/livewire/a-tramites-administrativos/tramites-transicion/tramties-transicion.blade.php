@@ -6,7 +6,7 @@
 
         <div class="flex gap-3 overflow-auto p-1">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.año">
 
                 <option value="" selected>Año</option>
 
@@ -18,9 +18,9 @@
 
             </select>
 
-            <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.folio" placeholder="Folio" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.estado">
 
                 <option value="" selected>Estado</option>
 
@@ -35,7 +35,7 @@
 
             </select>
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="filters.taño">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.taño">
 
                 <option value="" selected>T. Año</option>
 
@@ -47,11 +47,11 @@
 
             </select>
 
-            <input type="number" wire:model.live.debounce.500ms="filters.tfolio" placeholder="T. Folio" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.tfolio" placeholder="T. Folio" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.tusuario" placeholder="T. Usuario" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.tusuario" placeholder="T. Usuario" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+            <input wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
             @can('Crear predio ignorado')
 
@@ -74,7 +74,7 @@
 
     </div>
 
-    <div class="rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -180,12 +180,12 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     <button
                                         wire:click="abrirVerRequerimiento({{ $tramiteAdministrativo->id }})"
                                         wire:loading.attr="disabled"
-                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                         role="menuitem">
                                         Ver requerimientos
                                     </button>
@@ -195,7 +195,7 @@
                                         <button
                                             wire:click="abrirModalAuditoria({{ $tramiteAdministrativo->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Auditar
                                         </button>
@@ -209,7 +209,7 @@
                                             <button
                                                 wire:click="asignarFolio({{ $tramiteAdministrativo->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Asignar Folio
                                             </button>
@@ -225,7 +225,7 @@
                                             <button
                                                 wire:click="abrirHacerRequerimiento({{ $tramiteAdministrativo->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Hacer requerimiento
                                             </button>
@@ -233,7 +233,7 @@
                                             <button
                                                 wire:click="abrirAsignarValuador({{ $tramiteAdministrativo->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Asignar valuador
                                             </button>
@@ -243,7 +243,7 @@
                                         <button
                                             wire:click="abrirSubirArchivo({{ $tramiteAdministrativo->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Subir archivo
                                         </button>
@@ -253,7 +253,7 @@
                                             <button
                                                 wire:click="abrirVerArchivos({{ $tramiteAdministrativo->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Ver archivos
                                             </button>
@@ -265,7 +265,7 @@
                                             <button
                                                 wire:click="abrirCambiarEstado({{ $tramiteAdministrativo->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Cambiar estado
                                             </button>
@@ -277,7 +277,7 @@
                                             <button
                                                 wire:click="abrirModalBorrar({{ $tramiteAdministrativo->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Eliminar trámite administrativo
                                             </button>
@@ -300,7 +300,7 @@
 
                         <x-table.cell colspan="11">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -318,7 +318,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="11" class="bg-gray-50">
+                    <x-table.cell colspan="11" class="bg-gray-50 dark:bg-gray-800">
 
                         {{ $this->tramitesAdministrativos->links()}}
 
@@ -362,13 +362,13 @@
 
                 <div >
 
-                    <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite</Label>
+                    <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Trámite</Label>
 
                 </div>
 
                 <div class="inline-flex">
 
-                    <select class="bg-white rounded-l text-sm border border-r-transparent focus:ring-0 @error('taño') border-red-500 @enderror" wire:model="taño">
+                    <select class="bg-white dark:bg-gray-800 rounded-l text-sm border border-r-transparent focus:ring-0 @error('taño') border-red-500 @enderror" wire:model="taño">
 
                         @foreach ($años as $año)
 
@@ -378,9 +378,9 @@
 
                     </select>
 
-                    <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('tfolio') border-red-500 @enderror" wire:model="tfolio">
+                    <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 focus:ring-0 @error('tfolio') border-red-500 @enderror" wire:model="tfolio">
 
-                    <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('tusuario') border-red-500 @enderror" wire:model="tusuario">
+                    <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('tusuario') border-red-500 @enderror" wire:model="tusuario">
 
                 </div>
 
@@ -390,19 +390,19 @@
 
                 <div class="text-left">
 
-                    <Label class="text-base tracking-widest rounded-xl border-gray-500">Cuenta predial</Label>
+                    <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Cuenta predial</Label>
 
                 </div>
 
                 <div class="space-y-1">
 
-                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('modelo_editar.localidad') border-1 border-red-500 @enderror" wire:model.lazy="modelo_editar.localidad">
+                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('modelo_editar.localidad') border-1 border-red-500 @enderror" wire:model.lazy="modelo_editar.localidad">
 
-                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('modelo_editar.oficina') border-1 border-red-500 @enderror" wire:model.lazy="modelo_editar.oficina">
+                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('modelo_editar.oficina') border-1 border-red-500 @enderror" wire:model.lazy="modelo_editar.oficina">
 
-                    <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-20 @error('modelo_editar.tipo_predio') border-1 border-red-500 @enderror" wire:model="modelo_editar.tipo_predio">
+                    <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('modelo_editar.tipo_predio') border-1 border-red-500 @enderror" wire:model="modelo_editar.tipo_predio">
 
-                    <input title="Número de registro" placeholder="Registro" type="number" class="bg-white rounded text-xs w-20 @error('modelo_editar.numero_registro') border-1 border-red-500 @enderror" wire:model.lazy="modelo_editar.numero_registro">
+                    <input title="Número de registro" placeholder="Registro" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('modelo_editar.numero_registro') border-1 border-red-500 @enderror" wire:model.lazy="modelo_editar.numero_registro">
 
                 </div>
 

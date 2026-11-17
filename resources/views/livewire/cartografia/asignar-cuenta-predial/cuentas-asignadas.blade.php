@@ -2,13 +2,13 @@
 
     <div class="mb-6">
 
-        <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Cuentas asignadas</h1>
+        <h1 class="text-3xl tracking-widest py-3 px-6 text-gray-600 dark:text-gray-400 rounded-xl border-b-2 border-gray-500 dark:border-gray-600 font-thin mb-6  bg-white dark:bg-gray-800">Cuentas asignadas</h1>
 
         <div class=" space-y-2">
 
             <div>
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="filters.valuador">
+                <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.valuador">
 
                     <option value="" selected>Valuador</option>
 
@@ -20,11 +20,11 @@
 
                 </select>
 
-                <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm">
+                <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white rounded-full text-sm">
+                <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="filters.tipo">
+                <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.tipo">
 
                     <option value="" selected>Tipo de predio</option>
                     <option value="1">1</option>
@@ -32,11 +32,11 @@
 
                 </select>
 
-                <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="Número de registro" class="bg-white rounded-full text-sm">
+                <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="Número de registro" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.documento" placeholder="# de documento" class="bg-white rounded-full text-sm">
+                <input type="number" wire:model.live.debounce.500ms="filters.documento" placeholder="# de documento" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
-                <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+                <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -47,13 +47,13 @@
 
             </div>
 
-            <input wire:model.live.debounce.500ms="filters.observaciones" placeholder="Observaciones" class="bg-white rounded-full text-sm lg:w-1/2">
+            <input wire:model.live.debounce.500ms="filters.observaciones" placeholder="Observaciones" class="bg-white dark:bg-gray-800 rounded-full text-sm lg:w-1/2">
 
         </div>
 
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -171,7 +171,7 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     @can('Reasignar valuador')
 
@@ -179,7 +179,7 @@
                                             wire:click="abrirModalReasignar({{$predio->id}})"
                                             wire:loading.attr="disabled"
                                             wire:target="abrirModalReasignar({{$predio->id}})"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Reasignar
                                         </button>
@@ -188,7 +188,7 @@
                                             wire:click="eliminarCuenta({{$predio->id}})"
                                             wire:loading.attr="disabled"
                                             wire:confirm="¿Esta seguro que desea eliminar el registro?"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Eliminar
                                         </button>
@@ -199,7 +199,7 @@
 
                                         <a
                                             href="{{ route('auditoria') . '?modelo=Cuenta Asignada&modelo_id=' . $predio->id }}"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Auditar
                                         </a>
@@ -218,7 +218,7 @@
 
                         <x-table.cell colspan="11">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -236,7 +236,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="11" class="bg-gray-50">
+                    <x-table.cell colspan="11" class="bg-gray-50 dark:bg-gray-800">
 
                         {{ $this->predios->links()}}
 
@@ -286,7 +286,7 @@
 
                 </div>
 
-                <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" wire:loading.delay.longer>
+                <div class="h-full w-full rounded-lg bg-gray-200 dark:bg-gray-700 bg-opacity-75 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" wire:loading.delay.longer>
 
                     <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
 

@@ -2,7 +2,7 @@
 
     <x-header>Crear o editar pregunta</x-header>
 
-    <div class="bg-white rounded-lg shadow-xl p-4">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4">
 
         <div class="w-full lg:w-1/2 mx-auto mb-5">
 

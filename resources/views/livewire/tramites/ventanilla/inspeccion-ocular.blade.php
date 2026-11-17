@@ -21,7 +21,7 @@
 
                     </div>
 
-                    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 text-right shadow-xl">
+                    <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 text-right shadow-xl">
 
                         <x-input-group for="porcentaje" label="Aplicar porcentaje de 20%" :error="$errors->first('porcentaje')" class="flex gap-3 items-center mr-auto">
 

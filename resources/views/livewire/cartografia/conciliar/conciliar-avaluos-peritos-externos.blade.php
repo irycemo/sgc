@@ -6,7 +6,7 @@
 
         <div class="flex gap-3 overflow-auto p-1">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="año">
+            <select class="bg-white dark:bg-gray-800 rounded-full  text-sm" wire:model.live="año">
 
                 @foreach ($años as $item)
 
@@ -16,19 +16,19 @@
 
             </select>
 
-            <input type="number" wire:model.live.debounce.500mse="folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500mse="folio" placeholder="Folio" class="bg-white dark:bg-gray-800 rounded-full  text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.500mse="usuario" placeholder="Usuario" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500mse="usuario" placeholder="Usuario" class="bg-white dark:bg-gray-800 rounded-full  text-sm w-24">
 
-            <input type="number" wire:model="localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model="localidad" placeholder="Localidad" class="bg-white dark:bg-gray-800 rounded-full  text-sm w-24">
 
-            <input type="number" wire:model="oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model="oficina" placeholder="Oficina" class="bg-white dark:bg-gray-800 rounded-full  text-sm w-24">
 
-            <input type="number" wire:model="t_predio" placeholder="T. Predio" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model="t_predio" placeholder="T. Predio" class="bg-white dark:bg-gray-800 rounded-full  text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.500ms="registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="registro" placeholder="# Registro" class="bg-white dark:bg-gray-800 rounded-full  text-sm w-24">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+            <select class="bg-white dark:bg-gray-800 rounded-full  text-sm" wire:model.live="pagination">
 
                 <option value="10">10</option>
                 <option value="25">25</option>
@@ -90,7 +90,7 @@
 
                             @else
 
-                                <span class="bg-green-400 py-1 px-2 rounded-full text-white text-xs">Nuevo</span>
+                                <span class="bg-green-400 dark:bg-green-600 py-1 px-2 rounded-full text-white text-xs">Nuevo</span>
 
                             @endif
 
@@ -130,12 +130,12 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 absolute origin-top-right mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 absolute origin-top-right mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     <button
                                         wire:click="abrirModalConciliar({{ json_encode($avaluo) }})"
                                         wire:loading.attr="disabled"
-                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                         role="menuitem">
                                         Conciliar
                                     </button>
@@ -143,7 +143,7 @@
                                     <button
                                         wire:click="abrirModalRequerimiento({{ json_encode($avaluo) }})"
                                         wire:loading.attr="disabled"
-                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                         role="menuitem">
                                         Hacer requerimiento
                                     </button>
@@ -153,7 +153,7 @@
                                         <button
                                             wire:click="abrirModalVerRequerimientos({{ json_encode($avaluo) }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Ver requerimientos
                                         </button>
@@ -174,7 +174,7 @@
 
                         <x-table.cell colspan="15">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -192,7 +192,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="15" class="bg-gray-50">
+                    <x-table.cell colspan="15" class="bg-gray-50 dark:bg-gray-800">
 
                         <div>
                             <nav role="navigation" aria-label="Pagination Navigation" class="flex gap-3 justify-between">
@@ -259,7 +259,7 @@
 
                 <div class="flex gap-2 w-full items-center">
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 my-3">
 
                         <strong>Latitud:</strong>
 
@@ -267,7 +267,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 my-3">
 
                         <strong>Longitud:</strong>
 
@@ -296,7 +296,7 @@
                 </div>
 
                 <div class="flex gap-2 w-full">
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 my-3">
 
                         <strong>XUTM:</strong>
 
@@ -304,7 +304,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 my-3">
 
                         <strong>YUTM:</strong>
 
@@ -312,7 +312,7 @@
 
                     </div>
 
-                    <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+                    <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 my-3">
 
                         <strong>ZUTM:</strong>
 
@@ -328,34 +328,34 @@
 
                 <div class="flex flex-col md:flex-row justify-start md:space-x-1 mb-5">
 
-                    <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-24" title="Estado" value="16" readonly>
+                    <input placeholder="Estado" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24" title="Estado" value="16" readonly>
 
-                    <input title="Región" placeholder="Región" type="number" class="bg-white rounded text-xs w-24  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral" readonly>
+                    <input title="Región" placeholder="Región" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral" readonly>
 
-                    <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-24 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio" readonly>
+                    <input title="Municipio" placeholder="Municipio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio" readonly>
 
-                    <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-24 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model="zona_catastral" readonly>
-
-                </div>
-
-                <div class="flex flex-col md:flex-row justify-start md:space-x-1 mb-5">
-
-
-                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-24 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad" readonly>
-
-                    <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-24 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
-
-                    <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-24 @error('manzana') border-1 border-red-500 @enderror" wire:model="manzana">
-
-                    <input title="Predio" placeholder="Predio" type="number" class="bg-white rounded text-xs w-24 @error('predio') border-1 border-red-500 @enderror" wire:model.blur="predio">
+                    <input title="Zona" placeholder="Zona" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model="zona_catastral" readonly>
 
                 </div>
 
                 <div class="flex flex-col md:flex-row justify-start md:space-x-1 mb-5">
 
-                    <input title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-24 @error('edificio') border-1 border-red-500 @enderror" wire:model="edificio">
 
-                    <input title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-24 @error('departamento') border-1 border-red-500 @enderror" wire:model="departamento">
+                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad" readonly>
+
+                    <input title="Sector" placeholder="Sector" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
+
+                    <input title="Manzana" placeholder="Manzana" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('manzana') border-1 border-red-500 @enderror" wire:model="manzana">
+
+                    <input title="Predio" placeholder="Predio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('predio') border-1 border-red-500 @enderror" wire:model.blur="predio">
+
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-start md:space-x-1 mb-5">
+
+                    <input title="Edificio" placeholder="Edificio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('edificio') border-1 border-red-500 @enderror" wire:model="edificio">
+
+                    <input title="Departamento" placeholder="Departamento" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('departamento') border-1 border-red-500 @enderror" wire:model="departamento">
 
                 </div>
 
@@ -424,7 +424,7 @@
 
                 </x-input-select>
 
-                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico sobre la corrección que solicitas"></textarea>
+                <textarea class="w-full bg-white dark:bg-gray-800 rounded text-xs" rows="4" wire:model="observaciones" placeholder="Se lo más especifico sobre la corrección que solicitas"></textarea>
 
             </x-input-group>
 
@@ -468,7 +468,7 @@
 
                 @forelse ($avaluo_seleccionado['requerimientos'] as $requerimiento)
 
-                    <div class="bg-gray-100 rounded-lg p-2 mb-2">
+                    <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-2 mb-2">
 
                         <div>
                             {{ $requerimiento['descripcion'] }}
@@ -490,7 +490,7 @@
 
                 @empty
 
-                    <div class="bg-gray-100 rounded-lg p-4 text-center">
+                    <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 text-center">
 
                         <p>No hay requerimientos</p>
 

@@ -4,40 +4,40 @@
 
     <div class="tab-wrapper max-h-full" x-data="{ activeTab: 0 }">
 
-        <div class="flex py-4 space-x-4 items-center border-b-2 border-gray-500 mb-6 flex-wrap justify-center">
+        <div class="flex py-4 space-x-4 items-center border-b-2 border-gray-500 dark:border-gray-600 mb-6 flex-wrap justify-center">
 
             <label
                 @click="activeTab = 0"
-                class="px-6 py-1 text-gray-600 rounded-xl border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white"
-                :class="{'active  bg-gray-200 rounded-full px-3 py-1 text-gray-500 no-underline': activeTab === 0 }"
+                class="px-6 py-1 text-gray-600 dark:text-gray-400 rounded-xl border-b-2 border-gray-500 dark:border-gray-600 font-semibold mb-3 cursor-pointer bg-white dark:bg-gray-800"
+                :class="{'active  bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-gray-500 dark:text-gray-400 no-underline': activeTab === 0 }"
             >Información del inmueble
             </label>
 
             <label
                 @click="activeTab = 1"
-                class="px-6 py-1 text-gray-600 rounded-xl border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white"
-                :class="{'active  bg-gray-200 rounded-full px-3 py-1 text-gray-500 no-underline': activeTab === 1 }"
+                class="px-6 py-1 text-gray-600 dark:text-gray-400 rounded-xl border-b-2 border-gray-500 dark:border-gray-600 font-semibold mb-3 cursor-pointer bg-white dark:bg-gray-800"
+                :class="{'active  bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-gray-500 dark:text-gray-400 no-underline': activeTab === 1 }"
             >Colindancias
             </label>
 
             <label
                 @click="activeTab = 2"
-                class="px-6 py-1 text-gray-600 rounded-xl border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white"
-                :class="{'active  bg-gray-200 rounded-full px-3 py-1 text-gray-500 no-underline': activeTab === 2 }"
+                class="px-6 py-1 text-gray-600 dark:text-gray-400 rounded-xl border-b-2 border-gray-500 dark:border-gray-600 font-semibold mb-3 cursor-pointer bg-white dark:bg-gray-800"
+                :class="{'active  bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-gray-500 dark:text-gray-400 no-underline': activeTab === 2 }"
             >Propietarios
             </label>
 
             <label
                 @click="activeTab = 3"
-                class="px-6 py-1 text-gray-600 rounded-xl border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white"
-                :class="{'active  bg-gray-200 rounded-full px-3 py-1 text-gray-500 no-underline': activeTab === 3 }"
+                class="px-6 py-1 text-gray-600 dark:text-gray-400 rounded-xl border-b-2 border-gray-500 dark:border-gray-600 font-semibold mb-3 cursor-pointer bg-white dark:bg-gray-800"
+                :class="{'active  bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-gray-500 dark:text-gray-400 no-underline': activeTab === 3 }"
             >Archivo
             </label>
 
             <label
                 @click="activeTab = 4"
-                class="px-6 py-1 text-gray-600 rounded-xl border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white"
-                :class="{'active  bg-gray-200 rounded-full px-3 py-1 text-gray-500 no-underline': activeTab === 4 }"
+                class="px-6 py-1 text-gray-600 dark:text-gray-400 rounded-xl border-b-2 border-gray-500 dark:border-gray-600 font-semibold mb-3 cursor-pointer bg-white dark:bg-gray-800"
+                :class="{'active  bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-gray-500 dark:text-gray-400 no-underline': activeTab === 4 }"
             >Terrenos - Construcciones
             </label>
 
@@ -45,7 +45,7 @@
 
         @if(isset($predio))
 
-            <div class="space-y-2 mb-5 bg-white rounded-lg p-2 text-right shadow-xl">
+            <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 text-right shadow-xl">
 
                 <span class="bg-blue-400 text-white text-sm rounded-full px-2 py-1">Predio: {{ $predio->cuentaPredial() }}</span>
 
@@ -55,7 +55,7 @@
 
         <div x-cloak class="tab-panel" :class="{ 'active': activeTab === 0 }" x-show.transition.in.opacity.duration.800="activeTab === 0"  wire:key="tab-0">
 
-            <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl">
+            <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-xl">
 
                 <div class="flex items-center justify-center mb-8">
 
@@ -77,19 +77,19 @@
 
                             <div class="text-left">
 
-                                <Label class="text-base tracking-widest rounded-xl border-gray-500">Cuenta predial</Label>
+                                <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Cuenta predial</Label>
 
                             </div>
 
                             <div class="space-y-1">
 
-                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('predio.localidad') border-1 border-red-500 @enderror" wire:model.lazy="predio.localidad">
+                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio.localidad') border-1 border-red-500 @enderror" wire:model.lazy="predio.localidad">
 
-                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('predio.oficina') border-1 border-red-500 @enderror" wire:model.lazy="predio.oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Oficina" placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio.oficina') border-1 border-red-500 @enderror" wire:model.lazy="predio.oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-20 @error('predio.tipo_predio') border-1 border-red-500 @enderror" wire:model="predio.tipo_predio">
+                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio.tipo_predio') border-1 border-red-500 @enderror" wire:model="predio.tipo_predio">
 
-                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Número de registro" placeholder="Registro" type="number" class="bg-white rounded text-xs w-20 @error('predio.numero_registro') border-1 border-red-500 @enderror" wire:model.lazy="predio.numero_registro">
+                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Número de registro" placeholder="Registro" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio.numero_registro') border-1 border-red-500 @enderror" wire:model.lazy="predio.numero_registro">
 
                             </div>
 
@@ -99,31 +99,31 @@
 
                              <div class="text-left">
 
-                                <Label class="text-base tracking-widest rounded-xl border-gray-500">Clave catastral </Label>
+                                <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Clave catastral </Label>
 
                             </div>
 
                             <div class="space-y-1">
 
-                                <input @if($predio->getKey() && $actualizacion) readonly @endif placeholder="Estado" type="number" class="bg-white rounded text-xs w-20" title="Estado" value="16" readonly>
+                                <input @if($predio->getKey() && $actualizacion) readonly @endif placeholder="Estado" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20" title="Estado" value="16" readonly>
 
-                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Región" placeholder="Región" type="number" class="bg-white rounded text-xs w-20  @error('predio.region_catastral') border-1 border-red-500 @enderror" wire:model="predio.region_catastral" readonly>
+                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Región" placeholder="Región" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20  @error('predio.region_catastral') border-1 border-red-500 @enderror" wire:model="predio.region_catastral" readonly>
 
-                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-20 @error('predio.municipio') border-1 border-red-500 @enderror" wire:model="predio.municipio" readonly>
+                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Municipio" placeholder="Municipio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio.municipio') border-1 border-red-500 @enderror" wire:model="predio.municipio" readonly>
 
-                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-20 @error('predio.zona_catastral') border-1 border-red-500 @enderror" wire:model="predio.zona_catastral">
+                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Zona" placeholder="Zona" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio.zona_catastral') border-1 border-red-500 @enderror" wire:model="predio.zona_catastral">
 
-                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('predio.localidad') border-1 border-red-500 @enderror" wire:model.lazy="predio.localidad">
+                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio.localidad') border-1 border-red-500 @enderror" wire:model.lazy="predio.localidad">
 
-                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-20 @error('predio.sector') border-1 border-red-500 @enderror" wire:model="predio.sector">
+                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Sector" placeholder="Sector" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio.sector') border-1 border-red-500 @enderror" wire:model="predio.sector">
 
-                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-20 @error('predio.manzana') border-1 border-red-500 @enderror" wire:model="predio.manzana">
+                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Manzana" placeholder="Manzana" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio.manzana') border-1 border-red-500 @enderror" wire:model="predio.manzana">
 
-                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Predio" placeholder="Predio" type="number" class="bg-white rounded text-xs w-20 @error('predio.predio') border-1 border-red-500 @enderror" wire:model.lazy="predio.predio">
+                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Predio" placeholder="Predio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio.predio') border-1 border-red-500 @enderror" wire:model.lazy="predio.predio">
 
-                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-20 @error('predio.edificio') border-1 border-red-500 @enderror" wire:model="predio.edificio">
+                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Edificio" placeholder="Edificio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio.edificio') border-1 border-red-500 @enderror" wire:model="predio.edificio">
 
-                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-20 @error('predio.departamento') border-1 border-red-500 @enderror" wire:model="predio.departamento">
+                                <input @if($predio->getKey() && $actualizacion) readonly @endif title="Departamento" placeholder="Departamento" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('predio.departamento') border-1 border-red-500 @enderror" wire:model="predio.departamento">
 
                             </div>
 
@@ -201,7 +201,7 @@
 
             @include('livewire.comun.ubicacion-predio')
 
-            <div class="md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 items-end space-y-2 md:space-y-0 p-4 bg-white shadow-lg mb-5">
+            <div class="md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 items-end space-y-2 md:space-y-0 p-4 bg-white dark:bg-gray-800 shadow-lg mb-5">
 
                 <x-input-group for="predio.superficie_total_terreno" label="Superficie total de terreno {{ $predio->tipo_predio == 2 ? '(has.)' : '(mts.)' }}" :error="$errors->first('predio.superficie_total_terreno')" class="w-full">
 
@@ -305,7 +305,7 @@
 
             @include('livewire.comun.coordenadas')
 
-            <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-lg">
+            <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg">
 
                 <h4 class="text-lg mb-5 text-center">Documento de entrada</h4>
 
@@ -320,7 +320,7 @@
 
                         <div>
 
-                            <select class="bg-white rounded text-xs w-full" wire:model.live="predio.documento_entrada">
+                            <select class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model.live="predio.documento_entrada">
                                 <option value="" selected>Seleccione una opción</option>
 
                                 @foreach ($documentos as $item)
@@ -352,7 +352,7 @@
 
                             @if(in_array($predio->documento_entrada, ['ESCRITURA PÚBLICA', 'ESCRITURA PRIVADA']))
 
-                                <select class="bg-white rounded text-xs w-full" wire:model="predio.declarante">
+                                <select class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model="predio.declarante">
                                     <option value="" selected>Seleccione una opción</option>
 
                                     @foreach ($notarias as $notaria)
@@ -365,7 +365,7 @@
 
                             @else
 
-                                <input  class="bg-white rounded text-xs w-full" wire:model="predio.declarante">
+                                <input  class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model="predio.declarante">
 
                             @endif
 
@@ -389,7 +389,7 @@
 
                         <div>
 
-                            <input  class="bg-white rounded text-xs w-full" wire:model="predio.documento_numero">
+                            <input  class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model="predio.documento_numero">
 
                         </div>
 
@@ -410,7 +410,7 @@
 
                         <div>
 
-                            <input type="date" class="bg-white rounded text-xs w-full" wire:model="predio.fecha_efectos">
+                            <input type="date" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model="predio.fecha_efectos">
 
                         </div>
 
@@ -431,7 +431,7 @@
 
                         <div>
 
-                            <input type="date" class="bg-white rounded text-xs w-full" wire:model="predio.fecha_otorgamiento">
+                            <input type="date" class="bg-white dark:bg-gray-800 rounded text-xs w-full" wire:model="predio.fecha_otorgamiento">
 
                         </div>
 
@@ -447,11 +447,11 @@
 
             </div>
 
-            <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-lg">
+            <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg">
 
                 <x-input-group for="predio.observaciones" label="Observaciones del predio" :error="$errors->first('predio.observaciones')">
 
-                    <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="predio.observaciones"></textarea>
+                    <textarea class="bg-white dark:bg-gray-800 rounded text-xs w-full " rows="4" wire:model="predio.observaciones"></textarea>
 
                 </x-input-group>
 
@@ -473,7 +473,7 @@
 
             @include('livewire.comun.errores')
 
-            <div class="bg-white rounded-lg p-4 flex justify-end  shadow-xl">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-4 flex justify-end  shadow-xl">
 
                 <x-button-green
                     wire:click="actualizarConColindancias"
@@ -580,7 +580,7 @@
 
             <x-input-group for="observaciones" label="Observaciones" :error="$errors->first('observaciones')" class="w-full">
 
-                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más explicito en el motivo por el cual se da de baja el predio mencionando oficio si se ha presentado."></textarea>
+                <textarea class="bg-white dark:bg-gray-800 rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más explicito en el motivo por el cual se da de baja el predio mencionando oficio si se ha presentado."></textarea>
 
             </x-input-group>
 

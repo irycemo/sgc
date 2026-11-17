@@ -2,13 +2,13 @@
 
     <x-h4>Archivo</x-h4>
 
-    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-500 overflow-auto" wire:loading.class.delaylongest="opacity-50">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 text-sm text-gray-500 dark:text-gray-400 overflow-auto" wire:loading.class.delaylongest="opacity-50">
 
         <table class="w-full table table-fixed mb-5">
 
-            <thead class="border-b border-gray-300 ">
+            <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                     <th class="px-2">Descripción</th>
                     <th class="px-2">Registro</th>
@@ -18,13 +18,13 @@
 
             </thead>
 
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                 @foreach ($archivos as $key => $item)
 
                     @if(! empty($item))
 
-                        <tr class="text-gray-500 text-sm leading-relaxed">
+                        <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                             <td class="px-2 w-full capitalize">{{ $key }}</td>
                             <td class="px-2 w-full capitalize"></td>
                             <td class="px-2 w-full flex gap-3">
@@ -61,7 +61,7 @@
 
                 @foreach ($predio->archivos() as $archivo)
 
-                    <tr class="text-gray-500 text-sm leading-relaxed">
+                    <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                         <td class="px-2 capitalize">{{ Str::ucfirst($archivo->descripcion) }}</td>
                         <td class="px-2 capitalize">{{ $archivo->created_at }}</td>
                         <td class="px-2 flex gap-4">
@@ -99,7 +99,7 @@
 
                 @foreach ($predio->fotos() as $foto)
 
-                    <tr class="text-gray-500 text-sm leading-relaxed">
+                    <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                         <td class="px-2 capitalize">{{ $foto->descripcion }}</td>
                         <td class="px-2 capitalize">{{ $foto->created_at }}</td>
                         <td class="px-2">

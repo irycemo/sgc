@@ -18,21 +18,21 @@
 
     @endif
 
-    <div class="bg-white shadow-xl rounded-lg p-4 mb-5">
+    <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-4 mb-5">
 
-        <input type="text" class="rounded-lg w-full lg:w-1/2 mx-auto flex" placeholder="Buscar.." autofocus wire:model.live.debounce.200ms="search">
+        <input type="text" class="rounded-lg w-full lg:w-1/2 mx-auto flex bg-white dark:bg-gray-800" placeholder="Buscar.." autofocus wire:model.live.debounce.200ms="search">
 
     </div>
 
-    <div class="bg-white shadow-xl rounded-lg p-4" wire:loading.class.delaylongest="opacity-50">
+    <div class="bg-white dark:bg-gray-800 shadow-xl rounded-lg p-4" wire:loading.class.delaylongest="opacity-50">
 
         <div class="mx-auto lg:w-2/3">
 
             <div class="w-full grid grid-cols-12 gap-4">
 
-                <div class="col-span-12 lg:col-span-4 border border-gray-300 rounded-lg p-4 text-center">
+                <div class="col-span-12 lg:col-span-4 border border-gray-300 dark:border-gray-700 rounded-lg p-4 text-center">
 
-                    <span class="font-bold text-gray-600">Categorías</span>
+                    <span class="font-bold text-gray-600 dark:text-gray-400">Categorías</span>
 
                     <div class="space-y-2 flex flex-col mt-5">
 
@@ -40,7 +40,7 @@
 
                             <button
                                 wire:click="setCategoria('{{ $categoria_item }}')"
-                                class="bg-gray-200 whitespace-nowrap hover:shadow-lg hover:bg-gray-400 text-sm py-1 text-gray-700 hover:text-white rounded-full focus:outline-gray-400 focus:outline-offset-2 @if($categoria === $categoria_item) bg-gray-400 text-white @endif">
+                                class="bg-gray-200 dark:bg-gray-700 whitespace-nowrap hover:shadow-lg hover:bg-gray-400 text-sm py-1 text-gray-700 dark:text-gray-300 hover:text-white rounded-full focus:outline-gray-400 focus:outline-offset-2 @if($categoria === $categoria_item) bg-gray-400 text-white @endif">
 
                                 {{ $categoria_item }}
 
@@ -50,7 +50,7 @@
 
                         <button
                             wire:click="setCategoria('')"
-                            class="bg-gray-200 whitespace-nowrap hover:shadow-lg hover:bg-gray-400 text-sm py-1 text-gray-700 hover:text-white rounded-full focus:outline-gray-400 focus:outline-offset-2">
+                            class="bg-gray-200 dark:bg-gray-700 whitespace-nowrap hover:shadow-lg hover:bg-gray-400 text-sm py-1 text-gray-700 dark:text-gray-300 hover:text-white rounded-full focus:outline-gray-400 focus:outline-offset-2">
 
                             Quitar filtro
 
@@ -66,7 +66,7 @@
 
                         @forelse ($this->preguntas as $item)
 
-                            <li class="cursor-pointer hover:bg-gray-100 rounded-lg text-gray-700 border border-gray-300 flex justify-between" wire:key="pregunta-{{ $item->id }}">
+                            <li class="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700 flex justify-between" wire:key="pregunta-{{ $item->id }}">
 
                                 <div class="w-full h-full p-3 flex justify-between items-center" wire:click="verPregunta({{ $item->id }})">
 
@@ -102,20 +102,20 @@
 
                                         </div>
 
-                                        <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                        <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                             <button
                                             wire:click="verUsuarios({{ $item->id }})"
                                                 wire:target="verUsuarios({{ $item->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Ver usuarios
                                             </button>
 
                                             <a
                                                 href="{{ route('nueva_pregunta', $item) }}"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Editar pregunta
                                             </a>
@@ -124,7 +124,7 @@
                                                 wire:click="abrirModalBorrar({{ $item->id }})"
                                                 wire:target="abrirModalBorrar({{ $item->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Borrar
                                             </button>
@@ -167,7 +167,7 @@
 
                         @empty
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -294,7 +294,7 @@
 
                             <x-table.cell colspan="9">
 
-                                <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                                <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                     No hay resultados.
 

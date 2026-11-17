@@ -2,7 +2,7 @@
 
     @include('livewire.comun.avaluo-folio')
 
-    <div class="space-y-2 mb-5 bg-white rounded-lg p-2 shadow-xl">
+    <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-2 shadow-xl">
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-start md:w-2/3 mx-auto mb-4">
 
@@ -60,7 +60,7 @@
 
             <div class="text-left">
 
-                <Label class="text-base tracking-widest rounded-xl border-gray-500">Servicios municipales</Label>
+                <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Servicios municipales</Label>
 
             </div>
 
@@ -75,7 +75,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model="avaluo.agua" @if($predio && $predio->avaluo->agua == 1) checked @endif>
+                        <input type="checkbox" class="bg-white dark:bg-gray-800 rounded text-xs" wire:model="avaluo.agua" @if($predio && $predio->avaluo->agua == 1) checked @endif>
 
                     </div>
 
@@ -96,7 +96,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model="avaluo.drenaje" @if($predio && $predio->avaluo->drenaje == 1) checked @endif>
+                        <input type="checkbox" class="bg-white dark:bg-gray-800 rounded text-xs" wire:model="avaluo.drenaje" @if($predio && $predio->avaluo->drenaje == 1) checked @endif>
 
                     </div>
 
@@ -117,7 +117,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model="avaluo.pavimento" @if($predio && $predio->avaluo->pavimento == 1) checked @endif>
+                        <input type="checkbox" class="bg-white dark:bg-gray-800 rounded text-xs" wire:model="avaluo.pavimento" @if($predio && $predio->avaluo->pavimento == 1) checked @endif>
 
                     </div>
 
@@ -138,7 +138,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model="avaluo.energia_electrica" @if($predio && $predio->avaluo->energia_electrica == 1) checked @endif>
+                        <input type="checkbox" class="bg-white dark:bg-gray-800 rounded text-xs" wire:model="avaluo.energia_electrica" @if($predio && $predio->avaluo->energia_electrica == 1) checked @endif>
 
                     </div>
 
@@ -159,7 +159,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model="avaluo.alumbrado_publico" @if($predio && $predio->avaluo->alumbrado_publico == 1) checked @endif>
+                        <input type="checkbox" class="bg-white dark:bg-gray-800 rounded text-xs" wire:model="avaluo.alumbrado_publico" @if($predio && $predio->avaluo->alumbrado_publico == 1) checked @endif>
 
                     </div>
 
@@ -180,7 +180,7 @@
 
                     <div>
 
-                        <input type="checkbox" class="bg-white rounded text-xs" wire:model="avaluo.banqueta" @if($predio && $predio->avaluo->banqueta == 1) checked @endif>
+                        <input type="checkbox" class="bg-white dark:bg-gray-800 rounded text-xs" wire:model="avaluo.banqueta" @if($predio && $predio->avaluo->banqueta == 1) checked @endif>
 
                     </div>
 
@@ -215,7 +215,7 @@
 
     @foreach ($bloques as $index => $bloque)
 
-        <div class="space-y-2 mb-5 bg-white rounded-lg p-4 shadow-xl">
+        <div class="space-y-2 mb-5 bg-white dark:bg-gray-800 rounded-lg p-4 shadow-xl">
 
             <div class="flex justify-end ">
 
@@ -577,7 +577,7 @@
 
     @include('livewire.comun.errores')
 
-    <div class="bg-white rounded-lg p-4 flex justify-end">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-4 flex justify-end">
 
         @if(in_array($predio?->avaluo?->estado, ['nuevo', 'impreso']))
 

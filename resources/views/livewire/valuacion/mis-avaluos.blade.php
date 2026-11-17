@@ -6,7 +6,7 @@
 
         <div class="flex gap-3 overflow-auto p-1 items-center">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="filters.año">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.año">
 
                 @foreach ($años as $año)
 
@@ -16,11 +16,11 @@
 
             </select>
 
-            <input type="number" wire:model.live.debounce.500mse="filters.folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500mse="filters.folio" placeholder="Folio" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.500mse="filters.usuario" placeholder="Usuario" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500mse="filters.usuario" placeholder="Usuario" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="filters.estado">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.estado">
 
                 <option value="" selected>Estado</option>
                 <option value="nuevo">Nuevo</option>
@@ -30,15 +30,15 @@
 
             </select>
 
-            <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.p_oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.p_oficina" placeholder="Oficina" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.t_predio" placeholder="T. Predio" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.t_predio" placeholder="T. Predio" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+            <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="pagination">
 
                 <option value="10">10</option>
                 <option value="25">25</option>
@@ -107,7 +107,7 @@
 
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -234,13 +234,13 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     @if($avaluo->predioAvaluo->numero_registro && $avaluo->estado == 'nuevo')
 
                                         <a
                                             href="{{ route('valuacion_y_desglose', $avaluo) }}"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Editar
                                         </a>
@@ -249,7 +249,7 @@
 
                                         <a
                                             href="{{ route('avaluo_predio_ignorado', $avaluo) }}"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Editar
                                         </a>
@@ -261,7 +261,7 @@
                                         <button
                                             wire:click="imprimirAvaluo({{ $avaluo->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Imprimir
                                         </button>
@@ -273,7 +273,7 @@
                                         <button
                                             wire:click="abrirModalCorreccion({{ $avaluo->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Corregir
                                         </button>
@@ -287,7 +287,7 @@
                                             <button
                                                 wire:click="imprimirAvaluoPredioIgnorado({{ $avaluo->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Imprimir constancia
                                             </button>
@@ -297,7 +297,7 @@
                                         <button
                                             wire:click="abrirModalVerArchivos({{ $avaluo->predio_ignorado_id }}, 'predio_ignorado')"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Ver archivos
                                         </button>
@@ -309,7 +309,7 @@
                                         <button
                                             wire:click="abrirModalVerArchivos({{ $avaluo->variacion_catastral_id }}, 'variacion')"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Ver archivos
                                         </button>
@@ -321,7 +321,7 @@
                                         <button
                                             wire:click="actualizarPropietarios({{ $avaluo->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Actualizar propietarios
                                         </button>
@@ -331,7 +331,7 @@
                                     <button
                                         wire:click="abrirModalClonar({{ $avaluo->id }})"
                                         wire:loading.attr="disabled"
-                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                        class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                         role="menuitem">
                                         Clonar
                                     </button>
@@ -350,7 +350,7 @@
 
                         <x-table.cell colspan="10">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -368,7 +368,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="10" class="bg-gray-50">
+                    <x-table.cell colspan="10" class="bg-gray-50 dark:bg-gray-800">
 
                         {{ $this->avaluos->links()}}
 
@@ -429,13 +429,13 @@
 
                 <div >
 
-                    <Label class="text-base tracking-widest rounded-xl border-gray-500">Trámite</Label>
+                    <Label class="text-base tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Trámite</Label>
 
                 </div>
 
                 <div class="inline-flex">
 
-                    <select class="bg-white rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
+                    <select class="bg-white dark:bg-gray-800 rounded-l text-sm border border-r-transparent  focus:ring-0" wire:model="año">
                         @foreach ($años as $año)
 
                             <option value="{{ $año }}">{{ $año }}</option>
@@ -443,9 +443,9 @@
                         @endforeach
                     </select>
 
-                    <input type="number" class="bg-white text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
+                    <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 focus:ring-0 @error('folio') border-red-500 @enderror" wire:model="folio">
 
-                    <input type="number" class="bg-white text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
+                    <input type="number" class="bg-white dark:bg-gray-800 text-sm w-20 border-l-0 rounded-r focus:ring-0 @error('usuario') border-red-500 @enderror" wire:model="usuario">
 
                 </div>
 
@@ -453,21 +453,21 @@
 
             @if($generando)
 
-                <div wire:poll.1500ms="updateProgress" class="w-full max-w-xl mx-auto bg-white rounded-lg p-2 mb-5">
+                <div wire:poll.1500ms="updateProgress" class="w-full max-w-xl mx-auto bg-white dark:bg-gray-800 rounded-lg p-2 mb-5">
 
                     <div class="mb-2 flex justify-between text-sm">
                         <span>Progreso</span>
                         <span>{{ $this->batch->progress() }}%</span>
                     </div>
 
-                    <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4">
                         <div
                             class="h-4 rounded-full transition-all duration-500 bg-green-500"
                             style="width: {{ $this->batch->progress() }}%">
                         </div>
                     </div>
 
-                    <div class="mt-3 text-sm text-gray-600">
+                    <div class="mt-3 text-sm text-gray-600 dark:text-gray-400">
                         Procesados: {{ $this->batch->processedJobs() }} / {{ $this->batch->totalJobs }}
                     </div>
 
@@ -571,9 +571,9 @@
 
             <table class="table-auto lg:table-fixed w-full">
 
-                <thead class="border-b border-gray-300 ">
+                <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                    <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                    <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                         <th class="px-2">Descripción</th>
                         <th class="px-2">Link</th>
@@ -582,13 +582,13 @@
 
                 </thead>
 
-                <tbody class="divide-y divide-gray-200">
+                <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                     @if($this->modelo_administrativo)
 
                         @foreach ($this->modelo_administrativo->archivos as $archivo)
 
-                            <tr class="text-gray-500 text-sm leading-relaxed">
+                            <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 <td class=" px-2 w-full ">{{ $archivo->descripcion }}</td>
                                 <td class=" p-2 w-full ">
 
@@ -646,44 +646,44 @@
 
                 <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
 
-                    <input placeholder="Estado" type="number" class="bg-white rounded text-xs w-24" title="Estado" value="16" readonly>
+                    <input placeholder="Estado" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24" title="Estado" value="16" readonly>
 
-                    <input title="Región" placeholder="Región" type="number" class="bg-white rounded text-xs w-24  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral">
+                    <input title="Región" placeholder="Región" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24  @error('region_catastral') border-1 border-red-500 @enderror" wire:model="region_catastral">
 
-                    <input title="Municipio" placeholder="Municipio" type="number" class="bg-white rounded text-xs w-24 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio">
+                    <input title="Municipio" placeholder="Municipio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('municipio') border-1 border-red-500 @enderror" wire:model="municipio">
 
-                    <input title="Zona" placeholder="Zona" type="number" class="bg-white rounded text-xs w-24 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model="zona_catastral">
-
-                </div>
-
-                <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
-
-
-                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-24 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
-
-                    <input title="Sector" placeholder="Sector" type="number" class="bg-white rounded text-xs w-24 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
-
-                    <input title="Manzana" placeholder="Manzana" type="number" class="bg-white rounded text-xs w-24 @error('manzana') border-1 border-red-500 @enderror" wire:model="manzana">
-
-                    <input title="Predio" placeholder="Predio" type="number" class="bg-white rounded text-xs w-24 @error('predio') border-1 border-red-500 @enderror" wire:model.blur="predio">
+                    <input title="Zona" placeholder="Zona" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('zona_catastral') border-1 border-red-500 @enderror" wire:model="zona_catastral">
 
                 </div>
 
                 <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
 
-                    <input title="Edificio" placeholder="Edificio" type="number" class="bg-white rounded text-xs w-24 @error('edificio') border-1 border-red-500 @enderror" wire:model="edificio">
 
-                    <input title="Departamento" placeholder="Departamento" type="number" class="bg-white rounded text-xs w-24 @error('departamento') border-1 border-red-500 @enderror" wire:model="departamento">
+                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
+
+                    <input title="Sector" placeholder="Sector" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('sector') border-1 border-red-500 @enderror" wire:model="sector">
+
+                    <input title="Manzana" placeholder="Manzana" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('manzana') border-1 border-red-500 @enderror" wire:model="manzana">
+
+                    <input title="Predio" placeholder="Predio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('predio') border-1 border-red-500 @enderror" wire:model.blur="predio">
 
                 </div>
 
                 <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
 
-                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-24 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina">
+                    <input title="Edificio" placeholder="Edificio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('edificio') border-1 border-red-500 @enderror" wire:model="edificio">
 
-                    <input title="Tipo de predio" placeholder="Tipo predio" type="number" class="bg-white rounded text-xs w-24 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
+                    <input title="Departamento" placeholder="Departamento" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('departamento') border-1 border-red-500 @enderror" wire:model="departamento">
 
-                    <input title="Número de registro" placeholder="Número de registro" type="number" class="bg-white rounded text-xs @error('numero_registro') border-1 border-red-500 @enderror" wire:model="numero_registro">
+                </div>
+
+                <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
+
+                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina">
+
+                    <input title="Tipo de predio" placeholder="Tipo predio" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-24 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
+
+                    <input title="Número de registro" placeholder="Número de registro" type="number" class="bg-white dark:bg-gray-800 rounded text-xs @error('numero_registro') border-1 border-red-500 @enderror" wire:model="numero_registro">
 
                 </div>
 
@@ -732,13 +732,13 @@
 
                 <div class="flex flex-col w-full md:flex-row justify-start md:space-x-1 mb-5">
 
-                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
+                    <input title="Localidad" placeholder="Localidad" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('localidad') border-1 border-red-500 @enderror" wire:model.blur="localidad">
 
-                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina">
+                    <input title="Oficina" placeholder="Oficina" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('oficina') border-1 border-red-500 @enderror" wire:model="oficina">
 
-                    <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white rounded text-xs w-20 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
+                    <input title="Tipo de predio" placeholder="Tipo" type="number" class="bg-white dark:bg-gray-800 rounded text-xs w-20 @error('tipo_predio') border-1 border-red-500 @enderror" wire:model="tipo_predio">
 
-                    <input title="Número de registro" placeholder="Número de registro" type="number" class="bg-white rounded text-xs @error('numero_registro') border-1 border-red-500 @enderror" wire:model="numero_registro">
+                    <input title="Número de registro" placeholder="Número de registro" type="number" class="bg-white dark:bg-gray-800 rounded text-xs @error('numero_registro') border-1 border-red-500 @enderror" wire:model="numero_registro">
 
                 </div>
 

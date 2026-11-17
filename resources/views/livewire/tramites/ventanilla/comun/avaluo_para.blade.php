@@ -1,18 +1,18 @@
 @if ($flags['avaluo_para'])
 
-    <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg space-y-2 mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
 
         <div class="flex-auto ">
 
             <div class="mb-2">
 
-                <Label class="text-lg tracking-widest rounded-xl border-gray-500">Avaluo para</Label>
+                <Label class="text-lg tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Avaluo para</Label>
 
             </div>
 
             <div>
 
-                <select class="bg-white rounded text-sm w-full" wire:model.lazy="modelo_editar.avaluo_para">
+                <select class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model.lazy="modelo_editar.avaluo_para">
 
                     <option value="" selected>Seleccione una opción</option>
                     @foreach ($lista_avaluo_para as $item)

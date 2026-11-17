@@ -1,10 +1,10 @@
 <x-h4>Imágenes</x-h4>
 
-<div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-sm">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 text-sm">
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Fachada</strong>
 
@@ -14,7 +14,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Foto</strong>
 
@@ -24,7 +24,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Foto</strong>
 
@@ -34,7 +34,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Foto</strong>
 
@@ -44,7 +44,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Macrolocalización</strong>
 
@@ -54,7 +54,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Microlocalización</strong>
 
@@ -64,7 +64,7 @@
 
         </div>
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
             <strong>Imágen del poligono</strong>
 

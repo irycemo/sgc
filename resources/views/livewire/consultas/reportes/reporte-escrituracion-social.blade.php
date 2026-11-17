@@ -1,6 +1,6 @@
 <div>
 
-    <div class="md:flex md:flex-row flex-col justify-center md:space-x-4 items-end bg-white rounded-xl mb-5 p-4 shadow-xl">
+    <div class="md:flex md:flex-row flex-col justify-center md:space-x-4 items-end bg-white dark:bg-gray-800 rounded-xl mb-5 p-4 shadow-xl">
 
         <x-input-group for="fecha1" label="Fecha inicial" :error="$errors->first('fecha1')">
 
@@ -16,7 +16,7 @@
 
     </div>
 
-    <div class="md:flex flex-col md:flex-row justify-between md:space-x-3 items-center bg-white rounded-xl mb-5 p-4 shadow-xl">
+    <div class="md:flex flex-col md:flex-row justify-between md:space-x-3 items-center bg-white dark:bg-gray-800 rounded-xl mb-5 p-4 shadow-xl">
 
         <x-input-group for="estado" label="Estado" :error="$errors->first('estado')" class="w-full">
 
@@ -103,7 +103,7 @@
 
         @if(count($this->tramites))
 
-            <div class="rounded-lg shadow-xl mb-5 p-4 font-thin md:flex items-center justify-between bg-white">
+            <div class="rounded-lg shadow-xl mb-5 p-4 font-thin md:flex items-center justify-between bg-white dark:bg-gray-800">
 
                 <p class="text-xl font-extralight">Se encontraron: {{ number_format($this->tramites->total()) }} registros con los filtros seleccionados.</p>
 
@@ -121,7 +121,7 @@
 
             </div>
 
-            <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+            <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
                 <x-table>
 
@@ -200,7 +200,7 @@
 
                                 <x-table.cell colspan="15">
 
-                                    <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                                    <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                         No hay resultados.
 
@@ -218,7 +218,7 @@
 
                         <x-table.row>
 
-                            <x-table.cell colspan="15" class="bg-gray-50">
+                            <x-table.cell colspan="15" class="bg-gray-50 dark:bg-gray-800">
 
                                 {{ $this->tramites->links()}}
 
@@ -234,7 +234,7 @@
 
         @else
 
-            <div class="border-b border-gray-300 bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+            <div class="border-b border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                 No hay resultados.
 

@@ -1,18 +1,18 @@
 @if ($flags['observaciones'])
 
-    <div class="bg-white p-4 rounded-lg space-y-2 mb-3 shadow-md" wire:loading.class.delay.longest="opacity-50">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg space-y-2 mb-3 shadow-md" wire:loading.class.delay.longest="opacity-50">
 
         <div class="flex-auto ">
 
             <div class="mb-2">
 
-                <Label class="text-lg tracking-widest rounded-xl border-gray-500">Observaciones</Label>
+                <Label class="text-lg tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Observaciones</Label>
 
             </div>
 
             <div>
 
-                <textarea rows="5" wire:model.blur="modelo_editar.observaciones" class="bg-white rounded text-sm w-full" placeholder="Se lo mas especifico posible acerca de porque se genera el trámite."></textarea>
+                <textarea rows="5" wire:model.blur="modelo_editar.observaciones" class="bg-white dark:bg-gray-800 rounded text-sm w-full" placeholder="Se lo mas especifico posible acerca de porque se genera el trámite."></textarea>
 
             </div>
 

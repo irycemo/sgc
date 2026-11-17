@@ -6,11 +6,11 @@
 
     <x-h4>Datos generales</x-h4>
 
-    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 text-gray-600 dark:text-gray-400">
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 text-sm">
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Cuenta predial</strong>
 
@@ -18,7 +18,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Clave catastral</strong>
 
@@ -26,7 +26,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Estado</strong>
 
@@ -34,7 +34,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Folio real</strong>
 
@@ -42,7 +42,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Tomo</strong>
 
@@ -50,7 +50,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Registro</strong>
 
@@ -58,7 +58,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Es habitacional</strong>
 
@@ -66,7 +66,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Declarante</strong>
 
@@ -74,7 +74,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>CURT</strong>
 
@@ -82,7 +82,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Fecha de efectos</strong>
 
@@ -90,7 +90,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Fecha de otorgamiento</strong>
 
@@ -98,7 +98,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Superficie notarial</strong>
 
@@ -106,7 +106,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Superficie judicial</strong>
 
@@ -114,7 +114,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Superficie de terreno</strong>
 
@@ -122,7 +122,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Superficie de construccion</strong>
 
@@ -132,7 +132,7 @@
 
             @if($predio->terrenosComun->count())
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Superficie proporcional de terreno</strong>
 
@@ -144,7 +144,7 @@
 
             @if($predio->construccionesComun->count())
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                     <strong>Superficie proporcional de construcción</strong>
 
@@ -154,7 +154,7 @@
 
             @endif
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Superficie total de terreno</strong>
 
@@ -162,7 +162,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Superficie total de construcción</strong>
 
@@ -170,7 +170,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Valor total de terreno</strong>
 
@@ -178,7 +178,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Valor total de construcción</strong>
 
@@ -186,7 +186,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Valor catastral</strong>
 
@@ -194,7 +194,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Uso del predio</strong>
 
@@ -204,7 +204,7 @@
 
             </div>
 
-            <div class="rounded-lg bg-gray-100 py-1 px-2">
+            <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Documento de entrada - Número de documento</strong>
 
@@ -212,7 +212,7 @@
 
             </div>
 
-            <div class="col-span-1 sm:col-span-2 lg:col-span-5 rounded-lg bg-gray-100 py-1 px-2">
+            <div class="col-span-1 sm:col-span-2 lg:col-span-5 rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2">
 
                 <strong>Observaciones</strong>
 
@@ -240,15 +240,15 @@
 
     @include('admin.comun.movimientos')
 
-    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 rounded-xl border-b-2 border-gray-500 font-thin mb-6  bg-white">Bloqueos ({{ $predio->bloqueos->count() }})</h4>
+    <h4 class="text-2xl tracking-widest py-1 px-6 text-gray-600 dark:text-gray-400 rounded-xl border-b-2 border-gray-500 dark:border-gray-600 font-thin mb-6  bg-white dark:bg-gray-800">Bloqueos ({{ $predio->bloqueos->count() }})</h4>
 
-    <div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
         <table class="table-auto lg:table-fixed w-full">
 
-            <thead class="border-b border-gray-300 ">
+            <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                     <th class="px-2">Estado</th>
                     <th class="px-2">Motivo de bloqueo</th>
@@ -260,11 +260,11 @@
 
             </thead>
 
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                 @foreach ($predio->bloqueos as $bloqueo)
 
-                    <tr class="text-gray-500 text-sm leading-relaxed">
+                    <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                         <td class=" px-2 w-full capitalize">{{ $bloqueo->estado }}</td>
                         <td class=" px-2 w-full ">{{ $bloqueo->observaciones_bloqueo }}</td>
                         <td class=" px-2 w-full ">{{ $bloqueo->observaciones_desbloqueo }}</td>

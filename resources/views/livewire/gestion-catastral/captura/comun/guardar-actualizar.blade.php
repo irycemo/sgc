@@ -1,4 +1,4 @@
-<div class="bg-white rounded-lg p-4 flex justify-end  shadow-xl">
+<div class="bg-white dark:bg-gray-800 rounded-lg p-4 flex justify-end  shadow-xl">
 
     @if($actualizacion)
 

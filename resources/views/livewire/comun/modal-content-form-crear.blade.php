@@ -40,7 +40,7 @@
 
             <x-input-group for="multiple_nombre" label="Nombre multiple (Opcional)" :error="$errors->first('multiple_nombre')" class="sm:col-span-2 lg:col-span-3">
 
-                <textarea rows="3" class="w-full bg-white rounded text-sm" wire:model="multiple_nombre"></textarea>
+                <textarea rows="3" class="w-full bg-white dark:bg-gray-800 rounded text-sm" wire:model="multiple_nombre"></textarea>
 
             </x-input-group>
 
@@ -86,7 +86,7 @@
 
     </x-input-group>
 
-    <span class="flex items-center justify-center text-lg text-gray-700 md:col-span-3 col-span-1 sm:col-span-2">Domicilio</span>
+    <span class="flex items-center justify-center text-lg text-gray-700 dark:text-gray-300 md:col-span-3 col-span-1 sm:col-span-2">Domicilio</span>
 
     <x-input-group for="cp" label="Código postal" :error="$errors->first('cp')" class="w-full">
 
@@ -138,7 +138,7 @@
 
     @if($tipo_actor === 'propietario')
 
-        <span class="flex items-center justify-center text-lg text-gray-700 md:col-span-3 col-span-1 sm:col-span-2">Porcentajes</span>
+        <span class="flex items-center justify-center text-lg text-gray-700 dark:text-gray-300 md:col-span-3 col-span-1 sm:col-span-2">Porcentajes</span>
 
         <x-input-group for="porcentaje_propiedad" label="Porcentaje propiedad" :error="$errors->first('porcentaje_propiedad')" class="w-full">
 
@@ -160,7 +160,7 @@
 
     @elseif($tipo_actor === 'representante')
 
-        <span class="flex items-center justify-center text-lg text-gray-700 md:col-span-3 col-span-1 sm:col-span-2" >Representados</span>
+        <span class="flex items-center justify-center text-lg text-gray-700 dark:text-gray-300 md:col-span-3 col-span-1 sm:col-span-2" >Representados</span>
 
         <div class="md:col-span-3 col-span-1 sm:col-span-2">
 
@@ -212,7 +212,7 @@
                 wire:ignore>
 
                 <select
-                    class="bg-white rounded text-sm w-full z-50"
+                    class="bg-white dark:bg-gray-800 rounded text-sm w-full z-50"
                     wire:model.live="representados"
                     x-ref="select"
                     multiple="multiple">

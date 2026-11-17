@@ -18,15 +18,15 @@
 
             <div class="flex gap-3">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.tipo" placeholder="T. Predio" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.tipo" placeholder="T. Predio" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="# Registro" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <x-input-select class="bg-white rounded-full text-sm w-min" wire:model.live="estado">
+                <x-input-select class="bg-white dark:bg-gray-800 rounded-full text-sm w-min" wire:model.live="estado">
 
                     <option value="">Seleccione una opción</option>
                     <option value="nuevo">Nuevo</option>
@@ -37,15 +37,15 @@
 
                 </x-input-select>
 
-                <input type="number" wire:model.live.debounce.500ms="filters.año_aviso" placeholder="Año Aviso" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.año_aviso" placeholder="Año Aviso" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.folio_aviso" placeholder="Folio Aviso" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.folio_aviso" placeholder="Folio Aviso" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="number" wire:model.live.debounce.500ms="filters.usuario_aviso" placeholder="Usuario Aviso" class="bg-white rounded-full text-sm w-24">
+                <input type="number" wire:model.live.debounce.500ms="filters.usuario_aviso" placeholder="Usuario Aviso" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24">
 
-                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm">
+                <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
-                <x-input-select class="bg-white rounded-full text-sm w-min" wire:model.live="oficina">
+                <x-input-select class="bg-white dark:bg-gray-800 rounded-full text-sm w-min" wire:model.live="oficina">
 
                     @foreach ($oficinas as $item)
 
@@ -55,7 +55,7 @@
 
                 </x-input-select>
 
-                <x-input-select class="bg-white rounded-full text-sm w-min" wire:model.live="pagination">
+                <x-input-select class="bg-white dark:bg-gray-800 rounded-full text-sm w-min" wire:model.live="pagination">
 
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -70,7 +70,7 @@
 
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -162,7 +162,7 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     @if(!in_array($traslado->estado, ['operado', 'nuevo']))
 
@@ -171,7 +171,7 @@
                                             <button
                                                 wire:click="abrirModalReasignar({{ $traslado->id }})"
                                                 wire:loading.attr="disabled"
-                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                                 role="menuitem">
                                                 Reasignar fiscal
                                             </button>
@@ -180,7 +180,7 @@
 
                                         <a
                                             href="{{ route('revisar_traslado', $traslado) }}"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
 
                                             <span>Revisar</span>
@@ -194,7 +194,7 @@
                                         <button
                                             wire:click="abrirModalRechazos({{ $traslado->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Ver rechazos
                                         </button>
@@ -207,7 +207,7 @@
                                             wire:confirm="¿Esta seguro que desea enviar el aviso a estado de autorizado?"
                                             wire:click="abrirModalRevertir({{ $traslado->id }}, 'operado')"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Revertir operación
                                         </button>
@@ -220,7 +220,7 @@
                                             wire:confirm="¿Esta seguro que desea enviar el aviso a estado de cerrado?"
                                             wire:click="abrirModalRevertir({{ $traslado->id }}, 'rechazo')"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Revertir rechazo
                                         </button>
@@ -233,7 +233,7 @@
                                             wire:confirm="¿Esta seguro que desea enviar el aviso a estado de cerrado?"
                                             wire:click="abrirModalRevertir({{ $traslado->id }}, 'autorizado')"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Revertir autorizado
                                         </button>
@@ -244,7 +244,7 @@
 
                                         <a
                                             href="{{ route('auditoria') . '?modelo=Traslado&modelo_id=' . $traslado->id }}"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Auditar
                                         </a>
@@ -265,7 +265,7 @@
 
                         <x-table.cell colspan="9">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -283,7 +283,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="9" class="bg-gray-50">
+                    <x-table.cell colspan="9" class="bg-gray-50 dark:bg-gray-800">
 
                         {{ $this->traslados->links()}}
 
@@ -371,7 +371,7 @@
 
             @foreach ($modelo_editar->rechazos as $rechazo)
 
-                <div class="bg-gray-100 rounded-lg p-2 mb-2">
+                <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-2 mb-2">
 
                     <div>
                         <p class="text-xs mb-1">Reglamento de la ley de la Función Registral y Catastral del Estado de Michoacán de Ocampo</p>
@@ -420,7 +420,7 @@
 
             <x-input-group for="observaciones" label="Observación" :error="$errors->first('observaciones')">
 
-                <textarea class="bg-white rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico sobre el motivo por el que se revierte la operación del aviso"></textarea>
+                <textarea class="bg-white dark:bg-gray-800 rounded text-xs w-full " rows="4" wire:model="observaciones" placeholder="Se lo más especifico sobre el motivo por el que se revierte la operación del aviso"></textarea>
 
             </x-input-group>
 

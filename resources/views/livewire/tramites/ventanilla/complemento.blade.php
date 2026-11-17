@@ -17,7 +17,7 @@
 
                     @else
 
-                        <div class="flex justify-around space-x-3 bg-white p-4 rounded-lg mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
+                        <div class="flex justify-around space-x-3 bg-white dark:bg-gray-800 p-4 rounded-lg mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
 
                             Tramite original: {{ $tramiteAdicionado?->servicio->nombre }}
 
@@ -27,7 +27,7 @@
 
                     @if(in_array($tramiteAdicionado?->servicio->clave_ingreso, ['DM31']))
 
-                        <div class="flex justify-around space-x-3 bg-white p-4 rounded-lg mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
+                        <div class="flex justify-around space-x-3 bg-white dark:bg-gray-800 p-4 rounded-lg mb-3 shadow-md relative" wire:loading.class.delay.longest="opacity-50">
 
                             Tramite complemento: urgente
 
@@ -51,19 +51,19 @@
 
                         <div class="flex-row lg:flex lg:space-x-3 relative" wire:loading.class.delay.longest="opacity-50">
 
-                            <div class="flex-auto bg-white p-3 rounded-lg mb-3 shadow-md">
+                            <div class="flex-auto bg-white dark:bg-gray-800 p-3 rounded-lg mb-3 shadow-md">
 
                                 <div class="flex-auto ">
 
                                     <div class="mb-2">
 
-                                        <Label class="text-lg tracking-widest rounded-xl border-gray-500">Servicios de historia</Label>
+                                        <Label class="text-lg tracking-widest rounded-xl border-gray-500 dark:border-gray-600">Servicios de historia</Label>
 
                                     </div>
 
                                     <div>
 
-                                        <select class="bg-white rounded text-sm w-full" wire:model.live="servicio_historia_seleccionado">
+                                        <select class="bg-white dark:bg-gray-800 rounded text-sm w-full" wire:model.live="servicio_historia_seleccionado">
 
                                             <option value="" selected>Seleccione una opción</option>
 

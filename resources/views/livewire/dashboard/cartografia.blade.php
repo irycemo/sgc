@@ -8,13 +8,13 @@
 
             <x-h4>Asignación de clave catastral</x-h4>
 
-            <div class="grid grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-lg">
+            <div class="grid grid-cols-2 gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
 
                 @foreach ($predios_ignorados as $ignorado)
 
-                    <span class="text-left text-sm text-gray-600 hover:underline ">Asignaciones pendientes</span>
+                    <span class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">Asignaciones pendientes</span>
 
-                    <span class="text-right text-sm text-gray-600">{{ $ignorado['total'] }}</span>
+                    <span class="text-right text-sm text-gray-600 dark:text-gray-400">{{ $ignorado['total'] }}</span>
 
                 @endforeach
 
@@ -26,11 +26,11 @@
 
             <x-h4>Peritos externos</x-h4>
 
-            <div class="grid grid-cols-2 gap-3 p-4 bg-white rounded-lg shadow-lg">
+            <div class="grid grid-cols-2 gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
 
-                <a href="{{ route('conciliar')}}" class="text-left text-sm text-gray-600 hover:underline ">Revisión de cartografía</a>
+                <a href="{{ route('conciliar')}}" class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">Revisión de cartografía</a>
 
-                <a href="{{ route('conciliar_avaluos_peritos_externos')}}" class="text-left text-sm text-gray-600 hover:underline ">Conciliación</a>
+                <a href="{{ route('conciliar_avaluos_peritos_externos')}}" class="text-left text-sm text-gray-600 dark:text-gray-400 hover:underline ">Conciliación</a>
 
             </div>
 

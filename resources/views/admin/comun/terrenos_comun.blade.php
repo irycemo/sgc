@@ -1,12 +1,12 @@
 <x-h4>Terrenos de área común ({{ $predio->terrenosCOmun->count() }})</x-h4>
 
-<div class="bg-white p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-lg w-full shadow-lg mb-5 overflow-x-auto">
 
     <table class="table-auto lg:table-fixed w-full">
 
-        <thead class="border-b border-gray-300 ">
+        <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-            <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+            <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                 <th class="px-2">Área común de terreno</th>
                 <th class="px-2">Indiviso de terreno</th>
@@ -18,11 +18,11 @@
 
         </thead>
 
-        <tbody class="divide-y divide-gray-200">
+        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
             @foreach ($predio->terrenosComun as $terreno)
 
-                <tr class="text-gray-500 text-sm leading-relaxed">
+                <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                     <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->area_terreno_comun }}</td>
                     <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->indiviso_terreno }}</td>
                     <td class=" px-2 w-full whitespace-nowrap">{{ $terreno->superficie_proporcional }}</td>

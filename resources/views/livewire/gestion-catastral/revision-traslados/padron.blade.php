@@ -1,4 +1,4 @@
-<div class="bg-white p-4 rounded-lg shadow-lg">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg">
 
     <div class="text-lg font-semibold text-center tracking-widest mb-3">
 
@@ -12,14 +12,14 @@
 
             <label
                 @click="activeTab = 0"
-                class="px-6 py-1 text-gray-600 rounded-full border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white w-full"
-                :class="{'active  bg-gray-200 text-gray-500 no-underline': activeTab === 0 }"
+                class="px-6 py-1 text-gray-600 dark:text-gray-400 rounded-full border-b-2 border-gray-500 dark:border-gray-600 font-semibold mb-3 cursor-pointer bg-white dark:bg-gray-800 w-full"
+                :class="{'active  bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 no-underline': activeTab === 0 }"
             >Identificación del inmueble
             </label>
 
             <div class="tab-panel w-full" :class="{ 'active': activeTab === 0 }" x-show.transition.in.opacity.duration.800="activeTab === 0"  wire:key="tab-0">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Cuenta predial</strong>
 
@@ -27,7 +27,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Clave catastral</strong>
 
@@ -35,7 +35,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Código postal</strong>
 
@@ -43,7 +43,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Nombre del asentamiento</strong>
 
@@ -51,7 +51,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Tipo de asentamiento</strong>
 
@@ -59,7 +59,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Nombre del vialidad</strong>
 
@@ -67,7 +67,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Tipo de vialidad</strong>
 
@@ -75,7 +75,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Número exterior</strong>
 
@@ -83,7 +83,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Número exterior 2</strong>
 
@@ -91,7 +91,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Número interior</strong>
 
@@ -99,7 +99,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Número adicional</strong>
 
@@ -107,7 +107,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Número adicional 2</strong>
 
@@ -115,7 +115,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Lote del fraccionador</strong>
 
@@ -123,7 +123,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Manzana del fraccionador</strong>
 
@@ -131,7 +131,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Etapa o zona del fraccionador</strong>
 
@@ -139,7 +139,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Nombre del edificio</strong>
 
@@ -147,7 +147,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Clave del edificio</strong>
 
@@ -155,7 +155,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Departamento</strong>
 
@@ -163,7 +163,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 ">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 ">
 
                     <strong>Predio Rústico Denominado ó Antecedente</strong>
 
@@ -171,7 +171,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2">
 
                     <strong>Coordenadas geográficas</strong>
 
@@ -183,8 +183,8 @@
 
             <label
                 @click="activeTab = 1"
-                class="px-6 py-1 text-gray-600 rounded-full border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white w-full"
-                :class="{'active  bg-gray-200 text-gray-500 no-underline': activeTab === 1 }"
+                class="px-6 py-1 text-gray-600 dark:text-gray-400 rounded-full border-b-2 border-gray-500 dark:border-gray-600 font-semibold mb-3 cursor-pointer bg-white dark:bg-gray-800 w-full"
+                :class="{'active  bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 no-underline': activeTab === 1 }"
             >Colindancias
             </label>
 
@@ -192,9 +192,9 @@
 
                 <table class="w-full">
 
-                    <thead class="border-b border-gray-300 ">
+                    <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                        <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                        <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                             <th class="px-2">Viento</th>
                             <th class="px-2">Longitud</th>
@@ -204,11 +204,11 @@
 
                     </thead>
 
-                    <tbody class="divide-y divide-gray-200">
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                         @foreach ($traslado->predio->colindancias as $colindancia)
 
-                            <tr class="text-gray-500 text-sm leading-relaxed">
+                            <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 <td class=" px-2 w-min ">{{ $colindancia->viento }}</td>
                                 <td class=" px-2 w-min ">{{ $colindancia->longitud }}</td>
                                 <td class=" px-2 w-full ">{{ $colindancia->descripcion }}</td>
@@ -224,8 +224,8 @@
 
             <label
                 @click="activeTab = 2"
-                class="px-6 py-1 text-gray-600 rounded-full border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white w-full"
-                :class="{'active  bg-gray-200 text-gray-500 no-underline': activeTab === 2 }"
+                class="px-6 py-1 text-gray-600 dark:text-gray-400 rounded-full border-b-2 border-gray-500 dark:border-gray-600 font-semibold mb-3 cursor-pointer bg-white dark:bg-gray-800 w-full"
+                :class="{'active  bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 no-underline': activeTab === 2 }"
             >Propietarios
             </label>
 
@@ -233,9 +233,9 @@
 
                 <table class="w-full">
 
-                    <thead class="border-b border-gray-300 ">
+                    <thead class="border-b border-gray-300 dark:border-gray-700 ">
 
-                        <tr class="text-sm text-gray-500 text-left traling-wider whitespace-nowrap">
+                        <tr class="text-sm text-gray-500 dark:text-gray-400 text-left traling-wider whitespace-nowrap">
 
                             <th class="px-2">Nombre / Razón social</th>
                             <th class="px-2">% Porpiedad</th>
@@ -246,11 +246,11 @@
 
                     </thead>
 
-                    <tbody class="divide-y divide-gray-200">
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
 
                         @foreach ($traslado->predio->propietarios->sortBy('persona.nombre') as $propietario)
 
-                            <tr class="text-gray-500 text-sm leading-relaxed">
+                            <tr class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                 <td class=" px-2 w-full">{{ $propietario->persona->nombre }} {{ $propietario->persona->ap_paterno }} {{ $propietario->persona->ap_materno }} {{ $propietario->persona->razon_social }}</td>
                                 <td class=" px-2 w-min">{{ $propietario->porcentaje_propiedad ?? '0' }}</td>
                                 <td class=" px-2 w-min">{{ $propietario->porcentaje_nuda ?? '0' }}</td>
@@ -267,14 +267,14 @@
 
             <label
                 @click="activeTab = 3"
-                class="px-6 py-1 text-gray-600 rounded-full border-b-2 border-gray-500 font-semibold mb-3 cursor-pointer bg-white w-full"
-                :class="{'active  bg-gray-200 text-gray-500 no-underline': activeTab === 3 }"
+                class="px-6 py-1 text-gray-600 dark:text-gray-400 rounded-full border-b-2 border-gray-500 dark:border-gray-600 font-semibold mb-3 cursor-pointer bg-white dark:bg-gray-800 w-full"
+                :class="{'active  bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 no-underline': activeTab === 3 }"
             >Superficies y valores
             </label>
 
             <div class="tab-panel w-full" :class="{ 'active': activeTab === 3 }" x-show.transition.in.opacity.duration.800="activeTab === 3"  wire:key="tab-3">
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Superficie Notarial</strong>
 
@@ -282,7 +282,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Superficie total de terreno</strong>
 
@@ -290,7 +290,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Superficie total de construcción</strong>
 
@@ -298,7 +298,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Valor de terreno</strong>
 
@@ -306,7 +306,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Valor de construcción</strong>
 
@@ -314,7 +314,7 @@
 
                 </div>
 
-                <div class="rounded-lg bg-gray-100 py-1 px-2 mb-2 flex gap-2">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 mb-2 flex gap-2">
 
                     <strong>Valor catastral</strong>
 

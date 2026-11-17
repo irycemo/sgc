@@ -6,11 +6,11 @@
 
         <div class="flex gap-3 overflow-auto p-1">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white rounded-full text-sm">
+            <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
-            <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white rounded-full text-sm">
+            <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="filters.tipo">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.tipo">
 
                 <option value="" selected>Tipo de predio</option>
                 <option value="1">1</option>
@@ -18,9 +18,9 @@
 
             </select>
 
-            <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="Número de registro" class="bg-white rounded-full text-sm">
+            <input type="number" wire:model.live.debounce.500ms="filters.registro" placeholder="Número de registro" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="pagination">
 
                 <option value="10">10</option>
                 <option value="25">25</option>
@@ -33,7 +33,7 @@
 
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -116,13 +116,13 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     @can('Ver predio')
 
                                         <a
                                             href="{{ route('ver_predio', $predio) }}"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Ver
                                         </a>
@@ -134,7 +134,7 @@
                                         <button
                                             wire:click="abrirModal({{ $predio->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Bloqueo
                                         </button>
@@ -145,7 +145,7 @@
 
                                         <a
                                             href="{{ route('auditoria') . '?modelo=Predio&modelo_id=' . $predio->id }}"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Auditar
                                         </a>
@@ -166,7 +166,7 @@
 
                         <x-table.cell colspan="9">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -184,7 +184,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="9" class="bg-gray-50">
+                    <x-table.cell colspan="9" class="bg-gray-50 dark:bg-gray-800">
 
                         {{ $this->predios->links()}}
 
@@ -208,7 +208,7 @@
 
             @if($this->modelo_editar->status == 'bloqueado')
 
-                <div class="rounded-lg bg-gray-100 p-2 mb-3">
+                <div class="rounded-lg bg-gray-100 dark:bg-gray-900 p-2 mb-3">
 
                     <p>El predio se encuentra bloqueado por el siguiente motivo:</p>
 
@@ -220,7 +220,7 @@
 
             <x-input-group for="observaciones" label="Observaciones" :error="$errors->first('observaciones')" class="w-full">
 
-                <textarea class="bg-white rounded w-full" rows="5" wire:model="observaciones" placeholder="Menciona el oficio mediante el cual se solicita el bloqueo o desbloqueo"></textarea>
+                <textarea class="bg-white dark:bg-gray-800 rounded w-full" rows="5" wire:model="observaciones" placeholder="Menciona el oficio mediante el cual se solicita el bloqueo o desbloqueo"></textarea>
 
             </x-input-group>
 

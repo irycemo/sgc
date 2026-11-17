@@ -1,12 +1,12 @@
-<div class="bg-white p-3 rounded-lg  shadow-md">
+<div class="bg-white dark:bg-gray-800 p-3 rounded-lg  shadow-md">
 
-    <h1 class="text-lg tracking-widest rounded-xl border-gray-500 text-center mb-5">Trámite</h1>
+    <h1 class="text-lg tracking-widest rounded-xl border-gray-500 dark:border-gray-600 text-center mb-5">Trámite</h1>
 
     @include('livewire.tramites.ventanilla.comun.tramite')
 
     @if ($tramite->observaciones)
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 my-3">
 
             <strong>Observaciones:</strong>
 
@@ -18,7 +18,7 @@
 
     @if ($tramite->predios->count())
 
-        <div class="rounded-lg bg-gray-100 py-1 px-2 my-3">
+        <div class="rounded-lg bg-gray-100 dark:bg-gray-900 py-1 px-2 my-3">
 
             <strong>Predios:</strong>
 

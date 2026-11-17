@@ -2,13 +2,13 @@
 
     <x-header>Consulta certificación</x-header>
 
-    <div class="bg-white px-2 py-4 rounded-lg shadow-xl mb-5">
+    <div class="bg-white dark:bg-gray-800 px-2 py-4 rounded-lg shadow-xl mb-5">
 
         <div class="lg:w-1/2 mx-auto text-center space-y-5">
 
             <div>
 
-                <select class="bg-white rounded-full text-sm border @error('año') border-red-500 @enderror" wire:model="año">
+                <select class="bg-white dark:bg-gray-800 rounded-full text-sm border @error('año') border-red-500 @enderror" wire:model="año">
                     @foreach ($años as $año)
 
                         <option value="{{ $año }}">{{ $año }}</option>
@@ -16,9 +16,9 @@
                     @endforeach
                 </select>
 
-                <input type="number" wire:model="folio" placeholder="Folio" class="bg-white rounded-full text-sm w-24 @error('folio') border-red-500 @enderror">
+                <input type="number" wire:model="folio" placeholder="Folio" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24 @error('folio') border-red-500 @enderror">
 
-                <input type="number" wire:model="usuario" placeholder="Usuario" class="bg-white rounded-full text-sm w-24 mb-5 @error('usuario') border-red-500 @enderror">
+                <input type="number" wire:model="usuario" placeholder="Usuario" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24 mb-5 @error('usuario') border-red-500 @enderror">
 
                 <x-button-blue
                     class="mx-auto"
@@ -36,13 +36,13 @@
 
             <div>
 
-                <input type="number" wire:model="localidad" placeholder="Localidad" class="bg-white rounded-full text-sm w-24 @error('localidad') border-red-500 @enderror">
+                <input type="number" wire:model="localidad" placeholder="Localidad" class="bg-white dark:bg-gray-800 rounded-full text-sm w-24 @error('localidad') border-red-500 @enderror">
 
-                <input type="number" wire:model="oficina" placeholder="Oficina" class="bg-white rounded-full text-sm w-20 @error('oficina') border-red-500 @enderror" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
+                <input type="number" wire:model="oficina" placeholder="Oficina" class="bg-white dark:bg-gray-800 rounded-full text-sm w-20 @error('oficina') border-red-500 @enderror" @if(auth()->user()->oficina->oficina != 101) readonly @endif>
 
-                <input type="number" wire:model="t_predio" placeholder="Tipo" class="bg-white rounded-full text-sm w-16 @error('t_predio') border-red-500 @enderror">
+                <input type="number" wire:model="t_predio" placeholder="Tipo" class="bg-white dark:bg-gray-800 rounded-full text-sm w-16 @error('t_predio') border-red-500 @enderror">
 
-                <input type="number" wire:model="registro" placeholder="Registro" class="bg-white rounded-full text-sm w-20 mb-5 @error('registro') border-red-500 @enderror">
+                <input type="number" wire:model="registro" placeholder="Registro" class="bg-white dark:bg-gray-800 rounded-full text-sm w-20 mb-5 @error('registro') border-red-500 @enderror">
 
                 <x-button-blue
                     class="mx-auto"
@@ -64,7 +64,7 @@
 
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -203,14 +203,14 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     @if($certificacion->estado != 'cancelado')
 
                                         <button
                                             wire:click="reimprimir('{{ $certificacion->uuid }}')"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Reimprimir
                                         </button>
@@ -231,7 +231,7 @@
 
                         <x-table.cell colspan="11">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 

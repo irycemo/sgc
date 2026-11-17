@@ -6,9 +6,9 @@
 
         <div class="flex gap-3 overflow-auto p-1">
 
-            <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white rounded-full text-sm ">
+            <input type="text" wire:model.live.debounce.500ms="search" placeholder="Buscar" class="bg-white dark:bg-gray-800 rounded-full text-sm ">
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="filters.rol">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.rol">
 
                 <option value="">Seleccione un rol</option>
 
@@ -20,7 +20,7 @@
 
             </select>
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="filters.oficina">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.oficina">
 
                 <option value="">Seleccione una oficina</option>
 
@@ -32,7 +32,7 @@
 
             </select>
 
-            <select class="bg-white rounded-full text-sm w-48" wire:model.live="filters.area">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm w-48" wire:model.live="filters.area">
 
                 <option value="">Seleccione una área</option>
 
@@ -44,7 +44,7 @@
 
             </select>
 
-            <select class="bg-white rounded-full text-sm" wire:model.live="pagination">
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="pagination">
 
                 <option value="10">10</option>
                 <option value="25">25</option>
@@ -74,7 +74,7 @@
 
     </div>
 
-    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500">
+    <div class="overflow-x-auto rounded-lg shadow-xl border-t-2 border-t-gray-500 dark:border-t-gray-600">
 
         <x-table>
 
@@ -106,7 +106,7 @@
 
                                 <img class="h-10 w-10 rounded-full" src="{{ $usuario->profile_photo_url }}" alt="{{ $usuario->name }}">
 
-                                <span class="text-sm text-gray-900 ml-4">{{ $usuario->name }}</span>
+                                <span class="text-sm text-gray-900 dark:text-gray-100 ml-4">{{ $usuario->name }}</span>
 
                             </div>
 
@@ -206,14 +206,14 @@
 
                                 </div>
 
-                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+                                <div x-cloak x-show="open_drop_down" x-on:click="open_drop_down=false" x-on:click.away="open_drop_down=false" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
 
                                     @can('Reestablecer contraseña')
 
                                         <button
                                             wire:click="resetearPassword({{ $usuario->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Reestablecer contraseña
                                         </button>
@@ -225,7 +225,7 @@
                                         <button
                                             wire:click="abrirModalPermisos({{ $usuario->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Permisos
                                         </button>
@@ -237,7 +237,7 @@
                                         <button
                                             wire:click="abrirModalEditar({{ $usuario->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Editar
                                         </button>
@@ -249,7 +249,7 @@
                                         <button
                                             wire:click="abrirModalBorrar({{ $usuario->id }})"
                                             wire:loading.attr="disabled"
-                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                            class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
                                             role="menuitem">
                                             Eliminar
                                         </button>
@@ -270,7 +270,7 @@
 
                         <x-table.cell colspan="11">
 
-                            <div class="bg-white text-gray-500 text-center p-5 rounded-full text-lg">
+                            <div class="bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-center p-5 rounded-full text-lg">
 
                                 No hay resultados.
 
@@ -288,7 +288,7 @@
 
                 <x-table.row>
 
-                    <x-table.cell colspan="11" class="bg-gray-50">
+                    <x-table.cell colspan="11" class="bg-gray-50 dark:bg-gray-800">
 
                         {{ $this->usuarios->links()}}
 
@@ -402,13 +402,13 @@
 
                     <x-input-group for="modelo_editar.valuador" label="Valuador" :error="$errors->first('modelo_editar.valuador')" class="w-full">
 
-                        <input type="checkbox" class="bg-white rounded text-xs " wire:model="modelo_editar.valuador">
+                        <input type="checkbox" class="bg-white dark:bg-gray-800 rounded text-xs " wire:model="modelo_editar.valuador">
 
                     </x-input-group>
 
                 </div>
 
-                <div class="h-full w-full rounded-lg bg-gray-200 bg-opacity-75 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" wire:loading.delay.longer>
+                <div class="h-full w-full rounded-lg bg-gray-200 dark:bg-gray-700 bg-opacity-75 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" wire:loading.delay.longer>
 
                     <img class="mx-auto h-16" src="{{ asset('storage/img/loading.svg') }}" alt="">
 
@@ -510,7 +510,7 @@
 
                     <div>
 
-                        <Label class="block text-sm font-medium leading-6 text-gray-900">Seleccione los permisos</Label>
+                        <Label class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">Seleccione los permisos</Label>
 
                     </div>
 
@@ -524,9 +524,9 @@
 
                                 @foreach ($area as $permission)
 
-                                    <label class="border border-gray-400 text-gray-500 px-2 rounded-full py-1 text-xs flex items-center">
+                                    <label class="border border-gray-400 dark:border-gray-600 text-gray-500 dark:text-gray-400 px-2 rounded-full py-1 text-xs flex items-center">
 
-                                        <input class="bg-white rounded" type="checkbox" wire:model.defer="listaDePermisos" value="{{ $permission['id'] }}">
+                                        <input class="bg-white dark:bg-gray-800 rounded" type="checkbox" wire:model.defer="listaDePermisos" value="{{ $permission['id'] }}">
 
                                         <p class="ml-2">{{ $permission['name'] }}</p>
 
