@@ -31,12 +31,70 @@ input[type=number] {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #d6dee1;
+    background-color: #d4d4d8;
     border-radius: 20px;
     border: 6px solid transparent;
     background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #a8bbbf;
+    background-color: #a1a1aa;
+}
+
+/* DARK */
+html.dark {
+    color-scheme: dark;
+}
+
+/* Scrollbar en modo oscuro */
+html.dark ::-webkit-scrollbar-thumb {
+    background-color: #52525b; /* zinc-600 */
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+    background-color: #71717a; /* zinc-500 */
+}
+
+html.dark  ::-webkit-scrollbar-corner { background: rgb(63 63 70 / 0.6); }
+
+/* Los parciales del menú usan hovers claros (hover:bg-gray-100) y
+   chevrons text-gray-300 pensados para fondo blanco; se adaptan a oscuro
+   sin modificar los parciales. */
+html.dark .sgc-nav [class*="hover:bg-gray-100"]:hover,
+html.dark .sgc-topnav [class*="hover:bg-gray-100"]:hover,
+html.dark .sgc-flatten [class*="hover:bg-gray-100"]:hover {
+    background-color: rgb(63 63 70 / 0.6); /* zinc-700 */
+}
+html.dark .sgc-nav [class*="text-gray-300"],
+html.dark .sgc-topnav [class*="text-gray-300"] {
+    color: #a1a1aa; /* zinc-400 */
+}
+
+/* Menu superior */
+#sgc-topnav {
+    display: none;
+}
+.sgc-only-sidebar {
+    display: flex;
+}
+html.sgc-mode-topbar #sgc-topnav {
+    display: flex;
+    /* Crea contexto de apilamiento propio para que los dropdowns
+       se pinten SIEMPRE por encima del cuerpo del contenido */
+    position: relative;
+    z-index: 30;
+}
+html.sgc-mode-topbar .sgc-only-sidebar {
+    display: none !important;
+}
+html.sgc-mode-topbar #sgc-sidebar {
+    display: none !important;
+}
+
+/* En el menú superior, las sub-listas de cada área se muestran planas
+   (oculta los botones de colapsar y fuerza visible el cuerpo). */
+html.sgc-mode-topbar .sgc-flatten button[x-show] {
+    display: none !important;
+}
+html.sgc-mode-topbar .sgc-flatten [x-show]:not(button) {
+    display: flex !important;
 }

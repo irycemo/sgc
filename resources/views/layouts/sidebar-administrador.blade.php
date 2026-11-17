@@ -1,6 +1,6 @@
 <div class="mb-5">
 
-    <p class="uppercase text-base mb-2 border-b border-rojo rounded-lg px-1.5 w-full">Administración</p>
+    <p class="sgc-only-sidebar uppercase text-base mb-2 border-b border-rojo dark:border-gray-200 rounded-lg px-1.5 w-full">Administración</p>
 
     @can('Lista de roles')
 
@@ -22,7 +22,7 @@
 
             <x-slot name="body">
 
-                <a  href="{{ route('permisos') }}" class="mb-3 capitalize font-medium text-sm hover:text-red-600 transition ease-in-out duration-500 flex items-center hover  hover:bg-gray-100 p-2 px-4 rounded-xl focus:outline-rojo focus:outline-offset-2 w-full">
+                <a  href="{{ route('permisos') }}" class="mb-3 capitalize font-medium text-sm hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 flex items-center hover  hover:bg-gray-100 p-2 px-4 rounded-xl focus:outline-rojo focus:outline-offset-2 w-full">
 
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
@@ -57,7 +57,7 @@
 
             <x-slot name="body">
 
-                <a  href="{{ route('efirmas') }}" class="mb-3 capitalize font-medium text-sm hover:text-red-600 transition ease-in-out duration-500 flex items-center hover  hover:bg-gray-100 p-2 px-4 rounded-xl focus:outline-rojo focus:outline-offset-2 w-full">
+                <a  href="{{ route('efirmas') }}" class="mb-3 capitalize font-medium text-sm hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 flex items-center hover  hover:bg-gray-100 p-2 px-4 rounded-xl focus:outline-rojo focus:outline-offset-2 w-full">
 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
@@ -93,7 +93,7 @@
 
             <x-slot name="body">
 
-                <a  href="{{ route('categorias_servicios') }}" class="mb-3 capitalize font-medium text-sm hover:text-red-600 transition ease-in-out duration-500 flex items-center hover  hover:bg-gray-100 p-2 px-4 rounded-xl focus:outline-rojo focus:outline-offset-2 w-full">
+                <a  href="{{ route('categorias_servicios') }}" class="mb-3 capitalize font-medium text-sm hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 flex items-center hover  hover:bg-gray-100 p-2 px-4 rounded-xl focus:outline-rojo focus:outline-offset-2 w-full">
 
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z" />
@@ -129,7 +129,7 @@
 
             <x-slot name="body">
 
-                <a  href="{{ route('conciliar_personas') }}" class="mb-3 capitalize font-medium text-sm hover:text-red-600 transition ease-in-out duration-500 flex items-center hover  hover:bg-gray-100 p-2 px-4 rounded-xl focus:outline-rojo focus:outline-offset-2 w-full">
+                <a  href="{{ route('conciliar_personas') }}" class="mb-3 capitalize font-medium text-sm hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 flex items-center hover  hover:bg-gray-100 p-2 px-4 rounded-xl focus:outline-rojo focus:outline-offset-2 w-full">
 
 
                     Concliliar
@@ -144,7 +144,7 @@
 
     @can('Lista de trámites')
 
-        <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+        <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
             <a href="{{ route('tramites') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -162,7 +162,7 @@
 
     @can('Lista de predios')
 
-        <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+        <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
             <a href="{{ route('predios') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -180,7 +180,7 @@
 
     @can('Lista de certificaciones')
 
-        <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+        <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
             <a href="{{ route('certificaciones') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -198,7 +198,7 @@
 
     @can('Lista de avaluos')
 
-        <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+        <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
             <a href="{{ route('avaluos_lista') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -216,7 +216,7 @@
 
     @can('Lista de oficinas')
 
-        <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+        <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
             <a href="{{ route('oficinas') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -253,13 +253,13 @@
 
             <x-slot name="body">
 
-                <a href="{{ route('umas') }}" class="capitalize font-medium text-sm  flex hover w-full  hover:bg-gray-100 p-2 px-4 rounded-xl hover:text-red-600">UMAS</a>
+                <a href="{{ route('umas') }}" class="capitalize font-medium text-sm  flex hover w-full  hover:bg-gray-100 p-2 px-4 rounded-xl hover:text-red-600 dark:hover:text-red-400">UMAS</a>
 
-                <a href="{{ route('factor_incremento') }}" class="capitalize font-medium text-sm  flex hover w-full  hover:bg-gray-100 p-2 px-4 rounded-xl hover:text-red-600">Factor de incremento</a>
+                <a href="{{ route('factor_incremento') }}" class="capitalize font-medium text-sm  flex hover w-full  hover:bg-gray-100 p-2 px-4 rounded-xl hover:text-red-600 dark:hover:text-red-400">Factor de incremento</a>
 
-                <a href="{{ route('unitarios_construccion') }}" class="capitalize font-medium text-sm  flex hover w-full  hover:bg-gray-100 p-2 px-4 rounded-xl hover:text-red-600">Valores unitarios construcciones</a>
+                <a href="{{ route('unitarios_construccion') }}" class="capitalize font-medium text-sm  flex hover w-full  hover:bg-gray-100 p-2 px-4 rounded-xl hover:text-red-600 dark:hover:text-red-400">Valores unitarios construcciones</a>
 
-                <a href="{{ route('unitarios_rusticos') }}" class="capitalize font-medium text-sm  flex hover w-full  hover:bg-gray-100 p-2 px-4 rounded-xl hover:text-red-600">Valores unitarios rusticos</a>
+                <a href="{{ route('unitarios_rusticos') }}" class="capitalize font-medium text-sm  flex hover w-full  hover:bg-gray-100 p-2 px-4 rounded-xl hover:text-red-600 dark:hover:text-red-400">Valores unitarios rusticos</a>
 
             </x-slot>
 
@@ -269,7 +269,7 @@
 
     @can('Logs')
 
-        <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+        <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
             <a href="{{ url('log-viewer') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -287,7 +287,7 @@
 
     @can('Auditoria')
 
-        <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+        <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
             <a href="{{ url('auditoria') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -322,19 +322,19 @@
 
             <x-slot name="body">
 
-                <a  href="{{ route('auditoria_old') }}" class=" capitalize font-medium text-sm hover:text-red-600 transition ease-in-out duration-500 flex items-center hover  hover:bg-gray-100 p-2 px-4 rounded-xl focus:outline-rojo focus:outline-offset-2 w-full">
+                <a  href="{{ route('auditoria_old') }}" class=" capitalize font-medium text-sm hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 flex items-center hover  hover:bg-gray-100 p-2 px-4 rounded-xl focus:outline-rojo focus:outline-offset-2 w-full">
 
                     Auditoria
 
                 </a>
 
-                <a  href="{{ route('certificados_old') }}" class=" capitalize font-medium text-sm hover:text-red-600 transition ease-in-out duration-500 flex items-center hover  hover:bg-gray-100 p-2 px-4 rounded-xl focus:outline-rojo focus:outline-offset-2 w-full">
+                <a  href="{{ route('certificados_old') }}" class=" capitalize font-medium text-sm hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 flex items-center hover  hover:bg-gray-100 p-2 px-4 rounded-xl focus:outline-rojo focus:outline-offset-2 w-full">
 
                     Certificados
 
                 </a>
 
-                <a  href="{{ route('traslados_old') }}" class=" capitalize font-medium text-sm hover:text-red-600 transition ease-in-out duration-500 flex items-center hover  hover:bg-gray-100 p-2 px-4 rounded-xl focus:outline-rojo focus:outline-offset-2 w-full">
+                <a  href="{{ route('traslados_old') }}" class=" capitalize font-medium text-sm hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 flex items-center hover  hover:bg-gray-100 p-2 px-4 rounded-xl focus:outline-rojo focus:outline-offset-2 w-full">
 
                     Traslados
 

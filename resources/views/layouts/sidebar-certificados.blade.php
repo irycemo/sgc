@@ -2,7 +2,7 @@
 
     <div class="flex items-center  w-full justify-between mb-2">
 
-        <p class="uppercase text-base mb-2 border-b border-rojo rounded-lg px-1.5 w-full">Certificaciones</p>
+        <p class="sgc-only-sidebar  uppercase text-base mb-2 border-b border-rojo dark:border-gray-200 rounded-lg px-1.5 w-full">Certificaciones</p>
 
         <button @click="openValuacion = false" x-show="openValuacion" class="rounded-full p-1 focus:outline-rojo">
 
@@ -32,7 +32,7 @@
 
         @can('Certificado negativo')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('certificado_negativo') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -46,7 +46,7 @@
 
         @can('Certificado de historia')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('certificado_historia') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -60,7 +60,7 @@
 
         @can('Certificado de registro')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('certificado_registro') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -74,7 +74,7 @@
 
         @can('Cedula de actualización')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('cedula_actualizacion') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -88,7 +88,7 @@
 
         @can('Consulta certificación')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('consulta_certificacion') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -102,7 +102,7 @@
 
         @can('Requerimientos')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('requerimientos_certificaciones') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 

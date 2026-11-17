@@ -2,7 +2,7 @@
 
     <div class="flex items-center  w-full justify-between mb-2">
 
-        <p class="uppercase text-base mb-2 border-b border-rojo rounded-lg px-1.5 w-full">Gestión Catastral</p>
+        <p class="sgc-only-sidebar uppercase text-base mb-2 border-b border-rojo dark:border-gray-200 rounded-lg px-1.5 w-full">Gestión Catastral</p>
 
         <button @click="openValuacion = false" x-show="openValuacion" class="rounded-full p-1 focus:outline-rojo">
 
@@ -32,7 +32,7 @@
 
         @can('Captura al padron')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('captura_padron') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -46,7 +46,7 @@
 
         @can('Revisar traslados')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('revision_traslados') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -60,7 +60,7 @@
 
         @can('Lista traslados')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('lista_avisos') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -72,7 +72,7 @@
 
         @endcan
 
-        <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+        <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
             <a href="{{ route('requerimientos') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 

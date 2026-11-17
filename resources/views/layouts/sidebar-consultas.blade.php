@@ -2,7 +2,7 @@
 
     <div class="flex items-center  w-full justify-between mb-2">
 
-        <p class="uppercase text-base mb-2 border-b border-rojo rounded-lg px-1.5 w-full">Consultas</p>
+        <p class="sgc-only-sidebar  uppercase text-base mb-2 border-b border-rojo dark:border-gray-200 rounded-lg px-1.5 w-full">Consultas</p>
 
         <button @click="openValuacion = false" x-show="openValuacion" class="rounded-full p-1 focus:outline-rojo">
 
@@ -32,7 +32,7 @@
 
         @can('Ver oficina')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('ver_oficina') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -46,7 +46,7 @@
 
         @can('Ver reportes')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('reportes') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -60,7 +60,7 @@
 
         @can('Consulta Padrón')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('consulta_padron') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -74,7 +74,7 @@
 
         @can('Historico')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('historico') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -86,7 +86,7 @@
 
         @endcan
 
-        <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+        <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
             <a href="{{ route('planos_valores') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -96,7 +96,7 @@
 
         </div>
 
-        <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+        <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
             <a href="{{ route('preguntas_frecuentes') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 

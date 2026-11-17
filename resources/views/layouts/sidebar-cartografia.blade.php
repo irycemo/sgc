@@ -2,7 +2,7 @@
 
     <div class="flex items-center  w-full justify-between mb-2">
 
-        <p class="uppercase text-base mb-2 border-b border-rojo rounded-lg px-1.5 w-full">Cartografía</p>
+        <p class="sgc-only-sidebar  uppercase text-base mb-2 border-b border-rojo dark:border-gray-200 rounded-lg px-1.5 w-full">Cartografía</p>
 
         <button @click="openValuacion = false" x-show="openValuacion" class="rounded-full p-1 focus:outline-rojo">
 
@@ -46,7 +46,7 @@
 
                 <x-slot name="body">
 
-                    <a href="{{ route('cuentas_asignadas') }}" class="capitalize font-medium text-sm  flex w-full  hover:bg-gray-100 p-2 px-4  rounded-xl hover:text-red-600">Cuentas asignadas</a>
+                    <a href="{{ route('cuentas_asignadas') }}" class="capitalize font-medium text-sm  flex w-full  hover:bg-gray-100 p-2 px-4  rounded-xl hover:text-red-600 dark:hover:text-red-400">Cuentas asignadas</a>
 
                 </x-slot>
 
@@ -56,7 +56,7 @@
 
         @can('Asignación de manzanas')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('asignacion_manzana') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -70,7 +70,7 @@
 
         @can('Conciliar')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('conciliar') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -84,7 +84,7 @@
 
         @can('Conciliar manzanas')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('conciliar_manzanas') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -98,7 +98,7 @@
 
         @can('Conciliar avalúos peritos externos')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('conciliar_avaluos_peritos_externos') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -112,7 +112,7 @@
 
         @can('Asignar coordenadas')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('asignar_coordenadas') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -126,7 +126,7 @@
 
         @can('Validar cartografia')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('validar_cartografia') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -140,7 +140,7 @@
 
         @can('Asignación de claves')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('asignacion_clave_catastral') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -154,7 +154,7 @@
 
         @can('Cambio de localidad')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('cambio_localidad') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 
@@ -168,7 +168,7 @@
 
         @can('Cartografia archivo')
 
-            <div class="flex items-center w-full justify-between hover:text-red-600 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
+            <div class="flex items-center w-full justify-between hover:text-red-600 dark:hover:text-red-400 transition ease-in-out duration-500 hover:bg-gray-100 rounded-xl">
 
                 <a href="{{ route('cartografia_archivo') }}" class="capitalize font-medium text-sm flex items-center w-full py-2 px-4 focus:outline-rojo focus:outline-offset-2 rounded-lg">
 

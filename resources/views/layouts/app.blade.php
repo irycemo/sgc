@@ -5,6 +5,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        <script>
+
+            (function () {
+
+                let theme = null;
+
+                try { theme = localStorage.getItem('sgc-theme'); } catch (e) { /* sin persistencia */ }
+
+                if (!theme) {
+
+                    theme = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches)
+                        ? 'dark' : 'light';
+
+                }
+
+                if (theme === 'dark') document.documentElement.classList.add('dark');
+
+            })();
+
+        </script>
+
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
