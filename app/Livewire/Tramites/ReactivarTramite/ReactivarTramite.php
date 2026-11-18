@@ -359,7 +359,7 @@ class ReactivarTramite extends Component
 
     public function validarDiasHabiles(){
 
-        if(! auth()->user()->hasRole('Administrador')){
+        if(! auth()->user()->hasRole(['Administrador', 'Director'])){
 
             $avaluo = $this->tramite->avaluos()->first();
 
