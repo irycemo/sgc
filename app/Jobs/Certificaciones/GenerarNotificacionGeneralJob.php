@@ -54,17 +54,6 @@ class GenerarNotificacionGeneralJob implements ShouldQueue
                             ->lockForUpdate()
                             ->first();
 
-            $previa = Certificacion::where('tipo', CertificacionesEnum::NOTIFICACION_VALOR_CATASTRAL)
-                                        ->where('tramite_id', $this->tramite_inspeccion->id)
-                                        ->where('estado', 'activo')
-                                        ->first();
-
-            if ($previa) {
-
-                return $controller->reimprimirNotifiacionValorCatastral($previa);
-
-            }
-
             $folio = (Certificacion::where('año', now()->format('Y'))->where('tipo', CertificacionesEnum::NOTIFICACION_VALOR_CATASTRAL)->max('folio') ?? 0) + 1;
 
             Certificacion::where('tipo', CertificacionesEnum::NOTIFICACION_VALOR_CATASTRAL)
