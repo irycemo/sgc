@@ -22,6 +22,18 @@
 
                 if (theme === 'dark') document.documentElement.classList.add('dark');
 
+                /* Posición del menú (lateral/superior): se aplica antes de
+                   pintar para evitar que el sidebar parpadee al navegar.
+                   Debe coincidir con el breakpoint md de Tailwind (768px). */
+
+                let layout = null;
+
+                try { layout = localStorage.getItem('sgc-layout'); } catch (e) { /* sin persistencia */ }
+
+                if (layout === 'topbar' && (!window.matchMedia || matchMedia('(min-width: 768px)').matches)) {
+                    document.documentElement.classList.add('sgc-mode-topbar');
+                }
+
             })();
 
         </script>
