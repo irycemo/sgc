@@ -303,7 +303,6 @@ class PrediosIgnorados extends Component
 
         $this->valuadores = User::where('valuador', true)
                                     ->where('estado', 'activo')
-                                    ->where('oficina_id', $this->modelo_editar->oficina_id)
                                     ->orderBy('name')
                                     ->get();
 
