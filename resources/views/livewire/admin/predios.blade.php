@@ -6,6 +6,16 @@
 
         <div class="flex gap-3 overflow-auto p-1">
 
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.estado">
+
+                <option value="" selected>Estado</option>
+                <option value="activo">Activo</option>
+                <option value="bloqueado">Bloqueado</option>
+                <option value="fusionado">Fusionado</option>
+                <option value="baja">Baja</option>
+
+            </select>
+
             <input type="number" wire:model.live.debounce.500ms="filters.localidad" placeholder="Localidad" class="bg-white dark:bg-gray-800 rounded-full text-sm">
 
             <input type="number" wire:model.live.debounce.500ms="filters.oficina" placeholder="Oficina" class="bg-white dark:bg-gray-800 rounded-full text-sm">

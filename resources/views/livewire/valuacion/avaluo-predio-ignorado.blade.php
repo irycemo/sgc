@@ -286,7 +286,7 @@
 
                     <x-input-group for="oficina" label="Oficina" :error="$errors->first('oficina')" class="w-16">
 
-                        <x-input-text type="number" id="oficina" wire:model="oficina" readonly/>
+                        <x-input-text type="number" id="oficina" wire:model="oficina" @if(auth()->user()->oficina->oficina != 101) readonly @endif/>
 
                     </x-input-group>
 

@@ -21,6 +21,7 @@ class Predios extends Component
     public $observaciones;
 
     public $filters = [
+        'estado' => '',
         'localidad' => '',
         'oficina' => '',
         'tipo' => '',
@@ -81,6 +82,7 @@ class Predios extends Component
 
         return Predio::select('id', 'status', 'localidad', 'oficina', 'tipo_predio', 'numero_registro', 'creado_por', 'actualizado_por', 'created_at', 'updated_at')
                         ->with('actualizadoPor:id,name', 'creadoPor:id,name')
+                        ->when($this->filters['estado'], fn($q, $estado) => $q->where('status', $estado))
                         ->when($this->filters['localidad'], fn($q, $localidad) => $q->where('localidad', $localidad))
                         ->when($this->filters['oficina'], fn($q, $oficina) => $q->where('oficina', $oficina))
                         ->when($this->filters['tipo'], fn($q, $tipo) => $q->where('tipo_predio', $tipo))
