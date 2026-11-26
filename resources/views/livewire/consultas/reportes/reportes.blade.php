@@ -17,6 +17,7 @@
                 <option value="Recaudacion">Recaudación</option>
                 <option value="Sat">SAT</option>
                 <option value="Inegi">Inegi</option>
+                <option value="Trasnformacion digital">Trasnformación digital</option>
 
             </x-input-select>
 
@@ -69,6 +70,12 @@
     @if ($flags['Inegi'])
 
         @livewire('consultas.reportes.reporte-inegi')
+
+    @endif
+
+    @if ($flags['Trasnformacion digital'])
+
+        @livewire('consultas.reportes.reporte-transformacion-digital')
 
     @endif
 

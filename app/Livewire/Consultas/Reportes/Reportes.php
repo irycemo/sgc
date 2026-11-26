@@ -18,6 +18,7 @@ class Reportes extends Component
         'Recaudacion' => false,
         'Sat' => false,
         'Inegi' => false,
+        'Trasnformacion digital' => false
     ];
 
     protected function rules(){
