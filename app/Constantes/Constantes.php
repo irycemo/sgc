@@ -782,7 +782,8 @@ class Constantes{
         4 => 'resolucion',
         5 => 'firma',
         6 => 'concluido',
-        7 => 'rechazado'
+        7 => 'rechazado',
+        8 => 'actualizado'
     ];
 
     const ESTADOS_PREDIO_IGNORADO = [

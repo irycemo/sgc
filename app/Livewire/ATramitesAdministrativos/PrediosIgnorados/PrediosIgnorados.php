@@ -3,6 +3,7 @@
 namespace App\Livewire\ATramitesAdministrativos\PrediosIgnorados;
 
 use App\Constantes\Constantes;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exceptions\GeneralException;
 use App\Models\Audit;
 use App\Models\Avaluo;
@@ -12,6 +13,7 @@ use App\Models\PredioIgnorado;
 use App\Models\Tramite;
 use App\Models\User;
 use App\Services\Tramites\TramiteService;
+use App\Traits\ATramitesAdministrativos\ObservacionesTrait;
 use App\Traits\ComponentesTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -30,6 +32,7 @@ class PrediosIgnorados extends Component
     use ComponentesTrait;
     use WithPagination;
     use WithFileUploads;
+    use ObservacionesTrait;
 
     public $años;
     public $taño;
@@ -52,12 +55,16 @@ class PrediosIgnorados extends Component
     public $modalCambiarEstado = false;
     public $modalVerArchivos = false;
     public $modalVerAudits = false;
+    public $modal_constancia = false;
 
     public PredioIgnorado $modelo_editar;
 
     public $descripcion_documento;
     public $documentos;
     public $audits = [];
+    public $actualizados;
+    public $valor_catastral;
+    public $ubicacion;
 
     public $filters = [
         'estado' => '',
@@ -65,7 +72,8 @@ class PrediosIgnorados extends Component
         'folio' => '',
         'taño' => '',
         'tfolio' => '',
-        'tusuario' => ''
+        'tusuario' => '',
+        'oficina' => ''
     ];
 
     protected function rules(){
@@ -328,6 +336,26 @@ class PrediosIgnorados extends Component
         $this->audits = Audit::with('user:id,name')->where('auditable_type', 'App\Models\PredioIgnorado')->where('auditable_id', $this->modelo_editar->id)->get();
 
         $this->modalVerAudits = true;
+
+    }
+
+    public function abrirModalObservaciones(PredioIgnorado $modelo){
+
+        $this->modal_observaciones = true;
+
+        $this->observaciones = $modelo->observaciones;
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
+
+    }
+
+    public function abrirModalConstancia(PredioIgnorado $modelo){
+
+        $this->modal_constancia = true;
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
 
     }
 
@@ -595,6 +623,37 @@ class PrediosIgnorados extends Component
 
     }
 
+    public function imprimirConstancia(){
+
+        $this->validate(['valor_catastral' => 'required|numeric', 'ubicacion' => 'required']);
+
+        $pdf = Pdf::loadView('avaluos.constancia_valor_catastral_sin_predio', [
+            'valor_catastral' => $this->valor_catastral,
+            'promovente' => $this->modelo_editar->promovente,
+            'ubicacion' => $this->ubicacion
+        ]);
+
+        $pdf->render();
+
+        $dom_pdf = $pdf->getDomPDF();
+
+        $canvas = $dom_pdf->get_canvas();
+
+        $canvas->page_text(480, 745, "Página: {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(1, 1, 1));
+
+        $canvas->page_text(35, 745, "Constancia de valor catastral" , null, 9, array(1, 1, 1));
+
+        $pdf = $dom_pdf->output();
+
+        $this->modal_constancia = false;
+
+        return response()->streamDownload(
+            fn () => print($pdf),
+            'constancia_valor_catastral.pdf'
+        );
+
+    }
+
     public function mount(){
 
         array_push($this->fields, 'requerimiento', 'tramite', 'modalHacerRequerimiento', 'tfolio', 'tusuario', 'modalVerRequerimiento', 'modalAsignarValuador', 'modalSubirArchivo', 'file', 'modalCambiarEstado');
@@ -628,6 +687,8 @@ class PrediosIgnorados extends Component
         $this->filters['estado'] = request()->query('estado');
 
         $this->documentos = Constantes::PREDIOS_IGNORADOS_DOCUMENTOS;
+
+        $this->actualizados = PredioIgnorado::where('estado', 'actualizado')->count();
 
     }
 
@@ -684,6 +745,7 @@ class PrediosIgnorados extends Component
                                                 ->when($this->filters['taño'], fn($q, $taño) => $q->whereHas('tramite', function($q) use($taño){ $q->where('año', $taño); }))
                                                 ->when($this->filters['tfolio'], fn($q, $tfolio) => $q->whereHas('tramite', function($q) use($tfolio){ $q->where('folio', $tfolio); }))
                                                 ->when($this->filters['tusuario'], fn($q, $tusuario) => $q->whereHas('tramite', function($q) use($tusuario){ $q->where('usuario', $tusuario); }))
+                                                ->when($this->filters['oficina'], fn($q, $oficina) => $q->whereHas('tramite', function($q) use($oficina){ $q->where('oficina_id', $oficina); }))
                                                 ->orderBy($this->sort, $this->direction)
                                                 ->paginate($this->pagination);
 

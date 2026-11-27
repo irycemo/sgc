@@ -1,10 +1,22 @@
 <div>
 
-    <x-header>Predios ignorados</x-header>
+    <x-header>Predios ignorados <span class="text-xs">(Actualizados: {{ $actualizados }})</span></x-header>
 
     <div class="mb-2 lg:mb-5">
 
         <div class="flex gap-3 overflow-auto p-1">
+
+            <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.oficina">
+
+                <option value="" selected>Oficina</option>
+
+                @foreach ($oficinas as $oficina_item)
+
+                    <option value="{{ $oficina_item->id }}">{{ $oficina_item->nombre }}</option>
+
+                @endforeach
+
+            </select>
 
             <select class="bg-white dark:bg-gray-800 rounded-full text-sm" wire:model.live="filters.año">
 
@@ -25,6 +37,7 @@
                 <option value="" selected>Estado</option>
 
                 <option value="nuevo">Nuevo</option>
+                <option value="actualizado">Actualizado</option>
                 <option value="revisión">Revisión</option>
                 <option value="requerimineto">Requerimineto</option>
                 <option value="valuación">Valuación</option>
@@ -270,6 +283,30 @@
 
                                         @endcan
 
+                                        @can('Ver observaciones')
+
+                                            <button
+                                                wire:click="abrirModalObservaciones({{ $predio->id }})"
+                                                wire:loading.attr="disabled"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
+                                                role="menuitem">
+                                                Ver observaciones
+                                            </button>
+
+                                        @endcan
+
+                                        @if(auth()->user()->area == 'Oficina de rentas')
+
+                                            <button
+                                                wire:click="abrirModalConstancia({{ $predio->id }})"
+                                                wire:loading.attr="disabled"
+                                                class="w-full text-left block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700"
+                                                role="menuitem">
+                                                Imprimir constancia de valor catastral
+                                            </button>
+
+                                        @endif
+
                                     @endif
 
                                 </div>
@@ -335,5 +372,9 @@
     @include('livewire.a-tramites-administrativos.comun.modal-ver-archivos')
 
     @include('livewire.a-tramites-administrativos.comun.modal-auditar')
+
+    @include('livewire.a-tramites-administrativos.comun.modal-ver-observaciones')
+
+    @include('livewire.a-tramites-administrativos.comun.modal-constancia')
 
 </div>

@@ -20,6 +20,7 @@ use App\Models\Tramite;
 use App\Models\User;
 use App\Models\VariacionCatastral;
 use App\Services\Tramites\TramiteService;
+use App\Traits\ATramitesAdministrativos\ObservacionesTrait;
 use App\Traits\ComponentesTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -38,6 +39,7 @@ class VariacionesCatastrales extends Component
     use ComponentesTrait;
     use WithPagination;
     use WithFileUploads;
+    use ObservacionesTrait;
 
     public $años;
     public $taño;
@@ -64,6 +66,7 @@ class VariacionesCatastrales extends Component
     public $descripcion_documento;
     public $documentos;
     public $audits = [];
+    public $actualizados;
 
     public VariacionCatastral $modelo_editar;
 
@@ -73,7 +76,8 @@ class VariacionesCatastrales extends Component
         'folio' => '',
         'taño' => '',
         'tfolio' => '',
-        'tusuario' => ''
+        'tusuario' => '',
+        'oficina' => ''
     ];
 
     protected function rules(){
@@ -359,6 +363,17 @@ class VariacionesCatastrales extends Component
         $this->audits = Audit::with('user:id,name')->where('auditable_type', 'App\Models\VariacionCatastral')->where('auditable_id', $this->modelo_editar->id)->get();
 
         $this->modalVerAudits = true;
+
+    }
+
+    public function abrirModalObservaciones(VariacionCatastral $modelo){
+
+        $this->modal_observaciones = true;
+
+        $this->observaciones = $modelo->observaciones;
+
+        if($this->modelo_editar->isNot($modelo))
+            $this->modelo_editar = $modelo;
 
     }
 
@@ -849,6 +864,8 @@ class VariacionesCatastrales extends Component
 
         $this->documentos = Constantes::VARIACIONES_CATASTRALES_DOCUMENTOS;
 
+        $this->actualizados = VariacionCatastral::where('estado', 'actualizado')->count();
+
     }
 
     public function rechazar(VariacionCatastral $modelo){
@@ -930,6 +947,7 @@ class VariacionesCatastrales extends Component
                                                 ->when($this->filters['taño'], fn($q, $taño) => $q->whereHas('tramite', function($q) use($taño){ $q->where('año', $taño); }))
                                                 ->when($this->filters['tfolio'], fn($q, $tfolio) => $q->whereHas('tramite', function($q) use($tfolio){ $q->where('folio', $tfolio); }))
                                                 ->when($this->filters['tusuario'], fn($q, $tusuario) => $q->whereHas('tramite', function($q) use($tusuario){ $q->where('usuario', $tusuario); }))
+                                                ->when($this->filters['oficina'], fn($q, $oficina) => $q->whereHas('tramite', function($q) use($oficina){ $q->where('oficina_id', $oficina); }))
                                                 ->orderBy($this->sort, $this->direction)
                                                 ->paginate($this->pagination);
 
